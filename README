@@ -1,0 +1,27 @@
+
+#**parser library**
+---------
+
+Parser Library for VLSI CAD Design 
+
+---------
+
+## Components 
+| Components              | Languages & Libraries           |
+| ----------------------- | ------------------------------- |
+| Lef Parser              | boost.spirit                    |
+| Def Parser              | flex/bison                      |
+|                         | boost.spirit                    |
+| Gds Parser              | stream parser: c/c++            |
+|                         | ascii parser: boost.spirit      |
+| Tf Parser               | boost.spirit                    |
+
+## Authors
+
+|  Name              | Affiliation                |  email                            |
+| ------------------ | -------------------------- | --------------------------------- |
+| Yibo Lin           | ECE Dept, UT Austin        | yibolin@utexas.edu			      |
+
+## Copyright 
+Copyright (c) 2014-2014 
+
