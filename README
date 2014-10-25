@@ -30,32 +30,32 @@ Parser Library for VLSI CAD Design
 
 ## Introduction
 
-1. # Flex
+# 1. Flex
 
 * A fast scanner generator or lexical analyzer generator. Another famous related software is Lex.
 
-2. # Bison 
+# 2. Bison 
 
 * A Yacc-compatible parser generator that is part of the GNU Project. 
 	For details, please refer to http://en.wikipedia.org/wiki/GNU_bison 
 	Another famous related software is Yacc.
 
-3. # Boost.Spirit
+# 3. Boost.Spirit
 
 * An object-oriented, recursive-descent parser and output generation library for C++. 
 	For details, please refer to http://www.boost.org/doc/libs/1_55_0/libs/spirit/doc/html/index.html
 
-4. # LL Parser 
+# 4. LL Parser 
 
 * In computer science, a LL parser is a top-down parser for a subset of context-free languages. 
 	It parses the input from Left to right, performing Leftmost derivation of the sentence. 
 
-5. # LR Parser 
+# 5. LR Parser 
 
 * In computer science, LR parsers are a type of bottom-up parsers that efficiently handle 
 	deterministic context-free languages in guaranteed linear time. 
 
-6. # LL v.s. LR
+# 6. LL v.s. LR
 
 * Bison is based on LR parser and Boost.Spirit is based on LL parser.
 http://cs.stackexchange.com/questions/43/language-theoretic-comparison-of-ll-and-lr-grammars 
