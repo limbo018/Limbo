@@ -55,10 +55,11 @@ Parser Library for VLSI CAD Design
 * In computer science, LR parsers are a type of bottom-up parsers that efficiently handle 
 	deterministic context-free languages in guaranteed linear time. 
 
-5. LL v.s. LR
+6. LL v.s. LR
 
-* http://cs.stackexchange.com/questions/43/language-theoretic-comparison-of-ll-and-lr-grammars 
-	Bison is based on LR parser and Boost.Spirit is based on LL parser.
+* Bison is based on LR parser and Boost.Spirit is based on LL parser.
+http://cs.stackexchange.com/questions/43/language-theoretic-comparison-of-ll-and-lr-grammars 
+	
 
 
 ## Copyright 

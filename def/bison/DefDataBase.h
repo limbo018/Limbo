@@ -25,11 +25,9 @@ namespace DefParser {
 	using std::pair;
 	using std::make_pair;
 	using std::ostringstream;
-	typedef short int int8_t;
 	typedef int int32_t;
 	typedef unsigned int uint32_t;
 	typedef long int64_t;
-	typedef unsigned short int uint8_t;
 
 // temporary data structures to hold parsed data 
 struct Item 

@@ -51,7 +51,7 @@ struct DefParser
 
 	struct Item 
 	{
-		virtual void print(ostringstream& ss) const {};
+		virtual void print(ostringstream&) const {};
 		friend std::ostream& operator<<(std::ostream& os, Item const& rhs)
 		{
 			std::ostringstream ss;
@@ -406,7 +406,7 @@ struct DefParser
 		{
 			m_pin.layer_name = s1;
 			m_pin.bbox[0] = d1; m_pin.bbox[1] = d2;
-			m_pin.bbox[2] = d3; m_pin.bbox[3] = d3;
+			m_pin.bbox[2] = d3; m_pin.bbox[3] = d4;
 		}
 		void pin_cbk()
 		{

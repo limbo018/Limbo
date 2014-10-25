@@ -8,7 +8,7 @@
 #ifndef _EBEAMPARSER_H
 #define _EBEAMPARSER_H
 
-#ifdef EBEAM_AWARE
+//#ifdef EBEAM_AWARE
 
 #include <iostream>
 #include <fstream>
@@ -56,7 +56,7 @@ struct EbeamParser
 
 	struct Item 
 	{
-		virtual void print(ostringstream& ss) const {};
+		virtual void print(ostringstream&) const {};
 		friend std::ostream& operator<<(std::ostream& os, Item const& rhs)
 		{
 			std::ostringstream ss;
@@ -346,6 +346,6 @@ struct EbeamParser
 	}
 };
 
-#endif 
+//#endif // end of EBEAM_AWARE
 
 #endif 
