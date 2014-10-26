@@ -64,6 +64,31 @@ struct hash_pair : pair<T1, T2>
 // the dual problem of this LP is a min-cost flow problem 
 // so we can solve the graph problem and then 
 // call shortest path algrithm to calculate optimum of primal problem 
+//
+// 1. primal problem 
+// min. sum ci*xi
+// s.t. xi - xj >= bij for (i, j) in E
+//      di <= xi <= ui for i in [1, n]
+//
+// 2. introduce new variables yi in [0, n]
+//    set xi = yi - y0 
+// min. sum ci*(yi-y0)
+// s.t. yi - yj >= bij for (i, j) in E 
+//      di <= yi - y0 <= ui for i in [1, n]
+//      yi is unbounded integer for i in [0, n]
+//
+// 3. re-write the problem 
+//                              ci for i in [1, n]
+// min. sum ci*yi, where ci =   - sum ci for i in [1, n]
+//                    bij for (i, j) in E 
+// s.t. yi - yj >=    di  for j = 0, i in [1, n]
+//                    -ui for i = 0, i in [1, n]
+//      yi is unbounded integer for i in [0, n]
+//
+// 4. map to dual min-cost flow problem 
+//    let's use c'i for generalized ci and b'ij for generalized bij 
+//    c'i is node supply 
+//    for each (i, j) in E', an arc from i to j with cost -b'ij and flow range [0, unlimited]
 template <typename T = int64_t>
 class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 {
