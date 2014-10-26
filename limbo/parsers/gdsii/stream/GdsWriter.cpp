@@ -404,7 +404,7 @@ void GdsWriter::gds_bindump( BYTE x )            // dump one byte in binary form
 
 /*------------------------------------------------------------------------------------------*/
 
-void GdsWriter::gds_write_float( float x )
+void GdsWriter::gds_write_float( double x )
 
 	/* Write 8 bytes after converting back to wacky GDS float format. */
 
@@ -420,7 +420,7 @@ void GdsWriter::gds_write_float( float x )
 		exponent,
 		i;
 
-	float
+	double
 		fexponent,
 		mantissa,
 		mantita;    
@@ -445,13 +445,13 @@ void GdsWriter::gds_write_float( float x )
 		else
 			sign = 0;
 
-		x = fabsf( x ); 
+		if (x < 0.0) x = -x ;
 
 		exponent = 1 + floor( log( x ) / log( 16 ) );
 		if ( exponent < -64 ) BAILOUT( "A NUMBER IS TOO SMALL TO ENCODE AS A GDS FLOAT" );
 		fexponent = exponent;
 		e64 = exponent + 64;
-		mantissa = x / powf( 16.0, fexponent );
+		mantissa = x / pow( 16.0, fexponent );
 		mantita = mantissa;
 
 		for( i=0; i<=56; i++ )
@@ -2163,7 +2163,7 @@ gds_read_units( float *Pdbu_um, float *Pdbu_uu, float *Pdbu_m, BOOL verbose )
 
 /*------------------------------------------------------------------------------------------*/
 
-void GdsWriter::gds_write_units( float dbu_uu, float dbu_m )
+void GdsWriter::gds_write_units( double dbu_uu, double dbu_m )
 {
 	short int
 		count,
@@ -2202,7 +2202,7 @@ gds_read_mag( int count, struct gds_itemtype **ci, BOOL verbose )
 
 /*------------------------------------------------------------------------------------------*/
 
-void GdsWriter::gds_write_mag( float mag )
+void GdsWriter::gds_write_mag( double mag )
 {
 	static int
 		count,
@@ -2244,7 +2244,7 @@ gds_read_angle( int count, struct gds_itemtype **ci, BOOL verbose )
 
 /*------------------------------------------------------------------------------------------*/
 
-void GdsWriter::gds_write_angle( float angle )
+void GdsWriter::gds_write_angle( double angle )
 {
 	static int
 		count,
@@ -2266,12 +2266,12 @@ void GdsWriter::gds_write_angle( float angle )
 /*------------------------------------------------------------------------------------------*/
 
 
-void GdsWriter::gds_create_lib( const char *libname, float dbu_um )
+void GdsWriter::gds_create_lib( const char *libname, double dbu_um )
 {
 	// Write HEADER, BGNLIB, LIBNAME, and UNITS.
 
 
-	float
+	double
 		dbu_uu,        // database user units, 1 nm per bit
 		dbu_m;         // database unit in meters, usually 1e-9m
 

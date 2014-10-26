@@ -40,8 +40,8 @@ struct gds_itemtype
 	int   layer;                     /* layer                                                                     */
 	int   dt;                        /* datatype                                                                  */ 
 	int   cell_number;               /* index into the table of cells- relevant for sref and aref                 */
-	float mag;                       /* magnification- relevant to sref, aref and text                            */
-	float angle;                     /* the angle - relevant to sref and aref                                     */
+	double mag;                       /* magnification- relevant to sref, aref and text                            */
+	double angle;                     /* the angle - relevant to sref and aref                                     */
 	BOOL  abs_angle;                 /* from strans - normally false                                              */
 	BOOL  abs_mag;                   /* from strans - normally false                                              */
 	BOOL  reflect;                   /* from strans (reflect over x axis before rotating)                         */
@@ -89,7 +89,7 @@ struct GdsWriter
 	/**************** low level interfaces *****************/
 	void gds_make_next_item( struct gds_itemtype **ci );
 	void gds_bindump( BYTE x );            // dump one byte in binary format
-	void gds_write_float( float x );
+	void gds_write_float( double x );
 	void gds_swap4bytes( BYTE *four  );
 	void gds_swap2bytes( BYTE *two );
 	void gds_write_header(  );
@@ -119,10 +119,10 @@ struct GdsWriter
 	void gds_write_strans( BOOL reflect, BOOL abs_angle, BOOL abs_mag  );
 	void gds_write_xy( const int *x, const int *y, int n, bool has_last = true);
 	void gds_write_colrow( int ncols, int nrows );
-	void gds_write_units( float dbu_uu, float dbu_m );
-	void gds_write_mag( float mag );
-	void gds_write_angle( float angle );
-	void gds_create_lib( const char *libname, float dbu_um );    
+	void gds_write_units( double dbu_uu, double dbu_m );
+	void gds_write_mag( double mag );
+	void gds_write_angle( double angle );
+	void gds_create_lib( const char *libname, double dbu_um );    
 	void gds_create_text( const char *str, int x, int y, int layer, int size );
 
 	// add by Yibo Lin 
