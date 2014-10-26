@@ -6,6 +6,10 @@ Limbo Library for VLSI CAD Design
 
 ---------
 
+All components are written with C/C++ and API is designed for easy usage and simple embedding. 
+
+---------
+
 ## Components 
 | Components              | Languages & Libraries           |
 | ----------------------- | ------------------------------- |
@@ -71,6 +75,9 @@ In this library, an API for lemon (MFC solver) is implemented to solve LP and du
 The API supports reading files with both LGF (lemon graph format) and LP (linear program format) and then dump out solutions. 
 Thus, it will be easier to verify results with general LP solvers such as Gurobi or CBC.
 
+## Bug Report 
+
+Please report bugs to Yibo Lin (yibolin at utexas dot edu). 
 
 ## Copyright 
 Copyright (c) 2014-2014 
