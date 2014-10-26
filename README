@@ -1,8 +1,8 @@
 
-#**Parser Library**
+#**Limbo Library**
 ---------
 
-Parser Library for VLSI CAD Design 
+Limbo Library for VLSI CAD Design 
 
 ---------
 
@@ -15,6 +15,8 @@ Parser Library for VLSI CAD Design
 | Gds Parser              | stream parser: c/c++            |
 |                         | ascii parser: boost.spirit      |
 | Tf Parser               | boost.spirit                    |
+| Lp Parser               | flex/bison                      |
+| LP Min-Cost Flow Solver | boost, lemon                    |
 
 ## Authors
 
@@ -59,7 +61,15 @@ Parser Library for VLSI CAD Design
 
 * Bison is based on LR parser and Boost.Spirit is based on LL parser.
 Please refer to [here](http://cs.stackexchange.com/questions/43/language-theoretic-comparison-of-ll-and-lr-grammars).
-	
+
+### 7. LP and Min-Cost Flow 
+
+* Min-cost flow (MCF) is a special case of linear programs (LP). 
+It is usually faster than general LP solver and is also able to achieve integer solution.
+Some LP can be directly transformed to MCF problem, and for some other LP, its duality is a MCF problem. 
+In this library, an API for lemon (MFC solver) is implemented to solve LP and dual LP problems. 
+The API supports reading files with both LGF (lemon graph format) and LP (linear program format) and then dump out solutions. 
+Thus, it will be easier to verify results with general LP solvers such as Gurobi or CBC.
 
 
 ## Copyright 

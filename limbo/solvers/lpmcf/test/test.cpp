@@ -1,0 +1,37 @@
+/*************************************************************************
+    > File Name: main.cpp
+    > Author: Yibo Lin
+    > Mail: yibolin@utexas.edu
+    > Created Time: Wed 15 Oct 2014 05:08:44 PM CDT
+ ************************************************************************/
+
+#include <iostream>
+#include <boost/algorithm/string/predicate.hpp>
+#include <limbo/solvers/lpmcf/Lgf.h>
+#include <limbo/solvers/lpmcf/LpDualMcf.h>
+
+using std::cout;
+using std::endl;
+
+int main(int argc, char** argv)
+{
+	if (argc > 1)
+	{
+		LpMcf::Lgf<long> lpsolver1;
+		LpMcf::LpDualMcf<long> lpsolver2;
+
+		string filename = argv[1];
+		if (boost::ends_with(filename, ".lgf"))
+			lpsolver1(filename);
+		else if (boost::ends_with(filename, ".lp"))
+			lpsolver2(filename);
+		else 
+			cout << "only support .lgf and .lp file formats" << endl;
+
+		//lpsolver();
+	}
+	else 
+		cout << "at least 1 argument required\n";
+
+	return 0;
+}

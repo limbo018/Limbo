@@ -1,3 +1,4 @@
-*.o
-*.a
+limbo/*.o
+limbo/*.a
+lib/*
 wiki
