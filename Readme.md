@@ -21,6 +21,8 @@ All components are written with C/C++ and API is designed for easy usage and sim
 | Tf Parser               | boost.spirit                    |
 | Lp Parser               | flex/bison                      |
 | LP Min-Cost Flow Solver | boost, lemon                    |
+| Geometry Algorithms     | c++                             |
+| String Algorithms       | c++                             |
 
 ## Authors
 
