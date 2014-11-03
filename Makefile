@@ -30,7 +30,7 @@ install:
 	$(MAKE) install -C $(PARSERS)/gdsii/stream
 
 clean:
-	$(MAKE) clean -C $(PARSERS)/def/bison
-	$(MAKE) clean -C $(PARSERS)/ebeam/bison
-	$(MAKE) clean -C $(PARSERS)/lp/bison
-	$(MAKE) clean -C $(PARSERS)/gdsii/stream
+	$(MAKE) extraclean -C $(PARSERS)/def/bison
+	$(MAKE) extraclean -C $(PARSERS)/ebeam/bison
+	$(MAKE) extraclean -C $(PARSERS)/lp/bison
+	$(MAKE) extraclean -C $(PARSERS)/gdsii/stream

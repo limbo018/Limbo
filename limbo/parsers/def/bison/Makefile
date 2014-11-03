@@ -53,3 +53,4 @@ clean:
 extraclean: clean
 	rm -f $(PARSER_PREFIX)Parser.cc $(PARSER_PREFIX)Parser.h $(PARSER_PREFIX)Scanner.cc 
 	rm -f *.a $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
+	rm -f location.hh position.hh stack.hh
