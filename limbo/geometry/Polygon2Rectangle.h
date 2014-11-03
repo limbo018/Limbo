@@ -523,12 +523,13 @@ class Polygon2Rectangle
 };
 
 /// \brief standby function for polygon-to-rectangle conversion 
-/// \param p represents the container for points of polygon 
-/// \param r represents the container for rectangles 
-template <typename RectSet, typename PointSet>
-inline bool polygon2rectangle(PointSet const& p, RectSet& r)
+/// \param InputIterator represents the input iterators for points of polygon 
+/// \param PointSet represents the internal container for points of polygon, user needs to pass a hint for type deduction 
+/// \param RectSet represents the container for rectangles 
+template <typename InputIterator, typename PointSet, typename RectSet>
+inline bool polygon2rectangle(InputIterator input_begin, InputIterator input_end, PointSet const& hint, RectSet& r)
 {
-	Polygon2Rectangle<PointSet, RectSet> p2r (p);
+	Polygon2Rectangle<PointSet, RectSet> p2r (input_begin, input_end);
 	if (!p2r()) return false;
 	r = p2r.get_rectangles();
 	return true;

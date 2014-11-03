@@ -160,6 +160,7 @@ struct container_traits
 {
 	typedef ContainerType container_type;
 	typedef typename container_type::value_type value_type;
+	typedef typename container_type::const_iterator const_iterator_type;
 	typedef typename container_type::iterator iterator_type;
 
 	static void insert(container_type& container, value_type const& v) {container.insert(v);}
@@ -178,6 +179,7 @@ struct container_traits<std::vector<T> >
 {
 	typedef std::vector<T> container_type;
 	typedef typename container_type::value_type value_type;
+	typedef typename container_type::const_iterator const_iterator_type;
 	typedef typename container_type::iterator iterator_type;
 
 	static void insert(container_type& container, value_type const& v) {container.push_back(v);}
@@ -193,6 +195,7 @@ struct container_traits<std::list<T> >
 {
 	typedef std::list<T> container_type;
 	typedef typename container_type::value_type value_type;
+	typedef typename container_type::const_iterator const_iterator_type;
 	typedef typename container_type::iterator iterator_type;
 
 	static void insert(container_type& container, value_type const& v) {container.push_back(v);}
@@ -202,6 +205,29 @@ struct container_traits<std::list<T> >
 	static container_type construct(PointCompareType const&)
 	{return container_type();}
 };
+
+/// \brief calculate signed area of a polygon, the result is positive if its winding is CLOCKWISE
+template <typename PointSet>
+inline coordinate_traits<typename point_traits<typename container_traits<PointSet>::value_type>::area_type>
+area(PointSet const& vPoint)
+{
+	typedef typename container_traits<PointSet>::const_iterator_type const_iterator_type;
+	typedef typename container_traits<PointSet>::value_type point_type;
+	typedef typename point_traits<point_type>::coordinate_type coordinate_type;
+	typedef typename coordinate_traits<coordinate_type>::area_type area_type;
+
+	area_type a = 0;
+	for (const_iterator_type itCur = vPoint.begin(); itCur != vPoint.end(); ++itCur)
+	{
+		const_iterator_type itNext = itCur;
+		++itNext;
+		if (itNext == vPoint.end()) itNext = vPoint.begin();
+
+		a += (area_type)(point_traits<point_type>::x(*itNext) - point_traits<point_type>::x(*itCur)) * 
+			(area_type)(point_traits<point_type>::y(*itNext) + point_traits<point_type>::y(*itCur)); 
+	}
+	return a/2;
+}
 
 }} // namespace limbo // namespace geometry
 
