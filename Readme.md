@@ -81,6 +81,12 @@ Thus, it will be easier to verify results with general LP solvers such as Gurobi
 
 Please report bugs to Yibo Lin (yibolin at utexas dot edu). 
 
+## Intallation
+
+In the directory of limbo library, run
+
+make install
+
 ## Copyright 
 Copyright (c) 2014-2014 
 
