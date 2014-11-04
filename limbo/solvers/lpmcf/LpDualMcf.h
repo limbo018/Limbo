@@ -8,6 +8,12 @@
 #ifndef _LPMCF_LPDUALMCF_H
 #define _LPMCF_LPDUALMCF_H
 
+/// ===================================================================
+///    class          : LpDualMcf
+///    attributes     : Solve Lp problem with min-cost flow 
+///                     This is the api for Lemon (a min-cost flow solver)
+/// ===================================================================
+
 #include <cstdlib>
 #include <iostream>
 #include <cassert>
@@ -33,10 +39,10 @@ using boost::int64_t;
 using boost::unordered_map;
 using boost::iequals;
 
-// solving LP with min-cost flow 
+/// solving LP with min-cost flow 
 namespace LpMcf 
 {
-// hash calculator for pairs 
+/// hash calculator for pairs 
 template <typename T1, typename T2>
 struct hash_pair : pair<T1, T2>
 {
@@ -60,40 +66,40 @@ struct hash_pair : pair<T1, T2>
 	}
 };
 
-// LP solved with min-cost flow 
-// the dual problem of this LP is a min-cost flow problem 
-// so we can solve the graph problem and then 
-// call shortest path algrithm to calculate optimum of primal problem 
-//
-// 1. primal problem 
-// min. sum ci*xi
-// s.t. xi - xj >= bij for (i, j) in E
-//      di <= xi <= ui for i in [1, n]
-//
-// 2. introduce new variables yi in [0, n]
-//    set xi = yi - y0 
-// min. sum ci*(yi-y0)
-// s.t. yi - yj >= bij for (i, j) in E 
-//      di <= yi - y0 <= ui for i in [1, n]
-//      yi is unbounded integer for i in [0, n]
-//
-// 3. re-write the problem 
-//                              ci for i in [1, n]
-// min. sum ci*yi, where ci =   - sum ci for i in [1, n]
-//                    bij for (i, j) in E 
-// s.t. yi - yj >=    di  for j = 0, i in [1, n]
-//                    -ui for i = 0, i in [1, n]
-//      yi is unbounded integer for i in [0, n]
-//
-// 4. map to dual min-cost flow problem 
-//    let's use c'i for generalized ci and b'ij for generalized bij 
-//    c'i is node supply 
-//    for each (i, j) in E', an arc from i to j with cost -b'ij and flow range [0, unlimited]
+/// LP solved with min-cost flow 
+/// the dual problem of this LP is a min-cost flow problem 
+/// so we can solve the graph problem and then 
+/// call shortest path algrithm to calculate optimum of primal problem 
+///
+/// 1. primal problem 
+/// min. sum ci*xi
+/// s.t. xi - xj >= bij for (i, j) in E
+///      di <= xi <= ui for i in [1, n]
+///
+/// 2. introduce new variables yi in [0, n]
+///    set xi = yi - y0 
+/// min. sum ci*(yi-y0)
+/// s.t. yi - yj >= bij for (i, j) in E 
+///      di <= yi - y0 <= ui for i in [1, n]
+///      yi is unbounded integer for i in [0, n]
+///
+/// 3. re-write the problem 
+///                              ci for i in [1, n]
+/// min. sum ci*yi, where ci =   - sum ci for i in [1, n]
+///                    bij for (i, j) in E 
+/// s.t. yi - yj >=    di  for j = 0, i in [1, n]
+///                    -ui for i = 0, i in [1, n]
+///      yi is unbounded integer for i in [0, n]
+///
+/// 4. map to dual min-cost flow problem 
+///    let's use c'i for generalized ci and b'ij for generalized bij 
+///    c'i is node supply 
+///    for each (i, j) in E', an arc from i to j with cost -b'ij and flow range [0, unlimited]
 template <typename T = int64_t>
 class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 {
 	public:
-		// value_type can only be integer types 
+		/// value_type can only be integer types 
 		typedef T value_type;
 		typedef Lgf<value_type> base_type1;
 		typedef LpParser::LpDataBase base_type2;
@@ -108,15 +114,15 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 		using typename base_type1::arc_flow_map_type;
 		using typename base_type1::node_pot_map_type;
 
-		// I don't know why it does not work with 
-		// using typename base_type1::alg_type;
+		/// I don't know why it does not work with 
+		/// using typename base_type1::alg_type;
 		typedef typename base_type1::alg_type alg_type;
 
-		// standard format 
-		// li <= xi <= ui 
-		// mapping to 
-		// node i 
-		// arcs from node i to node st 
+		/// standard format 
+		/// li <= xi <= ui 
+		/// mapping to 
+		/// node i 
+		/// arcs from node i to node st 
 		struct variable_type 
 		{
 			string name;
@@ -137,10 +143,10 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			bool is_bounded() const {return is_lower_bounded() || is_upper_bounded();}
 		};
 
-		// standard format 
-		// xi - xj >= cij 
-		// mapping to 
-		// xi ----> xj, cost = -cij
+		/// standard format 
+		/// xi - xj >= cij 
+		/// mapping to 
+		/// xi ----> xj, cost = -cij
 		struct constraint_type 
 		{
 			pair<string, string> variable;
@@ -159,9 +165,9 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 		{
 		}
 
-		// add variable with range 
-		// default range is 
-		// -inf <= xi <= inf 
+		/// add variable with range 
+		/// default range is 
+		/// -inf <= xi <= inf 
 		virtual void add_variable(string const& xi, 
 				value_type const& l = std::numeric_limits<value_type>::min(), 
 				value_type const& r = std::numeric_limits<value_type>::max())
@@ -181,9 +187,9 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 					this->is_bounded(true);
 			}
 		}
-		// add constraint 
-		// xi - xj >= cij 
-		// assume there's no duplicate 
+		/// add constraint 
+		/// xi - xj >= cij 
+		/// assume there's no duplicate 
 		virtual void add_constraint(string const& xi, string const& xj, cost_type const& cij)
 		{
 			BOOST_AUTO(found, m_hConstraint.find(make_pair(xi, xj)));
@@ -198,8 +204,8 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			else // automatically reduce constraints 
 				found->second.constant = std::max(found->second.constant, cij);
 		}
-		// add linear terms for objective function of LP 
-		// we allow repeat adding weight 
+		/// add linear terms for objective function of LP 
+		/// we allow repeat adding weight 
 		virtual void add_objective(string const& xi, value_type const& w)
 		{
 			if (w == 0) return;
@@ -210,20 +216,20 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			found->second.weight += w;
 		}
 
-		// check if lp problem is bounded 
+		/// check if lp problem is bounded 
 		bool is_bounded() const {return m_is_bounded;}
 		void is_bounded(bool v) {m_is_bounded = v;}
 
-		// read lp format 
-		// and then dump solution 
+		/// read lp format 
+		/// and then dump solution 
 		void operator()(string const& filename)
 		{
 			read_lp(filename);
 			(*this)();
 			this->print_solution(filename+".sol");
 		}
-		// execute solver 
-		// write out solution file if provided 
+		/// execute solver 
+		/// write out solution file if provided 
 		void operator()() 
 		{
 			prepare();
@@ -232,7 +238,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 #endif 
 			run();
 		}
-		// return solution 
+		/// return solution 
 		value_type solution(string const& xi) const 
 		{
 			BOOST_AUTO(found, m_hVariable.find(xi));
@@ -240,13 +246,15 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 
 			return found->second.value;
 		}
-		// read lp format 
-		// initializing graph 
+		/// read lp format 
+		/// initializing graph 
 		void read_lp(string const& filename) 
 		{
 			LpParser::read(*this, filename);
 		}
 
+		/// print solutions into a file 
+		/// including prime problem and dual problem
 		virtual void print_solution(string const& filename) const 
 		{
 			this->base_type1::print_solution(filename);
@@ -268,7 +276,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			out.close();
 		}
 	protected:
-		// prepare before run 
+		/// prepare before run 
 		void prepare()
 		{
 			// 1. preparing nodes 
@@ -344,6 +352,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 				}
 			}
 		}
+		/// core function for run
 		typename alg_type::ProblemType run()
 		{
 			// 1. choose algorithm 
@@ -397,15 +406,13 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			return status;
 		}
 
-		bool m_is_bounded; // whether the problem is bounded or not 
-		node_type m_addl_node; // additional node, only valid when m_is_bounded = true  
+		bool m_is_bounded; ///< whether the problem is bounded or not 
+		node_type m_addl_node; ///< additional node, only valid when m_is_bounded = true  
 
-		value_type m_M; // a very large number to deal with ranges of variables 
-						// reference from MIT paper: solving the convex cost integer dual network flow problem 
-		// variable map 
-		unordered_map<string, variable_type> m_hVariable;
-		// constraint map 
-		unordered_map<hash_pair<string, string>, constraint_type> m_hConstraint;
+		value_type m_M; ///< a very large number to deal with ranges of variables 
+						///< reference from MIT paper: solving the convex cost integer dual network flow problem 
+		unordered_map<string, variable_type> m_hVariable; ///< variable map 
+		unordered_map<hash_pair<string, string>, constraint_type> m_hConstraint; ///< constraint map 
 };
 
 } // namespace LpMinCostFlow
