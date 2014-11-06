@@ -17,8 +17,8 @@ int main(int argc, char** argv)
 {
 	if (argc > 1)
 	{
-		LpMcf::Lgf<long> lpsolver1;
-		LpMcf::LpDualMcf<long> lpsolver2;
+		limbo::solvers::lpmcf::Lgf<long> lpsolver1;
+		limbo::solvers::lpmcf::LpDualMcf<long> lpsolver2;
 
 		string filename = argv[1];
 		if (boost::ends_with(filename, ".lgf"))

@@ -173,17 +173,20 @@ single_bound : STRING KWD_COMPARE INTEGER {
 multiple_bounds : single_bound
 					| multiple_bounds single_bound
 					;
-block_bounds : KWD_BOUNDS multiple_bounds
+block_bounds : KWD_BOUNDS 
+			 | KWD_BOUNDS multiple_bounds
 				  ;
 
  /*** grammar for integer ***/
-block_generals : KWD_GENERALS string_array {
+block_generals : KWD_GENERALS
+			   | KWD_GENERALS string_array {
 				driver.generals_cbk(*$2);
 			   }
 			  ;
 
  /*** grammar for binary ***/
-block_binary : KWD_BINARY string_array {
+block_binary : KWD_BINARY 
+			 | KWD_BINARY string_array {
 				driver.binary_cbk(*$2);
 			 }
 			  ;

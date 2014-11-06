@@ -5,8 +5,8 @@
     > Created Time: Mon 13 Oct 2014 07:30:40 PM CDT
  ************************************************************************/
 
-#ifndef _LPMCF_LPDUALMCF_H
-#define _LPMCF_LPDUALMCF_H
+#ifndef _LIMBO_SOLVERS_LPMCF_LPDUALMCF_H
+#define _LIMBO_SOLVERS_LPMCF_LPDUALMCF_H
 
 /// ===================================================================
 ///    class          : LpDualMcf
@@ -40,8 +40,8 @@ using boost::unordered_map;
 using boost::iequals;
 
 /// solving LP with min-cost flow 
-namespace LpMcf 
-{
+namespace limbo { namespace solvers { namespace lpmcf {
+
 /// hash calculator for pairs 
 template <typename T1, typename T2>
 struct hash_pair : pair<T1, T2>
@@ -95,6 +95,10 @@ struct hash_pair : pair<T1, T2>
 ///    let's use c'i for generalized ci and b'ij for generalized bij 
 ///    c'i is node supply 
 ///    for each (i, j) in E', an arc from i to j with cost -b'ij and flow range [0, unlimited]
+///
+/// caution: the cost-scaling algorithm in lemon cannot take an arc with negative cost but unlimited capacity.
+/// So here I introduce a member variable m_M to represent unlimit, but it is much smaller than real bound of integer.
+/// But there may be problem if potential overflow appears. 
 template <typename T = int64_t>
 class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 {
@@ -157,12 +161,15 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 				: variable(make_pair(xi, xj)), constant(c) {}
 		};
 
-		LpDualMcf() 
+		/// constructor 
+		/// \param max_limit represents unlimited arc capacity, default value is 2^(32*3/4) for int32_t, 2^(64*3/4) for int64_t...
+		LpDualMcf(value_type max_limit = (value_type(2) << (sizeof(value_type)*8*3/4))) 
 			: base_type1(), 
 			base_type2(),
 			m_is_bounded(false), 
-			m_M(std::numeric_limits<value_type>::max() >> 2) // use as unlimited number 
+			m_M(max_limit) // use as unlimited number 
 		{
+			if (m_M < 0) m_M = -m_M; // make sure m_M is positive 
 		}
 
 		/// add variable with range 
@@ -172,20 +179,24 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 				value_type const& l = std::numeric_limits<value_type>::min(), 
 				value_type const& r = std::numeric_limits<value_type>::max())
 		{
+			assert_msg(l <= r, "failed to add bound " << l << " <= " << xi << " <= " << r);
+
 			// no variables with the same name is allowed 
 			BOOST_AUTO(found, m_hVariable.find(xi));
 			if (found == m_hVariable.end())
-				assert(m_hVariable.insert(make_pair(xi, variable_type(xi, l, r, 0))).second);
+				assert_msg(m_hVariable.insert(make_pair(xi, variable_type(xi, l, r, 0))).second,
+						"failed to insert variable " << xi << " to hash table");
 			else 
 			{
 				found->second.range.first = std::max(found->second.range.first, l);
 				found->second.range.second = std::min(found->second.range.second, r);
-
-				// if user set bounds to variables 
-				// switch to bounded mode, which means there will be an additional node to the graph 
-				if (found->second.is_bounded())
-					this->is_bounded(true);
+				assert_msg(found->second.range.first <= found->second.range.second, 
+						"failed to set bound " << found->second.range.first << " <= " << xi << " <= " << found->second.range.second);
 			}
+			// if user set bounds to variables 
+			// switch to bounded mode, which means there will be an additional node to the graph 
+			if (l != std::numeric_limits<value_type>::min() || r != std::numeric_limits<value_type>::max())
+				this->is_bounded(true);
 		}
 		/// add constraint 
 		/// xi - xj >= cij 
@@ -194,12 +205,13 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 		{
 			BOOST_AUTO(found, m_hConstraint.find(make_pair(xi, xj)));
 			if (found == m_hConstraint.end())
-				assert(m_hConstraint.insert(
+				assert_msg(m_hConstraint.insert(
 							make_pair(
 								make_pair(xi, xj), 
 								constraint_type(xi, xj, cij)
 								)
-							).second
+							).second,
+						"failed to add constraint for " << xi << " - " << xj << " >= " << cij
 						);
 			else // automatically reduce constraints 
 				found->second.constant = std::max(found->second.constant, cij);
@@ -211,7 +223,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			if (w == 0) return;
 
 			BOOST_AUTO(found, m_hVariable.find(xi));
-			assert(found != m_hVariable.end());
+			assert_msg(found != m_hVariable.end(), "failed to add objective " << w << " " << xi);
 
 			found->second.weight += w;
 		}
@@ -222,27 +234,30 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 
 		/// read lp format 
 		/// and then dump solution 
-		void operator()(string const& filename)
+		typename alg_type::ProblemType operator()(string const& filename)
 		{
 			read_lp(filename);
-			(*this)();
-			this->print_solution(filename+".sol");
+			typename alg_type::ProblemType status = (*this)();
+			if (status == alg_type::OPTIMAL)
+				this->print_solution(filename+".sol");
+
+			return status;
 		}
 		/// execute solver 
 		/// write out solution file if provided 
-		void operator()() 
+		typename alg_type::ProblemType operator()() 
 		{
 			prepare();
 #ifdef DEBUG 
-			this->print_graph();
+			this->print_graph("graph.lp");
 #endif 
-			run();
+			return run();
 		}
 		/// return solution 
 		value_type solution(string const& xi) const 
 		{
 			BOOST_AUTO(found, m_hVariable.find(xi));
-			assert(found != m_hVariable.end());
+			assert_msg(found != m_hVariable.end(), "failed to find variable " << xi);
 
 			return found->second.value;
 		}
@@ -252,6 +267,9 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 		{
 			LpParser::read(*this, filename);
 		}
+		/// check empty
+		/// return true if there's no variable created
+		bool empty() const {return m_hVariable.empty();}
 
 		/// print solutions into a file 
 		/// including prime problem and dual problem
@@ -273,6 +291,65 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 				out << this->m_hName[variable.node] << ": " << variable.value << endl;
 			}
 
+			out.close();
+		}
+		/// print primal problem in LP format to a file 
+		void print_problem(string const& filename) const 
+		{
+			std::ofstream out (filename.c_str());
+			if (!out.good())
+			{
+				cout << "failed to open " << filename << endl;
+				return;
+			}
+
+			// print objective 
+			out << "Minimize\n";
+			for (BOOST_AUTO(it, this->m_hVariable.begin()); it != this->m_hVariable.end(); ++it)
+			{
+				variable_type const& variable = it->second;
+				if (variable.weight == 0) continue;
+
+				out << "\t" << " + " << variable.weight << " " << variable.name << endl;
+			}
+			// print constraints 
+			out << "Subject To\n";
+			for (BOOST_AUTO(it, this->m_hConstraint.begin()); it != this->m_hConstraint.end(); ++it)
+			{
+				constraint_type const& constraint = it->second;
+				out << "\t" << constraint.variable.first 
+					<< " - " << constraint.variable.second 
+					<< " >= " << constraint.constant << endl;
+			}
+			// print bounds 
+			out << "Bounds\n";
+			for (BOOST_AUTO(it, this->m_hVariable.begin()); it != this->m_hVariable.end(); ++it)
+			{
+				variable_type const& variable = it->second;
+				out << "\t";
+				// both lower bound and upper bound 
+				if (variable.range.first != std::numeric_limits<value_type>::min()
+						&& variable.range.second != std::numeric_limits<value_type>::max())
+					out << variable.range.first << " <= " 
+						<< variable.name << " <= " << variable.range.second << endl;
+				// lower bound only 
+				else if (variable.range.first != std::numeric_limits<value_type>::min())
+					out << variable.name << " >= " << variable.range.first << endl;
+				// upper bound only 
+				else if (variable.range.second != std::numeric_limits<value_type>::max())
+					out << variable.name << " <= " << variable.range.second << endl;
+				// no bounds 
+				else 
+					out << variable.name << " free\n";
+			}
+			// print data type (integer)
+			out << "Generals\n";
+			for (BOOST_AUTO(it, this->m_hVariable.begin()); it != this->m_hVariable.end(); ++it)
+			{
+				variable_type const& variable = it->second;
+				out << "\t" << variable.name << endl;
+			}
+			out << "End";
 			out.close();
 		}
 	protected:
@@ -298,8 +375,8 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 				constraint_type& constraint = it->second;
 				BOOST_AUTO(found1, m_hVariable.find(constraint.variable.first));
 				BOOST_AUTO(found2, m_hVariable.find(constraint.variable.second));
-				assert(found1 != m_hVariable.end()); 
-				assert(found2 != m_hVariable.end()); 
+				assert_msg(found1 != m_hVariable.end(), "failed to find variable1 " << constraint.variable.first << " in preparing arcs"); 
+				assert_msg(found2 != m_hVariable.end(), "failed to find variable2 " << constraint.variable.second << " in preparing arcs"); 
 
 				variable_type const& variable1 = found1->second;
 				variable_type const& variable2 = found2->second;
@@ -358,6 +435,11 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			// 1. choose algorithm 
 			alg_type alg (this->m_graph);
 
+			// 1.1 for robustness 
+			// if problem is empty, also return OPTIMAL
+			if (this->empty())
+				return alg_type::OPTIMAL;
+
 			// 2. run 
 			typename alg_type::ProblemType status = alg.reset().resetParams()
 				.lowerMap(this->m_hLower)
@@ -381,7 +463,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 					break;
 			}
 
-			assert(status == alg_type::OPTIMAL);
+			assert_msg(status == alg_type::OPTIMAL, "failed to achieve OPTIMAL solution");
 #endif 
 			// 4. update solution 
 			if (status == alg_type::OPTIMAL)
@@ -415,6 +497,6 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 		unordered_map<hash_pair<string, string>, constraint_type> m_hConstraint; ///< constraint map 
 };
 
-} // namespace LpMinCostFlow
+}}} // namespace lpmcf // namespace solvers // limbo
 
 #endif 

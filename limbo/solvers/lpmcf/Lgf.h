@@ -5,8 +5,8 @@
     > Created Time: Sat 25 Oct 2014 05:33:19 PM CDT
  ************************************************************************/
 
-#ifndef _LPMCF_LGF_H
-#define _LPMCF_LGF_H
+#ifndef _LIMBO_SOLVERS_LPMCF_LGF_H
+#define _LIMBO_SOLVERS_LPMCF_LGF_H
 
 #include <cstdlib>
 #include <iostream>
@@ -28,9 +28,10 @@
 #include <lemon/graph_to_eps.h>
 #include <lemon/math.h>
 
+#include <limbo/preprocessor/AssertMsg.h>
+
 // solving LP with min-cost flow 
-namespace LpMcf 
-{
+namespace limbo { namespace solvers { namespace lpmcf {
 
 using std::cout;
 using std::endl;
@@ -88,7 +89,7 @@ class Lgf
 		}
 
 		// for debug 
-		virtual void print_graph() const 
+		virtual void print_graph(string const& filename) const 
 		{
 			typedef lemon::dim2::Point<int> Point;
 			
@@ -122,7 +123,7 @@ class Lgf
 			}
 
 			// dump eps figure 
-			lemon::graphToEps(m_graph, "graph.eps")
+			lemon::graphToEps(m_graph, filename+".eps")
 				.title("LpMcfD EPS figure")
 				.coords(coords)
 				.absoluteNodeSizes().absoluteArcWidths()
@@ -136,7 +137,7 @@ class Lgf
 				.drawArrows().arrowWidth(1).arrowLength(1)
 				.run();
 			// dump lgf file 
-			lemon::DigraphWriter<graph_type>(m_graph, "graph.lgf")
+			lemon::DigraphWriter<graph_type>(m_graph, filename+".lgf")
 				.nodeMap("name", m_hName)
 				.nodeMap("supply", m_hSupply)
 				.arcMap("capacity_lower", m_hLower)
@@ -211,7 +212,7 @@ class Lgf
 					break;
 			}
 
-			assert(status == alg_type::OPTIMAL);
+			assert_msg(status == alg_type::OPTIMAL, "failed to achieve OPTIMAL solution");
 #endif 
 			// 4. update solution 
 			if (status == alg_type::OPTIMAL)
@@ -238,6 +239,6 @@ class Lgf
 		node_pot_map_type m_hPot; // dual solution of min-cost flow, which is the solution of LP 
 };
 
-} // namespace LpMcf 
+}}} // namespace lpmcf // namespace solvers // limbo 
 
 #endif 
