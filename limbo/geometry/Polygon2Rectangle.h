@@ -529,7 +529,7 @@ class Polygon2Rectangle
 /// \param RectSet represents the container for rectangles 
 template <typename InputIterator, typename PointSet, typename RectSet>
 inline bool polygon2rectangle(InputIterator input_begin, InputIterator input_end, 
-		PointSet const& hint, RectSet& r, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
+		PointSet const&, RectSet& r, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
 {
 	Polygon2Rectangle<PointSet, RectSet> p2r (input_begin, input_end, slicing_orient);
 	if (!p2r()) return false;

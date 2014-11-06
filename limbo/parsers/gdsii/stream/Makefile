@@ -11,7 +11,7 @@ TEST_DIR = $(realpath ../test)
 
 VPATH = . $(TEST_DIR)
 
-CXXFLAGS = -W -Wall -Wextra -ansi -g #-DDEBUG_GDSREADER
+CXXFLAGS = -W -Wall -Wextra -ansi -g -O2 #-DDEBUG_GDSREADER
 
 INCLUDE = $(LIMBO_ROOT_DIR) #-I$(LIBRARIES_DIR)/boost_1_55_0
 

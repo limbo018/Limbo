@@ -61,7 +61,7 @@
 
 	class IntegerArray* integerArrayVal;
 	class StringArray* stringArrayVal;
-	class Term* termVal;
+	struct Term* termVal;
 
 /*    class CalcNode*		calcnode; */
 }
