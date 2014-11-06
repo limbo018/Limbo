@@ -111,16 +111,17 @@ class Polygon2Rectangle
 			// identical vertices are skipped 
 			// extra vertices in the same line are skipped  
 			std::vector<point_type> vTmpPoint;
-			InputIterator input_last = input_end; 
-			--input_last;
-			if (is_equal_type()(*input_begin, *input_last)) input_end = input_last; // skip identical first and last points 
-			for (InputIterator itCur = input_begin; itCur != input_end; ++itCur)
+			InputIterator input_first = input_begin; 
+			++input_first;
+			if (is_equal_type()(*input_begin, *input_first)) input_begin = input_first; // skip identical first and last points 
+			// use only operator++ so that just forward_iteartor is enough
+			for (InputIterator itPrev = input_begin; itPrev != input_end; ++itPrev)
 			{
-				InputIterator itPrev = itCur;
+				InputIterator itCur = itPrev;
+				++itCur;
+				if (itCur == input_end)
+					itCur = input_begin;
 				InputIterator itNext = itCur;
-				if (itPrev == input_begin)
-					itPrev = input_end;
-				--itPrev;
 				++itNext;
 				if (itNext == input_end)
 					itNext = input_begin;
