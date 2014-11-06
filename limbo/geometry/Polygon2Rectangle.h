@@ -65,6 +65,7 @@ struct point_compare_type
 
 /// \brief a class implement conversion from manhattan polygon to rectangle 
 /// \param PointSet is the container for internal storing vertices of polygon 
+/// according to some experiments, vector is much faster than list, and set 
 /// \param RectSet is the container storing output rectangles 
 template <typename PointSet,
 		 typename RectSet>
@@ -527,9 +528,10 @@ class Polygon2Rectangle
 /// \param PointSet represents the internal container for points of polygon, user needs to pass a hint for type deduction 
 /// \param RectSet represents the container for rectangles 
 template <typename InputIterator, typename PointSet, typename RectSet>
-inline bool polygon2rectangle(InputIterator input_begin, InputIterator input_end, PointSet const& hint, RectSet& r)
+inline bool polygon2rectangle(InputIterator input_begin, InputIterator input_end, 
+		PointSet const& hint, RectSet& r, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
 {
-	Polygon2Rectangle<PointSet, RectSet> p2r (input_begin, input_end);
+	Polygon2Rectangle<PointSet, RectSet> p2r (input_begin, input_end, slicing_orient);
 	if (!p2r()) return false;
 	r = p2r.get_rectangles();
 	return true;

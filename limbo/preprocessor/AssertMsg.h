@@ -26,7 +26,7 @@
         if (! (condition)) { \
             std::cerr << "assertion `" #condition "` failed in " << __FILE__ \
                       << " line " << __LINE__ << ": " << message << std::endl; \
-            std::exit(EXIT_FAILURE); \
+			assert(condition); \
         } \
     } while (false)
 #else
