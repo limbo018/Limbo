@@ -31,6 +31,7 @@
 #include <boost/algorithm/string/classification.hpp>
 #include <limbo/geometry/Geometry.h>
 #include <limbo/string/Classification.h>
+#include <limbo/preprocessor/AssertMsg.h>
 
 namespace limbo { namespace geometry {
 
@@ -111,9 +112,21 @@ class Polygon2Rectangle
 			// identical vertices are skipped 
 			// extra vertices in the same line are skipped  
 			std::vector<point_type> vTmpPoint;
-			InputIterator input_first = input_begin; 
-			++input_first;
-			if (is_equal_type()(*input_begin, *input_first)) input_begin = input_first; // skip identical first and last points 
+			// I'm trying to use only forward_iteartor, which only supports ++ operation 
+			// so it may spend more effort on getting the last point 
+			InputIterator input_last = input_end;
+			for (InputIterator itCur = input_begin; itCur != input_end; ++itCur)
+			{
+				InputIterator itNext = itCur;
+				++itNext;
+				if (itNext == input_end)
+				{
+					input_last = itCur;
+					break;
+				}
+			}
+			assert_msg(input_last != input_end, "failed to find input_last, maybe too few points");
+			if (is_equal_type()(*input_begin, *input_last)) ++input_begin; // skip identical first and last points 
 			// use only operator++ so that just forward_iteartor is enough
 			for (InputIterator itPrev = input_begin; itPrev != input_end; ++itPrev)
 			{
