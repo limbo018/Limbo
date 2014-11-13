@@ -46,26 +46,26 @@ namespace phoenix =  boost::phoenix;
 
 // read ascii gds file 
 // user can pass an object which contains the following member functions as callbacks 
-// add_gds_lib(GdsTxtParser::Lib const&)
+// add_gds_lib(GdsTxtParser::GdsLib const&)
 struct GdsTxtParser
 {
-	struct Item 
+	struct GdsItem 
 	{
 		virtual void print(ostringstream& ss) const {};
-		friend std::ostream& operator<<(std::ostream& os, Item const& rhs)
+		friend std::ostream& operator<<(std::ostream& os, GdsItem const& rhs)
 		{
 			std::ostringstream ss;
 			rhs.print(ss);
 			os << ss.str();
 			return os;
 		}
-		friend ostringstream& operator<<(ostringstream& ss, Item const& rhs)
+		friend ostringstream& operator<<(ostringstream& ss, GdsItem const& rhs)
 		{
 			rhs.print(ss);
 			return ss;
 		}
 	};
-	struct Boundary 
+	struct GdsBoundary 
 	{
 		int32_t layer;
 		int32_t datatype;
@@ -77,7 +77,7 @@ struct GdsTxtParser
 			vPoint.clear();
 		}
 	};
-	struct Text 
+	struct GdsText 
 	{
 		int32_t layer;
 		int32_t texttype;
@@ -94,11 +94,11 @@ struct GdsTxtParser
 			content = "";
 		}
 	};
-	struct Cell 
+	struct GdsCell 
 	{
 		string cell_name;
-		vector<Boundary> vBoundary;
-		vector<Text> vText;
+		vector<GdsBoundary> vBoundary;
+		vector<GdsText> vText;
 		void reset()
 		{
 			cell_name = "";
@@ -106,17 +106,22 @@ struct GdsTxtParser
 			vText.clear();
 		}
 	};
-	struct Lib 
+	struct GdsLib 
 	{
 		string lib_name;
 		array<double, 2> unit;
-		vector<Cell> vCell;
+		vector<GdsCell> vCell;
 		void reset()
 		{
 			lib_name = "";
 			unit.fill(0);
 			vCell.clear();
 		}
+	};
+	/// dummy class to keep the same api with gds stream parser 
+	struct GdsDataBase
+	{
+		virtual void add_gds_lib(GdsLib const&) = 0;
 	};
 	// grammar 
 	template <typename Iterator, typename Skipper, typename DataBaseType>
@@ -132,7 +137,7 @@ struct GdsTxtParser
 		qi::rule<Iterator, string(), Skipper> text_nc; // no constraints
 		qi::rule<Iterator, string(), Skipper> text_quote; // text quoted by ""
 
-		Lib m_lib;
+		GdsLib m_lib;
 
 		DataBaseType& m_db;
 
@@ -241,32 +246,32 @@ struct GdsTxtParser
 		}
 		void str_cbk()
 		{
-			m_lib.vCell.push_back(Cell());
+			m_lib.vCell.push_back(GdsCell());
 		}
 		void strname_cbk(string const& s1)
 		{
-			Cell& cell = m_lib.vCell.back();
+			GdsCell& cell = m_lib.vCell.back();
 			// skip ""
 			cell.cell_name = s1.substr(1, s1.size()-2);
 		}
 		void boundary_begin_cbk()
 		{
-			m_lib.vCell.back().vBoundary.push_back(Boundary());
+			m_lib.vCell.back().vBoundary.push_back(GdsBoundary());
 		}
 		void boundary_layer_cbk(int32_t const& d1)
 		{
-			Boundary& boundary = m_lib.vCell.back().vBoundary.back();
+			GdsBoundary& boundary = m_lib.vCell.back().vBoundary.back();
 			boundary.layer = d1;
 		}
 		void boundary_datatype_cbk(int32_t const& d1)
 		{
-			Boundary& boundary = m_lib.vCell.back().vBoundary.back();
+			GdsBoundary& boundary = m_lib.vCell.back().vBoundary.back();
 			boundary.datatype = d1;
 		}
 		void boundary_xy_cbk(vector<int32_t> const& v1)
 		{
 			assert((v1.size()%2) == 0);
-			Boundary& boundary = m_lib.vCell.back().vBoundary.back();
+			GdsBoundary& boundary = m_lib.vCell.back().vBoundary.back();
 			boundary.vPoint.resize(v1.size()>>1);
 			for (int32_t i = 0; i < v1.size(); i += 2)
 			{
@@ -277,41 +282,41 @@ struct GdsTxtParser
 		}
 		void text_begin_cbk()
 		{
-			m_lib.vCell.back().vText.push_back(Text());
+			m_lib.vCell.back().vText.push_back(GdsText());
 		}
 		void text_layer_cbk(int32_t const& d1)
 		{
-			Text& t = m_lib.vCell.back().vText.back();
+			GdsText& t = m_lib.vCell.back().vText.back();
 			t.layer = d1;
 		}
 		void text_texttype_cbk(int32_t const& d1)
 		{
-			Text& t = m_lib.vCell.back().vText.back();
+			GdsText& t = m_lib.vCell.back().vText.back();
 			t.texttype = d1;
 		}
 		void text_presentation_cbk(int32_t const& d1)
 		{
-			Text& t = m_lib.vCell.back().vText.back();
+			GdsText& t = m_lib.vCell.back().vText.back();
 			t.presentation = d1;
 		}
 		void text_strans_cbk(int32_t const& d1)
 		{
-			Text& t = m_lib.vCell.back().vText.back();
+			GdsText& t = m_lib.vCell.back().vText.back();
 			t.strans = d1;
 		}
 		void text_mag_cbk(double const& d1)
 		{
-			Text& t = m_lib.vCell.back().vText.back();
+			GdsText& t = m_lib.vCell.back().vText.back();
 			t.mag = d1;
 		}
 		void text_xy_cbk(int32_t const& d1, int32_t const& d2)
 		{
-			Text& t = m_lib.vCell.back().vText.back();
+			GdsText& t = m_lib.vCell.back().vText.back();
 			t.position[0] = d1; t.position[1] = d2;
 		}
 		void text_string_cbk(string const& s1)
 		{
-			Text& t = m_lib.vCell.back().vText.back();
+			GdsText& t = m_lib.vCell.back().vText.back();
 			// skip ""
 			t.content = s1.substr(1, s1.size()-2);
 		}

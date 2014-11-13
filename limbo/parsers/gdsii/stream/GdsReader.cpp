@@ -214,9 +214,9 @@ bool GdsReader::operator() (const char* filename)
 #ifdef DEBUG_GDSREADER
 					printf ("%s0x%04x     # DATA\n",
 							indent_string, bit_array);
-#endif 
 					/* print a hopefully useful comment */
 					print_bit_array_comments (ascii_record_type, bit_array, indent_string);
+#endif 
 					vBitArray.push_back(bit_array);
 				}
 				m_db.bit_array_cbk(ascii_record_type, ascii_data_type, vBitArray);
@@ -339,21 +339,25 @@ bool GdsReader::operator() (const char* filename)
 				{
 					display_char_1 = record[data_ktr];
 					display_char_2 = record[data_ktr + 1];
-					if (!isprint (display_char_1))
+
+					if (display_char_1 == '\0') break; /* quit early if encounter null character */
+					else if (!isprint (display_char_1))
 					{
 						display_char_1 = '.';
 					}
-					if (!isprint (display_char_2))
+					str.push_back(display_char_1);
+
+					if (display_char_2 == '\0') break; /* quit early if encounter null character */
+					else if (!isprint (display_char_2))
 					{
 						display_char_2 = '.';
 					}
+					str.push_back(display_char_2);
 #ifdef DEBUG_GDSREADER
 					printf ("%s0x%02x 0x%02x  # DATA: %c%c\n",
 							indent_string, record[data_ktr], record[data_ktr + 1],
 							display_char_1, display_char_2);
 #endif 
-					str.push_back(display_char_1);
-					str.push_back(display_char_2);
 					if (((!isprint (record[data_ktr])) && (record[data_ktr] != 0)) ||
 							((!isprint (record[data_ktr + 1])) && (record[data_ktr + 1] != 0)))
 					{

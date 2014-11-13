@@ -11,13 +11,13 @@ TEST_DIR = $(realpath ../test)
 
 VPATH = . $(TEST_DIR)
 
-CXXFLAGS = -W -Wall -Wextra -ansi -g -O2 #-DDEBUG_GDSREADER
+CXXFLAGS = -W -Wall -Wextra -ansi -g #-O2 #-DDEBUG_GDSREADER
 
 INCLUDE = $(LIMBO_ROOT_DIR) #-I$(LIBRARIES_DIR)/boost_1_55_0
 
-HEADERS = $(PARSER_PREFIX)Reader.h $(PARSER_PREFIX)Writer.h
+HEADERS = $(PARSER_PREFIX)Reader.h $(PARSER_PREFIX)Writer.h $(PARSER_PREFIX)Driver.h
 
-all: lib$(LIB_PREFIX)parser $(TEST_DIR)/test_reader $(TEST_DIR)/test_writer
+all: lib$(LIB_PREFIX)parser $(TEST_DIR)/test_reader $(TEST_DIR)/test_writer $(TEST_DIR)/test_driver
 
 # Implicit rule to compile c++ files
 
@@ -32,15 +32,18 @@ $(TEST_DIR)/test_reader: $(TEST_DIR)/test_reader.o
 $(TEST_DIR)/test_writer: $(TEST_DIR)/test_writer.o 
 	$(CXX) $(LDFLAGS) -o $@ $(TEST_DIR)/test_writer.o -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)parser
 
-lib$(LIB_PREFIX)parser: $(PARSER_PREFIX)Reader.o $(PARSER_PREFIX)Writer.o
-	ar rvs lib$(LIB_PREFIX)parser.a $(PARSER_PREFIX)Reader.o $(PARSER_PREFIX)Writer.o
+$(TEST_DIR)/test_driver: $(TEST_DIR)/test_driver.o
+	$(CXX) $(LDFLAGS) -o $@ $(TEST_DIR)/test_driver.o -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)parser
+
+lib$(LIB_PREFIX)parser: $(PARSER_PREFIX)Reader.o $(PARSER_PREFIX)Writer.o $(PARSER_PREFIX)Driver.o
+	ar rvs lib$(LIB_PREFIX)parser.a $(PARSER_PREFIX)Reader.o $(PARSER_PREFIX)Writer.o $(PARSER_PREFIX)Driver.o
 	mv lib$(LIB_PREFIX)parser.a $(LIMBO_ROOT_DIR)/lib
 
 install: lib$(LIB_PREFIX)parser
 	rm -f *.o
 
 clean:
-	rm -f $(TEST_DIR)/test_reader $(TEST_DIR)/test_writer *.o $(TEST_DIR)/*.o
+	rm -f $(TEST_DIR)/test_reader $(TEST_DIR)/test_writer $(TEST_DIR)/test_driver *.o $(TEST_DIR)/*.o
 
 extraclean: clean
 	rm -f $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
