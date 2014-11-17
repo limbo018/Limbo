@@ -1,2 +1,3 @@
 test/test_reader
 test/test_writer
+test/test_driver
