@@ -113,8 +113,8 @@ class GdsDriver : public GdsDataBase
 	protected:
 		/// required callbacks from GdsDataBase
 		virtual void bit_array_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vBitArray);
-		virtual void integer_2_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<unsigned int> const& vInteger);
-		virtual void integer_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<unsigned int> const& vInteger);
+		virtual void integer_2_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vInteger);
+		virtual void integer_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vInteger);
 		virtual void real_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<double> const& vFloat);
 		virtual void real_8_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<double> const& vFloat);
 		virtual void string_cbk(const char* ascii_record_type, const char* ascii_data_type, string const& str);

@@ -22,12 +22,12 @@ struct DataBase : public GdsParser::GdsDataBase
 		cout << __func__ << endl;
 		this->general_cbk(ascii_record_type, ascii_data_type, vBitArray);
 	}
-	virtual void integer_2_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<unsigned int> const& vInteger)
+	virtual void integer_2_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vInteger)
 	{
 		cout << __func__ << endl;
 		this->general_cbk(ascii_record_type, ascii_data_type, vInteger);
 	}
-	virtual void integer_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<unsigned int> const& vInteger)
+	virtual void integer_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vInteger)
 	{
 		cout << __func__ << endl;
 		this->general_cbk(ascii_record_type, ascii_data_type, vInteger);
@@ -70,6 +70,7 @@ struct DataBase : public GdsParser::GdsDataBase
 		}
 		else if (ascii_record_type == "XY")
 		{
+			cout << data.size() << endl;
 		}
 		else if (ascii_record_type == "ENDEL")
 		{

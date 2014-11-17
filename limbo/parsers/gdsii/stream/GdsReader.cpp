@@ -223,8 +223,8 @@ bool GdsReader::operator() (const char* filename)
 			}
 			else if (expected_data_type == 0x02)	/* INTEGER_2 */
 			{
-				/* vInteger used to save data for callbacks  */
-				vector<unsigned int> vInteger; vInteger.reserve((no_read-2)>>1);
+				/* vInteger used to save data for callbacks, be careful, it should be int rather than unsigned int */
+				vector<int> vInteger; vInteger.reserve((no_read-2)>>1);
 				for (data_ktr = 2; data_ktr < no_read; data_ktr += 2)
 				{
 					display_integer = record[data_ktr];
@@ -251,8 +251,8 @@ bool GdsReader::operator() (const char* filename)
 			}
 			else if (expected_data_type == 0x03)	/* INTEGER_4 */
 			{
-				/* vInteger used to save data for callbacks  */
-				vector<unsigned int> vInteger; vInteger.reserve((no_read-2)>>2);
+				/* vInteger used to save data for callbacks, be careful, it should be int rather than unsigned int */
+				vector<int> vInteger; vInteger.reserve((no_read-2)>>2);
 				for (data_ktr = 2; data_ktr < no_read; data_ktr += 4)
 				{
 					display_integer = 0;

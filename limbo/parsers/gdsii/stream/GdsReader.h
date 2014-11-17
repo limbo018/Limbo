@@ -20,8 +20,8 @@ class GdsDataBase
 {
 	public:
 		virtual void bit_array_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vBitArray) = 0;
-		virtual void integer_2_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<unsigned int> const& vInteger) = 0;
-		virtual void integer_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<unsigned int> const& vInteger) = 0;
+		virtual void integer_2_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vInteger) = 0;
+		virtual void integer_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vInteger) = 0;
 		virtual void real_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<double> const& vFloat) = 0;
 		virtual void real_8_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<double> const& vFloat) = 0;
 		virtual void string_cbk(const char* ascii_record_type, const char* ascii_data_type, string const& str) = 0;

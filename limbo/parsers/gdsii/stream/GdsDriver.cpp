@@ -20,9 +20,9 @@ bool GdsDriver::operator()(string const& filename)
 
 void GdsDriver::bit_array_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vBitArray)
 {this->general_cbk(ascii_record_type, ascii_data_type, vBitArray);}
-void GdsDriver::integer_2_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<unsigned int> const& vInteger)
+void GdsDriver::integer_2_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vInteger)
 {this->general_cbk(ascii_record_type, ascii_data_type, vInteger);}
-void GdsDriver::integer_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<unsigned int> const& vInteger)
+void GdsDriver::integer_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vInteger)
 {this->general_cbk(ascii_record_type, ascii_data_type, vInteger);}
 void GdsDriver::real_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<double> const& vFloat) 
 {this->general_cbk(ascii_record_type, ascii_data_type, vFloat);}
