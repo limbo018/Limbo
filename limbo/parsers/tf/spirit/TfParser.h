@@ -20,7 +20,7 @@
 #include <boost/spirit/include/qi_no_case.hpp>
 #include <boost/spirit/include/phoenix.hpp>
 #include <boost/spirit/include/phoenix_bind.hpp>
-#include "ErrorHandler.h"
+#include <limbo/parsers/tf/spirit/ErrorHandler.h>
 //#include "Gadget.h"
 using std::cout;
 using std::endl;

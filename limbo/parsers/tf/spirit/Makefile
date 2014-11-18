@@ -21,7 +21,7 @@ all: $(TEST_DIR)/test_spirit
 # Implicit rule to compile c++ files
 
 $(TEST_DIR)/test_spirit.o: $(TEST_DIR)/test_spirit.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $< -I $(INCLUDE)
+	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE)
 
 # Link executable
 

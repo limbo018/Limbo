@@ -21,8 +21,8 @@
 #include <boost/spirit/include/phoenix.hpp>
 #include <boost/spirit/include/phoenix_bind.hpp>
 #include <boost/spirit/include/phoenix_function.hpp>
-#include "ErrorHandler.h"
-//#include "Gadget.h"
+#include <limbo/parsers/lef/spirit/ErrorHandler.h>
+
 using std::cout;
 using std::endl;
 using std::vector;
@@ -50,7 +50,7 @@ struct LefParser
 {
 	struct Item 
 	{
-		virtual void print(ostringstream& ss) const {};
+		virtual void print(ostringstream&) const {};
 		friend std::ostream& operator<<(std::ostream& os, Item const& rhs)
 		{
 			std::ostringstream ss;
@@ -182,6 +182,16 @@ struct LefParser
 				<< "class_name = " << class_name << endl 
 				<< "size = " << size[0] << " " << size[1] << endl;
 		}
+	};
+	/// base abstract class and user needs to inherit this class 
+	/// it contains required callbacks for LefParser 
+	struct LefDataBase
+	{
+		virtual void set_lef_version(string const&) = 0;
+		virtual void set_lef_unit(int32_t const&) = 0;
+		virtual void set_lef_site(Site const&) = 0;
+		virtual void add_lef_layer(Layer const&) = 0;
+		virtual void add_lef_macro(Macro const&) = 0;
 	};
 	// grammar 
 	template <typename Iterator, typename Skipper, typename DataBaseType>
@@ -449,7 +459,7 @@ struct LefParser
 				m_layer.pitch.fill(v1[0]);
 			else 
 			{
-				for (int32_t i = 0; i < v1.size(); ++i)
+				for (uint32_t i = 0; i < v1.size(); ++i)
 					m_layer.pitch[i] = v1[i];
 			}
 		}
@@ -471,12 +481,12 @@ struct LefParser
 		{
 			m_layer.spacing = d1;
 		}
-		void layer_cbk_resistance(vector<string> const& v1, double const& d2)
+		void layer_cbk_resistance(vector<string> const& , double const& d2)
 		{
 			//assert(s1 == "RPERSQ");
 			m_layer.resistance = d2;
 		}
-		void layer_cbk_capacitance(vector<string> const& v1, double const& d2)
+		void layer_cbk_capacitance(vector<string> const& , double const& d2)
 		{
 			//assert(s1 == "CPERSQDIST");
 			m_layer.capacitance = d2;

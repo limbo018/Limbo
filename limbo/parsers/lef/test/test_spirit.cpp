@@ -9,25 +9,36 @@ using std::cin;
 using std::endl;
 using std::string;
 
+/// this is an recommended API for LefParser, which also matches to potential bison version in the future
+/// actually spirit version of parser is based on template, so user does not necessarily need to inherit LefDataBase
 class DataBase : public LefParser::LefDataBase
 {
 	public:
+
 		DataBase()
 		{
 			cout << "constructing DataBase" << endl;
 		}
 		///////////////// required callback ////////////////
-		virtual void set_ebeam_unit(int token) 
+		virtual void set_lef_version(string const& v) 
 		{
-			cout << __func__ << " => " << token << endl;
+			cout << "version = " << v << endl;
 		}
-		virtual void set_ebeam_boundary(EbeamParser::EbeamBoundary const&) 
+		virtual void set_lef_unit(int32_t const& u) 
 		{
-			cout << __func__ << endl;
+			cout << "unit = " << u << endl;
 		}
-		virtual void add_ebeam_macro(EbeamParser::Macro const&) 
+		virtual void set_lef_site(LefParser::Site const& s) 
 		{
-			cout << __func__ << endl;
+			cout << s << endl;
+		}
+		virtual void add_lef_layer(LefParser::Layer const& l) 
+		{
+			cout << l << endl;
+		}
+		virtual void add_lef_macro(LefParser::Macro const& m) 
+		{
+			cout << m << endl;
 		}
 };
 
