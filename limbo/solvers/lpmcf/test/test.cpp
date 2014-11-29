@@ -22,9 +22,15 @@ int main(int argc, char** argv)
 
 		string filename = argv[1];
 		if (boost::ends_with(filename, ".lgf"))
+		{
 			lpsolver1(filename);
+			lpsolver1.print_graph("graph1");
+		}
 		else if (boost::ends_with(filename, ".lp"))
+		{
 			lpsolver2(filename);
+			lpsolver2.print_graph("graph2");
+		}
 		else 
 			cout << "only support .lgf and .lp file formats" << endl;
 
