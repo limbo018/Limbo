@@ -62,16 +62,33 @@ struct GdsText
 		content = "";
 	}
 };
+/// thanks to Biying Xu for the benchmarks and sample code 
+struct GdsSref
+{
+	string sname;
+	vector<int32_t> position;
+	GdsSref() 
+	{
+		position.resize(2, 0);
+	}
+	void reset()
+	{
+		sname = "";
+		position.resize(2, 0);
+	}
+};
 struct GdsCell 
 {
 	string cell_name;
 	vector<GdsBoundary> vBoundary;
 	vector<GdsText> vText;
+	vector<GdsSref> vSref;
 	void reset()
 	{
 		cell_name = "";
 		vBoundary.clear();
 		vText.clear();
+		vSref.clear();
 	}
 };
 struct GdsLib 
@@ -127,7 +144,7 @@ class GdsDriver : public GdsDataBase
 		GdsLib m_lib; ///< temporary GdsLib object 
 									///< when parsed a lib, pass it using add_gds_lib function
 		string m_current; ///< current block name 
-						///< it can be HEADER, LIBRARY, CELL, BOUNDARY, BOX, TEXT
+						///< it can be HEADER, LIBRARY, CELL, BOUNDARY, BOX, TEXT, SREF
 };
 
 template <typename ContainerType>
@@ -162,12 +179,20 @@ void GdsDriver::general_cbk(string const& ascii_record_type, string const&, Cont
 	else if (ascii_record_type == "BOUNDARY" || ascii_record_type == "BOX") // BOUNDARY and BOX are generalized to BOUNDARY
 	{
 		m_current = "BOUNDARY";
+		assert_msg(!m_lib.vCell.empty(), ascii_record_type << " block must be in a BGNSTR block");
 		m_lib.vCell.back().vBoundary.push_back(GdsBoundary());
 	}
 	else if (ascii_record_type == "TEXT")
 	{
 		m_current = "TEXT";
+		assert_msg(!m_lib.vCell.empty(), ascii_record_type << " block must be in a BGNSTR block");
 		m_lib.vCell.back().vText.push_back(GdsText());
+	}
+	else if (ascii_record_type == "SREF")
+	{
+		m_current = "SREF";
+		assert_msg(!m_lib.vCell.empty(), ascii_record_type << " block must be in a BGNSTR block");
+		m_lib.vCell.back().vSref.push_back(GdsSref());
 	}
 	else if (ascii_record_type == "LAYER")
 	{
@@ -178,18 +203,33 @@ void GdsDriver::general_cbk(string const& ascii_record_type, string const&, Cont
 	}
 	else if (ascii_record_type == "DATATYPE") // here're some information I don't see any usage
 	{
+		if (m_current == "BOUNDARY")
+			m_lib.vCell.back().vBoundary.back().datatype = vData[0];
 	}
 	else if (ascii_record_type == "TEXTTYPE")
 	{
+		if (m_current == "TEXT")
+			m_lib.vCell.back().vText.back().texttype = vData[0];
 	}
 	else if (ascii_record_type == "PRESENTATION")
 	{
+		if (m_current == "TEXT")
+			m_lib.vCell.back().vText.back().presentation = vData[0];
 	}
 	else if (ascii_record_type == "STRANS")
 	{
+		if (m_current == "TEXT")
+			m_lib.vCell.back().vText.back().strans = vData[0];
 	}
 	else if (ascii_record_type == "MAG")
 	{
+		if (m_current == "TEXT")
+			m_lib.vCell.back().vText.back().mag = vData[0];
+	}
+	else if (ascii_record_type == "SNAME")
+	{
+		if (m_current == "SREF")
+			m_lib.vCell.back().vSref.back().sname.assign(vData.begin(), vData.end());
 	}
 	else if (ascii_record_type == "XY")
 	{
@@ -206,11 +246,17 @@ void GdsDriver::general_cbk(string const& ascii_record_type, string const&, Cont
 		}
 		else if (m_current == "TEXT")
 		{
-			assert_msg(vData.size() == 2, "invalid size of data array for TEXT: " << vData.size());
-			m_lib.vCell.back().vText.back().position[0] = vData[0];
-			m_lib.vCell.back().vText.back().position[1] = vData[1];
+			assert_msg(vData.size() == 2, "invalid size of data array for " 
+					<< m_current << ": " << vData.size());
+			m_lib.vCell.back().vText.back().position.assign(vData.begin(), vData.end());
 		}
-		else assert_msg(0, "record XY should only appear in BOUNDARY, BOX or TEXT");
+		else if (m_current == "SREF")
+		{
+			assert_msg(vData.size() == 2, "invalid size of data array for " 
+					<< m_current << ": " << vData.size());
+			m_lib.vCell.back().vSref.back().position.assign(vData.begin(), vData.end());
+		}
+		else assert_msg(0, "record XY should only appear in BOUNDARY, BOX, TEXT, SREF");
 	}
 	else if (ascii_record_type == "STRING")
 	{
@@ -219,7 +265,9 @@ void GdsDriver::general_cbk(string const& ascii_record_type, string const&, Cont
 	}
 	else if (ascii_record_type == "ENDEL")
 	{
-		assert_msg(m_current == "BOUNDARY" || m_current == "TEXT", "currently only support BOUNDARY, BOX, and TEXT");
+		assert_msg(m_current == "BOUNDARY" || m_current == "TEXT"
+				|| m_current == "SREF", 
+				"currently only support BOUNDARY, BOX, and TEXT");
 		m_current = "CELL"; // go back to upper 
 	}
 	else if (ascii_record_type == "ENDSTR")
