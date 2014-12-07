@@ -5,8 +5,8 @@
     > Created Time: Wed 22 Oct 2014 10:41:23 PM CDT
  ************************************************************************/
 
-#ifndef _GDSPARSER_READER_H
-#define _GDSPARSER_READER_H
+#ifndef _GDSPARSER_GDSREADER_H
+#define _GDSPARSER_GDSREADER_H
 
 #include <string>
 #include <vector>

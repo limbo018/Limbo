@@ -23,7 +23,9 @@ int main( int argc, char *argv[] )
     // start the gds library with HEADER, BGNLIB, LIBNAME, and UNITS
 
 	GdsParser::GdsWriter gw (argv[1]);
-    gw.gds_create_lib(  "dogs", 0.001 /* um per bit */ );
+	// two different wrappers 
+    //gw.gds_create_lib(  "dogs", 0.001 /* um per bit */ );
+	gw.create_lib("dogs", 0.001, 1.0e-9);
 
     // create a cell called "hotdogs"
 
@@ -72,30 +74,29 @@ int main( int argc, char *argv[] )
 #endif 
     gw.gds_write_endstr(  );
 
-#if 0
     //-----------------------------------------------------------------------------
     // create some text, reflected about the x axis
 
-    gds_write_text(  );
-    gds_write_layer(  1 );
-    gds_write_texttype(  0 );
-    gds_write_presentation(  0, 1, 1 );  //  font, hp, vp
-    gds_write_width(  500 );
-    gds_write_strans(  1, 0, 0 );        //  reflect, abs_angle, abs_mag
+    gw.gds_write_text(  );
+    gw.gds_write_layer(  1 );
+    gw.gds_write_texttype(  0 );
+    gw.gds_write_presentation(  0, 1, 1 );  //  font, hp, vp
+    gw.gds_write_width(  500 );
+    gw.gds_write_strans(  1, 0, 0 );        //  reflect, abs_angle, abs_mag
     x[0] = 2000;  
     y[0] = 2000;
-    gds_write_xy(  x, y, 1 );  
-    gds_write_string(  "reflected" );
-    gds_write_endel(  );
+    gw.gds_write_xy(  x, y, 1 );  
+    gw.gds_write_string(  "reflected" );
+    gw.gds_write_endel(  );
 
     //-----------------------------------------------------------------------------
     // create some text, using the helper function instead.
     // arguments: file-descriptor, string, x, y, layer, size
     // where x, y, and size are in database units (nanometers, usually)
 
-    gds_create_text(  "not reflected", 2000, 1500, 2, 500 );  
+    gw.gds_create_text(  "not reflected", 2000, 1500, 2, 500 );  
 
-
+#if 0
     //-----------------------------------------------------------------------------
     // create a path
 

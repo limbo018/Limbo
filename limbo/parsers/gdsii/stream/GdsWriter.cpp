@@ -156,6 +156,14 @@ void GdsWriter::write_box(int layer, int datatype, int xl, int yl, int xh, int y
 	this->gds_write_xy(  px, py, 4, false);    // polygon, four vertices, first vertex repeated => 5 points
     this->gds_write_endel(  );          // end of element
 }
+void GdsWriter::create_lib(const char* libname, double dbu_uu, double dbu_m)
+{
+	// Write HEADER, BGNLIB, LIBNAME, and UNITS.
+	gds_write_header(  );
+	gds_write_bgnlib(  );
+	gds_write_libname(  libname );
+	gds_write_units(  dbu_uu, dbu_m);
+}
 
 /*------------------------------------------------------------------------------------------*/
 //    UTILITY FUNCTIONS

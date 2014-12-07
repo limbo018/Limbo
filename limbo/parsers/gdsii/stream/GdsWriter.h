@@ -1,3 +1,12 @@
+/*************************************************************************
+    > File Name: GdsWriter.h
+    > Author: Yibo Lin
+    > Mail: yibolin@utexas.edu
+    > Created Time: Wed 12 Nov 2014 01:23:35 PM CST
+ ************************************************************************/
+
+#ifndef _GDSPARSER_GDSWRITER_H
+#define _GDSPARSER_GDSWRITER_H
 
 #include <stdio.h>
 #include <math.h>
@@ -81,11 +90,15 @@ struct GdsWriter
 	~GdsWriter();
 
 	/**************** high level interfaces *****************/
-	// if has_last == true, it means the last point is the same as the first point 
-	// otherwise, we need to add one point to the end 
-	// default value is true 
+	/// if has_last == true, it means the last point is the same as the first point 
+	/// otherwise, we need to add one point to the end 
+	/// default value is true 
 	void write_boundary(int layer, int datatype, std::vector<int> const& vx, std::vector<int> const& vy, bool has_last = true);
 	void write_box(int layer, int datatype, int xl, int yl, int xh, int yh);
+	/// \param dbu_uu is user unit, 1nm per bit
+	/// \param dbu_m is database unit in meter, usually 1e-9 
+	/// this wrapper is different from gds_create_lib in terms of units 
+	void create_lib(const char* libname, double dbu_uu, double dbu_m);
 	/**************** low level interfaces *****************/
 	void gds_make_next_item( struct gds_itemtype **ci );
 	void gds_bindump( BYTE x );            // dump one byte in binary format
@@ -132,3 +145,5 @@ struct GdsWriter
 };
 
 } // namespace GdsParser
+
+#endif 
