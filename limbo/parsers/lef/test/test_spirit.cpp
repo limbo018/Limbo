@@ -46,7 +46,9 @@ void test1(string const& filename)
 {
 	cout << "////////////// test1 ////////////////" << endl;
 	DataBase db;
-	LefParser::read(db, filename);
+	if (LefParser::read(db, filename))
+		cout << "read successfully" << endl;
+	else cout << "read failed" << endl;
 }
 
 int main(int argc, char** argv)

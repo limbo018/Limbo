@@ -58,7 +58,10 @@
     double 			doubleVal;
     std::string*		stringVal;
 	std::string*		quoteVal;
-/*    class CalcNode*		calcnode; */
+	std::string*		binaryVal;
+
+/*	class IntegerArray* integerArrayVal;*/
+	class StringArray* stringArrayVal;
 }
 
 %token			END	     0	"end of file"
@@ -67,6 +70,9 @@
 %token <doubleVal> 	DOUBLE		"double"
 %token <stringVal> 	STRING		"string"
 %token <quoteVal> 	QUOTE		"quoted chars"
+%token <binaryVal> 	BINARY		"binary numbers"
+/*%type <integerArrayVal> integer_array */
+%type <stringArrayVal> string_array
 %token			KWD_VERSION		"VERSION"
 %token			KWD_DIVIDERCHAR	"DIVIDERCHAR"
 %token			KWD_BUSBITCHARS	"BUSBITCHARS"
@@ -86,13 +92,29 @@
 %token			KWD_END			"END"
 %token			KWD_DIRECTION	"DIRECTION"
 %token			KWD_LAYER		"LAYER"
+%token			KWD_PROPERTYDEFINITIONS		"PROPERTYDEFINITIONS"
+%token			KWD_COMPONENTPIN		"COMPONENTPIN"
+%token			KWD_TRACKS		"TRACKS"
+%token			KWD_GCELLGRID		"GCELLGRID"
+%token			KWD_VIAS		"VIAS"
+%token			KWD_VIARULE		"VIARULE"
+%token			KWD_CUTSIZE		"CUTSIZE"
+%token			KWD_LAYERS		"LAYERS"
+%token			KWD_ROWCOL		"ROWCOL"
+%token			KWD_ENCLOSURE		"ENCLOSURE"
+%token			KWD_CUTSPACING		"CUTSPACING"
+%token			KWD_USE		"USE"
+%token			KWD_SPECIALNETS		"SPECIALNETS"
+%token			KWD_SHAPE		"SHAPE"
+%token			KWD_SOURCE		"SOURCE"
 
 /*
 %type <integerVal>	block_other block_row block_comp block_pin block_net 
 %type <integerVal>	expression 
 */
 
-%destructor { delete $$; } STRING QUOTE
+%destructor { delete $$; } STRING QUOTE BINARY
+%destructor { delete $$; } /*integer_array*/ string_array 
 /*
 %destructor { delete $$; } constant variable
 %destructor { delete $$; } atomexpr powexpr unaryexpr mulexpr addexpr expr
@@ -117,6 +139,23 @@
 
  /*** BEGIN EXAMPLE - Change the example grammar rules below ***/
 
+/*
+integer_array : INTEGER {
+				$$ = new IntegerArray(1, $1);
+			  }
+			  | integer_array INTEGER {
+				$1->push_back($2);
+				$$ = $1;
+			  }
+*/
+string_array : STRING {
+				$$ = new StringArray(1, *$1);
+			  }
+			  | string_array STRING {
+				$1->push_back(*$2);
+				$$ = $1;
+			  }
+
 block_other : KWD_VERSION DOUBLE ';' {
 				driver.version_cbk($2);
 			}
@@ -136,6 +175,51 @@ block_rows : single_row
 		  | block_rows single_row 
 		  ;
 
+ /*** grammar for tracks ***/
+single_tracks : KWD_TRACKS STRING INTEGER KWD_DO INTEGER KWD_STEP INTEGER KWD_LAYER STRING ';' {
+				driver.track_cbk(*$2, $3, $5, $7, *$9);
+			 }
+
+block_tracks : single_tracks 
+		  | block_tracks single_tracks 
+		  ;
+
+ /*** grammar for gcellgrid ***/
+single_gcellgrid : KWD_GCELLGRID STRING INTEGER KWD_DO INTEGER KWD_STEP INTEGER ';' {
+				driver.gcellgrid_cbk(*$2, $3, $5, $7);
+			 }
+
+block_gcellgrid : single_gcellgrid 
+		  | block_gcellgrid single_gcellgrid 
+		  ;
+
+ /*** grammar for vias ***/
+begin_vias : KWD_VIAS INTEGER ';'
+		   ;
+
+end_vias : KWD_END KWD_VIAS 
+		 ;
+
+via_addon : /* empty */
+		  | via_addon '+' KWD_VIARULE STRING 
+		  | via_addon '+' KWD_CUTSIZE INTEGER INTEGER
+		  | via_addon '+' KWD_LAYERS string_array
+		  | via_addon '+' KWD_CUTSPACING INTEGER INTEGER 
+		  | via_addon '+' KWD_ENCLOSURE INTEGER INTEGER INTEGER INTEGER 
+		  | via_addon '+' KWD_ROWCOL INTEGER INTEGER 
+		  ;
+
+single_via : '-' STRING via_addon ';'
+		   ;
+
+multiple_vias : single_via 
+			 | multiple_vias single_via
+			 ;
+
+block_vias : begin_vias multiple_vias end_vias
+		   | begin_vias end_vias 
+		   ;
+
  /*** grammar for components ***/
 begin_components : KWD_COMPONENTS INTEGER ';' {
 					driver.component_cbk_size($2);
@@ -144,11 +228,20 @@ begin_components : KWD_COMPONENTS INTEGER ';' {
 end_components : KWD_END KWD_COMPONENTS 
 			   ;
 
-single_component : '-' STRING STRING '+' STRING '(' INTEGER INTEGER ')' STRING ';' {
-				driver.component_cbk(*$2, *$3, *$5, $7, $8, *$10);
-			}
-			| '-' STRING STRING '+' STRING ';' {
-				driver.component_cbk(*$2, *$3, *$5);
+component_addon : /* empty */
+				| component_addon '+' STRING '(' INTEGER INTEGER ')' STRING {
+					driver.component_cbk_position(*$3, $5, $6, *$8);
+				}
+				| component_addon '+' KWD_SOURCE STRING {
+					driver.component_cbk_source(*$4);
+				}
+				| component_addon '+' STRING {
+					driver.component_cbk_position(*$3);
+				}
+				;
+
+single_component : '-' STRING STRING component_addon ';' {
+				driver.component_cbk(*$2, *$3);
 			}
 
 multiple_components : single_component 
@@ -170,11 +263,26 @@ begin_pins : KWD_PINS INTEGER ';' {
 end_pins : KWD_END KWD_PINS
 		 ;
 
-single_pin : '-' STRING '+' KWD_NET STRING 
-		   '+' KWD_DIRECTION STRING 
-		   '+' STRING '(' INTEGER INTEGER ')' STRING 
-		   '+' KWD_LAYER STRING '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' ';' {
-				driver.pin_cbk(*$2, *$5, *$8, *$10, $12, $13, *$15, *$18, $20, $21, $24, $25);
+pin_addon : /* empty */
+		  | pin_addon '+' KWD_NET STRING {
+			driver.pin_cbk_net(*$4);
+		  }
+		  | pin_addon '+' KWD_DIRECTION STRING {
+			driver.pin_cbk_direction(*$4);
+		  }
+		  | pin_addon '+' STRING '(' INTEGER INTEGER ')' STRING {
+			driver.pin_cbk_position(*$3, $5, $6, *$8);
+		  }
+		  | pin_addon '+' KWD_LAYER STRING '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' {
+			driver.pin_cbk_bbox(*$4, $6, $7, $10, $11);
+		  }
+		  | pin_addon '+' KWD_USE STRING {
+			driver.pin_cbk_use(*$4);
+		  }
+		  ;
+
+single_pin : '-' STRING pin_addon ';' {
+			driver.pin_cbk(*$2);
 		   }
 
 multiple_pins : single_pin 
@@ -187,6 +295,35 @@ block_pins : begin_pins
 		   | begin_pins 
 		   end_pins 
 		   ;
+
+ /*** grammar for special nets ***/
+ /*** so far we do not use special nets, so I simply pass the grammar ***/
+begin_specialnets : KWD_SPECIALNETS INTEGER ';'
+				  ;
+end_specialnets : KWD_END KWD_SPECIALNETS
+				;
+specialnets_metal_layer : STRING STRING INTEGER
+						;
+specialnets_metal_shape : '+' KWD_SHAPE STRING '(' INTEGER INTEGER ')' '(' INTEGER '*' ')'
+						| '+' KWD_SHAPE STRING '(' INTEGER INTEGER ')' '(' '*' INTEGER ')'
+						| '+' KWD_SHAPE STRING '(' INTEGER INTEGER ')' STRING
+						;
+specialnets_metal_array : specialnets_metal_layer specialnets_metal_shape 
+						| specialnets_metal_array specialnets_metal_layer specialnets_metal_shape 
+						;
+specialnets_addon : /* empty */
+				  | specialnets_addon '+' specialnets_metal_array
+				  | specialnets_addon '+' KWD_USE STRING
+				  ;
+single_specialnet : '-' BINARY specialnets_addon ';'
+				  | '-' STRING specialnets_addon ';'
+				   ;
+multiple_specialnets : single_specialnet
+					 | multiple_specialnets single_specialnet
+					 ;
+block_specialnets : begin_specialnets multiple_specialnets end_specialnets
+				  | begin_specialnets end_specialnets
+				  ;
 
  /*** grammar for nets ***/
 begin_nets : KWD_NETS INTEGER ';' {
@@ -220,6 +357,24 @@ block_nets : begin_nets
 		   end_nets 
 		   ;
 
+ /*** grammar for property definitions ***/
+ /*** additional block, usually useless for placement ***/
+ /*** so no callbacks are created for it ***/
+single_propterty : KWD_COMPONENTPIN STRING STRING ';'
+				 | KWD_DESIGN STRING STRING DOUBLE ';'
+				 ;
+
+multiple_property : single_propterty 
+				  | multiple_property single_propterty
+				  ;
+
+block_propertydefinitions : KWD_PROPERTYDEFINITIONS 
+						  multiple_property
+						  KWD_END KWD_PROPERTYDEFINITIONS
+						  | KWD_PROPERTYDEFINITIONS
+						  KWD_END KWD_PROPERTYDEFINITIONS
+						  ;
+
  /*** grammar for top design ***/
 
 begin_design : KWD_DESIGN STRING ';' {
@@ -237,20 +392,24 @@ block_diearea : KWD_DIEAREA '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' ';' 
 				driver.diearea_cbk($3, $4, $7, $8);
 			  }
 
-block_design : begin_design 
+block_design : /* empty */
 			 block_unit
+			 block_propertydefinitions
 			 block_diearea
 			 block_rows 
+			 block_tracks
+			 block_gcellgrid
+			 block_vias
 			 block_components
 			 block_pins
+			 block_specialnets
 			 block_nets 
-			 end_design 
 			 ;
 
  /*** grammar for top file ***/
 start : 
 	  | start block_other
-	  | start block_design
+	  | start begin_design block_design end_design
 	  ;
 
  /*** END EXAMPLE - Change the example grammar rules above ***/

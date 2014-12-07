@@ -29,6 +29,36 @@ namespace DefParser {
 	typedef unsigned int uint32_t;
 	typedef long int64_t;
 
+// bison does not support vector very well 
+// so here create a dummy class 
+class IntegerArray : public vector<int>
+{
+	public: 
+		typedef vector<int> base_type;
+		using base_type::size_type;
+		using base_type::value_type;
+		using base_type::allocator_type;
+
+		IntegerArray(const allocator_type& alloc = allocator_type())
+			: base_type(alloc) {}
+		IntegerArray(size_type n, const value_type& val, const allocator_type& alloc = allocator_type())
+			: base_type(n, val, alloc) {}
+};
+
+class StringArray : public vector<string>
+{
+	public: 
+		typedef vector<string> base_type;
+		using base_type::size_type;
+		using base_type::value_type;
+		using base_type::allocator_type;
+
+		StringArray(const allocator_type& alloc = allocator_type())
+			: base_type(alloc) {}
+		StringArray(size_type n, const value_type& val, const allocator_type& alloc = allocator_type())
+			: base_type(n, val, alloc) {}
+};
+
 // temporary data structures to hold parsed data 
 struct Item 
 {
@@ -104,11 +134,13 @@ struct Pin : public Item
 	string orient; 
 	string layer_name;
 	int32_t bbox[4];
+	string use;
 	void reset()
 	{
 		pin_name = net_name = direct = status = orient = layer_name = "";
 		origin[0] = origin[1] = -1;
 		bbox[0] = bbox[1] = bbox[2] = bbox[3] = -1;
+		use = "";
 	}
 	virtual void print(ostringstream& ss) const
 	{
@@ -120,7 +152,8 @@ struct Pin : public Item
 			<< "origin = " << origin[0] << " " << origin[1] << endl 
 			<< "orient = " << orient << endl
 			<< "layer_name = " << layer_name << endl 
-			<< "bbox = " << bbox[0] << " " << bbox[1] << " " << bbox[2] << " " << bbox[3] << endl;
+			<< "bbox = " << bbox[0] << " " << bbox[1] << " " << bbox[2] << " " << bbox[3] << endl
+			<< "use = " << use << endl;
 	}
 };
 struct Net : public Item

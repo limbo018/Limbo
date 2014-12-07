@@ -115,6 +115,51 @@ typedef DefParser::Parser::token_type token_type;
 "LAYER" {
 	return token::KWD_LAYER;
 }
+"PROPERTYDEFINITIONS" {
+	return token::KWD_PROPERTYDEFINITIONS;
+}
+"COMPONENTPIN" {
+	return token::KWD_COMPONENTPIN;
+}
+"TRACKS" {
+	return token::KWD_TRACKS;
+}
+"GCELLGRID" {
+	return token::KWD_GCELLGRID;
+}
+"VIAS" {
+	return token::KWD_VIAS;
+}
+"VIARULE" {
+	return token::KWD_VIARULE;
+}
+"CUTSIZE" {
+	return token::KWD_CUTSIZE;
+}
+"LAYERS" {
+	return token::KWD_LAYERS;
+}
+"CUTSPACING" {
+	return token::KWD_CUTSPACING;
+}
+"ENCLOSURE" {
+	return token::KWD_ENCLOSURE;
+}
+"ROWCOL" {
+	return token::KWD_ROWCOL;
+}
+"USE" {
+	return token::KWD_USE;
+}
+"SPECIALNETS" {
+	return token::KWD_SPECIALNETS;
+}
+"SHAPE" {
+	return token::KWD_SHAPE;
+}
+"SOURCE" {
+	return token::KWD_SOURCE;
+}
 
 [\+\-]?[0-9]+ {
     yylval->integerVal = atoi(yytext);
@@ -126,7 +171,12 @@ typedef DefParser::Parser::token_type token_type;
     return token::DOUBLE;
 }
 
-[A-Za-z][A-Za-z0-9_,.-]* {
+[0-9]*\'[A-Za-z][0-9]+ {
+    yylval->stringVal = new std::string(yytext, yyleng);
+    return token::BINARY;
+}
+
+[A-Za-z][A-Za-z0-9_,.\-\[\]]* {
     yylval->stringVal = new std::string(yytext, yyleng);
     return token::STRING;
 }

@@ -95,57 +95,82 @@ void Driver::row_cbk(string const& row_name, string const& macro_name,
 #endif 
 	m_row.reset();
 }
-void Driver::component_cbk(string const& comp_name, string const& macro_name, string const& status) 
+void Driver::track_cbk(string const& orient, int origin, 
+		int repeat, int step, string const& layer_name) 
 {
-	m_comp.comp_name = comp_name;
-	m_comp.macro_name = macro_name;
-	m_comp.status = status;
-	assert(status == "UNPLACED");
-	m_db.add_def_component(m_comp);
-#ifdef DEBUG_DEFPARSER
-	std::cerr << m_comp << std::endl;
-#endif 
-	m_comp.reset();
+	// leave it empty here
+	// add something if needed
 }
-void Driver::component_cbk(string const& comp_name, string const& macro_name, 
-		string const& status, int originx, int originy, string const& orient) 
+void Driver::gcellgrid_cbk(string const& orient, int origin, 
+		int repeat, int step) 
 {
-	m_comp.comp_name = comp_name;
-	m_comp.macro_name = macro_name;
-	m_comp.status = status;
-	m_comp.origin[0] = originx; m_comp.origin[1] = originy;
-	m_comp.orient = orient;
-	m_db.add_def_component(m_comp);
-#ifdef DEBUG_DEFPARSER
-	std::cerr << m_comp << std::endl;
-#endif 
-	m_comp.reset();
+	// leave it empty here
+	// add something if needed
 }
 void Driver::component_cbk_size(int size) 
 {
 	m_db.resize_def_component(size);
 }
-void Driver::pin_cbk(string const& pin_name, string const& net_name, string const& direct, string const& status, 
-		int originx, int originy, string const& orient, string const& layer_name, int xl, int yl, int xh, int yh) 
+void Driver::component_cbk_position(string const& status, int originx, int originy, string const& orient) 
+{
+	m_comp.status = status;
+	m_comp.origin[0] = originx; m_comp.origin[1] = originy;
+	m_comp.orient = orient;
+}
+void Driver::component_cbk_position(string const& status) 
+{
+	m_comp.status = status;
+}
+void Driver::component_cbk_source(string const&) 
+{
+	// no use 
+}
+void Driver::component_cbk(string const& comp_name, string const& macro_name) 
+{
+	m_comp.comp_name = comp_name;
+	m_comp.macro_name = macro_name;
+	m_db.add_def_component(m_comp);
+#ifdef DEBUG_DEFPARSER
+	std::cerr << m_comp << std::endl;
+#endif 
+	m_comp.reset();
+}
+void Driver::pin_cbk_size(int size) 
+{
+	m_db.resize_def_pin(size);
+}
+void Driver::pin_cbk(string const& pin_name) // remember to reset in this function 
 {
 	m_pin.pin_name = pin_name;
-	m_pin.net_name = net_name;
-	m_pin.direct = direct;
-	m_pin.status = status;
-	m_pin.origin[0] = originx; m_pin.origin[1] = originy;
-	m_pin.orient = orient;
-	m_pin.layer_name = layer_name;
-	m_pin.bbox[0] = xl; m_pin.bbox[1] = yl;
-	m_pin.bbox[2] = xh; m_pin.bbox[3] = yh;
 	m_db.add_def_pin(m_pin);
 #ifdef DEBUG_DEFPARSER
 	std::cerr << m_pin << std::endl;
 #endif 
 	m_pin.reset();
 }
-void Driver::pin_cbk_size(int size) 
+void Driver::pin_cbk_net(string const& net_name)
 {
-	m_db.resize_def_pin(size);
+	m_pin.net_name = net_name;
+}
+void Driver::pin_cbk_direction(string const& direct)
+{
+	m_pin.direct = direct;
+}
+void Driver::pin_cbk_position(string const& status, int originx, int originy, string const& orient)
+{
+	m_pin.status = status;
+	m_pin.origin[0] = originx; m_pin.origin[1] = originy;
+	m_pin.orient = orient;
+}
+void Driver::pin_cbk_bbox(string const& layer_name, int xl, int yl, int xh, int yh)
+{
+	m_pin.layer_name = layer_name;
+	m_pin.bbox[0] = xl; m_pin.bbox[1] = yl;
+	m_pin.bbox[2] = xh; m_pin.bbox[3] = yh;
+}
+void Driver::pin_cbk_use(string const& use)
+{
+	m_pin.use = use;
 }
 void Driver::net_cbk_name(string const& net_name) 
 {

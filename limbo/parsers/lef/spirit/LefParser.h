@@ -99,15 +99,20 @@ struct LefParser
 		string name;
 		string class_name;
 		string site_name;
-		double origin[2];
-		double size[2];
+		array<double, 2> origin;
+		array<double, 2> size;
 		vector<string> vSymmetry;
 		vector<Pin> vPin;
+		Macro()
+		{
+			origin.fill(0);
+			size.fill(0);
+		}
 		void reset()
 		{
 			name = class_name = site_name = "";
-			origin[0] = origin[1] = 0;
-			size[0] = size[1] = 0;
+			origin.fill(0);
+			size.fill(0);
 			vSymmetry.clear();
 			vPin.clear();
 		}
@@ -139,6 +144,13 @@ struct LefParser
 		double height;
 		double thickness;
 		double edge_capacitance;
+		Layer()
+		{
+			pitch.fill(0);
+			offset.fill(0);
+			width = spacing = resistance = capacitance = 0.0;
+			height = thickness = edge_capacitance = 0.0;
+		}
 		void reset()
 		{
 			name = type = direct = "";
@@ -168,11 +180,15 @@ struct LefParser
 		string name;
 		string class_name;
 		vector<string> vSymmetry;
-		double size[2];
+		array<double, 2> size;
+		Site()
+		{
+			size.fill(0);
+		}
 		void reset()
 		{
 			name = class_name = "";
-			size[0] = size[1] = 0;
+			size.fill(0);
 			vSymmetry.clear();
 		}
 		void print(ostringstream& ss) const
@@ -328,12 +344,12 @@ struct LefParser
 									>> 
 									+(
 									 // add here if there are other shapes 
-									 (lexeme[LEF_NO_CASE("RECT")] >> repeat(4)[double_]) >> ";"
+									 text >> repeat(4, inf)[double_] > ";"
 									 )
+									>> lexeme[LEF_NO_CASE("END")]
 									)
-								>> lexeme[LEF_NO_CASE("END")]
 							)
-					)
+						)
 				>> lexeme[LEF_NO_CASE("END")] >> text														[boost::phoenix::bind(&LefGrammar::macro_cbk, this, _1)]
 				;
 			// you can add custom callbacks here 
