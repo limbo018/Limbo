@@ -344,7 +344,10 @@ node_pin_pairs : node_pin_pair
 
 single_net : '-' STRING node_pin_pairs ';' {
 				driver.net_cbk_name(*$2);
-		   }
+		   } 
+		   | '-' BINARY node_pin_pairs ';' {
+				driver.net_cbk_name(*$2);
+		   } 
 
 multiple_nets : single_net 
 			  | multiple_nets single_net
