@@ -396,16 +396,6 @@ struct LefParser
 			text.name("LEF text");
 			text_nc.name("LEF text_nc");
 
-#if 0
-			qi::on_error<qi::fail>(expression, 
-					phoenix::ref(std::cout)
-					<< phoenix::val("Error! Expecting ")
-					<< _4
-					<< " here: '"
-					<< phoenix::construct<string>(_3, _2)
-					<< phoenix::val("'\n")
-					);
-#endif 
 			///////////////////////////////////////////////////////////////////////
 #if (BOOST_VERSION/100)%1000 == 55
 			// following Error handler only works in boost 1.55.0 
@@ -414,6 +404,15 @@ struct LefParser
 			qi::on_error<qi::fail>(expression,
 					boost::phoenix::function<ErrorHandler<Iterator> >(error_handler)(
 						"Error! Expecting ", _4, _3));
+#else 
+			qi::on_error<qi::fail>(expression, 
+					phoenix::ref(std::cout)
+					<< phoenix::val("Error! Expecting ")
+					<< _4
+					<< " here: '"
+					<< phoenix::construct<string>(_3, _2)
+					<< phoenix::val("'\n")
+					);
 #endif 
 		}
 
