@@ -8,7 +8,7 @@ DEBUG_PREFIX = $(shell echo $(PARSER_PREFIX) | tr a-z A-Z) # lower case to upper
 LIMBO_ROOT_DIR = $(realpath ../../../..)
 TEST_DIR = $(realpath ../test)
 
-CXXFLAGS = -W -Wall -Wextra -ansi -g #-DDEBUG_$(DEBUG_PREFIX)PARSER
+CXXFLAGS = -W -Wall -Wextra -ansi -g -fmax-errors=1 #-DDEBUG_$(DEBUG_PREFIX)PARSER
 LDFLAGS = 
 
 INCLUDE = -I $(LIMBO_ROOT_DIR) \

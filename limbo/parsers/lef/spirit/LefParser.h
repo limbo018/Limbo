@@ -21,6 +21,7 @@
 #include <boost/spirit/include/phoenix.hpp>
 #include <boost/spirit/include/phoenix_bind.hpp>
 #include <boost/spirit/include/phoenix_function.hpp>
+#include <boost/version.hpp>
 #include <limbo/parsers/lef/spirit/ErrorHandler.h>
 
 using std::cout;
@@ -405,11 +406,15 @@ struct LefParser
 					<< phoenix::val("'\n")
 					);
 #endif 
-        ///////////////////////////////////////////////////////////////////////
-        // Error handling: on error in expr, call error_handler.
+			///////////////////////////////////////////////////////////////////////
+#if (BOOST_VERSION/100)%1000 == 55
+			// following Error handler only works in boost 1.55.0 
+			// and there will be compilation error for 1.56.0 and 1.57.0
+			// Error handling: on error in expr, call error_handler.
 			qi::on_error<qi::fail>(expression,
 					boost::phoenix::function<ErrorHandler<Iterator> >(error_handler)(
 						"Error! Expecting ", _4, _3));
+#endif 
 		}
 
 		void version_cbk(string const& s1)
