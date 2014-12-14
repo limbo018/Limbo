@@ -16,7 +16,7 @@
 #include <string.h>
 #include "lex.h"
 #include "lefiNonDefault.hpp"
-//#include "lefiDebug.hpp"
+#include "lefiDebug.hpp"
 #include "lefrCallBacks.hpp"
 
 namespace LefParser {

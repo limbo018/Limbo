@@ -14,10 +14,10 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "lex.h"
+//#include "lex.h"
 #include "lefiArray.hpp"
 #include "lefiMisc.hpp"
-//#include "lefiDebug.hpp"
+#include "lefiDebug.hpp"
 
 namespace LefParser {
 

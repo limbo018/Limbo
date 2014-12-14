@@ -109,19 +109,9 @@ enum lefiConstantEnum
 
 /***************** custom help functions here ******************/
 // copy from lex.h and lex.cpph
-void lefError(int msgNum, const char *s);
-void lefWarning(int msgNum, const char *s);
-void lefInfo(int msgNum, const char *s);
 void* lefMalloc(int lef_size);
 void* lefRealloc(void *name, int lef_size);
 void lefFree(void *name);
-
-// copy from lef.y 
-int comp_str(const char *s1, int op, const char *s2);
-int comp_num(double s1, int op, double s2);
-int validNum(int values);
-int zeroOrGt(double values);
-double convert_name2num(char const* versionName);
 
 } // namespace LefParser
 

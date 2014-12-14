@@ -17,7 +17,7 @@
 #include <string.h>
 #include "lex.h"
 #include "lefiViaRule.hpp"
-//#include "lefiDebug.hpp"
+#include "lefiDebug.hpp"
 
 ///////////////////////////////////////////
 ///////////////////////////////////////////

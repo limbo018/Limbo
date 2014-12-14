@@ -17,7 +17,7 @@
 #include <string.h>
 #include "lex.h"
 #include "lefiCrossTalk.hpp"
-//#include "lefiDebug.hpp"
+#include "lefiDebug.hpp"
 
 namespace LefParser {
 

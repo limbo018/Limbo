@@ -16,7 +16,7 @@
 #include <string.h>
 #include "lex.h"
 #include "lefiPropType.hpp"
-//#include "lefiDebug.hpp"
+#include "lefiDebug.hpp"
 
 namespace LefParser {
 

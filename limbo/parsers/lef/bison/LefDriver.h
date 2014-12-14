@@ -20,6 +20,10 @@ namespace LefParser {
 	using std::make_pair;
 	using std::ostringstream;
 
+#ifndef STRSIZE
+#define STRSIZE 4096
+#endif 
+
 /** The Driver class brings together all components. It creates an instance of
  * the Parser and Scanner classes and connects them. Then the input stream is
  * fed into the scanner object and the parser gets it's token
@@ -31,6 +35,7 @@ class Driver
 public:
     /// construct a new parser driver context
     Driver(LefDataBase& db);
+	~Driver();
 
     /// enable debug output in the flex scanner
     bool trace_scanning;
@@ -150,6 +155,16 @@ public:
 	void lefAddBooleanDefine(string const& token, int val);
 	void lefAddNumDefine(string const& token, double val);
 	void lefAddStringMessage(string const& token, string const& val);
+	void lefError(int msgNum, const char *s);
+	void lefWarning(int msgNum, const char *s);
+	void lefInfo(int msgNum, const char *s);
+	// copy from lef.y 
+	int comp_str(const char *s1, int op, const char *s2) const;
+	int comp_num(double s1, int op, double s2) const;
+	int validNum(int values);
+	int zeroOrGt(double values) const;
+	double convert_name2num(char const* versionName) const;
+
 public:
 	int lefDumbMode;   // for communicating with parser
 	int lefNoNum;      // likewise, says no numbers for the next N tokens
@@ -161,7 +176,13 @@ public:
 	int lefInPropDef;  // for tracking if inside propertydefinitions
 	int lefInProp;     // for tracking if inside property
 
-	int lef_errors;    // from lex.cpph
+	int lef_errors;    // from lex.cpph /* number of errors */
+	int lef_warnings; // number of warnings; 
+	int lef_ntokens;
+	int lef_nlines;
+	FILE* lefrLog;
+	static int hasOpenedLogFile; /* flag on how to open the warning log file */
+	static int spaceMissing;   /* flag to indicate if there is space after " */
 	std::string Hist_text;   // for BEGINEXT - extension
 
 	int doneLib;       // keep track if the file is done parsing
@@ -269,6 +290,11 @@ public:
 	static double layerCutSpacing;
 	static char* outMsg; // error messages
 	static char lefPropDefType; /* save the current type of the property */
+	static char cur_token[STRSIZE];      /* global so error message can print it */
+	static char saved_token[STRSIZE];/* for an (illegal) usage ';TOKEN' */
+	static char pv_token[STRSIZE];   /* previous token, for check ; without space */
+	static int nDMsgs; // disable message 
+
 
 	int spParallelLength;          /* the number of layer parallelrunlength */
 

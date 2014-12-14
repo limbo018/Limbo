@@ -16,7 +16,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "lex.h"
-//#include "lefiDebug.hpp"
+#include "lefiDebug.hpp"
 #include "FEF_stringhash.h"
 #include "lefiUtil.hpp"
 

@@ -17,7 +17,7 @@
 #include "lex.h"
 #include "lefiMacro.hpp"
 #include "lefiMisc.hpp"
-//#include "lefiDebug.hpp"
+#include "lefiDebug.hpp"
 #include "lefiUtil.hpp"
 
 namespace LefParser {

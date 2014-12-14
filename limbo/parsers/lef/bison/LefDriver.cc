@@ -3,7 +3,10 @@
 
 #include "LefDriver.h"
 #include "LefScanner.h"
+#include "lefiDebug.hpp"
 #include <cctype>
+#include <cstring>
+#include <unistd.h>
 
 namespace LefParser {
 
@@ -132,6 +135,17 @@ Driver::Driver(LefDataBase& db)
 	lefNdRule = 0;// for communicating with parser
 	lefDefIf = FALSE;
 	inDefine = 0;
+
+	lef_errors = 0;    // from lex.cpph /* number of errors */
+	lef_warnings = 0;
+	lef_ntokens = 0;
+	lef_nlines = 1;
+
+	lefrLog = 0;
+}
+Driver::~Driver()
+{
+	if (hasOpenedLogFile) fclose(lefrLog);
 }
 
 bool Driver::parse_stream(std::istream& in, const std::string& sname)
@@ -172,7 +186,62 @@ void Driver::error(const std::string& m)
 }
 
 /***************** custom callbacks here ******************/
+void Driver::lefrVersionStrCbk(string const&){}
+void Driver::lefrVersionCbk(double){}
+void Driver::lefrDividerCharCbk(string const&){}
+void Driver::lefrLibraryEndCbk(){}
+void Driver::lefrCaseSensitiveCbk(int){}
+void Driver::lefrNoWireExtensionCbk(string const&){}
+void Driver::lefrManufacturingCbk(double){}
+void Driver::lefrUseMinSpacingCbk(lefiUseMinSpacing const&){}
+void Driver::lefrClearanceMeasureCbk(string const&){}
+void Driver::lefrUnitsCbk(lefiUnits const&){}
+void Driver::lefrBusBitCharsCbk(string const&){}
+void Driver::lefrLayerCbk(lefiLayer const&){}
+void Driver::lefrMaxStackViaCbk(lefiMaxStackVia const&){}
+void Driver::lefrViaCbk(lefiVia const&){}
+void Driver::lefrViaRuleCbk(lefiViaRule const&){}
+void Driver::lefrSpacingBeginCbk(int){}
+void Driver::lefrSpacingEndCbk(int){}
+void Driver::lefrSpacingCbk(lefiSpacing const&){}
+void Driver::lefrIRDropBeginCbk(int){}
+void Driver::lefrIRDropEndCbk(int){}
+void Driver::lefrIRDropCbk(lefiIRDrop const&){}
+void Driver::lefrMinFeatureCbk(lefiMinFeature const&){}
+void Driver::lefrDielectricCbk(double){}
+void Driver::lefrNonDefaultCbk(lefiNonDefault const&){}
+void Driver::lefrSiteCbk(lefiSite const&){}
+void Driver::lefrMacroBeginCbk(string const&){}
+void Driver::lefrMacroEndCbk(string const&){}
+void Driver::lefrMacroCbk(lefiMacro const&){}
+void Driver::lefrMacroClassTypeCbk(string const&){} // maybe useless 
+void Driver::lefrMacroOriginCbk(lefiNum const&){}
+void Driver::lefrMacroSizeCbk(lefiNum const&){}
+void Driver::lefrPinCbk(lefiPin const&){}
+void Driver::lefrObstructionCbk(lefiObstruction const&){}
+void Driver::lefrDensityCbk(lefiDensity const&){}
+void Driver::lefrTimingCbk(lefiTiming const&){}
+void Driver::lefrArrayCbk(lefiArray const&){}
+void Driver::lefrArrayBeginCbk(string const&){}
+void Driver::lefrArrayEndCbk(string const&){}
+void Driver::lefrPropBeginCbk(int){}
+void Driver::lefrPropEndCbk(int){}
+void Driver::lefrPropCbk(lefiProp const&){}
+void Driver::lefrNoiseMarginCbk(lefiNoiseMargin const&){}
+void Driver::lefrEdgeRateThreshold1Cbk(double){}
+void Driver::lefrEdgeRateThreshold2Cbk(double){}
+void Driver::lefrEdgeRateScaleFactorCbk(double){}
+void Driver::lefrNoiseTableCbk(lefiNoiseTable const&){}
+void Driver::lefrCorrectionTableCbk(lefiCorrectionTable const&){}
+void Driver::lefrInputAntennaCbk(double){}
+void Driver::lefrOutputAntennaCbk(double){}
+void Driver::lefrInoutAntennaCbk(double){}
+void Driver::lefrAntennaInputCbk(double){}
+void Driver::lefrAntennaInoutCbk(double){}
+void Driver::lefrAntennaOutputCbk(double){}
+void Driver::lefrExtensionCbk(string const&){}
 
+/***************** custom help functions here ******************/
 void Driver::resetVars()
 {
      hasVer = 0;
@@ -288,6 +357,265 @@ void Driver::lefAddStringMessage(string const& token, string const& val)
 		message_set.insert(std::make_pair(token, val));
 	}
 }
+void Driver::lefError(int msgNum, const char *s) 
+{
+   char* str;
+   int len = strlen(cur_token)-1;
+   int pvLen = strlen(pv_token)-1;
+
+   /* PCR 690679, probably missing space before a ';' */
+   if (strcmp(s, "parse error") == 0) {
+      if ((len > 1) && (cur_token[len] == ';')) {
+         str = (char*)lefMalloc(strlen(cur_token)+strlen(s)+strlen(lefrFileName)
+                                +350);
+         sprintf(str, "ERROR (LEFPARS-%d): %s, see file %s at line %d\nLast cur_token was <%s>, space is missing before <;>\n",
+              msgNum, s, lefrFileName, lef_nlines, cur_token);
+      } else if ((pvLen > 1) && (pv_token[pvLen] == ';')) {
+         str = (char*)lefMalloc(strlen(pv_token)+strlen(s)+strlen(lefrFileName)
+                                +350);
+         sprintf(str, "ERROR (LEFPARS-%d): %s, see file %s at line %d\nLast cur_token was <%s>, space is missing before <;>\n",
+              msgNum, s, lefrFileName, lef_nlines-1, pv_token);
+      } else if ((cur_token[0] == '"') && (spaceMissing)) {
+         /* most likely space is missing after the end " */
+         str = (char*)lefMalloc(strlen(pv_token)+strlen(s)+strlen(lefrFileName)
+                                +350);
+         sprintf(str, "ERROR (LEFPARS-%d): %s, see file %s at line %d\nLast cur_token was <%s\">, space is missing between the closing \" of the string and ;.\n",
+              1010, s, lefrFileName, lef_nlines, cur_token);
+         spaceMissing = 0;
+      } else {
+         str = (char*)lefMalloc(strlen(cur_token) + strlen(lefrFileName) + 350);
+         sprintf(str, "ERROR (LEFPARS-%d): Lef parser has encountered an error in file %s at line %d, on cur_token %s.\nProblem can be syntax error on the lef file or an invalid parameter name.\nDouble check the syntax on the lef file with the LEFDEF Reference Manual.\n",
+              msgNum, lefrFileName, lef_nlines, cur_token);
+      }
+   } else if (strcmp(s, "syntax error") == 0) {  /* linux machines */
+      if ((len > 1) && (cur_token[len] == ';')) {
+         str = (char*)lefMalloc(strlen(cur_token)+strlen(s)+strlen(lefrFileName)
+                                +350);
+         sprintf(str, "ERROR (LEFPARS-%d): %s, see file %s at line %d\nLast cur_token was <%s>, space is missing before <;>\n",
+              msgNum, s, lefrFileName, lef_nlines, cur_token);
+      } else if ((pvLen > 1) && (pv_token[pvLen] == ';')) {
+         str = (char*)lefMalloc(strlen(pv_token)+strlen(s)+strlen(lefrFileName)
+                                +350);
+         sprintf(str, "ERROR (LEFPARS-%d): %s, see file %s at line %d\nLast cur_token was <%s>, space is missing before <;>\n",
+              msgNum, s, lefrFileName, lef_nlines-1, pv_token);
+      } else if ((cur_token[0] == '"') && (spaceMissing)) {
+         /* most likely space is missing after the end " */
+         str = (char*)lefMalloc(strlen(pv_token)+strlen(s)+strlen(lefrFileName)
+                                +350);
+         sprintf(str, "ERROR (LEFPARS-%d): %s, see file %s at line %d\nLast cur_token was <%s\">, space is missing between the closing \" of the string and ;.\n",
+              1011, s, lefrFileName, lef_nlines, cur_token);
+         spaceMissing = 0;
+      } else {
+         str = (char*)lefMalloc(strlen(cur_token) + strlen(lefrFileName) + 350);
+         sprintf(str, "ERROR (LEFPARS-%d): Lef parser has encountered an error in file %s at line %d, on cur_token %s.\nProblem can be syntax error on the lef file or an invalid parameter name.\nDouble check the syntax on the lef file with the LEFDEF Reference Manual.\n",
+              msgNum, lefrFileName, lef_nlines, cur_token);
+      }
+   } else {
+      str = (char*)lefMalloc(strlen(cur_token) + strlen(s) +
+                             strlen(lefrFileName) + 350);
+      sprintf(str, "ERROR (LEFPARS-%d): %s Error in file %s at line %d, on cur_token %s.\n",
+           msgNum, s, lefrFileName, lef_nlines, cur_token);
+   }
+   fflush(stdout);
+   lefiError(str);
+   free(str);
+   lef_errors++;
+}
+/* All warning starts with 2000 */
+/* All warning within lefWarning starts with 2500 */
+void Driver::lefWarning(int msgNum, const char *s) 
+{
+   int i;
+
+#if 0
+   for (i = 0; i < nDMsgs; i++) {  /* check if warning has been disable */
+      if (disableMsgs[i] == msgNum)
+         return;  /* don't print out any warning since msg has been disabled */
+   }
+#endif 
+
+   /*
+   if (lefiWarningLogFunction) 
+   {
+      char* str = (char*)lefMalloc(strlen(cur_token)+strlen(s)+strlen(lefrFileName)
+                                   +350);
+      sprintf(str, "WARNING (LEFPARS-%d): %s See file %s at line %d.\n",
+              msgNum, s, lefrFileName, lef_nlines);
+      (*lefiWarningLogFunction)(str);
+      free(str);
+   } 
+   else */ if (lefrLog) 
+   {
+      fprintf(lefrLog, "WARNING (LEFPARS-%d): %s See file %s at line %d\n",
+              msgNum, s, lefrFileName, lef_nlines);
+   } 
+   else 
+   {
+      if (!hasOpenedLogFile) 
+	  {
+         if ((lefrLog = fopen("lefRWarning.log", "w")) == 0) 
+		 {
+            printf("WARNING (LEFPARS-2500): Unable to open the file lefRWarning.log in %s.\n",
+            getcwd(NULL, 64));
+            printf("Warning messages will not be printed.\n");
+         } 
+		 else 
+		 {
+            hasOpenedLogFile = 1; 
+            fprintf(lefrLog, "Warnings from file: %s\n\n", lefrFileName);
+            fprintf(lefrLog, "WARNING (LEFPARS-%d): %s See file %s at line %d\n",
+                    msgNum, s, lefrFileName, lef_nlines);
+         }
+      } 
+	  else 
+	  {
+         if ((lefrLog = fopen("lefRWarning.log", "a")) == 0) 
+		 {
+            printf("WARNING (LEFPARS-2501): Unable to open the file lefRWarning.log in %s.\n",
+            getcwd(NULL, 64));
+            printf("Warning messages will not be printed.\n");
+         }
+		 else 
+		 {
+            fprintf(lefrLog, "\nWarnings from file: %s\n\n", lefrFileName);
+            fprintf(lefrLog, "WARNING (LEFPARS-%d): %s See file %s at line %d\n",
+                    msgNum, s, lefrFileName, lef_nlines);
+         }
+      }
+   }
+   lef_warnings++;
+}
+/* All info starts with 3000 */
+/* All info within lefInfo starts with 3500 */
+void Driver::lefInfo(int msgNum, const char *s) 
+{
+   int i;
+#if 0
+   for (i = 0; i < nDMsgs; i++) {  /* check if info has been disable */
+      if (disableMsgs[i] == msgNum)
+         return;  /* don't print out any info since msg has been disabled */
+   }
+#endif 
+
+/*   if (lefiWarningLogFunction) 
+   {
+      char* str = (char*)lefMalloc(strlen(cur_token)+strlen(s)+strlen(lefrFileName)
+                                   +350);
+      sprintf(str, "INFO (LEFPARS-%d): %s See file %s at line %d.\n",
+              msgNum, s, lefrFileName, lef_nlines);
+      (*lefiWarningLogFunction)(str);
+      free(str);
+   } 
+   else*/ if (lefrLog) 
+   {
+      fprintf(lefrLog, "INFO (LEFPARS-%d): %s See file %s at line %d\n",
+              msgNum, s, lefrFileName, lef_nlines);
+   } 
+   else 
+   {
+      if (!hasOpenedLogFile) 
+	  {
+         if ((lefrLog = fopen("lefRWarning.log", "w")) == 0) 
+		 {
+            printf("WARNING (LEFPARS-3500): Unable to open the file lefRWarning.log in %s.\n",
+            getcwd(NULL, 64));
+            printf("Info messages will not be printed.\n");
+         } 
+		 else 
+		 {
+            hasOpenedLogFile = 1;
+            fprintf(lefrLog, "Info from file: %s\n\n", lefrFileName);
+            fprintf(lefrLog, "INFO (LEFPARS-%d): %s See file %s at line %d\n",
+                    msgNum, s, lefrFileName, lef_nlines);
+         }
+      } 
+	  else 
+	  {
+         if ((lefrLog = fopen("lefRWarning.log", "a")) == 0) 
+		 {
+            printf("WARNING (LEFPARS-3500): Unable to open the file lefRWarning.log in %s.\n",
+            getcwd(NULL, 64));
+            printf("Info messages will not be printed.\n");
+         } 
+		 else 
+		 {
+            fprintf(lefrLog, "\nInfo from file: %s\n\n", lefrFileName);
+            fprintf(lefrLog, "INFO (LEFPARS-%d): %s See file %s at line %d\n",
+                    msgNum, s, lefrFileName, lef_nlines);
+         }
+      }
+   }
+}
+int Driver::comp_str(const char *s1, int op, const char *s2) const
+{
+	int k = strcmp(s1, s2);
+	switch (op) {
+		case C_EQ: return k == 0;
+		case C_NE: return k != 0;
+		case C_GT: return k >  0;
+		case C_GE: return k >= 0;
+		case C_LT: return k <  0;
+		case C_LE: return k <= 0;
+	}
+	return 0;
+}
+int Driver::comp_num(double s1, int op, double s2) const
+{
+	double k = s1 - s2;
+	switch (op) {
+		case C_EQ: return k == 0;
+		case C_NE: return k != 0;
+		case C_GT: return k >  0;
+		case C_GE: return k >= 0;
+		case C_LT: return k <  0;
+		case C_LE: return k <= 0;
+	}
+	return 0;
+}
+int Driver::validNum(int values)
+{
+    switch (values) {
+        case 100:
+        case 200:
+        case 1000:
+        case 2000:
+                return 1; 
+        case 10000:
+        case 20000:
+			if (versionNum < 5.6) 
+			{
+				if (/*lefrUnitsCbk*/ 1) 
+				{
+					if (unitsWarnings++ < lefrUnitsWarnings) 
+					{
+						outMsg = (char*)lefMalloc(10000);
+						sprintf (outMsg,
+								"Error found when processing LEF file '%s'\nUnit %d is a version 5.6 or later syntax\nYour lef file is defined with version %g",
+								lefrFileName, values, versionNum);
+						lefError(1501, outMsg);
+						lefFree(outMsg);
+					}
+				}
+				return 0;
+			} 
+			else return 1;
+    }
+    if (unitsWarnings++ < lefrUnitsWarnings) {
+       outMsg = (char*)lefMalloc(10000);
+       sprintf (outMsg,
+          "The value %d defined for LEF UNITS DATABASE MICRONS is invalid\n. Correct value is 100, 200, 1000, 2000, 10000, or 20000", values);
+       lefError(1502, outMsg);
+       lefFree(outMsg);
+    }
+    /*CHKERR();*/
+    return 0;
+}
+int Driver::zeroOrGt(double values) const
+{
+    if (values < 0)
+      return 0;
+    return 1;
+}
 
 /***************** static variables ******************/
 int Driver::ignoreVersion = 0; // ignore checking version number
@@ -382,6 +710,10 @@ int Driver::useMinSpacingWarnings = 0;
 int Driver::viaRuleWarnings = 0;
 int Driver::viaWarnings = 0;
 double Driver::layerCutSpacing = 0;
+
+int Driver::hasOpenedLogFile = 0; /* flag on how to open the warning log file */
+int Driver::spaceMissing = 0;   /* flag to indicate if there is space after " */
+int Driver::nDMsgs = 0; // disable message 
 
 bool read(LefDataBase& db, const string& lefFile)
 {
