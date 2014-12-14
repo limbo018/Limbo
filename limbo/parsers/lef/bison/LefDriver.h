@@ -1,0 +1,400 @@
+// $Id: driver.h 17 2007-08-19 18:51:39Z tb $ 	
+/** \file driver.h Declaration of the example::Driver class. */
+
+#ifndef LEFPARSER_DRIVER_H
+#define LEFPARSER_DRIVER_H
+
+#include <map>
+#include "LefDataBase.h"
+
+/** The example namespace is used to encapsulate the three parser classes
+ * example::Parser, example::Scanner and example::Driver */
+namespace LefParser {
+
+	using std::cout;
+	using std::endl;
+	using std::cerr;
+	using std::string; 
+	using std::vector;
+	using std::pair;
+	using std::make_pair;
+	using std::ostringstream;
+
+/** The Driver class brings together all components. It creates an instance of
+ * the Parser and Scanner classes and connects them. Then the input stream is
+ * fed into the scanner object and the parser gets it's token
+ * sequence. Furthermore the driver object is available in the grammar rules as
+ * a parameter. Therefore the driver class contains a reference to the
+ * structure into which the parsed data is saved. */
+class Driver
+{
+public:
+    /// construct a new parser driver context
+    Driver(LefDataBase& db);
+
+    /// enable debug output in the flex scanner
+    bool trace_scanning;
+
+    /// enable debug output in the bison parser
+    bool trace_parsing;
+
+    /// stream name (file or input stream) used for error messages.
+    string streamname;
+
+    /** Invoke the scanner and parser for a stream.
+     * @param in	input stream
+     * @param sname	stream name for error messages
+     * @return		true if successfully parsed
+     */
+    bool parse_stream(std::istream& in,
+		      const string& sname = "stream input");
+
+    /** Invoke the scanner and parser on an input string.
+     * @param input	input string
+     * @param sname	stream name for error messages
+     * @return		true if successfully parsed
+     */
+    bool parse_string(const string& input,
+		      const string& sname = "string stream");
+
+    /** Invoke the scanner and parser on a file. Use parse_stream with a
+     * std::ifstream if detection of file reading errors is required.
+     * @param filename	input file name
+     * @return		true if successfully parsed
+     */
+    bool parse_file(const string& filename);
+
+    // To demonstrate pure handling of parse errors, instead of
+    // simply dumping them on the standard error output, we will pass
+    // them to the driver using the following two member functions.
+
+    /** Error handling with associated line number. This can be modified to
+     * output the error e.g. to a dialog box. */
+    void error(const class location& l, const string& m);
+
+    /** General error handling. This can be modified to output the error
+     * e.g. to a dialog box. */
+    void error(const string& m);
+
+    /** Pointer to the current lexer instance, this is used to connect the
+     * parser to the scanner. It is used in the yylex macro. */
+    class Scanner* lexer;
+
+    /** Reference to the database filled during parsing of the
+     * expressions. */
+    LefDataBase& m_db;
+
+	/***************** custom callbacks here ******************/
+	void lefrVersionStrCbk(string const&);
+	void lefrVersionCbk(double);
+	void lefrDividerCharCbk(string const&);
+	void lefrLibraryEndCbk();
+	void lefrCaseSensitiveCbk(int);
+	void lefrNoWireExtensionCbk(string const&);
+	void lefrManufacturingCbk(double);
+	void lefrUseMinSpacingCbk(lefiUseMinSpacing const&);
+	void lefrClearanceMeasureCbk(string const&);
+	void lefrUnitsCbk(lefiUnits const&);
+	void lefrBusBitCharsCbk(string const&);
+	void lefrLayerCbk(lefiLayer const&);
+	void lefrMaxStackViaCbk(lefiMaxStackVia const&);
+	void lefrViaCbk(lefiVia const&);
+	void lefrViaRuleCbk(lefiViaRule const&);
+	void lefrSpacingBeginCbk(int);
+	void lefrSpacingEndCbk(int);
+	void lefrSpacingCbk(lefiSpacing const&);
+	void lefrIRDropBeginCbk(int);
+	void lefrIRDropEndCbk(int);
+	void lefrIRDropCbk(lefiIRDrop const&);
+	void lefrMinFeatureCbk(lefiMinFeature const&);
+	void lefrDielectricCbk(double);
+	void lefrNonDefaultCbk(lefiNonDefault const&);
+	void lefrSiteCbk(lefiSite const&);
+	void lefrMacroBeginCbk(string const&);
+	void lefrMacroEndCbk(string const&);
+	void lefrMacroCbk(lefiMacro const&);
+	void lefrMacroClassTypeCbk(string const&); // maybe useless 
+	void lefrMacroOriginCbk(lefiNum const&);
+	void lefrMacroSizeCbk(lefiNum const&);
+	void lefrPinCbk(lefiPin const&);
+	void lefrObstructionCbk(lefiObstruction const&);
+	void lefrDensityCbk(lefiDensity const&);
+	void lefrTimingCbk(lefiTiming const&);
+	void lefrArrayCbk(lefiArray const&);
+	void lefrArrayBeginCbk(string const&);
+	void lefrArrayEndCbk(string const&);
+	void lefrPropBeginCbk(int);
+	void lefrPropEndCbk(int);
+	void lefrPropCbk(lefiProp const&);
+	void lefrNoiseMarginCbk(lefiNoiseMargin const&);
+	void lefrEdgeRateThreshold1Cbk(double);
+	void lefrEdgeRateThreshold2Cbk(double);
+	void lefrEdgeRateScaleFactorCbk(double);
+	void lefrNoiseTableCbk(lefiNoiseTable const&);
+	void lefrCorrectionTableCbk(lefiCorrectionTable const&);
+	void lefrInputAntennaCbk(double);
+	void lefrOutputAntennaCbk(double);
+	void lefrInoutAntennaCbk(double);
+	void lefrAntennaInputCbk(double);
+	void lefrAntennaInoutCbk(double);
+	void lefrAntennaOutputCbk(double);
+	void lefrExtensionCbk(string const&);
+
+	/***************** custom help functions here ******************/
+	// copy from lef.y 
+	void resetVars();
+	// copy from lex.cpph
+	void lefSetNonDefault(const char*);
+	void lefUnsetNonDefault();
+	void lefAddStringDefine(string const& token, string const& val);
+	void lefAddBooleanDefine(string const& token, int val);
+	void lefAddNumDefine(string const& token, double val);
+	void lefAddStringMessage(string const& token, string const& val);
+public:
+	int lefDumbMode;   // for communicating with parser
+	int lefNoNum;      // likewise, says no numbers for the next N tokens
+	int lefRealNum;    // Next token will be a real number
+	int lefNlToken;    // likewise
+	int lefDefIf;      // likewise /* if TRUE, is within the defines if-then-else */
+	int inDefine;		//  /* Keep track it is within a define statement */
+	int lefNdRule;     // for communicating with parser
+	int lefInPropDef;  // for tracking if inside propertydefinitions
+	int lefInProp;     // for tracking if inside property
+
+	int lef_errors;    // from lex.cpph
+	std::string Hist_text;   // for BEGINEXT - extension
+
+	int doneLib;       // keep track if the file is done parsing
+	int ge56almostDone;// lef file has Extension section
+	int ge56done;      // done reading 5.6 and beyond library
+
+	char* lefrFileName;
+
+	int lefNamesCaseSensitive;  // always true in 5.6
+	int lefReaderCaseSensitive;  // default to 0
+
+	int lefrShiftCase;     // if user wants to shift to all uppercase
+
+	int lefrRelaxMode;    // relax mode?
+
+	/* XXXXXXXXXXXXX check out these variables */
+	double lef_save_x, lef_save_y;  // for interpreting (*) notation of LEF/DEF
+
+	/* #define STRING_LIST_SIZE 1024 */
+	/* char string_list[STRING_LIST_SIZE]; */
+
+	static int ignoreVersion; // ignore checking version number
+	static char temp_name[258];
+	static std::string layerName;
+	static std::string viaName;
+	static std::string viaRuleName;
+	static std::string nonDefaultRuleName;
+	static std::string siteName;
+	static std::string arrayName;
+	static std::string macroName;
+	static std::string pinName;
+
+	static int siteDef, symDef, sizeDef, pinDef, obsDef, origDef;
+	static int useLenThr;
+	static int layerCut, layerMastOver, layerRout, layerDir;
+	static lefiAntennaEnum antennaType;  /* 5.4 - antenna type */
+	static int arrayCutsVal;       /* keep track the arraycuts value */
+	static int arrayCutsWar;       /* keep track if warning has already printed */
+	static int viaRuleLayer;       /* keep track number of layer in a viarule */
+	static int viaLayer;           /* keep track number of layer in a via */
+	static std::string ndName;		// for ndName in lefSetNonDefault()
+	static int ndLayer;            /* keep track number of layer in a nondefault */
+	static int numVia;             /* keep track number of via */
+	static int viaRuleHasDir;      /* viarule layer has direction construct */
+	static int viaRuleHasEnc;      /* viarule layer has enclosure construct */
+	static int ndRule;         /* keep track if inside nondefaultrule */
+	static int ndLayerWidth;       /* keep track if width is set at ndLayer */
+	static int ndLayerSpace;       /* keep track if spacing is set at ndLayer */
+	static int isGenerate;         /* keep track if viarule has generate */
+	static int hasType;            /* keep track of type in layer */
+	static int hasPitch;           /* keep track of pitch in layer */
+	static int hasWidth;           /* keep track of width in layer */
+	static int hasDirection;       /* keep track of direction in layer */
+	static int hasParallel;        /* keep track of parallelrunlength */
+	static int hasInfluence;       /* keep track of influence */
+	static int hasTwoWidths;       /* keep track of twoWidths */
+	static int hasLayerMincut;     /* keep track of layer minimumcut */
+	static int hasManufactur;  /* keep track of manufacture is after unit */
+	static int hasMinfeature;  /* keep track of minfeature is after unit */
+	static int hasPRP;             /* keep track if path, rect or poly is def */
+	static int needGeometry;       /* keep track if path/rect/poly is defined */
+	static int hasViaRule_layer; /* keep track at least viarule or layer */
+	static int hasSamenet;         /* keep track if samenet is defined in spacing */
+	static int hasSite;        /* keep track if SITE has defined for pre 5.6 */
+	static int hasSiteClass;   /* keep track if SITE has CLASS */
+	static int hasSiteSize;    /* keep track if SITE has SIZE */
+	static int hasSpCenter;    /* keep track if LAYER SPACING has CENTER */
+	static int hasSpSamenet;   /* keep track if LAYER SPACING has SAMENET */
+	static int hasSpParallel;  /* keep track if LAYER SPACING has PARALLEL */
+	static int hasSpLayer;     /* keep track if LAYER SPACING has LAYER */
+	static int hasGeoLayer;    /* keep track if Geometries has LAYER */
+
+
+	// the following variables to keep track the number of warnings printed.
+	static int antennaInoutWarnings;
+	static int antennaInputWarnings;
+	static int antennaOutputWarnings;
+	static int arrayWarnings;
+	static int caseSensitiveWarnings;
+	static int correctionTableWarnings;
+	static int dielectricWarnings;
+	static int edgeRateThreshold1Warnings;
+	static int edgeRateThreshold2Warnings;
+	static int edgeRateScaleFactorWarnings;
+	static int inoutAntennaWarnings;
+	static int inputAntennaWarnings;
+	static int iRDropWarnings;
+	static int layerWarnings;
+	static int macroWarnings;
+	static int maxStackViaWarnings;
+	static int minFeatureWarnings;
+	static int noiseMarginWarnings;
+	static int noiseTableWarnings;
+	static int nonDefaultWarnings;
+	static int noWireExtensionWarnings;
+	static int outputAntennaWarnings;
+	static int pinWarnings;
+	static int siteWarnings;
+	static int spacingWarnings;
+	static int timingWarnings;
+	static int unitsWarnings;
+	static int useMinSpacingWarnings;
+	static int viaRuleWarnings;
+	static int viaWarnings;
+	static double layerCutSpacing;
+	static char* outMsg; // error messages
+	static char lefPropDefType; /* save the current type of the property */
+
+	int spParallelLength;          /* the number of layer parallelrunlength */
+
+	lefiNum macroNum;              /* for origin & size callback */
+
+	///////////////////////////////////s
+	//
+	//   copied from Global variables
+	//
+	/////////////////////////////////////
+
+	lefiUserData lefrUserData;
+	//char* lefrFileName;
+	static int lefrRegisterUnused;
+	FILE* lefrFile;
+	lefiAntennaPWL* lefrAntennaPWLPtr;
+	lefiArray lefrArray;
+	lefiCorrectionTable lefrCorrectionTable;
+	lefiDensity lefrDensity;
+	lefiGcellPattern* lefrGcellPatternPtr;
+	lefiGeometries* lefrGeometriesPtr;
+	lefiIRDrop lefrIRDrop;
+	lefiLayer lefrLayer;
+	lefiMacro lefrMacro;
+	lefiMaxStackVia lefrMaxStackVia;  // 5.5
+	lefiMinFeature lefrMinFeature;
+	struct lefiNoiseMargin lefrNoiseMargin;
+	lefiNoiseTable lefrNoiseTable;
+	lefiNonDefault lefrNonDefault;
+	lefiObstruction lefrObstruction;
+	lefiPin lefrPin;
+	lefiProp lefrProp;
+	lefiSite lefrSite;
+	lefiSitePattern* lefrSitePatternPtr;
+	lefiSpacing lefrSpacing;
+	lefiTiming lefrTiming;
+	lefiTrackPattern* lefrTrackPatternPtr;
+	lefiUnits lefrUnits;
+	lefiUseMinSpacing lefrUseMinSpacing;
+	lefiVia lefrVia;
+	lefiViaRule lefrViaRule;
+	int lefrIsReset;
+	int lefrDoGcell;
+	int lefrDoGeometries;
+	int lefrDoTrack;
+	int lefrDoSite;
+	int lefrHasLayer;    // 5.5 this & lefrHasMaxVS is to keep track that
+	int lefrHasMaxVS;    // MAXVIASTACK has to be after all layers
+	int lefrHasSpacingTbl;   // keep track of spacing table in a layer
+	int lefrHasSpacing;      // keep track of spacing in a layer
+	int userHasSetVer;   // if user has set default version value
+	//int doneLib;         // keep track if the library is done parsing
+	// 5.6 END LIBRARY is optional.
+	//int ge56almostDone;  // have reached the EXTENSION SECTION
+	//int ge56done;        // a 5.6 and it has END LIBRARY statement
+
+	// The following global variables are for storing the propertydefination
+	// types.  Only real & integer need to store since the parser can
+	// distinguish string and quote string
+	lefiPropType lefrLibProp;
+	lefiPropType lefrCompProp;
+	lefiPropType lefrPinProp;
+	lefiPropType lefrMacroProp;
+	lefiPropType lefrViaProp;
+	lefiPropType lefrViaRuleProp;
+	lefiPropType lefrLayerProp;
+	lefiPropType lefrNondefProp;
+
+	// The following global variables are used in lef.y
+	int use5_3;          /* keep track if there is any 5.3 on 5.4 file */
+	int use5_4;          /* keep track if only 5.4 is allowed */
+	int hasVer;          /* keep track if version is in file */
+	int hasNameCase;     /* keep track if namescasesensitive is in file */
+	int hasBusBit;       /* keep track if bustbitchars is in file */
+	int hasDivChar;      /* keep track if dividerchar is in file */
+	int aOxide;          /* keep track for oxide */
+	double versionNum;
+
+	////////////////////////////////////
+	//
+	//  Flags to control number of warnings to print out, max will be 999
+	//  I don't know if it is useful, but they are used in .yy 
+	//
+	////////////////////////////////////
+
+	int lefrAntennaInoutWarnings;
+	int lefrAntennaInputWarnings;
+	int lefrAntennaOutputWarnings;
+	int lefrArrayWarnings;
+	int lefrCaseSensitiveWarnings;
+	int lefrCorrectionTableWarnings;
+	int lefrDielectricWarnings;
+	int lefrEdgeRateThreshold1Warnings;
+	int lefrEdgeRateThreshold2Warnings;
+	int lefrEdgeRateScaleFactorWarnings;
+	int lefrInoutAntennaWarnings;
+	int lefrInputAntennaWarnings;
+	int lefrIRDropWarnings;
+	int lefrLayerWarnings;
+	int lefrMacroWarnings;
+	int lefrMaxStackViaWarnings;
+	int lefrMinFeatureWarnings;
+	int lefrNoiseMarginWarnings;
+	int lefrNoiseTableWarnings;
+	int lefrNonDefaultWarnings;
+	int lefrNoWireExtensionWarnings;
+	int lefrOutputAntennaWarnings;
+	int lefrPinWarnings;
+	int lefrSiteWarnings;
+	int lefrSpacingWarnings;
+	int lefrTimingWarnings;
+	int lefrUnitsWarnings;
+	int lefrUseMinSpacingWarnings;
+	int lefrViaRuleWarnings;
+	int lefrViaWarnings;
+
+	// message table, alias table...
+	std::map<string, string> message_set; ///< message table 
+	std::map<string, string> defines_set; ///< string table 
+	std::map<string, int> defineb_set; ///< boolean table 
+	std::map<string, double> definen_set; ///< number table 
+};
+
+// top api for LefParser
+bool read(LefDataBase& db, const string& lefFile);
+
+} // namespace example
+
+#endif // EXAMPLE_DRIVER_H

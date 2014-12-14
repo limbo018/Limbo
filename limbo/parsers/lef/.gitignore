@@ -1,1 +1,6 @@
 test/test_spirit
+bison/bak
+bison/LefParser.cc
+bison/LefParser.h
+bison/LefScanner.cc
+*.hh
