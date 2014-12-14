@@ -15,9 +15,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "lex.h"
+//#include "lex.h"
 #include "lefiViaRule.hpp"
 #include "lefiDebug.hpp"
+#include "LefDataBase.h" // be careful about cross reference
+
+namespace LefParser {
 
 ///////////////////////////////////////////
 ///////////////////////////////////////////
@@ -622,3 +625,5 @@ int lefiViaRule::propIsString(int i) const {
   }
   return this->dvalues_[i] ? 0 : 1;
 }
+
+} // namespace LefParser

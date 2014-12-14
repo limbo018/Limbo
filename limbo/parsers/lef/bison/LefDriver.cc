@@ -199,11 +199,39 @@ void Driver::lefrUnitsCbk(lefiUnits const&){}
 void Driver::lefrBusBitCharsCbk(string const&){}
 void Driver::lefrLayerCbk(lefiLayer const&){}
 void Driver::lefrMaxStackViaCbk(lefiMaxStackVia const&){}
-void Driver::lefrViaCbk(lefiVia const&){}
+void Driver::lefrViaCbk(lefiVia const& v)
+{
+	if (lefNdRule) // in non-default rules 
+		lefrNonDefault.lefiNonDefault::addViaRule(v);
+	else // normal mode 
+	{
+	}
+}
 void Driver::lefrViaRuleCbk(lefiViaRule const&){}
-void Driver::lefrSpacingBeginCbk(int){}
-void Driver::lefrSpacingEndCbk(int){}
-void Driver::lefrSpacingCbk(lefiSpacing const&){}
+void Driver::lefrSpacingBeginCbk(int)
+{
+	if (lefNdRule) // in non-default rules 
+		return;
+	else // normal mode 
+	{
+	}
+}
+void Driver::lefrSpacingEndCbk(int)
+{
+	if (lefNdRule) // in non-default rules 
+		return;
+	else // normal mode 
+	{
+	}
+}
+void Driver::lefrSpacingCbk(lefiSpacing const& s)
+{
+	if (lefNdRule) // in non-default rules 
+		lefrNonDefault.lefiNonDefault::addSpacingRule(s);
+	else // normal mode 
+	{
+	}
+}
 void Driver::lefrIRDropBeginCbk(int){}
 void Driver::lefrIRDropEndCbk(int){}
 void Driver::lefrIRDropCbk(lefiIRDrop const&){}

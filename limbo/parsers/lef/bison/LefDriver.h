@@ -103,11 +103,11 @@ public:
 	void lefrBusBitCharsCbk(string const&);
 	void lefrLayerCbk(lefiLayer const&);
 	void lefrMaxStackViaCbk(lefiMaxStackVia const&);
-	void lefrViaCbk(lefiVia const&);
-	void lefrViaRuleCbk(lefiViaRule const&);
-	void lefrSpacingBeginCbk(int);
-	void lefrSpacingEndCbk(int);
-	void lefrSpacingCbk(lefiSpacing const&);
+	void lefrViaCbk(lefiVia const&); // include non-default via cbk 
+	void lefrViaRuleCbk(lefiViaRule const&); 
+	void lefrSpacingBeginCbk(int); // disabled when in non-default rules 
+	void lefrSpacingEndCbk(int); // disabled when in non-default rules 
+	void lefrSpacingCbk(lefiSpacing const&); // include non-default spacing cbk 
 	void lefrIRDropBeginCbk(int);
 	void lefrIRDropEndCbk(int);
 	void lefrIRDropCbk(lefiIRDrop const&);

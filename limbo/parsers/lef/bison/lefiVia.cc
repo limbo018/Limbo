@@ -14,10 +14,11 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "lex.h"
+//#include "lex.h"
 #include "lefiVia.hpp"
 #include "lefiDebug.hpp"
 #include "lefiUtil.hpp"
+#include "LefDataBase.h" // be careful about cross reference
 
 namespace LefParser {
 
@@ -306,7 +307,7 @@ lefiVia::~lefiVia() {
   this->lefiVia::Destroy();
 }
 
-lefiVia* lefiVia::clone() {
+lefiVia* lefiVia::clone() const {
   int i;
   lefiViaLayer* l;
   lefiVia* v = (lefiVia*)lefMalloc(sizeof(lefiVia));

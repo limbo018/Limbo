@@ -18,6 +18,7 @@
 #include "lefiArray.hpp"
 #include "lefiMisc.hpp"
 #include "lefiDebug.hpp"
+#include "LefDataBase.h" // be careful about cross reference
 
 namespace LefParser {
 

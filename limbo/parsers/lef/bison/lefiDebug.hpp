@@ -17,6 +17,8 @@
 
 #include "lefiKRDefs.hpp"
 
+namespace LefParser {
+
 /* Set flag */
 EXTERN void lefiSetDebug PROTO_PARAMS((int num, int value)) ;
 
@@ -40,5 +42,7 @@ extern int lefrShiftCase;
                  else x;)
 */
 #define CASE(x) (!lefNamesCaseSensitive && lefrShiftCase ? lefUpperCase(x) : x)
+
+} // namespace LefParser
 
 #endif

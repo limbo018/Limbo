@@ -14,10 +14,11 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "lex.h"
+//#include "lex.h"
 #include "lefiNonDefault.hpp"
 #include "lefiDebug.hpp"
-#include "lefrCallBacks.hpp"
+//#include "lefrCallBacks.hpp"
+#include "LefDataBase.h" // be careful about cross reference
 
 namespace LefParser {
 
@@ -30,12 +31,15 @@ namespace LefParser {
 // include lefiNonDefault.hpp, this creates a loop and is
 // problematic...
 
+#if 0
+	// resolve this in Driver 
 static lefrViaCbkFnType oldViaCbk;
 static lefrSpacingCbkFnType oldSpacingCbk;
 static lefrVoidCbkFnType oldSpacingBeginCbk;
 static lefrVoidCbkFnType oldSpacingEndCbk;
 
 static lefiNonDefault* nd = 0;  // PCR 909010 - For VIA in the nondefaultrule
+#endif 
 
 /////////////////////////////////////////
 /////////////////////////////////////////
@@ -187,7 +191,7 @@ void lefiNonDefault::clear() {
   this->numMinCuts_ = 0;
 }
 
-void lefiNonDefault::addViaRule(lefiVia* v) {
+void lefiNonDefault::addViaRule(lefiVia const& v) {
   if (this->numVias_ == this->allocatedVias_) {
     int i;
     lefiVia** nv;
@@ -203,10 +207,10 @@ void lefiNonDefault::addViaRule(lefiVia* v) {
     lefFree((char*)(this->viaRules_));
     this->viaRules_ = nv;
     }
-  this->viaRules_[this->numVias_++] = v->lefiVia::clone();
+  this->viaRules_[this->numVias_++] = v.lefiVia::clone();
 }
 
-void lefiNonDefault::addSpacingRule(lefiSpacing* s) {
+void lefiNonDefault::addSpacingRule(lefiSpacing const& s) {
 if (this->numSpacing_ == this->allocatedSpacing_) {
   int i;
   lefiSpacing** ns;
@@ -223,9 +227,10 @@ if (this->numSpacing_ == this->allocatedSpacing_) {
     lefFree((char*)(this->spacingRules_));
     this->spacingRules_ = ns;
   }
-  this->spacingRules_[this->numSpacing_++] = s->lefiSpacing::clone();
+  this->spacingRules_[this->numSpacing_++] = s.lefiSpacing::clone();
 }
 
+#if 0
 int lefiNonDefaultViaCbk(lefrCallbackType_e t, lefiVia* v,
        lefiUserData ud) {
    // PCR 909010 - Not needed, nd info is saved in global variable 
@@ -253,11 +258,13 @@ int lefiNonDefaultSpacingCbk(lefrCallbackType_e t,
    nd->lefiNonDefault::addSpacingRule(s);
    return 0;
 }
+#endif 
 
 void lefiNonDefault::setName(const char* name) { 
   int len = strlen(name) + 1;
   this->lefiNonDefault::clear();
 
+#if 0
   // Use our callback functions because a via and spacing
   // rule is really part of the non default section.
   // this->oldViaCbk_ = (void*)lefrViaCbk;
@@ -278,6 +285,7 @@ void lefiNonDefault::setName(const char* name) {
   // lefrSetUserData((lefiUserData)this);
 
   nd = this;
+#endif 
 
   if (len > this->nameSize_) {
     lefFree(this->name_);
@@ -521,6 +529,7 @@ void lefiNonDefault::addMinCuts(const char* name, int numCuts) {
 }
 
 void lefiNonDefault::end() { 
+#if 0
   // Return the callbacks to their normal state.
   // lefrSetViaCbk((lefrViaCbkFnType)this->oldViaCbk_);
   // lefrSetSpacingCbk((lefrSpacingCbkFnType)this->oldSpacingCbk_);
@@ -533,6 +542,7 @@ void lefiNonDefault::end() {
   // pcr 909010 - global var nd is used to pass nondefault rule data
   // lefrSetUserData(this->oldUserData_);
   nd = 0;
+#endif 
 }
 
 int lefiNonDefault::numLayers() const { 

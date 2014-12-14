@@ -35,11 +35,11 @@ public:
   void addWidth(double num);
   void addWireExtension(double num);
   void addSpacing(double num);
-  void addSpacingRule(lefiSpacing* s);
+  void addSpacingRule(lefiSpacing const& s);
   void addResistance(double num);
   void addCapacitance(double num);
   void addEdgeCap(double num);
-  void addViaRule(lefiVia* v);
+  void addViaRule(lefiVia const& v);
   void addDiagWidth(double num);                    // 5.6
   void end();
   void clear();

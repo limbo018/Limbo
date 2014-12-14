@@ -9,13 +9,13 @@
 #include <string.h>
 #include "LefDataBase.h"
 
-/*#include "expression.h"*/
-
 %}
 
+/*
 %code requires {
 #include "lefiDefs.hpp"
 }
+*/
 
 /*** yacc/bison Declarations ***/
 
@@ -550,26 +550,26 @@ lef_file: rules extension_opt  end_library
         if (driver.lef_errors)
            return 1;
         if (!driver.hasVer && driver.versionNum < 5.6)
-           lefWarning(2001, "VERSION is a required statement on LEF file with version 5.5 and earlier.\nWithout VERSION defined, the LEF file is technically illegal.\nRefer the LEF/DEF 5.5 and earlier Language Reference manual on how to defined this statement.");
+           driver.lefWarning(2001, "VERSION is a required statement on LEF file with version 5.5 and earlier.\nWithout VERSION defined, the LEF file is technically illegal.\nRefer the LEF/DEF 5.5 and earlier Language Reference manual on how to defined this statement.");
         //only pre 5.6, 5.6 it is obsolete
         if (!driver.hasNameCase && driver.versionNum < 5.6)
-           lefWarning(2002, "NAMESCASESENSITIVE is a required statement on LEF file with version 5.5 and earlier.\nWithout NAMESCASESENSITIVE defined, the LEF file is technically illegal.\nRefer the LEF/DEF 5.5 and earlier Language Referece manual on how to define this statement.");
+           driver.lefWarning(2002, "NAMESCASESENSITIVE is a required statement on LEF file with version 5.5 and earlier.\nWithout NAMESCASESENSITIVE defined, the LEF file is technically illegal.\nRefer the LEF/DEF 5.5 and earlier Language Referece manual on how to define this statement.");
         if (!driver.hasBusBit && driver.versionNum < 5.6)
-           lefWarning(2003, "BUSBITCHARS is a required statement on LEF file with version 5.5 and earlier.\nWithout BUSBITCHARS defined, the LEF file is technically illegal.\nRefer the LEF/DEF 5.5 and earlier Language Referece manual on how to define this statement.");
+           driver.lefWarning(2003, "BUSBITCHARS is a required statement on LEF file with version 5.5 and earlier.\nWithout BUSBITCHARS defined, the LEF file is technically illegal.\nRefer the LEF/DEF 5.5 and earlier Language Referece manual on how to define this statement.");
         if (!driver.hasDivChar && driver.versionNum < 5.6)
-           lefWarning(2004, "DIVIDERCHAR is a required statementon LEF file with version 5.5 and earlier.\nWithout DIVIDECHAR defined, the LEF file is technically illegal.\nRefer the LEF/DEF 5.5 and earlier Language Referece manual on how to define this statement.");
+           driver.lefWarning(2004, "DIVIDERCHAR is a required statementon LEF file with version 5.5 and earlier.\nWithout DIVIDECHAR defined, the LEF file is technically illegal.\nRefer the LEF/DEF 5.5 and earlier Language Referece manual on how to define this statement.");
 
        driver.resetVars();
       }
 
 version: K_VERSION { driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING ';'
       { 
-         driver.versionNum = convert_name2num((*$3).c_str());
+         driver.versionNum = driver.convert_name2num((*$3).c_str());
          if (driver.versionNum > 5.7) {
             char temp[120];
             sprintf(temp,
                "Lef parser 5.7 does not support lef file with version %s. Parser stops executions.", (*$3).c_str());
-            lefError(1503, temp);
+            driver.lefError(1503, temp);
             return 1;
          }
 /*
@@ -603,7 +603,7 @@ dividerchar: K_DIVIDERCHAR QSTRING ';'
 		  else 
 		  {
 			  driver.lefrDividerCharCbk("/");
-			  lefWarning(2005, "DIVIDERCHAR has an invalid null value. Value is set to default /");
+			  driver.lefWarning(2005, "DIVIDERCHAR has an invalid null value. Value is set to default /");
 		  }
 		  driver.hasDivChar = 1;
       }
@@ -617,7 +617,7 @@ busbitchars: K_BUSBITCHARS QSTRING ';'
 	  else 
 	  {
 		  driver.lefrBusBitCharsCbk("[]");
-		 lefWarning(2006, "BUSBITCHAR has an invalid null value. Value is set to default []");
+		 driver.lefWarning(2006, "BUSBITCHAR has an invalid null value. Value is set to default []");
 	  }
 	driver.hasBusBit = 1;
   }
@@ -645,13 +645,13 @@ end_library: /* empty */
         if (driver.lef_errors)
            return 1;
         if (!driver.hasVer)
-           lefWarning(2001, "VERSION is a required statement.");
+           driver.lefWarning(2001, "VERSION is a required statement.");
         if (!driver.hasNameCase)
-           lefWarning(2002, "NAMESCASESENSITIVE is a required statement.");
+           driver.lefWarning(2002, "NAMESCASESENSITIVE is a required statement.");
         if (!driver.hasBusBit && driver.versionNum < 5.6)
-           lefWarning(2003, "BUSBITCHARS is a required statement.");
+           driver.lefWarning(2003, "BUSBITCHARS is a required statement.");
         if (!driver.hasDivChar && driver.versionNum < 5.6)
-           lefWarning(2004, "DIVIDERCHAR is a required statement.");
+           driver.lefWarning(2004, "DIVIDERCHAR is a required statement.");
         driver.hasVer = 0;
         driver.hasNameCase = 0;
         driver.hasBusBit = 0;
@@ -684,7 +684,7 @@ case_sensitivity: K_NAMESCASESENSITIVE K_ON ';'
               driver.hasNameCase = 1;
             } 
 			else if (driver.caseSensitiveWarnings++ < driver.lefrCaseSensitiveWarnings)
-				lefWarning(2007, "NAMESCASESENSITIVE statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+				driver.lefWarning(2007, "NAMESCASESENSITIVE statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
 	  }
       | K_NAMESCASESENSITIVE K_OFF ';'
 	  {
@@ -698,7 +698,7 @@ case_sensitivity: K_NAMESCASESENSITIVE K_ON ';'
 			{
                 if (driver.caseSensitiveWarnings++ < driver.lefrCaseSensitiveWarnings) 
 				{
-                  lefError(1504, "NAMESCASESENSITIVE statement is set with OFF.\nStarting version 5.6, NAMESCASENSITIVE is obsolete,\nif it is defined, it has to have the ON value.\nParser stops executions.");
+                  driver.lefError(1504, "NAMESCASESENSITIVE statement is set with OFF.\nStarting version 5.6, NAMESCASENSITIVE is obsolete,\nif it is defined, it has to have the ON value.\nParser stops executions.");
               }
             }
 	  }
@@ -711,7 +711,7 @@ wireextension: K_NOWIREEXTENSIONATPIN K_ON ';'
       } 
 	  else if (driver.noWireExtensionWarnings++ < driver.lefrNoWireExtensionWarnings)
 	  {
-	  lefWarning(2008, "NOWIREEXTENSIONATPIN statement is obsolete in version 5.6 or later.\nThe NOWIREEXTENSIONATPIN statement will be ignored.");
+	  driver.lefWarning(2008, "NOWIREEXTENSIONATPIN statement is obsolete in version 5.6 or later.\nThe NOWIREEXTENSIONATPIN statement will be ignored.");
 	  }
     }
   | K_NOWIREEXTENSIONATPIN K_OFF ';'
@@ -722,7 +722,7 @@ wireextension: K_NOWIREEXTENSIONATPIN K_ON ';'
       } 
 	  else if (driver.noWireExtensionWarnings++ < driver.lefrNoWireExtensionWarnings)
 	  {
-	  lefWarning(2008, "NOWIREEXTENSIONATPIN statement is obsolete in version 5.6 or later.\nThe NOWIREEXTENSIONATPIN statement will be ignored.");
+	  driver.lefWarning(2008, "NOWIREEXTENSIONATPIN statement is obsolete in version 5.6 or later.\nThe NOWIREEXTENSIONATPIN statement will be ignored.");
 	  }
     }
 
@@ -737,7 +737,7 @@ useminspacing: K_USEMINSPACING spacing_type spacing_value ';'
     if ((strcmp((*$2).c_str(), "PIN") == 0) && (driver.versionNum >= 5.6)) 
 	{
          if (driver.useMinSpacingWarnings++ < driver.lefrUseMinSpacingWarnings)
-            lefWarning(2009, "USEMINSPACING PIN statement is obsolete in version 5.6 or later.\n The USEMINSPACING PIN statement will be ignored.");
+            driver.lefWarning(2009, "USEMINSPACING PIN statement is obsolete in version 5.6 or later.\n The USEMINSPACING PIN statement will be ignored.");
     } 
 	else 
 	{
@@ -770,17 +770,17 @@ start_units: K_UNITS
       if (driver.hasManufactur) 
 	  {
         if (driver.unitsWarnings++ < driver.lefrUnitsWarnings) 
-		{lefError(1505, "MANUFACTURINGGRID statement was defined before UNITS.\nRefer the LEF Language Reference manual for the order of LEF statements.");}
+		{driver.lefError(1505, "MANUFACTURINGGRID statement was defined before UNITS.\nRefer the LEF Language Reference manual for the order of LEF statements.");}
       }
       if (driver.hasMinfeature) {
         if (driver.unitsWarnings++ < driver.lefrUnitsWarnings) 
 		{
-          lefError(1712, "MINFEATURE statement was defined before UNITS.\nRefer the LEF Language Reference manual for the order of LEF statements.");
+          driver.lefError(1712, "MINFEATURE statement was defined before UNITS.\nRefer the LEF Language Reference manual for the order of LEF statements.");
         }
       }
       if (driver.versionNum < 5.6) {
         if (driver.hasSite) {/*SITE is defined before UNIT and is illegal in pre 5.6*/
-          lefError(1713, "SITE statement was defined before UNITS.\nRefer the LEF Language Reference manual for the order of LEF statements.");
+          driver.lefError(1713, "SITE statement was defined before UNITS.\nRefer the LEF Language Reference manual for the order of LEF statements.");
         }
       }
     }
@@ -803,7 +803,7 @@ units_rule: K_TIME K_NANOSECONDS NUMBER ';'
     { driver.lefrUnits.lefiUnits::setVoltage($3); }
   | K_DATABASE K_MICRONS NUMBER ';'
     { 
-      if(validNum((int)$3)) {
+      if(driver.validNum((int)$3)) {
             driver.lefrUnits.lefiUnits::setDatabase("MICRONS", $3);
       }
     }
@@ -818,7 +818,7 @@ start_layer: K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING
     { 
       if (driver.lefrHasMaxVS) {   /* 5.5 */
           if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-            lefError(1506, "A MAXVIASTACK statement is defined before the LAYER statement.\nRefer to the LEF Language Reference manual for the order of LEF statements.");
+            driver.lefError(1506, "A MAXVIASTACK statement is defined before the LAYER statement.\nRefer to the LEF Language Reference manual for the order of LEF statements.");
           }
       }
 	  driver.lefrLayer.lefiLayer::setName((*$3).c_str());
@@ -847,31 +847,31 @@ end_layer: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING
              driver.outMsg = (char*)lefMalloc(10000);
              sprintf (driver.outMsg,
                 "END LAYER name %s is different from the LAYER name %s.\nCorrect the LEF file before rerun it through the LEF parser.", (*$3).c_str(), driver.layerName.c_str());
-             lefError(1507, driver.outMsg);
+             driver.lefError(1507, driver.outMsg);
              lefFree(driver.outMsg);
           } 
       } 
       if (!driver.lefrRelaxMode) {
         if (driver.hasType == 0) {
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-               lefError(1508, "TYPE statement is a required statement in a LAYER and it is not defined.");
+               driver.lefError(1508, "TYPE statement is a required statement in a LAYER and it is not defined.");
             }
         }
         if ((driver.layerRout == 1) && (driver.hasPitch == 0)) {
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1509, "PITCH statement is a required statement in a LAYER with type ROUTING and it is not defined.");
+              driver.lefError(1509, "PITCH statement is a required statement in a LAYER with type ROUTING and it is not defined.");
           }
         }
         if ((driver.layerRout == 1) && (driver.hasWidth == 0)) {
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1510, "WIDTH statement is a required statement in a LAYER with type ROUTING and it is not defined.");
+              driver.lefError(1510, "WIDTH statement is a required statement in a LAYER with type ROUTING and it is not defined.");
           }
         }
         if ((driver.layerRout == 1) && (driver.hasDirection == 0)) {
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
               driver.outMsg = (char*)lefMalloc(10000);
-              sprintf (driver.outMsg, "The DIRECTION statement which is required in a LAYER with TYPE ROUTING is not defined in LAYER %s.\nUpdate your lef file and add the DIRECTION statement for layer %s.", $3, $3);
-              lefError(1511, driver.outMsg);
+              sprintf (driver.outMsg, "The DIRECTION statement which is required in a LAYER with TYPE ROUTING is not defined in LAYER %s.\nUpdate your lef file and add the DIRECTION statement for layer %s.", (*$3).c_str(), (*$3).c_str());
+              driver.lefError(1511, driver.outMsg);
               lefFree(driver.outMsg);
             }
         }
@@ -907,7 +907,7 @@ layer_option:
          driver.outMsg = (char*)lefMalloc(10000);
          sprintf(driver.outMsg,
            "ARRAYSPACING is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-         lefError(1685, driver.outMsg);
+         driver.lefError(1685, driver.outMsg);
          lefFree(driver.outMsg);
       }
     }
@@ -971,7 +971,7 @@ layer_option:
       if (driver.layerMastOver) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1512, "It is illegal to define a SPACING statement in LAYER with TYPE MASTERSLICE or OVERLAP. Parser stops executions.");
+              driver.lefError(1512, "It is illegal to define a SPACING statement in LAYER with TYPE MASTERSLICE or OVERLAP. Parser stops executions.");
             }
          }
       }
@@ -980,7 +980,7 @@ layer_option:
         if (driver.lefrHasSpacingTbl && driver.versionNum < 5.7) {
            if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
               if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-                lefWarning(2010, "It is illegal to have both SPACING rules & SPACINGTABLE rules within a ROUTING layer");
+                driver.lefWarning(2010, "It is illegal to have both SPACING rules & SPACINGTABLE rules within a ROUTING layer");
               }
            }
         }
@@ -1007,7 +1007,7 @@ layer_option:
          driver.outMsg = (char*)lefMalloc(10000);
          sprintf(driver.outMsg,
            "SPACINGTABLE ORTHOGONAL is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-         lefError(1694, driver.outMsg);
+         driver.lefError(1694, driver.outMsg);
          lefFree(driver.outMsg);
       }
     }
@@ -1017,7 +1017,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1513, "DIRECTION statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1513, "DIRECTION statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1030,7 +1030,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1514, "RESISTANCE statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1514, "RESISTANCE statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1042,7 +1042,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1515, "RESISTANCE statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1515, "RESISTANCE statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1053,7 +1053,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1516, "CAPACITANCE statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1516, "CAPACITANCE statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1065,7 +1065,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1517, "CAPACITANCE statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1517, "CAPACITANCE statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1076,7 +1076,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1518, "HEIGHT statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1518, "HEIGHT statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1088,7 +1088,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1519, "WIREEXTENSION statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1519, "WIREEXTENSION statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1100,7 +1100,7 @@ layer_option:
       if (!driver.layerRout && (driver.layerCut || driver.layerMastOver)) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1520, "THICKNESS statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1520, "THICKNESS statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1112,7 +1112,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1521, "SHRINKAGE statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1521, "SHRINKAGE statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1124,7 +1124,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1522, "CAPMULTIPLIER statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1522, "CAPMULTIPLIER statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1136,7 +1136,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1523, "EDGECAPACITANCE statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1523, "EDGECAPACITANCE statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1149,7 +1149,7 @@ layer_option:
     {
       if (!driver.layerRout && (driver.layerCut || driver.layerMastOver)) {
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1524, "ANTENNAAREAFACTOR statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1524, "ANTENNAAREAFACTOR statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               CHKERR();
             }
       }
@@ -1162,7 +1162,7 @@ layer_option:
       if (!driver.layerRout && (driver.layerCut || driver.layerMastOver)) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1525, "ANTENNALENGTHFACTOR statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1525, "ANTENNALENGTHFACTOR statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1173,7 +1173,7 @@ layer_option:
                   driver.outMsg = (char*)lefMalloc(10000);
                   sprintf (driver.outMsg,
                     "ANTENNALENGTHFACTOR statement is a version 5.3 or earlier syntax.\nYour lef file with version %g, has both old and new ANTENNALENGTHFACTOR syntax, which is illegal.", driver.versionNum);
-                  lefError(1526, driver.outMsg);
+                  driver.lefError(1526, driver.outMsg);
                   lefFree(driver.outMsg);
                   /*CHKERR();*/
                }
@@ -1189,7 +1189,7 @@ layer_option:
          if (!driver.layerRout) {
             if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
                if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-                 lefError(1526, "CURRENTDEN statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+                 driver.lefError(1526, "CURRENTDEN statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
                  /*CHKERR();*/
                }
             }
@@ -1197,7 +1197,7 @@ layer_option:
          if (/*driver.lefrLayerCbk*/ 1) driver.lefrLayer.lefiLayer::setCurrentDensity($2);
       } else {
          if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-            lefWarning(2079, "CURRENTDEN statement is obsolete in version 5.2 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.2 or later.");
+            driver.lefWarning(2079, "CURRENTDEN statement is obsolete in version 5.2 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.2 or later.");
             /*CHKERR();*/
          }
       }
@@ -1208,14 +1208,14 @@ layer_option:
          if (!driver.layerRout) {
             if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
                if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-                 lefError(1526, "CURRENTDEN statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+                 driver.lefError(1526, "CURRENTDEN statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
                  /*CHKERR();*/
                }
             }
          }
       } else {
          if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-            lefWarning(2079, "CURRENTDEN statement is obsolete in version 5.2 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.2 or later.");
+            driver.lefWarning(2079, "CURRENTDEN statement is obsolete in version 5.2 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.2 or later.");
             /*CHKERR();*/
          }
       }
@@ -1226,7 +1226,7 @@ layer_option:
          if (!driver.layerRout) {
             if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
                if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-                 lefError(1526, "CURRENTDEN statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+                 driver.lefError(1526, "CURRENTDEN statement can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
                  /*CHKERR();*/
                }
             }
@@ -1234,7 +1234,7 @@ layer_option:
          if (/*driver.lefrLayerCbk*/ 1) driver.lefrLayer.lefiLayer::setCurrentPoint($3, $4);
       } else {
          if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-            lefWarning(2079, "CURRENTDEN statement is obsolete in version 5.2 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.2 or later.");
+            driver.lefWarning(2079, "CURRENTDEN statement is obsolete in version 5.2 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.2 or later.");
             /*CHKERR();*/
          }
       }
@@ -1250,7 +1250,7 @@ layer_option:
       if (driver.layerMastOver) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1527, "ACCURRENTDENSITY statement can't be defined in LAYER with TYPE MASTERSLICE or OVERLAP. Parser stops executions.");
+              driver.lefError(1527, "ACCURRENTDENSITY statement can't be defined in LAYER with TYPE MASTERSLICE or OVERLAP. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1263,7 +1263,7 @@ layer_option:
       if (driver.layerMastOver) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1527, "ACCURRENTDENSITY statement can't be defined in LAYER with TYPE MASTERSLICE or OVERLAP. Parser stops executions.");
+              driver.lefError(1527, "ACCURRENTDENSITY statement can't be defined in LAYER with TYPE MASTERSLICE or OVERLAP. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1278,7 +1278,7 @@ layer_option:
       if (driver.layerMastOver) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1528, "DCCURRENTDENSITY statement can't be defined in LAYER with TYPE MASTERSLICE or OVERLAP. Parser stops executions.");
+              driver.lefError(1528, "DCCURRENTDENSITY statement can't be defined in LAYER with TYPE MASTERSLICE or OVERLAP. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1293,7 +1293,7 @@ layer_option:
       if (driver.layerMastOver) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1528, "DCCURRENTDENSITY statement can't be defined in LAYER with TYPE MASTERSLICE or OVERLAP. Parser stops executions.");
+              driver.lefError(1528, "DCCURRENTDENSITY statement can't be defined in LAYER with TYPE MASTERSLICE or OVERLAP. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1301,7 +1301,7 @@ layer_option:
       if (!driver.layerCut) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1529, "CUTAREA statement can only be defined in LAYER with type CUT. Parser stops executions.");
+              driver.lefError(1529, "CUTAREA statement can only be defined in LAYER with type CUT. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1319,7 +1319,7 @@ layer_option:
       if (driver.layerMastOver) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1528, "DCCURRENTDENSITY can't be defined in LAYER with TYPE MASTERSLICE or OVERLAP. Parser stops executions.");
+              driver.lefError(1528, "DCCURRENTDENSITY can't be defined in LAYER with TYPE MASTERSLICE or OVERLAP. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1327,7 +1327,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1530, "WIDTH statement can only be defined in LAYER with type ROUTING. Parser stops executions.");
+              driver.lefError(1530, "WIDTH statement can only be defined in LAYER with type ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1353,7 +1353,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "ANTENNAAREARATIO statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1531, driver.outMsg);
+               driver.lefError(1531, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1364,7 +1364,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "ANTENNAAREARATIO statement is a version 5.4 or earlier syntax.\nYour lef file with version %g, has both old and new ANTENNAAREARATIO syntax, which is illegal.", driver.versionNum);
-               lefError(1532, driver.outMsg);
+               driver.lefError(1532, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1373,7 +1373,7 @@ layer_option:
       if (!driver.layerRout && !driver.layerCut && driver.layerMastOver) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1533, "ANTENNAAREARATIO statement can only be defined in LAYER with TYPE ROUTING or CUT. Parser stops executions.");
+              driver.lefError(1533, "ANTENNAAREARATIO statement can only be defined in LAYER with TYPE ROUTING or CUT. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1391,7 +1391,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "ANTENNADIFFAREARATIO statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1532, driver.outMsg);
+               driver.lefError(1532, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1402,7 +1402,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "ANTENNADIFFAREARATIO statement is a version 5.4 or earlier syntax.\nYour lef file with version %g, has both old and new ANTENNADIFFAREARATIO syntax, which is illegal.", driver.versionNum);
-               lefError(1533, driver.outMsg);
+               driver.lefError(1533, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1411,7 +1411,7 @@ layer_option:
       if (!driver.layerRout && !driver.layerCut && driver.layerMastOver) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-               lefError(1534, "ANTENNADIFFAREARATIO statement can only be defined in LAYER with TYPE ROUTING or CUT. Parser stops executions.");
+               driver.lefError(1534, "ANTENNADIFFAREARATIO statement can only be defined in LAYER with TYPE ROUTING or CUT. Parser stops executions.");
                /*CHKERR();*/
             }
          }
@@ -1430,7 +1430,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "ANTENNACUMAREARATIO statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1535, driver.outMsg);
+               driver.lefError(1535, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1441,7 +1441,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "ANTENNACUMAREARATIO statement is a version 5.4 or earlier syntax.\nYour lef file with version %g, has both old and new ANTENNACUMAREARATIO syntax, which is illegal.", driver.versionNum);
-               lefError(1536, driver.outMsg);
+               driver.lefError(1536, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1450,7 +1450,7 @@ layer_option:
       if (!driver.layerRout && !driver.layerCut && driver.layerMastOver) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-               lefError(1537, "ANTENNACUMAREARATIO statement can only be defined in LAYER with TYPE ROUTING or CUT. Parser stops executions.");
+               driver.lefError(1537, "ANTENNACUMAREARATIO statement can only be defined in LAYER with TYPE ROUTING or CUT. Parser stops executions.");
                /*CHKERR();*/
             }
          }
@@ -1468,7 +1468,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "ANTENNACUMDIFFAREARATIO statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1538, driver.outMsg);
+               driver.lefError(1538, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1479,7 +1479,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "ANTENNACUMDIFFAREARATIO statement is a version 5.4 or earlier syntax.\nYour lef file with version %g, has both old and new ANTENNACUMDIFFAREARATIO syntax, which is illegal.", driver.versionNum);
-               lefError(1539, driver.outMsg);
+               driver.lefError(1539, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1488,7 +1488,7 @@ layer_option:
       if (!driver.layerRout && !driver.layerCut && driver.layerMastOver) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1540, "ANTENNACUMDIFFAREARATIO statement can only be defined in LAYER with TYPE ROUTING or CUT. Parser stops executions.");
+              driver.lefError(1540, "ANTENNACUMDIFFAREARATIO statement can only be defined in LAYER with TYPE ROUTING or CUT. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -1501,7 +1501,7 @@ layer_option:
       if (!driver.layerRout && !driver.layerCut && driver.layerMastOver) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-               lefError(1541, "ANTENNAAREAFACTOR can only be defined in LAYER with TYPE ROUTING or CUT. Parser stops executions.");
+               driver.lefError(1541, "ANTENNAAREAFACTOR can only be defined in LAYER with TYPE ROUTING or CUT. Parser stops executions.");
                /*CHKERR();*/
             }
          }
@@ -1517,7 +1517,7 @@ layer_option:
       if (!driver.layerRout && (driver.layerCut || driver.layerMastOver)) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-               lefError(1542, "ANTENNASIDEAREARATIO can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+               driver.lefError(1542, "ANTENNASIDEAREARATIO can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
                /*CHKERR();*/
             }
          }
@@ -1530,7 +1530,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "ANTENNASIDEAREARATIO statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1543, driver.outMsg);
+               driver.lefError(1543, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1541,7 +1541,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "ANTENNASIDEAREARATIO statement is a version 5.4 or earlier syntax.\nYour lef file with version %g, has both old and new ANTENNASIDEAREARATIO syntax, which is illegal.", driver.versionNum);
-               lefError(1544, driver.outMsg);
+               driver.lefError(1544, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1555,7 +1555,7 @@ layer_option:
       if (!driver.layerRout && (driver.layerCut || driver.layerMastOver)) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-               lefError(1545, "ANTENNADIFFSIDEAREARATIO can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+               driver.lefError(1545, "ANTENNADIFFSIDEAREARATIO can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
                /*CHKERR();*/
             }
          }
@@ -1568,7 +1568,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "ANTENNADIFFSIDEAREARATIO statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1546, driver.outMsg);
+               driver.lefError(1546, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1579,7 +1579,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "ANTENNADIFFSIDEAREARATIO statement is a version 5.4 or earlier syntax.\nYour lef file with version %g, has both old and new ANTENNADIFFSIDEAREARATIO syntax, which is illegal.", driver.versionNum);
-               lefError(1547, driver.outMsg);
+               driver.lefError(1547, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1594,7 +1594,7 @@ layer_option:
       if (!driver.layerRout && (driver.layerCut || driver.layerMastOver)) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-               lefError(1548, "ANTENNACUMSIDEAREARATIO can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+               driver.lefError(1548, "ANTENNACUMSIDEAREARATIO can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
                /*CHKERR();*/
             }
          }
@@ -1607,7 +1607,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "ANTENNACUMSIDEAREARATIO statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1549, driver.outMsg);
+               driver.lefError(1549, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1618,7 +1618,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "ANTENNACUMSIDEAREARATIO statement is a version 5.4 or earlier syntax.\nYour lef file with version %g, has both old and new ANTENNACUMSIDEAREARATIO syntax, which is illegal.", driver.versionNum);
-               lefError(1550, driver.outMsg);
+               driver.lefError(1550, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1632,7 +1632,7 @@ layer_option:
       if (!driver.layerRout && (driver.layerCut || driver.layerMastOver)) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-               lefError(1551, "ANTENNACUMDIFFSIDEAREARATIO can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+               driver.lefError(1551, "ANTENNACUMDIFFSIDEAREARATIO can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
                /*CHKERR();*/
             }
          }
@@ -1645,7 +1645,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "ANTENNACUMDIFFSIDEAREARATIO statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1552, driver.outMsg);
+               driver.lefError(1552, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1656,7 +1656,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "ANTENNACUMDIFFSIDEAREARATIO statement is a version 5.4 or earlier syntax.\nYour lef file with version %g, has both old and new ANTENNACUMDIFFSIDEAREARATIO syntax, which is illegal.", driver.versionNum);
-               lefError(1553, driver.outMsg);
+               driver.lefError(1553, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1671,7 +1671,7 @@ layer_option:
       if (!driver.layerRout && (driver.layerCut || driver.layerMastOver)) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-               lefError(1554, "ANTENNASIDEAREAFACTOR can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+               driver.lefError(1554, "ANTENNASIDEAREAFACTOR can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
                /*CHKERR();*/
             }
          }
@@ -1684,7 +1684,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "ANTENNASIDEAREAFACTOR statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1555, driver.outMsg);
+               driver.lefError(1555, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1695,7 +1695,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "ANTENNASIDEAREAFACTOR statement is a version 5.4 or earlier syntax.\nYour lef file with version %g, has both old and new ANTENNASIDEAREAFACTOR syntax, which is illegal.", driver.versionNum);
-               lefError(1556, driver.outMsg);
+               driver.lefError(1556, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1711,7 +1711,7 @@ layer_option:
       if (!driver.layerRout && !driver.layerCut && driver.layerMastOver) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-               lefError(1557, "ANTENNAMODEL can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+               driver.lefError(1557, "ANTENNAMODEL can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
                /*CHKERR();*/
             }
          }
@@ -1724,7 +1724,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "ANTENNAMODEL statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1558, driver.outMsg);
+               driver.lefError(1558, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1735,7 +1735,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "ANTENNAMODEL statement is a version 5.4 or earlier syntax.\nYour lef file with version %g, has both old and new ANTENNAMODEL syntax, which is illegal.", driver.versionNum);
-               lefError(1559, driver.outMsg);
+               driver.lefError(1559, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1750,14 +1750,14 @@ layer_option:
          driver.outMsg = (char*)lefMalloc(10000);
          sprintf(driver.outMsg,
            "ANTENNACUMROUTINGPLUSCUT is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-         lefError(1686, driver.outMsg);
+         driver.lefError(1686, driver.outMsg);
          lefFree(driver.outMsg);
          /*CHKERR();*/
       } else {
          if (!driver.layerRout && !driver.layerCut) {
             if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
                if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-                  lefError(1560, "ANTENNACUMROUTINGPLUSCUT can only be defined in LAYER with type ROUTING or CUT. Parser stops executions.");
+                  driver.lefError(1560, "ANTENNACUMROUTINGPLUSCUT can only be defined in LAYER with type ROUTING or CUT. Parser stops executions.");
                   /*CHKERR();*/
                }
             }
@@ -1771,14 +1771,14 @@ layer_option:
          driver.outMsg = (char*)lefMalloc(10000);
          sprintf(driver.outMsg,
            "ANTENNAGATEPLUSDIFF is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-         lefError(1687, driver.outMsg);
+         driver.lefError(1687, driver.outMsg);
          lefFree(driver.outMsg);
          /*CHKERR();*/
       } else {
          if (!driver.layerRout && !driver.layerCut) {
             if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
                if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-                  lefError(1561, "ANTENNAGATEPLUSDIFF can only be defined in LAYER with type ROUTING or CUT. Parser stops executions.");
+                  driver.lefError(1561, "ANTENNAGATEPLUSDIFF can only be defined in LAYER with type ROUTING or CUT. Parser stops executions.");
                   /*CHKERR();*/
                }
             }
@@ -1792,14 +1792,14 @@ layer_option:
          driver.outMsg = (char*)lefMalloc(10000);
          sprintf(driver.outMsg,
            "ANTENNAAREAMINUSDIFF is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-         lefError(1688, driver.outMsg);
+         driver.lefError(1688, driver.outMsg);
          lefFree(driver.outMsg);
          /*CHKERR();*/
       } else {
          if (!driver.layerRout && !driver.layerCut) {
             if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
                if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-                  lefError(1562, "ANTENNAAREAMINUSDIFF can only be defined in LAYER with type ROUTING or CUT. Parser stops executions.");
+                  driver.lefError(1562, "ANTENNAAREAMINUSDIFF can only be defined in LAYER with type ROUTING or CUT. Parser stops executions.");
                   /*CHKERR();*/
                }
             }
@@ -1812,7 +1812,7 @@ layer_option:
       if (!driver.layerRout && !driver.layerCut) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-               lefError(1563, "ANTENNAAREADIFFREDUCEPWL can only be defined in LAYER with type ROUTING or CUT. Parser stops executions.");
+               driver.lefError(1563, "ANTENNAAREADIFFREDUCEPWL can only be defined in LAYER with type ROUTING or CUT. Parser stops executions.");
                /*CHKERR();*/
             }
          }
@@ -1834,7 +1834,7 @@ layer_option:
         driver.outMsg = (char*)lefMalloc(10000);
         sprintf(driver.outMsg,
           "ANTENNAAREADIFFREDUCEPWL is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-        lefError(1689, driver.outMsg);
+        driver.lefError(1689, driver.outMsg);
         lefFree(driver.outMsg);
         /*CHKERR();*/
       }
@@ -1847,7 +1847,7 @@ layer_option:
       } else if (driver.versionNum >= 5.7) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings)
-               lefWarning(2011, "SLOTWIREWIDTH statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
+               driver.lefWarning(2011, "SLOTWIREWIDTH statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
          }
       } else if (driver.versionNum < 5.4) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
@@ -1855,7 +1855,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "SLOTWIREWIDTH statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1564, driver.outMsg);
+               driver.lefError(1564, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1871,7 +1871,7 @@ layer_option:
       } else if (driver.versionNum >= 5.7) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings)
-               lefWarning(2012, "SLOTWIRELENGTH statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
+               driver.lefWarning(2012, "SLOTWIRELENGTH statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
          }
       } else if (driver.versionNum < 5.4) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
@@ -1879,7 +1879,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "SLOTWIRELENGTH statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1565, driver.outMsg);
+               driver.lefError(1565, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1895,7 +1895,7 @@ layer_option:
       } else if (driver.versionNum >= 5.7) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings)
-               lefWarning(2013, "SLOTWIDTH statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
+               driver.lefWarning(2013, "SLOTWIDTH statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
          }
       } else if (driver.versionNum < 5.4) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
@@ -1903,7 +1903,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "SLOTWIDTH statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1566, driver.outMsg);
+               driver.lefError(1566, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1919,7 +1919,7 @@ layer_option:
       } else if (driver.versionNum >= 5.7) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings)
-               lefWarning(2014, "SLOTLENGTH statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
+               driver.lefWarning(2014, "SLOTLENGTH statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
          }
       } else if (driver.versionNum < 5.4) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
@@ -1927,7 +1927,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "SLOTLENGTH statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1567, driver.outMsg);
+               driver.lefError(1567, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1943,7 +1943,7 @@ layer_option:
       } else if (driver.versionNum >= 5.7) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings)
-               lefWarning(2015, "MAXADJACENTSLOTSPACING statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
+               driver.lefWarning(2015, "MAXADJACENTSLOTSPACING statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
          }
       } else if (driver.versionNum < 5.4) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
@@ -1951,7 +1951,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "MAXADJACENTSLOTSPACING statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1568, driver.outMsg);
+               driver.lefError(1568, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1967,7 +1967,7 @@ layer_option:
       } else if (driver.versionNum >= 5.7) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings)
-                lefWarning(2016, "MAXCOAXIALSLOTSPACING statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
+                driver.lefWarning(2016, "MAXCOAXIALSLOTSPACING statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
          }
       } else if (driver.versionNum < 5.4) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
@@ -1975,7 +1975,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "MAXCOAXIALSLOTSPACING statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1569, driver.outMsg);
+               driver.lefError(1569, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -1991,7 +1991,7 @@ layer_option:
       } else if (driver.versionNum >= 5.7) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings)
-               lefWarning(2017, "MAXEDGESLOTSPACING statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
+               driver.lefWarning(2017, "MAXEDGESLOTSPACING statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
          }
       } else if (driver.versionNum < 5.4) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
@@ -1999,7 +1999,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "MAXEDGESLOTSPACING statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1570, driver.outMsg);
+               driver.lefError(1570, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2014,7 +2014,7 @@ layer_option:
       } else if (driver.versionNum >= 5.7) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings)
-               lefWarning(2018, "SPLITWIREWIDTH statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
+               driver.lefWarning(2018, "SPLITWIREWIDTH statement is obsolete in version 5.7 or later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.7 or later.");
          }
       } else if (driver.versionNum < 5.4) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
@@ -2022,7 +2022,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "SPLITWIREWIDTH statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1571, driver.outMsg);
+               driver.lefError(1571, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2040,7 +2040,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "MINIMUMDENSITY statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1572, driver.outMsg);
+               driver.lefError(1572, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2058,7 +2058,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "MAXIMUMDENSITY statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1573, driver.outMsg);
+               driver.lefError(1573, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2076,7 +2076,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "DENSITYCHECKWINDOW statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1574, driver.outMsg);
+               driver.lefError(1574, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2094,7 +2094,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "DENSITYCHECKSTEP statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1575, driver.outMsg);
+               driver.lefError(1575, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2112,7 +2112,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "FILLACTIVESPACING statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1576, driver.outMsg);
+               driver.lefError(1576, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2126,7 +2126,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-               lefError(1577, "MAXWIDTH statement can only be defined in LAYER with TYPE ROUTING.  Parser stops executions.");
+               driver.lefError(1577, "MAXWIDTH statement can only be defined in LAYER with TYPE ROUTING.  Parser stops executions.");
                /*CHKERR();*/
             }
          }
@@ -2137,7 +2137,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "MAXWIDTH statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1578, driver.outMsg);
+               driver.lefError(1578, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2151,7 +2151,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1579, "MINWIDTH statement can only be defined in LAYER with TYPE ROUTING.  Parser stops executions.");
+              driver.lefError(1579, "MINWIDTH statement can only be defined in LAYER with TYPE ROUTING.  Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -2162,7 +2162,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "MINWIDTH statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1580, driver.outMsg);
+               driver.lefError(1580, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2178,7 +2178,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "MINENCLOSEDAREA statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1581, driver.outMsg);
+               driver.lefError(1581, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2217,7 +2217,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "PROTRUSION RULE statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1582, driver.outMsg);
+               driver.lefError(1582, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2233,7 +2233,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "SPACINGTABLE statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1583, driver.outMsg);
+               driver.lefError(1583, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2243,7 +2243,7 @@ layer_option:
       if (driver.lefrHasSpacing && driver.layerRout && driver.versionNum < 5.7) {
          if (/*driver.lefrLayerCbk*/ 1)  /* write warning only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefWarning(2010, "It is illegal to have both SPACING rules & SPACINGTABLE rules within a ROUTING layer");
+              driver.lefWarning(2010, "It is illegal to have both SPACING rules & SPACINGTABLE rules within a ROUTING layer");
             }
       } 
       if (/*driver.lefrLayerCbk*/ 1) driver.lefrLayer.lefiLayer::addSpacingTable();
@@ -2259,7 +2259,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "ENCLOSURE statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1584, driver.outMsg);
+               driver.lefError(1584, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2278,7 +2278,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "PREFERENCLOSURE statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1585, driver.outMsg);
+               driver.lefError(1585, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2296,7 +2296,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "RESISTANCE statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1586, driver.outMsg);
+               driver.lefError(1586, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2311,7 +2311,7 @@ layer_option:
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1587, "DIAGMINEDGELENGTH can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
+              driver.lefError(1587, "DIAGMINEDGELENGTH can only be defined in LAYER with TYPE ROUTING. Parser stops executions.");
               /*CHKERR();*/
             }
          }
@@ -2321,7 +2321,7 @@ layer_option:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "DIAGMINEDGELENGTH statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1588, driver.outMsg);
+               driver.lefError(1588, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2379,7 +2379,7 @@ layer_arraySpacing_arraycut:
             /* Mulitiple ARRAYCUTS value needs to me in ascending order */
             if (!driver.arrayCutsWar) {
                if (driver.layerWarnings++ < driver.lefrLayerWarnings)
-                  lefWarning(2080, "The number of cut values in multiple ARRAYSPACING ARRAYCUTS are not in increasing order.\nTo be consistent with the documentation, update the cut values to increasing order.");
+                  driver.lefWarning(2080, "The number of cut values in multiple ARRAYSPACING ARRAYCUTS are not in increasing order.\nTo be consistent with the documentation, update the cut values to increasing order.");
                driver.arrayCutsWar = 1;
             }
          }
@@ -2392,7 +2392,7 @@ sp_options:
       if (driver.hasInfluence) {  // 5.5 - INFLUENCE table must follow a PARALLEL
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1589, "An INFLUENCE table statement was defined before the PARALLELRUNLENGTH table statement.\nINFLUENCE table statement should be defined following the PARALLELRUNLENGTH.\nChange the LEF file and rerun the parser.");
+              driver.lefError(1589, "An INFLUENCE table statement was defined before the PARALLELRUNLENGTH table statement.\nINFLUENCE table statement should be defined following the PARALLELRUNLENGTH.\nChange the LEF file and rerun the parser.");
               /*CHKERR();*/
             }
          }
@@ -2400,7 +2400,7 @@ sp_options:
       if (driver.hasParallel) { // 5.5 - Only one PARALLEL table is allowed per layer
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1590, "There is multiple PARALLELRUNLENGTH table statements are defined within a layer.\nAccording to the LEF Reference Manual, only one PARALLELRUNLENGTH table statement is allowed per layer.");
+              driver.lefError(1590, "There is multiple PARALLELRUNLENGTH table statements are defined within a layer.\nAccording to the LEF Reference Manual, only one PARALLELRUNLENGTH table statement is allowed per layer.");
               /*CHKERR();*/
             }
          }
@@ -2424,7 +2424,7 @@ sp_options:
       if (driver.lefrLayer.lefiLayer::getNumber() != driver.spParallelLength) {
          if (/*driver.lefrLayerCbk*/ 1) {
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1591, "The number of length in PARALLELRUNLENGTH is not the same as the number of spacing in WIDTH.");
+              driver.lefError(1591, "The number of length in PARALLELRUNLENGTH is not the same as the number of spacing in WIDTH.");
               /*CHKERR();*/
             }
          }
@@ -2442,7 +2442,7 @@ sp_options:
       if (driver.hasParallel) { // 5.7 - Either PARALLEL OR TWOWIDTHS per layer
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1592, "A PARALLELRUNLENGTH statement has already defined in the layer.\nOnly either PARALLELRUNLENGTH or TWOWIDTHS is allowed per layer.");
+              driver.lefError(1592, "A PARALLELRUNLENGTH statement has already defined in the layer.\nOnly either PARALLELRUNLENGTH or TWOWIDTHS is allowed per layer.");
               /*CHKERR();*/
             }
          }
@@ -2450,7 +2450,7 @@ sp_options:
       if (driver.hasTwoWidths) { // 5.7 - only 1 TWOWIDTHS per layer
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1593, "A TWOWIDTHS table statement has already defined in the layer.\nOnly one TWOWIDTHS statement is allowed per layer.");
+              driver.lefError(1593, "A TWOWIDTHS table statement has already defined in the layer.\nOnly one TWOWIDTHS statement is allowed per layer.");
               /*CHKERR();*/
             }
          }
@@ -2464,7 +2464,7 @@ sp_options:
         driver.outMsg = (char*)lefMalloc(10000);
         sprintf(driver.outMsg,
           "TWOWIDTHS is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-        lefError(1697, driver.outMsg);
+        driver.lefError(1697, driver.outMsg);
         lefFree(driver.outMsg);
         /*CHKERR();*/
       } 
@@ -2474,7 +2474,7 @@ sp_options:
       if (driver.hasInfluence) {  // 5.5 - INFLUENCE table must follow a PARALLEL
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1594, "A INFLUENCE table statement has already defined in the layer.\nOnly one INFLUENCE statement is allowed per layer.");
+              driver.lefError(1594, "A INFLUENCE table statement has already defined in the layer.\nOnly one INFLUENCE statement is allowed per layer.");
               /*CHKERR();*/
             }
          }
@@ -2482,7 +2482,7 @@ sp_options:
       if (!driver.hasParallel) {  // 5.5 - INFLUENCE must follow a PARALLEL
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1595, "An INFLUENCE table statement has already defined beofre the layer.\nINFLUENCE statement has to be defined after the PARALLELRUNLENGTH table statement in the layer.");
+              driver.lefError(1595, "An INFLUENCE table statement has already defined beofre the layer.\nINFLUENCE statement has to be defined after the PARALLELRUNLENGTH table statement in the layer.");
               /*CHKERR();*/
             }
          }
@@ -2524,7 +2524,7 @@ layer_enclosure_width_opt:  /* empty */
          driver.outMsg = (char*)lefMalloc(10000);
          sprintf(driver.outMsg,
            "LENGTH is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-         lefError(1691, driver.outMsg);
+         driver.lefError(1691, driver.outMsg);
          lefFree(driver.outMsg);
          /*CHKERR();*/
       } else {
@@ -2541,7 +2541,7 @@ layer_enclosure_width_except_opt: /* empty */
          driver.outMsg = (char*)lefMalloc(10000);
          sprintf(driver.outMsg,
            "EXCEPTEXTRACUT is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-         lefError(1690, driver.outMsg);
+         driver.lefError(1690, driver.outMsg);
          lefFree(driver.outMsg);
          /*CHKERR();*/
       } else {
@@ -2566,7 +2566,7 @@ layer_minimumcut_within: /* empty */
         driver.outMsg = (char*)lefMalloc(10000);
         sprintf(driver.outMsg,
           "MINIMUMCUT WITHIN is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-        lefError(1700, driver.outMsg);
+        driver.lefError(1700, driver.outMsg);
         lefFree(driver.outMsg);
         /*CHKERR();*/
       } else {
@@ -2585,7 +2585,7 @@ layer_minimumcut_from: /* empty */
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "FROMABOVE statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1596, driver.outMsg);
+               driver.lefError(1596, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2604,7 +2604,7 @@ layer_minimumcut_from: /* empty */
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "FROMBELOW statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1597, driver.outMsg);
+               driver.lefError(1597, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -2624,7 +2624,7 @@ layer_minimumcut_length: /* empty */
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "LENGTH WITHIN statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1598, driver.outMsg);
+               driver.lefError(1598, driver.outMsg);
                lefFree(driver.outMsg);
               /*CHKERR();*/
             }
@@ -2655,7 +2655,7 @@ layer_minstep_option:
       driver.outMsg = (char*)lefMalloc(10000);
       sprintf(driver.outMsg,
         "MAXEDGES is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-      lefError(1685, driver.outMsg);
+      driver.lefError(1685, driver.outMsg);
       lefFree(driver.outMsg);
       /*CHKERR();*/
     } else
@@ -2710,7 +2710,7 @@ layer_antenna_duo: /* empty */
                  driver.outMsg = (char*)lefMalloc(10000);
                  sprintf (driver.outMsg,
                    "ANTENNAAREAFACTOR with DIFFUSEONLY statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-                 lefError(1599, driver.outMsg);
+                 driver.lefError(1599, driver.outMsg);
                  lefFree(driver.outMsg);
                  /*CHKERR();*/
               }
@@ -2721,7 +2721,7 @@ layer_antenna_duo: /* empty */
                  driver.outMsg = (char*)lefMalloc(10000);
                  sprintf (driver.outMsg,
                    "ANTENNAAREAFACTOR with DIFFUSEONLY statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-                 lefError(1599, driver.outMsg);
+                 driver.lefError(1599, driver.outMsg);
                  lefFree(driver.outMsg);
                  /*CHKERR();*/
               }
@@ -2753,7 +2753,7 @@ ac_layer_table_opt:  /* empty */
       if (!driver.layerCut) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1600, "CUTAREA statement can only be defined in LAYER with type CUT.");
+              driver.lefError(1600, "CUTAREA statement can only be defined in LAYER with type CUT.");
               /*CHKERR();*/
             }
          }
@@ -2767,7 +2767,7 @@ ac_layer_table_opt:  /* empty */
       if (!driver.layerRout) {
          if (/*driver.lefrLayerCbk*/ 1) { /* write error only if cbk is set */
             if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1601, "WIDTH can only be defined in LAYER with type ROUTING.");
+              driver.lefError(1601, "WIDTH can only be defined in LAYER with type ROUTING.");
               /*CHKERR();*/
             }
          }
@@ -2949,14 +2949,14 @@ maxstack_via: K_MAXVIASTACK NUMBER ';'
       if (!driver.lefrHasLayer) {  /* 5.5 */
         if (/*lefrMaxStackViaCbk*/ 1) { /* write error only if cbk is set */
            if (driver.maxStackViaWarnings++ < driver.lefrMaxStackViaWarnings) {
-             lefError(1602, "MAXVIASTACK statement has to be defined after the LAYER statement.");
+             driver.lefError(1602, "MAXVIASTACK statement has to be defined after the LAYER statement.");
              /*CHKERR();*/
            }
         }
       } else if (driver.lefrHasMaxVS) {
         if (/*lefrMaxStackViaCbk*/ 1) { /* write error only if cbk is set */
            if (driver.maxStackViaWarnings++ < driver.lefrMaxStackViaWarnings) {
-             lefError(1603, "A MAXVIASTACK has already defined.\nOnly one MAXVIASTACK is allowed per lef file.");
+             driver.lefError(1603, "A MAXVIASTACK has already defined.\nOnly one MAXVIASTACK is allowed per lef file.");
              /*CHKERR();*/
            }
         }
@@ -2972,7 +2972,7 @@ maxstack_via: K_MAXVIASTACK NUMBER ';'
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                 "MAXVIASTACK statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1604, driver.outMsg);
+              driver.lefError(1604, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -2986,14 +2986,14 @@ maxstack_via: K_MAXVIASTACK NUMBER ';'
       if (!driver.lefrHasLayer) {  /* 5.5 */
         if (/*lefrMaxStackViaCbk*/ 1) { /* write error only if cbk is set */
            if (driver.maxStackViaWarnings++ < driver.lefrMaxStackViaWarnings) {
-              lefError(1602, "MAXVIASTACK statement has to be defined after the LAYER statement.");
+              driver.lefError(1602, "MAXVIASTACK statement has to be defined after the LAYER statement.");
               /*CHKERR();*/
            }
         }
       } else if (driver.lefrHasMaxVS) {
         if (/*lefrMaxStackViaCbk*/ 1) { /* write error only if cbk is set */
            if (driver.maxStackViaWarnings++ < driver.lefrMaxStackViaWarnings) {
-             lefError(1603, "A MAXVIASTACK has already defined.\nOnly one MAXVIASTACK is allowed per lef file.");
+             driver.lefError(1603, "A MAXVIASTACK has already defined.\nOnly one MAXVIASTACK is allowed per lef file.");
              /*CHKERR();*/
            }
         }
@@ -3054,7 +3054,7 @@ via_viarule: K_VIARULE {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                 "VIARULE statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1605, driver.outMsg);
+              driver.lefError(1605, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
             }
@@ -3119,7 +3119,7 @@ via_other_option:
       } else
         if (/*lefrViaCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.viaWarnings++ < driver.lefrViaWarnings)
-              lefWarning(2019, "TOPOFSTACKONLY statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later");
+              driver.lefWarning(2019, "TOPOFSTACKONLY statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later");
     }
 
 via_prop_list:
@@ -3163,7 +3163,7 @@ via_foreign:
       } else
         if (/*lefrViaCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.viaWarnings++ < driver.lefrViaWarnings)
-             lefWarning(2020, "FOREIGN statement in VIA is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2020, "FOREIGN statement in VIA is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
   | start_foreign pt ';'
     {
@@ -3172,7 +3172,7 @@ via_foreign:
       } else
         if (/*lefrViaCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.viaWarnings++ < driver.lefrViaWarnings)
-             lefWarning(2020, "FOREIGN statement in VIA is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2020, "FOREIGN statement in VIA is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
   | start_foreign pt orientation ';'
     {
@@ -3181,7 +3181,7 @@ via_foreign:
       } else
         if (/*lefrViaCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.viaWarnings++ < driver.lefrViaWarnings)
-             lefWarning(2020, "FOREIGN statement in VIA is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2020, "FOREIGN statement in VIA is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
   | start_foreign orientation ';'
     {
@@ -3190,7 +3190,7 @@ via_foreign:
       } else
         if (/*lefrViaCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.viaWarnings++ < driver.lefrViaWarnings)
-             lefWarning(2020, "FOREIGN statement in VIA is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2020, "FOREIGN statement in VIA is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
 
 start_foreign:	K_FOREIGN {driver.lefDumbMode = 1; driver.lefNoNum= 1;} STRING
@@ -3259,8 +3259,8 @@ end_via: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
             if (driver.viaWarnings++ < driver.lefrViaWarnings) {
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
-                "A LAYER statement is missing in the VIA %s.\nAt least one LAYERis required per VIA statement.", $3);
-              lefError(1606, driver.outMsg);
+                "A LAYER statement is missing in the VIA %s.\nAt least one LAYERis required per VIA statement.", (*$3).c_str());
+              driver.lefError(1606, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
             }
@@ -3271,8 +3271,8 @@ end_via: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
             if (driver.viaWarnings++ < driver.lefrViaWarnings) {
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
-                "END VIA name %s is different from the VIA name %s.\nCorrect the LEF file before rerun it through the LEF parser.", $3, driver.viaName.c_str());
-              lefError(1607, driver.outMsg);
+                "END VIA name %s is different from the VIA name %s.\nCorrect the LEF file before rerun it through the LEF parser.", (*$3).c_str(), driver.viaName.c_str());
+              driver.lefError(1607, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
             } 
@@ -3297,13 +3297,13 @@ viarule:
       // 11/14/2001 - Wanda da Rosa,
       //              Commented out for pcr 411781
       //if (driver.viaRuleLayer != 2) {
-         //lefError("VIARULE requires two layers");
+         //driver.lefError("VIARULE requires two layers");
          ///*CHKERR();*/
       //}
       if (driver.viaRuleLayer == 0 || driver.viaRuleLayer > 2) {
          if (/*driver.lefrViaRuleCbk*/ 1) {  /* write error only if cbk is set */
             if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings) {
-              lefError(1608, "A VIARULE statement requires two layers.");
+              driver.lefError(1608, "A VIARULE statement requires two layers.");
               /*CHKERR();*/
             }
          }
@@ -3327,20 +3327,20 @@ viarule_generate:
       // 11/14/2001 - Wanda da Rosa,
       //              Commented out for pcr 411781
       //if (driver.viaRuleLayer != 3) {
-         //lefError("VIARULE requires three layers");
+         //driver.lefError("VIARULE requires three layers");
          ///*CHKERR();*/
       //}
       if (driver.viaRuleLayer == 0) {
          if (/*driver.lefrViaRuleCbk*/ 1) {  /* write error only if cbk is set */
             if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings) {
-              lefError(1609, "A VIARULE GENERATE requires three layers.");
+              driver.lefError(1609, "A VIARULE GENERATE requires three layers.");
               /*CHKERR();*/
             }
          }
       } else if ((driver.viaRuleLayer < 3) && (driver.versionNum >= 5.6)) {
          if (/*driver.lefrViaRuleCbk*/ 1)  /* write warning only if cbk is set */
             if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings)
-              lefWarning(2021, "turn-via is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+              driver.lefWarning(2021, "turn-via is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
       } else {
          if (/*driver.lefrViaRuleCbk*/ 1) {
             driver.lefrViaRule.lefiViaRule::setGenerate();
@@ -3361,7 +3361,7 @@ viarule_generate_default:  /* optional */
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                 "DEFAULT statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1605, driver.outMsg);
+              driver.lefError(1605, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
             }
@@ -3435,7 +3435,7 @@ viarule_layer: viarule_layer_name viarule_layer_options
              !driver.isGenerate) {
             if (/*driver.lefrViaRuleCbk*/ 1) {  /* write error only if cbk is set */
                if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings) {
-                  lefError(1606, "VIARULE statement in a layer, requires a DIRECTION construct statement.");
+                  driver.lefError(1606, "VIARULE statement in a layer, requires a DIRECTION construct statement.");
                   /*CHKERR();*/ 
                }
             }
@@ -3445,7 +3445,7 @@ viarule_layer: viarule_layer_name viarule_layer_options
              driver.isGenerate) {
             if (/*driver.lefrViaRuleCbk*/ 1) {  /* write error only if cbk is set */
                if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings) {
-                  lefError(1606, "VIARULE statement in a layer, requires a DIRECTION construct statement.");
+                  driver.lefError(1606, "VIARULE statement in a layer, requires a DIRECTION construct statement.");
                   /*CHKERR();*/ 
                }
             }
@@ -3480,7 +3480,7 @@ viarule_layer_option:
       if (driver.viaRuleHasEnc) {
         if (/*driver.lefrViaRuleCbk*/ 1) {  /* write error only if cbk is set */
            if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings) {
-              lefError(1607, "An ENCLOSRE statement has already defined in the layer.\nOnly either DIRECTION or ENCLOSURE can be specified in a layer.");
+              driver.lefError(1607, "An ENCLOSRE statement has already defined in the layer.\nOnly either DIRECTION or ENCLOSURE can be specified in a layer.");
               /*CHKERR();*/
            }
         }
@@ -3490,7 +3490,7 @@ viarule_layer_option:
         } else
           if (/*driver.lefrViaRuleCbk*/ 1)  /* write warning only if cbk is set */
              if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings)
-               lefWarning(2022, "DIRECTION statement in VIARULE is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+               driver.lefWarning(2022, "DIRECTION statement in VIARULE is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
       }
       driver.viaRuleHasDir = 1;
     }
@@ -3499,7 +3499,7 @@ viarule_layer_option:
       if (driver.viaRuleHasEnc) {
         if (/*driver.lefrViaRuleCbk*/ 1) { /* write error only if cbk is set */
            if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings) {
-              lefError(1607, "An ENCLOSRE statement has already defined in the layer.\nOnly either DIRECTION or ENCLOSURE can be specified in a layer.");
+              driver.lefError(1607, "An ENCLOSRE statement has already defined in the layer.\nOnly either DIRECTION or ENCLOSURE can be specified in a layer.");
               /*CHKERR();*/
            }
         }
@@ -3509,7 +3509,7 @@ viarule_layer_option:
         } else
           if (/*driver.lefrViaRuleCbk*/ 1) /* write warning only if cbk is set */
            if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings)
-              lefWarning(2022, "DIRECTION statement in VIARULE is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+              driver.lefWarning(2022, "DIRECTION statement in VIARULE is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
       }
       driver.viaRuleHasDir = 1;
     }
@@ -3521,7 +3521,7 @@ viarule_layer_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                 "ENCLOSURE statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1608, driver.outMsg);
+              driver.lefError(1608, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -3532,7 +3532,7 @@ viarule_layer_option:
       if (!driver.isGenerate) {
          if (/*driver.lefrViaRuleCbk*/ 1) { /* write error only if cbk is set */
            if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings) {
-              lefError(1614, "An ENCLOSURE statement is defined in a VIARULE statement only.\nOVERHANG statement can only be defined in VIARULE GENERATE.");
+              driver.lefError(1614, "An ENCLOSURE statement is defined in a VIARULE statement only.\nOVERHANG statement can only be defined in VIARULE GENERATE.");
               /*CHKERR();*/
            }
          }
@@ -3540,7 +3540,7 @@ viarule_layer_option:
       if (driver.viaRuleHasDir) {
          if (/*driver.lefrViaRuleCbk*/ 1) { /* write error only if cbk is set */
            if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings) {
-              lefError(1609, "A DIRECTION statement has already defined in the layer.\nOnly either DIRECTION or ENCLOSURE can be specified in a layer.");
+              driver.lefError(1609, "A DIRECTION statement has already defined in the layer.\nOnly either DIRECTION or ENCLOSURE can be specified in a layer.");
               /*CHKERR();*/
            }
          }
@@ -3563,7 +3563,7 @@ viarule_layer_option:
       if (!driver.viaRuleHasDir) {
          if (/*driver.lefrViaRuleCbk*/ 1) {  /* write error only if cbk is set */
             if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings) {
-               lefError(1610, "An OVERHANG statement is defined, but the required DIRECTION statement is not yet defined.\nUpdate the LEF file to define the DIRECTION statement before the OVERHANG.");
+               driver.lefError(1610, "An OVERHANG statement is defined, but the required DIRECTION statement is not yet defined.\nUpdate the LEF file to define the DIRECTION statement before the OVERHANG.");
                /*CHKERR();*/
             }
          }
@@ -3573,7 +3573,7 @@ viarule_layer_option:
       if ((driver.versionNum > 5.3) && (!driver.isGenerate)) {
          if (/*driver.lefrViaRuleCbk*/ 1) {  /* write error only if cbk is set */
             if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings) {
-               lefError(1611, "An OVERHANG statement is defined in a VIARULE statement only.\nOVERHANG statement can only be defined in VIARULE GENERATE.");
+               driver.lefError(1611, "An OVERHANG statement is defined in a VIARULE statement only.\nOVERHANG statement can only be defined in VIARULE GENERATE.");
                /*CHKERR();*/
             }
          }
@@ -3583,7 +3583,7 @@ viarule_layer_option:
       } else {
         if (/*driver.lefrViaRuleCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings)
-              lefWarning(2023, "OVERHANG statement will be translated into similar ENCLOSURE rule");
+              driver.lefWarning(2023, "OVERHANG statement will be translated into similar ENCLOSURE rule");
         // In 5.6 & later, set it to either ENCLOSURE overhang1 or overhang2
         if (/*driver.lefrViaRuleCbk*/ 1) driver.lefrViaRule.lefiViaRule::setOverhangToEnclosure($2);
       }
@@ -3595,7 +3595,7 @@ viarule_layer_option:
       if ((driver.versionNum > 5.3) && (!driver.isGenerate)) {
          if (/*driver.lefrViaRuleCbk*/ 1) {  /* write error only if cbk is set */
             if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings) {
-               lefError(1612, "An METALOVERHANG statement is defined in a VIARULE statement only.\nOVERHANG statement can only be defined in VIARULE GENERATE.");
+               driver.lefError(1612, "An METALOVERHANG statement is defined in a VIARULE statement only.\nOVERHANG statement can only be defined in VIARULE GENERATE.");
                /*CHKERR();*/
             }
          }
@@ -3604,7 +3604,7 @@ viarule_layer_option:
         if (!driver.viaRuleHasDir) {
            if (/*driver.lefrViaRuleCbk*/ 1) {  /* write error only if cbk is set */
              if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings) {
-                lefError(1613, "An METALOVERHANG statement is defined, but the required DIRECTION statement is not yet defined.\nUpdate the LEF file to define the DIRECTION statement before the OVERHANG.");
+                driver.lefError(1613, "An METALOVERHANG statement is defined, but the required DIRECTION statement is not yet defined.\nUpdate the LEF file to define the DIRECTION statement before the OVERHANG.");
                 /*CHKERR();*/
              } 
            }
@@ -3613,7 +3613,7 @@ viarule_layer_option:
       } else
         if (/*driver.lefrViaRuleCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.viaRuleWarnings++ < driver.lefrViaRuleWarnings)
-             lefWarning(2024, "METALOVERHANG statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2024, "METALOVERHANG statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
 
 end_viarule: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;}  STRING 
@@ -3624,7 +3624,7 @@ end_viarule: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;}  STRING
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "END VIARULE name %s is different from the VIARULE name %s.\nCorrect the LEF file before rerun it through the LEF parser.", (*$3).c_str(), driver.viaRuleName.c_str());
-              lefError(1615, driver.outMsg);
+              driver.lefError(1615, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            } 
@@ -3646,7 +3646,7 @@ start_spacing: K_SPACING
         if (driver.versionNum >= 5.7) { /* will get to this if statement if */ 
                            /* driver.versionNum is 5.6 and higher but driver.ndRule = 0 */
            if (driver.spacingWarnings == 0) {  /* only print once */
-              lefWarning(2077, "A SPACING SAMENET section is defined but it is not legal in a LEF 5.7 version file.\nIt will be ignored which will probably cause real DRC violations to be ignored, and may\ncause false DRC violations to occur.\n\nTo avoid this warning, and correctly handle these DRC rules, you should modify your\nLEF to use the appropriate SAMENET keywords as described in the LEF/DEF 5.7\nmanual under the SPACING statements in the LAYER (Routing) and LAYER (Cut)\nsections listed in the LEF Table of Contents.");
+              driver.lefWarning(2077, "A SPACING SAMENET section is defined but it is not legal in a LEF 5.7 version file.\nIt will be ignored which will probably cause real DRC violations to be ignored, and may\ncause false DRC violations to occur.\n\nTo avoid this warning, and correctly handle these DRC rules, you should modify your\nLEF to use the appropriate SAMENET keywords as described in the LEF/DEF 5.7\nmanual under the SPACING statements in the LAYER (Routing) and LAYER (Cut)\nsections listed in the LEF Table of Contents.");
               driver.spacingWarnings++;
            }
         } else if (/*driver.lefrSpacingBeginCbk*/ 1)
@@ -3654,14 +3654,14 @@ start_spacing: K_SPACING
       } else
         if (/*driver.lefrSpacingBeginCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.spacingWarnings++ < driver.lefrSpacingWarnings)
-             lefWarning(2025, "SAMENET statement in NONDEFAULTRULE is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2025, "SAMENET statement in NONDEFAULTRULE is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
 
 end_spacing: K_END K_SPACING
     {
       if ((driver.versionNum < 5.6) || (!driver.ndRule)) {
         if ((driver.versionNum <= 5.4) && (!driver.hasSamenet)) {
-           lefError(1616, "SAMENET statement is required inside SPACING for any lef file with version 5.4 and earlier, but is not defined in the parsed lef file.");
+           driver.lefError(1616, "SAMENET statement is required inside SPACING for any lef file with version 5.4 and earlier, but is not defined in the parsed lef file.");
            /*CHKERR();*/
         } else if (driver.versionNum < 5.7) { /* obsolete in 5.7 and later */
            if (/*driver.lefrSpacingEndCbk*/ 1)
@@ -3713,7 +3713,7 @@ start_irdrop: K_IRDROP
       } else
         if (/*driver.lefrIRDropBeginCbk*/ 1) /* write warning only if cbk is set */
           if (driver.iRDropWarnings++ < driver.lefrIRDropWarnings)
-            lefWarning(2026, "IRDROP statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+            driver.lefWarning(2026, "IRDROP statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
 
 end_irdrop: K_END K_IRDROP
@@ -3760,7 +3760,7 @@ minfeature: K_MINFEATURE NUMBER NUMBER ';'
     } else
        if (/*driver.lefrMinFeatureCbk*/ 1) /* write warning only if cbk is set */
           if (driver.minFeatureWarnings++ < driver.lefrMinFeatureWarnings)
-            lefWarning(2027, "MINFEATURE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+            driver.lefWarning(2027, "MINFEATURE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
   }
 
 dielectric: K_DIELECTRIC NUMBER ';'
@@ -3771,7 +3771,7 @@ dielectric: K_DIELECTRIC NUMBER ';'
     } else
        if (/*lefrDielectricCbk*/ 1) /* write warning only if cbk is set */
          if (driver.dielectricWarnings++ < driver.lefrDielectricWarnings)
-           lefWarning(2028, "DIELECTRIC statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+           driver.lefWarning(2028, "DIELECTRIC statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
   }
 
 nondefault_rule: K_NONDEFAULTRULE {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
@@ -3792,7 +3792,7 @@ nondefault_rule: K_NONDEFAULTRULE {driver.lefDumbMode = 1; driver.lefNoNum = 1;}
     if ((!driver.ndLayer) && (!driver.lefrRelaxMode)) {
        if (/*driver.lefrNonDefaultCbk*/ 1) { /* write error only if cbk is set */
          if (driver.nonDefaultWarnings++ < driver.lefrNonDefaultWarnings) {
-            lefError(1617, "NONDEFAULTRULE statement requires at least one LAYER statement.");
+            driver.lefError(1617, "NONDEFAULTRULE statement requires at least one LAYER statement.");
             /*CHKERR();*/
          }
        }
@@ -3801,7 +3801,7 @@ nondefault_rule: K_NONDEFAULTRULE {driver.lefDumbMode = 1; driver.lefNoNum = 1;}
        // VIA is no longer a required statement in 5.6
        if (/*driver.lefrNonDefaultCbk*/ 1) { /* write error only if cbk is set */
          if (driver.nonDefaultWarnings++ < driver.lefrNonDefaultWarnings) {
-            lefError(1618, "NONDEFAULTRULE statement requires at least one VIA statement.");
+            driver.lefError(1618, "NONDEFAULTRULE statement requires at least one VIA statement.");
             /*CHKERR();*/
          }
        }
@@ -3828,7 +3828,7 @@ end_nd_rule: K_END
              driver.outMsg = (char*)lefMalloc(10000);
              sprintf (driver.outMsg,
                 "END NONDEFAULTRULE name %s is different from the NONDEFAULTRULE name %s.\nCorrect the LEF file before rerun it through the LEF parser.", (*$2).c_str(), driver.nonDefaultRuleName.c_str());
-             lefError(1619, driver.outMsg);
+             driver.lefError(1619, driver.outMsg);
              lefFree(driver.outMsg);
              /*CHKERR();*/
           } 
@@ -3847,7 +3847,7 @@ nd_hardspacing:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "HARDSPACING statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1620, driver.outMsg);
+               driver.lefError(1620, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -3879,7 +3879,7 @@ usevia: K_USEVIA STRING ';'
              driver.outMsg = (char*)lefMalloc(10000);
              sprintf (driver.outMsg,
                "USEVIA statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-             lefError(1621, driver.outMsg);
+             driver.lefError(1621, driver.outMsg);
              lefFree(driver.outMsg);
              /*CHKERR();*/
           }
@@ -3897,7 +3897,7 @@ useviarule:  K_USEVIARULE STRING ';'
                 driver.outMsg = (char*)lefMalloc(10000);
                 sprintf (driver.outMsg,
                   "USEVIARULE statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-                lefError(1622, driver.outMsg);
+                driver.lefError(1622, driver.outMsg);
                 lefFree(driver.outMsg);
                 /*CHKERR();*/
              }
@@ -3916,7 +3916,7 @@ mincuts: K_MINCUTS STRING NUMBER ';'
                 driver.outMsg = (char*)lefMalloc(10000);
                 sprintf (driver.outMsg,
                   "MINCUTS statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-                lefError(1623, driver.outMsg);
+                driver.lefError(1623, driver.outMsg);
                 lefFree(driver.outMsg);
                 /*CHKERR();*/
              }
@@ -3988,7 +3988,7 @@ nd_layer: K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
             driver.outMsg = (char*)lefMalloc(10000);
             sprintf (driver.outMsg,
                "END LAYER name %s is different from the LAYER name %s.\nCorrect the LEF file before rerun it through the LEF parser.", (*$3).c_str(), driver.layerName.c_str());
-            lefError(1624, driver.outMsg);
+            driver.lefError(1624, driver.outMsg);
             lefFree(driver.outMsg);
             /*CHKERR();*/
          }
@@ -3997,7 +3997,7 @@ nd_layer: K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
     if (!driver.ndLayerWidth) {
       if (/*driver.lefrNonDefaultCbk*/ 1) { /* write error only if cbk is set */
          if (driver.nonDefaultWarnings++ < driver.lefrNonDefaultWarnings) {
-            lefError(1625, "A WIDTH statement is required in the LAYER statement in NONDEFULTRULE.");
+            driver.lefError(1625, "A WIDTH statement is required in the LAYER statement in NONDEFULTRULE.");
             /*CHKERR();*/
          }
       }
@@ -4009,7 +4009,7 @@ nd_layer: K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
             sprintf (driver.outMsg,
                "A SPACING statement is required in the LAYER statement in NONDEFAULTRULE for lef file with version 5.5 and earlier.\nYour lef file is defined with version %g. Update your lef to add a LAYER statement and try again.",
                 driver.versionNum);
-            lefError(1626, driver.outMsg);
+            driver.lefError(1626, driver.outMsg);
             lefFree(driver.outMsg);
             /*CHKERR();*/
          }
@@ -4043,7 +4043,7 @@ nd_layer_stmt:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "RESISTANCE RPERSQ statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1627, driver.outMsg);
+               driver.lefError(1627, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -4051,7 +4051,7 @@ nd_layer_stmt:
       } else if (driver.versionNum > 5.5) {  // obsolete in 5.6
          if (/*driver.lefrNonDefaultCbk*/ 1) /* write warning only if cbk is set */
             if (driver.nonDefaultWarnings++ < driver.lefrNonDefaultWarnings)
-              lefWarning(2029, "RESISTANCE RPERSQ statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+              driver.lefWarning(2029, "RESISTANCE RPERSQ statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
       } else if (/*driver.lefrNonDefaultCbk*/ 1)
          driver.lefrNonDefault.lefiNonDefault::addResistance($3);
     } 
@@ -4067,7 +4067,7 @@ nd_layer_stmt:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "CAPACITANCE CPERSQDIST statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1628, driver.outMsg);
+               driver.lefError(1628, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
             }
@@ -4075,7 +4075,7 @@ nd_layer_stmt:
       } else if (driver.versionNum > 5.5) { // obsolete in 5.6
          if (/*driver.lefrNonDefaultCbk*/ 1) /* write warning only if cbk is set */
             if (driver.nonDefaultWarnings++ < driver.lefrNonDefaultWarnings)
-              lefWarning(2030, "CAPACITANCE CPERSQDIST statement is obsolete in version 5.6. and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+              driver.lefWarning(2030, "CAPACITANCE CPERSQDIST statement is obsolete in version 5.6. and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
       } else if (/*driver.lefrNonDefaultCbk*/ 1)
          driver.lefrNonDefault.lefiNonDefault::addCapacitance($3);
     }
@@ -4090,7 +4090,7 @@ nd_layer_stmt:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "EDGECAPACITANCE statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1629, driver.outMsg);
+               driver.lefError(1629, driver.outMsg);
                lefFree(driver.outMsg);
               /*CHKERR();*/
             }
@@ -4098,7 +4098,7 @@ nd_layer_stmt:
       } else if (driver.versionNum > 5.5) {  // obsolete in 5.6
          if (/*driver.lefrNonDefaultCbk*/ 1) /* write warning only if cbk is set */
             if (driver.nonDefaultWarnings++ < driver.lefrNonDefaultWarnings)
-              lefWarning(2031, "EDGECAPACITANCE statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+              driver.lefWarning(2031, "EDGECAPACITANCE statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
       } else if (/*driver.lefrNonDefaultCbk*/ 1)
          driver.lefrNonDefault.lefiNonDefault::addEdgeCap($2);
     }
@@ -4110,7 +4110,7 @@ nd_layer_stmt:
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                  "DIAGWIDTH statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-               lefError(1630, driver.outMsg);
+               driver.lefError(1630, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/ 
             }
@@ -4145,7 +4145,7 @@ end_site: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "END SITE name %s is different from the SITE name %s.\nCorrect the LEF file before rerun it through the LEF parser.", (*$3).c_str(), driver.siteName.c_str());
-              lefError(1631, driver.outMsg);
+              driver.lefError(1631, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            } 
@@ -4153,11 +4153,11 @@ end_site: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
       } else {
         if (/*driver.lefrSiteCbk*/ 1) { /* write error only if cbk is set */
           if (driver.hasSiteClass == 0) {
-             lefError(1632, "A CLASS statement is required in the SITE statement.");
+             driver.lefError(1632, "A CLASS statement is required in the SITE statement.");
              /*CHKERR();*/
           }
           if (driver.hasSiteSize == 0) {
-             lefError(1633, "A SIZE  statement is required in the SITE statement.");
+             driver.lefError(1633, "A SIZE  statement is required in the SITE statement.");
              /*CHKERR();*/
           }
         }
@@ -4260,7 +4260,7 @@ end_macro: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "END MACRO name %s is different from the MACRO name %s.\nCorrect the LEF file before rerun it through the LEF parser.", (*$3).c_str(), driver.macroName.c_str());
-              lefError(1634, driver.outMsg);
+              driver.lefError(1634, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            } 
@@ -4327,7 +4327,7 @@ macro_symmetry_statement: K_SYMMETRY macro_symmetries ';'
           /* pcr 283846 suppress warning */
           if (/*driver.lefrMacroCbk*/ 1) /* write warning only if cbk is set */
              if (driver.macroWarnings++ < driver.lefrMacroWarnings)
-               lefWarning(2032, "A SITE statement is defined before SYMMETRY statement.\nTo avoid this warning in the future, define SITE after SYMMETRY");
+               driver.lefWarning(2032, "A SITE statement is defined before SYMMETRY statement.\nTo avoid this warning in the future, define SITE after SYMMETRY");
       }
       driver.symDef = 1;
     }
@@ -4388,12 +4388,12 @@ class_type:
         if (/*driver.lefrMacroCbk*/ 1) { /* write error only if cbk is set */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings) {
               if (driver.lefrRelaxMode)
-                 lefWarning(2033, "The statement COVER BUMP is a LEF verion 5.5 syntax.\nYour LEF file is version 5.4 or earlier which is illegal but will be allowed\nbecause this application does not enforce strict version checking.\nOther tools that enforce strict checking will have a syntax error when reading this file.\nYou can change the VERSION statement in this LEF file to 5.5 or higher to stop this warning.");
+                 driver.lefWarning(2033, "The statement COVER BUMP is a LEF verion 5.5 syntax.\nYour LEF file is version 5.4 or earlier which is illegal but will be allowed\nbecause this application does not enforce strict version checking.\nOther tools that enforce strict checking will have a syntax error when reading this file.\nYou can change the VERSION statement in this LEF file to 5.5 or higher to stop this warning.");
               else {
                  driver.outMsg = (char*)lefMalloc(10000);
                  sprintf (driver.outMsg,
                     "COVER BUMP statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-                 lefError(1635, driver.outMsg);
+                 driver.lefError(1635, driver.outMsg);
                  lefFree(driver.outMsg);
                  /*CHKERR();*/
               }
@@ -4409,12 +4409,12 @@ class_type:
         if (/*driver.lefrMacroCbk*/ 1) { /* write error only if cbk is set */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings) {
              if (driver.lefrRelaxMode)
-                lefWarning(2034, "The statement BLOCK BLACKBOX is a LEF verion 5.5 syntax.\nYour LEF file is version 5.4 or earlier which is illegal but will be allowed\nbecause this application does not enforce strict version checking.\nOther tools that enforce strict checking will have a syntax error when reading this file.\nYou can change the VERSION statement in this LEF file to 5.5 or higher to stop this warning.");
+                driver.lefWarning(2034, "The statement BLOCK BLACKBOX is a LEF verion 5.5 syntax.\nYour LEF file is version 5.4 or earlier which is illegal but will be allowed\nbecause this application does not enforce strict version checking.\nOther tools that enforce strict checking will have a syntax error when reading this file.\nYou can change the VERSION statement in this LEF file to 5.5 or higher to stop this warning.");
               else {
                  driver.outMsg = (char*)lefMalloc(10000);
                  sprintf (driver.outMsg,
                     "BLOCK BLACKBOX statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-                 lefError(1636, driver.outMsg);
+                 driver.lefError(1636, driver.outMsg);
                  lefFree(driver.outMsg);
                  /*CHKERR();*/
               }
@@ -4432,7 +4432,7 @@ class_type:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "BLOCK SOFT statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1637, driver.outMsg);
+              driver.lefError(1637, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -4448,7 +4448,7 @@ class_type:
           driver.outMsg = (char*)lefMalloc(10000);
           sprintf(driver.outMsg,
             "BUMP is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-          lefError(1698, driver.outMsg);
+          driver.lefError(1698, driver.outMsg);
           lefFree(driver.outMsg);
           /*CHKERR();*/
       } else
@@ -4461,17 +4461,17 @@ class_type:
         $$ = new std::string (driver.temp_name); 
         if (driver.versionNum < 5.5) {
            if ("AREAIO" != *$2) {
-             sprintf(driver.temp_name, "PAD %s", $2);
+             sprintf(driver.temp_name, "PAD %s", (*$2).c_str());
 			 $$ = new std::string (driver.temp_name); 
            } else if (/*driver.lefrMacroCbk*/ 1) { 
              if (driver.macroWarnings++ < driver.lefrMacroWarnings) {
                if (driver.lefrRelaxMode)
-                  lefWarning(2035, "The statement PAD AREAIO is a LEF verion 5.5 syntax.\nYour LEF file is version 5.4 or earlier which is illegal but will be allowed\nbecause this application does not enforce strict version checking.\nOther tools that enforce strict checking will have a syntax error when reading this file.\nYou can change the VERSION statement in this LEF file to 5.5 or higher to stop this warning.");
+                  driver.lefWarning(2035, "The statement PAD AREAIO is a LEF verion 5.5 syntax.\nYour LEF file is version 5.4 or earlier which is illegal but will be allowed\nbecause this application does not enforce strict version checking.\nOther tools that enforce strict checking will have a syntax error when reading this file.\nYou can change the VERSION statement in this LEF file to 5.5 or higher to stop this warning.");
                else {
                   driver.outMsg = (char*)lefMalloc(10000);
                   sprintf (driver.outMsg,
                      "PAD AREAIO statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-                  lefError(1638, driver.outMsg);
+                  driver.lefError(1638, driver.outMsg);
                   lefFree(driver.outMsg);
                   /*CHKERR();*/
                }
@@ -4517,7 +4517,7 @@ core_type:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "SPACER statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1639, driver.outMsg);
+              driver.lefError(1639, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -4536,7 +4536,7 @@ core_type:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNACELL statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1640, driver.outMsg);
+              driver.lefError(1640, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -4555,7 +4555,7 @@ core_type:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "WELLTAP statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1641, driver.outMsg);
+              driver.lefError(1641, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -4587,7 +4587,7 @@ macro_source:
       } else
         if (/*driver.lefrMacroCbk*/ 1) /* write warning only if cbk is set */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings)
-             lefWarning(2036, "SOURCE statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2036, "SOURCE statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
   | K_SOURCE K_GENERATE ';'
     {
@@ -4596,7 +4596,7 @@ macro_source:
       } else
         if (/*driver.lefrMacroCbk*/ 1) /* write warning only if cbk is set */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings)
-             lefWarning(2037, "SOURCE statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2037, "SOURCE statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
   | K_SOURCE K_BLOCK ';'
     {
@@ -4605,7 +4605,7 @@ macro_source:
       } else
         if (/*driver.lefrMacroCbk*/ 1) /* write warning only if cbk is set */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings)
-             lefWarning(2037, "SOURCE statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2037, "SOURCE statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
 
 macro_power: K_POWER NUMBER ';'
@@ -4615,7 +4615,7 @@ macro_power: K_POWER NUMBER ';'
       } else
         if (/*driver.lefrMacroCbk*/ 1) /* write warning only if cbk is set */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings)
-             lefWarning(2038, "MACRO POWER statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2038, "MACRO POWER statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
 
 macro_origin: K_ORIGIN pt ';'
@@ -4623,7 +4623,7 @@ macro_origin: K_ORIGIN pt ';'
        if (driver.origDef) { /* Has multiple ORIGIN defined in a macro, stop parsing*/
           if (/*driver.lefrMacroCbk*/ 1) { /* write error only if cbk is set */
              if (driver.macroWarnings++ < driver.lefrMacroWarnings) {
-                lefError(1642, "ORIGIN statement has defined more than once in a MACRO statement.\nOnly one ORIGIN statement can be defined in a Macro.\nParser stops executions.");
+                driver.lefError(1642, "ORIGIN statement has defined more than once in a MACRO statement.\nOnly one ORIGIN statement can be defined in a Macro.\nParser stops executions.");
                /*CHKERR();*/
              }
           }
@@ -4633,29 +4633,29 @@ macro_origin: K_ORIGIN pt ';'
           /* pcr 283846 suppress warning */
           if (/*driver.lefrMacroCbk*/ 1) /* write warning only if cbk is set */
              if (driver.macroWarnings++ < driver.lefrMacroWarnings)
-               lefWarning(2039, "A SITE statement is defined before ORIGIN statement.\nTo avoid this warning in the future, define SITE after ORIGIN");
+               driver.lefWarning(2039, "A SITE statement is defined before ORIGIN statement.\nTo avoid this warning in the future, define SITE after ORIGIN");
        }
        if (driver.pinDef) { /* PIN is defined before ORIGIN */
           /* pcr 283846 suppress warning */
           if (/*driver.lefrMacroCbk*/ 1) /* write warning only if cbk is set */
              if (driver.macroWarnings++ < driver.lefrMacroWarnings)
-               lefWarning(2040, "A PIN statement is defined before ORIGIN statement.\nTo avoid this warning in the future, define PIN after ORIGIN");
+               driver.lefWarning(2040, "A PIN statement is defined before ORIGIN statement.\nTo avoid this warning in the future, define PIN after ORIGIN");
        }
        if (driver.obsDef) { /* OBS is defined before ORIGIN */
           /* pcr 283846 suppress warning */
           if (/*driver.lefrMacroCbk*/ 1) /* write warning only if cbk is set */
              if (driver.macroWarnings++ < driver.lefrMacroWarnings)
-               lefWarning(2041, "A OBS statement is defined before ORIGIN statement.\nTo avoid this warning in the future, define OBS after ORIGIN");
+               driver.lefWarning(2041, "A OBS statement is defined before ORIGIN statement.\nTo avoid this warning in the future, define OBS after ORIGIN");
        }
        /* 11/22/99 - Wanda da Rosa. PCR 283846 
                      can be defined any order.
        if (driver.symDef)  * SYMMETRY is defined before ORIGIN *
-          lefWarning("SYMMETRY is defined before ORIGIN.");
+          driver.lefWarning("SYMMETRY is defined before ORIGIN.");
        */
        /* Add back it back in per Nora request on PCR 283846 */
        /* 1/14/2000 - Wanda da Rosa, PCR 288770
        if (driver.sizeDef)  * SIZE is defined before ORIGIN *
-          lefWarning("SIZE is defined before ORIGIN.");
+          driver.lefWarning("SIZE is defined before ORIGIN.");
        */
       
        /* Workaround for pcr 640902 */
@@ -4695,7 +4695,7 @@ macro_leq: K_LEQ { driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
       } else
         if (/*driver.lefrMacroCbk*/ 1) /* write warning only if cbk is set */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings)
-             lefWarning(2042, "LEQ statement in MACRO is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2042, "LEQ statement in MACRO is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
 
 macro_site:
@@ -4738,7 +4738,7 @@ macro_size: K_SIZE NUMBER K_BY NUMBER ';'
       if (driver.siteDef) { /* SITE is defined before SIZE */
          /* pcr 283846 suppress warning
          if (driver.siteWarnings++ < driver.lefrSiteWarnings)
-           lefWarning("SITE is defined before SIZE.");
+           driver.lefWarning("SITE is defined before SIZE.");
          return 1; 
          */
       }
@@ -4775,7 +4775,7 @@ end_macro_pin: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "END PIN name %s is different from the PIN name %s.\nCorrect the LEF file before rerun it through the LEF parser.", (*$3).c_str(), driver.pinName.c_str());
-              lefError(1643, driver.outMsg);
+              driver.lefError(1643, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            } 
@@ -4797,7 +4797,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
   | start_foreign pt ';'
     {
@@ -4806,7 +4806,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
   | start_foreign pt orientation ';'
     {
@@ -4815,7 +4815,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
   | start_foreign K_STRUCTURE ';'
     {
@@ -4824,7 +4824,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
   | start_foreign K_STRUCTURE pt ';'
     {
@@ -4833,7 +4833,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
   | start_foreign K_STRUCTURE pt orientation ';'
     {
@@ -4842,7 +4842,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
   | K_LEQ { driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
     {
@@ -4851,7 +4851,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2044, "LEQ statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2044, "LEQ statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
    }
   | K_POWER NUMBER ';'
     {
@@ -4860,7 +4860,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2045, "MACRO POWER statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2045, "MACRO POWER statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | electrical_direction
     { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setDirection((*$1).c_str()); }
@@ -4875,7 +4875,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2046, "MACRO LEAKAGE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, r emove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2046, "MACRO LEAKAGE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, r emove this statement from the LEF file with version 5.4 or later.");
     }
   | K_RISETHRESH NUMBER ';'
     {
@@ -4884,7 +4884,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2047, "MACRO RISETHRESH statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2047, "MACRO RISETHRESH statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_FALLTHRESH NUMBER ';'
     {
@@ -4893,7 +4893,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2048, "MACRO FALLTHRESH statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2048, "MACRO FALLTHRESH statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_RISESATCUR NUMBER ';'
     {
@@ -4902,7 +4902,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2049, "MACRO RISESATCUR statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2049, "MACRO RISESATCUR statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_FALLSATCUR NUMBER ';'
     {
@@ -4911,7 +4911,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2050, "MACRO FALLSATCUR statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2050, "MACRO FALLSATCUR statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_VLO NUMBER ';'
     {
@@ -4920,7 +4920,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2051, "MACRO VLO statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2051, "MACRO VLO statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_VHI NUMBER ';'
     {
@@ -4929,7 +4929,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2052, "MACRO VHI statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2052, "MACRO VHI statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_TIEOFFR NUMBER ';'
     {
@@ -4938,7 +4938,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2053, "MACRO TIEOFFR statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2053, "MACRO TIEOFFR statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_SHAPE pin_shape ';'
     { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setShape((*$2).c_str()); }
@@ -4951,7 +4951,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2054, "MACRO OUTPUTNOISEMARGIN statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2054, "MACRO OUTPUTNOISEMARGIN statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_OUTPUTRESISTANCE {driver.lefDumbMode = 1;} NUMBER NUMBER ';'
     {
@@ -4960,7 +4960,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2055, "MACRO OUTPUTRESISTANCE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2055, "MACRO OUTPUTRESISTANCE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_INPUTNOISEMARGIN {driver.lefDumbMode = 1;} NUMBER NUMBER ';'
     {
@@ -4969,7 +4969,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2056, "MACRO INPUTNOISEMARGIN statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2056, "MACRO INPUTNOISEMARGIN statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_CAPACITANCE NUMBER ';' 
     {
@@ -4978,7 +4978,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2057, "MACRO CAPACITANCE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2057, "MACRO CAPACITANCE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_MAXDELAY NUMBER ';' 
     { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setMaxdelay($2); }
@@ -4991,7 +4991,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2058, "MACRO RESISTANCE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2058, "MACRO RESISTANCE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_PULLDOWNRES NUMBER ';' 
     {
@@ -5000,7 +5000,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2059, "MACRO PULLDOWNRES statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2059, "MACRO PULLDOWNRES statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_CURRENTSOURCE K_ACTIVE ';' 
     {
@@ -5009,7 +5009,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2060, "MACRO CURRENTSOURCE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2060, "MACRO CURRENTSOURCE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_CURRENTSOURCE K_RESISTIVE ';' 
     {
@@ -5018,7 +5018,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2061, "MACRO CURRENTSOURCE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2061, "MACRO CURRENTSOURCE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_RISEVOLTAGETHRESHOLD NUMBER ';' 
     {
@@ -5027,7 +5027,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2062, "MACRO RISEVOLTAGETHRESHOLD statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2062, "MACRO RISEVOLTAGETHRESHOLD statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_FALLVOLTAGETHRESHOLD NUMBER ';' 
     {
@@ -5036,7 +5036,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2063, "MACRO FALLVOLTAGETHRESHOLD statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2063, "MACRO FALLVOLTAGETHRESHOLD statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_IV_TABLES STRING STRING ';'
     {
@@ -5045,7 +5045,7 @@ macro_pin_option:
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2064, "MACRO IV_TABLES statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+             driver.lefWarning(2064, "MACRO IV_TABLES statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_TAPERRULE STRING ';'
     { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setTaperRule((*$2).c_str()); }
@@ -5066,7 +5066,7 @@ macro_pin_option:
       if ((driver.needGeometry) && (driver.needGeometry != 2))  // if the last LAYER in PORT
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
-             lefWarning(2065, "Either PATH, RECT or POLYGON statement is a required in MACRO/PIN/PORT.");
+             driver.lefWarning(2065, "Either PATH, RECT or POLYGON statement is a required in MACRO/PIN/PORT.");
     }
   | start_macro_port K_END
     /* 06/07/2001 - Wanda da Rosa.  Allow empty PORT due to incorrect
@@ -5095,7 +5095,7 @@ macro_pin_option:
                 driver.outMsg = (char*)lefMalloc(10000);
                 sprintf (driver.outMsg,
                    "ANTENNASIZE statement is a version 5.3 and earlier syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-                lefError(1644, driver.outMsg);
+                driver.lefError(1644, driver.outMsg);
                 lefFree(driver.outMsg);
                 /*CHKERR();*/
              }
@@ -5116,7 +5116,7 @@ macro_pin_option:
                  driver.outMsg = (char*)lefMalloc(10000);
                  sprintf (driver.outMsg,
                     "ANTENNAMETALAREA statement is a version 5.3 and earlier syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-                 lefError(1645, driver.outMsg);
+                 driver.lefError(1645, driver.outMsg);
                  lefFree(driver.outMsg);
                  /*CHKERR();*/
               }
@@ -5137,7 +5137,7 @@ macro_pin_option:
                  driver.outMsg = (char*)lefMalloc(10000);
                  sprintf (driver.outMsg,
                     "ANTENNAMETALLENGTH statement is a version 5.3 and earlier syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-                 lefError(1646, driver.outMsg);
+                 driver.lefError(1646, driver.outMsg);
                  lefFree(driver.outMsg);
                  /*CHKERR();*/
               }
@@ -5161,7 +5161,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAPARTIALMETALAREA statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1647, driver.outMsg);
+              driver.lefError(1647, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5172,7 +5172,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAPARTIALMETALAREA statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1647, driver.outMsg);
+              driver.lefError(1647, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5191,7 +5191,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAPARTIALMETALSIDEAREA statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1648, driver.outMsg);
+              driver.lefError(1648, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5202,7 +5202,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAPARTIALMETALSIDEAREA statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1648, driver.outMsg);
+              driver.lefError(1648, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5221,7 +5221,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAPARTIALCUTAREA statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1649, driver.outMsg);
+              driver.lefError(1649, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5232,7 +5232,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAPARTIALCUTAREA statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1649, driver.outMsg);
+              driver.lefError(1649, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5251,7 +5251,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNADIFFAREA statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1650, driver.outMsg);
+              driver.lefError(1650, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5262,7 +5262,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNADIFFAREA statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1650, driver.outMsg);
+              driver.lefError(1650, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5281,7 +5281,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAGATEAREA statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1651, driver.outMsg);
+              driver.lefError(1651, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5292,7 +5292,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAGATEAREA statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1651, driver.outMsg);
+              driver.lefError(1651, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5311,7 +5311,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAMAXAREACAR statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1652, driver.outMsg);
+              driver.lefError(1652, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5322,7 +5322,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAMAXAREACAR statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1652, driver.outMsg);
+              driver.lefError(1652, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5341,7 +5341,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAMAXSIDEAREACAR statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1653, driver.outMsg);
+              driver.lefError(1653, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5352,7 +5352,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAMAXSIDEAREACAR statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1653, driver.outMsg);
+              driver.lefError(1653, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5371,7 +5371,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAMAXCUTCAR statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1654, driver.outMsg);
+              driver.lefError(1654, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5382,7 +5382,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAMAXCUTCAR statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1654, driver.outMsg);
+              driver.lefError(1654, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5401,7 +5401,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAMODEL statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1655, driver.outMsg);
+              driver.lefError(1655, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5412,7 +5412,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ANTENNAMODEL statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1655, driver.outMsg);
+              driver.lefError(1655, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5428,7 +5428,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "NETEXPR statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1656, driver.outMsg);
+              driver.lefError(1656, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5444,7 +5444,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "SUPPLYSENSITIVITY statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1657, driver.outMsg);
+              driver.lefError(1657, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5460,7 +5460,7 @@ macro_pin_option:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "GROUNDSENSITIVITY statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1658, driver.outMsg);
+              driver.lefError(1658, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5577,9 +5577,9 @@ geometry:
         if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
           /* geometries is called by MACRO/OBS & MACRO/PIN/PORT */
           if (driver.obsDef)
-             lefWarning(2076, "Either PATH, RECT or POLYGON statement is a required in MACRO/OBS.");
+             driver.lefWarning(2076, "Either PATH, RECT or POLYGON statement is a required in MACRO/OBS.");
           else
-             lefWarning(2065, "Either PATH, RECT or POLYGON statement is a required in MACRO/PIN/PORT.");
+             driver.lefWarning(2065, "Either PATH, RECT or POLYGON statement is a required in MACRO/PIN/PORT.");
         }
       if (driver.lefrDoGeometries)
         driver.lefrGeometriesPtr->lefiGeometries::addLayer((*$3).c_str());
@@ -5593,7 +5593,7 @@ geometry:
       if (driver.lefrDoGeometries) {
         if (driver.hasGeoLayer == 0) {   /* LAYER statement is missing */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings) {
-              lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
+              driver.lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
               /*CHKERR();*/
            }
         } else
@@ -5604,7 +5604,7 @@ geometry:
     { if (driver.lefrDoGeometries) {
         if (driver.hasGeoLayer == 0) {   /* LAYER statement is missing */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings) {
-              lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
+              driver.lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
               /*CHKERR();*/
            }
         } else
@@ -5617,7 +5617,7 @@ geometry:
     { if (driver.lefrDoGeometries) {
         if (driver.hasGeoLayer == 0) {   /* LAYER statement is missing */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings) {
-              lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
+              driver.lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
               /*CHKERR();*/
            }
         } else
@@ -5630,7 +5630,7 @@ geometry:
     { if (driver.lefrDoGeometries) {
         if (driver.hasGeoLayer == 0) {   /* LAYER statement is missing */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings) {
-              lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
+              driver.lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
               /*CHKERR();*/
            }
         } else
@@ -5642,7 +5642,7 @@ geometry:
     { if (driver.lefrDoGeometries) {
         if (driver.hasGeoLayer == 0) {   /* LAYER statement is missing */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings) {
-              lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
+              driver.lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
               /*CHKERR();*/
            }
         } else
@@ -5656,7 +5656,7 @@ geometry:
       if (driver.lefrDoGeometries) {
         if (driver.hasGeoLayer == 0) {   /* LAYER statement is missing */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings) {
-              lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
+              driver.lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
               /*CHKERR();*/
            }
         } else
@@ -5669,7 +5669,7 @@ geometry:
     { if (driver.lefrDoGeometries) {
         if (driver.hasGeoLayer == 0) {   /* LAYER statement is missing */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings) {
-              lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
+              driver.lefError(1701, "A LAYER statement is missing in Geometry.\nLAYER is a required statement before any geometry can be defined.");
               /*CHKERR();*/
            }
         } else
@@ -5691,7 +5691,7 @@ layer_exceptpgnet: /* empty */
         driver.outMsg = (char*)lefMalloc(10000);
         sprintf(driver.outMsg,
           "EXCEPTPGNET is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-        lefError(1699, driver.outMsg);
+        driver.lefError(1699, driver.outMsg);
         lefFree(driver.outMsg);
         /*CHKERR();*/
       } else {
@@ -5703,13 +5703,13 @@ layer_exceptpgnet: /* empty */
 layer_spacing: /* empty */
   | K_SPACING NUMBER
     { if (driver.lefrDoGeometries) {
-        if (zeroOrGt($2))
+        if (driver.zeroOrGt($2))
            driver.lefrGeometriesPtr->lefiGeometries::addLayerMinSpacing($2);
         else {
            driver.outMsg = (char*)lefMalloc(10000);
            sprintf (driver.outMsg,
               "THE SPACING statement has the value %g in MACRO OBS.\nValue has to be 0 or greater.", $2);
-           lefError(1659, driver.outMsg);
+           driver.lefError(1659, driver.outMsg);
            lefFree(driver.outMsg);
            /*CHKERR();*/
         }
@@ -5717,13 +5717,13 @@ layer_spacing: /* empty */
     }
   | K_DESIGNRULEWIDTH NUMBER
     { if (driver.lefrDoGeometries) {
-        if (zeroOrGt($2))
+        if (driver.zeroOrGt($2))
            driver.lefrGeometriesPtr->lefiGeometries::addLayerRuleWidth($2);
         else {
            driver.outMsg = (char*)lefMalloc(10000);
            sprintf (driver.outMsg,
               "THE DESIGNRULEWIDTH statement has the value %g in MACRO OBS.\nValue has to be 0 or greater.", $2);
-           lefError(1660, driver.outMsg);
+           driver.lefError(1660, driver.outMsg);
            lefFree(driver.outMsg);
            /*CHKERR();*/
         }
@@ -5866,7 +5866,7 @@ macro_obs: start_macro_obs geometries K_END
     /* 08/14/00 - Wanda da Rosa.  Allow empty OBS due to so many lef files
      * have empty OBS
     {
-       lefError("OBS requires either a LAYER or a VIA.");
+       driver.lefError("OBS requires either a LAYER or a VIA.");
        CHKERR();
     }
     */
@@ -5901,7 +5901,7 @@ macro_density: K_DENSITY density_layer density_layers K_END
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "DENSITY statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1661, driver.outMsg);
+              driver.lefError(1661, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -5953,7 +5953,7 @@ end_timing: K_END K_TIMING
     } else {
       if (/*driver.lefrTimingCbk*/ 1) /* write warning only if cbk is set */
         if (driver.timingWarnings++ < driver.lefrTimingWarnings)
-          lefWarning(2066, "MACRO TIMING statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+          driver.lefWarning(2066, "MACRO TIMING statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
       driver.lefrTiming.lefiTiming::clear();
     }
   }
@@ -6146,7 +6146,7 @@ end_array: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "END ARRAY name %s is different from the ARRAY name %s.\nCorrect the LEF file before rerun it through the LEF parser.", (*$3).c_str(), driver.arrayName.c_str());
-              lefError(1662, driver.outMsg);
+              driver.lefError(1662, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            } 
@@ -6256,7 +6256,7 @@ def_statement:
       else
         if (/*driver.lefrArrayCbk*/ 1) /* write warning only if cbk is set */
            if (driver.arrayWarnings++ < driver.lefrArrayWarnings)
-             lefWarning(2067, "DEFINE statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2067, "DEFINE statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
   |  K_DEFINES {driver.lefDumbMode=1;driver.lefNlToken=TRUE;} STRING '=' s_expr dtrm
     {
@@ -6265,7 +6265,7 @@ def_statement:
       else
         if (/*driver.lefrArrayCbk*/ 1) /* write warning only if cbk is set */
            if (driver.arrayWarnings++ < driver.lefrArrayWarnings)
-             lefWarning(2068, "DEFINES statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2068, "DEFINES statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
   |  K_DEFINEB {driver.lefDumbMode=1;driver.lefNlToken=TRUE;} STRING '=' b_expr dtrm
     {
@@ -6274,7 +6274,7 @@ def_statement:
       else
         if (/*driver.lefrArrayCbk*/ 1) /* write warning only if cbk is set */
            if (driver.arrayWarnings++ < driver.lefrArrayWarnings)
-             lefWarning(2069, "DEFINEB statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+             driver.lefWarning(2069, "DEFINEB statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
     }
 
 /* terminator for &defines.  Can be semicolon or newline */
@@ -6304,10 +6304,10 @@ expression:
   | NUMBER			{$$ = $1;}
 
 b_expr:
-  expression relop expression {$$ = comp_num($1,$2,$3);}
+  expression relop expression {$$ = driver.comp_num($1,$2,$3);}
   | expression K_AND expression {$$ = $1 != 0 && $3 != 0;}
   | expression K_OR  expression {$$ = $1 != 0 || $3 != 0;}
-  | s_expr relop s_expr	      {$$ = comp_str((*$1).c_str(),$2,(*$3).c_str());}
+  | s_expr relop s_expr	      {$$ = driver.comp_str((*$1).c_str(),$2,(*$3).c_str());}
   | s_expr K_AND s_expr	      {$$ = (*$1)[0] != 0 && (*$3)[0] != 0;}
   | s_expr K_OR  s_expr	      {$$ = (*$1)[0] != 0 || (*$3)[0] != 0;}
   | b_expr K_EQ b_expr	      {$$ = $1 == $3;}
@@ -6552,7 +6552,7 @@ layer_spacing_opt: K_CENTERTOCENTER      /* 5.7 */
       if (/*driver.lefrLayerCbk*/ 1) {
          if (driver.hasSpCenter) {
            if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1663, "A CENTERTOCENTER statement has already defined in SPACING\nCENTERTOCENTER can only be defined once per LAYER CUT SPACING.");
+              driver.lefError(1663, "A CENTERTOCENTER statement has already defined in SPACING\nCENTERTOCENTER can only be defined once per LAYER CUT SPACING.");
               /*CHKERR();*/
            }
         }
@@ -6562,7 +6562,7 @@ layer_spacing_opt: K_CENTERTOCENTER      /* 5.7 */
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "CENTERTOCENTER statement is a version 5.6 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1664, driver.outMsg);
+              driver.lefError(1664, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -6576,7 +6576,7 @@ layer_spacing_opt: K_CENTERTOCENTER      /* 5.7 */
       if (/*driver.lefrLayerCbk*/ 1) {
         if (driver.hasSpSamenet) {
            if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-              lefError(1665, "A SAMENET statement has already defined in SPACING\nSAMENET can only be defined once per LAYER CUT SPACING.");
+              driver.lefError(1665, "A SAMENET statement has already defined in SPACING\nSAMENET can only be defined once per LAYER CUT SPACING.");
               /*CHKERR();*/
            }
         }
@@ -6591,7 +6591,7 @@ layer_spacing_opt: K_CENTERTOCENTER      /* 5.7 */
         driver.outMsg = (char*)lefMalloc(10000);
         sprintf(driver.outMsg,
           "SAMENET is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-        lefError(1684, driver.outMsg);
+        driver.lefError(1684, driver.outMsg);
         lefFree(driver.outMsg);
         /*CHKERR();*/
       }
@@ -6602,14 +6602,14 @@ layer_spacing_opt: K_CENTERTOCENTER      /* 5.7 */
         driver.outMsg = (char*)lefMalloc(10000);
         sprintf(driver.outMsg,
           "PARALLELOVERLAP is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-        lefError(1680, driver.outMsg);
+        driver.lefError(1680, driver.outMsg);
         lefFree(driver.outMsg);
         /*CHKERR();*/ 
       } else {
         if (/*driver.lefrLayerCbk*/ 1) {
           if (driver.hasSpParallel) {
              if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-                lefError(1666, "A PARALLELOVERLAP statement has already defined in SPACING\nPARALLELOVERLAP can only be defined once per LAYER CUT SPACING.");
+                driver.lefError(1666, "A PARALLELOVERLAP statement has already defined in SPACING\nPARALLELOVERLAP can only be defined once per LAYER CUT SPACING.");
                 /*CHKERR();*/
              }
           }
@@ -6629,7 +6629,7 @@ layer_spacing_cut_routing:
         if (driver.versionNum < 5.7) {
            if (driver.hasSpSamenet) {    /* 5.6 and earlier does not allow */
               if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-                 lefError(1667, "A SAMENET statement has already defined in SPACING\nEither SAMENET or LAYER can be defined, but not both.");
+                 driver.lefError(1667, "A SAMENET statement has already defined in SPACING\nEither SAMENET or LAYER can be defined, but not both.");
                  /*CHKERR();*/
               }
            }
@@ -6646,7 +6646,7 @@ layer_spacing_cut_routing:
               driver.outMsg = (char*)lefMalloc(10000);
               sprintf (driver.outMsg,
                  "ADJACENTCUTS statement is a version 5.5 and later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-              lefError(1668, driver.outMsg);
+              driver.lefError(1668, driver.outMsg);
               lefFree(driver.outMsg);
               /*CHKERR();*/
            }
@@ -6654,7 +6654,7 @@ layer_spacing_cut_routing:
         if (driver.versionNum < 5.7) {
            if (driver.hasSpSamenet) {    /* 5.6 and earlier does not allow */
               if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-                 lefError(1669, "A SAMENET statement has already defined in SPACING\nEither SAMENET or ADJACENTCUTS can be defined, but not both.");
+                 driver.lefError(1669, "A SAMENET statement has already defined in SPACING\nEither SAMENET or ADJACENTCUTS can be defined, but not both.");
                  /*CHKERR();*/
               }
            }
@@ -6669,7 +6669,7 @@ layer_spacing_cut_routing:
         driver.outMsg = (char*)lefMalloc(10000);
         sprintf(driver.outMsg,
           "AREA is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-        lefError(1693, driver.outMsg);
+        driver.lefError(1693, driver.outMsg);
         lefFree(driver.outMsg);
         /*CHKERR();*/
       } else {
@@ -6677,7 +6677,7 @@ layer_spacing_cut_routing:
           if (driver.versionNum < 5.7) {
              if (driver.hasSpSamenet) {    /* 5.6 and earlier does not allow */
                 if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
-                   lefError(1670, "A SAMENET statement has already defined in SPACING\nEither SAMENET or AREA can be defined, but not both.");
+                   driver.lefError(1670, "A SAMENET statement has already defined in SPACING\nEither SAMENET or AREA can be defined, but not both.");
                    /*CHKERR();*/
                 }
              }
@@ -6716,7 +6716,7 @@ layer_spacing_cut_routing:
         driver.outMsg = (char*)lefMalloc(10000);
         sprintf(driver.outMsg,
           "ENDOFLINE is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-        lefError(1681, driver.outMsg);
+        driver.lefError(1681, driver.outMsg);
         lefFree(driver.outMsg);
         /*CHKERR();*/
       }
@@ -6727,7 +6727,7 @@ layer_spacing_cut_routing:
         driver.outMsg = (char*)lefMalloc(10000);
         sprintf(driver.outMsg,
           "NOTCHLENGTH is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-        lefError(1682, driver.outMsg);
+        driver.lefError(1682, driver.outMsg);
         lefFree(driver.outMsg);
         /*CHKERR();*/
       } else {
@@ -6741,7 +6741,7 @@ layer_spacing_cut_routing:
         driver.outMsg = (char*)lefMalloc(10000);
         sprintf(driver.outMsg,
           "ENDOFNOTCHWIDTH is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-        lefError(1696, driver.outMsg);
+        driver.lefError(1696, driver.outMsg);
         lefFree(driver.outMsg);
         /*CHKERR();*/
       } else {
@@ -6768,7 +6768,7 @@ opt_adjacentcuts_exceptsame:                /* 5.7 */
         driver.outMsg = (char*)lefMalloc(10000);
         sprintf(driver.outMsg,
           "EXCEPTSAMEPGNET is a version 5.7 or later syntax.\nYour lef file is defined with version %g.", driver.versionNum);
-        lefError(1683, driver.outMsg);
+        driver.lefError(1683, driver.outMsg);
         lefFree(driver.outMsg);
         /*CHKERR();*/
       } else {
@@ -6800,7 +6800,7 @@ universalnoisemargin: K_UNIVERSALNOISEMARGIN NUMBER NUMBER ';'
       } else
         if (/*driver.lefrNoiseMarginCbk*/ 1) /* write warning only if cbk is set */
           if (driver.noiseMarginWarnings++ < driver.lefrNoiseMarginWarnings)
-            lefWarning(2070, "UNIVERSALNOISEMARGIN statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+            driver.lefWarning(2070, "UNIVERSALNOISEMARGIN statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
 
 edgeratethreshold1: K_EDGERATETHRESHOLD1 NUMBER ';'
@@ -6812,7 +6812,7 @@ edgeratethreshold1: K_EDGERATETHRESHOLD1 NUMBER ';'
       } else
         if (/*lefrEdgeRateThreshold1Cbk*/ 1) /* write warning only if cbk is set */
           if (driver.edgeRateThreshold1Warnings++ < driver.lefrEdgeRateThreshold1Warnings)
-            lefWarning(2071, "EDGERATETHRESHOLD1 statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+            driver.lefWarning(2071, "EDGERATETHRESHOLD1 statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
 
 edgeratethreshold2: K_EDGERATETHRESHOLD2 NUMBER ';'
@@ -6824,7 +6824,7 @@ edgeratethreshold2: K_EDGERATETHRESHOLD2 NUMBER ';'
       } else
         if (/*lefrEdgeRateThreshold2Cbk*/ 1) /* write warning only if cbk is set */
           if (driver.edgeRateThreshold2Warnings++ < driver.lefrEdgeRateThreshold2Warnings)
-            lefWarning(2072, "EDGERATETHRESHOLD2 statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+            driver.lefWarning(2072, "EDGERATETHRESHOLD2 statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
 
 edgeratescalefactor: K_EDGERATESCALEFACTOR NUMBER ';'
@@ -6836,7 +6836,7 @@ edgeratescalefactor: K_EDGERATESCALEFACTOR NUMBER ';'
       } else
         if (/*lefrEdgeRateScaleFactorCbk*/ 1) /* write warning only if cbk is set */
           if (driver.edgeRateScaleFactorWarnings++ < driver.lefrEdgeRateScaleFactorWarnings)
-            lefWarning(2073, "EDGERATESCALEFACTOR statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+            driver.lefWarning(2073, "EDGERATESCALEFACTOR statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
 
 noisetable: K_NOISETABLE NUMBER
@@ -6853,7 +6853,7 @@ end_noisetable:
     } else
       if (/*driver.lefrNoiseTableCbk*/ 1) /* write warning only if cbk is set */
         if (driver.noiseTableWarnings++ < driver.lefrNoiseTableWarnings)
-          lefWarning(2074, "NOISETABLE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+          driver.lefWarning(2074, "NOISETABLE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
   }
 
 
@@ -6920,7 +6920,7 @@ end_correctiontable:
     } else
       if (/*driver.lefrCorrectionTableCbk*/ 1) /* write warning only if cbk is set */
         if (driver.correctionTableWarnings++ < driver.lefrCorrectionTableWarnings)
-          lefWarning(2075, "CORRECTIONTABLE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+          driver.lefWarning(2075, "CORRECTIONTABLE statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
   }
 
 correction_table_list:
@@ -6988,7 +6988,7 @@ input_antenna: K_INPUTPINANTENNASIZE NUMBER ';'
                    driver.outMsg = (char*)lefMalloc(10000);
                    sprintf (driver.outMsg,
                       "INPUTPINANTENNASIZE statement is a version 5.3 or earlier syntax.\nYour lef file with version %g, has both old and new INPUTPINANTENNASIZE syntax, which is illegal.", driver.versionNum);
-                   lefError(1671, driver.outMsg);
+                   driver.lefError(1671, driver.outMsg);
                    lefFree(driver.outMsg);
                    /*CHKERR();*/
                 }
@@ -7012,7 +7012,7 @@ output_antenna: K_OUTPUTPINANTENNASIZE NUMBER ';'
                    driver.outMsg = (char*)lefMalloc(10000);
                    sprintf (driver.outMsg,
                       "OUTPUTPINANTENNASIZE statement is a version 5.3 or earlier syntax.\nYour lef file with version %g, has both old and new OUTPUTPINANTENNASIZE syntax, which is illegal.", driver.versionNum);
-                   lefError(1672, driver.outMsg);
+                   driver.lefError(1672, driver.outMsg);
                    lefFree(driver.outMsg);
                    /*CHKERR();*/
                 }
@@ -7036,7 +7036,7 @@ inout_antenna: K_INOUTPINANTENNASIZE NUMBER ';'
                    driver.outMsg = (char*)lefMalloc(10000);
                    sprintf (driver.outMsg,
                       "INOUTPINANTENNASIZE statement is a version 5.3 or earlier syntax.\nYour lef file with version %g, has both old and new INOUTPINANTENNASIZE syntax, which is illegal.", driver.versionNum);
-                   lefError(1673, driver.outMsg);
+                   driver.lefError(1673, driver.outMsg);
                    lefFree(driver.outMsg);
                    /*CHKERR();*/
                 }
@@ -7060,7 +7060,7 @@ antenna_input: K_ANTENNAINPUTGATEAREA NUMBER ';'
                driver.outMsg = (char*)lefMalloc(10000);
                sprintf (driver.outMsg,
                   "ANTENNAINPUTGATEAREA statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.\nEither update your VERSION number or use the 5.3 syntax.", driver.versionNum);
-               lefError(1674, driver.outMsg);
+               driver.lefError(1674, driver.outMsg);
                lefFree(driver.outMsg);
                /*CHKERR();*/
              }
@@ -7071,7 +7071,7 @@ antenna_input: K_ANTENNAINPUTGATEAREA NUMBER ';'
                 driver.outMsg = (char*)lefMalloc(10000);
                 sprintf (driver.outMsg,
                    "ANTENNAINPUTGATEAREA statement is a version 5.4 or later syntax.\nYour lef file with version %g, has both old and new ANTENNAINPUTGATEAREA syntax, which is illegal.", driver.versionNum);
-                lefError(1675, driver.outMsg);
+                driver.lefError(1675, driver.outMsg);
                 lefFree(driver.outMsg);
                /*CHKERR();*/
              }
@@ -7094,7 +7094,7 @@ antenna_inout: K_ANTENNAINOUTDIFFAREA NUMBER ';'
                  driver.outMsg = (char*)lefMalloc(10000);
                  sprintf (driver.outMsg,
                     "ANTENNAINOUTDIFFAREA statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.\nEither update your VERSION number or use the 5.3 syntax.", driver.versionNum);
-                 lefError(1676, driver.outMsg);
+                 driver.lefError(1676, driver.outMsg);
                  lefFree(driver.outMsg);
                  /*CHKERR();*/
               }
@@ -7105,7 +7105,7 @@ antenna_inout: K_ANTENNAINOUTDIFFAREA NUMBER ';'
                  driver.outMsg = (char*)lefMalloc(10000);
                  sprintf (driver.outMsg,
                     "ANTENNAINOUTDIFFAREA statement is a version 5.4 or later syntax.\nYour lef file with version %g, has both old and new ANTENNAINOUTDIFFAREA syntax, which is illegal.", driver.versionNum);
-                 lefError(1677, driver.outMsg);
+                 driver.lefError(1677, driver.outMsg);
                  lefFree(driver.outMsg);
                  /*CHKERR();*/
               }
@@ -7128,7 +7128,7 @@ antenna_output: K_ANTENNAOUTPUTDIFFAREA NUMBER ';'
                  driver.outMsg = (char*)lefMalloc(10000);
                  sprintf (driver.outMsg,
                     "ANTENNAOUTPUTDIFFAREA statement is a version 5.4 and later syntax.\nYour lef file is defined with version %g.\nEither update your VERSION number or use the 5.3 syntax.", driver.versionNum);
-                 lefError(1678, driver.outMsg);
+                 driver.lefError(1678, driver.outMsg);
                  lefFree(driver.outMsg);
                  /*CHKERR();*/
               }
@@ -7139,7 +7139,7 @@ antenna_output: K_ANTENNAOUTPUTDIFFAREA NUMBER ';'
                  driver.outMsg = (char*)lefMalloc(10000);
                  sprintf (driver.outMsg,
                     "ANTENNAOUTPUTDIFFAREA statement is a version 5.4 or later syntax.\nYour lef file with version %g, has both old and new ANTENNAOUTPUTDIFFAREA syntax, which is illegal.", driver.versionNum);
-                 lefError(1679, driver.outMsg);
+                 driver.lefError(1679, driver.outMsg);
                  lefFree(driver.outMsg);
                  /*CHKERR();*/
               }

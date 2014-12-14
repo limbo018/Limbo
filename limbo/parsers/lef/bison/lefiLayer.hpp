@@ -760,8 +760,8 @@ public:
   lefiOrthogonal *orthogonal() const;
 
 
-  void parse65nmRules();                  // 5.7
-  void parseLEF58Layer();                 // 5.8
+  void parse65nmRules(double versionNum);                  // 5.7
+  void parseLEF58Layer(double versionNum);                 // 5.8
 
   // Debug print
   void print(FILE* f) const;

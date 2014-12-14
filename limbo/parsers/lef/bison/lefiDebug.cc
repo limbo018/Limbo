@@ -13,13 +13,15 @@
  */
 
 #include "lefiDebug.hpp"
-#include "lefrReader.hpp"
-#include "lex.h"
+//#include "lefrReader.hpp"
+//#include "lex.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "LefDataBase.h" // be careful about cross reference
 
 
+namespace LefParser {
 
 char lefDebug[100];
 
@@ -56,12 +58,12 @@ int lefiDebug(int num) {
   return lefDebug[num];
 }
 
-extern LEFI_LOG_FUNCTION lefiErrorLogFunction;
+//extern LEFI_LOG_FUNCTION lefiErrorLogFunction;
 
 void lefiError(const char* str) {
-  if (lefiErrorLogFunction)
+  /*if (lefiErrorLogFunction)
     (*lefiErrorLogFunction)(str);
-  else
+  else*/
     fprintf(stderr, str);
 }
 
@@ -133,3 +135,4 @@ const char* lefUpperCase(const char* str) {
 }
 
 
+} // namespace LefParser

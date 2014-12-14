@@ -188,7 +188,7 @@ public:
   void Destroy();
   ~lefiSpacing();
 
-  lefiSpacing* clone();
+  lefiSpacing* clone() const;
 
   void set(const char* name1, const char* name2, double num, int hasStack);
 
@@ -419,7 +419,7 @@ protected:
 };
 
 
-
+#if 0
 class lefiAlias_itr {
 public:
   lefiAlias_itr();
@@ -435,7 +435,7 @@ public:
 protected:
   int num_;
 };
-
+#endif 
 
 class lefiUseMinSpacing {
 public:

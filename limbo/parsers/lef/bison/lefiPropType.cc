@@ -14,9 +14,10 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "lex.h"
+//#include "lex.h"
 #include "lefiPropType.hpp"
 #include "lefiDebug.hpp"
+#include "LefDataBase.h" // be careful about cross reference
 
 namespace LefParser {
 

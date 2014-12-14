@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
 
 #include <limbo/parsers/lef/bison/LefDriver.h>
 
@@ -26,7 +27,7 @@ class DataBase : public LefParser::LefDataBase
 		}
 };
 
-void test1(string const& filename)
+void test1(std::string const& filename)
 {
 	cout << "////////////// test1 ////////////////" << endl;
 	DataBase db;

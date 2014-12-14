@@ -101,7 +101,7 @@ public:
   void setPattern(const char* cutPattern);                  // 5.6
 
   /* make a new one */
-  lefiVia* clone();
+  lefiVia* clone() const;
 
   int hasDefault() const ;
   int hasGenerated() const ; // 5.6, this no longer in 5.6, should be removed

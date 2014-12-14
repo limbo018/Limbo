@@ -19,11 +19,13 @@ INCLUDE = $(LIMBO_ROOT_DIR) #-I$(LIBRARIES_DIR)/boost_1_55_0
 
 #HEADERS = $(PARSER_PREFIX)Driver.h $(PARSER_PREFIX)Parser.h $(PARSER_PREFIX)Scanner.h $(PARSER_PREFIX)DataBase.h \
     y.tab.h FlexLexer.h location.hh position.hh stack.hh
-HEADERS = $(wildcard *.h) $(wildcard *.hpp) $(wildcard *.hh)
-SRCS = $(wildcard *.cc)
+HEADERS = $(wildcard *.hpp) \
+		  $(PARSER_PREFIX)Driver.h $(PARSER_PREFIX)Parser.h $(PARSER_PREFIX)Scanner.h $(PARSER_PREFIX)DataBase.h \
+		  y.tab.h FlexLexer.h location.hh position.hh stack.hh
+SRCS = $(wildcard lef*.cc)  $(PARSER_PREFIX)Driver.cc $(PARSER_PREFIX)Parser.cc $(PARSER_PREFIX)Scanner.cc $(PARSER_PREFIX)DataBase.cc
 OBJS = $(patsubst %.cc, %.o, $(SRCS))
 
-all: lib$(LIB_PREFIX)parser $(TEST_DIR)/test_bison
+all: $(PARSER_PREFIX)Scanner.cc $(PARSER_PREFIX)Parser.cc lib$(LIB_PREFIX)parser $(TEST_DIR)/test_bison
 
 # Generate scanner and parser
 
@@ -43,12 +45,12 @@ $(TEST_DIR)/test_bison.o: $(TEST_DIR)/test_bison.cc
 
 # Link executable
 
-$(TEST_DIR)/test_bison: $(TEST_DIR)/test_bison.o 
+$(TEST_DIR)/test_bison: $(TEST_DIR)/test_bison.o lib$(LIB_PREFIX)parser
 	$(CXX) $(LDFLAGS) -o $@ $(TEST_DIR)/test_bison.o -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)parser 
 
 #lib$(LIB_PREFIX)parser: $(PARSER_PREFIX)Parser.o $(PARSER_PREFIX)Scanner.o $(PARSER_PREFIX)Driver.o 
 lib$(LIB_PREFIX)parser: $(OBJS)
-	ar rvs lib$(LIB_PREFIX)parser.a $($OBJS)
+	ar rvs lib$(LIB_PREFIX)parser.a $(OBJS)
 	mv lib$(LIB_PREFIX)parser.a $(LIMBO_ROOT_DIR)/lib
 
 install: lib$(LIB_PREFIX)parser

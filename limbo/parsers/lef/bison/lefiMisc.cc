@@ -15,10 +15,11 @@
 #include "lefiMisc.hpp"
 #include <string.h>
 #include <stdlib.h>
-#include "lex.h"
+//#include "lex.h"
 #include "lefiDebug.hpp"
-#include "FEF_stringhash.h"
+//#include "FEF_stringhash.h"
 #include "lefiUtil.hpp"
+#include "LefDataBase.h" // be careful about cross reference
 
 namespace LefParser {
 
@@ -691,7 +692,7 @@ lefiSpacing::~lefiSpacing() {
 }
 
 
-lefiSpacing* lefiSpacing::clone() {
+lefiSpacing* lefiSpacing::clone() const {
   lefiSpacing* sp = (lefiSpacing*)lefMalloc(sizeof(lefiSpacing));
   sp->name1Size_ = strlen(this->name1_)+1;
   sp->name1_ = (char*)lefMalloc(sp->name1Size_);
@@ -1507,7 +1508,7 @@ void lefiGcellPattern::print(FILE* f) const {
     this->lefiGcellPattern::space());
 }
 
-
+#if 0
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
 //
@@ -1556,7 +1557,7 @@ const char* lefiAlias_itr::Data() {
   if (this->num_ <= -1 || this->num_ >= aliasLimit()) return 0;
   return aliasData(this->num_);
 }
-
+#endif 
  
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////

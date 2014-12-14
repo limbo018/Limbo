@@ -14,10 +14,11 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "lex.h"
+//#include "lex.h"
 #include "lefiLayer.hpp"
 #include "lefiDebug.hpp"
-#include "lefrCallBacks.hpp"
+//#include "lefrCallBacks.hpp"
+#include "LefDataBase.h" // be careful about cross reference
 
 namespace LefParser {
 
@@ -5262,7 +5263,7 @@ void lefiLayer::parseLayerEnclosure(int index) {
 // This API will be obsoleted in 5.7.
 // It will look for all the properties in "this" that are type 'S' and
 // property name starts with "LEF57_...
-void lefiLayer::parse65nmRules() {
+void lefiLayer::parse65nmRules(double versionNum) {
   int i;
 
   if (versionNum < 5.6)
@@ -5364,7 +5365,7 @@ void lefiLayer::parseLayerType(int index) {
 // to using them.
 // It will look for the properties in "this" that are type 'S' and
 // property name is "LEF58_TYPE"
-void lefiLayer::parseLEF58Layer() {
+void lefiLayer::parseLEF58Layer(double versionNum) {
   int i;
 
   if (versionNum < 5.7)
