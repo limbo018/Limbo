@@ -20,6 +20,9 @@ double LefDataBase::current_version() const
 void LefDataBase::current_version(double cv)
 {m_current_version = cv;}
 
+int LefDataBase::lefNamesCaseSensitive = TRUE;
+int LefDataBase::lefrShiftCase = FALSE;
+
 } // namespace LefParser
 
 namespace LefParser {

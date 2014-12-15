@@ -15,10 +15,10 @@ Driver::Driver(LefDataBase& db)
       trace_parsing(false),
       m_db(db)
 {
-	lefNamesCaseSensitive = TRUE;  // always true in 5.6
+	lefNamesCaseSensitive = m_db.lefNamesCaseSensitive;  // always true in 5.6
 	lefReaderCaseSensitive = FALSE;  // default to 0
 
-	lefrShiftCase = 0;     // if user wants to shift to all uppercase
+	lefrShiftCase = m_db.lefrShiftCase;     // if user wants to shift to all uppercase
 
 	lefrRelaxMode = FALSE;    // relax mode?
 	///////////////////////////////////s
@@ -644,6 +644,38 @@ int Driver::zeroOrGt(double values) const
       return 0;
     return 1;
 }
+double Driver::convert_name2num(char const* versionName) const
+{
+    char majorNm[80];
+    char minorNm[80];
+    char *subMinorNm = NULL;
+    char *p1;
+    char *versionNm = strdup(versionName);
+
+    double major = 0, minor = 0, subMinor = 0;
+    double version;
+
+    sscanf(versionNm, "%[^.].%s", majorNm, minorNm);
+    if ((p1 = strchr(minorNm, '.'))) {
+       subMinorNm = p1+1;
+       *p1 = '\0';
+    }
+    major = atof(majorNm);
+    minor = atof(minorNm);
+    if (subMinorNm)
+       subMinor = atof(subMinorNm);
+
+    version = major;
+
+    if (minor > 0)
+       version = major + minor/10;
+
+    if (subMinor > 0)
+       version = version + subMinor/1000;
+
+    lefFree(versionNm);
+    return version;
+}
 
 /***************** static variables ******************/
 int Driver::ignoreVersion = 0; // ignore checking version number
@@ -742,6 +774,13 @@ double Driver::layerCutSpacing = 0;
 int Driver::hasOpenedLogFile = 0; /* flag on how to open the warning log file */
 int Driver::spaceMissing = 0;   /* flag to indicate if there is space after " */
 int Driver::nDMsgs = 0; // disable message 
+
+char* Driver::outMsg = NULL; // error messages
+char Driver::lefPropDefType; /* save the current type of the property */
+char Driver::cur_token[STRSIZE];      /* global so error message can print it */
+char Driver::saved_token[STRSIZE];/* for an (illegal) usage ';TOKEN' */
+char Driver::pv_token[STRSIZE];   /* previous token, for check ; without space */
+int Driver::lefrRegisterUnused = 0;
 
 bool read(LefDataBase& db, const string& lefFile)
 {

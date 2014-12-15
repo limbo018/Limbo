@@ -1,4 +1,5 @@
 test/test_spirit
+test/test_bison
 bison/bak
 bison/LefParser.cc
 bison/LefParser.h

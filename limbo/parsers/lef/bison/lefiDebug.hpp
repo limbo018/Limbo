@@ -41,7 +41,7 @@ extern int lefrShiftCase;
                      lefUpperCase(x);   \
                  else x;)
 */
-#define CASE(x) (!lefNamesCaseSensitive && lefrShiftCase ? lefUpperCase(x) : x)
+#define CASE(x) (!LefDataBase::lefNamesCaseSensitive && LefDataBase::lefrShiftCase ? lefUpperCase(x) : x)
 
 } // namespace LefParser
 

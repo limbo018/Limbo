@@ -91,6 +91,9 @@ class LefDataBase
 		void current_version(double);
 	protected:
 		double m_current_version; /* default current lef version, use static variable to mimic definitions */
+	public:
+		static int lefNamesCaseSensitive; /* case sensitive or not, mimic global variable lefNamesCaseSensitive */
+		static int lefrShiftCase; /* shift to upper case or not  */
 };
 
 } // namespace LefParser

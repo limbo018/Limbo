@@ -25,14 +25,14 @@ struct lefiPoints {
 
 typedef struct lefiPoints lefiNum;
 
-//int lefiValidTime();
+int lefiValidTime();
 int lefiValidUser();
 
-char* lefiUser();
+//char* lefiUser();
 
 char* lefiOrientStr(int orient);
 
-double convert_name2num(char *versionName);
+//double convert_name2num(char *versionName);
 
 } // namespace LefParser
 
