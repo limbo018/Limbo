@@ -1,6 +1,7 @@
 # $Id$
 # plain simple Makefile to build test
 
+#CXX = /usr/local/bin/g++-4.9
 CXX = g++
 LEX = flex
 YACC = bison
@@ -12,10 +13,10 @@ LIMBO_ROOT_DIR = $(realpath ../../../..)
 TEST_DIR = $(realpath ../test)
 
 #CXXFLAGS = -W -Wall -Wextra -ansi -O2 -fmax-errors=5 #-g #-DDEBUG_$(DEBUG_PREFIX)PARSER
-CXXFLAGS = -ansi -O2 -fmax-errors=1 #-g #-DDEBUG_$(DEBUG_PREFIX)PARSER
+CXXFLAGS = -ansi -fmax-errors=1 -g #-DDEBUG_$(DEBUG_PREFIX)PARSER
 LDFLAGS = 
 
-INCLUDE = $(LIMBO_ROOT_DIR) #-I$(LIBRARIES_DIR)/boost_1_55_0
+INCLUDE = -I . -I $(LIMBO_ROOT_DIR) #-I$(LIBRARIES_DIR)/boost_1_55_0
 
 #HEADERS = $(PARSER_PREFIX)Driver.h $(PARSER_PREFIX)Parser.h $(PARSER_PREFIX)Scanner.h $(PARSER_PREFIX)DataBase.h \
     y.tab.h FlexLexer.h location.hh position.hh stack.hh
@@ -38,10 +39,10 @@ $(PARSER_PREFIX)Scanner.cc: $(PARSER_PREFIX)Scanner.ll
 # Implicit rule to compile c++ files
 
 %.o: %.cc 
-	$(CXX) $(CXXFLAGS) -c -o $@ $< -I $(INCLUDE) 
+	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE) 
 
 $(TEST_DIR)/test_bison.o: $(TEST_DIR)/test_bison.cc
-	$(CXX) $(CXXFLAGS) -c -o $@ $< -I $(INCLUDE) 
+	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE) 
 
 # Link executable
 
