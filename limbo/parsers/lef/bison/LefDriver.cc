@@ -248,7 +248,7 @@ void Driver::lefrViaRuleCbk(lefiViaRule const& v)
 {
 	m_db.lef_viarule_cbk(v);
 }
-void Driver::lefrSpacingBeginCbk(int v)
+void Driver::lefrSpacingBeginCbk(int)
 {
 	// we do not need any begin/end cbk 
 	if (lefNdRule) // in non-default rules 
@@ -580,10 +580,8 @@ void Driver::lefError(int msgNum, const char *s)
 /* All warning within lefWarning starts with 2500 */
 void Driver::lefWarning(int msgNum, const char *s) 
 {
-   int i;
-
 #if 0
-   for (i = 0; i < nDMsgs; i++) {  /* check if warning has been disable */
+   for (int i = 0; i < nDMsgs; i++) {  /* check if warning has been disable */
       if (disableMsgs[i] == msgNum)
          return;  /* don't print out any warning since msg has been disabled */
    }
@@ -644,9 +642,8 @@ void Driver::lefWarning(int msgNum, const char *s)
 /* All info within lefInfo starts with 3500 */
 void Driver::lefInfo(int msgNum, const char *s) 
 {
-   int i;
 #if 0
-   for (i = 0; i < nDMsgs; i++) {  /* check if info has been disable */
+   for (int i = 0; i < nDMsgs; i++) {  /* check if info has been disable */
       if (disableMsgs[i] == msgNum)
          return;  /* don't print out any info since msg has been disabled */
    }

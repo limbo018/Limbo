@@ -303,7 +303,7 @@ public:
   const  char* propName(int index) const;
   const  char* propValue(int index) const;
   double propNum(int index) const;
-  const  char  propType(int index) const;
+  char  propType(int index) const;
   int    propIsNumber(int index) const;
   int    propIsString(int index) const;
 
@@ -545,7 +545,7 @@ public:
   const char* propName(int index) const;
   const char* propValue(int index) const;
   double propNum(int index) const;
-  const char propType(int index) const;
+  char propType(int index) const;
   int  propIsNumber(int index) const;
   int  propIsString(int index) const;
 
@@ -573,7 +573,7 @@ public:
 
   // for pins in a macro 
   int numPins() const;
-  lefiPin* pin(int index) const;
+  lefiPin* pin(unsigned int index) const;
   void addPin(lefiPin const& p);
 
   // Debug print

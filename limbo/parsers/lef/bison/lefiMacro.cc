@@ -616,6 +616,16 @@ lefiPin::lefiPin(lefiPin const& rhs)
 void lefiPin::Init() {
   this->nameSize_ = 16;
   this->name_ = (char*)lefMalloc(16);
+
+  this->numForeigns_ = 0;
+  this->foreignAllocated_ = 0;
+  this->hasForeignOrient_ = 0;
+  this->hasForeignPoint_ = 0;
+  this->foreignOrient_ = 0;
+  this->foreignX_ = 0;
+  this->foreignY_ = 0;
+  this->foreign_ = 0;
+
   this->portsAllocated_ = 2;
   this->ports_ = (lefiGeometries**)lefMalloc(sizeof(lefiGeometries*)*2);
   this->numPorts_ = 0;
@@ -623,8 +633,8 @@ void lefiPin::Init() {
   this->propertiesAllocated_ = 0;
   this->propNames_ = 0;
   this->propValues_ = 0;
+  this->propNums_ = 0;
   this->propTypes_ = 0;
-  this->foreign_ = 0;
   this->LEQ_ = 0;
   this->mustjoin_ = 0;
   this->lowTable_ = 0;
@@ -632,6 +642,7 @@ void lefiPin::Init() {
   this->taperRule_ = 0;
   this->antennaModel_ = 0;
   this->numAntennaModel_ = 0;
+  this->antennaModelAllocated_ = 0;
   this->netEpxr_ = 0;
   this->ssPinName_ = 0;
   this->gsPinName_ = 0;
@@ -678,7 +689,7 @@ void lefiPin::Init() {
 }
 void lefiPin::copy(lefiPin const& rhs)
 {
-	this->clear();
+	this->Init();
 	// nameSize_ 
 	// name_
 	this->setName(rhs.name());
@@ -818,7 +829,7 @@ void lefiPin::copy(lefiPin const& rhs)
 		this->setNumProperty(rhs.propName(i), rhs.propNum(i), rhs.propValue(i), rhs.propType(i));
 
 	for (int i = 0; i < rhs.numPorts(); ++i)
-		this->addPort(rhs.port(i));
+		this->addPort(new lefiGeometries (*rhs.port(i)));
 }
 
 
@@ -2324,7 +2335,7 @@ double lefiPin::propNum(int index) const {
   return this->propNums_[index];
 }
  
-const char lefiPin::propType(int index) const {
+char lefiPin::propType(int index) const {
   char msg[160];
   if (index < 0 || index >= this->numProperties_) {
      sprintf (msg, "ERROR (EMSPARS-1352): The index number %d given for the macro property is invalid.\nValid index is from 0 to %d", index, this->numProperties_);
@@ -2922,7 +2933,7 @@ double lefiMacro::propNum(int index) const {
 }
 
 
-const char lefiMacro::propType(int index) const {
+char lefiMacro::propType(int index) const {
   char msg[160];
   if (index < 0 || index >= this->numProperties_) {
      sprintf (msg, "ERROR (EMSPARS-1352): The index number %d given for the macro property is invalid.\nValid index is from 0 to %d", index, this->numProperties_);
@@ -3059,9 +3070,9 @@ int lefiMacro::numPins() const
 	return m_vPin.size();
 }
 
-lefiPin* lefiMacro::pin(int index) const 
+lefiPin* lefiMacro::pin(unsigned int index) const 
 {
-	if (index < 0 || index >= m_vPin.size())
+	if (index >= m_vPin.size())
 		return NULL;
 	return m_vPin[index];
 }

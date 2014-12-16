@@ -23,6 +23,203 @@
 
 namespace LefParser {
 
+
+lefiGeomRect::lefiGeomRect()
+{
+	xl = yl = xh = yh = 0;
+}
+void lefiGeomRect::copy(lefiGeomRect const& rhs)
+{
+	this->xl = rhs.xl; 
+	this->yl = rhs.yl;
+	this->xh = rhs.xh; 
+	this->yh = rhs.yh;
+}
+#if 0
+lefiGeomRect::~lefiGeomRect()
+{
+}
+#endif 
+lefiGeomRectIter::lefiGeomRectIter()
+{
+	xl = yl = xh = yh = 0;
+	xStart = yStart = xStep = yStep = 0;
+}
+void lefiGeomRectIter::copy(lefiGeomRectIter const& rhs)
+{
+	this->xl = rhs.xl; 
+	this->yl = rhs.yl;
+	this->xh = rhs.xh; 
+	this->yh = rhs.yh;
+	this->xStart = rhs.xStart;
+	this->yStart = rhs.yStart;
+	this->xStep = rhs.xStep;
+	this->yStep = rhs.yStep;
+}
+#if 0
+lefiGeomRectIter::~lefiGeomRectIter()
+{
+}
+#endif 
+lefiGeomPath::lefiGeomPath()
+{
+	numPoints = 0;
+	x = 0;
+	y = 0;
+}
+void lefiGeomPath::copy(lefiGeomPath const& rhs)
+{
+	this->numPoints = rhs.numPoints;
+	this->x = (double*)lefMalloc(sizeof(double)*rhs.numPoints);
+	this->y = (double*)lefMalloc(sizeof(double)*rhs.numPoints);
+	for (int i = 0; i < rhs.numPoints; ++i)
+	{
+		this->x[i] = rhs.x[i];
+		this->y[i] = rhs.y[i];
+	}
+}
+#if 0
+lefiGeomPath::~lefiGeomPath()
+{
+	if (this->numPoints != 0)
+	{
+		lefFree((double*)this->x);
+		lefFree((double*)this->y);
+	}
+}
+#endif 
+lefiGeomPathIter::lefiGeomPathIter()
+{
+	numPoints = 0;
+	x = 0;
+	y = 0;
+	xStart = yStart = xStep = yStep = 0;
+}
+void lefiGeomPathIter::copy(lefiGeomPathIter const& rhs)
+{
+	this->numPoints = rhs.numPoints;
+	this->x = (double*)lefMalloc(sizeof(double)*rhs.numPoints);
+	this->y = (double*)lefMalloc(sizeof(double)*rhs.numPoints);
+	for (int i = 0; i < rhs.numPoints; ++i)
+	{
+		this->x[i] = rhs.x[i];
+		this->y[i] = rhs.y[i];
+	}
+	this->xStart = rhs.xStart;
+	this->yStart = rhs.yStart;
+	this->xStep = rhs.xStep;
+	this->yStep = rhs.yStep;
+}
+#if 0
+lefiGeomPathIter::~lefiGeomPathIter()
+{
+	if (this->numPoints != 0)
+	{
+		lefFree((double*)this->x);
+		lefFree((double*)this->y);
+	}
+}
+#endif 
+lefiGeomPolygon::lefiGeomPolygon()
+{
+	numPoints = 0;
+	x = 0;
+	y = 0;
+}
+void lefiGeomPolygon::copy(lefiGeomPolygon const& rhs)
+{
+	this->numPoints = rhs.numPoints;
+	this->x = (double*)lefMalloc(sizeof(double)*rhs.numPoints);
+	this->y = (double*)lefMalloc(sizeof(double)*rhs.numPoints);
+	for (int i = 0; i < rhs.numPoints; ++i)
+	{
+		this->x[i] = rhs.x[i];
+		this->y[i] = rhs.y[i];
+	}
+}
+#if 0
+lefiGeomPolygon::~lefiGeomPolygon()
+{
+	if (this->numPoints != 0)
+	{
+		lefFree((double*)this->x);
+		lefFree((double*)this->y);
+	}
+}
+#endif 
+lefiGeomPolygonIter::lefiGeomPolygonIter()
+{
+	numPoints = 0;
+	x = 0;
+	y = 0;
+	xStart = yStart = xStep = yStep = 0;
+}
+void lefiGeomPolygonIter::copy(lefiGeomPolygonIter const& rhs)
+{
+	this->numPoints = rhs.numPoints;
+	this->x = (double*)lefMalloc(sizeof(double)*rhs.numPoints);
+	this->y = (double*)lefMalloc(sizeof(double)*rhs.numPoints);
+	for (int i = 0; i < rhs.numPoints; ++i)
+	{
+		this->x[i] = rhs.x[i];
+		this->y[i] = rhs.y[i];
+	}
+	this->xStart = rhs.xStart;
+	this->yStart = rhs.yStart;
+	this->xStep = rhs.xStep;
+	this->yStep = rhs.yStep;
+}
+#if 0
+lefiGeomPolygonIter::~lefiGeomPolygonIter()
+{
+	if (this->numPoints != 0)
+	{
+		lefFree((double*)this->x);
+		lefFree((double*)this->y);
+	}
+}
+#endif 
+lefiGeomVia::lefiGeomVia()
+{
+	name = 0;
+	x = y = 0;
+}
+void lefiGeomVia::copy(lefiGeomVia const& rhs)
+{
+	this->name = (char*)lefMalloc(sizeof(char)*(strlen(rhs.name)+1));
+	strcpy(this->name, CASE(rhs.name));
+	this->x = rhs.x;
+	this->y = rhs.y;
+}
+#if 0
+lefiGeomVia::~lefiGeomVia()
+{
+	if (this->name) lefFree((double*)this->name);
+}
+#endif 
+lefiGeomViaIter::lefiGeomViaIter()
+{
+	name = 0;
+	x = y = 0;
+	xStart = yStart = xStep = yStep = 0;
+}
+void lefiGeomViaIter::copy(lefiGeomViaIter const& rhs)
+{
+	this->name = (char*)lefMalloc(sizeof(char)*(strlen(rhs.name)+1));
+	strcpy(this->name, CASE(rhs.name));
+	this->x = rhs.x;
+	this->y = rhs.y;
+	this->xStart = rhs.xStart;
+	this->yStart = rhs.yStart;
+	this->xStep = rhs.xStep;
+	this->yStep = rhs.yStep;
+}
+#if 0
+lefiGeomViaIter::~lefiGeomViaIter()
+{
+	if (this->name) lefFree((double*)this->name);
+}
+#endif 
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 //
@@ -35,7 +232,11 @@ namespace LefParser {
 lefiGeometries::lefiGeometries() {
   this->lefiGeometries::Init();
 }
-
+lefiGeometries::lefiGeometries(lefiGeometries const& rhs)
+{
+	this->Init();
+	this->copy(rhs);
+}
 
 void lefiGeometries::Init() {
   this->itemsAllocated_ = 2;
@@ -52,6 +253,97 @@ void lefiGeometries::Init() {
   this->yStep_ = -1;
 }
 
+void lefiGeometries::copy(lefiGeometries const& rhs)
+{
+
+	this->addStepPattern(rhs.xStart_, rhs.yStart_, rhs.xStep_, rhs.yStep_);
+
+	for (int i = 0; i < rhs.numPoints_; ++i)
+	{
+		if (i == 0)
+			this->startList(rhs.x_[i], rhs.y_[i]);
+		else 
+			this->addToList(rhs.x_[i], rhs.y_[i]);
+	}
+
+	for (int i = 0; i < rhs.numItems(); ++i) 
+	{
+		switch (rhs.lefiGeometries::itemType(i)) 
+		{
+			case lefiGeomLayerE:
+				this->addLayer(rhs.getLayer(i));
+				break;
+			case lefiGeomLayerExceptPgNetE:
+				if (rhs.hasLayerExceptPgNet(i))
+					this->addLayerExceptPgNet();
+				break;
+			case lefiGeomLayerMinSpacingE:
+				this->addLayerMinSpacing(rhs.getLayerMinSpacing(i));
+				break;
+			case lefiGeomLayerRuleWidthE:
+				this->addLayerRuleWidth(rhs.getLayerRuleWidth(i));
+				break;
+			case lefiGeomWidthE:
+				this->addWidth(rhs.getWidth(i));
+				break;
+			case lefiGeomPathE:
+			{
+				lefiGeomPath* p = (lefiGeomPath*)lefMalloc(sizeof(lefiGeomPath)); p->copy(*rhs.getPath(i));
+				this->lefiGeometries::add((void*)p, lefiGeomPathE);
+				break;
+			}
+			case lefiGeomPathIterE:
+			{
+				lefiGeomPathIter* p = (lefiGeomPathIter*)lefMalloc(sizeof(lefiGeomPathIter)); p->copy(*rhs.getPathIter(i));
+				this->lefiGeometries::add((void*)p, lefiGeomPathIterE);
+				break;
+			}
+			case lefiGeomRectE:
+			{
+				lefiGeomRect* p = (lefiGeomRect*)lefMalloc(sizeof(lefiGeomRect)); p->copy(*rhs.getRect(i));
+				this->lefiGeometries::add((void*)p, lefiGeomRectE);
+				break;
+			}
+			case lefiGeomRectIterE:
+			{
+				lefiGeomRectIter* p = (lefiGeomRectIter*)lefMalloc(sizeof(lefiGeomRectIter)); p->copy(*rhs.getRectIter(i));
+				this->lefiGeometries::add((void*)p, lefiGeomRectIterE);
+				break;
+			}
+			case lefiGeomPolygonE:
+			{
+				lefiGeomPolygon* p = (lefiGeomPolygon*)lefMalloc(sizeof(lefiGeomPolygon)); p->copy(*rhs.getPolygon(i));
+				this->lefiGeometries::add((void*)p, lefiGeomPolygonE);
+				break;
+			}
+			case lefiGeomPolygonIterE:
+			{
+				lefiGeomPolygonIter* p = (lefiGeomPolygonIter*)lefMalloc(sizeof(lefiGeomPolygonIter)); p->copy(*rhs.getPolygonIter(i));
+				this->lefiGeometries::add((void*)p, lefiGeomPolygonIterE);
+				break;
+			}
+			case lefiGeomViaE:
+			{
+				lefiGeomVia* p = (lefiGeomVia*)lefMalloc(sizeof(lefiGeomVia)); p->copy(*rhs.getVia(i));
+				this->lefiGeometries::add((void*)p, lefiGeomViaE);
+				break;
+			}
+			case lefiGeomViaIterE:
+			{
+				lefiGeomViaIter* p = (lefiGeomViaIter*)lefMalloc(sizeof(lefiGeomViaIter)); p->copy(*rhs.getViaIter(i));
+				this->lefiGeometries::add((void*)p, lefiGeomViaIterE);
+				break;
+			}
+			case lefiGeomClassE:
+			{
+				this->addClass(rhs.getClass(i));
+				break;
+			}
+			default: lefiError("ERROR (LEFPARS-1375): unknown geometry type");
+					 break;
+		}
+	}
+}
 
 void lefiGeometries::Destroy() {
   this->lefiGeometries::clear();
@@ -343,7 +635,7 @@ void lefiGeometries::startList(double x, double y) {
     this->pointsAllocated_ = 16;
     this->x_ = (double*)lefMalloc(sizeof(double)*16);
     this->y_ = (double*)lefMalloc(sizeof(double)*16);
-  } else {  // reset the numPoits to 0
+  } else {  // reset the numPonits to 0
     this->numPoints_ = 0;
   }
   this->lefiGeometries::addToList(x, y);

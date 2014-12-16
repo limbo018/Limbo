@@ -36,6 +36,7 @@ lefiUnits::lefiUnits() {
 
 
 void lefiUnits::Init() {
+	this->databaseName_ = 0; 
   this->lefiUnits::clear();
 }
 

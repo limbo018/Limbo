@@ -139,7 +139,7 @@ void LefDataBase::lef_density_cbk(lefiDensity const& v)
 	v.print(stdout);
 	lef_user_cbk_reminder(__func__);
 }
-void LefDataBase::lef_timing_cbk(lefiTiming const& v)
+void LefDataBase::lef_timing_cbk(lefiTiming const& )
 {
 	//v.print(stdout);
 	lef_user_cbk_reminder(__func__);
@@ -154,7 +154,7 @@ void LefDataBase::lef_prop_cbk(lefiProp const& v)
 	v.print(stdout);
 	lef_user_cbk_reminder(__func__);
 }
-void LefDataBase::lef_noisemargin_cbk(lefiNoiseMargin const& v)
+void LefDataBase::lef_noisemargin_cbk(lefiNoiseMargin const& )
 {
 	//v.print(stdout);
 	lef_user_cbk_reminder(__func__);
@@ -174,12 +174,12 @@ void LefDataBase::lef_edgeratescalefactor_cbk(double v)
 	cout << "LEF edgeratescalefactor: " << v << endl;
 	lef_user_cbk_reminder(__func__);
 }
-void LefDataBase::lef_noisetable_cbk(lefiNoiseTable const& v)
+void LefDataBase::lef_noisetable_cbk(lefiNoiseTable const& )
 {
 	//v.print(stdout);
 	lef_user_cbk_reminder(__func__);
 }
-void LefDataBase::lef_correctiontable_cbk(lefiCorrectionTable const& v)
+void LefDataBase::lef_correctiontable_cbk(lefiCorrectionTable const& )
 {
 	//v.print(stdout);
 	lef_user_cbk_reminder(__func__);

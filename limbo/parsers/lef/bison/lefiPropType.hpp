@@ -33,7 +33,7 @@ public:
   void setPropType(const char* name, const char type);
   void Clear();
 
-  const char propType(const char* name) const;
+  char propType(const char* name) const;
   void bumpProps();
 
 protected:

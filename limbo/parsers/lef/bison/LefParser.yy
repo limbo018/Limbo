@@ -80,9 +80,6 @@
 %token K_WARNING "WARNING"
 %token K_ERROR "ERROR"
 %token K_FATALERROR "FATALERROR"
-%token K_namescasesensitive "namescasesensitive"
-%token K_off "off"
-%token K_on "on"
 %token K_ABOVE "ABOVE"
 %token K_ABUT "ABUT"
 %token K_ABUTMENT "ABUTMENT"
@@ -488,8 +485,9 @@
 %token <binaryVal> 	BINARY		"binary numbers"
 
 %type <doubleVal>   NUMBER "number"
-%type <stringVal> start_macro end_macro
-%type <stringVal> start_layer
+%type <stringVal> GSTRING      "generalized string"
+/*%type <stringVal> start_macro end_macro*/
+/*%type <stringVal> start_layer*/
 %type <stringVal> macro_pin_use
 %type <stringVal> macro_scan_use
 %type <stringVal> pin_shape
@@ -510,8 +508,9 @@
 %type <stringVal> layer_table_type layer_enclosure_type_opt layer_minstep_type
 %type <doubleVal>   layer_sp_TwoWidthsPRL
 
-%destructor { delete $$; } STRING QSTRING BINARY
+%destructor { delete $$; } STRING QSTRING BINARY 
 %destructor { delete $$; } pt
+%destructor { delete $$; } GSTRING 
 
 %nonassoc IF
 %left K_AND
@@ -543,6 +542,419 @@
 
 NUMBER : INTEGER {$$=$1;} 
 	   | DOUBLE {$$=$1;}
+
+GSTRING : STRING {$$ = new std::string (*$1);}
+| K_DEFINE {$$ = new std::string ("DEFINE");} 
+| K_DEFINEB {$$ = new std::string ("DEFINEB");} 
+| K_DEFINES {$$ = new std::string ("DEFINES");} 
+| K_MESSAGE {$$ = new std::string ("MESSAGE");} 
+| K_CREATEFILE {$$ = new std::string ("CREATEFILE");} 
+| K_OPENFILE {$$ = new std::string ("OPENFILE");} 
+| K_CLOSEFILE {$$ = new std::string ("CLOSEFILE");} 
+| K_WARNING {$$ = new std::string ("WARNING");} 
+| K_ERROR {$$ = new std::string ("ERROR");} 
+| K_FATALERROR {$$ = new std::string ("FATALERROR");} 
+| K_ABOVE {$$ = new std::string ("ABOVE");} 
+| K_ABUT {$$ = new std::string ("ABUT");} 
+| K_ABUTMENT {$$ = new std::string ("ABUTMENT");} 
+| K_ACCURRENTDENSITY {$$ = new std::string ("ACCURRENTDENSITY");} 
+| K_ACTIVE {$$ = new std::string ("ACTIVE");} 
+| K_ADJACENTCUTS {$$ = new std::string ("ADJACENTCUTS");} 
+| K_ANALOG {$$ = new std::string ("ANALOG");} 
+| K_AND {$$ = new std::string ("AND");} 
+| K_ANTENNAAREAFACTOR {$$ = new std::string ("ANTENNAAREAFACTOR");} 
+| K_ANTENNAAREADIFFREDUCEPWL {$$ = new std::string ("ANTENNAAREADIFFREDUCEPWL");} 
+| K_ANTENNAAREAMINUSDIFF {$$ = new std::string ("ANTENNAAREAMINUSDIFF");} 
+| K_ANTENNAAREARATIO {$$ = new std::string ("ANTENNAAREARATIO");} 
+| K_ANTENNACELL {$$ = new std::string ("ANTENNACELL");} 
+| K_ANTENNACUMAREARATIO {$$ = new std::string ("ANTENNACUMAREARATIO");} 
+| K_ANTENNACUMDIFFAREARATIO {$$ = new std::string ("ANTENNACUMDIFFAREARATIO");} 
+| K_ANTENNACUMDIFFSIDEAREARATIO {$$ = new std::string ("ANTENNACUMDIFFSIDEAREARATIO");} 
+| K_ANTENNACUMROUTINGPLUSCUT {$$ = new std::string ("ANTENNACUMROUTINGPLUSCUT");} 
+| K_ANTENNACUMSIDEAREARATIO {$$ = new std::string ("ANTENNACUMSIDEAREARATIO");} 
+| K_ANTENNADIFFAREA {$$ = new std::string ("ANTENNADIFFAREA");} 
+| K_ANTENNADIFFAREARATIO {$$ = new std::string ("ANTENNADIFFAREARATIO");} 
+| K_ANTENNADIFFSIDEAREARATIO {$$ = new std::string ("ANTENNADIFFSIDEAREARATIO");} 
+| K_ANTENNAGATEAREA {$$ = new std::string ("ANTENNAGATEAREA");} 
+| K_ANTENNAGATEPLUSDIFF {$$ = new std::string ("ANTENNAGATEPLUSDIFF");} 
+| K_ANTENNAINOUTDIFFAREA {$$ = new std::string ("ANTENNAINOUTDIFFAREA");} 
+| K_ANTENNAINPUTGATEAREA {$$ = new std::string ("ANTENNAINPUTGATEAREA");} 
+| K_ANTENNALENGTHFACTOR {$$ = new std::string ("ANTENNALENGTHFACTOR");} 
+| K_ANTENNAMAXAREACAR {$$ = new std::string ("ANTENNAMAXAREACAR");} 
+| K_ANTENNAMAXCUTCAR {$$ = new std::string ("ANTENNAMAXCUTCAR");} 
+| K_ANTENNAMAXSIDEAREACAR {$$ = new std::string ("ANTENNAMAXSIDEAREACAR");} 
+| K_ANTENNAMETALAREA {$$ = new std::string ("ANTENNAMETALAREA");} 
+| K_ANTENNAMETALLENGTH {$$ = new std::string ("ANTENNAMETALLENGTH");} 
+| K_ANTENNAMODEL {$$ = new std::string ("ANTENNAMODEL");} 
+| K_ANTENNAOUTPUTDIFFAREA {$$ = new std::string ("ANTENNAOUTPUTDIFFAREA");} 
+| K_ANTENNAPARTIALCUTAREA {$$ = new std::string ("ANTENNAPARTIALCUTAREA");} 
+| K_ANTENNAPARTIALMETALAREA {$$ = new std::string ("ANTENNAPARTIALMETALAREA");} 
+| K_ANTENNAPARTIALMETALSIDEAREA {$$ = new std::string ("ANTENNAPARTIALMETALSIDEAREA");} 
+| K_ANTENNASIDEAREARATIO {$$ = new std::string ("ANTENNASIDEAREARATIO");} 
+| K_ANTENNASIZE {$$ = new std::string ("ANTENNASIZE");} 
+| K_ANTENNASIDEAREAFACTOR {$$ = new std::string ("ANTENNASIDEAREAFACTOR");} 
+| K_ANYEDGE {$$ = new std::string ("ANYEDGE");} 
+| K_AREA {$$ = new std::string ("AREA");} 
+| K_AREAIO {$$ = new std::string ("AREAIO");} 
+| K_ARRAY {$$ = new std::string ("ARRAY");} 
+| K_ARRAYCUTS {$$ = new std::string ("ARRAYCUTS");} 
+| K_ARRAYSPACING {$$ = new std::string ("ARRAYSPACING");} 
+| K_AVERAGE {$$ = new std::string ("AVERAGE");} 
+| K_BELOW {$$ = new std::string ("BELOW");} 
+| K_BEGINEXT {$$ = new std::string ("BEGINEXT");} 
+| K_BLACKBOX {$$ = new std::string ("BLACKBOX");} 
+| K_BLOCK {$$ = new std::string ("BLOCK");} 
+| K_BOTTOMLEFT {$$ = new std::string ("BOTTOMLEFT");} 
+| K_BOTTOMRIGHT {$$ = new std::string ("BOTTOMRIGHT");} 
+| K_BUMP {$$ = new std::string ("BUMP");} 
+| K_BUSBITCHARS {$$ = new std::string ("BUSBITCHARS");} 
+| K_BUFFER {$$ = new std::string ("BUFFER");} 
+| K_BY {$$ = new std::string ("BY");} 
+| K_CANNOTOCCUPY {$$ = new std::string ("CANNOTOCCUPY");} 
+| K_CANPLACE {$$ = new std::string ("CANPLACE");} 
+| K_CAPACITANCE {$$ = new std::string ("CAPACITANCE");} 
+| K_CAPMULTIPLIER {$$ = new std::string ("CAPMULTIPLIER");} 
+| K_CENTERTOCENTER {$$ = new std::string ("CENTERTOCENTER");} 
+| K_CLASS {$$ = new std::string ("CLASS");} 
+| K_CLEARANCEMEASURE {$$ = new std::string ("CLEARANCEMEASURE");} 
+| K_CLOCK {$$ = new std::string ("CLOCK");} 
+| K_CLOCKTYPE {$$ = new std::string ("CLOCKTYPE");} 
+| K_COLUMNMAJOR {$$ = new std::string ("COLUMNMAJOR");} 
+| K_CURRENTDEN {$$ = new std::string ("CURRENTDEN");} 
+| K_COMPONENTPIN {$$ = new std::string ("COMPONENTPIN");} 
+| K_CORE {$$ = new std::string ("CORE");} 
+| K_CORNER {$$ = new std::string ("CORNER");} 
+| K_CORRECTIONFACTOR {$$ = new std::string ("CORRECTIONFACTOR");} 
+| K_CORRECTIONTABLE {$$ = new std::string ("CORRECTIONTABLE");} 
+| K_COVER {$$ = new std::string ("COVER");} 
+| K_CPERSQDIST {$$ = new std::string ("CPERSQDIST");} 
+| K_CURRENT {$$ = new std::string ("CURRENT");} 
+| K_CURRENTSOURCE {$$ = new std::string ("CURRENTSOURCE");} 
+| K_CUT {$$ = new std::string ("CUT");} 
+| K_CUTAREA {$$ = new std::string ("CUTAREA");} 
+| K_CUTSIZE {$$ = new std::string ("CUTSIZE");} 
+| K_CUTSPACING {$$ = new std::string ("CUTSPACING");} 
+| K_DATA {$$ = new std::string ("DATA");} 
+| K_DATABASE {$$ = new std::string ("DATABASE");} 
+| K_DCCURRENTDENSITY {$$ = new std::string ("DCCURRENTDENSITY");} 
+| K_DEFAULT {$$ = new std::string ("DEFAULT");} 
+| K_DEFAULTCAP {$$ = new std::string ("DEFAULTCAP");} 
+| K_DELAY {$$ = new std::string ("DELAY");} 
+| K_DENSITY {$$ = new std::string ("DENSITY");} 
+| K_DENSITYCHECKSTEP {$$ = new std::string ("DENSITYCHECKSTEP");} 
+| K_DENSITYCHECKWINDOW {$$ = new std::string ("DENSITYCHECKWINDOW");} 
+| K_DESIGNRULEWIDTH {$$ = new std::string ("DESIGNRULEWIDTH");} 
+| K_DIAG45 {$$ = new std::string ("DIAG45");} 
+| K_DIAG135 {$$ = new std::string ("DIAG135");} 
+| K_DIAGMINEDGELENGTH {$$ = new std::string ("DIAGMINEDGELENGTH");} 
+| K_DIAGSPACING {$$ = new std::string ("DIAGSPACING");} 
+| K_DIAGPITCH {$$ = new std::string ("DIAGPITCH");} 
+| K_DIAGWIDTH {$$ = new std::string ("DIAGWIDTH");} 
+| K_DIELECTRIC {$$ = new std::string ("DIELECTRIC");} 
+| K_DIFFUSEONLY {$$ = new std::string ("DIFFUSEONLY");} 
+| K_DIRECTION {$$ = new std::string ("DIRECTION");} 
+| K_DIVIDERCHAR {$$ = new std::string ("DIVIDERCHAR");} 
+| K_DO {$$ = new std::string ("DO");} 
+| K_E {$$ = new std::string ("E");} 
+| K_EDGECAPACITANCE {$$ = new std::string ("EDGECAPACITANCE");} 
+| K_EDGERATE {$$ = new std::string ("EDGERATE");} 
+| K_EDGERATESCALEFACTOR {$$ = new std::string ("EDGERATESCALEFACTOR");} 
+| K_EDGERATETHRESHOLD1 {$$ = new std::string ("EDGERATETHRESHOLD1");} 
+| K_EDGERATETHRESHOLD2 {$$ = new std::string ("EDGERATETHRESHOLD2");} 
+| K_EEQ {$$ = new std::string ("EEQ");} 
+| K_ELSE {$$ = new std::string ("ELSE");} 
+| K_ENCLOSURE {$$ = new std::string ("ENCLOSURE");} 
+| K_END {$$ = new std::string ("END");} 
+| K_ENDEXT {$$ = new std::string ("ENDEXT");} 
+| K_ENDCAP {$$ = new std::string ("ENDCAP");} 
+| K_ENDOFLINE {$$ = new std::string ("ENDOFLINE");} 
+| K_ENDOFNOTCHWIDTH {$$ = new std::string ("ENDOFNOTCHWIDTH");} 
+| K_EUCLIDEAN {$$ = new std::string ("EUCLIDEAN");} 
+| K_EXCEPTEXTRACUT {$$ = new std::string ("EXCEPTEXTRACUT");} 
+| K_EXCEPTSAMEPGNET {$$ = new std::string ("EXCEPTSAMEPGNET");} 
+| K_EXCEPTPGNET {$$ = new std::string ("EXCEPTPGNET");} 
+| K_EXTENSION {$$ = new std::string ("EXTENSION");} 
+| K_FALL {$$ = new std::string ("FALL");} 
+| K_FALLCS {$$ = new std::string ("FALLCS");} 
+| K_FALLRS {$$ = new std::string ("FALLRS");} 
+| K_FALLSATCUR {$$ = new std::string ("FALLSATCUR");} 
+| K_FALLSATT1 {$$ = new std::string ("FALLSATT1");} 
+| K_FALLSLEWLIMIT {$$ = new std::string ("FALLSLEWLIMIT");} 
+| K_FALLT0 {$$ = new std::string ("FALLT0");} 
+| K_FALLTHRESH {$$ = new std::string ("FALLTHRESH");} 
+| K_FALLVOLTAGETHRESHOLD {$$ = new std::string ("FALLVOLTAGETHRESHOLD");} 
+| K_FALSE {$$ = new std::string ("FALSE");} 
+| K_FE {$$ = new std::string ("FE");} 
+| K_FEEDTHRU {$$ = new std::string ("FEEDTHRU");} 
+| K_FILLACTIVESPACING {$$ = new std::string ("FILLACTIVESPACING");} 
+| K_FIXED {$$ = new std::string ("FIXED");} 
+| K_FLIP {$$ = new std::string ("FLIP");} 
+| K_FLOORPLAN {$$ = new std::string ("FLOORPLAN");} 
+| K_FN {$$ = new std::string ("FN");} 
+| K_FOREIGN {$$ = new std::string ("FOREIGN");} 
+| K_FREQUENCY {$$ = new std::string ("FREQUENCY");} 
+| K_FROMABOVE {$$ = new std::string ("FROMABOVE");} 
+| K_FROMBELOW {$$ = new std::string ("FROMBELOW");} 
+| K_FROMPIN {$$ = new std::string ("FROMPIN");} 
+| K_FUNCTION {$$ = new std::string ("FUNCTION");} 
+| K_FS {$$ = new std::string ("FS");} 
+| K_FW {$$ = new std::string ("FW");} 
+| K_GCELLGRID {$$ = new std::string ("GCELLGRID");} 
+| K_GENERATE {$$ = new std::string ("GENERATE");} 
+| K_GENERATED {$$ = new std::string ("GENERATED");} 
+| K_GENERATOR {$$ = new std::string ("GENERATOR");} 
+| K_GROUND {$$ = new std::string ("GROUND");} 
+| K_GROUNDSENSITIVITY {$$ = new std::string ("GROUNDSENSITIVITY");} 
+| K_HARDSPACING {$$ = new std::string ("HARDSPACING");} 
+| K_HEIGHT {$$ = new std::string ("HEIGHT");} 
+| K_HISTORY {$$ = new std::string ("HISTORY");} 
+| K_HOLD {$$ = new std::string ("HOLD");} 
+| K_HORIZONTAL {$$ = new std::string ("HORIZONTAL");} 
+| K_IF {$$ = new std::string ("IF");} 
+| K_IMPLANT {$$ = new std::string ("IMPLANT");} 
+| K_INFLUENCE {$$ = new std::string ("INFLUENCE");} 
+| K_INOUT {$$ = new std::string ("INOUT");} 
+| K_INOUTPINANTENNASIZE {$$ = new std::string ("INOUTPINANTENNASIZE");} 
+| K_INPUT {$$ = new std::string ("INPUT");} 
+| K_INPUTPINANTENNASIZE {$$ = new std::string ("INPUTPINANTENNASIZE");} 
+| K_INPUTNOISEMARGIN {$$ = new std::string ("INPUTNOISEMARGIN");} 
+| K_INSIDECORNER {$$ = new std::string ("INSIDECORNER");} 
+| K_INTEGER {$$ = new std::string ("INTEGER");} 
+| K_INTRINSIC {$$ = new std::string ("INTRINSIC");} 
+| K_INVERT {$$ = new std::string ("INVERT");} 
+| K_INVERTER {$$ = new std::string ("INVERTER");} 
+| K_IRDROP {$$ = new std::string ("IRDROP");} 
+| K_ITERATE {$$ = new std::string ("ITERATE");} 
+| K_IV_TABLES {$$ = new std::string ("IV_TABLES");} 
+| K_LAYER {$$ = new std::string ("LAYER");} 
+| K_LAYERS {$$ = new std::string ("LAYERS");} 
+| K_LEAKAGE {$$ = new std::string ("LEAKAGE");} 
+| K_LENGTH {$$ = new std::string ("LENGTH");} 
+| K_LENGTHSUM {$$ = new std::string ("LENGTHSUM");} 
+| K_LENGTHTHRESHOLD {$$ = new std::string ("LENGTHTHRESHOLD");} 
+| K_LEQ {$$ = new std::string ("LEQ");} 
+| K_LIBRARY {$$ = new std::string ("LIBRARY");} 
+| K_LONGARRAY {$$ = new std::string ("LONGARRAY");} 
+| K_MACRO {$$ = new std::string ("MACRO");} 
+| K_MANUFACTURINGGRID {$$ = new std::string ("MANUFACTURINGGRID");} 
+| K_MASTERSLICE {$$ = new std::string ("MASTERSLICE");} 
+| K_MATCH {$$ = new std::string ("MATCH");} 
+| K_MAXADJACENTSLOTSPACING {$$ = new std::string ("MAXADJACENTSLOTSPACING");} 
+| K_MAXCOAXIALSLOTSPACING {$$ = new std::string ("MAXCOAXIALSLOTSPACING");} 
+| K_MAXDELAY {$$ = new std::string ("MAXDELAY");} 
+| K_MAXEDGES {$$ = new std::string ("MAXEDGES");} 
+| K_MAXEDGESLOTSPACING {$$ = new std::string ("MAXEDGESLOTSPACING");} 
+| K_MAXLOAD {$$ = new std::string ("MAXLOAD");} 
+| K_MAXIMUMDENSITY {$$ = new std::string ("MAXIMUMDENSITY");} 
+| K_MAXVIASTACK {$$ = new std::string ("MAXVIASTACK");} 
+| K_MAXWIDTH {$$ = new std::string ("MAXWIDTH");} 
+| K_MAXXY {$$ = new std::string ("MAXXY");} 
+| K_MEGAHERTZ {$$ = new std::string ("MEGAHERTZ");} 
+| K_METALOVERHANG {$$ = new std::string ("METALOVERHANG");} 
+| K_MICRONS {$$ = new std::string ("MICRONS");} 
+| K_MILLIAMPS {$$ = new std::string ("MILLIAMPS");} 
+| K_MILLIWATTS {$$ = new std::string ("MILLIWATTS");} 
+| K_MINCUTS {$$ = new std::string ("MINCUTS");} 
+| K_MINENCLOSEDAREA {$$ = new std::string ("MINENCLOSEDAREA");} 
+| K_MINFEATURE {$$ = new std::string ("MINFEATURE");} 
+| K_MINIMUMCUT {$$ = new std::string ("MINIMUMCUT");} 
+| K_MINIMUMDENSITY {$$ = new std::string ("MINIMUMDENSITY");} 
+| K_MINPINS {$$ = new std::string ("MINPINS");} 
+| K_MINSIZE {$$ = new std::string ("MINSIZE");} 
+| K_MINSTEP {$$ = new std::string ("MINSTEP");} 
+| K_MINWIDTH {$$ = new std::string ("MINWIDTH");} 
+| K_MPWH {$$ = new std::string ("MPWH");} 
+| K_MPWL {$$ = new std::string ("MPWL");} 
+| K_MUSTJOIN {$$ = new std::string ("MUSTJOIN");} 
+| K_MX {$$ = new std::string ("MX");} 
+| K_MY {$$ = new std::string ("MY");} 
+| K_MXR90 {$$ = new std::string ("MXR90");} 
+| K_MYR90 {$$ = new std::string ("MYR90");} 
+| K_N {$$ = new std::string ("N");} 
+| K_NAMEMAPSTRING {$$ = new std::string ("NAMEMAPSTRING");} 
+| K_NAMESCASESENSITIVE {$$ = new std::string ("NAMESCASESENSITIVE");} 
+| K_NANOSECONDS {$$ = new std::string ("NANOSECONDS");} 
+| K_NEGEDGE {$$ = new std::string ("NEGEDGE");} 
+| K_NETEXPR {$$ = new std::string ("NETEXPR");} 
+| K_NETS {$$ = new std::string ("NETS");} 
+| K_NEW {$$ = new std::string ("NEW");} 
+| K_NONDEFAULTRULE {$$ = new std::string ("NONDEFAULTRULE");} 
+| K_NONE {$$ = new std::string ("NONE");} 
+| K_NONINVERT {$$ = new std::string ("NONINVERT");} 
+| K_NONUNATE {$$ = new std::string ("NONUNATE");} 
+| K_NOISETABLE {$$ = new std::string ("NOISETABLE");} 
+| K_NOTCHLENGTH {$$ = new std::string ("NOTCHLENGTH");} 
+| K_NOTCHSPACING {$$ = new std::string ("NOTCHSPACING");} 
+| K_NOWIREEXTENSIONATPIN {$$ = new std::string ("NOWIREEXTENSIONATPIN");} 
+| K_OBS {$$ = new std::string ("OBS");} 
+| K_OFF {$$ = new std::string ("OFF");} 
+| K_OFFSET {$$ = new std::string ("OFFSET");} 
+| K_OHMS {$$ = new std::string ("OHMS");} 
+| K_ON {$$ = new std::string ("ON");} 
+| K_OR {$$ = new std::string ("OR");} 
+| K_ORIENT {$$ = new std::string ("ORIENT");} 
+| K_ORIENTATION {$$ = new std::string ("ORIENTATION");} 
+| K_ORIGIN {$$ = new std::string ("ORIGIN");} 
+| K_ORTHOGONAL {$$ = new std::string ("ORTHOGONAL");} 
+| K_OUTPUT {$$ = new std::string ("OUTPUT");} 
+| K_OUTPUTPINANTENNASIZE {$$ = new std::string ("OUTPUTPINANTENNASIZE");} 
+| K_OUTPUTNOISEMARGIN {$$ = new std::string ("OUTPUTNOISEMARGIN");} 
+| K_OUTPUTRESISTANCE {$$ = new std::string ("OUTPUTRESISTANCE");} 
+| K_OUTSIDECORNER {$$ = new std::string ("OUTSIDECORNER");} 
+| K_OVERHANG {$$ = new std::string ("OVERHANG");} 
+| K_OVERLAP {$$ = new std::string ("OVERLAP");} 
+| K_OVERLAPS {$$ = new std::string ("OVERLAPS");} 
+| K_OXIDE1 {$$ = new std::string ("OXIDE1");} 
+| K_OXIDE2 {$$ = new std::string ("OXIDE2");} 
+| K_OXIDE3 {$$ = new std::string ("OXIDE3");} 
+| K_OXIDE4 {$$ = new std::string ("OXIDE4");} 
+| K_PAD {$$ = new std::string ("PAD");} 
+| K_PARALLELEDGE {$$ = new std::string ("PARALLELEDGE");} 
+| K_PARALLELOVERLAP {$$ = new std::string ("PARALLELOVERLAP");} 
+| K_PARALLELRUNLENGTH {$$ = new std::string ("PARALLELRUNLENGTH");} 
+| K_PATH {$$ = new std::string ("PATH");} 
+| K_PATTERN {$$ = new std::string ("PATTERN");} 
+| K_PEAK {$$ = new std::string ("PEAK");} 
+| K_PERIOD {$$ = new std::string ("PERIOD");} 
+| K_PGONLY {$$ = new std::string ("PGONLY");} 
+| K_PICOFARADS {$$ = new std::string ("PICOFARADS");} 
+| K_PIN {$$ = new std::string ("PIN");} 
+| K_PITCH {$$ = new std::string ("PITCH");} 
+| K_PLACED {$$ = new std::string ("PLACED");} 
+| K_POLYGON {$$ = new std::string ("POLYGON");} 
+| K_PORT {$$ = new std::string ("PORT");} 
+| K_POSEDGE {$$ = new std::string ("POSEDGE");} 
+| K_POST {$$ = new std::string ("POST");} 
+| K_POWER {$$ = new std::string ("POWER");} 
+| K_PRE {$$ = new std::string ("PRE");} 
+| K_PREFERENCLOSURE {$$ = new std::string ("PREFERENCLOSURE");} 
+| K_PRL {$$ = new std::string ("PRL");} 
+| K_PROPERTY {$$ = new std::string ("PROPERTY");} 
+| K_PROPERTYDEFINITIONS {$$ = new std::string ("PROPERTYDEFINITIONS");} 
+| K_PROTRUSIONWIDTH {$$ = new std::string ("PROTRUSIONWIDTH");} 
+| K_PULLDOWNRES {$$ = new std::string ("PULLDOWNRES");} 
+| K_PWL {$$ = new std::string ("PWL");} 
+| K_R0 {$$ = new std::string ("R0");} 
+| K_R90 {$$ = new std::string ("R90");} 
+| K_R180 {$$ = new std::string ("R180");} 
+| K_R270 {$$ = new std::string ("R270");} 
+| K_RANGE {$$ = new std::string ("RANGE");} 
+| K_REAL {$$ = new std::string ("REAL");} 
+| K_RECOVERY {$$ = new std::string ("RECOVERY");} 
+| K_RECT {$$ = new std::string ("RECT");} 
+| K_RESISTANCE {$$ = new std::string ("RESISTANCE");} 
+| K_RESISTIVE {$$ = new std::string ("RESISTIVE");} 
+| K_RING {$$ = new std::string ("RING");} 
+| K_RISE {$$ = new std::string ("RISE");} 
+| K_RISECS {$$ = new std::string ("RISECS");} 
+| K_RISERS {$$ = new std::string ("RISERS");} 
+| K_RISESATCUR {$$ = new std::string ("RISESATCUR");} 
+| K_RISESATT1 {$$ = new std::string ("RISESATT1");} 
+| K_RISESLEWLIMIT {$$ = new std::string ("RISESLEWLIMIT");} 
+| K_RISET0 {$$ = new std::string ("RISET0");} 
+| K_RISETHRESH {$$ = new std::string ("RISETHRESH");} 
+| K_RISEVOLTAGETHRESHOLD {$$ = new std::string ("RISEVOLTAGETHRESHOLD");} 
+| K_RMS {$$ = new std::string ("RMS");} 
+| K_ROUTING {$$ = new std::string ("ROUTING");} 
+| K_ROWABUTSPACING {$$ = new std::string ("ROWABUTSPACING");} 
+| K_ROWCOL {$$ = new std::string ("ROWCOL");} 
+| K_ROWMAJOR {$$ = new std::string ("ROWMAJOR");} 
+| K_ROWMINSPACING {$$ = new std::string ("ROWMINSPACING");} 
+| K_ROWPATTERN {$$ = new std::string ("ROWPATTERN");} 
+| K_RPERSQ {$$ = new std::string ("RPERSQ");} 
+| K_S {$$ = new std::string ("S");} 
+| K_SAMENET {$$ = new std::string ("SAMENET");} 
+| K_SCANUSE {$$ = new std::string ("SCANUSE");} 
+| K_SDFCOND {$$ = new std::string ("SDFCOND");} 
+| K_SDFCONDEND {$$ = new std::string ("SDFCONDEND");} 
+| K_SDFCONDSTART {$$ = new std::string ("SDFCONDSTART");} 
+| K_SETUP {$$ = new std::string ("SETUP");} 
+| K_SHAPE {$$ = new std::string ("SHAPE");} 
+| K_SHRINKAGE {$$ = new std::string ("SHRINKAGE");} 
+| K_SIGNAL {$$ = new std::string ("SIGNAL");} 
+| K_SITE {$$ = new std::string ("SITE");} 
+| K_SIZE {$$ = new std::string ("SIZE");} 
+| K_SKEW {$$ = new std::string ("SKEW");} 
+| K_SLOTLENGTH {$$ = new std::string ("SLOTLENGTH");} 
+| K_SLOTWIDTH {$$ = new std::string ("SLOTWIDTH");} 
+| K_SLOTWIRELENGTH {$$ = new std::string ("SLOTWIRELENGTH");} 
+| K_SLOTWIREWIDTH {$$ = new std::string ("SLOTWIREWIDTH");} 
+| K_SPLITWIREWIDTH {$$ = new std::string ("SPLITWIREWIDTH");} 
+| K_SOFT {$$ = new std::string ("SOFT");} 
+| K_SOURCE {$$ = new std::string ("SOURCE");} 
+| K_SPACER {$$ = new std::string ("SPACER");} 
+| K_SPACING {$$ = new std::string ("SPACING");} 
+| K_SPACINGTABLE {$$ = new std::string ("SPACINGTABLE");} 
+| K_SPECIALNETS {$$ = new std::string ("SPECIALNETS");} 
+| K_STABLE {$$ = new std::string ("STABLE");} 
+| K_STACK {$$ = new std::string ("STACK");} 
+| K_START {$$ = new std::string ("START");} 
+| K_STEP {$$ = new std::string ("STEP");} 
+| K_STOP {$$ = new std::string ("STOP");} 
+| K_STRING {$$ = new std::string ("STRING");} 
+| K_STRUCTURE {$$ = new std::string ("STRUCTURE");} 
+| K_SUPPLYSENSITIVITY {$$ = new std::string ("SUPPLYSENSITIVITY");} 
+| K_SYMMETRY {$$ = new std::string ("SYMMETRY");} 
+| K_TABLE {$$ = new std::string ("TABLE");} 
+| K_TABLEAXIS {$$ = new std::string ("TABLEAXIS");} 
+| K_TABLEDIMENSION {$$ = new std::string ("TABLEDIMENSION");} 
+| K_TABLEENTRIES {$$ = new std::string ("TABLEENTRIES");} 
+| K_TAPERRULE {$$ = new std::string ("TAPERRULE");} 
+| K_THEN {$$ = new std::string ("THEN");} 
+| K_THICKNESS {$$ = new std::string ("THICKNESS");} 
+| K_TIEHIGH {$$ = new std::string ("TIEHIGH");} 
+| K_TIELOW {$$ = new std::string ("TIELOW");} 
+| K_TIEOFFR {$$ = new std::string ("TIEOFFR");} 
+| K_TIME {$$ = new std::string ("TIME");} 
+| K_TIMING {$$ = new std::string ("TIMING");} 
+| K_TO {$$ = new std::string ("TO");} 
+| K_TOPIN {$$ = new std::string ("TOPIN");} 
+| K_TOPLEFT {$$ = new std::string ("TOPLEFT");} 
+| K_TOPOFSTACKONLY {$$ = new std::string ("TOPOFSTACKONLY");} 
+| K_TOPRIGHT {$$ = new std::string ("TOPRIGHT");} 
+| K_TRACKS {$$ = new std::string ("TRACKS");} 
+| K_TRANSITIONTIME {$$ = new std::string ("TRANSITIONTIME");} 
+| K_TRISTATE {$$ = new std::string ("TRISTATE");} 
+| K_TRUE {$$ = new std::string ("TRUE");} 
+| K_TWOEDGES {$$ = new std::string ("TWOEDGES");} 
+| K_TWOWIDTHS {$$ = new std::string ("TWOWIDTHS");} 
+| K_TYPE {$$ = new std::string ("TYPE");} 
+| K_UNATENESS {$$ = new std::string ("UNATENESS");} 
+| K_UNITS {$$ = new std::string ("UNITS");} 
+| K_UNIVERSALNOISEMARGIN {$$ = new std::string ("UNIVERSALNOISEMARGIN");} 
+| K_USE {$$ = new std::string ("USE");} 
+| K_USELENGTHTHRESHOLD {$$ = new std::string ("USELENGTHTHRESHOLD");} 
+| K_USEMINSPACING {$$ = new std::string ("USEMINSPACING");} 
+| K_USER {$$ = new std::string ("USER");} 
+| K_USEVIA {$$ = new std::string ("USEVIA");} 
+| K_USEVIARULE {$$ = new std::string ("USEVIARULE");} 
+| K_VARIABLE {$$ = new std::string ("VARIABLE");} 
+| K_VERSION {$$ = new std::string ("VERSION");} 
+| K_VERTICAL {$$ = new std::string ("VERTICAL");} 
+| K_VHI {$$ = new std::string ("VHI");} 
+| K_VIA {$$ = new std::string ("VIA");} 
+| K_VIARULE {$$ = new std::string ("VIARULE");} 
+| K_VICTIMLENGTH {$$ = new std::string ("VICTIMLENGTH");} 
+| K_VICTIMNOISE {$$ = new std::string ("VICTIMNOISE");} 
+| K_VIRTUAL {$$ = new std::string ("VIRTUAL");} 
+| K_VLO {$$ = new std::string ("VLO");} 
+| K_VOLTAGE {$$ = new std::string ("VOLTAGE");} 
+| K_VOLTS {$$ = new std::string ("VOLTS");} 
+| K_W {$$ = new std::string ("W");} 
+| K_WELLTAP {$$ = new std::string ("WELLTAP");} 
+| K_WIDTH {$$ = new std::string ("WIDTH");} 
+| K_WITHIN {$$ = new std::string ("WITHIN");} 
+| K_WIRECAP {$$ = new std::string ("WIRECAP");} 
+| K_WIREEXTENSION {$$ = new std::string ("WIREEXTENSION");} 
+| K_X {$$ = new std::string ("X");} 
+| K_Y {$$ = new std::string ("Y");} 
+| K_EQ {$$ = new std::string ("EQ");} 
+| K_NE {$$ = new std::string ("NE");} 
+| K_LE {$$ = new std::string ("LE");} 
+| K_LT {$$ = new std::string ("LT");} 
+| K_GE {$$ = new std::string ("GE");} 
+| K_GT {$$ = new std::string ("GT");} 
+| K_NOT {$$ = new std::string ("NOT");}
 
 lef_file: rules extension_opt  end_library
       {
@@ -576,6 +988,38 @@ version: K_VERSION { driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING ';'
 /*
          driver.versionNum = $3;         Save the version number for future use */
 		 driver.lefrVersionStrCbk(*$3);
+		 driver.lefrVersionCbk(driver.versionNum);
+         if (driver.versionNum > 5.3 && driver.versionNum < 5.4) {
+            driver.ignoreVersion = 1;
+         }
+         driver.use5_3 = driver.use5_4 = 0;
+         driver.lef_errors = 0;
+         if (driver.hasVer)     /* More than 1 lef file within the open file */
+            driver.resetVars();
+         driver.hasVer = 1;
+         if (driver.versionNum < 5.6) {
+            driver.doneLib = 0;
+            driver.lefNamesCaseSensitive = driver.lefReaderCaseSensitive;
+         } else {
+            driver.doneLib = 1;
+            driver.lefNamesCaseSensitive = 1;
+         }
+      }
+	  | K_VERSION { driver.lefDumbMode = 1; driver.lefNoNum = 1;} DOUBLE ';'
+      { 
+         driver.versionNum = $3;
+         if (driver.versionNum > 5.7) {
+            char temp[120];
+            sprintf(temp,
+               "Lef parser 5.7 does not support lef file with version %f. Parser stops executions.", $3);
+            driver.lefError(1503, temp);
+            return 1;
+         }
+/*
+         driver.versionNum = $3;         Save the version number for future use */
+		 char tmp[20];
+		 snprintf(tmp, sizeof(tmp), "%g", $3);
+		 driver.lefrVersionStrCbk(tmp);
 		 driver.lefrVersionCbk(driver.versionNum);
          if (driver.versionNum > 5.3 && driver.versionNum < 5.4) {
             driver.ignoreVersion = 1;
@@ -815,7 +1259,7 @@ layer_rule: start_layer
     layer_options end_layer
     { driver.lefrLayerCbk(driver.lefrLayer);}
 
-start_layer: K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING
+start_layer: K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1; } GSTRING 
     { 
       if (driver.lefrHasMaxVS) {   /* 5.5 */
           if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
@@ -841,7 +1285,7 @@ start_layer: K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING
       driver.lefrHasSpacing = 0;
     }
 
-end_layer: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING
+end_layer: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1; } GSTRING
     { 
       if (driver.layerName != *$3) {
           if (driver.layerWarnings++ < driver.lefrLayerWarnings) {
@@ -3195,7 +3639,7 @@ via_foreign:
     }
 
 start_foreign:	K_FOREIGN {driver.lefDumbMode = 1; driver.lefNoNum= 1;} STRING
-    { $$ = $3; }
+    { $$ = new std::string (*$3); }
 
 orientation:
   K_N         {$$ = 0;}
@@ -6781,14 +7225,14 @@ opt_adjacentcuts_exceptsame:                /* 5.7 */
 
 opt_layer_name:
   /* empty */
-    { $$ = 0; }
+    { $$ = new std::string (""); }
   | K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING
-    { $$ = $3; }
+    { $$ = new std::string (*$3); }
 
 req_layer_name:
   /* pcr 355313 */
    K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING
-    { $$ = $3; }
+    { $$ = new std::string (*$3); }
 
 /* 9/11/2001 - Wanda da Rosa.  The following are obsolete in 5.4 */
 universalnoisemargin: K_UNIVERSALNOISEMARGIN NUMBER NUMBER ';'

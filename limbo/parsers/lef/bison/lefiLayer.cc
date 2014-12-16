@@ -2508,7 +2508,7 @@ int lefiLayer::hasLayerType() const {
 }
 
 int lefiLayer::hasPitch() const {
-  if (this->hasPitch_ == 1)
+  if (this->hasPitch_ == 1) 
     return 1;
   else
     return 0;
@@ -3202,6 +3202,8 @@ void lefiLayer::print(FILE* f) const {
      fprintf(f, "  type %s\n", this->lefiLayer::type());
   if (this->lefiLayer::hasPitch())
      fprintf(f, "  pitch %g\n", this->lefiLayer::pitch());
+  if (this->lefiLayer::hasXYPitch())
+     fprintf(f, "  xypitch %g %g\n", this->lefiLayer::pitchX(), this->lefiLayer::pitchY());
   if (this->lefiLayer::hasWireExtension())
      fprintf(f, "  wireextension %g\n", this->lefiLayer::wireExtension());
   if (this->lefiLayer::hasWidth())
@@ -3427,7 +3429,7 @@ double lefiLayer::propNumber(int i) const {
 }
 
 
-const char lefiLayer::propType(int i) const {
+char lefiLayer::propType(int i) const {
   char msg[160];
   if (i < 0 || i >= this->numProps_) {
     sprintf (msg, "ERROR (EMSPARS-1300): The index number %d given for the layer property is invalid.\nValid index is from 0 to %d", i, this->numProps_);

@@ -261,11 +261,19 @@ void lefiVia::Init() {
   this->foreign_ = 0;
   this->numProps_ = 0;
   this->propsAllocated_ = 0;
+  this->propName_ = 0;
+  this->propValue_ = 0;
+  this->propDValue_ = 0;
+  this->propType_ = 0;
   this->layersAllocated_ = 3;
   this->layers_ = (lefiViaLayer**)lefMalloc(sizeof(lefiViaLayer*)*3);
   this->numLayers_ = 0;
-  this->lefiVia::clear();
+  this->botLayer_ = 0;
+  this->cutLayer_ = 0;
+  this->topLayer_ = 0;
+  this->cutPattern_ = 0;
   this->viaRuleName_ = 0;
+  this->lefiVia::clear();
 }
 
 void lefiVia::Destroy() {

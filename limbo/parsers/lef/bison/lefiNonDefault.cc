@@ -956,7 +956,7 @@ double lefiNonDefault::propNumber(int index) const {
   return this->dvalues_[index];
 }
 
-const char lefiNonDefault::propType(int index) const {
+char lefiNonDefault::propType(int index) const {
   char msg[160];
   if (index < 0 || index >= this->numProps_) {
     sprintf (msg, "ERROR (LEFPARS-1408): The index number %d given for the NONDEFAULT PROPERTY is invalid.\nValid index is from 0 to %d", index, this->numProps_);

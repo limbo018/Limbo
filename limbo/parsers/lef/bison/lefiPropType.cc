@@ -99,7 +99,7 @@ void lefiPropType::bumpProps() {
 }
 
 
-const char lefiPropType::propType(const char* name) const {
+char lefiPropType::propType(const char* name) const {
   int i;
 
   // Name is NULL, error

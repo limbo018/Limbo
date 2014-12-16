@@ -22,54 +22,78 @@ namespace LefParser {
 
 // The different types of items in a geometry list.
 
-struct lefiGeomRect {
-  double xl;
-  double yl;
-  double xh;
-  double yh;
+struct lefiGeomRect 
+{
+	lefiGeomRect();
+	void copy(lefiGeomRect const& rhs);
+	//~lefiGeomRect();
+	double xl;
+	double yl;
+	double xh;
+	double yh;
 };
 
-struct lefiGeomRectIter {
-  double xl;
-  double yl;
-  double xh;
-  double yh;
-  double xStart;
-  double yStart;
-  double xStep;
-  double yStep;
+struct lefiGeomRectIter 
+{
+	lefiGeomRectIter();
+	void copy(lefiGeomRectIter const& rhs);
+	//~lefiGeomRectIter();
+	double xl;
+	double yl;
+	double xh;
+	double yh;
+	double xStart;
+	double yStart;
+	double xStep;
+	double yStep;
 };
 
-struct lefiGeomPath {
-  int numPoints;
-  double* x;
-  double* y;
+struct lefiGeomPath 
+{
+	lefiGeomPath();
+	void copy(lefiGeomPath const& rhs);
+	//~lefiGeomPath();
+	int numPoints;
+	double* x;
+	double* y;
 };
 
-struct lefiGeomPathIter {
-  int numPoints;
-  double* x;
-  double* y;
-  double xStart;
-  double yStart;
-  double xStep;
-  double yStep;
+struct lefiGeomPathIter 
+{
+	lefiGeomPathIter();
+	void copy(lefiGeomPathIter const& rhs);
+	//~lefiGeomPathIter();
+	int numPoints;
+	double* x;
+	double* y;
+	double xStart;
+	double yStart;
+	double xStep;
+	double yStep;
 };
 
-struct lefiGeomPolygon {
-  int numPoints;
-  double* x;
-  double* y;
+struct lefiGeomPolygon 
+{
+	lefiGeomPolygon();
+	void copy(lefiGeomPolygon const& rhs);
+	//~lefiGeomPolygon();
+	int numPoints;
+	double* x;
+	double* y;
 };
 
-struct lefiGeomPolygonIter {
-  int numPoints;
-  double* x;
-  double* y;
-  double xStart;
-  double yStart;
-  double xStep;
-  double yStep;
+struct lefiGeomPolygonIter 
+{
+	lefiGeomPolygonIter();
+	void copy(lefiGeomPolygonIter const& rhs);
+	//~lefiGeomPolygonIter();
+	int numPoints;
+	double* x;
+	double* y;
+	double xStart;
+	double yStart;
+	double xStep;
+	double yStep;
 };
 
 enum lefiGeomEnum {
@@ -91,27 +115,37 @@ enum lefiGeomEnum {
   lefiGeomEnd
 };
 
-struct lefiGeomVia {
-  char* name;
-  double x;
-  double y;
+struct lefiGeomVia 
+{
+	lefiGeomVia();
+	void copy(lefiGeomVia const& rhs);
+	//~lefiGeomVia();
+	char* name;
+	double x;
+	double y;
 };
 
-struct lefiGeomViaIter {
-  char* name;
-  double x;
-  double y;
-  double xStart;
-  double yStart;
-  double xStep;
-  double yStep;
+struct lefiGeomViaIter 
+{
+	lefiGeomViaIter();
+	void copy(lefiGeomViaIter const& rhs);
+	//~lefiGeomViaIter();
+	char* name;
+	double x;
+	double y;
+	double xStart;
+	double yStart;
+	double xStep;
+	double yStep;
 };
 
 
 class lefiGeometries {
 public:
   lefiGeometries();
+  lefiGeometries(lefiGeometries const& rhs); // copy constructor is necessary 
   void Init();
+  void copy(lefiGeometries const& rhs);
 
   void Destroy();
   ~lefiGeometries();

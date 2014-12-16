@@ -596,7 +596,7 @@ double lefiViaRule::propNumber(int i) const {
   return this->dvalues_[i];
 }
 
-const char lefiViaRule::propType(int i) const {
+char lefiViaRule::propType(int i) const {
   char msg[160];
   if (i < 0 || i >= this->numProps_) {
     sprintf (msg, "ERROR (LEFPARS-1430): The index number %d given for the VIARULE PROPERTY is invalid.\nValid index is from 0 to %d", i, this->numProps_);

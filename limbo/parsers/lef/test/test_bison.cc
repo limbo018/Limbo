@@ -42,6 +42,10 @@ class DataBase : public LefParser::LefDataBase
 		{
 			v.print(stdout);
 		}
+		virtual void lef_manufacturing_cbk(double v)
+		{
+			cout << "lef manufacturing = " << v << endl;
+		}
 		virtual void lef_busbitchars_cbk(string const& v)
 		{
 			cout << "lef busbitchars = " << v << endl;
@@ -50,11 +54,27 @@ class DataBase : public LefParser::LefDataBase
 		{
 			v.print(stdout);
 		}
+		virtual void lef_via_cbk(LefParser::lefiVia const& v)
+		{
+			v.print(stdout);
+		}
+		virtual void lef_viarule_cbk(LefParser::lefiViaRule const& v)
+		{
+			v.print(stdout);
+		}
+		virtual void lef_spacing_cbk(LefParser::lefiSpacing const& v)
+		{
+			v.print(stdout);
+		}
 		virtual void lef_site_cbk(LefParser::lefiSite const& v)
 		{
 			v.print(stdout);
 		}
 		virtual void lef_macro_cbk(LefParser::lefiMacro const& v)
+		{
+			v.print(stdout);
+		}
+		virtual void lef_obstruction_cbk(LefParser::lefiObstruction const& v)
 		{
 			v.print(stdout);
 		}
@@ -74,7 +94,8 @@ int main(int argc, char** argv)
 
 	if (argc > 1)
 	{
-		test1(argv[1]);
+		for (int i = 1; i < argc; ++i)
+			test1(argv[i]);
 	}
 	else 
 		cout << "at least 1 argument is required" << endl;

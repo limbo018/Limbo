@@ -129,22 +129,27 @@ void lefiArray::Init() {
 
   this->numPatterns_ = 0;
   this->patternsAllocated_ = 0;
+  this->pattern_ = 0;
   this->lefiArray::bump((void***)(&(this->pattern_)), this->numPatterns_, &(this->patternsAllocated_));
 
   this->numCan_ = 0;
   this->canAllocated_ = 0;
+  this->canPlace_ = 0;
   this->lefiArray::bump((void***)(&(this->canPlace_)), this->numCan_, &(this->canAllocated_));
 
   this->numCannot_ = 0;
   this->cannotAllocated_ = 0;
+  this->cannotOccupy_ = 0;
   this->lefiArray::bump((void***)(&(this->cannotOccupy_)), this->numCannot_, &(this->cannotAllocated_));
 
   this->numTracks_ = 0;
   this->tracksAllocated_ = 0;
+  this->track_ = 0;
   this->lefiArray::bump((void***)(&(this->track_)), this->numTracks_, &(this->tracksAllocated_));
 
   this->numG_ = 0;
   this->gAllocated_ = 0;
+  this->gcell_ = 0;
   this->lefiArray::bump((void***)(&(this->gcell_)), this->numG_, &(this->gAllocated_));
 
   this->numDefault_ = 0;
@@ -154,8 +159,8 @@ void lefiArray::Init() {
 
   this->floorPlansAllocated_ = 0;
   this->numFloorPlans_ = 0;
-  this->lefiArray::bump((void***)(&(this->floors_)), this->numFloorPlans_,
-  &(this->floorPlansAllocated_));
+  this->floors_ = 0;
+  this->lefiArray::bump((void***)(&(this->floors_)), this->numFloorPlans_, &(this->floorPlansAllocated_));
 }
 
 
