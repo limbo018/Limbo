@@ -469,7 +469,7 @@ typedef LefParser::Parser::token_type token_type;
     return token::INTEGER;
 }
 
-[\+\-]?[0-9]+"."[0-9]* {
+[\+\-]?[0-9]+("."[0-9]*)?([eE][\+\-]?[0-9]+)? {
     yylval->doubleVal = atof(yytext);
     return token::DOUBLE;
 }

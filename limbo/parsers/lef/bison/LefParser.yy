@@ -5207,13 +5207,13 @@ macro_pin: start_macro_pin macro_pin_options end_macro_pin
       driver.lefrPin.lefiPin::clear();
     }
 
-start_macro_pin: K_PIN {driver.lefDumbMode = 1; driver.lefNoNum = 1; driver.pinDef = 1;} STRING 
+start_macro_pin: K_PIN {driver.lefDumbMode = 1; driver.lefNoNum = 1; driver.pinDef = 1;} GSTRING 
     { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setName((*$3).c_str());
       //strcpy(driver.pinName, $3);
       driver.pinName = (*$3);
     }
 
-end_macro_pin: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
+end_macro_pin: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} GSTRING
     {
       if (driver.pinName != *$3 ) {
         if (/*driver.lefrMacroCbk*/ 1) { /* write error only if cbk is set */

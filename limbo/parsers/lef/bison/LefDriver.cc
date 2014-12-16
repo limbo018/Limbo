@@ -178,11 +178,13 @@ void Driver::error(const class location& l,
 		   const std::string& m)
 {
     std::cerr << l << ": " << m << std::endl;
+	exit(-1);
 }
 
 void Driver::error(const std::string& m)
 {
     std::cerr << m << std::endl;
+	exit(-1);
 }
 
 /***************** custom callbacks here ******************/
