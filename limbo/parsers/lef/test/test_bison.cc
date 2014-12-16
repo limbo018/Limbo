@@ -13,6 +13,7 @@
 
 using std::cout;
 using std::endl;
+using std::string;
 
 /// this is an recommended API for LefParser, which also matches to potential bison version in the future
 /// actually spirit version of parser is based on template, so user does not necessarily need to inherit LefDataBase
@@ -24,6 +25,38 @@ class DataBase : public LefParser::LefDataBase
 		DataBase() : base_type()
 		{
 			cout << "constructing DataBase" << endl;
+		}
+		virtual void lef_version_cbk(string const& v)
+		{
+			cout << "lef version = " << v << endl;
+		}
+		virtual void lef_version_cbk(double v) 
+		{
+			cout << "lef version = " << v << endl;
+		}
+		virtual void lef_dividerchar_cbk(string const& v)
+		{
+			cout << "lef dividechar = " << v << endl;
+		}
+		virtual void lef_units_cbk(LefParser::lefiUnits const& v)
+		{
+			v.print(stdout);
+		}
+		virtual void lef_busbitchars_cbk(string const& v)
+		{
+			cout << "lef busbitchars = " << v << endl;
+		}
+		virtual void lef_layer_cbk(LefParser::lefiLayer const& v)
+		{
+			v.print(stdout);
+		}
+		virtual void lef_site_cbk(LefParser::lefiSite const& v)
+		{
+			v.print(stdout);
+		}
+		virtual void lef_macro_cbk(LefParser::lefiMacro const& v)
+		{
+			v.print(stdout);
 		}
 };
 

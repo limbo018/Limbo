@@ -115,93 +115,93 @@ void lefiUnits::setFrequency(double num) {
 }
 
 
-int lefiUnits::hasDatabase() {
+int lefiUnits::hasDatabase() const {
   return this->hasDatabase_;
 }
 
 
-int lefiUnits::hasCapacitance() {
+int lefiUnits::hasCapacitance() const {
   return this->hasCapacitance_;
 }
 
 
-int lefiUnits::hasResistance() {
+int lefiUnits::hasResistance() const {
   return this->hasResistance_;
 }
 
 
-int lefiUnits::hasPower() {
+int lefiUnits::hasPower() const {
   return this->hasPower_;
 }
 
 
-int lefiUnits::hasCurrent() {
+int lefiUnits::hasCurrent() const {
   return this->hasCurrent_;
 }
 
 
-int lefiUnits::hasVoltage() {
+int lefiUnits::hasVoltage() const {
   return this->hasVoltage_;
 }
 
 
-int lefiUnits::hasFrequency() {
+int lefiUnits::hasFrequency() const {
   return this->hasFrequency_;
 }
 
 
-int lefiUnits::hasTime() {
+int lefiUnits::hasTime() const {
   return this->hasTime_;
 }
 
 
-const char* lefiUnits::databaseName() {
+const char* lefiUnits::databaseName() const {
   return this->databaseName_;
 }
 
 
-double lefiUnits::databaseNumber() {
+double lefiUnits::databaseNumber() const {
   return this->databaseNumber_;
 }
 
 
-double lefiUnits::capacitance() {
+double lefiUnits::capacitance() const {
   return this->capacitance_;
 }
 
 
-double lefiUnits::resistance() {
+double lefiUnits::resistance() const {
   return this->resistance_;
 }
 
 
-double lefiUnits::power() {
+double lefiUnits::power() const {
   return this->power_;
 }
 
 
-double lefiUnits::current() {
+double lefiUnits::current() const {
   return this->current_;
 }
 
 
-double lefiUnits::time() {
+double lefiUnits::time() const {
   return this->time_;
 }
 
 
-double lefiUnits::voltage() {
+double lefiUnits::voltage() const {
   return this->voltage_;
 }
 
 
-double lefiUnits::frequency() {
+double lefiUnits::frequency() const {
   return this->frequency_;
 }
 
 
 
-void lefiUnits::print(FILE* f) {
+void lefiUnits::print(FILE* f) const {
   fprintf(f, "Units:\n");
   if (this->lefiUnits::hasTime())
     fprintf(f, "  %g nanoseconds\n", this->lefiUnits::time());

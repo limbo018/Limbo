@@ -787,7 +787,7 @@ int lefiNonDefault::numCuts(int index) const {
   return this->numCuts_[index];
 }
 
-void lefiNonDefault::print(FILE* f) { 
+void lefiNonDefault::print(FILE* f) const { 
   int i;
   lefiSpacing* s;
   lefiVia* v;

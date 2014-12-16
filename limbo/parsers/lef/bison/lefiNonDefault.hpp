@@ -100,7 +100,7 @@ public:
   int numCuts(int index) const;                  // 5.6
 
   // Debug print
-  void print(FILE* f);
+  void print(FILE* f) const;
 
 protected:
   void* oldViaCbk_;     // save the users' functions.

@@ -509,7 +509,7 @@ int lefiArray::hasDefaultCap() {
 }
 
 
-const char* lefiArray::name() {
+const char* lefiArray::name() const {
   return this->name_;
 }
 
@@ -588,7 +588,7 @@ lefiSitePattern* lefiArray::site(int index, int j) {
 }
 
 
-void lefiArray::print(FILE* f) {
+void lefiArray::print(FILE* f) const {
   fprintf(f, "ARRAY %s\n", this->lefiArray::name());
 }
 

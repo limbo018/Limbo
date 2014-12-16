@@ -186,88 +186,215 @@ void Driver::error(const std::string& m)
 }
 
 /***************** custom callbacks here ******************/
-void Driver::lefrVersionStrCbk(string const&){}
-void Driver::lefrVersionCbk(double){}
-void Driver::lefrDividerCharCbk(string const&){}
-void Driver::lefrLibraryEndCbk(){}
-void Driver::lefrCaseSensitiveCbk(int){}
-void Driver::lefrNoWireExtensionCbk(string const&){}
-void Driver::lefrManufacturingCbk(double){}
-void Driver::lefrUseMinSpacingCbk(lefiUseMinSpacing const&){}
-void Driver::lefrClearanceMeasureCbk(string const&){}
-void Driver::lefrUnitsCbk(lefiUnits const&){}
-void Driver::lefrBusBitCharsCbk(string const&){}
-void Driver::lefrLayerCbk(lefiLayer const&){}
-void Driver::lefrMaxStackViaCbk(lefiMaxStackVia const&){}
+void Driver::lefrVersionStrCbk(string const& v)
+{
+	m_db.lef_version_cbk(v);
+}
+void Driver::lefrVersionCbk(double v)
+{
+	m_db.lef_version_cbk(v);
+}
+void Driver::lefrDividerCharCbk(string const& v)
+{
+	m_db.lef_dividerchar_cbk(v);
+}
+void Driver::lefrLibraryEndCbk()
+{
+}
+void Driver::lefrCaseSensitiveCbk(int v)
+{
+	m_db.lef_casesensitive_cbk(v);
+}
+void Driver::lefrNoWireExtensionCbk(string const& v)
+{
+	m_db.lef_nowireextension_cbk(v);
+}
+void Driver::lefrManufacturingCbk(double v)
+{
+	m_db.lef_manufacturing_cbk(v);
+}
+void Driver::lefrUseMinSpacingCbk(lefiUseMinSpacing const& v)
+{
+	m_db.lef_useminspacing_cbk(v);
+}
+void Driver::lefrClearanceMeasureCbk(string const& v)
+{
+	m_db.lef_clearancemeasure_cbk(v);
+}
+void Driver::lefrUnitsCbk(lefiUnits const& v)
+{
+	m_db.lef_units_cbk(v);
+}
+void Driver::lefrBusBitCharsCbk(string const& v)
+{
+	m_db.lef_busbitchars_cbk(v);
+}
+void Driver::lefrLayerCbk(lefiLayer const& v)
+{
+	m_db.lef_layer_cbk(v);
+}
+void Driver::lefrMaxStackViaCbk(lefiMaxStackVia const& v)
+{
+	m_db.lef_maxstackvia_cbk(v);
+}
 void Driver::lefrViaCbk(lefiVia const& v)
 {
 	if (lefNdRule) // in non-default rules 
 		lefrNonDefault.lefiNonDefault::addViaRule(v);
 	else // normal mode 
-	{
-	}
+		m_db.lef_via_cbk(v);
 }
-void Driver::lefrViaRuleCbk(lefiViaRule const&){}
-void Driver::lefrSpacingBeginCbk(int)
+void Driver::lefrViaRuleCbk(lefiViaRule const& v)
 {
+	m_db.lef_viarule_cbk(v);
+}
+void Driver::lefrSpacingBeginCbk(int v)
+{
+	// we do not need any begin/end cbk 
 	if (lefNdRule) // in non-default rules 
 		return;
 	else // normal mode 
-	{
-	}
+		return;
 }
 void Driver::lefrSpacingEndCbk(int)
 {
+	// we do not need any begin/end cbk 
 	if (lefNdRule) // in non-default rules 
 		return;
 	else // normal mode 
-	{
-	}
+		return;
 }
 void Driver::lefrSpacingCbk(lefiSpacing const& s)
 {
 	if (lefNdRule) // in non-default rules 
 		lefrNonDefault.lefiNonDefault::addSpacingRule(s);
 	else // normal mode 
-	{
-	}
+		m_db.lef_spacing_cbk(s);
 }
-void Driver::lefrIRDropBeginCbk(int){}
-void Driver::lefrIRDropEndCbk(int){}
-void Driver::lefrIRDropCbk(lefiIRDrop const&){}
-void Driver::lefrMinFeatureCbk(lefiMinFeature const&){}
-void Driver::lefrDielectricCbk(double){}
-void Driver::lefrNonDefaultCbk(lefiNonDefault const&){}
-void Driver::lefrSiteCbk(lefiSite const&){}
-void Driver::lefrMacroBeginCbk(string const&){}
-void Driver::lefrMacroEndCbk(string const&){}
-void Driver::lefrMacroCbk(lefiMacro const&){}
-void Driver::lefrMacroClassTypeCbk(string const&){} // maybe useless 
-void Driver::lefrMacroOriginCbk(lefiNum const&){}
-void Driver::lefrMacroSizeCbk(lefiNum const&){}
-void Driver::lefrPinCbk(lefiPin const&){}
-void Driver::lefrObstructionCbk(lefiObstruction const&){}
-void Driver::lefrDensityCbk(lefiDensity const&){}
-void Driver::lefrTimingCbk(lefiTiming const&){}
-void Driver::lefrArrayCbk(lefiArray const&){}
-void Driver::lefrArrayBeginCbk(string const&){}
-void Driver::lefrArrayEndCbk(string const&){}
-void Driver::lefrPropBeginCbk(int){}
-void Driver::lefrPropEndCbk(int){}
-void Driver::lefrPropCbk(lefiProp const&){}
-void Driver::lefrNoiseMarginCbk(lefiNoiseMargin const&){}
-void Driver::lefrEdgeRateThreshold1Cbk(double){}
-void Driver::lefrEdgeRateThreshold2Cbk(double){}
-void Driver::lefrEdgeRateScaleFactorCbk(double){}
-void Driver::lefrNoiseTableCbk(lefiNoiseTable const&){}
-void Driver::lefrCorrectionTableCbk(lefiCorrectionTable const&){}
-void Driver::lefrInputAntennaCbk(double){}
-void Driver::lefrOutputAntennaCbk(double){}
-void Driver::lefrInoutAntennaCbk(double){}
-void Driver::lefrAntennaInputCbk(double){}
-void Driver::lefrAntennaInoutCbk(double){}
-void Driver::lefrAntennaOutputCbk(double){}
-void Driver::lefrExtensionCbk(string const&){}
+void Driver::lefrIRDropBeginCbk(int)
+{
+}
+void Driver::lefrIRDropEndCbk(int)
+{
+}
+void Driver::lefrIRDropCbk(lefiIRDrop const& v)
+{
+	m_db.lef_irdrop_cbk(v);
+}
+void Driver::lefrMinFeatureCbk(lefiMinFeature const& v)
+{
+	m_db.lef_minfeature_cbk(v);
+}
+void Driver::lefrDielectricCbk(double v)
+{
+	m_db.lef_dielectric_cbk(v);
+}
+void Driver::lefrNonDefaultCbk(lefiNonDefault const& v)
+{
+	m_db.lef_nondefault_cbk(v);
+}
+void Driver::lefrSiteCbk(lefiSite const& v)
+{
+	m_db.lef_site_cbk(v);
+}
+void Driver::lefrMacroBeginCbk(string const&)
+{
+}
+void Driver::lefrMacroEndCbk(string const&)
+{
+}
+void Driver::lefrMacroCbk(lefiMacro const& v)
+{
+	m_db.lef_macro_cbk(v);
+}
+void Driver::lefrMacroClassTypeCbk(string const&)// maybe useless 
+{} 
+void Driver::lefrMacroOriginCbk(lefiNum const&)
+{}
+void Driver::lefrMacroSizeCbk(lefiNum const&)
+{}
+void Driver::lefrPinCbk(lefiPin const&) // directly added to macro 
+{}
+void Driver::lefrObstructionCbk(lefiObstruction const& v)
+{
+	m_db.lef_obstruction_cbk(v);
+}
+void Driver::lefrDensityCbk(lefiDensity const& v)
+{
+	m_db.lef_density_cbk(v);
+}
+void Driver::lefrTimingCbk(lefiTiming const& v)
+{
+	m_db.lef_timing_cbk(v);
+}
+void Driver::lefrArrayCbk(lefiArray const& v)
+{
+	m_db.lef_array_cbk(v);
+}
+void Driver::lefrArrayBeginCbk(string const&)
+{}
+void Driver::lefrArrayEndCbk(string const&)
+{}
+void Driver::lefrPropBeginCbk(int)
+{}
+void Driver::lefrPropEndCbk(int)
+{}
+void Driver::lefrPropCbk(lefiProp const& v)
+{
+	m_db.lef_prop_cbk(v);
+}
+void Driver::lefrNoiseMarginCbk(lefiNoiseMargin const& v)
+{
+	m_db.lef_noisemargin_cbk(v);
+}
+void Driver::lefrEdgeRateThreshold1Cbk(double v)
+{
+	m_db.lef_edgeratethreshold1_cbk(v);
+}
+void Driver::lefrEdgeRateThreshold2Cbk(double v)
+{
+	m_db.lef_edgeratethreshold2_cbk(v);
+}
+void Driver::lefrEdgeRateScaleFactorCbk(double v)
+{
+	m_db.lef_edgeratescalefactor_cbk(v);
+}
+void Driver::lefrNoiseTableCbk(lefiNoiseTable const& v)
+{
+	m_db.lef_noisetable_cbk(v);
+}
+void Driver::lefrCorrectionTableCbk(lefiCorrectionTable const& v)
+{
+	m_db.lef_correctiontable_cbk(v);
+}
+void Driver::lefrInputAntennaCbk(double v)
+{
+	m_db.lef_inputantenna_cbk(v);
+}
+void Driver::lefrOutputAntennaCbk(double v)
+{
+	m_db.lef_outputantenna_cbk(v);
+}
+void Driver::lefrInoutAntennaCbk(double v)
+{
+	m_db.lef_inoutantenna_cbk(v);
+}
+void Driver::lefrAntennaInputCbk(double v)
+{
+	m_db.lef_antennainput_cbk(v);
+}
+void Driver::lefrAntennaInoutCbk(double v)
+{
+	m_db.lef_antennainout_cbk(v);
+}
+void Driver::lefrAntennaOutputCbk(double v)
+{
+	m_db.lef_antennaoutput_cbk(v);
+}
+void Driver::lefrExtensionCbk(string const& v)
+{
+	m_db.lef_extension_cbk(v);
+}
 
 /***************** custom help functions here ******************/
 void Driver::resetVars()

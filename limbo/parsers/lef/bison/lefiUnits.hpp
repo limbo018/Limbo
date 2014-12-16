@@ -38,27 +38,27 @@ public:
   void setVoltage(double num);
   void setFrequency(double num);
 
-  int hasDatabase();
-  int hasCapacitance();
-  int hasResistance();
-  int hasTime();
-  int hasPower();
-  int hasCurrent();
-  int hasVoltage();
-  int hasFrequency();
+  int hasDatabase() const;
+  int hasCapacitance() const;
+  int hasResistance() const;
+  int hasTime() const;
+  int hasPower() const;
+  int hasCurrent() const;
+  int hasVoltage() const;
+  int hasFrequency() const;
 
-  const char* databaseName();
-  double databaseNumber();
-  double capacitance();
-  double resistance();
-  double time();
-  double power();
-  double current();
-  double voltage();
-  double frequency();
+  const char* databaseName() const;
+  double databaseNumber() const;
+  double capacitance() const;
+  double resistance() const;
+  double time() const;
+  double power() const;
+  double current() const;
+  double voltage() const;
+  double frequency() const;
 
   // Debug print
-  void print(FILE* f);
+  void print(FILE* f) const;
 
 protected:
   int hasDatabase_;

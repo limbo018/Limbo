@@ -607,6 +607,10 @@ int lefiPinAntennaModel::hasReturn() const {
 lefiPin::lefiPin() {
   this->lefiPin::Init();
 }
+lefiPin::lefiPin(lefiPin const& rhs)
+{
+	this->lefiPin::copy(rhs);
+}
 
 
 void lefiPin::Init() {
@@ -671,6 +675,150 @@ void lefiPin::Init() {
   this->antennaDiffAreaAllocated_ = 1;
   this->antennaDiffArea_ = (double*)lefMalloc(sizeof(double));
   this->antennaDiffAreaLayer_ = (char**)lefMalloc(sizeof(char*));
+}
+void lefiPin::copy(lefiPin const& rhs)
+{
+	this->clear();
+	// nameSize_ 
+	// name_
+	this->setName(rhs.name());
+
+	this->hasLEQ_ = rhs.hasLEQ_;
+	this->hasDirection_ = rhs.hasDirection_;
+	this->hasUse_ = rhs.hasUse_;
+	this->hasShape_ = rhs.hasShape_;
+	this->hasMustjoin_ = rhs.hasMustjoin_;
+	this->hasOutMargin_ = rhs.hasOutMargin_;
+	this->hasOutResistance_ = rhs.hasOutResistance_;
+	this->hasInMargin_ = rhs.hasInMargin_;
+	this->hasPower_ = rhs.hasPower_;
+	this->hasLeakage_ = rhs.hasLeakage_;
+	this->hasMaxload_ = rhs.hasMaxload_;
+	this->hasMaxdelay_ = rhs.hasMaxdelay_;
+	this->hasCapacitance_ = rhs.hasCapacitance_;
+	this->hasResistance_ = rhs.hasResistance_;
+	this->hasPulldownres_ = rhs.hasPulldownres_;
+	this->hasTieoffr_ = rhs.hasTieoffr_;
+	this->hasVHI_ = rhs.hasVHI_; 
+	this->hasVLO_ = rhs.hasVLO_;
+	this->hasRiseVoltage_ = rhs.hasRiseVoltage_;
+	this->hasFallVoltage_ = rhs.hasFallVoltage_;
+	this->hasRiseThresh_ = rhs.hasRiseThresh_;
+	this->hasFallThresh_ = rhs.hasFallThresh_;
+	this->hasRiseSatcur_ = rhs.hasRiseSatcur_;
+	this->hasFallSatcur_ = rhs.hasFallSatcur_;
+	this->hasCurrentSource_ = rhs.hasCurrentSource_;
+	this->hasTables_ = rhs.hasTables_;
+	this->hasAntennasize_ = rhs.hasAntennasize_;
+	this->hasRiseSlewLimit_ = rhs.hasRiseSlewLimit_;
+	this->hasFallSlewLimit_ = rhs.hasFallSlewLimit_;
+
+	// foreign_, foreignX_, foreignY_, foreignOrient_
+	// hasForeignPoint_, hasForeignOrient_, numForeigns_, foreignAllocated_
+	if (rhs.hasForeign())
+	{
+		for (int i = 0; i < rhs.numForeigns_; ++i)
+		{
+			this->addForeign(rhs.foreignName(i), rhs.hasForeignPoint(i), 
+					rhs.foreignX(i), rhs.foreignY(i), rhs.foreignOrient(i));
+		}
+	}
+	// hasLEQ_, LEQSize_, LEQ_ 
+	if (rhs.hasLEQ()) this->setLEQ(rhs.LEQ());
+	// hasMustjoin_, mustjoinSize_, mustjoin_
+	if (rhs.hasMustjoin()) this->setMustjoin(rhs.mustjoin());
+	// hasOutMargin_, outMarginH_, outMarginL_
+	if (rhs.hasOutMargin()) this->setOutMargin(rhs.outMarginHigh(), rhs.outMarginLow());
+	// hasOutResistance_, outResistanceH_, outResistanceL_
+	if (rhs.hasOutResistance()) this->setOutResistance(rhs.outResistanceHigh(), rhs.outResistanceLow());
+	if (rhs.hasInMargin()) this->setInMargin(rhs.inMarginHigh(), rhs.inMarginLow());
+	if (rhs.hasPower()) this->setPower(rhs.power());
+	if (rhs.hasLeakage()) this->setLeakage(rhs.leakage());
+	if (rhs.hasMaxload()) this->setMaxload(rhs.maxload());
+	if (rhs.hasMaxdelay()) this->setMaxdelay(rhs.maxdelay());
+	if (rhs.hasCapacitance()) this->setCapacitance(rhs.capacitance());
+	if (rhs.hasResistance()) this->setResistance(rhs.resistance());
+	if (rhs.hasPulldownres()) this->setPulldownres(rhs.pulldownres());
+	if (rhs.hasTieoffr()) this->setTieoffr(rhs.tieoffr());
+	if (rhs.hasVHI()) this->setVHI(rhs.VHI());
+	if (rhs.hasVLO()) this->setVLO(rhs.VLO());
+	if (rhs.hasRiseVoltage()) this->setRiseVoltage(rhs.riseVoltage());
+	if (rhs.hasFallVoltage()) this->setFallVoltage(rhs.fallVoltage());
+	if (rhs.hasRiseThresh()) this->setRiseThresh(rhs.riseThresh());
+	if (rhs.hasFallThresh()) this->setFallThresh(rhs.fallThresh());
+	if (rhs.hasRiseSatcur()) this->setRiseSatcur(rhs.riseSatcur());
+	if (rhs.hasFallSatcur()) this->setFallSatcur(rhs.fallSatcur());
+	if (rhs.hasTables()) this->setTables(rhs.tableHighName(), rhs.tableLowName());
+	if (rhs.hasRiseSlewLimit()) this->setRiseSlewLimit(rhs.riseSlewLimit());
+	if (rhs.hasFallSlewLimit()) this->setFallSlewLimit(rhs.fallSlewLimit());
+
+	// 5.5 AntennaModel
+//	if (rhs.hasAntennaModel()) 
+//	{
+		for (int i = 0; i < rhs.numAntennaModel(); ++i)
+		{
+			if (strcmp(rhs.antennaModel(i)->antennaOxide(), "OXIDE1") == 0)
+				this->addAntennaModel(1);
+			else if (strcmp(rhs.antennaModel(i)->antennaOxide(), "OXIDE2") == 0)
+				this->addAntennaModel(2);
+			else if (strcmp(rhs.antennaModel(i)->antennaOxide(), "OXIDE3") == 0)
+				this->addAntennaModel(3);
+			else if (strcmp(rhs.antennaModel(i)->antennaOxide(), "OXIDE4") == 0)
+				this->addAntennaModel(4);
+			else // something very wrong, normally this can't happen
+				lefiError("ERROR (LEFPARS-1351): There is an unexpected lef parser bug which cause it unable to retrieve ANTENNAMODEL data with the given index.");
+		}
+		this->curAntennaModelIndex_ = rhs.curAntennaModelIndex_;
+//	}
+	if (rhs.hasAntennaSize())
+	{
+		for (int i = 0; i < rhs.numAntennaSize(); ++i)
+			this->addAntennaSize(rhs.antennaSize(i), rhs.antennaSizeLayer(i));
+	}
+	if (rhs.hasAntennaMetalArea())
+	{
+		for (int i = 0; i < rhs.numAntennaMetalArea(); ++i)
+			this->addAntennaMetalArea(rhs.antennaMetalArea(i), antennaMetalAreaLayer(i));
+	}
+	if (rhs.hasAntennaMetalLength())
+	{
+		for (int i = 0; i < rhs.numAntennaMetalLength(); ++i)
+			this->addAntennaMetalLength(rhs.antennaMetalLength(i), antennaMetalAreaLayer(i));
+	}
+	if (rhs.hasAntennaPartialMetalArea())
+	{
+		for (int i = 0; i < rhs.numAntennaPartialMetalArea(); ++i)
+			this->addAntennaPartialMetalArea(rhs.antennaPartialMetalArea(i), rhs.antennaPartialMetalAreaLayer(i));
+	}
+	if (rhs.hasAntennaPartialMetalSideArea())
+	{
+		for (int i = 0; i < rhs.numAntennaPartialMetalSideArea(); ++i)
+			this->addAntennaPartialMetalSideArea(rhs.antennaPartialMetalSideArea(i), rhs.antennaPartialMetalSideAreaLayer(i));
+	}
+	if (rhs.hasAntennaPartialCutArea())
+	{
+		for (int i = 0; i < rhs.numAntennaPartialCutArea(); ++i)
+			this->addAntennaPartialCutArea(rhs.antennaPartialCutArea(i), rhs.antennaPartialCutAreaLayer(i));
+	}
+	if (rhs.hasAntennaDiffArea())
+	{
+		for (int i = 0; i < rhs.numAntennaDiffArea(); ++i)
+			this->addAntennaDiffArea(rhs.antennaDiffArea(i), rhs.antennaDiffAreaLayer(i));
+	}
+	if (rhs.hasTaperRule()) this->setTaperRule(rhs.taperRule());
+	if (rhs.hasNetExpr()) this->setNetExpr(rhs.netExpr());
+	if (rhs.hasSupplySensitivity()) this->setSupplySensitivity(rhs.supplySensitivity());
+	if (rhs.hasGroundSensitivity()) this->setGroundSensitivity(rhs.groundSensitivity());
+	if (rhs.hasDirection()) this->setDirection(rhs.direction());
+	if (rhs.hasUse()) this->setUse(rhs.use());
+	if (rhs.hasShape()) this->setShape(rhs.shape());
+	if (rhs.hasCurrentSource()) this->setCurrentSource(rhs.currentSource());
+	// setNumProperty is actually generalized version of setProperty
+	for (int i = 0; i < rhs.numProperties(); ++i)
+		this->setNumProperty(rhs.propName(i), rhs.propNum(i), rhs.propValue(i), rhs.propType(i));
+
+	for (int i = 0; i < rhs.numPorts(); ++i)
+		this->addPort(rhs.port(i));
 }
 
 
@@ -2347,6 +2495,12 @@ void lefiMacro::clear() {
     lefFree(this->propValues_[i]);
   }
   this->numProperties_ = 0;
+
+  // remove pins 
+  for (std::vector<lefiPin*>::iterator it = m_vPin.begin();
+		  it != m_vPin.end(); ++it)
+	  delete *it;
+  m_vPin.clear();
 }
 
 
@@ -2900,6 +3054,23 @@ const char* lefiMacro::foreignName(int index) const {
   return this->foreign_[index];
 }
 
+int lefiMacro::numPins() const 
+{
+	return m_vPin.size();
+}
+
+lefiPin* lefiMacro::pin(int index) const 
+{
+	if (index < 0 || index >= m_vPin.size())
+		return NULL;
+	return m_vPin[index];
+}
+
+void lefiMacro::addPin(lefiPin const& p)
+{
+	m_vPin.push_back(new lefiPin (p));
+}
+
 
 const char* lefiMacro::clockType() const {
   return this->clockType_;
@@ -2990,6 +3161,11 @@ void lefiMacro::print(FILE* f) const {
   if (this->lefiMacro::hasClockType())
     fprintf(f, "  Clock type %s\n", this->lefiMacro::clockType());
 
+  for (vector<lefiPin*>::const_iterator it = m_vPin.begin(); 
+		  it != m_vPin.end(); ++it)
+  {
+	  (*it)->print(f);
+  }
   fprintf(f, "END MACRO %s\n", this->lefiMacro::name());
 }
 

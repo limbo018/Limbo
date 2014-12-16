@@ -16,6 +16,7 @@
 #define lefiMacro_h
 
 #include <stdio.h>
+#include <vector>
 //#include "lefiKRDefs.hpp"
 #include "lefiMisc.hpp"
 
@@ -111,7 +112,9 @@ protected:
 class lefiPin {
 public:
   lefiPin();
+  lefiPin(lefiPin const& rhs); // copy constructor 
   void Init();
+  void copy(lefiPin const& rhs);
 
   void Destroy();
   ~lefiPin();
@@ -206,7 +209,7 @@ public:
   int hasAntennaPartialMetalSideArea() const;
   int hasAntennaPartialCutArea() const;
   int hasAntennaDiffArea() const;
-  int hasAntennaModel() const;         // 5.5
+  int hasAntennaModel() const;         // 5.5 // not defined
   int hasTaperRule() const;
   int hasRiseSlewLimit() const;
   int hasFallSlewLimit() const;
@@ -568,6 +571,11 @@ public:
   double foreignY(int index = 0) const;
   const char* foreignName(int index = 0) const;
 
+  // for pins in a macro 
+  int numPins() const;
+  lefiPin* pin(int index) const;
+  void addPin(lefiPin const& p);
+
   // Debug print
   void print(FILE* f) const;
 
@@ -635,6 +643,7 @@ protected:
   double* propNums_;
   char*  propTypes_;
 
+  std::vector<lefiPin*> m_vPin; ///< save pins in macro 
 };
 
 

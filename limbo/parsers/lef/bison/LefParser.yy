@@ -67,7 +67,7 @@
 	std::string*		qstringVal;
 	std::string*		binaryVal;
 
-	lefPoint pt; 
+	class lefPoint* pt; 
 }
 
 %token K_DEFINE "DEFINE"
@@ -511,6 +511,7 @@
 %type <doubleVal>   layer_sp_TwoWidthsPRL
 
 %destructor { delete $$; } STRING QSTRING BINARY
+%destructor { delete $$; } pt
 
 %nonassoc IF
 %left K_AND
@@ -1820,8 +1821,8 @@ layer_option:
       if (/*driver.lefrLayerCbk*/ 1) { /* require min 2 points, set the 1st 2 */
          driver.lefrAntennaPWLPtr=(lefiAntennaPWL*)lefMalloc(sizeof(lefiAntennaPWL));
          driver.lefrAntennaPWLPtr->lefiAntennaPWL::Init();
-         driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($3.x, $3.y);
-         driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($4.x, $4.y);
+         driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($3->x, $3->y);
+         driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($4->x, $4->y);
       }
     } 
     layer_diffusion_ratios ')' ';'
@@ -2675,8 +2676,8 @@ layer_antenna_pwl:
       { if (/*driver.lefrLayerCbk*/ 1) { /* require min 2 points, set the 1st 2 */
           driver.lefrAntennaPWLPtr = (lefiAntennaPWL*)lefMalloc(sizeof(lefiAntennaPWL));
           driver.lefrAntennaPWLPtr->lefiAntennaPWL::Init();
-          driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($3.x, $3.y);
-          driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($4.x, $4.y);
+          driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($3->x, $3->y);
+          driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($4->x, $4->y);
         }
       }
     layer_diffusion_ratios ')'
@@ -2694,7 +2695,7 @@ layer_diffusion_ratios: /* empty */
 layer_diffusion_ratio:
   pt
   { if (/*driver.lefrLayerCbk*/ 1)
-      driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($1.x, $1.y);
+      driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($1->x, $1->y);
   }
 
 layer_antenna_duo: /* empty */
@@ -3168,7 +3169,7 @@ via_foreign:
   | start_foreign pt ';'
     {
       if (driver.versionNum < 5.6) {
-        if (/*lefrViaCbk*/ 1) driver.lefrVia.lefiVia::setForeign((*$1).c_str(), 1, $2.x, $2.y, -1);
+        if (/*lefrViaCbk*/ 1) driver.lefrVia.lefiVia::setForeign((*$1).c_str(), 1, $2->x, $2->y, -1);
       } else
         if (/*lefrViaCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.viaWarnings++ < driver.lefrViaWarnings)
@@ -3177,7 +3178,7 @@ via_foreign:
   | start_foreign pt orientation ';'
     {
       if (driver.versionNum < 5.6) {
-        if (/*lefrViaCbk*/ 1) driver.lefrVia.lefiVia::setForeign((*$1).c_str(), 1, $2.x, $2.y, $3);
+        if (/*lefrViaCbk*/ 1) driver.lefrVia.lefiVia::setForeign((*$1).c_str(), 1, $2->x, $2->y, $3);
       } else
         if (/*lefrViaCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.viaWarnings++ < driver.lefrViaWarnings)
@@ -3232,7 +3233,7 @@ via_geometries:
 via_geometry:
   K_RECT pt pt ';'
     { if (/*lefrViaCbk*/ 1)
-        driver.lefrVia.lefiVia::addRectToLayer($2.x, $2.y, $3.x, $3.y); }
+        driver.lefrVia.lefiVia::addRectToLayer($2->x, $2->y, $3->x, $3->y); }
   | K_POLYGON                                               // 5.6
     {
       driver.lefrGeometriesPtr = (lefiGeometries*)lefMalloc(sizeof(lefiGeometries));
@@ -3553,7 +3554,7 @@ viarule_layer_option:
     { if (/*driver.lefrViaRuleCbk*/ 1) driver.lefrViaRule.lefiViaRule::setWidth($2,$4); }
   | K_RECT pt pt ';'
     { if (/*driver.lefrViaRuleCbk*/ 1)
-	driver.lefrViaRule.lefiViaRule::setRect($2.x, $2.y, $3.x, $3.y); }
+	driver.lefrViaRule.lefiViaRule::setRect($2->x, $2->y, $3->x, $3->y); }
   | K_SPACING NUMBER K_BY NUMBER ';'
     { if (/*driver.lefrViaRuleCbk*/ 1) driver.lefrViaRule.lefiViaRule::setSpacing($2,$4); }
   | K_RESISTANCE NUMBER ';'
@@ -4222,9 +4223,9 @@ site_rowpattern: STRING orientation {driver.lefDumbMode = 1; driver.lefNoNum = 1
 
 pt:
   NUMBER NUMBER
-    { $$.x = $1; $$.y = $2; }
+    { $$ = new lefPoint; $$->x = $1; $$->y = $2; }
   | '(' NUMBER NUMBER ')'
-    { $$.x = $2; $$.y = $3; }
+    { $$ = new lefPoint; $$->x = $2; $$->y = $3; }
 
 macro: start_macro macro_options
     { 
@@ -4659,10 +4660,10 @@ macro_origin: K_ORIGIN pt ';'
        */
       
        /* Workaround for pcr 640902 */
-       if (/*driver.lefrMacroCbk*/ 1) driver.lefrMacro.lefiMacro::setOrigin($2.x, $2.y);
+       if (/*driver.lefrMacroCbk*/ 1) driver.lefrMacro.lefiMacro::setOrigin($2->x, $2->y);
        if (/*driver.lefrMacroOriginCbk*/ 1) {
-          driver.macroNum.x = $2.x; 
-          driver.macroNum.y = $2.y; 
+          driver.macroNum.x = $2->x; 
+          driver.macroNum.y = $2->y; 
           driver.lefrMacroOriginCbk( driver.macroNum);
        }
     }
@@ -4674,11 +4675,11 @@ macro_foreign:
     }
   | start_foreign pt ';'
     { if (/*driver.lefrMacroCbk*/ 1)
-      driver.lefrMacro.lefiMacro::addForeign((*$1).c_str(), 1, $2.x, $2.y, -1);
+      driver.lefrMacro.lefiMacro::addForeign((*$1).c_str(), 1, $2->x, $2->y, -1);
     }
   | start_foreign pt orientation ';'
     { if (/*driver.lefrMacroCbk*/ 1)
-      driver.lefrMacro.lefiMacro::addForeign((*$1).c_str(), 1, $2.x, $2.y, $3);
+      driver.lefrMacro.lefiMacro::addForeign((*$1).c_str(), 1, $2->x, $2->y, $3);
     }
   | start_foreign orientation ';'
     { if (/*driver.lefrMacroCbk*/ 1)
@@ -4757,7 +4758,8 @@ macro_size: K_SIZE NUMBER K_BY NUMBER ';'
 macro_pin: start_macro_pin macro_pin_options end_macro_pin
     { 
       if (/*driver.lefrPinCbk*/ 1)
-        driver.lefrPinCbk( driver.lefrPin);
+        /*driver.lefrPinCbk( driver.lefrPin);*/
+		driver.lefrMacro.addPin(driver.lefrPin);
       driver.lefrPin.lefiPin::clear();
     }
 
@@ -4802,7 +4804,7 @@ macro_pin_option:
   | start_foreign pt ';'
     {
       if (driver.versionNum < 5.6) {
-        if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addForeign((*$1).c_str(), 1, $2.x, $2.y, -1);
+        if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addForeign((*$1).c_str(), 1, $2->x, $2->y, -1);
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
@@ -4811,7 +4813,7 @@ macro_pin_option:
   | start_foreign pt orientation ';'
     {
       if (driver.versionNum < 5.6) {
-        if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addForeign((*$1).c_str(), 1, $2.x, $2.y, $3);
+        if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addForeign((*$1).c_str(), 1, $2->x, $2->y, $3);
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
@@ -4829,7 +4831,7 @@ macro_pin_option:
   | start_foreign K_STRUCTURE pt ';'
     {
       if (driver.versionNum < 5.6) {
-        if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addForeign((*$1).c_str(), 1, $3.x, $3.y, -1);
+        if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addForeign((*$1).c_str(), 1, $3->x, $3->y, -1);
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
@@ -4838,7 +4840,7 @@ macro_pin_option:
   | start_foreign K_STRUCTURE pt orientation ';'
     {
       if (driver.versionNum < 5.6) {
-        if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addForeign((*$1).c_str(), 1, $3.x, $3.y, $4);
+        if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addForeign((*$1).c_str(), 1, $3->x, $3->y, $4);
       } else
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
@@ -5634,7 +5636,7 @@ geometry:
               /*CHKERR();*/
            }
         } else
-           driver.lefrGeometriesPtr->lefiGeometries::addRect($2.x, $2.y, $3.x, $3.y);
+           driver.lefrGeometriesPtr->lefiGeometries::addRect($2->x, $2->y, $3->x, $3->y);
       }
       driver.needGeometry = 2;
     }
@@ -5646,8 +5648,8 @@ geometry:
               /*CHKERR();*/
            }
         } else
-           driver.lefrGeometriesPtr->lefiGeometries::addRectIter($3.x, $3.y, $4.x,
-                                                          $4.y);
+           driver.lefrGeometriesPtr->lefiGeometries::addRectIter($3->x, $3->y, $4->x,
+                                                          $4->y);
       }
       driver.needGeometry = 2;
     }
@@ -5732,11 +5734,11 @@ layer_spacing: /* empty */
 
 firstPt: pt  
     { if (driver.lefrDoGeometries)
-        driver.lefrGeometriesPtr->lefiGeometries::startList($1.x, $1.y); }
+        driver.lefrGeometriesPtr->lefiGeometries::startList($1->x, $1->y); }
 
 nextPt:  pt
     { if (driver.lefrDoGeometries)
-        driver.lefrGeometriesPtr->lefiGeometries::addToList($1.x, $1.y); }
+        driver.lefrGeometriesPtr->lefiGeometries::addToList($1->x, $1->y); }
 
 otherPts:
   /* empty */
@@ -5749,11 +5751,11 @@ otherPts:
 via_placement:
   K_VIA pt {driver.lefDumbMode = 1;} STRING ';'
     { if (driver.lefrDoGeometries)
-        driver.lefrGeometriesPtr->lefiGeometries::addVia($2.x, $2.y, (*$4).c_str()); }
+        driver.lefrGeometriesPtr->lefiGeometries::addVia($2->x, $2->y, (*$4).c_str()); }
   | K_VIA K_ITERATE pt {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
     stepPattern ';'
     { if (driver.lefrDoGeometries)
-        driver.lefrGeometriesPtr->lefiGeometries::addViaIter($3.x, $3.y, (*$5).c_str()); }
+        driver.lefrGeometriesPtr->lefiGeometries::addViaIter($3->x, $3->y, (*$5).c_str()); }
         
 
 stepPattern: K_DO NUMBER K_BY NUMBER K_STEP NUMBER NUMBER
@@ -5932,7 +5934,7 @@ density_layer_rects: /* empty */
 density_layer_rect: K_RECT pt pt NUMBER ';'
     {
       if (/*driver.lefrDensityCbk*/ 1)
-        driver.lefrDensity.lefiDensity::addRect($2.x, $2.y, $3.x, $3.y, $4); 
+        driver.lefrDensity.lefiDensity::addRect($2->x, $2->y, $3->x, $3->y, $4); 
     }
 
 macro_clocktype: K_CLOCKTYPE { driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'

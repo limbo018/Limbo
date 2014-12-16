@@ -69,7 +69,7 @@ public:
   int numGcell();
   int hasDefaultCap();
 
-  const char* name();
+  const char* name() const;
   lefiSitePattern* sitePattern(int index);
   lefiSitePattern* canPlace(int index);
   lefiSitePattern* cannotOccupy(int index);
@@ -88,7 +88,7 @@ public:
   lefiSitePattern* site(int floorIndex, int siteIndex);
 
   // Debug print
-  void print(FILE* f);
+  void print(FILE* f) const;
 
 protected:
   int nameSize_;
