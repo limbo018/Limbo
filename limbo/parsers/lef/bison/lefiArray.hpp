@@ -23,6 +23,7 @@ namespace LefParser {
 
 class lefiArrayFloorPlan {
 public:
+	lefiArrayFloorPlan();
   void Init(const char* name);
   void Destroy();
   void addSitePattern(const char* typ, lefiSitePattern* s);

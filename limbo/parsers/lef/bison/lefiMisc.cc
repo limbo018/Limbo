@@ -1923,14 +1923,20 @@ lefiMaxStackVia::lefiMaxStackVia() {
 
 
 void lefiMaxStackVia::Init() {
-  this->value_ = 0;
+  this->bottomLayer_ = 0;
+  this->topLayer_ = 0;
   this->hasRange_ = 0;
+  this->value_ = 0;
+#if 0
+  this->hasRange_ = 0;
+  this->value_ = 0;
   if (this->bottomLayer_)          // This is for C version, since C will
      lefFree(this->bottomLayer_);  // call this function before calling
   if (this->topLayer_)             // setMaxStackViaRange when more than 1 lef
      lefFree(this->topLayer_);     // files are parse. C++ skips this function
   this->bottomLayer_ = 0;
   this->topLayer_ = 0;
+#endif 
 }
 
 

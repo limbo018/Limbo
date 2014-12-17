@@ -1133,6 +1133,7 @@ void lefiLayer::Init() {
   this->dccurrentAllocated_ = 0;
   this->numNums_ = 0;
   this->numAllocated_ = 0;
+  this->nums_ = 0;
   this->numSpacingTable_ = 0;
   this->spacingTableAllocated_ = 0;
   this->numEnclosure_ = 0;

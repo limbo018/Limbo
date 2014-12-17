@@ -13,7 +13,7 @@ LIMBO_ROOT_DIR = $(realpath ../../../..)
 TEST_DIR = $(realpath ../test)
 
 CXXFLAGS = -W -Wall -Wextra -ansi -O2 -fmax-errors=5 #-g #-DDEBUG_$(DEBUG_PREFIX)PARSER
-#CXXFLAGS = -W -Wall -Wextra -Wuninitialized -ansi -fmax-errors=1 -g #-DDEBUG_$(DEBUG_PREFIX)PARSER
+#CXXFLAGS = -W -Wall -Wextra -ansi -fmax-errors=1 -g #-DDEBUG_$(DEBUG_PREFIX)PARSER
 LDFLAGS = 
 
 INCLUDE = -I . -I $(LIMBO_ROOT_DIR) #-I$(LIBRARIES_DIR)/boost_1_55_0

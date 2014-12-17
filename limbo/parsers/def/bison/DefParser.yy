@@ -395,18 +395,21 @@ block_diearea : KWD_DIEAREA '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' ';' 
 				driver.diearea_cbk($3, $4, $7, $8);
 			  }
 
-block_design : /* empty */
-			 block_unit
-			 block_propertydefinitions
-			 block_diearea
-			 block_rows 
-			 block_tracks
-			 block_gcellgrid
-			 block_vias
-			 block_components
-			 block_pins
-			 block_specialnets
-			 block_nets 
+block_option : block_unit
+			 | block_propertydefinitions
+			 | block_diearea
+			 | block_rows 
+			 | block_tracks
+			 | block_gcellgrid
+			 | block_vias
+			 | block_components
+			 | block_pins
+			 | block_specialnets
+			 | block_nets 
+			 ;
+
+block_design : block_option
+			 | block_design block_option
 			 ;
 
  /*** grammar for top file ***/

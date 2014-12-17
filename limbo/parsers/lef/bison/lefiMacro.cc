@@ -99,6 +99,7 @@ lefiDensity::lefiDensity() {
 void lefiDensity::Init() {
   this->numLayers_ = 0;
   this->layersAllocated_ = 0;
+  this->layerName_ = 0;
 }
 
 

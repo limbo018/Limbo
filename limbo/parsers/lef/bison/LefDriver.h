@@ -7,6 +7,35 @@
 #include <map>
 #include "LefDataBase.h"
 
+////////////////////////////////////////////////////////////////
+///
+/// LefParser is modified from Cadence open source parser.
+/// Original version stays in C style and has very poor support
+/// to object-oriented programming.
+/// LefParser borrows its data structure and bison grammar, 
+/// but wrap it in C++ style.
+///
+////////////////////////////////////////////////////////////////
+///
+/// 1. The original data structure abuses malloc and free without 
+/// proper initialization to pointers, which may lead to 
+/// memory allocating problems.
+/// Although I fixed some of the bugs and it looks good with current 
+/// benchmarks, there may still contain problems with other benchmarks.
+///
+////////////////////////////////////////////////////////////////
+///
+/// 2. Another issue is that keywords may have conflicts with STRING 
+/// in LefParser.yy, so I created a generalized string type GSTRING 
+/// which includes all string and keywords. 
+/// I did not replace all STRING with GSTRING, because it may result in 
+/// performance degradation. 
+/// If a new benchmark causes syntax error during parsing, then replace 
+/// STRING of specific grammar with GSTRING. 
+/// The main idea is to reduce the usage of GSTRING. 
+///
+///////////////////////////////////////////////////////////////// 
+
 /** The example namespace is used to encapsulate the three parser classes
  * example::Parser, example::Scanner and example::Driver */
 namespace LefParser {
