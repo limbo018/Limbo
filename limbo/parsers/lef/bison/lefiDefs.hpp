@@ -28,13 +28,18 @@ namespace LefParser {
 
 /*=================== General Types and Definitions =================*/
 
-#ifndef TRUE
-#define TRUE (1)
-#endif
+//#ifndef TRUE
+//#define TRUE (1)
+//#endif
 
-#ifndef FALSE
-#define FALSE (0)
-#endif
+//#ifndef FALSE
+//#define FALSE (0)
+//#endif
+
+enum LefBoolConstantEnum {
+	FALSE = 0,
+	TRUE = 1, 
+};
 
 #ifndef NULL
 #define NULL (0)

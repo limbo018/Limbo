@@ -22,11 +22,11 @@
 // Setting BYTESWAP to 1 is appropriate for big-endian Intel processors. 
 // GDS format was originally used on little-endian, older computers.
 #define BYTESWAP 1
-#define BYTE unsigned char
+//#define BYTE unsigned char
 
-#define BOOL  int
-#define TRUE  1
-#define FALSE 0
+//#define BOOL  int
+//#define TRUE  1
+//#define FALSE 0
 
 //extern BYTE  gdsswap;
 //extern short gdsword;
@@ -40,6 +40,13 @@
 
 namespace GdsParser
 {
+
+typedef int BOOL;
+typedef unsigned char BYTE;
+enum GdsWriterBoolConstantEnum {
+	FALSE = 0,
+	TRUE = 1
+};
 
 struct gds_itemtype
 {                                /* an item might be a polygon, path, aref, sref or text                      */
