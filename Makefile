@@ -18,6 +18,7 @@ RESRCS = \
 build: 
 	mkdir -p lib 
 	$(MAKE) -C $(PARSERS)/def/bison
+	$(MAKE) -C $(PARSERS)/lef/bison
 	$(MAKE) -C $(PARSERS)/ebeam/bison
 	$(MAKE) -C $(PARSERS)/lp/bison
 	$(MAKE) -C $(PARSERS)/gdsii/stream
@@ -25,12 +26,14 @@ build:
 install:
 	mkdir -p lib 
 	$(MAKE) install -C $(PARSERS)/def/bison
+	$(MAKE) install -C $(PARSERS)/lef/bison
 	$(MAKE) install -C $(PARSERS)/ebeam/bison
 	$(MAKE) install -C $(PARSERS)/lp/bison
 	$(MAKE) install -C $(PARSERS)/gdsii/stream
 
 clean:
 	$(MAKE) extraclean -C $(PARSERS)/def/bison
+	$(MAKE) extraclean -C $(PARSERS)/lef/bison
 	$(MAKE) extraclean -C $(PARSERS)/ebeam/bison
 	$(MAKE) extraclean -C $(PARSERS)/lp/bison
 	$(MAKE) extraclean -C $(PARSERS)/gdsii/stream
