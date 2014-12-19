@@ -13,7 +13,8 @@ All components are written with C/C++ and API is designed for easy usage and sim
 ## Components 
 | Components              | Languages & Libraries           |
 | ----------------------- | ------------------------------- |
-| Lef Parser              | boost.spirit                    |
+| Lef Parser              | flex/bison                      |
+|                         | boost.spirit                    |
 | Def Parser              | flex/bison                      |
 |                         | boost.spirit                    |
 | Gds Parser              | stream parser: c/c++            |
@@ -23,6 +24,7 @@ All components are written with C/C++ and API is designed for easy usage and sim
 | LP Min-Cost Flow Solver | boost, lemon                    |
 | Geometry Algorithms     | c++                             |
 | String Algorithms       | c++                             |
+| Math Utilities          | c++                             |
 
 ## Authors
 
@@ -86,6 +88,10 @@ Please report bugs to Yibo Lin (yibolin at utexas dot edu).
 In the directory of limbo library, run
 
 make install
+
+## Examples
+
+In the subdirectories of source code, there are test folders including test/example programs.
 
 ## Copyright 
 Copyright (c) 2014-2014 
