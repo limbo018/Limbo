@@ -18,7 +18,6 @@
 
 #include <iostream>
 #include <vector>
-#include <limbo/containers/FastMultiSet.h>
 #include <limbo/math/Math.h>
 using std::cout;
 using std::endl;
@@ -114,7 +113,8 @@ class FM
 			}
 		};
 
-		typedef containers::FastMultiSet<FM_node_type*, compare_type1, compare_type2> gain_bucket_type;
+		//typedef containers::FastMultiSet<FM_node_type*, compare_type1, compare_type2> gain_bucket_type;
+		typedef set<set<FM_node_type*> > gain_bucket_type;
 
 		/// \param initialPartition, 0 or 1
 		/// \return whehter insertion is successful
