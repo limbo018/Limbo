@@ -67,7 +67,7 @@
 	std::string*		qstringVal;
 	std::string*		binaryVal;
 
-	class lefPoint* pt; 
+	struct lefPoint* pt; 
 }
 
 %token K_DEFINE "DEFINE"

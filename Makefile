@@ -8,6 +8,7 @@ SOLVERS = limbo/solvers
 
 RESRCS = \
 		 $(PARSERS)/def/bison \
+		 $(PARSERS)/lef/bison \
 		 $(PARSERS)/ebeam/bison \
 		 $(PARSERS)/lp/bison \
 		 $(PARSERS)/gdsii/stream \
@@ -18,7 +19,7 @@ RESRCS = \
 build: 
 	mkdir -p lib 
 	$(MAKE) -C $(PARSERS)/def/bison
-	$(MAKE) -C $(PARSERS)/lef/bison
+	$(MAKE) all -C $(PARSERS)/lef/bison
 	$(MAKE) -C $(PARSERS)/ebeam/bison
 	$(MAKE) -C $(PARSERS)/lp/bison
 	$(MAKE) -C $(PARSERS)/gdsii/stream

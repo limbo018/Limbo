@@ -14,7 +14,8 @@ TEST_DIR = $(realpath ../test)
 CXXFLAGS = -W -Wall -Wextra -ansi -O2 #-g #-DDEBUG_$(DEBUG_PREFIX)PARSER
 LDFLAGS = 
 
-INCLUDE = $(LIMBO_ROOT_DIR) #-I$(LIBRARIES_DIR)/boost_1_55_0
+INCLUDE = -I $(realpath .) \
+		  -I $(LIMBO_ROOT_DIR)
 
 HEADERS = $(PARSER_PREFIX)Driver.h $(PARSER_PREFIX)Parser.h $(PARSER_PREFIX)Scanner.h $(PARSER_PREFIX)DataBase.h \
     y.tab.h FlexLexer.h location.hh position.hh stack.hh
@@ -24,15 +25,27 @@ all: lib$(LIB_PREFIX)parser $(TEST_DIR)/test_bison
 # Generate scanner and parser
 
 $(PARSER_PREFIX)Parser.cc: $(PARSER_PREFIX)Parser.yy
+	$(YACC) --version
 	$(YACC) -o $(PARSER_PREFIX)Parser.cc --defines=$(PARSER_PREFIX)Parser.h $(PARSER_PREFIX)Parser.yy
 
 $(PARSER_PREFIX)Scanner.cc: $(PARSER_PREFIX)Scanner.ll
+	$(LEX) --version
 	$(LEX) -o $(PARSER_PREFIX)Scanner.cc $(PARSER_PREFIX)Scanner.ll
 
 # Implicit rule to compile c++ files
+# Switched to naive way to compile under osx
+
+$(PARSER_PREFIX)Scanner.o: $(PARSER_PREFIX)Scanner.cc
+	$(CXX) $(CXXFLAGS) -c -o $(PARSER_PREFIX)Scanner.o $(PARSER_PREFIX)Scanner.cc $(INCLUDE)
+
+$(PARSER_PREFIX)Parser.o: $(PARSER_PREFIX)Parser.cc
+	$(CXX) $(CXXFLAGS) -c -o $(PARSER_PREFIX)Parser.o $(PARSER_PREFIX)Parser.cc $(INCLUDE)
+
+$(PARSER_PREFIX)Driver.o: $(PARSER_PREFIX)Driver.cc
+	$(CXX) $(CXXFLAGS) -c -o $(PARSER_PREFIX)Driver.o $(PARSER_PREFIX)Driver.cc $(INCLUDE)
 
 $(TEST_DIR)/test_bison.o: $(TEST_DIR)/test_bison.cc
-	$(CXX) $(CXXFLAGS) -c -o $@ $< -I $(INCLUDE) 
+	$(CXX) $(CXXFLAGS) -c -o $(TEST_DIR)/test_bison.o $(TEST_DIR)/test_bison.cc $(INCLUDE)
 
 # Link executable
 
