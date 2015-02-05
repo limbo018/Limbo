@@ -25,6 +25,7 @@ All components are written with C/C++ and API is designed for easy usage and sim
 | Geometry Algorithms     | c++                             |
 | String Algorithms       | c++                             |
 | Math Utilities          | c++                             |
+| Partition Algorithms    | c++                             |
 
 ## Authors
 
