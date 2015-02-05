@@ -289,14 +289,24 @@ class FM
 		void print() const 
 		{
 			cout << "------- partitions -------" << endl;
+			vector<typename FM_node_traits<node_type>::tie_id_type> vPartition[2];
+
 			for (typename unordered_map<node_type*, FM_node_type*>::const_iterator it = m_hNode.begin();
 					it != m_hNode.end(); ++it)
 			{
 				FM_node_type* const& pFMNode = it->second;
 				assert(pFMNode->partition == 0 || pFMNode->partition == 1);
-
-				cout << FM_node_traits<node_type>::tie_id(*(pFMNode->pNode)) << ": " << pFMNode->partition << endl;
+				vPartition[pFMNode->partition].push_back(FM_node_traits<node_type>::tie_id(*(pFMNode->pNode)));
 			}
+			cout << "{";
+			for (typename vector<typename FM_node_traits<node_type>::tie_id_type>::const_iterator it = vPartition[0].begin();
+					it != vPartition[0].end(); ++it)
+				cout << (*it) << " ";
+			cout << "| ";
+			for (typename vector<typename FM_node_traits<node_type>::tie_id_type>::const_iterator it = vPartition[1].begin();
+					it != vPartition[1].end(); ++it)
+				cout << (*it) << " ";
+			cout << "}" << endl;
 		}
 		/// print connection
 		void print_connection() const
@@ -417,6 +427,7 @@ class FM
 			}
 
 #ifdef DEBUG_FM
+			this->print();
 			cout << "initial cutsize = " << this->cutsize() << endl;
 #endif
 			// 1 trial pass, 1 real pass
@@ -530,6 +541,7 @@ class FM
 #ifdef DEBUG_FM
 				//gain_bucket.print();
 				assert(cur_cutsize == this->cutsize());
+				this->print();
 				cout << "move cnt = " << cur_cnt << ", current cutsize = " << this->cutsize() << endl;
 #endif
 
