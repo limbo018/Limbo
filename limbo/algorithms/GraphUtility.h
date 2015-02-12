@@ -20,14 +20,21 @@
 
 namespace limbo { namespace algorithms {
 
+/// \param mCompG2G, a vertex mapping from complement graph to original graph 
 template <typename GraphType>
-void complement_graph(GraphType const& g, GraphType& gp) 
+void complement_graph(GraphType const& g, GraphType& gp, 
+		std::map<typename boost::graph_traits<GraphType>::vertex_descriptor, 
+		typename boost::graph_traits<GraphType>::vertex_descriptor>& mCompG2G) 
 { 
 	typedef typename boost::graph_traits<GraphType>::vertex_descriptor vertex_descriptor; 
 	std::map<vertex_descriptor, vertex_descriptor> vmap; 
 
 	BGL_FORALL_VERTICES_T(v, g, GraphType) 
-		vmap[v] = boost::add_vertex(gp); 
+	{
+		vertex_descriptor u = boost::add_vertex(gp); 
+		vmap[v] = u;
+		mCompG2G[u] = v;
+	}
 
 	BGL_FORALL_VERTICES_T(u, g, GraphType) 
 	{ 

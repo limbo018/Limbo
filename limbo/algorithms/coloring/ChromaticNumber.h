@@ -54,7 +54,7 @@ class LawlerChromaticNumber
 			/// requied callback for max_independent_set function
 			/// \param MisType is a container type, default is std::deque
 			template <typename MisType>
-			void mis(MisType const& is, graph_type& g)
+			void mis(MisType const& is)
 			{
 				// only record maximal independent sets 
 				if (!mMisNode.empty())
@@ -71,16 +71,13 @@ class LawlerChromaticNumber
 					mMisNode.back().insert(*it);
 			}
 		};
-		int operator()(graph_type const& g) const 
+		int operator()(subgraph_type& g) const 
 		{
-			BOOST_AUTO(iter, boost::vertices(g));
-			subgraph_type g_s = g.create_subgraph(iter.first, iter.second);
-
-			return chromatic_number(g_s);
+			return chromatic_number(g);
 		}
 
 	protected:
-		int chromatic_number(subgraph_type const& g) const
+		int chromatic_number(subgraph_type& g) const
 		{
 			int cn = boost::num_vertices(g); // initial chromatic number 
 
@@ -98,15 +95,15 @@ class LawlerChromaticNumber
 				return 1;
 			}
 
-			vector<set<graph_vertex_type*> > mMisNode;
-			limbo::algorithms::max_independent_set(g, mis_visitor_type(mMisNode));
+			vector<set<graph_vertex_type> > mMisNode;
+			limbo::algorithms::max_independent_set(g, mis_visitor_type(mMisNode), limbo::algorithms::MaxIndependentSetByMaxClique());
 
-			for (typename vector<set<graph_vertex_type*> >::const_iterator it1 = mMisNode.begin(); 
+			for (typename vector<set<graph_vertex_type> >::const_iterator it1 = mMisNode.begin(); 
 					it1 != mMisNode.end(); ++it1)
 			{
-				set<graph_vertex_type*> const& sMisNode = *it1;
+				set<graph_vertex_type> const& sMisNode = *it1;
 				subgraph_type& g_s = g.create_subgraph(); // subgraph, G \ I
-				for (typename set<graph_vertex_type*>::const_iterator it2 = sMisNode.begin();
+				for (typename set<graph_vertex_type>::const_iterator it2 = sMisNode.begin();
 						it2 != sMisNode.end(); ++it2)
 				{
 					if (!sMisNode.count(*it2))
