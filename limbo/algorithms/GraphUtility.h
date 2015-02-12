@@ -21,6 +21,7 @@
 namespace limbo { namespace algorithms {
 
 /// \param mCompG2G, a vertex mapping from complement graph to original graph 
+/// get the complement graph of original graph 
 template <typename GraphType>
 void complement_graph(GraphType const& g, GraphType& gp, 
 		std::map<typename boost::graph_traits<GraphType>::vertex_descriptor, 

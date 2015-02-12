@@ -8,6 +8,7 @@
 #ifndef LIMBO_ALGORITHMS_COLORING_CHROMATICNUMBER
 #define LIMBO_ALGORITHMS_COLORING_CHROMATICNUMBER
 
+#include <iostream>
 #include <vector>
 #include <set>
 #include <boost/graph/graph_concepts.hpp>
@@ -16,6 +17,8 @@
 
 using std::vector;
 using std::set;
+using std::cout;
+using std::endl;
 
 /// =====================================================
 /// class: LawlerChromaticNumber
@@ -71,12 +74,16 @@ class LawlerChromaticNumber
 					mMisNode.back().insert(*it);
 			}
 		};
-		int operator()(subgraph_type& g) const 
+		int operator()(subgraph_type g) const 
 		{
 			return chromatic_number(g);
 		}
 
 	protected:
+		/// the chromatic number of G is related to the complement graph of G \ I, 
+		/// where I is maximum independent set 
+		/// traversing over all maximum independent sets are necessary to calculate the chromatic number
+		/// this function is implemented in a recursive way
 		int chromatic_number(subgraph_type& g) const
 		{
 			int cn = boost::num_vertices(g); // initial chromatic number 
@@ -98,22 +105,51 @@ class LawlerChromaticNumber
 			vector<set<graph_vertex_type> > mMisNode;
 			limbo::algorithms::max_independent_set(g, mis_visitor_type(mMisNode), limbo::algorithms::MaxIndependentSetByMaxClique());
 
+#ifdef DEBUG_CHROMATICNUMBER
+#if 0
+			typename boost::property_map<subgraph_type, boost::vertex_index_t>::type vertex_index_map = boost::get(boost::vertex_index, g);
+
+			for (typename vector<set<graph_vertex_type> >::const_iterator it1 = mMisNode.begin(); 
+					it1 != mMisNode.end(); ++it1)
+			{
+				set<graph_vertex_type> const& sMisNode = *it1;
+
+				for (typename set<graph_vertex_type>::const_iterator it2 = sMisNode.begin();
+						it2 != sMisNode.end(); ++it2)
+					cout << vertex_index_map[*it2] << " ";
+				cout << endl;
+			}
+#endif
+#endif
+
 			for (typename vector<set<graph_vertex_type> >::const_iterator it1 = mMisNode.begin(); 
 					it1 != mMisNode.end(); ++it1)
 			{
 				set<graph_vertex_type> const& sMisNode = *it1;
 				subgraph_type& g_s = g.create_subgraph(); // subgraph, G \ I
-				for (typename set<graph_vertex_type>::const_iterator it2 = sMisNode.begin();
-						it2 != sMisNode.end(); ++it2)
+
+				BGL_FORALL_VERTICES_T(v, g, subgraph_type)
 				{
-					if (!sMisNode.count(*it2))
-						boost::add_vertex(*it2, g_s);
+					if (!sMisNode.count(v))
+						boost::add_vertex(v, g_s);
 				}
 
+#ifdef DEBUG_CHROMATICNUMBER
+				//boost::print_graph(g_s, vertex_index_map);
+#endif
 				// get chromatic number of complementary MIS graph
 				int comp_cn = chromatic_number(g_s);
 
 				if (cn > comp_cn) cn = comp_cn;
+
+				// the assumption is that all mis have the same size 
+				//
+				// if current graph has more than 1 vertices 
+				// and we only need 1 color, that is already smallest number of colors
+				// so we can exit early
+				if (boost::num_vertices(g_s) == 0 
+						|| (boost::num_vertices(g_s) > 0 && cn == 1)) 
+					break;
 			}
 
 			return cn+1;
