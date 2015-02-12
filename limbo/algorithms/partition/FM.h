@@ -88,6 +88,7 @@ class FM
 				for (typename vector<FM_net_type*>::const_iterator itNet = vNet.begin(); 
 						itNet != vNet.end(); ++itNet)
 				{
+#if 0
 					for (typename vector<FM_node_type*>::const_iterator itNode = (*itNet)->vNode.begin();
 							itNode != (*itNet)->vNode.end(); ++itNode)
 					{
@@ -99,6 +100,18 @@ class FM
 						else // external node
 							g += (*itNet)->weight;
 					}
+#else 
+					int exclusivePartition = (*itNet)->exclusive_partition(*this);
+					if (exclusivePartition != 2)
+					{
+						// current node is in the same partition as other nodes in this net
+						if (this->partition == exclusivePartition) 
+							g -= (*itNet)->weight;
+						// current node is in different partitions from other nodes in this net
+						else
+							g += (*itNet)->weight;
+					}
+#endif
 				}
 				return g;
 			}
@@ -107,6 +120,50 @@ class FM
 		{
 			vector<FM_node_type*> vNode;
 			net_weight_type weight; ///< net weight
+
+			/// \return 0 or weight 
+			net_weight_type cutsize() const
+			{
+				if (vNode.size() < 2) return 0;
+				for (typename vector<FM_node_type*>::const_iterator itNode = vNode.begin()+1;
+						itNode != vNode.end(); ++itNode)
+				{
+					assert((*itNode)->partition == 0 || (*itNode)->partition == 1);
+					if ((*(itNode-1))->partition != (*itNode)->partition) // has a cut
+						return weight;
+				}
+				return 0;
+			}
+			/// partition excludes a certain node  
+			/// \return 0 indicates all nodes except pFMNode are in partition 0
+			/// \return 1 indicates all nodes except pFMNode are in partition 1
+			/// \return 2 indicates all nodes except are in both partitions 
+			int exclusive_partition(FM_node_type const& fmNode) const 
+			{
+				int prevPartition = -1;
+				int exclusivePartition = -1; // except current node, 
+				//	0 indicates all in partition 0, 
+				//	1 indicates all in partition 1,
+				//	2 indicates in both partitions
+				for (typename vector<FM_node_type*>::const_iterator itNode = vNode.begin();
+						itNode != vNode.end(); ++itNode)
+				{
+					assert((*itNode)->partition == 0 || (*itNode)->partition == 1);
+
+					if (fmNode.pNode == (*itNode)->pNode) continue;
+					else if (prevPartition < 0) 
+					{
+						prevPartition = (*itNode)->partition;
+						exclusivePartition = prevPartition;
+					}
+					else if (prevPartition != (*itNode)->partition) 
+					{
+						exclusivePartition = 2;
+						break;
+					}
+				}
+				return exclusivePartition;
+			}
 		};
 
 		/// forward declaration
@@ -260,24 +317,10 @@ class FM
 		net_weight_type cutsize() const 
 		{
 			net_weight_type cs = 0;
-			for (typename unordered_map<node_type*, FM_node_type*>::const_iterator it = m_hNode.begin();
-					it != m_hNode.end(); ++it)
-			{
-				FM_node_type* const& pFMNode = it->second;
-				assert(pFMNode->partition == 0 || pFMNode->partition == 1);
-
-				for (typename vector<FM_net_type*>::const_iterator itNet = pFMNode->vNet.begin(); 
-						itNet != pFMNode->vNet.end(); ++itNet)
-				{
-					for (typename vector<FM_node_type*>::const_iterator itNode = (*itNet)->vNode.begin(); 
-							itNode != (*itNet)->vNode.end(); ++itNode)
-					{
-						if (pFMNode == *itNode) continue;
-						cs += (pFMNode->partition^(*itNode)->partition)*(*itNet)->weight;
-					}
-				}
-			}
-			return cs/2;
+			for (typename vector<FM_net_type*>::const_iterator it = m_vNet.begin();
+					it != m_vNet.end(); ++it)
+				cs += (*it)->cutsize();
+			return cs;
 		}
 		/// top api for FM 
 		/// \return final cutsize after partition
@@ -371,7 +414,7 @@ class FM
 
 #ifdef DEBUG_FM
 				this->print_node();
-				assert(trial_pass == actual_pass && actual_pass.first == this->cutsize());
+				assert(trial_pass == actual_pass && limbo::abs(actual_pass.first-this->cutsize()) < 1e-6);
 #endif 
 
 				cur_cutsize = actual_pass.first;
@@ -508,6 +551,7 @@ class FM
 				for (typename vector<FM_net_type*>::const_iterator itNet = pFMNodeBest->vNet.begin(); 
 						itNet != pFMNodeBest->vNet.end(); ++itNet)
 				{
+#if 0
 					for (typename vector<FM_node_type*>::const_iterator itNode = (*itNet)->vNode.begin(); 
 							itNode != (*itNet)->vNode.end(); ++itNode)
 					{
@@ -519,6 +563,18 @@ class FM
 						else 
 							cur_cutsize -= (*itNet)->weight;
 					}
+#else
+					int exclusivePartition = (*itNet)->exclusive_partition(*pFMNodeBest);
+					if (exclusivePartition != 2)
+					{
+						// current node is in the same partition as other nodes in this net
+						if (pFMNodeBest->partition == exclusivePartition) 
+							cur_cutsize += (*itNet)->weight;
+						// current node is in different partitions from other nodes in this net
+						else
+							cur_cutsize -= (*itNet)->weight;
+					}
+#endif
 				}
 				// update partition of pFMNodeBest
 				pFMNodeBest->partition = !pFMNodeBest->partition;
@@ -540,7 +596,7 @@ class FM
 
 #ifdef DEBUG_FM
 				//gain_bucket.print();
-				assert(cur_cutsize == this->cutsize());
+				assert(limbo::abs(cur_cutsize-this->cutsize()) < 1.0e-6);
 				this->print();
 				cout << "move cnt = " << cur_cnt << ", current cutsize = " << this->cutsize() << endl;
 #endif

@@ -43,7 +43,7 @@ int main()
 	vNode[6] = new Node (1, 'g');
 	vNode[7] = new Node (1, 'h');
 
-	limbo::algorithms::partition::FM<Node, int> fm; 
+	limbo::algorithms::partition::FM<Node, double> fm; 
 	for (unsigned int i = 0; i < vNode.size(); ++i)
 	{
 #if 1
@@ -66,6 +66,7 @@ int main()
 		vNodeNet.push_back(vNode[1]);
 		vNodeNet.push_back(vNode[2]);
 		fm.add_net(1, vNodeNet.begin(), vNodeNet.end());
+		//fm.add_net(1.0/(vNodeNet.size()-1), vNodeNet.begin(), vNodeNet.end());
 	}
 	// net n2
 	{
@@ -75,6 +76,7 @@ int main()
 		vNodeNet.push_back(vNode[4]);
 		vNodeNet.push_back(vNode[5]);
 		fm.add_net(1, vNodeNet.begin(), vNodeNet.end());
+		//fm.add_net(1.0/(vNodeNet.size()-1), vNodeNet.begin(), vNodeNet.end());
 	}
 	// net n3
 	{
@@ -83,6 +85,7 @@ int main()
 		vNodeNet.push_back(vNode[5]);
 		vNodeNet.push_back(vNode[6]);
 		fm.add_net(1, vNodeNet.begin(), vNodeNet.end());
+		//fm.add_net(1.0/(vNodeNet.size()-1), vNodeNet.begin(), vNodeNet.end());
 	}
 	// net n4
 	{
@@ -90,6 +93,7 @@ int main()
 		vNodeNet.push_back(vNode[0]);
 		vNodeNet.push_back(vNode[6]);
 		fm.add_net(1, vNodeNet.begin(), vNodeNet.end());
+		//fm.add_net(1.0/(vNodeNet.size()-1), vNodeNet.begin(), vNodeNet.end());
 	}
 	// net n5
 	{
@@ -98,6 +102,7 @@ int main()
 		vNodeNet.push_back(vNode[4]);
 		vNodeNet.push_back(vNode[7]);
 		fm.add_net(1, vNodeNet.begin(), vNodeNet.end());
+		//fm.add_net(1.0/(vNodeNet.size()-1), vNodeNet.begin(), vNodeNet.end());
 	}
 	// net n6
 	{
@@ -105,6 +110,7 @@ int main()
 		vNodeNet.push_back(vNode[5]);
 		vNodeNet.push_back(vNode[7]);
 		fm.add_net(1, vNodeNet.begin(), vNodeNet.end());
+		//fm.add_net(1.0/(vNodeNet.size()-1), vNodeNet.begin(), vNodeNet.end());
 	}
 	fm.print();
 	fm.print_connection();

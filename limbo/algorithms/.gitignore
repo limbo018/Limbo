@@ -1,2 +1,3 @@
 test/*.o
 test/test_FM
+test/test_ChromaticNumber
