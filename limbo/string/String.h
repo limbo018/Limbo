@@ -101,6 +101,52 @@ inline bool iequals(string const& s1, string const& s2)
 	return s1_up == s2_up;
 }
 
+/// return the relative path of a file
+inline string get_file_path(const string& s)
+{
+	size_t found = s.rfind('/');
+	if (found != string::npos) return s.substr(0, found);
+	else return ".";
+}
+/// return the pure name of a file (no path)
+inline string get_file_name(const string& s)
+{
+	size_t found = s.rfind('/');
+	if (found != string::npos) return s.substr(found+1);
+	else return s;
+}
+/// return the suffix of a file 
+inline string get_file_suffix(const string& s)
+{
+	size_t found = s.rfind('.');
+	if (found != string::npos) return s.substr(found+1);
+	else return string("");
+}
+/// trim the suffix of a file 
+inline string trim_file_suffix(string const& s)
+{
+	size_t found = s.rfind('.');
+	if (found != string::npos) return s.substr(0, found);
+	else return s;
+}
+/// return the first word of a string, assume delimiter is space or tab
+inline string get_first_word(string const& str)
+{
+	size_t pos1 = std::string::npos;
+	size_t pos2 = std::string::npos;
+	for (size_t i = 0; i < str.size(); i++)
+	{
+		if (pos1 == std::string::npos && str[i] != ' ' && str[i] != '\t')
+			pos1 = i;
+		else if (pos1 != std::string::npos && (str[i] == ' ' || str[i] == '\t'))
+		{
+			pos2 = i;
+			break;
+		}
+	}
+	return str.substr(pos1, pos2 - pos1);
+}
+
 } // namespace limbo 
 
 #endif 
