@@ -23,6 +23,52 @@ inline T abs(T const& t)
 {
 	return (t > 0)? t : -t;
 }
+/// return sum value of an array
+template <typename Iterator>
+inline typename std::iterator_traits<Iterator>::value_type sum(Iterator first, Iterator last)
+{
+	typename std::iterator_traits<Iterator>::value_type v = 0;
+	for (; first != last; ++first)
+		v += *first;
+	return v;
+}
+/// return average value of an array 
+template <typename Iterator>
+inline typename std::iterator_traits<Iterator>::value_type average(Iterator first, Iterator last)
+{
+	typename std::iterator_traits<Iterator>::value_type v = 0;
+	size_t cnt = 0;
+	for (; first != last; ++first)
+	{
+		v += *first;
+		cnt += 1;
+	}
+	return v/cnt;
+}
+/// return max value of an array 
+template <typename Iterator>
+inline typename std::iterator_traits<Iterator>::value_type max(Iterator first, Iterator last)
+{
+	typename std::iterator_traits<Iterator>::value_type v = *first;
+	for (; first != last; ++first)
+	{
+		if (v < *first)
+			v = *first;
+	}
+	return v;
+}
+/// return min value of an array 
+template <typename Iterator>
+inline typename std::iterator_traits<Iterator>::value_type min(Iterator first, Iterator last)
+{
+	typename std::iterator_traits<Iterator>::value_type v = *first;
+	for (; first != last; ++first)
+	{
+		if (v > *first)
+			v = *first;
+	}
+	return v;
+}
 
 } // namespace limbo 
 

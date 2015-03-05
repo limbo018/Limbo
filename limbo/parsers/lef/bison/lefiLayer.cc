@@ -1136,6 +1136,7 @@ void lefiLayer::Init() {
   this->nums_ = 0;
   this->numSpacingTable_ = 0;
   this->spacingTableAllocated_ = 0;
+  this->spacingTable_ = 0;
   this->numEnclosure_ = 0;
   this->enclosureAllocated_ = 0;
   this->numPreferEnclosure_ = 0;
