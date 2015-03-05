@@ -122,7 +122,15 @@ struct TfParser
 			text = lexeme[(char_("a-zA-Z") >> *char_("a-zA-Z_0-9-"))];
 			text_nc = lexeme[+char_("a-zA-Z_0-9.-")]; // text no constraints
 
-#if 0
+			///////////////////////////////////////////////////////////////////////
+#if (BOOST_VERSION/100)%1000 == 55
+			// following Error handler only works in boost 1.55.0 
+			// and there will be compilation error for 1.56.0 and 1.57.0
+			// Error handling: on error in expr, call error_handler.
+			qi::on_error<qi::fail>(expression,
+					boost::phoenix::function<ErrorHandler<Iterator> >(error_handler)(
+						"Error! Expecting ", _4, _3));
+#else 
 			qi::on_error<qi::fail>(expression, 
 					phoenix::ref(std::cout)
 					<< phoenix::val("Error! Expecting ")
@@ -132,11 +140,6 @@ struct TfParser
 					<< phoenix::val("'\n")
 					);
 #endif 
-        ///////////////////////////////////////////////////////////////////////
-        // Error handling: on error in expr, call error_handler.
-			qi::on_error<qi::fail>(expression,
-					boost::phoenix::function<ErrorHandler<Iterator> >(error_handler)(
-						"Error! Expecting ", _4, _3));
 		}
 
 		void layer_id_cbk(string const& s1, int32_t const& d2, string const& s3)
