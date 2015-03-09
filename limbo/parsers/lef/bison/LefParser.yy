@@ -4572,7 +4572,7 @@ site: start_site site_options end_site
         driver.lefrSiteCbk( driver.lefrSite);
     }
 
-start_site: K_SITE {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING 
+start_site: K_SITE {driver.lefDumbMode = 1; driver.lefNoNum = 1;} GSTRING 
     { 
       if (/*driver.lefrSiteCbk*/ 1) driver.lefrSite.lefiSite::setName((*$3).c_str());
       //strcpy(driver.siteName, $3);
@@ -4582,7 +4582,7 @@ start_site: K_SITE {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
       driver.hasSite = 1;
     }
 
-end_site: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
+end_site: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} GSTRING
     {
       if (driver.siteName != *$3) {
         if (/*driver.lefrSiteCbk*/ 1) { /* write error only if cbk is set */
@@ -5144,7 +5144,7 @@ macro_leq: K_LEQ { driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
     }
 
 macro_site:
-  macro_site_word  STRING ';'
+  macro_site_word  GSTRING ';'
     {
       if (/*driver.lefrMacroCbk*/ 1) {
         driver.lefrMacro.lefiMacro::setSiteName((*$2).c_str());
@@ -6206,7 +6206,7 @@ stepPattern: K_DO NUMBER K_BY NUMBER K_STEP NUMBER NUMBER
      { if (driver.lefrDoGeometries)
          driver.lefrGeometriesPtr->lefiGeometries::addStepPattern($2, $4, $6, $7); }
 
-sitePattern: STRING NUMBER NUMBER orientation
+sitePattern: GSTRING NUMBER NUMBER orientation
   K_DO NUMBER K_BY NUMBER K_STEP NUMBER NUMBER
     {
       if (driver.lefrDoSite) {
@@ -6217,7 +6217,7 @@ sitePattern: STRING NUMBER NUMBER orientation
 	  $10, $11);
 	}
     }
-  | STRING NUMBER NUMBER orientation
+  | GSTRING NUMBER NUMBER orientation
     {
       if (driver.lefrDoSite) {
 	driver.lefrSitePatternPtr = (lefiSitePattern*)lefMalloc(
