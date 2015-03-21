@@ -386,7 +386,7 @@ void LPColoring<GraphType>::ILPColoring(GRBModel& opt_model, vector<GRBVar>& col
   for(uint32_t k = 0; k < variable_cnt; k++) {
     double value = coloringBits[k].get(GRB_DoubleAttr_X);
     if(value == 0.0 || value == 1.0) continue;
-    coloringBits[k].get(GRB.CharAttr);
+    //coloringBits[k].get(GRB.CharAttr);
   }//end for
   opt_model.update();
 
