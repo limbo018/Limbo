@@ -1,3 +1,8 @@
 test/*.o
 test/test_FM
 test/test_ChromaticNumber
+test/graph.dot
+test/graph.pdf
+test/color_graph.dot
+test/color_graph.pdf
+test/log
