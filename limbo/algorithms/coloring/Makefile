@@ -7,7 +7,7 @@ LIMBO_ROOT_DIR = $(realpath ../../..)
 TEST_DIR = $(realpath ../test)
 VPATH = . $(TEST_DIR)
 
-CXXFLAGS = -W -Wall -Wextra -ansi -pthread -fmax-errors=1 -DDEBUG_LPCOLORING -DASSERT_LPCOLORING -g -std=c++11 #-O2 
+CXXFLAGS = -W -Wall -Wextra -ansi -pthread -fmax-errors=1 -DDEBUG_LPCOLORING -DASSERT_LPCOLORING -g #-O2 
 LDFLAGS =
 
 # internal dependency is lp parser 

@@ -1,6 +1,7 @@
 test/*.o
 test/test_FM
 test/test_ChromaticNumber
+test/test_LPColoring
 test/graph.dot
 test/graph.pdf
 test/color_graph.dot

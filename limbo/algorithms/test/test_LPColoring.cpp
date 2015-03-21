@@ -33,34 +33,6 @@ using std::ofstream;
 using std::string;
 using namespace boost;
 
-template <typename GraphType>
-struct MisVisitor
-{
-	GraphType& g;
-
-	MisVisitor(GraphType& g_) : g(g_) {}
-	MisVisitor(MisVisitor const& rhs) : g(rhs.g) {}
-
-	template <typename MisType>
-	void mis(MisType const& is)
-	{
-		typename property_map<GraphType, vertex_index_t>::type vertex_index_map = get(vertex_index, g);
-
-#if 1
-		if (num_vertices(g) < 20)
-		{
-			cout << "independent sets" << endl;
-			for (typename MisType::const_iterator it = is.begin(); 
-					it != is.end(); ++it)
-			{
-				cout << vertex_index_map[*it] << " ";
-			}
-			cout << endl;
-		}
-#endif
-	}
-};
-
 int main()
 {
 	// do not use setS, it does not compile for subgraph
@@ -75,16 +47,16 @@ int main()
 	typedef typename boost::graph_traits<subgraph_type>::vertex_descriptor vertex_descriptor; 
 
 	mt19937 gen;
-  subgraph_type g;
-  int N = 40;
-  std::vector<vertex_descriptor> vertex_set;
-  std::vector< std::pair<vertex_descriptor, vertex_descriptor> > edge_set;
-  generate_random_graph(g, N, N * 2, gen,
-                          std::back_inserter(vertex_set),
-                          std::back_inserter(edge_set));
-	
-  //test relaxed LP based coloring
-  limbo::algorithms::coloring::LPColoring<subgraph_type> lp_coloring; 
-  lp_coloring.graphColoring(g);
+	subgraph_type g;
+	int N = 40;
+	std::vector<vertex_descriptor> vertex_set;
+	std::vector< std::pair<vertex_descriptor, vertex_descriptor> > edge_set;
+	generate_random_graph(g, N, N * 2, gen,
+			std::back_inserter(vertex_set),
+			std::back_inserter(edge_set));
+
+	//test relaxed LP based coloring
+	limbo::algorithms::coloring::LPColoring<subgraph_type> lp_coloring (g); 
+	lp_coloring();
 	return 0;
 }
