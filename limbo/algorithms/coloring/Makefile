@@ -14,7 +14,7 @@ LDFLAGS =
 # external dependency is boost and lemon 
 INCLUDE = -I $(LIMBO_ROOT_DIR) \
 		  -I $(BOOST_DIR)/include \
-			-I $(GUROBI_HOME)/include \
+		  -I $(GUROBI_HOME)/include \
 		  -I $(LIBRARIES_DIR)/boost_1_55_0
 LINK = -L $(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi60 -lrt
 

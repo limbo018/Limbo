@@ -47,12 +47,14 @@ class LPColoring
 		/// top api 
 		void operator()() {this->graphColoring();}
 
+		/// \return coloring solution for a node 
+		uint32_t color(graph_vertex_type const& node) const {return m_coloring.at(node);}
+
 		/// set up the vertex map
 		void setVertexMap();
 
 		/// DFS to search for the odd cycles, stored in m_odd_cycles
 		void oddCycles(graph_vertex_type& v);
-
 
 		/// relaxed linear programming based coloring for the conflict graph (m_graph)
 		void graphColoring(); 
@@ -575,8 +577,8 @@ void LPColoring<GraphType>::roundingColoring(vector<GRBVar>& coloringBits)
 		}//end for k
 		if(this->m_coloring.find(vertex_key) == this->m_coloring.end())
 			this->m_coloring[vertex_key] = color;
-		else 
 #ifdef ASSERT_LPCOLORING
+		else 
 			assert(this->m_coloring[vertex_key] == color);
 #endif
 	}//end for 
