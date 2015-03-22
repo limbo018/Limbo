@@ -44,10 +44,10 @@ int main()
 	typedef subgraph<graph_type> subgraph_type;
 	typedef property<vertex_index_t, std::size_t> VertexId;
 	typedef property<edge_index_t, std::size_t> EdgeID;
-	typedef typename boost::graph_traits<subgraph_type>::vertex_descriptor vertex_descriptor; 
+	typedef typename boost::graph_traits<graph_type>::vertex_descriptor vertex_descriptor; 
 
 	mt19937 gen;
-	subgraph_type g;
+	graph_type g;
 	int N = 40;
 	std::vector<vertex_descriptor> vertex_set;
 	std::vector< std::pair<vertex_descriptor, vertex_descriptor> > edge_set;
@@ -56,7 +56,8 @@ int main()
 			std::back_inserter(edge_set));
 
 	//test relaxed LP based coloring
-	limbo::algorithms::coloring::LPColoring<subgraph_type> lp_coloring (g); 
+	limbo::algorithms::coloring::LPColoring<graph_type> lp_coloring (g); 
+	lp_coloring.conflictCost(false);
 	lp_coloring();
 	return 0;
 }
