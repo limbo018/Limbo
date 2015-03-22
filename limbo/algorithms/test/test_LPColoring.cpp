@@ -54,6 +54,18 @@ int main()
 	generate_random_graph(g, N, N * 2, gen,
 			std::back_inserter(vertex_set),
 			std::back_inserter(edge_set));
+	BOOST_AUTO(edge_weight_map, get(edge_weight, g));
+	unsigned int i = 0; 
+	graph_traits<graph_type>::edge_iterator eit, eit_end;
+	for (tie(eit, eit_end) = edges(g); eit != eit_end; ++eit, ++i)
+	{
+#if 1
+		if (i%10 == 0) // generate stitch 
+			edge_weight_map[*eit] = -1;
+		else // generate conflict 
+#endif
+			edge_weight_map[*eit] = 1;
+	}
 
 	//test relaxed LP based coloring
 	limbo::algorithms::coloring::LPColoring<graph_type> lp_coloring (g); 
