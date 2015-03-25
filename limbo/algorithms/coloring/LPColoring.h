@@ -7,6 +7,7 @@
 #include <cassert>
 #include <cmath>
 #include <stdlib.h>
+#include <sstream>
 #include <boost/cstdint.hpp>
 #include <boost/unordered_map.hpp>
 #include <boost/graph/graph_concepts.hpp>
@@ -23,6 +24,7 @@ using std::cout;
 using std::endl;
 using std::ofstream;
 using std::pair;
+using std::ostringstream;
 using boost::unordered_map;
 using boost::uint32_t;
 using boost::int32_t;
@@ -82,6 +84,9 @@ class LPColoring
 		uint32_t vertexColor(graph_vertex_type& node) const;
 		uint32_t conflictNum() const;
 		uint32_t stitchNum() const;
+		/// coloring info for non-rounded LP results
+		uint32_t lpConflictNum() const;
+		uint32_t lpStitchNum() const;
 
 		pair<uint32_t, uint32_t> nonIntegerNum(const vector<GRBVar>& coloringBits, const vector<GRBVar>& vEdgeBit) const;
 		/// for debug use
@@ -98,6 +103,20 @@ class LPColoring
 	protected:
 		/// set up the vertex map
 		void setMap();
+		/// check if a variable is integer or not 
+		bool isInteger(double value) const {return value == floor(value);}
+		/// check same color for two vertices from m_coloring
+		bool sameColor(graph_vertex_type v1, graph_vertex_type v2) const;
+		/// check same color for two vertices from m_lp_coloring
+		bool lpSameColor(graph_vertex_type v1, graph_vertex_type v2) const;
+		/// check conflict of an edge from m_coloring
+		bool hasConflict(graph_edge_type e) const;
+		/// check conflict of an edge from m_lp_coloring
+		bool hasLPConflict(graph_edge_type e) const;
+		/// check stitch of an edge from m_coloring
+		bool hasStitch(graph_edge_type e) const;
+		/// check stitch of an edge from m_lp_coloring
+		bool hasLPStitch(graph_edge_type e) const;
 
 		/// members
 		/// the graph 
@@ -301,15 +320,19 @@ void LPColoring<GraphType>::graphColoring()
 	coloringBits.reserve(coloring_bits_num);
 	for (uint32_t i = 0; i != coloring_bits_num; ++i)
 	{
+		ostringstream oss;
+		oss << "v" << i;
 		//coloringBits.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_INTEGER));
-		coloringBits.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS));
+		coloringBits.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS, oss.str()));
 	}
 	vEdgeBit.reserve(edge_num);
 	for (uint32_t i = 0; i != edge_num; ++i)
 	{
 		// some variables here may not be used 
+		ostringstream oss;
+		oss << "e" << i;
 		//vEdgeBit.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_INTEGER));
-		vEdgeBit.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS));
+		vEdgeBit.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS, oss.str()));
 	}
 	// conflict edge variables 
 	// they are used in objective function to minimize conflict cost 
@@ -332,7 +355,7 @@ void LPColoring<GraphType>::graphColoring()
 				obj_init += m_stitch_weight*vEdgeBit[edge_idx];
 		}
 	}
-	if(conflictCost()) obj = obj_init;
+	obj = obj_init;
 	opt_model.setObjective(obj, GRB_MINIMIZE);
 
 	//set up the LP constraints
@@ -420,6 +443,10 @@ void LPColoring<GraphType>::graphColoring()
 	}
 #endif
 	//optimize model 
+	opt_model.update();
+#ifdef DEBUG_LPCOLORING
+	opt_model.write("../test/graph.lp");
+#endif
 	opt_model.optimize();
 	int optim_status = opt_model.get(GRB_IntAttr_Status);
 	if(optim_status == GRB_INFEASIBLE) 
@@ -436,7 +463,7 @@ void LPColoring<GraphType>::graphColoring()
 		BOOST_AUTO(pair, this->nonIntegerNum(coloringBits, vEdgeBit));
 		non_integer_num = pair.first;
 		half_integer_num = pair.second;
-    if(non_integer_num == 0) break;
+		if(non_integer_num == 0) break;
 		//store the lp coloring results 
 		m_lp_coloring.clear();
 		m_lp_coloring.reserve(coloring_bits_num);
@@ -445,61 +472,87 @@ void LPColoring<GraphType>::graphColoring()
 			double value = coloringBits[k].get(GRB_DoubleAttr_X);
 			m_lp_coloring.push_back(value);
 		}
+#ifdef DEBUG_LPCOLORING
+		// compare unrounded conflict number is more fair 
+		this->lpConflictNum();
+#endif
 
 		vector<bool> non_integer_flag(coloring_bits_num, false);
 		//set the new objective
 		//push the non-half_integer to 0/1
 		// only check for vertices 
     
-		for(uint32_t k = 0; k < coloring_bits_num; k++) 
+		for(uint32_t k = 0; k < coloring_bits_num; k += COLORING_BITS) 
 		{
-			double value = coloringBits[k].get(GRB_DoubleAttr_X);
+			double value1 = coloringBits[k].get(GRB_DoubleAttr_X);
+			double value2 = coloringBits[k+1].get(GRB_DoubleAttr_X);
+			if (!isInteger(value1) || !isInteger(value2))
+			{
+				if (value1 > value2)
+				{
+					if (!conflictCost())
+						obj += coloringBits[k+1]-coloringBits[k];
+				}
+				else if (value1 < value2)
+				{
+					if (!conflictCost())
+						obj += coloringBits[k]-coloringBits[k+1];
+				}
+				if (value1 == 0.5) non_integer_flag[k] = true;
+				if (value2 == 0.5) non_integer_flag[k+1] = true;
+			}
+#if 0
 			if(value < 0.5) 
 			{
-				if(!conflictCost()) obj = obj + 2*coloringBits[k];
+				if(!conflictCost()) 
+					obj = obj + 2*coloringBits[k];
 				non_integer_flag[k] = false;
 			} 
 			else if (value > 0.5) 
 			{
-				if(!conflictCost()) obj = obj - 2*coloringBits[k];
+				if(!conflictCost()) 
+					obj = obj - 2*coloringBits[k];
 				non_integer_flag[k] = false;
 			} 
 			else 
 			{
 				non_integer_flag[k] = true;
 			}
-
+#endif
 		}//end for 
     
 		//minimize the conflict number 
-		for(BOOST_AUTO(itr, edge_range.first); itr != edge_range.second; ++itr) 
+		if (!conflictCost())
 		{
-			BOOST_AUTO(from, source(*itr, m_graph));
-			uint32_t f_ind = m_vertex_map[from];
-			BOOST_AUTO(to, target(*itr, m_graph));
-			uint32_t t_ind = m_vertex_map[to];
-  		uint32_t vertex_idx1 = f_ind<<1;
-  		uint32_t vertex_idx2 = t_ind<<1;
-			if (m_lp_coloring[vertex_idx1] > m_lp_coloring[vertex_idx2]) 
+			for(BOOST_AUTO(itr, edge_range.first); itr != edge_range.second; ++itr) 
 			{
-				obj += coloringBits[vertex_idx2] - coloringBits[vertex_idx1];
-			} 
-			else if (m_lp_coloring[vertex_idx1] < m_lp_coloring[vertex_idx2]) 
-			{
-				obj += coloringBits[vertex_idx1] - coloringBits[vertex_idx2];
-			}
+				BOOST_AUTO(from, source(*itr, m_graph));
+				uint32_t f_ind = m_vertex_map[from];
+				BOOST_AUTO(to, target(*itr, m_graph));
+				uint32_t t_ind = m_vertex_map[to];
+				uint32_t vertex_idx1 = f_ind<<1;
+				uint32_t vertex_idx2 = t_ind<<1;
+				if (m_lp_coloring[vertex_idx1] > m_lp_coloring[vertex_idx2]) 
+				{
+					obj += coloringBits[vertex_idx2] - coloringBits[vertex_idx1];
+				} 
+				else if (m_lp_coloring[vertex_idx1] < m_lp_coloring[vertex_idx2]) 
+				{
+					obj += coloringBits[vertex_idx1] - coloringBits[vertex_idx2];
+				}
 
-      vertex_idx1 += 1;
-      vertex_idx2 += 1;
-			if (m_lp_coloring[vertex_idx1] > m_lp_coloring[vertex_idx2]) 
-			{
-				obj += coloringBits[vertex_idx2] - coloringBits[vertex_idx1];
-			} 
-			else if (m_lp_coloring[vertex_idx1] < m_lp_coloring[vertex_idx2]) 
-			{
-				obj += coloringBits[vertex_idx1] - coloringBits[vertex_idx2];
-			}
-		}//end for 
+				vertex_idx1 += 1;
+				vertex_idx2 += 1;
+				if (m_lp_coloring[vertex_idx1] > m_lp_coloring[vertex_idx2]) 
+				{
+					obj += coloringBits[vertex_idx2] - coloringBits[vertex_idx1];
+				} 
+				else if (m_lp_coloring[vertex_idx1] < m_lp_coloring[vertex_idx2]) 
+				{
+					obj += coloringBits[vertex_idx1] - coloringBits[vertex_idx2];
+				}
+			}//end for 
+		}
 
 		opt_model.setObjective(obj);
 
@@ -552,6 +605,10 @@ void LPColoring<GraphType>::graphColoring()
 		}//end for k
 
 		//optimize the new model
+		opt_model.update();
+#ifdef DEBUG_LPCOLORING
+		opt_model.write("../test/graph.lp");
+#endif
 		opt_model.optimize();
 		optim_status = opt_model.get(GRB_IntAttr_Status);
 		if(optim_status == GRB_INFEASIBLE) 
@@ -567,7 +624,7 @@ void LPColoring<GraphType>::graphColoring()
 		non_integer_num_updated = pair.first;
 		half_integer_num_updated = pair.second;
 
-		if (non_integer_num_updated == 0 || 
+		if (/*non_integer_num_updated == 0*/ half_integer_num_updated == 0 || 
 				(non_integer_num_updated >= non_integer_num && half_integer_num_updated >= half_integer_num)) break;
 	}//end while
 
@@ -580,6 +637,11 @@ void LPColoring<GraphType>::graphColoring()
 		m_lp_coloring.push_back(value);
 	}
 
+#ifdef DEBUG_LPCOLORING
+	// compare unrounded conflict number is more fair 
+	this->lpConflictNum();
+	this->write_graph_dot();
+#endif
 	//the last round of ILP 
 	//this->ILPColoring(opt_model, coloringBits);
 	//rounding the coloring results
@@ -627,9 +689,9 @@ void LPColoring<GraphType>::roundingColoring(vector<GRBVar>& coloringBits)
 	//greedy rounding scheme
 	uint32_t vec_size = coloringBits.size();
 	//the rounding results
-	bool coloringBinary[vec_size];
+	vector<bool> coloringBinary(vec_size, false);
 	//the flag denoting whether current bit is rounded or not
-	bool roundingFlag[vec_size]; 
+	vector<bool> roundingFlag(vec_size, false); 
 	//rounding by range
 	for(uint32_t k = 0; k < vec_size; k++) 
 	{
@@ -734,7 +796,7 @@ void LPColoring<GraphType>::roundingColoring(vector<GRBVar>& coloringBits)
 			base = base<<1;
 		}
 #ifdef ASSERT_LPCOLORING
-    assert(color < 4);
+		assert(color < 4);
 #endif
 		this->m_coloring[vertex_key] = color;
 	}//end for k
@@ -753,10 +815,11 @@ void LPColoring<GraphType>::roundingColoring(vector<GRBVar>& coloringBits)
 		if(this->m_coloring.find(vertex_key) == this->m_coloring.end())
 			this->m_coloring[vertex_key] = color;
 #ifdef ASSERT_LPCOLORING
-		else { 
-      //cout << "stored color-" << this->m_coloring[vertex_key] << " vs assigned color-" << color << endl;
+		else 
+		{ 
+			//cout << "stored color-" << this->m_coloring[vertex_key] << " vs assigned color-" << color << endl;
 			assert(this->m_coloring[vertex_key] == color);
-    }
+		}
 #endif
 	}//end for 
 }
@@ -771,6 +834,42 @@ uint32_t LPColoring<GraphType>::vertexColor(graph_vertex_type& node) const
 	return this->m_coloring.at(node);
 }
 
+template <typename GraphType>
+bool LPColoring<GraphType>::sameColor(typename LPColoring<GraphType>::graph_vertex_type v1, 
+		typename LPColoring<GraphType>::graph_vertex_type v2) const 
+{
+	assert(!m_coloring.empty());
+#ifdef ASSERT_LPCOLORING
+	assert(this->m_coloring.find(v1) != this->m_coloring.end());
+	assert(this->m_coloring.find(v2) != this->m_coloring.end());
+#endif
+	return m_coloring.at(v1) == m_coloring.at(v2);
+}
+
+template <typename GraphType>
+bool LPColoring<GraphType>::hasConflict(typename LPColoring<GraphType>::graph_edge_type e) const 
+{
+	BOOST_AUTO(w, m_edge_weight_map[e]);
+	// skip stitch edges 
+	if (w < 0) return false;
+
+	BOOST_AUTO(from, source(e, m_graph));
+	BOOST_AUTO(to, target(e, m_graph));
+	return sameColor(from, to);
+}
+
+template <typename GraphType>
+bool LPColoring<GraphType>::hasStitch(typename LPColoring<GraphType>::graph_edge_type e) const 
+{
+	BOOST_AUTO(w, m_edge_weight_map[e]);
+	// skip conflict edges 
+	if (w >= 0) return false;
+
+	BOOST_AUTO(from, source(e, m_graph));
+	BOOST_AUTO(to, target(e, m_graph));
+	return !sameColor(from, to);
+}
+
 //report the conflict number
 template<typename GraphType>
 uint32_t LPColoring<GraphType>::conflictNum() const
@@ -783,19 +882,8 @@ uint32_t LPColoring<GraphType>::conflictNum() const
 	pair<typename graph_type::edge_iterator, typename graph_type::edge_iterator> edge_range = edges(m_graph);
 	for(BOOST_AUTO(itr, edge_range.first); itr != edge_range.second; ++itr) 
 	{
-		BOOST_AUTO(w, m_edge_weight_map[*itr]);
-		// skip stitch edges 
-		if (w < 0) continue;
-		BOOST_AUTO(from, source(*itr, m_graph));
-		BOOST_AUTO(to, target(*itr, m_graph));
-#ifdef ASSERT_LPCOLORING
-		assert(this->m_coloring.find(from) != this->m_coloring.end());
-		assert(this->m_coloring.find(to) != this->m_coloring.end());
-#endif
-		if(this->m_coloring.at(from) == this->m_coloring.at(to)) 
-		{
+		if (hasConflict(*itr))
 			++conflict_num;
-		}
 		++conflict_edge_num;
 	}//end for itr
 	cout << "Conflict number: " << conflict_num << " out of " << conflict_edge_num << " conflict edges" << endl;
@@ -815,22 +903,90 @@ uint32_t LPColoring<GraphType>::stitchNum() const
 	pair<typename graph_type::edge_iterator, typename graph_type::edge_iterator> edge_range = edges(m_graph);
 	for(BOOST_AUTO(itr, edge_range.first); itr != edge_range.second; ++itr) 
 	{
-		BOOST_AUTO(w, m_edge_weight_map[*itr]);
-		// skip conflict edges 
-		if (w >= 0) continue;
-		BOOST_AUTO(from, source(*itr, m_graph));
-		BOOST_AUTO(to, target(*itr, m_graph));
-#ifdef ASSERT_LPCOLORING
-		assert(this->m_coloring.count(from));
-		assert(this->m_coloring.count(to));
-#endif
-		if(this->m_coloring.at(from) != this->m_coloring.at(to)) 
+		if (hasStitch(*itr))
+			++stitch_num;
+		++stitch_edge_num;
+	}//end for itr
+	cout << "Stitch number: " << stitch_num << " out of " << stitch_edge_num << " stitch edges" << endl;
+	return stitch_num;
+}
+
+template <typename GraphType>
+bool LPColoring<GraphType>::lpSameColor(typename LPColoring<GraphType>::graph_vertex_type v1, 
+		typename LPColoring<GraphType>::graph_vertex_type v2) const 
+{
+	assert(!m_lp_coloring.empty());
+
+	uint32_t f_ind = m_vertex_map.at(v1);
+	uint32_t t_ind = m_vertex_map.at(v2);
+	uint32_t vertex_idx1 = f_ind<<1;
+	uint32_t vertex_idx2 = t_ind<<1;
+
+	return m_lp_coloring.at(vertex_idx1) == m_lp_coloring.at(vertex_idx2)
+		&& m_lp_coloring.at(vertex_idx1+1) == m_lp_coloring.at(vertex_idx2+1);
+}
+
+template <typename GraphType>
+bool LPColoring<GraphType>::hasLPConflict(typename LPColoring<GraphType>::graph_edge_type e) const 
+{
+	BOOST_AUTO(w, m_edge_weight_map[e]);
+	// skip stitch edges 
+	if (w < 0) return false;
+
+	BOOST_AUTO(from, source(e, m_graph));
+	BOOST_AUTO(to, target(e, m_graph));
+	return lpSameColor(from, to);
+}
+
+template <typename GraphType>
+bool LPColoring<GraphType>::hasLPStitch(typename LPColoring<GraphType>::graph_edge_type e) const 
+{
+	BOOST_AUTO(w, m_edge_weight_map[e]);
+	// skip conflict edges 
+	if (w >= 0) return false;
+
+	BOOST_AUTO(from, source(e, m_graph));
+	BOOST_AUTO(to, target(e, m_graph));
+	return !lpSameColor(from, to);
+}
+
+//report the unrounded LP conflict number
+template<typename GraphType>
+uint32_t LPColoring<GraphType>::lpConflictNum() const
+{
+	if (m_lp_coloring.empty()) return 0;
+	//check the coloring results
+	uint32_t conflict_edge_num = 0;
+	uint32_t conflict_num = 0;
+	pair<typename graph_type::edge_iterator, typename graph_type::edge_iterator> edge_range = edges(m_graph);
+	for(BOOST_AUTO(itr, edge_range.first); itr != edge_range.second; ++itr) 
+	{
+		if (hasLPConflict(*itr))
+			++conflict_num;
+		++conflict_edge_num;
+	}//end for itr
+	cout << "LP Conflict number: " << conflict_num << " out of " << conflict_edge_num << " conflict edges" << endl;
+	return conflict_num;
+}
+
+//report the unrounded LP stitch number
+template<typename GraphType>
+uint32_t LPColoring<GraphType>::lpStitchNum() const
+{
+	if (m_lp_coloring.empty()) return 0;
+	//check the coloring results
+	uint32_t stitch_edge_num = 0;
+	uint32_t stitch_num = 0;
+	pair<typename graph_type::edge_iterator, typename graph_type::edge_iterator> edge_range = edges(m_graph);
+	for(BOOST_AUTO(itr, edge_range.first); itr != edge_range.second; ++itr) 
+	{
+		if (hasLPStitch(*itr))
 		{
 			++stitch_num;
 		}
 		++stitch_edge_num;
 	}//end for itr
-	cout << "Stitch number: " << stitch_num << " out of " << stitch_edge_num << " stitch edges" << endl;
+	cout << "LP Stitch number: " << stitch_num << " out of " << stitch_edge_num << " stitch edges" << endl;
 	return stitch_num;
 }
 
@@ -852,17 +1008,17 @@ pair<uint32_t, uint32_t> LPColoring<GraphType>::nonIntegerNum(const vector<GRBVa
 				//break;
 			}
 			if(value == 0.5) half_num++;
-      cout << k+m << "-" << value << " ";
+			cout << k+m << "-" << value << " ";
 		}
 	}//end for k
-  cout << endl;
+	cout << endl;
 	cout << "NonInteger count: " << non_integer_num << ", half integer count: " << half_num << ", out of " << vec_size << " vertex variable" << endl;
 
-  uint32_t non_integer_num_edge = 0;
-  uint32_t half_num_edge = 0;
-  uint32_t conflict_num = 0;
-  vec_size = vEdgeBit.size();
-  for(uint32_t k = 0; k < vec_size; ++k) 
+	uint32_t non_integer_num_edge = 0;
+	uint32_t half_num_edge = 0;
+	uint32_t conflict_num = 0;
+	vec_size = vEdgeBit.size();
+	for(uint32_t k = 0; k < vec_size; ++k) 
 	{
 		double value = vEdgeBit[k].get(GRB_DoubleAttr_X);
 		if(value != 0.0 && value != 1.0) 
@@ -871,12 +1027,12 @@ pair<uint32_t, uint32_t> LPColoring<GraphType>::nonIntegerNum(const vector<GRBVa
 			//break;
 		}
 		if(value == 0.5) half_num_edge++;
-    if(value == 1) conflict_num++;
-    cout << k << "-" << value << " ";
+		if(value == 1) conflict_num++;
+		cout << k << "-" << value << " ";
 	}//end for k
-  cout << endl;
+	cout << endl;
 	cout << "NonInteger count: " << non_integer_num_edge << ", half integer count: " << half_num_edge << ", out of " << vec_size << " edge variable" << endl;
-  cout << "conflict number: " << conflict_num << endl;
+	cout << "conflict variable number: " << conflict_num << endl;
 	return pair<uint32_t, uint32_t>(non_integer_num+non_integer_num_edge, half_num+half_num_edge);
 }
 
@@ -1012,17 +1168,21 @@ void LPColoring<GraphType>::write_graph_dot() const
 		uint32_t f_ind = m_vertex_map.at(from);
 		BOOST_AUTO(to, target(*itr, m_graph));
 		uint32_t t_ind = m_vertex_map.at(to);
-    bool conflict_flag = false;
-    if(m_lp_coloring[2*f_ind] == m_lp_coloring[2*t_ind] && m_lp_coloring[2*f_ind+1] == m_lp_coloring[2*t_ind+1]) {
-      conflict_flag = true;
-    }//end if
+		bool conflict_flag = false;
+		if(m_lp_coloring[2*f_ind] == m_lp_coloring[2*t_ind] && m_lp_coloring[2*f_ind+1] == m_lp_coloring[2*t_ind+1]) 
+		{
+			conflict_flag = true;
+		}//end if
 		if (m_edge_weight_map[*itr] >= 0) // conflict edge 
-    {
-      if(conflict_flag)
-			  dot_file << "  " << f_ind << "--" << t_ind << "[color=\"red\",style=\"solid\"]\n";
-      else 
-			  dot_file << "  " << f_ind << "--" << t_ind << "[color=\"black\",style=\"solid\"]\n";
-    }
+		{
+			if(conflict_flag)
+			{
+				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"blue\",style=\"solid\"]\n";
+				cout << "conflict (" << f_ind << ", " << t_ind << ")" << endl;
+			}
+			else 
+				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"black\",style=\"solid\"]\n";
+		}
 		else // stitch edge 
 			dot_file << "  " << f_ind << "--" << t_ind << "[color=\"black\",style=\"dashed\"]\n";
 	}

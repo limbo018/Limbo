@@ -59,7 +59,7 @@ int main()
 	graph_traits<graph_type>::edge_iterator eit, eit_end;
 	for (tie(eit, eit_end) = edges(g); eit != eit_end; ++eit, ++i)
 	{
-#if 1
+#if 0
 		if (i%10 == 0) // generate stitch 
 			edge_weight_map[*eit] = -1;
 		else // generate conflict 
@@ -69,7 +69,7 @@ int main()
 
 	//test relaxed LP based coloring
 	limbo::algorithms::coloring::LPColoring<graph_type> lp_coloring (g); 
-	lp_coloring.conflictCost(false);
+	lp_coloring.conflictCost(true);
 	lp_coloring();
 	return 0;
 }
