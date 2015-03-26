@@ -16,8 +16,8 @@
 #include <boost/graph/bipartite.hpp>
 #include "gurobi_c++.h"
 
-#define TRIPLEPATTERNING 
-//#define ILPCOLORING
+//#define TRIPLEPATTERNING 
+#define ILPCOLORING
 
 using std::vector;
 using std::set;
@@ -663,6 +663,7 @@ void LPColoring<GraphType>::graphColoring()
 #endif
 
 	this->conflictNum();
+  this->stitchNum();
 	this->write_graph_color();
 #ifdef DEBUG_LPCOLORING
 	//this->write_graph_dot();
@@ -856,8 +857,8 @@ void LPColoring<GraphType>::rounding_ILP(GRBModel& opt_model, vector<GRBVar>& co
 		int optim_status = opt_model.get(GRB_IntAttr_Status);
 		if(optim_status == GRB_INFEASIBLE) 
 		{
-			cout << "ERROR: the model is infeasible... EXIT" << endl;
-			exit(1);
+			cout << "ERROR: the ILP model is infeasible... Quit ILP based rounding" << endl;
+      exit(1);
 		}
 
 		//no more non-integers are removed 
@@ -1028,7 +1029,7 @@ template<typename GraphType>
 uint32_t LPColoring<GraphType>::vertexColor(graph_vertex_type& node) const
 {
 	//the graph is not colored
-	if(this->m_coloring.empty()) this->graphColoring(m_graph);
+	if(this->m_coloring.empty()) return 0; //this->graphColoring(m_graph);
 	return this->m_coloring.at(node);
 }
 
@@ -1093,7 +1094,7 @@ template<typename GraphType>
 uint32_t LPColoring<GraphType>::stitchNum() const
 {
 	//the graph is not colored
-	if(this->m_coloring.empty()) this->graphColoring(m_graph);
+	if(this->m_coloring.empty()) return 0; //this->graphColoring(m_graph);
 
 	//check the coloring results
 	uint32_t stitch_edge_num = 0;

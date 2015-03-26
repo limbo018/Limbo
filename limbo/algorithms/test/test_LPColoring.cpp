@@ -59,7 +59,7 @@ int main()
 	graph_traits<graph_type>::edge_iterator eit, eit_end;
 	for (tie(eit, eit_end) = edges(g); eit != eit_end; ++eit, ++i)
 	{
-#if 0
+#if 1
 		if (i%10 == 0) // generate stitch 
 			edge_weight_map[*eit] = -1;
 		else // generate conflict 
