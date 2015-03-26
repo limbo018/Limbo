@@ -69,7 +69,7 @@ int main()
 
 	//test relaxed LP based coloring
 	limbo::algorithms::coloring::LPColoring<graph_type> lp_coloring (g); 
-	lp_coloring.conflictCost(true);
+	lp_coloring.conflictCost(false);
 	lp_coloring();
 	return 0;
 }
