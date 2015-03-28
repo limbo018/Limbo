@@ -59,7 +59,7 @@ int main()
 	graph_traits<graph_type>::edge_iterator eit, eit_end;
 	for (tie(eit, eit_end) = edges(g); eit != eit_end; ++eit, ++i)
 	{
-#if 1
+#if 0
 		if (i%10 == 0) // generate stitch 
 			edge_weight_map[*eit] = -1;
 		else // generate conflict 
@@ -68,8 +68,14 @@ int main()
 	}
 
 	//test relaxed LP based coloring
-	limbo::algorithms::coloring::LPColoring<graph_type> lp_coloring (g); 
-	lp_coloring.conflictCost(false);
-	lp_coloring();
+	limbo::algorithms::coloring::LPColoring<graph_type> lc (g); 
+	lc.stitchWeight(0.1);
+	// true or false 
+	lc.conflictCost(false);
+	// DIRECT_ILP, FIXED_ILP or ITERATIVE_ILP
+	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::ITERATIVE_ILP);
+	// THREE or FOUR 
+	lc.colorNum(limbo::algorithms::coloring::LPColoring<graph_type>::FOUR);
+	lc();
 	return 0;
 }

@@ -16,9 +16,6 @@
 #include <boost/graph/bipartite.hpp>
 #include "gurobi_c++.h"
 
-//#define TRIPLEPATTERNING 
-#define ILPCOLORING
-
 using std::vector;
 using std::set;
 using std::cout;
@@ -45,6 +42,17 @@ class LPColoring
 		/// negative weight implies stitch edge 
 		typedef typename boost::property_map<graph_type, boost::edge_weight_t>::const_type edge_weight_map_type;
 
+		enum RoundingScheme 
+		{
+			DIRECT_ILP, // directly solve ILP to get optimal solution 
+			FIXED_ILP, 
+			ITERATIVE_ILP
+		};
+		enum ColorNum 
+		{
+			THREE, 
+			FOUR
+		};
 		// hasher class for graph_edge_type
 		struct edge_hash_type : std::unary_function<graph_edge_type, std::size_t>
 		{
@@ -70,6 +78,10 @@ class LPColoring
 		void conflictCost(bool flag) {m_conflict_cost = flag;}
 		double stitchWeight() const {return m_stitch_weight;}
 		void stitchWeight(double w) {m_stitch_weight = w;}
+		RoundingScheme roundingScheme() const {return m_rounding_scheme;}
+		void roundingScheme(RoundingScheme rs) {m_rounding_scheme = rs;}
+		ColorNum colorNum() const {return m_color_num;}
+		void colorNum(ColorNum cn) {m_color_num = cn;}
 
 		/// DFS to search for the odd cycles, stored in m_odd_cycles
 		void oddCycles(graph_vertex_type& v);
@@ -77,9 +89,15 @@ class LPColoring
 		/// relaxed linear programming based coloring for the conflict graph (m_graph)
 		void graphColoring(); 
 		/// ILP based coloring
+		/// fix all integer solutions from LP 
+		/// set non-integer solutions to integer in ILP 
+		/// call ILP only once 
 		void ILPColoring(vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
-    /// ILP based rounding
-    void rounding_ILP(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
+		/// iterative ILP based rounding
+		/// set non-integer solutions to integer 
+		/// set integer solutions from LP to continuous 
+		/// iteratively call ILP until no non-integer solutions 
+		void rounding_ILP(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
 		/// rounding scheme
 		void rounding_Greedy(vector<GRBVar>& coloringBits);
 
@@ -91,7 +109,7 @@ class LPColoring
 		uint32_t lpConflictNum() const;
 		uint32_t lpStitchNum() const;
 		///store the lp coloring results 
-    void store_lp_coloring(vector<GRBVar>& coloringBits);
+		void store_lp_coloring(vector<GRBVar>& coloringBits);
 
 		pair<uint32_t, uint32_t> nonIntegerNum(const vector<GRBVar>& coloringBits, const vector<GRBVar>& vEdgeBit) const;
 		/// for debug use
@@ -144,6 +162,14 @@ class LPColoring
 		bool m_conflict_cost;
 		/// weight for stitch in the cost 
 		double m_stitch_weight;
+		/// rounding scheme option 
+		RoundingScheme m_rounding_scheme;
+		/// number of colors available, three or four 
+		ColorNum m_color_num;
+		/// record number of LP iterations 
+		uint32_t m_lp_iter_cnt;
+		/// record number of ILP iterations 
+		uint32_t m_ilp_iter_cnt;
 };
 
 /// constructor
@@ -151,7 +177,11 @@ template <typename GraphType>
 LPColoring<GraphType>::LPColoring(graph_type const& g) : COLORING_BITS(2), m_graph(g)
 {
 	m_conflict_cost = true;
-	m_stitch_weight = 1.0;
+	m_stitch_weight = 0.1;
+	m_rounding_scheme = FIXED_ILP;
+	m_color_num = THREE;
+	m_lp_iter_cnt = 0;
+	m_ilp_iter_cnt = 0;
 	this->setMap();
 }
 
@@ -308,6 +338,9 @@ void LPColoring<GraphType>::graphColoring()
 		vertex_num++;
 	}
 #endif
+	// reset iteration counters 
+	m_lp_iter_cnt = m_ilp_iter_cnt = 0;
+
 	uint32_t vertex_num = boost::num_vertices(m_graph);
 	uint32_t edge_num = boost::num_edges(m_graph);
 	uint32_t coloring_bits_num = COLORING_BITS*vertex_num;
@@ -327,8 +360,10 @@ void LPColoring<GraphType>::graphColoring()
 	{
 		ostringstream oss;
 		oss << "v" << i;
-		//coloringBits.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_INTEGER));
-		coloringBits.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS, oss.str()));
+		if (roundingScheme() == DIRECT_ILP)
+			coloringBits.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_INTEGER, oss.str()));
+		else
+			coloringBits.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS, oss.str()));
 	}
 	vEdgeBit.reserve(edge_num);
 	for (uint32_t i = 0; i != edge_num; ++i)
@@ -336,7 +371,6 @@ void LPColoring<GraphType>::graphColoring()
 		// some variables here may not be used 
 		ostringstream oss;
 		oss << "e" << i;
-		//vEdgeBit.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_INTEGER));
 		vEdgeBit.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS, oss.str()));
 	}
 	// conflict edge variables 
@@ -356,9 +390,14 @@ void LPColoring<GraphType>::graphColoring()
 			uint32_t edge_idx = m_edge_map[*itr];
 			if (w >= 0) // conflict 
 				obj_init += vEdgeBit[edge_idx];
-			else // stitch 
-				obj_init += m_stitch_weight*vEdgeBit[edge_idx];
 		}
+	}
+	for (BOOST_AUTO(itr, edge_range.first); itr != edge_range.second; ++itr)
+	{
+		BOOST_AUTO(w, m_edge_weight_map[*itr]);
+		uint32_t edge_idx = m_edge_map[*itr];
+		if (w < 0) // stitch 
+			obj_init += m_stitch_weight*vEdgeBit[edge_idx];
 	}
 	obj = obj_init;
 	opt_model.setObjective(obj, GRB_MINIMIZE);
@@ -441,17 +480,19 @@ void LPColoring<GraphType>::graphColoring()
 		}
 	}
 
-#ifdef TRIPLEPATTERNING
-	for(uint32_t k = 0; k < coloring_bits_num; k += COLORING_BITS) 
+	if (colorNum() == THREE)
 	{
-		opt_model.addConstr(coloringBits[k] + coloringBits[k+1] <= 1);
+		for(uint32_t k = 0; k < coloring_bits_num; k += COLORING_BITS) 
+		{
+			opt_model.addConstr(coloringBits[k] + coloringBits[k+1] <= 1);
+		}
 	}
-#endif
 	//optimize model 
 	opt_model.update();
 #ifdef DEBUG_LPCOLORING
 	opt_model.write("../test/graph.lp");
-#endif
+#endif 
+	cout << "================== LP iteration #" << m_lp_iter_cnt++ << " ==================\n";
 	opt_model.optimize();
 	int optim_status = opt_model.get(GRB_IntAttr_Status);
 	if(optim_status == GRB_INFEASIBLE) 
@@ -470,19 +511,20 @@ void LPColoring<GraphType>::graphColoring()
 		half_integer_num = pair.second;
 		if(non_integer_num == 0) break;
 		//store the lp coloring results 
-    this->store_lp_coloring(coloringBits);
-    /*
-		m_lp_coloring.clear();
-		m_lp_coloring.reserve(coloring_bits_num);
-		for(uint32_t k = 0; k < coloring_bits_num; k++) 
-		{
-			double value = coloringBits[k].get(GRB_DoubleAttr_X);
-			m_lp_coloring.push_back(value);
-		}
-    */
+		this->store_lp_coloring(coloringBits);
+		/*
+		   m_lp_coloring.clear();
+		   m_lp_coloring.reserve(coloring_bits_num);
+		   for(uint32_t k = 0; k < coloring_bits_num; k++) 
+		   {
+		   double value = coloringBits[k].get(GRB_DoubleAttr_X);
+		   m_lp_coloring.push_back(value);
+		   }
+		   */
 #ifdef DEBUG_LPCOLORING
 		// compare unrounded conflict number is more fair 
 		this->lpConflictNum();
+		this->write_graph_dot();
 #endif
 
 		vector<bool> non_integer_flag(coloring_bits_num, false);
@@ -562,7 +604,7 @@ void LPColoring<GraphType>::graphColoring()
 			}//end for 
 		}
 
-		opt_model.setObjective(obj);
+//		opt_model.setObjective(obj);
 
 		//add the new constraints
 		//odd cycle trick from Prof. Baldick
@@ -588,14 +630,17 @@ void LPColoring<GraphType>::graphColoring()
 				uint32_t cycle_len = m_odd_cycles[m].size();
 				GRBLinExpr constraint1 = 0;
 				GRBLinExpr constraint2 = 0;
-				for(uint32_t n = 0; n < cycle_len - 1; n++) 
+#ifdef DEBUG_LPCOLORING 
+				assert(cycle_len%2 == 1);
+#endif
+				for(uint32_t n = 0; n < cycle_len; ++n) 
 				{
 #ifdef ASSERT_LPCOLORING
 					assert(m_vertex_map.find(m_odd_cycles[m][n]) != m_vertex_map.end());
 #endif
 					uint32_t vi_index = m_vertex_map[m_odd_cycles[m][n]];
-					constraint1 += coloringBits[2*vi_index];
-					constraint2 += coloringBits[2*vi_index+1];
+					constraint1 += coloringBits[vi_index<<1];
+					constraint2 += coloringBits[(vi_index<<1)+1];
 
 					////non_integer nodes already handled
 					for(uint32_t x = 0; x < COLORING_BITS; x++) 
@@ -617,6 +662,7 @@ void LPColoring<GraphType>::graphColoring()
 #ifdef DEBUG_LPCOLORING
 		opt_model.write("../test/graph.lp");
 #endif
+		cout << "================== LP iteration #" << m_lp_iter_cnt++ << " ==================\n";
 		opt_model.optimize();
 		optim_status = opt_model.get(GRB_IntAttr_Status);
 		if(optim_status == GRB_INFEASIBLE) 
@@ -637,16 +683,16 @@ void LPColoring<GraphType>::graphColoring()
 	}//end while
 
 	//store the lp coloring results 
-  this->store_lp_coloring(coloringBits);
-  /*
-	m_lp_coloring.clear();
-	m_lp_coloring.reserve(coloring_bits_num);
-	for(uint32_t k = 0; k < coloring_bits_num; k++) 
-	{
-		double value = coloringBits[k].get(GRB_DoubleAttr_X);
-		m_lp_coloring.push_back(value);
-	}
-  */
+	this->store_lp_coloring(coloringBits);
+	/*
+	   m_lp_coloring.clear();
+	   m_lp_coloring.reserve(coloring_bits_num);
+	   for(uint32_t k = 0; k < coloring_bits_num; k++) 
+	   {
+	   double value = coloringBits[k].get(GRB_DoubleAttr_X);
+	   m_lp_coloring.push_back(value);
+	   }
+	   */
 
 #ifdef DEBUG_LPCOLORING
 	// compare unrounded conflict number is more fair 
@@ -654,24 +700,37 @@ void LPColoring<GraphType>::graphColoring()
 	this->write_graph_dot();
 #endif
 
-#ifdef ILPCOLORING
-	//the last round of ILP 
-	this->ILPColoring(coloringBits, vEdgeBit);
-#else 
-	//rounding the coloring results
-	this->rounding_ILP(opt_model, coloringBits, vEdgeBit);
-#endif
+	if (roundingScheme() == DIRECT_ILP)
+		this->rounding_Greedy(coloringBits);
+	else if (roundingScheme() == FIXED_ILP)
+		this->ILPColoring(coloringBits, vEdgeBit);
+	else if (roundingScheme() == ITERATIVE_ILP)
+		this->rounding_ILP(opt_model, coloringBits, vEdgeBit);
 
 	this->conflictNum();
-  this->stitchNum();
+	this->stitchNum();
 	this->write_graph_color();
 #ifdef DEBUG_LPCOLORING
 	//this->write_graph_dot();
 #endif
+	switch (roundingScheme())
+	{
+		case DIRECT_ILP:
+			cout << "DIRECT_ILP mode "; break;
+		case FIXED_ILP:
+			cout << "FIXED_ILP mode "; break;
+		case ITERATIVE_ILP:
+			cout << "ITERATIVE_ILP mode "; break;
+		default:
+			cout << "Unknown mode "; assert(0);
+	}
+	cout << "problem solved in " << m_lp_iter_cnt << " LP iterations, " << m_ilp_iter_cnt << " ILP iterations" << endl;
 
 }//end coloring
 
-//ILP based coloring
+// ILP based coloring
+// all integer bits are fixed 
+// non-integer bits are set to integer in the ILP problem 
 template<typename GraphType>
 void LPColoring<GraphType>::ILPColoring(vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit) 
 {
@@ -687,24 +746,29 @@ void LPColoring<GraphType>::ILPColoring(vector<GRBVar>& coloringBits, vector<GRB
 	vector<GRBVar> vEdgeBit_updated;
 	// vertex and edge variables 
 	coloringBits_updated.reserve(coloring_bits_num);
-  //set the non-integer solution of the 
+	//set the non-integer solution of the 
 	for(uint32_t k = 0; k < coloring_bits_num; k++) 
 	{
-    ostringstream oss;
-    oss << "v" << k;
+		ostringstream oss;
+		oss << "v" << k;
 		double value = coloringBits[k].get(GRB_DoubleAttr_X);
-		if(value == 0.0) {
-      //integer solution 0.0
-      coloringBits_updated.push_back(opt_model_updated.addVar(0.0, 0.0, 0.0, GRB_CONTINUOUS, oss.str()));
-    } else if (value == 1.0) {
-      //integer solution 1.0
-      coloringBits_updated.push_back(opt_model_updated.addVar(1.0, 1.0, 0.0, GRB_CONTINUOUS, oss.str()));
-    } else {
-      //non-integer solution 
-      coloringBits_updated.push_back(opt_model_updated.addVar(0.0, 1.0, 0.0, GRB_INTEGER, oss.str()));
-    }
+		if(value == 0.0) 
+		{
+			//integer solution 0.0
+			coloringBits_updated.push_back(opt_model_updated.addVar(0.0, 0.0, 0.0, GRB_CONTINUOUS, oss.str()));
+		} 
+		else if (value == 1.0) 
+		{
+			//integer solution 1.0
+			coloringBits_updated.push_back(opt_model_updated.addVar(1.0, 1.0, 0.0, GRB_CONTINUOUS, oss.str()));
+		} 
+		else 
+		{
+			//non-integer solution 
+			coloringBits_updated.push_back(opt_model_updated.addVar(0.0, 1.0, 0.0, GRB_INTEGER, oss.str()));
+		}
 	}//end for
-  uint32_t edge_num = vEdgeBit.size();
+	uint32_t edge_num = vEdgeBit.size();
 	vEdgeBit_updated.reserve(edge_num);
 	for (uint32_t i = 0; i != edge_num; ++i)
 	{
@@ -715,10 +779,10 @@ void LPColoring<GraphType>::ILPColoring(vector<GRBVar>& coloringBits, vector<GRB
 		vEdgeBit_updated.push_back(opt_model_updated.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS, oss.str()));
 	}
 
-  opt_model_updated.update();
-  //iterate through the edges
+	opt_model_updated.update();
+	//iterate through the edges
 	pair<typename graph_type::edge_iterator, typename graph_type::edge_iterator> edge_range = edges(m_graph);
-  //set new objective
+	//set new objective
 	GRBLinExpr obj_init (0);
 	for (BOOST_AUTO(itr, edge_range.first); itr != edge_range.second; ++itr)
 	{
@@ -783,6 +847,13 @@ void LPColoring<GraphType>::ILPColoring(vector<GRBVar>& coloringBits, vector<GRB
 					);
 		}
 	}//end for itr
+	if (colorNum() == THREE)
+	{
+		for(uint32_t k = 0; k < coloring_bits_num; k += COLORING_BITS) 
+		{
+			opt_model_updated.addConstr(coloringBits_updated[k] + coloringBits_updated[k+1] <= 1);
+		}
+	}
 
 	opt_model_updated.update();
 
@@ -791,6 +862,7 @@ void LPColoring<GraphType>::ILPColoring(vector<GRBVar>& coloringBits, vector<GRB
 #endif
 
 	//optimize model 
+	cout << "================== ILP iteration #" << m_ilp_iter_cnt++ << " ==================\n";
 	opt_model_updated.optimize();
 	int optim_status = opt_model_updated.get(GRB_IntAttr_Status);
 	if(optim_status == GRB_INFEASIBLE) 
@@ -802,63 +874,73 @@ void LPColoring<GraphType>::ILPColoring(vector<GRBVar>& coloringBits, vector<GRB
 	cout << "ILP solved to seek a coloring solution." << endl;
 
 	//store the lp coloring results 
-  this->store_lp_coloring(coloringBits_updated);
-  //store the coloring results
-  for(uint32_t k = 0; k < coloring_bits_num; k = k + COLORING_BITS) {
-    uint32_t vertex_index = k/COLORING_BITS;
-    graph_vertex_type vertex_key = this->m_inverse_vertex_map[vertex_index];
-    uint32_t color = 0;
-    uint32_t base = 1;
-    for(uint32_t m = 0; m < COLORING_BITS; m++) {
-      double value = coloringBits_updated[k+m].get(GRB_DoubleAttr_X);
+	this->store_lp_coloring(coloringBits_updated);
+	//store the coloring results
+	for(uint32_t k = 0; k < coloring_bits_num; k = k + COLORING_BITS) {
+		uint32_t vertex_index = k/COLORING_BITS;
+		graph_vertex_type vertex_key = this->m_inverse_vertex_map[vertex_index];
+		uint32_t color = 0;
+		uint32_t base = 1;
+		for(uint32_t m = 0; m < COLORING_BITS; m++) {
+			double value = coloringBits_updated[k+m].get(GRB_DoubleAttr_X);
 #if ASSERT_LPCOLORING
-      assert(value == 0.0 || value == 1.0);
+			assert(value == 0.0 || value == 1.0);
 #endif
-      if(value == 1.0) color = color + base;
-      base = base<<1;
-    }
-    //set the coloring
-    this->m_coloring[vertex_key] = color;
-  }
-  return;
+			if(value == 1.0) color = color + base;
+			base = base<<1;
+		}
+		//set the coloring
+		this->m_coloring[vertex_key] = color;
+	}
 }
 
 /// ILP based rounding
 template<typename GraphType>
-void LPColoring<GraphType>::rounding_ILP(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit) {
-  uint32_t non_integer_num, half_integer_num;
-  uint32_t non_integer_num_updated, half_integer_num_updated;
-  while(true) {
+void LPColoring<GraphType>::rounding_ILP(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit) 
+{
+	uint32_t non_integer_num, half_integer_num;
+	uint32_t non_integer_num_updated, half_integer_num_updated;
+	while(true) 
+	{
 		BOOST_AUTO(pair, this->nonIntegerNum(coloringBits, vEdgeBit));
 		non_integer_num = pair.first;
 		half_integer_num = pair.second;
 		if(non_integer_num == 0) break;
 		//store the lp coloring results 
-    this->store_lp_coloring(coloringBits);
+		this->store_lp_coloring(coloringBits);
 #ifdef DEBUG_LPCOLORING
 		// compare unrounded conflict number is more fair 
 		this->lpConflictNum();
 #endif
-    //update the ILP model
-    uint32_t coloring_bits_num = coloringBits.size();
-    for(uint32_t k = 0; k < coloring_bits_num; ++k) {
-      double value = coloringBits[k].get(GRB_DoubleAttr_X);
-      if(value == 1.0 || value == 0.0) {
-        coloringBits[k].set(GRB_CharAttr_VType, 'C');
-      } else {
-        coloringBits[k].set(GRB_CharAttr_VType, 'I');
-      }
-    }//end for k
-    opt_model.update();
+		//update the ILP model
+		uint32_t coloring_bits_num = coloringBits.size();
+		for(uint32_t k = 0; k < coloring_bits_num; ++k) 
+		{
+			double value = coloringBits[k].get(GRB_DoubleAttr_X);
+			if(value == 1.0 || value == 0.0) 
+			{
+				coloringBits[k].set(GRB_CharAttr_VType, 'C');
+			}
+			else 
+			{
+				coloringBits[k].set(GRB_CharAttr_VType, 'I');
+			}
+		}//end for k
+		opt_model.update();
 #ifdef DEBUG_LPCOLORING
 		opt_model.write("../test/graph_ilp.lp");
 #endif
+		cout << "================== ILP iteration #" << m_ilp_iter_cnt++ << " ==================\n";
 		opt_model.optimize();
 		int optim_status = opt_model.get(GRB_IntAttr_Status);
 		if(optim_status == GRB_INFEASIBLE) 
 		{
 			cout << "ERROR: the ILP model is infeasible... Quit ILP based rounding" << endl;
-      exit(1);
+#ifdef DEBUG_LPCOLORING
+			opt_model.computeIIS();
+			opt_model.write("../test/graph_ilp.ilp");
+#endif
+			exit(1);
 		}
 
 		//no more non-integers are removed 
@@ -867,12 +949,10 @@ void LPColoring<GraphType>::rounding_ILP(GRBModel& opt_model, vector<GRBVar>& co
 		half_integer_num_updated = pair.second;
 		if (/*non_integer_num_updated == 0*/ half_integer_num_updated == 0 || 
 				(non_integer_num_updated >= non_integer_num && half_integer_num_updated >= half_integer_num)) break;
-  }//end while 
+	}//end while 
 
-  //final greedy rounding
-  this->rounding_Greedy(coloringBits);
-  return;
-  
+	//final greedy rounding
+	this->rounding_Greedy(coloringBits);
 }
 
 //greedy rounding scheme, need better scheme later on 
@@ -1314,7 +1394,7 @@ void LPColoring<GraphType>::write_graph_dot(graph_vertex_type& v) const
 		if(k == start_index) dot_file << "  " << k << "[shape=\"square\"";
 		else dot_file << "  " << k << "[shape=\"circle\"";
 		//output coloring label
-		dot_file << ",label=\"(" << m_lp_coloring[2*k] << "," << m_lp_coloring[2*k+1] << ")\"";
+		dot_file << ",label=\"" << k << ":(" << m_lp_coloring[2*k] << "," << m_lp_coloring[2*k+1] << ")\"";
 		if(inCycle[k]) dot_file << ",color=\"red\"]\n";
 		else dot_file << "]\n";
 	}//end for
@@ -1369,6 +1449,7 @@ void LPColoring<GraphType>::write_graph_dot() const
 	{
 		dot_file << "  " << k << "[shape=\"circle\"";
 		//output coloring label
+		//dot_file << ",label=\"" << k << ":(" << m_lp_coloring[2*k] << "," << m_lp_coloring[2*k+1] << ")\"";
 		dot_file << ",label=\"(" << m_lp_coloring[2*k] << "," << m_lp_coloring[2*k+1] << ")\"";
 		dot_file << "]\n";
 	}//end for
@@ -1390,14 +1471,14 @@ void LPColoring<GraphType>::write_graph_dot() const
 		{
 			if(conflict_flag)
 			{
-				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"blue\",style=\"solid\"]\n";
+				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"blue\",style=\"solid\",penwidth=3]\n";
 				cout << "conflict (" << f_ind << ", " << t_ind << ")" << endl;
 			}
 			else 
-				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"black\",style=\"solid\"]\n";
+				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"black\",style=\"solid\",penwidth=3]\n";
 		}
 		else // stitch edge 
-			dot_file << "  " << f_ind << "--" << t_ind << "[color=\"black\",style=\"dashed\"]\n";
+			dot_file << "  " << f_ind << "--" << t_ind << "[color=\"black\",style=\"dashed\",penwidth=3]\n";
 	}
 	dot_file << "}";
 	dot_file.close();
@@ -1458,16 +1539,16 @@ void LPColoring<GraphType>::write_graph_color() const
 		if (m_edge_weight_map[*itr] >= 0) // conflict edge 
 		{
 			if(m_coloring.at(from) != m_coloring.at(to)) 
-				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"black\",style=\"solid\"]\n";
+				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"black\",style=\"solid\",penwidth=3]\n";
 			else 
-				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"blue\",style=\"solid\"]\n";
+				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"blue\",style=\"solid\",penwidth=3]\n";
 		}
 		else // stitch edge 
 		{
 			if(m_coloring.at(from) == m_coloring.at(to)) 
-				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"black\",style=\"dashed\"]\n";
+				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"black\",style=\"dashed\",penwidth=3]\n";
 			else 
-				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"blue\",style=\"dashed\"]\n";
+				dot_file << "  " << f_ind << "--" << t_ind << "[color=\"blue\",style=\"dashed\",penwidth=3]\n";
 		}
 	}
 	dot_file << "}";

@@ -9,3 +9,4 @@ test/color_graph.pdf
 test/log
 test/graph.lp
 test/graph_ilp.lp
+test/*.ilp
