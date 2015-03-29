@@ -30,7 +30,7 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/classification.hpp>
 #include <limbo/geometry/Geometry.h>
-#include <limbo/string/Classification.h>
+#include <limbo/string/String.h>
 #include <limbo/preprocessor/AssertMsg.h>
 
 namespace limbo { namespace geometry {
