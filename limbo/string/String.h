@@ -18,11 +18,13 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <limbo/string/ToString.h>
+
+namespace limbo { 
+
 using std::cout;
 using std::endl;
 using std::string;
-
-namespace limbo { 
 
 /// check whether string represents an integer 
 inline bool is_integer(string const& s)

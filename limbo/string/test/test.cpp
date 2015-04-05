@@ -22,5 +22,15 @@ int main()
 	assert_msg(limbo::tolower(s2) == "limbo2343slimbo", "limbo::tolower failed");
 	assert_msg(limbo::iequals(s1, s2), "limbo::iequals failed");
 
+	string tmp;
+	tmp = limbo::to_string(std::numeric_limits<int>::min());
+	cout << tmp << "(" << tmp.size() << ")" << " == " << std::numeric_limits<int>::min() << endl;
+	tmp = limbo::to_string(std::numeric_limits<int>::max());
+	cout << tmp << "(" << tmp.size() << ")" << " == " << std::numeric_limits<int>::max() << endl;
+	tmp = limbo::to_string(std::numeric_limits<float>::min());
+	cout << tmp << "(" << tmp.size() << ")" << " == " << std::numeric_limits<float>::min() << endl;
+	tmp = limbo::to_string(std::numeric_limits<float>::max());
+	cout << tmp << "(" << tmp.size() << ")" << " == " << std::numeric_limits<float>::max() << endl;
+
 	return 0;
 }
