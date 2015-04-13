@@ -7,6 +7,7 @@
 #include <cassert>
 #include <cmath>
 #include <stdlib.h>
+#include <cstdio>
 #include <sstream>
 #include <boost/cstdint.hpp>
 #include <boost/unordered_map.hpp>
@@ -18,11 +19,13 @@
 
 using std::vector;
 using std::set;
+using std::cin;
 using std::cout;
 using std::endl;
 using std::ofstream;
 using std::pair;
 using std::ostringstream;
+using std::string;
 using boost::unordered_map;
 using boost::uint32_t;
 using boost::int32_t;
@@ -41,11 +44,12 @@ class LPColoring
 		/// non-negative weight implies conflict edge 
 		/// negative weight implies stitch edge 
 		typedef typename boost::property_map<graph_type, boost::edge_weight_t>::const_type edge_weight_map_type;
+    typedef typename boost::property_map<graph_type, boost::vertex_color_t>::const_type vertex_color_map_type;
 
 		enum RoundingScheme 
 		{
 			DIRECT_ILP, // directly solve ILP to get optimal solution 
-			FIXED_ILP, 
+			FIXED_ILP, // this rounding scheme is not in use now, because feasible solution is not guaranteed  
 			ITERATIVE_ILP
 		};
 		enum ColorNum 
@@ -88,17 +92,22 @@ class LPColoring
 
 		/// relaxed linear programming based coloring for the conflict graph (m_graph)
 		void graphColoring(); 
-		/// ILP based coloring
+		/// ILP based coloring, not in use now
 		/// fix all integer solutions from LP 
 		/// set non-integer solutions to integer in ILP 
 		/// call ILP only once 
 		void ILPColoring(vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
+
+    /// Optimal rounding based on binding constraints
+    void rounding_bindingAnalysis(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
+
 		/// iterative ILP based rounding
 		/// set non-integer solutions to integer 
 		/// set integer solutions from LP to continuous 
 		/// iteratively call ILP until no non-integer solutions 
-		void rounding_ILP(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
-		/// rounding scheme
+    /// ILP based rounding 
+    void rounding_ILP(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
+		/// Greedy rounding scheme
 		void rounding_Greedy(vector<GRBVar>& coloringBits);
 
 		/// coloring info
@@ -151,6 +160,8 @@ class LPColoring
 		unordered_map<graph_edge_type, uint32_t, edge_hash_type> m_edge_map;
 		/// edge weight map 
 		edge_weight_map_type m_edge_weight_map;
+    /// vertex color map for vertex stitch candidate number
+    vertex_color_map_type m_vertex_color_map;
 		/// LP coloring results
 		unordered_map<graph_vertex_type, uint32_t> m_coloring;
 		/// the lp coloring before rounding
@@ -170,6 +181,10 @@ class LPColoring
 		uint32_t m_lp_iter_cnt;
 		/// record number of ILP iterations 
 		uint32_t m_ilp_iter_cnt;
+
+    //linear programming constraints property 
+    unordered_map<string, bool> m_stitch_constrs;
+    uint32_t m_constrs_num;
 };
 
 /// constructor
@@ -182,6 +197,7 @@ LPColoring<GraphType>::LPColoring(graph_type const& g) : COLORING_BITS(2), m_gra
 	m_color_num = THREE;
 	m_lp_iter_cnt = 0;
 	m_ilp_iter_cnt = 0;
+  m_constrs_num = 0;
 	this->setMap();
 }
 
@@ -209,8 +225,9 @@ void LPColoring<GraphType>::setMap()
 		m_edge_map[*itr] = edge_num;
 		++edge_num;
 	}
-	// build edge weight map 
+	// build edge weight map and vertex color map 
 	m_edge_weight_map = get(boost::edge_weight, m_graph);
+  m_vertex_color_map = get(boost::vertex_color, m_graph);
 }
 
 //DFS to search for the odd cycles, stored in m_odd_cycles
@@ -338,6 +355,7 @@ void LPColoring<GraphType>::graphColoring()
 		vertex_num++;
 	}
 #endif
+  cout << "---------------------------------------Iterative LP based coloring scheme------------------------------------\n";
 	// reset iteration counters 
 	m_lp_iter_cnt = m_ilp_iter_cnt = 0;
 
@@ -416,84 +434,183 @@ void LPColoring<GraphType>::graphColoring()
 		uint32_t vertex_idx2 = t_ind<<1;
 
 		BOOST_AUTO(w, m_edge_weight_map[*itr]);
+    GRBConstr tmpConstr;
+    char buf[100];
+    string tmpConstr_name;
 		if (w >= 0) // constraints for conflict edges 
 		{
 			if (!conflictCost())
 			{
-				opt_model.addConstr(
+        sprintf(buf, "%u", m_constrs_num++);  
+        tmpConstr_name = "R" + string(buf);
+				tmpConstr = opt_model.addConstr(
 						coloringBits[vertex_idx1] + coloringBits[vertex_idx1+1] 
 						+ coloringBits[vertex_idx2] + coloringBits[vertex_idx2+1] >= 1
-						);
-				opt_model.addConstr(
+						, tmpConstr_name);
+#ifdef ASSERT_LPCOLORING
+        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+#endif
+        m_stitch_constrs[tmpConstr_name] = false;
+
+        sprintf(buf, "%u", m_constrs_num++);  
+        tmpConstr_name = "R" + string(buf);
+				tmpConstr = opt_model.addConstr(
 						1 - coloringBits[vertex_idx1] + coloringBits[vertex_idx1+1] 
 						+ 1 - coloringBits[vertex_idx2] + coloringBits[vertex_idx2+1] >= 1
-						);
-				opt_model.addConstr(
+						, tmpConstr_name);
+#ifdef ASSERT_LPCOLORING
+        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+#endif
+        m_stitch_constrs[tmpConstr_name] = false;
+
+        sprintf(buf, "%u", m_constrs_num++);  
+        tmpConstr_name = "R" + string(buf);
+				tmpConstr = opt_model.addConstr(
 						coloringBits[vertex_idx1] + 1 - coloringBits[vertex_idx1+1] 
 						+ coloringBits[vertex_idx2] + 1 - coloringBits[vertex_idx2+1] >= 1
-						);
-				opt_model.addConstr(
+						, tmpConstr_name);
+#ifdef ASSERT_LPCOLORING
+        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+#endif
+        m_stitch_constrs[tmpConstr_name] = false;
+
+        sprintf(buf, "%u", m_constrs_num++);  
+        tmpConstr_name = "R" + string(buf);
+				tmpConstr = opt_model.addConstr(
 						1 - coloringBits[vertex_idx1] + 1 - coloringBits[vertex_idx1+1] 
 						+ 1 - coloringBits[vertex_idx2] + 1 - coloringBits[vertex_idx2+1] >= 1
-						);
+						, tmpConstr_name);
+#ifdef ASSERT_LPCOLORING
+        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+#endif
+        m_stitch_constrs[tmpConstr_name] = false;
+
 			}
 			else 
 			{
 				uint32_t edge_idx = m_edge_map[*itr];
-				opt_model.addConstr(
+
+        sprintf(buf, "%u", m_constrs_num++);  
+        tmpConstr_name = "R" + string(buf);
+				tmpConstr = opt_model.addConstr(
 						coloringBits[vertex_idx1] + coloringBits[vertex_idx1+1] 
 						+ coloringBits[vertex_idx2] + coloringBits[vertex_idx2+1] 
 						+ vEdgeBit[edge_idx] >= 1
-						);
-				opt_model.addConstr(
+						, tmpConstr_name);
+#ifdef ASSERT_LPCOLORING
+        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+#endif
+        m_stitch_constrs[tmpConstr_name] = false;
+
+        sprintf(buf, "%u", m_constrs_num++);  
+        tmpConstr_name = "R" + string(buf);
+				tmpConstr = opt_model.addConstr(
 						1 - coloringBits[vertex_idx1] + coloringBits[vertex_idx1+1] 
 						+ 1 - coloringBits[vertex_idx2] + coloringBits[vertex_idx2+1] 
 						+ vEdgeBit[edge_idx] >= 1
-						);
-				opt_model.addConstr(
+						, tmpConstr_name);
+#ifdef ASSERT_LPCOLORING
+        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+#endif
+        m_stitch_constrs[tmpConstr_name] = false;
+
+        sprintf(buf, "%u", m_constrs_num++);  
+        tmpConstr_name = "R" + string(buf);
+				tmpConstr = opt_model.addConstr(
 						coloringBits[vertex_idx1] + 1 - coloringBits[vertex_idx1+1] 
 						+ coloringBits[vertex_idx2] + 1 - coloringBits[vertex_idx2+1] 
 						+ vEdgeBit[edge_idx] >= 1
-						);
-				opt_model.addConstr(
+						, tmpConstr_name);
+#ifdef ASSERT_LPCOLORING
+        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+#endif
+        m_stitch_constrs[tmpConstr_name] = false;
+
+        sprintf(buf, "%u", m_constrs_num++);  
+        tmpConstr_name = "R" + string(buf);
+				tmpConstr = opt_model.addConstr(
 						1 - coloringBits[vertex_idx1] + 1 - coloringBits[vertex_idx1+1] 
 						+ 1 - coloringBits[vertex_idx2] + 1 - coloringBits[vertex_idx2+1] 
 						+ vEdgeBit[edge_idx] >= 1
-						);
+						, tmpConstr_name);
+#ifdef ASSERT_LPCOLORING
+        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+#endif
+        m_stitch_constrs[tmpConstr_name] = false;
+
 			}
 		}
 		else // constraints for stitch edges 
 		{
 			uint32_t edge_idx = m_edge_map[*itr];
-			opt_model.addConstr(
+
+      sprintf(buf, "%u", m_constrs_num++);  
+      tmpConstr_name = "R" + string(buf);
+			tmpConstr = opt_model.addConstr(
 					coloringBits[vertex_idx1] - coloringBits[vertex_idx2] - vEdgeBit[edge_idx] <= 0
-					);
-			opt_model.addConstr(
+					, tmpConstr_name);
+#ifdef ASSERT_LPCOLORING
+      assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+#endif
+      m_stitch_constrs[tmpConstr_name] = true;
+
+      sprintf(buf, "%u", m_constrs_num++);  
+      tmpConstr_name = "R" + string(buf);
+			tmpConstr = opt_model.addConstr(
 					coloringBits[vertex_idx2] - coloringBits[vertex_idx1] - vEdgeBit[edge_idx] <= 0
-					);
-			opt_model.addConstr(
+					, tmpConstr_name);
+#ifdef ASSERT_LPCOLORING
+      assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+#endif
+      m_stitch_constrs[tmpConstr_name] = true;
+
+      sprintf(buf, "%u", m_constrs_num++);  
+      tmpConstr_name = "R" + string(buf);
+			tmpConstr = opt_model.addConstr(
 					coloringBits[vertex_idx1+1] - coloringBits[vertex_idx2+1] - vEdgeBit[edge_idx] <= 0
-					);
-			opt_model.addConstr(
+					, tmpConstr_name);      
+#ifdef ASSERT_LPCOLORING
+      assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+#endif
+      m_stitch_constrs[tmpConstr_name] = true;
+
+      sprintf(buf, "%u", m_constrs_num++);  
+      tmpConstr_name = "R" + string(buf);
+			tmpConstr = opt_model.addConstr(
 					coloringBits[vertex_idx2+1] - coloringBits[vertex_idx1+1] - vEdgeBit[edge_idx] <= 0
-					);
+					, tmpConstr_name);
+#ifdef ASSERT_LPCOLORING
+      assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+#endif
+      m_stitch_constrs[tmpConstr_name] = true;
+
 		}
 	}
 
 	if (colorNum() == THREE)
 	{
+    GRBConstr tmpConstr;
+    string tmpConstr_name;
+    char buf[100];
 		for(uint32_t k = 0; k < coloring_bits_num; k += COLORING_BITS) 
 		{
-			opt_model.addConstr(coloringBits[k] + coloringBits[k+1] <= 1);
+      sprintf(buf, "%u", m_constrs_num++);  
+      tmpConstr_name = "R" + string(buf);
+			tmpConstr = opt_model.addConstr(coloringBits[k] + coloringBits[k+1] <= 1, tmpConstr_name);
+#ifdef ASSERT_LPCOLORING
+      assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+#endif
+      m_stitch_constrs[tmpConstr_name] = false;
 		}
 	}
 	//optimize model 
 	opt_model.update();
-#ifdef DEBUG_LPCOLORING
-	opt_model.write("../test/graph.lp");
-#endif 
 	cout << "================== LP iteration #" << m_lp_iter_cnt++ << " ==================\n";
 	opt_model.optimize();
+#ifdef DEBUG_LPCOLORING
+	opt_model.write("../test/graph.lp");
+  opt_model.write("../test/graph.sol");
+#endif 
 	int optim_status = opt_model.get(GRB_IntAttr_Status);
 	if(optim_status == GRB_INFEASIBLE) 
 	{
@@ -604,7 +721,7 @@ void LPColoring<GraphType>::graphColoring()
 			}//end for 
 		}
 
-//		opt_model.setObjective(obj);
+		opt_model.setObjective(obj);
 
 		//add the new constraints
 		//odd cycle trick from Prof. Baldick
@@ -659,11 +776,12 @@ void LPColoring<GraphType>::graphColoring()
 
 		//optimize the new model
 		opt_model.update();
-#ifdef DEBUG_LPCOLORING
-		opt_model.write("../test/graph.lp");
-#endif
 		cout << "================== LP iteration #" << m_lp_iter_cnt++ << " ==================\n";
 		opt_model.optimize();
+#ifdef DEBUG_LPCOLORING
+		opt_model.write("../test/graph.lp");
+    opt_model.write("../test/graph.sol");
+#endif
 		optim_status = opt_model.get(GRB_IntAttr_Status);
 		if(optim_status == GRB_INFEASIBLE) 
 		{
@@ -680,6 +798,8 @@ void LPColoring<GraphType>::graphColoring()
 
 		if (/*non_integer_num_updated == 0*/ half_integer_num_updated == 0 || 
 				(non_integer_num_updated >= non_integer_num && half_integer_num_updated >= half_integer_num)) break;
+
+    cout << "\n\n-----------------------------------Next iteration------------------------------" << endl;
 	}//end while
 
 	//store the lp coloring results 
@@ -700,6 +820,8 @@ void LPColoring<GraphType>::graphColoring()
 	this->write_graph_dot();
 #endif
 
+  //rounding the coloring results  
+  this->rounding_bindingAnalysis(opt_model, coloringBits, vEdgeBit);
 	if (roundingScheme() == DIRECT_ILP)
 		this->rounding_Greedy(coloringBits);
 	else if (roundingScheme() == FIXED_ILP)
@@ -894,14 +1016,397 @@ void LPColoring<GraphType>::ILPColoring(vector<GRBVar>& coloringBits, vector<GRB
 	}
 }
 
+/// optimal rounding based on the binding analysis
+template<typename GraphType>
+void LPColoring<GraphType>::rounding_bindingAnalysis(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit) {
+  cout << "\n\n---------------------------------------Optimal rounding from binding analysis------------------------------------\n";
+  /*
+//{{{
+  GRBConstr* constrs_ptr = opt_model.getConstrs();
+  int constrs_num = opt_model.get(GRB_IntAttr_NumConstrs);
+  for(int k = 0; k < constrs_num; k++) {
+    double slack = constrs_ptr[k].get(GRB_DoubleAttr_Slack);
+    cout << "The slack for the " << k << "th constraint - " << constrs_ptr[k].get(GRB_StringAttr_ConstrName) << ": " << slack << endl;
+  }//end for k
+  */
+  uint32_t non_integer_num, half_integer_num;
+  uint32_t non_integer_num_updated, half_integer_num_updated;
+/*
+  //single digit rounding scheme
+  while(true) {
+  	BOOST_AUTO(pair, this->nonIntegerNum(coloringBits, vEdgeBit));
+  	non_integer_num = pair.first;
+  	half_integer_num = pair.second;
+  	if(non_integer_num == 0) return;
+  	//store the lp coloring results 
+    this->store_lp_coloring(coloringBits);
+  
+    //rounding scheme
+    bool rounding_flag = true;
+    uint32_t variable_num = coloringBits.size();
+    for(uint32_t k = 0; k < variable_num; k++) {
+      double value = coloringBits[k].get(GRB_DoubleAttr_X);
+      if(isInteger(value)) continue;
+#ifdef DEBUG_LPCOLORING
+      cout << endl << endl << k << "th non-integer variable" << endl;
+      //string check_point;
+      //cin >> check_point;
+#endif
+      rounding_flag = true;
+      char pre_sense = '=';
+      bool pre_sense_flag = false;
+      GRBColumn column = opt_model.getCol(coloringBits[k]);
+      int column_size = column.size();
+      for(int m = 0; m < column_size; m++) {
+        GRBConstr constr = column.getConstr(m);
+        double slack = constr.get(GRB_DoubleAttr_Slack);
+        string name = constr.get(GRB_StringAttr_ConstrName);
+        //ignore the non-binding constr
+        if(slack != 0.0) continue;
+        //ignore the stitch constraint
+        if(true == m_stitch_constrs[name]) continue;
+        double coeff = opt_model.getCoeff(constr, coloringBits[k]);
+        char sense = constr.get(GRB_CharAttr_Sense);
+#ifdef DEBUG_LPCOLORING
+        cout << "The slack for " << constr.get(GRB_StringAttr_ConstrName) << ": " << slack << endl;
+        cout << "The constraint sense for " << constr.get(GRB_StringAttr_ConstrName) << ": " << sense << endl;
+        cout << "The coefficient for " << constr.get(GRB_StringAttr_ConstrName) << ": " << coeff << endl << endl;
+#endif
+#ifdef ASSERT_LPCOLORING
+        assert(coeff == 1.0 || coeff == -1.0);
+        assert(sense == '>' || sense == '<' || sense == '=');
+#endif
+        //flip the sense based on coeff
+        if(coeff == -1.0) {
+          if(sense == '>') sense = '<';
+          else if(sense == '<') sense = '>';
+        }//end if 
+
+        //set the rounding_flag
+        if(false == pre_sense_flag) {
+          pre_sense = sense;
+          pre_sense_flag = true;
+        } else {
+          if(sense != pre_sense) {
+            rounding_flag = false;
+            //break;
+          }
+        }//end if
+      }//end for m
+      
+      //rounding the first feasible variable
+      if(true == rounding_flag) {
+#ifdef ASSERT_LPCOLORING
+        assert(pre_sense == '<' || pre_sense == '>');
+#endif
+        if(pre_sense == '<') coloringBits[k].set(GRB_DoubleAttr_UB, 0.0);
+        else coloringBits[k].set(GRB_DoubleAttr_LB, 1.0);
+        break;
+      }
+    }//end for k
+
+    if(true == rounding_flag) {
+      //update the model and optimize
+      opt_model.update();
+  	  opt_model.optimize();
+#ifdef DEBUG_LPCOLORING
+      opt_model.write("../test/graph.lp");
+      opt_model.write("../test/graph.sol");
+#endif
+  	  int optim_status = opt_model.get(GRB_IntAttr_Status);
+  	  if(optim_status == GRB_INFEASIBLE) 
+  	  {
+  		  cout << "ERROR: the ILP model is infeasible... Quit ILP based rounding" << endl;
+        exit(1);
+  	  }
+    }//end if
+  
+  	//no more non-integers are removed 
+  	pair = this->nonIntegerNum(coloringBits, vEdgeBit);
+  	non_integer_num_updated = pair.first;
+  	half_integer_num_updated = pair.second;
+  	if (half_integer_num_updated == 0 || 
+  			(non_integer_num_updated >= non_integer_num && half_integer_num_updated >= half_integer_num)) break;
+
+  }//end while
+//}}}
+*/
+
+  //a pair of digits rounding scheme, essentially this is a hard coding implementation
+  while(true) {
+  	BOOST_AUTO(pair, this->nonIntegerNum(coloringBits, vEdgeBit));
+  	non_integer_num = pair.first;
+  	half_integer_num = pair.second;
+  	if(non_integer_num == 0) return;
+  	//store the lp coloring results 
+    this->store_lp_coloring(coloringBits);
+  
+    //rounding scheme
+    bool rounding_flag = true;
+    double bit1 = 0.0, bit2 = 0.0;
+    uint32_t variable_num = coloringBits.size();
+    for(uint32_t k = 0; k < variable_num; k = k + COLORING_BITS) {
+      double value1 = coloringBits[k].get(GRB_DoubleAttr_X);
+      double value2 = coloringBits[k+1].get(GRB_DoubleAttr_X);
+      if(isInteger(value1) && isInteger(value2)) continue;
+#ifdef DEBUG_LPCOLORING
+      //cout << endl << endl << k << "th and " << (k + 1) << "th non-integer variable" << endl;
+      //string check_point;
+      //cin >> check_point;
+#endif
+      GRBColumn column1 = opt_model.getCol(coloringBits[k]);
+      GRBColumn column2 = opt_model.getCol(coloringBits[k+1]);
+      int column1_size = column1.size();
+      int column2_size = column2.size();
+      //constraints flag, shared constraints betweeen column1 & 2 are flagged true, otherwise false
+      //coefficient, -1 or 1
+      //sense, < or >
+      unordered_map<string, bool> constrs_flag1;
+      unordered_map<string, double> constrs_coeff1;
+      unordered_map<string, char> constrs_sense1;
+      unordered_map<string, bool> constrs_flag2;
+      unordered_map<string, double> constrs_coeff2;
+      unordered_map<string, char> constrs_sense2;
+      //process the first set of binding constraints
+#ifdef DEBUG_LPCOLORING
+      cout << endl << endl << k << "th non-integer variable" << endl;
+#endif
+      for(int m = 0; m < column1_size; m++) {
+        GRBConstr constr = column1.getConstr(m);
+        double slack = constr.get(GRB_DoubleAttr_Slack);
+        //ignore the non-binding constr
+        if(slack != 0.0) continue;
+        double coeff = opt_model.getCoeff(constr, coloringBits[k]);
+        char sense = constr.get(GRB_CharAttr_Sense);
+#ifdef DEBUG_LPCOLORING
+        cout << "The slack for " << constr.get(GRB_StringAttr_ConstrName) << ": " << slack << endl;
+        cout << "The constraint sense for " << constr.get(GRB_StringAttr_ConstrName) << ": " << sense << endl;
+        cout << "The coefficient for " << constr.get(GRB_StringAttr_ConstrName) << ": " << coeff << endl << endl;
+#endif
+#ifdef ASSERT_LPCOLORING
+        assert(coeff == 1.0 || coeff == -1.0);
+        assert(sense == '>' || sense == '<');
+#endif
+        string name = constr.get(GRB_StringAttr_ConstrName);
+        constrs_flag1[name] = false;
+        constrs_coeff1[name] = coeff;
+        constrs_sense1[name] = sense;
+      }//end for m
+
+#ifdef DEBUG_LPCOLORING
+      cout << endl << endl << (k+1) << "th non-integer variable" << endl;
+#endif
+      //process the second set of binding constraints
+      for(int m = 0; m < column2_size; m++) {
+        GRBConstr constr = column2.getConstr(m);
+        double slack = constr.get(GRB_DoubleAttr_Slack);
+        //ignore the non-binding constr
+        if(slack != 0.0) continue;
+        double coeff = opt_model.getCoeff(constr, coloringBits[k+1]);
+        char sense = constr.get(GRB_CharAttr_Sense);
+#ifdef DEBUG_LPCOLORING
+        cout << "The slack for " << constr.get(GRB_StringAttr_ConstrName) << ": " << slack << endl;
+        cout << "The constraint sense for " << constr.get(GRB_StringAttr_ConstrName) << ": " << sense << endl;
+        cout << "The coefficient for " << constr.get(GRB_StringAttr_ConstrName) << ": " << coeff << endl << endl;
+#endif
+#ifdef ASSERT_LPCOLORING
+        assert(coeff == 1.0 || coeff == -1.0);
+        assert(sense == '>' || sense == '<');
+#endif
+        string name = constr.get(GRB_StringAttr_ConstrName);
+        if(constrs_flag1.find(name) == constrs_flag1.end()) 
+        {
+          constrs_flag2[name] = false;
+          constrs_coeff2[name] = coeff;
+          constrs_sense2[name] = sense;
+        } 
+        else 
+        {
+          constrs_flag1[name] = true;
+          constrs_flag2[name] = true;
+          constrs_coeff2[name] = coeff;
+          constrs_sense2[name] = sense;
+        }//end if
+      }//end for m
+      
+      //flip the sense of the un-shared constraints if necessary
+      unordered_map<string, double> shared_constrs_coeff1;
+      unordered_map<string, char> shared_constrs_sense1;
+      BOOST_AUTO(end, constrs_flag1.end());
+      for(BOOST_AUTO(itr, constrs_flag1.begin()); itr != end; ++itr) {
+        //ignore shared constraint
+        if(true == itr->second) 
+        {
+          shared_constrs_coeff1[itr->first] = constrs_coeff1[itr->first];
+          shared_constrs_sense1[itr->first] = constrs_sense1[itr->first];
+          continue;
+        }
+        if(-1.0 == constrs_coeff1[itr->first]) 
+        {
+          //flip sense
+          constrs_coeff1[itr->first] = 1.0;
+          if(constrs_sense1[itr->first] == '<') constrs_sense1[itr->first] = '>';
+          else constrs_sense1[itr->first] = '<';
+        }//end if
+      }
+
+      unordered_map<string, double> shared_constrs_coeff2;
+      unordered_map<string, double> shared_constrs_sense2;
+      end = constrs_flag2.end();
+      for(BOOST_AUTO(itr, constrs_flag2.begin()); itr != end; ++itr) {
+        //ignore shared constraint
+        if(true == itr->second) 
+        {
+          shared_constrs_coeff2[itr->first] = constrs_coeff2[itr->first];
+          shared_constrs_sense2[itr->first] = constrs_sense2[itr->first];
+          continue;
+        }
+        if(-1.0 == constrs_coeff2[itr->first])
+        {
+          //flip sense
+          constrs_coeff2[itr->first] = 1.0;
+          if(constrs_sense2[itr->first] == '<') constrs_sense2[itr->first] = '>';
+          else constrs_sense2[itr->first] = '<';
+        }//end if
+      }
+#ifdef ASSERT_LPCOLORING
+      assert(shared_constrs_coeff1.size() == shared_constrs_coeff2.size());
+#endif
+      
+      //check whether value1 can be rounded
+      bool rounding_flag1 = true;
+      char pre_sense1 = '=';
+      bool pre_sense_flag = false;
+      end = constrs_flag1.end();
+      for(BOOST_AUTO(itr, constrs_flag1.begin()); itr != end; ++itr) {
+        //ignore shared constraint
+        if(true == itr->second) continue;
+#ifdef ASSERT_LPCOLORING
+        assert(1.0 == constrs_coeff1[itr->first]);
+#endif
+        if(false == pre_sense_flag) 
+        {
+          pre_sense1 = constrs_sense1[itr->first];
+          pre_sense_flag = true;
+        }
+        else 
+        {
+          if(pre_sense1 != constrs_sense1[itr->first]) {
+            rounding_flag1 = false;
+            break;
+          }
+        }//end if
+      }//end for itr
+      
+      //check whether value2 can be rounded
+      bool rounding_flag2 = true;
+      char pre_sense2 = '=';
+      pre_sense_flag = false;
+      end = constrs_flag2.end();
+      for(BOOST_AUTO(itr, constrs_flag2.begin()); itr != end; ++itr) {
+        //ignore the shared constraint
+        if(true == itr->second) continue;
+#ifdef ASSERT_LPCOLORING
+        assert(1.0 == constrs_coeff2[itr->first]);
+#endif
+        if(false == pre_sense_flag) 
+        {
+          pre_sense2 = constrs_sense2[itr->first];
+          pre_sense_flag = true;
+        }
+        else 
+        {
+          if(pre_sense2 != constrs_sense2[itr->first]) {
+            rounding_flag2 = false;
+            break;
+          }
+        }//end if
+      }//end for itr
+      
+      //check value1 and value2 can be rounded on un-shared constraints
+      rounding_flag = rounding_flag1 & rounding_flag2;
+      if(false == rounding_flag) break;
+
+      //check whether value1&2 can be rounded simultaneously for shared constraints
+      bit1 = 0.0, bit2 = 0.0;
+      for(bit1 = 0.0; bit1 <= 1.0; bit1 = bit1 + 1.0) {
+        if(pre_sense1 == '<' && bit1 == 1.0) continue;
+        if(pre_sense1 == '>' && bit1 == 0.0) continue;
+        for(bit2 = 0.0; bit2 <= 1.0; bit2 = bit2 + 1.0) {
+          if(pre_sense2 == '<' && bit2 == 1.0) continue;
+          if(pre_sense2 == '>' && bit2 == 0.0) continue;
+	        if (colorNum() == THREE && (bit1 == 1.0) && (bit2 == 1.0)) continue;
+          //check each shared constraint
+          BOOST_AUTO(itr_end, shared_constrs_coeff1.end());
+          for(BOOST_AUTO(itr, shared_constrs_coeff1.begin()); itr != itr_end; ++itr) {
+            double delta_value = itr->second * (bit1 - value1) + shared_constrs_coeff2[itr->first] * (bit2 - value2);
+            char sense = shared_constrs_sense1[itr->first];
+            if(delta_value < 0 && sense == '>') {
+              rounding_flag = false; 
+              break;
+            }
+            if(delta_value > 0 && sense == '<') {
+              rounding_flag = false;
+              break;
+            }
+          }//end for itr
+          if(true == rounding_flag) break;
+        }//end for bit2
+        if(true == rounding_flag) break;
+      }//end for bit1
+      //rounding the first feasible variable
+      if(true == rounding_flag) {
+#ifdef ASSERT_LPCOLORING
+#endif
+        coloringBits[k].set(GRB_DoubleAttr_UB, bit1);
+        coloringBits[k].set(GRB_DoubleAttr_LB, bit1);
+        coloringBits[k+1].set(GRB_DoubleAttr_UB, bit2);
+        coloringBits[k+1].set(GRB_DoubleAttr_LB, bit2);
+        break;
+      }
+    }//end for k
+
+    if(true == rounding_flag) {
+      //update the model and optimize
+      opt_model.update();
+  	  opt_model.optimize();
+#ifdef DEBUG_LPCOLORING
+      opt_model.write("../test/graph.lp");
+      opt_model.write("../test/graph.sol");
+      this->store_lp_coloring(coloringBits);
+	    this->write_graph_dot();
+#endif
+  	  int optim_status = opt_model.get(GRB_IntAttr_Status);
+  	  if(optim_status == GRB_INFEASIBLE) 
+  	  {
+  		  cout << "ERROR: the model after binding analysis is infeasible... Quit ILP based rounding" << endl;
+        exit(1);
+  	  }
+    }//end if
+  
+  	//no more non-integers are removed 
+  	pair = this->nonIntegerNum(coloringBits, vEdgeBit);
+  	non_integer_num_updated = pair.first;
+  	half_integer_num_updated = pair.second;
+  	if (/*non_integer_num_updated == 0*/ half_integer_num_updated == 0 || 
+  			(non_integer_num_updated >= non_integer_num && half_integer_num_updated >= half_integer_num)) break;
+
+  }//end while
+
+
+  this->store_lp_coloring(coloringBits);
+  return;
+}
+
 /// ILP based rounding
 template<typename GraphType>
 void LPColoring<GraphType>::rounding_ILP(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit) 
 {
-	uint32_t non_integer_num, half_integer_num;
-	uint32_t non_integer_num_updated, half_integer_num_updated;
-	while(true) 
-	{
+  cout << "\n\n---------------------------------------ILP rounding scheme------------------------------------\n";
+  uint32_t non_integer_num, half_integer_num;
+  uint32_t non_integer_num_updated, half_integer_num_updated;
+  while(true) 
+  {
 		BOOST_AUTO(pair, this->nonIntegerNum(coloringBits, vEdgeBit));
 		non_integer_num = pair.first;
 		half_integer_num = pair.second;
@@ -959,6 +1464,7 @@ void LPColoring<GraphType>::rounding_ILP(GRBModel& opt_model, vector<GRBVar>& co
 template<typename GraphType>
 void LPColoring<GraphType>::rounding_Greedy(vector<GRBVar>& coloringBits) 
 {
+  cout << "\n\n---------------------------------------Greedy rounding scheme------------------------------------\n";
 
 	//greedy rounding scheme
 	uint32_t vec_size = coloringBits.size();
@@ -988,8 +1494,7 @@ void LPColoring<GraphType>::rounding_Greedy(vector<GRBVar>& coloringBits)
 	}//end for 
 
 	//rounding of the half integer
-	//greedy rounding schme should minimize the conflict number instead of random strategy
-	//to be added later on
+	//greedy rounding schme should minimize the conflict and stitch number
 	for(uint32_t k = 0; k < vec_size; k++) 
 	{
 		if(true == roundingFlag[k]) continue;
@@ -1366,8 +1871,8 @@ void LPColoring<GraphType>::write_graph_dot(graph_vertex_type& v) const
 		<< "  randir = LR\n"
 		<< "  size=\"4, 3\"\n"
 		<< "  ratio=\"fill\"\n"
-		<< "  edge[style=\"bold\"]\n" 
-		<< "  node[shape=\"circle\"]\n";
+		<< "  edge[style=\"bold\",fontsize=120]\n" 
+		<< "  node[shape=\"circle\",fontsize=120]\n";
 
 	//output nodes 
 	uint32_t vertex_num = num_vertices(m_graph);
@@ -1440,8 +1945,8 @@ void LPColoring<GraphType>::write_graph_dot() const
 		<< "  randir = LR\n"
 		<< "  size=\"4, 3\"\n"
 		<< "  ratio=\"fill\"\n"
-		<< "  edge[style=\"bold\"]\n" 
-		<< "  node[shape=\"circle\"]\n";
+		<< "  edge[style=\"bold\",fontsize=200]\n" 
+		<< "  node[shape=\"circle\",fontsize=200]\n";
 
 	//output nodes 
 	uint32_t vertex_num = num_vertices(m_graph);
@@ -1450,7 +1955,7 @@ void LPColoring<GraphType>::write_graph_dot() const
 		dot_file << "  " << k << "[shape=\"circle\"";
 		//output coloring label
 		//dot_file << ",label=\"" << k << ":(" << m_lp_coloring[2*k] << "," << m_lp_coloring[2*k+1] << ")\"";
-		dot_file << ",label=\"(" << m_lp_coloring[2*k] << "," << m_lp_coloring[2*k+1] << ")\"";
+		dot_file << ",label=\"" << k << "-(" << m_lp_coloring[2*k] << "," << m_lp_coloring[2*k+1] << ")\"";
 		dot_file << "]\n";
 	}//end for
 
@@ -1499,8 +2004,8 @@ void LPColoring<GraphType>::write_graph_color() const
 		<< "  randir = LR\n"
 		<< "  size=\"4, 3\"\n"
 		<< "  ratio=\"fill\"\n"
-		<< "  edge[style=\"bold\"]\n" 
-		<< "  node[shape=\"circle\"]\n";
+		<< "  edge[style=\"bold\",fontsize=120]\n" 
+		<< "  node[shape=\"circle\",fontsize=120]\n";
 
 	//output nodes 
 	uint32_t vertex_num = num_vertices(m_graph);

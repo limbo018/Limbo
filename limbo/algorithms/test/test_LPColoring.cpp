@@ -38,7 +38,7 @@ int main()
 	// do not use setS, it does not compile for subgraph
 	// do not use custom property tags, it does not compile for most utilities
 	typedef adjacency_list<vecS, vecS, undirectedS, 
-			property<vertex_index_t, std::size_t>, 
+			property<vertex_index_t, std::size_t, property<vertex_color_t, int> >, 
 			property<edge_index_t, std::size_t, property<edge_weight_t, int> >,
 			property<graph_name_t, string> > graph_type;
 	typedef subgraph<graph_type> subgraph_type;
@@ -75,7 +75,7 @@ int main()
 	// DIRECT_ILP, FIXED_ILP or ITERATIVE_ILP
 	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::ITERATIVE_ILP);
 	// THREE or FOUR 
-	lc.colorNum(limbo::algorithms::coloring::LPColoring<graph_type>::FOUR);
+	lc.colorNum(limbo::algorithms::coloring::LPColoring<graph_type>::THREE);
 	lc();
 	return 0;
 }
