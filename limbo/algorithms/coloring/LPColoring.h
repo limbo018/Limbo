@@ -108,6 +108,7 @@ class LPColoring
     /// ILP based rounding 
     void rounding_ILP(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
 		/// Greedy rounding scheme
+		void rounding_Greedy_v0(vector<GRBVar>& coloringBits);
 		void rounding_Greedy(vector<GRBVar>& coloringBits);
 
 		/// coloring info
@@ -1462,7 +1463,7 @@ void LPColoring<GraphType>::rounding_ILP(GRBModel& opt_model, vector<GRBVar>& co
 
 //greedy rounding scheme, need better scheme later on 
 template<typename GraphType>
-void LPColoring<GraphType>::rounding_Greedy(vector<GRBVar>& coloringBits) 
+void LPColoring<GraphType>::rounding_Greedy_v0(vector<GRBVar>& coloringBits) 
 {
   cout << "\n\n---------------------------------------Greedy rounding scheme------------------------------------\n";
 
@@ -1476,12 +1477,12 @@ void LPColoring<GraphType>::rounding_Greedy(vector<GRBVar>& coloringBits)
 	for(uint32_t k = 0; k < vec_size; k++) 
 	{
 		double value = coloringBits[k].get(GRB_DoubleAttr_X);
-		if (0.0 <= value && value < 0.5) 
+		if (0.0 == value) 
 		{
 			coloringBinary[k] = false;
 			roundingFlag[k] = true;
 		} 
-		else if (0.5 < value && value <= 1.0) 
+		else if (1.0 == value)
 		{
 			coloringBinary[k] = true;
 			roundingFlag[k] = true;
@@ -1557,6 +1558,8 @@ void LPColoring<GraphType>::rounding_Greedy(vector<GRBVar>& coloringBits)
 					//flip the color bit that has not be rounded 
 					color_bits[m] = true;
 					nextFlag = true;
+          //for Triple patterning mode
+          if((colorNum() == THREE) && (m == COLORING_BITS - 1)) nextFlag = false;
           break;
 				}
 			}//end for m
@@ -1607,6 +1610,98 @@ void LPColoring<GraphType>::rounding_Greedy(vector<GRBVar>& coloringBits)
 #endif
 	}//end for 
 }
+
+template<typename GraphType>
+void LPColoring<GraphType>::rounding_Greedy(vector<GRBVar>& coloringBits) 
+{
+  cout << "\n\n---------------------------------------Greedy rounding scheme------------------------------------\n";
+
+	//greedy rounding scheme
+	uint32_t vec_size = coloringBits.size();
+  this->store_lp_coloring(coloringBits);
+
+	//greedy rounding schme should minimize the conflict and stitch number
+	for(uint32_t k = 0; k < vec_size; k = k + COLORING_BITS) 
+	{
+    double value1 = coloringBits[k].get(GRB_DoubleAttr_X);
+    double value2 = coloringBits[k+1].get(GRB_DoubleAttr_X);
+		if(isInteger(value1) && isInteger(value2)) continue;
+		//greedy rounding scheme 
+		uint32_t vertex_index = k/COLORING_BITS;
+
+		//get the neighbors
+		typename boost::graph_traits<graph_type>::adjacency_iterator vi_begin, vi_end;
+		BOOST_AUTO(vertex_key, m_inverse_vertex_map[vertex_index]);
+		boost::tie(vi_begin, vi_end) = adjacent_vertices(vertex_key, m_graph);
+		//calculate the current 
+		uint32_t same_color_bound = std::numeric_limits<uint32_t>::max(); 
+		uint32_t same_color_count = 0;
+		double best_bit1 = 0.0, best_bit2 = 0.0;
+    //greedy selection 
+    for(double bit1 = 0.0; bit1 <= 1.0; bit1 = bit1 + 1.0)
+		{
+      if(isInteger(value1) && (bit1 != value1)) continue;
+      for(double bit2 = 0.0; bit2 <= 1.0; bit2 = bit2 + 1.0) 
+      {
+        if(isInteger(value2) && (bit2 != value2)) continue;
+	      if (colorNum() == THREE && (bit1 == 1.0) && (bit2 == 1.0)) continue;
+        same_color_count = 0;
+        //cout << endl << "current_index: " << vertex_index << ", bits: " << bit1 << bit2 << endl;
+  			//check the same color neighbors
+  			for(BOOST_AUTO(vi, vi_begin); vi != vi_end; ++vi) 
+  			{
+#ifdef ASSERT_LPCOLORING
+  				assert(this->m_vertex_map.find(*vi) != m_vertex_map.end());
+#endif
+          uint32_t neighbor_index = this->m_vertex_map[*vi];
+          //same color neighbor
+  				if((m_lp_coloring[2*neighbor_index] == bit1) && (m_lp_coloring[2*neighbor_index+1] == bit2)) 
+          { 
+            same_color_count++;
+            //cout << "conflict neighbor_index: " << neighbor_index << endl;
+          }
+  			}//end for
+  			//assign better color
+  			if(same_color_count < same_color_bound) 
+  			{
+  				same_color_bound = same_color_count;
+  				best_bit1 = bit1;
+          best_bit2 = bit2;
+  			}
+      }//end for bit2
+		}//end for bit1
+
+		//the vertex is colored
+    this->m_lp_coloring[k] = best_bit1;
+    this->m_lp_coloring[k+1] = best_bit2;
+	}//end for k
+
+	//assign the coloring results 
+	for(uint32_t k = 0; k < vec_size; k = k + COLORING_BITS) 
+	{
+		BOOST_AUTO(vertex_key, this->m_inverse_vertex_map[(k/COLORING_BITS)]);
+		uint32_t color = 0;
+		uint32_t base = 1;
+		for(uint32_t m = 0; m < COLORING_BITS; ++m) 
+		{
+#ifdef ASSERT_LPCOLORING
+      assert(isInteger(this->m_lp_coloring[k + m]));
+#endif
+			if(this->m_lp_coloring[k + m] == 1.0) color = color + base;
+      base = base<<1;
+		}//end for k
+		if(this->m_coloring.find(vertex_key) == this->m_coloring.end())
+			this->m_coloring[vertex_key] = color;
+#ifdef ASSERT_LPCOLORING
+		else 
+		{ 
+			//cout << "stored color-" << this->m_coloring[vertex_key] << " vs assigned color-" << color << endl;
+			assert(this->m_coloring[vertex_key] == color);
+		}
+#endif
+	}//end for 
+}
+
 
 
 //get the vertex color
