@@ -75,7 +75,7 @@ int main()
 	// DIRECT_ILP, FIXED_ILP or ITERATIVE_ILP
 	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::ITERATIVE_ILP);
 	// THREE or FOUR 
-	lc.colorNum(limbo::algorithms::coloring::LPColoring<graph_type>::THREE);
+	lc.colorNum(limbo::algorithms::coloring::LPColoring<graph_type>::FOUR);
 	lc();
 	return 0;
 }
