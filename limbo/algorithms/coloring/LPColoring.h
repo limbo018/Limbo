@@ -2050,7 +2050,7 @@ void LPColoring<GraphType>::write_graph_dot() const
 		dot_file << "  " << k << "[shape=\"circle\"";
 		//output coloring label
 		//dot_file << ",label=\"" << k << ":(" << m_lp_coloring[2*k] << "," << m_lp_coloring[2*k+1] << ")\"";
-		dot_file << ",label=\"" << k << "-(" << m_lp_coloring[2*k] << "," << m_lp_coloring[2*k+1] << ")\"";
+		dot_file << ",label=\"(" << m_lp_coloring[2*k] << "," << m_lp_coloring[2*k+1] << ")\"";
 		dot_file << "]\n";
 	}//end for
 

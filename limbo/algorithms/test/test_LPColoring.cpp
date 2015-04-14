@@ -33,8 +33,54 @@ using std::ofstream;
 using std::string;
 using namespace boost;
 
-int main()
-{
+void simpleGraph() {
+ 	typedef adjacency_list<vecS, vecS, undirectedS, 
+			property<vertex_index_t, std::size_t, property<vertex_color_t, int> >, 
+			property<edge_index_t, std::size_t, property<edge_weight_t, int> >,
+			property<graph_name_t, string> > graph_type;
+	typedef subgraph<graph_type> subgraph_type;
+	typedef property<vertex_index_t, std::size_t> VertexId;
+	typedef property<edge_index_t, std::size_t> EdgeID;
+	typedef typename boost::graph_traits<graph_type>::vertex_descriptor vertex_descriptor; 
+  
+  graph_type g;
+  vertex_descriptor a = boost::add_vertex(g);
+  vertex_descriptor b = boost::add_vertex(g);
+  vertex_descriptor c = boost::add_vertex(g);
+  vertex_descriptor d = boost::add_vertex(g);
+  vertex_descriptor e = boost::add_vertex(g);
+  boost::add_edge(a, b, g);
+  boost::add_edge(a, c, g);
+  boost::add_edge(a, d, g);
+  boost::add_edge(b, c, g);
+  boost::add_edge(b, d, g);
+  boost::add_edge(c, d, g);
+  boost::add_edge(a, e, g);
+  boost::add_edge(c, e, g);
+  boost::add_edge(d, e, g);
+  
+	BOOST_AUTO(edge_weight_map, get(edge_weight, g));
+	graph_traits<graph_type>::edge_iterator eit, eit_end;
+	for (tie(eit, eit_end) = edges(g); eit != eit_end; ++eit)
+	{
+			edge_weight_map[*eit] = 1;
+	}
+
+	//test relaxed LP based coloring
+	limbo::algorithms::coloring::LPColoring<graph_type> lc (g); 
+	lc.stitchWeight(0.1);
+	// true or false 
+	lc.conflictCost(false);
+	// DIRECT_ILP, FIXED_ILP or ITERATIVE_ILP
+	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::ITERATIVE_ILP);
+	// THREE or FOUR 
+	lc.colorNum(limbo::algorithms::coloring::LPColoring<graph_type>::THREE);
+	lc();
+
+  return;
+}
+
+void randomGraph() {
 	// do not use setS, it does not compile for subgraph
 	// do not use custom property tags, it does not compile for most utilities
 	typedef adjacency_list<vecS, vecS, undirectedS, 
@@ -77,5 +123,14 @@ int main()
 	// THREE or FOUR 
 	lc.colorNum(limbo::algorithms::coloring::LPColoring<graph_type>::FOUR);
 	lc();
+
+  return;
+}
+
+int main()
+{
+  simpleGraph();
+
+  //randomGraph();
 	return 0;
 }
