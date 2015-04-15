@@ -164,7 +164,7 @@ bool Driver::parse_stream(std::istream& in, const std::string& sname)
 bool Driver::parse_file(const std::string &filename)
 {
     std::ifstream in(filename.c_str());
-    if (!in.good()) return false;
+    if (!in.good()) {std::cerr << "failed to open " << filename << std::endl; return false;}
     return parse_stream(in, filename);
 }
 
