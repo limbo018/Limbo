@@ -13,3 +13,8 @@ test/log
 test/graph.lp
 test/graph_ilp.lp
 test/*.ilp
+coloring/*.dot
+coloring/*.pdf
+coloring/*.gv
+coloring/*.lp
+coloring/*.sol

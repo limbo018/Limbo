@@ -16,7 +16,7 @@ INCLUDE = -I $(LIMBO_ROOT_DIR) \
 		  -I $(BOOST_DIR)/include \
 		  -I $(GUROBI_HOME)/include \
 		  -I $(LIBRARIES_DIR)/boost_1_55_0
-LINK = -L $(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi60 -lrt
+LINK = -L $(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi60 -lrt -lboost_graph
 
 all: $(TEST_DIR)/test_ChromaticNumber $(TEST_DIR)/test_LPColoring
 

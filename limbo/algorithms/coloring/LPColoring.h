@@ -44,13 +44,15 @@ class LPColoring
 		/// non-negative weight implies conflict edge 
 		/// negative weight implies stitch edge 
 		typedef typename boost::property_map<graph_type, boost::edge_weight_t>::const_type edge_weight_map_type;
-    typedef typename boost::property_map<graph_type, boost::vertex_color_t>::const_type vertex_color_map_type;
+		/// use vertex color to save vertex stitch candidate number 
+		typedef typename boost::property_map<graph_type, boost::vertex_color_t>::const_type vertex_color_map_type;
 
 		enum RoundingScheme 
 		{
 			DIRECT_ILP, // directly solve ILP to get optimal solution 
 			FIXED_ILP, // this rounding scheme is not in use now, because feasible solution is not guaranteed  
-			ITERATIVE_ILP
+			ITERATIVE_ILP, 
+			GREEDY
 		};
 		enum ColorNum 
 		{
@@ -98,15 +100,15 @@ class LPColoring
 		/// call ILP only once 
 		void ILPColoring(vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
 
-    /// Optimal rounding based on binding constraints
-    void rounding_bindingAnalysis(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
+		/// Optimal rounding based on binding constraints
+		void rounding_bindingAnalysis(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
 
 		/// iterative ILP based rounding
 		/// set non-integer solutions to integer 
 		/// set integer solutions from LP to continuous 
 		/// iteratively call ILP until no non-integer solutions 
-    /// ILP based rounding 
-    void rounding_ILP(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
+		/// ILP based rounding 
+		void rounding_ILP(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
 		/// Greedy rounding scheme
 		void rounding_Greedy_v0(vector<GRBVar>& coloringBits);
 		void rounding_Greedy(vector<GRBVar>& coloringBits);
@@ -161,8 +163,8 @@ class LPColoring
 		unordered_map<graph_edge_type, uint32_t, edge_hash_type> m_edge_map;
 		/// edge weight map 
 		edge_weight_map_type m_edge_weight_map;
-    /// vertex color map for vertex stitch candidate number
-    vertex_color_map_type m_vertex_color_map;
+		/// vertex color map for vertex stitch candidate number
+		vertex_color_map_type m_vertex_color_map;
 		/// LP coloring results
 		unordered_map<graph_vertex_type, uint32_t> m_coloring;
 		/// the lp coloring before rounding
@@ -183,9 +185,9 @@ class LPColoring
 		/// record number of ILP iterations 
 		uint32_t m_ilp_iter_cnt;
 
-    //linear programming constraints property 
-    unordered_map<string, bool> m_stitch_constrs;
-    uint32_t m_constrs_num;
+		//linear programming constraints property 
+		unordered_map<string, bool> m_stitch_constrs;
+		uint32_t m_constrs_num;
 };
 
 /// constructor
@@ -609,8 +611,8 @@ void LPColoring<GraphType>::graphColoring()
 	cout << "================== LP iteration #" << m_lp_iter_cnt++ << " ==================\n";
 	opt_model.optimize();
 #ifdef DEBUG_LPCOLORING
-	opt_model.write("../test/graph.lp");
-  opt_model.write("../test/graph.sol");
+	opt_model.write("graph.lp");
+	opt_model.write("graph.sol");
 #endif 
 	int optim_status = opt_model.get(GRB_IntAttr_Status);
 	if(optim_status == GRB_INFEASIBLE) 
@@ -780,8 +782,8 @@ void LPColoring<GraphType>::graphColoring()
 		cout << "================== LP iteration #" << m_lp_iter_cnt++ << " ==================\n";
 		opt_model.optimize();
 #ifdef DEBUG_LPCOLORING
-		opt_model.write("../test/graph.lp");
-    opt_model.write("../test/graph.sol");
+		opt_model.write("graph.lp");
+    opt_model.write("graph.sol");
 #endif
 		optim_status = opt_model.get(GRB_IntAttr_Status);
 		if(optim_status == GRB_INFEASIBLE) 
@@ -829,6 +831,8 @@ void LPColoring<GraphType>::graphColoring()
 		this->ILPColoring(coloringBits, vEdgeBit);
 	else if (roundingScheme() == ITERATIVE_ILP)
 		this->rounding_ILP(opt_model, coloringBits, vEdgeBit);
+	else if (roundingScheme() == GREEDY)
+		this->rounding_Greedy(coloringBits);
 
 	this->conflictNum();
 	this->stitchNum();
@@ -844,6 +848,8 @@ void LPColoring<GraphType>::graphColoring()
 			cout << "FIXED_ILP mode "; break;
 		case ITERATIVE_ILP:
 			cout << "ITERATIVE_ILP mode "; break;
+		case GREEDY:
+			cout << "GREEDY mode "; break;
 		default:
 			cout << "Unknown mode "; assert(0);
 	}
@@ -981,7 +987,7 @@ void LPColoring<GraphType>::ILPColoring(vector<GRBVar>& coloringBits, vector<GRB
 	opt_model_updated.update();
 
 #ifdef DEBUG_LPCOLORING
-	opt_model_updated.write("../test/graph_ilp.lp");
+	opt_model_updated.write("graph_ilp.lp");
 #endif
 
 	//optimize model 
@@ -1111,8 +1117,8 @@ void LPColoring<GraphType>::rounding_bindingAnalysis(GRBModel& opt_model, vector
       opt_model.update();
   	  opt_model.optimize();
 #ifdef DEBUG_LPCOLORING
-      opt_model.write("../test/graph.lp");
-      opt_model.write("../test/graph.sol");
+      opt_model.write("graph.lp");
+      opt_model.write("graph.sol");
 #endif
   	  int optim_status = opt_model.get(GRB_IntAttr_Status);
   	  if(optim_status == GRB_INFEASIBLE) 
@@ -1372,8 +1378,8 @@ void LPColoring<GraphType>::rounding_bindingAnalysis(GRBModel& opt_model, vector
       opt_model.update();
   	  opt_model.optimize();
 #ifdef DEBUG_LPCOLORING
-      opt_model.write("../test/graph.lp");
-      opt_model.write("../test/graph.sol");
+      opt_model.write("graph.lp");
+      opt_model.write("graph.sol");
       this->store_lp_coloring(coloringBits);
 	    this->write_graph_dot();
 #endif
@@ -1434,7 +1440,7 @@ void LPColoring<GraphType>::rounding_ILP(GRBModel& opt_model, vector<GRBVar>& co
 		}//end for k
 		opt_model.update();
 #ifdef DEBUG_LPCOLORING
-		opt_model.write("../test/graph_ilp.lp");
+		opt_model.write("graph_ilp.lp");
 #endif
 		cout << "================== ILP iteration #" << m_ilp_iter_cnt++ << " ==================\n";
 		opt_model.optimize();
@@ -1444,7 +1450,7 @@ void LPColoring<GraphType>::rounding_ILP(GRBModel& opt_model, vector<GRBVar>& co
 			cout << "ERROR: the ILP model is infeasible... Quit ILP based rounding" << endl;
 #ifdef DEBUG_LPCOLORING
 			opt_model.computeIIS();
-			opt_model.write("../test/graph_ilp.ilp");
+			opt_model.write("graph_ilp.ilp");
 #endif
 			exit(1);
 		}
@@ -1961,7 +1967,7 @@ void LPColoring<GraphType>::write_graph_dot(graph_vertex_type& v) const
 #endif
 	//if(m_vertex_map.empty() || m_inverse_vertex_map.empty()) this->setMap();
 
-	ofstream dot_file("../test/graph.dot");
+	ofstream dot_file("graph.dot");
 	dot_file << "graph D { \n"
 		<< "  randir = LR\n"
 		<< "  size=\"4, 3\"\n"
@@ -2023,7 +2029,7 @@ void LPColoring<GraphType>::write_graph_dot(graph_vertex_type& v) const
 	}
 	dot_file << "}";
 	dot_file.close();
-	system("dot -Tpdf ../test/graph.dot -o ../test/graph.pdf");
+	system("dot -Tpdf graph.dot -o graph.pdf");
 }
 
 //print graphviz
@@ -2035,7 +2041,7 @@ void LPColoring<GraphType>::write_graph_dot() const
 #endif
 	//if(m_vertex_map.empty() || m_inverse_vertex_map.empty()) this->setMap();
 
-	ofstream dot_file("../test/graph.dot");
+	ofstream dot_file("graph.dot");
 	dot_file << "graph D { \n"
 		<< "  randir = LR\n"
 		<< "  size=\"4, 3\"\n"
@@ -2082,7 +2088,7 @@ void LPColoring<GraphType>::write_graph_dot() const
 	}
 	dot_file << "}";
 	dot_file.close();
-	system("dot -Tpdf ../test/graph.dot -o ../test/graph.pdf");
+	system("dot -Tpdf graph.dot -o graph.pdf");
 }
 
 
@@ -2094,7 +2100,7 @@ void LPColoring<GraphType>::write_graph_color() const
 	//  assert(m_graph_ptr);
 #endif
 	//if(m_vertex_map.empty() || m_inverse_vertex_map.empty()) this->setMap();
-	ofstream dot_file("../test/color_graph.dot");
+	ofstream dot_file("color_graph.dot");
 	dot_file << "graph D { \n"
 		<< "  randir = LR\n"
 		<< "  size=\"4, 3\"\n"
@@ -2153,7 +2159,7 @@ void LPColoring<GraphType>::write_graph_color() const
 	}
 	dot_file << "}";
 	dot_file.close();
-	system("dot -Tpdf ../test/color_graph.dot -o ../test/color_graph.pdf");
+	system("dot -Tpdf color_graph.dot -o color_graph.pdf");
 }
 
 }//end namespace coloring
