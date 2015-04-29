@@ -1335,6 +1335,8 @@ void LPColoring<GraphType>::rounding_bindingAnalysis(GRBModel& opt_model, vector
       if(false == rounding_flag) break;
 
       //check whether value1&2 can be rounded simultaneously for shared constraints
+      //flag whether a feasible flag is found or not
+      bool bit_pair_flag = false;
       bit1 = 0.0, bit2 = 0.0;
       for(bit1 = 0.0; bit1 <= 1.0; bit1 = bit1 + 1.0) {
         if(pre_sense1 == '<' && bit1 == 1.0) continue;
@@ -1342,6 +1344,7 @@ void LPColoring<GraphType>::rounding_bindingAnalysis(GRBModel& opt_model, vector
         for(bit2 = 0.0; bit2 <= 1.0; bit2 = bit2 + 1.0) {
           if(pre_sense2 == '<' && bit2 == 1.0) continue;
           if(pre_sense2 == '>' && bit2 == 0.0) continue;
+          cout << "bit1: " << bit1 << "; bit2: " << bit2 << endl;
 	        if (colorNum() == THREE && (bit1 == 1.0) && (bit2 == 1.0)) continue;
           //check each shared constraint
           BOOST_AUTO(itr_end, shared_constrs_coeff1.end());
@@ -1357,12 +1360,13 @@ void LPColoring<GraphType>::rounding_bindingAnalysis(GRBModel& opt_model, vector
               break;
             }
           }//end for itr
+          bit_pair_flag = true;
           if(true == rounding_flag) break;
         }//end for bit2
         if(true == rounding_flag) break;
       }//end for bit1
       //rounding the first feasible variable
-      if(true == rounding_flag) {
+      if(true == rounding_flag && true == bit_pair_flag) {
 #ifdef ASSERT_LPCOLORING
 #endif
         coloringBits[k].set(GRB_DoubleAttr_UB, bit1);

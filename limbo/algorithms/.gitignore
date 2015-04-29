@@ -13,6 +13,7 @@ test/log
 test/graph.lp
 test/graph_ilp.lp
 test/*.ilp
+test/graph_init.*
 coloring/*.dot
 coloring/*.pdf
 coloring/*.gv
