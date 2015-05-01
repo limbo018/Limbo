@@ -178,9 +178,9 @@ void realGraph(string const& filename)
 	// true or false 
 	lc.conflictCost(false);
   // true or false
-  lc.stitchMode(true);
+  lc.stitchMode(false);
 	// DIRECT_ILP, FIXED_ILP, ITERATIVE_ILP, GREEDY
-	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::DIRECT_ILP);
+	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::GREEDY);
 	// THREE or FOUR 
 	lc.colorNum(limbo::algorithms::coloring::LPColoring<graph_type>::THREE);
 	lc();

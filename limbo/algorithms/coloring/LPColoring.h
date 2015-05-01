@@ -30,6 +30,7 @@ using std::pair;
 using std::ostringstream;
 using std::string;
 using std::sort;
+using std::distance;
 using boost::unordered_map;
 using boost::uint32_t;
 using boost::int32_t;
@@ -104,6 +105,7 @@ class LPColoring
 		/// DFS to search for the odd cycles, stored in m_odd_cycles
 		void oddCycles(graph_vertex_type& v);
     bool criticalCycle(vector<graph_vertex_type>& cycle);
+    graph_vertex_type largestDegreeVertex();
 
 		/// relaxed linear programming based coloring for the conflict graph (m_graph)
 		void graphColoring(); 
@@ -165,9 +167,13 @@ class LPColoring
           //conflict edge
           if(lpcoloring_ptr->m_cg_edge_weight_map[*ei] > 0) ++ce_2;
         }
-        return (ce_1 > ce_2);
+        return (ce_1 >= ce_2);
       } 
     };
+
+    //greedy final coloring refinement
+    void postRefinement();
+    bool refineColor(graph_vertex_type& v);
 
 		/// coloring info
 		uint32_t cg_vertexColor(graph_vertex_type& node) const;
@@ -574,6 +580,24 @@ bool LPColoring<GraphType>::criticalCycle(vector<graph_vertex_type>& cycle) {
   return (stitch_node_percentage <= m_snode_th);
 };
 
+//the vertex with the largest degree
+template<typename GraphType>
+typename boost::graph_traits<GraphType>::vertex_descriptor LPColoring<GraphType>::largestDegreeVertex() {
+	pair<typename graph_type::vertex_iterator, typename graph_type::vertex_iterator> vertex_range = vertices(m_graph);
+  BOOST_AUTO(anchor, *(vertex_range.first));
+  BOOST_AUTO(anchor_degree, degree(anchor, m_graph));
+
+  for(BOOST_AUTO(itr, vertex_range.first); itr != vertex_range.second; ++itr) 
+  {
+    BOOST_AUTO(itr_degree, degree(*itr, m_graph));
+    if(itr_degree > anchor_degree) {
+      anchor = *itr;
+      anchor_degree = itr_degree;
+    }//end if
+  }//end for itr
+  return anchor;
+}
+
 //relaxed linear programming based coloring for the conflict graph (m_graph)
 template<typename GraphType> 
 void LPColoring<GraphType>::graphColoring() 
@@ -622,8 +646,9 @@ void LPColoring<GraphType>::graphColoring()
 		if (roundingScheme() == DIRECT_ILP)
 			coloringBits.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_INTEGER, oss.str()));
 		else
-			coloringBits.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS, oss.str()));
+		  coloringBits.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS, oss.str()));
 	}
+  
 	vEdgeBit.reserve(edge_num);
 	for (uint32_t i = 0; i != edge_num; ++i)
 	{
@@ -660,6 +685,15 @@ void LPColoring<GraphType>::graphColoring()
 	}
 	obj = obj_init;
 	opt_model.setObjective(obj, GRB_MINIMIZE);
+
+  //Anchoring the coloring of the vertex with largest degree
+  graph_vertex_type anchor = largestDegreeVertex();
+  uint32_t anchor_index = m_vertex_map.at(anchor);
+  anchor_index = anchor_index<<1;
+  coloringBits[anchor_index].set(GRB_DoubleAttr_UB, 0.0);
+  coloringBits[anchor_index].set(GRB_DoubleAttr_LB, 0.0);
+  coloringBits[anchor_index+1].set(GRB_DoubleAttr_UB, 0.0);
+  coloringBits[anchor_index+1].set(GRB_DoubleAttr_LB, 0.0);
 
 	//set up the LP constraints
 	//typename graph_type::edges_size_type edge_num = num_edges(m_graph);
@@ -1075,8 +1109,11 @@ void LPColoring<GraphType>::graphColoring()
 #ifdef DEBUG_LPCOLORING
   this->cg_lpConflictNum();
   this->cg_lpStitchNum();
+	this->write_graph_dot();
+	this->write_conflictgraph_dot();
 #endif
   this->stitch_Insertion();
+  this->postRefinement();
   this->cg_conflictNum();
   this->cg_stitchNum();
   /*
@@ -2104,12 +2141,14 @@ void LPColoring<GraphType>::stitch_Insertion()
       }//end for bit2
 		}//end for bit1
 
-    //cout << (vertex_index>>1) << "(" << best_bit1 << "," << best_bit2 << ")" << endl;
+#ifdef DEBUG_LPCOLORING
+    cout << (vertex_index>>1) << "(" << best_bit1 << "," << best_bit2 << ")" << endl;
+#endif
 		//the vertex is colored
     this->m_lp_cg_coloring[vertex_index] = best_bit1;
     this->m_lp_cg_coloring[vertex_index+1] = best_bit2;
 	}//end for k
-
+/*
 	//assign the coloring results 
 	for(uint32_t k = 0; k < vec_size; k = k + COLORING_BITS) 
 	{
@@ -2134,7 +2173,119 @@ void LPColoring<GraphType>::stitch_Insertion()
 		}
 #endif
 	}//end for 
+*/
+}
 
+//post coloring refinement
+template<typename GraphType>
+void LPColoring<GraphType>::postRefinement() 
+{
+  //greedy post refinement
+  const_edge_weight_map_type edge_weight_map = get(boost::edge_weight, m_conflict_graph);
+	pair<typename graph_type::edge_iterator, typename graph_type::edge_iterator> edge_range = edges(m_conflict_graph);
+	for (BOOST_AUTO(itr, edge_range.first); itr != edge_range.second; ++itr)
+	{
+    //skipe the stitch edges 
+    if (edge_weight_map[*itr] < 0) continue;
+    graph_vertex_type from = source(*itr, m_conflict_graph);
+    graph_vertex_type to = target(*itr, m_conflict_graph);
+    //skip safe conflict edge
+    if (m_cg_coloring[from] != m_cg_coloring[to]) continue;
+    //greedy refinement based on the vertex degree
+    BOOST_AUTO(from_degree, degree(from, m_conflict_graph));
+    BOOST_AUTO(to_degree, degree(to, m_conflict_graph));
+    if(from_degree > to_degree) {
+      refineColor(to);
+      refineColor(from);
+    } else {
+      refineColor(from);
+      refineColor(to);
+    }
+	}//end for itr 
+
+	//assign the coloring results 
+  uint32_t vec_size = this->m_lp_cg_coloring.size();
+	for(uint32_t k = 0; k < vec_size; k = k + COLORING_BITS) 
+	{
+		BOOST_AUTO(vertex_key, this->m_cg_inverse_vertex_map[(k/COLORING_BITS)]);
+		uint32_t color = 0;
+		uint32_t base = 1;
+		for(uint32_t m = 0; m < COLORING_BITS; ++m) 
+		{
+#ifdef ASSERT_LPCOLORING
+      assert(isInteger(this->m_lp_cg_coloring[k + m]));
+#endif
+			if(this->m_lp_cg_coloring[k + m] == 1.0) color = color + base;
+      base = base<<1;
+		}//end for k
+    //update the color
+		this->m_cg_coloring[vertex_key] = color;
+	}//end for 
+}
+
+template<typename GraphType>
+bool LPColoring<GraphType>::refineColor(graph_vertex_type& v) { 
+  uint32_t vertex_index = this->m_cg_vertex_map.at(v);
+  vertex_index = vertex_index<<1;
+  double value1 = m_lp_cg_coloring[vertex_index];
+  double value2 = m_lp_cg_coloring[vertex_index+1];
+	//get the neighbors
+  typename boost::graph_traits<graph_type>::adjacency_iterator vi_begin, vi_end;
+  boost::tie(vi_begin, vi_end) = adjacent_vertices(v, m_conflict_graph);
+	//calculate the current 
+	uint32_t conflict_bound = std::numeric_limits<uint32_t>::max(); 
+  uint32_t stitch_bound = std::numeric_limits<uint32_t>::max();
+	uint32_t conflict_count = 0;
+  uint32_t stitch_count = 0;
+	double best_bit1 = 0.0, best_bit2 = 0.0;
+  //greedy selection 
+  for(double bit1 = 0.0; bit1 <= 1.0; bit1 = bit1 + 1.0)
+	{
+    for(double bit2 = 0.0; bit2 <= 1.0; bit2 = bit2 + 1.0) 
+    {
+      if (colorNum() == THREE && (bit1 == 1.0) && (bit2 == 1.0)) continue;
+      conflict_count = 0;
+      stitch_count = 0;
+			for(BOOST_AUTO(vi, vi_begin); vi != vi_end; ++vi) 
+			{
+        bool same_color_flag = false;
+        uint32_t neighbor_index = this->m_cg_vertex_map[*vi]; 
+        neighbor_index = neighbor_index<<1;
+        //conflict/stitch neighbor
+				if((m_lp_cg_coloring[neighbor_index] == bit1) && (m_lp_cg_coloring[neighbor_index+1] == bit2)) same_color_flag = true;
+        BOOST_AUTO(edge_pair, boost::edge(v, *vi, m_conflict_graph));
+        assert(edge_pair.second);
+        if(m_cg_edge_weight_map[edge_pair.first] > 0) 
+        {
+          //conflict edge
+          if(same_color_flag) ++conflict_count;
+        }
+        else 
+        {
+          //stitch edge 
+          if(!same_color_flag) ++stitch_count;
+        }
+			}//end for
+			//assign better color
+      bool better_flag = false;
+      if(conflict_count < conflict_bound) better_flag = true;
+      else if (conflict_count == conflict_bound) {
+        if(stitch_count < stitch_bound) better_flag = true;
+      }
+			if(better_flag)
+			{
+				conflict_bound = conflict_count;
+        stitch_bound = stitch_count;
+				best_bit1 = bit1;
+        best_bit2 = bit2;
+			}
+    }//end for bit2
+	}//end for bit1
+
+	//the vertex color updated 
+  this->m_lp_cg_coloring[vertex_index] = best_bit1;
+  this->m_lp_cg_coloring[vertex_index+1] = best_bit2;
+  return !((value1 == best_bit1) && (value2 == best_bit2));
 }
 
 //get the vertex color
@@ -2508,7 +2659,9 @@ pair<uint32_t, uint32_t> LPColoring<GraphType>::nonIntegerNum(const vector<GRBVa
 				//break;
 			}
 			if(value == 0.5) half_num++;
+#ifdef DEBUG_LPCOLORING
 			cout << k+m << "-" << value << " ";
+#endif
 		}
 	}//end for k
 	cout << endl;
@@ -2528,7 +2681,9 @@ pair<uint32_t, uint32_t> LPColoring<GraphType>::nonIntegerNum(const vector<GRBVa
 		}
 		if(value == 0.5) half_num_edge++;
 		if(value == 1) conflict_num++;
+#ifdef DEBUG_LPCOLORING
 		cout << k << "-" << value << " ";
+#endif
 	}//end for k
 	cout << endl;
 	cout << "NonInteger count: " << non_integer_num_edge << ", half integer count: " << half_num_edge << ", out of " << vec_size << " edge variable" << endl;
