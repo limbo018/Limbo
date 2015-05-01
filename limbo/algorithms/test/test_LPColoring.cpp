@@ -100,7 +100,7 @@ void randomGraph()
 	graph_traits<graph_type>::edge_iterator eit, eit_end;
 	for (tie(eit, eit_end) = edges(g); eit != eit_end; ++eit, ++i)
 	{
-#if 0
+#if 1
 		if (i%10 == 0) // generate stitch 
 			edge_weight_map[*eit] = -1;
 		else // generate conflict 
@@ -114,7 +114,7 @@ void randomGraph()
 	// true or false 
 	lc.conflictCost(false);
 	// DIRECT_ILP, FIXED_ILP, ITERATIVE_ILP, GREEDY
-	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::ITERATIVE_ILP);
+	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::DIRECT_ILP);
 	// THREE or FOUR 
 	lc.colorNum(limbo::algorithms::coloring::LPColoring<graph_type>::FOUR);
 	lc();
@@ -177,8 +177,10 @@ void realGraph(string const& filename)
 	lc.stitchWeight(0.1);
 	// true or false 
 	lc.conflictCost(false);
+  // true or false
+  lc.stitchMode(true);
 	// DIRECT_ILP, FIXED_ILP, ITERATIVE_ILP, GREEDY
-	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::GREEDY);
+	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::DIRECT_ILP);
 	// THREE or FOUR 
 	lc.colorNum(limbo::algorithms::coloring::LPColoring<graph_type>::THREE);
 	lc();
@@ -190,8 +192,8 @@ int main(int argc, char** argv)
 {
 	if (argc < 2)
 	{
-		simpleGraph();
-		//randomGraph();
+		//simpleGraph();
+		randomGraph();
 	}
 	else realGraph(argv[1]);
 
