@@ -718,109 +718,109 @@ void LPColoring<GraphType>::graphColoring()
 		uint32_t vertex_idx2 = t_ind<<1;
 
 		BOOST_AUTO(w, m_edge_weight_map[*itr]);
-    GRBConstr tmpConstr;
-    char buf[100];
-    string tmpConstr_name;
+		GRBConstr tmpConstr;
+		char buf[100];
+		string tmpConstr_name;
 		if (w >= 0) // constraints for conflict edges 
 		{
 			if (!conflictCost())
 			{
-        sprintf(buf, "%u", m_constrs_num++);  
-        tmpConstr_name = "R" + string(buf);
+				sprintf(buf, "%u", m_constrs_num++);  
+				tmpConstr_name = "R" + string(buf);
 				tmpConstr = opt_model.addConstr(
 						coloringBits[vertex_idx1] + coloringBits[vertex_idx1+1] 
 						+ coloringBits[vertex_idx2] + coloringBits[vertex_idx2+1] >= 1
 						, tmpConstr_name);
 #ifdef ASSERT_LPCOLORING
-        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+				assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
 #endif
-        m_stitch_constrs[tmpConstr_name] = false;
+				m_stitch_constrs[tmpConstr_name] = false;
 
-        sprintf(buf, "%u", m_constrs_num++);  
-        tmpConstr_name = "R" + string(buf);
+				sprintf(buf, "%u", m_constrs_num++);  
+				tmpConstr_name = "R" + string(buf);
 				tmpConstr = opt_model.addConstr(
 						1 - coloringBits[vertex_idx1] + coloringBits[vertex_idx1+1] 
 						+ 1 - coloringBits[vertex_idx2] + coloringBits[vertex_idx2+1] >= 1
 						, tmpConstr_name);
 #ifdef ASSERT_LPCOLORING
-        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+				assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
 #endif
-        m_stitch_constrs[tmpConstr_name] = false;
+				m_stitch_constrs[tmpConstr_name] = false;
 
-        sprintf(buf, "%u", m_constrs_num++);  
-        tmpConstr_name = "R" + string(buf);
+				sprintf(buf, "%u", m_constrs_num++);  
+				tmpConstr_name = "R" + string(buf);
 				tmpConstr = opt_model.addConstr(
 						coloringBits[vertex_idx1] + 1 - coloringBits[vertex_idx1+1] 
 						+ coloringBits[vertex_idx2] + 1 - coloringBits[vertex_idx2+1] >= 1
 						, tmpConstr_name);
 #ifdef ASSERT_LPCOLORING
-        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+				assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
 #endif
-        m_stitch_constrs[tmpConstr_name] = false;
+				m_stitch_constrs[tmpConstr_name] = false;
 
-        sprintf(buf, "%u", m_constrs_num++);  
-        tmpConstr_name = "R" + string(buf);
+				sprintf(buf, "%u", m_constrs_num++);  
+				tmpConstr_name = "R" + string(buf);
 				tmpConstr = opt_model.addConstr(
 						1 - coloringBits[vertex_idx1] + 1 - coloringBits[vertex_idx1+1] 
 						+ 1 - coloringBits[vertex_idx2] + 1 - coloringBits[vertex_idx2+1] >= 1
 						, tmpConstr_name);
 #ifdef ASSERT_LPCOLORING
-        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+				assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
 #endif
-        m_stitch_constrs[tmpConstr_name] = false;
+				m_stitch_constrs[tmpConstr_name] = false;
 
 			}
 			else 
 			{
 				uint32_t edge_idx = m_edge_map[*itr];
 
-        sprintf(buf, "%u", m_constrs_num++);  
-        tmpConstr_name = "R" + string(buf);
+				sprintf(buf, "%u", m_constrs_num++);  
+				tmpConstr_name = "R" + string(buf);
 				tmpConstr = opt_model.addConstr(
 						coloringBits[vertex_idx1] + coloringBits[vertex_idx1+1] 
 						+ coloringBits[vertex_idx2] + coloringBits[vertex_idx2+1] 
 						+ vEdgeBit[edge_idx] >= 1
 						, tmpConstr_name);
 #ifdef ASSERT_LPCOLORING
-        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+				assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
 #endif
-        m_stitch_constrs[tmpConstr_name] = false;
+				m_stitch_constrs[tmpConstr_name] = false;
 
-        sprintf(buf, "%u", m_constrs_num++);  
-        tmpConstr_name = "R" + string(buf);
+				sprintf(buf, "%u", m_constrs_num++);  
+				tmpConstr_name = "R" + string(buf);
 				tmpConstr = opt_model.addConstr(
 						1 - coloringBits[vertex_idx1] + coloringBits[vertex_idx1+1] 
 						+ 1 - coloringBits[vertex_idx2] + coloringBits[vertex_idx2+1] 
 						+ vEdgeBit[edge_idx] >= 1
 						, tmpConstr_name);
 #ifdef ASSERT_LPCOLORING
-        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+				assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
 #endif
-        m_stitch_constrs[tmpConstr_name] = false;
+				m_stitch_constrs[tmpConstr_name] = false;
 
-        sprintf(buf, "%u", m_constrs_num++);  
-        tmpConstr_name = "R" + string(buf);
+				sprintf(buf, "%u", m_constrs_num++);  
+				tmpConstr_name = "R" + string(buf);
 				tmpConstr = opt_model.addConstr(
 						coloringBits[vertex_idx1] + 1 - coloringBits[vertex_idx1+1] 
 						+ coloringBits[vertex_idx2] + 1 - coloringBits[vertex_idx2+1] 
 						+ vEdgeBit[edge_idx] >= 1
 						, tmpConstr_name);
 #ifdef ASSERT_LPCOLORING
-        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+				assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
 #endif
-        m_stitch_constrs[tmpConstr_name] = false;
+				m_stitch_constrs[tmpConstr_name] = false;
 
-        sprintf(buf, "%u", m_constrs_num++);  
-        tmpConstr_name = "R" + string(buf);
+				sprintf(buf, "%u", m_constrs_num++);  
+				tmpConstr_name = "R" + string(buf);
 				tmpConstr = opt_model.addConstr(
 						1 - coloringBits[vertex_idx1] + 1 - coloringBits[vertex_idx1+1] 
 						+ 1 - coloringBits[vertex_idx2] + 1 - coloringBits[vertex_idx2+1] 
 						+ vEdgeBit[edge_idx] >= 1
 						, tmpConstr_name);
 #ifdef ASSERT_LPCOLORING
-        assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+				assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
 #endif
-        m_stitch_constrs[tmpConstr_name] = false;
+				m_stitch_constrs[tmpConstr_name] = false;
 
 			}
 		}
@@ -828,45 +828,45 @@ void LPColoring<GraphType>::graphColoring()
 		{
 			uint32_t edge_idx = m_edge_map[*itr];
 
-      sprintf(buf, "%u", m_constrs_num++);  
-      tmpConstr_name = "R" + string(buf);
+			sprintf(buf, "%u", m_constrs_num++);  
+			tmpConstr_name = "R" + string(buf);
 			tmpConstr = opt_model.addConstr(
 					coloringBits[vertex_idx1] - coloringBits[vertex_idx2] - vEdgeBit[edge_idx] <= 0
 					, tmpConstr_name);
 #ifdef ASSERT_LPCOLORING
-      assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+			assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
 #endif
-      m_stitch_constrs[tmpConstr_name] = true;
+			m_stitch_constrs[tmpConstr_name] = true;
 
-      sprintf(buf, "%u", m_constrs_num++);  
-      tmpConstr_name = "R" + string(buf);
+			sprintf(buf, "%u", m_constrs_num++);  
+			tmpConstr_name = "R" + string(buf);
 			tmpConstr = opt_model.addConstr(
 					coloringBits[vertex_idx2] - coloringBits[vertex_idx1] - vEdgeBit[edge_idx] <= 0
 					, tmpConstr_name);
 #ifdef ASSERT_LPCOLORING
-      assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+			assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
 #endif
-      m_stitch_constrs[tmpConstr_name] = true;
+			m_stitch_constrs[tmpConstr_name] = true;
 
-      sprintf(buf, "%u", m_constrs_num++);  
-      tmpConstr_name = "R" + string(buf);
+			sprintf(buf, "%u", m_constrs_num++);  
+			tmpConstr_name = "R" + string(buf);
 			tmpConstr = opt_model.addConstr(
 					coloringBits[vertex_idx1+1] - coloringBits[vertex_idx2+1] - vEdgeBit[edge_idx] <= 0
 					, tmpConstr_name);      
 #ifdef ASSERT_LPCOLORING
-      assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+			assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
 #endif
-      m_stitch_constrs[tmpConstr_name] = true;
+			m_stitch_constrs[tmpConstr_name] = true;
 
-      sprintf(buf, "%u", m_constrs_num++);  
-      tmpConstr_name = "R" + string(buf);
+			sprintf(buf, "%u", m_constrs_num++);  
+			tmpConstr_name = "R" + string(buf);
 			tmpConstr = opt_model.addConstr(
 					coloringBits[vertex_idx2+1] - coloringBits[vertex_idx1+1] - vEdgeBit[edge_idx] <= 0
 					, tmpConstr_name);
 #ifdef ASSERT_LPCOLORING
-      assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
+			assert(m_stitch_constrs.find(tmpConstr_name) == m_stitch_constrs.end());
 #endif
-      m_stitch_constrs[tmpConstr_name] = true;
+			m_stitch_constrs[tmpConstr_name] = true;
 
 		}
 	}
