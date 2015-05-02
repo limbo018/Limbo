@@ -19,3 +19,5 @@ coloring/*.pdf
 coloring/*.gv
 coloring/*.lp
 coloring/*.sol
+test/.nfs*
+coloring/gdb.sh

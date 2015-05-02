@@ -170,7 +170,7 @@ class LPColoring
 					//conflict edge
 					if(lc.m_cg_edge_weight_map[*ei] > 0) ++ce_2;
 				}
-				return (ce_1 >= ce_2);
+				return (ce_1 > ce_2);
 			} 
 		};
 
@@ -2034,6 +2034,10 @@ void LPColoring<GraphType>::mapColoring()
 #endif
 		uint32_t g_index = m_vertex_map[g_node];
 		uint32_t cg_index = m_cg_vertex_map[cg_node];
+#ifdef ASSERT_LPCOLORING
+		assert(2*cg_index+1 < m_lp_cg_coloring.size());
+		assert(2*g_index+1 < m_lp_coloring.size());
+#endif
 		m_lp_cg_coloring[2*cg_index] = m_lp_coloring[2*g_index];
 		m_lp_cg_coloring[2*cg_index+1] = m_lp_coloring[2*g_index+1];
 	}
@@ -2060,6 +2064,7 @@ void LPColoring<GraphType>::stitch_Insertion()
 	{
 #ifdef ASSERT_LPCOLORING
 		assert(m_cg_vertex_map.find(*itr) != m_cg_vertex_map.end());
+		assert(*itr < num_vertices(m_conflict_graph));
 #endif
 		uint32_t vertex_index = m_cg_vertex_map.at(*itr);
 		vertex_index = vertex_index<<1;
@@ -2072,7 +2077,7 @@ void LPColoring<GraphType>::stitch_Insertion()
 	}
 
 	//sort the vertices based on the stitch candidate number and conflict edge degree
-	sort(rounding_vertices.begin(), rounding_vertices.end() - 1, insertionOrder(*this));
+	sort(rounding_vertices.begin(), rounding_vertices.end(), insertionOrder(*this));
 
 	uint32_t vertex_num = rounding_vertices.size();
 	//greedy rounding schme should minimize the conflict and stitch number
