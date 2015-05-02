@@ -21,3 +21,5 @@ coloring/*.lp
 coloring/*.sol
 test/.nfs*
 coloring/gdb.sh
+test/*.dot
+test/*.pdf
