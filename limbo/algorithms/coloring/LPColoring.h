@@ -2072,7 +2072,7 @@ void LPColoring<GraphType>::stitch_Insertion()
 	}
 
 	//sort the vertices based on the stitch candidate number and conflict edge degree
-	sort(rounding_vertices.begin(), rounding_vertices.end(), insertionOrder(*this));
+	sort(rounding_vertices.begin(), rounding_vertices.end() - 1, insertionOrder(*this));
 
 	uint32_t vertex_num = rounding_vertices.size();
 	//greedy rounding schme should minimize the conflict and stitch number
