@@ -342,7 +342,8 @@ void LPColoring<GraphType>::createNoStitchGraph()
 		bfs_nodes.clear();
 		bfs_queue.push(*itr);
 		nodeVisited[vertex_index] = true;
-		while(false == bfs_queue.empty()) {
+		while(false == bfs_queue.empty()) 
+		{
 			//pop out the first element
 			graph_vertex_type curr_v = bfs_queue.front();
 			bfs_queue.pop();
@@ -363,7 +364,8 @@ void LPColoring<GraphType>::createNoStitchGraph()
 				// skip conflict edges 
 				if (edge_weight_map[found_edge.first] > 0) continue;
 				vertex_index = m_cg_vertex_map[*vi];
-				if (false == nodeVisited[vertex_index]) {
+				if (false == nodeVisited[vertex_index]) 
+				{
 					nodeVisited[vertex_index] = true;
 					bfs_queue.push(*vi);
 				}
@@ -405,7 +407,8 @@ void LPColoring<GraphType>::createNoStitchGraph()
 	for (BOOST_AUTO(itr, edge_range.first); itr != edge_range.second; ++itr)
 	{
 		//skipe the stitch edges 
-		if (edge_weight_map[*itr] < 0) continue;
+		// in DIRECT_ILP mode, we should still keep all stitch edges 
+		if (roundingScheme() != DIRECT_ILP && edge_weight_map[*itr] < 0) continue;
 		graph_vertex_type from = source(*itr, m_conflict_graph);
 		graph_vertex_type to = target(*itr, m_conflict_graph);
 #ifdef ASSERT_LPCOLORING
