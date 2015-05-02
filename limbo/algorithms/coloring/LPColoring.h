@@ -1457,6 +1457,7 @@ void LPColoring<GraphType>::rounding_bindingAnalysis(GRBModel& opt_model, vector
       double value1 = coloringBits[k].get(GRB_DoubleAttr_X);
       double value2 = coloringBits[k+1].get(GRB_DoubleAttr_X);
       if(isInteger(value1) && isInteger(value2)) continue;
+      if(!(value1 == 0.5 && value2 == 0.5)) continue;
 #ifdef DEBUG_LPCOLORING
       //cout << endl << endl << k << "th and " << (k + 1) << "th non-integer variable" << endl;
       //string check_point;
@@ -1477,7 +1478,7 @@ void LPColoring<GraphType>::rounding_bindingAnalysis(GRBModel& opt_model, vector
       unordered_map<string, char> constrs_sense2;
       //process the first set of binding constraints
 #ifdef DEBUG_LPCOLORING
-      cout << endl << endl << k << "th non-integer variable" << endl;
+      cout << endl << endl << k << "th non-integer variable with value: " << value1 << endl;
 #endif
       for(int m = 0; m < column1_size; ++m) {
         GRBConstr constr = column1.getConstr(m);
@@ -1502,7 +1503,7 @@ void LPColoring<GraphType>::rounding_bindingAnalysis(GRBModel& opt_model, vector
       }//end for m
 
 #ifdef DEBUG_LPCOLORING
-      cout << endl << endl << (k+1) << "th non-integer variable" << endl;
+      cout << endl << endl << (k+1) << "th non-integer variable with value: " << value2 << endl;
 #endif
       //process the second set of binding constraints
       for(int m = 0; m < column2_size; ++m) {
