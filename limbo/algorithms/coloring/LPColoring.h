@@ -178,6 +178,9 @@ class LPColoring
 		void postRefinement();
 		bool refineColor(graph_vertex_type& v);
 
+    //iteration number
+    uint32_t iterationNum() const { return m_lp_iter_cnt; };
+
 		/// coloring info
 		uint32_t cg_vertexColor(graph_vertex_type& node) const;
 		uint32_t cg_conflictNum() const;
@@ -641,7 +644,7 @@ void LPColoring<GraphType>::graphColoring()
 	//set up the LP environment
 	GRBEnv env = GRBEnv();
 	//mute the log from the LP solver
-	//env.set(GRB_IntParam_OutputFlag, 0);
+	env.set(GRB_IntParam_OutputFlag, 0);
 	GRBModel opt_model = GRBModel(env);
 	//set up the LP variables
 	vector<GRBVar> coloringBits;
@@ -1686,6 +1689,7 @@ void LPColoring<GraphType>::rounding_bindingAnalysis(GRBModel& opt_model, vector
       //update the model and optimize
       opt_model.update();
   	  opt_model.optimize();
+		  cout << "================== LP iteration #" << m_lp_iter_cnt++ << " ==================\n";
 #ifdef DEBUG_LPCOLORING
       opt_model.write("graph.lp");
       opt_model.write("graph.sol");
