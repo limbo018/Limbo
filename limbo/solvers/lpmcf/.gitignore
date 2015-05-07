@@ -1,3 +1,4 @@
 test/test
 test/problem.lp.*
 test/graph.lgf.*
+test/graph.lp*
