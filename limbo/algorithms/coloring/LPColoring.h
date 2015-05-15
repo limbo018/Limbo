@@ -1031,7 +1031,7 @@ void LPColoring<GraphType>::graphColoring()
 		//push the non-half_integer to 0/1
 		// only check for vertices 
 
-#if 1
+#ifndef DEBUG_ODDCYCLE
 		// tune objective for a pair of values 
 		for(uint32_t k = 0; k < coloring_bits_num; k += COLORING_BITS) 
 		{
@@ -1079,7 +1079,7 @@ void LPColoring<GraphType>::graphColoring()
 #endif
 
 		//minimize the conflict number 
-#if 1
+#ifndef DEBUG_ODDCYCLE
 		// tune objective for a pair of value along conflict edges 
 		if (!conflictCost())
 		{
@@ -1116,7 +1116,7 @@ void LPColoring<GraphType>::graphColoring()
 		opt_model.setObjective(obj);
 #endif
 
-#if 1
+#ifndef DEBUG_ODDCYCLE
 		//add the new constraints
 		//odd cycle trick from Prof. Baldick
 		for(uint32_t k = 0; k < coloring_bits_num; k += 2) 
@@ -1203,7 +1203,9 @@ void LPColoring<GraphType>::graphColoring()
 #endif
 #ifdef DEBUG_LPCOLORING
 		// manually type in odd cycles 
-#if 0
+		// enter node id of an odd cycle and end with ";"
+		// if you are done, enter "done" to preform LP 
+#ifdef DEBUG_ODDCYCLE
 		while (true)
 		{
 			cout << "enter an odd cycle" << endl;
@@ -1293,7 +1295,7 @@ void LPColoring<GraphType>::graphColoring()
 		non_integer_num_updated = pair.first;
 		half_integer_num_updated = pair.second;
 
-#if 1
+#ifndef DEBUG_ODDCYCLE
 		if (/*non_integer_num_updated == 0*/ half_integer_num_updated == 0 || 
 				(non_integer_num_updated >= non_integer_num && half_integer_num_updated >= half_integer_num)) break;
 #endif

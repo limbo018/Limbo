@@ -25,3 +25,4 @@ test/*.dot
 test/*.pdf
 coloring/tmp_*
 coloring/two-cases.tar.gz
+coloring/LPColoring.h.bk
