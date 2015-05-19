@@ -10,7 +10,7 @@ VPATH = . $(TEST_DIR)
 # -stdlib=libstdc++ is necessary to compile under osx 10.9 
 #  because there are two stl implementation under osx 10.9, libc++ and libstdc++
 CXXFLAGS = -W -Wall -Wextra -Wreturn-type -ansi -pthread -fmax-errors=1 -DDEBUG_LPCOLORING -DASSERT_LPCOLORING -DDEBUG_ODDCYCLE -DDEBUG_GRAPHSIMPLIFICATION -g #-O2 
-LDFLAGS = -stdlib=libstdc++ 
+LDFLAGS = #-stdlib=libstdc++ 
 
 # internal dependency is lp parser 
 # external dependency is boost and lemon 
@@ -19,8 +19,8 @@ INCLUDE = -I $(LIMBO_ROOT_DIR) \
 		  -I $(GUROBI_HOME)/include \
 		  -I $(LIBRARIES_DIR)/boost_1_55_0
 LINK = -L $(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi60 \
-	   -L $(BOOST_DIR)/lib -lboost_graph -lboost_unit_test_framework \
-	   -lm
+	   -L -Wl,rpath-link,$(BOOST_DIR)/lib -lboost_graph -lboost_unit_test_framework \
+	   -lm 
 #	   -lrt
 
 all: $(TEST_DIR)/test_ChromaticNumber $(TEST_DIR)/test_LPColoring $(TEST_DIR)/test_GraphSimplification
@@ -28,7 +28,7 @@ all: $(TEST_DIR)/test_ChromaticNumber $(TEST_DIR)/test_LPColoring $(TEST_DIR)/te
 # Implicit rule to compile c++ files
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE) -stdlib=libstdc++ 
+	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE) 
 
 # Link executable
 

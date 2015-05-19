@@ -96,6 +96,7 @@ void realGraph(string const& filename)
 	limbo::algorithms::coloring::GraphSimplication<graph_type> gs (g); 
 	gs.merge_subK4();
 	gs.write_graph_dot("graph_simpl");
+	gs.write_merged_graph_dot("graph_simpl_merge");
 
 	in.close();
 }

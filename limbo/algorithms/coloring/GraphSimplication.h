@@ -12,6 +12,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <map>
 #include <boost/graph/graph_concepts.hpp>
 #include <boost/property_map/property_map.hpp>
 
@@ -21,7 +22,9 @@ using std::cout;
 using std::endl;
 using std::vector;
 using std::string;
+using std::map;
 using std::pair;
+using std::make_pair;
 
 template <typename GraphType>
 class GraphSimplication
@@ -53,6 +56,51 @@ class GraphSimplication
 
 		vector<graph_vertex_type> const& parents() const {return m_vParent;}
 		vector<vector<graph_vertex_type> > const& children() const {return m_vChildren;}
+		pair<graph_type, map<graph_vertex_type, graph_vertex_type> > merged_graph() const 
+		{
+			size_t vertex_cnt = 0;
+			map<graph_vertex_type, graph_vertex_type> mG2MG;
+			map<graph_vertex_type, graph_vertex_type> mMG2G;
+			vertex_iterator vi1, vie1;
+			for (boost::tie(vi1, vie1) = boost::vertices(m_graph); vi1 != vie1; ++vi1)
+			{
+				graph_vertex_type v1 = *vi1;
+				bool merge_flag = this->merged(v1);
+				if (!merge_flag)
+				{
+					mG2MG[*vi1] = vertex_cnt;
+					mMG2G[vertex_cnt] = v1;
+					vertex_cnt += 1;
+				}
+			}
+			graph_type mg (vertex_cnt);
+
+			edge_iterator ei, eie;
+			for (boost::tie(ei, eie) = boost::edges(m_graph); ei != eie; ++ei)
+			{
+				graph_edge_type e = *ei;
+				graph_vertex_type s = boost::source(e, m_graph);
+				graph_vertex_type t = boost::target(e, m_graph);
+				graph_vertex_type sp = this->parent(s);
+				graph_vertex_type tp = this->parent(t);
+
+#ifdef DEBUG_GRAPHSIMPLIFICATION
+				assert(mG2MG.count(sp));
+				assert(mG2MG.count(tp));
+#endif
+				graph_vertex_type msp = mG2MG[sp];
+				graph_vertex_type mtp = mG2MG[tp];
+				pair<graph_edge_type, bool> emg = boost::edge(msp, mtp, mg);
+				if (!emg.second)
+				{
+					emg = boost::add_edge(msp, mtp, mg);
+					assert(emg.second);
+					boost::put(boost::edge_weight, mg, emg.first, boost::get(boost::edge_weight, m_graph, e));
+				}
+			}
+
+			return make_pair(mg, mMG2G);
+		}
 
 		/// for a structure of K4 with one fewer edge 
 		/// suppose we have 4 vertices 1, 2, 3, 4
@@ -80,7 +128,7 @@ class GraphSimplication
 					for (typename vector<graph_vertex_type>::const_iterator vic1 = vChildren1.begin(); vic1 != vChildren1.end(); ++vic1)
 					{
 #ifdef DEBUG_GRAPHSIMPLIFICATION
-						cout << vic1-vChildren1.begin() << endl;
+						assert(vic1-vChildren1.begin() >= 0);
 #endif
 						graph_vertex_type vc1 = *vic1;
 						adjacency_iterator vi2, vie2;
@@ -135,18 +183,28 @@ class GraphSimplication
 											m_vChildren[v4].resize(0); // clear and shrink to fit 
 											m_vParent[v4] = v1;
 											merge_flag = true;
+#ifdef DEBUG_GRAPHSIMPLIFICATION
+											//this->write_graph_dot("graph_simpl");
+#endif
+											break;
 										}
+										if (merge_flag) break;
 									}
+									if (merge_flag) break;
 								}
+								if (merge_flag) break;
 							}
+							if (merge_flag) break;
 						}
+						if (merge_flag) break;
 					}
+					if (merge_flag) break;
 				}
 			} while (merge_flag);
 		}
 		void write_graph_dot(string const& filename) const 
 		{
-			std::ofstream dot_file(filename.c_str());
+			std::ofstream dot_file((filename+".dot").c_str());
 			dot_file << "graph D { \n"
 				<< "  randir = LR\n"
 				<< "  size=\"4, 3\"\n"
@@ -194,6 +252,59 @@ class GraphSimplication
 					else if (this->connected_stitch(v1, v2))
 						dot_file << "  " << v1 << "--" << v2 << "[color=\"black\",style=\"dashed\",penwidth=3]\n";
 				}
+			}
+			dot_file << "}";
+			dot_file.close();
+
+			char buf[256];
+			sprintf(buf, "dot -Tpdf %s.dot -o %s.pdf", filename.c_str(), filename.c_str());
+			system(buf);
+		}
+		void write_merged_graph_dot(string const& filename) const
+		{
+			std::ofstream dot_file((filename+".dot").c_str());
+			dot_file << "graph D { \n"
+				<< "  randir = LR\n"
+				<< "  size=\"4, 3\"\n"
+				<< "  ratio=\"fill\"\n"
+				<< "  edge[style=\"bold\",fontsize=200]\n" 
+				<< "  node[shape=\"circle\",fontsize=200]\n";
+
+			// get merged graph 
+			pair<graph_type, map<graph_vertex_type, graph_vertex_type> > mg = this->merged_graph();
+			//output nodes 
+			vertex_iterator vi1, vie1;
+			for (boost::tie(vi1, vie1) = boost::vertices(mg.first); vi1 != vie1; ++vi1)
+			{
+				graph_vertex_type mv1 = *vi1;
+				graph_vertex_type v1 = mg.second[mv1];
+				if (m_vChildren[v1].empty()) continue;
+
+				dot_file << "  " << mv1 << "[shape=\"circle\"";
+				//output coloring label
+				dot_file << ",label=\"" << v1 << ":(";
+				for (typename vector<graph_vertex_type>::const_iterator it1 = m_vChildren[v1].begin(); it1 != m_vChildren[v1].end(); ++it1)
+				{
+					if (it1 != m_vChildren[v1].begin())
+						dot_file << ",";
+					dot_file << *it1;
+				}
+				dot_file << ")\"";
+				dot_file << "]\n";
+			}
+
+			//output edges
+			edge_iterator ei, eie;
+			for (boost::tie(ei, eie) = boost::edges(mg.first); ei != eie; ++ei)
+			{
+				graph_edge_type e = *ei;
+				graph_vertex_type mv1 = boost::source(e, mg.first);
+				graph_vertex_type mv2 = boost::target(e, mg.first);
+
+				if (boost::get(boost::edge_weight, mg.first, e) >= 0)
+					dot_file << "  " << mv1 << "--" << mv2 << "[color=\"black\",style=\"solid\",penwidth=3]\n";
+				else 
+					dot_file << "  " << mv1 << "--" << mv2 << "[color=\"black\",style=\"dashed\",penwidth=3]\n";
 			}
 			dot_file << "}";
 			dot_file.close();
