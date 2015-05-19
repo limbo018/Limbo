@@ -1,12 +1,12 @@
 /*************************************************************************
-    > File Name: GraphSimplication.h
+    > File Name: GraphSimplification.h
     > Author: Yibo Lin
     > Mail: yibolin@utexas.edu
     > Created Time: Mon May 18 15:55:09 2015
  ************************************************************************/
 
-#ifndef LIMBO_ALGORITHMS_GRAPHSIMPLICATION_H
-#define LIMBO_ALGORITHMS_GRAPHSIMPLICATION_H
+#ifndef LIMBO_ALGORITHMS_GRAPHSIMPLIFICATION_H
+#define LIMBO_ALGORITHMS_GRAPHSIMPLIFICATION_H
 
 #include <iostream>
 #include <fstream>
@@ -27,7 +27,7 @@ using std::pair;
 using std::make_pair;
 
 template <typename GraphType>
-class GraphSimplication
+class GraphSimplification
 {
 	public:
 		typedef GraphType graph_type;
@@ -38,7 +38,7 @@ class GraphSimplication
 		typedef typename boost::graph_traits<graph_type>::edge_iterator edge_iterator;
 
 		/// constructor 
-		GraphSimplication(graph_type const& g) : m_graph (g), m_vParent(boost::num_vertices(g)), m_vChildren(boost::num_vertices(g))
+		GraphSimplification(graph_type const& g) : m_graph (g), m_vParent(boost::num_vertices(g)), m_vChildren(boost::num_vertices(g))
 		{
 			graph_vertex_type v = 0; 
 			for (typename vector<graph_vertex_type>::iterator it = m_vParent.begin(); it != m_vParent.end(); ++it, ++v)
@@ -52,7 +52,7 @@ class GraphSimplication
 #endif
 		}
 		/// copy constructor is not allowed 
-		GraphSimplication(GraphSimplication const& rhs);
+		GraphSimplification(GraphSimplification const& rhs);
 
 		vector<graph_vertex_type> const& parents() const {return m_vParent;}
 		vector<vector<graph_vertex_type> > const& children() const {return m_vChildren;}

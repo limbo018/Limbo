@@ -10,7 +10,7 @@
 #include <boost/graph/graph_utility.hpp>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/undirected_graph.hpp>
-#include <limbo/algorithms/coloring/GraphSimplication.h>
+#include <limbo/algorithms/coloring/GraphSimplification.h>
 #include <boost/version.hpp>
 #if BOOST_VERSION <= 14601
 #include <boost/graph/detail/is_same.hpp>
@@ -93,7 +93,7 @@ void realGraph(string const& filename)
 #endif
 
 	//test relaxed LP based coloring
-	limbo::algorithms::coloring::GraphSimplication<graph_type> gs (g); 
+	limbo::algorithms::coloring::GraphSimplification<graph_type> gs (g); 
 	gs.merge_subK4();
 	gs.write_graph_dot("graph_simpl");
 	gs.write_merged_graph_dot("graph_simpl_merge");
