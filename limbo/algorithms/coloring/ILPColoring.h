@@ -1,5 +1,12 @@
-#ifndef LIMBO_ALGORITHMS_COLORING_LP
-#define LIMBO_ALGORITHMS_COLORING_LP
+/*************************************************************************
+    > File Name: ILPColoring.h
+    > Author: Yibo Lin
+    > Mail: yibolin@utexas.edu
+    > Created Time: Sat 23 May 2015 11:21:08 AM CDT
+ ************************************************************************/
+
+#ifndef LIMBO_ALGORITHMS_COLORING_ILPCOLORING
+#define LIMBO_ALGORITHMS_COLORING_ILPCOLORING
 
 #include <iostream>
 #include <vector>
@@ -16,39 +23,36 @@
 #include <boost/graph/graph_concepts.hpp>
 #include <boost/graph/subgraph.hpp>
 #include <boost/property_map/property_map.hpp>
-#include <boost/graph/bipartite.hpp>
+//#include <boost/graph/bipartite.hpp>
 //#include <boost/graph/kruskal_min_spanning_tree.hpp>
-#include <boost/graph/prim_minimum_spanning_tree.hpp>
-#include <boost/graph/dijkstra_shortest_paths.hpp>
+//#include <boost/graph/prim_minimum_spanning_tree.hpp>
+//#include <boost/graph/dijkstra_shortest_paths.hpp>
 #include <limbo/string/String.h>
 #include "gurobi_c++.h"
 
 namespace limbo { namespace algorithms { namespace coloring {
 
 using std::vector;
-using std::queue;
-using std::set;
-using std::cin;
 using std::cout;
 using std::endl;
 using std::ofstream;
 using std::pair;
 using std::ostringstream;
 using std::string;
-using std::sort;
-using std::distance;
 using boost::unordered_map;
 using boost::uint32_t;
 using boost::int32_t;
 
 template <typename GraphType>
-class LPColoring 
+class ILPColoring 
 {
 	public:
 		typedef GraphType graph_type;
 		//typedef boost::subgraph_type<graph_type> subgraph_type;
 		typedef typename boost::graph_traits<graph_type>::vertex_descriptor graph_vertex_type;
 		typedef typename boost::graph_traits<graph_type>::edge_descriptor graph_edge_type;
+		typedef typename boost::graph_traits<graph_type>::vertex_iterator vertex_iterator_type;
+		typedef typename boost::graph_traits<graph_type>::edge_iterator edge_iterator_type;
 		/// edge weight is used to differentiate conflict edge and stitch edge 
 		/// non-negative weight implies conflict edge 
 		/// negative weight implies stitch edge 
@@ -58,18 +62,10 @@ class LPColoring
 		typedef typename boost::property_map<graph_type, boost::vertex_color_t>::type vertex_color_map_type;
 		typedef typename boost::property_map<graph_type, boost::vertex_color_t>::const_type const_vertex_color_map_type;
 
-		enum RoundingScheme 
+		enum ColorNumType
 		{
-			DIRECT_ILP, // directly solve ILP to get optimal solution 
-			FIXED_ILP, // this rounding scheme is not in use now, because feasible solution is not guaranteed  
-			ITERATIVE_ILP, 
-			GREEDY, // greedy scheme for stitch insertion 
-			POST_ILP // ilp for stitch insertion 
-		};
-		enum ColorNum 
-		{
-			THREE, 
-			FOUR
+			THREE = 3, 
+			FOUR = 4
 		};
 		// hasher class for graph_edge_type
 		struct edge_hash_type : std::unary_function<graph_edge_type, std::size_t>
@@ -85,215 +81,177 @@ class LPColoring
 
 		/// member functions
 		/// constructor
-		LPColoring(graph_type const& g);
+		ILPColoring(graph_type const& g) : m_graph(g), m_vColor(boost::num_vertices(g), -1) {}
 		/// destructor
-		~LPColoring() {};
+		~ILPColoring() {};
 
 		/// top api 
-		void operator()() {this->graphColoring();}
+		void operator()() {this->coloring();}
 
-		/// create the NoStitchGraph (m_graph) from the (m_conflict_graph)
-		void initialization();
-		void createNoStitchGraph();
-		bool conflictCost() const {return m_conflict_cost;}
-		void conflictCost(bool flag) {m_conflict_cost = flag;}
-		double stitchWeight() const {return m_stitch_weight;}
-		void stitchWeight(double w) {m_stitch_weight = w;}
-		RoundingScheme roundingScheme() const {return m_rounding_scheme;}
-		void roundingScheme(RoundingScheme rs) {m_rounding_scheme = rs;}
-		ColorNum colorNum() const {return m_color_num;}
-		void colorNum(ColorNum cn) {m_color_num = cn;}
-		bool stitchMode() const {return m_stitch_mode;}
-		void stitchMode(bool flag) {m_stitch_mode = flag;}
-		void increSnodeTh() {m_snode_th += m_snode_th_step;}
+		// precolored vertex 
+		void precolor(vector<int8_t> const& vPrecolor)
+		{m_vColor.assign(vPrecolor.begin(), vPrecolor.end());}
 
-		/// DFS to search for the odd cycles, stored in m_odd_cycles
-		void oddCycles(graph_vertex_type const& v);
-		/// find odd cycles based on minimum spanning tree 
-		void odd_cycle_mst(graph_vertex_type const& v);
-		bool criticalCycle(vector<graph_vertex_type>& cycle);
-		graph_vertex_type largestDegreeVertex();
-
-		/// relaxed linear programming based coloring for the conflict graph (m_graph)
-		void graphColoring(); 
-		/// ILP based coloring, not in use now
-		/// fix all integer solutions from LP 
-		/// set non-integer solutions to integer in ILP 
-		/// call ILP only once 
-		void ILPColoring(vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
-
-		/// Optimal rounding based on binding constraints
-		void rounding_bindingAnalysis(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
-
-		/// iterative ILP based rounding
-		/// set non-integer solutions to integer 
-		/// set integer solutions from LP to continuous 
-		/// iteratively call ILP until no non-integer solutions 
-		/// ILP based rounding 
-		void rounding_ILP(GRBModel& opt_model, vector<GRBVar>& coloringBits, vector<GRBVar>& vEdgeBit);
-		/// Greedy rounding scheme
-		void rounding_Greedy_v0(vector<GRBVar>& coloringBits);
-		void rounding_Greedy(vector<GRBVar>& coloringBits);
-
-		/// coloring info
-		uint32_t vertexColor(graph_vertex_type& node) const;
-		uint32_t conflictNum() const;
-		uint32_t stitchNum() const;
-		/// coloring info for non-rounded LP results
-		uint32_t lpConflictNum() const;
-		uint32_t lpStitchNum() const;
-		///store the lp coloring results 
-		void store_lp_coloring(vector<GRBVar>& coloringBits);
-
-		//map the coloring from m_graph to m_conflict_graph, unrounded
-		void mapColoring();
-		//greedy scheme to insert stitches and rounding non-integers
-		void stitch_Insertion();
-		/// ILP scheme for stitch insertion 
-		void stitch_Insertion_ILP();
-		struct insertionOrder 
-		{
-			LPColoring const& lc;
-			insertionOrder(LPColoring const& _lc) : lc(_lc) {}
-			insertionOrder(insertionOrder const& rhs)  : lc(rhs.lc) {}
-			bool operator() (graph_vertex_type const& v1, graph_vertex_type const& v2) const
-			{
-#if ASSERT_LPCOLORING
-				assert(lc.m_contraction_map.find(v1) != lc.m_contraction_map.end());
-				assert(lc.m_contraction_map.find(v2) != lc.m_contraction_map.end());
-#endif
-				//graph_vertex_type g_v1 = lc.m_contraction_map.at(v1);
-				//graph_vertex_type g_v2 = lc.m_contraction_map.at(v2);
-				//if(lc.m_vertex_color_map[g_v1] <= lc.m_vertex_color_map[g_v2]) return true;
-
-				pair<typename graph_type::out_edge_iterator, typename graph_type::out_edge_iterator> edge_range = out_edges(v1, lc.m_conflict_graph);
-				uint32_t ce_1 = 0, ce_2 = 0;
-				for(BOOST_AUTO(ei, edge_range.first); ei != edge_range.second; ++ei) 
-				{
-					//conflict edge
-					if(lc.m_cg_edge_weight_map[*ei] > 0) ++ce_1;
-				}//end for
-				edge_range = out_edges(v2, lc.m_conflict_graph);
-				for(BOOST_AUTO(ei, edge_range.first); ei != edge_range.second; ++ei) 
-				{
-					//conflict edge
-					if(lc.m_cg_edge_weight_map[*ei] > 0) ++ce_2;
-				}
-				return (ce_1 > ce_2);
-			} 
-		};
-
-		//greedy final coloring refinement
-		void postRefinement();
-		bool refineColor(graph_vertex_type& v);
-
-		//iteration number
-		uint32_t iterationNum() const { return m_lp_iter_cnt; };
-
-		/// coloring info
-		uint32_t cg_vertexColor(graph_vertex_type& node) const;
-		uint32_t cg_conflictNum() const;
-		uint32_t cg_stitchNum() const;
-		/// coloring info for non-rounded LP results
-		uint32_t cg_lpConflictNum() const;
-		uint32_t cg_lpStitchNum() const;
-
-		pair<uint32_t, uint32_t> nonIntegerNum(const vector<GRBVar>& coloringBits, const vector<GRBVar>& vEdgeBit) const;
-		/// for debug use
-		void printBoolVec(vector<bool>& vec) const;
-		void printBoolArray(bool* vec, uint32_t vec_size) const;
-		/// print graphviz
-		void write_graph_dot(graph_vertex_type& v) const;
-		void write_graph_dot() const;
-		void write_graph_color() const;
-		void write_graph();
-
-		void write_conflictgraph_dot() const;
-		void write_conflictgraph_color() const;
-		void write_conflictgraph() const;
-		/// members
-		/// coloring bits
-		const uint32_t COLORING_BITS;
 	protected:
-		/// set up the vertex map
-		void setMap();
-		/// check if a variable is integer or not 
-		bool isInteger(double value) const {return value == floor(value);}
-		/// check same color for two vertices from m_coloring
-		bool sameColor(graph_vertex_type v1, graph_vertex_type v2) const;
-		bool cg_sameColor(graph_vertex_type v1, graph_vertex_type v2) const;
-		/// check same color for two vertices from m_lp_coloring
-		bool lpSameColor(graph_vertex_type v1, graph_vertex_type v2) const;
-		bool cg_lpSameColor(graph_vertex_type v1, graph_vertex_type v2) const;
-		/// check conflict of an edge from m_coloring
-		bool hasConflict(graph_edge_type e) const;
-		bool cg_hasConflict(graph_edge_type e) const;
-		/// check conflict of an edge from m_lp_coloring
-		bool hasLPConflict(graph_edge_type e) const;
-		bool cg_hasLPConflict(graph_edge_type e) const;
-		/// check stitch of an edge from m_coloring
-		bool hasStitch(graph_edge_type e) const;
-		bool cg_hasStitch(graph_edge_type e) const;
-		/// check stitch of an edge from m_lp_coloring
-		bool hasLPStitch(graph_edge_type e) const;
-		bool cg_hasLPStitch(graph_edge_type e) const;
+		void coloring();
 
-		/// members
-		/// the graph 
-		graph_type const& m_conflict_graph;
-		unordered_map<graph_vertex_type, uint32_t> m_cg_vertex_map;
-		unordered_map<uint32_t, graph_vertex_type> m_cg_inverse_vertex_map;
-		unordered_map<graph_vertex_type, uint32_t> m_cg_coloring;
-		vector<double> m_lp_cg_coloring;
-		/// the contraction map from m_conflict_graph to m_graph
-		unordered_map<graph_vertex_type, graph_vertex_type> m_contraction_map;
-		const_edge_weight_map_type m_cg_edge_weight_map;
-		unordered_map<graph_edge_type, uint32_t, edge_hash_type> m_cg_edge_map;
+		graph_type const& m_graph;
+		vector<int8_t> m_vColor;
 
-		graph_type m_graph;
-		/// the vertex map for the graph 
-		unordered_map<graph_vertex_type, uint32_t> m_vertex_map;
-		unordered_map<uint32_t, graph_vertex_type> m_inverse_vertex_map;
-		/// edge map for the graph 
-		unordered_map<graph_edge_type, uint32_t, edge_hash_type> m_edge_map;
-		/// edge weight map 
-		edge_weight_map_type m_edge_weight_map;
-		/// vertex color map for vertex stitch candidate number
-		vertex_color_map_type m_vertex_color_map;
-		/// rounded LP coloring results
-		unordered_map<graph_vertex_type, uint32_t> m_coloring;
-		/// the lp coloring before rounding
-		vector<double> m_lp_coloring;
-		/// store the odd cycles found for one vertex 
-		vector< vector<graph_vertex_type> > m_odd_cycles;
-		/// order cycle map 
-		/// record odd cycles that have been added to LP constraints 
-		/// vector<bool> has the same size as m_graph
-		set<vector<bool> > m_lp_odd_cycles;
-		/// conflict control flag 
-		/// whether put conflicts in ILP cost 
-		bool m_conflict_cost;
-		/// weight for stitch in the cost 
-		double m_stitch_weight;
-		/// rounding scheme option 
-		RoundingScheme m_rounding_scheme;
-		/// number of colors available, three or four 
-		ColorNum m_color_num;
-		/// record number of LP iterations 
-		uint32_t m_lp_iter_cnt;
-		/// record number of ILP iterations 
-		uint32_t m_ilp_iter_cnt;
-		/// odd cycle trick involves nodes with potential stitch candidates, valid cycle if the percentage of nodes with potential stitch candidates is less than a threshold
-		/// as the LP iterations increase, this percentage should increase to 100%
-		double m_snode_th;
-		double m_snode_th_step;
-		bool m_stitch_mode;
-
-		///linear programming constraints property 
-		unordered_map<string, bool> m_stitch_constrs;
-		uint32_t m_constrs_num;
-
+		ColorNumType m_color_num;
 };
+
+template <typename GraphType>
+void ILPColoring<GraphType>::coloring()
+{
+	uint32_t vertex_num = boost::num_vertices(m_graph);
+	uint32_t edge_num = boost::num_edges(m_graph);
+	uint32_t vertex_variable_num = vertex_num<<1;
+
+	unordered_map<graph_vertex_type, uint32_t> hVertexIdx; // vertex index 
+	unordered_map<graph_edge_type, uint32_t, edge_hash_type> hEdgeIdx; // edge index 
+
+	vertex_iterator_type vi, vie;
+	uint32_t cnt = 0;
+	for (boost::tie(vi, vie) = boost::vertices(m_graph); vi != vie; ++vi, ++cnt)
+		hVertexIdx[*vi] = cnt;
+	edge_iterator_type ei, eie;
+	cnt = 0; 
+	for (boost::tie(ei, eie) = boost::edges(m_graph); ei != eie; ++ei, ++cnt)
+		hEdgeIdx[*ei] = cnt;
+
+	// ILP environment
+	GRBEnv env = GRBEnv();
+	//mute the log from the LP solver
+	env.set(GRB_IntParam_OutputFlag, 0);
+	GRBModel opt_model = GRBModel(env);
+	//set up the ILP variables
+	vector<GRBVar> vVertexBit;
+	vector<GRBVar> vEdgeBit;
+
+	// vertex variables 
+	vVertexBit.reserve(vertex_variable_num); 
+	for (uint32_t i = 0; i != vertex_variable_num; ++i)
+	{
+		ostringstream oss; 
+		oss << "v" << i;
+		if (m_vColor[i] >= 0 && m_vColor[i] < m_color_num) // precolored 
+		{
+			int8_t color = 
+			vVertexBit.push_back(opt_model.addVar(0, 1, 0, GRB_INTEGER, oss.str()));
+		}
+		else // uncolored 
+			vVertexBit.push_back(opt_model.addVar(0, 1, 0, GRB_INTEGER, oss.str()));
+	}
+
+	// edge variables 
+	vEdgeBit.reserve(edge_num);
+	for (uint32_t i = 0; i != edge_num; ++i)
+	{
+		ostringstream oss;
+		oss << "e" << i;
+		vEdgeBit.push_back(opt_model.addVar(0, 1, 0, GRB_CONTINUOUS, oss.str()));
+	}
+
+	// update model 
+	opt_model.update();
+
+	// set up the objective 
+	GRBLinExpr obj (0);
+	edge_iterator_type ei, eie;
+	for (boost::tie(ei, eie) = edges(m_graph); ei != eie; ++ei)
+	{
+		int32_t w = boost::get(edge_weight, m_graph, *ei);
+		if (w > 0) // conflict 
+			obj += vEdgeBit[hEdgeIdx[*ei]];
+		else if (w < 0) // stitch 
+			obj += m_stitch_weight*vEdgeBit[hEdgeIdx[*ei]];
+	}
+	opt_model.setObjective(obj, GRB_MINIMIZE);
+
+	// set up the constraints
+	uint32_t constr_num = 0;
+	for (boost::tie(ei, eie) = boost::edges(m_graph); ei != eie; ++ei)
+	{
+		graph_vertex_type s = boost::source(*ei, m_graph);
+		graph_vertex_type t = boost::target(*ei, m_graph);
+		uint32_t sIdx = hVertexIdx[s];
+		uint32_t tIdx = hVertexIdx[t];
+
+		uint32_t vertex_idx1 = sIdx<<1;
+		uint32_t vertex_idx2 = tIdx<<1;
+
+		int32_t w = boost::get(edge_weight, m_graph, *ei);
+		uint32_t edge_idx = hEdgeIdx[*ei];
+
+		char buf[100];
+		string tmpConstr_name;
+		if (w >= 0) // constraints for conflict edges 
+		{
+			sprintf(buf, "R%u", constr_num++);  
+			opt_model.addConstr(
+					vVertexBit[vertex_idx1] + vVertexBit[vertex_idx1+1] 
+					+ vVertexBit[vertex_idx2] + vVertexBit[vertex_idx2+1] 
+					+ vEdgeBit[edge_idx] >= 1
+					, buf);
+
+			sprintf(buf, "R%u", constr_num++);  
+			opt_model.addConstr(
+					1 - vVertexBit[vertex_idx1] + vVertexBit[vertex_idx1+1] 
+					+ 1 - vVertexBit[vertex_idx2] + vVertexBit[vertex_idx2+1] 
+					+ vEdgeBit[edge_idx] >= 1
+					, buf);
+
+			sprintf(buf, "R%u", constr_num++);  
+			opt_model.addConstr(
+					vVertexBit[vertex_idx1] + 1 - vVertexBit[vertex_idx1+1] 
+					+ vVertexBit[vertex_idx2] + 1 - vVertexBit[vertex_idx2+1] 
+					+ vEdgeBit[edge_idx] >= 1
+					, buf);
+
+			sprintf(buf, "R%u", constr_num++);  
+			opt_model.addConstr(
+					1 - vVertexBit[vertex_idx1] + 1 - vVertexBit[vertex_idx1+1] 
+					+ 1 - vVertexBit[vertex_idx2] + 1 - vVertexBit[vertex_idx2+1] 
+					+ vEdgeBit[edge_idx] >= 1
+					, buf);
+
+		}
+		else // constraints for stitch edges 
+		{
+			sprintf(buf, "R%u", constr_num++);  
+			opt_model.addConstr(
+					vVertexBit[vertex_idx1] - vVertexBit[vertex_idx2] - vEdgeBit[edge_idx] <= 0
+					, buf);
+
+			sprintf(buf, "R%u", constr_num++);  
+			opt_model.addConstr(
+					vVertexBit[vertex_idx2] - vVertexBit[vertex_idx1] - vEdgeBit[edge_idx] <= 0
+					, buf);
+
+			sprintf(buf, "R%u", constr_num++);  
+			opt_model.addConstr(
+					vVertexBit[vertex_idx1+1] - vVertexBit[vertex_idx2+1] - vEdgeBit[edge_idx] <= 0
+					, buf);      
+
+			sprintf(buf, "R%u", constr_num++);  
+			opt_model.addConstr(
+					vVertexBit[vertex_idx2+1] - vVertexBit[vertex_idx1+1] - vEdgeBit[edge_idx] <= 0
+					, buf);
+		}
+	}
+
+	// additional constraints for 3-coloring 
+	if (m_color_num == THREE)
+	{
+		char buf[100];
+		for(uint32_t k = 0; k != vertex_variable_num; k += 2) 
+		{
+			sprintf(buf, "R%u", constr_num++);  
+			opt_model.addConstr(vVertexBit[k] + vVertexBit[k+1] <= 1, buf);
+		}
+	}
+}
 
 /// constructor
 template <typename GraphType>

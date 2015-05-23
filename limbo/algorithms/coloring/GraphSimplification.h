@@ -15,6 +15,9 @@
 #include <string>
 #include <map>
 #include <boost/graph/graph_concepts.hpp>
+#include <boost/graph/graph_utility.hpp>
+#include <boost/graph/adjacency_list.hpp>
+#include <boost/graph/undirected_graph.hpp>
 #include <boost/property_map/property_map.hpp>
 
 namespace limbo { namespace algorithms { namespace coloring {
