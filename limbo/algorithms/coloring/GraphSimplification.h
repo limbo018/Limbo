@@ -79,8 +79,9 @@ class GraphSimplification
 		vector<vertex_status_type> const& status() const {return m_vStatus;}
 		vector<graph_vertex_type> const& parents() const {return m_vParent;}
 		vector<vector<graph_vertex_type> > const& children() const {return m_vChildren;}
-		vector<graph_vertex_type> const& hidden_vertices() const {return m_vHiddenVertex;}
+		stack<graph_vertex_type> const& hidden_vertices() const {return m_vHiddenVertex;}
 
+		/// \return simplified graph and a map from merged graph vertices to original graph vertices 
 		pair<graph_type, map<graph_vertex_type, graph_vertex_type> > simplified_graph() const 
 		{
 			size_t vertex_cnt = 0;
