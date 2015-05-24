@@ -90,7 +90,8 @@ class ILPColoring
 		~ILPColoring() {};
 
 		/// top api 
-		void operator()() {this->coloring();}
+		/// \return objective value 
+		double operator()() {return this->coloring();}
 
 		/// color number 
 		void color_num(ColorNumType cn) {m_color_num = cn;} 
@@ -111,7 +112,8 @@ class ILPColoring
 		/// for debug 
 		void write_graph(string const& filename) const;
 	protected:
-		void coloring();
+		/// \return objective value 
+		double coloring();
 
 		graph_type const& m_graph;
 		vector<int8_t> m_vColor;
@@ -121,7 +123,7 @@ class ILPColoring
 };
 
 template <typename GraphType>
-void ILPColoring<GraphType>::coloring()
+double ILPColoring<GraphType>::coloring()
 {
 	uint32_t vertex_num = boost::num_vertices(m_graph);
 	uint32_t edge_num = boost::num_edges(m_graph);
@@ -299,6 +301,9 @@ void ILPColoring<GraphType>::coloring()
 		else // assign color to uncolored vertex 
 			m_vColor[vertex_idx] = color;
 	}
+
+	// return objective value 
+	return opt_model.get(GRB_DoubleAttr_ObjVal);
 }
 
 template <typename GraphType>
