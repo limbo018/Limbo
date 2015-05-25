@@ -394,7 +394,7 @@ class GraphSimplification
 
 				dot_file << "  " << mv1 << "[shape=\"circle\"";
 				//output coloring label
-				dot_file << ",label=\"" << v1 << ":(";
+				dot_file << ",label=\"" << mv1 << ":(";
 				for (typename vector<graph_vertex_type>::const_iterator it1 = m_vChildren[v1].begin(); it1 != m_vChildren[v1].end(); ++it1)
 				{
 					if (it1 != m_vChildren[v1].begin())
