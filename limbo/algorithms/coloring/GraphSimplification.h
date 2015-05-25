@@ -147,7 +147,7 @@ class GraphSimplification
 		/// suppose we have 4 vertices 1, 2, 3, 4
 		/// 1--2, 1--3, 2--3, 2--4, 3--4, vertex 4 is merged to 1 
 		/// this strategy only works for 3-coloring 
-		/// it cannot garuantee minimal conflicts 
+		/// it cannot guarantee minimal conflicts 
 		/// but it can be used in a native conflict checker 
 		void merge_subK4()
 		{
