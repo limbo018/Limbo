@@ -185,10 +185,10 @@ double ILPColoring<GraphType>::coloring()
 	for (boost::tie(ei, eie) = edges(m_graph); ei != eie; ++ei)
 	{
 		int32_t w = boost::get(boost::edge_weight, m_graph, *ei);
-		if (w > 0) // conflict 
-			obj += vEdgeBit[hEdgeIdx[*ei]];
-		else if (w < 0) // stitch 
-			obj += m_stitch_weight*vEdgeBit[hEdgeIdx[*ei]];
+		if (w > 0) // weighted conflict 
+			obj += w*vEdgeBit[hEdgeIdx[*ei]];
+		else if (w < 0) // weighted stitch 
+			obj += m_stitch_weight*(-w)*vEdgeBit[hEdgeIdx[*ei]];
 	}
 	opt_model.setObjective(obj, GRB_MINIMIZE);
 

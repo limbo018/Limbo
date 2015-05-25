@@ -128,6 +128,16 @@ class GraphSimplification
 					assert(emg.second);
 					boost::put(boost::edge_weight, mg, emg.first, boost::get(boost::edge_weight, m_graph, e));
 				}
+				else 
+				{
+					// use cumulative weight 
+					// this is to make sure we can still achieve small conflict number in the simplified graph 
+					// no longer optimal if merge_subK4() is called 
+					boost::put(
+							boost::edge_weight, mg, emg.first, 
+							boost::get(boost::edge_weight, mg, emg.first) + boost::get(boost::edge_weight, m_graph, e)
+							);
+				}
 			}
 
 			return make_pair(mg, mMG2G);
@@ -137,6 +147,8 @@ class GraphSimplification
 		/// suppose we have 4 vertices 1, 2, 3, 4
 		/// 1--2, 1--3, 2--3, 2--4, 3--4, vertex 4 is merged to 1 
 		/// this strategy only works for 3-coloring 
+		/// it cannot garuantee minimal conflicts 
+		/// but it can be used in a native conflict checker 
 		void merge_subK4()
 		{
 			// when applying this function, be aware that other merging strategies may have already been applied 
@@ -400,11 +412,14 @@ class GraphSimplification
 				graph_edge_type e = *ei;
 				graph_vertex_type mv1 = boost::source(e, mg.first);
 				graph_vertex_type mv2 = boost::target(e, mg.first);
+				int32_t w = boost::get(boost::edge_weight, mg.first, e);
 
-				if (boost::get(boost::edge_weight, mg.first, e) >= 0)
-					dot_file << "  " << mv1 << "--" << mv2 << "[color=\"black\",style=\"solid\",penwidth=3]\n";
+				char buf[256];
+				if (w >= 0)
+					sprintf(buf, "  %lu--%lu[label=%d,color=\"black\",style=\"solid\",penwidth=3]", mv1, mv2, w);
 				else 
-					dot_file << "  " << mv1 << "--" << mv2 << "[color=\"black\",style=\"dashed\",penwidth=3]\n";
+					sprintf(buf, "  %lu--%lu[label=%d,color=\"black\",style=\"dashed\",penwidth=3]", mv1, mv2, w);
+				dot_file << buf << endl;
 			}
 			dot_file << "}";
 			dot_file.close();
