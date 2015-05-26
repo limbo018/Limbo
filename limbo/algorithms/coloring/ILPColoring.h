@@ -12,6 +12,7 @@
 #include <vector>
 #include <queue>
 #include <set>
+#include <limits>
 #include <cassert>
 #include <cmath>
 #include <stdlib.h>
@@ -85,6 +86,7 @@ class ILPColoring
 			  : m_graph(g)
 			  , m_vColor(boost::num_vertices(g), -1)
 			  , m_stitch_weight(0.1)
+			  , m_threads(std::numeric_limits<int32_t>::max())
 		{}
 		/// destructor
 		~ILPColoring() {};
@@ -106,6 +108,9 @@ class ILPColoring
 		double stitch_weight() const {return m_stitch_weight;}
 		void stitch_weight(double w) {m_stitch_weight = w;}
 
+		/// threads 
+		void threads(int32_t t) {m_threads = t;}
+
 		/// \return coloring solution 
 		int8_t color(graph_vertex_type v) const {return m_vColor[v];}
 
@@ -120,6 +125,7 @@ class ILPColoring
 
 		ColorNumType m_color_num;
 		double m_stitch_weight;
+		int32_t m_threads; ///< control number of threads for ILP solver 
 };
 
 template <typename GraphType>
@@ -145,6 +151,9 @@ double ILPColoring<GraphType>::coloring()
 	GRBEnv env = GRBEnv();
 	//mute the log from the LP solver
 	env.set(GRB_IntParam_OutputFlag, 0);
+	// set threads 
+	if (m_threads > 0 && m_threads < std::numeric_limits<int32_t>::max())
+		env.set(GRB_IntParam_Threads, m_threads);
 	GRBModel opt_model = GRBModel(env);
 	//set up the ILP variables
 	vector<GRBVar> vVertexBit;
