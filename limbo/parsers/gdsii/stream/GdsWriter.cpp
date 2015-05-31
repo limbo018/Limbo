@@ -462,7 +462,8 @@ void GdsWriter::gds_write_float( double x )
 		mantissa = x / pow( 16.0, fexponent );
 		mantita = mantissa;
 
-		for( i=0; i<=56; i++ )
+		// original version is i<=56, I don't think it is correct 
+		for( i=0; i<56; i++ )
 		{
 			bit[i] = floor( pow(2,i+1) * mantita );
 			mantita = mantita - bit[i] / pow(2,i+1);
