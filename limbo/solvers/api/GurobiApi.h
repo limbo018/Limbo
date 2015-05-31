@@ -53,7 +53,7 @@ struct GurobiFileApi
 		list<pair<string, value_type> > vVariable;
 	};
 	/// top api function 
-	virtual shared_ptr<solution_type> operator()(string const& fileName, bool log2std = true) const 
+	virtual shared_ptr<solution_type> operator()(string const& fileName, bool = true) const 
 	{
 		// better to use full path for file name 
 		shared_ptr<solution_type> pSol (new solution_type);
