@@ -64,7 +64,7 @@ void lefiError(const char* str) {
   /*if (lefiErrorLogFunction)
     (*lefiErrorLogFunction)(str);
   else*/
-    fprintf(stderr, str);
+    fprintf(stderr, "%s", str);
 }
 
 

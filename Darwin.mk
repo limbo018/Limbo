@@ -17,3 +17,5 @@ CXXFLAGS_RELEASE = -O4 $(CXXFLAGS_BASIC)
 
 ARFLAGS = rvs
 
+LEX = flex
+YACC = bison
