@@ -2,3 +2,4 @@
 *.a
 lib/*
 wiki
+obj/*
