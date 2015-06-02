@@ -79,6 +79,12 @@ class DsatColoring
 		}
 
 		map<graph_vertex_type, int> const& color_map() const {return m_mColor;}
+		int color(graph_vertex_type v) const 
+		{
+			BOOST_AUTO(found, m_mColor.find(v));
+			if (found == m_mColor.end()) return -1;
+			else return found->second;
+		}
 
 		int operator()()
 		{
