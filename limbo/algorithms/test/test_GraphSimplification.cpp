@@ -100,9 +100,12 @@ void realGraph(string const& filename)
 	if (vPrecolor.size() > 4) vPrecolor[4] = 0;
 	gs.precolor(vPrecolor.begin(), vPrecolor.end());
 	gs.hide_small_degree(3);
-	gs.merge_subK4();
-	gs.write_graph_dot("graph_simpl");
-	gs.write_simplified_graph_dot("graph_simpl_merge");
+	gs.write_graph_dot("graph_simpl1");
+	//gs.merge_subK4();
+	gs.remove_bridge();
+	gs.connected_component();
+	gs.write_graph_dot("graph_simpl3");
+	//gs.write_simplified_graph_dot("graph_simpl_merge");
 
 	in.close();
 }

@@ -32,6 +32,7 @@ using std::endl;
 using std::ifstream;
 using std::ofstream;
 using std::string;
+using std::pair;
 using namespace boost;
 
 // do not use setS, it does not compile for subgraph
