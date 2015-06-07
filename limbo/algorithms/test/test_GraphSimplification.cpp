@@ -102,10 +102,10 @@ void realGraph(string const& filename)
 	gs.hide_small_degree(3);
 	gs.write_graph_dot("graph_simpl1");
 	//gs.merge_subK4();
-	gs.remove_bridge();
+	gs.articulation_points();
 	gs.connected_component();
 	gs.write_graph_dot("graph_simpl3");
-	//gs.write_simplified_graph_dot("graph_simpl_merge");
+	gs.write_simplified_graph_dot("graph_simpl_merge");
 
 	in.close();
 }

@@ -42,7 +42,7 @@ endif
 INCLUDE = -I $(LIMBO_ROOT_DIR) \
 		  -I $(BOOST_DIR)/include \
 		  -I $(GUROBI_HOME)/include 
-LINK = \
+LIBS = \
 	   $(BOOST_DIR)/lib/libboost_graph.a \
 	   $(BOOST_DIR)/lib/libboost_regex.a \
 	   $(BOOST_DIR)/lib/libboost_unit_test_framework.a \
@@ -87,11 +87,11 @@ $(TEST_DIR)/%.o: %.cpp
 # Link executable
 
 $(TEST_DIR)/test_ChromaticNumber: $(TEST_DIR)/test_ChromaticNumber.o 
-	$(CXX) $(LDFLAGS) -o $@ $(TEST_DIR)/test_ChromaticNumber.o $(LINK) 
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_ChromaticNumber.o $(LIBS) 
 $(TEST_DIR)/test_LPColoring: $(TEST_DIR)/test_LPColoring.o 
-	$(CXX) $(LDFLAGS) -o $@ $(TEST_DIR)/test_LPColoring.o $(LDFLAGS) $(LINK)
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_LPColoring.o $(CXXFLAGS) $(LIBS)
 $(TEST_DIR)/test_GraphSimplification: $(TEST_DIR)/test_GraphSimplification.o 
-	$(CXX) $(LDFLAGS) -o $@ $(TEST_DIR)/test_GraphSimplification.o $(LDFLAGS) $(LINK)
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_GraphSimplification.o $(CXXFLAGS) $(LIBS)
 
 .PHONY: clean
 clean: cleandep

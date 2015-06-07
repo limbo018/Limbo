@@ -21,6 +21,7 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/undirected_graph.hpp>
 #include <boost/property_map/property_map.hpp>
+#include <limbo/preprocessor/AssertMsg.h>
 
 namespace limbo { namespace algorithms { namespace coloring {
 
@@ -58,8 +59,10 @@ class GraphSimplification
 			, m_vParent(boost::num_vertices(g))
 			, m_vChildren(boost::num_vertices(g))
 			, m_vHiddenVertex()
-			, m_vComponent(boost::num_vertices(g), std::numeric_limits<uint32_t>::max())
-			, m_sBridgeEdge()
+			, m_mCompVertex()
+//			, m_vComponent(boost::num_vertices(g), std::numeric_limits<uint32_t>::max())
+//			, m_sBridgeEdge()
+			, m_mArtiPoint()
 			, m_vPrecolor(boost::num_vertices(g), -1)
 		{
 			graph_vertex_type v = 0; 
@@ -92,6 +95,8 @@ class GraphSimplification
 
 		/// \return simplified graph and a map from merged graph vertices to original graph vertices 
 		pair<graph_type, map<graph_vertex_type, graph_vertex_type> > simplified_graph() const; 
+		bool simplified_graph_component(uint32_t comp_id, graph_type& sg, vector<graph_vertex_type>& vSimpl2Orig) const;
+		uint32_t num_component() const {return m_mCompVertex.size();}
 
 		/// for a structure of K4 with one fewer edge 
 		/// suppose we have 4 vertices 1, 2, 3, 4
@@ -105,14 +110,26 @@ class GraphSimplification
 		/// hide vertices whose degree is no larger than color_num-1
 		void hide_small_degree(size_t color_num);
 		/// find all bridge edges and divided graph into components  
-		void remove_bridge();
+		//void remove_bridge();
+		/// find all articulation points 
+		void articulation_points();
 		/// compute connected components 
 		void connected_component();
+
+		/// recover merged vertices 
+		/// \param vColor must be partially assigned colors except simplified vertices  
+		void recover_merge_subK4(vector<int8_t>& vColor) const;
+		/// recover color for bridges 
+		/// \param vColor must be partially assigned colors except simplified vertices  
+		//void recover_bridge(vector<int8_t>& vColor) const;
+		/// recover color for articulation points 
+		void recover_articulation_points(vector<vector<int8_t> >& mColor, vector<vector<graph_vertex_type> > const& mSimpl2Orig, uint32_t color_num) const;
 
 		void write_graph_dot(string const& filename) const; 
 		void write_simplified_graph_dot(string const& filename) const;
 		
 	protected:
+		void articulation_points_recursion(graph_vertex_type v, deque<bool>& vVisited, vector<uint32_t>& vDisc, vector<uint32_t>& vLow, vector<graph_vertex_type>& vParent, deque<bool>& vArtiPoint, uint32_t& visit_time) const;
 		/// \return the root parent 
 		/// i.e. the vertex that is not merged 
 		graph_vertex_type parent(graph_vertex_type v) const 
@@ -122,6 +139,14 @@ class GraphSimplification
 #endif
 			while (v != m_vParent.at(v))
 				v = m_vParent.at(v);
+			return v;
+		}
+		/// \return the root parent 
+		/// generalized version 
+		graph_vertex_type parent(uint32_t v, vector<uint32_t> const& vParent) const 
+		{
+			while (v != vParent.at(v))
+				v = vParent.at(v);
 			return v;
 		}
 		/// \return true if two vertices (parents) are connected by conflict edges 
@@ -197,18 +222,24 @@ class GraphSimplification
 		{
 			return (m_vPrecolor.at(v1) >= 0);
 		}
-		/// \return true if the edge is a bridge edge 
-		bool bridge(graph_edge_type e) const 
+		/// \return true if the point is a articulation point 
+		bool articulation_point(graph_vertex_type v) const 
 		{
-			return m_sBridgeEdge.count(e);
+			return m_mArtiPoint.count(v);
 		}
 		graph_type const& m_graph;
 		vector<vertex_status_type> m_vStatus; ///< status of each vertex 
+
 		vector<graph_vertex_type> m_vParent; ///< parent vertex of current vertex 
 		vector<vector<graph_vertex_type> > m_vChildren; ///< children verices of current vertex, a vertex is the child of itself if it is not merged  
+
 		stack<graph_vertex_type> m_vHiddenVertex; ///< a stack that keeps a reverse order of vertices hidden, useful for color recovery 
-		vector<uint32_t> m_vComponent; ///< connected component id for each vertex 
-		set<graph_edge_type> m_sBridgeEdge; ///< bridge edges that are removed during graph division 
+
+		vector<vector<graph_vertex_type> > m_mCompVertex; ///< group vertices by components 
+//		vector<uint32_t> m_vComponent; ///< component id for each vertex 
+
+//		set<graph_edge_type> m_sBridgeEdge; ///< bridge edges that are removed during graph division 
+		map<graph_vertex_type, set<uint32_t> > m_mArtiPoint;
 
 		vector<int8_t> m_vPrecolor; ///< precolor information, if uncolored, set to -1
 };
@@ -272,6 +303,81 @@ GraphSimplification<GraphType>::simplified_graph() const
 	}
 
 	return make_pair(mg, mMG2G);
+}
+
+template <typename GraphType>
+bool GraphSimplification<GraphType>::simplified_graph_component(uint32_t comp_id, typename GraphSimplification<GraphType>::graph_type& simplG, 
+		vector<typename GraphSimplification<GraphType>::graph_vertex_type>& vSimpl2Orig) const
+{
+	if (comp_id >= m_mCompVertex.size()) return false;
+
+	vector<graph_vertex_type> const& vCompVertex = m_mCompVertex[comp_id];
+
+	graph_type sg (vCompVertex.size());
+	map<graph_vertex_type, graph_vertex_type> mOrig2Simpl;
+	vSimpl2Orig.assign(vCompVertex.begin(), vCompVertex.end());
+	for (uint32_t i = 0; i != vCompVertex.size(); ++i)
+		mOrig2Simpl[vCompVertex[i]] = i;
+#ifdef DEBUG_GRAPHSIMPLIFICATION
+	cout << "Comp " << comp_id << ": ";
+	for (uint32_t i = 0; i != vCompVertex.size(); ++i)
+		cout << vCompVertex[i] << " ";
+	cout << endl;
+#endif
+
+	for (typename vector<graph_vertex_type>::const_iterator vi = vCompVertex.begin(); vi != vCompVertex.end(); ++vi)
+	{
+		graph_vertex_type v = *vi;
+		graph_vertex_type vsg = mOrig2Simpl[v];
+		assert(this->good(v));
+		bool ap = this->articulation_point(v);
+		vector<graph_vertex_type> const& vChildren = m_vChildren.at(v);
+		for (typename vector<graph_vertex_type>::const_iterator vic = vChildren.begin(); vic != vChildren.end(); ++vic)
+		{
+			graph_vertex_type vc = *vic;
+			typename boost::graph_traits<graph_type>::adjacency_iterator ui, uie;
+			for (boost::tie(ui, uie) = boost::adjacent_vertices(vc, m_graph); ui != uie; ++ui)
+			{
+				graph_vertex_type uc = *ui;
+				// skip hidden 
+				if (this->hidden(uc)) continue;
+				graph_vertex_type u = this->parent(uc);
+				// skip non-good 
+				if (!this->good(u)) continue;
+				else if (v >= u) continue; // avoid duplicate 
+				else if (ap && !mOrig2Simpl.count(u)) continue; // skip vertex that is not in component 
+				//else if (u == v) continue;
+				assert_msg(u != v, u << " == " << v);
+
+				pair<graph_edge_type, bool> e = boost::edge(vc, uc, m_graph);
+				assert(e.second);
+				// skip bridge 
+				//if (m_sBridgeEdge.count(e.first)) continue;
+				graph_vertex_type usg = mOrig2Simpl[u];
+				assert_msg(usg != vsg, u << "==" << v << ": " << usg << " == " << vsg);
+				
+				pair<graph_edge_type, bool> esg = boost::edge(vsg, usg, sg);
+				if (!esg.second)
+				{
+					esg = boost::add_edge(vsg, usg, sg);
+					assert(esg.second);
+					boost::put(boost::edge_weight, sg, esg.first, boost::get(boost::edge_weight, m_graph, e.first));
+				}
+				else 
+				{
+					// use cumulative weight 
+					// this is to make sure we can still achieve small conflict number in the simplified graph 
+					// no longer optimal if merge_subK4() is called 
+					boost::put(
+							boost::edge_weight, sg, esg.first, 
+							boost::get(boost::edge_weight, sg, esg.first) + boost::get(boost::edge_weight, m_graph, e.first)
+							);
+				}
+			}
+		}
+	}
+	simplG.swap(sg);
+	return true;
 }
 
 /// for a structure of K4 with one fewer edge 
@@ -448,22 +554,22 @@ void GraphSimplification<GraphType>::hide_small_degree(size_t color_num)
 	} while (hide_flag);
 }
 
-// refer to http://www.geeksforgeeks.org/bridge-in-a-graph/
+// refer to http://www.geeksforgeeks.org/articulation-points-or-cut-vertices-in-a-graph/
 // for the recursive implementation 
 template <typename GraphType>
-void GraphSimplification<GraphType>::remove_bridge()
+void GraphSimplification<GraphType>::articulation_points()
 {
-	m_sBridgeEdge.clear();
-
 	uint32_t vertex_num = boost::num_vertices(m_graph);
 	stack<graph_vertex_type> vStack; // stack for dfs 
 	// for speed instead of memory (no bool)
 	deque<bool> vVisited (vertex_num, false); 
 	vector<graph_vertex_type> vParent (vertex_num); 
+	vector<uint32_t> vChildrenCnt (vertex_num, 0);
 	// vLow[u] = min(vDisc[u], vDisc[w]), where w is an ancestor of u
 	// there is a back edge from some descendant of u to w
 	vector<uint32_t> vLow (vertex_num, std::numeric_limits<uint32_t>::max()); // lowest vertex reachable from subtree under v  
 	vector<uint32_t> vDisc(vertex_num, std::numeric_limits<uint32_t>::max()); // discovery time 
+	deque<bool> vArtiPoint (vertex_num, false); // true of it is articulation point 
 	uint32_t visit_time = 0;
 
 	// set initial parent of current vertex to itself 
@@ -471,6 +577,471 @@ void GraphSimplification<GraphType>::remove_bridge()
 	for (boost::tie(vi, vie) = boost::vertices(m_graph); vi != vie; ++vi)
 		vParent[*vi] = *vi;
 
+	for (boost::tie(vi, vie) = boost::vertices(m_graph); vi != vie; ++vi)
+	{
+		graph_vertex_type source = *vi;
+		if (!vVisited[source])
+			articulation_points_recursion(source, vVisited, vDisc, vLow, vParent, vArtiPoint, visit_time);
+	}
+	// collect articulation points 
+	for (uint32_t v = 0; v < vArtiPoint.size(); ++v)
+	{
+		if (vArtiPoint[v])
+		{
+			m_mArtiPoint.insert(make_pair(v, set<uint32_t>()));
+#ifdef DEBUG_GRAPHSIMPLIFICATION
+			cout << "+ articulation point " << v << endl;
+#endif
+		}
+	}
+}
+
+template <typename GraphType>
+void GraphSimplification<GraphType>::articulation_points_recursion(graph_vertex_type v, deque<bool>& vVisited, vector<uint32_t>& vDisc, 
+		vector<uint32_t>& vLow, vector<graph_vertex_type>& vParent, deque<bool>& vArtiPoint, uint32_t& visit_time) const
+{ 
+    // Count of children in DFS Tree
+    uint32_t children = 0;
+ 
+    // Mark the current node as visited
+    vVisited[v] = true;
+ 
+    // Initialize discovery time and low value
+    vDisc[v] = vLow[v] = visit_time++;
+ 
+    // Go through all vertices aadjacent to this
+	if (!this->good(v)) return;
+
+	// find neighbors of all merged vertices
+	vector<graph_vertex_type> const& vChildren = m_vChildren.at(v);
+	for (typename vector<graph_vertex_type>::const_iterator vic = vChildren.begin(); vic != vChildren.end(); ++vic)
+	{
+		graph_vertex_type vc = *vic;
+		// skip hidden vertex 
+		if (this->hidden(vc)) continue;
+
+		adjacency_iterator ui, uie;
+		for (boost::tie(ui, uie) = boost::adjacent_vertices(vc, m_graph); ui != uie; ++ui)
+		{
+			graph_vertex_type uc = *ui;
+			// skip hidden vertex 
+			if (this->hidden(uc)) continue;
+
+			graph_vertex_type u = this->parent(uc);
+			assert(this->good(u));
+
+			// If v is not visited yet, then make it a child of u
+			// in DFS tree and recur for it
+			if (!vVisited[u])
+			{
+				++children;
+				vParent[u] = v;
+				articulation_points_recursion(u, vVisited, vDisc, vLow, vParent, vArtiPoint, visit_time);
+
+				// Check if the subtree rooted with v has a connection to
+				// one of the ancestors of u
+				vLow[v] = std::min(vLow[v], vLow[u]);
+
+				// u is an articulation point in following cases
+
+				// (1) u is root of DFS tree and has two or more chilren.
+				if (vParent[v] == v && children > 1)
+					vArtiPoint[v] = true;
+
+				// (2) If u is not root and low value of one of its child is more
+				// than discovery value of u.
+				if (vParent[v] != v && vLow[u] >= vDisc[v])
+					vArtiPoint[v] = true;
+			}
+			else if (u != vParent[v])
+				vLow[v] = std::min(vLow[v], vDisc[u]);
+		}
+	}
+}
+
+template <typename GraphType>
+void GraphSimplification<GraphType>::connected_component() 
+{
+	// we only need to filter out hidden vertices and bridges 
+	// merged vertices are not a problem because they are initially connected with their parents 
+
+	uint32_t vertex_num = boost::num_vertices(m_graph);
+	stack<graph_vertex_type> vStack; // stack for dfs 
+	// for speed instead of memory (no bool)
+	deque<bool> vVisited (vertex_num, false); 
+	uint32_t comp_id = 0;
+	vector<uint32_t> vComponent (vertex_num, std::numeric_limits<uint32_t>::max());
+
+	// set initial parent of current vertex to itself 
+	vertex_iterator vi, vie;
+	for (boost::tie(vi, vie) = boost::vertices(m_graph); vi != vie; ++vi)
+	{
+		graph_vertex_type source = *vi;
+		// skip visited vertex 
+		if (vVisited[source]) continue; 
+		if (this->hidden(source)) continue;
+		if (this->articulation_point(source)) continue;
+		vStack.push(source);
+		vVisited[source] = true;
+		while (!vStack.empty())
+		{
+			graph_vertex_type v = vStack.top();
+			vStack.pop();
+#ifdef DEBUG_GRAPHSIMPLIFICATION
+			cout << v << " ";
+#endif
+
+			vComponent[v] = comp_id; // set component id 
+
+			// for a articulation point, do not explore the neighbors 
+			if (this->articulation_point(v))
+			{
+				m_mArtiPoint[v].insert(comp_id);
+				vVisited[v] = false;
+				continue;
+			}
+
+			adjacency_iterator ui, uie;
+			for (boost::tie(ui, uie) = boost::adjacent_vertices(v, m_graph); ui != uie; ++ui)
+			{
+				graph_vertex_type u = *ui;
+				if (this->hidden(u)) continue;
+
+				pair<graph_edge_type, bool> e = boost::edge(u, v, m_graph);
+				assert(e.second);
+
+				if (!vVisited[u]) // non-visited vertex 
+				{
+					vStack.push(u);
+					vVisited[u] = true;
+				}
+			}
+		}
+		comp_id += 1;
+	}
+#ifdef DEBUG_GRAPHSIMPLIFICATION
+	cout << endl;
+#endif
+	// explore the connection between articulation points
+	// create additional components for connected articulation pairs 
+	for (typename map<graph_vertex_type, set<uint32_t> >::const_iterator vapi = m_mArtiPoint.begin(); vapi != m_mArtiPoint.end(); ++vapi)
+	{
+		graph_vertex_type v = vapi->first;
+		if (!vVisited[v])
+		{
+			adjacency_iterator ui, uie;
+			for (boost::tie(ui, uie) = boost::adjacent_vertices(v, m_graph); ui != uie; ++ui)
+			{
+				graph_vertex_type u = *ui;
+				if (this->hidden(u)) continue;
+				if (!vVisited[u] && this->articulation_point(u))
+				{
+					m_mArtiPoint[v].insert(comp_id);
+					m_mArtiPoint[u].insert(comp_id);
+
+#ifdef DEBUG_GRAPHSIMPLIFICATION
+					cout << "detect " << v << ", " << u << " ==> comp " << comp_id << endl;
+#endif
+
+					comp_id += 1;
+				}
+			}
+			vVisited[v] = true;
+		}
+	}
+
+	// set m_mCompVertex
+	m_mCompVertex.assign(comp_id, vector<graph_vertex_type>());
+	for (boost::tie(vi, vie) = boost::vertices(m_graph); vi != vie; ++vi)
+	{
+		graph_vertex_type v = *vi;
+		// consider good vertices only 
+		// skip articulation_point
+		if (this->good(v) && !this->articulation_point(v))
+			m_mCompVertex[vComponent[v]].push_back(v);
+	}
+	for (typename map<graph_vertex_type, set<uint32_t> >::const_iterator vapi = m_mArtiPoint.begin(); vapi != m_mArtiPoint.end(); ++vapi)
+	{
+		graph_vertex_type vap = vapi->first;
+		set<uint32_t> const& sComp = vapi->second;
+		for (typename set<uint32_t>::const_iterator itc = sComp.begin(); itc != sComp.end(); ++itc)
+			m_mCompVertex[*itc].push_back(vap);
+	}
+}
+
+/// recover merged vertices 
+/// \param vColor must be partially assigned colors except simplified vertices  
+template <typename GraphType>
+void GraphSimplification<GraphType>::recover_merge_subK4(vector<int8_t>& vColor) const
+{
+	vertex_iterator vi, vie;
+	for (boost::tie(vi, vie) = boost::vertices(m_graph); vi != vie; ++vi)
+	{
+		graph_vertex_type v = *vi;
+		if (this->good(v))
+		{
+			assert(vColor[v] >= 0 && vColor[v] < 3);
+			for (uint32_t j = 0; j != m_vChildren[v].size(); ++j)
+			{
+				graph_vertex_type u = m_vChildren[v][j];
+				if (v != u) 
+					vColor[u] = vColor[v];
+			}
+		}
+	}
+}
+
+/// recover color for articulation points 
+/// \param vColor must be partially assigned colors except simplified vertices  
+template <typename GraphType>
+void GraphSimplification<GraphType>::recover_articulation_points(vector<vector<int8_t> >& mColor, vector<vector<graph_vertex_type> > const& mSimpl2Orig, uint32_t color_num) const
+{
+	// a single articulation point must correspond to two components 
+	// map<graph_vertex_type, pair<uint32_t, uint32_t> > m_mArtiPoint
+	// vector<vector<graph_vertex_type> > m_mCompVertex
+	
+	// only contain mapping for articulation points 
+	vector<map<graph_vertex_type, graph_vertex_type> > mApOrig2Simpl (mSimpl2Orig.size());
+	for (uint32_t i = 0; i < mSimpl2Orig.size(); ++i)
+	{
+		vector<graph_vertex_type> const& vSimpl2Orig = mSimpl2Orig[i];
+		map<graph_vertex_type, graph_vertex_type>& vApOrig2Simpl = mApOrig2Simpl[i];
+
+		for (uint32_t j = 0; j < vSimpl2Orig.size(); ++j)
+		{
+			if (m_mArtiPoint.count(vSimpl2Orig[j]))
+				vApOrig2Simpl[vSimpl2Orig[j]] = j;
+		}
+	}
+
+	vector<int32_t> vRotation (m_mCompVertex.size(), 0); // rotation amount for each component
+	deque<bool> vVisited (m_mCompVertex.size(), false); // visited flag 
+	vector<set<graph_vertex_type> > vCompAp (m_mCompVertex.size()); // articulation points for each component 
+
+	for (typename map<graph_vertex_type, set<uint32_t> >::const_iterator vapi = m_mArtiPoint.begin(); vapi != m_mArtiPoint.end(); ++vapi)
+	{
+		graph_vertex_type vap = vapi->first;
+		set<uint32_t> const& sComp = vapi->second;
+		for (typename set<uint32_t>::const_iterator itc = sComp.begin(); itc != sComp.end(); ++itc)
+		{
+			uint32_t comp = *itc;
+			vCompAp[comp].insert(vap);
+			assert(vCompAp[comp].size() < 3);
+		}
+	}
+
+	// dfs based approach to propagate rotation 
+	for (uint32_t comp_id = 0; comp_id < vCompAp.size(); ++comp_id)
+	{
+		if (!vVisited[comp_id])
+		{
+			stack<uint32_t> vStack;
+			vStack.push(comp_id);
+			vVisited[comp_id] = true;
+			while (!vStack.empty())
+			{
+				uint32_t c = vStack.top(); // current component 
+				vStack.pop();
+
+				for (typename set<graph_vertex_type>::const_iterator vapi = vCompAp[comp_id].begin(); vapi != vCompAp[comp_id].end(); ++vapi)
+				{
+					graph_vertex_type vap = *vapi;
+					set<uint32_t> const& sComp = m_mArtiPoint.at(vap);
+
+					for (typename set<uint32_t>::const_iterator itcc = sComp.begin(); itcc != sComp.end(); ++itcc)
+					{
+						uint32_t cc = *itcc; // child component
+						if (!vVisited[cc])
+						{
+							vStack.push(cc);
+							vVisited[cc] = true;
+							vRotation[cc] += vRotation[c] + mColor[c][mApOrig2Simpl[c][vap]] - mColor[cc][mApOrig2Simpl[cc][vap]];
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// apply color rotation 
+	for (uint32_t comp_id = 0; comp_id < mColor.size(); ++comp_id)
+	{
+		vector<int8_t>& vColor = mColor[comp_id];
+		int32_t rotation = vRotation[comp_id] % (int32_t)color_num;
+		for (uint32_t v = 0; v < vColor.size(); ++v)
+		{
+			assert(vColor[v] >= 0);
+			vColor[v] = (vColor[v] + rotation) % (int32_t)color_num;
+		}
+	}
+
+#ifdef DEBUG_GRAPHSIMPLIFICATION
+	for (typename map<graph_vertex_type, set<uint32_t> >::const_iterator vapi = m_mArtiPoint.begin(); vapi != m_mArtiPoint.end(); ++vapi)
+	{
+		graph_vertex_type vap = vapi->first;
+		set<uint32_t> const& sComp = vapi->second;
+
+		int8_t prev_color = -1;
+		for (typename set<uint32_t>::const_iterator itc = sComp.begin(); itc != sComp.end(); ++itc)
+		{
+			uint32_t comp = *itc;
+			int8_t color = mColor[comp][mApOrig2Simpl[comp][vap]];
+			if (itc == sComp.begin())
+				prev_color = color;
+			else assert_msg(prev_color == color, 
+					vap << ": " << "comp " << comp << ", c[" << mApOrig2Simpl[comp][ap] << "] = " << color << "; " 
+					<< "prev_color = " << prev_color);
+		}
+	}
+#endif
+}
+
+template <typename GraphType>
+void GraphSimplification<GraphType>::write_graph_dot(string const& filename) const 
+{
+	std::ofstream dot_file((filename+".dot").c_str());
+	dot_file << "graph D { \n"
+		<< "  randir = LR\n"
+		<< "  size=\"4, 3\"\n"
+		<< "  ratio=\"fill\"\n"
+		<< "  edge[style=\"bold\",fontsize=200]\n" 
+		<< "  node[shape=\"circle\",fontsize=200]\n";
+
+	//output nodes 
+	vertex_iterator vi1, vie1;
+	for (boost::tie(vi1, vie1) = boost::vertices(m_graph); vi1 != vie1; ++vi1)
+	{
+		graph_vertex_type v1 = *vi1;
+		if (!this->good(v1)) continue;
+
+		dot_file << "  " << v1 << "[shape=\"circle\"";
+		//output coloring label
+		dot_file << ",label=\"" << v1 << ":(";
+		for (typename vector<graph_vertex_type>::const_iterator it1 = m_vChildren[v1].begin(); it1 != m_vChildren[v1].end(); ++it1)
+		{
+			if (it1 != m_vChildren[v1].begin())
+				dot_file << ",";
+			dot_file << *it1;
+		}
+		dot_file << ")";
+		dot_file << "\"";
+		dot_file << "]\n";
+	}
+
+	//output edges
+	for (boost::tie(vi1, vie1) = boost::vertices(m_graph); vi1 != vie1; ++vi1)
+	{
+		graph_vertex_type v1 = *vi1;
+		if (!this->good(v1)) continue;
+
+		vertex_iterator vi2, vie2;
+		for (boost::tie(vi2, vie2) = boost::vertices(m_graph); vi2 != vie2; ++vi2)
+		{
+			graph_vertex_type v2 = *vi2;
+			if (!this->good(v2)) continue;
+			if (v1 >= v2) continue;
+
+			pair<graph_edge_type, bool> e = this->connected_edge(v1, v2);
+			if (e.second)
+			{
+#ifdef DEBUG_GRAPHSIMPLIFICATION
+//				if (v1 == uint32_t(3)) 
+//					cout << "stop\n";
+#endif
+				// if two hyper vertices are connected by conflict edges, 
+				// there is no need to consider stitch edges 
+				if (this->connected_conflict(v1, v2)) 
+					dot_file << "  " << v1 << "--" << v2 << "[color=\"black\",style=\"solid\",penwidth=3]\n";
+				else if (this->connected_stitch(v1, v2))
+					dot_file << "  " << v1 << "--" << v2 << "[color=\"black\",style=\"dashed\",penwidth=3]\n";
+				// virtual connection showing that a bridge exists
+				dot_file << " " << v1 << "--" << v2 << "[color=\"black\",style=\"dotted\",penwidth=1]\n";
+			}
+		}
+	}
+	dot_file << "}";
+	dot_file.close();
+
+	char buf[256];
+	sprintf(buf, "dot -Tpdf %s.dot -o %s.pdf", filename.c_str(), filename.c_str());
+	system(buf);
+}
+template <typename GraphType>
+void GraphSimplification<GraphType>::write_simplified_graph_dot(string const& filename) const
+{
+	std::ofstream dot_file((filename+".dot").c_str());
+	dot_file << "graph D { \n"
+		<< "  randir = LR\n"
+		<< "  size=\"4, 3\"\n"
+		<< "  ratio=\"fill\"\n"
+		<< "  edge[style=\"bold\",fontsize=200]\n" 
+		<< "  node[shape=\"circle\",fontsize=200]\n";
+
+	uint32_t offset = 0;
+	// component by component 
+	for (uint32_t comp_id = 0; comp_id != m_mCompVertex.size(); ++comp_id)
+	{
+		graph_type sg;
+		vector<graph_vertex_type> vSimpl2Orig;
+		bool flag = this->simplified_graph_component(comp_id, sg, vSimpl2Orig);
+		if (flag)
+		{
+			//output nodes 
+			vertex_iterator vi1, vie1;
+			for (boost::tie(vi1, vie1) = boost::vertices(sg); vi1 != vie1; ++vi1)
+			{
+				graph_vertex_type mv1 = *vi1;
+				graph_vertex_type v1 = vSimpl2Orig[mv1];
+				if (m_vChildren[v1].empty()) continue;
+
+				dot_file << "  " << offset+mv1 << "[shape=\"circle\"";
+				//output coloring label
+				dot_file << ",label=\"" << mv1 << ":(";
+				for (typename vector<graph_vertex_type>::const_iterator it1 = m_vChildren[v1].begin(); it1 != m_vChildren[v1].end(); ++it1)
+				{
+					if (it1 != m_vChildren[v1].begin())
+						dot_file << ",";
+					dot_file << *it1;
+				}
+				dot_file << ")";
+				dot_file << ":" << comp_id;
+				dot_file << "\"";
+				dot_file << "]\n";
+			}
+			//output edges
+			edge_iterator ei, eie;
+			for (boost::tie(ei, eie) = boost::edges(sg); ei != eie; ++ei)
+			{
+				graph_edge_type e = *ei;
+				graph_vertex_type mv1 = boost::source(e, sg);
+				graph_vertex_type mv2 = boost::target(e, sg);
+				int32_t w = boost::get(boost::edge_weight, sg, e);
+				assert_msg(mv1 != mv2, mv1 << " == " << mv2);
+
+				char buf[256];
+				if (w >= 0)
+					sprintf(buf, "  %lu--%lu[label=%d,color=\"black\",style=\"solid\",penwidth=3]", offset+mv1, offset+mv2, w);
+				else 
+					sprintf(buf, "  %lu--%lu[label=%d,color=\"black\",style=\"dashed\",penwidth=3]", offset+mv1, offset+mv2, w);
+				dot_file << buf << endl;
+			}
+			offset += boost::num_vertices(sg);
+		}
+	}
+
+	dot_file << "}";
+	dot_file.close();
+
+	char buf[256];
+	sprintf(buf, "dot -Tpdf %s.dot -o %s.pdf", filename.c_str(), filename.c_str());
+	system(buf);
+}
+
+}}} // namespace limbo // namespace algorithms // namespace coloring 
+
+#endif
+
+#if 0
 	// similar to pre-order dfs  
 	for (boost::tie(vi, vie) = boost::vertices(m_graph); vi != vie; ++vi)
 	{
@@ -515,7 +1086,10 @@ void GraphSimplification<GraphType>::remove_bridge()
 					if (vVisited[u] && vDisc[u] < std::numeric_limits<uint32_t>::max()) 
 					{
 						if (vParent[v] == v || vDisc[u] > vDisc[vParent[v]])
+						{
+							vChildrenCnt[u] += 1;
 							vParent[v] = u;
+						}
 					}
 				}
 			}
@@ -584,292 +1158,28 @@ void GraphSimplification<GraphType>::remove_bridge()
 
 //				if (!vVisited[u]) // non-visited vertex 
 				{
-					vVisited[u] = true;
+					//vVisited[u] = true;
+
 					if (vParent[v] != u)
 						vLow[v] = std::min(vLow[v], vLow[u]);
-					// If the lowest vertex reachable from subtree under u is 
-					// below v in DFS tree, then v-u is a bridge
-					if (vLow[u] > vDisc[v])
+
+					// (1) u is root of DFS tree and has two or more chilren.
+					if (vParent[v] == v && vChildrenCnt[v] > 1)
+						vArtiPoint[v] = true;
+
+					// (2) If u is not root and low value of one of its child is more
+					// than discovery value of u.
+					if (vParent[v] != v && vLow[u] >= vDisc[v])
 					{
-						assert(this->good(v) && this->good(u));
-						pair<graph_edge_type, bool> e = this->connected_edge(v, u);
-						assert(e.second);
-						assert(m_sBridgeEdge.insert(e.first).second);
+						vArtiPoint[v] = true;
 #ifdef DEBUG_GRAPHSIMPLIFICATION
-						//							if (std::min(v, u) == 5 && std::max(v, u) == 86)
-						//								cout << "stop" << endl;
-						//							cout << "+ bridge (" << boost::source(e.first, m_graph) << ", " << boost::target(e.first, m_graph) << ")" << endl;
+						if (v == 11)
+							cout << vLow[12] << ", " << 
+						assert(v != 12);
 #endif
 					}
 				}
 			}
 		}
-#ifdef DEBUG_GRAPHSIMPLIFICATION
-		cout << v << " ";
-#endif
 	}
-#if 0
-	// similar to post-order dfs traversal (a little bit different from the order of tree post-order traversal)
-	std::fill(vVisited.begin(), vVisited.end(), false);
-	for (boost::tie(vi, vie) = boost::vertices(m_graph); vi != vie; ++vi)
-	{
-		graph_vertex_type source = *vi;
-		// only consider good vertex 
-		if (!this->good(source)) continue;
-		// skip visited vertex 
-		if (vVisited[source]) continue; 
-		vStack.push(source);
-		vVisited[source] = true;
-		while (!vStack.empty())
-		{
-			graph_vertex_type v = vStack.top();
-			//vStack.pop();
-
-			bool hasUnvisitedChild = false;
-			// find neighbors of all merged vertices
-			vector<graph_vertex_type> const& vChildren = m_vChildren.at(v);
-			for (typename vector<graph_vertex_type>::const_iterator vic = vChildren.begin(); vic != vChildren.end(); ++vic)
-			{
-				graph_vertex_type vc = *vic;
-				// skip hidden vertex 
-				if (this->hidden(vc)) continue;
-
-				adjacency_iterator ui, uie;
-				for (boost::tie(ui, uie) = boost::adjacent_vertices(vc, m_graph); ui != uie; ++ui)
-				{
-					graph_vertex_type uc = *ui;
-					// skip hidden vertex 
-					if (this->hidden(uc)) continue;
-
-					graph_vertex_type u = this->parent(uc);
-					assert(this->good(u));
-
-					if (!vVisited[u]) // non-visited vertex 
-					{
-						vStack.push(u);
-						vVisited[u] = true;
-						hasUnvisitedChild = true;
-						vLow[v] = std::min(vLow[v], vLow[u]);
-						// If the lowest vertex reachable from subtree under u is 
-						// below v in DFS tree, then v-u is a bridge
-						if (vLow[u] > vDisc[v])
-						{
-							assert(this->good(v) && this->good(u));
-							pair<graph_edge_type, bool> e = this->connected_edge(v, u);
-							assert(e.second);
-							assert(m_sBridgeEdge.insert(e.first).second);
-#ifdef DEBUG_GRAPHSIMPLIFICATION
-//							if (std::min(v, u) == 5 && std::max(v, u) == 86)
-//								cout << "stop" << endl;
-//							cout << "+ bridge (" << boost::source(e.first, m_graph) << ", " << boost::target(e.first, m_graph) << ")" << endl;
-#endif
-						}
-					}
-				}
-			}
-			if (!hasUnvisitedChild)
-			{
-#ifdef DEBUG_GRAPHSIMPLIFICATION
-				cout << v << " ";
-#endif
-				vStack.pop();
-			}
-		}
-	}
-#endif
-#ifdef DEBUG_GRAPHSIMPLIFICATION
-	cout << endl;
-	for (typename set<graph_edge_type>::const_iterator it = m_sBridgeEdge.begin(); it != m_sBridgeEdge.end(); ++it)
-	{
-		graph_edge_type e = *it;
-		cout << "+ bridge (" << boost::source(e, m_graph) << ", " << boost::target(e, m_graph) << ")" << endl;
-	}
-#endif
-}
-
-template <typename GraphType>
-void GraphSimplification<GraphType>::connected_component() 
-{
-	// we only need to filter out hidden vertices and bridges 
-	// merged vertices are not a problem because they are initially connected with their parents 
-
-	uint32_t vertex_num = boost::num_vertices(m_graph);
-	stack<graph_vertex_type> vStack; // stack for dfs 
-	// for speed instead of memory (no bool)
-	deque<bool> vVisited (vertex_num, false); 
-	uint32_t comp_id = 0;
-
-	assert(m_vComponent.size() == vertex_num);
-	std::fill(m_vComponent.begin(), m_vComponent.end(), 0);
-
-	// set initial parent of current vertex to itself 
-	vertex_iterator vi, vie;
-	for (boost::tie(vi, vie) = boost::vertices(m_graph); vi != vie; ++vi)
-	{
-		graph_vertex_type source = *vi;
-		// skip visited vertex 
-		if (vVisited[source]) continue; 
-		if (this->hidden(source)) continue;
-		vStack.push(source);
-		vVisited[source] = true;
-		while (!vStack.empty())
-		{
-			graph_vertex_type v = vStack.top();
-			vStack.pop();
-
-			m_vComponent[v] = comp_id; // set component id 
-
-			adjacency_iterator ui, uie;
-			for (boost::tie(ui, uie) = boost::adjacent_vertices(v, m_graph); ui != uie; ++ui)
-			{
-				graph_vertex_type u = *ui;
-				if (this->hidden(u)) continue;
-				pair<graph_edge_type, bool> e = boost::edge(u, v, m_graph);
-				assert(e.second);
-				// skip bridge edges 
-				if (this->bridge(e.first)) continue;
-
-				if (!vVisited[u]) // non-visited vertex 
-				{
-					vStack.push(u);
-					vVisited[u] = true;
-				}
-			}
-		}
-		comp_id += 1;
-	}
-}
-
-template <typename GraphType>
-void GraphSimplification<GraphType>::write_graph_dot(string const& filename) const 
-{
-	std::ofstream dot_file((filename+".dot").c_str());
-	dot_file << "graph D { \n"
-		<< "  randir = LR\n"
-		<< "  size=\"4, 3\"\n"
-		<< "  ratio=\"fill\"\n"
-		<< "  edge[style=\"bold\",fontsize=200]\n" 
-		<< "  node[shape=\"circle\",fontsize=200]\n";
-
-	//output nodes 
-	vertex_iterator vi1, vie1;
-	for (boost::tie(vi1, vie1) = boost::vertices(m_graph); vi1 != vie1; ++vi1)
-	{
-		graph_vertex_type v1 = *vi1;
-		if (!this->good(v1)) continue;
-
-		dot_file << "  " << v1 << "[shape=\"circle\"";
-		//output coloring label
-		dot_file << ",label=\"" << v1 << ":(";
-		for (typename vector<graph_vertex_type>::const_iterator it1 = m_vChildren[v1].begin(); it1 != m_vChildren[v1].end(); ++it1)
-		{
-			if (it1 != m_vChildren[v1].begin())
-				dot_file << ",";
-			dot_file << *it1;
-		}
-		dot_file << ")";
-		if (this->good(v1) && m_vComponent[v1] < std::numeric_limits<uint32_t>::max())
-			dot_file << ":" << m_vComponent[v1];
-		dot_file << "\"";
-		dot_file << "]\n";
-	}
-
-	//output edges
-	for (boost::tie(vi1, vie1) = boost::vertices(m_graph); vi1 != vie1; ++vi1)
-	{
-		graph_vertex_type v1 = *vi1;
-		if (!this->good(v1)) continue;
-
-		vertex_iterator vi2, vie2;
-		for (boost::tie(vi2, vie2) = boost::vertices(m_graph); vi2 != vie2; ++vi2)
-		{
-			graph_vertex_type v2 = *vi2;
-			if (!this->good(v2)) continue;
-			if (v1 >= v2) continue;
-
-			pair<graph_edge_type, bool> e = this->connected_edge(v1, v2);
-			if (e.second)
-			{
-#ifdef DEBUG_GRAPHSIMPLIFICATION
-//				if (v1 == uint32_t(3)) 
-//					cout << "stop\n";
-#endif
-				// if two hyper vertices are connected by conflict edges, 
-				// there is no need to consider stitch edges 
-				if (this->connected_conflict(v1, v2)) 
-					dot_file << "  " << v1 << "--" << v2 << "[color=\"black\",style=\"solid\",penwidth=3]\n";
-				else if (this->connected_stitch(v1, v2))
-					dot_file << "  " << v1 << "--" << v2 << "[color=\"black\",style=\"dashed\",penwidth=3]\n";
-				// virtual connection showing that a bridge exists
-				dot_file << " " << v1 << "--" << v2 << "[color=\"black\",style=\"dotted\",penwidth=1]\n";
-			}
-		}
-	}
-	dot_file << "}";
-	dot_file.close();
-
-	char buf[256];
-	sprintf(buf, "dot -Tpdf %s.dot -o %s.pdf", filename.c_str(), filename.c_str());
-	system(buf);
-}
-template <typename GraphType>
-void GraphSimplification<GraphType>::write_simplified_graph_dot(string const& filename) const
-{
-	std::ofstream dot_file((filename+".dot").c_str());
-	dot_file << "graph D { \n"
-		<< "  randir = LR\n"
-		<< "  size=\"4, 3\"\n"
-		<< "  ratio=\"fill\"\n"
-		<< "  edge[style=\"bold\",fontsize=200]\n" 
-		<< "  node[shape=\"circle\",fontsize=200]\n";
-
-	// get merged graph 
-	pair<graph_type, map<graph_vertex_type, graph_vertex_type> > mg = this->simplified_graph();
-	//output nodes 
-	vertex_iterator vi1, vie1;
-	for (boost::tie(vi1, vie1) = boost::vertices(mg.first); vi1 != vie1; ++vi1)
-	{
-		graph_vertex_type mv1 = *vi1;
-		graph_vertex_type v1 = mg.second[mv1];
-		if (m_vChildren[v1].empty()) continue;
-
-		dot_file << "  " << mv1 << "[shape=\"circle\"";
-		//output coloring label
-		dot_file << ",label=\"" << mv1 << ":(";
-		for (typename vector<graph_vertex_type>::const_iterator it1 = m_vChildren[v1].begin(); it1 != m_vChildren[v1].end(); ++it1)
-		{
-			if (it1 != m_vChildren[v1].begin())
-				dot_file << ",";
-			dot_file << *it1;
-		}
-		dot_file << ")\"";
-		dot_file << "]\n";
-	}
-
-	//output edges
-	edge_iterator ei, eie;
-	for (boost::tie(ei, eie) = boost::edges(mg.first); ei != eie; ++ei)
-	{
-		graph_edge_type e = *ei;
-		graph_vertex_type mv1 = boost::source(e, mg.first);
-		graph_vertex_type mv2 = boost::target(e, mg.first);
-		int32_t w = boost::get(boost::edge_weight, mg.first, e);
-
-		char buf[256];
-		if (w >= 0)
-			sprintf(buf, "  %lu--%lu[label=%d,color=\"black\",style=\"solid\",penwidth=3]", mv1, mv2, w);
-		else 
-			sprintf(buf, "  %lu--%lu[label=%d,color=\"black\",style=\"dashed\",penwidth=3]", mv1, mv2, w);
-		dot_file << buf << endl;
-	}
-	dot_file << "}";
-	dot_file.close();
-
-	char buf[256];
-	sprintf(buf, "dot -Tpdf %s.dot -o %s.pdf", filename.c_str(), filename.c_str());
-	system(buf);
-}
-
-}}} // namespace limbo // namespace algorithms // namespace coloring 
-
 #endif
