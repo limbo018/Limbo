@@ -248,6 +248,16 @@ class GraphSimplification
 		{
 			return m_mArtiPoint.count(v);
 		}
+		/// \return true if there exist precolored vertices 
+		bool has_precolored() const 
+		{
+			for (vector<int8_t>::const_iterator it = m_vPrecolor.begin(); it != m_vPrecolor.end(); ++it)
+			{
+				if (*it >= 0) 
+					return true;
+			}
+			return false;
+		}
 		graph_type const& m_graph;
 		uint32_t m_color_num;
 		uint32_t m_level; ///< simplification level 
@@ -407,6 +417,9 @@ template <typename GraphType>
 void GraphSimplification<GraphType>::simplify(uint32_t level)
 {
 	m_level = level; // record level for recover()
+	if (this->has_precolored()) // this step does not support precolored graph yet 
+		m_level = m_level & (~BICONNECTED_COMPONENT);
+
 	if (m_level & HIDE_SMALL_DEGREE)
 		this->hide_small_degree();
 	if (m_level & MERGE_SUBK4)
@@ -670,7 +683,9 @@ void GraphSimplification<GraphType>::biconnected_component()
 	}
 	// collect articulation points 
 	uint32_t comp_id = 0;
-	m_mCompVertex.resize(mCompVertex.size());
+	// reset members 
+	m_mArtiPoint.clear();
+	m_mCompVertex.assign(mCompVertex.size(), vector<graph_vertex_type>());
 	for (typename list<pair<graph_vertex_type, set<graph_vertex_type> > >::const_iterator it = mCompVertex.begin(); it != mCompVertex.end(); ++it, ++comp_id)
 	{
 		graph_vertex_type vap = it->first;
