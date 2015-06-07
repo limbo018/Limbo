@@ -60,6 +60,7 @@ class GraphSimplification
 		/// it is recommended to call simplify() 
 		/// e.g. simplify(HIDE_SMALL_DEGREE | BICONNECTED_COMPONENT) 
 		enum strategy_type {
+			NONE = 0, 
 			HIDE_SMALL_DEGREE = 1, 
 			MERGE_SUBK4 = 2,
 			BICONNECTED_COMPONENT = 4
@@ -68,7 +69,7 @@ class GraphSimplification
 		GraphSimplification(graph_type const& g, uint32_t color_num) 
 			: m_graph (g)
 			, m_color_num (color_num)
-			, m_level (0)
+			, m_level (NONE)
 			, m_vStatus(boost::num_vertices(g), GOOD)
 			, m_vParent(boost::num_vertices(g))
 			, m_vChildren(boost::num_vertices(g))
@@ -130,8 +131,6 @@ class GraphSimplification
 		//void remove_bridge();
 		/// find all articulation points and biconnected components 
 		void biconnected_component();
-		/// compute connected components 
-		void connected_component();
 
 		/// recover merged vertices 
 		/// \param vColor must be partially assigned colors except simplified vertices  
@@ -150,6 +149,8 @@ class GraphSimplification
 				vector<uint32_t>& vLow, vector<graph_vertex_type>& vParent, uint32_t& visit_time, 
 				stack<pair<graph_vertex_type, graph_vertex_type> >& vEdge, 
 				list<pair<graph_vertex_type, set<graph_vertex_type> > >& mCompVertex) const;
+		/// compute connected components 
+		void connected_component();
 		/// \return the root parent 
 		/// i.e. the vertex that is not merged 
 		graph_vertex_type parent(graph_vertex_type v) const 
@@ -619,6 +620,8 @@ void GraphSimplification<GraphType>::hide_small_degree()
 			}
 		}
 	} while (hide_flag);
+
+	this->connected_component();
 }
 
 // refer to http://www.geeksforgeeks.org/articulation-points-or-cut-vertices-in-a-graph/
