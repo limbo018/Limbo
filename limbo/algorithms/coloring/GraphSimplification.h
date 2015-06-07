@@ -12,6 +12,7 @@
 #include <fstream>
 #include <vector>
 #include <stack>
+#include <list>
 #include <string>
 #include <map>
 #include <set>
@@ -22,6 +23,7 @@
 #include <boost/graph/undirected_graph.hpp>
 #include <boost/property_map/property_map.hpp>
 #include <limbo/preprocessor/AssertMsg.h>
+#include <limbo/math/Math.h>
 
 namespace limbo { namespace algorithms { namespace coloring {
 
@@ -29,6 +31,7 @@ using std::cout;
 using std::endl;
 using std::vector;
 using std::stack;
+using std::list;
 using std::string;
 using std::map;
 using std::set;
@@ -52,9 +55,20 @@ class GraphSimplification
 			HIDDEN, // vertex is hidden by simplification  
 			MERGED // vertex is merged to other vertex 
 		};
+		/// simplification strategies available 
+		/// these strategies are order-sensitive 
+		/// it is recommended to call simplify() 
+		/// e.g. simplify(HIDE_SMALL_DEGREE | BICONNECTED_COMPONENT) 
+		enum strategy_type {
+			HIDE_SMALL_DEGREE = 1, 
+			MERGE_SUBK4 = 2,
+			BICONNECTED_COMPONENT = 4
+		};
 		/// constructor 
-		GraphSimplification(graph_type const& g) 
+		GraphSimplification(graph_type const& g, uint32_t color_num) 
 			: m_graph (g)
+			, m_color_num (color_num)
+			, m_level (0)
 			, m_vStatus(boost::num_vertices(g), GOOD)
 			, m_vParent(boost::num_vertices(g))
 			, m_vChildren(boost::num_vertices(g))
@@ -98,6 +112,9 @@ class GraphSimplification
 		bool simplified_graph_component(uint32_t comp_id, graph_type& sg, vector<graph_vertex_type>& vSimpl2Orig) const;
 		uint32_t num_component() const {return m_mCompVertex.size();}
 
+		void simplify(uint32_t level);
+		void recover(vector<int8_t>& vColorFlat, vector<vector<int8_t> >& mColor, vector<vector<graph_vertex_type> > const& mSimpl2Orig) const;
+
 		/// for a structure of K4 with one fewer edge 
 		/// suppose we have 4 vertices 1, 2, 3, 4
 		/// 1--2, 1--3, 2--3, 2--4, 3--4, vertex 4 is merged to 1 
@@ -108,11 +125,11 @@ class GraphSimplification
 
 		/// \param color_num number of colors available 
 		/// hide vertices whose degree is no larger than color_num-1
-		void hide_small_degree(size_t color_num);
+		void hide_small_degree();
 		/// find all bridge edges and divided graph into components  
 		//void remove_bridge();
-		/// find all articulation points 
-		void articulation_points();
+		/// find all articulation points and biconnected components 
+		void biconnected_component();
 		/// compute connected components 
 		void connected_component();
 
@@ -122,14 +139,17 @@ class GraphSimplification
 		/// recover color for bridges 
 		/// \param vColor must be partially assigned colors except simplified vertices  
 		//void recover_bridge(vector<int8_t>& vColor) const;
-		/// recover color for articulation points 
-		void recover_articulation_points(vector<vector<int8_t> >& mColor, vector<vector<graph_vertex_type> > const& mSimpl2Orig, uint32_t color_num) const;
+		/// recover color for biconnected components  
+		void recover_biconnected_component(vector<vector<int8_t> >& mColor, vector<vector<graph_vertex_type> > const& mSimpl2Orig) const;
 
 		void write_graph_dot(string const& filename) const; 
 		void write_simplified_graph_dot(string const& filename) const;
 		
 	protected:
-		void articulation_points_recursion(graph_vertex_type v, deque<bool>& vVisited, vector<uint32_t>& vDisc, vector<uint32_t>& vLow, vector<graph_vertex_type>& vParent, deque<bool>& vArtiPoint, uint32_t& visit_time) const;
+		void biconnected_component_recursion(graph_vertex_type v, deque<bool>& vVisited, vector<uint32_t>& vDisc, 
+				vector<uint32_t>& vLow, vector<graph_vertex_type>& vParent, uint32_t& visit_time, 
+				stack<pair<graph_vertex_type, graph_vertex_type> >& vEdge, 
+				list<pair<graph_vertex_type, set<graph_vertex_type> > >& mCompVertex) const;
 		/// \return the root parent 
 		/// i.e. the vertex that is not merged 
 		graph_vertex_type parent(graph_vertex_type v) const 
@@ -228,6 +248,8 @@ class GraphSimplification
 			return m_mArtiPoint.count(v);
 		}
 		graph_type const& m_graph;
+		uint32_t m_color_num;
+		uint32_t m_level; ///< simplification level 
 		vector<vertex_status_type> m_vStatus; ///< status of each vertex 
 
 		vector<graph_vertex_type> m_vParent; ///< parent vertex of current vertex 
@@ -380,6 +402,51 @@ bool GraphSimplification<GraphType>::simplified_graph_component(uint32_t comp_id
 	return true;
 }
 
+template <typename GraphType>
+void GraphSimplification<GraphType>::simplify(uint32_t level)
+{
+	m_level = level; // record level for recover()
+	if (m_level & HIDE_SMALL_DEGREE)
+		this->hide_small_degree();
+	if (m_level & MERGE_SUBK4)
+		this->merge_subK4();
+	if (m_level & BICONNECTED_COMPONENT)
+		this->biconnected_component();
+}
+
+template <typename GraphType>
+void GraphSimplification<GraphType>::recover(vector<int8_t>& vColorFlat, vector<vector<int8_t> >& mColor, vector<vector<graph_vertex_type> > const& mSimpl2Orig) const
+{
+	// reverse order w.r.t simplify()
+	if (m_level & BICONNECTED_COMPONENT)
+		this->recover_biconnected_component(mColor, mSimpl2Orig);
+
+	// map mColor to vColorFlat
+	for (uint32_t sub_comp_id = 0; sub_comp_id < mColor.size(); ++sub_comp_id)
+	{
+		vector<int8_t> const& vColor = mColor[sub_comp_id];
+		vector<graph_vertex_type> const& vSimpl2Orig = mSimpl2Orig[sub_comp_id];
+		for (uint32_t subv = 0; subv < vColor.size(); ++subv)
+		{
+			graph_vertex_type v = vSimpl2Orig[subv];
+			if (vColorFlat[v] >= 0)
+				assert(vColorFlat[v] == vColor[subv]);
+			else 
+				vColorFlat[v] = vColor[subv];
+		}
+	}
+
+	if (m_level & MERGE_SUBK4)
+	{
+		this->recover_merge_subK4(vColorFlat);
+	}
+	if (m_level & HIDE_SMALL_DEGREE)
+	{
+		// TO DO: this part has custom requirement, such as density balancing 
+		// so now it is recovered manually 
+	}
+}
+
 /// for a structure of K4 with one fewer edge 
 /// suppose we have 4 vertices 1, 2, 3, 4
 /// 1--2, 1--3, 2--3, 2--4, 3--4, vertex 4 is merged to 1 
@@ -495,7 +562,7 @@ void GraphSimplification<GraphType>::merge_subK4()
 /// \param color_num number of colors available 
 /// hide vertices whose degree is no larger than color_num-1
 template <typename GraphType>
-void GraphSimplification<GraphType>::hide_small_degree(size_t color_num)
+void GraphSimplification<GraphType>::hide_small_degree()
 {
 	// when applying this function, be aware that other strategies may have already been applied 
 	// make sure it is compatible 
@@ -533,7 +600,7 @@ void GraphSimplification<GraphType>::hide_small_degree(size_t color_num)
 					conflict_degree += 1;
 				}
 			}
-			if (conflict_degree < color_num) // hide v1 
+			if (conflict_degree < m_color_num) // hide v1 
 			{
 				//m_vStatus[v1] = HIDDEN;
 				m_vHiddenVertex.push(v1);
@@ -557,7 +624,7 @@ void GraphSimplification<GraphType>::hide_small_degree(size_t color_num)
 // refer to http://www.geeksforgeeks.org/articulation-points-or-cut-vertices-in-a-graph/
 // for the recursive implementation 
 template <typename GraphType>
-void GraphSimplification<GraphType>::articulation_points()
+void GraphSimplification<GraphType>::biconnected_component()
 {
 	uint32_t vertex_num = boost::num_vertices(m_graph);
 	stack<graph_vertex_type> vStack; // stack for dfs 
@@ -570,6 +637,8 @@ void GraphSimplification<GraphType>::articulation_points()
 	vector<uint32_t> vLow (vertex_num, std::numeric_limits<uint32_t>::max()); // lowest vertex reachable from subtree under v  
 	vector<uint32_t> vDisc(vertex_num, std::numeric_limits<uint32_t>::max()); // discovery time 
 	deque<bool> vArtiPoint (vertex_num, false); // true of it is articulation point 
+	stack<pair<graph_vertex_type, graph_vertex_type> > vEdge; // virtual edge, it can be connection between parents 
+	list<pair<graph_vertex_type, set<graph_vertex_type> > > mCompVertex; // save bi-connected components 
 	uint32_t visit_time = 0;
 
 	// set initial parent of current vertex to itself 
@@ -581,24 +650,72 @@ void GraphSimplification<GraphType>::articulation_points()
 	{
 		graph_vertex_type source = *vi;
 		if (!vVisited[source])
-			articulation_points_recursion(source, vVisited, vDisc, vLow, vParent, vArtiPoint, visit_time);
-	}
-	// collect articulation points 
-	for (uint32_t v = 0; v < vArtiPoint.size(); ++v)
-	{
-		if (vArtiPoint[v])
 		{
-			m_mArtiPoint.insert(make_pair(v, set<uint32_t>()));
-#ifdef DEBUG_GRAPHSIMPLIFICATION
-			cout << "+ articulation point " << v << endl;
-#endif
+			biconnected_component_recursion(source, vVisited, vDisc, vLow, vParent, visit_time, vEdge, mCompVertex);
+		}
+		// if stack is not empty, pop all edges from stack
+		if (!vEdge.empty())
+		{
+			mCompVertex.push_back(std::make_pair(std::numeric_limits<graph_vertex_type>::max(), set<graph_vertex_type>()));
+			do
+			{
+				mCompVertex.back().second.insert(vEdge.top().first);
+				mCompVertex.back().second.insert(vEdge.top().second);
+				vEdge.pop();
+			} while (!vEdge.empty());
 		}
 	}
+	// collect articulation points 
+	uint32_t comp_id = 0;
+	m_mCompVertex.resize(mCompVertex.size());
+	for (typename list<pair<graph_vertex_type, set<graph_vertex_type> > >::const_iterator it = mCompVertex.begin(); it != mCompVertex.end(); ++it, ++comp_id)
+	{
+		graph_vertex_type vap = it->first;
+		set<graph_vertex_type> const& sComp = it->second;
+		if (vap < std::numeric_limits<graph_vertex_type>::max()) // valid 
+			m_mArtiPoint.insert(std::make_pair(vap, set<uint32_t>()));
+		m_mCompVertex[comp_id].assign(sComp.begin(), sComp.end());
+	}
+	comp_id = 0;
+	for (typename list<pair<graph_vertex_type, set<graph_vertex_type> > >::const_iterator it = mCompVertex.begin(); it != mCompVertex.end(); ++it, ++comp_id)
+	{
+		graph_vertex_type vap = it->first;
+		set<graph_vertex_type> const& sComp = it->second;
+		for (typename set<graph_vertex_type>::const_iterator itc = sComp.begin(); itc != sComp.end(); ++itc)
+		{
+			graph_vertex_type v = *itc;
+			if (this->articulation_point(v))
+				m_mArtiPoint[v].insert(comp_id);
+		}
+	}
+#ifdef DEBUG_GRAPHSIMPLIFICATION
+	comp_id = 0;
+	for (typename list<pair<graph_vertex_type, set<graph_vertex_type> > >::const_iterator it = mCompVertex.begin(); it != mCompVertex.end(); ++it, ++comp_id)
+	{
+		graph_vertex_type vap = it->first;
+		set<graph_vertex_type> const& sComp = it->second;
+		cout << "+ articulation point " << vap << " --> comp " << comp_id << ": ";
+		for (typename set<graph_vertex_type>::const_iterator itc = sComp.begin(); itc != sComp.end(); ++itc)
+			cout << *itc << " ";
+		cout << endl;
+	}
+	for (typename map<graph_vertex_type, set<uint32_t> >::const_iterator it = m_mArtiPoint.begin(); it != m_mArtiPoint.end(); ++it)
+	{
+		graph_vertex_type vap = it->first;
+		set<uint32_t> const& sComp = it->second;
+		cout << "ap " << vap << ": ";
+		for (typename set<uint32_t>::const_iterator itc = sComp.begin(); itc != sComp.end(); ++itc)
+			cout << *itc << " ";
+		cout << endl;
+	}
+#endif
 }
 
 template <typename GraphType>
-void GraphSimplification<GraphType>::articulation_points_recursion(graph_vertex_type v, deque<bool>& vVisited, vector<uint32_t>& vDisc, 
-		vector<uint32_t>& vLow, vector<graph_vertex_type>& vParent, deque<bool>& vArtiPoint, uint32_t& visit_time) const
+void GraphSimplification<GraphType>::biconnected_component_recursion(graph_vertex_type v, deque<bool>& vVisited, vector<uint32_t>& vDisc, 
+		vector<uint32_t>& vLow, vector<graph_vertex_type>& vParent, uint32_t& visit_time, 
+		stack<pair<graph_vertex_type, graph_vertex_type> >& vEdge, 
+		list<pair<graph_vertex_type, set<graph_vertex_type> > >& mCompVertex) const
 { 
     // Count of children in DFS Tree
     uint32_t children = 0;
@@ -612,6 +729,7 @@ void GraphSimplification<GraphType>::articulation_points_recursion(graph_vertex_
     // Go through all vertices aadjacent to this
 	if (!this->good(v)) return;
 
+	bool isolate = true;
 	// find neighbors of all merged vertices
 	vector<graph_vertex_type> const& vChildren = m_vChildren.at(v);
 	for (typename vector<graph_vertex_type>::const_iterator vic = vChildren.begin(); vic != vChildren.end(); ++vic)
@@ -627,6 +745,7 @@ void GraphSimplification<GraphType>::articulation_points_recursion(graph_vertex_
 			// skip hidden vertex 
 			if (this->hidden(uc)) continue;
 
+			isolate = false; 
 			graph_vertex_type u = this->parent(uc);
 			assert(this->good(u));
 
@@ -636,7 +755,8 @@ void GraphSimplification<GraphType>::articulation_points_recursion(graph_vertex_
 			{
 				++children;
 				vParent[u] = v;
-				articulation_points_recursion(u, vVisited, vDisc, vLow, vParent, vArtiPoint, visit_time);
+				vEdge.push(make_pair(std::min(v, u), std::max(v, u)));
+				biconnected_component_recursion(u, vVisited, vDisc, vLow, vParent, visit_time, vEdge, mCompVertex);
 
 				// Check if the subtree rooted with v has a connection to
 				// one of the ancestors of u
@@ -645,17 +765,36 @@ void GraphSimplification<GraphType>::articulation_points_recursion(graph_vertex_
 				// u is an articulation point in following cases
 
 				// (1) u is root of DFS tree and has two or more chilren.
-				if (vParent[v] == v && children > 1)
-					vArtiPoint[v] = true;
-
 				// (2) If u is not root and low value of one of its child is more
 				// than discovery value of u.
-				if (vParent[v] != v && vLow[u] >= vDisc[v])
-					vArtiPoint[v] = true;
+				if ((vParent[v] == v && children > 1)
+						|| (vParent[v] != v && vLow[u] >= vDisc[v]))
+				{
+					mCompVertex.push_back(std::make_pair(v, set<graph_vertex_type>()));
+					while (vEdge.top().first != std::min(v, u) || vEdge.top().second != std::max(v, u))
+					{
+						mCompVertex.back().second.insert(vEdge.top().first);
+						mCompVertex.back().second.insert(vEdge.top().second);
+						vEdge.pop();
+					}
+					mCompVertex.back().second.insert(vEdge.top().first);
+					mCompVertex.back().second.insert(vEdge.top().second);
+					vEdge.pop();
+				}
+
 			}
-			else if (u != vParent[v])
+			else if (u != vParent[v] && vDisc[u] < vLow[v])
+			{
 				vLow[v] = std::min(vLow[v], vDisc[u]);
+				vEdge.push(make_pair(std::min(v, u), std::max(v, u)));
+			}
 		}
+	}
+	// for isolated vertex, create a component 
+	if (isolate)
+	{
+		mCompVertex.push_back(std::make_pair(std::numeric_limits<graph_vertex_type>::max(), set<graph_vertex_type>()));
+		mCompVertex.back().second.insert(v);
 	}
 }
 
@@ -791,10 +930,10 @@ void GraphSimplification<GraphType>::recover_merge_subK4(vector<int8_t>& vColor)
 	}
 }
 
-/// recover color for articulation points 
+/// recover color for biconnected components  
 /// \param vColor must be partially assigned colors except simplified vertices  
 template <typename GraphType>
-void GraphSimplification<GraphType>::recover_articulation_points(vector<vector<int8_t> >& mColor, vector<vector<graph_vertex_type> > const& mSimpl2Orig, uint32_t color_num) const
+void GraphSimplification<GraphType>::recover_biconnected_component(vector<vector<int8_t> >& mColor, vector<vector<graph_vertex_type> > const& mSimpl2Orig) const
 {
 	// a single articulation point must correspond to two components 
 	// map<graph_vertex_type, pair<uint32_t, uint32_t> > m_mArtiPoint
@@ -826,7 +965,7 @@ void GraphSimplification<GraphType>::recover_articulation_points(vector<vector<i
 		{
 			uint32_t comp = *itc;
 			vCompAp[comp].insert(vap);
-			assert(vCompAp[comp].size() < 3);
+			//assert(vCompAp[comp].size() < 3);
 		}
 	}
 
@@ -843,7 +982,7 @@ void GraphSimplification<GraphType>::recover_articulation_points(vector<vector<i
 				uint32_t c = vStack.top(); // current component 
 				vStack.pop();
 
-				for (typename set<graph_vertex_type>::const_iterator vapi = vCompAp[comp_id].begin(); vapi != vCompAp[comp_id].end(); ++vapi)
+				for (typename set<graph_vertex_type>::const_iterator vapi = vCompAp[c].begin(); vapi != vCompAp[c].end(); ++vapi)
 				{
 					graph_vertex_type vap = *vapi;
 					set<uint32_t> const& sComp = m_mArtiPoint.at(vap);
@@ -855,7 +994,9 @@ void GraphSimplification<GraphType>::recover_articulation_points(vector<vector<i
 						{
 							vStack.push(cc);
 							vVisited[cc] = true;
-							vRotation[cc] += vRotation[c] + mColor[c][mApOrig2Simpl[c][vap]] - mColor[cc][mApOrig2Simpl[cc][vap]];
+							int8_t color_c = mColor[c][mApOrig2Simpl[c][vap]];
+							int8_t color_cc = mColor[cc][mApOrig2Simpl[cc][vap]];
+							vRotation[cc] += vRotation[c] + color_c - color_cc;
 						}
 					}
 				}
@@ -867,11 +1008,15 @@ void GraphSimplification<GraphType>::recover_articulation_points(vector<vector<i
 	for (uint32_t comp_id = 0; comp_id < mColor.size(); ++comp_id)
 	{
 		vector<int8_t>& vColor = mColor[comp_id];
-		int32_t rotation = vRotation[comp_id] % (int32_t)color_num;
+		int32_t rotation = vRotation[comp_id];
+		if (rotation < 0) // add a large enough K*m to achieve positive value 
+			rotation += (limbo::abs(rotation)/m_color_num+1)*m_color_num;
+		assert(rotation >= 0);
+		rotation %= (int32_t)m_color_num;
 		for (uint32_t v = 0; v < vColor.size(); ++v)
 		{
 			assert(vColor[v] >= 0);
-			vColor[v] = (vColor[v] + rotation) % (int32_t)color_num;
+			vColor[v] = (vColor[v] + rotation) % (int32_t)m_color_num;
 		}
 	}
 
@@ -889,7 +1034,7 @@ void GraphSimplification<GraphType>::recover_articulation_points(vector<vector<i
 			if (itc == sComp.begin())
 				prev_color = color;
 			else assert_msg(prev_color == color, 
-					vap << ": " << "comp " << comp << ", c[" << mApOrig2Simpl[comp][ap] << "] = " << color << "; " 
+					vap << ": " << "comp " << comp << ", c[" << mApOrig2Simpl[comp][vap] << "] = " << color << "; " 
 					<< "prev_color = " << prev_color);
 		}
 	}

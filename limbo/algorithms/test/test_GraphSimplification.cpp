@@ -93,17 +93,22 @@ void realGraph(string const& filename)
 #endif
 
 	//test relaxed LP based coloring
-	limbo::algorithms::coloring::GraphSimplification<graph_type> gs (g); 
+	typedef limbo::algorithms::coloring::GraphSimplification<graph_type> simplification_type;
+	simplification_type gs (g, 3); 
 	std::vector<int> vPrecolor (num_vertices(g), -1);
 	if (vPrecolor.size() > 0) vPrecolor[0] = 0;
 	if (vPrecolor.size() > 3) vPrecolor[3] = 0;
 	if (vPrecolor.size() > 4) vPrecolor[4] = 0;
 	gs.precolor(vPrecolor.begin(), vPrecolor.end());
-	gs.hide_small_degree(3);
+#if 0
+	gs.hide_small_degree();
 	gs.write_graph_dot("graph_simpl1");
 	//gs.merge_subK4();
-	gs.articulation_points();
-	gs.connected_component();
+	gs.biconnected_component();
+	//gs.connected_component();
+#else 
+	gs.simplify(simplification_type::HIDE_SMALL_DEGREE | simplification_type::BICONNECTED_COMPONENT);
+#endif
 	gs.write_graph_dot("graph_simpl3");
 	gs.write_simplified_graph_dot("graph_simpl_merge");
 
