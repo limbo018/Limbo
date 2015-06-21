@@ -14,7 +14,9 @@
 #include <boost/graph/undirected_graph.hpp>
 #include <limbo/algorithms/coloring/ChromaticNumber.h>
 #include <limbo/algorithms/coloring/GreedyColoring.h>
+// do not include these two together 
 #include <limbo/algorithms/coloring/LPColoring.h>
+//#include <limbo/algorithms/coloring/LPColoringOld.h> 
 #include <boost/graph/erdos_renyi_generator.hpp>
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/graph/random.hpp>
@@ -179,7 +181,7 @@ void realGraph(string const& filename)
 	// true or false 
 	lc.conflictCost(false);
 	// true or false
-	lc.stitchMode(false);
+	//lc.stitchMode(false);
 	// DIRECT_ILP, FIXED_ILP, ITERATIVE_ILP, GREEDY, POST_ILP
 	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::POST_ILP);
 	// THREE or FOUR 
