@@ -76,6 +76,9 @@ class ILPColoring : public Coloring<GraphType>
 		/// destructor
 		virtual ~ILPColoring() {}
 
+        /// write raw solution of ILP 
+        void write_graph_sol(string const& filename, vector<GRBVar> const& vVertexBit) const;
+
 	protected:
 		/// \return objective value 
 		virtual double coloring();
@@ -251,6 +254,10 @@ double ILPColoring<GraphType>::coloring()
 		exit(1);
 	}
 
+#ifdef DEBUG_ILPCOLORING
+    this->write_graph_sol("graph_sol", vVertexBit); // dump solution figure 
+#endif
+
 	// collect coloring solution 
 	for (uint32_t k = 0; k != vertex_variable_num; k += 2)
 	{
@@ -266,6 +273,53 @@ double ILPColoring<GraphType>::coloring()
 
 	// return objective value 
 	return opt_model.get(GRB_DoubleAttr_ObjVal);
+}
+
+template <typename GraphType>
+void ILPColoring<GraphType>::write_graph_sol(string const& filename, vector<GRBVar> const& vVertexBit) const
+{
+	ofstream dot_file((filename+".gv").c_str());
+	dot_file << "graph D { \n"
+		<< "  randir = LR\n"
+		<< "  size=\"4, 3\"\n"
+		<< "  ratio=\"fill\"\n"
+		<< "  edge[style=\"bold\",fontsize=200]\n" 
+		<< "  node[shape=\"circle\",fontsize=200]\n";
+
+	//output nodes 
+	uint32_t vertex_num = boost::num_vertices(this->m_graph);
+	for(uint32_t k = 0; k < vertex_num; ++k) 
+	{
+		dot_file << "  " << k << "[shape=\"circle\"";
+		//output coloring label
+		dot_file << ",label=\"" << k << ":(" << vVertexBit[(k<<1)].get(GRB_DoubleAttr_X) << "," << vVertexBit[(k<<1)+1].get(GRB_DoubleAttr_X)<< ")\"";
+		dot_file << "]\n";
+	}//end for
+
+	//output edges
+	edge_iterator_type ei, eie;
+	for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei)
+	{
+		int32_t w = boost::get(boost::edge_weight, this->m_graph, *ei);
+		graph_vertex_type s = boost::source(*ei, this->m_graph);
+		graph_vertex_type t = boost::target(*ei, this->m_graph);
+		if (w >= 0) // conflict edge 
+		{
+            bool conflict_flag = (vVertexBit[(s<<1)].get(GRB_DoubleAttr_X) == vVertexBit[(t<<1)].get(GRB_DoubleAttr_X) && vVertexBit[(s<<1)+1].get(GRB_DoubleAttr_X) == vVertexBit[(t<<1)+1].get(GRB_DoubleAttr_X));
+
+			if(conflict_flag)
+				dot_file << "  " << s << "--" << t << "[color=\"red\",style=\"solid\",penwidth=3]\n";
+			else 
+				dot_file << "  " << s << "--" << t << "[color=\"black\",style=\"solid\",penwidth=3]\n";
+		}
+		else // stitch edge 
+			dot_file << "  " << s << "--" << t << "[color=\"blue\",style=\"dotted\",penwidth=3]\n";
+	}
+	dot_file << "}";
+	dot_file.close();
+	char cmd[100];
+	sprintf(cmd, "dot -Tpdf %s.gv -o %s.pdf", filename.c_str(), filename.c_str());
+	system(cmd);
 }
 
 }}} // namespace limbo // namespace algorithms // namespace coloring

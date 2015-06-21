@@ -738,6 +738,8 @@ void LPColoring<GraphType>::graphColoring()
 	GRBEnv env = GRBEnv();
 	//mute the log from the LP solver
 	env.set(GRB_IntParam_OutputFlag, 0);
+    // default algorithm 
+    env.set(GRB_IntParam_Method, -1);
 	GRBModel opt_model = GRBModel(env);
 	//set up the LP variables
 	vector<GRBVar> coloringBits;

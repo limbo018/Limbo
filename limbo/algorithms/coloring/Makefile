@@ -28,7 +28,7 @@ ifeq ($(UNAME_S), Darwin)
 endif 
 
 ifeq ($(DBG), 1)
-	CXXFLAGS = $(CXXFLAGS_DEBUG) -DDEBUG_LPCOLORING -DASSERT_LPCOLORING -DDEBUG_GRAPHSIMPLIFICATION
+	CXXFLAGS = $(CXXFLAGS_DEBUG) -DDEBUG_LPCOLORING -DASSERT_LPCOLORING -DDEBUG_GRAPHSIMPLIFICATION -DDEBUG_ILPCOLORING
 else
 	CXXFLAGS = $(CXXFLAGS_RELEASE)
 endif
@@ -61,7 +61,7 @@ SRCS_TEST = $(wildcard $(TEST_DIR)/*.cpp)
 OBJS_TEST = $(patsubst $(TEST_DIR)/%.cpp,$(TEST_DIR)/%.o,$(SRCS_TEST))
 DEPS_TEST = $(OBJS_TEST:%.o=%.d)
 
-all: $(TEST_DIR)/test_ChromaticNumber $(TEST_DIR)/test_LPColoring $(TEST_DIR)/test_GraphSimplification
+all: $(TEST_DIR)/test_ChromaticNumber $(TEST_DIR)/test_LPColoring $(TEST_DIR)/test_GraphSimplification $(TEST_DIR)/test_ILPColoring 
 
 # Compile dependency 
 
@@ -92,10 +92,12 @@ $(TEST_DIR)/test_LPColoring: $(TEST_DIR)/test_LPColoring.o
 	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_LPColoring.o $(CXXFLAGS) $(LIBS)
 $(TEST_DIR)/test_GraphSimplification: $(TEST_DIR)/test_GraphSimplification.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_GraphSimplification.o $(CXXFLAGS) $(LIBS)
+$(TEST_DIR)/test_ILPColoring: $(TEST_DIR)/test_ILPColoring.o 
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_ILPColoring.o $(CXXFLAGS) $(LIBS)
 
 .PHONY: clean
 clean: cleandep
-	rm -f $(TEST_DIR)/test_ChromaticNumber $(TEST_DIR)/test_LPColoring $(TEST_DIR)/test_GraphSimplification $(OBJS) $(OBJS_TEST)
+	rm -f $(TEST_DIR)/test_ChromaticNumber $(TEST_DIR)/test_LPColoring $(TEST_DIR)/test_GraphSimplification $(TEST_DIR)/test_ILPColoring $(OBJS) $(OBJS_TEST)
 
 .PHONY: cleandep
 cleandep:

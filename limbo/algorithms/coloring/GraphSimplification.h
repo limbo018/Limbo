@@ -697,7 +697,7 @@ void GraphSimplification<GraphType>::biconnected_component()
 	comp_id = 0;
 	for (typename list<pair<graph_vertex_type, set<graph_vertex_type> > >::const_iterator it = mCompVertex.begin(); it != mCompVertex.end(); ++it, ++comp_id)
 	{
-		graph_vertex_type vap = it->first;
+		//graph_vertex_type vap = it->first;
 		set<graph_vertex_type> const& sComp = it->second;
 		for (typename set<graph_vertex_type>::const_iterator itc = sComp.begin(); itc != sComp.end(); ++itc)
 		{
