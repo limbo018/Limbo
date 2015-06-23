@@ -232,6 +232,9 @@ component_addon : /* empty */
 				| component_addon '+' STRING '(' INTEGER INTEGER ')' STRING {
 					driver.component_cbk_position(*$3, $5, $6, *$8);
 				}
+				| component_addon '+' STRING '(' DOUBLE DOUBLE ')' STRING { /*it may be double in some benchmarks*/
+					driver.component_cbk_position(*$3, $5, $6, *$8);
+				}
 				| component_addon '+' KWD_SOURCE STRING {
 					driver.component_cbk_source(*$4);
 				}
@@ -371,6 +374,8 @@ block_nets : begin_nets
  /*** so no callbacks are created for it ***/
 single_propterty : KWD_COMPONENTPIN STRING STRING ';'
 				 | KWD_DESIGN STRING STRING DOUBLE ';'
+                 | KWD_NET STRING STRING ';'
+                 | KWD_COMPONENTPIN STRING STRING ';'
 				 ;
 
 multiple_property : single_propterty 

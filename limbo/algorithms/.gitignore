@@ -2,6 +2,7 @@ test/*.o
 test/test_FM
 test/test_ChromaticNumber
 test/test_LPColoring
+test/test_ILPColoring
 test/test_GraphSimplification
 test/graph.sol
 test/graph.dot
