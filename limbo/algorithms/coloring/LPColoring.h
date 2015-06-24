@@ -64,7 +64,8 @@ class LPColoring
 			FIXED_ILP, // this rounding scheme is not in use now, because feasible solution is not guaranteed  
 			ITERATIVE_ILP, 
 			GREEDY, // greedy scheme for stitch insertion 
-			POST_ILP // ilp for stitch insertion 
+			POST_ILP, // ilp for stitch insertion 
+            STARTING_POINT_ILP // lp result as the starting point of ilp 
 		};
 		enum ColorNum 
 		{
@@ -293,6 +294,7 @@ class LPColoring
 		unordered_map<string, bool> m_stitch_constrs;
 		uint32_t m_constrs_num;
 
+        uint32_t m_threads;
 };
 
 /// constructor
@@ -309,6 +311,7 @@ LPColoring<GraphType>::LPColoring(graph_type const& g) : COLORING_BITS(2), m_con
 	m_snode_th = 0.5;
 	m_snode_th_step = 0.1;
 	m_stitch_mode = false;
+    m_threads = 8;
 }
 
 ///initialization
@@ -738,6 +741,8 @@ void LPColoring<GraphType>::graphColoring()
 	GRBEnv env = GRBEnv();
 	//mute the log from the LP solver
 	env.set(GRB_IntParam_OutputFlag, 0);
+    // set number of threads 
+    env.set(GRB_IntParam_Threads, this->m_threads);
     // default algorithm 
     env.set(GRB_IntParam_Method, -1);
 	GRBModel opt_model = GRBModel(env);
@@ -1337,7 +1342,7 @@ void LPColoring<GraphType>::graphColoring()
 #endif
 	if (this->roundingScheme() == GREEDY)
 		this->stitch_Insertion();
-	else if (this->roundingScheme() == POST_ILP)
+	else if (this->roundingScheme() == POST_ILP || this->roundingScheme() == STARTING_POINT_ILP)
 		this->stitch_Insertion_ILP();
 	this->postRefinement();
 	this->cg_conflictNum();
@@ -1373,6 +1378,8 @@ void LPColoring<GraphType>::graphColoring()
 			cout << "GREEDY mode "; break;
 		case POST_ILP:
 			cout << "POST_ILP mode "; break;
+        case STARTING_POINT_ILP:
+            cout << "STARTING_POINT_ILP mode "; break;
 		default:
 			cout << "Unknown mode "; assert(0);
 	}
@@ -1390,6 +1397,8 @@ void LPColoring<GraphType>::ILPColoring(vector<GRBVar>& coloringBits, vector<GRB
 
 	//set up the LP environment
 	GRBEnv env = GRBEnv();
+    // set number of threads 
+    env.set(GRB_IntParam_Threads, this->m_threads);
 	//mute the log from the LP solver
 	//env.set(GRB_IntParam_OutputFlag, 0);
 	GRBModel opt_model_updated = GRBModel(env);
@@ -2425,6 +2434,8 @@ void LPColoring<GraphType>::stitch_Insertion_ILP()
 	GRBEnv env = GRBEnv();
 	//mute the log from the LP solver
 	env.set(GRB_IntParam_OutputFlag, 0);
+    // set number of threads 
+    env.set(GRB_IntParam_Threads, this->m_threads);
 	GRBModel opt_model = GRBModel(env);
 	//set up the LP variables
 	vector<GRBVar> coloringBits;
@@ -2436,10 +2447,24 @@ void LPColoring<GraphType>::stitch_Insertion_ILP()
 	{
 		ostringstream oss;
 		oss << "v" << i;
+#if 1
 		if (!isInteger(m_lp_cg_coloring[i]))
 			coloringBits.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_INTEGER, oss.str()));
-		else 
+		else if (this->roundingScheme() == POST_ILP)
 			coloringBits.push_back(opt_model.addVar(m_lp_cg_coloring[i], m_lp_cg_coloring[i], m_lp_cg_coloring[i], GRB_INTEGER, oss.str()));
+        else if (this->roundingScheme() == STARTING_POINT_ILP)
+			coloringBits.push_back(opt_model.addVar(0, 1, m_lp_cg_coloring[i], GRB_INTEGER, oss.str()));
+#else 
+        if (this->roundingScheme() == POST_ILP)
+        {
+            if (!isInteger(m_lp_cg_coloring[i]))
+                coloringBits.push_back(opt_model.addVar(0.0, 1.0, 0.0, GRB_INTEGER, oss.str()));
+            else 
+                coloringBits.push_back(opt_model.addVar(m_lp_cg_coloring[i], m_lp_cg_coloring[i], m_lp_cg_coloring[i], GRB_INTEGER, oss.str()));
+        }
+        else if (this->roundingScheme() == STARTING_POINT_ILP)
+			coloringBits.push_back(opt_model.addVar(0, 1, m_lp_cg_coloring[i], GRB_INTEGER, oss.str()));
+#endif
 	}
 
 	vEdgeBit.reserve(edge_num);
