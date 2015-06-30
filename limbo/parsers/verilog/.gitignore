@@ -1,0 +1,5 @@
+test/test_bison
+bison/VerilogParser.cc
+bison/VerilogParser.h
+bison/VerilogScanner.cc
+*.hh

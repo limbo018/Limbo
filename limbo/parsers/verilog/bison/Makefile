@@ -5,8 +5,8 @@
 #                         Directories and names 
 # ==========================================================================
 
-PARSER_PREFIX = Def
-LIB_PREFIX = def
+PARSER_PREFIX = Verilog
+LIB_PREFIX = verilog
 DEBUG_PREFIX = $(shell echo $(PARSER_PREFIX) | tr a-z A-Z) # lower case to upper case 
 LIMBO_ROOT_DIR = $(realpath ../../../..)
 TEST_DIR = $(realpath ../test)

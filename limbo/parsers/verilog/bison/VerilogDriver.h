@@ -1,14 +1,14 @@
 // $Id: driver.h 17 2007-08-19 18:51:39Z tb $ 	
 /** \file driver.h Declaration of the example::Driver class. */
 
-#ifndef DEFPARSER_DRIVER_H
-#define DEFPARSER_DRIVER_H
+#ifndef VERILOGPARSER_DRIVER_H
+#define VERILOGPARSER_DRIVER_H
 
-#include "DefDataBase.h"
+#include "VerilogDataBase.h"
 
 /** The example namespace is used to encapsulate the three parser classes
  * example::Parser, example::Scanner and example::Driver */
-namespace DefParser {
+namespace VerilogParser {
 
 	using std::cout;
 	using std::endl;
@@ -29,7 +29,7 @@ class Driver
 {
 public:
     /// construct a new parser driver context
-    Driver(DefDataBase& db);
+    Driver(VerilogDataBase& db);
 
     /// enable debug output in the flex scanner
     bool trace_scanning;
@@ -81,52 +81,20 @@ public:
 
     /** Reference to the database filled during parsing of the
      * expressions. */
-    DefDataBase& m_db;
+    VerilogDataBase& m_db;
 
-	void dividerchar_cbk(string const&) ;
-	void busbitchars_cbk(string const&) ;
-	void version_cbk(double) ;
-	void design_cbk(string const&) ;
-	void unit_cbk(int) ;
-	void diearea_cbk(int, int, int, int) ;
-
-	void row_cbk(string const&, string const&, int, int, string const&, int, int, int, int) ;
-	void track_cbk(string const&, int, int, int, string const&) ;
-	void gcellgrid_cbk(string const&, int, int, int) ;
-	// component cbk
-	void component_cbk_size(int) ;
-	void component_cbk_position(string const&, int, int, string const&) ;
-	void component_cbk_position(string const&) ;
-	void component_cbk_source(string const&) ;
-	void component_cbk(string const&, string const&) ;
-
-	// pin cbk 
-//	void pin_cbk(string const&, string const&, string const&, string const&, 
-//			int, int, string const&, string const&, int, int, int, int) ;
-	void pin_cbk_size(int) ;
-	void pin_cbk(string const&); // remember to reset in this function 
-	void pin_cbk_net(string const&);
-	void pin_cbk_direction(string const&);
-	void pin_cbk_position(string const&, int, int, string const&);
-	void pin_cbk_bbox(string const&, int, int, int, int);
-	void pin_cbk_use(string const&);
-	// net cbk 
-	void net_cbk_name(string const&) ;
-	void net_cbk_pin(string const&, string const&) ;
-	void net_cbk_size(int) ;
+    void wire_pin_cbk(std::string&, std::string&, Range const& = Range());
+    void wire_declare_cbk(std::string const&, Range const& = Range());
+    void module_instance_cbk(std::string const&, std::string const&);
 
 protected:
 	// use as a stack for node and pin pairs in a net 
-	// because net_cbk_pin will be called before net_cbk_name
-	vector<pair<string, string> > m_vNetPin;
-	Row m_row;
-	Component m_comp;
-	Pin m_pin;
-	Net m_net;
+	// because wire_pin_cbk will be called before module_instance_cbk
+	vector<NetPin> m_vNetPin;
 };
 
-// top api for DefParser
-bool read(DefDataBase& db, const string& defFile);
+// top api for VerilogParser
+bool read(VerilogDataBase& db, const string& verilogFile);
 
 } // namespace example
 

@@ -7,8 +7,6 @@
 #include <string>
 #include <vector>
 
-/*#include "expression.h"*/
-
 %}
 
 /*** yacc/bison Declarations ***/
@@ -54,11 +52,17 @@
  /*** BEGIN EXAMPLE - Change the example grammar's tokens below ***/
 
 %union {
-    char* str;
+    std::string* stringVal;
     struct {
         long value;
         long bits;
     } mask;
+    struct Range* rangeVal;
+/*    struct Range {
+        int low;
+        int high;
+    } rangeVal;
+    */
 }
 
 %token ALWAYS 
@@ -67,15 +71,16 @@
 %token NEGEDGE
 %token OR
 %token BEG
-%token END
+%token END 0 "end of file"
 %token AND
 %token IF
 %token ELSE
 %token INIT
 %token AT
-%token ID
+%token NAME
 %token NUM
 %token MODULE
+%token ENDMODULE
 %token INPUT
 %token OUTPUT
 %token REG
@@ -90,9 +95,13 @@
 %left OR
 %left AND
 
-%type<str> ID 
+%type<stringVal> NAME
 %type<mask> BIT_MASK OCT_MASK DEC_MASK HEX_MASK
-%type<int> VAL NUM VAL_DEC EXPR_CALC
+%type<int> NUM 
+%type<rangeVal> range
+
+%destructor {delete $$;} NAME
+%destructor {delete $$;} range
 
  /*** END EXAMPLE - Change the example grammar's tokens above ***/
 
@@ -113,69 +122,74 @@
 
  /*** BEGIN EXAMPLE - Change the example grammar rules below ***/
 
-PROGRAM: OPS ;
+range: '[' NUM ':' NUM ']' {$$ = new Range (1, 2);}
 
-OPS: INIT_BLOCK | VAL_DEC | MODULE_INIT | OP_BLOCK
-| OPS OPS
+param1: NAME {}
+      | NAME range {} 
+      ;
 
-OP_CALC: ID EQUAL EXPR_CALC
-|   TIME OP_CALC
+/* wire_pin_cbk will be called before module_instance_cbk */
+param2: '.' NAME '(' NAME ')' {driver.wire_pin_cbk(*$2, *$4);}
+      | '.' NAME '(' NAME range ')' {driver.wire_pin_cbk(*$2, *$4, *$5);}
+      ;
 
-OP_BLOCK: OP_CALC ';'
-| '{' OP_BLOCK '}'
-|   IF '(' EXPR ')' OP_BLOCK   {; }
-|   IF '(' EXPR ')' OP_BLOCK ELSE OP_BLOCK {;}
-|   OP_TREE
+param3: INPUT NAME {}
+      | INPUT REG NAME {}
+      | INPUT range NAME {} 
+      | INPUT REG range NAME {}
+      | OUTPUT NAME {}
+      | OUTPUT REG NAME {}
+      | OUTPUT range NAME {}
+      | OUTPUT REG range NAME {}
+      ;
 
-OP_TREE: ALWAYS AT '(' POSNEG_EXPR ')' OP_BLOCK {;}
-|   ALWAYS INIT_VAL {;}
+param4: REG NAME
+      | REG range NAME
+      ;
 
-POSNEG_EXPR: POSEDGE ID
-| POSNEG_EXPR OR POSNEG_EXPR
-| POSNEG_EXPR AND POSNEG_EXPR ; 
+param5: WIRE NAME {driver.wire_declare_cbk(*$2);}
+      | WIRE range NAME {driver.wire_declare_cbk(*$3, *$2);}
+      ;
 
-EXPR: EXPR_CALC {$$ = $1;}
-|   '!' EXPR_CALC {$$ = !$1;}
-|   EXPR '>' EXPR_CALC {$$ = ($1>$2);}
-|   EXPR '<' EXPR_CALC {$$ = ($1<$2);}
-|   EXPR '=' EXPR_CALC {$$ = ($1==$2);}
 
-EXPR_CALC: VAL
-|   TERM '+' VAL { $$ = $1 + $2;}
-|   TERM '-' VAL { $$ = $1 - $2;}
+module_param: param1 
+            | param3
+      ;
 
-TERM: VAL
-|   TERM '*' VAL {$$ = $1 * $2;}
-|   TERM '/' VAL {$$ = $1 / $2;}
+module_params: /* empty */
+             | module_param 
+             | module_params ',' module_param 
+             ;
 
-VAL: MASK {$$=$1.mask.value;}
-|   '~' VAL {$$=0; OPS* ops = new OPS(OPERAND_ASSIGN, MAX32, "="); totop.push_back(ops);}
-|   '(' EXPR_CALC ')'
-|   ID {$$=0;}
+module_declare: MODULE NAME '(' module_params ')' ';'
+              ;
 
-VAL_DEC: REG ID ';' {OPS* ops = new OPS(OPERAND_REG, 0, $2); totop.push_back(ops);printf("%s\n",$2);}
-| WIRE '[' NUM ':' NUM ']' ID ';' {OPS* ops = new OPS(OPERAND_REG, 0, $4); totop.push_back(ops);}
+variable_declare: param3 ';'
+                | param4 ';'
+                | param5 ';'
+                ;
 
-INIT_BLOCK: INIT BEG INIT_VAL END ;
+/* do not support param1 yet */
+instance_params: /* empty */
+               | param2 
+               | instance_params ',' param2 
+               ;
 
-INIT_VAL: ID '=' VAL ';' {OPS* ops = new OPS(OPERAND_ASSIGN, MAX32, "="); totop.push_back(ops);}
-| TIME_DEF
-| INIT_VAL INIT_VAL
+module_instance: NAME NAME '(' instance_params ')' ';' {driver.module_instance_cbk(*$1, *$2);}
+               ;
 
-TIME_DEF: TIME ID '=' VAL ';' {OPS* ops = new OPS(OPERAND_ASSIGN, MAX32, "="); totop.push_back(ops) }
+module_content: /* empty */
+              | module_content variable_declare
+              | module_content module_instance 
+              ;
 
-MODULE_INIT: MODULE ID '(' PARAMS ')' ';';
 
-PARAMS: INPUT ID 
-| OUTPUT ID
-| INPUT REG '[' NUM ':' NUM ']' ID
-| OUTPUT REG '[' NUM ':' NUM ']' ID
-| PARAMS ',' PARAMS ;
+single_module: module_declare module_content ENDMODULE 
+             ;
 
-MASK: BIT_MASK
-| OCT_MASK
-| DEC_MASK
-| HEX_MASK ;
+start : /* empty */
+     | start single_module
+     ;
 
  /*** END EXAMPLE - Change the example grammar rules above ***/
 

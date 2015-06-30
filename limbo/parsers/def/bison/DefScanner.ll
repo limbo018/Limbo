@@ -187,7 +187,7 @@ typedef DefParser::Parser::token_type token_type;
 }
 
  /* gobble up comments */
-"#"([^\n])*\n {
+"#"([^\n])* {
     yylloc->step();
 }
 

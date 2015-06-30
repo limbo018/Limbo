@@ -7,6 +7,8 @@
 #include <cctype>
 #include <cstring>
 #include <unistd.h>
+#include <cstdlib>
+#include <cmath>
 
 namespace LefParser {
 
