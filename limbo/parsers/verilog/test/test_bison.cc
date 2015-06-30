@@ -20,7 +20,7 @@ class DataBase : public VerilogParser::VerilogDataBase
         virtual void verilog_instance_cbk(std::string const& macro_name, std::string inst_name, std::vector<VerilogParser::NetPin> const& vNetPin)
         {
 			cout << __func__ << " => " << macro_name << ", " << inst_name << ", ";
-            for (typename std::vector<VerilogParser::NetPin>::const_iterator it = vNetPin.begin(); it != vNetPin.end(); ++it)
+            for (std::vector<VerilogParser::NetPin>::const_iterator it = vNetPin.begin(); it != vNetPin.end(); ++it)
                 cout << it->pin << "(" << it->net << ") ";
             cout << endl;
         }
