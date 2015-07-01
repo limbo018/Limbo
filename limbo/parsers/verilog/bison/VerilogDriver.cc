@@ -66,6 +66,10 @@ void Driver::wire_declare_cbk(std::string const& net_name, Range const& range)
 {
     m_db.verilog_net_declare_cbk(net_name, range);
 }
+void Driver::pin_declare_cbk(std::string const& pin_name, unsigned type, Range const& range)
+{
+    m_db.verilog_pin_declare_cbk(pin_name, type, range);
+}
 
 bool read(VerilogDataBase& db, const string& verilogFile)
 {

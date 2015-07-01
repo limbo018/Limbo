@@ -17,7 +17,7 @@ class DataBase : public VerilogParser::VerilogDataBase
 			cout << "DataBase::" << __func__ << endl;
 		}
 		//////////////////// required callbacks from abstract VerilogParser::VerilogDataBase ///////////////////
-        virtual void verilog_instance_cbk(std::string const& macro_name, std::string inst_name, std::vector<VerilogParser::NetPin> const& vNetPin)
+        virtual void verilog_instance_cbk(std::string const& macro_name, std::string const& inst_name, std::vector<VerilogParser::NetPin> const& vNetPin)
         {
 			cout << __func__ << " => " << macro_name << ", " << inst_name << ", ";
             for (std::vector<VerilogParser::NetPin>::const_iterator it = vNetPin.begin(); it != vNetPin.end(); ++it)
@@ -28,6 +28,10 @@ class DataBase : public VerilogParser::VerilogDataBase
 		{
 			cout << __func__ << " => " << net_name << " (" << range.low << ", " << range.high << ")" << endl;
 		}
+        virtual void verilog_pin_declare_cbk(std::string const& pin_name, unsigned type, VerilogParser::Range const& range)
+        {
+			cout << __func__ << " => " << pin_name << " " << type << " (" << range.low << ", " << range.high << ")" << endl;
+        }
 };
 
 void test1(string const& filename)

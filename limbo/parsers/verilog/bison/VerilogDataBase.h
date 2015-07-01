@@ -18,11 +18,18 @@
 
 namespace VerilogParser {
 
+enum PinType
+{
+    kINPUT = 0x1, 
+    kOUTPUT = 0x2,
+    kREG = 0x4
+};
+
 struct Range 
 {
     int low; 
     int high;
-    Range() {low = std::numeric_limits<int>::min(); high = std::numeric_limits<int>::max();}
+    Range() {low = 0; high = 0;}
     Range(int l, int h) : low(l), high(h) {}
 };
 
@@ -47,8 +54,9 @@ struct NetPin
 class VerilogDataBase
 {
 	public:
-        virtual void verilog_instance_cbk(std::string const& macro_name, std::string inst_name, std::vector<NetPin> const& vNetPin) = 0;
+        virtual void verilog_instance_cbk(std::string const& macro_name, std::string const& inst_name, std::vector<NetPin> const& vNetPin) = 0;
         virtual void verilog_net_declare_cbk(std::string const& net_name, Range const& range) = 0;
+        virtual void verilog_pin_declare_cbk(std::string const& pin_name, unsigned type, Range const& range) = 0;
 };
 
 } // namespace VerilogParser

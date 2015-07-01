@@ -8,6 +8,9 @@
 #ifndef _LIMBO_GEOMETRY_GEOMETRY_H
 #define _LIMBO_GEOMETRY_GEOMETRY_H
 
+#include <vector>
+#include <list>
+
 /// ===================================================================
 ///    class          : Geometry
 ///

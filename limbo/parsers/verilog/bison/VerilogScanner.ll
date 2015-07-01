@@ -71,6 +71,7 @@ module          return token::MODULE;
 endmodule       return token::ENDMODULE;
 input           return token::INPUT;
 output          return token::OUTPUT;
+inout           return token::INOUT;
 reg             return token::REG;
 wire            return token::WIRE;
 integer         return token::INTEGER;

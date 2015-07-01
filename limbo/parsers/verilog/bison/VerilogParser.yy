@@ -83,6 +83,7 @@
 %token ENDMODULE
 %token INPUT
 %token OUTPUT
+%token INOUT
 %token REG
 %token WIRE
 %token INTEGER
@@ -133,14 +134,18 @@ param2: '.' NAME '(' NAME ')' {driver.wire_pin_cbk(*$2, *$4);}
       | '.' NAME '(' NAME range ')' {driver.wire_pin_cbk(*$2, *$4, *$5);}
       ;
 
-param3: INPUT NAME {}
-      | INPUT REG NAME {}
-      | INPUT range NAME {} 
-      | INPUT REG range NAME {}
-      | OUTPUT NAME {}
-      | OUTPUT REG NAME {}
-      | OUTPUT range NAME {}
-      | OUTPUT REG range NAME {}
+param3: INPUT NAME {driver.pin_declare_cbk(*$2, kINPUT);}
+      | INPUT REG NAME {driver.pin_declare_cbk(*$3, kINPUT|kREG);}
+      | INPUT range NAME {driver.pin_declare_cbk(*$3, kINPUT, *$2);} 
+      | INPUT REG range NAME {driver.pin_declare_cbk(*$4, kINPUT|kREG, *$3);}
+      | OUTPUT NAME {driver.pin_declare_cbk(*$2, kOUTPUT);}
+      | OUTPUT REG NAME {driver.pin_declare_cbk(*$3, kOUTPUT|kREG);}
+      | OUTPUT range NAME {driver.pin_declare_cbk(*$3, kOUTPUT, *$2);}
+      | OUTPUT REG range NAME {driver.pin_declare_cbk(*$4, kOUTPUT|kREG, *$3);}
+      | INOUT NAME {driver.pin_declare_cbk(*$2, kINPUT|kOUTPUT);}
+      | INOUT REG NAME {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT|kREG);}
+      | INOUT range NAME {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT, *$2);}
+      | INOUT REG range NAME {driver.pin_declare_cbk(*$4, kINPUT|kOUTPUT|kREG, *$3);}
       ;
 
 param4: REG NAME
