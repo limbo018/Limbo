@@ -130,8 +130,8 @@ param1: NAME {}
       ;
 
 /* wire_pin_cbk will be called before module_instance_cbk */
-param2: '.' NAME '(' NAME ')' {driver.wire_pin_cbk(*$2, *$4);}
-      | '.' NAME '(' NAME range ')' {driver.wire_pin_cbk(*$2, *$4, *$5);}
+param2: '.' NAME '(' NAME ')' {driver.wire_pin_cbk(*$4, *$2);}
+      | '.' NAME '(' NAME range ')' {driver.wire_pin_cbk(*$4, *$2, *$5);}
       ;
 
 param3: INPUT NAME {driver.pin_declare_cbk(*$2, kINPUT);}
