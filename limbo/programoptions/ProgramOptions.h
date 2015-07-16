@@ -21,6 +21,7 @@
 #include <map>
 #include <limbo/string/String.h>
 #include <limbo/preprocessor/AssertMsg.h>
+#include <limbo/programoptions/ConversionHelpers.h>
 
 namespace limbo { namespace programoptions {
 
@@ -39,151 +40,101 @@ enum ContainerType {
     SET = 0x400 
 };
 
-union Data 
+class ValueBase
 {
-    char ch;
-    bool b;
-    int i;
-    double fp;
-    std::string* str;
-    std::vector<char>* vChar;
-    std::vector<bool>* vBool;
-    std::vector<int>* vInt;
-    std::vector<double>* vDouble;
-    std::vector<std::string>* vString;
-    std::set<char>* sChar;
-    std::set<int>* sInt;
-    std::set<double>* sDouble;
-    std::set<std::string>* sString;
+    public:
+        ValueBase(std::string const& cat, std::string const& help_msg)
+            : m_category(cat)
+            , m_msg(help_msg)
+            , m_required(false)
+            , m_valid(false)
+        {}
+        virtual ~ValueBase() {}
+        /// parse command 
+        virtual void parse(const char*) = 0;
+        /// print target value 
+        virtual void print(std::ostream& os) const = 0;
+        /// print default value 
+        virtual void print_default(std::ostream& os) const = 0;
+        /// \return apply default value 
+        virtual void apply_default() = 0;
+        /// \return true if default value is set 
+        bool valid_default() const = 0;
+        std::string const& category() const {return m_category;}
+        std::string const& msg() const {return m_msg;}
+        bool required() const {return m_required;}
+        bool valid() const {return m_valid;}
+    protected:
+        std::string const& m_category; ///< category 
+        std::string const& m_msg; ///< helper message 
+        bool m_required; ///< whether the value is a required option
+        bool m_valid; ///< true if target is set, not default 
 };
 
-struct POData
+template <typename T>
+class Value : public ValueBase
 {
-    DataType data_tag;
-    ContainerType container_tag;
-    Data data;
-    bool required;
-    bool has_default; ///< whether has default value 
-    bool valid; ///< whether data is set 
-    Data dvalue; ///< default value 
+    public:
+        typedef T value_type;
+        typedef ValueBase base_type;
 
-    void assign_default();
+        Value(std::string const& cat, value_type* target, std::string const& help_msg)
+            : base_type(cat, help_msg)
+            , m_target(target)
+            , m_default(NULL)
+        {}
+        virtual ~Value();
+
+        virtual void parse(const char* v) 
+        {
+            parse_helper<value_type>(*m_target, v);
+        }
+        virtual void print(std::ostream& os) const 
+        {
+            print_helper<value_type>(os, *m_target);
+        }
+        virtual void print_default(std::ostream& os) const 
+        {
+            print_helper<value_type>(os, *m_default);
+        }
+        virtual void apply_default()
+        {
+            if (m_target && m_default)
+                assign_helper<value_type>(*m_target, *m_default);
+        }
+        virtual bool valid_default() const 
+        {
+            return (m_default != NULL);
+        }
+
+    protected:
+        value_type* m_target;
+        value_type* m_default;
 };
+
 
 class ProgramOptions
 {
     public:
         typedef std::map<std::string, POData> data_map_type;
 
-        ProgramOptions& add_option(std::string const& category, POData const& data)
-        {
-            m_mData.insert(std::make_pair(category, data));
-            return *this;
-        }
-        bool parse(int argc, char** argv);
-        void print(std::ostream& os = stdout) const;
-    protected:
-        void assign(DataType data_tag, ContainerType container_tag, Data& d, const char* v);
+        ProgramOptions() {}
+        ~ProgramOptions();
 
-        std::map<std::string, POData> m_mData; ///< saving mapping for flag and options 
+        template <typename ValueType>
+        ProgramOptions& add_option(std::string const& category, ValueType const& data);
+        bool parse(int argc, char** argv);
+        void print() const {print(stdout);}
+        void print(std::ostream& os) const;
+    protected:
+        std::map<std::string, ValueBase*> m_mData; ///< saving mapping for flag and options 
 };
 
-void POData::assign_default()
+template <typename ValueType>
+ProgramOptions& ProgramOptions::add_option(std::string const& category, ValueType const& data) 
 {
-    switch (data_tag)
-    {
-        case CHAR:
-        {
-            if (container_tag == NONE) data.ch = dvalue.ch; 
-            else if (container_tag == VECTOR) std::swap(data.vChar, dvalue.vChar);
-            else if (container_tag == SET) std::swap(data.sChar, dvalue.sChar);
-            break;
-        }
-        case BOOLEAN:
-        {
-            bool value;
-            if (limbo::iequals(v, "true")) value = true;
-            else if (limbo::iequals(v, "false")) value = false;
-            else value = atoi(v);
-            if (container_tag == NONE) data.b = value;
-            else if (container_tag == VECTOR) std::swap(data.vBool, dvalue.vBool);
-            break;
-        }
-        case INTEGER:
-        {
-            int value = atoi(v);
-            if (container_tag == NONE) data.i = value;
-            else if (container_tag == VECTOR) std::swap(data.vInt, dvalue.vInt);
-            else if (container_tag == SET) std::swap(data.sInt, dvalue.vInt);
-            break;
-        }
-        case FLOAT:
-        {
-            double value = atof(v);
-            if (container_tag == NONE) data.fp = value;
-            else if (container_tag == VECTOR) std::swap(data.vDouble, dvalue.vDouble);
-            else if (container_tag == SET) std::swap(data.sDouble, dvalue.sDouble);
-            break;
-        }
-        case STRING:
-        {
-            if (container_tag == NONE) data.str->assign(v);
-            else if (container_tag == VECTOR) std::swap(data.vString, dvalue.vString);
-            else if (container_tag == SET) std::swap(data.sString, dvalue.sString);
-            break;
-        }
-        default:
-            assert_msg(0, "unknown tag type");
-    }
-}
-
-void ProgramOptions::assign(DataType data_tag, ContainerType container_tag, Data& d, const char* v)
-{
-    switch (data_tag)
-    {
-        case CHAR:
-        {
-            if (container_tag == NONE) d.ch = *v; 
-            else if (container_tag == VECTOR) d.vChar->push_back(*v);
-            else if (container_tag == SET) d.sChar->insert(*v);
-            break;
-        }
-        case BOOLEAN:
-        {
-            bool value;
-            if (limbo::iequals(v, "true")) value = true;
-            else if (limbo::iequals(v, "false")) value = false;
-            else value = atoi(v);
-            if (container_tag == NONE) d.b = value;
-            else if (container_tag == VECTOR) d.vBool->push_back(value);
-            break;
-        }
-        case INTEGER:
-        {
-            int value = atoi(v);
-            if (container_tag == NONE) d.i = value;
-            else if (container_tag == VECTOR) d.vInt->push_back(value);
-            else if (container_tag == SET) d.sInt->insert(value);
-            break;
-        }
-        case FLOAT:
-        {
-            double value = atof(v);
-            if (container_tag == NONE) d.fp = value;
-            else if (container_tag == VECTOR) d.vDouble->push_back(value);
-            else if (container_tag == SET) d.sDouble->insert(value);
-            break;
-        }
-        case STRING:
-        {
-            if (container_tag == NONE) d.str->assign(v);
-            else if (container_tag == VECTOR) d.vString->push_back(v);
-            else if (container_tag == SET) d.sString->insert(v);
-            break;
-        }
-        default:
-            assert_msg(0, "unknown tag type");
-    }
+    m_mData.insert(std::make_pair(category, new ValueType (data)));
+    return *this;
 }
 
 bool ProgramOptions::parse(int argc, char** argv)
@@ -194,12 +145,12 @@ bool ProgramOptions::parse(int argc, char** argv)
         data_map_type::iterator found = m_mData.find(argv[i]);
         if (found != m_mData.end())
         {
-            POData& poData = found->second;
+            ValueBase* pData = found->second;
             i += 1;
             if (i < argc)
             {
                 const char* value = argv[i];
-                assign(poData.data_tag, poData.container_tag, poData.data, value);
+                pData->parse(value);
             }
             else 
             {
@@ -212,12 +163,12 @@ bool ProgramOptions::parse(int argc, char** argv)
     for (data_map_type::iterator it = m_mData.begin(); it != m_mData.end(); ++it)
     {
         std::string const& category = it->first;
-        POData& poData = it->second;
-        if (!poData.valid)
+        ValueBase* pData = it->second;
+        if (!pData->valid())
         {
-            if (poData.has_default)
-                poData.assign_default();
-            else if (poData.required)
+            if (pData->valid_default())
+                pData->apply_default();
+            else if (pData->required())
             {
                 std::cerr << "required option not set: " << category << "\n";
                 return false;
