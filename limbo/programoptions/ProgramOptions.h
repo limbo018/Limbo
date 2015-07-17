@@ -289,8 +289,9 @@ ProgramOptions::~ProgramOptions()
 template <typename ValueType>
 ProgramOptions& ProgramOptions::add_option(ValueType const& data) 
 {
-    m_mCat2Index.insert(std::make_pair(data.category(), m_vData.size()));
-    m_vData.push_back(new ValueType (data));
+    std::pair<cat2index_map_type::iterator, bool> insertRet = m_mCat2Index.insert(std::make_pair(data.category(), m_vData.size()));
+    if (insertRet.second) // only create new data when it is not in the map
+        m_vData.push_back(new ValueType (data));
     return *this;
 }
 
