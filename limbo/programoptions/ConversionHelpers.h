@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <limbo/string/String.h>
 
 namespace limbo { namespace programoptions {
 
@@ -45,6 +46,19 @@ struct assign_helper
 };
 
 /////////////////// specialization for parse_helper /////////////////
+template <>
+struct parse_helper<bool>
+{
+    inline bool operator()(bool& target, const char* value) const
+    {
+        if (limbo::iequals(value, "true") || limbo::iequals(value, "1"))
+            target = true;
+        else if (limbo::iequals(value, "false") || limbo::iequals(value, "0"))
+            target = false;
+        else return false;
+        return true;
+    }
+};
 template <>
 struct parse_helper<char>
 {

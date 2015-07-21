@@ -3,3 +3,4 @@ bison/DefParser.cc
 bison/DefParser.h
 bison/DefScanner.cc
 *.hh
+test/valgrind.txt
