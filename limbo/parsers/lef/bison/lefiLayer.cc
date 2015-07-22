@@ -1302,6 +1302,8 @@ void lefiLayer::Destroy() {
   this->resistancePointsAllocated_ = 0;
   this->capacitancePointsAllocated_ = 0;
   this->propsAllocated_ = 0;
+  if (this->spacingTable_)
+      lefFree((char*)this->spacingTable_);
 }
 
 
@@ -2346,8 +2348,8 @@ void lefiLayer::addArraySpacingArray(int arrayCut, double arraySpacing) {
   this->numArrayCuts_ += 1;
 }
 
-void lefiLayer::setDirection(const char* dir) {
-  this->direction_ = (char*)dir;
+void lefiLayer::setDirection(std::string& dir) {
+    std::swap(this->direction_, dir);
   this->hasDirection_ = 1;
 }
 
@@ -3027,7 +3029,7 @@ double lefiLayer::spacingEndOfNotchLength(int index) const {
   return this->eonotchLength_[index];
 }
 
-const char* lefiLayer::direction() const {
+std::string const& lefiLayer::direction() const {
   return this->direction_;
 }
 
@@ -3243,7 +3245,7 @@ void lefiLayer::print(FILE* f) const {
      }
   }
   if (this->lefiLayer::hasDirection())
-     fprintf(f, "  direction %s\n", this->lefiLayer::direction());
+     fprintf(f, "  direction %s\n", this->lefiLayer::direction().c_str());
 
   if (this->lefiLayer::hasResistance())
      fprintf(f, "  resistance %g\n", this->lefiLayer::resistance());

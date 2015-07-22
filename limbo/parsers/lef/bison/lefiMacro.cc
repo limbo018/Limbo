@@ -830,7 +830,12 @@ void lefiPin::copy(lefiPin const& rhs)
 		this->setNumProperty(rhs.propName(i), rhs.propNum(i), rhs.propValue(i), rhs.propType(i));
 
 	for (int i = 0; i < rhs.numPorts(); ++i)
-		this->addPort(new lefiGeometries (*rhs.port(i)));
+    {
+        lefiGeometries* g = (lefiGeometries*)lefMalloc(sizeof(lefiGeometries));
+        g->Init();
+        g->copy(*rhs.port(i));
+		this->addPort(g);
+    }
 }
 
 

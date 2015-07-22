@@ -90,29 +90,29 @@ public:
 	void unit_cbk(int) ;
 	void diearea_cbk(int, int, int, int) ;
 
-	void row_cbk(string const&, string const&, int, int, string const&, int, int, int, int) ;
+	void row_cbk(string&, string&, int, int, string&, int, int, int, int) ;
 	void track_cbk(string const&, int, int, int, string const&) ;
 	void gcellgrid_cbk(string const&, int, int, int) ;
 	// component cbk
 	void component_cbk_size(int) ;
-	void component_cbk_position(string const&, int, int, string const&) ;
-	void component_cbk_position(string const&) ;
+	void component_cbk_position(string&, int, int, string&) ;
+	void component_cbk_position(string&) ;
 	void component_cbk_source(string const&) ;
-	void component_cbk(string const&, string const&) ;
+	void component_cbk(string&, string&) ;
 
 	// pin cbk 
 //	void pin_cbk(string const&, string const&, string const&, string const&, 
 //			int, int, string const&, string const&, int, int, int, int) ;
 	void pin_cbk_size(int) ;
-	void pin_cbk(string const&); // remember to reset in this function 
-	void pin_cbk_net(string const&);
-	void pin_cbk_direction(string const&);
-	void pin_cbk_position(string const&, int, int, string const&);
-	void pin_cbk_bbox(string const&, int, int, int, int);
-	void pin_cbk_use(string const&);
+	void pin_cbk(string&); // remember to reset in this function 
+	void pin_cbk_net(string&);
+	void pin_cbk_direction(string&);
+	void pin_cbk_position(string&, int, int, string&);
+	void pin_cbk_bbox(string&, int, int, int, int);
+	void pin_cbk_use(string&);
 	// net cbk 
-	void net_cbk_name(string const&) ;
-	void net_cbk_pin(string const&, string const&) ;
+	void net_cbk_name(string&) ;
+	void net_cbk_pin(string&, string&) ;
 	void net_cbk_size(int) ;
 
 protected:

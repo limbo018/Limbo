@@ -16,6 +16,7 @@
 #define lefiLayer_h
 
 #include <stdio.h>
+#include <string>
 //#include "lefiKRDefs.hpp"
 #include "lefiMisc.hpp"
 
@@ -396,7 +397,7 @@ public:
   void setSpacingNotchLength(double minNotchLength);           // 5.7
   void setSpacingEndOfNotchWidth (double endOfNotchWidth,
            double minNotchSpacing, double minNotchLength);     // 5.7
-  void setDirection(const char* dir);
+  void setDirection(std::string& dir);
   void setResistance(double num);
   void setCapacitance(double num);
   void setHeight(double num);
@@ -597,7 +598,7 @@ public:
   double minimumcutLength(int index) const;
   double minimumcutDistance(int index) const;
 
-  const char* direction() const ;
+  std::string const& direction() const ;
   double resistance() const ;
   double capacitance() const ;
   double height() const ;
@@ -886,7 +887,7 @@ protected:
   double* minstepMinBetLength_;               // 5.7
   int*    minstepXSameCorners_;               // 5.7
 
-  char*  direction_;
+  std::string  direction_;
   double resistance_;
   double capacitance_;
   double height_;

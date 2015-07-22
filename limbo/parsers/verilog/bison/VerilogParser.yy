@@ -125,35 +125,35 @@
 
 range: '[' NUM ':' NUM ']' {$$ = new Range (1, 2);}
 
-param1: NAME {}
-      | NAME range {} 
+param1: NAME {delete $1;}
+      | NAME range {delete $1; delete $2;} 
       ;
 
 /* wire_pin_cbk will be called before module_instance_cbk */
-param2: '.' NAME '(' NAME ')' {driver.wire_pin_cbk(*$4, *$2);}
-      | '.' NAME '(' NAME range ')' {driver.wire_pin_cbk(*$4, *$2, *$5);}
+param2: '.' NAME '(' NAME ')' {driver.wire_pin_cbk(*$4, *$2); delete $2; delete $4;}
+      | '.' NAME '(' NAME range ')' {driver.wire_pin_cbk(*$4, *$2, *$5); delete $2; delete $4; delete $5;}
       ;
 
-param3: INPUT NAME {driver.pin_declare_cbk(*$2, kINPUT);}
-      | INPUT REG NAME {driver.pin_declare_cbk(*$3, kINPUT|kREG);}
-      | INPUT range NAME {driver.pin_declare_cbk(*$3, kINPUT, *$2);} 
-      | INPUT REG range NAME {driver.pin_declare_cbk(*$4, kINPUT|kREG, *$3);}
-      | OUTPUT NAME {driver.pin_declare_cbk(*$2, kOUTPUT);}
-      | OUTPUT REG NAME {driver.pin_declare_cbk(*$3, kOUTPUT|kREG);}
-      | OUTPUT range NAME {driver.pin_declare_cbk(*$3, kOUTPUT, *$2);}
-      | OUTPUT REG range NAME {driver.pin_declare_cbk(*$4, kOUTPUT|kREG, *$3);}
-      | INOUT NAME {driver.pin_declare_cbk(*$2, kINPUT|kOUTPUT);}
-      | INOUT REG NAME {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT|kREG);}
-      | INOUT range NAME {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT, *$2);}
-      | INOUT REG range NAME {driver.pin_declare_cbk(*$4, kINPUT|kOUTPUT|kREG, *$3);}
+param3: INPUT NAME {driver.pin_declare_cbk(*$2, kINPUT); delete $2;}
+      | INPUT REG NAME {driver.pin_declare_cbk(*$3, kINPUT|kREG); delete $3;}
+      | INPUT range NAME {driver.pin_declare_cbk(*$3, kINPUT, *$2); delete $2; delete $3;} 
+      | INPUT REG range NAME {driver.pin_declare_cbk(*$4, kINPUT|kREG, *$3); delete $3; delete $4;}
+      | OUTPUT NAME {driver.pin_declare_cbk(*$2, kOUTPUT); delete $2;}
+      | OUTPUT REG NAME {driver.pin_declare_cbk(*$3, kOUTPUT|kREG); delete $3;}
+      | OUTPUT range NAME {driver.pin_declare_cbk(*$3, kOUTPUT, *$2); delete $2; delete $3;}
+      | OUTPUT REG range NAME {driver.pin_declare_cbk(*$4, kOUTPUT|kREG, *$3); delete $3; delete $4;}
+      | INOUT NAME {driver.pin_declare_cbk(*$2, kINPUT|kOUTPUT); delete $2;}
+      | INOUT REG NAME {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT|kREG); delete $3;}
+      | INOUT range NAME {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT, *$2); delete $2; delete $3;}
+      | INOUT REG range NAME {driver.pin_declare_cbk(*$4, kINPUT|kOUTPUT|kREG, *$3); delete $3; delete $4;}
       ;
 
-param4: REG NAME
-      | REG range NAME
+param4: REG NAME {delete $2;}
+      | REG range NAME {delete $2; delete $3;}
       ;
 
-param5: WIRE NAME {driver.wire_declare_cbk(*$2);}
-      | WIRE range NAME {driver.wire_declare_cbk(*$3, *$2);}
+param5: WIRE NAME {driver.wire_declare_cbk(*$2); delete $2;}
+      | WIRE range NAME {driver.wire_declare_cbk(*$3, *$2); delete $2; delete $3;}
       ;
 
 
@@ -166,7 +166,7 @@ module_params: /* empty */
              | module_params ',' module_param 
              ;
 
-module_declare: MODULE NAME '(' module_params ')' ';'
+module_declare: MODULE NAME '(' module_params ')' ';' {delete $2;}
               ;
 
 variable_declare: param3 ';'
@@ -180,7 +180,7 @@ instance_params: /* empty */
                | instance_params ',' param2 
                ;
 
-module_instance: NAME NAME '(' instance_params ')' ';' {driver.module_instance_cbk(*$1, *$2);}
+module_instance: NAME NAME '(' instance_params ')' ';' {driver.module_instance_cbk(*$1, *$2); delete $1; delete $2;}
                ;
 
 module_content: /* empty */

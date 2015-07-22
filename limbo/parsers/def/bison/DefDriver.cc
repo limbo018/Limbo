@@ -78,15 +78,15 @@ void Driver::diearea_cbk(int xl, int yl, int xh, int yh)
 	m_db.set_def_diearea(xl, yl, xh, yh);
 }
 
-void Driver::row_cbk(string const& row_name, string const& macro_name, 
-		int originx, int originy, string const& orient, 
+void Driver::row_cbk(string& row_name, string& macro_name, 
+		int originx, int originy, string& orient, 
 		int repeatx, int repeaty, int stepx, int stepy) 
 {
-	m_row.row_name = row_name; 
-	m_row.macro_name = macro_name;
+	std::swap(m_row.row_name, row_name); 
+	std::swap(m_row.macro_name, macro_name);
 	m_row.origin[0] = originx; 
 	m_row.origin[1] = originy; 
-	m_row.orient = orient;
+	std::swap(m_row.orient, orient);
 	m_row.repeat[0] = repeatx; m_row.repeat[1] = repeaty;
 	m_row.step[0] = stepx; m_row.step[1] = stepy;
 	m_db.add_def_row(m_row);
@@ -111,24 +111,24 @@ void Driver::component_cbk_size(int size)
 {
 	m_db.resize_def_component(size);
 }
-void Driver::component_cbk_position(string const& status, int originx, int originy, string const& orient) 
+void Driver::component_cbk_position(string& status, int originx, int originy, string& orient) 
 {
-	m_comp.status = status;
+	std::swap(m_comp.status, status);
 	m_comp.origin[0] = originx; m_comp.origin[1] = originy;
-	m_comp.orient = orient;
+	std::swap(m_comp.orient, orient);
 }
-void Driver::component_cbk_position(string const& status) 
+void Driver::component_cbk_position(string& status) 
 {
-	m_comp.status = status;
+	std::swap(m_comp.status, status);
 }
 void Driver::component_cbk_source(string const&) 
 {
 	// no use 
 }
-void Driver::component_cbk(string const& comp_name, string const& macro_name) 
+void Driver::component_cbk(string& comp_name, string& macro_name) 
 {
-	m_comp.comp_name = comp_name;
-	m_comp.macro_name = macro_name;
+	std::swap(m_comp.comp_name, comp_name);
+	std::swap(m_comp.macro_name, macro_name);
 	m_db.add_def_component(m_comp);
 #ifdef DEBUG_DEFPARSER
 	std::cerr << m_comp << std::endl;
@@ -139,45 +139,45 @@ void Driver::pin_cbk_size(int size)
 {
 	m_db.resize_def_pin(size);
 }
-void Driver::pin_cbk(string const& pin_name) // remember to reset in this function 
+void Driver::pin_cbk(string& pin_name) // remember to reset in this function 
 {
-	m_pin.pin_name = pin_name;
+	std::swap(m_pin.pin_name, pin_name);
 	m_db.add_def_pin(m_pin);
 #ifdef DEBUG_DEFPARSER
 	std::cerr << m_pin << std::endl;
 #endif 
 	m_pin.reset();
 }
-void Driver::pin_cbk_net(string const& net_name)
+void Driver::pin_cbk_net(string& net_name)
 {
-	m_pin.net_name = net_name;
+	std::swap(m_pin.net_name, net_name);
 }
-void Driver::pin_cbk_direction(string const& direct)
+void Driver::pin_cbk_direction(string& direct)
 {
-	m_pin.direct = direct;
+	std::swap(m_pin.direct, direct);
 }
-void Driver::pin_cbk_position(string const& status, int originx, int originy, string const& orient)
+void Driver::pin_cbk_position(string& status, int originx, int originy, string& orient)
 {
-	m_pin.status = status;
+	std::swap(m_pin.status, status);
 	m_pin.origin[0] = originx; m_pin.origin[1] = originy;
-	m_pin.orient = orient;
+	std::swap(m_pin.orient, orient);
 }
-void Driver::pin_cbk_bbox(string const& layer_name, int xl, int yl, int xh, int yh)
+void Driver::pin_cbk_bbox(string& layer_name, int xl, int yl, int xh, int yh)
 {
-	m_pin.layer_name = layer_name;
+	std::swap(m_pin.layer_name, layer_name);
 	m_pin.bbox[0] = xl; m_pin.bbox[1] = yl;
 	m_pin.bbox[2] = xh; m_pin.bbox[3] = yh;
 }
-void Driver::pin_cbk_use(string const& use)
+void Driver::pin_cbk_use(string& use)
 {
-	m_pin.use = use;
+	std::swap(m_pin.use, use);
 }
-void Driver::net_cbk_name(string const& net_name) 
+void Driver::net_cbk_name(string& net_name) 
 {
 	// due to the feature of LL 
 	// net_cbk_pin will be called before net_cbk_name 
-	m_net.net_name = net_name;
-	m_net.vNetPin = m_vNetPin;
+	std::swap(m_net.net_name, net_name);
+	std::swap(m_net.vNetPin, m_vNetPin);
 	m_db.add_def_net(m_net);
 #ifdef DEBUG_DEFPARSER
 	std::cerr << m_net << std::endl;
@@ -186,9 +186,11 @@ void Driver::net_cbk_name(string const& net_name)
 	// remember to clear m_vNetPin
 	m_vNetPin.clear();
 }
-void Driver::net_cbk_pin(string const& node_name, string const& pin_name) 
+void Driver::net_cbk_pin(string& node_name, string& pin_name) 
 {
-	m_vNetPin.push_back(make_pair(node_name, pin_name));
+    m_vNetPin.push_back(pair<string, string>());
+    std::swap(m_vNetPin.back().first, node_name);
+    std::swap(m_vNetPin.back().second, pin_name);
 }
 void Driver::net_cbk_size(int size) 
 {

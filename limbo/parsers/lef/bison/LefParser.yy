@@ -543,7 +543,7 @@
 NUMBER : INTEGER {$$=$1;} 
 	   | DOUBLE {$$=$1;}
 
-GSTRING : STRING {$$ = new std::string (*$1);}
+GSTRING : STRING {$$ = $1;}
 | K_DEFINE {$$ = new std::string ("DEFINE");} 
 | K_DEFINEB {$$ = new std::string ("DEFINEB");} 
 | K_DEFINES {$$ = new std::string ("DEFINES");} 
@@ -1004,6 +1004,7 @@ version: K_VERSION { driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING ';'
             driver.doneLib = 1;
             driver.lefNamesCaseSensitive = 1;
          }
+         delete $3;
       }
 	  | K_VERSION { driver.lefDumbMode = 1; driver.lefNoNum = 1;} DOUBLE ';'
       { 
@@ -1051,6 +1052,7 @@ dividerchar: K_DIVIDERCHAR QSTRING ';'
 			  driver.lefWarning(2005, "DIVIDERCHAR has an invalid null value. Value is set to default /");
 		  }
 		  driver.hasDivChar = 1;
+          delete $2;
       }
 
 busbitchars: K_BUSBITCHARS QSTRING ';'
@@ -1065,6 +1067,7 @@ busbitchars: K_BUSBITCHARS QSTRING ';'
 		 driver.lefWarning(2006, "BUSBITCHAR has an invalid null value. Value is set to default []");
 	  }
 	driver.hasBusBit = 1;
+    delete $2;
   }
 
 rules: /* empty */
@@ -1189,10 +1192,11 @@ useminspacing: K_USEMINSPACING spacing_type spacing_value ';'
 		driver.lefrUseMinSpacing.lefiUseMinSpacing::set((*$2).c_str(), $3);
 		driver.lefrUseMinSpacingCbk(driver.lefrUseMinSpacing);
     }
+    delete $2;
   }
 
 clearancemeasure: K_CLEARANCEMEASURE clearance_type ';'
-    {driver.lefrClearanceMeasureCbk(*$2);}
+    {driver.lefrClearanceMeasureCbk(*$2); delete $2;}
 
 clearance_type:
   K_MAXXY   {$$ = new std::string ("MAXXY");}
@@ -1283,6 +1287,7 @@ start_layer: K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1; } GSTRING
       driver.hasTwoWidths = 0;
       driver.lefrHasSpacingTbl = 0;
       driver.lefrHasSpacing = 0;
+      delete $3;
     }
 
 end_layer: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1; } GSTRING
@@ -1321,6 +1326,7 @@ end_layer: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1; } GSTRING
             }
         }
       }
+      delete $3;
     }
 
 layer_options:
@@ -1360,6 +1366,7 @@ layer_option:
     {
          driver.lefrLayer.lefiLayer::setType((*$2).c_str());
       driver.hasType = 1;
+      delete $2;
     }
   | K_PITCH NUMBER ';'
     { 
@@ -1467,8 +1474,9 @@ layer_option:
             }
          }
       }
-      if (/*driver.lefrLayerCbk*/ 1) driver.lefrLayer.lefiLayer::setDirection((*$2).c_str());
+      if (/*driver.lefrLayerCbk*/ 1) driver.lefrLayer.lefiLayer::setDirection(*$2);
       driver.hasDirection = 1;  
+      delete $2;
     }
   | K_RESISTANCE K_RPERSQ NUMBER ';'
     {
@@ -1701,6 +1709,7 @@ layer_option:
          }
       }
       if (/*driver.lefrLayerCbk*/ 1) driver.lefrLayer.lefiLayer::addAccurrentDensity((*$2).c_str());
+      delete $2;
     }
     layer_frequency
   | K_ACCURRENTDENSITY layer_table_type NUMBER ';'
@@ -1716,6 +1725,7 @@ layer_option:
       if (/*driver.lefrLayerCbk*/ 1) {
            driver.lefrLayer.lefiLayer::addAccurrentDensity((*$2).c_str());
            driver.lefrLayer.lefiLayer::setAcOneEntry($3);
+           delete $2;
       }
     }
   | K_DCCURRENTDENSITY K_AVERAGE NUMBER ';'
@@ -2268,6 +2278,7 @@ layer_option:
          driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($3->x, $3->y);
          driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($4->x, $4->y);
       }
+      delete $3; delete $4;
     } 
     layer_diffusion_ratios ')' ';'
     {
@@ -2712,6 +2723,7 @@ layer_option:
       }
       if (/*driver.lefrLayerCbk*/ 1)
          driver.lefrLayer.lefiLayer::addEnclosure((*$2).c_str(), $3, $4);
+         delete $2;
     }
     layer_enclosure_width_opt ';'
   /* 12/30/2003 - 5.6 syntax */
@@ -2731,6 +2743,7 @@ layer_option:
       }
       if (/*driver.lefrLayerCbk*/ 1)
          driver.lefrLayer.lefiLayer::addPreferEnclosure((*$2).c_str(), $3, $4);
+         delete $2;
     }
     layer_preferenclosure_width_opt ';'
   | K_RESISTANCE NUMBER ';'
@@ -3089,6 +3102,7 @@ layer_minstep_option:
   layer_minstep_type
   {
     if (/*driver.lefrLayerCbk*/ 1) driver.lefrLayer.lefiLayer::addMinstepType((*$1).c_str());
+    delete $1;
   }
   | K_LENGTHSUM NUMBER
   {
@@ -3123,6 +3137,7 @@ layer_antenna_pwl:
           driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($3->x, $3->y);
           driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($4->x, $4->y);
         }
+        delete $3; delete $4;
       }
     layer_diffusion_ratios ')'
       { if (/*driver.lefrLayerCbk*/ 1)
@@ -3140,6 +3155,7 @@ layer_diffusion_ratio:
   pt
   { if (/*driver.lefrLayerCbk*/ 1)
       driver.lefrAntennaPWLPtr->lefiAntennaPWL::addAntennaPWL($1->x, $1->y);
+    delete $1;
   }
 
 layer_antenna_duo: /* empty */
@@ -3245,6 +3261,7 @@ layer_prop:
         propTp = driver.lefrLayerProp.lefiPropType::propType((*$1).c_str());
         driver.lefrLayer.lefiLayer::addProp((*$1).c_str(), (*$2).c_str(), propTp);
       }
+      delete $1; delete $2;
     }
   | STRING QSTRING
     {
@@ -3253,6 +3270,7 @@ layer_prop:
         propTp = driver.lefrLayerProp.lefiPropType::propType((*$1).c_str());
         driver.lefrLayer.lefiLayer::addProp((*$1).c_str(), (*$2).c_str(), propTp);
       }
+      delete $1; delete $2;
     }
   | STRING NUMBER
     {
@@ -3263,6 +3281,7 @@ layer_prop:
         propTp = driver.lefrLayerProp.lefiPropType::propType((*$1).c_str());
         driver.lefrLayer.lefiLayer::addNumProp((*$1).c_str(), $2, temp, propTp);
       }
+      delete $1; 
     }
 
 current_density_pwl_list :
@@ -3450,6 +3469,7 @@ maxstack_via: K_MAXVIASTACK NUMBER ';'
         }
       }
       driver.lefrHasMaxVS = 1;
+      delete $5; delete $6;
     }
 
 via: start_via  { driver.hasViaRule_layer = 0; } via_option end_via
@@ -3469,6 +3489,7 @@ start_via: via_keyword STRING
       driver.numVia++;
       //strcpy(driver.viaName, $2);
       driver.viaName = *$2;
+      delete $2;
     }
   | via_keyword STRING K_DEFAULT
     {
@@ -3477,6 +3498,7 @@ start_via: via_keyword STRING
       driver.viaLayer = 0;
       //strcpy(driver.viaName, $2);
       driver.viaName = *$2;
+      delete $2;
     }
   | via_keyword STRING K_GENERATED
     {
@@ -3485,6 +3507,7 @@ start_via: via_keyword STRING
       driver.viaLayer = 0;
       //strcpy(driver.viaName, $2);
       driver.viaName = *$2;
+      delete $2;
     }
 
 via_viarule: K_VIARULE {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
@@ -3509,6 +3532,7 @@ via_viarule: K_VIARULE {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';
                           $16, $17, $20, $21, $22, $23);
        driver.viaLayer++;
        driver.hasViaRule_layer = 1;
+       delete $3; delete $11; delete $12; delete $13;
     }
   via_viarule_options
   ;
@@ -3532,6 +3556,7 @@ via_viarule_option: K_ROWCOL NUMBER NUMBER ';'
   | K_PATTERN {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
     {
        if (/*lefrViaCbk*/ 1) driver.lefrVia.lefiVia::setPattern((*$3).c_str());
+       delete $3;
     }
   ;
 
@@ -3582,6 +3607,7 @@ via_name_value_pair:
          propTp = driver.lefrViaProp.lefiPropType::propType((*$1).c_str());
          driver.lefrVia.lefiVia::addNumProp((*$1).c_str(), $2, temp, propTp);
       }
+     delete $1;
     }
   | STRING QSTRING
     {
@@ -3590,6 +3616,7 @@ via_name_value_pair:
          propTp = driver.lefrViaProp.lefiPropType::propType((*$1).c_str());
          driver.lefrVia.lefiVia::addProp((*$1).c_str(), (*$2).c_str(), propTp);
       }
+     delete $1; delete $2;
     }
   | STRING STRING
     {
@@ -3598,6 +3625,7 @@ via_name_value_pair:
          propTp = driver.lefrViaProp.lefiPropType::propType((*$1).c_str());
          driver.lefrVia.lefiVia::addProp((*$1).c_str(), (*$2).c_str(), propTp);
       }
+     delete $1; delete $2;
     }
 
 via_foreign:
@@ -3609,6 +3637,7 @@ via_foreign:
         if (/*lefrViaCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.viaWarnings++ < driver.lefrViaWarnings)
              driver.lefWarning(2020, "FOREIGN statement in VIA is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+        delete $1;
     }
   | start_foreign pt ';'
     {
@@ -3618,6 +3647,7 @@ via_foreign:
         if (/*lefrViaCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.viaWarnings++ < driver.lefrViaWarnings)
              driver.lefWarning(2020, "FOREIGN statement in VIA is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+     delete $1; delete $2;
     }
   | start_foreign pt orientation ';'
     {
@@ -3627,6 +3657,7 @@ via_foreign:
         if (/*lefrViaCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.viaWarnings++ < driver.lefrViaWarnings)
              driver.lefWarning(2020, "FOREIGN statement in VIA is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+     delete $1; delete $2;
     }
   | start_foreign orientation ';'
     {
@@ -3636,10 +3667,11 @@ via_foreign:
         if (/*lefrViaCbk*/ 1)  /* write warning only if cbk is set */
            if (driver.viaWarnings++ < driver.lefrViaWarnings)
              driver.lefWarning(2020, "FOREIGN statement in VIA is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+     delete $1;
     }
 
 start_foreign:	K_FOREIGN {driver.lefDumbMode = 1; driver.lefNoNum= 1;} STRING
-    { $$ = new std::string (*$3); }
+    { $$ = $3; }
 
 orientation:
   K_N         {$$ = 0;}
@@ -3667,6 +3699,7 @@ via_layer: K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
       if (/*lefrViaCbk*/ 1) driver.lefrVia.lefiVia::addLayer((*$3).c_str());
       driver.viaLayer++;
       driver.hasViaRule_layer = 1;
+      delete $3;
     }
 
 via_geometries:
@@ -3677,7 +3710,9 @@ via_geometries:
 via_geometry:
   K_RECT pt pt ';'
     { if (/*lefrViaCbk*/ 1)
-        driver.lefrVia.lefiVia::addRectToLayer($2->x, $2->y, $3->x, $3->y); }
+        driver.lefrVia.lefiVia::addRectToLayer($2->x, $2->y, $3->x, $3->y); 
+    delete $2; delete $3;
+    }
   | K_POLYGON                                               // 5.6
     {
       driver.lefrGeometriesPtr = (lefiGeometries*)lefMalloc(sizeof(lefiGeometries));
@@ -3723,6 +3758,7 @@ end_via: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
             } 
          } 
       } 
+      delete $3;
     }
 
 viarule_keyword : K_VIARULE { driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
@@ -3732,6 +3768,7 @@ viarule_keyword : K_VIARULE { driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRI
       //strcpy(driver.viaRuleName, $3);
       driver.viaRuleName = (*$3);
       driver.isGenerate = 0;
+      delete $3;
     }
 
 viarule:
@@ -3849,6 +3886,7 @@ viarule_prop:
          propTp = driver.lefrViaRuleProp.lefiPropType::propType((*$1).c_str());
          driver.lefrViaRule.lefiViaRule::addProp((*$1).c_str(), (*$2).c_str(), propTp);
       }
+      delete $1; delete $2;
     }
   | STRING QSTRING
     {
@@ -3857,6 +3895,7 @@ viarule_prop:
          propTp = driver.lefrViaRuleProp.lefiPropType::propType((*$1).c_str());
          driver.lefrViaRule.lefiViaRule::addProp((*$1).c_str(), (*$2).c_str(), propTp);
       }
+      delete $1; delete $2;
     }
   | STRING NUMBER
     {
@@ -3867,6 +3906,7 @@ viarule_prop:
          propTp = driver.lefrViaRuleProp.lefiPropType::propType((*$1).c_str());
          driver.lefrViaRule.lefiViaRule::addNumProp((*$1).c_str(), $2, temp, propTp);
       }
+      delete $1;
     }
 
 viarule_layer: viarule_layer_name viarule_layer_options
@@ -3906,12 +3946,13 @@ via_names:
   ;
 
 via_name: via_keyword STRING ';'
-    { if (/*driver.lefrViaRuleCbk*/ 1) driver.lefrViaRule.lefiViaRule::addViaName((*$2).c_str()); }
+    { if (/*driver.lefrViaRuleCbk*/ 1) driver.lefrViaRule.lefiViaRule::addViaName((*$2).c_str()); delete $2;}
 
 viarule_layer_name: K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
     { if (/*driver.lefrViaRuleCbk*/ 1) driver.lefrViaRule.lefiViaRule::setLayer((*$3).c_str());
       driver.viaRuleHasDir = 0;
       driver.viaRuleHasEnc = 0;
+      delete $3;
     }
 
 viarule_layer_options:
@@ -3998,7 +4039,9 @@ viarule_layer_option:
     { if (/*driver.lefrViaRuleCbk*/ 1) driver.lefrViaRule.lefiViaRule::setWidth($2,$4); }
   | K_RECT pt pt ';'
     { if (/*driver.lefrViaRuleCbk*/ 1)
-	driver.lefrViaRule.lefiViaRule::setRect($2->x, $2->y, $3->x, $3->y); }
+	driver.lefrViaRule.lefiViaRule::setRect($2->x, $2->y, $3->x, $3->y); 
+    delete $2; delete $3;
+    }
   | K_SPACING NUMBER K_BY NUMBER ';'
     { if (/*driver.lefrViaRuleCbk*/ 1) driver.lefrViaRule.lefiViaRule::setSpacing($2,$4); }
   | K_RESISTANCE NUMBER ';'
@@ -4075,6 +4118,7 @@ end_viarule: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;}  STRING
            } 
         } 
       } 
+      delete $3;
     }
 
 spacing_rule: start_spacing spacings end_spacing 
@@ -4130,6 +4174,7 @@ spacing:  samenet_keyword STRING STRING NUMBER ';'
           }
         }
       }
+      delete $2; delete $3;
     }
   | samenet_keyword STRING STRING NUMBER K_STACK ';'
     {
@@ -4141,6 +4186,7 @@ spacing:  samenet_keyword STRING STRING NUMBER ';'
           }
         }
       }
+      delete $2; delete $3;
     }
 
 samenet_keyword: K_SAMENET
@@ -4192,7 +4238,7 @@ ir_table_value: NUMBER NUMBER
   { if (/*driver.lefrIRDropCbk*/ 1) driver.lefrIRDrop.lefiIRDrop::setValues($1, $2); }
 
 ir_tablename: K_TABLE STRING
-  { if (/*driver.lefrIRDropCbk*/ 1) driver.lefrIRDrop.lefiIRDrop::setTableName((*$2).c_str()); }
+  { if (/*driver.lefrIRDropCbk*/ 1) driver.lefrIRDrop.lefiIRDrop::setTableName((*$2).c_str()); delete $2; }
 
 minfeature: K_MINFEATURE NUMBER NUMBER ';'
   {
@@ -4228,6 +4274,7 @@ nondefault_rule: K_NONDEFAULTRULE {driver.lefDumbMode = 1; driver.lefNoNum = 1;}
     driver.numVia = 0;
     //strcpy(driver.nonDefaultRuleName, $3);
     driver.nonDefaultRuleName = *$3;
+    delete $3;
   }
   nd_hardspacing
   nd_rules {driver.lefNdRule = 1;} end_nd_rule
@@ -4279,6 +4326,7 @@ end_nd_rule: K_END
           } 
         } 
       } 
+      delete $2;
     }
   ;
 
@@ -4332,6 +4380,7 @@ usevia: K_USEVIA STRING ';'
           if (/*driver.lefrNonDefaultCbk*/ 1)
              driver.lefrNonDefault.lefiNonDefault::addUseVia((*$2).c_str());
        }
+       delete $2;
     }
 
 useviarule:  K_USEVIARULE STRING ';'
@@ -4351,6 +4400,7 @@ useviarule:  K_USEVIARULE STRING ';'
           if (/*driver.lefrNonDefaultCbk*/ 1)
              driver.lefrNonDefault.lefiNonDefault::addUseViaRule((*$2).c_str());
        }
+       delete $2;
     }
 
 mincuts: K_MINCUTS STRING NUMBER ';'
@@ -4370,6 +4420,7 @@ mincuts: K_MINCUTS STRING NUMBER ';'
           if (/*driver.lefrNonDefaultCbk*/ 1)
              driver.lefrNonDefault.lefiNonDefault::addMinCuts((*$2).c_str(), (int)$3);
        }
+       delete $2;
     }
 
 nd_prop: K_PROPERTY { driver.lefDumbMode = 10000000; driver.lefRealNum = 1; driver.lefInProp = 1; } nd_prop_list ';'
@@ -4391,6 +4442,7 @@ nd_prop:
          propTp = driver.lefrNondefProp.lefiPropType::propType((*$1).c_str());
          driver.lefrNonDefault.lefiNonDefault::addProp((*$1).c_str(), (*$2).c_str(), propTp);
       }
+      delete $1; delete $2;
     }
   | STRING QSTRING
     {
@@ -4399,6 +4451,7 @@ nd_prop:
          propTp = driver.lefrNondefProp.lefiPropType::propType((*$1).c_str());
          driver.lefrNonDefault.lefiNonDefault::addProp((*$1).c_str(), (*$2).c_str(), propTp);
       }
+      delete $1; delete $2;
     }
   | STRING NUMBER
     {
@@ -4409,6 +4462,7 @@ nd_prop:
          propTp = driver.lefrNondefProp.lefiPropType::propType((*$1).c_str());
          driver.lefrNonDefault.lefiNonDefault::addNumProp((*$1).c_str(), $2, temp, propTp);
       }
+      delete $1;
     }
 
 nd_layer: K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
@@ -4419,6 +4473,7 @@ nd_layer: K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
     driver.layerName = *$3;
     driver.ndLayerWidth = 0;
     driver.ndLayerSpace = 0;
+    delete $3;
   }
   K_WIDTH NUMBER ';'
   { 
@@ -4460,6 +4515,7 @@ nd_layer: K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
          }
       }
     }
+    delete $3; delete $12;
   }
   ;
 
@@ -4580,6 +4636,7 @@ start_site: K_SITE {driver.lefDumbMode = 1; driver.lefNoNum = 1;} GSTRING
       driver.hasSiteClass = 0;
       driver.hasSiteSize = 0;
       driver.hasSite = 1;
+      delete $3;
     }
 
 end_site: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} GSTRING
@@ -4607,6 +4664,7 @@ end_site: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} GSTRING
           }
         }
       }
+      delete $3;
     }
 
 site_options:
@@ -4628,6 +4686,7 @@ site_option:
     { 
       if (/*driver.lefrSiteCbk*/ 1) driver.lefrSite.lefiSite::setClass((*$1).c_str());
       driver.hasSiteClass = 1;
+      delete $1;
     }
   | site_rowpattern_statement
     { }
@@ -4663,7 +4722,7 @@ site_rowpatterns:
   ;
 
 site_rowpattern: STRING orientation {driver.lefDumbMode = 1; driver.lefNoNum = 1;}
-    { if (/*driver.lefrSiteCbk*/ 1) driver.lefrSite.lefiSite::addRowPattern((*$1).c_str(), $2); }
+    { if (/*driver.lefrSiteCbk*/ 1) driver.lefrSite.lefiSite::addRowPattern((*$1).c_str(), $2); delete $1;}
 
 pt:
   NUMBER NUMBER
@@ -4695,6 +4754,7 @@ start_macro: K_MACRO {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
       }
       //strcpy(driver.macroName, $3);
       driver.macroName = (*$3);
+      delete $3;
     }
 
 end_macro: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
@@ -4713,6 +4773,7 @@ end_macro: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
       } 
       if (/*driver.lefrMacroEndCbk*/ 1)
         driver.lefrMacroEndCbk(*$3);
+        delete $3;
     }
 
 macro_options:
@@ -4800,6 +4861,7 @@ macro_name_value_pair:
          propTp = driver.lefrMacroProp.lefiPropType::propType((*$1).c_str());
          driver.lefrMacro.lefiMacro::setNumProperty((*$1).c_str(), $2, temp,  propTp);
       }
+      delete $1;
     }
   | STRING QSTRING
     {
@@ -4808,6 +4870,7 @@ macro_name_value_pair:
          propTp = driver.lefrMacroProp.lefiPropType::propType((*$1).c_str());
          driver.lefrMacro.lefiMacro::setProperty((*$1).c_str(), (*$2).c_str(), propTp);
       }
+      delete $1; delete $2;
     }
   | STRING STRING
     {
@@ -4816,6 +4879,7 @@ macro_name_value_pair:
          propTp = driver.lefrMacroProp.lefiPropType::propType((*$1).c_str());
          driver.lefrMacro.lefiMacro::setProperty((*$1).c_str(), (*$2).c_str(), propTp);
       }
+      delete $1; delete $2;
     }
 
 macro_class: K_CLASS class_type ';'
@@ -4823,6 +4887,7 @@ macro_class: K_CLASS class_type ';'
        if (/*driver.lefrMacroCbk*/ 1) driver.lefrMacro.lefiMacro::setClass((*$2).c_str());
        if (/*driver.lefrMacroClassTypeCbk*/ 1)
           driver.lefrMacroClassTypeCbk(*$2);
+        delete $2;
     }
 
 class_type:
@@ -4923,6 +4988,7 @@ class_type:
             }
           }
         }
+        delete $2;
       }
   | K_CORE    {$$ = new std::string ("CORE"); }
   | K_CORNER 
@@ -4933,10 +4999,10 @@ class_type:
        */
       }
   | K_CORE core_type
-      {sprintf(driver.temp_name, "CORE %s", (*$2).c_str());
+      {sprintf(driver.temp_name, "CORE %s", (*$2).c_str()); delete $2;
       $$ = new std::string (driver.temp_name);} 
   | K_ENDCAP endcap_type
-      {sprintf(driver.temp_name, "ENDCAP %s", (*$2).c_str());
+      {sprintf(driver.temp_name, "ENDCAP %s", (*$2).c_str()); delete $2;
       $$ = new std::string (driver.temp_name);} 
 
 pad_type: /*      {$$ = (char*)"";}
@@ -5019,10 +5085,10 @@ endcap_type:
   | K_BOTTOMRIGHT	{$$ = new std::string ("BOTTOMRIGHT");}
 
 macro_generator: K_GENERATOR STRING ';'
-    { if (/*driver.lefrMacroCbk*/ 1) driver.lefrMacro.lefiMacro::setGenerator((*$2).c_str()); }
+    { if (/*driver.lefrMacroCbk*/ 1) driver.lefrMacro.lefiMacro::setGenerator((*$2).c_str()); delete $2;}
 
 macro_generate: K_GENERATE STRING STRING ';'
-    { if (/*driver.lefrMacroCbk*/ 1) driver.lefrMacro.lefiMacro::setGenerate((*$2).c_str(), (*$3).c_str()); }
+    { if (/*driver.lefrMacroCbk*/ 1) driver.lefrMacro.lefiMacro::setGenerate((*$2).c_str(), (*$3).c_str());  delete $2; delete $3;}
 
 macro_source:
   K_SOURCE K_USER ';'
@@ -5110,28 +5176,33 @@ macro_origin: K_ORIGIN pt ';'
           driver.macroNum.y = $2->y; 
           driver.lefrMacroOriginCbk( driver.macroNum);
        }
+       delete $2;
     }
 
 macro_foreign:
   start_foreign ';'
     { if (/*driver.lefrMacroCbk*/ 1)
       driver.lefrMacro.lefiMacro::addForeign((*$1).c_str(), 0, 0.0, 0.0, -1);
+      delete $1;
     }
   | start_foreign pt ';'
     { if (/*driver.lefrMacroCbk*/ 1)
       driver.lefrMacro.lefiMacro::addForeign((*$1).c_str(), 1, $2->x, $2->y, -1);
+      delete $1; delete $2;
     }
   | start_foreign pt orientation ';'
     { if (/*driver.lefrMacroCbk*/ 1)
       driver.lefrMacro.lefiMacro::addForeign((*$1).c_str(), 1, $2->x, $2->y, $3);
+      delete $1; delete $2;
     }
   | start_foreign orientation ';'
     { if (/*driver.lefrMacroCbk*/ 1)
       driver.lefrMacro.lefiMacro::addForeign((*$1).c_str(), 0, 0.0, 0.0, $2);
+      delete $1;
     }
 
 macro_eeq: K_EEQ { driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
-    { if (/*driver.lefrMacroCbk*/ 1) driver.lefrMacro.lefiMacro::setEEQ((*$3).c_str()); }
+    { if (/*driver.lefrMacroCbk*/ 1) driver.lefrMacro.lefiMacro::setEEQ((*$3).c_str()); delete $3;}
 
 macro_leq: K_LEQ { driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
     {
@@ -5141,6 +5212,7 @@ macro_leq: K_LEQ { driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
         if (/*driver.lefrMacroCbk*/ 1) /* write warning only if cbk is set */
            if (driver.macroWarnings++ < driver.lefrMacroWarnings)
              driver.lefWarning(2042, "LEQ statement in MACRO is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+     delete $3;
     }
 
 macro_site:
@@ -5155,6 +5227,7 @@ macro_site:
         driver.lefrSitePatternPtr->lefiSitePattern::setSiteName($2);
 */
       }
+      delete $2;
     }
   | macro_site_word sitePattern ';'
     {
@@ -5211,6 +5284,7 @@ start_macro_pin: K_PIN {driver.lefDumbMode = 1; driver.lefNoNum = 1; driver.pinD
     { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setName((*$3).c_str());
       //strcpy(driver.pinName, $3);
       driver.pinName = (*$3);
+      delete $3;
     }
 
 end_macro_pin: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} GSTRING
@@ -5227,6 +5301,7 @@ end_macro_pin: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} GSTRING
            } 
         } 
       } 
+      delete $3;
     }
 
 macro_pin_options:
@@ -5244,6 +5319,7 @@ macro_pin_option:
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
              driver.lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+     delete $1;
     }
   | start_foreign pt ';'
     {
@@ -5253,6 +5329,7 @@ macro_pin_option:
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
              driver.lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+    delete $1; delete $2;
     }
   | start_foreign pt orientation ';'
     {
@@ -5262,6 +5339,7 @@ macro_pin_option:
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
              driver.lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+    delete $1; delete $2;
     }
   | start_foreign K_STRUCTURE ';'
     {
@@ -5271,6 +5349,7 @@ macro_pin_option:
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
              driver.lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+    delete $1;
     }
   | start_foreign K_STRUCTURE pt ';'
     {
@@ -5280,6 +5359,7 @@ macro_pin_option:
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
              driver.lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+    delete $1; delete $3;
     }
   | start_foreign K_STRUCTURE pt orientation ';'
     {
@@ -5289,6 +5369,7 @@ macro_pin_option:
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
              driver.lefWarning(2043, "FOREIGN statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+    delete $1; delete $3;
     }
   | K_LEQ { driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
     {
@@ -5298,6 +5379,7 @@ macro_pin_option:
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
              driver.lefWarning(2044, "LEQ statement in MACRO PIN is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+    delete $3;
    }
   | K_POWER NUMBER ';'
     {
@@ -5309,9 +5391,9 @@ macro_pin_option:
              driver.lefWarning(2045, "MACRO POWER statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | electrical_direction
-    { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setDirection((*$1).c_str()); }
+    { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setDirection((*$1).c_str()); delete $1;}
   | K_USE macro_pin_use ';'
-    { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setUse((*$2).c_str()); }
+    { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setUse((*$2).c_str()); delete $2;}
   | K_SCANUSE macro_scan_use ';'
     { }
   | K_LEAKAGE NUMBER ';'
@@ -5387,9 +5469,9 @@ macro_pin_option:
              driver.lefWarning(2053, "MACRO TIEOFFR statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
     }
   | K_SHAPE pin_shape ';'
-    { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setShape((*$2).c_str()); }
+    { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setShape((*$2).c_str()); delete $2;}
   | K_MUSTJOIN {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING ';'
-    { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setMustjoin((*$3).c_str()); }
+    { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setMustjoin((*$3).c_str()); delete $3;}
   | K_OUTPUTNOISEMARGIN {driver.lefDumbMode = 1;} NUMBER NUMBER ';'
     {
       if (driver.versionNum < 5.4) {
@@ -5492,9 +5574,10 @@ macro_pin_option:
         if (/*driver.lefrPinCbk*/ 1) /* write warning only if cbk is set */
            if (driver.pinWarnings++ < driver.lefrPinWarnings)
              driver.lefWarning(2064, "MACRO IV_TABLES statement is obsolete in version 5.4 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.4 or later.");
+    delete $2; delete $3;
     }
   | K_TAPERRULE STRING ';'
-    { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setTaperRule((*$2).c_str()); }
+    { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setTaperRule((*$2).c_str()); delete $2;}
   | K_PROPERTY {driver.lefDumbMode = 1000000; driver.lefRealNum = 1; driver.lefInProp = 1; } pin_prop_list ';'
     { driver.lefDumbMode = 0;
       driver.lefRealNum = 0;
@@ -5549,6 +5632,7 @@ macro_pin_option:
         }
       }
       if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addAntennaSize($2, (*$3).c_str());
+      delete $3;
     }
   | K_ANTENNAMETALAREA NUMBER opt_layer_name ';'
     {  /* a pre 5.4 syntax */
@@ -5570,6 +5654,7 @@ macro_pin_option:
         }
       }
       if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addAntennaMetalArea($2, (*$3).c_str());
+      delete $3;
     }
   | K_ANTENNAMETALLENGTH NUMBER opt_layer_name ';'
     { /* a pre 5.4 syntax */ 
@@ -5591,6 +5676,7 @@ macro_pin_option:
         }
       }
       if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addAntennaMetalLength($2, (*$3).c_str());
+      delete $3;
     }
   | K_RISESLEWLIMIT NUMBER ';'
     { if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setRiseSlewLimit($2); }
@@ -5625,6 +5711,7 @@ macro_pin_option:
         }
       }
       if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addAntennaPartialMetalArea($2, (*$3).c_str());
+      delete $3;
     }
   | K_ANTENNAPARTIALMETALSIDEAREA NUMBER opt_layer_name ';'
     { /* 5.4 syntax */
@@ -5655,6 +5742,7 @@ macro_pin_option:
         }
       }
       if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addAntennaPartialMetalSideArea($2, (*$3).c_str());
+      delete $3;
     }
   | K_ANTENNAPARTIALCUTAREA NUMBER opt_layer_name ';'
     { /* 5.4 syntax */
@@ -5685,6 +5773,7 @@ macro_pin_option:
         }
       }
       if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addAntennaPartialCutArea($2, (*$3).c_str());
+      delete $3;
     }
   | K_ANTENNADIFFAREA NUMBER opt_layer_name ';'
     { /* 5.4 syntax */
@@ -5715,6 +5804,7 @@ macro_pin_option:
         }
       }
       if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addAntennaDiffArea($2, (*$3).c_str());
+      delete $3;
     }
   | K_ANTENNAGATEAREA NUMBER opt_layer_name ';'
     { /* 5.4 syntax */
@@ -5745,6 +5835,7 @@ macro_pin_option:
         }
       }
       if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addAntennaGateArea($2, (*$3).c_str());
+      delete $3;
     }
   | K_ANTENNAMAXAREACAR NUMBER req_layer_name ';'
     { /* 5.4 syntax */
@@ -5775,6 +5866,7 @@ macro_pin_option:
         }
       }
       if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addAntennaMaxAreaCar($2, (*$3).c_str());
+      delete $3;
     }
   | K_ANTENNAMAXSIDEAREACAR NUMBER req_layer_name ';'
     { /* 5.4 syntax */
@@ -5805,6 +5897,7 @@ macro_pin_option:
         }
       }
       if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addAntennaMaxSideAreaCar($2, (*$3).c_str());
+      delete $3;
     }
   | K_ANTENNAMAXCUTCAR NUMBER req_layer_name ';'
     { /* 5.4 syntax */
@@ -5835,6 +5928,7 @@ macro_pin_option:
         }
       }
       if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::addAntennaMaxCutCar($2, (*$3).c_str());
+      delete $3;
     }
   | K_ANTENNAMODEL
     { /* 5.5 syntax */
@@ -5881,6 +5975,7 @@ macro_pin_option:
         }
       } else
         if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setNetExpr((*$3).c_str());
+    delete $3;
     }
   | K_SUPPLYSENSITIVITY {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
     {
@@ -5897,6 +5992,7 @@ macro_pin_option:
         }
       } else
         if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setSupplySensitivity((*$3).c_str());
+    delete $3;
     }
   | K_GROUNDSENSITIVITY {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
     {
@@ -5913,6 +6009,7 @@ macro_pin_option:
         }
       } else
         if (/*driver.lefrPinCbk*/ 1) driver.lefrPin.lefiPin::setGroundSensitivity((*$3).c_str());
+    delete $3;
     }
 
 pin_layer_oxide:
@@ -5952,6 +6049,7 @@ pin_name_value_pair:
          propTp = driver.lefrPinProp.lefiPropType::propType((*$1).c_str());
          driver.lefrPin.lefiPin::setNumProperty((*$1).c_str(), $2, temp, propTp);
       }
+      delete $1;
     }
   | STRING QSTRING
     {
@@ -5960,6 +6058,7 @@ pin_name_value_pair:
          propTp = driver.lefrPinProp.lefiPropType::propType((*$1).c_str());
          driver.lefrPin.lefiPin::setProperty((*$1).c_str(), (*$2).c_str(), propTp);
       }
+      delete $1; delete $2;
     }
   | STRING STRING
     {
@@ -5968,6 +6067,7 @@ pin_name_value_pair:
          propTp = driver.lefrPinProp.lefiPropType::propType((*$1).c_str());
          driver.lefrPin.lefiPin::setProperty((*$1).c_str(), (*$2).c_str(), propTp);
       }
+      delete $1; delete $2;
     }
 
 electrical_direction:
@@ -5992,7 +6092,9 @@ start_macro_port: K_PORT
 macro_port_class_option: /* empty */
   | K_CLASS class_type ';'
     { if (driver.lefrDoGeometries)
-        driver.lefrGeometriesPtr->lefiGeometries::addClass((*$2).c_str()); }
+        driver.lefrGeometriesPtr->lefiGeometries::addClass((*$2).c_str()); 
+    delete $2;
+    }
 
 macro_pin_use:
   K_SIGNAL	{$$ = new std::string ("SIGNAL");}
@@ -6031,6 +6133,7 @@ geometry:
         driver.lefrGeometriesPtr->lefiGeometries::addLayer((*$3).c_str());
       driver.needGeometry = 1;    // within LAYER it requires either path, rect, poly
       driver.hasGeoLayer = 1;
+      delete $3;
     }
   layer_exceptpgnet
   layer_spacing ';'
@@ -6083,6 +6186,7 @@ geometry:
            driver.lefrGeometriesPtr->lefiGeometries::addRect($2->x, $2->y, $3->x, $3->y);
       }
       driver.needGeometry = 2;
+      delete $2; delete $3;
     }
   | K_RECT K_ITERATE pt pt stepPattern ';'
     { if (driver.lefrDoGeometries) {
@@ -6096,6 +6200,7 @@ geometry:
                                                           $4->y);
       }
       driver.needGeometry = 2;
+      delete $3; delete $4;
     }
   | K_POLYGON firstPt nextPt nextPt otherPts ';'
     {
@@ -6178,11 +6283,15 @@ layer_spacing: /* empty */
 
 firstPt: pt  
     { if (driver.lefrDoGeometries)
-        driver.lefrGeometriesPtr->lefiGeometries::startList($1->x, $1->y); }
+        driver.lefrGeometriesPtr->lefiGeometries::startList($1->x, $1->y); 
+    delete $1;
+    }
 
 nextPt:  pt
     { if (driver.lefrDoGeometries)
-        driver.lefrGeometriesPtr->lefiGeometries::addToList($1->x, $1->y); }
+        driver.lefrGeometriesPtr->lefiGeometries::addToList($1->x, $1->y); 
+    delete $1;
+    }
 
 otherPts:
   /* empty */
@@ -6195,11 +6304,15 @@ otherPts:
 via_placement:
   K_VIA pt {driver.lefDumbMode = 1;} STRING ';'
     { if (driver.lefrDoGeometries)
-        driver.lefrGeometriesPtr->lefiGeometries::addVia($2->x, $2->y, (*$4).c_str()); }
+        driver.lefrGeometriesPtr->lefiGeometries::addVia($2->x, $2->y, (*$4).c_str()); 
+    delete $2; delete $4;
+    }
   | K_VIA K_ITERATE pt {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
     stepPattern ';'
     { if (driver.lefrDoGeometries)
-        driver.lefrGeometriesPtr->lefiGeometries::addViaIter($3->x, $3->y, (*$5).c_str()); }
+        driver.lefrGeometriesPtr->lefiGeometries::addViaIter($3->x, $3->y, (*$5).c_str()); 
+    delete $3; delete $5;
+    }
         
 
 stepPattern: K_DO NUMBER K_BY NUMBER K_STEP NUMBER NUMBER
@@ -6216,6 +6329,7 @@ sitePattern: GSTRING NUMBER NUMBER orientation
 	driver.lefrSitePatternPtr->lefiSitePattern::set((*$1).c_str(), $2, $3, $4, $6, $8,
 	  $10, $11);
 	}
+    delete $1;
     }
   | GSTRING NUMBER NUMBER orientation
     {
@@ -6226,6 +6340,7 @@ sitePattern: GSTRING NUMBER NUMBER orientation
 	driver.lefrSitePatternPtr->lefiSitePattern::set((*$1).c_str(), $2, $3, $4, -1, -1,
 	  -1, -1);
 	}
+    delete $1;
     }
 
 trackPattern:
@@ -6276,7 +6391,7 @@ trackLayers:
   ;
 
 layer_name: STRING
-    { if (driver.lefrDoTrack) driver.lefrTrackPatternPtr->lefiTrackPattern::addLayer((*$1).c_str()); }
+    { if (driver.lefrDoTrack) driver.lefrTrackPatternPtr->lefiTrackPattern::addLayer((*$1).c_str()); delete $1;}
 
 gcellPattern: K_X NUMBER K_DO NUMBER K_STEP NUMBER
     {
@@ -6368,6 +6483,7 @@ density_layer: K_LAYER { driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING '
     {
       if (/*driver.lefrDensityCbk*/ 1)
         driver.lefrDensity.lefiDensity::addLayer((*$3).c_str());
+    delete $3;
     }
     density_layer_rect density_layer_rects
 
@@ -6379,10 +6495,11 @@ density_layer_rect: K_RECT pt pt NUMBER ';'
     {
       if (/*driver.lefrDensityCbk*/ 1)
         driver.lefrDensity.lefiDensity::addRect($2->x, $2->y, $3->x, $3->y, $4); 
+    delete $2; delete $3;
     }
 
 macro_clocktype: K_CLOCKTYPE { driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING ';'
-    { if (/*driver.lefrMacroCbk*/ 1) driver.lefrMacro.lefiMacro::setClockType((*$3).c_str()); }
+    { if (/*driver.lefrMacroCbk*/ 1) driver.lefrMacro.lefiMacro::setClockType((*$3).c_str()); delete $3;}
 
 timing: start_timing timing_options end_timing
     { }
@@ -6424,7 +6541,7 @@ timing_option:
   | K_TOPIN {driver.lefDumbMode = 1000000000;} list_of_to_strings ';'
     { driver.lefDumbMode = 0;}
   | risefall K_INTRINSIC NUMBER NUMBER
-    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addRiseFall((*$1).c_str(),$3,$4); }
+    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addRiseFall((*$1).c_str(),$3,$4); delete $1;}
     slew_spec K_VARIABLE NUMBER NUMBER ';'
     { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addRiseFallVariable($8,$9); }
   | risefall delay_or_transition K_UNATENESS unateness
@@ -6435,6 +6552,7 @@ timing_option:
 	else
 	  driver.lefrTiming.lefiTiming::addTransition((*$1).c_str(), (*$4).c_str(), $6, $7, $8);
       }
+      delete $1; delete $2; delete $4;
     }
   | K_TABLEAXIS list_of_table_axis_numbers ';'
     { }
@@ -6457,19 +6575,19 @@ timing_option:
   | K_FALLT0 NUMBER NUMBER ';'
     { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::setFallTo($2,$3); }
   | K_UNATENESS unateness ';'
-    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addUnateness((*$2).c_str()); }
+    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addUnateness((*$2).c_str()); delete $2;}
   | K_STABLE K_SETUP NUMBER K_HOLD NUMBER risefall ';'
-    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::setStable($3,$5,(*$6).c_str()); }
+    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::setStable($3,$5,(*$6).c_str()); delete $6;}
   | two_pin_trigger from_pin_trigger to_pin_trigger K_TABLEDIMENSION NUMBER NUMBER NUMBER ';'
-    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addSDF2Pins((*$1).c_str(),(*$2).c_str(),(*$3).c_str(),$5,$6,$7); }
+    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addSDF2Pins((*$1).c_str(),(*$2).c_str(),(*$3).c_str(),$5,$6,$7); delete $1; delete $2; delete $3;}
   | one_pin_trigger K_TABLEDIMENSION NUMBER NUMBER NUMBER ';' 
-    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addSDF1Pin((*$1).c_str(),$3,$4,$4); }
+    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addSDF1Pin((*$1).c_str(),$3,$4,$4); delete $1;}
   | K_SDFCONDSTART QSTRING ';'
-    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::setSDFcondStart((*$2).c_str()); }
+    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::setSDFcondStart((*$2).c_str()); delete $2;}
   | K_SDFCONDEND QSTRING ';'
-    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::setSDFcondEnd((*$2).c_str()); }
+    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::setSDFcondEnd((*$2).c_str()); delete $2;}
   | K_SDFCOND QSTRING ';'
-    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::setSDFcond((*$2).c_str()); }
+    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::setSDFcond((*$2).c_str()); delete $2;}
   | K_EXTENSION ';'
     { /* XXXXX */ }
 
@@ -6553,15 +6671,15 @@ unateness:
 
 list_of_from_strings:
   STRING
-    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addFromPin((*$1).c_str()); }
+    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addFromPin((*$1).c_str()); delete $1;}
   | list_of_from_strings STRING 
-    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addFromPin((*$2).c_str()); }
+    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addFromPin((*$2).c_str()); delete $2;}
 
 list_of_to_strings:
   STRING
-    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addToPin((*$1).c_str()); }
+    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addToPin((*$1).c_str()); delete $1;}
   | list_of_to_strings STRING 
-    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addToPin((*$2).c_str()); }
+    { if (/*driver.lefrTimingCbk*/ 1) driver.lefrTiming.lefiTiming::addToPin((*$2).c_str()); delete $2;}
 
 array: start_array array_rules
     {
@@ -6580,6 +6698,7 @@ start_array: K_ARRAY {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
       }
       //strcpy(driver.arrayName, $3);
       driver.arrayName = (*$3);
+      delete $3;
     }
 
 end_array: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
@@ -6598,6 +6717,7 @@ end_array: K_END {driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING
            } 
         } 
       } 
+      delete $3;
     }
 
 array_rules:
@@ -6653,7 +6773,7 @@ array_rule:
     { }
 
 floorplan_start: K_FLOORPLAN STRING
-    { if (/*driver.lefrArrayCbk*/ 1) driver.lefrArray.lefiArray::addFloorPlan((*$2).c_str()); }
+    { if (/*driver.lefrArrayCbk*/ 1) driver.lefrArray.lefiArray::addFloorPlan((*$2).c_str()); delete $2;}
 	
 floorplan_list:
   /* empty */
@@ -6688,7 +6808,7 @@ one_cap: K_MINPINS NUMBER K_WIRECAP NUMBER ';'
 
 msg_statement:
   K_MESSAGE {driver.lefDumbMode=1;driver.lefNlToken=TRUE;} STRING '=' s_expr dtrm
-    { driver.lefAddStringMessage((*$3).c_str(), (*$5).c_str()); }
+    { driver.lefAddStringMessage((*$3).c_str(), (*$5).c_str()); delete $3; delete $5;}
 
 create_file_statement:
   K_CREATEFILE {driver.lefDumbMode=1;driver.lefNlToken=TRUE;} STRING '=' s_expr dtrm
@@ -6703,6 +6823,7 @@ def_statement:
         if (/*driver.lefrArrayCbk*/ 1) /* write warning only if cbk is set */
            if (driver.arrayWarnings++ < driver.lefrArrayWarnings)
              driver.lefWarning(2067, "DEFINE statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+    delete $3;
     }
   |  K_DEFINES {driver.lefDumbMode=1;driver.lefNlToken=TRUE;} STRING '=' s_expr dtrm
     {
@@ -6712,6 +6833,7 @@ def_statement:
         if (/*driver.lefrArrayCbk*/ 1) /* write warning only if cbk is set */
            if (driver.arrayWarnings++ < driver.lefrArrayWarnings)
              driver.lefWarning(2068, "DEFINES statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+    delete $3; delete $5;
     }
   |  K_DEFINEB {driver.lefDumbMode=1;driver.lefNlToken=TRUE;} STRING '=' b_expr dtrm
     {
@@ -6721,6 +6843,7 @@ def_statement:
         if (/*driver.lefrArrayCbk*/ 1) /* write warning only if cbk is set */
            if (driver.arrayWarnings++ < driver.lefrArrayWarnings)
              driver.lefWarning(2069, "DEFINEB statement is obsolete in version 5.6 and later.\nThe LEF parser will ignore this statement.\nTo avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later.");
+    delete $3;
     }
 
 /* terminator for &defines.  Can be semicolon or newline */
@@ -6753,9 +6876,9 @@ b_expr:
   expression relop expression {$$ = driver.comp_num($1,$2,$3);}
   | expression K_AND expression {$$ = $1 != 0 && $3 != 0;}
   | expression K_OR  expression {$$ = $1 != 0 || $3 != 0;}
-  | s_expr relop s_expr	      {$$ = driver.comp_str((*$1).c_str(),$2,(*$3).c_str());}
-  | s_expr K_AND s_expr	      {$$ = (*$1)[0] != 0 && (*$3)[0] != 0;}
-  | s_expr K_OR  s_expr	      {$$ = (*$1)[0] != 0 || (*$3)[0] != 0;}
+  | s_expr relop s_expr	      {$$ = driver.comp_str((*$1).c_str(),$2,(*$3).c_str()); delete $1; delete $3;}
+  | s_expr K_AND s_expr	      {$$ = (*$1)[0] != 0 && (*$3)[0] != 0; delete $1; delete $3;}
+  | s_expr K_OR  s_expr	      {$$ = (*$1)[0] != 0 || (*$3)[0] != 0; delete $1; delete $3;}
   | b_expr K_EQ b_expr	      {$$ = $1 == $3;}
   | b_expr K_NE b_expr	      {$$ = $1 != $3;}
   | b_expr K_AND b_expr	      {$$ = $1 && $3;}
@@ -6771,20 +6894,21 @@ s_expr:
   s_expr '+' s_expr
     {
 	  $$ = new std::string ((*$1) + (*$3));
+      delete $1; delete $3;
     }
   | '(' s_expr ')'
-    { $$ = new std::string (*$2); }
+    { $$ = $2; }
   | K_IF b_expr then s_expr else s_expr %prec IF
     {
       driver.lefDefIf = TRUE;
       if ($2 != 0) {
-	$$ = new std::string (*$4);	
+	$$ = $4;	
       } else {
-	$$ = new std::string (*$6);
+	$$ = $6;
       }
     }
   | QSTRING
-    { $$ = new std::string (*$1); }
+    { $$ = $1; }
 
 relop:
   K_LE {$$ = C_LE;}
@@ -6827,6 +6951,7 @@ prop_stmt:
         driver.lefrPropCbk( driver.lefrProp);
       }
       driver.lefrLibProp.lefiPropType::setPropType((*$3).c_str(), driver.lefPropDefType);
+      delete $3;
     }
   | K_COMPONENTPIN {driver.lefDumbMode = 1; driver.lefrProp.lefiProp::clear(); }
     STRING prop_define ';'
@@ -6836,6 +6961,7 @@ prop_stmt:
         driver.lefrPropCbk( driver.lefrProp);
       }
       driver.lefrCompProp.lefiPropType::setPropType((*$3).c_str(), driver.lefPropDefType);
+      delete $3;
     }
   | K_PIN {driver.lefDumbMode = 1; driver.lefrProp.lefiProp::clear(); }
     STRING prop_define ';'
@@ -6846,6 +6972,7 @@ prop_stmt:
       }
       driver.lefrPinProp.lefiPropType::setPropType((*$3).c_str(), driver.lefPropDefType);
       
+      delete $3;
     }
   | K_MACRO {driver.lefDumbMode = 1; driver.lefrProp.lefiProp::clear(); }
     STRING prop_define ';'
@@ -6855,6 +6982,7 @@ prop_stmt:
         driver.lefrPropCbk( driver.lefrProp);
       }
       driver.lefrMacroProp.lefiPropType::setPropType((*$3).c_str(), driver.lefPropDefType);
+      delete $3;
     }
   | K_VIA {driver.lefDumbMode = 1; driver.lefrProp.lefiProp::clear(); }
     STRING prop_define ';'
@@ -6864,6 +6992,7 @@ prop_stmt:
         driver.lefrPropCbk( driver.lefrProp);
       }
       driver.lefrViaProp.lefiPropType::setPropType((*$3).c_str(), driver.lefPropDefType);
+      delete $3;
     }
   | K_VIARULE {driver.lefDumbMode = 1; driver.lefrProp.lefiProp::clear(); }
     STRING prop_define ';'
@@ -6873,6 +7002,7 @@ prop_stmt:
         driver.lefrPropCbk( driver.lefrProp);
       }
       driver.lefrViaRuleProp.lefiPropType::setPropType((*$3).c_str(), driver.lefPropDefType);
+      delete $3;
     }
   | K_LAYER {driver.lefDumbMode = 1; driver.lefrProp.lefiProp::clear(); }
     STRING prop_define ';'
@@ -6882,6 +7012,7 @@ prop_stmt:
         driver.lefrPropCbk( driver.lefrProp);
       }
       driver.lefrLayerProp.lefiPropType::setPropType((*$3).c_str(), driver.lefPropDefType);
+      delete $3;
     }
   | K_NONDEFAULTRULE {driver.lefDumbMode = 1; driver.lefrProp.lefiProp::clear(); }
     STRING prop_define ';'
@@ -6891,6 +7022,7 @@ prop_stmt:
         driver.lefrPropCbk( driver.lefrProp);
       }
       driver.lefrNondefProp.lefiPropType::setPropType((*$3).c_str(), driver.lefPropDefType);
+      delete $3;
     }
     
 prop_define:
@@ -6914,11 +7046,13 @@ prop_define:
     {
       if (/*lefrPropCbk*/ 1) driver.lefrProp.lefiProp::setPropQString((*$2).c_str());
       driver.lefPropDefType = 'Q';
+      delete $2;
     }
   | K_NAMEMAPSTRING STRING
     {
       if (/*lefrPropCbk*/ 1) driver.lefrProp.lefiProp::setPropNameMapString((*$2).c_str());
       driver.lefPropDefType = 'S';
+      delete $2;
     }
 
 opt_range_second:
@@ -7082,6 +7216,7 @@ layer_spacing_cut_routing:
         }
         driver.lefrLayer.lefiLayer::setSpacingName((*$3).c_str());
       }
+      delete $3;
     }
     spacing_cut_layer_opt
   | K_ADJACENTCUTS NUMBER K_WITHIN NUMBER
@@ -7227,12 +7362,12 @@ opt_layer_name:
   /* empty */
     { $$ = new std::string (""); }
   | K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING
-    { $$ = new std::string (*$3); }
+    { $$ = $3; }
 
 req_layer_name:
   /* pcr 355313 */
    K_LAYER {driver.lefDumbMode = 1; driver.lefNoNum = 1; } STRING
-    { $$ = new std::string (*$3); }
+    { $$ = $3; }
 
 /* 9/11/2001 - Wanda da Rosa.  The following are obsolete in 5.4 */
 universalnoisemargin: K_UNIVERSALNOISEMARGIN NUMBER NUMBER ';'

@@ -150,9 +150,11 @@ integer_array : INTEGER {
 */
 string_array : STRING {
 				$$ = new StringArray(1, *$1);
+                delete $1;
 			  }
 			  | string_array STRING {
 				$1->push_back(*$2);
+                delete $2;
 				$$ = $1;
 			  }
 
@@ -161,14 +163,19 @@ block_other : KWD_VERSION DOUBLE ';' {
 			}
 			| KWD_DIVIDERCHAR QUOTE ';' {
 				driver.dividerchar_cbk(*$2);
+                delete $2;
 			}
 			| KWD_BUSBITCHARS QUOTE ';' {
 				driver.busbitchars_cbk(*$2);
+                delete $2;
 			}
 			
  /*** grammar for rows ***/
 single_row : KWD_ROW STRING STRING INTEGER INTEGER STRING KWD_DO INTEGER KWD_BY INTEGER KWD_STEP INTEGER INTEGER ';' {
 				driver.row_cbk(*$2, *$3, $4, $5, *$6, $8, $10, $12, $13);
+                delete $2;
+                delete $3;
+                delete $6;
 			 }
 
 block_rows : single_row 
@@ -178,6 +185,8 @@ block_rows : single_row
  /*** grammar for tracks ***/
 single_tracks : KWD_TRACKS STRING INTEGER KWD_DO INTEGER KWD_STEP INTEGER KWD_LAYER STRING ';' {
 				driver.track_cbk(*$2, $3, $5, $7, *$9);
+                delete $2;
+                delete $9;
 			 }
 
 block_tracks : single_tracks 
@@ -187,6 +196,7 @@ block_tracks : single_tracks
  /*** grammar for gcellgrid ***/
 single_gcellgrid : KWD_GCELLGRID STRING INTEGER KWD_DO INTEGER KWD_STEP INTEGER ';' {
 				driver.gcellgrid_cbk(*$2, $3, $5, $7);
+                delete $2;
 			 }
 
 block_gcellgrid : single_gcellgrid 
@@ -201,15 +211,15 @@ end_vias : KWD_END KWD_VIAS
 		 ;
 
 via_addon : /* empty */
-		  | via_addon '+' KWD_VIARULE STRING 
+		  | via_addon '+' KWD_VIARULE STRING {delete $4;}
 		  | via_addon '+' KWD_CUTSIZE INTEGER INTEGER
-		  | via_addon '+' KWD_LAYERS string_array
+		  | via_addon '+' KWD_LAYERS string_array {delete $4;}
 		  | via_addon '+' KWD_CUTSPACING INTEGER INTEGER 
 		  | via_addon '+' KWD_ENCLOSURE INTEGER INTEGER INTEGER INTEGER 
 		  | via_addon '+' KWD_ROWCOL INTEGER INTEGER 
 		  ;
 
-single_via : '-' STRING via_addon ';'
+single_via : '-' STRING via_addon ';' {delete $2;}
 		   ;
 
 multiple_vias : single_via 
@@ -231,20 +241,28 @@ end_components : KWD_END KWD_COMPONENTS
 component_addon : /* empty */
 				| component_addon '+' STRING '(' INTEGER INTEGER ')' STRING {
 					driver.component_cbk_position(*$3, $5, $6, *$8);
+                    delete $3;
+                    delete $8;
 				}
 				| component_addon '+' STRING '(' DOUBLE DOUBLE ')' STRING { /*it may be double in some benchmarks*/
 					driver.component_cbk_position(*$3, $5, $6, *$8);
+                    delete $3; 
+                    delete $8;
 				}
 				| component_addon '+' KWD_SOURCE STRING {
 					driver.component_cbk_source(*$4);
+                    delete $4;
 				}
 				| component_addon '+' STRING {
 					driver.component_cbk_position(*$3);
+                    delete $3;
 				}
 				;
 
 single_component : '-' STRING STRING component_addon ';' {
 				driver.component_cbk(*$2, *$3);
+                delete $2;
+                delete $3;
 			}
 
 multiple_components : single_component 
@@ -269,23 +287,30 @@ end_pins : KWD_END KWD_PINS
 pin_addon : /* empty */
 		  | pin_addon '+' KWD_NET STRING {
 			driver.pin_cbk_net(*$4);
+            delete $4;
 		  }
 		  | pin_addon '+' KWD_DIRECTION STRING {
 			driver.pin_cbk_direction(*$4);
+            delete $4;
 		  }
 		  | pin_addon '+' STRING '(' INTEGER INTEGER ')' STRING {
 			driver.pin_cbk_position(*$3, $5, $6, *$8);
+            delete $3;
+            delete $8;
 		  }
 		  | pin_addon '+' KWD_LAYER STRING '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' {
 			driver.pin_cbk_bbox(*$4, $6, $7, $10, $11);
+            delete $4;
 		  }
 		  | pin_addon '+' KWD_USE STRING {
 			driver.pin_cbk_use(*$4);
+            delete $4;
 		  }
 		  ;
 
 single_pin : '-' STRING pin_addon ';' {
 			driver.pin_cbk(*$2);
+            delete $2;
 		   }
 
 multiple_pins : single_pin 
@@ -305,21 +330,21 @@ begin_specialnets : KWD_SPECIALNETS INTEGER ';'
 				  ;
 end_specialnets : KWD_END KWD_SPECIALNETS
 				;
-specialnets_metal_layer : STRING STRING INTEGER
+specialnets_metal_layer : STRING STRING INTEGER {delete $1; delete $2;}
 						;
-specialnets_metal_shape : '+' KWD_SHAPE STRING '(' INTEGER INTEGER ')' '(' INTEGER '*' ')'
-						| '+' KWD_SHAPE STRING '(' INTEGER INTEGER ')' '(' '*' INTEGER ')'
-						| '+' KWD_SHAPE STRING '(' INTEGER INTEGER ')' STRING
+specialnets_metal_shape : '+' KWD_SHAPE STRING '(' INTEGER INTEGER ')' '(' INTEGER '*' ')' {delete $3;}
+						| '+' KWD_SHAPE STRING '(' INTEGER INTEGER ')' '(' '*' INTEGER ')' {delete $3;}
+						| '+' KWD_SHAPE STRING '(' INTEGER INTEGER ')' STRING {delete $3; delete $8;}
 						;
 specialnets_metal_array : specialnets_metal_layer specialnets_metal_shape 
 						| specialnets_metal_array specialnets_metal_layer specialnets_metal_shape 
 						;
 specialnets_addon : /* empty */
 				  | specialnets_addon '+' specialnets_metal_array
-				  | specialnets_addon '+' KWD_USE STRING
+				  | specialnets_addon '+' KWD_USE STRING {delete $4;}
 				  ;
-single_specialnet : '-' BINARY specialnets_addon ';'
-				  | '-' STRING specialnets_addon ';'
+single_specialnet : '-' BINARY specialnets_addon ';' {delete $2;}
+				  | '-' STRING specialnets_addon ';' {delete $2;}
 				   ;
 multiple_specialnets : single_specialnet
 					 | multiple_specialnets single_specialnet
@@ -339,6 +364,8 @@ end_nets : KWD_END KWD_NETS
 node_pin_pair : '(' STRING STRING ')' {
 		   /** be careful, this callback will be invoked before net_cbk_name **/
 				driver.net_cbk_pin(*$2, *$3); 
+                delete $2;
+                delete $3;
 			  }
 
 node_pin_pairs : node_pin_pair 
@@ -347,15 +374,19 @@ node_pin_pairs : node_pin_pair
 
 single_net : '-' STRING node_pin_pairs ';' {
 				driver.net_cbk_name(*$2);
+                delete $2;
 		   } 
 		   | '-' BINARY node_pin_pairs ';' {
 				driver.net_cbk_name(*$2);
+                delete $2;
 		   } 
 		   | '-' STRING node_pin_pairs '+' KWD_USE STRING ';' {
 				driver.net_cbk_name(*$2);
+                delete $2;
 		   } 
 		   | '-' BINARY node_pin_pairs '+' KWD_USE STRING ';' {
 				driver.net_cbk_name(*$2);
+                delete $2;
 		   } 
 
 multiple_nets : single_net 
@@ -372,10 +403,10 @@ block_nets : begin_nets
  /*** grammar for property definitions ***/
  /*** additional block, usually useless for placement ***/
  /*** so no callbacks are created for it ***/
-single_propterty : KWD_COMPONENTPIN STRING STRING ';'
-				 | KWD_DESIGN STRING STRING DOUBLE ';'
-                 | KWD_NET STRING STRING ';'
-                 | KWD_COMPONENTPIN STRING STRING ';'
+single_propterty : KWD_COMPONENTPIN STRING STRING ';' {delete $2; delete $3;}
+				 | KWD_DESIGN STRING STRING DOUBLE ';' {delete $2; delete $3;}
+                 | KWD_NET STRING STRING ';' {delete $2; delete $3;}
+                 | KWD_COMPONENTPIN STRING STRING ';' {delete $2; delete $3;}
 				 ;
 
 multiple_property : single_propterty 
@@ -393,6 +424,7 @@ block_propertydefinitions : KWD_PROPERTYDEFINITIONS
 
 begin_design : KWD_DESIGN STRING ';' {
 				driver.design_cbk(*$2);
+                delete $2;
 			 }
 
 end_design : KWD_END KWD_DESIGN
