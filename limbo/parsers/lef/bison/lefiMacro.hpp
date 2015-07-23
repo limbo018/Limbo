@@ -35,6 +35,9 @@ public:
 
   lefiGeometries* geometries() const;
 
+  // swap with a lefiObstruction
+  void swap(lefiObstruction& rhs);
+
   void print(FILE* f) const;
 
 protected:
@@ -576,6 +579,10 @@ public:
   lefiPin* pin(unsigned int index) const;
   void addPin(lefiPin const& p);
 
+  // for obstruction in a macro 
+  lefiObstruction const& obstruction() const {return m_obs;}
+  lefiObstruction& obstruction() {return m_obs;}
+
   // Debug print
   void print(FILE* f) const;
 
@@ -644,6 +651,7 @@ protected:
   char*  propTypes_;
 
   std::vector<lefiPin*> m_vPin; ///< save pins in macro 
+  lefiObstruction m_obs; ///< obstruction 
 };
 
 

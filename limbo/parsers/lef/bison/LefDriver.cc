@@ -317,9 +317,11 @@ void Driver::lefrMacroSizeCbk(lefiNum const&)
 {}
 void Driver::lefrPinCbk(lefiPin const&) // directly added to macro 
 {}
-void Driver::lefrObstructionCbk(lefiObstruction const& v)
+void Driver::lefrObstructionCbk(lefiObstruction& v)
 {
-	m_db.lef_obstruction_cbk(v);
+	//m_db.lef_obstruction_cbk(v);
+    // instead of a callback, add to macro 
+    lefrMacro.obstruction().swap(v);
 }
 void Driver::lefrDensityCbk(lefiDensity const& v)
 {

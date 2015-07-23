@@ -74,10 +74,13 @@ class DataBase : public LefParser::LefDataBase
 		{
 			v.print(stdout);
 		}
+#if 0
+        // deprecated 
 		virtual void lef_obstruction_cbk(LefParser::lefiObstruction const& v)
 		{
 			v.print(stdout);
 		}
+#endif
 };
 
 void test1(std::string const& filename)

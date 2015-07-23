@@ -71,6 +71,10 @@ lefiGeometries* lefiObstruction::geometries() const {
   return this->geometries_;
 }
 
+void lefiObstruction::swap(lefiObstruction& rhs) {
+    std::swap(this->geometries_, rhs.geometries_);
+}
+
 
 void lefiObstruction::print(FILE* f) const {
   lefiGeometries* g;
@@ -3183,6 +3187,9 @@ void lefiMacro::print(FILE* f) const {
   {
 	  (*it)->print(f);
   }
+  // print Obstruction
+  m_obs.print(f);
+
   fprintf(f, "END MACRO %s\n", this->lefiMacro::name());
 }
 

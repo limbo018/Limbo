@@ -115,7 +115,7 @@ class LefDataBase
 		virtual void lef_nondefault_cbk(lefiNonDefault const&);
 		virtual void lef_site_cbk(lefiSite const&);
 		virtual void lef_macro_cbk(lefiMacro const&);
-		virtual void lef_obstruction_cbk(lefiObstruction const&);
+		//virtual void lef_obstruction_cbk(lefiObstruction const&);
 		virtual void lef_density_cbk(lefiDensity const&);
 		virtual void lef_timing_cbk(lefiTiming const&);
 		virtual void lef_array_cbk(lefiArray const&);

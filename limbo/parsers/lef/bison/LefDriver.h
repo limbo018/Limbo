@@ -151,7 +151,7 @@ public:
 	void lefrMacroOriginCbk(lefiNum const&);
 	void lefrMacroSizeCbk(lefiNum const&);
 	void lefrPinCbk(lefiPin const&);
-	void lefrObstructionCbk(lefiObstruction const&);
+	void lefrObstructionCbk(lefiObstruction&);
 	void lefrDensityCbk(lefiDensity const&);
 	void lefrTimingCbk(lefiTiming const&);
 	void lefrArrayCbk(lefiArray const&);

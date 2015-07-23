@@ -129,11 +129,13 @@ void LefDataBase::lef_macro_cbk(lefiMacro const& v)
 	v.print(stdout);
 	lef_user_cbk_reminder(__func__);
 }
+#if 0
 void LefDataBase::lef_obstruction_cbk(lefiObstruction const& v)
 {
 	v.print(stdout);
 	lef_user_cbk_reminder(__func__);
 }
+#endif
 void LefDataBase::lef_density_cbk(lefiDensity const& v)
 {
 	v.print(stdout);
