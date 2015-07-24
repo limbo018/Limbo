@@ -69,6 +69,15 @@ struct parse_helper<char>
     }
 };
 template <>
+struct parse_helper<unsigned char>
+{
+    inline bool operator()(unsigned char& target, const char* value) const
+    {
+        target = *value;
+        return true;
+    }
+};
+template <>
 struct parse_helper<int>
 {
     inline bool operator()(int& target, const char* value) const
@@ -78,9 +87,27 @@ struct parse_helper<int>
     }
 };
 template <>
+struct parse_helper<unsigned int>
+{
+    inline bool operator()(unsigned int& target, const char* value) const
+    {
+        target = atoi(value);
+        return true;
+    }
+};
+template <>
 struct parse_helper<long>
 {
     inline bool operator()(long& target, const char* value) const
+    {
+        target = atol(value);
+        return true;
+    }
+};
+template <>
+struct parse_helper<unsigned long>
+{
+    inline bool operator()(unsigned long& target, const char* value) const
     {
         target = atol(value);
         return true;
