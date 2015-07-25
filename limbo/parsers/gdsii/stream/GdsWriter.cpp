@@ -587,7 +587,7 @@ void GdsWriter::gds_write_bgnlib(  )
 		count;
 
 	now  = (time_t *)    malloc( sizeof( time_t ) );
-	date = (struct tm *) malloc( sizeof( struct tm ) );
+	//date = (struct tm *) malloc( sizeof( struct tm ) );
 
 	time( now );
 	date = localtime( now );
@@ -624,6 +624,7 @@ void GdsWriter::gds_write_bgnlib(  )
 	write( this->out, &minute, 2 );
 	write( this->out, &second, 2 );
 
+    free(now);
 }  // write_bgnlib
 
 
@@ -718,7 +719,7 @@ void GdsWriter::gds_write_bgnstr(  )
 		count;
 
 	now  = (time_t *)    malloc( sizeof( time_t ) );
-	date = (struct tm *) malloc( sizeof( struct tm ) );
+	//date = (struct tm *) malloc( sizeof( struct tm ) );
 
 	time( now );
 	date = localtime( now );
@@ -756,6 +757,7 @@ void GdsWriter::gds_write_bgnstr(  )
 	write( this->out, &minute, 2 );
 	write( this->out, &second, 2 );
 
+    free(now);
 }  // write_bgnstr
 
 /*------------------------------------------------------------------------------------------*/
