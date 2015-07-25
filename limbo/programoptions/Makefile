@@ -28,7 +28,7 @@ ifeq ($(UNAME_S), Darwin)
 endif 
 
 ifeq ($(DBG), 1)
-	CXXFLAGS = $(CXXFLAGS_DEBUG) 
+	CXXFLAGS = $(CXXFLAGS_DEBUG)
 else
 	CXXFLAGS = $(CXXFLAGS_RELEASE)
 endif
@@ -37,14 +37,14 @@ endif
 #                         Special Library
 # ==========================================================================
 
-INCLUDE = -I $(LIMBO_ROOT_DIR) 
-LIBS = -lm 
+INCLUDE = -I $(realpath .) \
+		  -I $(LIMBO_ROOT_DIR) 
 
 # ==========================================================================
 #                         Standard Setting
 # ==========================================================================
 
-SRCS = $(wildcard *.cpp)
+SRCS = $(wildcard *.cpp) 
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
@@ -52,7 +52,7 @@ SRCS_TEST = $(wildcard $(TEST_DIR)/*.cpp)
 OBJS_TEST = $(patsubst $(TEST_DIR)/%.cpp,$(TEST_DIR)/%.o,$(SRCS_TEST))
 DEPS_TEST = $(OBJS_TEST:%.o=%.d)
 
-all: $(TEST_DIR)/test_ProgramOptions 
+all: libprogramoptions $(TEST_DIR)/test_ProgramOptions
 
 # Compile dependency 
 
@@ -70,15 +70,22 @@ $(TEST_DIR)/%.d: %.cpp
 
 $(OBJDIR)/%.o: %.cpp
 	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE)
+	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE) 
 $(TEST_DIR)/%.o: %.cpp
 	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE)
+	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE) 
 
 # Link executable
 
-$(TEST_DIR)/test_ProgramOptions: $(TEST_DIR)/test_ProgramOptions.o 
-	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_ProgramOptions.o $(LIBS) 
+$(TEST_DIR)/test_ProgramOptions: libprogramoptions $(OBJS_TEST)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS_TEST) $(LIMBO_ROOT_DIR)/lib/libprogramoptions.a
+
+libprogramoptions: $(OBJS)
+	$(AR) $(ARFLAGS) libprogramoptions.a $(OBJS)
+	mv libprogramoptions.a $(LIMBO_ROOT_DIR)/lib
+
+install: libprogramoptions
+	rm -f $(OBJS) $(OBJS_TEST) 
 
 .PHONY: clean
 clean: cleandep
@@ -88,3 +95,6 @@ clean: cleandep
 cleandep:
 	rm -f $(DEPS) $(DEPS_TEST)
 
+.PHONY: extraclean
+extraclean: clean
+	rm -f $(LIMBO_ROOT_DIR)/lib/libprogramoptions.a
