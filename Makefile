@@ -5,6 +5,7 @@ MAKE = make
 # list of components 
 PARSERS = limbo/parsers
 SOLVERS = limbo/solvers
+PROGRAMOPTIONS = limbo/programoptions
 
 RESRCS = \
 		 $(PARSERS)/def/bison \
@@ -12,7 +13,8 @@ RESRCS = \
 		 $(PARSERS)/ebeam/bison \
 		 $(PARSERS)/lp/bison \
 		 $(PARSERS)/gdsii/stream \
-		 $(SOLVERS)/lpmcf
+		 $(SOLVERS)/lpmcf \
+		 $(PROGRAMOPTIONS)
 
 .PHONY: build 
 
@@ -23,6 +25,7 @@ build:
 	$(MAKE) -C $(PARSERS)/ebeam/bison
 	$(MAKE) -C $(PARSERS)/lp/bison
 	$(MAKE) -C $(PARSERS)/gdsii/stream
+	$(MAKE) -C $(PROGRAMOPTIONS)
 	
 install:
 	mkdir -p lib 
@@ -31,6 +34,7 @@ install:
 	$(MAKE) install -C $(PARSERS)/ebeam/bison
 	$(MAKE) install -C $(PARSERS)/lp/bison
 	$(MAKE) install -C $(PARSERS)/gdsii/stream
+	$(MAKE) install -C $(PROGRAMOPTIONS)
 
 clean:
 	$(MAKE) extraclean -C $(PARSERS)/def/bison
@@ -38,3 +42,4 @@ clean:
 	$(MAKE) extraclean -C $(PARSERS)/ebeam/bison
 	$(MAKE) extraclean -C $(PARSERS)/lp/bison
 	$(MAKE) extraclean -C $(PARSERS)/gdsii/stream
+	$(MAKE) extraclean -C $(PROGRAMOPTIONS)
