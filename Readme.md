@@ -11,29 +11,33 @@ All components are written with C/C++ and API is designed for easy usage and sim
 ---------
 
 ## Components 
-| Components              | Languages & Libraries           |
-| ----------------------- | ------------------------------- |
-| Lef Parser              | flex/bison                      |
-|                         | boost.spirit                    |
-| Def Parser              | flex/bison                      |
-|                         | boost.spirit                    |
-| Gds Parser              | stream parser: c/c++            |
-|                         | ascii parser: boost.spirit      |
-| Tf Parser               | boost.spirit                    |
-| Lp Parser               | flex/bison                      |
-| LP Min-Cost Flow Solver | boost, lemon                    |
-| Geometry Algorithms     | c++                             |
-| String Algorithms       | c++                             |
-| Math Utilities          | c++                             |
-| Partition Algorithms    | c++                             |
+| Components              | Languages & Libraries           | Description                                              |
+| ----------------------- | ------------------------------- | -------------------------------------------------------- |
+| Lef Parser              | flex/bison                      |                                                          |
+|                         | boost.spirit                    |                                                          |
+| Def Parser              | flex/bison                      |                                                          |
+|                         | boost.spirit                    |                                                          |
+| Gds Parser              | stream parser: c/c++            |                                                          |
+|                         | ascii parser: boost.spirit      |                                                          |
+| Tf Parser               | boost.spirit                    |                                                          |
+| Verilog netlist parser  | flex/bison                      | read verilog netlist to initialize nets during placement |
+| Lp Parser               | flex/bison                      |                                                          |
+| LP Min-Cost Flow Solver | boost, lemon                    |                                                          |
+| Geometry Algorithms     | c++                             |                                                          |
+| String Algorithms       | c++                             |                                                          |
+| Math Utilities          | c++                             |                                                          |
+| Partition Algorithms    | c++                             |                                                          |
+| Placement Algorithms    | c++                             | some common and useful placement algorithms              |
+| Graph Algorithms        | c++                             | basic graph algorithms based on Boost.Graph structure    |
+| Program Options         | c++                             | package for easy command line options for a program      |
 
-## Authors
+## Authors & Maintainers
 
 |  Name              | Affiliation                |  email                            |
 | ------------------ | -------------------------- | --------------------------------- |
 | Yibo Lin           | ECE Dept, UT Austin        | yibolin@utexas.edu			      |
 
-## Maintainers
+## Users
 
 |  Name              | Affiliation                |  email                            |
 | ------------------ | -------------------------- | --------------------------------- |
