@@ -24,9 +24,8 @@
 #define assert_msg(condition, message) \
     do { \
         if (! (condition)) { \
-            std::cerr << "assertion `" #condition "` failed in " << __FILE__ \
-                      << " line " << __LINE__ << ": " << message << std::endl; \
-			assert(condition); \
+            std::cerr << __FILE__ << ":" << __LINE__ << ": " << __PRETTY_FUNCTION__ << ": Assertion `" << #condition << "' failed: " << message << std::endl; \
+            abort(); \
         } \
     } while (false)
 #else
