@@ -30,6 +30,7 @@ All components are written with C/C++ and API is designed for easy usage and sim
 | Placement Algorithms    | c++                             | some common and useful placement algorithms              |
 | Graph Algorithms        | c++                             | basic graph algorithms based on Boost.Graph structure    |
 | Program Options         | c++                             | package for easy command line options for a program      |
+| Makefile Utilities      | makefile                        | makefile help functions                                  |
 
 ## Authors & Maintainers
 
