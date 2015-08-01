@@ -101,7 +101,7 @@ class Lgf
 			graph_type::NodeMap<int> shapes(m_graph);
 			graph_type::ArcMap<int> acolors(m_graph);
 			graph_type::ArcMap<int> widths(m_graph);
-			lemon::IdMap<graph_type, node_type> id(m_graph);
+			//lemon::IdMap<graph_type, node_type> id(m_graph);
 
 			srand(1000);
 			int64_t i = 0;

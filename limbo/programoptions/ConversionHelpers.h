@@ -114,6 +114,24 @@ struct parse_helper<unsigned long>
     }
 };
 template <>
+struct parse_helper<long long>
+{
+    inline bool operator()(long long& target, const char* value) const
+    {
+        target = atol(value);
+        return true;
+    }
+};
+template <>
+struct parse_helper<unsigned long long>
+{
+    inline bool operator()(unsigned long long& target, const char* value) const
+    {
+        target = atol(value);
+        return true;
+    }
+};
+template <>
 struct parse_helper<float>
 {
     inline bool operator()(float& target, const char* value) const
