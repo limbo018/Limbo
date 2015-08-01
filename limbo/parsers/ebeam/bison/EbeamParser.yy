@@ -163,6 +163,7 @@ entry_step : KWD_STEP number ';' {
 		   }
 entry_layer : KWD_LAYERID integer_array ';' {
 				driver.ebeam_cbk_layerid(*$2);
+                delete $2;
 			}
 			| KWD_LAYER string_array ';' {
 				driver.ebeam_cbk_layer(*$2);
