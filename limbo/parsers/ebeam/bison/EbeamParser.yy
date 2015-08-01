@@ -137,10 +137,10 @@ integer_array : INTEGER {
 				$$ = $1;
 			  }
 string_array : STRING {
-				$$ = new StringArray(1, *$1);
+				$$ = new StringArray(1, *$1); delete $1;
 			  }
 			  | string_array STRING {
-				$1->push_back(*$2);
+				$1->push_back(*$2); delete $2;
 				$$ = $1;
 			  }
 
@@ -179,9 +179,11 @@ block_ebeam : KWD_EBEAMBOUNDARY
  /*** grammar for macros ***/
 begin_macro : KWD_MACRO STRING {
 				driver.macro_cbk_name(*$2);
+                delete $2;
 			}
 end_macro : KWD_END STRING {
 			driver.macro_cbk(*$2);
+            delete $2;
 		  }
 single_confsite : KWD_CONFLICTSITE STRING
 			   KWD_LAYERID INTEGER ';'
@@ -191,6 +193,7 @@ single_confsite : KWD_CONFLICTSITE STRING
 				driver.macro_cbk_confsite_layerid($4);
 				driver.macro_cbk_confsite_site(*$7);
 				driver.macro_cbk_confsite(*$10);
+                delete $2; delete $7; delete $10;
 			   }
 			   | KWD_CONFLICTSITE STRING
 			   KWD_LAYER STRING ';'
@@ -200,6 +203,7 @@ single_confsite : KWD_CONFLICTSITE STRING
 				driver.macro_cbk_confsite_layer(*$4);
 				driver.macro_cbk_confsite_site(*$7);
 				driver.macro_cbk_confsite(*$10);
+                delete $2; delete $4; delete $7; delete $10;
 			   }
 multiple_confsites : single_confsite 
 				   | multiple_confsites single_confsite 

@@ -164,6 +164,6 @@ class EbeamDataBase
 		virtual void add_ebeam_macro(Macro const&) = 0;
 };
 
-} // namespace DefParser
+} // namespace EbeamParser
 
 #endif
