@@ -25,10 +25,10 @@ int main(int argc, char** argv)
     std::vector<std::string> vString;
 
     ProgramOptions po ("My options");
-    po.add_option(Value<bool>("-help", &help, "print help message").toggle(true).default_value(false).toggle_value(true))
+    po.add_option(Value<bool>("-help", &help, "print help message").toggle(true).default_value(false).toggle_value(true).help(true))
         .add_option(Value<int>("-i", &i, "an integer").default_value(100, "1.0.0"))
-        .add_option(Value<double>("-f", &fp, "a floating point"))
-        .add_option(Value<std::string>("-s", &str, "a string"))
+        .add_option(Value<double>("-f", &fp, "a floating point").required(true))
+        .add_option(Value<std::string>("-s", &str, "a string").required(true))
         .add_option(Value<std::vector<int> >("-vi", &vInteger, "vector of integers"))
         .add_option(Value<std::vector<std::string> >("-vs", &vString, "vector of string"))
         ;

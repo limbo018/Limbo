@@ -45,6 +45,7 @@ class ValueBase
         ValueBase(std::string const& cat, std::string const& m)
             : m_category(cat)
             , m_msg(m)
+            , m_help(false)
             , m_required(false)
             , m_valid(false)
             , m_toggle(false)
@@ -77,9 +78,12 @@ class ValueBase
         virtual bool valid_toggle() const = 0;
         /// \return the length of string if default value is printed 
         virtual unsigned count_default_chars() const = 0;
+        /// \return true if this option is a help option and it is on 
+        virtual bool help_on() const = 0;
 
         std::string const& category() const {return m_category;}
         std::string const& msg() const {return m_msg;}
+        bool help() const {return m_help;}
         bool required() const {return m_required;}
         bool valid() const {return m_valid;}
         bool toggle() const {return m_toggle;}
@@ -90,6 +94,7 @@ class ValueBase
         {
             m_category = rhs.m_category;
             m_msg = rhs.m_msg;
+            m_help = rhs.m_help;
             m_required = rhs.m_required;
             m_valid = rhs.m_valid;
             m_toggle = rhs.m_toggle;
@@ -97,9 +102,10 @@ class ValueBase
 
         std::string m_category; ///< category 
         std::string m_msg; ///< helper message 
-        bool m_required; ///< whether the value is a required option
-        bool m_valid; ///< true if target is set, not default 
-        bool m_toggle; ///< true if this option is a toggle value 
+        unsigned char m_help : 1; ///< whether is help option 
+        unsigned char m_required : 1; ///< whether the value is a required option
+        unsigned char m_valid : 1; ///< true if target is set, not default 
+        unsigned char m_toggle : 1; ///< true if this option is a toggle value 
 };
 
 template <typename T>
@@ -194,6 +200,13 @@ class Value : public ValueBase
             print_default(oss);
             return oss.str().size();
         }
+        virtual bool help_on() const 
+        {
+            // only true when this option is already set 
+            if (m_help && m_target && boolean_helper<value_type>()(*m_target))
+                return true;
+            else return false;
+        }
         /// set default value 
         virtual Value& default_value(value_type const& v, std::string const& d = "")
         {
@@ -209,6 +222,11 @@ class Value : public ValueBase
             if (m_toggle_value) // in case for multiple calls 
                 delete m_toggle_value;
             m_toggle_value = new value_type (v);
+            return *this;
+        }
+        virtual Value& help(bool h)
+        {
+            m_help = h;
             return *this;
         }
         virtual Value& required(bool r)
@@ -245,7 +263,7 @@ class ProgramOptions
     public:
         typedef std::map<std::string, unsigned> cat2index_map_type;
 
-        ProgramOptions(std::string const& title = "Available options") : m_title(title) {}
+        ProgramOptions(std::string const& title = "Available options");
         ProgramOptions(ProgramOptions const& rhs);
         ~ProgramOptions();
 
@@ -278,6 +296,10 @@ class ProgramOptions
         std::vector<ValueBase*> m_vData; ///< saving options 
         std::string m_title; ///< title of options 
 };
+
+inline ProgramOptions::ProgramOptions(std::string const& title) 
+    : m_title(title) 
+{}
 
 template <typename ValueType>
 ProgramOptions& ProgramOptions::add_option(ValueType const& data) 

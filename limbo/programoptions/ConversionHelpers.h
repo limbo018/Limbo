@@ -45,6 +45,16 @@ struct assign_helper
     }
 };
 
+/// \return false for types other than boolean, but return target value for boolean 
+template <typename T>
+struct boolean_helper
+{
+    inline bool operator()(T const&) const 
+    {
+        return false;
+    }
+};
+
 /////////////////// specialization for parse_helper /////////////////
 template <>
 struct parse_helper<bool>
@@ -211,6 +221,16 @@ struct print_helper<std::set<T> >
 };
 
 /////////////////// specialization for assign_helper /////////////////
+
+/////////////////// specialization for boolean_helper /////////////////
+template <>
+struct boolean_helper<bool>
+{
+    inline bool operator()(bool const& target) const 
+    {
+        return target;
+    }
+};
 
 }} // namespace limbo // programoptions
 

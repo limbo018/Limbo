@@ -44,6 +44,9 @@ bool ProgramOptions::parse(int argc, char** argv)
             throw ProgramOptionsException(std::string("unknown option: ")+argv[i]);
     }
     // check required and default value 
+    std::ostringstream oss;
+    bool help = false;
+    const char* prefix = "";
     for (cat2index_map_type::const_iterator it = m_mCat2Index.begin(); it != m_mCat2Index.end(); ++it)
     {
         std::string const& category = it->first;
@@ -53,9 +56,17 @@ bool ProgramOptions::parse(int argc, char** argv)
             if (pData->valid_default()) // has default 
                 pData->apply_default();
             else if (pData->required()) // required 
-                throw ProgramOptionsException(std::string("required option not set: ")+category);
+            {
+                oss << prefix << category;
+                prefix = ", ";
+            }
         }
+        if (pData->help_on()) // help is true 
+            help = true;
     }
+    // if help is on, no need to set other required options
+    if (!help && !oss.str().empty())
+        throw ProgramOptionsException(std::string("required option not set: ")+oss.str());
     return true;
 }
 
