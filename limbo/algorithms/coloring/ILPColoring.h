@@ -48,6 +48,7 @@ class ILPColoring : public Coloring<GraphType>
 		using typename base_type::vertex_iterator_type;
 		using typename base_type::edge_iterator_type;
 		using typename base_type::ColorNumType;
+        typedef typename base_type::EdgeHashType edge_hash_type;
 		/// edge weight is used to differentiate conflict edge and stitch edge 
 		/// non-negative weight implies conflict edge 
 		/// negative weight implies stitch edge 
@@ -56,18 +57,6 @@ class ILPColoring : public Coloring<GraphType>
 		/// use vertex color to save vertex stitch candidate number 
 		typedef typename boost::property_map<graph_type, boost::vertex_color_t>::type vertex_color_map_type;
 		typedef typename boost::property_map<graph_type, boost::vertex_color_t>::const_type const_vertex_color_map_type;
-
-		// hasher class for graph_edge_type
-		struct edge_hash_type : std::unary_function<graph_edge_type, std::size_t>
-		{
-			std::size_t operator()(graph_edge_type const& e) const 
-			{
-				std::size_t seed = 0;
-				boost::hash_combine(seed, e.m_source);
-				boost::hash_combine(seed, e.m_target);
-				return seed;
-			}
-		};
 
 		/// constructor
 		ILPColoring(graph_type const& g) 

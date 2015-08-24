@@ -36,20 +36,30 @@ class Coloring
 		typedef typename boost::graph_traits<graph_type>::edge_descriptor graph_edge_type;
 		typedef typename boost::graph_traits<graph_type>::vertex_iterator vertex_iterator_type;
 		typedef typename boost::graph_traits<graph_type>::edge_iterator edge_iterator_type;
+		/// edge weight is used to differentiate conflict edge and stitch edge 
+		/// non-negative weight implies conflict edge 
+		/// negative weight implies stitch edge 
 
 		enum ColorNumType
 		{
 			THREE = 3, 
 			FOUR = 4
 		};
+		// hasher class for graph_edge_type
+		struct EdgeHashType : std::unary_function<graph_edge_type, std::size_t>
+		{
+			std::size_t operator()(graph_edge_type const& e) const 
+			{
+				std::size_t seed = 0;
+				boost::hash_combine(seed, e.m_source);
+				boost::hash_combine(seed, e.m_target);
+				return seed;
+			}
+		};
+
 
 		/// constructor
-		Coloring(graph_type const& g) 
-			  : m_graph(g)
-			  , m_vColor(boost::num_vertices(g), -1)
-			  , m_stitch_weight(0.1)
-			  , m_threads(std::numeric_limits<int32_t>::max())
-		{}
+		Coloring(graph_type const& g);
 		/// destructor
 		virtual ~Coloring() {};
 
@@ -61,9 +71,13 @@ class Coloring
 		/// color number 
 		virtual void color_num(ColorNumType cn) {m_color_num = cn;} 
 		virtual void color_num(int8_t cn) {m_color_num = (cn == 3)? THREE : FOUR;}
+        virtual ColorNumType color_num() const {return m_color_num;}
 
 		/// precolored vertex 
-		virtual void precolor(graph_vertex_type v, int8_t c) {m_vColor[v] = c;}
+		virtual void precolor(graph_vertex_type v, int8_t c) {m_vColor[v] = c; m_has_precolored = true;}
+
+        /// \return true if contain precolored vertices 
+        virtual bool has_precolored() const {return m_has_precolored;}
 
 		/// stitch weight 
 		virtual double stitch_weight() const {return m_stitch_weight;}
@@ -74,6 +88,9 @@ class Coloring
 
 		/// \return coloring solution 
 		virtual int8_t color(graph_vertex_type v) const {return m_vColor[v];}
+
+        /// helper functions 
+        inline virtual int32_t edge_weight(graph_edge_type const& e) const {return boost::get(boost::edge_weight, m_graph, e);}
 
 		/// for debug 
 		virtual void write_graph(string const& filename) const;
@@ -90,7 +107,18 @@ class Coloring
 		ColorNumType m_color_num;
 		double m_stitch_weight;
 		int32_t m_threads; ///< control number of threads for ILP solver 
+        bool m_has_precolored; ///< whether contain precolored vertices 
 };
+
+template <typename GraphType>
+Coloring<GraphType>::Coloring(Coloring<GraphType>::graph_type const& g) 
+    : m_graph(g)
+    , m_vColor(boost::num_vertices(g), -1)
+    , m_color_num(THREE)
+    , m_stitch_weight(0.1)
+    , m_threads(std::numeric_limits<int32_t>::max())
+    , m_has_precolored(false)
+{}
 
 template <typename GraphType>
 double Coloring<GraphType>::calc_cost(vector<int8_t> const& vColor) const 
@@ -128,7 +156,7 @@ void Coloring<GraphType>::write_graph(string const& filename) const
 	{
 		dot_file << "  " << k << "[shape=\"circle\"";
 		//output coloring label
-		dot_file << ",label=\"" << k << ":" << m_vColor[k] << "\"";
+		dot_file << ",label=\"" << k << ":" << (int32_t)m_vColor[k] << "\"";
 		dot_file << "]\n";
 	}//end for
 

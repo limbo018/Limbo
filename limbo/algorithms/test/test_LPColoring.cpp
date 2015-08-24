@@ -51,7 +51,7 @@ typedef graph_traits<graph_type>::edge_descriptor edge_descriptor;
 typedef property_map<graph_type, edge_weight_t>::type edge_weight_map_type;
 typedef property_map<graph_type, vertex_color_t>::type vertex_color_map_type;
 
-void simpleGraph() 
+double simple_graph() 
 {
 	graph_type g;
 	vertex_descriptor a = boost::add_vertex(g);
@@ -78,17 +78,13 @@ void simpleGraph()
 
 	//test relaxed LP based coloring
 	limbo::algorithms::coloring::LPColoring<graph_type> lc (g); 
-	lc.stitchWeight(0.1);
-	// true or false 
-	lc.conflictCost(false);
-	// DIRECT_ILP, FIXED_ILP, ITERATIVE_ILP, GREEDY
-	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::ITERATIVE_ILP);
 	// THREE or FOUR 
-	lc.colorNum(limbo::algorithms::coloring::LPColoring<graph_type>::THREE);
-	lc();
+	lc.color_num(limbo::algorithms::coloring::LPColoring<graph_type>::THREE);
+	double cost = lc();
+    return cost;
 }
 
-void randomGraph() 
+double random_graph() 
 {
 	mt19937 gen;
 	graph_type g;
@@ -102,28 +98,17 @@ void randomGraph()
 	unsigned int i = 0; 
 	graph_traits<graph_type>::edge_iterator eit, eit_end;
 	for (tie(eit, eit_end) = edges(g); eit != eit_end; ++eit, ++i)
-	{
-#if 1
-		if (i%10 == 0) // generate stitch 
-			edge_weight_map[*eit] = -1;
-		else // generate conflict 
-#endif
-			edge_weight_map[*eit] = 1;
-	}
+        edge_weight_map[*eit] = 1;
 
 	//test relaxed LP based coloring
 	limbo::algorithms::coloring::LPColoring<graph_type> lc (g); 
-	lc.stitchWeight(0.1);
-	// true or false 
-	lc.conflictCost(false);
-	// DIRECT_ILP, FIXED_ILP, ITERATIVE_ILP, GREEDY
-	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::DIRECT_ILP);
 	// THREE or FOUR 
-	lc.colorNum(limbo::algorithms::coloring::LPColoring<graph_type>::FOUR);
-	lc();
+	lc.color_num(limbo::algorithms::coloring::LPColoring<graph_type>::FOUR);
+	double cost = lc();
+    return cost;
 }
 
-void realGraph(string const& filename)
+double real_graph(string const& filename)
 {
 	ifstream in (filename.c_str());
 
@@ -177,28 +162,26 @@ void realGraph(string const& filename)
 
 	//test relaxed LP based coloring
 	limbo::algorithms::coloring::LPColoring<graph_type> lc (g); 
-	lc.stitchWeight(0.1);
-	// true or false 
-	lc.conflictCost(false);
-	// true or false
-	//lc.stitchMode(false);
-	// DIRECT_ILP, FIXED_ILP, ITERATIVE_ILP, GREEDY, POST_ILP, STARTING_POINT_ILP
-	lc.roundingScheme(limbo::algorithms::coloring::LPColoring<graph_type>::STARTING_POINT_ILP);
 	// THREE or FOUR 
-	lc.colorNum(limbo::algorithms::coloring::LPColoring<graph_type>::THREE);
-	lc();
+	lc.color_num(limbo::algorithms::coloring::LPColoring<graph_type>::THREE);
+	double cost = lc();
 
 	in.close();
+
+    return cost;
 }
 
 int main(int argc, char** argv)
 {
+    double cost;
 	if (argc < 2)
 	{
-		//simpleGraph();
-		randomGraph();
+		//cost = simple_graph();
+		cost = random_graph();
 	}
-	else realGraph(argv[1]);
+	else cost = real_graph(argv[1]);
+
+    cout << "cost = " << cost << endl;
 
 	return 0;
 }
