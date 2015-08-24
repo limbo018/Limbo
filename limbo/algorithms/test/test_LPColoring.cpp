@@ -81,6 +81,7 @@ double simple_graph()
 	// THREE or FOUR 
 	lc.color_num(limbo::algorithms::coloring::LPColoring<graph_type>::THREE);
 	double cost = lc();
+    printf("solved in %u LP iterations\n", lc.lp_iters());
     return cost;
 }
 
@@ -105,6 +106,7 @@ double random_graph()
 	// THREE or FOUR 
 	lc.color_num(limbo::algorithms::coloring::LPColoring<graph_type>::FOUR);
 	double cost = lc();
+    printf("solved in %u LP iterations\n", lc.lp_iters());
     return cost;
 }
 
@@ -165,6 +167,7 @@ double real_graph(string const& filename)
 	// THREE or FOUR 
 	lc.color_num(limbo::algorithms::coloring::LPColoring<graph_type>::THREE);
 	double cost = lc();
+    printf("solved in %u LP iterations\n", lc.lp_iters());
 
 	in.close();
 
@@ -176,8 +179,8 @@ int main(int argc, char** argv)
     double cost;
 	if (argc < 2)
 	{
-		cost = simple_graph();
-		//cost = random_graph();
+		//cost = simple_graph();
+		cost = random_graph();
 	}
 	else cost = real_graph(argv[1]);
 

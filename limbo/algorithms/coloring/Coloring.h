@@ -66,7 +66,7 @@ class Coloring
 		/// member functions
 		/// top api 
 		/// \return objective value 
-		virtual double operator()() {return this->coloring();}
+		virtual double operator()(); 
 
 		/// color number 
 		virtual void color_num(ColorNumType cn) {m_color_num = cn;} 
@@ -119,6 +119,36 @@ Coloring<GraphType>::Coloring(Coloring<GraphType>::graph_type const& g)
     , m_threads(std::numeric_limits<int32_t>::max())
     , m_has_precolored(false)
 {}
+
+template <typename GraphType>
+double Coloring<GraphType>::operator()()
+{
+    if (boost::num_vertices(m_graph) <= color_num()) // if vertex number is no larger than color number, directly assign color
+    {
+        // need to consider precolored vertices
+        bool unusedColors[4] = {true, true, true, true};
+        if (color_num() == THREE)
+            unusedColors[3] = false;
+        for (int32_t i = 0, ie = m_vColor.size(); i != ie; ++i)
+        {
+            if (m_vColor[i] < 0) // if not precolored, assign to an unused color
+            {
+                for (int8_t c = 0; c != 4; ++c)
+                    if (unusedColors[c])
+                    {
+                        m_vColor[i] = c;
+                        break;
+                    }
+            }
+            // must have valid color after assignment 
+            assert(m_vColor[i] >= 0);
+            unusedColors[m_vColor[i]] = false;
+        }
+        return calc_cost(m_vColor);
+    }
+    else // perform coloring algorithm 
+        return this->coloring();
+}
 
 template <typename GraphType>
 double Coloring<GraphType>::calc_cost(vector<int8_t> const& vColor) const 

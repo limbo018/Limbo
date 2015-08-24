@@ -13,12 +13,8 @@
 #include <algorithm>
 #include <boost/cstdint.hpp>
 #include <boost/graph/graph_concepts.hpp>
-#include <boost/graph/subgraph.hpp>
 #include <boost/property_map/property_map.hpp>
-#include <boost/graph/bipartite.hpp>
-//#include <boost/graph/kruskal_min_spanning_tree.hpp>
-#include <boost/graph/prim_minimum_spanning_tree.hpp>
-#include <boost/graph/dijkstra_shortest_paths.hpp>
+#include <boost/dynamic_bitset.hpp>
 #include <limbo/string/String.h>
 #include <limbo/algorithms/coloring/Coloring.h>
 #include "gurobi_c++.h"
@@ -90,6 +86,8 @@ class LPColoring : public Coloring<GraphType>
 		/// destructor
 		~LPColoring() {};
 
+        uint32_t lp_iters() const {return m_lp_iters;}
+
         /// for debug 
         void print_solution(vector<GRBVar> const& vColorBits) const;
 	protected:
@@ -113,7 +111,7 @@ class LPColoring : public Coloring<GraphType>
         /// odd cycle constraints from Prof. Baldick
         void add_odd_cycle_constraints(vector<GRBVar> const& vColorBits, GRBModel& optModel); 
         /// solve model 
-        void solve_model(GRBModel& optModel) const;
+        void solve_model(GRBModel& optModel);
 
 		/// DFS to search for the odd cycles, stored in m_odd_cycles
 		void get_odd_cycles(graph_vertex_type const& v, vector<vector<graph_vertex_type> >& vOddCyle);
@@ -121,7 +119,7 @@ class LPColoring : public Coloring<GraphType>
 		graph_vertex_type max_degree_vertex() const;
 
 		/// Optimal rounding based on binding constraints
-		void rounding_with_binding_analysis(GRBModel& optModel, vector<GRBVar>& vColorBits, vector<GRBVar>& vEdgeBits) const;
+		void rounding_with_binding_analysis(GRBModel& optModel, vector<GRBVar>& vColorBits, vector<GRBVar>& vEdgeBits);
 
 		/// greedy final coloring refinement
 		uint32_t post_refinement();
@@ -136,15 +134,22 @@ class LPColoring : public Coloring<GraphType>
 		/// check if a variable is integer or not 
 		bool is_integer(double value) const {return value == floor(value);}
 
+        /// \return number of precolored vertices 
+        uint32_t check_precolored_num(vector<LPColoring<GraphType>::graph_vertex_type> const& vVertex) const; 
+
 		/// members
-		uint32_t m_constrs_num;
+        boost::dynamic_bitset<> m_vVertexHandledByOddCycle; ///< record whether a vertex has already been handled by an odd cycle 
+		uint32_t m_constrs_num; ///< record number of constraints 
+        uint32_t m_lp_iters; ///< record lp iterations 
 };
 
 /// constructor
 template <typename GraphType>
 LPColoring<GraphType>::LPColoring(graph_type const& g) 
     : LPColoring<GraphType>::base_type(g)
+    , m_vVertexHandledByOddCycle(boost::num_vertices(g), false)
     , m_constrs_num(0)
+    , m_lp_iters(0)
 {
 }
 
@@ -154,6 +159,10 @@ void LPColoring<GraphType>::get_odd_cycles(graph_vertex_type const& v, vector<ve
 {
 	//odd_cycle results
 	vOddCyle.clear();
+
+    // do not search for odd cycles for the same vertex again 
+    if (m_vVertexHandledByOddCycle[v]) return;
+    else m_vVertexHandledByOddCycle[v] = true;
 
 	//the array denoting the distance/visiting of the graph 
 	uint32_t numVertices = boost::num_vertices(this->m_graph);
@@ -186,7 +195,7 @@ void LPColoring<GraphType>::get_odd_cycles(graph_vertex_type const& v, vector<ve
 			if(vNodeDistColor[u] == -1) 
 			{
 				vNodeDistColor[u] = 1 - vNodeDistColor[cv];
-				vNodeDistColor[u] = true;
+				vNodeVisited[u] = true;
 				//push to the stack
 				vVertexStack.push_back(u);
 				popFlag = false;
@@ -196,6 +205,7 @@ void LPColoring<GraphType>::get_odd_cycles(graph_vertex_type const& v, vector<ve
 
 		if (true == popFlag) 
 		{
+            vector<graph_vertex_type> cycle;
 			//detect the odd cycle
             for (boost::tie(ui, uie) = adjacent_vertices(cv, this->m_graph); ui != uie; ++ui)
 			{
@@ -204,11 +214,10 @@ void LPColoring<GraphType>::get_odd_cycles(graph_vertex_type const& v, vector<ve
 				//if (*vi == v && (nodeDist[next_index] == nodeDist[curr_index])) // we only care about odd cycle related to v 
 				{
 					//suppose v is not in the current cycle 
-					vInCycle[v] = true;
+					vInCycle[v] = false;
 					//detect the cycle between curr_v and *vi
-					vector<graph_vertex_type> cycle;
 					int32_t cnt = vVertexStack.size();
-					for(int32_t k = cnt - 1; k >= 0; k--) 
+					for(int32_t k = cnt - 1; k >= 0; --k) // back trace cycle 
 					{
 						cycle.push_back(vVertexStack[k]);
 						//flag the nodes in cycle
@@ -216,13 +225,19 @@ void LPColoring<GraphType>::get_odd_cycles(graph_vertex_type const& v, vector<ve
 						if(vVertexStack[k] == u) break;
 					}
 					//store the cycle, when v is in cycle
-					if(!cycle.empty() && vInCycle[v]) 
+                    // if contain precolored vertices, avoid cycle with a lot precolored vertices
+					if (!cycle.empty() && vInCycle[v] && !(this->has_precolored() && check_precolored_num(cycle)+2 > cycle.size())) 
 					{
-                        vOddCyle.push_back(vector<graph_vertex_type>(0));
+                        vOddCyle.push_back(vector<graph_vertex_type>());
                         vOddCyle.back().swap(cycle);
+                        // if we find a small cycle, mark all vertices as handled to reduce the number of duplicate constraints
+                        if (cnt == 3)
+                            for (int32_t k = 0; k != cnt; ++k)
+                                m_vVertexHandledByOddCycle[vVertexStack[k]] = true;
 					} 
-				}//end if
-			}//end for vi
+                    else cycle.clear(); // remember to clear cycle 
+				}
+			}
 
 			//pop the top element
 			vVertexStack.pop_back();
@@ -265,7 +280,19 @@ void LPColoring<GraphType>::set_optimize_model(vector<GRBVar>& vColorBits, vecto
 	for (uint32_t i = 0; i != numColorBits; ++i)
 	{
         sprintf(buf, "v%u", i);
-		vColorBits.push_back(optModel.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS, buf));
+        // check whether precolored 
+        uint32_t vertexIdx = i>>1;
+        int8_t color = this->m_vColor[vertexIdx];
+        if (color < 0) // not precolored
+            vColorBits.push_back(optModel.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS, buf));
+        else // precolored
+        {
+            int8_t colorBit = (i&1)? (color&1) : (color>>1); 
+#ifdef DEBUG_LPCOLORING
+            assert(colorBit >= 0 && colorBit <= 1);
+#endif
+            vColorBits.push_back(optModel.addVar(colorBit, colorBit, colorBit, GRB_CONTINUOUS, buf));
+        }
 	}
 	for (uint32_t i = 0; i != numEdges; ++i)
 	{
@@ -287,6 +314,11 @@ void LPColoring<GraphType>::set_optimize_model(vector<GRBVar>& vColorBits, vecto
         graph_edge_type e = *ei;
         graph_vertex_type s = boost::source(e, this->m_graph);
         graph_vertex_type t = boost::target(e, this->m_graph);
+
+        // if both vertices of an edge is precolored, skip 
+        // otherwise, it may crash due to intrinsic conflict 
+        if (this->has_precolored() && this->m_vColor[s] >= 0 && this->m_vColor[t] >= 0)
+            continue;
 
         uint32_t bitIdxS = s<<1;
         uint32_t bitIdxT = t<<1;
@@ -433,13 +465,27 @@ void LPColoring<GraphType>::add_odd_cycle_constraints(vector<GRBVar> const& vCol
 
 /// solve model 
 template <typename GraphType>
-void LPColoring<GraphType>::solve_model(GRBModel& optModel) const 
+void LPColoring<GraphType>::solve_model(GRBModel& optModel) 
 {
     //optimize the new model
     optModel.update();
+#ifdef DEBUG_LPCOLORING
+    char buf[64];
+    sprintf(buf, "%u.lp", m_lp_iters);
+    optModel.write(buf);
+#endif
     optModel.optimize();
     int32_t optStatus = optModel.get(GRB_IntAttr_Status);
+#ifdef DEBUG_LPCOLORING
+    if (optStatus == GRB_INFEASIBLE)
+    {
+        optModel.computeIIS();
+        sprintf(buf, "%u.ilp", m_lp_iters);
+        optModel.write(buf);
+    }
+#endif
     assert_msg(optStatus != GRB_INFEASIBLE, "model is infeasible");
+    ++m_lp_iters;
 }
 
 //relaxed linear programming based coloring for the conflict graph (this->m_graph)
@@ -456,7 +502,7 @@ double LPColoring<GraphType>::coloring()
 	//set up the LP environment
 	GRBEnv env;
 	//mute the log from the LP solver
-	//env.set(GRB_IntParam_OutputFlag, 0);
+	env.set(GRB_IntParam_OutputFlag, 0);
     // set number of threads 
 	if (this->m_threads > 0 && this->m_threads < std::numeric_limits<int32_t>::max())
 		env.set(GRB_IntParam_Threads, this->m_threads);
@@ -531,7 +577,7 @@ void LPColoring<GraphType>::apply_solution(vector<GRBVar> const& vColorBits)
 /// optimal rounding based on the binding analysis
 /// but only a part of all vertices can be rounded 
 template <typename GraphType>
-void LPColoring<GraphType>::rounding_with_binding_analysis(GRBModel& optModel, vector<GRBVar>& vColorBits, vector<GRBVar>& vEdgeBits) const
+void LPColoring<GraphType>::rounding_with_binding_analysis(GRBModel& optModel, vector<GRBVar>& vColorBits, vector<GRBVar>& vEdgeBits) 
 {
     NonIntegerInfo prevInfo; // initialize to numeric max 
     NonIntegerInfo curInfo;
@@ -559,7 +605,7 @@ void LPColoring<GraphType>::rounding_with_binding_analysis(GRBModel& optModel, v
             ConstrVariableInfo curConstrInfo[2];
 
             // (0, 0), (0, 1), (1, 0), (1, 1)
-            bool mValidColorBits[2][2] = {{true}};
+            bool mValidColorBits[2][2] = {{true, true}, {true, true}};
             if (this->color_num() == base_type::THREE)
                 mValidColorBits[1][1] = false;
 
@@ -664,7 +710,7 @@ bool LPColoring<GraphType>::refine_color(LPColoring<GraphType>::graph_edge_type 
     if (this->m_vColor[v[0]] != this->m_vColor[v[1]])
         return false;
 
-    bool mValidColors[4][4] = {{true}};
+    bool mValidColors[4][4] = {{true, true, true, true}, {true, true, true, true}, {true, true, true, true}, {true, true, true, true}};
     for (int8_t c = 0; c != 4; ++c) // two colors must be different
         mValidColors[c][c] = false; 
     if (this->color_num() == base_type::THREE)
@@ -728,6 +774,16 @@ void LPColoring<GraphType>::non_integer_num(vector<GRBVar> const& vVariables, ui
                 ++halfIntegerNum;
         }
     }
+}
+
+template <typename GraphType>
+uint32_t LPColoring<GraphType>::check_precolored_num(vector<LPColoring<GraphType>::graph_vertex_type> const& vVertex) const 
+{
+    uint32_t precoloredNum = 0;
+    for (typename vector<graph_vertex_type>::const_iterator vi = vVertex.begin(), vie = vVertex.end(); vi != vie; ++vi)
+        if (this->m_vColor[*vi] >= 0) // precolored vertex 
+            ++precoloredNum;
+    return precoloredNum;
 }
 
 template <typename GraphType>
