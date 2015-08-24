@@ -90,6 +90,8 @@ class LPColoring : public Coloring<GraphType>
 		/// destructor
 		~LPColoring() {};
 
+        /// for debug 
+        void print_solution(vector<GRBVar> const& vColorBits) const;
 	protected:
 		/// \return objective value 
 		/// relaxed linear programming based coloring for the conflict graph (this->m_graph)
@@ -110,6 +112,8 @@ class LPColoring : public Coloring<GraphType>
         void adjust_conflict_edge_vertices_in_objective(vector<GRBVar> const& vColorBits, GRBLinExpr& obj) const;
         /// odd cycle constraints from Prof. Baldick
         void add_odd_cycle_constraints(vector<GRBVar> const& vColorBits, GRBModel& optModel); 
+        /// solve model 
+        void solve_model(GRBModel& optModel) const;
 
 		/// DFS to search for the odd cycles, stored in m_odd_cycles
 		void get_odd_cycles(graph_vertex_type const& v, vector<vector<graph_vertex_type> >& vOddCyle);
@@ -427,6 +431,17 @@ void LPColoring<GraphType>::add_odd_cycle_constraints(vector<GRBVar> const& vCol
     }//end for k
 }
 
+/// solve model 
+template <typename GraphType>
+void LPColoring<GraphType>::solve_model(GRBModel& optModel) const 
+{
+    //optimize the new model
+    optModel.update();
+    optModel.optimize();
+    int32_t optStatus = optModel.get(GRB_IntAttr_Status);
+    assert_msg(optStatus != GRB_INFEASIBLE, "model is infeasible");
+}
+
 //relaxed linear programming based coloring for the conflict graph (this->m_graph)
 template <typename GraphType> 
 double LPColoring<GraphType>::coloring() 
@@ -454,9 +469,12 @@ double LPColoring<GraphType>::coloring()
     set_optimize_model(vColorBits, vEdgeBits, obj, optModel);
     set_anchor(vColorBits);
 
-	optModel.optimize();
-	int optStatus = optModel.get(GRB_IntAttr_Status);
-    assert_msg(optStatus != GRB_INFEASIBLE, "model is infeasible");
+    solve_model(optModel);
+
+#ifdef DEBUG_LPCOLORING
+    printf("default LP solution: ");
+    print_solution(vColorBits);
+#endif
 
     NonIntegerInfo prevInfo; // initialize to numeric max 
     NonIntegerInfo curInfo;
@@ -477,16 +495,11 @@ double LPColoring<GraphType>::coloring()
 		//odd cycle trick from Prof. Baldick
         add_odd_cycle_constraints(vColorBits, optModel);
 
-		//optimize the new model
-		optModel.update();
-		optModel.optimize();
-
-        optStatus = optModel.get(GRB_IntAttr_Status);
-        assert_msg(optStatus != GRB_INFEASIBLE, "model is infeasible");
+        solve_model(optModel);
 
         prevInfo = curInfo;
         non_integer_num(vColorBits, vEdgeBits, curInfo);
-	}//end while
+	}
 
 	// binding analysis
     rounding_with_binding_analysis(optModel, vColorBits, vEdgeBits);
@@ -510,7 +523,8 @@ void LPColoring<GraphType>::apply_solution(vector<GRBVar> const& vColorBits)
         GRBVar const& var2 = vColorBits[(i<<1)+1];
         int8_t b1 = round(var1.get(GRB_DoubleAttr_X));
         int8_t b2 = round(var2.get(GRB_DoubleAttr_X));
-        this->m_vColor[i] = (b1<<1)+b2;
+        // exclude (1, 1) for three coloring 
+        this->m_vColor[i] = std::min((b1<<1)+b2, (int8_t)this->color_num()-1);
     }
 }
 
@@ -525,6 +539,7 @@ void LPColoring<GraphType>::rounding_with_binding_analysis(GRBModel& optModel, v
 	//iteratively scheme
 	while(curInfo.vertex_non_integer_num > 0 && curInfo.vertex_non_integer_num < prevInfo.vertex_non_integer_num) 
     {
+        bool modifyFlag = false; // whether binding analysis causes any change 
         for (uint32_t i = 0, ie = vColorBits.size(); i < ie; i += 2)
         {
             GRBVar const& var1 = vColorBits[i];
@@ -544,15 +559,13 @@ void LPColoring<GraphType>::rounding_with_binding_analysis(GRBModel& optModel, v
             ConstrVariableInfo curConstrInfo[2];
 
             // (0, 0), (0, 1), (1, 0), (1, 1)
-            bool mValidColorBits[2][2] = {
-                {true, true}, 
-                {true, true}
-            };
+            bool mValidColorBits[2][2] = {{true}};
             if (this->color_num() == base_type::THREE)
                 mValidColorBits[1][1] = false;
 
             uint32_t invalidCount = 0;
             bool failFlag = false; // whether optimal rounding is impossible 
+            // check all corresponding constraints 
             for (uint32_t j = 0; j != 2 && !failFlag; ++j)
                 for (uint32_t k = 0, ke = column[j].size(); k != ke; ++k)
                 {
@@ -608,9 +621,15 @@ void LPColoring<GraphType>::rounding_with_binding_analysis(GRBModel& optModel, v
                             vColorBits[i].set(GRB_DoubleAttr_LB, b1);
                             vColorBits[i+1].set(GRB_DoubleAttr_UB, b2);
                             vColorBits[i+1].set(GRB_DoubleAttr_LB, b2);
+                            modifyFlag = true;
                         }
             }
         }
+
+        // exit if nothing changed 
+        if (!modifyFlag) break;
+
+        solve_model(optModel);
 
         prevInfo = curInfo;
         non_integer_num(vColorBits, vEdgeBits, curInfo);
@@ -645,16 +664,21 @@ bool LPColoring<GraphType>::refine_color(LPColoring<GraphType>::graph_edge_type 
     if (this->m_vColor[v[0]] != this->m_vColor[v[1]])
         return false;
 
-    bool mValidColors[2][4] = {
-        {true, true, true, true}, 
-        {true, true, true, true}
-    };
+    bool mValidColors[4][4] = {{true}};
+    for (int8_t c = 0; c != 4; ++c) // two colors must be different
+        mValidColors[c][c] = false; 
     if (this->color_num() == base_type::THREE)
-        mValidColors[0][3] = mValidColors[1][3] = false;
+    {
+        for (int8_t c = 0; c != 4; ++c)
+            mValidColors[c][3] = mValidColors[3][c] = false;
+    }
 
-    for (int8_t c1 = 0; c1 != 4; ++c1)
-        for (int8_t c2 = 0; c2 != 4; ++c2)
-            if (c1 != c2 && mValidColors[c1][c2]) // no conflict allowed between v1 and v2 
+    int8_t c[2] = {0};
+    for (c[0] = 0; c[0] != 4; ++c[0])
+        for (c[1] = 0; c[1] != 4; ++c[1])
+        {
+            bool& validColor = mValidColors[c[0]][c[1]];
+            if (validColor) // no conflict allowed between v1 and v2 
             {
                 typename boost::graph_traits<graph_type>::adjacency_iterator ui, uie;
                 for (int32_t i = 0; i != 2; ++i)
@@ -665,17 +689,18 @@ bool LPColoring<GraphType>::refine_color(LPColoring<GraphType>::graph_edge_type 
                     for (boost::tie(ui, uie) = boost::adjacent_vertices(cv, this->m_graph); ui != uie; ++ui)
                     {
                         graph_vertex_type u = *ui;
-                        if (u != ov)
-                            mValidColors[0][this->m_vColor[u]] = false;
+                        if (u != ov && c[i] == this->m_vColor[u])
+                            validColor = false;
                     }
                 }
-                if (mValidColors[c1][c2]) // found coloring solution to resolve conflict 
+                if (validColor) // found coloring solution to resolve conflict 
                 {
-                    this->m_vColor[v[0]] = c1;
-                    this->m_vColor[v[1]] = c2;
+                    this->m_vColor[v[0]] = c[0];
+                    this->m_vColor[v[1]] = c[1];
                     return true;
                 }
             }
+        }
 
     return false;
 }
@@ -703,6 +728,18 @@ void LPColoring<GraphType>::non_integer_num(vector<GRBVar> const& vVariables, ui
                 ++halfIntegerNum;
         }
     }
+}
+
+template <typename GraphType>
+void LPColoring<GraphType>::print_solution(vector<GRBVar> const& vColorBits) const 
+{
+    const char* prefix = "";
+    for (uint32_t i = 0, ie = vColorBits.size(); i < ie; i += 2)
+    {
+        printf("%sv%u=(%g,%g)", prefix, i>>1, vColorBits[i].get(GRB_DoubleAttr_X), vColorBits[i+1].get(GRB_DoubleAttr_X));
+        prefix = ", ";
+    }
+    printf("\n");
 }
 
 }}} // namespace limbo // namespace algorithms // namespace coloring
