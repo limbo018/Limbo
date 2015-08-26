@@ -418,7 +418,7 @@ void GraphSimplification<GraphType>::simplify(uint32_t level)
 {
 	m_level = level; // record level for recover()
 	if (this->has_precolored()) // this step does not support precolored graph yet 
-		m_level = m_level & (~BICONNECTED_COMPONENT);
+		m_level = m_level & (~MERGE_SUBK4) & (~BICONNECTED_COMPONENT);
 
 	if (m_level & HIDE_SMALL_DEGREE)
 		this->hide_small_degree();

@@ -179,8 +179,8 @@ int main(int argc, char** argv)
     double cost;
 	if (argc < 2)
 	{
-		//cost = simple_graph();
-		cost = random_graph();
+		cost = simple_graph();
+		//cost = random_graph();
 	}
 	else cost = real_graph(argv[1]);
 

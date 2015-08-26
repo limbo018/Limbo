@@ -433,8 +433,11 @@ void LPColoring<GraphType>::add_odd_cycle_constraints(vector<GRBVar> const& vCol
     vector<vector<graph_vertex_type> > vOddCyle;
     for(uint32_t k = 0, ke = vColorBits.size(); k < ke; k += 2) 
     {
+        // only add odd cycle for half integer 
+        if (vColorBits[k].get(GRB_DoubleAttr_X) != 0.5 && vColorBits[k+1].get(GRB_DoubleAttr_X) != 0.5)
+            continue;
+
         graph_vertex_type v = k>>1;
-        //this->odd_cycle_mst(curr_v);
         this->get_odd_cycles(v, vOddCyle);
 
         for (typename vector<vector<graph_vertex_type> >::const_iterator it1 = vOddCyle.begin(), it1e = vOddCyle.end(); it1 != it1e; ++it1)
@@ -518,7 +521,7 @@ double LPColoring<GraphType>::coloring()
     solve_model(optModel);
 
 #ifdef DEBUG_LPCOLORING
-    printf("default LP solution: ");
+    printf("\nLP %u solution: ", m_lp_iters);
     print_solution(vColorBits);
 #endif
 
@@ -542,6 +545,11 @@ double LPColoring<GraphType>::coloring()
         add_odd_cycle_constraints(vColorBits, optModel);
 
         solve_model(optModel);
+
+#ifdef DEBUG_LPCOLORING
+        printf("LP %u solution: ", m_lp_iters);
+        print_solution(vColorBits);
+#endif
 
         prevInfo = curInfo;
         non_integer_num(vColorBits, vEdgeBits, curInfo);
@@ -707,48 +715,48 @@ bool LPColoring<GraphType>::refine_color(LPColoring<GraphType>::graph_edge_type 
         boost::target(e, this->m_graph)
     };
 
-    if (this->m_vColor[v[0]] != this->m_vColor[v[1]])
-        return false;
+    //if (this->m_vColor[v[0]] != this->m_vColor[v[1]])
+    //    return false;
 
-    bool mValidColors[4][4] = {{true, true, true, true}, {true, true, true, true}, {true, true, true, true}, {true, true, true, true}};
-    for (int8_t c = 0; c != 4; ++c) // two colors must be different
-        mValidColors[c][c] = false; 
-    if (this->color_num() == base_type::THREE)
-    {
-        for (int8_t c = 0; c != 4; ++c)
-            mValidColors[c][3] = mValidColors[3][c] = false;
-    }
-
-    int8_t c[2] = {0};
-    for (c[0] = 0; c[0] != 4; ++c[0])
-        for (c[1] = 0; c[1] != 4; ++c[1])
+    // find coloring solution with best cost 
+    int8_t bestColor[2] = {0, 0};
+    int32_t bestCost = std::numeric_limits<int32_t>::max();
+    int8_t c[2];
+    for (c[0] = 0; c[0] != this->color_num(); c[0] += 1)
+        for (c[1] = 0; c[1] != this->color_num(); c[1] += 1)
         {
-            bool& validColor = mValidColors[c[0]][c[1]];
-            if (validColor) // no conflict allowed between v1 and v2 
+            int32_t curCost = 0;
+            typename boost::graph_traits<graph_type>::adjacency_iterator ui, uie;
+            for (int32_t i = 0; i != 2; ++i)
             {
-                typename boost::graph_traits<graph_type>::adjacency_iterator ui, uie;
-                for (int32_t i = 0; i != 2; ++i)
+                // cv denotes current vertex 
+                // ov denotes the other vertex 
+                graph_vertex_type cv = v[i], ov = v[!i];
+                for (boost::tie(ui, uie) = boost::adjacent_vertices(cv, this->m_graph); ui != uie; ++ui)
                 {
-                    // cv denotes current vertex 
-                    // ov denotes the other vertex 
-                    graph_vertex_type cv = v[i], ov = v[!i];
-                    for (boost::tie(ui, uie) = boost::adjacent_vertices(cv, this->m_graph); ui != uie; ++ui)
-                    {
-                        graph_vertex_type u = *ui;
-                        if (u != ov && c[i] == this->m_vColor[u])
-                            validColor = false;
-                    }
-                }
-                if (validColor) // found coloring solution to resolve conflict 
-                {
-                    this->m_vColor[v[0]] = c[0];
-                    this->m_vColor[v[1]] = c[1];
-                    return true;
+                    graph_vertex_type u = *ui;
+                    if (u != ov && c[i] == this->m_vColor[u])
+                        curCost += 1;
                 }
             }
+            if (c[0] == c[1])
+                curCost += 1;
+            if (curCost < bestCost)
+            {
+                bestCost = curCost;
+                bestColor[0] = c[0];
+                bestColor[1] = c[1];
+            }
         }
+    bool retFlag = false;
+    if (this->m_vColor[v[0]] != bestColor[0] || this->m_vColor[v[1]] != bestColor[1])
+    {
+        this->m_vColor[v[0]] = bestColor[0];
+        this->m_vColor[v[1]] = bestColor[1];
+        retFlag = true;
+    }
 
-    return false;
+    return retFlag;
 }
 
 //for debug use
