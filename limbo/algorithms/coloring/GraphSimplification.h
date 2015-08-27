@@ -81,10 +81,10 @@ class GraphSimplification
 			, m_vPrecolor(boost::num_vertices(g), -1)
 		{
 			graph_vertex_type v = 0; 
-			for (typename vector<graph_vertex_type>::iterator it = m_vParent.begin(); it != m_vParent.end(); ++it, ++v)
+			for (typename vector<graph_vertex_type>::iterator it = m_vParent.begin(), ite = m_vParent.end(); it != ite; ++it, ++v)
 				(*it) = v;
 			v = 0;
-			for (typename vector<vector<graph_vertex_type> >::iterator it = m_vChildren.begin(); it != m_vChildren.end(); ++it, ++v)
+			for (typename vector<vector<graph_vertex_type> >::iterator it = m_vChildren.begin(), ite = m_vChildren.end(); it != ite; ++it, ++v)
 				it->push_back(v);
 #ifdef DEBUG_GRAPHSIMPLIFICATION
 			assert(m_vParent.size() == boost::num_vertices(m_graph));
@@ -426,6 +426,13 @@ void GraphSimplification<GraphType>::simplify(uint32_t level)
 		this->merge_subK4();
 	if (m_level & BICONNECTED_COMPONENT)
 		this->biconnected_component();
+    else // if BICONNECTED_COMPONENT is not on, we need to construct m_mCompVertex with size 1 
+    {
+        m_mCompVertex.assign(1, vector<graph_vertex_type>());
+        for (graph_vertex_type v = 0, ve = boost::num_vertices(m_graph); v != ve; ++v)
+            if (this->good(v))
+                m_mCompVertex[0].push_back(v);
+    }
 }
 
 template <typename GraphType>
