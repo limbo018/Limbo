@@ -470,23 +470,25 @@ void LPColoring<GraphType>::add_odd_cycle_constraints(vector<GRBVar> const& vCol
 template <typename GraphType>
 void LPColoring<GraphType>::solve_model(GRBModel& optModel) 
 {
+    char buf[64];
     //optimize the new model
     optModel.update();
 #ifdef DEBUG_LPCOLORING
-    char buf[64];
     sprintf(buf, "%u.lp", m_lp_iters);
     optModel.write(buf);
 #endif
     optModel.optimize();
     int32_t optStatus = optModel.get(GRB_IntAttr_Status);
-#ifdef DEBUG_LPCOLORING
     if (optStatus == GRB_INFEASIBLE)
     {
+        // write lp 
+        sprintf(buf, "%u.lp", m_lp_iters);
+        optModel.write(buf);
+        // write iis 
         optModel.computeIIS();
         sprintf(buf, "%u.ilp", m_lp_iters);
         optModel.write(buf);
     }
-#endif
     assert_msg(optStatus != GRB_INFEASIBLE, "model is infeasible");
     ++m_lp_iters;
 }
@@ -556,7 +558,7 @@ double LPColoring<GraphType>::coloring()
 	}
 
 	// binding analysis
-    rounding_with_binding_analysis(optModel, vColorBits, vEdgeBits);
+    //rounding_with_binding_analysis(optModel, vColorBits, vEdgeBits);
     // apply coloring solution 
     apply_solution(vColorBits);
     // post refinement 
@@ -625,8 +627,8 @@ void LPColoring<GraphType>::rounding_with_binding_analysis(GRBModel& optModel, v
                 {
                     GRBConstr constr = column[j].getConstr(k);
                     // skip non-binding constraint 
-                    if (constr.get(GRB_DoubleAttr_Slack) != 0.0) 
-                        continue;
+                    //if (constr.get(GRB_DoubleAttr_Slack) != 0.0) 
+                    //    continue;
                     char sense = constr.get(GRB_CharAttr_Sense);
                     curConstrInfo[0].set(optModel.getCoeff(constr, var1), sense);
                     curConstrInfo[1].set(optModel.getCoeff(constr, var2), sense);
@@ -736,11 +738,18 @@ bool LPColoring<GraphType>::refine_color(LPColoring<GraphType>::graph_edge_type 
                 {
                     graph_vertex_type u = *ui;
                     if (u != ov && c[i] == this->m_vColor[u])
-                        curCost += 1;
+                    {
+                        std::pair<graph_edge_type, bool> eU2cv = boost::edge(cv, u, this->m_graph);
+#ifdef DEBUG_LPCOLORING
+                        assert(eU2cv.second);
+#endif
+                        // edge weight is important since we may deal with merged graphs
+                        curCost += std::max(1, boost::get(boost::edge_weight, this->m_graph, eU2cv.first));
+                    }
                 }
             }
-            if (c[0] == c[1])
-                curCost += 1;
+            if (c[0] == c[1]) // edge weight is important since we may deal with merged graphs
+                curCost += std::max(1, boost::get(boost::edge_weight, this->m_graph, e));
             if (curCost < bestCost)
             {
                 bestCost = curCost;

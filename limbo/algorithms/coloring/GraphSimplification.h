@@ -70,6 +70,7 @@ class GraphSimplification
 			: m_graph (g)
 			, m_color_num (color_num)
 			, m_level (NONE)
+            , m_max_merge_level(std::numeric_limits<uint32_t>::max())
 			, m_vStatus(boost::num_vertices(g), GOOD)
 			, m_vParent(boost::num_vertices(g))
 			, m_vChildren(boost::num_vertices(g))
@@ -112,6 +113,9 @@ class GraphSimplification
 		pair<graph_type, map<graph_vertex_type, graph_vertex_type> > simplified_graph() const; 
 		bool simplified_graph_component(uint32_t comp_id, graph_type& sg, vector<graph_vertex_type>& vSimpl2Orig) const;
 		uint32_t num_component() const {return m_mCompVertex.size();}
+
+        /// set m_max_merge_level
+        void max_merge_level(int32_t l) {m_max_merge_level = l;}
 
 		void simplify(uint32_t level);
 		void recover(vector<int8_t>& vColorFlat, vector<vector<int8_t> >& mColor, vector<vector<graph_vertex_type> > const& mSimpl2Orig) const;
@@ -258,9 +262,15 @@ class GraphSimplification
 			}
 			return false;
 		}
+        /// \return true if the vertex satisfies max merge level constraint 
+        bool check_max_merge_level(uint32_t l) const 
+        {
+            return l <= m_max_merge_level;
+        }
 		graph_type const& m_graph;
 		uint32_t m_color_num;
 		uint32_t m_level; ///< simplification level 
+        uint32_t m_max_merge_level; ///< in MERGE_SUBK4, any merge that results in the children number of a vertex larger than m_max_merge_level is disallowed 
 		vector<vertex_status_type> m_vStatus; ///< status of each vertex 
 
 		vector<graph_vertex_type> m_vParent; ///< parent vertex of current vertex 
@@ -553,6 +563,8 @@ void GraphSimplification<GraphType>::merge_subK4()
 									// vertex 2 and vertex 4 must be connected 
 									// vertex 1 and vertex 4 must not be connected (K4)
 									if (!this->connected_conflict(v2, v4) || this->connected_conflict(v1, v4)) continue;
+                                    // check max merge level 
+                                    if (!this->check_max_merge_level(m_vChildren[v1].size()+m_vChildren[v4].size())) continue;
 									// merge vertex 4 to vertex 1 
 									m_vStatus[v4] = MERGED;
 									m_vChildren[v1].insert(m_vChildren[v1].end(), m_vChildren[v4].begin(), m_vChildren[v4].end());
@@ -944,7 +956,7 @@ void GraphSimplification<GraphType>::recover_merge_subK4(vector<int8_t>& vColor)
 		graph_vertex_type v = *vi;
 		if (this->good(v))
 		{
-			assert(vColor[v] >= 0 && vColor[v] < 3);
+			assert(vColor[v] >= 0 && vColor[v] < (int8_t)this->m_color_num);
 			for (uint32_t j = 0; j != m_vChildren[v].size(); ++j)
 			{
 				graph_vertex_type u = m_vChildren[v][j];

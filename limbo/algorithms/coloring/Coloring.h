@@ -202,12 +202,12 @@ void Coloring<GraphType>::write_graph(string const& filename) const
 			bool conflict_flag = (m_vColor[s] >= 0 && m_vColor[s] == m_vColor[t]);
 
 			if(conflict_flag)
-				dot_file << "  " << s << "--" << t << "[color=\"red\",style=\"solid\",penwidth=3]\n";
+				dot_file << "  " << s << "--" << t << "[label=" << w << ",color=\"red\",style=\"solid\",penwidth=3]\n";
 			else 
-				dot_file << "  " << s << "--" << t << "[color=\"black\",style=\"solid\",penwidth=3]\n";
+				dot_file << "  " << s << "--" << t << "[label=" << w << ",color=\"black\",style=\"solid\",penwidth=3]\n";
 		}
 		else // stitch edge 
-			dot_file << "  " << s << "--" << t << "[color=\"black\",style=\"dashed\",penwidth=3]\n";
+			dot_file << "  " << s << "--" << t << "[label=" << w << ",color=\"black\",style=\"dashed\",penwidth=3]\n";
 	}
 	dot_file << "}";
 	dot_file.close();
