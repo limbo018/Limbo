@@ -8,9 +8,12 @@
 #ifndef LIMBO_ALGORITHMS_COLORING_COLORING
 #define LIMBO_ALGORITHMS_COLORING_COLORING
 
+#include <fstream>
 #include <vector>
 #include <boost/cstdint.hpp>
+#include <boost/functional/hash.hpp>
 #include <boost/graph/graph_concepts.hpp>
+#include <boost/graph/adjacency_list.hpp>
 #include <boost/property_map/property_map.hpp>
 #include <limbo/preprocessor/AssertMsg.h>
 

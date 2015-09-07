@@ -54,9 +54,6 @@ class ILPColoring : public Coloring<GraphType>
 		/// negative weight implies stitch edge 
 		typedef typename boost::property_map<graph_type, boost::edge_weight_t>::type edge_weight_map_type;
 		typedef typename boost::property_map<graph_type, boost::edge_weight_t>::const_type const_edge_weight_map_type;
-		/// use vertex color to save vertex stitch candidate number 
-		typedef typename boost::property_map<graph_type, boost::vertex_color_t>::type vertex_color_map_type;
-		typedef typename boost::property_map<graph_type, boost::vertex_color_t>::const_type const_vertex_color_map_type;
 
 		/// constructor
 		ILPColoring(graph_type const& g) 
