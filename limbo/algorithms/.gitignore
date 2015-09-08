@@ -3,6 +3,7 @@ test/test_FM
 test/test_ChromaticNumber
 test/test_LPColoring
 test/test_ILPColoring
+test/test_SDPColoring
 test/test_GraphSimplification
 test/graph.sol
 test/graph.dot
@@ -27,5 +28,6 @@ test/*.dot
 test/*.pdf
 coloring/tmp_*
 coloring/two-cases.tar.gz
+coloring/*.sdpa
 coloring/LPColoring.h.bk
 test/test_LPColoring.cpp.bk

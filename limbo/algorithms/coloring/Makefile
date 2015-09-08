@@ -28,10 +28,13 @@ ifeq ($(UNAME_S), Darwin)
 endif 
 
 ifeq ($(DBG), 1)
-	CXXFLAGS = $(CXXFLAGS_DEBUG) -DDEBUG_LPCOLORING -DASSERT_LPCOLORING -DDEBUG_GRAPHSIMPLIFICATION -DDEBUG_ILPCOLORING
+	CXXFLAGS = $(CXXFLAGS_DEBUG) -DDEBUG_LPCOLORING -DASSERT_LPCOLORING -DDEBUG_GRAPHSIMPLIFICATION -DDEBUG_ILPCOLORING -DDEBUG_SDPCOLORING
 else
 	CXXFLAGS = $(CXXFLAGS_RELEASE)
 endif
+
+# moved to SDPColoringCsdp.h
+#CXXFLAGS += -DNOSHORTS
 
 #==========================================================================
 #                         Special Library
@@ -41,13 +44,17 @@ endif
 # external dependency is boost
 INCLUDE = -I $(LIMBO_ROOT_DIR) \
 		  -I $(BOOST_DIR)/include \
-		  -I $(GUROBI_HOME)/include 
+		  -I $(GUROBI_HOME)/include \
+		  -I $(CSDP_DIR)/include
 LIBS = \
 	   $(BOOST_DIR)/lib/libboost_graph.a \
 	   $(BOOST_DIR)/lib/libboost_regex.a \
 	   $(BOOST_DIR)/lib/libboost_unit_test_framework.a \
 	   -lm \
-	   -L $(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi60 
+	   -L $(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi60 \
+	   -L$(CSDP_DIR)/lib -lsdp \
+	   -L$(OPENBLAS_DIR)/lib -lopenblas \
+	   -lgfortran -lm -lrt -lpthread
 
 # ==========================================================================
 #                         Standard Setting
@@ -61,7 +68,7 @@ SRCS_TEST = $(wildcard $(TEST_DIR)/*.cpp)
 OBJS_TEST = $(patsubst $(TEST_DIR)/%.cpp,$(TEST_DIR)/%.o,$(SRCS_TEST))
 DEPS_TEST = $(OBJS_TEST:%.o=%.d)
 
-all: $(TEST_DIR)/test_ChromaticNumber $(TEST_DIR)/test_LPColoring $(TEST_DIR)/test_GraphSimplification $(TEST_DIR)/test_ILPColoring 
+all: $(TEST_DIR)/test_ChromaticNumber $(TEST_DIR)/test_LPColoring $(TEST_DIR)/test_GraphSimplification $(TEST_DIR)/test_ILPColoring  $(TEST_DIR)/test_SDPColoring
 
 # Compile dependency 
 
@@ -94,10 +101,12 @@ $(TEST_DIR)/test_GraphSimplification: $(TEST_DIR)/test_GraphSimplification.o
 	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_GraphSimplification.o $(CXXFLAGS) $(LIBS)
 $(TEST_DIR)/test_ILPColoring: $(TEST_DIR)/test_ILPColoring.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_ILPColoring.o $(CXXFLAGS) $(LIBS)
+$(TEST_DIR)/test_SDPColoring: $(TEST_DIR)/test_SDPColoring.o 
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_SDPColoring.o $(CXXFLAGS) $(LIBS)
 
 .PHONY: clean
 clean: cleandep
-	rm -f $(TEST_DIR)/test_ChromaticNumber $(TEST_DIR)/test_LPColoring $(TEST_DIR)/test_GraphSimplification $(TEST_DIR)/test_ILPColoring $(OBJS) $(OBJS_TEST)
+	rm -f $(TEST_DIR)/test_ChromaticNumber $(TEST_DIR)/test_LPColoring $(TEST_DIR)/test_GraphSimplification $(TEST_DIR)/test_ILPColoring $(TEST_DIR)/test_SDPColoring $(OBJS) $(OBJS_TEST)
 
 .PHONY: cleandep
 cleandep:
