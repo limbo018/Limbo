@@ -10,6 +10,9 @@
 #ifndef LIMBO_SOLVERS_CSDPEASYSDPAPI_H
 #define LIMBO_SOLVERS_CSDPEASYSDPAPI_H
 
+// must define NOSHORTS to forbid the usage of unsigned shorts in Csdp 
+#define NOSHORTS
+
 // necessary since we are linking C library 
 #ifdef __cplusplus
 extern "C" {

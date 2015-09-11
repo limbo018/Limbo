@@ -47,13 +47,12 @@ class ILPColoring : public Coloring<GraphType>
 		using typename base_type::graph_edge_type;
 		using typename base_type::vertex_iterator_type;
 		using typename base_type::edge_iterator_type;
+        using typename base_type::edge_weight_type;
 		using typename base_type::ColorNumType;
         typedef typename base_type::EdgeHashType edge_hash_type;
 		/// edge weight is used to differentiate conflict edge and stitch edge 
 		/// non-negative weight implies conflict edge 
 		/// negative weight implies stitch edge 
-		typedef typename boost::property_map<graph_type, boost::edge_weight_t>::type edge_weight_map_type;
-		typedef typename boost::property_map<graph_type, boost::edge_weight_t>::const_type const_edge_weight_map_type;
 
 		/// constructor
 		ILPColoring(graph_type const& g) 
@@ -135,7 +134,7 @@ double ILPColoring<GraphType>::coloring()
 	GRBLinExpr obj (0);
 	for (boost::tie(ei, eie) = edges(this->m_graph); ei != eie; ++ei)
 	{
-		int32_t w = boost::get(boost::edge_weight, this->m_graph, *ei);
+		edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, *ei);
 		if (w > 0) // weighted conflict 
 			obj += w*vEdgeBit[hEdgeIdx[*ei]];
 		else if (w < 0) // weighted stitch 
@@ -155,7 +154,7 @@ double ILPColoring<GraphType>::coloring()
 		uint32_t vertex_idx1 = sIdx<<1;
 		uint32_t vertex_idx2 = tIdx<<1;
 
-		int32_t w = boost::get(boost::edge_weight, this->m_graph, *ei);
+		edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, *ei);
 		uint32_t edge_idx = hEdgeIdx[*ei];
 
 		char buf[100];
@@ -286,7 +285,7 @@ void ILPColoring<GraphType>::write_graph_sol(string const& filename, vector<GRBV
 	edge_iterator_type ei, eie;
 	for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei)
 	{
-		int32_t w = boost::get(boost::edge_weight, this->m_graph, *ei);
+		edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, *ei);
 		graph_vertex_type s = boost::source(*ei, this->m_graph);
 		graph_vertex_type t = boost::target(*ei, this->m_graph);
 		if (w >= 0) // conflict edge 

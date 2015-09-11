@@ -51,15 +51,12 @@ class ILPColoringLemonCbc : public Coloring<GraphType>
 		using typename base_type::graph_edge_type;
 		using typename base_type::vertex_iterator_type;
 		using typename base_type::edge_iterator_type;
+        using typename base_type::edge_weight_type;
 		using typename base_type::ColorNumType;
 		/// edge weight is used to differentiate conflict edge and stitch edge 
 		/// non-negative weight implies conflict edge 
 		/// negative weight implies stitch edge 
-		typedef typename boost::property_map<graph_type, boost::edge_weight_t>::type edge_weight_map_type;
-		typedef typename boost::property_map<graph_type, boost::edge_weight_t>::const_type const_edge_weight_map_type;
 		/// use vertex color to save vertex stitch candidate number 
-		typedef typename boost::property_map<graph_type, boost::vertex_color_t>::type vertex_color_map_type;
-		typedef typename boost::property_map<graph_type, boost::vertex_color_t>::const_type const_vertex_color_map_type;
 
 		// hasher class for graph_edge_type
 		struct edge_hash_type : std::unary_function<graph_edge_type, std::size_t>
@@ -163,7 +160,7 @@ double ILPColoringLemonCbc<GraphType>::coloring()
 	Expr obj;
 	for (boost::tie(ei, eie) = edges(this->m_graph); ei != eie; ++ei)
 	{
-		int32_t w = boost::get(boost::edge_weight, this->m_graph, *ei);
+		edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, *ei);
 		if (w > 0) // weighted conflict 
 			obj += w*vEdgeBit[hEdgeIdx[*ei]];
 		else if (w < 0) // weighted stitch 
@@ -184,7 +181,7 @@ double ILPColoringLemonCbc<GraphType>::coloring()
 		uint32_t vertex_idx1 = sIdx<<1;
 		uint32_t vertex_idx2 = tIdx<<1;
 
-		int32_t w = boost::get(boost::edge_weight, this->m_graph, *ei);
+		edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, *ei);
 		uint32_t edge_idx = hEdgeIdx[*ei];
 
 		//char buf[100];

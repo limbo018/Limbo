@@ -10,9 +10,9 @@
 
 #include <limbo/string/String.h>
 #include <limbo/algorithms/coloring/Coloring.h>
+#include <limbo/algorithms/coloring/BacktrackColoring.h>
+#include <limbo/containers/DisjointSet.h>
 
-// must define NOSHORTS to forbid the usage of unsigned shorts in Csdp 
-#define NOSHORTS
 // as the original csdp easy_sdp api is not very flexible to printlevel
 // I made small modification to support that 
 #include <limbo/solvers/api/CsdpEasySdpApi.h>
@@ -31,6 +31,7 @@
 
 namespace limbo { namespace algorithms { namespace coloring {
 
+/// thread control is not available as Csdp does not provide any API for that
 template <typename GraphType>
 class SDPColoringCsdp : public Coloring<GraphType>
 {
@@ -41,18 +42,15 @@ class SDPColoringCsdp : public Coloring<GraphType>
 		using typename base_type::graph_edge_type;
 		using typename base_type::vertex_iterator_type;
 		using typename base_type::edge_iterator_type;
+        using typename base_type::edge_weight_type;
 		using typename base_type::ColorNumType;
         typedef typename base_type::EdgeHashType edge_hash_type;
 		/// edge weight is used to differentiate conflict edge and stitch edge 
 		/// non-negative weight implies conflict edge 
 		/// negative weight implies stitch edge 
-		typedef typename boost::property_map<graph_type, boost::edge_weight_t>::type edge_weight_map_type;
-		typedef typename boost::property_map<graph_type, boost::edge_weight_t>::const_type const_edge_weight_map_type;
 
 		/// constructor
-		SDPColoringCsdp(graph_type const& g) 
-			: base_type(g)
-		{}
+		SDPColoringCsdp(graph_type const& g); 
 		/// destructor
 		virtual ~SDPColoringCsdp() {}
 
@@ -73,7 +71,18 @@ class SDPColoringCsdp : public Coloring<GraphType>
         void set_sparseblock_entry(struct sparseblock& block, int32_t entryid, int32_t i, int32_t j, double value) const; 
         /// round sdp solution 
         void round_sol(struct blockmatrix const& X);
+
+        double m_rounding_lb; ///< if SDP solution x < m_rounding_lb, take x as -0.5
+        double m_rounding_ub; ///< if SDP solution x > m_rounding_ub, take x as 1.0
 };
+
+template <typename GraphType>
+SDPColoringCsdp<GraphType>::SDPColoringCsdp(SDPColoringCsdp<GraphType>::graph_type const& g) 
+    : base_type(g)
+{
+    m_rounding_lb = -0.4;
+    m_rounding_ub = 0.9;
+}
 
 template <typename GraphType>
 double SDPColoringCsdp<GraphType>::coloring()
@@ -132,7 +141,7 @@ double SDPColoringCsdp<GraphType>::coloring()
         // 1 for conflict edge, -alpha for stitch edge 
         // add unary negative operator, because Csdp solves maximization problem 
         // but we are solving minimization problem 
-        double alpha = (this->edge_weight(*ei) >= 0)? -1 : this->stitch_weight();
+        edge_weight_type alpha = (this->edge_weight(*ei) >= 0)? -1 : this->stitch_weight();
         // variable starts from 1 instead of 0 in Csdp
         s += 1; t += 1;
         int32_t idx1 = ijtok(s,t,C.blocks[1].blocksize);
@@ -232,9 +241,9 @@ double SDPColoringCsdp<GraphType>::coloring()
     struct paramstruc params; 
     int printlevel;
     initparams(&params, &printlevel);
-#ifndef DEBUG_SDPCOLORING
+//#ifndef DEBUG_SDPCOLORING
     printlevel = 0;
-#endif
+//#endif
     // A return code for the call to easy_sdp().
     // solve sdp 
     // objective value is (dobj+pobj)/2
@@ -248,8 +257,12 @@ double SDPColoringCsdp<GraphType>::coloring()
     // Free storage allocated for the problem and return.
     free_prob(num_variables, num_constraints, C, b, constraints, X, y, Z);
 
+#ifdef DEBUG_LPCOLORING
+    this->write_graph("final_output");
+#endif
     // return objective value 
-    return (dobj+pobj)/2;
+    //return (dobj+pobj)/2;
+    return this->calc_cost(this->m_vColor);
 }
 
 template <typename GraphType>
@@ -309,6 +322,81 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
 #ifdef DEBUG_SDPCOLORING
     write_sdp_sol("problem.sol", X);
 #endif
+    // merge vertices with SDP solution with disjoint set 
+    std::vector<graph_vertex_type> vParent (boost::num_vertices(this->m_graph));
+    std::vector<uint32_t> vRank (vParent.size());
+    typedef limbo::containers::DisjointSet disjoint_set_type;
+    disjoint_set_type::SubsetHelper<graph_vertex_type, uint32_t> gp (vParent, vRank);
+    // check SDP solution in X 
+    // we are only interested in block 1 
+    struct blockrec const& block = X.blocks[1];
+    assert_msg(block.blockcategory == MATRIX, "mismatch of block category");
+    for (int32_t i = 1; i <= block.blocksize; ++i)
+        for (int32_t j = i+1; j <= block.blocksize; ++j)
+        {
+            double ent = block.data.mat[ijtok(i, j, block.blocksize)];
+            if (ent > m_rounding_ub) // merge vertices if SDP solution rounded to 1.0
+                disjoint_set_type::union_set(gp, i-1, j-1); // Csdp array starts from 1 instead of 0
+        }
+    // construct merged graph 
+    // for vertices in merged graph 
+    std::vector<graph_vertex_type> vG2MG (vParent.size(), std::numeric_limits<graph_vertex_type>::max()); // mapping from graph to merged graph
+    uint32_t mg_count = 0; // count number of vertices in merged graph 
+    for (uint32_t i = 0, ie = vParent.size(); i != ie; ++i) // check subset elements and compute mg_count
+        if (vParent[i] == i)
+            vG2MG[i] = mg_count++;
+    for (uint32_t i = 0, ie = vParent.size(); i != ie; ++i) // check other elements 
+        if (vParent[i] != i)
+            vG2MG[i] = vG2MG.at(disjoint_set_type::find_set(gp, i));
+#ifdef DEBUG_SDPCOLORING
+    assert(mg_count == disjoint_set_type::count_sets(gp));
+#endif
+    graph_type mg (mg_count); // merged graph 
+    // for edges in merged graph 
+    edge_iterator_type ei, eie; 
+    for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei)
+    {
+        graph_edge_type const& e = *ei;
+        graph_vertex_type s = boost::source(e, this->m_graph);
+        graph_vertex_type t = boost::target(e, this->m_graph);
+        graph_vertex_type ms = vG2MG.at(s);
+        graph_vertex_type mt = vG2MG.at(t);
+        std::pair<graph_edge_type, bool> me = boost::edge(ms, mt, mg);
+        // need to consider if this setting is still reasonable when stitch is on 
+        edge_weight_type w = (this->edge_weight(e) >= 0)? 1 : -this->stitch_weight();
+        if (me.second) // already exist, update weight 
+            w += boost::get(boost::edge_weight, mg, me.first);
+        else // not exist, add edge 
+            me = boost::add_edge(ms, mt, mg);
+        boost::put(boost::edge_weight, mg, me.first, w);
+#ifdef DEBUG_SDPCOLORING
+        assert(boost::get(boost::edge_weight, mg, me.first) != 0);
+#endif
+    }
+#ifdef DEBUG_SDPCOLORING
+    //this->print_edge_weight(this->m_graph);
+    this->check_edge_weight(this->m_graph, this->stitch_weight()/10, 2);
+    //this->print_edge_weight(mg);
+    this->check_edge_weight(mg, this->stitch_weight()/10, boost::num_edges(this->m_graph));
+#endif
+    // coloring for merged graph 
+    // currently backtrack coloring is used 
+    // TO DO: add faster coloring approach like FM partition based 
+    BacktrackColoring<graph_type> bc (mg);
+    bc.stitch_weight(1); // already scaled in edge weights 
+    bc.color_num(this->color_num());
+    bc();
+    // apply coloring solution from merged graph to graph 
+    // first, map colors to subsets 
+    vertex_iterator_type vi, vie; 
+    for (boost::tie(vi, vie) = boost::vertices(this->m_graph); vi != vie; ++vi)
+    {
+        graph_vertex_type v = *vi;
+        this->m_vColor[v] = bc.color(vG2MG.at(v));
+#ifdef DEBUG_SDPCOLORING
+        assert(this->m_vColor[v] >= 0 && this->m_vColor[v] < this->color_num());
+#endif
+    }
 }
 
 template <typename GraphType>

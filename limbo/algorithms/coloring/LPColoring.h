@@ -38,6 +38,7 @@ class LPColoring : public Coloring<GraphType>
 		typedef typename base_type::graph_edge_type graph_edge_type;
 		typedef typename base_type::vertex_iterator_type vertex_iterator_type;
 		typedef typename base_type::edge_iterator_type edge_iterator_type;
+        typedef typename base_type::edge_weight_type edge_weight_type;
         typedef typename base_type::EdgeHashType edge_hash_type;
 
         struct NonIntegerInfo
@@ -323,7 +324,7 @@ void LPColoring<GraphType>::set_optimize_model(vector<GRBVar>& vColorBits, vecto
         uint32_t bitIdxS = s<<1;
         uint32_t bitIdxT = t<<1;
 
-        int32_t w = this->edge_weight(e);
+        edge_weight_type w = this->edge_weight(e);
         assert_msg(w > 0, "no stitch edge allowed, positive edge weight expected: " << w);
 
         sprintf(buf, "R%u", m_constrs_num++);  
@@ -722,12 +723,12 @@ bool LPColoring<GraphType>::refine_color(LPColoring<GraphType>::graph_edge_type 
 
     // find coloring solution with best cost 
     int8_t bestColor[2] = {0, 0};
-    int32_t bestCost = std::numeric_limits<int32_t>::max();
+    edge_weight_type bestCost = std::numeric_limits<edge_weight_type>::max();
     int8_t c[2];
     for (c[0] = 0; c[0] != this->color_num(); c[0] += 1)
         for (c[1] = 0; c[1] != this->color_num(); c[1] += 1)
         {
-            int32_t curCost = 0;
+            edge_weight_type curCost = 0;
             typename boost::graph_traits<graph_type>::adjacency_iterator ui, uie;
             for (int32_t i = 0; i != 2; ++i)
             {
@@ -744,12 +745,12 @@ bool LPColoring<GraphType>::refine_color(LPColoring<GraphType>::graph_edge_type 
                         assert(eU2cv.second);
 #endif
                         // edge weight is important since we may deal with merged graphs
-                        curCost += std::max(1, boost::get(boost::edge_weight, this->m_graph, eU2cv.first));
+                        curCost += std::max((edge_weight_type)1, boost::get(boost::edge_weight, this->m_graph, eU2cv.first));
                     }
                 }
             }
             if (c[0] == c[1]) // edge weight is important since we may deal with merged graphs
-                curCost += std::max(1, boost::get(boost::edge_weight, this->m_graph, e));
+                curCost += std::max((edge_weight_type)1, boost::get(boost::edge_weight, this->m_graph, e));
             if (curCost < bestCost)
             {
                 bestCost = curCost;

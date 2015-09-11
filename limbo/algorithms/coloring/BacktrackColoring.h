@@ -23,6 +23,7 @@ class BacktrackColoring : public Coloring<GraphType>
 		using typename base_type::graph_edge_type;
 		using typename base_type::vertex_iterator_type;
 		using typename base_type::edge_iterator_type;
+        using typename base_type::edge_weight_type;
 		using typename base_type::ColorNumType;
 		typedef typename boost::graph_traits<graph_type>::adjacency_iterator adjacency_iterator_type;
 
@@ -140,7 +141,7 @@ void BacktrackColoring<GraphType>::coloring_kernel(vector<int8_t>& vBestColor, v
 				{
 					pair<graph_edge_type, bool> e = boost::edge(u, v, this->m_graph);
 					assert_msg(e.second, "failed to find edge with " << u << "--" << v);
-					int32_t w = boost::get(boost::edge_weight, this->m_graph, e.first);
+					edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, e.first);
 					assert_msg(w > 0, "only support conflict edges with positive cost"); // only support conflict edges 
 					delta_cost += w;
 				}

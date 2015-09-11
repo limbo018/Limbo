@@ -39,6 +39,8 @@ class Coloring
 		typedef typename boost::graph_traits<graph_type>::edge_descriptor graph_edge_type;
 		typedef typename boost::graph_traits<graph_type>::vertex_iterator vertex_iterator_type;
 		typedef typename boost::graph_traits<graph_type>::edge_iterator edge_iterator_type;
+        /// value type for edge weight, integer or double...
+        typedef typename boost::property_traits<typename boost::property_map<graph_type, boost::edge_weight_t>::const_type>::value_type edge_weight_type;
 		/// edge weight is used to differentiate conflict edge and stitch edge 
 		/// non-negative weight implies conflict edge 
 		/// negative weight implies stitch edge 
@@ -93,7 +95,7 @@ class Coloring
 		virtual int8_t color(graph_vertex_type v) const {return m_vColor[v];}
 
         /// helper functions 
-        inline virtual int32_t edge_weight(graph_edge_type const& e) const {return boost::get(boost::edge_weight, m_graph, e);}
+        inline virtual edge_weight_type edge_weight(graph_edge_type const& e) const {return boost::get(boost::edge_weight, m_graph, e);}
 
 		/// for debug 
 		virtual void write_graph(string const& filename) const;
@@ -102,7 +104,13 @@ class Coloring
 		virtual double coloring() = 0;
 
 		/// \return cost with a coloring solution 
-		virtual double calc_cost(vector<int8_t> const& vColor) const;
+		virtual edge_weight_type calc_cost(vector<int8_t> const& vColor) const;
+
+        /// check edge weight within lb and ub 
+        void check_edge_weight(graph_type const& g, edge_weight_type lb, edge_weight_type ub) const;
+
+        /// print edge weight 
+        void print_edge_weight(graph_type const& g) const;
 
 		graph_type const& m_graph;
 		vector<int8_t> m_vColor;
@@ -154,14 +162,14 @@ double Coloring<GraphType>::operator()()
 }
 
 template <typename GraphType>
-double Coloring<GraphType>::calc_cost(vector<int8_t> const& vColor) const 
+typename Coloring<GraphType>::edge_weight_type Coloring<GraphType>::calc_cost(vector<int8_t> const& vColor) const 
 {
 	assert(vColor.size() == boost::num_vertices(this->m_graph));
 	double cost = 0;
 	edge_iterator_type ei, eie;
 	for (boost::tie(ei, eie) = boost::edges(m_graph); ei != eie; ++ei)
 	{
-		int32_t w = boost::get(boost::edge_weight, m_graph, *ei);
+		edge_weight_type w = boost::get(boost::edge_weight, m_graph, *ei);
 		graph_vertex_type s = boost::source(*ei, m_graph);
 		graph_vertex_type t = boost::target(*ei, m_graph);
 		if (w >= 0) // conflict edge 
@@ -170,6 +178,29 @@ double Coloring<GraphType>::calc_cost(vector<int8_t> const& vColor) const
 			cost += (vColor[s] != vColor[t])*w;
 	}
 	return cost;
+}
+
+template <typename GraphType>
+void Coloring<GraphType>::check_edge_weight(typename Coloring<GraphType>::graph_type const& g, typename Coloring<GraphType>::edge_weight_type lb, typename Coloring<GraphType>::edge_weight_type ub) const 
+{
+	edge_iterator_type ei, eie;
+	for (boost::tie(ei, eie) = boost::edges(g); ei != eie; ++ei)
+	{
+		edge_weight_type w = boost::get(boost::edge_weight, m_graph, *ei);
+        assert_msg(w >= lb && w <= ub, "edge weight out of range: " << w);
+    }
+}
+
+template <typename GraphType>
+void Coloring<GraphType>::print_edge_weight(typename Coloring<GraphType>::graph_type const& g) const 
+{
+	edge_iterator_type ei, eie;
+	for (boost::tie(ei, eie) = boost::edges(g); ei != eie; ++ei)
+	{
+		edge_weight_type w = boost::get(boost::edge_weight, m_graph, *ei);
+        std::cout << w << " ";
+    }
+    std::cout << "\n";
 }
 
 template <typename GraphType>
@@ -197,7 +228,7 @@ void Coloring<GraphType>::write_graph(string const& filename) const
 	edge_iterator_type ei, eie;
 	for (boost::tie(ei, eie) = boost::edges(m_graph); ei != eie; ++ei)
 	{
-		int32_t w = boost::get(boost::edge_weight, m_graph, *ei);
+		edge_weight_type w = boost::get(boost::edge_weight, m_graph, *ei);
 		graph_vertex_type s = boost::source(*ei, m_graph);
 		graph_vertex_type t = boost::target(*ei, m_graph);
 		if (w >= 0) // conflict edge 

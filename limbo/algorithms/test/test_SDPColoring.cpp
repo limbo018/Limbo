@@ -37,7 +37,7 @@ using namespace boost;
 // do not use custom property tags, it does not compile for most utilities
 typedef adjacency_list<vecS, vecS, undirectedS, 
 		property<vertex_index_t, std::size_t, property<vertex_color_t, int> >, 
-		property<edge_index_t, std::size_t, property<edge_weight_t, int> >,
+		property<edge_index_t, std::size_t, property<edge_weight_t, double> >,
 		property<graph_name_t, string> > graph_type;
 typedef subgraph<graph_type> subgraph_type;
 typedef property<vertex_index_t, std::size_t> VertexId;

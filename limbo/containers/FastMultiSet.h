@@ -35,6 +35,8 @@
 #include <cassert>
 #include <boost/typeof.hpp>
 
+namespace limbo { namespace containers {
+
 using std::map;
 using std::less;
 using std::multiset;
@@ -167,5 +169,6 @@ class FastMultiSet : public multiset<KeyType, Compare1>
 		map_type m_map;
 };
 
+}} // namespace limbo // namespace containers
 
 #endif
