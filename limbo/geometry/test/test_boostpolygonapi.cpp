@@ -6,14 +6,17 @@
  ************************************************************************/
 
 #include <iostream>
+#include <string>
 #include <vector>
 #include <list>
 #include <set>
 #include <boost/polygon/polygon.hpp>
 #include <limbo/geometry/Polygon2Rectangle.h>
 #include <limbo/geometry/api/BoostPolygonApi.h>
+#include <limbo/geometry/test/GeoBoostPolygonApi.h>
 using std::cout;
 using std::endl;
+using std::string;
 using std::vector;
 using std::list;
 using std::set;
@@ -45,8 +48,31 @@ void test3(string const& filename)
 	p2r.print("p2r3.gp");
 }
 
+void test4()
+{
+    vector<gtl::point_data<int> > vPoint (8);
+    vPoint[0] = gtl::construct<gtl::point_data<int> >(0, 0);
+    vPoint[1] = gtl::construct<gtl::point_data<int> >(0, 10);
+    vPoint[2] = gtl::construct<gtl::point_data<int> >(10, 10);
+    vPoint[3] = gtl::construct<gtl::point_data<int> >(10, 20);
+    vPoint[4] = gtl::construct<gtl::point_data<int> >(20, 20);
+    vPoint[5] = gtl::construct<gtl::point_data<int> >(20, 10);
+    vPoint[6] = gtl::construct<gtl::point_data<int> >(30, 10);
+    vPoint[7] = gtl::construct<gtl::point_data<int> >(30, 0);
+    //vPoint.push_back(gtl::construct<gtl::point_data<int> >(0, 0));
+    vector<gtl::rectangle_data<int> > vRectangle;
+    assert(lg::polygon2RectangleBoost(vPoint, vRectangle));
+    for (std::size_t i = 0; i != vRectangle.size(); ++i)
+    {
+        gtl::rectangle_data<int> const& rect = vRectangle[i];
+        cout << "(" << gtl::xl(rect) << ", " << gtl::yl(rect) << ", " << gtl::xh(rect) << ", " << gtl::yh(rect) << ")\n";
+    }
+    cout << "test 4 passed\n";
+}
+
 int main(int argc, char** argv)
 {
+    test4();
 	if (argc > 1)
 	{
 		test1(argv[1]);

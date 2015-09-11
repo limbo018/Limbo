@@ -16,18 +16,61 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/property_map/property_map.hpp>
 #include <limbo/preprocessor/AssertMsg.h>
+#include <limbo/algorithms/GraphUtility.h>
 
 namespace limbo { namespace algorithms { namespace coloring {
 
-using std::vector;
-using std::cout;
-using std::endl;
-using std::pair;
-using std::string;
-using std::ofstream;
 using boost::uint32_t;
 using boost::int32_t;
 using boost::int8_t;
+
+namespace la = limbo::algorithms;
+
+template <typename GraphType>
+struct ColoringVertexLabelWriter : public la::VertexLabelWriter<GraphType>
+{
+    typedef GraphType graph_type;
+    typedef la::VertexLabelWriter<graph_type> base_type;
+    typedef typename base_type::vertex_descriptor vertex_descriptor;
+    
+    std::vector<int8_t> const& vColor;
+
+    ColoringVertexLabelWriter(graph_type const& g, std::vector<int8_t> const& vc) : base_type(g), vColor(vc) {}
+
+    std::string label(vertex_descriptor v) const 
+    {
+        std::ostringstream oss; 
+        oss << v << ":" << (int32_t)vColor[v];
+        return oss.str();
+    }
+};
+
+template <typename GraphType>
+struct ColoringEdgeLabelWriter : public la::EdgeLabelWriter<GraphType>
+{
+    typedef GraphType graph_type;
+    typedef la::EdgeLabelWriter<graph_type> base_type;
+    typedef typename base_type::edge_descriptor edge_descriptor;
+    typedef typename base_type::edge_weight_type edge_weight_type;
+    typedef typename boost::graph_traits<graph_type>::vertex_descriptor vertex_descriptor;
+
+    std::vector<int8_t> const& vColor;
+
+    ColoringEdgeLabelWriter(graph_type const& g, std::vector<int8_t> const& vc) : base_type(g), vColor(vc) {}
+
+    edge_weight_type label(edge_descriptor e) const {return boost::get(boost::edge_weight, this->g, e);}
+    std::string color(edge_descriptor e) const 
+    {
+		vertex_descriptor s = boost::source(e, this->g);
+		vertex_descriptor t = boost::target(e, this->g);
+		edge_weight_type w = boost::get(boost::edge_weight, this->g, e);
+        bool conflict_flag = (vColor[s] >= 0 && vColor[s] == vColor[t]);
+        if (w >= 0 && conflict_flag) // conflict 
+            return "red";
+        else return "black";
+    }
+    std::string style(edge_descriptor e) const {return (boost::get(boost::edge_weight, this->g, e) >= 0)? "solid" : "dashed";}
+};
 
 /// base class for all coloring algorithms 
 template <typename GraphType>
@@ -44,6 +87,7 @@ class Coloring
 		/// edge weight is used to differentiate conflict edge and stitch edge 
 		/// non-negative weight implies conflict edge 
 		/// negative weight implies stitch edge 
+        typedef typename boost::property_traits<typename boost::property_map<graph_type, boost::edge_index_t>::const_type>::value_type edge_index_type;
 
 		enum ColorNumType
 		{
@@ -98,13 +142,14 @@ class Coloring
         inline virtual edge_weight_type edge_weight(graph_edge_type const& e) const {return boost::get(boost::edge_weight, m_graph, e);}
 
 		/// for debug 
-		virtual void write_graph(string const& filename) const;
+		virtual void write_graph(std::string const& filename) const;
+        virtual void write_graph(std::string const& filename, graph_type const& g, std::vector<int8_t> const& vColor) const;
 	protected:
 		/// \return objective value 
 		virtual double coloring() = 0;
 
 		/// \return cost with a coloring solution 
-		virtual edge_weight_type calc_cost(vector<int8_t> const& vColor) const;
+		virtual edge_weight_type calc_cost(std::vector<int8_t> const& vColor) const;
 
         /// check edge weight within lb and ub 
         void check_edge_weight(graph_type const& g, edge_weight_type lb, edge_weight_type ub) const;
@@ -113,7 +158,7 @@ class Coloring
         void print_edge_weight(graph_type const& g) const;
 
 		graph_type const& m_graph;
-		vector<int8_t> m_vColor;
+		std::vector<int8_t> m_vColor;
 
 		ColorNumType m_color_num;
 		double m_stitch_weight;
@@ -162,7 +207,7 @@ double Coloring<GraphType>::operator()()
 }
 
 template <typename GraphType>
-typename Coloring<GraphType>::edge_weight_type Coloring<GraphType>::calc_cost(vector<int8_t> const& vColor) const 
+typename Coloring<GraphType>::edge_weight_type Coloring<GraphType>::calc_cost(std::vector<int8_t> const& vColor) const 
 {
 	assert(vColor.size() == boost::num_vertices(this->m_graph));
 	double cost = 0;
@@ -204,50 +249,18 @@ void Coloring<GraphType>::print_edge_weight(typename Coloring<GraphType>::graph_
 }
 
 template <typename GraphType>
-void Coloring<GraphType>::write_graph(string const& filename) const 
+void Coloring<GraphType>::write_graph(std::string const& filename) const 
 {
-	ofstream dot_file((filename+".gv").c_str());
-	dot_file << "graph D { \n"
-		<< "  randir = LR\n"
-		<< "  size=\"4, 3\"\n"
-		<< "  ratio=\"fill\"\n"
-		<< "  edge[style=\"bold\",fontsize=200]\n" 
-		<< "  node[shape=\"circle\",fontsize=200]\n";
+    write_graph(filename, m_graph, m_vColor);
+}
 
-	//output nodes 
-	uint32_t vertex_num = boost::num_vertices(m_graph);
-	for(uint32_t k = 0; k < vertex_num; ++k) 
-	{
-		dot_file << "  " << k << "[shape=\"circle\"";
-		//output coloring label
-		dot_file << ",label=\"" << k << ":" << (int32_t)m_vColor[k] << "\"";
-		dot_file << "]\n";
-	}//end for
-
-	//output edges
-	edge_iterator_type ei, eie;
-	for (boost::tie(ei, eie) = boost::edges(m_graph); ei != eie; ++ei)
-	{
-		edge_weight_type w = boost::get(boost::edge_weight, m_graph, *ei);
-		graph_vertex_type s = boost::source(*ei, m_graph);
-		graph_vertex_type t = boost::target(*ei, m_graph);
-		if (w >= 0) // conflict edge 
-		{
-			bool conflict_flag = (m_vColor[s] >= 0 && m_vColor[s] == m_vColor[t]);
-
-			if(conflict_flag)
-				dot_file << "  " << s << "--" << t << "[label=" << w << ",color=\"red\",style=\"solid\",penwidth=3]\n";
-			else 
-				dot_file << "  " << s << "--" << t << "[label=" << w << ",color=\"black\",style=\"solid\",penwidth=3]\n";
-		}
-		else // stitch edge 
-			dot_file << "  " << s << "--" << t << "[label=" << w << ",color=\"black\",style=\"dashed\",penwidth=3]\n";
-	}
-	dot_file << "}";
-	dot_file.close();
-	char cmd[100];
-	sprintf(cmd, "dot -Tpdf %s.gv -o %s.pdf", filename.c_str(), filename.c_str());
-	system(cmd);
+template <typename GraphType>
+void Coloring<GraphType>::write_graph(std::string const& filename, Coloring<GraphType>::graph_type const& g, std::vector<int8_t> const& vColor) const
+{
+    std::ofstream out ((filename+".gv").c_str());
+    la::write_graph(out, g, ColoringVertexLabelWriter<graph_type>(g, vColor), ColoringEdgeLabelWriter<graph_type>(g, vColor));
+    out.close();
+    la::graphviz2pdf(filename);
 }
 
 }}} // namespace limbo // namespace algorithms // namespace coloring

@@ -139,7 +139,7 @@ void BacktrackColoring<GraphType>::coloring_kernel(vector<int8_t>& vBestColor, v
 			{
 				if (vColor[u] == c) // conflict 
 				{
-					pair<graph_edge_type, bool> e = boost::edge(u, v, this->m_graph);
+					std::pair<graph_edge_type, bool> e = boost::edge(u, v, this->m_graph);
 					assert_msg(e.second, "failed to find edge with " << u << "--" << v);
 					edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, e.first);
 					assert_msg(w > 0, "only support conflict edges with positive cost"); // only support conflict edges 

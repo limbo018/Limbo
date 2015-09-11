@@ -34,9 +34,6 @@
 
 namespace limbo { namespace algorithms { namespace coloring {
 
-using std::ostringstream;
-using boost::unordered_map;
-
 template <typename GraphType>
 class ILPColoring : public Coloring<GraphType>
 {
@@ -76,15 +73,10 @@ double ILPColoring<GraphType>::coloring()
 	uint32_t edge_num = boost::num_edges(this->m_graph);
 	uint32_t vertex_variable_num = vertex_num<<1;
 
-	unordered_map<graph_vertex_type, uint32_t> hVertexIdx; // vertex index 
-	unordered_map<graph_edge_type, uint32_t, edge_hash_type> hEdgeIdx; // edge index 
+	boost::unordered_map<graph_edge_type, uint32_t, edge_hash_type> hEdgeIdx; // edge index 
 
-	vertex_iterator_type vi, vie;
 	uint32_t cnt = 0;
-	for (boost::tie(vi, vie) = boost::vertices(this->m_graph); vi != vie; ++vi, ++cnt)
-		hVertexIdx[*vi] = cnt;
 	edge_iterator_type ei, eie;
-	cnt = 0; 
 	for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei, ++cnt)
 		hEdgeIdx[*ei] = cnt;
 
@@ -105,7 +97,7 @@ double ILPColoring<GraphType>::coloring()
 	for (uint32_t i = 0; i != vertex_variable_num; ++i)
 	{
 		uint32_t vertex_idx = (i>>1);
-		ostringstream oss; 
+		std::ostringstream oss; 
 		oss << "v" << i;
 		if (this->m_vColor[vertex_idx] >= 0 && this->m_vColor[vertex_idx] < this->m_color_num) // precolored 
 		{
@@ -122,7 +114,7 @@ double ILPColoring<GraphType>::coloring()
 	vEdgeBit.reserve(edge_num);
 	for (uint32_t i = 0; i != edge_num; ++i)
 	{
-		ostringstream oss;
+		std::ostringstream oss;
 		oss << "e" << i;
 		vEdgeBit.push_back(opt_model.addVar(0, 1, 0, GRB_CONTINUOUS, oss.str()));
 	}
@@ -148,11 +140,9 @@ double ILPColoring<GraphType>::coloring()
 	{
 		graph_vertex_type s = boost::source(*ei, this->m_graph);
 		graph_vertex_type t = boost::target(*ei, this->m_graph);
-		uint32_t sIdx = hVertexIdx[s];
-		uint32_t tIdx = hVertexIdx[t];
 
-		uint32_t vertex_idx1 = sIdx<<1;
-		uint32_t vertex_idx2 = tIdx<<1;
+		uint32_t vertex_idx1 = s<<1;
+		uint32_t vertex_idx2 = t<<1;
 
 		edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, *ei);
 		uint32_t edge_idx = hEdgeIdx[*ei];
@@ -263,8 +253,8 @@ double ILPColoring<GraphType>::coloring()
 template <typename GraphType>
 void ILPColoring<GraphType>::write_graph_sol(string const& filename, vector<GRBVar> const& vVertexBit) const
 {
-	ofstream dot_file((filename+".gv").c_str());
-	dot_file << "graph D { \n"
+	std::ofstream out((filename+".gv").c_str());
+	out << "graph D { \n"
 		<< "  randir = LR\n"
 		<< "  size=\"4, 3\"\n"
 		<< "  ratio=\"fill\"\n"
@@ -275,10 +265,10 @@ void ILPColoring<GraphType>::write_graph_sol(string const& filename, vector<GRBV
 	uint32_t vertex_num = boost::num_vertices(this->m_graph);
 	for(uint32_t k = 0; k < vertex_num; ++k) 
 	{
-		dot_file << "  " << k << "[shape=\"circle\"";
+		out << "  " << k << "[shape=\"circle\"";
 		//output coloring label
-		dot_file << ",label=\"" << k << ":(" << vVertexBit[(k<<1)].get(GRB_DoubleAttr_X) << "," << vVertexBit[(k<<1)+1].get(GRB_DoubleAttr_X)<< ")\"";
-		dot_file << "]\n";
+		out << ",label=\"" << k << ":(" << vVertexBit[(k<<1)].get(GRB_DoubleAttr_X) << "," << vVertexBit[(k<<1)+1].get(GRB_DoubleAttr_X)<< ")\"";
+		out << "]\n";
 	}//end for
 
 	//output edges
@@ -293,18 +283,16 @@ void ILPColoring<GraphType>::write_graph_sol(string const& filename, vector<GRBV
             bool conflict_flag = (vVertexBit[(s<<1)].get(GRB_DoubleAttr_X) == vVertexBit[(t<<1)].get(GRB_DoubleAttr_X) && vVertexBit[(s<<1)+1].get(GRB_DoubleAttr_X) == vVertexBit[(t<<1)+1].get(GRB_DoubleAttr_X));
 
 			if(conflict_flag)
-				dot_file << "  " << s << "--" << t << "[color=\"red\",style=\"solid\",penwidth=3]\n";
+				out << "  " << s << "--" << t << "[color=\"red\",style=\"solid\",penwidth=3]\n";
 			else 
-				dot_file << "  " << s << "--" << t << "[color=\"black\",style=\"solid\",penwidth=3]\n";
+				out << "  " << s << "--" << t << "[color=\"black\",style=\"solid\",penwidth=3]\n";
 		}
 		else // stitch edge 
-			dot_file << "  " << s << "--" << t << "[color=\"blue\",style=\"dotted\",penwidth=3]\n";
+			out << "  " << s << "--" << t << "[color=\"blue\",style=\"dotted\",penwidth=3]\n";
 	}
-	dot_file << "}";
-	dot_file.close();
-	char cmd[100];
-	sprintf(cmd, "dot -Tpdf %s.gv -o %s.pdf", filename.c_str(), filename.c_str());
-	system(cmd);
+	out << "}";
+	out.close();
+    la::graphviz2pdf(filename);
 }
 
 }}} // namespace limbo // namespace algorithms // namespace coloring

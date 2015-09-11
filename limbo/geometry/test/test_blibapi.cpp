@@ -6,6 +6,7 @@
  ************************************************************************/
 
 #include <iostream>
+#include <string>
 #include <vector>
 #include <list>
 #include <set>
@@ -15,6 +16,7 @@
 #include <limbo/geometry/api/bLibApi.h>
 using std::cout;
 using std::endl;
+using std::string;
 using std::vector;
 using std::list;
 using std::set;

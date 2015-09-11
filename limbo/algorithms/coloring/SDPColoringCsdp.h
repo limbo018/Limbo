@@ -11,6 +11,7 @@
 #include <limbo/string/String.h>
 #include <limbo/algorithms/coloring/Coloring.h>
 #include <limbo/algorithms/coloring/BacktrackColoring.h>
+#include <limbo/algorithms/partition/FMMultiWay.h>
 #include <limbo/containers/DisjointSet.h>
 
 // as the original csdp easy_sdp api is not very flexible to printlevel
@@ -49,6 +50,32 @@ class SDPColoringCsdp : public Coloring<GraphType>
 		/// non-negative weight implies conflict edge 
 		/// negative weight implies stitch edge 
 
+        struct FMGainCalcType
+        {
+            typedef edge_weight_type value_type;
+            graph_type const& graph;
+
+            FMGainCalcType(graph_type const& g) : graph(g) {}
+            edge_weight_type operator()(int32_t v, int8_t origp, int8_t newp, std::vector<int8_t> const& vPartition) const
+            {
+                typedef typename boost::graph_traits<graph_type>::out_edge_iterator out_edge_iterator_type;
+                out_edge_iterator_type ei, eie; 
+                // if v is not partitioned, then any partition will have preassigned large gain 
+                edge_weight_type gain = (origp >= 0)? 0 : boost::num_edges(graph)*boost::num_vertices(graph);
+                for (boost::tie(ei, eie) = boost::out_edges(v, graph); ei != eie; ++ei)
+                {
+                    graph_vertex_type t = boost::target(*ei, graph);
+#ifdef DEBUG_SDPCOLORING
+                    assert((int32_t)t != v);
+#endif
+                    // skip unpartitioned vertex 
+                    if (vPartition[t] < 0) continue;
+                    edge_weight_type w = boost::get(boost::edge_weight, graph, *ei);
+                    gain += w * ((vPartition[t] == origp && origp >= 0) - (vPartition[t] == newp));
+                }
+                return gain;
+            }
+        };
 		/// constructor
 		SDPColoringCsdp(graph_type const& g); 
 		/// destructor
@@ -71,6 +98,9 @@ class SDPColoringCsdp : public Coloring<GraphType>
         void set_sparseblock_entry(struct sparseblock& block, int32_t entryid, int32_t i, int32_t j, double value) const; 
         /// round sdp solution 
         void round_sol(struct blockmatrix const& X);
+        void coloring_merged_graph(graph_type const& mg, std::vector<int8_t>& vMColor) const;
+        void coloring_by_backtrack(graph_type const& mg, std::vector<int8_t>& vColor) const;
+        void coloring_by_FM(graph_type const& mg, std::vector<int8_t>& vColor) const;
 
         double m_rounding_lb; ///< if SDP solution x < m_rounding_lb, take x as -0.5
         double m_rounding_ub; ///< if SDP solution x > m_rounding_ub, take x as 1.0
@@ -97,6 +127,7 @@ double SDPColoringCsdp<GraphType>::coloring()
     // with some reverse engineering, for the coloring problem here, matrices in C, b, and constraints mainly consists of 2 blocks 
     // the first block is for vertex variables, and the second block is for slack variables introduced to resolve '>=' operators in the constraints
 
+    assert_msg(!this->has_precolored(), "SDP coloring does not support precolored layout yet");
     // The problem and solution data.
     struct blockmatrix C; // objective matrix 
     double *b; // right hand side of constraints
@@ -162,6 +193,8 @@ double SDPColoringCsdp<GraphType>::coloring()
     // the order matters for constraint matrices 
     b = (double *)malloc((num_constraints+1)*sizeof(double));
     assert_msg(b, "Failed to allocate storage for right hand side of constraints b");
+    // -1/(k-1) according to Bei Yu's DAC2014 paper
+    // consider in the constraints, xij+xji >= beta, so beta should be -2/(k-1)
     double beta = -2.0/(this->color_num()-1.0); // right hand side of constraints for conflict edges 
     for (uint32_t i = 1, ie = num_constraints+1; i != ie; ++i)
     {
@@ -380,23 +413,92 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
     this->check_edge_weight(mg, this->stitch_weight()/10, boost::num_edges(this->m_graph));
 #endif
     // coloring for merged graph 
-    // currently backtrack coloring is used 
-    // TO DO: add faster coloring approach like FM partition based 
-    BacktrackColoring<graph_type> bc (mg);
-    bc.stitch_weight(1); // already scaled in edge weights 
-    bc.color_num(this->color_num());
-    bc();
+    std::vector<int8_t> vMColor (mg_count, -1); // coloring solution for merged graph 
+    coloring_merged_graph(mg, vMColor);
     // apply coloring solution from merged graph to graph 
     // first, map colors to subsets 
     vertex_iterator_type vi, vie; 
     for (boost::tie(vi, vie) = boost::vertices(this->m_graph); vi != vie; ++vi)
     {
         graph_vertex_type v = *vi;
-        this->m_vColor[v] = bc.color(vG2MG.at(v));
+        this->m_vColor[v] = vMColor.at(vG2MG.at(v));
 #ifdef DEBUG_SDPCOLORING
         assert(this->m_vColor[v] >= 0 && this->m_vColor[v] < this->color_num());
 #endif
     }
+}
+
+template <typename GraphType>
+void SDPColoringCsdp<GraphType>::coloring_merged_graph(graph_type const& mg, std::vector<int8_t>& vMColor) const
+{
+    const uint32_t max_backtrack_num_vertices = 7;
+    if (boost::num_vertices(mg) <= max_backtrack_num_vertices) 
+        coloring_by_backtrack(mg, vMColor);
+    else 
+    {
+        // simplify merged graph 
+        typedef GraphSimplification<graph_type> graph_simplification_type;
+        graph_simplification_type gs (mg, this->color_num());
+        gs.simplify(graph_simplification_type::HIDE_SMALL_DEGREE);
+
+        // in order to recover color from articulation points 
+        // we have to record all components and mappings 
+        // but graph is not necessary 
+        std::vector<std::vector<int8_t> > mSubColor (gs.num_component());
+        std::vector<std::vector<graph_vertex_type> > mSimpl2Orig (gs.num_component());
+        for (uint32_t sub_comp_id = 0; sub_comp_id < gs.num_component(); ++sub_comp_id)
+        {
+            graph_type sg;
+            std::vector<int8_t>& vSubColor = mSubColor[sub_comp_id];
+            std::vector<graph_vertex_type>& vSimpl2Orig = mSimpl2Orig[sub_comp_id];
+
+            gs.simplified_graph_component(sub_comp_id, sg, vSimpl2Orig);
+
+            vSubColor.assign(num_vertices(sg), -1);
+
+#ifdef DEBUG_SDPCOLORING
+            this->write_graph("initial_merged_graph", sg, vSubColor);
+#endif
+            // solve coloring 
+            if (boost::num_vertices(sg) <= max_backtrack_num_vertices)
+                coloring_by_backtrack(sg, vSubColor);
+            else 
+                coloring_by_FM(sg, vSubColor);
+#ifdef DEBUG_SDPCOLORING
+            this->write_graph("final_merged_graph", sg, vSubColor);
+#endif
+        }
+
+        // recover color assignment according to the simplification level set previously 
+        // HIDE_SMALL_DEGREE needs to be recovered manually for density balancing 
+        gs.recover(vMColor, mSubColor, mSimpl2Orig);
+
+        // recover colors for simplified vertices without balanced assignment 
+        gs.recover_hide_small_degree(vMColor);
+    }
+}
+
+template <typename GraphType>
+void SDPColoringCsdp<GraphType>::coloring_by_backtrack(SDPColoringCsdp<GraphType>::graph_type const& mg, std::vector<int8_t>& vColor) const
+{
+    // currently backtrack coloring is used 
+    // TO DO: add faster coloring approach like FM partition based 
+    BacktrackColoring<graph_type> bc (mg);
+    bc.stitch_weight(1); // already scaled in edge weights 
+    bc.color_num(this->color_num());
+    bc();
+    for (uint32_t i = 0, ie = vColor.size(); i != ie; ++i)
+        vColor[i] = bc.color(i);
+}
+
+template <typename GraphType>
+void SDPColoringCsdp<GraphType>::coloring_by_FM(SDPColoringCsdp<GraphType>::graph_type const& mg, std::vector<int8_t>& vColor) const
+{
+    limbo::algorithms::partition::FMMultiWay<FMGainCalcType> fmp (FMGainCalcType(mg), boost::num_vertices(mg), this->color_num());
+    fmp.set_partitions(vColor.begin(), vColor.end());
+    fmp();
+    for (uint32_t i = 0, ie = vColor.size(); i != ie; ++i)
+        vColor[i] = fmp.partition(i);
 }
 
 template <typename GraphType>
