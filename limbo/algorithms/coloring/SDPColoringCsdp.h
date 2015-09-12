@@ -65,13 +65,16 @@ class SDPColoringCsdp : public Coloring<GraphType>
                 for (boost::tie(ei, eie) = boost::out_edges(v, graph); ei != eie; ++ei)
                 {
                     graph_vertex_type t = boost::target(*ei, graph);
+                    int8_t pt = vPartition[t];
 #ifdef DEBUG_SDPCOLORING
                     assert((int32_t)t != v);
 #endif
                     // skip unpartitioned vertex 
-                    if (vPartition[t] < 0) continue;
+                    if (pt < 0) continue;
                     edge_weight_type w = boost::get(boost::edge_weight, graph, *ei);
-                    gain += w * ((vPartition[t] == origp && origp >= 0) - (vPartition[t] == newp));
+                    // assume origp != newp, pt >= 0 
+                    gain += (pt == newp)? -w : (pt == origp)? w : 0;
+                    //gain += w * ((vPartition[t] == origp && origp >= 0) - (vPartition[t] == newp));
                 }
                 return gain;
             }
@@ -89,6 +92,7 @@ class SDPColoringCsdp : public Coloring<GraphType>
 	protected:
 		/// \return objective value 
 		virtual double coloring();
+
         /// helper functions 
         /// construct blockrec in C for objective 
         void construct_objectve_blockrec(blockmatrix& C, int32_t blocknum, int32_t blocksize, blockcat blockcategory) const; 
@@ -99,11 +103,13 @@ class SDPColoringCsdp : public Coloring<GraphType>
         /// round sdp solution 
         void round_sol(struct blockmatrix const& X);
         void coloring_merged_graph(graph_type const& mg, std::vector<int8_t>& vMColor) const;
+        void coloring_algos(graph_type const& g, std::vector<int8_t>& vColor) const;
         void coloring_by_backtrack(graph_type const& mg, std::vector<int8_t>& vColor) const;
         void coloring_by_FM(graph_type const& mg, std::vector<int8_t>& vColor) const;
 
         double m_rounding_lb; ///< if SDP solution x < m_rounding_lb, take x as -0.5
         double m_rounding_ub; ///< if SDP solution x > m_rounding_ub, take x as 1.0
+        const static uint32_t max_backtrack_num_vertices = 7;
 };
 
 template <typename GraphType>
@@ -431,9 +437,10 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
 template <typename GraphType>
 void SDPColoringCsdp<GraphType>::coloring_merged_graph(graph_type const& mg, std::vector<int8_t>& vMColor) const
 {
-    const uint32_t max_backtrack_num_vertices = 7;
-    if (boost::num_vertices(mg) <= max_backtrack_num_vertices) 
-        coloring_by_backtrack(mg, vMColor);
+    uint32_t num_vertices = boost::num_vertices(mg);
+    // if small number of vertices or no vertex merged, no need to simplify graph 
+    if (num_vertices <= max_backtrack_num_vertices || num_vertices == boost::num_vertices(this->m_graph)) 
+        coloring_algos(mg, vMColor);
     else 
     {
         // simplify merged graph 
@@ -454,16 +461,13 @@ void SDPColoringCsdp<GraphType>::coloring_merged_graph(graph_type const& mg, std
 
             gs.simplified_graph_component(sub_comp_id, sg, vSimpl2Orig);
 
-            vSubColor.assign(num_vertices(sg), -1);
+            vSubColor.assign(boost::num_vertices(sg), -1);
 
 #ifdef DEBUG_SDPCOLORING
             this->write_graph("initial_merged_graph", sg, vSubColor);
 #endif
             // solve coloring 
-            if (boost::num_vertices(sg) <= max_backtrack_num_vertices)
-                coloring_by_backtrack(sg, vSubColor);
-            else 
-                coloring_by_FM(sg, vSubColor);
+            coloring_algos(sg, vSubColor);
 #ifdef DEBUG_SDPCOLORING
             this->write_graph("final_merged_graph", sg, vSubColor);
 #endif
@@ -476,6 +480,15 @@ void SDPColoringCsdp<GraphType>::coloring_merged_graph(graph_type const& mg, std
         // recover colors for simplified vertices without balanced assignment 
         gs.recover_hide_small_degree(vMColor);
     }
+}
+
+template <typename GraphType>
+void SDPColoringCsdp<GraphType>::coloring_algos(graph_type const& g, std::vector<int8_t>& vColor) const
+{
+    if (boost::num_vertices(g) <= max_backtrack_num_vertices)
+        coloring_by_backtrack(g, vColor);
+    else 
+        coloring_by_FM(g, vColor);
 }
 
 template <typename GraphType>
