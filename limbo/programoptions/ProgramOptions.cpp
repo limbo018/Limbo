@@ -20,6 +20,9 @@ bool ProgramOptions::parse(int argc, char** argv)
     // skip the first argument 
     for (int i = 1; i < argc; ++i)
     {
+#ifdef DEBUG
+        printf("argv[%d] = %s\n", i, argv[i]);
+#endif
         cat2index_map_type::iterator found = m_mCat2Index.find(argv[i]);
         if (found != m_mCat2Index.end())
         {
