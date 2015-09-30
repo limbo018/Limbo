@@ -31,6 +31,7 @@ All components are written with C/C++ and API is designed for easy usage and sim
 | Graph Algorithms        | c++                             | basic graph algorithms based on Boost.Graph structure    |
 | Program Options         | c++                             | package for easy command line options for a program      |
 | Makefile Utilities      | makefile                        | makefile help functions                                  |
+| Third Party Libraries   | c/c++/fortran                   | OpenBlas, Csdp                                           |
 
 ## Authors & Maintainers
 
