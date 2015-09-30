@@ -60,7 +60,7 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -I../include
 # An Intel Pentum 4 based amchine:
 #  CFLAGS=-march=pentum4 -O3 -ansi -Wall -DNOSHORTS -I../include 
 #
-# 5. If you change the CFLAGS, make sure that you use the same CFLAGS
+# 6. If you change the CFLAGS, make sure that you use the same CFLAGS
 #    in the Makefiles in the solver and theta directories!
 #
 # The code depends on several libraries:
@@ -71,10 +71,10 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -I../include
 #
 # In addition, if you're using gcc to compile the C code, then you'll need:
 #
-#  gfortran           The gnu C/Fortran 77 compatibility library (called g2c
-#                     in versions of gcc before gcc 4.0.)
+#  gfortran           The gnu C/Fortran 77 compatibility library
 #  m                  The C math run time library.
-#   
+#  
+#
 # Use this line to specify where the SDP and linear algebra libraries are
 # to be found. 
 #
@@ -85,11 +85,12 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -I../include
 # -lgfortran          get libgfortran.a or libgfortran.so
 # -lm                 get libm.a or libm.so
 #
-# The default settings for a Linux system with gcc3, lapack, blas, and g2c:
+# The default settings for a Linux system with gcc3, lapack, blas, and 
+# gfortran:
 #
 #LIBS=-L../lib -lsdp -llapack -lblas -lgfortran -lm
-LIMBO_ROOT_DIR = ../../..
-LIBS=-L$(LIMBO_ROOT_DIR)/lib -lsdp -lopenblas-st -lgfortran -lm -lrt -lpthread -static
+LIMBO_ROOT_DIR = ../../../..
+LIBS=-L$(LIMBO_ROOT_DIR)/lib -L../lib -lsdp -lopenblas-st -lgfortran -lm -lrt -lpthread -static
 #
 # 1. Warning about debian systems.  For some absurb reason, the BLAS
 # package in debian has the BLAS library named libblas-3.a, rather than
@@ -100,54 +101,31 @@ LIBS=-L$(LIMBO_ROOT_DIR)/lib -lsdp -lopenblas-st -lgfortran -lm -lrt -lpthread -
 #
 # LIBS=-L../lib -lsdp -llapack -lf77blas -lcblas -latlas -lgfortran -lm 
 #
-# 3. Special note on gcc 3.  For gcc versions before gcc 4.0,  -lgfortran 
+# 3. Special note on gcc 4.  For gcc versions before gcc 4.0, -lgfortran 
 #    should be replaced by -lg2c.
 #
 # 4. An alternative set of flags for use with the ATLAS BLAS, gcc 4.2, and
 #    OpenMP on a linux system.
 #
-#
 # LIBS=-L../lib -lsdp -llapack -lptf77blas -lptcblas -latlas -lgomp -lrt -lpthread -lgfortran -lm
 #
-# 5. An alternative set of flags for use with Intel's icc and MKL.
-#
-#      CC=icc
-#      CFLAGS=-O3 -m64 -openmp -DBIT64 -DUSEOPENMP -DNOSHORTS -DSETNUMTHREADS
-#              -I../include
-#      LIBS=-openmp -L../lib -lsdp -mkl -lm       
 #
 # Target all builds everything.
 #
-all: theta complement rand_graph graphtoprob
+all: example
 #
-# This builds the theta number code. 
+# This builds the example code.
 #
-theta: theta.o 
-	$(CC) $(CFLAGS) theta.o $(LIBS) -o theta
-#
-# Complement computes the complement of a graph.
-#
-complement: complement.o 
-	$(CC) $(CFLAGS) complement.o $(LIBS) -o complement
-#
-# rand_graph generates a random graph.  
-#
-rand_graph: rand_graph.o
-	$(CC) $(CFLAGS) rand_graph.o $(LIBS) -o rand_graph
-#
-# graphtoprob converts a file in the graph format to an SDP problem in our
-# SDP format.
-#
-graphtoprob: graphtoprob.o 
-	$(CC) $(CFLAGS) graphtoprob.o $(LIBS) -o graphtoprob
+example: example.o 
+	$(CC) $(CFLAGS) example.o $(LIBS) -o example
 #
 # To clean up the directory.
 #
 clean:
 	rm -f *.o
-	rm -f theta
-	rm -f complement
-	rm -f rand_graph
-	rm -f graphtoprob
+	rm -f example
+	rm -f prob.dat-s
+	rm -f prob.sol
+
 
 

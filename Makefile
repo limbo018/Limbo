@@ -6,7 +6,7 @@ MAKE = make
 PARSERS = limbo/parsers
 SOLVERS = limbo/solvers
 PROGRAMOPTIONS = limbo/programoptions
-THIRDPARTY = thirdparty
+THIRDPARTY = limbo/thirdparty
 
 RESRCS = \
 		 $(PARSERS)/def/bison \
@@ -21,6 +21,7 @@ RESRCS = \
 
 build: 
 	mkdir -p lib 
+	mkdir -p bin
 	$(MAKE) -C $(PARSERS)/def/bison
 	$(MAKE) all -C $(PARSERS)/lef/bison
 	$(MAKE) -C $(PARSERS)/ebeam/bison
@@ -31,6 +32,7 @@ build:
 	
 install:
 	mkdir -p lib 
+	mkdir -p bin
 	$(MAKE) install -C $(PARSERS)/def/bison
 	$(MAKE) install -C $(PARSERS)/lef/bison
 	$(MAKE) install -C $(PARSERS)/ebeam/bison

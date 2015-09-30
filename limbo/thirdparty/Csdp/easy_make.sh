@@ -6,13 +6,15 @@
 #########################################################################
 #!/bin/bash
 
+# the source code or makefile maybe modified for specific usage 
+
 function fmake {
     # make single threaded Csdp, but multiple threading safe on higher level 
-    echo "make"
+    make
 }
 
 function fclean {
-    echo "make clean"
+    make clean
 }
 
 function fextraclean {

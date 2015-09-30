@@ -16,6 +16,8 @@
 #  -DNOSHORTS         Allow for (LP) blocks of more than 65535 variables.
 #  -DUSEOPENMP        To turn on OpenMP parallelization
 #  -DSETNUMTHREADS    To use with an OpenMP aware BLAS library.
+#  -DUSEGETTIME       Use ANSI C gettime() routine to determine clock
+#                     time used in different parts of the code.
 #
 # The default settings for gcc:
 #
@@ -28,12 +30,16 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -I../include
 # in the data structures that describe the problem.  This can cause problems
 # when some of the size parameters are larger than 65535.  
 #
-# 2. By default, we assume that BLAS routines have names like ddot_(),
+# 2. -DUSEGETTIME is generally useful.  However, this functionality isn't
+#    available under Windows/MSYS/MINGW, so you should remove it when compiling
+#    for that system.
+#
+# 3. By default, we assume that BLAS routines have names like ddot_(),
 # but some systems use ddot(), DDOT(), or DDOT_() instead.  A similar issue
 # effects the LAPACK routines.  The flags -DCAPSBLAS, -DCAPSLAPACK, 
 # -DNOUNDERBLAS. and -DNOUNDERLAPACK are used to handle such situations.
 # 
-# 3. The code can be built on 64 bit systems that use an I32LP64 model
+# 4. The code can be built on 64 bit systems that use an I32LP64 model
 # in which int's are 32 bits, long's and pointers are 64 bits.  Note that 
 # that is the model on all 64 bit Linux and Unix systems that I'm aware of,
 # but it is not the model used by MS in its 64 bit Windows!  To build a 
@@ -41,15 +47,15 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -I../include
 # to tell your compiler to produce 64 bit code.  For example, with gcc, 
 # you'll need to add "-m64" to CFLAGS to produce 64 bit code.  
 #
-# 4. If you have multiple CPU's, and if your compiler supports OpenMP, then
+# 5. If you have multiple CPU's, and if your compiler supports OpenMP, then
 #    you should definitely build a parallel version of CSDP.  To do this,
 #    add "-DUSEOPENMP" to CFLAGS.  If your BLAS/LAPACK library routines 
 #    use OpenMP's conventions for setting the number of threads to use, then
 #    you should also add "-DSETNUMTHREADS".  Note that ATLAS does not 
 #    currently work with "-DSETNUMTHREADS", but you can use SETNUMTHREADS
 #    on Solaris with -lsunperf and AIX systems with -lesslsmp.
-
-# 5. Using gcc, you can greatly improve the efficency of the code if you 
+#
+# 6. Using gcc, you can greatly improve the efficency of the code if you 
 # specify your processor type.  Examples are given below, use the default 
 # if you are unsure.  More examples may be found at 
 #
@@ -60,7 +66,7 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -I../include
 # An Intel Pentum 4 based amchine:
 #  CFLAGS=-march=pentum4 -O3 -ansi -Wall -DNOSHORTS -I../include 
 #
-# 6. If you change the CFLAGS, make sure that you use the same CFLAGS
+# 7. If you change the CFLAGS, make sure that you use the same CFLAGS
 #    in the Makefiles in the solver and theta directories!
 #
 # The code depends on several libraries:
@@ -71,10 +77,10 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -I../include
 #
 # In addition, if you're using gcc to compile the C code, then you'll need:
 #
-#  gfortran           The gnu C/Fortran 77 compatibility library
+#  gfortran           The gnu C/Fortran 77 compatibility library (called
+#                     g2c in versions of gcc before gcc 4.0.)
 #  m                  The C math run time library.
-#  
-#
+#   
 # Use this line to specify where the SDP and linear algebra libraries are
 # to be found. 
 #
@@ -89,8 +95,8 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -I../include
 # gfortran:
 #
 #LIBS=-L../lib -lsdp -llapack -lblas -lgfortran -lm
-LIMBO_ROOT_DIR = ../../..
-LIBS=-L$(LIMBO_ROOT_DIR)/lib -lsdp -lopenblas-st -lgfortran -lm -lrt -lpthread -static
+LIMBO_ROOT_DIR = ../../../..
+LIBS=-L$(LIMBO_ROOT_DIR)/lib -L../lib -lsdp -lopenblas-st -lgfortran -lm -lrt -lpthread -static
 #
 # 1. Warning about debian systems.  For some absurb reason, the BLAS
 # package in debian has the BLAS library named libblas-3.a, rather than
@@ -101,31 +107,35 @@ LIBS=-L$(LIMBO_ROOT_DIR)/lib -lsdp -lopenblas-st -lgfortran -lm -lrt -lpthread -
 #
 # LIBS=-L../lib -lsdp -llapack -lf77blas -lcblas -latlas -lgfortran -lm 
 #
-# 3. Special note on gcc 4.  For gcc versions before gcc 4.0, -lgfortran 
-#    should be replaced by -lg2c.
+# 3. Special note on gcc 4.  In versions of gcc before gcc 4.0, use -lg2c 
+#    instead of -lgfortran.
 #
 # 4. An alternative set of flags for use with the ATLAS BLAS, gcc 4.2, and
 #    OpenMP on a linux system.
 #
 # LIBS=-L../lib -lsdp -llapack -lptf77blas -lptcblas -latlas -lgomp -lrt -lpthread -lgfortran -lm
 #
+# 5. An alternative set of flags for use with Intel's icc 11.0 and MKL.
 #
-# Target all builds everything.
+#      CC=icc
+#      CFLAGS=-O3 -m64 -openmp -DBIT64 -DUSEOPENMP -DNOSHORTS -DSETNUMTHREADS
+#              -I../include
+#      LIBS=-openmp -L../lib -lsdp -mkl -lm
 #
-all: example
+#  This builds the stand alone solver.
 #
-# This builds the example code.
+csdp: csdp.o 
+	$(CC) $(CFLAGS) csdp.o $(LIBS) -o csdp
+
+csdp_test: csdp_test.c
+	$(CC) -g -ansi -Wall -DNOSHORTS -DUSEGETTIME -I../include  csdp_test.c $(LIBS) -o csdp_test
+
 #
-example: example.o 
-	$(CC) $(CFLAGS) example.o $(LIBS) -o example
-#
-# To clean up the directory.
+# To clean out the directory:
 #
 clean:
 	rm -f *.o
-	rm -f example
-	rm -f prob.dat-s
-	rm -f prob.sol
-
+	rm -f csdp
+	rm -rf csdp_test
 
 

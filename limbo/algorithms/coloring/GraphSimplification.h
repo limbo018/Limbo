@@ -24,10 +24,11 @@
 #include <boost/property_map/property_map.hpp>
 #include <limbo/preprocessor/AssertMsg.h>
 #include <limbo/math/Math.h>
+#include <limbo/algorithms/GraphUtility.h>
 
 namespace limbo { namespace algorithms { namespace coloring {
 
-namespace la = limbo::algorithms;
+namespace la = ::limbo::algorithms;
 
 template <typename GraphType>
 class GraphSimplification

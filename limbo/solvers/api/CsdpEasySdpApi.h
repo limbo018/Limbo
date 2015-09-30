@@ -20,7 +20,7 @@ extern "C" {
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include "declarations.h"
+#include <limbo/thirdparty/Csdp/include/declarations.h>
 #ifdef __cplusplus
 }
 #endif

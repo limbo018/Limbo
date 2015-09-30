@@ -6,13 +6,15 @@
 #########################################################################
 #!/bin/bash
 
+# the source code or makefile maybe modified for specific usage 
+
 function fmake {
     # make single threaded OpenBlas
-    echo "make BINARY=64 CC=gcc FC=gfortran USE_OPENMP=0 USE_THREAD=0 NO_CBLAS=1 NO_WARMUP=1 libs netlib"
+    make BINARY=64 CC=gcc FC=gfortran USE_OPENMP=0 USE_THREAD=0 NO_CBLAS=1 NO_WARMUP=1 libs netlib
 }
 
 function fclean {
-    echo "make clean"
+    make clean
 }
 
 function fextraclean {

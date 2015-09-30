@@ -44,16 +44,14 @@ endif
 # external dependency is boost
 INCLUDE = -I $(LIMBO_ROOT_DIR) \
 		  -I $(BOOST_DIR)/include \
-		  -I $(GUROBI_HOME)/include \
-		  -I $(CSDP_DIR)/include
+		  -I $(GUROBI_HOME)/include 
 LIBS = \
 	   $(BOOST_DIR)/lib/libboost_graph.a \
 	   $(BOOST_DIR)/lib/libboost_regex.a \
 	   $(BOOST_DIR)/lib/libboost_unit_test_framework.a \
 	   -lm \
 	   -L $(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi60 \
-	   -L$(CSDP_DIR)/lib -lsdp \
-	   -L$(OPENBLAS_DIR)/lib -lopenblas \
+	   -L$(LIMBO_ROOT_DIR)/lib -lsdp -lopenblas-st \
 	   -lgfortran -lm -lrt -lpthread
 
 # ==========================================================================
