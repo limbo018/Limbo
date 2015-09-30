@@ -1,0 +1,8 @@
+*.o
+Csdp/example/example
+Csdp/solver/csdp
+Csdp/solver/csdp_test
+Csdp/theta/theta
+Csdp/theta/complement
+Csdp/theta/graphtoprob
+Csdp/theta/rand_graph

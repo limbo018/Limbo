@@ -9,6 +9,7 @@
 #define LIMBO_ALGORITHMS_COLORING_SDPCOLORINGCSDP
 
 #include <limbo/string/String.h>
+#include <limbo/algorithms/coloring/GraphSimplification.h>
 #include <limbo/algorithms/coloring/Coloring.h>
 #include <limbo/algorithms/coloring/BacktrackColoring.h>
 #include <limbo/algorithms/partition/FMMultiWay.h>
