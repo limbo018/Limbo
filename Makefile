@@ -6,6 +6,7 @@ MAKE = make
 PARSERS = limbo/parsers
 SOLVERS = limbo/solvers
 PROGRAMOPTIONS = limbo/programoptions
+THIRDPARTY = thirdparty
 
 RESRCS = \
 		 $(PARSERS)/def/bison \
@@ -26,6 +27,7 @@ build:
 	$(MAKE) -C $(PARSERS)/lp/bison
 	$(MAKE) -C $(PARSERS)/gdsii/stream
 	$(MAKE) -C $(PROGRAMOPTIONS)
+	$(MAKE) -C $(THIRDPARTY)
 	
 install:
 	mkdir -p lib 
@@ -35,6 +37,7 @@ install:
 	$(MAKE) install -C $(PARSERS)/lp/bison
 	$(MAKE) install -C $(PARSERS)/gdsii/stream
 	$(MAKE) install -C $(PROGRAMOPTIONS)
+	$(MAKE) install -C $(THIRDPARTY)
 
 clean:
 	$(MAKE) extraclean -C $(PARSERS)/def/bison
@@ -43,3 +46,4 @@ clean:
 	$(MAKE) extraclean -C $(PARSERS)/lp/bison
 	$(MAKE) extraclean -C $(PARSERS)/gdsii/stream
 	$(MAKE) extraclean -C $(PROGRAMOPTIONS)
+	$(MAKE) extraclean -C $(THIRDPARTY)
