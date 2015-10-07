@@ -10,11 +10,12 @@
 using std::cout;
 using std::endl;
 
-struct DataBase : public GdsParser::GdsDataBase
+/// test ascii callbacks 
+struct AsciiDataBase : public GdsParser::GdsDataBase
 {
-	DataBase()
+	AsciiDataBase()
 	{
-		cout << "constructing DataBase" << endl;
+		cout << "constructing AsciiDataBase" << endl;
 	}
 	///////////////////// required callbacks /////////////////////
 	virtual void bit_array_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vBitArray)
@@ -78,11 +79,85 @@ struct DataBase : public GdsParser::GdsDataBase
 	}
 };
 
+/// test enum callbacks
+struct EnumDataBase : public GdsParser::GdsDataBaseKernel
+{
+	EnumDataBase()
+	{
+		cout << "constructing EnumDataBase" << endl;
+	}
+	///////////////////// required callbacks /////////////////////
+	virtual void bit_array_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<int> const& vBitArray)
+	{
+		cout << __func__ << endl;
+		this->general_cbk(record_type, data_type, vBitArray);
+	}
+	virtual void integer_2_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<int> const& vInteger)
+	{
+		cout << __func__ << endl;
+		this->general_cbk(record_type, data_type, vInteger);
+	}
+	virtual void integer_4_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<int> const& vInteger)
+	{
+		cout << __func__ << endl;
+		this->general_cbk(record_type, data_type, vInteger);
+	}
+	virtual void real_4_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<double> const& vFloat) 
+	{
+		cout << __func__ << endl;
+		this->general_cbk(record_type, data_type, vFloat);
+	}
+	virtual void real_8_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<double> const& vFloat) 
+	{
+		cout << __func__ << endl;
+		this->general_cbk(record_type, data_type, vFloat);
+	}
+	virtual void string_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, string const& str) 
+	{
+		cout << __func__ << endl;
+		this->general_cbk(record_type, data_type, str);
+	}
+	virtual void begin_end_cbk(GdsParser::GdsRecords::EnumType record_type)
+	{
+		cout << __func__ << endl;
+		this->general_cbk(record_type, GdsParser::GdsData::NO_DATA, vector<int>(0));
+	}
+
+	template <typename ContainerType>
+	void general_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, ContainerType const& data)
+	{
+		cout << "ascii_record_type: " << GdsParser::gds_record_ascii(record_type) << endl
+			<< "ascii_data_type: " << GdsParser::gds_data_ascii(data_type) << endl 
+			<< "data size: " << data.size() << endl;
+        switch (record_type)
+        {
+            case GdsParser::GdsRecords::UNITS:
+                break;
+            case GdsParser::GdsRecords::BOUNDARY:
+                break;
+            case GdsParser::GdsRecords::LAYER:
+                cout << "LAYER = " << data[0] <<  endl;
+                break;
+            case GdsParser::GdsRecords::XY:
+                cout << data.size() << endl;
+                break;
+            case GdsParser::GdsRecords::ENDEL:
+                break;
+            default:
+                break;
+        }
+	}
+};
+
 int main(int argc, char** argv)
 {
-	DataBase db;
 	if (argc > 1)
-		cout << GdsParser::read(db, argv[1]) << endl;
+    {
+        AsciiDataBase adb;
+		cout << "test ascii api\n" << GdsParser::read(adb, argv[1]) << endl;
+        EnumDataBase edb;
+		cout << "test enum api\n" << GdsParser::read(edb, argv[1]) << endl;
+    }
 	else cout << "at least 1 argument is required" << endl;
 
 	return 0;

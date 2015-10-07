@@ -48,7 +48,7 @@ namespace GdsParser
 {
 
 /* static function */
-bool read(GdsDataBase& db, string const& filename)
+bool read(GdsDataBaseKernel& db, string const& filename)
 {
 	return GdsReader(db)(filename.c_str());
 }
@@ -59,17 +59,13 @@ bool GdsReader::operator() (const char* filename)
 	int no_read;
 	int no_bytes;
 	unsigned char *record;
-	char indent_string[128];
+    int indent_amount;
 	int record_type;
 	int data_type;
 	int expected_data_type;
-	char ascii_record_type[128];
-	char ascii_data_type[128];
-	char ascii_record_description[128];
-	char ascii_data_type_description[128];
-	char ascii_expected_data_type[128];
-	char ascii_expected_data_type_description[128];
-	int ktr;
+    GdsRecords::EnumType enum_record_type;
+    GdsData::EnumType enum_data_type;
+    GdsData::EnumType enum_expected_data_type;
 	int int_ktr;
 	int data_ktr;
 	int exponent_ktr;
@@ -97,7 +93,7 @@ bool GdsReader::operator() (const char* filename)
 		return false;
 	}
 	/* start out with no indent */
-	strcpy (indent_string, "");
+    indent_amount = 0;
 
 	/* main loop, read the record header, then read the rest of the record once we know its
 	 * size */
@@ -159,32 +155,29 @@ bool GdsReader::operator() (const char* filename)
 
 			/* now find the record type, numeric and ascii */
 			record_type = record[0];
-			find_ascii_record_type (record_type, ascii_record_type, ascii_record_description,
-					&expected_data_type);
+			find_record_type (record_type, enum_record_type, expected_data_type);
 
 			/* find the data type, numeric and ascii */
 			data_type = record[1];
-			find_ascii_data_type (data_type, ascii_data_type, ascii_data_type_description);
+			find_data_type (data_type, enum_data_type);
 
 			/* if it's a ENDSTR or ENDEL, subtract from indent */
-			if ((!strcmp (ascii_record_type, "ENDSTR")) ||
-					(!strcmp (ascii_record_type, "ENDEL")))
+            if (enum_record_type == GdsRecords::ENDSTR
+                    || enum_record_type == GdsRecords::ENDEL)
 			{
-				if (strlen (indent_string) >= 2)
-				{
-					indent_string[strlen (indent_string) - 2] = 0;
-				}
+                if (indent_amount >= 2)
+                    indent_amount -= 2;
 			}
 
 #ifdef DEBUG_GDSREADER
 			/* print it out */
 			printf ("\n");
-			printf ("%s0x%04x     # RECORD_LENGTH              Bytes of data in this record\n",
-					indent_string, no_bytes);
-			printf ("%s0x%02x       # RECORD_TYPE:  %-12s %s\n",
-					indent_string, record_type, ascii_record_type, ascii_record_description);
-			printf ("%s0x%02x       # DATA_TYPE:    %-12s %s\n",
-					indent_string, data_type, ascii_data_type, ascii_data_type_description);
+			printf ("%*s0x%04x     # RECORD_LENGTH              Bytes of data in this record\n",
+					indent_amount, "", no_bytes);
+			printf ("%*s0x%02x       # RECORD_TYPE:  %-12s %s\n",
+					indent_amount, "", record_type, gds_record_ascii(enum_record_type), gds_record_description(enum_record_type));
+			printf ("%*s0x%02x       # DATA_TYPE:    %-12s %s\n",
+					indent_amount, "", data_type, gds_data_ascii(enum_data_type), gds_data_description(enum_data_type));
 #endif 
 
 			/* If the record and data types don't match, print an error, but
@@ -194,34 +187,34 @@ bool GdsReader::operator() (const char* filename)
 			 * looking for errors... */
 			if ((expected_data_type != 0xffff) && (expected_data_type != data_type))
 			{
-				find_ascii_data_type (expected_data_type, ascii_expected_data_type,
-						ascii_expected_data_type_description);
-				printf ("%s# ***ERROR*** We were expecting data type 0x%02x (%s) to be specified, but\n",
-						indent_string, expected_data_type, ascii_expected_data_type_description);
-				printf ("%s#             data type 0x%02x (%s) was specified.\n",
-						indent_string, data_type, ascii_data_type_description);
-				printf ("%s#             I'll use the expected data type when I try to read this.\n",
-						indent_string);
+				find_data_type (expected_data_type, enum_expected_data_type);
+				printf ("%*s# ***ERROR*** We were expecting data type 0x%02x (%s) to be specified, but\n",
+						indent_amount, "", expected_data_type, gds_data_ascii(enum_expected_data_type));
+				printf ("%*s#             data type 0x%02x (%s) was specified.\n",
+						indent_amount, "", data_type, gds_data_ascii(enum_data_type));
+				printf ("%*s#             I'll use the expected data type when I try to read this.\n",
+						indent_amount, "");
 			}
 
 			/* now print the actual data (if present) */
-			if (expected_data_type == 0x01)	/* BIT_ARRAY */
+			if (expected_data_type == GdsData::BIT_ARRAY)	/* BIT_ARRAY */
 			{
 				vector<int> vBitArray; vBitArray.reserve((no_read-2)>>1);
 				for (data_ktr = 2; data_ktr < no_read; data_ktr += 2)
 				{
-					bit_array = 256 * record[data_ktr] + record[data_ktr + 1];
+                    /* use bit shifting instread of multiplication */
+					bit_array = (record[data_ktr]<<8) + record[data_ktr + 1];
 #ifdef DEBUG_GDSREADER
-					printf ("%s0x%04x     # DATA\n",
-							indent_string, bit_array);
+					printf ("%*s0x%04x     # DATA\n",
+							indent_amount, "", bit_array);
 					/* print a hopefully useful comment */
-					print_bit_array_comments (ascii_record_type, bit_array, indent_string);
+					print_bit_array_comments (enum_record_type, bit_array, indent_amount);
 #endif 
 					vBitArray.push_back(bit_array);
 				}
-				m_db.bit_array_cbk(ascii_record_type, ascii_data_type, vBitArray);
+				m_db.bit_array_cbk(enum_record_type, enum_data_type, vBitArray);
 			}
-			else if (expected_data_type == 0x02)	/* INTEGER_2 */
+			else if (expected_data_type == GdsData::INTEGER_2)	/* INTEGER_2 */
 			{
 				/* vInteger used to save data for callbacks, be careful, it should be int rather than unsigned int */
 				vector<int> vInteger; vInteger.reserve((no_read-2)>>1);
@@ -242,14 +235,14 @@ bool GdsReader::operator() (const char* filename)
 						display_integer *= -1;
 					}
 #ifdef DEBUG_GDSREADER
-					printf ("%s0x%04x     # DATA: %d\n",
-							indent_string, hex_display_integer, display_integer);
+					printf ("%*s0x%04x     # DATA: %d\n",
+							indent_amount, "", hex_display_integer, display_integer);
 #endif 
 					vInteger.push_back(display_integer);
 				}
-				m_db.integer_2_cbk(ascii_record_type, ascii_data_type, vInteger);
+				m_db.integer_2_cbk(enum_record_type, enum_data_type, vInteger);
 			}
-			else if (expected_data_type == 0x03)	/* INTEGER_4 */
+			else if (expected_data_type == GdsData::INTEGER_4)	/* INTEGER_4 */
 			{
 				/* vInteger used to save data for callbacks, be careful, it should be int rather than unsigned int */
 				vector<int> vInteger; vInteger.reserve((no_read-2)>>2);
@@ -273,14 +266,14 @@ bool GdsReader::operator() (const char* filename)
 						display_integer *= -1;
 					}
 #ifdef DEBUG_GDSREADER
-					printf ("%s0x%08x # DATA: %d\n",
-							indent_string, hex_display_integer, display_integer);
+					printf ("%*s0x%08x # DATA: %d\n",
+							indent_amount, "", hex_display_integer, display_integer);
 #endif 
 					vInteger.push_back(display_integer);
 				}
-				m_db.integer_4_cbk(ascii_record_type, ascii_data_type, vInteger);
+				m_db.integer_4_cbk(enum_record_type, enum_data_type, vInteger);
 			}
-			else if (expected_data_type == 0x04)	/* REAL_4 */
+			else if (expected_data_type == GdsData::REAL_4)	/* REAL_4 */
 			{
 				vector<double> vFloat; vFloat.reserve((no_read-2)>>2);
 				for (data_ktr = 2; data_ktr < no_read; data_ktr += 4)
@@ -300,13 +293,13 @@ bool GdsReader::operator() (const char* filename)
 						display_float *= -1;
 					}
 #ifdef DEBUG_GDSREADER
-					printf ("%s%-.9f # DATA\n", indent_string, display_float);
+					printf ("%*s%-.9f # DATA\n", indent_amount, "", display_float);
 #endif 
 					vFloat.push_back(display_float);
 				}
-				m_db.real_4_cbk(ascii_record_type, ascii_data_type, vFloat);
+				m_db.real_4_cbk(enum_record_type, enum_data_type, vFloat);
 			}
-			else if (expected_data_type == 0x05)	/* REAL_8 */
+			else if (expected_data_type == GdsData::REAL_8)	/* REAL_8 */
 			{
 				vector<double> vFloat; vFloat.reserve((no_read-2)>>3);
 				for (data_ktr = 2; data_ktr < no_read; data_ktr += 8)
@@ -326,13 +319,13 @@ bool GdsReader::operator() (const char* filename)
 						display_float *= -1;
 					}
 #ifdef DEBUG_GDSREADER
-					printf ("%s%-.18f # DATA\n", indent_string, display_float);
+					printf ("%*s%-.18f # DATA\n", indent_amount, "", display_float);
 #endif 
 					vFloat.push_back(display_float);
 				}
-				m_db.real_8_cbk(ascii_record_type, ascii_data_type, vFloat);
+				m_db.real_8_cbk(enum_record_type, enum_data_type, vFloat);
 			}
-			else if (expected_data_type == 0x06)	/* STRING */
+			else if (expected_data_type == GdsData::STRING)	/* STRING */
 			{
 				string str; str.reserve((no_read-2)>>1); 
 				for (data_ktr = 2; data_ktr < no_read; data_ktr += 2)
@@ -354,22 +347,22 @@ bool GdsReader::operator() (const char* filename)
 					}
 					str.push_back(display_char_2);
 #ifdef DEBUG_GDSREADER
-					printf ("%s0x%02x 0x%02x  # DATA: %c%c\n",
-							indent_string, record[data_ktr], record[data_ktr + 1],
+					printf ("%*s0x%02x 0x%02x  # DATA: %c%c\n",
+							indent_amount, "", record[data_ktr], record[data_ktr + 1],
 							display_char_1, display_char_2);
 #endif 
 					if (((!isprint (record[data_ktr])) && (record[data_ktr] != 0)) ||
 							((!isprint (record[data_ktr + 1])) && (record[data_ktr + 1] != 0)))
 					{
-						printf ("%s# ***ERROR*** There was a non-printable character in the last 2 byte word.\n",
-								indent_string);
+						printf ("%*s# ***ERROR*** There was a non-printable character in the last 2 byte word.\n",
+								indent_amount, "");
 					}
 				}
-				m_db.string_cbk(ascii_record_type, ascii_data_type, str);
+				m_db.string_cbk(enum_record_type, enum_data_type, str);
 			}
 			else
 			{
-				if (expected_data_type != 0x00)
+				if (expected_data_type != GdsData::NO_DATA)
 				{
 #ifdef DEBUG_GDSREADER
 					for (data_ktr = 2; data_ktr < no_read; data_ktr++)
@@ -378,25 +371,22 @@ bool GdsReader::operator() (const char* filename)
 					}
 #endif 
 				}
-				/* ascii_record_type == BGNSTR, BOUNDARY, PATH, BOX */
-				else m_db.begin_end_cbk(ascii_record_type); 
+				/* enum_record_type == BGNSTR, BOUNDARY, PATH, BOX */
+				else m_db.begin_end_cbk(enum_record_type); 
 			}
 
 			/* if it's a BGNSTR or the beginning of an element, add to indent */
-			if ((!strcmp (ascii_record_type, "BGNSTR")) ||
-					(!strcmp (ascii_record_type, "BOUNDARY")) ||
-					(!strcmp (ascii_record_type, "PATH")) ||
-					(!strcmp (ascii_record_type, "SREF")) ||
-					(!strcmp (ascii_record_type, "AREF")) ||
-					(!strcmp (ascii_record_type, "TEXT")) ||
-					(!strcmp (ascii_record_type, "TEXTNODE")) ||
-					(!strcmp (ascii_record_type, "NODE")) ||
-					(!strcmp (ascii_record_type, "BOX")))
+			if (enum_record_type == GdsRecords::BGNSTR ||
+					enum_record_type == GdsRecords::BOUNDARY ||
+					enum_record_type == GdsRecords::PATH ||
+					enum_record_type == GdsRecords::SREF ||
+					enum_record_type == GdsRecords::AREF ||
+					enum_record_type == GdsRecords::TEXT ||
+					enum_record_type == GdsRecords::TEXTNODE ||
+					enum_record_type == GdsRecords::NODE ||
+					enum_record_type == GdsRecords::BOX)
 			{
-				for (ktr = 0; ktr < NO_SPACES_TO_INDENT; ktr++)
-				{
-					strcat (indent_string, " ");
-				}
+                indent_amount += NO_SPACES_TO_INDENT;
 			}
 
 			/* free the record memory */
@@ -406,8 +396,8 @@ bool GdsReader::operator() (const char* filename)
 		{
 #ifdef DEBUG_GDSREADER
 			/* if it was a NULL record */
-			printf ("%s0x%04x # PADDING(NULL RECORD)\n",
-					indent_string, no_bytes);
+			printf ("%*s0x%04x # PADDING(NULL RECORD)\n",
+					indent_amount, "", no_bytes);
 #endif 
 		}
 
@@ -418,507 +408,146 @@ bool GdsReader::operator() (const char* filename)
 	return true;
 }
 
-void GdsReader::find_ascii_record_type (int numeric, char *record_name, char *record_description, int *expected_data_type)
+void GdsReader::find_record_type (int numeric, GdsRecords::EnumType& record_name, int& expected_data_type)
 {
-
-	switch (numeric)
-	{
-		case 0x00:
-			strcpy (record_name, "HEADER");
-			strcpy (record_description, "Start of stream, contains version number of stream file");
-			*expected_data_type = 0x02;
-			break;
-		case 0x01:
-			strcpy (record_name, "BGNLIB");
-			strcpy (record_description, "Beginning of library, plus mod and access dates");
-			*expected_data_type = 0x02;
-			break;
-		case 0x02:
-			strcpy (record_name, "LIBNAME");
-			strcpy (record_description, "The name of the library");
-			*expected_data_type = 0x06;
-			break;
-		case 0x03:
-			strcpy (record_name, "UNITS");
-			strcpy (record_description, "Size of db unit in user units and size of db unit in meters");
-			*expected_data_type = 0x05;
-			break;
-		case 0x04:
-			strcpy (record_name, "ENDLIB");
-			strcpy (record_description, "End of the library");
-			*expected_data_type = 0x00;
-			break;
-		case 0x05:
-			strcpy (record_name, "BGNSTR");
-			strcpy (record_description, "Begin structure, plus create and mod dates");
-			*expected_data_type = 0x02;
-			break;
-		case 0x06:
-			strcpy (record_name, "STRNAME");
-			strcpy (record_description, "Name of a structure");
-			*expected_data_type = 0x06;
-			break;
-		case 0x07:
-			strcpy (record_name, "ENDSTR");
-			strcpy (record_description, "End of a structure");
-			*expected_data_type = 0x00;
-			break;
-		case 0x08:
-			strcpy (record_name, "BOUNDARY");
-			strcpy (record_description, "The beginning of a BOUNDARY element");
-			*expected_data_type = 0x00;
-			break;
-		case 0x09:
-			strcpy (record_name, "PATH");
-			strcpy (record_description, "The beginning of a PATH element");
-			*expected_data_type = 0x00;
-			break;
-		case 0x0a:
-			strcpy (record_name, "SREF");
-			strcpy (record_description, "The beginning of an SREF element");
-			*expected_data_type = 0x00;
-			break;
-		case 0x0b:
-			strcpy (record_name, "AREF");
-			strcpy (record_description, "The beginning of an AREF element");
-			*expected_data_type = 0x00;
-			break;
-		case 0x0c:
-			strcpy (record_name, "TEXT");
-			strcpy (record_description, "The beginning of a TEXT element");
-			*expected_data_type = 0x00;
-			break;
-		case 0x0d:
-			strcpy (record_name, "LAYER");
-			strcpy (record_description, "Layer specification");
-			*expected_data_type = 0x02;
-			break;
-		case 0x0e:
-			strcpy (record_name, "DATATYPE");
-			strcpy (record_description, "Datatype specification");
-			*expected_data_type = 0x02;
-			break;
-		case 0x0f:
-			strcpy (record_name, "WIDTH");
-			strcpy (record_description, "Width specification, negative means absolute");
-			*expected_data_type = 0x03;
-			break;
-		case 0x10:
-			strcpy (record_name, "XY");
-			strcpy (record_description, "An array of XY coordinates");
-			*expected_data_type = 0x03;
-			break;
-		case 0x11:
-			strcpy (record_name, "ENDEL");
-			strcpy (record_description, "The end of an element");
-			*expected_data_type = 0x00;
-			break;
-		case 0x12:
-			strcpy (record_name, "SNAME");
-			strcpy (record_description, "The name of a referenced structure");
-			*expected_data_type = 0x06;
-			break;
-		case 0x13:
-			strcpy (record_name, "COLROW");
-			strcpy (record_description, "Columns and rows for an AREF");
-			*expected_data_type = 0x02;
-			break;
-		case 0x14:
-			strcpy (record_name, "TEXTNODE");
-			strcpy (record_description,
-					"\"Not currently used\" per GDSII Stream Format Manual, Release 6.0");
-			*expected_data_type = 0x00;
-			break;
-		case 0x15:
-			strcpy (record_name, "NODE");
-			strcpy (record_description, "The beginning of a NODE element");
-			*expected_data_type = 0x00;
-			break;
-		case 0x16:
-			strcpy (record_name, "TEXTTYPE");
-			strcpy (record_description, "Texttype specification");
-			*expected_data_type = 0x02;
-			break;
-		case 0x17:
-			strcpy (record_name, "PRESENTATION");
-			strcpy (record_description, "Text origin and font specification");
-			*expected_data_type = 0x01;
-			break;
-		case 0x18:
-			strcpy (record_name, "SPACING");
-			strcpy (record_description,
-					"\"Discontinued\" per GDSII Stream Format Manual, Release 6.0");
-			*expected_data_type = 0xffff;
-			break;
-		case 0x19:
-			strcpy (record_name, "STRING");
-			strcpy (record_description, "Character string");
-			*expected_data_type = 0x06;
-			break;
-		case 0x1a:
-			strcpy (record_name, "STRANS");
-			strcpy (record_description,
-					"Refl, absmag, and absangle for SREF, AREF and TEXT");
-			*expected_data_type = 0x01;
-			break;
-		case 0x1b:
-			strcpy (record_name, "MAG");
-			strcpy (record_description, "Magnification, 1 is the default");
-			*expected_data_type = 0x05;
-			break;
-		case 0x1c:
-			strcpy (record_name, "ANGLE");
-			strcpy (record_description, "Angular rotation factor");
-			*expected_data_type = 0x05;
-			break;
-		case 0x1d:
-			strcpy (record_name, "UINTEGER");
-			strcpy (record_description,
-					"User integer, used only in V2.0, translates to userprop 126 on instream");
-			*expected_data_type = 0xffff;
-			break;
-		case 0x1e:
-			strcpy (record_name, "USTRING");
-			strcpy (record_description,
-					"User string, used only in V2.0, translates to userprop 127 on instream");
-			*expected_data_type = 0xffff;
-			break;
-		case 0x1f:
-			strcpy (record_name, "REFLIBS");
-			strcpy (record_description, "Names of the reference libraries");
-			*expected_data_type = 0x06;
-			break;
-		case 0x20:
-			strcpy (record_name, "FONTS");
-			strcpy (record_description, "Names of the textfont definition files");
-			*expected_data_type = 0x06;
-			break;
-		case 0x21:
-			strcpy (record_name, "PATHTYPE");
-			strcpy (record_description, "Type of path ends");
-			*expected_data_type = 0x02;
-			break;
-		case 0x22:
-			strcpy (record_name, "GENERATIONS");
-			strcpy (record_description, "Number of deleted or backed up structures to retain");
-			*expected_data_type = 0x02;
-			break;
-		case 0x23:
-			strcpy (record_name, "ATTRTABLE");
-			strcpy (record_description, "Name of the attribute definition file");
-			*expected_data_type = 0x06;
-			break;
-		case 0x24:
-			strcpy (record_name, "STYPTABLE");
-			strcpy (record_description,
-					"\"Unreleased feature\" per GDSII Stream Format Manual, Release 6.0");
-			*expected_data_type = 0x06;
-			break;
-		case 0x25:
-			strcpy (record_name, "STRTYPE");
-			strcpy (record_description,
-					"\"Unreleased feature\" per GDSII Stream Format Manual, Release 6.0");
-			*expected_data_type = 0x02;
-			break;
-		case 0x26:
-			strcpy (record_name, "ELFLAGS");
-			strcpy (record_description, "Flags for template and exterior data");
-			*expected_data_type = 0x01;
-			break;
-		case 0x27:
-			strcpy (record_name, "ELKEY");
-			strcpy (record_description,
-					"\"Unreleased feature\" per GDSII Stream Format Manual, Release 6.0");
-			*expected_data_type = 0x03;
-			break;
-		case 0x28:
-			strcpy (record_name, "LINKTYPE");
-			strcpy (record_description,
-					"\"Unreleased feature\" per GDSII Stream Format Manual, Release 6.0");
-			*expected_data_type = 0xffff;
-			break;
-		case 0x29:
-			strcpy (record_name, "LINKKEYS");
-			strcpy (record_description,
-					"\"Unreleased feature\" per GDSII Stream Format Manual, Release 6.0");
-			*expected_data_type = 0xffff;
-			break;
-		case 0x2a:
-			strcpy (record_name, "NODETYPE");
-			strcpy (record_description, "Nodetype specification");
-			*expected_data_type = 0x02;
-			break;
-		case 0x2b:
-			strcpy (record_name, "PROPATTR");
-			strcpy (record_description, "Property number");
-			*expected_data_type = 0x02;
-			break;
-		case 0x2c:
-			strcpy (record_name, "PROPVALUE");
-			strcpy (record_description, "Property value");
-			*expected_data_type = 0x06;
-			break;
-		case 0x2d:
-			strcpy (record_name, "BOX");
-			strcpy (record_description, "The beginning of a BOX element");
-			*expected_data_type = 0x00;
-			break;
-		case 0x2e:
-			strcpy (record_name, "BOXTYPE");
-			strcpy (record_description, "Boxtype specification");
-			*expected_data_type = 0x02;
-			break;
-		case 0x2f:
-			strcpy (record_name, "PLEX");
-			strcpy (record_description, "Plex number and plexhead flag");
-			*expected_data_type = 0x03;
-			break;
-		case 0x30:
-			strcpy (record_name, "BGNEXTN");
-			strcpy (record_description, "Path extension beginning for pathtype 4 in CustomPlus");
-			*expected_data_type = 0x03;
-			break;
-		case 0x31:
-			strcpy (record_name, "ENDTEXTN");	/* first 'T' a typo in GDSII
-												 * manual??? */
-			strcpy (record_description, "Path extension end for pathtype 4 in CustomPlus");
-			*expected_data_type = 0x03;
-			break;
-		case 0x32:
-			strcpy (record_name, "TAPENUM");
-			strcpy (record_description,
-					"Tape number for multi-reel stream file, you've got a really old file here");
-			*expected_data_type = 0x02;
-			break;
-		case 0x33:
-			strcpy (record_name, "TAPECODE");
-			strcpy (record_description,
-					"Tape code to verify that you've loaded a reel from the proper set");
-			*expected_data_type = 0x02;
-			break;
-		case 0x34:
-			strcpy (record_name, "STRCLASS");
-			strcpy (record_description,
-					"Calma use only, non-Calma programs should not use, or set to all 0");
-			*expected_data_type = 0x01;
-			break;
-		case 0x35:
-			strcpy (record_name, "RESERVED");
-			strcpy (record_description,
-					"Used to be NUMTYPES per GDSII Stream Format Manual, Release 6.0");
-			*expected_data_type = 0x03;
-			break;
-		case 0x36:
-			strcpy (record_name, "FORMAT");
-			strcpy (record_description, "Archive or Filtered flag");
-			*expected_data_type = 0x02;
-			break;
-		case 0x37:
-			strcpy (record_name, "MASK");
-			strcpy (record_description,
-					"Only in filtered streams, lists layer and datatype mask used");
-			*expected_data_type = 0x06;
-			break;
-		case 0x38:
-			strcpy (record_name, "ENDMASKS");
-			strcpy (record_description, "The end of mask descriptions");
-			*expected_data_type = 0x00;
-			break;
-		case 0x39:
-			strcpy (record_name, "LIBDIRSIZE");
-			strcpy (record_description, "Number of pages in library director, a GDSII thing...");
-			*expected_data_type = 0x02;
-			break;
-		case 0x3a:
-			strcpy (record_name, "SRFNAME");
-			strcpy (record_description, "Sticks rule file name");
-			*expected_data_type = 0x06;
-			break;
-		case 0x3b:
-			strcpy (record_name, "LIBSECUR");
-			strcpy (record_description, "Access control list stuff for CalmaDOS, ancient!");
-			*expected_data_type = 0x02;
-			break;
-		default:
-			strcpy (record_name, "UNKNOWN");
-			strcpy (record_description,
-					"***ERROR*** Unknown record type type");
-			*expected_data_type = 0xffff;
-			break;
-	}
-
+    record_name = gds_record_type(numeric);
+    expected_data_type = gds_record_expected_data(record_name);
 }
 
-void GdsReader::find_ascii_data_type (int numeric, char *data_name, char *data_description)
+void GdsReader::find_data_type (int numeric, GdsData::EnumType& data_name)
 {
-
-	switch (numeric)
-	{
-		case 0x00:
-			strcpy (data_description, "No data present (nothing after the record header)");
-			strcpy (data_name, "NO_DATA");
-			break;
-		case 0x01:
-			strcpy (data_description, "Bit array (2 bytes)");
-			strcpy (data_name, "BIT_ARRAY");
-			break;
-		case 0x02:
-			strcpy (data_description, "Two byte signed integer");
-			strcpy (data_name, "INTEGER_2");
-			break;
-		case 0x03:
-			strcpy (data_description, "Four byte signed integer");
-			strcpy (data_name, "INTEGER_4");
-			break;
-		case 0x04:
-			strcpy (data_description, "Four byte real (not used?)");
-			strcpy (data_name, "REAL_4");
-			break;
-		case 0x05:
-			strcpy (data_description, "Eight byte real");
-			strcpy (data_name, "REAL_8");
-			break;
-		case 0x06:
-			strcpy (data_description, "ASCII string (padded to an even byte count with NULL)");
-			strcpy (data_name, "STRING");
-			break;
-		default:
-			strcpy (data_description, "UNKNOWN");
-			strcpy (data_name, "UNKNOWN");
-			break;
-	}
-
+    data_name = gds_data_type(numeric);
 }
 
-void GdsReader::print_bit_array_comments (char *ascii_record_type, int bit_array, char *indent_string)
+void GdsReader::print_bit_array_comments (GdsRecords::EnumType enum_record_type, int bit_array, int indent_amount)
 {
 	int half_nyble;
 
-	if (!strcmp (ascii_record_type, "STRANS"))
+	if (enum_record_type == GdsRecords::STRANS)
 	{
-		printf ("%s           # bits 15 to 0, l to r\n",
-				indent_string);
-		printf ("%s           # 15=refl, 2=absmag, 1=absangle, others unused\n",
-				indent_string);
+		printf ("%*s           # bits 15 to 0, l to r\n",
+				indent_amount, "");
+		printf ("%*s           # 15=refl, 2=absmag, 1=absangle, others unused\n",
+				indent_amount, "");
 		if (bit_array & 0x8000)
 		{
-			printf ("%s           # Reflected on X axis before rotation\n",
-					indent_string);
+			printf ("%*s           # Reflected on X axis before rotation\n",
+					indent_amount, "");
 		}
 		if (bit_array & 0x0002)
 		{
-			printf ("%s           # Magnitude is absolute\n",
-					indent_string);
+			printf ("%*s           # Magnitude is absolute\n",
+					indent_amount, "");
 		}
 		if (bit_array & 0x0001)
 		{
-			printf ("%s           # Angle is absolute\n",
-					indent_string);
+			printf ("%*s           # Angle is absolute\n",
+					indent_amount, "");
 		}
 		if (bit_array & 0x7ff8)
 		{
-			printf ("%s           # ***ERROR*** Undefined bits set in STRANS\n",
-					indent_string);
+			printf ("%*s           # ***ERROR*** Undefined bits set in STRANS\n",
+					indent_amount, "");
 		}
 	}
-	else if (!strcmp (ascii_record_type, "PRESENTATION"))
+	else if (enum_record_type == GdsRecords::PRESENTATION)
 	{
-		printf ("%s           # bits 15 to 0, l to r\n",
-				indent_string);
-		printf ("%s           # bits 0 and 1: 00 left, 01 center, 10 right\n",
-				indent_string);
-		printf ("%s           # bits 2 and 3: 00 top 01, middle, 10 bottom\n",
-				indent_string);
-		printf ("%s           # bits 4 and 5: 00 font 0, 01 font 1, 10 font 2, 11 font 3,\n",
-				indent_string);
+		printf ("%*s           # bits 15 to 0, l to r\n",
+				indent_amount, "");
+		printf ("%*s           # bits 0 and 1: 00 left, 01 center, 10 right\n",
+				indent_amount, "");
+		printf ("%*s           # bits 2 and 3: 00 top 01, middle, 10 bottom\n",
+				indent_amount, "");
+		printf ("%*s           # bits 4 and 5: 00 font 0, 01 font 1, 10 font 2, 11 font 3,\n",
+				indent_amount, "");
 		half_nyble = bit_array;
 		half_nyble &= 0x30;
 		half_nyble >>= 4;
-		printf ("%s           # Font %d\n",
-				indent_string, half_nyble);
+		printf ("%*s           # Font %d\n",
+				indent_amount, "", half_nyble);
 		half_nyble = bit_array;
 		half_nyble &= 0x0c;
 		half_nyble >>= 2;
 		if (half_nyble == 0x00)
 		{
-			printf ("%s           # Top justification\n",
-					indent_string);
+			printf ("%*s           # Top justification\n",
+					indent_amount, "");
 		}
 		else if (half_nyble == 0x01)
 		{
-			printf ("%s           # Middle justification\n",
-					indent_string);
+			printf ("%*s           # Middle justification\n",
+					indent_amount, "");
 		}
 		else if (half_nyble == 0x02)
 		{
-			printf ("%s           # Bottom justification\n",
-					indent_string);
+			printf ("%*s           # Bottom justification\n",
+					indent_amount, "");
 		}
 		else
 		{
-			printf ("%s           # ***ERROR*** Illegal justification\n",
-					indent_string);
+			printf ("%*s           # ***ERROR*** Illegal justification\n",
+					indent_amount, "");
 		}
 		half_nyble = bit_array;
 		half_nyble &= 0x03;
 		if (half_nyble == 0x00)
 		{
-			printf ("%s           # Left justification\n",
-					indent_string);
+			printf ("%*s           # Left justification\n",
+					indent_amount, "");
 		}
 		else if (half_nyble == 0x01)
 		{
-			printf ("%s           # Center justification\n",
-					indent_string);
+			printf ("%*s           # Center justification\n",
+					indent_amount, "");
 		}
 		else if (half_nyble == 0x02)
 		{
-			printf ("%s           # Right justification\n",
-					indent_string);
+			printf ("%*s           # Right justification\n",
+					indent_amount, "");
 		}
 		else
 		{
-			printf ("%s           # ***ERROR*** Illegal justification\n",
-					indent_string);
+			printf ("%*s           # ***ERROR*** Illegal justification\n",
+					indent_amount, "");
 		}
 		if (bit_array & 0xffc0)
 		{
-			printf ("%s           # ***ERROR*** Undefined bits set in PRESENTATION\n",
-					indent_string);
+			printf ("%*s           # ***ERROR*** Undefined bits set in PRESENTATION\n",
+					indent_amount, "");
 		}
 	}
-	else if (!strcmp (ascii_record_type, "ELFLAGS"))
+	else if (enum_record_type == GdsRecords::ELFLAGS)
 	{
-		printf ("%s           # bits 15 to 0, l to r\n",
-				indent_string);
-		printf ("%s           # 0=template, 1=external data, others unused\n",
-				indent_string);
+		printf ("%*s           # bits 15 to 0, l to r\n",
+				indent_amount, "");
+		printf ("%*s           # 0=template, 1=external data, others unused\n",
+				indent_amount, "");
 		if (bit_array & 0x0001)
 		{
-			printf ("%s           # This is template data\n",
-					indent_string);
+			printf ("%*s           # This is template data\n",
+					indent_amount, "");
 		}
 		if (bit_array & 0x0002)
 		{
-			printf ("%s           # This is external data\n",
-					indent_string);
+			printf ("%*s           # This is external data\n",
+					indent_amount, "");
 		}
 		if (bit_array & 0xfffc)
 		{
-			printf ("%s           # ***ERROR*** Undefined bits in ELFLAGS\n",
-					indent_string);
+			printf ("%*s           # ***ERROR*** Undefined bits in ELFLAGS\n",
+					indent_amount, "");
 		}
 	}
-	else if (!strcmp (ascii_record_type, "STRCLASS"))
+	else if (enum_record_type == GdsRecords::STRCLASS)
 	{
-		printf ("%s           # Calma internal use only, should be all 0\n",
-				indent_string);
-		printf ("%s           # if this file was generated by non-Calma software\n",
-				indent_string);
+		printf ("%*s           # Calma internal use only, should be all 0\n",
+				indent_amount, "");
+		printf ("%*s           # if this file was generated by non-Calma software\n",
+				indent_amount, "");
 		if (bit_array)
 		{
-			printf ("%s           # ***WARNING*** The STRCLASS record type is used\n",
-					indent_string);
+			printf ("%*s           # ***WARNING*** The STRCLASS record type is used\n",
+					indent_amount, "");
 		}
 	}
 	else
