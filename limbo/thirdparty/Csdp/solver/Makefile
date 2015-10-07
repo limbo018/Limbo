@@ -21,7 +21,7 @@
 #
 # The default settings for gcc:
 #
-CFLAGS=-O3 -ansi -Wall -DNOSHORTS -I../include 
+CFLAGS=-O3 -Wall -DNOSHORTS -I../include 
 #
 # Notes on CFLAGS.
 #
@@ -96,7 +96,12 @@ CFLAGS=-O3 -ansi -Wall -DNOSHORTS -I../include
 #
 #LIBS=-L../lib -lsdp -llapack -lblas -lgfortran -lm
 LIMBO_ROOT_DIR = ../../../..
-LIBS=-L$(LIMBO_ROOT_DIR)/lib -L../lib -lsdp -lopenblas-st -lgfortran -lm -lrt -lpthread -static
+LIBS=-L$(LIMBO_ROOT_DIR)/lib -L../lib -lsdp -lopenblas-st -lm -lpthread
+UNAME_S = $(shell uname -s)
+ifeq ($(UNAME_S), Linux)
+	CFLAGS+= -ansi 
+	LIBS+= -static -lrt -lgfortran
+endif 
 #
 # 1. Warning about debian systems.  For some absurb reason, the BLAS
 # package in debian has the BLAS library named libblas-3.a, rather than
