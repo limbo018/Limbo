@@ -101,5 +101,5 @@ make install
 In the subdirectories of source code, there are test folders including test/example programs.
 
 ## Copyright 
-Copyright (c) 2014-2014 
+Copyright (c) 2014-2015 
 
