@@ -5,9 +5,11 @@
 # detect compiler 
 ifneq ($(shell which clang++),)
 	CXX = clang++
+	CC = clang
 	AR = ar
 else
 	CXX = g++
+	CC = gcc
 	AR = ar
 endif
 
