@@ -415,7 +415,7 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
     }
 #ifdef DEBUG_SDPCOLORING
     //this->print_edge_weight(this->m_graph);
-    this->check_edge_weight(this->m_graph, this->stitch_weight()/10, 2);
+    this->check_edge_weight(this->m_graph, this->stitch_weight()/10, 4);
     //this->print_edge_weight(mg);
     this->check_edge_weight(mg, this->stitch_weight()/10, boost::num_edges(this->m_graph));
 #endif

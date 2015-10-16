@@ -141,13 +141,6 @@ class Coloring
         /// helper functions 
         inline virtual edge_weight_type edge_weight(graph_edge_type const& e) const {return boost::get(boost::edge_weight, m_graph, e);}
 
-		/// for debug 
-		virtual void write_graph(std::string const& filename) const;
-        virtual void write_graph(std::string const& filename, graph_type const& g, std::vector<int8_t> const& vColor) const;
-	protected:
-		/// \return objective value 
-		virtual double coloring() = 0;
-
 		/// \return cost with a coloring solution 
 		virtual edge_weight_type calc_cost(std::vector<int8_t> const& vColor) const;
 
@@ -156,6 +149,13 @@ class Coloring
 
         /// print edge weight 
         void print_edge_weight(graph_type const& g) const;
+
+		/// for debug 
+		virtual void write_graph(std::string const& filename) const;
+        virtual void write_graph(std::string const& filename, graph_type const& g, std::vector<int8_t> const& vColor) const;
+	protected:
+		/// \return objective value 
+		virtual double coloring() = 0;
 
 		graph_type const& m_graph;
 		std::vector<int8_t> m_vColor;
