@@ -5,3 +5,5 @@ bin/*
 wiki
 obj/*
 *.d
+limbo/thirdparty/liblinear/predict
+limbo/thirdparty/liblinear/train

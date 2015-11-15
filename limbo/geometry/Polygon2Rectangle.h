@@ -287,6 +287,11 @@ class Polygon2Rectangle
 		{
 			return m_vRect;
 		}
+        /// faster api, but user must take care of data race 
+        void get_rectangles(rectangle_set_type& vRect)
+        {
+            m_vRect.swap(vRect);
+        }
 		/// read polygon from file 
 		/// try to be compatible to gnuplot format 
 		bool read(string const& filename)
@@ -547,7 +552,7 @@ inline bool polygon2rectangle(InputIterator input_begin, InputIterator input_end
 {
 	Polygon2Rectangle<PointSet, RectSet> p2r (input_begin, input_end, slicing_orient);
 	if (!p2r()) return false;
-	r = p2r.get_rectangles();
+	p2r.get_rectangles(r);
 	return true;
 }
 
