@@ -8,6 +8,8 @@
 #ifndef _LIMBO_MATH_MATH
 #define _LIMBO_MATH_MATH
 
+#include <iterator>
+
 /// ===================================================================
 ///    File          : Math
 ///    Function      : mathematical utilities such as abs 
