@@ -84,8 +84,7 @@ public:
     BookshelfDataBase& m_db;
 
     // .nodes file 
-    void numNodeCbk(int);
-    void numTerminalsCbk(int);
+    void numNodeTerminalsCbk(int, int);
     void terminalEntryCbk(string&, int, int);
     void nodeEntryCbk(string&, int, int, string&);
     void nodeEntryCbk(string&, int, int);

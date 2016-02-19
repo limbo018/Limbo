@@ -165,8 +165,7 @@ struct Net : public Item
 class BookshelfDataBase
 {
 	public:
-        virtual void resize_bookshelf_node(int) = 0;
-        virtual void resize_bookshelf_terminals(int) = 0;
+        virtual void resize_bookshelf_node_terminals(int, int) = 0;
         virtual void resize_bookshelf_net(int) = 0;
         virtual void resize_bookshelf_pin(int) = 0;
         virtual void resize_bookshelf_row(int) = 0;

@@ -182,11 +182,21 @@ nodes_header : KWD_UCLA KWD_NODES DOUBLE
              | nodes_header EOL /* swallow up EOL by recursion  */
              ; 
 
-nodes_number : KWD_NUMNODES ':' INTEGER {
-              driver.numNodeCbk($3);
+nodes_number : KWD_NUMNODES ':' INTEGER EOL 
+             KWD_NUMTERMINALS ':' INTEGER {
+              driver.numNodeTerminalsCbk($3, $7);
              }
-             | KWD_NUMTERMINALS ':' INTEGER {
-             driver.numTerminalsCbk($3);
+             | KWD_NUMNODES ':' INTEGER 
+             KWD_NUMTERMINALS ':' INTEGER {
+              driver.numNodeTerminalsCbk($3, $6);
+             }
+             | KWD_NUMTERMINALS ':' INTEGER EOL 
+             KWD_NUMNODES ':' INTEGER {
+              driver.numNodeTerminalsCbk($3, $7);
+             }
+             | KWD_NUMTERMINALS ':' INTEGER 
+             KWD_NUMNODES ':' INTEGER {
+              driver.numNodeTerminalsCbk($3, $6);
              }
               ;
 

@@ -52,13 +52,9 @@ void Driver::error(const std::string& m)
 }
 
 // .nodes file 
-void Driver::numNodeCbk(int n)
+void Driver::numNodeTerminalsCbk(int nn, int nt)
 {
-    m_db.resize_bookshelf_node(n);
-}
-void Driver::numTerminalsCbk(int n)
-{
-    m_db.resize_bookshelf_terminals(n);
+    m_db.resize_bookshelf_node_terminals(nn, nt);
 }
 void Driver::terminalEntryCbk(string& name, int w, int h)
 {

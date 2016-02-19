@@ -17,13 +17,9 @@ class DataBase : public BookshelfParser::BookshelfDataBase
 			cout << "DataBase::" << __func__ << endl;
 		}
 		//////////////////// required callbacks from abstract BookshelfParser::BookshelfDataBase ///////////////////
-        virtual void resize_bookshelf_node(int n) 
+        virtual void resize_bookshelf_node_terminals(int nn, int nt) 
         {
-            cout << __func__ << " => " << n << endl;
-        }
-        virtual void resize_bookshelf_terminals(int n)
-        {
-            cout << __func__ << " => " << n << endl;
+            cout << __func__ << " => " << nn << ", " << nt << endl;
         }
         virtual void resize_bookshelf_net(int n)
         {
