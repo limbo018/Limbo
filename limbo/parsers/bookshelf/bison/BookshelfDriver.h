@@ -97,8 +97,8 @@ public:
     void netNameAndDegreeCbk(string&, int);
     void netEntryCbk();
     // .pl file 
-    void plNodeEntryCbk(string&, int, int, string&, string&);
-    void plNodeEntryCbk(string&, int, int, string&);
+    void plNodeEntryCbk(string&, double, double, string&, string&);
+    void plNodeEntryCbk(string&, double, double, string&);
     // .scl file 
     void sclNumRows(int);
     void sclCoreRowStart(string const&);
@@ -115,11 +115,13 @@ public:
     // .aux file 
     void auxCbk(string&, vector<string>&);
 
+    vector<string> const& bookshelfFiles() const {return m_vBookshelfFiles;}
 protected:
 	// use as a stack for node and pin pairs in a net 
 	// because net_cbk_pin will be called before net_cbk_name
 	Row m_row;
 	Net m_net;
+    vector<string> m_vBookshelfFiles; ///< store bookshelf files except .aux 
 };
 
 // top api for BookshelfParser

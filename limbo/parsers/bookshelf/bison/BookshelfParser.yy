@@ -57,6 +57,7 @@
     int  			integerVal;
     double 			doubleVal;
     char            charVal;
+    double          numberVal;
     std::string*		stringVal;
 	std::string*		quoteVal;
 	std::string*		binaryVal;
@@ -66,14 +67,12 @@
 }
 
 %token			END	     0	"end of file"
-/* %token			EOL		"end of line" */
+%token			EOL		"end of line" 
 %token <integerVal> 	INTEGER		"integer"
 %token <doubleVal> 	DOUBLE		"double"
 %token <stringVal> 	STRING		"string"
 %token <quoteVal> 	QUOTE		"quoted chars"
 %token <binaryVal> 	BINARY		"binary numbers"
-/*%type <integerArrayVal> integer_array */
-%type <stringArrayVal> string_array
 %token			KWD_NUMNETS		"NumNets"
 %token          KWD_NUMPINS     "NumPins"
 %token          KWD_NUMNODES    "NumNodes"
@@ -104,7 +103,20 @@
 %token          KWD_PLACED      "PLACED"
 %token          KWD_UNPLACED    "UNPLACED"
 %token          KWD_MOVABLE     "MOVABLE"
+%token          KWD_O     "O"
+%token          KWD_I     "I"
+%token          KWD_N     "N"
+%token          KWD_S     "S"
+%token          KWD_W     "W"
+%token          KWD_E     "E"
+%token          KWD_FN     "FN"
+%token          KWD_FS     "FS"
+%token          KWD_FW     "FW"
+%token          KWD_FE     "FE"
 
+/*%type <integerArrayVal> integer_array */
+%type <stringArrayVal> string_array
+%type <numberVal>  NUMBER      
 %type <charVal> nets_pin_direct
 %type <stringVal> pl_status
 %type <stringVal> pl_orient
@@ -159,34 +171,40 @@ string_array : STRING {
                 delete $2;
 				$$ = $1;
 			  }
+              ;
+
+NUMBER : INTEGER {$$ = $1;}
+       | DOUBLE {$$ = $1;}
+       ;
 
 /***** .nodes file *****/
 nodes_header : KWD_UCLA KWD_NODES DOUBLE
+             | nodes_header EOL /* swallow up EOL by recursion  */
              ; 
 
-nodes_numbers : KWD_NUMNODES ':' INTEGER {
+nodes_number : KWD_NUMNODES ':' INTEGER {
               driver.numNodeCbk($3);
-             }
-             KWD_NUMTERMINALS ':' INTEGER {
-             driver.numTerminalsCbk($3);
              }
              | KWD_NUMTERMINALS ':' INTEGER {
              driver.numTerminalsCbk($3);
-             } KWD_NUMNODES ':' INTEGER {
-             driver.numNodeCbk($3);
              }
               ;
 
-nodes_node_entry : STRING INTEGER INTEGER KWD_TERMINAL {
+nodes_numbers : nodes_number 
+              | nodes_numbers nodes_number
+              | nodes_numbers EOL
+              ;
+
+nodes_node_entry : STRING INTEGER INTEGER KWD_TERMINAL EOL {
                      driver.terminalEntryCbk(*$1, $2, $3);
                      delete $1;
                      } 
-                     | STRING INTEGER INTEGER STRING {
+                     | STRING INTEGER INTEGER STRING EOL {
                  driver.nodeEntryCbk(*$1, $2, $3, *$4);
                  delete $1;
                  delete $4;
                  }
-                 | STRING INTEGER INTEGER {
+                 | STRING INTEGER INTEGER EOL {
                  driver.nodeEntryCbk(*$1, $2, $3);
                  delete $1;
                  }
@@ -194,6 +212,7 @@ nodes_node_entry : STRING INTEGER INTEGER KWD_TERMINAL {
 
 nodes_block_node_entries : nodes_node_entry 
                          | nodes_block_node_entries nodes_node_entry
+                         | nodes_block_node_entries EOL 
                          ; 
 
 /* .nodes top */
@@ -205,6 +224,7 @@ bookshelf_nodes : nodes_header
 
 /***** .nets file *****/
 nets_header : KWD_UCLA KWD_NETS DOUBLE 
+            | nets_header EOL
             ; 
 
 nets_number : KWD_NUMNETS ':' INTEGER {driver.numNetCbk($3);}
@@ -213,14 +233,15 @@ nets_number : KWD_NUMNETS ':' INTEGER {driver.numNetCbk($3);}
 
 nets_numbers : nets_number 
              | nets_numbers nets_number
+             | nets_numbers EOL
             ;
 
-nets_pin_direct : 'O' {$$='O';} 
-                | 'I' {$$='I';}
+nets_pin_direct : KWD_O {$$='O';} 
+                | KWD_I {$$='I';}
                 ;
 
 nets_pin_entry : STRING nets_pin_direct ':' DOUBLE DOUBLE ':' DOUBLE DOUBLE STRING {
-               driver.netPinEntryCbk(*$1, $2, $4, $5, $7, $8, *$9);
+               driver.netPinEntryCbk(*$1, 'O', $4, $5, $7, $8, *$9);
                delete $1;
                delete $9;
                }
@@ -232,9 +253,14 @@ nets_pin_entry : STRING nets_pin_direct ':' DOUBLE DOUBLE ':' DOUBLE DOUBLE STRI
 
 nets_pin_entries : nets_pin_entry 
                  | nets_pin_entries nets_pin_entry
+                 | nets_pin_entries EOL
                  ;
 
-nets_entry : KWD_NETDEGREE INTEGER ':' STRING  {driver.netNameAndDegreeCbk(*$4, $2); delete $4;}
+nets_name : KWD_NETDEGREE ':' INTEGER STRING  {driver.netNameAndDegreeCbk(*$4, $3); delete $4;}
+          | nets_name EOL
+          ;
+
+nets_entry : nets_name
            nets_pin_entries {driver.netEntryCbk();}
            ;
 
@@ -250,16 +276,17 @@ bookshelf_nets : nets_header
 
 /***** .pl file *****/
 pl_header : KWD_UCLA KWD_PL DOUBLE 
+          | pl_header EOL
             ;
 
-pl_orient : "N" {$$ = new std::string ("N");}
-          | "S" {$$ = new std::string ("S");}
-          | "W" {$$ = new std::string ("W");}
-          | "E" {$$ = new std::string ("E");}
-          | "FN" {$$ = new std::string ("FN");}
-          | "FS" {$$ = new std::string ("FS");}
-          | "FW" {$$ = new std::string ("FW");}
-          | "FE" {$$ = new std::string ("FE");}
+pl_orient : KWD_N {$$ = new std::string ("N");}
+          | KWD_S {$$ = new std::string ("S");}
+          | KWD_W {$$ = new std::string ("W");}
+          | KWD_E {$$ = new std::string ("E");}
+          | KWD_FN {$$ = new std::string ("FN");}
+          | KWD_FS {$$ = new std::string ("FS");}
+          | KWD_FW {$$ = new std::string ("FW");}
+          | KWD_FE {$$ = new std::string ("FE");}
           ;
 
 pl_status : KWD_FIXED {$$ = new std::string("FIXED");}
@@ -267,13 +294,13 @@ pl_status : KWD_FIXED {$$ = new std::string("FIXED");}
           | KWD_UNPLACED {$$ = new std::string("UNPLACED");}
           | KWD_MOVABLE {$$ = new std::string("MOVABLE");}
 
-pl_node_entry : STRING INTEGER INTEGER ':' pl_orient pl_status {
+pl_node_entry : STRING NUMBER NUMBER ':' pl_orient pl_status {
               driver.plNodeEntryCbk(*$1, $2, $3, *$5, *$6);
               delete $1;
               delete $5;
               delete $6;
               }
-              | STRING INTEGER INTEGER ':' pl_orient {
+              | STRING NUMBER NUMBER ':' pl_orient {
               driver.plNodeEntryCbk(*$1, $2, $3, *$5);
               delete $1;
               delete $5;
@@ -282,6 +309,7 @@ pl_node_entry : STRING INTEGER INTEGER ':' pl_orient pl_status {
 
 pl_node_entries : pl_node_entry
                 | pl_node_entries pl_node_entry
+                | pl_node_entries EOL
                 ;
 
 /* .pl top */
@@ -292,9 +320,11 @@ bookshelf_pl : pl_header
 
 /***** .scl file *****/
 scl_header : KWD_UCLA KWD_SCL DOUBLE 
+           | scl_header EOL
            ;
 
 scl_numbers : KWD_NUMROWS ':' INTEGER {driver.sclNumRows($3);}
+            | scl_numbers EOL
             ;
 
 scl_corerow_start : KWD_COREROW KWD_HORIZONTAL {
@@ -303,6 +333,7 @@ scl_corerow_start : KWD_COREROW KWD_HORIZONTAL {
                   | KWD_COREROW KWD_VERTICAL {
                   driver.sclCoreRowStart("VERTICAL");
                   }
+                  | scl_corerow_start EOL
                   ;
 
 scl_corerow_property : KWD_COORDINATE ':' INTEGER {driver.sclCoreRowCoordinate($3);}
@@ -317,6 +348,7 @@ scl_corerow_property : KWD_COORDINATE ':' INTEGER {driver.sclCoreRowCoordinate($
 
 scl_corerow_properties : scl_corerow_property
                        | scl_corerow_properties scl_corerow_property
+                       | scl_corerow_properties EOL 
                        ;
 
 scl_corerow_entry : scl_corerow_start
@@ -324,6 +356,7 @@ scl_corerow_entry : scl_corerow_start
                   KWD_END {
                   driver.sclCoreRowEnd();
                   }
+                  | scl_corerow_entry EOL
                   ;
 
 scl_corerow_entries : scl_corerow_entry
@@ -338,6 +371,7 @@ bookshelf_scl : scl_header
 
 /***** .wts file (not implemented) *****/
 wts_header : KWD_UCLA KWD_WTS DOUBLE
+           | wts_header EOL
            ;
 
 /* .wts top */
@@ -351,6 +385,7 @@ bookshelf_aux : STRING ':' string_array {
               delete $1;
               delete $3;
               }
+              | bookshelf_aux EOL
               ;
 
 

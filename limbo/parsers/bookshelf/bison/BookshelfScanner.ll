@@ -88,6 +88,16 @@ typedef BookshelfParser::Parser::token_type token_type;
 (?i:[\/]?PLACED) {return token::KWD_PLACED;}
 (?i:[\/]?UNPLACED) {return token::KWD_UNPLACED;}
 (?i:[\/]?MOVABLE) {return token::KWD_MOVABLE;}
+(?i:O) {return token::KWD_O;}
+(?i:I) {return token::KWD_I;}
+(?i:N) {return token::KWD_N;}
+(?i:S) {return token::KWD_S;}
+(?i:W) {return token::KWD_W;}
+(?i:E) {return token::KWD_E;}
+(?i:FN) {return token::KWD_FN;}
+(?i:FS) {return token::KWD_FS;}
+(?i:FW) {return token::KWD_FW;}
+(?i:FE) {return token::KWD_FE;}
 
 
 [\+\-]?[0-9]+ {
@@ -128,7 +138,7 @@ typedef BookshelfParser::Parser::token_type token_type;
  /* gobble up end-of-lines */
 \n {
     yylloc->lines(yyleng); yylloc->step();
-    /* return token::EOL; */
+     return token::EOL; 
 }
 
  /* pass all other characters up to bison */

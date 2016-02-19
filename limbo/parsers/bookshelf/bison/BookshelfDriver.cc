@@ -3,6 +3,7 @@
 
 #include "BookshelfDriver.h"
 #include "BookshelfScanner.h"
+#include <limbo/string/String.h>
 
 namespace BookshelfParser {
 
@@ -101,11 +102,11 @@ void Driver::netEntryCbk()
     m_net.reset();
 }
 // .pl file 
-void Driver::plNodeEntryCbk(string& node_name, int x, int y, string& orient, string& status)
+void Driver::plNodeEntryCbk(string& node_name, double x, double y, string& orient, string& status)
 {
     m_db.set_bookshelf_node_position(node_name, x, y, orient, status);
 }
-void Driver::plNodeEntryCbk(string& node_name, int x, int y, string& orient)
+void Driver::plNodeEntryCbk(string& node_name, double x, double y, string& orient)
 {
     m_db.set_bookshelf_node_position(node_name, x, y, orient, "MOVABLE");
 }
@@ -160,15 +161,67 @@ void Driver::sclCoreRowEnd()
 void Driver::auxCbk(string& design_name, vector<string>& vBookshelfFiles)
 {
     m_db.set_bookshelf_design(design_name);
+    m_vBookshelfFiles.swap(vBookshelfFiles);
 }
+
+/// a local helper function 
+struct SortByPairFirst
+{
+    inline bool operator()(std::pair<int, int> const& p1, std::pair<int, int> const& p2) const 
+    {
+        return p1.first < p2.first; 
+    }
+};
 
 bool read(BookshelfDataBase& db, const string& auxFile)
 {
-	Driver driver (db);
+    // first read .aux 
+	Driver driverAux (db);
 	//driver.trace_scanning = true;
 	//driver.trace_parsing = true;
 
-	return driver.parse_file(auxFile);
+	bool flagAux = driverAux.parse_file(auxFile);
+    if (!flagAux)
+        return false;
+
+    string auxPath = limbo::get_file_path(auxFile);
+
+    // (visit_order, index)
+    vector<std::pair<int, int> > vOrder (driverAux.bookshelfFiles().size());
+    for (unsigned i = 0; i < vOrder.size(); ++i)
+    {
+        string const& filename = driverAux.bookshelfFiles().at(i);
+        string suffix = limbo::get_file_suffix(filename);
+        if (limbo::iequals(suffix, "scl"))
+            vOrder[i].first = 0;
+        else if (limbo::iequals(suffix, "nodes"))
+            vOrder[i].first = 1;
+        else if (limbo::iequals(suffix, "nets"))
+            vOrder[i].first = 2;
+        else if (limbo::iequals(suffix, "wts"))
+            vOrder[i].first = 3;
+        else if (limbo::iequals(suffix, "pl"))
+            vOrder[i].first = 4;
+        else 
+            vOrder[i].first = vOrder.size();
+        vOrder[i].second = i;
+    }
+    // order by visit_order 
+    std::sort(vOrder.begin(), vOrder.end(), SortByPairFirst());
+
+    // start parsing 
+    for (vector<std::pair<int, int> >::const_iterator it = vOrder.begin(); it != vOrder.end(); ++it)
+    {
+        std::pair<int, int> const& order = *it;
+        string const& filename = driverAux.bookshelfFiles().at(order.second);
+
+        Driver driver (db);
+        bool flag = driver.parse_file(auxPath + "/" + filename);
+        if (!flag)
+            return false;
+    }
+
+    return true;
 }
 
 } // namespace example

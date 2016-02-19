@@ -174,7 +174,7 @@ class BookshelfDataBase
         virtual void add_bookshelf_node(string&, int, int) = 0;
         virtual void add_bookshelf_net(Net const&) = 0;
         virtual void add_bookshelf_row(Row const&) = 0;
-        virtual void set_bookshelf_node_position(string const&, int, int, string const&, string const&) = 0;
+        virtual void set_bookshelf_node_position(string const&, double, double, string const&, string const&) = 0;
         virtual void set_bookshelf_design(string&) = 0;
 };
 

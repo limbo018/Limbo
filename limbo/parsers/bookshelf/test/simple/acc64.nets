@@ -1,0 +1,22 @@
+UCLA nets 1.0
+NumNets : 3
+NumPins : 7
+
+NetDegree : 5   Accumulator_RTL_BODY.csa_tree_add_5_30_groupi.n_100.0
+	Accumulator_RTL_BODY.csa_tree_add_5_30_groupi.g3280	O : 0.0 0.0 : 0.060 4.380 X.0
+	Accumulator_RTL_BODY.csa_tree_add_5_30_groupi.g188328	I : 0.0 0.0 : 0.060 0.780 A[0].0
+	pchb_cloud_944_inst_controller	I : 0.0 0.0 : 0.060 2.220 A[0].0
+	pchb_cfbuf_2026_SX_inst_Accumulator_RTL_BODY.csa_tree_add_5_30_groupi.n_100_buf	I : 0.0 0.0 : 0.060 0.540 L.0
+	pchb_cfbuf_2030_SX_inst_Accumulator_RTL_BODY.csa_tree_add_5_30_groupi.n_100_buf	I : 0.0 0.0 : 0.060 0.540 L.0
+
+NetDegree : 5   Accumulator_RTL_BODY.csa_tree_add_5_30_groupi.n_100.1
+	Accumulator_RTL_BODY.csa_tree_add_5_30_groupi.g3280	O : 0.0 0.0 : 3.115 4.380 X.1
+	Accumulator_RTL_BODY.csa_tree_add_5_30_groupi.g188328	I : 0.0 0.0 : 0.060 1.260 A[0].1
+	pchb_cloud_944_inst_controller	I : 0.0 0.0 : 0.060 0.300 A[0].1
+	pchb_cfbuf_2026_SX_inst_Accumulator_RTL_BODY.csa_tree_add_5_30_groupi.n_100_buf	I : 0.0 0.0 : 0.060 5.100 L.1
+	pchb_cfbuf_2030_SX_inst_Accumulator_RTL_BODY.csa_tree_add_5_30_groupi.n_100_buf	I : 0.0 0.0 : 0.060 5.100 L.1
+
+NetDegree : 2   Accumulator_RTL_BODY.csa_tree_add_5_30_groupi.n_100_2026.e
+	ctreeAccumulator_RTL_BODY.csa_tree_add_5_30_groupi.g3280	I : 0.0 0.0 : 1.705 2.460 a[2]
+	pchb_cfbuf_2026_SX_inst_Accumulator_RTL_BODY.csa_tree_add_5_30_groupi.n_100_buf	O : 0.0 0.0 : 0.060 1.020 L.e
+
