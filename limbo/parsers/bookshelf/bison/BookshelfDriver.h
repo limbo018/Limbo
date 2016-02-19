@@ -92,7 +92,7 @@ public:
     void numNetCbk(int);
     void numPinCbk(int);
     void netPinEntryCbk(string&, char, double, double, double, double, string&);
-    void netPinEntryCbk(string&, char, double, double);
+    void netPinEntryCbk(string&, char, double, double, double=0.0, double=0.0);
     void netNameAndDegreeCbk(string&, int);
     void netEntryCbk();
     // .pl file 

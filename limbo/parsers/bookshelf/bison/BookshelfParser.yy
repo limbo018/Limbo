@@ -102,7 +102,6 @@
 %token          KWD_FIXED       "FIXED"
 %token          KWD_PLACED      "PLACED"
 %token          KWD_UNPLACED    "UNPLACED"
-%token          KWD_MOVABLE     "MOVABLE"
 %token          KWD_O     "O"
 %token          KWD_I     "I"
 %token          KWD_N     "N"
@@ -250,12 +249,16 @@ nets_pin_direct : KWD_O {$$='O';}
                 | KWD_I {$$='I';}
                 ;
 
-nets_pin_entry : STRING nets_pin_direct ':' DOUBLE DOUBLE ':' DOUBLE DOUBLE STRING {
+nets_pin_entry : STRING nets_pin_direct ':' NUMBER NUMBER ':' NUMBER NUMBER STRING EOL {
                driver.netPinEntryCbk(*$1, 'O', $4, $5, $7, $8, *$9);
                delete $1;
                delete $9;
                }
-               | STRING nets_pin_direct ':' DOUBLE DOUBLE {
+               | STRING nets_pin_direct ':' NUMBER NUMBER ':' NUMBER NUMBER EOL {
+               driver.netPinEntryCbk(*$1, $2, $4, $5, $7, $8);
+               delete $1;
+               }
+               | STRING nets_pin_direct ':' NUMBER NUMBER EOL{
                driver.netPinEntryCbk(*$1, $2, $4, $5);
                delete $1;
                }
@@ -302,7 +305,7 @@ pl_orient : KWD_N {$$ = new std::string ("N");}
 pl_status : KWD_FIXED {$$ = new std::string("FIXED");}
           | KWD_PLACED {$$ = new std::string("PLACED");}
           | KWD_UNPLACED {$$ = new std::string("UNPLACED");}
-          | KWD_MOVABLE {$$ = new std::string("MOVABLE");}
+          ;
 
 pl_node_entry : STRING NUMBER NUMBER ':' pl_orient pl_status {
               driver.plNodeEntryCbk(*$1, $2, $3, *$5, *$6);
@@ -390,12 +393,16 @@ bookshelf_wts : wts_header
 
 /***** .aux file ******/
 /* .aux top */
-bookshelf_aux : STRING ':' string_array {
+aux_entry : STRING ':' string_array {
               driver.auxCbk(*$1, *$3);
               delete $1;
               delete $3;
               }
-              | bookshelf_aux EOL
+              | aux_entry EOL
+              ;
+
+bookshelf_aux : aux_entry
+              | EOL aux_entry
               ;
 
 

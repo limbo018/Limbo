@@ -57,6 +57,10 @@ class DataBase : public BookshelfParser::BookshelfDataBase
         {
             cout << __func__ << " => " << name << endl;
         }
+        virtual void bookshelf_end()
+        {
+            cout << __func__ << endl;
+        }
 };
 
 void test1(string const& filename)

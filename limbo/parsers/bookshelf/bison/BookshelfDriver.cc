@@ -82,9 +82,10 @@ void Driver::netPinEntryCbk(string& node_name, char direct, double offsetX, doub
     // not sure whether w or h has the correct meaning 
     m_net.vNetPin.push_back(NetPin(node_name, direct, offsetX, offsetY, w, h, pin_name));
 }
-void Driver::netPinEntryCbk(string& node_name, char direct, double offsetX, double offsetY)
+void Driver::netPinEntryCbk(string& node_name, char direct, double offsetX, double offsetY, double w, double h)
 {
-    m_net.vNetPin.push_back(NetPin(node_name, direct, offsetX, offsetY, 0, 0));
+    // not sure whether w or h has the correct meaning 
+    m_net.vNetPin.push_back(NetPin(node_name, direct, offsetX, offsetY, w, h));
 }
 void Driver::netNameAndDegreeCbk(string& net_name, int degree)
 {
@@ -104,7 +105,7 @@ void Driver::plNodeEntryCbk(string& node_name, double x, double y, string& orien
 }
 void Driver::plNodeEntryCbk(string& node_name, double x, double y, string& orient)
 {
-    m_db.set_bookshelf_node_position(node_name, x, y, orient, "MOVABLE");
+    m_db.set_bookshelf_node_position(node_name, x, y, orient, "PLACED");
 }
 // .scl file 
 void Driver::sclNumRows(int n)
@@ -216,6 +217,8 @@ bool read(BookshelfDataBase& db, const string& auxFile)
         if (!flag)
             return false;
     }
+    // inform database that parsing is completed 
+    db.bookshelf_end(); 
 
     return true;
 }

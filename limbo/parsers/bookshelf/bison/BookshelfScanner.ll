@@ -87,7 +87,6 @@ typedef BookshelfParser::Parser::token_type token_type;
 (?i:[\/]?FIXED) {return token::KWD_FIXED;}
 (?i:[\/]?PLACED) {return token::KWD_PLACED;}
 (?i:[\/]?UNPLACED) {return token::KWD_UNPLACED;}
-(?i:[\/]?MOVABLE) {return token::KWD_MOVABLE;}
 (?i:O) {return token::KWD_O;}
 (?i:I) {return token::KWD_I;}
 (?i:N) {return token::KWD_N;}
@@ -115,7 +114,7 @@ typedef BookshelfParser::Parser::token_type token_type;
     return token::BINARY;
 }
 
-[A-Za-z][A-Za-z0-9_,.\-\[\]]* {
+[A-Za-z][A-Za-z0-9_,.\$\-\[\]]* {
     yylval->stringVal = new std::string(yytext, yyleng);
     return token::STRING;
 }
