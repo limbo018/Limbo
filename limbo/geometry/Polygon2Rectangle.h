@@ -228,6 +228,7 @@ class Polygon2Rectangle
 					orientation_2d const& orient = it->first;
 #ifdef DEBUG
 					point_set_type const& vPoint = it->second; // just for gdb 
+                    assert(vPoint.empty() || !vPoint.empty()); // to remove annoying warning 
 #endif 
 
 					point_type Pk, Pl, Pm;
@@ -269,6 +270,7 @@ class Polygon2Rectangle
 					orientation_2d const& orient = it->first;
 #ifdef DEBUG
 					point_set_type const& vPoint = it->second; // just for gdb 
+                    assert(vPoint.empty() || !vPoint.empty()); // to remove annoying warning 
 #endif 
 
 					F(point_traits<point_type>::construct(this->get(*itRect, LEFT), this->get(*itRect, BOTTOM)), orient);
