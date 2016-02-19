@@ -124,6 +124,11 @@ typedef BookshelfParser::Parser::token_type token_type;
     return token::QUOTE;
 }
 
+[A-Za-z0-9_,.\$\-\[\]\/\(\)]* {
+    yylval->stringVal = new std::string(yytext, yyleng);
+    return token::PATH;
+}
+
  /* gobble up comments */
 "#"([^\n])* {
     yylloc->step();

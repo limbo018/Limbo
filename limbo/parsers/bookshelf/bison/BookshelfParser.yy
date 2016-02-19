@@ -72,6 +72,7 @@
 %token <doubleVal> 	DOUBLE		"double"
 %token <stringVal> 	STRING		"string"
 %token <quoteVal> 	QUOTE		"quoted chars"
+%token <stringVal> 	PATH		"path"
 %token <binaryVal> 	BINARY		"binary numbers"
 %token			KWD_NUMNETS		"NumNets"
 %token          KWD_NUMPINS     "NumPins"
@@ -113,8 +114,10 @@
 %token          KWD_FW     "FW"
 %token          KWD_FE     "FE"
 
-/*%type <integerArrayVal> integer_array */
-%type <stringArrayVal> string_array
+/*%type <integerArrayVal> integer_array 
+%type <stringArrayVal> string_array */
+%type <stringArrayVal> path_array
+%type <stringVal> path
 %type <numberVal>  NUMBER      
 %type <charVal> nets_pin_direct
 %type <stringVal> pl_status
@@ -125,8 +128,8 @@
 %type <integerVal>	expression 
 */
 
-%destructor { delete $$; } STRING QUOTE BINARY 
-%destructor { delete $$; } /*integer_array*/ string_array 
+%destructor { delete $$; } STRING QUOTE BINARY path
+%destructor { delete $$; } /*integer_array string_array*/  path_array 
 %destructor { delete $$; } pl_orient pl_status
 /*
 %destructor { delete $$; } constant variable
@@ -160,12 +163,25 @@ integer_array : INTEGER {
 				$1->push_back($2);
 				$$ = $1;
 			  }
-*/
 string_array : STRING {
 				$$ = new StringArray(1, *$1);
                 delete $1;
 			  }
 			  | string_array STRING {
+				$1->push_back(*$2);
+                delete $2;
+				$$ = $1;
+			  }
+              ;
+*/
+path : STRING {$$ = $1;}
+     | PATH {$$ = $1;}
+     ;
+path_array : path {
+				$$ = new StringArray(1, *$1);
+                delete $1;
+			  }
+			  | path_array path {
 				$1->push_back(*$2);
                 delete $2;
 				$$ = $1;
@@ -393,7 +409,7 @@ bookshelf_wts : wts_header
 
 /***** .aux file ******/
 /* .aux top */
-aux_entry : STRING ':' string_array {
+aux_entry : STRING ':' path_array {
               driver.auxCbk(*$1, *$3);
               delete $1;
               delete $3;
