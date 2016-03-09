@@ -74,6 +74,14 @@ class DataBase : public LefParser::LefDataBase
 		{
 			v.print(stdout);
 		}
+		virtual void lef_prop_cbk(LefParser::lefiProp const& v)
+        {
+            v.print(stdout);
+        }
+		virtual void lef_maxstackvia_cbk(LefParser::lefiMaxStackVia const& v)
+        {
+            v.print(stdout);
+        }
 #if 0
         // deprecated 
 		virtual void lef_obstruction_cbk(LefParser::lefiObstruction const& v)

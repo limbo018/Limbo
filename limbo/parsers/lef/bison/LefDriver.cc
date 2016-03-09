@@ -147,7 +147,11 @@ Driver::Driver(LefDataBase& db)
 }
 Driver::~Driver()
 {
-	if (hasOpenedLogFile) fclose(lefrLog);
+	if (hasOpenedLogFile) 
+    {
+        fclose(lefrLog);
+        hasOpenedLogFile = 0;
+    }
 }
 
 bool Driver::parse_stream(std::istream& in, const std::string& sname)
