@@ -26,6 +26,7 @@ build:
 	$(MAKE) all -C $(PARSERS)/lef/bison
 	$(MAKE) -C $(PARSERS)/ebeam/bison
 	$(MAKE) -C $(PARSERS)/lp/bison
+	$(MAKE) -C $(PARSERS)/verilog/bison
 	$(MAKE) -C $(PARSERS)/gdsii/stream
 	$(MAKE) -C $(PROGRAMOPTIONS)
 	$(MAKE) -C $(THIRDPARTY)
@@ -37,6 +38,7 @@ install:
 	$(MAKE) install -C $(PARSERS)/lef/bison
 	$(MAKE) install -C $(PARSERS)/ebeam/bison
 	$(MAKE) install -C $(PARSERS)/lp/bison
+	$(MAKE) install -C $(PARSERS)/verilog/bison
 	$(MAKE) install -C $(PARSERS)/gdsii/stream
 	$(MAKE) install -C $(PROGRAMOPTIONS)
 	$(MAKE) install -C $(THIRDPARTY)
@@ -46,6 +48,7 @@ clean:
 	$(MAKE) extraclean -C $(PARSERS)/lef/bison
 	$(MAKE) extraclean -C $(PARSERS)/ebeam/bison
 	$(MAKE) extraclean -C $(PARSERS)/lp/bison
+	$(MAKE) extraclean -C $(PARSERS)/verilog/bison
 	$(MAKE) extraclean -C $(PARSERS)/gdsii/stream
 	$(MAKE) extraclean -C $(PROGRAMOPTIONS)
 	$(MAKE) extraclean -C $(THIRDPARTY)
