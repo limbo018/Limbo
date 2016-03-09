@@ -95,14 +95,14 @@ void Driver::row_cbk(string& row_name, string& macro_name,
 #endif 
 	m_row.reset();
 }
-void Driver::track_cbk(string const& orient, int origin, 
-		int repeat, int step, string const& layer_name) 
+void Driver::track_cbk(string const& /*orient*/, int /*origin*/, 
+		int /*repeat*/, int /*step*/, vector<string> const& /*vLayerName*/) 
 {
 	// leave it empty here
 	// add something if needed
 }
-void Driver::gcellgrid_cbk(string const& orient, int origin, 
-		int repeat, int step) 
+void Driver::gcellgrid_cbk(string const& /*orient*/, int /*origin*/, 
+		int /*repeat*/, int /*step*/) 
 {
 	// leave it empty here
 	// add something if needed

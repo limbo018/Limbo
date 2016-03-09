@@ -91,7 +91,7 @@ public:
 	void diearea_cbk(int, int, int, int) ;
 
 	void row_cbk(string&, string&, int, int, string&, int, int, int, int) ;
-	void track_cbk(string const&, int, int, int, string const&) ;
+	void track_cbk(string const&, int, int, int, vector<string> const&) ;
 	void gcellgrid_cbk(string const&, int, int, int) ;
 	// component cbk
 	void component_cbk_size(int) ;

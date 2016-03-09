@@ -983,7 +983,7 @@ version: K_VERSION { driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING ';'
             sprintf(temp,
                "Lef parser 5.7 does not support lef file with version %s. Parser stops executions.", (*$3).c_str());
             driver.lefError(1503, temp);
-            return 1;
+            //return 1;
          }
 /*
          driver.versionNum = $3;         Save the version number for future use */
@@ -1014,7 +1014,7 @@ version: K_VERSION { driver.lefDumbMode = 1; driver.lefNoNum = 1;} STRING ';'
             sprintf(temp,
                "Lef parser 5.7 does not support lef file with version %f. Parser stops executions.", $3);
             driver.lefError(1503, temp);
-            return 1;
+            //return 1;
          }
 /*
          driver.versionNum = $3;         Save the version number for future use */

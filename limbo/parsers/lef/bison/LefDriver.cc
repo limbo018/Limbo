@@ -167,6 +167,7 @@ bool Driver::parse_file(const std::string &filename)
 {
     std::ifstream in(filename.c_str());
     if (!in.good()) {std::cerr << "failed to open " << filename << std::endl; return false;}
+    lefrFileName = (const char*)filename.c_str();
     return parse_stream(in, filename);
 }
 

@@ -130,6 +130,9 @@ typedef DefParser::Parser::token_type token_type;
 "VIAS" {
 	return token::KWD_VIAS;
 }
+"VIA" {
+	return token::KWD_VIA;
+}
 "VIARULE" {
 	return token::KWD_VIARULE;
 }
@@ -157,8 +160,44 @@ typedef DefParser::Parser::token_type token_type;
 "SHAPE" {
 	return token::KWD_SHAPE;
 }
+"RECT" {
+	return token::KWD_RECT;
+}
 "SOURCE" {
 	return token::KWD_SOURCE;
+}
+"NONDEFAULTRULES" {
+	return token::KWD_NONDEFAULTRULES;
+}
+"NONDEFAULTRULE" {
+	return token::KWD_NONDEFAULTRULE;
+}
+"HARDSPACING" {
+	return token::KWD_HARDSPACING;
+}
+"WIDTH" {
+	return token::KWD_WIDTH;
+}
+"SPACING" {
+	return token::KWD_SPACING;
+}
+"REGIONS" {
+	return token::KWD_REGIONS;
+}
+"REGION" {
+	return token::KWD_REGION;
+}
+"TYPE" {
+	return token::KWD_TYPE;
+}
+"FENCE" {
+	return token::KWD_FENCE;
+}
+"GROUPS" {
+	return token::KWD_GROUPS;
+}
+"GROUP" {
+	return token::KWD_GROUP;
 }
 
 [\+\-]?[0-9]+ {
@@ -176,7 +215,7 @@ typedef DefParser::Parser::token_type token_type;
     return token::BINARY;
 }
 
-[A-Za-z][A-Za-z0-9_,.\-\[\]]* {
+[A-Za-z][A-Za-z0-9_,.\-\[\]\/\*]* {
     yylval->stringVal = new std::string(yytext, yyleng);
     return token::STRING;
 }
