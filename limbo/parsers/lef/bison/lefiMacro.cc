@@ -82,7 +82,8 @@ void lefiObstruction::print(FILE* f) const {
   fprintf(f, "  Obstruction\n");
 
   g = this->geometries_;
-  g->lefiGeometries::print(f);
+  if (g)
+      g->lefiGeometries::print(f);
 
 }
 
@@ -2522,6 +2523,9 @@ void lefiMacro::clear() {
 		  it != m_vPin.end(); ++it)
 	  delete *it;
   m_vPin.clear();
+
+  // remove Obstruction 
+  m_obs.lefiObstruction::clear();
 }
 
 

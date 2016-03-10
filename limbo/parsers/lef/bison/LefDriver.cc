@@ -313,6 +313,9 @@ void Driver::lefrMacroEndCbk(string const&)
 void Driver::lefrMacroCbk(lefiMacro const& v)
 {
 	m_db.lef_macro_cbk(v);
+    //lefrMacro.Init();
+    //lefrMacro.obstruction().Destroy();
+    lefrMacro.clear();
 }
 void Driver::lefrMacroClassTypeCbk(string const&)// maybe useless 
 {} 
