@@ -14,7 +14,11 @@ input iccad_clk;
 output out;
 
 // Start wires
-wire n1;
+wire n1,
+    n10;
+wire [3:0] bus1, 
+    bus2;
+wire [3:0] bus3;
 wire n2;
 wire n3;
 wire n4;

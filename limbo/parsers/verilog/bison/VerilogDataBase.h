@@ -47,6 +47,20 @@ struct NetPin
     }
 };
 
+class StringArray : public std::vector<std::string>
+{
+	public: 
+		typedef std::vector<std::string> base_type;
+		using base_type::size_type;
+		using base_type::value_type;
+		using base_type::allocator_type;
+
+		StringArray(const allocator_type& alloc = allocator_type())
+			: base_type(alloc) {}
+		StringArray(size_type n, const value_type& val, const allocator_type& alloc = allocator_type())
+			: base_type(n, val, alloc) {}
+};
+
 // forward declaration
 // base class for DataBase 
 // only pure virtual functions are defined 

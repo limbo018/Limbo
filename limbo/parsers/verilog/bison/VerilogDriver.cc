@@ -62,13 +62,15 @@ void Driver::wire_pin_cbk(std::string& net_name, std::string& pin_name, Range co
 {
 	m_vNetPin.push_back(NetPin(net_name, pin_name, range));
 }
-void Driver::wire_declare_cbk(std::string const& net_name, Range const& range)
+void Driver::wire_declare_cbk(std::vector<std::string> const& vNetName, Range const& range)
 {
-    m_db.verilog_net_declare_cbk(net_name, range);
+    for (std::vector<std::string>::const_iterator it = vNetName.begin(); it != vNetName.end(); ++it)
+        m_db.verilog_net_declare_cbk(*it, range);
 }
-void Driver::pin_declare_cbk(std::string const& pin_name, unsigned type, Range const& range)
+void Driver::pin_declare_cbk(std::vector<std::string> const& vPinName, unsigned type, Range const& range)
 {
-    m_db.verilog_pin_declare_cbk(pin_name, type, range);
+    for (std::vector<std::string>::const_iterator it = vPinName.begin(); it != vPinName.end(); ++it)
+        m_db.verilog_pin_declare_cbk(*it, type, range);
 }
 
 bool read(VerilogDataBase& db, const string& verilogFile)
