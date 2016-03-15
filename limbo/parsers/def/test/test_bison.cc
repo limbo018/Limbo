@@ -69,6 +69,18 @@ class DataBase : public DefParser::DefDataBase
 		{
 			cout << __func__ << " => " << token << endl;
 		}
+        virtual void resize_def_blockage(int n)
+        {
+			cout << __func__ << " => " << n << endl;
+        }
+        virtual void add_def_placement_blockage(int xl, int yl, int xh, int yh)
+        {
+			cout << __func__ << " => " << xl << ", " << yl << ", " << xh << ", " << yh << endl;
+        }
+        virtual void add_def_routing_blockage(int xl, int yl, int xh, int yh) 
+        {
+			cout << __func__ << " => " << xl << ", " << yl << ", " << xh << ", " << yh << endl;
+        }
 };
 
 void test1(string const& filename)

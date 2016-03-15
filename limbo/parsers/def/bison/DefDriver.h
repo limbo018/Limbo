@@ -114,6 +114,10 @@ public:
 	void net_cbk_name(string&) ;
 	void net_cbk_pin(string&, string&) ;
 	void net_cbk_size(int) ;
+    // blockage cbk 
+    void blockage_cbk_size(int);
+    void blockage_cbk_placement(int, int, int, int);
+    void blockage_cbk_routing(int, int, int, int);
 
 protected:
 	// use as a stack for node and pin pairs in a net 

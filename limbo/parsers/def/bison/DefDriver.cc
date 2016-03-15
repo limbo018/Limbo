@@ -196,6 +196,18 @@ void Driver::net_cbk_size(int size)
 {
 	m_db.resize_def_net(size);
 }
+void Driver::blockage_cbk_size(int n) 
+{
+    m_db.resize_def_blockage(n);
+}
+void Driver::blockage_cbk_placement(int xl, int yl, int xh, int yh)
+{
+    m_db.add_def_placement_blockage(xl, yl, xh, yh);
+}
+void Driver::blockage_cbk_routing(int xl, int yl, int xh, int yh)
+{
+    m_db.add_def_routing_blockage(xl, yl, xh, yh);
+}
 
 bool read(DefDataBase& db, const string& defFile)
 {

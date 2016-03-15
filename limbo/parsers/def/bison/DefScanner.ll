@@ -199,6 +199,15 @@ typedef DefParser::Parser::token_type token_type;
 "GROUP" {
 	return token::KWD_GROUP;
 }
+"BLOCKAGES" {
+    return token::KWD_BLOCKAGES;
+}
+"PLACEMENT" {
+    return token::KWD_PLACEMENT;
+}
+"ROUTING" {
+    return token::KWD_ROUTING;
+}
 
 [\+\-]?[0-9]+ {
     yylval->integerVal = atoi(yytext);
@@ -215,7 +224,7 @@ typedef DefParser::Parser::token_type token_type;
     return token::BINARY;
 }
 
-[A-Za-z][A-Za-z0-9_,.\-\[\]\/\*]* {
+[A-Za-z_][A-Za-z0-9_,.\-\[\]\/\*]* {
     yylval->stringVal = new std::string(yytext, yyleng);
     return token::STRING;
 }

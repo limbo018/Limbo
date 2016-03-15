@@ -120,6 +120,9 @@
 %token			KWD_FENCE		"FENCE"
 %token			KWD_GROUPS		"GROUPS"
 %token			KWD_GROUP		"GROUP"
+%token			KWD_BLOCKAGES		"BLOCKAGES"
+%token			KWD_PLACEMENT		"PLACEMENT"
+%token			KWD_ROUTING		"ROUTING"
 
 /*
 %type <integerVal>	block_other block_row block_comp block_pin block_net 
@@ -386,6 +389,22 @@ block_pins : begin_pins
 		   end_pins 
 		   ;
 
+ /*** grammar for blockages ***/
+begin_blockages : KWD_BLOCKAGES INTEGER ';' {driver.blockage_cbk_size($2);}
+                ;
+end_blockages : KWD_END KWD_BLOCKAGES
+              ;
+single_blockage : '-' KWD_PLACEMENT KWD_RECT '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' ';' {driver.blockage_cbk_placement($5, $6, $9, $10);}
+                | '-' KWD_ROUTING KWD_RECT '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' ';' {driver.blockage_cbk_routing($5, $6, $9, $10);}
+                | '-' KWD_LAYER STRING KWD_RECT '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' ';' {delete $3;}
+                ;
+multiple_blockages : single_blockage
+                   | multiple_blockages single_blockage
+                   ;
+block_blockages : begin_blockages multiple_blockages end_blockages
+                | begin_blockages end_blockages
+                ;
+
  /*** grammar for special nets ***/
  /*** so far we do not use special nets, so I simply pass the grammar ***/
 begin_specialnets : KWD_SPECIALNETS INTEGER ';'
@@ -404,6 +423,7 @@ specialnets_metal_array : specialnets_metal_layer specialnets_metal_shape
 specialnets_addon : /* empty */
 				  | specialnets_addon '+' specialnets_metal_array
 				  | specialnets_addon '+' KWD_USE STRING {delete $4;}
+                  | specialnets_addon '+' KWD_RECT STRING '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' {delete $4;}
 				  ;
 single_specialnet : '-' BINARY specialnets_addon ';' {delete $2;}
 				  | '-' STRING specialnets_addon ';' {delete $2;}
@@ -529,6 +549,7 @@ block_option : block_unit
              | block_regions
 			 | block_components
 			 | block_pins
+             | block_blockages
 			 | block_specialnets
 			 | block_nets 
              | block_groups
