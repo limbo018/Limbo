@@ -103,6 +103,8 @@ $(TEST_DIR)/test_bison: lib$(LIB_PREFIX)parser $(OBJS_TEST)
 lib$(LIB_PREFIX)parser: $(OBJS)
 	$(AR) $(ARFLAGS) lib$(LIB_PREFIX)parser.a $(OBJS)
 	mv lib$(LIB_PREFIX)parser.a $(LIMBO_ROOT_DIR)/lib
+	#$(CXX) -shared -o lib$(LIB_PREFIX)parser.so $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a # it works in this way, but not very meaningful to have shared library
+	#mv lib$(LIB_PREFIX)parser.so $(LIMBO_ROOT_DIR)/lib
 
 install: lib$(LIB_PREFIX)parser
 	rm -f $(PARSER_PREFIX)Parser.cc $(PARSER_PREFIX)Parser.h $(PARSER_PREFIX)Scanner.cc 
