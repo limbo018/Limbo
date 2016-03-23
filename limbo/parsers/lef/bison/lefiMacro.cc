@@ -2525,7 +2525,9 @@ void lefiMacro::clear() {
   m_vPin.clear();
 
   // remove Obstruction 
-  m_obs.lefiObstruction::clear();
+  for (std::vector<lefiObstruction*>::iterator it = m_vObs.begin(); it != m_vObs.end(); ++it)
+      delete *it;
+  m_vObs.clear();
 }
 
 
@@ -3192,7 +3194,8 @@ void lefiMacro::print(FILE* f) const {
 	  (*it)->print(f);
   }
   // print Obstruction
-  m_obs.print(f);
+  for (std::vector<lefiObstruction*>::const_iterator it = m_vObs.begin(); it != m_vObs.end(); ++it)
+      (*it)->print(f);
 
   fprintf(f, "END MACRO %s\n", this->lefiMacro::name());
 }

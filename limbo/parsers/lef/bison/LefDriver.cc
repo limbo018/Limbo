@@ -329,7 +329,8 @@ void Driver::lefrObstructionCbk(lefiObstruction& v)
 {
 	//m_db.lef_obstruction_cbk(v);
     // instead of a callback, add to macro 
-    lefrMacro.obstruction().swap(v);
+    lefrMacro.obstructions().push_back(new lefiObstruction());
+    lefrMacro.obstructions().back()->swap(v);
 }
 void Driver::lefrDensityCbk(lefiDensity const& v)
 {

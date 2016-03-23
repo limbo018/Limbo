@@ -579,9 +579,9 @@ public:
   lefiPin* pin(unsigned int index) const;
   void addPin(lefiPin const& p);
 
-  // for obstruction in a macro 
-  lefiObstruction const& obstruction() const {return m_obs;}
-  lefiObstruction& obstruction() {return m_obs;}
+  // for obstructions in a macro 
+  std::vector<lefiObstruction*> const& obstructions() const {return m_vObs;}
+  std::vector<lefiObstruction*>& obstructions() {return m_vObs;}
 
   // Debug print
   void print(FILE* f) const;
@@ -651,7 +651,7 @@ protected:
   char*  propTypes_;
 
   std::vector<lefiPin*> m_vPin; ///< save pins in macro 
-  lefiObstruction m_obs; ///< obstruction 
+  std::vector<lefiObstruction*> m_vObs; ///< obstructions 
 };
 
 
