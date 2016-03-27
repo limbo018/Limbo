@@ -83,6 +83,8 @@ public:
      * expressions. */
     BookshelfDataBase& m_db;
 
+    // control m_plFlag
+    void setPlFlag(bool flag);
     // .nodes file 
     void numNodeTerminalsCbk(int, int);
     void terminalEntryCbk(string&, int, int);
@@ -121,10 +123,13 @@ protected:
 	Row m_row;
 	Net m_net;
     vector<string> m_vBookshelfFiles; ///< store bookshelf files except .aux 
+    bool m_plFlag; ///< if true, indicate that only reads .pl file, this will result in different callbacks in the database 
 };
 
 // top api for BookshelfParser
 bool read(BookshelfDataBase& db, const string& auxFile);
+// read .pl file only, the callback only provide positions and orientation 
+bool readPl(BookshelfDataBase& db, const string& plFile);
 
 } // namespace example
 

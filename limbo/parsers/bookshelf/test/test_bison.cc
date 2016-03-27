@@ -49,9 +49,9 @@ class DataBase : public BookshelfParser::BookshelfDataBase
         {
             row.print(cout);
         }
-        virtual void set_bookshelf_node_position(string const& name, double x, double y, string const& orient, string const& status)
+        virtual void set_bookshelf_node_position(string const& name, double x, double y, string const& orient, string const& status, bool plFlag)
         {
-            cout << __func__ << " => " << name << ", " << x << ", " << y << ", " << orient << ", " << status << endl;
+            cout << __func__ << " => " << name << ", " << x << ", " << y << ", " << orient << ", " << status << ", plFlag = " << plFlag << endl;
         }
         virtual void set_bookshelf_design(string& name)
         {

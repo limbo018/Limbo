@@ -10,7 +10,8 @@ namespace BookshelfParser {
 Driver::Driver(BookshelfDataBase& db)
     : trace_scanning(false),
       trace_parsing(false),
-      m_db(db)
+      m_db(db), 
+      m_plFlag(false)
 {
 }
 
@@ -49,6 +50,12 @@ void Driver::error(const class location& l,
 void Driver::error(const std::string& m)
 {
     std::cerr << m << std::endl;
+}
+
+// control m_plFlag
+void Driver::setPlFlag(bool flag) 
+{
+    m_plFlag = flag;
 }
 
 // .nodes file 
@@ -101,11 +108,11 @@ void Driver::netEntryCbk()
 // .pl file 
 void Driver::plNodeEntryCbk(string& node_name, double x, double y, string& orient, string& status)
 {
-    m_db.set_bookshelf_node_position(node_name, x, y, orient, status);
+    m_db.set_bookshelf_node_position(node_name, x, y, orient, status, m_plFlag);
 }
 void Driver::plNodeEntryCbk(string& node_name, double x, double y, string& orient)
 {
-    m_db.set_bookshelf_node_position(node_name, x, y, orient, "PLACED");
+    m_db.set_bookshelf_node_position(node_name, x, y, orient, "", m_plFlag);
 }
 // .scl file 
 void Driver::sclNumRows(int n)
@@ -222,5 +229,24 @@ bool read(BookshelfDataBase& db, const string& auxFile)
 
     return true;
 }
+
+/// read .pl file only, the callback only provide positions and orientation 
+bool readPl(BookshelfDataBase& db, const string& plFile)
+{
+    // start parsing 
+    string const& filename = plFile;
+
+    Driver driver (db);
+    driver.setPlFlag(true);
+    bool flag = driver.parse_file(filename);
+    if (!flag)
+        return false;
+    // do not inform the ending 
+    // inform database that parsing is completed 
+    //db.bookshelf_end(); 
+
+    return true;
+}
+
 
 } // namespace example
