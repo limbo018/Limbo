@@ -15,6 +15,13 @@
 #include <sstream>
 #include <cassert>
 
+/// =============================================================
+/// main DataBase for GDF parser 
+/// see http://cadlab.cs.ucla.edu/~pubbench/routing/.index.html
+/// for the format of GDF file. 
+/// It is an academic format for routing. 
+/// =============================================================
+
 namespace GdfParser {
 
 	using std::cout;
