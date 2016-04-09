@@ -16,6 +16,7 @@ RESRCS = \
 		 $(PARSERS)/verilog/bison \
 		 $(PARSERS)/gdf/bison \
 		 $(PARSERS)/gdsii/stream \
+		 $(PARSERS)/bookshelf/bison \
 		 $(SOLVERS)/lpmcf \
 		 $(PROGRAMOPTIONS)
 
@@ -31,6 +32,7 @@ build:
 	$(MAKE) -C $(PARSERS)/verilog/bison
 	$(MAKE) -C $(PARSERS)/gdf/bison
 	$(MAKE) -C $(PARSERS)/gdsii/stream
+	$(MAKE) -C $(PARSERS)/bookshelf/bison
 	$(MAKE) -C $(PROGRAMOPTIONS)
 	$(MAKE) -C $(THIRDPARTY)
 	
@@ -44,6 +46,7 @@ install:
 	$(MAKE) install -C $(PARSERS)/verilog/bison
 	$(MAKE) install -C $(PARSERS)/gdf/bison
 	$(MAKE) install -C $(PARSERS)/gdsii/stream
+	$(MAKE) install -C $(PARSERS)/bookshelf/bison
 	$(MAKE) install -C $(PROGRAMOPTIONS)
 	$(MAKE) install -C $(THIRDPARTY)
 
@@ -55,5 +58,6 @@ clean:
 	$(MAKE) extraclean -C $(PARSERS)/verilog/bison
 	$(MAKE) extraclean -C $(PARSERS)/gdf/bison
 	$(MAKE) extraclean -C $(PARSERS)/gdsii/stream
+	$(MAKE) extraclean -C $(PARSERS)/bookshelf/bison
 	$(MAKE) extraclean -C $(PROGRAMOPTIONS)
 	$(MAKE) extraclean -C $(THIRDPARTY)

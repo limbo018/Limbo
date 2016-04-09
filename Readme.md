@@ -23,6 +23,7 @@ All components are written with C/C++ and API is designed for easy usage and sim
 | Verilog netlist parser  | flex/bison                      | read verilog netlist to initialize nets during placement |
 | Lp Parser               | flex/bison                      |                                                          |
 | GDF Parser              | flex/bison                      | routing file format from Jason Cong's group at UCLA      |
+| Bookshelf Parser        | flex/bison                      | placement file format from UCSD                          |
 | LP Min-Cost Flow Solver | boost, lemon                    |                                                          |
 | Geometry Algorithms     | c++                             |                                                          |
 | String Algorithms       | c++                             |                                                          |
