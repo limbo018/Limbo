@@ -13,7 +13,7 @@ OPENBLAS_LIB = $(LIMBO_ROOT_DIR)/lib/libopenblas-st.a
 LIBLINEAR_LIB = $(LIMBO_ROOT_DIR)/lib/liblinear.a
 CTHREADPOOL_LIB = $(LIMBO_ROOT_DIR)/lib/libthpool.a
 
-all: $(CSDP_LIB) $(OPENBLAS_LIB) $(LIBLINEAR_LIB)
+all: $(CSDP_LIB) $(OPENBLAS_LIB) $(LIBLINEAR_LIB) $(CTHREADPOOL_LIB)
 	@echo ">> building default"
 
 $(OPENBLAS_LIB): 

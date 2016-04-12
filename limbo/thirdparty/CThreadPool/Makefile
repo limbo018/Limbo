@@ -28,10 +28,12 @@ ifeq ($(UNAME_S), Darwin)
 endif 
 
 ifeq ($(DBG), 1)
-	CXXFLAGS = $(CXXFLAGS_DEBUG) -DTHPOOL_DEBUG
+	CXXFLAGS = $(CXXFLAGS_DEBUG) -DTHPOOL_DEBUG 
 else
 	CXXFLAGS = $(CXXFLAGS_RELEASE)
 endif
+
+CXXFLAGS += -D_POSIX_C_SOURCE=199506 -D_XOPEN_SOURCE=500
 
 #==========================================================================
 #                         Special Library
