@@ -25,7 +25,8 @@ namespace lg = limbo::geometry;
 
 void test1(string const& filename)
 {
-	lg::Polygon2Rectangle<vector<bLib::bPoint>, vector<bLib::bBox> > p2r (lg::HOR_VER_SLICING);
+    std::vector<bLib::bBox> vRect; 
+	lg::Polygon2Rectangle<vector<bLib::bPoint>, vector<bLib::bBox> > p2r (vRect, lg::HOR_VER_SLICING);
 	assert(p2r.read(filename));
 	assert(p2r());
 	p2r.print("p2r1.gp");
@@ -33,7 +34,8 @@ void test1(string const& filename)
 
 void test2(string const& filename)
 {
-	lg::Polygon2Rectangle<list<bLib::bPoint>, vector<bLib::bBox> > p2r (lg::HOR_VER_SLICING);
+    std::vector<bLib::bBox> vRect; 
+	lg::Polygon2Rectangle<list<bLib::bPoint>, vector<bLib::bBox> > p2r (vRect, lg::HOR_VER_SLICING);
 	assert(p2r.read(filename));
 	assert(p2r());
 	p2r.print("p2r2.gp");
@@ -41,7 +43,8 @@ void test2(string const& filename)
 
 void test3(string const& filename)
 {
-	lg::Polygon2Rectangle<set<bLib::bPoint, lg::point_compare_type>, vector<bLib::bBox> > p2r (lg::HOR_VER_SLICING);
+    std::vector<bLib::bBox> vRect; 
+	lg::Polygon2Rectangle<set<bLib::bPoint, lg::point_compare_type>, vector<bLib::bBox> > p2r (vRect, lg::HOR_VER_SLICING);
 	assert(p2r.read(filename));
 	assert(p2r());
 	p2r.print("p2r3.gp");
