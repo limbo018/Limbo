@@ -97,6 +97,7 @@
 %token			KWD_TRACKS		"TRACKS"
 %token			KWD_GCELLGRID		"GCELLGRID"
 %token			KWD_VIAS		"VIAS"
+%token			KWD_VIA		"VIA"
 %token			KWD_VIARULE		"VIARULE"
 %token			KWD_CUTSIZE		"CUTSIZE"
 %token			KWD_LAYERS		"LAYERS"
@@ -106,7 +107,22 @@
 %token			KWD_USE		"USE"
 %token			KWD_SPECIALNETS		"SPECIALNETS"
 %token			KWD_SHAPE		"SHAPE"
+%token			KWD_RECT		"RECT"
 %token			KWD_SOURCE		"SOURCE"
+%token			KWD_NONDEFAULTRULES		"NONDEFAULTRULES"
+%token			KWD_NONDEFAULTRULE		"NONDEFAULTRULE"
+%token			KWD_HARDSPACING		"HARDSPACING"
+%token			KWD_WIDTH		"WIDTH"
+%token			KWD_SPACING		"SPACING"
+%token			KWD_REGIONS		"REGIONS"
+%token			KWD_REGION		"REGION"
+%token			KWD_TYPE		"TYPE"
+%token			KWD_FENCE		"FENCE"
+%token			KWD_GROUPS		"GROUPS"
+%token			KWD_GROUP		"GROUP"
+%token			KWD_BLOCKAGES		"BLOCKAGES"
+%token			KWD_PLACEMENT		"PLACEMENT"
+%token			KWD_ROUTING		"ROUTING"
 
 /*
 %type <integerVal>	block_other block_row block_comp block_pin block_net 
@@ -183,7 +199,7 @@ block_rows : single_row
 		  ;
 
  /*** grammar for tracks ***/
-single_tracks : KWD_TRACKS STRING INTEGER KWD_DO INTEGER KWD_STEP INTEGER KWD_LAYER STRING ';' {
+single_tracks : KWD_TRACKS STRING INTEGER KWD_DO INTEGER KWD_STEP INTEGER KWD_LAYER string_array ';' {
 				driver.track_cbk(*$2, $3, $5, $7, *$9);
                 delete $2;
                 delete $9;
@@ -216,6 +232,7 @@ via_addon : /* empty */
 		  | via_addon '+' KWD_LAYERS string_array {delete $4;}
 		  | via_addon '+' KWD_CUTSPACING INTEGER INTEGER 
 		  | via_addon '+' KWD_ENCLOSURE INTEGER INTEGER INTEGER INTEGER 
+		  | via_addon '+' KWD_RECT STRING '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' {delete $4;}
 		  | via_addon '+' KWD_ROWCOL INTEGER INTEGER 
 		  ;
 
@@ -229,6 +246,54 @@ multiple_vias : single_via
 block_vias : begin_vias multiple_vias end_vias
 		   | begin_vias end_vias 
 		   ;
+
+/*** grammar for nondefault rules ***/
+begin_nondefaultrules : KWD_NONDEFAULTRULES INTEGER ';'
+                       ;
+end_nondefaultrules : KWD_END KWD_NONDEFAULTRULES
+                    ;
+
+nondefaultrule_addon : /* empty */
+           | nondefaultrule_addon '+' KWD_HARDSPACING
+           | nondefaultrule_addon '+' KWD_LAYER STRING KWD_WIDTH INTEGER KWD_SPACING INTEGER {delete $4;}
+           | nondefaultrule_addon '+' KWD_VIA STRING {delete $4;}
+           ;
+
+single_nondefaultrule : '-' STRING nondefaultrule_addon ';' {delete $2;}
+                      ;
+
+multiple_nondefaultrules : single_nondefaultrule
+                         | multiple_nondefaultrules single_nondefaultrule
+                         ;
+
+block_nondefaultrules : begin_nondefaultrules multiple_nondefaultrules end_nondefaultrules
+                      | begin_nondefaultrules end_nondefaultrules
+                      ; 
+
+/*** grammar for regions ***/
+begin_regions : KWD_REGIONS INTEGER ';'
+              ;
+end_regions : KWD_END KWD_REGIONS
+            ;
+
+region_addon : /* empty */
+              | region_addon '+' KWD_TYPE KWD_FENCE
+              ;
+
+region_points : '(' INTEGER INTEGER ')'
+              | region_points '(' INTEGER INTEGER ')'
+             ;
+
+single_region : '-' STRING region_points region_addon ';' {delete $2;}
+              ;
+
+multiple_regions : single_region
+                 | multiple_regions single_region
+                 ;
+
+block_regions : begin_regions multiple_regions end_regions
+              | begin_regions end_regions
+              ;
 
  /*** grammar for components ***/
 begin_components : KWD_COMPONENTS INTEGER ';' {
@@ -324,6 +389,22 @@ block_pins : begin_pins
 		   end_pins 
 		   ;
 
+ /*** grammar for blockages ***/
+begin_blockages : KWD_BLOCKAGES INTEGER ';' {driver.blockage_cbk_size($2);}
+                ;
+end_blockages : KWD_END KWD_BLOCKAGES
+              ;
+single_blockage : '-' KWD_PLACEMENT KWD_RECT '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' ';' {driver.blockage_cbk_placement($5, $6, $9, $10);}
+                | '-' KWD_ROUTING KWD_RECT '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' ';' {driver.blockage_cbk_routing($5, $6, $9, $10);}
+                | '-' KWD_LAYER STRING KWD_RECT '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' ';' {delete $3;}
+                ;
+multiple_blockages : single_blockage
+                   | multiple_blockages single_blockage
+                   ;
+block_blockages : begin_blockages multiple_blockages end_blockages
+                | begin_blockages end_blockages
+                ;
+
  /*** grammar for special nets ***/
  /*** so far we do not use special nets, so I simply pass the grammar ***/
 begin_specialnets : KWD_SPECIALNETS INTEGER ';'
@@ -342,6 +423,7 @@ specialnets_metal_array : specialnets_metal_layer specialnets_metal_shape
 specialnets_addon : /* empty */
 				  | specialnets_addon '+' specialnets_metal_array
 				  | specialnets_addon '+' KWD_USE STRING {delete $4;}
+                  | specialnets_addon '+' KWD_RECT STRING '(' INTEGER INTEGER ')' '(' INTEGER INTEGER ')' {delete $4;}
 				  ;
 single_specialnet : '-' BINARY specialnets_addon ';' {delete $2;}
 				  | '-' STRING specialnets_addon ';' {delete $2;}
@@ -372,22 +454,20 @@ node_pin_pairs : node_pin_pair
 			   | node_pin_pairs node_pin_pair
 			   ;
 
-single_net : '-' STRING node_pin_pairs ';' {
+net_addon : /* empty */
+          | net_addon '+' KWD_USE STRING {delete $4;}
+          | net_addon '+' KWD_NONDEFAULTRULE STRING {delete $4;}
+          ;
+
+single_net : '-' STRING node_pin_pairs net_addon ';' {
 				driver.net_cbk_name(*$2);
                 delete $2;
 		   } 
-		   | '-' BINARY node_pin_pairs ';' {
+		   | '-' BINARY node_pin_pairs net_addon ';' {
 				driver.net_cbk_name(*$2);
                 delete $2;
 		   } 
-		   | '-' STRING node_pin_pairs '+' KWD_USE STRING ';' {
-				driver.net_cbk_name(*$2);
-                delete $2;
-		   } 
-		   | '-' BINARY node_pin_pairs '+' KWD_USE STRING ';' {
-				driver.net_cbk_name(*$2);
-                delete $2;
-		   } 
+           ;
 
 multiple_nets : single_net 
 			  | multiple_nets single_net
@@ -406,7 +486,6 @@ block_nets : begin_nets
 single_propterty : KWD_COMPONENTPIN STRING STRING ';' {delete $2; delete $3;}
 				 | KWD_DESIGN STRING STRING DOUBLE ';' {delete $2; delete $3;}
                  | KWD_NET STRING STRING ';' {delete $2; delete $3;}
-                 | KWD_COMPONENTPIN STRING STRING ';' {delete $2; delete $3;}
 				 ;
 
 multiple_property : single_propterty 
@@ -419,6 +498,27 @@ block_propertydefinitions : KWD_PROPERTYDEFINITIONS
 						  | KWD_PROPERTYDEFINITIONS
 						  KWD_END KWD_PROPERTYDEFINITIONS
 						  ;
+
+/*** grammar for groups ***/
+begin_groups : KWD_GROUPS INTEGER ';'
+             ;
+end_groups : KWD_END KWD_GROUPS
+           ;
+
+group_addon : /* empty */
+            | group_addon '+' KWD_REGION STRING {delete $4;}
+            ;
+
+single_group : '-' STRING string_array group_addon ';' {delete $2; delete $3;}
+             ;
+
+multiple_groups : single_group 
+                | multiple_groups single_group
+                ;
+
+block_groups : begin_groups multiple_groups end_groups
+             | begin_groups end_groups
+             ;
 
  /*** grammar for top design ***/
 
@@ -445,10 +545,14 @@ block_option : block_unit
 			 | block_tracks
 			 | block_gcellgrid
 			 | block_vias
+             | block_nondefaultrules
+             | block_regions
 			 | block_components
 			 | block_pins
+             | block_blockages
 			 | block_specialnets
 			 | block_nets 
+             | block_groups
 			 ;
 
 block_design : block_option

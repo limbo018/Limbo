@@ -105,8 +105,8 @@ class SDPColoringCsdp : public Coloring<GraphType>
         void round_sol(struct blockmatrix const& X);
         void coloring_merged_graph(graph_type const& mg, std::vector<int8_t>& vMColor) const;
         void coloring_algos(graph_type const& g, std::vector<int8_t>& vColor) const;
-        void coloring_by_backtrack(graph_type const& mg, std::vector<int8_t>& vColor) const;
-        void coloring_by_FM(graph_type const& mg, std::vector<int8_t>& vColor) const;
+        virtual void coloring_by_backtrack(graph_type const& mg, std::vector<int8_t>& vColor) const;
+        virtual void coloring_by_FM(graph_type const& mg, std::vector<int8_t>& vColor) const;
 
         double m_rounding_lb; ///< if SDP solution x < m_rounding_lb, take x as -0.5
         double m_rounding_ub; ///< if SDP solution x > m_rounding_ub, take x as 1.0
@@ -415,7 +415,7 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
     }
 #ifdef DEBUG_SDPCOLORING
     //this->print_edge_weight(this->m_graph);
-    this->check_edge_weight(this->m_graph, this->stitch_weight()/10, 4);
+    //this->check_edge_weight(this->m_graph, this->stitch_weight()/10, 4);
     //this->print_edge_weight(mg);
     this->check_edge_weight(mg, this->stitch_weight()/10, boost::num_edges(this->m_graph));
 #endif

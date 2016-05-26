@@ -147,7 +147,11 @@ Driver::Driver(LefDataBase& db)
 }
 Driver::~Driver()
 {
-	if (hasOpenedLogFile) fclose(lefrLog);
+	if (hasOpenedLogFile) 
+    {
+        fclose(lefrLog);
+        hasOpenedLogFile = 0;
+    }
 }
 
 bool Driver::parse_stream(std::istream& in, const std::string& sname)
@@ -167,6 +171,7 @@ bool Driver::parse_file(const std::string &filename)
 {
     std::ifstream in(filename.c_str());
     if (!in.good()) {std::cerr << "failed to open " << filename << std::endl; return false;}
+    lefrFileName = (const char*)filename.c_str();
     return parse_stream(in, filename);
 }
 
@@ -308,6 +313,9 @@ void Driver::lefrMacroEndCbk(string const&)
 void Driver::lefrMacroCbk(lefiMacro const& v)
 {
 	m_db.lef_macro_cbk(v);
+    //lefrMacro.Init();
+    //lefrMacro.obstruction().Destroy();
+    lefrMacro.clear();
 }
 void Driver::lefrMacroClassTypeCbk(string const&)// maybe useless 
 {} 
@@ -321,7 +329,8 @@ void Driver::lefrObstructionCbk(lefiObstruction& v)
 {
 	//m_db.lef_obstruction_cbk(v);
     // instead of a callback, add to macro 
-    lefrMacro.obstruction().swap(v);
+    lefrMacro.obstructions().push_back(new lefiObstruction());
+    lefrMacro.obstructions().back()->swap(v);
 }
 void Driver::lefrDensityCbk(lefiDensity const& v)
 {

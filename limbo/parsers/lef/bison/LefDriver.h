@@ -218,7 +218,7 @@ public:
 	int ge56almostDone;// lef file has Extension section
 	int ge56done;      // done reading 5.6 and beyond library
 
-	char* lefrFileName;
+	const char* lefrFileName;
 
 	int lefNamesCaseSensitive;  // always true in 5.6
 	int lefReaderCaseSensitive;  // default to 0

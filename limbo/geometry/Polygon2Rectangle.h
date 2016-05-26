@@ -91,14 +91,16 @@ class Polygon2Rectangle
 		/// if slicing_orient == HORIZONTAL_SLICING or slicing_orient == VERTICAL_SLICING, only 1 copy of points is stored 
 		/// if slicing_orient == HOR_VER_SLICING, 2 copies of points sorted by different orientation are stored 
 		/// btw, slicing orientation is perpendicular to its corresponding sorting orientation 
-		Polygon2Rectangle(slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
+		Polygon2Rectangle(rectangle_set_type& vRect, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
+            : m_vRect(vRect)
 		{
 			this->initialize(slicing_orient);
 		}
 		/// constructor 
 		/// \param InputIterator represents the iterator type of point set container for construction only 
 		template <typename InputIterator>
-		Polygon2Rectangle(InputIterator input_begin, InputIterator input_end, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
+		Polygon2Rectangle(rectangle_set_type& vRect, InputIterator input_begin, InputIterator input_end, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
+            : m_vRect(vRect)
 		{
 			this->initialize(slicing_orient);
 			this->initialize(input_begin, input_end);
@@ -228,6 +230,7 @@ class Polygon2Rectangle
 					orientation_2d const& orient = it->first;
 #ifdef DEBUG
 					point_set_type const& vPoint = it->second; // just for gdb 
+                    assert(vPoint.empty() || !vPoint.empty()); // to remove annoying warning 
 #endif 
 
 					point_type Pk, Pl, Pm;
@@ -269,6 +272,7 @@ class Polygon2Rectangle
 					orientation_2d const& orient = it->first;
 #ifdef DEBUG
 					point_set_type const& vPoint = it->second; // just for gdb 
+                    assert(vPoint.empty() || !vPoint.empty()); // to remove annoying warning 
 #endif 
 
 					F(point_traits<point_type>::construct(this->get(*itRect, LEFT), this->get(*itRect, BOTTOM)), orient);
@@ -534,7 +538,7 @@ class Polygon2Rectangle
 													///< 1~2 copies, sort by left lower or by lower left 
 													///< for HORIZONTAL key, sort by left lower 
 													///< for VERTICAL key, sort by lower left 
-		rectangle_set_type m_vRect; ///< save all rectangles from conversion 
+		rectangle_set_type& m_vRect; ///< save all rectangles from conversion 
 };
 
 /// \brief standby function for polygon-to-rectangle conversion 
@@ -545,9 +549,8 @@ template <typename InputIterator, typename PointSet, typename RectSet>
 inline bool polygon2rectangle(InputIterator input_begin, InputIterator input_end, 
 		PointSet const&, RectSet& r, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
 {
-	Polygon2Rectangle<PointSet, RectSet> p2r (input_begin, input_end, slicing_orient);
+	Polygon2Rectangle<PointSet, RectSet> p2r (r, input_begin, input_end, slicing_orient);
 	if (!p2r()) return false;
-	r = p2r.get_rectangles();
 	return true;
 }
 

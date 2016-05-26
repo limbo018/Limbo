@@ -40,7 +40,7 @@ class BacktrackColoring : public Coloring<GraphType>
 		/// \return cost 
 		double init_coloring(vector<int8_t>& vColor) const;
 		/// kernel function for recursive backtracking 
-		void coloring_kernel(vector<int8_t>& vBestColor, vector<int8_t>& vColor, double& best_cost, double& cur_cost, graph_vertex_type v, double cost_lb) const;
+		void coloring_kernel(vector<int8_t>& vBestColor, vector<int8_t>& vColor, double& best_cost, double& cur_cost, graph_vertex_type v, double cost_lb, double cost_ub) const;
 };
 
 template <typename GraphType>
@@ -52,23 +52,34 @@ double BacktrackColoring<GraphType>::coloring()
 	double cur_cost = 0;
 	double actual_cost;
 
+    //std::cout << "best cost from dsat = " << best_cost << std::endl;
+
 	// solve coloring problem 
 	// heuristic for speedup when graph is large 
 	if (boost::num_vertices(this->m_graph) > 50 && best_cost > 0)
 	{
 		double cur_best_cost = best_cost;
-		double best_cost_lb = 0;
-		for (double tmp_best_cost = 0; tmp_best_cost <= cur_best_cost; ++tmp_best_cost)
+		//double best_cost_lb = 0;
+		for (double tmp_best_cost = 0; tmp_best_cost < cur_best_cost; ++tmp_best_cost)
 		{
-			best_cost = tmp_best_cost;
-			this->coloring_kernel(vBestColor, vColor, best_cost, cur_cost, 0, best_cost_lb);
-			actual_cost = this->calc_cost(vBestColor);
-			if (best_cost == actual_cost)
+			//best_cost = tmp_best_cost;
+            //best_cost = std::numeric_limits<double>::max();
+			this->coloring_kernel(vBestColor, vColor, best_cost, cur_cost, 0, tmp_best_cost, tmp_best_cost);
+			//actual_cost = this->calc_cost(vBestColor);
+            //std::cout << "tmp_best_cost = " << tmp_best_cost << " best_cost = " << best_cost << " actual_cost = " << actual_cost 
+                //<< " best_cost_lb = " << best_cost_lb 
+                //<< std::endl;
+			//if (best_cost == actual_cost)
+            if (best_cost <= tmp_best_cost)
 				break;
-			else best_cost_lb += 1;
+			//else best_cost_lb += 1;
+            // reset 
+            vColor.assign(this->m_vColor.begin(), this->m_vColor.end());
+            cur_cost = 0;
 		}
 	}
-	else this->coloring_kernel(vBestColor, vColor, best_cost, cur_cost, 0, 0);
+	else if (best_cost > 0)
+        this->coloring_kernel(vBestColor, vColor, best_cost, cur_cost, 0, 0, best_cost);
 
 	// apply coloring solution 
 	this->m_vColor.swap(vBestColor);
@@ -104,11 +115,12 @@ double BacktrackColoring<GraphType>::init_coloring(vector<int8_t>& vColor) const
 }
 
 template <typename GraphType>
-void BacktrackColoring<GraphType>::coloring_kernel(vector<int8_t>& vBestColor, vector<int8_t>& vColor, double& best_cost, double& cur_cost, BacktrackColoring<GraphType>::graph_vertex_type v, double cost_lb) const 
+void BacktrackColoring<GraphType>::coloring_kernel(vector<int8_t>& vBestColor, vector<int8_t>& vColor, double& best_cost, double& cur_cost, 
+        BacktrackColoring<GraphType>::graph_vertex_type v, double cost_lb, double cost_ub) const 
 {
 	if (best_cost <= cost_lb) // no conflict or reach to lower bound cost  
 		return;
-	if (cur_cost >= best_cost) // branch and bound 
+	if (cur_cost >= best_cost || cur_cost > cost_ub) // branch and bound 
 		return; 
 	if (v == boost::num_vertices(this->m_graph)) // leaf node in the recursion tree 
 	{
@@ -148,7 +160,7 @@ void BacktrackColoring<GraphType>::coloring_kernel(vector<int8_t>& vBestColor, v
 			}
 		}
 		cur_cost += delta_cost;
-		this->coloring_kernel(vBestColor, vColor, best_cost, cur_cost, v+1, cost_lb); // recursion 
+		this->coloring_kernel(vBestColor, vColor, best_cost, cur_cost, v+1, cost_lb, cost_ub); // recursion 
 		cur_cost -= delta_cost;
 	}
 }

@@ -52,7 +52,9 @@
  /*** BEGIN EXAMPLE - Change the example grammar's tokens below ***/
 
 %union {
+    int integerVal;
     std::string* stringVal;
+	class StringArray* stringArrayVal;
     struct {
         long value;
         long bits;
@@ -98,11 +100,13 @@
 
 %type<stringVal> NAME
 %type<mask> BIT_MASK OCT_MASK DEC_MASK HEX_MASK
-%type<int> NUM 
+%type<integerVal> NUM 
 %type<rangeVal> range
+%type <stringArrayVal> name_array
 
-%destructor {delete $$;} NAME
+%destructor {delete $$;} NAME 
 %destructor {delete $$;} range
+%destructor {delete $$;} name_array
 
  /*** END EXAMPLE - Change the example grammar's tokens above ***/
 
@@ -123,7 +127,19 @@
 
  /*** BEGIN EXAMPLE - Change the example grammar rules below ***/
 
-range: '[' NUM ':' NUM ']' {$$ = new Range (1, 2);}
+range: '[' NUM ':' NUM ']' {$$ = new Range ($2, $4);}
+
+name_array: NAME {
+          $$ = new StringArray(1, *$1);
+          delete $1;
+          }
+          | name_array ',' NAME {
+            $1->push_back(std::string());
+            $1->back().swap(*$3);
+            delete $3;
+            $$ = $1;
+          }
+          ;
 
 param1: NAME {delete $1;}
       | NAME range {delete $1; delete $2;} 
@@ -134,26 +150,26 @@ param2: '.' NAME '(' NAME ')' {driver.wire_pin_cbk(*$4, *$2); delete $2; delete 
       | '.' NAME '(' NAME range ')' {driver.wire_pin_cbk(*$4, *$2, *$5); delete $2; delete $4; delete $5;}
       ;
 
-param3: INPUT NAME {driver.pin_declare_cbk(*$2, kINPUT); delete $2;}
-      | INPUT REG NAME {driver.pin_declare_cbk(*$3, kINPUT|kREG); delete $3;}
-      | INPUT range NAME {driver.pin_declare_cbk(*$3, kINPUT, *$2); delete $2; delete $3;} 
-      | INPUT REG range NAME {driver.pin_declare_cbk(*$4, kINPUT|kREG, *$3); delete $3; delete $4;}
-      | OUTPUT NAME {driver.pin_declare_cbk(*$2, kOUTPUT); delete $2;}
-      | OUTPUT REG NAME {driver.pin_declare_cbk(*$3, kOUTPUT|kREG); delete $3;}
-      | OUTPUT range NAME {driver.pin_declare_cbk(*$3, kOUTPUT, *$2); delete $2; delete $3;}
-      | OUTPUT REG range NAME {driver.pin_declare_cbk(*$4, kOUTPUT|kREG, *$3); delete $3; delete $4;}
-      | INOUT NAME {driver.pin_declare_cbk(*$2, kINPUT|kOUTPUT); delete $2;}
-      | INOUT REG NAME {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT|kREG); delete $3;}
-      | INOUT range NAME {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT, *$2); delete $2; delete $3;}
-      | INOUT REG range NAME {driver.pin_declare_cbk(*$4, kINPUT|kOUTPUT|kREG, *$3); delete $3; delete $4;}
+param3: INPUT name_array {driver.pin_declare_cbk(*$2, kINPUT); delete $2;}
+      | INPUT REG name_array {driver.pin_declare_cbk(*$3, kINPUT|kREG); delete $3;}
+      | INPUT range name_array {driver.pin_declare_cbk(*$3, kINPUT, *$2); delete $2; delete $3;} 
+      | INPUT REG range name_array {driver.pin_declare_cbk(*$4, kINPUT|kREG, *$3); delete $3; delete $4;}
+      | OUTPUT name_array {driver.pin_declare_cbk(*$2, kOUTPUT); delete $2;}
+      | OUTPUT REG name_array {driver.pin_declare_cbk(*$3, kOUTPUT|kREG); delete $3;}
+      | OUTPUT range name_array {driver.pin_declare_cbk(*$3, kOUTPUT, *$2); delete $2; delete $3;}
+      | OUTPUT REG range name_array {driver.pin_declare_cbk(*$4, kOUTPUT|kREG, *$3); delete $3; delete $4;}
+      | INOUT name_array {driver.pin_declare_cbk(*$2, kINPUT|kOUTPUT); delete $2;}
+      | INOUT REG name_array {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT|kREG); delete $3;}
+      | INOUT range name_array {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT, *$2); delete $2; delete $3;}
+      | INOUT REG range name_array {driver.pin_declare_cbk(*$4, kINPUT|kOUTPUT|kREG, *$3); delete $3; delete $4;}
       ;
 
-param4: REG NAME {delete $2;}
-      | REG range NAME {delete $2; delete $3;}
+param4: REG name_array {delete $2;}
+      | REG range name_array {delete $2; delete $3;}
       ;
 
-param5: WIRE NAME {driver.wire_declare_cbk(*$2); delete $2;}
-      | WIRE range NAME {driver.wire_declare_cbk(*$3, *$2); delete $2; delete $3;}
+param5: WIRE name_array {driver.wire_declare_cbk(*$2); delete $2;}
+      | WIRE range name_array {driver.wire_declare_cbk(*$3, *$2); delete $2; delete $3;}
       ;
 
 

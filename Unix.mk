@@ -25,7 +25,7 @@ endif
 endif
 endif
 
-CXXFLAGS_BASIC = -fmax-errors=1 -W -Wall -Wextra -Wreturn-type -ansi -m64 -Wno-deprecated -Wno-unused-local-typedefs
+CXXFLAGS_BASIC = -fmax-errors=1 -fPIC -W -Wall -Wextra -Wreturn-type -ansi -m64 -Wno-deprecated -Wno-unused-local-typedefs
 CXXFLAGS_DEBUG = -g $(CXXFLAGS_BASIC) 
 CXXFLAGS_RELEASE = -O3 -fopenmp $(CXXFLAGS_BASIC) 
 

@@ -194,6 +194,13 @@ class DefDataBase
 		virtual void resize_def_pin(int)  = 0;
 		virtual void add_def_net(Net const&) = 0;
 		virtual void resize_def_net(int) = 0;
+        /// check these callbacks at runtime 
+        virtual void resize_def_blockage(int);
+        virtual void add_def_placement_blockage(int, int, int, int);
+        virtual void add_def_routing_blockage(int, int, int, int);
+
+    protected:
+        void def_user_cbk_reminder(const char* str) const;
 };
 
 } // namespace DefParser

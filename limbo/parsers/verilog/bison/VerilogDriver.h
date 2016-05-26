@@ -84,8 +84,8 @@ public:
     VerilogDataBase& m_db;
 
     void wire_pin_cbk(std::string&, std::string&, Range const& = Range());
-    void wire_declare_cbk(std::string const&, Range const& = Range());
-    void pin_declare_cbk(std::string const&, unsigned, Range const& = Range());
+    void wire_declare_cbk(std::vector<std::string> const&, Range const& = Range());
+    void pin_declare_cbk(std::vector<std::string> const&, unsigned, Range const& = Range());
     void module_instance_cbk(std::string const&, std::string const&);
 
 protected:

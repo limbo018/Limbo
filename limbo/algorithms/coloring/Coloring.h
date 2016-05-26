@@ -217,6 +217,8 @@ typename Coloring<GraphType>::edge_weight_type Coloring<GraphType>::calc_cost(st
 		edge_weight_type w = boost::get(boost::edge_weight, m_graph, *ei);
 		graph_vertex_type s = boost::source(*ei, m_graph);
 		graph_vertex_type t = boost::target(*ei, m_graph);
+        if (s == t) // skip self edges 
+            continue; 
 		if (w >= 0) // conflict edge 
 			cost += (vColor[s] == vColor[t])*w;
 		else // stitch edge 

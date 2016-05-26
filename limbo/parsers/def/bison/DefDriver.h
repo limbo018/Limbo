@@ -91,7 +91,7 @@ public:
 	void diearea_cbk(int, int, int, int) ;
 
 	void row_cbk(string&, string&, int, int, string&, int, int, int, int) ;
-	void track_cbk(string const&, int, int, int, string const&) ;
+	void track_cbk(string const&, int, int, int, vector<string> const&) ;
 	void gcellgrid_cbk(string const&, int, int, int) ;
 	// component cbk
 	void component_cbk_size(int) ;
@@ -114,6 +114,10 @@ public:
 	void net_cbk_name(string&) ;
 	void net_cbk_pin(string&, string&) ;
 	void net_cbk_size(int) ;
+    // blockage cbk 
+    void blockage_cbk_size(int);
+    void blockage_cbk_placement(int, int, int, int);
+    void blockage_cbk_routing(int, int, int, int);
 
 protected:
 	// use as a stack for node and pin pairs in a net 

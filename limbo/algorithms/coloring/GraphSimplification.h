@@ -425,14 +425,24 @@ void GraphSimplification<GraphType>::simplify(uint32_t level)
 	if (this->has_precolored()) // this step does not support precolored graph yet 
 		m_level = m_level & (~MERGE_SUBK4) & (~BICONNECTED_COMPONENT);
 
-	if (m_level & HIDE_SMALL_DEGREE)
-		this->hide_small_degree(); // connected components are computed inside 
-	if (m_level & MERGE_SUBK4)
-		this->merge_subK4();
-	if (m_level & BICONNECTED_COMPONENT)
-		this->biconnected_component();
+    bool reconstruct = true; // whether needs to reconstruct m_mCompVertex
 
-    if (m_level == MERGE_SUBK4) // if BICONNECTED_COMPONENT or HIDE_SMALL_DEGREE is not on, we need to construct m_mCompVertex with size 1 
+	if (m_level & HIDE_SMALL_DEGREE)
+    {
+		this->hide_small_degree(); // connected components are computed inside 
+        reconstruct = false;
+    }
+	if (m_level & MERGE_SUBK4)
+    {
+		this->merge_subK4();
+    }
+	if (m_level & BICONNECTED_COMPONENT)
+    {
+		this->biconnected_component();
+        reconstruct = false;
+    }
+
+    if (reconstruct) // if BICONNECTED_COMPONENT or HIDE_SMALL_DEGREE is not on, we need to construct m_mCompVertex with size 1 
     {
         m_mCompVertex.assign(1, std::vector<graph_vertex_type>());
         for (graph_vertex_type v = 0, ve = boost::num_vertices(m_graph); v != ve; ++v)
