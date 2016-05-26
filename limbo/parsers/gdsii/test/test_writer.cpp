@@ -70,7 +70,8 @@ int main( int argc, char *argv[] )
 	// for rectangles 
 	// use high-level interfaces 
 
-	gw.write_box(10003, 0, 10, 10, 20, 20);
+    for (int i = 0; i < 10000000; ++i)
+        gw.write_box(10003, 0, 10, 10, 20, 20);
 #endif 
     gw.gds_write_endstr(  );
 
