@@ -70,10 +70,9 @@ int main( int argc, char *argv[] )
 	// for rectangles 
 	// use high-level interfaces 
 
-    for (int i = 0; i < 10000000; ++i)
+    for (int i = 0; i < 1; ++i)
         gw.write_box(10003, 0, 10, 10, 20, 20);
 #endif 
-    gw.gds_write_endstr(  );
 
     //-----------------------------------------------------------------------------
     // create some text, reflected about the x axis
@@ -97,27 +96,26 @@ int main( int argc, char *argv[] )
 
     gw.gds_create_text(  "not reflected", 2000, 1500, 2, 500 );  
 
-#if 0
     //-----------------------------------------------------------------------------
     // create a path
 
-    gds_write_path(  );
-    gds_write_layer(  3 );               // layer 3
-    gds_write_datatype(  4 );            // datatype 4
-    gds_write_pathtype(  2 );            // extended square ends
-    gds_write_width(  200 );             // 200 nm wide
+    gw.gds_write_path(  );
+    gw.gds_write_layer(  3 );               // layer 3
+    gw.gds_write_datatype(  4 );            // datatype 4
+    gw.gds_write_pathtype(  2 );            // extended square ends
+    gw.gds_write_width(  200 );             // 200 nm wide
     x[0] = 2000;  y[0] = 3000;
     x[1] = 2000;  y[1] = 4000;
     x[2] = 2500;  y[2] = 3500;
-    gds_write_xy(  x, y, 3 );
-    gds_write_endel(  );
+    gw.gds_write_xy(  x, y, 3 );
+    gw.gds_write_endel(  );
 
     //-----------------------------------------------------------------------------
     // create a box, which is stupid
 
-    gds_write_box(  );            // write just the token
-    gds_write_layer(  6 );       // layer 6, for example
-    gds_write_boxtype(  12 );    // boxtype 12, for example same as datatype
+    gw.gds_write_box(  );            // write just the token
+    gw.gds_write_layer(  6 );       // layer 6, for example
+    gw.gds_write_boxtype(  12 );    // boxtype 12, for example same as datatype
 
     x[0] = 3000;  y[0] =   0;       // signed four-byte integers
     x[1] = 3000;  y[1] = 500;       
@@ -125,37 +123,37 @@ int main( int argc, char *argv[] )
     x[3] = 4000;  y[3] =   0;
     x[4] = 3000;  y[4] =   0;       // required repetition of first point (yup, that's stupid)
 
-    gds_write_xy(  x, y, 5 );    // polygon, four vertices, first vertex repeated => 5 points
-    gds_write_endel(  );          // end of element
+    gw.gds_write_xy(  x, y, 5 );    // polygon, four vertices, first vertex repeated => 5 points
+    gw.gds_write_endel(  );          // end of element
 
 
     // end the structure (the cell hotdogs)
 
-    gds_write_endstr(  );
+    gw.gds_write_endstr(  );
 
     //-----------------------------------------------------------------------------
     // Create a new cell, which will contain an instance of the previous cell 
 
-    gds_write_bgnstr(  );                  // new cell (structure)
-    gds_write_strname(  "sausage" );      // called "sausage"
-    gds_write_sref(  );                    // contains an instance of...
-    gds_write_sname(  "hotdogs" );        // the cell hotdogs
-    gds_write_mag(  5.0 );                // which will be 5 times larger
-    gds_write_angle(  15.4 );             // and tilted at some weird angle
+    gw.gds_write_bgnstr(  );                  // new cell (structure)
+    gw.gds_write_strname(  "sausage" );      // called "sausage"
+    gw.gds_write_sref(  );                    // contains an instance of...
+    gw.gds_write_sname(  "hotdogs" );        // the cell hotdogs
+    gw.gds_write_mag(  5.0 );                // which will be 5 times larger
+    gw.gds_write_angle(  15.4 );             // and tilted at some weird angle
     x[0] =  2000;
     y[0] = -2000;
-    gds_write_xy(  x, y, 1 );             // at these coordinates (database units)
-    gds_write_endel(  );                   // end of element
-    gds_write_endstr(  );                  // end of structure (cell)
+    gw.gds_write_xy(  x, y, 1 );             // at these coordinates (database units)
+    gw.gds_write_endel(  );                   // end of element
+    gw.gds_write_endstr(  );                  // end of structure (cell)
 
     //-----------------------------------------------------------------------------
     // Create a new cell "meatball" containing an array of the cell "sausage"
 
-    gds_write_bgnstr(  );                  // new cell
-    gds_write_strname(  "meatball" );     // called "meatball"
-    gds_write_aref(  );                    // containing an array of...
-    gds_write_sname(  "sausage" );        // the cell "sausage"
-    gds_write_colrow(  2, 5 );            // 2 columns, 5 rows
+    gw.gds_write_bgnstr(  );                  // new cell
+    gw.gds_write_strname(  "meatball" );     // called "meatball"
+    gw.gds_write_aref(  );                    // containing an array of...
+    gw.gds_write_sname(  "sausage" );        // the cell "sausage"
+    gw.gds_write_colrow(  2, 5 );            // 2 columns, 5 rows
 
     x[0] =   5000;  y[0] =   5000;           // array anchor point
 
@@ -163,12 +161,11 @@ int main( int argc, char *argv[] )
                                              // which makes the column pitch 40 um
     x[2] =   5000;  y[2] = 205000;           // displacement from anchor plus nrows*pitch
                                              // which makes the row pitch 40 um
-    gds_write_xy(  x, y, 3 );             // See how you could have a diagonal matrix? 
+    gw.gds_write_xy(  x, y, 3 );             // See how you could have a diagonal matrix? 
                                              // That would be so goofy!
-    gds_write_endel(  );                   // end of element
-    gds_write_endstr(  );                  // end of structure (cell) "meatball"
+    gw.gds_write_endel(  );                   // end of element
+    gw.gds_write_endstr(  );                  // end of structure (cell) "meatball"
 
-#endif 
     // end of library
 
     gw.gds_write_endlib(  );    
