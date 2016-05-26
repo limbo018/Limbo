@@ -120,10 +120,78 @@ GdsWriter::GdsWriter(const char* filename)
 {
 	this->out = open( filename, O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH );
 	if( this->out <= 0 ) BAILOUT( "UNABLE TO OPEN OUTPUT FILE" );
+
+    m_capacity = 16*1024; // 16 KB
+    m_size = 0; 
+    m_buffer = new char [m_capacity]; 
 }
 GdsWriter::~GdsWriter()
 {
+    gds_flush();  // remember to write the rest content in the buffer 
 	close(this->out);
+    delete [] m_buffer; 
+}
+
+/// copy char* as unsigned long* and deal with boundary cases 
+inline void fast_copy (char *t, const char *s, std::size_t n)
+{
+    if (n >= sizeof (unsigned long)) 
+    {
+        unsigned long *tl = reinterpret_cast<unsigned long *> (t);
+        const unsigned long *sl = reinterpret_cast<const unsigned long *> (s);
+
+        while (n >= sizeof (unsigned long)) 
+        {
+            *tl++ = *sl++;
+            n -= sizeof (unsigned long);
+        }
+
+        t = reinterpret_cast<char *> (tl);
+        s = reinterpret_cast<const char *> (sl);
+    }
+
+    while (n-- > 0) 
+    {
+        *t++ = *s++;
+    }
+}
+
+/// a buffered writing scheme 
+int GdsWriter::gds_write(const char* b, std::size_t n)
+{
+    int ret; 
+    while (m_size + n > m_capacity) 
+    {
+        std::size_t nw = m_capacity - m_size;
+        if (nw) 
+        {
+            n -= nw;
+            fast_copy(m_buffer + m_size, b, nw);
+            b += nw;
+        }
+
+        ret = write (this->out, m_buffer, m_capacity);
+        if (ret < 0)
+            return ret; 
+        m_size = 0;
+    }
+
+    if (n) 
+    {
+        fast_copy (m_buffer + m_size, b, n);
+        m_size += n;
+    }
+
+    return 1; 
+}
+
+void GdsWriter::gds_flush()
+{
+    if (m_size) // remember to write the rest content in the buffer 
+    {
+        write (this->out, m_buffer, m_size);
+        m_size = 0; 
+    }
 }
 
 /*------------------------------------------------------------------------------------------*/
@@ -485,7 +553,7 @@ void GdsWriter::gds_write_float( double x )
 	for ( i=0; i<8; i++ ) 
 	{
 		by = stupid[i];
-		write( this->out, &by, 1 );
+		gds_write((char*)(&by), 1 );
 		// gds_bindump( by );    
 	}            
 	// printf( "\n" ); fflush( stdout );
@@ -520,16 +588,16 @@ void GdsWriter::gds_write_header(  )
 
 	count = 6;
 	gds_swap2bytes( (BYTE *) &count );
-	w = write( this->out, &count, 2 );
+	w = gds_write((char*)(&count), 2 );
 
 	if ( w <= 0 ) BAILOUT( "UNABLE TO WRITE TO OUTPUT FILE - CHECK OPEN() CALL" );
 
 	token = 0x0002;                // header
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 	si = 600;                      // GDSII version 6 
 	gds_swap2bytes( (BYTE *) &si );
-	write( this->out, &si, 2 );          
+	gds_write((char*)(&si), 2 );          
 
 }  // write_header
 
@@ -594,35 +662,35 @@ void GdsWriter::gds_write_bgnlib(  )
 
 	count = 0x1C;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0102;                 // BGNLIB
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );         
+	gds_write((char*)(&token), 2 );         
 	year = 1900 + date->tm_year;    // last modification time
 	gds_swap2bytes( (BYTE *) &year );
-	write( this->out, &year, 2 );
+	gds_write((char*)(&year), 2 );
 	month = 1 + date->tm_mon;
 	gds_swap2bytes( (BYTE *) &month );
-	write( this->out, &month, 2 );
+	gds_write((char*)(&month), 2 );
 	day = date->tm_mday;
 	gds_swap2bytes( (BYTE *) &day );
-	write( this->out, &day, 2 );
+	gds_write((char*)(&day), 2 );
 	hour = date->tm_hour;
 	gds_swap2bytes( (BYTE *) &hour );
-	write( this->out, &hour, 2 );
+	gds_write((char*)(&hour), 2 );
 	minute = date->tm_min;
 	gds_swap2bytes( (BYTE *) &minute );
-	write( this->out, &minute, 2 );
+	gds_write((char*)(&minute), 2 );
 	second = date->tm_sec;
 	gds_swap2bytes( (BYTE *) &second );
-	write( this->out, &second, 2 );
+	gds_write((char*)(&second), 2 );
 
-	write( this->out, &year, 2 );          // last access time (same)
-	write( this->out, &month, 2 );
-	write( this->out, &day, 2 );
-	write( this->out, &hour, 2 );
-	write( this->out, &minute, 2 );
-	write( this->out, &second, 2 );
+	gds_write((char*)(&year), 2 );          // last access time (same)
+	gds_write((char*)(&month), 2 );
+	gds_write((char*)(&day), 2 );
+	gds_write((char*)(&hour), 2 );
+	gds_write((char*)(&minute), 2 );
+	gds_write((char*)(&second), 2 );
 
     free(now);
 }  // write_bgnlib
@@ -740,22 +808,22 @@ void GdsWriter::gds_write_bgnstr(  )
 
 	count = 28;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0502;                 // BGNSTR
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
-	write( this->out, &year, 2 );          // creation time
-	write( this->out, &month, 2 );
-	write( this->out, &day, 2 );
-	write( this->out, &hour, 2 );
-	write( this->out, &minute, 2 );
-	write( this->out, &second, 2 );
-	write( this->out, &year, 2 );          // access time
-	write( this->out, &month, 2 );
-	write( this->out, &day, 2 );
-	write( this->out, &hour, 2 );
-	write( this->out, &minute, 2 );
-	write( this->out, &second, 2 );
+	gds_write((char*)(&token), 2 );
+	gds_write((char*)(&year), 2 );          // creation time
+	gds_write((char*)(&month), 2 );
+	gds_write((char*)(&day), 2 );
+	gds_write((char*)(&hour), 2 );
+	gds_write((char*)(&minute), 2 );
+	gds_write((char*)(&second), 2 );
+	gds_write((char*)(&year), 2 );          // access time
+	gds_write((char*)(&month), 2 );
+	gds_write((char*)(&day), 2 );
+	gds_write((char*)(&hour), 2 );
+	gds_write((char*)(&minute), 2 );
+	gds_write((char*)(&second), 2 );
 
     free(now);
 }  // write_bgnstr
@@ -781,10 +849,13 @@ void GdsWriter::gds_write_endlib(  )
 
 	count = 4;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0400;                 // ENDLIB
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
+
+    // I want to keep a lib complete 
+    gds_flush(); 
 
 }  // write_endlib
 
@@ -809,10 +880,10 @@ void GdsWriter::gds_write_endstr(  )
 
 	count = 4;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0700;                 // ENDSTR
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 
 }  // write_endstr
 
@@ -849,12 +920,12 @@ void GdsWriter::gds_write_libname( const char *name )
 	count = 4 + tmp_length;
 
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0206;                 // LIBNAME
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 
-	write( this->out, tmp_name, tmp_length);
+	gds_write(tmp_name, tmp_length);
 	free(tmp_name);
 
 }  // write_libname
@@ -910,12 +981,12 @@ void GdsWriter::gds_write_strname( const char *name )
 	count = 4 + tmp_length;
 
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0606;                 // STRNAME
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 
-	write( this->out, tmp_name, tmp_length);
+	gds_write(tmp_name, tmp_length);
 	free(tmp_name);
 
 }  // write_strname
@@ -986,12 +1057,12 @@ void GdsWriter::gds_write_string( const char *s )
 	count = 4 + tmp_length;
 
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x1906;                 // STRING
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 
-	write( this->out, tmp_s, tmp_length );
+	gds_write(tmp_s, tmp_length );
 	free(tmp_s);
 
 }  // write_string
@@ -1095,12 +1166,12 @@ void GdsWriter::gds_write_sname( const char *s )
 	count = 4 + tmp_length;
 
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x1206;                 // SNAME
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 
-	write( this->out, tmp_s, tmp_length);
+	gds_write(tmp_s, tmp_length);
 	free(tmp_s);
 
 }  // write_sname
@@ -1136,10 +1207,10 @@ void GdsWriter::gds_write_boundary(  )
 
 	count = 4;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0800;                 // BOUNDARY
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 
 } // write_boundary
 
@@ -1178,10 +1249,10 @@ void GdsWriter::gds_write_box(  )
 
 	count = 4;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x2D00;                 // BOX
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 
 } // write_box
 
@@ -1229,12 +1300,12 @@ void GdsWriter::gds_write_boxtype( short int dt )
 
 	count = 6;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x2E02;                 // BOXTYPE
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 	gds_swap2bytes( (BYTE *) &dt );
-	write( this->out, &dt, 2 );
+	gds_write((char*)(&dt), 2 );
 
 }  // write_boxtype
 
@@ -1264,10 +1335,10 @@ void GdsWriter::gds_write_path(  )
 
 	count = 4;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0900;                 // PATH
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 
 }  // write_path
 
@@ -1298,10 +1369,10 @@ void GdsWriter::gds_write_sref(  )
 
 	count = 4;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0A00;                 // SREF
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 
 }  // write_sref
 
@@ -1333,10 +1404,10 @@ void GdsWriter::gds_write_aref(  )
 
 	count = 4;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0B00;                   // AREF
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 
 }  // write_aref
 
@@ -1367,10 +1438,10 @@ void GdsWriter::gds_write_text(  )
 
 	count = 4;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0C00;                   // TEXT
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 
 }  // write_text
 
@@ -1396,10 +1467,10 @@ void GdsWriter::gds_write_endel(  )
 
 	count = 4;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x1100;                 // ENDEL
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 
 }  // write_endel
 
@@ -1445,12 +1516,12 @@ void GdsWriter::gds_write_layer( short int layer )
 	//if ( layer < 0 || layer > 32767 ) BAILOUT( "INVALID LAYER NUMBER" );
 	count = 6;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0D02;                 // LAYER
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 	gds_swap2bytes( (BYTE *) &layer );
-	write( this->out, &layer, 2 );
+	gds_write((char*)(&layer), 2 );
 
 }  // write_layer
 
@@ -1491,12 +1562,12 @@ void GdsWriter::gds_write_width( int width )
 
 	count = 8;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0F03;                 // WIDTH
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 	gds_swap4bytes( (BYTE *) &width );
-	write( this->out, &width, 4 );
+	gds_write((char*)(&width), 4 );
 
 }  // write_width
 
@@ -1544,12 +1615,12 @@ void GdsWriter::gds_write_datatype( short int dt )
 
 	count = 6;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0E02;                 // DATATYPE
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 	gds_swap2bytes( (BYTE *) &dt );
-	write( this->out, &dt, 2 );
+	gds_write((char*)(&dt), 2 );
 
 }  // write_datatype
 
@@ -1597,12 +1668,12 @@ void GdsWriter::gds_write_texttype( short int dt )
 
 	count = 6;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x1602;                 // TEXTTYPE
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 	gds_swap2bytes( (BYTE *) &dt );
-	write( this->out, &dt, 2 );
+	gds_write((char*)(&dt), 2 );
 
 }  // write_texttype
 
@@ -1645,12 +1716,12 @@ void GdsWriter::gds_write_generations( short int gens )
 
 	count = 6;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x2202;                 // GENERATIONS
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 	gds_swap2bytes( (BYTE *) &gens );
-	write( this->out, &gens, 2 );
+	gds_write((char*)(&gens), 2 );
 
 }  // write_generations
 
@@ -1708,12 +1779,12 @@ void GdsWriter::gds_write_pathtype( short int pt )
 
 	count = 6;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x2102;                 // PATHTYPE
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 	gds_swap2bytes( (BYTE *) &pt );
-	write( this->out, &pt, 2 );
+	gds_write((char*)(&pt), 2 );
 
 }  // write_pathtype
 
@@ -1818,11 +1889,11 @@ void GdsWriter::gds_write_presentation(      // file descriptor
 	gds_swap2bytes( (BYTE *) &num ); 
 	count = 6;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x1701;
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
-	write( this->out, &num, 2 );
+	gds_write((char*)(&token), 2 );
+	gds_write((char*)(&num), 2 );
 
 }  // write_presentation
 
@@ -1915,12 +1986,12 @@ void GdsWriter::gds_write_strans(            // output file descriptor
 
 	count = 6;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x1A01;                 // STRANS
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 	gds_swap2bytes( (BYTE *) &strans );
-	write( this->out, &strans, 2 );
+	gds_write((char*)(&strans), 2 );
 
 }  // write_strans
 
@@ -2056,22 +2127,22 @@ void GdsWriter::gds_write_xy( const int *x, const int *y, int n, bool has_last )
 
 	count = 4 + 8 * (n+!has_last);
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x1003;                 // XY
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 
 	for ( i=0; i<n; i++ )
 	{
 		gds_swap4bytes( (BYTE *) &(x[i]) );
 		gds_swap4bytes( (BYTE *) &(y[i]) );
-		write( this->out, &(x[i]), 4 );
-		write( this->out, &(y[i]), 4 );
+		gds_write((char*)(&(x[i])), 4 );
+		gds_write((char*)(&(y[i])), 4 );
 	}
 	if (n > 0 && !has_last)
 	{
-		write( this->out, &(x[0]), 4 );
-		write( this->out, &(y[0]), 4 );
+		gds_write((char*)(&(x[0])), 4 );
+		gds_write((char*)(&(y[0])), 4 );
 	}
 
 }  // write_xy
@@ -2126,14 +2197,14 @@ void GdsWriter::gds_write_colrow(  int ncols, int nrows )
 
 	count = 8;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x1302;                 // COLROW
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 	gds_swap2bytes( (BYTE *) &sicols );
-	write( this->out, &sicols, 2 );
+	gds_write((char*)(&sicols), 2 );
 	gds_swap2bytes( (BYTE *) &sirows );
-	write( this->out, &sirows, 2 );
+	gds_write((char*)(&sirows), 2 );
 
 }  // write_colrow
 
@@ -2182,10 +2253,10 @@ void GdsWriter::gds_write_units( double dbu_uu, double dbu_m )
 
 	count = 20;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x0305;                 // UNITS
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 	gds_write_float( dbu_uu );
 	gds_write_float( dbu_m );
 
@@ -2221,10 +2292,10 @@ void GdsWriter::gds_write_mag( double mag )
 
 	count = 12;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x1B05;   // MAG
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 	gds_write_float( mag );
 
 }  // write_mag
@@ -2263,10 +2334,10 @@ void GdsWriter::gds_write_angle( double angle )
 
 	count = 12;
 	gds_swap2bytes( (BYTE *) &count );
-	write( this->out, &count, 2 );
+	gds_write((char*)(&count), 2 );
 	token = 0x1C05;   // ANGLE
 	gds_swap2bytes( (BYTE *) &token );
-	write( this->out, &token, 2 );
+	gds_write((char*)(&token), 2 );
 	gds_write_float( angle );
 
 }  // write_angle

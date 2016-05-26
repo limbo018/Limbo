@@ -18,6 +18,7 @@
 #include <time.h>
 #include <assert.h>
 #include <vector>
+#include <fstream>
 
 // Setting BYTESWAP to 1 is appropriate for big-endian Intel processors. 
 // GDS format was originally used on little-endian, older computers.
@@ -89,66 +90,81 @@ struct gds_celltype                  /* A GDS library is a linked list of cells.
 
 struct GdsWriter
 {
-	int out; // output gds file descriptor
-	BYTE  gdsswap;
-	short gdsword;
+    public:
+        GdsWriter(const char* filename);
+        ~GdsWriter();
 
-	GdsWriter(const char* filename);
-	~GdsWriter();
+        /**************** high level interfaces *****************/
+        /// if has_last == true, it means the last point is the same as the first point 
+        /// otherwise, we need to add one point to the end 
+        /// default value is true 
+        void write_boundary(int layer, int datatype, std::vector<int> const& vx, std::vector<int> const& vy, bool has_last = true);
+        void write_box(int layer, int datatype, int xl, int yl, int xh, int yh);
+        /// \param dbu_uu is user unit, 1nm per bit
+        /// \param dbu_m is database unit in meter, usually 1e-9 
+        /// this wrapper is different from gds_create_lib in terms of units 
+        void create_lib(const char* libname, double dbu_uu, double dbu_m);
+        /**************** low level interfaces *****************/
+        void gds_make_next_item( struct gds_itemtype **ci );
+        void gds_bindump( BYTE x );            // dump one byte in binary format
+        void gds_write_float( double x );
+        void gds_swap4bytes( BYTE *four  );
+        void gds_swap2bytes( BYTE *two );
+        void gds_write_header(  );
+        void gds_write_bgnlib(  );
+        void gds_write_bgnstr(  );
+        void gds_write_endlib(  );
+        void gds_write_endstr(  );
+        void gds_write_libname( const char *name );
+        void gds_write_strname( const char *name );
+        void gds_write_string( const char *s );
+        void gds_write_sname( const char *s );
+        void gds_write_boundary(  );
+        void gds_write_box(  );
+        void gds_write_boxtype( short int dt );
+        void gds_write_path(  );
+        void gds_write_sref(  );
+        void gds_write_aref(  );
+        void gds_write_text(  );
+        void gds_write_endel(  );
+        void gds_write_layer( short int layer );
+        void gds_write_width( int width );
+        void gds_write_datatype( short int dt );
+        void gds_write_texttype( short int dt );
+        void gds_write_generations( short int gens );
+        void gds_write_pathtype( short int pt );
+        void gds_write_presentation( int font, int vp, int hp );
+        void gds_write_strans( BOOL reflect, BOOL abs_angle, BOOL abs_mag  );
+        void gds_write_xy( const int *x, const int *y, int n, bool has_last = true);
+        void gds_write_colrow( int ncols, int nrows );
+        void gds_write_units( double dbu_uu, double dbu_m );
+        void gds_write_mag( double mag );
+        void gds_write_angle( double angle );
+        void gds_create_lib( const char *libname, double dbu_um );    
+        void gds_create_text( const char *str, int x, int y, int layer, int size );
 
-	/**************** high level interfaces *****************/
-	/// if has_last == true, it means the last point is the same as the first point 
-	/// otherwise, we need to add one point to the end 
-	/// default value is true 
-	void write_boundary(int layer, int datatype, std::vector<int> const& vx, std::vector<int> const& vy, bool has_last = true);
-	void write_box(int layer, int datatype, int xl, int yl, int xh, int yh);
-	/// \param dbu_uu is user unit, 1nm per bit
-	/// \param dbu_m is database unit in meter, usually 1e-9 
-	/// this wrapper is different from gds_create_lib in terms of units 
-	void create_lib(const char* libname, double dbu_uu, double dbu_m);
-	/**************** low level interfaces *****************/
-	void gds_make_next_item( struct gds_itemtype **ci );
-	void gds_bindump( BYTE x );            // dump one byte in binary format
-	void gds_write_float( double x );
-	void gds_swap4bytes( BYTE *four  );
-	void gds_swap2bytes( BYTE *two );
-	void gds_write_header(  );
-	void gds_write_bgnlib(  );
-	void gds_write_bgnstr(  );
-	void gds_write_endlib(  );
-	void gds_write_endstr(  );
-	void gds_write_libname( const char *name );
-	void gds_write_strname( const char *name );
-	void gds_write_string( const char *s );
-	void gds_write_sname( const char *s );
-	void gds_write_boundary(  );
-	void gds_write_box(  );
-	void gds_write_boxtype( short int dt );
-	void gds_write_path(  );
-	void gds_write_sref(  );
-	void gds_write_aref(  );
-	void gds_write_text(  );
-	void gds_write_endel(  );
-	void gds_write_layer( short int layer );
-	void gds_write_width( int width );
-	void gds_write_datatype( short int dt );
-	void gds_write_texttype( short int dt );
-	void gds_write_generations( short int gens );
-	void gds_write_pathtype( short int pt );
-	void gds_write_presentation( int font, int vp, int hp );
-	void gds_write_strans( BOOL reflect, BOOL abs_angle, BOOL abs_mag  );
-	void gds_write_xy( const int *x, const int *y, int n, bool has_last = true);
-	void gds_write_colrow( int ncols, int nrows );
-	void gds_write_units( double dbu_uu, double dbu_m );
-	void gds_write_mag( double mag );
-	void gds_write_angle( double angle );
-	void gds_create_lib( const char *libname, double dbu_um );    
-	void gds_create_text( const char *str, int x, int y, int layer, int size );
+        // add by Yibo Lin 
+        // handle string with odd length 
+        // generate new string output and return its length 
+        char* gds_adjust_string(const char* input, int *output_length);
 
-	// add by Yibo Lin 
-	// handle string with odd length 
-	// generate new string output and return its length 
-	char* gds_adjust_string(const char* input, int *output_length);
+    protected:
+
+        /// a buffered putting scheme to speedup writing 
+        /// \return negative value if error 
+        /// by Yibo Lin 
+        int gds_write(const char* b, std::size_t n); 
+        /// flush all contents in the buffer 
+        void gds_flush(); 
+
+        std::ofstream m_os; 
+        int out; // output gds file descriptor
+        BYTE  gdsswap;
+        short gdsword;
+
+        std::size_t m_capacity; 
+        std::size_t m_size; 
+        char* m_buffer; 
 };
 
 } // namespace GdsParser
