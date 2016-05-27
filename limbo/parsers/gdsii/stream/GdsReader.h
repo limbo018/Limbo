@@ -88,7 +88,8 @@ inline void GdsDataBase::begin_end_cbk(GdsRecords::EnumType record_type) // begi
 class GdsReader
 {
 	public: 
-		GdsReader(GdsDataBaseKernel& db) : m_db(db) {}
+		GdsReader(GdsDataBaseKernel& db); 
+        ~GdsReader(); 
 
 		bool operator()(const char* filename);
 
@@ -97,7 +98,16 @@ class GdsReader
         void find_data_type (int numeric, GdsData::EnumType& data_name);
         void print_bit_array_comments (GdsRecords::EnumType enum_record_type, int bit_array, int indent_amount);
 
+        /// read n bytes 
+        /// \param fp, file handler 
+        /// \param no_read, number of bytes read 
+        const char* gds_read(int& fp, int& no_read, std::size_t n); 
+
 		GdsDataBaseKernel& m_db;
+        char* m_buffer; 
+        char* m_bptr; ///< start position in buffer 
+        std::size_t m_bcap; ///< buffer capacity 
+        std::size_t m_blen; ///< current buffer size, from m_bptr to m_buffer+m_bcap 
 };
 
 bool read(GdsDataBaseKernel& db, string const& filename);

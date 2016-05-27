@@ -1,85 +1,39 @@
 /*************************************************************************
-    > File Name: Polygon2Rectangle.h
+    > File Name: Polygon2RectangleVec.h
     > Author: Yibo Lin
     > Mail: yibolin@utexas.edu
-    > Created Time: Mon 27 Oct 2014 11:06:30 AM CDT
+    > Created Time: Thu 26 May 2016 11:15:21 AM CDT
  ************************************************************************/
 
-#ifndef _LIMBO_GEOMETRY_POLYGON2RECTANGLE
-#define _LIMBO_GEOMETRY_POLYGON2RECTANGLE
+#ifndef _LIMBO_GEOMETRY_POLYGON2RECTANGLEVEC_H
+#define _LIMBO_GEOMETRY_POLYGON2RECTANGLEVEC_H
 
-/// ===================================================================
-///    class          : Polygon2Rectangle
-///    Modified from  : bLib::PTR by Bei Yu
-///
-///  Refer to K.D.Gourley and D.M. Green,
-///  "A Polygon-to-Rectangle Conversion Algorithm", IEEE 1983
-///  
-///  If a contour polygon has duplicate points, remove all of them and form 
-///  a polygon with holes 
-///
-/// ===================================================================
-
-#include <iostream>
-#include <fstream>
-#include <string>
 #include <vector>
-#include <list>
-#include <map>
-#include <boost/lexical_cast.hpp>
-#include <boost/algorithm/string/trim.hpp>
-#include <boost/algorithm/string/classification.hpp>
-#include <limbo/geometry/Geometry.h>
-#include <limbo/string/String.h>
-#include <limbo/preprocessor/AssertMsg.h>
-
-/// a specialization for vectors 
-#include <limbo/geometry/Polygon2RectangleVec.h>
+#include <limits>
 
 namespace limbo { namespace geometry {
 
-using std::cout;
-using std::endl;
-using std::ifstream;
-using std::ofstream;
-using std::string;
-using std::vector;
-using std::map;
+struct point_compare_type; 
+template <typename PointSet,
+		 typename RectSet>
+class Polygon2Rectangle; 
 
-/// \brief sort helper 
-/// if ori == HORIZONTAL, sort by left lower 
-/// if ori == VERTICAL, sort by lower left 
-struct point_compare_type 
-{
-	orientation_2d m_orient;
-
-	point_compare_type() {}
-	point_compare_type(orientation_2d const& ori) : m_orient(ori) {}
-
-	template <typename PointType>
-	inline bool operator()(PointType const& p1, PointType const& p2) const 
-	{
-		assert(m_orient.valid());
-		return point_traits<PointType>::get(p1, m_orient) < point_traits<PointType>::get(p2, m_orient)
-			|| (point_traits<PointType>::get(p1, m_orient) == point_traits<PointType>::get(p2, m_orient)
-					&& point_traits<PointType>::get(p1, m_orient.get_perpendicular()) < point_traits<PointType>::get(p2, m_orient.get_perpendicular())
-				);
-	}
-};
+/// a template specialization for std::vector 
+/// it is more efficient than generic version 
 
 /// \brief a class implement conversion from manhattan polygon to rectangle 
 /// \param PointSet is the container for internal storing vertices of polygon 
-/// according to some experiments, vector is much faster than list, and set 
+/// according to some experiments, std::vector is much faster than list, and set 
 /// \param RectSet is the container storing output rectangles 
-template <typename PointSet,
-		 typename RectSet>
-class Polygon2Rectangle
+template <typename PointType,
+		 typename RectangleType>
+class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 {
 	public:
 		/// \brief internal rectangle set type 
-		typedef RectSet rectangle_set_type; 
+		typedef std::vector<RectangleType> rectangle_set_type; 
 		/// \brief internal point set type 
-		typedef PointSet point_set_type;
+		typedef std::vector<PointType> point_set_type;
 		/// \brief internal point type 
 		//typedef typename polygon_90_traits<polygon_type>::point_type point_type;
 		typedef typename container_traits<point_set_type>::value_type point_type;
@@ -95,7 +49,9 @@ class Polygon2Rectangle
 		/// if slicing_orient == HOR_VER_SLICING, 2 copies of points sorted by different orientation are stored 
 		/// btw, slicing orientation is perpendicular to its corresponding sorting orientation 
 		Polygon2Rectangle(rectangle_set_type& vRect, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
-            : m_vRect(vRect)
+            : m_mPoint((slicing_orient == HOR_VER_SLICING)? 2 : 1)
+            , m_vOrient2Id(2, std::numeric_limits<unsigned char>::max())
+            , m_vRect(vRect)
 		{
 			this->initialize(slicing_orient);
 		}
@@ -103,7 +59,9 @@ class Polygon2Rectangle
 		/// \param InputIterator represents the iterator type of point set container for construction only 
 		template <typename InputIterator>
 		Polygon2Rectangle(rectangle_set_type& vRect, InputIterator input_begin, InputIterator input_end, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
-            : m_vRect(vRect)
+            : m_mPoint((slicing_orient == HOR_VER_SLICING)? 2 : 1)
+            , m_vOrient2Id(2, std::numeric_limits<unsigned char>::max())
+            , m_vRect(vRect)
 		{
 			this->initialize(slicing_orient);
 			this->initialize(input_begin, input_end);
@@ -112,26 +70,21 @@ class Polygon2Rectangle
 		template <typename InputIterator>
 		void initialize(InputIterator input_begin, InputIterator input_end)
 		{
+            assert(input_begin != input_end); 
 			// 1. collecting vertices from input container 
 			// it should be ordered, clockwise or counterclockwise  
 			// identical vertices are skipped 
 			// extra vertices in the same line are skipped  
 			std::vector<point_type> vTmpPoint;
-			// I'm trying to use only forward_iteartor, which only supports ++ operation 
-			// so it may spend more effort on getting the last point 
-			InputIterator input_last = input_end;
-			for (InputIterator itCur = input_begin; itCur != input_end; ++itCur)
-			{
-				InputIterator itNext = itCur;
-				++itNext;
-				if (itNext == input_end)
-				{
-					input_last = itCur;
-					break;
-				}
-			}
-			assert_msg(input_last != input_end, "failed to find input_last, maybe too few points");
-			if (is_equal_type()(*input_begin, *input_last)) ++input_begin; // skip identical first and last points 
+            InputIterator input_last = input_begin; 
+            std::size_t dist = std::distance(input_begin, input_end); 
+            std::advance(input_last, dist-1); 
+			if (is_equal_type()(*input_begin, *input_last)) // skip identical first and last points 
+            {
+                ++input_begin; 
+                --dist;
+            }
+            vTmpPoint.reserve(dist); // reserve memory 
 			// use only operator++ so that just forward_iteartor is enough
 			for (InputIterator itPrev = input_begin; itPrev != input_end; ++itPrev)
 			{
@@ -182,52 +135,52 @@ class Polygon2Rectangle
 #endif 
 
 			// copy from vTmpPoint to m_mPoint
-			for (typename map<orientation_2d, point_set_type>::iterator it = m_mPoint.begin(); 
-					it != m_mPoint.end(); ++it)
-			{
-				orientation_2d const& orient = it->first;
-				point_set_type& vPoint = it->second;
+            std::sort(vTmpPoint.begin(), vTmpPoint.end(), point_compare_type(m_mPoint.front().first));
+            point_set_type& vPointFront = m_mPoint.front().second; 
+            // remove points that appear more than once 
+            // in other words, after following operation, contour polygon will become polygon with holes
+            vPointFront.reserve(vTmpPoint.size()); // not defined in containers like set 
+            for (typename std::vector<point_type>::iterator itCur = vTmpPoint.begin(), itCure = vTmpPoint.end(); itCur != itCure; ++itCur)
+            {
+                typename std::vector<point_type>::iterator itNext = itCur;
+                ++itNext;
+                if (itNext == itCure)
+                    itNext = vTmpPoint.begin();
+                if (!is_equal_type()(*itCur, *itNext))
+                    vPointFront.push_back(*itCur); 
+                else 
+                {
+                    ++itCur;
+                    if (itCur == itCure) break;
+                }
+            }
 
-				std::sort(vTmpPoint.begin(), vTmpPoint.end(), point_compare_type(orient));
-				// remove points that appear more than once 
-				// in other words, after following operation, contour polygon will become polygon with holes
-				vPoint.clear();
-				//vPoint.reserve(vTmpPoint.size()); // not defined in containers like set 
-				for (typename vector<point_type>::iterator itCur = vTmpPoint.begin(); itCur != vTmpPoint.end(); ++itCur)
-				{
-					typename vector<point_type>::iterator itNext = itCur;
-					++itNext;
-					if (itNext == vTmpPoint.end())
-						itNext = vTmpPoint.begin();
-					if (!is_equal_type()(*itCur, *itNext))
-						container_traits<point_set_type>::insert(vPoint, vPoint.end(), *itCur); // provide hint for insertion
-					else 
-					{
-						++itCur;
-						if (itCur == vTmpPoint.end()) break;
-					}
-				}
-			}
-#ifdef DEBUG
-			cout << "reduce from " << vTmpPoint.size() << " to " << m_mPoint.begin()->second.size() << endl;
-#endif 
+            // copy the vTmpPoint to the rest entries 
+            for (std::size_t i = 1, ie = m_mPoint.size(); i < ie; ++i)
+            {
+                point_set_type const& vPointPrev = m_mPoint[i-1].second; 
+                orientation_2d const& orient = m_mPoint[i].first; 
+                point_set_type& vPoint = m_mPoint[i].second; 
+
+                if (i == 1) // make use of the memory already allocated by vTmpPoint 
+                    vPoint.swap(vTmpPoint); 
+                // copy 
+                vPoint.assign(vPointPrev.begin(), vPointPrev.end()); 
+                // sort 
+				std::sort(vPoint.begin(), vPoint.end(), point_compare_type(orient));
+            }
 		}
 
 		/// top api for Polygon2Rectangle 
 		bool operator()()
 		{
-#ifdef _DEBUG_PTR
-			std::cout << "debug| PTR::Polygon2Rectangle(), m_vPoint = " << std::endl;
-			print("debug.gp");
-#endif
+			std::vector<rectangle_type> vRect (m_mPoint.size());
 
-			vector<rectangle_type> vRect (m_mPoint.size());
-
-			while (m_mPoint.begin()->second.size() > 0)
+			while (!m_mPoint.front().second.empty())
 			{
 				int i = 0;
 
-				for (typename map<orientation_2d, point_set_type>::iterator it = m_mPoint.begin();
+				for (typename std::vector<std::pair<orientation_2d, point_set_type> >::const_iterator it = m_mPoint.begin();
 						it != m_mPoint.end(); ++it, ++i)
 				{
 					orientation_2d const& orient = it->first;
@@ -259,8 +212,8 @@ class Polygon2Rectangle
 #endif 
 				}
 				// choose rectangle 
-				typename vector<rectangle_type>::iterator itRect = vRect.begin();
-				for (typename vector<rectangle_type>::iterator it = ++vRect.begin(); it != vRect.end(); ++it)
+				typename std::vector<rectangle_type>::iterator itRect = vRect.begin();
+				for (typename std::vector<rectangle_type>::iterator it = ++vRect.begin(); it != vRect.end(); ++it)
 				{
 					// it is possible to try different strategies here 
 					// choose the one with largest area  
@@ -269,7 +222,7 @@ class Polygon2Rectangle
 						itRect = it;
 				}
 				// insert or remove point 
-				for (typename map<orientation_2d, point_set_type>::iterator it = m_mPoint.begin();
+				for (typename std::vector<std::pair<orientation_2d, point_set_type> >::iterator it = m_mPoint.begin();
 						it != m_mPoint.end(); ++it)
 				{
 					orientation_2d const& orient = it->first;
@@ -370,7 +323,7 @@ class Polygon2Rectangle
 			{
 				out << "set obj " << i++ << " ";
 				out << "polygon \\" << endl;
-				for (typename point_set_type::const_iterator it = vPoint.begin(); it != vPoint.end(); ++it)
+				for (typename point_set_type::const_iterator it = vPoint.begin(), ite = vPoint.end(); it != ite; ++it)
 				{
 					if (it == vPoint.begin())
 						out << "from " << this->get(*it, HORIZONTAL) << ", " << this->get(*it, VERTICAL) << " \\" << endl;
@@ -417,30 +370,23 @@ class Polygon2Rectangle
 		{
 			switch (slicing_orient)
 			{
+                // only need to set orient, the initialization of point array is done implicitly
 				case HORIZONTAL_SLICING:
-					assert(m_mPoint.insert(make_pair(
-									VERTICAL, 
-									container_traits<point_set_type>::construct(point_compare_type(VERTICAL))
-									)).second);
+					m_mPoint.at(0).first = VERTICAL; 
+                    m_vOrient2Id[VERTICAL] = 0;
 					break;
 				case VERTICAL_SLICING:
-					assert(m_mPoint.insert(make_pair(
-									HORIZONTAL, 
-									container_traits<point_set_type>::construct(point_compare_type(HORIZONTAL))
-									)).second);
+					m_mPoint.at(0).first = HORIZONTAL; 
+                    m_vOrient2Id[HORIZONTAL] = 0;
 					break;
 				case HOR_VER_SLICING:
-					assert(m_mPoint.insert(make_pair(
-									VERTICAL, 
-									container_traits<point_set_type>::construct(point_compare_type(VERTICAL))
-									)).second);
-					assert(m_mPoint.insert(make_pair(
-									HORIZONTAL, 
-									container_traits<point_set_type>::construct(point_compare_type(HORIZONTAL))
-									)).second);
+					m_mPoint.at(0).first = VERTICAL; 
+                    m_vOrient2Id[VERTICAL] = 0;
+					m_mPoint.at(1).first = HORIZONTAL; 
+                    m_vOrient2Id[HORIZONTAL] = 1; 
 					break;
 				default:
-					cout << "unknown slicing orientation" << endl;
+                    std::cout << "unknown slicing orientation" << std::endl;
 					assert(0);
 			}
 		}
@@ -452,7 +398,7 @@ class Polygon2Rectangle
 		///            2) Ym is lowest but Ym > Yk (Yk == Yl)
 		bool find_Pk_Pl_Pm(point_type& Pk, point_type& Pl, point_type& Pm, orientation_2d const& orient) 
 		{
-			point_set_type const& vPoint = m_mPoint[orient];
+			point_set_type const& vPoint = m_mPoint.at(m_vOrient2Id[orient.to_int()]).second;
 			if (vPoint.size() < 4)
 				return false;
 
@@ -466,7 +412,7 @@ class Polygon2Rectangle
 			// determine Pm
 			this->set(Pm, HORIZONTAL, std::numeric_limits<coordinate_type>::max());
 			this->set(Pm, VERTICAL, std::numeric_limits<coordinate_type>::max());
-			for (typename point_set_type::const_iterator it = vPoint.begin(); it != vPoint.end(); ++it)
+			for (typename point_set_type::const_iterator it = vPoint.begin(), ite = vPoint.end(); it != ite; ++it)
 			{
 				if (this->get(Pk, orient) == this->get(*it, orient))
 					continue;
@@ -487,7 +433,7 @@ class Polygon2Rectangle
 		}
 		void F(point_type const& point, orientation_2d const& orient)
 		{
-			point_set_type& vPoint = m_mPoint[orient];
+			point_set_type& vPoint = m_mPoint.at(m_vOrient2Id[orient.to_int()]).second;
 
 			// vPoint is always in order 
 			typename point_set_type::iterator itr = std::lower_bound(vPoint.begin(), vPoint.end(), point, point_compare_type(orient));
@@ -501,62 +447,14 @@ class Polygon2Rectangle
 				container_traits<point_set_type>::erase(vPoint, itr);
 			}
 		}
-#if 0
-		/// \brief maybe useful in get the length of slide line 
-		coordinate_type getHorRangeNext(coordinate_type const& x1, coordinate_type const& x2, coordinate_type const& min_y) const
-		{
-			coordinate_type next_y = std::numeric_limits<coordinate_type>::max() / 2;
-
-			for (typename point_set_type::const_iterator it = m_vPoint.begin(); it != m_vPoint.end(); ++it)
-			{
-				coordinate_type x = this->get(*it, HORIZONTAL), y = this->get(*it, VERTICAL);
-				if (x<x1 || x>x2) continue;
-				if (y <= min_y)   continue;
-				if (y >= next_y)  continue;  
-
-				next_y = y;
-			}
-
-			return next_y;
-		}
-
-		coordinate_type getVerRangeNext(coordinate_type const& y1, coordinate_type const& y2, coordinate_type const& min_x) const
-		{
-			coordinate_type next_x = std::numeric_limits<coordinate_type>::max() / 2;
-
-			for (typename point_set_type::const_iterator it = m_vPoint.begin(); it != m_vPoint.end(); ++it)
-			{
-				coordinate_type x = this->get(*it, HORIZONTAL), y = this->get(*it, VERTICAL);
-				if (y<y1 || y>y2) continue;
-				if (x <= min_x)   continue;
-				if (x >= next_x)  continue;
-
-				next_x = x;
-			}
-
-			return next_x;
-		}
-#endif 
-		map<orientation_2d, point_set_type> m_mPoint; ///< save all points of a polygon 
-													///< 1~2 copies, sort by left lower or by lower left 
-													///< for HORIZONTAL key, sort by left lower 
-													///< for VERTICAL key, sort by lower left 
+        std::vector<std::pair<orientation_2d, point_set_type> > m_mPoint; ///< save all points of a polygon 
+                                                                        ///< 1~2 copies, sort by left lower or by lower left 
+                                                                        ///< for HORIZONTAL key, sort by left lower 
+                                                                        ///< for VERTICAL key, sort by lower left 
+        std::vector<unsigned char>  m_vOrient2Id; ///< orientation_2d to index of m_mPoint
 		rectangle_set_type& m_vRect; ///< save all rectangles from conversion 
 };
 
-/// \brief standby function for polygon-to-rectangle conversion 
-/// \param InputIterator represents the input iterators for points of polygon 
-/// \param PointSet represents the internal container for points of polygon, user needs to pass a hint for type deduction 
-/// \param RectSet represents the container for rectangles 
-template <typename InputIterator, typename PointSet, typename RectSet>
-inline bool polygon2rectangle(InputIterator input_begin, InputIterator input_end, 
-		PointSet const&, RectSet& r, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
-{
-	Polygon2Rectangle<PointSet, RectSet> p2r (r, input_begin, input_end, slicing_orient);
-	if (!p2r()) return false;
-	return true;
-}
-
 }} // namespace limbo // namespace geometry
 
-#endif 
+#endif

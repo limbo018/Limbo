@@ -126,7 +126,8 @@ struct rectangle_traits<Rectangle>
 
 void test1(string const& filename)
 {
-	Polygon2Rectangle<vector<Point>, vector<Rectangle> > p2r (HOR_VER_SLICING);
+    vector<Rectangle> vRect; 
+	Polygon2Rectangle<vector<Point>, vector<Rectangle> > p2r (vRect, HOR_VER_SLICING);
 	assert(p2r.read(filename));
 	assert(p2r());
 	p2r.print("p2r1.gp");
@@ -134,7 +135,8 @@ void test1(string const& filename)
 
 void test2(string const& filename)
 {
-	Polygon2Rectangle<list<Point>, vector<Rectangle> > p2r (HOR_VER_SLICING);
+    vector<Rectangle> vRect; 
+	Polygon2Rectangle<list<Point>, vector<Rectangle> > p2r (vRect, HOR_VER_SLICING);
 	assert(p2r.read(filename));
 	assert(p2r());
 	p2r.print("p2r2.gp");
@@ -142,7 +144,8 @@ void test2(string const& filename)
 
 void test3(string const& filename)
 {
-	Polygon2Rectangle<set<Point, point_compare_type>, vector<Rectangle> > p2r (HOR_VER_SLICING);
+    vector<Rectangle> vRect; 
+	Polygon2Rectangle<set<Point, point_compare_type>, vector<Rectangle> > p2r (vRect, HOR_VER_SLICING);
 	assert(p2r.read(filename));
 	assert(p2r());
 	p2r.print("p2r3.gp");
