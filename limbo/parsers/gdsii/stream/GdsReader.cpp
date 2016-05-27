@@ -56,7 +56,7 @@ bool read(GdsDataBaseKernel& db, string const& filename)
 GdsReader::GdsReader(GdsDataBaseKernel& db) 
     : m_db(db) 
 {
-    m_bcap = 4*1024; // 4 KB
+    m_bcap = 8*1024; // 8 KB
     m_blen = 0; 
     m_buffer = new char [m_bcap]; 
     m_bptr = m_buffer; 
@@ -66,6 +66,30 @@ GdsReader::~GdsReader()
 {
     delete [] m_buffer; 
     m_bptr = NULL; 
+}
+
+/// copy char* as unsigned long* and deal with boundary cases 
+inline void fast_copy (char *t, const char *s, std::size_t n)
+{
+    if (n >= sizeof (unsigned long)) 
+    {
+        unsigned long *tl = reinterpret_cast<unsigned long *> (t);
+        const unsigned long *sl = reinterpret_cast<const unsigned long *> (s);
+
+        while (n >= sizeof (unsigned long)) 
+        {
+            *tl++ = *sl++;
+            n -= sizeof (unsigned long);
+        }
+
+        t = reinterpret_cast<char *> (tl);
+        s = reinterpret_cast<const char *> (sl);
+    }
+
+    while (n-- > 0) 
+    {
+        *t++ = *s++;
+    }
 }
 
 const char* GdsReader::gds_read(int& fp, int& no_read, std::size_t n)
@@ -83,7 +107,9 @@ const char* GdsReader::gds_read(int& fp, int& no_read, std::size_t n)
             char *buffer = new char [m_bcap];
             if (m_blen > 0) 
             {
+                // it seems memcpy is faster than fast_copy here 
                 memcpy (buffer, m_bptr, m_blen);
+                //fast_copy(buffer, m_bptr, m_blen); 
             }
             delete [] m_buffer;
             m_buffer = buffer;
