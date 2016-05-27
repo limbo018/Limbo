@@ -139,6 +139,9 @@ struct EnumDataBase : public GdsParser::GdsDataBaseKernel
                 cout << "LAYER = " << data[0] <<  endl;
                 break;
             case GdsParser::GdsRecords::XY:
+                for (typename ContainerType::const_iterator it = data.begin(); it != data.end(); ++it)
+                    cout << *it << " "; 
+                cout << endl; 
                 cout << data.size() << endl;
                 break;
             case GdsParser::GdsRecords::ENDEL:

@@ -53,12 +53,79 @@ bool read(GdsDataBaseKernel& db, string const& filename)
 	return GdsReader(db)(filename.c_str());
 }
 
+GdsReader::GdsReader(GdsDataBaseKernel& db) 
+    : m_db(db) 
+{
+    m_bcap = 4*1024; // 4 KB
+    m_blen = 0; 
+    m_buffer = new char [m_bcap]; 
+    m_bptr = m_buffer; 
+}
+
+GdsReader::~GdsReader()
+{
+    delete [] m_buffer; 
+    m_bptr = NULL; 
+}
+
+const char* GdsReader::gds_read(int& fp, int& no_read, std::size_t n)
+{
+    if (m_blen < n) // content in the buffer is not enough 
+    {
+        //  to keep move activity low, allocate twice as much as required
+        if (m_bcap < n * 2) 
+        {
+            while (m_bcap < n) // amortize doubling 
+            {
+                m_bcap *= 2;
+            }
+
+            char *buffer = new char [m_bcap];
+            if (m_blen > 0) 
+            {
+                memcpy (buffer, m_bptr, m_blen);
+            }
+            delete [] m_buffer;
+            m_buffer = buffer;
+
+        } 
+        else if (m_blen > 0) // move existing content front 
+        {
+            memmove (m_buffer, m_bptr, m_blen);
+        }
+
+        int num_bytes = ::read (fp, m_buffer + m_blen, m_bcap - m_blen); 
+        if (num_bytes < 0) // error 
+        {
+            no_read = 0; 
+            return NULL; 
+        }
+        m_blen += num_bytes;
+        m_bptr = m_buffer;
+    }
+
+    if (m_blen >= n) 
+    {
+        const char *r = m_bptr;
+        m_bptr += n;
+        m_blen -= n;
+        no_read = n; 
+        return r;
+    } 
+    else 
+    {
+        no_read = 0; 
+        return NULL;
+    }
+}
+
 bool GdsReader::operator() (const char* filename)
 {
-	unsigned char no_byte_array[2];
+    // unsigned char no_byte_array[2]; 
+	unsigned char* no_byte_array;
 	int no_read;
 	int no_bytes;
-	unsigned char *record;
+	unsigned char* record;
     int indent_amount;
 	int record_type;
 	int data_type;
@@ -101,8 +168,8 @@ bool GdsReader::operator() (const char* filename)
 	{
 		/* read 2 bytes, this will be two bytes telling how many bytes of
 		 * data are in this record (including these two bytes) */
-		/*no_read = read (0, no_byte_array, 2);*/
-		no_read = ::read (fp, no_byte_array, 2);
+		//no_read = ::read (fp, no_byte_array, 2);
+        no_byte_array = (unsigned char*)gds_read(fp, no_read, 2); 
 
 		/* if we can't read 2 bytes, we must be at the end of the file. If we
 		 * just get one byte and it's not  padding (a 0), something is wrong
@@ -127,11 +194,11 @@ bool GdsReader::operator() (const char* filename)
 		if (no_bytes != 0)
 		{
 			/* make room for the rest of the record */
-			record = (unsigned char *) malloc (no_bytes - 2);
+			//record = (unsigned char *) malloc (no_bytes - 2);
 
 			/* read in the record */
-			/*no_read = read (0, record, no_bytes - 2);*/
-			no_read = ::read (fp, record, no_bytes - 2);
+			//no_read = ::read (fp, record, no_bytes - 2);
+            record = (unsigned char*)gds_read(fp, no_read, no_bytes-2); 
 
 			/* we should always get all of the bytes we asked for */
 			if (no_read != no_bytes - 2)
@@ -390,7 +457,7 @@ bool GdsReader::operator() (const char* filename)
 			}
 
 			/* free the record memory */
-			free (record);
+			//free (record);
 		}
 		else
 		{
