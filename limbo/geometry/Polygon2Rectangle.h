@@ -85,6 +85,8 @@ class Polygon2Rectangle
 		typedef typename point_traits<point_type>::coordinate_type coordinate_type;
 		/// \brief internal rectangle type 
 		typedef typename container_traits<rectangle_set_type>::value_type rectangle_type;
+        typedef typename coordinate_traits<coordinate_type>::coordinate_distance coordinate_distance; 
+        typedef typename coordinate_traits<coordinate_type>::manhattan_area_type manhattan_area_type; 
 
 		/// constructor 
 		/// \param slicing_orient indicates the orientation of slicing 
@@ -92,15 +94,19 @@ class Polygon2Rectangle
 		/// if slicing_orient == HOR_VER_SLICING, 2 copies of points sorted by different orientation are stored 
 		/// btw, slicing orientation is perpendicular to its corresponding sorting orientation 
 		Polygon2Rectangle(rectangle_set_type& vRect, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
-            : m_vRect(vRect)
+            : m_mPoint()
+            , m_vRect(vRect) 
+            , m_slicing_orient(slicing_orient)
 		{
 			this->initialize(slicing_orient);
 		}
 		/// constructor 
 		/// \param InputIterator represents the iterator type of point set container for construction only 
 		template <typename InputIterator>
-		Polygon2Rectangle(rectangle_set_type& vRect, InputIterator input_begin, InputIterator input_end, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
-            : m_vRect(vRect)
+		Polygon2Rectangle(rectangle_set_type& vRect, InputIterator input_begin, InputIterator input_end, slicing_orientation_2d slicing_orient)
+            : m_mPoint()
+            , m_vRect(vRect)
+            , m_slicing_orient(slicing_orient)
 		{
 			this->initialize(slicing_orient);
 			this->initialize(input_begin, input_end);
@@ -260,10 +266,46 @@ class Polygon2Rectangle
 				for (typename vector<rectangle_type>::iterator it = ++vRect.begin(); it != vRect.end(); ++it)
 				{
 					// it is possible to try different strategies here 
-					// choose the one with largest area  
-					if ((this->get(*it, RIGHT)-this->get(*it, LEFT))*(this->get(*it, TOP)-this->get(*it, BOTTOM))
-							> (this->get(*itRect, RIGHT)-this->get(*itRect, LEFT))*(this->get(*itRect, TOP)-this->get(*itRect, BOTTOM)))
-						itRect = it;
+					// choose the one with heuristic  
+                    coordinate_distance w = this->get(*it, RIGHT)-this->get(*it, LEFT); 
+                    coordinate_distance h = this->get(*it, TOP)-this->get(*it, BOTTOM); 
+                    coordinate_distance wref = this->get(*itRect, RIGHT)-this->get(*itRect, LEFT); 
+                    coordinate_distance href = this->get(*itRect, TOP)-this->get(*itRect, BOTTOM); 
+                    switch (m_slicing_orient)
+                    {
+                        case HOR_VER_SLICING:
+                        {
+                            // compute area 
+                            if (w*h > wref*href) // choose large area 
+                                itRect = it;
+                            break; 
+                        }
+                        case HOR_VER_SA_SLICING:
+                        {
+                            // compute area 
+                            if (w*h < wref*href) // choose small area 
+                                itRect = it;
+                            break; 
+                        }
+                        case HOR_VER_AR_SLICING:
+                        {
+                            // compute aspect ratio = maxDelta/minDelta
+                            coordinate_distance minDelta = w;
+                            coordinate_distance maxDelta = h; 
+                            coordinate_distance minDeltaRef = wref;
+                            coordinate_distance maxDeltaRef = href; 
+                            if (minDelta > maxDelta)
+                                std::swap(minDelta, maxDelta); 
+                            if (minDeltaRef > maxDeltaRef)
+                                std::swap(minDeltaRef, maxDeltaRef); 
+                            // I rearrage the aspect ratio computation to avoid division 
+                            if (maxDelta*minDeltaRef < minDelta*maxDeltaRef) // avoid rectangle with bad aspect ratio 
+                                itRect = it;
+                            break; 
+                        }
+                        default:
+                            assert_msg(0, "should not reach here " << m_slicing_orient); 
+                    }
 				}
 				// insert or remove point 
 				for (typename map<orientation_2d, point_set_type>::iterator it = m_mPoint.begin();
@@ -427,6 +469,8 @@ class Polygon2Rectangle
 									)).second);
 					break;
 				case HOR_VER_SLICING:
+                case HOR_VER_SA_SLICING:
+                case HOR_VER_AR_SLICING:
 					assert(m_mPoint.insert(make_pair(
 									VERTICAL, 
 									container_traits<point_set_type>::construct(point_compare_type(VERTICAL))
@@ -539,6 +583,7 @@ class Polygon2Rectangle
 													///< for HORIZONTAL key, sort by left lower 
 													///< for VERTICAL key, sort by lower left 
 		rectangle_set_type& m_vRect; ///< save all rectangles from conversion 
+        slicing_orientation_2d m_slicing_orient; ///< slicing orient
 };
 
 }} // namespace limbo // namespace geometry

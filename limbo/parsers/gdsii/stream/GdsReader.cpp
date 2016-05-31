@@ -56,7 +56,7 @@ bool read(GdsDataBaseKernel& db, string const& filename)
 GdsReader::GdsReader(GdsDataBaseKernel& db) 
     : m_db(db) 
 {
-    m_bcap = 8*1024; // 8 KB
+    m_bcap = 4*1024; // 4 KB
     m_blen = 0; 
     m_buffer = new char [m_bcap]; 
     m_bptr = m_buffer; 
