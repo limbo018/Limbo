@@ -80,13 +80,13 @@ $(TEST_DIR)/%.o: %.cpp
 # Link executable
 
 $(TEST_DIR)/test_p2r: $(TEST_DIR)/test_p2r.o 
-	$(CXX) $(LDFLAGS) -o $@ $(TEST_DIR)/test_p2r.o 
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_p2r.o 
 
 $(TEST_DIR)/test_blibapi: $(TEST_DIR)/test_blibapi.o
-	$(CXX) $(LDFLAGS) -o $@ $(TEST_DIR)/test_blibapi.o 
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_blibapi.o 
 
 $(TEST_DIR)/test_boostpolygonapi: $(TEST_DIR)/test_boostpolygonapi.o $(TEST_DIR)/libGeoBoostPolygonApi.a
-	$(CXX) $(LDFLAGS) -o $@ $(TEST_DIR)/test_boostpolygonapi.o $(LIMBO_ROOT_DIR)/lib/libGeoBoostPolygonApi.a
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_boostpolygonapi.o $(LIMBO_ROOT_DIR)/lib/libGeoBoostPolygonApi.a
 
 $(TEST_DIR)/libGeoBoostPolygonApi.a: $(TEST_DIR)/GeoBoostPolygonApi.o
 	$(AR) $(ARFLAGS) libGeoBoostPolygonApi.a $(TEST_DIR)/GeoBoostPolygonApi.o

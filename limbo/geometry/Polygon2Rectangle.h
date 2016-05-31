@@ -33,9 +33,6 @@
 #include <limbo/string/String.h>
 #include <limbo/preprocessor/AssertMsg.h>
 
-/// a specialization for vectors 
-#include <limbo/geometry/Polygon2RectangleVec.h>
-
 namespace limbo { namespace geometry {
 
 using std::cout;
@@ -543,6 +540,13 @@ class Polygon2Rectangle
 													///< for VERTICAL key, sort by lower left 
 		rectangle_set_type& m_vRect; ///< save all rectangles from conversion 
 };
+
+}} // namespace limbo // namespace geometry
+
+/// a specialization for vectors 
+#include <limbo/geometry/Polygon2RectangleVec.h>
+
+namespace limbo { namespace geometry {
 
 /// \brief standby function for polygon-to-rectangle conversion 
 /// \param InputIterator represents the input iterators for points of polygon 
