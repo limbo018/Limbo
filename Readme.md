@@ -1,4 +1,3 @@
-
 #**Limbo Library**
 ---------
 
@@ -52,6 +51,7 @@ All components are written with C/C++ and API is designed for easy usage and sim
 ### 1. Flex
 
 * A fast scanner generator or lexical analyzer generator. Another famous related software is Lex.
+Current parsers support flex 2.5.37. 
 
 ### 2. Bison 
 
@@ -102,6 +102,17 @@ make install
 
 In the subdirectories of source code, there are test folders including test/example programs.
 
-## Copyright 
-Copyright (c) 2014-2015 
+## FAQ
 
+###1. Compiling errors like
+```
+LefScanner.cc:5582:21: error: out-of-line definition of 'LexerInput' does not match any declaration in 'LefParserFlexLexer'
+
+size_t yyFlexLexer::LexerInput( char* buf, size_t max_size )
+```
+comes from old versions of flex, such as 2.5.35. 
+
+**A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environmental variable. 
+
+## Copyright 
+Copyright (c) 2014-2015
