@@ -114,5 +114,13 @@ comes from old versions of flex, such as 2.5.35.
 
 **A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environmental variable. 
 
+###2. Compiling errors like 
+```
+LefScanner.cc:3195:8: error: member reference type 'std::istream *' (aka 'basic_istream<char> *') is a pointer; did you mean to use '->'?
+                        yyin.rdbuf(std::cin.rdbuf());
+```
+comes from new versions of flex, such as 2.6.0. 
+**A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environmental variable. 
+
 ## Copyright 
 Copyright (c) 2014-2015
