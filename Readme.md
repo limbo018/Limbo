@@ -120,6 +120,7 @@ LefScanner.cc:3195:8: error: member reference type 'std::istream *' (aka 'basic_
                         yyin.rdbuf(std::cin.rdbuf());
 ```
 comes from new versions of flex, such as 2.6.0. 
+
 **A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environmental variable. 
 
 ## Copyright 
