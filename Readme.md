@@ -107,8 +107,7 @@ In the subdirectories of source code, there are test folders including test/exam
 ###1. Compiling errors like
 ```
 LefScanner.cc:5582:21: error: out-of-line definition of 'LexerInput' does not match any declaration in 'LefParserFlexLexer'
-
-size_t yyFlexLexer::LexerInput( char* buf, size_t max_size )
+                        size_t yyFlexLexer::LexerInput( char* buf, size_t max_size )
 ```
 comes from old versions of flex, such as 2.5.35. 
 
