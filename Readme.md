@@ -112,8 +112,7 @@ size_t yyFlexLexer::LexerInput( char* buf, size_t max_size )
 ```
 comes from old versions of flex, such as 2.5.35. 
 
-###A: 
-It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environmental variable. 
+**A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environmental variable. 
 
 ## Copyright 
 Copyright (c) 2014-2015
