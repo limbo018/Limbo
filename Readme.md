@@ -88,24 +88,23 @@ In this library, an API for lemon (MFC solver) is implemented to solve LP and du
 The API supports reading files with both LGF (lemon graph format) and LP (linear program format) and then dump out solutions. 
 Thus, it will be easier to verify results with general LP solvers such as Gurobi or CBC.
 
-## 8. Bug Report 
+## Bug Report 
 
 Please report bugs to Yibo Lin (yibolin at utexas dot edu). 
 
-## 9. Intallation
+## Intallation
 
 In the directory of limbo library, run
 
 make install
 
-## 10. Examples
+## Examples
 
 In the subdirectories of source code, there are test folders including test/example programs.
 
-## 11. FAQ
+## FAQ
 
-#11.1 
-Compiling errors like
+###1. Compiling errors like
 ```
 LefScanner.cc:5582:21: error: out-of-line definition of 'LexerInput' does not match any declaration in 'LefParserFlexLexer'
 
@@ -113,7 +112,7 @@ size_t yyFlexLexer::LexerInput( char* buf, size_t max_size )
 ```
 comes from old versions of flex, such as 2.5.35. 
 
-#A: 
+###A: 
 It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environmental variable. 
 
 ## Copyright 
