@@ -12,6 +12,7 @@ input iccad_clk;
 
 // Start POs
 output out;
+output aaa[0];
 
 // Start wires
 wire n1,
@@ -27,6 +28,7 @@ wire inp2;
 wire iccad_clk;
 wire out;
 wire lcb1_fo;
+wire aaa[1];
 
 // Start cells
 NAND2_X1 u1 ( .a(inp1), .b(inp2), .o(n1) );
