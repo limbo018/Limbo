@@ -206,6 +206,15 @@ instance_params: /* empty */
                ;
 
 module_instance: NAME NAME '(' instance_params ')' ';' {driver.module_instance_cbk(*$1, *$2); delete $1; delete $2;}
+               | NAME NAME '[' NUM ']' '(' instance_params ')' ';' {
+               /* append NUM to instance name */
+               char buf[256];
+               sprintf(buf, "[%d]", $4);
+               $2->append(buf);
+               driver.module_instance_cbk(*$1, *$2); 
+               delete $1; 
+               delete $2;
+               }
                ;
 
 module_content: /* empty */
