@@ -32,7 +32,7 @@ wire lcb1_fo;
 wire aaa[1];
 
 // Start cells
-NAND2_X1 u1 ( .a(inp1), .b(inp2), .o(n1) );
+NAND2_X1 u1/reg0 ( .a(inp1), .b(inp2), .o(n1) );
 NOR2_X1 u2 ( .a(n1), .b(n3), .o(n2) );
 DFF_X80 f1 ( .d(n2), .ck(lcb1_fo), .q(n3) );
 INV_X1 u3 ( .a(n3), .o(n4) );
