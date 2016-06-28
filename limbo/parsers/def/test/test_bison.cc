@@ -45,25 +45,25 @@ class DataBase : public DefParser::DefDataBase
 		{
 			cout << __func__ << endl;
 		}
-		virtual void add_def_component(DefParser::Component const&) 
+		virtual void add_def_component(DefParser::Component const& c) 
 		{
-			cout << __func__ << endl;
+			cout << __func__ << ": " << c.comp_name << endl;
 		}
 		virtual void resize_def_component(int token) 
 		{
 			cout << __func__ << " => " << token << endl;
 		}
-		virtual void add_def_pin(DefParser::Pin const&) 
+		virtual void add_def_pin(DefParser::Pin const& p) 
 		{
-			cout << __func__ << endl;
+			cout << __func__ << ": " << p.pin_name << endl;
 		}
 		virtual void resize_def_pin(int token)  
 		{
 			cout << __func__ << " => " << token << endl;
 		}
-		virtual void add_def_net(DefParser::Net const&) 
+		virtual void add_def_net(DefParser::Net const& n) 
 		{
-			cout << __func__ << endl;
+			cout << __func__ << ": " << n.net_name << endl;
 		}
 		virtual void resize_def_net(int token) 
 		{
