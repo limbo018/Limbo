@@ -130,4 +130,4 @@ To solve the problem, users can set the environmental variable FLEX_DIR such tha
 The decision can be made according to how the flex package is installed.  
 
 ## Copyright 
-Copyright (c) 2014-2015
+Copyright (c) 2014-2016
