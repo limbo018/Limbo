@@ -104,23 +104,31 @@ In the subdirectories of source code, there are test folders including test/exam
 
 ## FAQ
 
-###1. Compiling errors like
+###1. *(Deprecated)* Compiling errors like
 ```
 LefScanner.cc:5582:21: error: out-of-line definition of 'LexerInput' does not match any declaration in 'LefParserFlexLexer'
                         size_t yyFlexLexer::LexerInput( char* buf, size_t max_size )
 ```
-comes from old versions of flex, such as 2.5.35. 
+come from old versions of flex, such as 2.5.35. 
 
 **A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environmental variable. 
 
-###2. Compiling errors like 
+###2. *(Deprecated)* Compiling errors like 
 ```
 LefScanner.cc:3195:8: error: member reference type 'std::istream *' (aka 'basic_istream<char> *') is a pointer; did you mean to use '->'?
                         yyin.rdbuf(std::cin.rdbuf());
 ```
-comes from new versions of flex, such as 2.6.0. 
+come from new versions of flex, such as 2.6.0. 
 
 **A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environmental variable. 
+
+###3. Compiling errors related to LefScanner.cc usually come from the configurations of flex version and environmental variables FLEX_DIR and LEX_INCLUDE_DIR. 
+
+**A:** LefScanner.cc needs to include the correct FlexLexer.h from the flex package for compilation; i.e., the version of FlexLexer.h must match the version of the flex executable. 
+Most errors for LefScanner.cc are caused by the failure of finding the correct FlexLexer.h (be careful when you have multiple versions of flex installed). 
+To solve the problem, users can set the environmental variable FLEX_DIR such that $FLEX_DIR/include points to the directory containing FlexLexer.h;  
+or alternatively set LEX_INCLUDE_DIR to the directory containing FlexLexer.h. 
+The decision can be made according to how the flex package is installed.  
 
 ## Copyright 
 Copyright (c) 2014-2015
