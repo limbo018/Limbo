@@ -126,8 +126,7 @@ come from new versions of flex, such as 2.6.0.
 
 **A:** LefScanner.cc needs to include the correct FlexLexer.h from the flex package for compilation; i.e., the version of FlexLexer.h must match the version of the flex executable. 
 Most errors for LefScanner.cc are caused by the failure of finding the correct FlexLexer.h (be careful when you have multiple versions of flex installed). 
-To solve the problem, users can set the environmental variable FLEX_DIR such that $FLEX_DIR/include points to the directory containing FlexLexer.h;  
-or alternatively set LEX_INCLUDE_DIR to the directory containing FlexLexer.h. 
+To solve the problem, users can set the environmental variable FLEX_DIR such that $FLEX_DIR/include points to the directory containing FlexLexer.h, or alternatively set LEX_INCLUDE_DIR to the directory containing FlexLexer.h. 
 The decision can be made according to how the flex package is installed.  
 
 ## Copyright 
