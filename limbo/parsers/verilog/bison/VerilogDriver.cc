@@ -58,6 +58,7 @@ void Driver::module_instance_cbk(std::string const& macro_name, std::string cons
 	// remember to clear m_vNetPin
 	m_vNetPin.clear();
 }
+
 void Driver::wire_pin_cbk(std::string& net_name, std::string& pin_name, Range const& range)
 {
 	m_vNetPin.push_back(NetPin(net_name, pin_name, range));

@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <list>
+#include <ostream>
 
 /// ===================================================================
 ///    class          : Geometry
@@ -38,8 +39,29 @@ enum slicing_orientation_2d
 {
 	HORIZONTAL_SLICING = 1,
 	VERTICAL_SLICING = 2,
-	HOR_VER_SLICING = 3
+	HOR_VER_SLICING = 3, ///< horizontal/vertical slicing and choose rectangle with larger area every time 
+    HOR_VER_SA_SLICING = 4, ///< horizontal/vertical slicing and choose rectangle with smaller area every time 
+    HOR_VER_AR_SLICING = 5 ///< horizontal/vertical slicing and choose rectangle with better aspect ratio every time 
 };
+
+inline std::string to_string(slicing_orientation_2d slicing_orient)
+{
+    switch (slicing_orient)
+    {
+        case HORIZONTAL_SLICING:
+            return "HORIZONTAL_SLICING"; 
+        case VERTICAL_SLICING:
+            return "VERTICAL_SLICING"; 
+        case HOR_VER_SLICING:
+            return "HOR_VER_SLICING"; 
+        case HOR_VER_SA_SLICING:
+            return "HOR_VER_SA_SLICING"; 
+        case HOR_VER_AR_SLICING:
+            return "HOR_VER_AR_SLICING"; 
+        default:
+            return "UNKNOWN";
+    }
+}
 
 /// \brief direction type for rectangles 
 enum direction_2d

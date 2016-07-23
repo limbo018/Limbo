@@ -128,6 +128,7 @@
  /*** BEGIN EXAMPLE - Change the example grammar rules below ***/
 
 range: '[' NUM ':' NUM ']' {$$ = new Range ($2, $4);}
+     | '[' NUM ']' {$$ = new Range (0, $2);}
 
 name_array: NAME {
           $$ = new StringArray(1, *$1);
@@ -153,23 +154,31 @@ param2: '.' NAME '(' NAME ')' {driver.wire_pin_cbk(*$4, *$2); delete $2; delete 
 param3: INPUT name_array {driver.pin_declare_cbk(*$2, kINPUT); delete $2;}
       | INPUT REG name_array {driver.pin_declare_cbk(*$3, kINPUT|kREG); delete $3;}
       | INPUT range name_array {driver.pin_declare_cbk(*$3, kINPUT, *$2); delete $2; delete $3;} 
+      | INPUT name_array range {driver.pin_declare_cbk(*$2, kINPUT, *$3); delete $2; delete $3;} 
       | INPUT REG range name_array {driver.pin_declare_cbk(*$4, kINPUT|kREG, *$3); delete $3; delete $4;}
+      | INPUT REG name_array range {driver.pin_declare_cbk(*$3, kINPUT|kREG, *$4); delete $3; delete $4;}
       | OUTPUT name_array {driver.pin_declare_cbk(*$2, kOUTPUT); delete $2;}
       | OUTPUT REG name_array {driver.pin_declare_cbk(*$3, kOUTPUT|kREG); delete $3;}
       | OUTPUT range name_array {driver.pin_declare_cbk(*$3, kOUTPUT, *$2); delete $2; delete $3;}
+      | OUTPUT name_array range {driver.pin_declare_cbk(*$2, kOUTPUT, *$3); delete $2; delete $3;}
       | OUTPUT REG range name_array {driver.pin_declare_cbk(*$4, kOUTPUT|kREG, *$3); delete $3; delete $4;}
+      | OUTPUT REG name_array range {driver.pin_declare_cbk(*$3, kOUTPUT|kREG, *$4); delete $3; delete $4;}
       | INOUT name_array {driver.pin_declare_cbk(*$2, kINPUT|kOUTPUT); delete $2;}
       | INOUT REG name_array {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT|kREG); delete $3;}
       | INOUT range name_array {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT, *$2); delete $2; delete $3;}
+      | INOUT name_array range {driver.pin_declare_cbk(*$2, kINPUT|kOUTPUT, *$3); delete $2; delete $3;}
       | INOUT REG range name_array {driver.pin_declare_cbk(*$4, kINPUT|kOUTPUT|kREG, *$3); delete $3; delete $4;}
+      | INOUT REG name_array range {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT|kREG, *$4); delete $3; delete $4;}
       ;
 
 param4: REG name_array {delete $2;}
       | REG range name_array {delete $2; delete $3;}
+      | REG name_array range {delete $2; delete $3;}
       ;
 
 param5: WIRE name_array {driver.wire_declare_cbk(*$2); delete $2;}
       | WIRE range name_array {driver.wire_declare_cbk(*$3, *$2); delete $2; delete $3;}
+      | WIRE name_array range {driver.wire_declare_cbk(*$2, *$3); delete $2; delete $3;}
       ;
 
 
@@ -197,6 +206,15 @@ instance_params: /* empty */
                ;
 
 module_instance: NAME NAME '(' instance_params ')' ';' {driver.module_instance_cbk(*$1, *$2); delete $1; delete $2;}
+               | NAME NAME '[' NUM ']' '(' instance_params ')' ';' {
+               /* append NUM to instance name */
+               char buf[256];
+               sprintf(buf, "[%d]", $4);
+               $2->append(buf);
+               driver.module_instance_cbk(*$1, *$2); 
+               delete $1; 
+               delete $2;
+               }
                ;
 
 module_content: /* empty */

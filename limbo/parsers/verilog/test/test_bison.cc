@@ -21,7 +21,7 @@ class DataBase : public VerilogParser::VerilogDataBase
         {
 			cout << __func__ << " => " << macro_name << ", " << inst_name << ", ";
             for (std::vector<VerilogParser::NetPin>::const_iterator it = vNetPin.begin(); it != vNetPin.end(); ++it)
-                cout << it->pin << "(" << it->net << ") ";
+                cout << it->pin << "(" << it->net << ")" << "[" << it->range.low << ":" << it->range.high << "] ";
             cout << endl;
         }
         virtual void verilog_net_declare_cbk(std::string const& net_name, VerilogParser::Range const& range)
