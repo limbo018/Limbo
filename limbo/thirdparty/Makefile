@@ -59,4 +59,4 @@ extraclean:
 	rm -f $(LIMBO_ROOT_DIR)/lib/liblinear.a
 	rm -f $(LIMBO_ROOT_DIR)/bin/liblinear-train
 	rm -f $(LIMBO_ROOT_DIR)/bin/liblinear-predict
-	@bash -c "cd $(CTHREADPOOL_SRCS); make extraclean; cd .."
+	@bash -c "cd $(CTHREADPOOL_SRCS); make clean; cd .."
