@@ -92,11 +92,51 @@ Thus, it will be easier to verify results with general LP solvers such as Gurobi
 
 Please report bugs to Yibo Lin (yibolin at utexas dot edu). 
 
-## Intallation
+## Installation
 
-In the directory of limbo library, run
+Some components depend on external libraries, such as 
 
+* [Boost](www.boost.org)
+* [Lemon](https://lemon.cs.elte.hu)
+* [Gurobi](www.gurobi.com) 
+
+Users need to make sure they are properly installed. 
+
+### 1. Default installation
+
+* In the directory of limbo library, run
+```
 make install
+```
+
+### 2. Customize CXX and CC options 
+
+* CXX sets the compiler for C++ and CC sets the compiler for C. 
+Some examples are as follows, 
+```
+make install CXX=g++ CC=gcc (default for Linux)
+make install CXX=clang++ CC=clang (default for Mac/Darwin)
+```
+
+### 3. Customize CXXSTDLIB and CXXSTD options
+
+* CXXSTDLIB is used to control -stdlib=xxx under clang++, and CXXSTD is used to control -std=xxx in most compilers. 
+
+Under clang, following combinations are valid, 
+```
+make install CXXSTDLIB="-stdlib=libstdc++" CXXSTD="-std=c++98" (default)
+make install CXXSTDLIB="-stdlib=libc++" CXXSTD="-std=c++98"
+make install CXXSTDLIB="-stdlib=libc++" CXXSTD="-std=c++11"
+```
+
+Under gcc, there is no -stdlib option, so following combinations are valid, 
+```
+make install CXXSTD="-std=c++98" (default)
+make install CXXSTD="-std=c++11"
+```
+
+Users must make sure the setting is consistent to dependent libraries during compilation, such Boost, Lemon, etc. 
+For example, if Boost is compiled with "clang++ -stdlib=libstdc++ -std=c++98", the same setting should be used for components dependent to Boost. 
 
 ## Examples
 

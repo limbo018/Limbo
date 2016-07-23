@@ -4,6 +4,7 @@
 #include "BookshelfDriver.h"
 #include "BookshelfScanner.h"
 #include <limbo/string/String.h>
+#include <algorithm>
 
 namespace BookshelfParser {
 
