@@ -138,4 +138,4 @@ Third party package **csdp** is released under CPL v1.0 license.
 
 Third party package **OpenBlas** has its copyright reserved; please check its license. 
 
-Third party package **liblinear** has its copy right reserved; please check its license. 
+Third party package **liblinear** has its copyright reserved; please check its license.
