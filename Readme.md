@@ -130,4 +130,8 @@ To solve the problem, users can set the environmental variable FLEX_DIR such tha
 The decision can be made according to how the flex package is installed.  
 
 ## Copyright 
-The software is released under MIT license. Please see the LICENSE file for details. 
+The software is released under MIT license except third party packages. Please see the LICENSE file for details. 
+Third party package **c-thread-pool** is released under MIT license. 
+Third party package **csdp** is released under CPL v1.0 license. 
+Third party package **OpenBlas** has its copyright reserved; please check its license. 
+Third party package **liblinear** has its copy right reserved; please check its license. 
