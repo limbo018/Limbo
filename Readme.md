@@ -117,6 +117,9 @@ Some examples are as follows,
 make install CXX=g++ CC=gcc (default for Linux)
 make install CXX=clang++ CC=clang (default for Mac/Darwin)
 ```
+These two options do not work with some third party packages such as OpenBlas, csdp, etc., which call gcc and gfortran as compilers.  
+Users may need to configure the corret compilers themselves for these packages. 
+The default gcc under Mac/Darwin is wrapped by clang, so it compiles in general. 
 
 ### 3. Customize CXXSTDLIB and CXXSTD options
 
