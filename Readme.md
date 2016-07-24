@@ -109,17 +109,14 @@ Users need to make sure they are properly installed.
 make install
 ```
 
-### 2. Customize CXX and CC options 
+### 2. Customize CXX, CC and FC options 
 
-* CXX sets the compiler for C++ and CC sets the compiler for C. 
+* CXX sets the compiler for C++ and CC sets the compiler for C. FC sets the fortran compiler which is only needed by some third party packages like OpenBlas. 
 Some examples are as follows, 
 ```
-make install CXX=g++ CC=gcc (default for Linux)
-make install CXX=clang++ CC=clang (default for Mac/Darwin)
+make install CXX=g++ CC=gcc FC=gfortran (default for Linux)
+make install CXX=clang++ CC=clang FC=gfortran (default for Mac/Darwin)
 ```
-These two options do not work with some third party packages such as OpenBlas, csdp, etc., which call gcc and gfortran as compilers.  
-Users may need to configure the corret compilers themselves for these packages. 
-The default gcc under Mac/Darwin is wrapped by clang, so it compiles in general. 
 
 ### 3. Customize CXXSTDLIB and CXXSTD options
 
