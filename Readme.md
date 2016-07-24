@@ -97,11 +97,12 @@ Please report bugs to Yibo Lin (yibolin at utexas dot edu).
 
 Some components depend on external libraries, such as 
 
-* [Boost](www.boost.org)
-* [Lemon](https://lemon.cs.elte.hu)
-* [Gurobi](www.gurobi.com) 
+* [Boost](www.boost.org): require BOOST_DIR environment variable to the path where Boost is installed. 
+* [Lemon](https://lemon.cs.elte.hu): require LEMON_DIR environment variable to the path where Lemon is installed. 
+* [Gurobi](www.gurobi.com): require GUROBI_HOME environment variable to the path where Gurobi is installed. 
+* [Flex](http://flex.sourceforge.net): require FLEX_DIR or LEX_INCLUDE_DIR environment variable if the flex version is not 2.5.37. See FAQ for details. 
 
-Users need to make sure they are properly installed. 
+Users need to make sure they are properly installed and the corresponding settings are configured. 
 
 ### 1. Default installation
 
@@ -109,6 +110,7 @@ Users need to make sure they are properly installed.
 ```
 make install
 ```
+After installation, it is strongly recommended to export LIMBO_DIR to the path where Limbo library is installed as an environment variable. 
 
 ### 2. Customize CXX, CC and FC options 
 
@@ -152,7 +154,7 @@ LefScanner.cc:5582:21: error: out-of-line definition of 'LexerInput' does not ma
 ```
 come from old versions of flex, such as 2.5.35. 
 
-**A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environmental variable. 
+**A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environment variable. 
 
 ###2. *(Deprecated)* Compiling errors like 
 ```
@@ -161,13 +163,13 @@ LefScanner.cc:3195:8: error: member reference type 'std::istream *' (aka 'basic_
 ```
 come from new versions of flex, such as 2.6.0. 
 
-**A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environmental variable. 
+**A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environment variable. 
 
-###3. Compiling errors related to LefScanner.cc usually come from the configurations of flex version and environmental variables FLEX_DIR and LEX_INCLUDE_DIR. 
+###3. Compiling errors related to LefScanner.cc usually come from the configurations of flex version and environment variables FLEX_DIR and LEX_INCLUDE_DIR. 
 
 **A:** LefScanner.cc needs to include the correct FlexLexer.h from the flex package for compilation; i.e., the version of FlexLexer.h must match the version of the flex executable. 
 Most errors for LefScanner.cc are caused by the failure of finding the correct FlexLexer.h (be careful when you have multiple versions of flex installed). 
-To solve the problem, users can set the environmental variable FLEX_DIR such that $FLEX_DIR/include points to the directory containing FlexLexer.h, or alternatively set LEX_INCLUDE_DIR to the directory containing FlexLexer.h. 
+To solve the problem, users can set the environment variable FLEX_DIR such that $FLEX_DIR/include points to the directory containing FlexLexer.h, or alternatively set LEX_INCLUDE_DIR to the directory containing FlexLexer.h. 
 The decision can be made according to how the flex package is installed.  
 
 ## Copyright 
