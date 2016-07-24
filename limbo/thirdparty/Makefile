@@ -71,12 +71,13 @@ clean:
 .PHONY: extraclean
 extraclean: 
 	make -C $(OPENBLAS_SRCS) clean -f Makefile.limbo
-	rm -f $(LIMBO_ROOT_DIR)/lib/libopenblas-st.a
+	rm -f $(OPENBLAS_LIB)
 	make -C $(CSDP_SRCS) clean
-	rm -f $(LIMBO_ROOT_DIR)/lib/libsdp.a
+	rm -f $(CSDP_LIB)
 	rm -f $(LIMBO_ROOT_DIR)/bin/csdp
 	make -C $(LIBLINEAR_SRCS) clean 
-	rm -f $(LIMBO_ROOT_DIR)/lib/liblinear.a
+	rm -f $(LIBLINEAR_LIB)
 	rm -f $(LIMBO_ROOT_DIR)/bin/liblinear-train
 	rm -f $(LIMBO_ROOT_DIR)/bin/liblinear-predict
 	make -C $(CTHREADPOOL_SRCS) clean 
+	rm -f $(CTHREADPOOL_LIB)
