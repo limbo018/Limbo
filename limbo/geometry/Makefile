@@ -19,13 +19,8 @@ VPATH = . $(TEST_DIR)
 # default DBG is off
 DBG = 0
 
-UNAME_S = $(shell uname -s)
-ifeq ($(UNAME_S), Linux)
-	-include $(LIMBO_ROOT_DIR)/Unix.mk
-endif 
-ifeq ($(UNAME_S), Darwin)
-	-include $(LIMBO_ROOT_DIR)/Darwin.mk
-endif 
+# include environmental configurations 
+include $(LIMBO_ROOT_DIR)/Include.mk
 
 ifeq ($(DBG), 1)
 	CXXFLAGS = $(CXXFLAGS_DEBUG)

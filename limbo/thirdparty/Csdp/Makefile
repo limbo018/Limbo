@@ -7,18 +7,32 @@
 #
 # Generic. On most systems, this should handle everything.
 #
+
+#==========================================================================
+#                         Directories and names 
+# ==========================================================================
+
+LIMBO_ROOT_DIR = $(realpath ../../..)
+
+#==========================================================================
+#                         Compilation Flags
+# ==========================================================================
+
+# include environmental configurations 
+include $(LIMBO_ROOT_DIR)/Include.mk
+
 all:
-	cd lib; make libsdp.a
-	cd solver; make csdp
-	cd theta; make all
-	cd example; make all
+	make -C lib CC=$(CC) libsdp.a
+	make -C solver CC=$(CC) csdp
+	make -C theta CC=$(CC) all 
+	make -C example CC=$(CC) all 
 
 #
 # Perform a unitTest
 #
 
 unitTest:
-	cd test; make all
+	make -C test CC=$(CC) all
 
 #
 # Install the executables in /usr/local/bin.
@@ -36,16 +50,9 @@ install:
 # 
 
 clean:
-	cd lib; make clean
-	cd solver; make clean
-	cd theta; make clean
-	cd test; make clean
-	cd example; make clean
-
-
-
-
-
-
-
+	make -C lib clean 
+	make -C solver clean 
+	make -C theta clean 
+	make -C test clean 
+	make -C example clean
 

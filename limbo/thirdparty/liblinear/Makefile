@@ -1,23 +1,28 @@
 #CXX ?= g++
 #CC ?= gcc
-CFLAGS = -Wall -Wconversion -O3 -fPIC
-#CFLAGS = -Wall -Wconversion -g -fPIC
 #LIBS = blas/blas.a
 SHVER = 3
 OS = $(shell uname)
-#LIBS = -lblas
-LIBS = -L$(LIMBO_ROOT_DIR)/lib -lopenblas-st
-ifeq ($(UNAME_S), Linux)
-	CFLAGS += -ansi 
-	LIBS += -static -lrt -lgfortran
-endif 
 
-LIMBO_ROOT_DIR = ../../..
+LIMBO_ROOT_DIR = $(realpath ../../..)
+
+DBG = 0
+
+# include environmental configurations 
+include $(LIMBO_ROOT_DIR)/Include.mk
+
+ifeq ($(DBG), 1)
+	CXXFLAGS = $(CXXFLAGS_DEBUG) -Wconversion 
+	CFLAGS = $(CFLAGS_DEBUG) -Wconversion 
+else
+	CXXFLAGS = $(CXXFLAGS_RELEASE) -Wconversion 
+	CFLAGS = $(CFLAGS_RELEASE) -Wconversion
+endif
+
+#LIBS = -lblas
+LIBS = $(LINK_FLAG) -L$(LIMBO_ROOT_DIR)/lib -lopenblas-st
 ifeq ($(UNAME_S), Linux)
-	-include $(LIMBO_ROOT_DIR)/Unix.mk
-endif 
-ifeq ($(UNAME_S), Darwin)
-	-include $(LIMBO_ROOT_DIR)/Darwin.mk
+	LIBS += -lrt -lgfortran
 endif 
 
 all: train predict static_lib
@@ -34,16 +39,16 @@ static_lib: linear.o tron.o blas/blas.a
 	$(AR) $(ARFLAGS) liblinear.a linear.o tron.o
 
 train: tron.o linear.o train.c blas/blas.a
-	$(CXX) $(CFLAGS) -o train train.c tron.o linear.o $(LIBS)
+	$(CXX) $(CXXFLAGS) -o train train.c tron.o linear.o $(LIBS)
 
 predict: tron.o linear.o predict.c blas/blas.a
-	$(CXX) $(CFLAGS) -o predict predict.c tron.o linear.o $(LIBS)
+	$(CXX) $(CXXFLAGS) -o predict predict.c tron.o linear.o $(LIBS)
 
 tron.o: tron.cpp tron.h
-	$(CXX) $(CFLAGS) -c -o tron.o tron.cpp
+	$(CXX) $(CXXFLAGS) -c -o tron.o tron.cpp
 
 linear.o: linear.cpp linear.h
-	$(CXX) $(CFLAGS) -c -o linear.o linear.cpp
+	$(CXX) $(CXXFLAGS) -c -o linear.o linear.cpp
 
 blas/blas.a: blas/*.c blas/*.h
 	make -C blas OPTFLAGS='$(CFLAGS)' CC='$(CC)';

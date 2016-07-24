@@ -19,21 +19,16 @@ VPATH = . $(TEST_DIR)
 # default DBG is off
 DBG = 0
 
-UNAME_S = $(shell uname -s)
-ifeq ($(UNAME_S), Linux)
-	-include $(LIMBO_ROOT_DIR)/Unix.mk
-endif 
-ifeq ($(UNAME_S), Darwin)
-	-include $(LIMBO_ROOT_DIR)/Darwin.mk
-endif 
+# include environmental configurations 
+include $(LIMBO_ROOT_DIR)/Include.mk
 
 ifeq ($(DBG), 1)
-	CXXFLAGS = $(CXXFLAGS_DEBUG) -DTHPOOL_DEBUG 
+	CFLAGS = $(CFLAGS_DEBUG) -DTHPOOL_DEBUG 
 else
-	CXXFLAGS = $(CXXFLAGS_RELEASE)
+	CFLAGS = $(CFLAGS_RELEASE)
 endif
 
-CXXFLAGS += -D_POSIX_C_SOURCE=199506 -D_XOPEN_SOURCE=500
+CFLAGS += -D_POSIX_C_SOURCE=199506 -D_XOPEN_SOURCE=500
 
 #==========================================================================
 #                         Special Library
@@ -51,16 +46,16 @@ OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
 SRCS_TEST = example.c
-OBJS_TEST = $(patsubst $(TEST_DIR)/%.c,$(TEST_DIR)/%.o,$(SRCS_TEST))
+OBJS_TEST = example.o
 DEPS_TEST = $(OBJS_TEST:%.o=%.d)
 
 all: 
 	@$(MKDIR)
-	$(CC) $(CXXFLAGS) -c -o $(OBJDIR)/thpool.o thpool.c $(INCLUDE)
-	$(CC) $(CXXFLAGS) -c -o $(TEST_DIR)/example.o $(TEST_DIR)/example.c $(INCLUDE)
+	$(CC) $(CFLAGS) -c -o $(OBJDIR)/thpool.o thpool.c $(INCLUDE)
+	$(CC) $(CFLAGS) -c -o $(TEST_DIR)/example.o $(TEST_DIR)/example.c $(INCLUDE)
 	$(AR) $(ARFLAGS) libthpool.a $(OBJDIR)/thpool.o
 	mv libthpool.a $(LIMBO_ROOT_DIR)/lib
-	$(CC) $(CXXFLAGS) -o example $(TEST_DIR)/example.o $(LIMBO_ROOT_DIR)/lib/libthpool.a $(LIBS) 
+	$(CC) $(CFLAGS) -o example $(TEST_DIR)/example.o $(LIMBO_ROOT_DIR)/lib/libthpool.a $(LIBS) 
 
 .PHONY: clean
 clean: cleandep

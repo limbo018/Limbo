@@ -19,13 +19,8 @@ VPATH = . $(TEST_DIR)
 # default DBG is off
 DBG = 0
 
-UNAME_S = $(shell uname -s)
-ifeq ($(UNAME_S), Linux)
-	-include $(LIMBO_ROOT_DIR)/Unix.mk
-endif 
-ifeq ($(UNAME_S), Darwin)
-	-include $(LIMBO_ROOT_DIR)/Darwin.mk
-endif 
+# include environmental configurations 
+include $(LIMBO_ROOT_DIR)/Include.mk
 
 ifeq ($(DBG), 1)
 	CXXFLAGS = $(CXXFLAGS_DEBUG) -DDEBUG_LPCOLORING -DASSERT_LPCOLORING -DDEBUG_GRAPHSIMPLIFICATION -DDEBUG_ILPCOLORING -DDEBUG_SDPCOLORING
@@ -43,16 +38,32 @@ endif
 # internal dependency is lp parser 
 # external dependency is boost
 INCLUDE = -I $(LIMBO_ROOT_DIR) \
-		  -I $(BOOST_DIR)/include \
-		  -I $(GUROBI_HOME)/include 
+		  -I $(BOOST_DIR)/include 
 LIBS = \
 	   $(BOOST_DIR)/lib/libboost_graph.a \
 	   $(BOOST_DIR)/lib/libboost_regex.a \
 	   $(BOOST_DIR)/lib/libboost_unit_test_framework.a \
-	   -lm \
-	   -L $(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi60 \
-	   -L$(LIMBO_ROOT_DIR)/lib -lsdp -lopenblas-st \
-	   -lgfortran -lm -lrt -lpthread
+	   -lm
+
+# ==== boost chrono links to to librt.a under Linux
+ifeq ($(UNAME_S), Linux)
+LIBS += $(STATIC_LINK_FLAG) -lrt 
+endif 
+
+# ==== GUROBI 
+INCLUDE += -I $(GUROBI_HOME)/include
+LIBS += -L $(GUROBI_HOME)/lib \
+		$(STATIC_LINK_FLAG) -lgurobi_c++ \
+		$(DYNAMIC_LINK_FLAG) -lgurobi60 \
+		$(DYNAMIC_LINK_FLAG) -lpthread 
+# ==== Csdp api (OpenBLAS and Fortran library are necessary)
+# it looks like pthead must be linked dynamically when GUROBI is also on 
+LIBS += -L $(LIMBO_DIR)/lib $(STATIC_LINK_FLAG) -lsdp \
+	   -L $(LIMBO_DIR)/lib $(STATIC_LINK_FLAG) -lopenblas-st -lm 
+# ==== Csdp links to Fortran under Linux 
+ifeq ($(UNAME_S), Linux)
+LIBS += -lgfortran 
+endif
 
 # ==========================================================================
 #                         Standard Setting
