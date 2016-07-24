@@ -60,7 +60,7 @@ Current parsers support flex 2.5.37.
 	For details, please refer to [here](http://en.wikipedia.org/wiki/GNU_bison).
 	Another famous related software is Yacc.
 
-### 3. (Deprecated) Boost.Spirit
+### 3. *(Deprecated)* Boost.Spirit
 
 * An object-oriented, recursive-descent parser and output generation library for C++. 
 	For details, please refer to [here](http://www.boost.org/doc/libs/1_55_0/libs/spirit/doc/html/index.html).
