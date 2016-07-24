@@ -6,7 +6,7 @@ Limbo Library for VLSI CAD Design
 ---------
 
 All components are written with C/C++ and API is designed for easy usage and simple embedding. 
-Please read this **Readme** file carefully for proper instructions to **install** and **customization**. 
+Please read this **Readme** file carefully for proper instructions to **install** and **customize**. 
 
 ---------
 
