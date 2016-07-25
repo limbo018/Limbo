@@ -210,7 +210,7 @@ int main()
     if (limbo::iequals(s1, s2))
         std::cout << "string " << s1 << " and " << s2 << " is equal case-insensitive\n";
     else 
-        std::cout << "string " << s1 << " and " << s2 << " is equal case-insensitive\n";
+        std::cout << "string " << s1 << " and " << s2 << " is not equal case-insensitive\n";
 
 	return 0;
 }
