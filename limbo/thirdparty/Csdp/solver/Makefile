@@ -100,7 +100,8 @@ LIBS=-L$(LIMBO_ROOT_DIR)/lib -L../lib -lsdp -lopenblas-st -lm -lpthread
 UNAME_S = $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
 	CFLAGS+= -ansi 
-	LIBS+= -static -lrt -lgfortran
+	LIBS+= -lrt -lgfortran
+	# I removed -static because some machines may not have statically linked libraries 
 endif 
 #
 # 1. Warning about debian systems.  For some absurb reason, the BLAS
