@@ -1,6 +1,6 @@
 #pragma once
 
-#include <dlx/ExactCoverProblem.hpp>
+#include <limbo/thirdparty/dlx/include/dlx/ExactCoverProblem.hpp>
 #include <vector>
 
 class LinkedMatrix {

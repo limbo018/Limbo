@@ -1,6 +1,6 @@
 #pragma once
 
-#include "LinkedMatrix.hpp"
+#include <limbo/thirdparty/dlx/include/dlx/LinkedMatrix.hpp>
 
 #include <stdint.h>
 #include <functional>

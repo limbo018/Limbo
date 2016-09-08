@@ -6,7 +6,8 @@
 # ==========================================================================
 
 LIMBO_ROOT_DIR = $(realpath ../../..)
-TEST_DIR = $(realpath ./example) # the real test directory is not used due to original setting of the package  
+# the real test directory is not used due to original setting of the package 
+TEST_DIR = $(realpath ./example)
 OBJDIR = $(LIMBO_ROOT_DIR)/obj
 MKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 
@@ -32,8 +33,7 @@ endif
 #                         Special Library
 # ==========================================================================
 
-INCLUDE = -I $(realpath ./include) \
-		  -I $(LIMBO_ROOT_DIR) \
+INCLUDE = -I $(LIMBO_ROOT_DIR) \
 		  -I $(BOOST_DIR)
 
 # ==========================================================================
@@ -55,7 +55,7 @@ all: libdlx $(TEST_DIR)/dlx/dlx
 $(OBJDIR)/%.d: %.cpp
 	@$(MKDIR)
 	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
-$(TEST_DIR)/%.d: %.cpp
+$(TEST_DIR)/dlx/%.d: %.cpp
 	@$(MKDIR)
 	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
 
@@ -66,15 +66,15 @@ $(TEST_DIR)/%.d: %.cpp
 
 $(OBJDIR)/%.o: %.cpp
 	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE) 
+	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE)
 $(TEST_DIR)/%.o: %.cpp
 	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE) 
+	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE)
 
 # Link executable
 
 $(TEST_DIR)/dlx/dlx: libdlx $(OBJS_TEST)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS_TEST) $(LIMBO_ROOT_DIR)/lib/libdlx.a
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS_TEST) $(INCLUDE) $(LIMBO_ROOT_DIR)/lib/libdlx.a
 
 libdlx: $(OBJS)
 	$(AR) $(ARFLAGS) libdlx.a $(OBJS)

@@ -1,4 +1,4 @@
-#include <dlx/AlgorithmDLX.hpp>
+#include <limbo/thirdparty/dlx/include/dlx/AlgorithmDLX.hpp>
 
 #include <unistd.h>
 #include <algorithm>

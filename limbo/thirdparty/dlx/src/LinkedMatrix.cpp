@@ -1,4 +1,4 @@
-#include <dlx/LinkedMatrix.hpp>
+#include <limbo/thirdparty/dlx/include/dlx/LinkedMatrix.hpp>
 
 #include <assert.h>
 #include <algorithm>

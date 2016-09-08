@@ -1,4 +1,4 @@
-#include <dlx/ExactCoverProblem.hpp>
+#include <limbo/thirdparty/dlx/include/dlx/ExactCoverProblem.hpp>
 
 #include <algorithm>
 #include <stdexcept>
