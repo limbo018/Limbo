@@ -27,10 +27,19 @@ enum PinType
 
 struct Range 
 {
-    int low; 
+    int low; ///< min infinity if not specified
     int high;
-    Range() {low = 0; high = 0;}
+    Range() {low = high = std::numeric_limits<int>::min();}
     Range(int l, int h) : low(l), high(h) {}
+};
+
+struct GeneralName
+{
+    std::string name; ///< empty if not specified
+    Range range; ///< min infinity if not specified 
+
+    GeneralName(std::string const& n = "") {name = n; range.low = range.high = std::numeric_limits<int>::min();}
+    GeneralName(std::string const& n, int low, int high) {name = n; range.low = low; range.high = high;}
 };
 
 struct NetPin
@@ -58,6 +67,20 @@ class StringArray : public std::vector<std::string>
 		StringArray(const allocator_type& alloc = allocator_type())
 			: base_type(alloc) {}
 		StringArray(size_type n, const value_type& val, const allocator_type& alloc = allocator_type())
+			: base_type(n, val, alloc) {}
+};
+
+class GeneralNameArray : public std::vector<GeneralName>
+{
+	public: 
+		typedef std::vector<GeneralName> base_type;
+		using base_type::size_type;
+		using base_type::value_type;
+		using base_type::allocator_type;
+
+		GeneralNameArray(const allocator_type& alloc = allocator_type())
+			: base_type(alloc) {}
+		GeneralNameArray(size_type n, const value_type& val, const allocator_type& alloc = allocator_type())
 			: base_type(n, val, alloc) {}
 };
 

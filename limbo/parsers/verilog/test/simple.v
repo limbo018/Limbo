@@ -30,6 +30,7 @@ wire iccad_clk;
 wire out;
 wire lcb1_fo;
 wire aaa[1];
+wire  sparc_alu_exu_aaa[0], n123, n456;
 
 // Start cells
 NAND2_X1 u1/reg0 ( .a(inp1), .b(inp2), .o(n1) );
