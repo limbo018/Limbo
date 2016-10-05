@@ -176,6 +176,7 @@ param1: NAME {delete $1;}
 /* wire_pin_cbk will be called before module_instance_cbk */
 param2: '.' NAME '(' NAME ')' {driver.wire_pin_cbk(*$4, *$2); delete $2; delete $4;}
       | '.' NAME '(' NAME range ')' {driver.wire_pin_cbk(*$4, *$2, *$5); delete $2; delete $4; delete $5;}
+      | '.' NAME '(' ')' {delete $2;} /* allow floating pin */
       ;
 
 param3: INPUT general_name_array {driver.pin_declare_cbk(*$2, kINPUT); delete $2;}

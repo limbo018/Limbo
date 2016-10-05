@@ -40,5 +40,6 @@ INV_X1 u3 ( .a(n3), .o(n4) );
 INV_X1 u4 ( .a(n4), .o(out) );
 INV_Z80 lcb1 ( .a(iccad_clk), .o(lcb1_fo) );
 DFFPOSX1 o_interrupt_vector_sel_reg[0] ( .D(n3861), .Q(o_interrupt_vector_sel[0]) );
+DFF_X1 addsub_sub_dff_q_reg_0_ ( .D(n2264), .CK(n2259), .Q(n1025), .QN() );
 
 endmodule
