@@ -10,6 +10,7 @@
 
 #include <string>
 #include <vector>
+#include <istream>
 #include <limbo/parsers/gdsii/stream/GdsRecords.h>
 using std::string;
 using std::vector;
@@ -91,7 +92,10 @@ class GdsReader
 		GdsReader(GdsDataBaseKernel& db); 
         ~GdsReader(); 
 
+        /// read from file 
 		bool operator()(const char* filename);
+        /// read from stream
+        bool operator()(std::istream& fp); 
 
 	protected:
         void find_record_type (int numeric, GdsRecords::EnumType& record_name, int& expected_data_type);
@@ -101,7 +105,7 @@ class GdsReader
         /// read n bytes 
         /// \param fp, file handler 
         /// \param no_read, number of bytes read 
-        const char* gds_read(int& fp, int& no_read, std::size_t n); 
+        const char* gds_read(std::istream& fp, int& no_read, std::size_t n); 
 
 		GdsDataBaseKernel& m_db;
         char* m_buffer; 
@@ -110,7 +114,10 @@ class GdsReader
         std::size_t m_blen; ///< current buffer size, from m_bptr to m_buffer+m_bcap 
 };
 
+/// read from file
 bool read(GdsDataBaseKernel& db, string const& filename);
+/// read from stream 
+bool read(GdsDataBaseKernel& db, std::istream& fp);
 
 } // namespace GdsParser
 
