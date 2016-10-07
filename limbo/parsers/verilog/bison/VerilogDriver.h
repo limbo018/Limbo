@@ -89,6 +89,7 @@ public:
     void pin_declare_cbk(std::vector<GeneralName> const&, unsigned, Range const&);
     void pin_declare_cbk(std::vector<GeneralName> const&, unsigned);
     void module_instance_cbk(std::string const&, std::string const&);
+    void assignment_cbk(std::string const&, Range const&, std::string const&, Range const&); 
 
 protected:
 	// use as a stack for node and pin pairs in a net 

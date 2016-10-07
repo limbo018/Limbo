@@ -90,6 +90,7 @@
 %token REG
 %token WIRE
 %token INTEGER
+%token ASSIGN
 %token TIME
 %token BIT_MASK;
 %token OCT_MASK;
@@ -237,9 +238,15 @@ module_instance: NAME NAME '(' instance_params ')' ';' {driver.module_instance_c
                }
                ;
 
+assignment: ASSIGN NAME '=' NAME ';' {driver.assignment_cbk(*$2, Range(), *$4, Range()); delete $2; delete $4;}
+          | ASSIGN NAME range '=' NAME ';' {driver.assignment_cbk(*$2, *$3, *$5, Range()); delete $2; delete $3; delete $5;}
+          | ASSIGN NAME '=' NAME range ';' {driver.assignment_cbk(*$2, Range(), *$4, *$5); delete $2; delete $4; delete $5;}
+          | ASSIGN NAME range '=' NAME range ';' {driver.assignment_cbk(*$2, *$3, *$5, *$6); delete $2; delete $3; delete $5; delete $6;}
+
 module_content: /* empty */
               | module_content variable_declare
               | module_content module_instance 
+              | module_content assignment 
               ;
 
 

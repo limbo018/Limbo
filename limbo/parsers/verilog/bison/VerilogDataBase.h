@@ -94,6 +94,10 @@ class VerilogDataBase
         virtual void verilog_instance_cbk(std::string const& macro_name, std::string const& inst_name, std::vector<NetPin> const& vNetPin) = 0;
         virtual void verilog_net_declare_cbk(std::string const& net_name, Range const& range) = 0;
         virtual void verilog_pin_declare_cbk(std::string const& pin_name, unsigned type, Range const& range) = 0;
+        virtual void verilog_assignment_cbk(std::string const& target_name, Range const& target_range, std::string const& source_name, Range const& source_range); 
+
+    protected:
+        void verilog_user_cbk_reminder(const char* str) const; 
 };
 
 } // namespace VerilogParser
