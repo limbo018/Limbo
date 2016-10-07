@@ -18,7 +18,14 @@
 #include <time.h>
 #include <assert.h>
 #include <vector>
+#include <iostream>
 #include <fstream>
+/// support to .gds.gz if BOOST is available 
+#if ZLIB == 1 
+#include <boost/iostreams/filter/gzip.hpp>
+#include <boost/iostreams/device/file.hpp>
+#include <boost/iostreams/filtering_stream.hpp>
+#endif
 
 // Setting BYTESWAP to 1 is appropriate for big-endian Intel processors. 
 // GDS format was originally used on little-endian, older computers.
@@ -157,8 +164,13 @@ struct GdsWriter
         /// flush all contents in the buffer 
         void gds_flush(); 
 
-        std::ofstream m_os; 
-        int out; // output gds file descriptor
+        std::ostream* m_os; 
+        /// only one will be used 
+#if ZLIB == 1 // the support to .gds.gz is automatically detected by file suffix 
+        boost::iostreams::filtering_ostream m_bos; 
+#endif
+        std::ofstream m_fos; 
+        //int out; // output gds file descriptor
         BYTE  gdsswap;
         short gdsword;
 
