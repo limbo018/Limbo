@@ -49,11 +49,6 @@ namespace GdsParser
 {
 
 /* static function */
-bool read(GdsDataBaseKernel& db, string const& filename)
-{
-	return GdsReader(db)(filename.c_str());
-}
-
 bool read(GdsDataBaseKernel& db, std::istream& fp)
 {
 	return GdsReader(db)(fp);

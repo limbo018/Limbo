@@ -12,6 +12,14 @@
 #include <vector>
 #include <istream>
 #include <limbo/parsers/gdsii/stream/GdsRecords.h>
+#include <limbo/string/String.h>
+/// support to .gds.gz if BOOST is available 
+#if ZLIB == 1 
+#include <boost/iostreams/filter/gzip.hpp>
+#include <boost/iostreams/device/file.hpp>
+#include <boost/iostreams/filtering_stream.hpp>
+#endif
+
 using std::string;
 using std::vector;
 
@@ -114,10 +122,23 @@ class GdsReader
         std::size_t m_blen; ///< current buffer size, from m_bptr to m_buffer+m_bcap 
 };
 
-/// read from file
-bool read(GdsDataBaseKernel& db, string const& filename);
 /// read from stream 
 bool read(GdsDataBaseKernel& db, std::istream& fp);
+/// read from file
+inline bool read(GdsDataBaseKernel& db, string const& filename)
+{
+/// support to .gds.gz if BOOST is available 
+#if ZLIB == 1
+    if (limbo::get_file_suffix(filename) == "gz") // detect .gz file 
+    {
+        boost::iostreams::filtering_istream in; 
+        in.push(boost::iostreams::gzip_decompressor());
+        in.push(boost::iostreams::file_source(filename.c_str()));
+        return read(db, in);
+    }
+#endif
+    return GdsReader(db)(filename.c_str());
+}
 
 } // namespace GdsParser
 
