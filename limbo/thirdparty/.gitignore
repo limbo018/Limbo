@@ -6,3 +6,9 @@ Csdp/theta/theta
 Csdp/theta/complement
 Csdp/theta/graphtoprob
 Csdp/theta/rand_graph
+dlx/build
+dlx/example/dlx/dlx
+dlx/example/sudoku/sudoku
+dlx/example/nqueens/nqueens
+dlx/example/npieces/npieces
+dlx/example/polyomino/polyomino
