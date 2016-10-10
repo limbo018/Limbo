@@ -31,11 +31,26 @@ else
 	CXXFLAGS = $(CXXFLAGS_RELEASE)
 endif
 
+# if zlib and boost are available, support compression/decompression features 
+ifdef ZLIB_DIR
+ifdef BOOST_DIR
+	CXXFLAGS += -DZLIB=1
+endif
+endif
+
 #==========================================================================
 #                         Special Library
 # ==========================================================================
 
 INCLUDE = -I $(LIMBO_ROOT_DIR) 
+
+ifdef ZLIB_DIR
+ifdef BOOST_DIR
+	INCLUDE += -I $(BOOST_DIR)/include
+	LIB += -L$(BOOST_DIR)/lib -lboost_iostreams \
+		   -L$(ZLIB_DIR) -lz
+endif
+endif
 
 # ==========================================================================
 #                         Standard Setting
@@ -75,13 +90,13 @@ $(TEST_DIR)/%.o: %.cpp
 # Link executable
 
 $(TEST_DIR)/test_reader: lib$(LIB_PREFIX)parser $(TEST_DIR)/test_reader.o
-	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_reader.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_reader.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a $(LIB)
 
 $(TEST_DIR)/test_writer: lib$(LIB_PREFIX)parser $(TEST_DIR)/test_writer.o
-	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_writer.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_writer.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a $(LIB)
 
 $(TEST_DIR)/test_driver: lib$(LIB_PREFIX)parser $(TEST_DIR)/test_driver.o
-	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_driver.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_driver.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a $(LIB)
 
 lib$(LIB_PREFIX)parser: $(OBJS)
 	$(AR) $(ARFLAGS) lib$(LIB_PREFIX)parser.a $(OBJS)

@@ -101,6 +101,7 @@ Some components depend on external libraries, such as
 * [Lemon](https://lemon.cs.elte.hu): require LEMON_DIR environment variable to the path where Lemon is installed. 
 * [Gurobi](www.gurobi.com): require GUROBI_HOME environment variable to the path where Gurobi is installed. 
 * [Flex](http://flex.sourceforge.net): require FLEX_DIR or LEX_INCLUDE_DIR environment variable if the flex version is not 2.5.37. See FAQ for details. 
+* [Zlib](http://www.zlib.net) (optional): require ZLIB_DIR environment variable to enable zlib features. If both zlib and boost are available, Gds parser supports reading/writing .gds.gz files. 
 
 Users need to make sure they are properly installed and the corresponding settings are configured. 
 

@@ -152,6 +152,20 @@ struct EnumDataBase : public GdsParser::GdsDataBaseKernel
 	}
 };
 
+/* ===========================================
+example to read .gds.gz 
+#include <boost/iostreams/filter/gzip.hpp>
+#include <boost/iostreams/device/file.hpp>
+#include <boost/iostreams/filtering_stream.hpp>
+
+EnumDataBase edb; 
+boost::iostreams::filtering_istream in; 
+in.push(boost::iostreams::gzip_decompressor());
+in.push(boost::iostreams::file_source(argv[1]));
+
+cout << "test enum api\n" << GdsParser::read(edb, in) << endl;
+=========================================== */
+
 int main(int argc, char** argv)
 {
 	if (argc > 1)

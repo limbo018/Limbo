@@ -102,6 +102,7 @@ ENDEL
 */
 
 #include "GdsWriter.h"
+#include <limbo/string/String.h>
 
 namespace GdsParser 
 {
@@ -118,8 +119,24 @@ namespace GdsParser
 /*------------------------------------------------------------------------------------------*/
 GdsWriter::GdsWriter(const char* filename)
 {
-	this->out = open( filename, O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH );
-	if( this->out <= 0 ) BAILOUT( "UNABLE TO OPEN OUTPUT FILE" );
+	//this->out = open( filename, O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH );
+	//if( this->out <= 0 ) BAILOUT( "UNABLE TO OPEN OUTPUT FILE" );
+    m_os = NULL; 
+#if ZLIB == 1
+    if (limbo::get_file_suffix(filename) == "gz") // detect gz file 
+    {
+        m_bos.push(boost::iostreams::gzip_compressor());
+        m_bos.push(boost::iostreams::file_sink(filename));
+        m_os = &m_bos; 
+    }
+#endif
+    if (!m_os)
+    {
+        m_fos.open(filename);
+        if (!m_fos.good()) 
+            BAILOUT( "UNABLE TO OPEN OUTPUT FILE" );
+        m_os = &m_fos; 
+    }
 
     m_capacity = 16*1024; // 16 KB
     m_size = 0; 
@@ -128,7 +145,9 @@ GdsWriter::GdsWriter(const char* filename)
 GdsWriter::~GdsWriter()
 {
     gds_flush();  // remember to write the rest content in the buffer 
-	close(this->out);
+	//close(this->out);
+    if (m_fos.is_open())
+        m_fos.close();
     delete [] m_buffer; 
 }
 
@@ -159,7 +178,7 @@ inline void fast_copy (char *t, const char *s, std::size_t n)
 /// a buffered writing scheme 
 int GdsWriter::gds_write(const char* b, std::size_t n)
 {
-    int ret; 
+    //int ret; 
     while (m_size + n > m_capacity) 
     {
         std::size_t nw = m_capacity - m_size;
@@ -170,9 +189,10 @@ int GdsWriter::gds_write(const char* b, std::size_t n)
             b += nw;
         }
 
-        ret = write (this->out, m_buffer, m_capacity);
-        if (ret < 0)
-            return ret; 
+        //ret = write (this->out, m_buffer, m_capacity);
+        m_os->write(m_buffer, m_capacity);
+        //if (ret < 0)
+        //    return ret; 
         m_size = 0;
     }
 
@@ -189,7 +209,8 @@ void GdsWriter::gds_flush()
 {
     if (m_size) // remember to write the rest content in the buffer 
     {
-        write (this->out, m_buffer, m_size);
+        //write (this->out, m_buffer, m_size);
+        m_os->write(m_buffer, m_size);
         m_size = 0; 
     }
 }
