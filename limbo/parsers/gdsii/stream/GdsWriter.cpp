@@ -103,9 +103,54 @@ ENDEL
 
 #include "GdsWriter.h"
 #include <limbo/string/String.h>
+/// support to .gds.gz if BOOST is available 
+#if ZLIB == 1 
+#include <boost/iostreams/filter/gzip.hpp>
+#include <boost/iostreams/device/file.hpp>
+#include <boost/iostreams/filtering_stream.hpp>
+#endif
 
 namespace GdsParser 
 {
+
+class GdsStream
+{
+    public:
+        GdsStream(const char* filename)
+        {
+            m_std = -1; 
+#if ZLIB == 1
+            if (limbo::get_file_suffix(filename) == "gz") // detect gz file 
+            {
+                m_bos.push(boost::iostreams::gzip_compressor());
+                m_bos.push(boost::iostreams::file_sink(filename));
+                m_stream = &m_bos; 
+                m_std = 0; 
+            }
+#endif
+            if (m_std == -1)
+            {
+                m_fos.open(filename);
+                if (!m_fos.good()) 
+                    BAILOUT( "UNABLE TO OPEN OUTPUT FILE" );
+                m_stream = &m_fos; 
+                m_std = 1; 
+            }
+        }
+        ~GdsStream()
+        {
+            if (m_std)
+                m_fos.close();
+        }
+        std::ostream& getStream() {return *m_stream;}
+    protected:
+#if ZLIB == 1
+        boost::iostreams::filtering_ostream m_bos; 
+#endif
+        std::ofstream m_fos; 
+        std::ostream* m_stream; 
+        char m_std; ///< 0 for m_bos, 1 for m_fos, -1 for invalid 
+};
 
 /*------------------------------------------------------------------------------------------*/
 //    GLOBAL VARAIBLES
@@ -121,22 +166,7 @@ GdsWriter::GdsWriter(const char* filename)
 {
 	//this->out = open( filename, O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH );
 	//if( this->out <= 0 ) BAILOUT( "UNABLE TO OPEN OUTPUT FILE" );
-    m_os = NULL; 
-#if ZLIB == 1
-    if (limbo::get_file_suffix(filename) == "gz") // detect gz file 
-    {
-        m_bos.push(boost::iostreams::gzip_compressor());
-        m_bos.push(boost::iostreams::file_sink(filename));
-        m_os = &m_bos; 
-    }
-#endif
-    if (!m_os)
-    {
-        m_fos.open(filename);
-        if (!m_fos.good()) 
-            BAILOUT( "UNABLE TO OPEN OUTPUT FILE" );
-        m_os = &m_fos; 
-    }
+    m_os = new GdsStream (filename); 
 
     m_capacity = 16*1024; // 16 KB
     m_size = 0; 
@@ -145,10 +175,8 @@ GdsWriter::GdsWriter(const char* filename)
 GdsWriter::~GdsWriter()
 {
     gds_flush();  // remember to write the rest content in the buffer 
-	//close(this->out);
-    if (m_fos.is_open())
-        m_fos.close();
     delete [] m_buffer; 
+    delete m_os; 
 }
 
 /// copy char* as unsigned long* and deal with boundary cases 
@@ -190,7 +218,7 @@ int GdsWriter::gds_write(const char* b, std::size_t n)
         }
 
         //ret = write (this->out, m_buffer, m_capacity);
-        m_os->write(m_buffer, m_capacity);
+        m_os->getStream().write(m_buffer, m_capacity);
         //if (ret < 0)
         //    return ret; 
         m_size = 0;
@@ -210,7 +238,7 @@ void GdsWriter::gds_flush()
     if (m_size) // remember to write the rest content in the buffer 
     {
         //write (this->out, m_buffer, m_size);
-        m_os->write(m_buffer, m_size);
+        m_os->getStream().write(m_buffer, m_size);
         m_size = 0; 
     }
 }

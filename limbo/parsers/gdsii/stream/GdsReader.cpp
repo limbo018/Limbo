@@ -41,6 +41,13 @@
 #include <math.h>
 #include <fstream>
 #include "GdsReader.h"
+/// support to .gds.gz if BOOST is available 
+/// better to put them in .cpp, which is not seen by users 
+#if ZLIB == 1 
+#include <boost/iostreams/filter/gzip.hpp>
+#include <boost/iostreams/device/file.hpp>
+#include <boost/iostreams/filtering_stream.hpp>
+#endif
 
 /* this is how far we indent the structures, then the elements */
 #define NO_SPACES_TO_INDENT 2
@@ -52,6 +59,21 @@ namespace GdsParser
 bool read(GdsDataBaseKernel& db, std::istream& fp)
 {
 	return GdsReader(db)(fp);
+}
+
+bool read(GdsDataBaseKernel& db, string const& filename)
+{
+/// support to .gds.gz if BOOST is available 
+#if ZLIB == 1
+    if (limbo::get_file_suffix(filename) == "gz") // detect .gz file 
+    {
+        boost::iostreams::filtering_istream in; 
+        in.push(boost::iostreams::gzip_decompressor());
+        in.push(boost::iostreams::file_source(filename.c_str()));
+        return read(db, in);
+    }
+#endif
+    return GdsReader(db)(filename.c_str());
 }
 
 GdsReader::GdsReader(GdsDataBaseKernel& db) 
