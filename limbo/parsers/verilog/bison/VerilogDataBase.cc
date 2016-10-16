@@ -6,6 +6,7 @@
  ************************************************************************/
 
 #include "VerilogDataBase.h"
+#include <cstdlib>
 
 namespace VerilogParser {
 
