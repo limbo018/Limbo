@@ -39,7 +39,15 @@
 #include <string.h>
 #include <ctype.h>
 #include <math.h>
+#include <fstream>
 #include "GdsReader.h"
+/// support to .gds.gz if BOOST is available 
+/// better to put them in .cpp, which is not seen by users 
+#if ZLIB == 1 
+#include <boost/iostreams/filter/gzip.hpp>
+#include <boost/iostreams/device/file.hpp>
+#include <boost/iostreams/filtering_stream.hpp>
+#endif
 
 /* this is how far we indent the structures, then the elements */
 #define NO_SPACES_TO_INDENT 2
@@ -48,9 +56,24 @@ namespace GdsParser
 {
 
 /* static function */
+bool read(GdsDataBaseKernel& db, std::istream& fp)
+{
+	return GdsReader(db)(fp);
+}
+
 bool read(GdsDataBaseKernel& db, string const& filename)
 {
-	return GdsReader(db)(filename.c_str());
+/// support to .gds.gz if BOOST is available 
+#if ZLIB == 1
+    if (limbo::get_file_suffix(filename) == "gz") // detect .gz file 
+    {
+        boost::iostreams::filtering_istream in; 
+        in.push(boost::iostreams::gzip_decompressor());
+        in.push(boost::iostreams::file_source(filename.c_str()));
+        return read(db, in);
+    }
+#endif
+    return GdsReader(db)(filename.c_str());
 }
 
 GdsReader::GdsReader(GdsDataBaseKernel& db) 
@@ -92,7 +115,7 @@ inline void fast_copy (char *t, const char *s, std::size_t n)
     }
 }
 
-const char* GdsReader::gds_read(int& fp, int& no_read, std::size_t n)
+const char* GdsReader::gds_read(std::istream& fp, int& no_read, std::size_t n)
 {
     if (m_blen < n) // content in the buffer is not enough 
     {
@@ -120,7 +143,8 @@ const char* GdsReader::gds_read(int& fp, int& no_read, std::size_t n)
             memmove (m_buffer, m_bptr, m_blen);
         }
 
-        int num_bytes = ::read (fp, m_buffer + m_blen, m_bcap - m_blen); 
+        fp.read(m_buffer + m_blen, m_bcap - m_blen);
+        int num_bytes = fp.gcount(); 
         if (num_bytes < 0) // error 
         {
             no_read = 0; 
@@ -146,6 +170,20 @@ const char* GdsReader::gds_read(int& fp, int& no_read, std::size_t n)
 }
 
 bool GdsReader::operator() (const char* filename)
+{
+    std::ifstream fp (filename);
+    if (!fp.good())
+    {
+		printf("failed to open %s for read\n", filename);
+		return false;
+    }
+
+    bool flag = (*this)(fp);
+    fp.close();
+    return flag; 
+}
+
+bool GdsReader::operator() (std::istream& fp)
 {
     // unsigned char no_byte_array[2]; 
 	unsigned char* no_byte_array;
@@ -179,12 +217,6 @@ bool GdsReader::operator() (const char* filename)
 	double real_mantissa_float;
 	double display_float;
 
-	int fp = open(filename, O_RDONLY);
-	if (fp < 0)
-	{
-		printf("failed to open %s for read\n", filename);
-		return false;
-	}
 	/* start out with no indent */
     indent_amount = 0;
 
@@ -495,8 +527,6 @@ bool GdsReader::operator() (const char* filename)
 		}
 
 	}
-
-	close(fp);
 
 	return true;
 }

@@ -32,6 +32,11 @@ class DataBase : public VerilogParser::VerilogDataBase
         {
 			cout << __func__ << " => " << pin_name << " " << type << " (" << range.low << ", " << range.high << ")" << endl;
         }
+        virtual void verilog_assignment_cbk(std::string const& target_name, VerilogParser::Range const& target_range, std::string const& source_name, VerilogParser::Range const& source_range)
+        {
+            cout << __func__ << " => " << target_name << " (" << target_range.low << ", " << target_range.high << ")" << " = " 
+                << source_name << " (" << source_range.low << ", " << source_range.high << ")" << endl;
+        }
 };
 
 void test1(string const& filename)

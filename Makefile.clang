@@ -21,7 +21,7 @@ else
 	CXXSTD = -std=c++98
 endif 
 
-CXXFLAGS_BASIC = -ferror-limit=1 -fPIC -W -Wall -Wextra -Wreturn-type -ansi -m64 $(CXXSTDLIB) $(CXXSTD) -Wno-deprecated -Wno-unused-parameter -Wno-unused-local-typedef
+CXXFLAGS_BASIC = -ferror-limit=1 -fPIC -W -Wall -Wextra -Wreturn-type -m64 $(CXXSTDLIB) $(CXXSTD) -Wno-deprecated -Wno-unused-parameter -Wno-unused-local-typedef
 CXXFLAGS_DEBUG = -g -DDEBUG $(CXXFLAGS_BASIC) 
 CXXFLAGS_RELEASE = -O3 $(CXXFLAGS_BASIC) 
 

@@ -75,6 +75,7 @@ inout           return token::INOUT;
 reg             return token::REG;
 wire            return token::WIRE;
 integer         return token::INTEGER;
+assign          return token::ASSIGN; 
 [0-1]+[']b[0-9]+    return token::BIT_MASK;
 [0-7]+[']o[0-9]+    return token::OCT_MASK;
 [0-9]+[']d[0-9]+    return token::DEC_MASK;

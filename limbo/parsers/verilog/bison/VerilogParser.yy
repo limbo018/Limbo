@@ -55,6 +55,7 @@
     int integerVal;
     std::string* stringVal;
 	class StringArray* stringArrayVal;
+    class GeneralNameArray* generalNameArrayVal; 
     struct {
         long value;
         long bits;
@@ -89,6 +90,7 @@
 %token REG
 %token WIRE
 %token INTEGER
+%token ASSIGN
 %token TIME
 %token BIT_MASK;
 %token OCT_MASK;
@@ -102,11 +104,13 @@
 %type<mask> BIT_MASK OCT_MASK DEC_MASK HEX_MASK
 %type<integerVal> NUM 
 %type<rangeVal> range
-%type <stringArrayVal> name_array
+/*%type <stringArrayVal> name_array*/
+%type <generalNameArrayVal> general_name_array
 
 %destructor {delete $$;} NAME 
 %destructor {delete $$;} range
-%destructor {delete $$;} name_array
+/*%destructor {delete $$;} name_array*/
+%destructor {delete $$;} general_name_array
 
  /*** END EXAMPLE - Change the example grammar's tokens above ***/
 
@@ -128,8 +132,9 @@
  /*** BEGIN EXAMPLE - Change the example grammar rules below ***/
 
 range: '[' NUM ':' NUM ']' {$$ = new Range ($2, $4);}
-     | '[' NUM ']' {$$ = new Range (0, $2);}
+     | '[' NUM ']' {$$ = new Range (std::numeric_limits<int>::min(), $2);}
 
+/*
 name_array: NAME {
           $$ = new StringArray(1, *$1);
           delete $1;
@@ -141,6 +146,29 @@ name_array: NAME {
             $$ = $1;
           }
           ;
+*/
+
+/* general name array may have range after name */
+general_name_array: NAME {
+          $$ = new GeneralNameArray(1, GeneralName(*$1));
+          delete $1;
+        }
+        | NAME range {
+          $$ = new GeneralNameArray(1, GeneralName(*$1, $2->low, $2->high));
+          delete $1;
+          delete $2; 
+        }
+        | general_name_array ',' NAME {
+            $1->push_back(GeneralName(*$3));
+            delete $3;
+            $$ = $1;
+        }
+        | general_name_array ',' NAME range {
+            $1->push_back(GeneralName(*$3, $4->low, $4->high));
+            delete $3;
+            delete $4; 
+            $$ = $1;
+        }
 
 param1: NAME {delete $1;}
       | NAME range {delete $1; delete $2;} 
@@ -149,36 +177,29 @@ param1: NAME {delete $1;}
 /* wire_pin_cbk will be called before module_instance_cbk */
 param2: '.' NAME '(' NAME ')' {driver.wire_pin_cbk(*$4, *$2); delete $2; delete $4;}
       | '.' NAME '(' NAME range ')' {driver.wire_pin_cbk(*$4, *$2, *$5); delete $2; delete $4; delete $5;}
+      | '.' NAME '(' ')' {delete $2;} /* allow floating pin */
       ;
 
-param3: INPUT name_array {driver.pin_declare_cbk(*$2, kINPUT); delete $2;}
-      | INPUT REG name_array {driver.pin_declare_cbk(*$3, kINPUT|kREG); delete $3;}
-      | INPUT range name_array {driver.pin_declare_cbk(*$3, kINPUT, *$2); delete $2; delete $3;} 
-      | INPUT name_array range {driver.pin_declare_cbk(*$2, kINPUT, *$3); delete $2; delete $3;} 
-      | INPUT REG range name_array {driver.pin_declare_cbk(*$4, kINPUT|kREG, *$3); delete $3; delete $4;}
-      | INPUT REG name_array range {driver.pin_declare_cbk(*$3, kINPUT|kREG, *$4); delete $3; delete $4;}
-      | OUTPUT name_array {driver.pin_declare_cbk(*$2, kOUTPUT); delete $2;}
-      | OUTPUT REG name_array {driver.pin_declare_cbk(*$3, kOUTPUT|kREG); delete $3;}
-      | OUTPUT range name_array {driver.pin_declare_cbk(*$3, kOUTPUT, *$2); delete $2; delete $3;}
-      | OUTPUT name_array range {driver.pin_declare_cbk(*$2, kOUTPUT, *$3); delete $2; delete $3;}
-      | OUTPUT REG range name_array {driver.pin_declare_cbk(*$4, kOUTPUT|kREG, *$3); delete $3; delete $4;}
-      | OUTPUT REG name_array range {driver.pin_declare_cbk(*$3, kOUTPUT|kREG, *$4); delete $3; delete $4;}
-      | INOUT name_array {driver.pin_declare_cbk(*$2, kINPUT|kOUTPUT); delete $2;}
-      | INOUT REG name_array {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT|kREG); delete $3;}
-      | INOUT range name_array {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT, *$2); delete $2; delete $3;}
-      | INOUT name_array range {driver.pin_declare_cbk(*$2, kINPUT|kOUTPUT, *$3); delete $2; delete $3;}
-      | INOUT REG range name_array {driver.pin_declare_cbk(*$4, kINPUT|kOUTPUT|kREG, *$3); delete $3; delete $4;}
-      | INOUT REG name_array range {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT|kREG, *$4); delete $3; delete $4;}
+param3: INPUT general_name_array {driver.pin_declare_cbk(*$2, kINPUT); delete $2;}
+      | INPUT range general_name_array {driver.pin_declare_cbk(*$3, kINPUT, *$2); delete $2; delete $3;} 
+      | INPUT REG range general_name_array {driver.pin_declare_cbk(*$4, kINPUT|kREG, *$3); delete $3; delete $4;}
+      | INPUT REG general_name_array {driver.pin_declare_cbk(*$3, kINPUT|kREG); delete $3;}
+      | OUTPUT general_name_array {driver.pin_declare_cbk(*$2, kOUTPUT); delete $2;}
+      | OUTPUT range general_name_array {driver.pin_declare_cbk(*$3, kOUTPUT, *$2); delete $2; delete $3;}
+      | OUTPUT REG range general_name_array {driver.pin_declare_cbk(*$4, kOUTPUT|kREG, *$3); delete $3; delete $4;}
+      | OUTPUT REG general_name_array {driver.pin_declare_cbk(*$3, kOUTPUT|kREG); delete $3;}
+      | INOUT general_name_array {driver.pin_declare_cbk(*$2, kINPUT|kOUTPUT); delete $2;}
+      | INOUT range general_name_array {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT, *$2); delete $2; delete $3;}
+      | INOUT REG range general_name_array {driver.pin_declare_cbk(*$4, kINPUT|kOUTPUT|kREG, *$3); delete $3; delete $4;}
+      | INOUT REG general_name_array {driver.pin_declare_cbk(*$3, kINPUT|kOUTPUT|kREG); delete $3;}
       ;
 
-param4: REG name_array {delete $2;}
-      | REG range name_array {delete $2; delete $3;}
-      | REG name_array range {delete $2; delete $3;}
+param4: REG general_name_array {delete $2;}
+      | REG range general_name_array {delete $2; delete $3;}
       ;
 
-param5: WIRE name_array {driver.wire_declare_cbk(*$2); delete $2;}
-      | WIRE range name_array {driver.wire_declare_cbk(*$3, *$2); delete $2; delete $3;}
-      | WIRE name_array range {driver.wire_declare_cbk(*$2, *$3); delete $2; delete $3;}
+param5: WIRE general_name_array {driver.wire_declare_cbk(*$2); delete $2;}
+      | WIRE range general_name_array {driver.wire_declare_cbk(*$3, *$2); delete $2; delete $3;}
       ;
 
 
@@ -217,9 +238,15 @@ module_instance: NAME NAME '(' instance_params ')' ';' {driver.module_instance_c
                }
                ;
 
+assignment: ASSIGN NAME '=' NAME ';' {driver.assignment_cbk(*$2, Range(), *$4, Range()); delete $2; delete $4;}
+          | ASSIGN NAME range '=' NAME ';' {driver.assignment_cbk(*$2, *$3, *$5, Range()); delete $2; delete $3; delete $5;}
+          | ASSIGN NAME '=' NAME range ';' {driver.assignment_cbk(*$2, Range(), *$4, *$5); delete $2; delete $4; delete $5;}
+          | ASSIGN NAME range '=' NAME range ';' {driver.assignment_cbk(*$2, *$3, *$5, *$6); delete $2; delete $3; delete $5; delete $6;}
+
 module_content: /* empty */
               | module_content variable_declare
               | module_content module_instance 
+              | module_content assignment 
               ;
 
 
