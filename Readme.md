@@ -139,8 +139,16 @@ make install CXXSTD="-std=c++98" (default)
 make install CXXSTD="-std=c++11"
 ```
 
-Users must make sure the setting is consistent to dependent libraries during compilation, such Boost, Lemon, etc. 
+Users must make sure the setting is consistent to dependent libraries during compilation, such as Boost, Lemon, etc. 
 For example, if Boost is compiled with "clang++ -stdlib=libstdc++ -std=c++98", the same setting should be used for components dependent to Boost. 
+
+### 4. Customize OPENBLAS options 
+
+* There is a third party OpenBlas required by some other third party packages, such as Csdp and liblinear. OPENBLAS option is used to control whether compiling these packages. 
+
+If you do not need these packages, set OPENBLAS=0 (default); 
+otherwise, set OPENBLAS=1.
+The default version of OpenBlas is not very stable for cross platforms, which often results in compiling errors. 
 
 ## Examples
 
