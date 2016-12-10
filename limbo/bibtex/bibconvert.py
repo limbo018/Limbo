@@ -72,8 +72,7 @@ def printBibDB(bibDB, highlightAuthors, suffix):
 
     # call kernel print functions 
     if suffix.lower() == 'web':
-        print """
-# jemdoc: menu{MENU}{publications.html}
+        print """# jemdoc: menu{MENU}{publications.html}
 # jemdoc: addcss{yibolin_homepage/jemdoc.css}
 # jemdoc: title{Yibo Lin's Homepage}
 
@@ -83,8 +82,7 @@ def printBibDB(bibDB, highlightAuthors, suffix):
         printWeb(bibDB, stringMap, highlightAuthors, journalEntries, 'journal', 'journal')
         printWeb(bibDB, stringMap, highlightAuthors, conferenceEntries, 'conference', 'booktitle')
     elif suffix.lower() == 'cv':
-        print """
-\\begin{rSection}{Publications}
+        print """\\begin{rSection}{Publications}
 
 """
         printCV(bibDB, stringMap, highlightAuthors, journalEntries, 'journal', 'journal')
