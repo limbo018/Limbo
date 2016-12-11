@@ -33,7 +33,7 @@ Please read this **Readme** file carefully for proper instructions to **install*
 | Graph Algorithms        | c++                             | basic graph algorithms based on Boost.Graph structure    |
 | Program Options         | c++                             | package for easy command line options for a program      |
 | Makefile Utilities      | makefile                        | makefile help functions                                  |
-| Third Party Libraries   | c/c++/fortran                   | OpenBlas, Csdp                                           |
+| Third Party Libraries   | c/c++/fortran                   | OpenBLAS, Csdp                                           |
 
 ## Authors & Maintainers
 
@@ -115,7 +115,7 @@ After installation, it is strongly recommended to export LIMBO_DIR to the path w
 
 ### 2. Customize CXX, CC and FC options 
 
-* CXX sets the compiler for C++ and CC sets the compiler for C. FC sets the fortran compiler which is only needed by some third party packages like OpenBlas. 
+* CXX sets the compiler for C++ and CC sets the compiler for C. FC sets the fortran compiler which is only needed by some third party packages like OpenBLAS. 
 Some examples are as follows, 
 ```
 make install CXX=g++ CC=gcc FC=gfortran (default for Linux)
@@ -144,11 +144,13 @@ For example, if Boost is compiled with "clang++ -stdlib=libstdc++ -std=c++98", t
 
 ### 4. Customize OPENBLAS options 
 
-* There is a third party OpenBlas required by some other third party packages, such as Csdp and liblinear. OPENBLAS option is used to control whether compiling these packages. 
+* There is a third party OpenBLAS required by some other third party packages, such as Csdp and liblinear. OPENBLAS option is used to control whether compiling these packages. 
 
 If you do not need these packages, set OPENBLAS=0 (default); 
 otherwise, set OPENBLAS=1.
-The default version of OpenBlas is not very stable for cross platforms, which often results in compiling errors. 
+The default version of OpenBLAS is not very stable for cross platforms, which often results in compiling errors. 
+OpenBLAS is integrated as a submodule which fetch source code from remote repository, so it is always up-to-date version. 
+If you already have OpenBLAS in the directory, simply run "git submodule update" to fetch the latest version in the submodule directory. 
 
 ## Examples
 
@@ -188,7 +190,7 @@ Third party package **c-thread-pool** is released under MIT license.
 
 Third party package **csdp** is released under CPL v1.0 license. 
 
-Third party package **OpenBlas** has its copyright reserved; please check its license. 
+Third party package **OpenBLAS** has its copyright reserved; please check its license. 
 
 Third party package **liblinear** has its copyright reserved; please check its license.
 
