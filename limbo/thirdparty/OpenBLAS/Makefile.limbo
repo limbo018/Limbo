@@ -20,6 +20,15 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 
 # make single threaded OpenBlas
 all: 
+ifneq ($(wildcard OpenBlas/.*),)
+	@echo "OpenBlas submodule is NOT EMPTY" 
+else 
+	@echo "OpenBlas submodule is EMPTY" 
+	@cd OpenBlas
+	@git submodule init 
+	@git submodule update 
+	@cd ..
+endif 
 	@make -C OpenBlas -f Makefile BINARY=64 CC=$(CC) FC=$(FC) USE_OPENMP=0 USE_THREAD=0 NO_CBLAS=1 NO_WARMUP=1 libs netlib
 
 .PHONY: clean
