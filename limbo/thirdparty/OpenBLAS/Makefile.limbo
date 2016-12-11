@@ -18,7 +18,7 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 #                         Standard Setting
 # ==========================================================================
 
-# make single threaded OpenBlas
+# make single threaded OpenBLAS
 all: 
 ifeq ($(wildcard OpenBLAS/*.*),)
 	@echo "OpenBLAS submodule is EMPTY" 
