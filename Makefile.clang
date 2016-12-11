@@ -25,7 +25,7 @@ CXXFLAGS_BASIC = -ferror-limit=1 -fPIC -W -Wall -Wextra -Wreturn-type -m64 $(CXX
 CXXFLAGS_DEBUG = -g -DDEBUG $(CXXFLAGS_BASIC) 
 CXXFLAGS_RELEASE = -O3 $(CXXFLAGS_BASIC) 
 
-CFLAGS_BASIC = -ferror-limit=1 -fPIC -W -Wall -Wextra -Wreturn-type -ansi -m64 -Wno-deprecated -Wno-unused-parameter -Wno-unused-local-typedef
+CFLAGS_BASIC = -ferror-limit=1 -fPIC -W -Wall -Wextra -Wreturn-type -m64 -Wno-deprecated -Wno-unused-parameter -Wno-unused-local-typedef
 CFLAGS_DEBUG = -g -DDEBUG $(CFLAGS_BASIC) 
 CFLAGS_RELEASE = -O3 $(CFLAGS_BASIC) 
 

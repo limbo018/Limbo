@@ -20,9 +20,7 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 
 # make single threaded OpenBlas
 all: 
-	@cd OpenBlas
-	@make -f Makefile BINARY=64 CC=$(CC) FC=$(FC) USE_OPENMP=0 USE_THREAD=0 NO_CBLAS=1 NO_WARMUP=1 libs netlib
-	@cd ..
+	@make -C OpenBlas -f Makefile BINARY=64 CC=$(CC) FC=$(FC) USE_OPENMP=0 USE_THREAD=0 NO_CBLAS=1 NO_WARMUP=1 libs netlib
 
 .PHONY: clean
 clean: 
