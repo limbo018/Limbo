@@ -53,6 +53,22 @@ def getAddressAndDate(entry):
         addressAndDate += prefix + entry['year']
     return addressAndDate
 
+# switch from [last name, first name] to [first name last name]
+def switchToFirstLastNameStyle(author):
+    authorArray = author.split('and')
+    for i, oneAuthor in enumerate(authorArray):
+        if ',' in oneAuthor:
+            nameArray = oneAuthor.split(',')
+            assert len(nameArray) == 2, "len(nameArray) = %d" % len(nameArray)
+            authorArray[i] = nameArray[1].strip() + ' ' + nameArray[0].strip()
+        if i == 0:
+            author = authorArray[i]
+        elif i+1 < len(authorArray):
+            author += ", " + authorArray[i]
+        else:
+            author += " and " + authorArray[i]
+    return author
+
 def printBibDB(bibDB, highlightAuthors, suffix):
     # differentiate journal and conference 
     # I assume journal uses 'journal' 
@@ -109,7 +125,8 @@ def printWeb(bibDB, stringMap, highlightAuthors, entries, publishType, booktitle
         if not currentYear or currentYear.lower() != entry['year'].lower():
             currentYear = entry['year']
             print "==== %s\n" % (currentYear)
-        author = entry['author']
+        # switch from [last name, first name] to [first name last name]
+        author = switchToFirstLastNameStyle(entry['author'])
         if highlightAuthors: # highlight some authors 
             for highlightAuthor in highlightAuthors:
                 author = author.replace(highlightAuthor, "*"+highlightAuthor+"*")
@@ -152,7 +169,8 @@ def printCV(bibDB, stringMap, highlightAuthors, entries, publishType, booktitleK
     for i, entry in enumerate(entries):
         if not currentYear or currentYear.lower() != entry['year'].lower():
             currentYear = entry['year']
-        author = entry['author']
+        # switch from [last name, first name] to [first name last name]
+        author = switchToFirstLastNameStyle(entry['author'])
         if highlightAuthors: # highlight some authors 
             for highlightAuthor in highlightAuthors:
                 author = author.replace(highlightAuthor, "\\textbf{"+highlightAuthor+"}")
