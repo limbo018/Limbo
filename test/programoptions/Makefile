@@ -3,10 +3,9 @@
 # ==========================================================================
 
 LIMBO_ROOT_DIR = $(realpath ../..)
-OBJDIR = $(LIMBO_ROOT_DIR)/obj
+OBJDIR = obj
 MKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 LIBDIR = $(LIMBO_ROOT_DIR)/lib
-LIBMKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 
 VPATH = .
 
@@ -41,7 +40,7 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-all: libprogramoptions 
+all: test_ProgramOptions
 
 # Compile dependency 
 
@@ -50,6 +49,7 @@ $(OBJDIR)/%.d: %.cpp
 	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
 
 -include $(DEPS)
+-include $(DEPS_TEST)
 
 # Implicit rule to compile c++ files
 
@@ -59,15 +59,15 @@ $(OBJDIR)/%.o: %.cpp
 
 # Link executable
 
-libprogramoptions: $(OBJS)
-	@$(LIBMKDIR)
-	$(AR) $(ARFLAGS) $(LIBDIR)/libprogramoptions.a $(OBJS)
+test_ProgramOptions: $(LIBDIR)/libprogramoptions.a $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LIBDIR)/libprogramoptions.a
 
 install: libprogramoptions
-	rm -f $(OBJS) 
+	rm -f $(OBJS)
 
 .PHONY: clean
 clean: cleandep
+	rm -f test_ProgramOptions
 	rm -f $(OBJS)
 
 .PHONY: cleandep
