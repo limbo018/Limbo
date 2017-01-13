@@ -3,11 +3,10 @@
 # ==========================================================================
 
 LIMBO_ROOT_DIR = $(realpath ../..)
-TEST_DIR = $(realpath .)
-OBJDIR = $(TEST_DIR)/obj
+OBJDIR = obj
 MKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 
-VPATH = . $(TEST_DIR)
+VPATH = .
 
 #==========================================================================
 #                         Compilation Flags
@@ -63,7 +62,7 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-all: $(TEST_DIR)/test_ChromaticNumber $(TEST_DIR)/test_LPColoring $(TEST_DIR)/test_GraphSimplification $(TEST_DIR)/test_ILPColoring  $(TEST_DIR)/test_SDPColoring $(TEST_DIR)/test_FM
+all: test_ChromaticNumber test_LPColoring test_GraphSimplification test_ILPColoring  test_SDPColoring test_FM
 
 # Compile dependency 
 
@@ -81,32 +80,32 @@ $(OBJDIR)/%.o: %.cpp
 
 # Link executable
 
-$(TEST_DIR)/test_ChromaticNumber: $(OBJDIR)/test_ChromaticNumber.o 
+test_ChromaticNumber: $(OBJDIR)/test_ChromaticNumber.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_ChromaticNumber.o $(LIBS) 
 
-$(TEST_DIR)/test_LPColoring: $(OBJDIR)/test_LPColoring.o 
+test_LPColoring: $(OBJDIR)/test_LPColoring.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_LPColoring.o $(CXXFLAGS) $(LIBS)
 
-$(TEST_DIR)/test_GraphSimplification: $(OBJDIR)/test_GraphSimplification.o 
+test_GraphSimplification: $(OBJDIR)/test_GraphSimplification.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_GraphSimplification.o $(CXXFLAGS) $(LIBS)
 
-$(TEST_DIR)/test_ILPColoring: $(OBJDIR)/test_ILPColoring.o 
+test_ILPColoring: $(OBJDIR)/test_ILPColoring.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_ILPColoring.o $(CXXFLAGS) $(LIBS)
 
-$(TEST_DIR)/test_SDPColoring: $(OBJDIR)/test_SDPColoring.o $(LIMBO_ROOT_DIR)/lib/libsdp.a $(LIMBO_ROOT_DIR)/lib/libopenblas-st.a
+test_SDPColoring: $(OBJDIR)/test_SDPColoring.o $(LIMBO_ROOT_DIR)/lib/libsdp.a $(LIMBO_ROOT_DIR)/lib/libopenblas-st.a
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_SDPColoring.o $(CXXFLAGS) $(LIBS)
 
-$(TEST_DIR)/test_FM: $(OBJDIR)/test_FM.o 
+test_FM: $(OBJDIR)/test_FM.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_FM.o $(LIBS) 
 
 .PHONY: clean
 clean: cleandep
-	rm -f $(TEST_DIR)/test_ChromaticNumber 
-	rm -f $(TEST_DIR)/test_LPColoring 
-	rm -f $(TEST_DIR)/test_GraphSimplification 
-	rm -f $(TEST_DIR)/test_ILPColoring 
-	rm -f $(TEST_DIR)/test_SDPColoring 
-	rm -f $(TEST_DIR)/test_FM
+	rm -f test_ChromaticNumber 
+	rm -f test_LPColoring 
+	rm -f test_GraphSimplification 
+	rm -f test_ILPColoring 
+	rm -f test_SDPColoring 
+	rm -f test_FM
 	rm -f $(OBJS)
 
 .PHONY: cleandep
