@@ -5,7 +5,6 @@
 LIMBO_ROOT_DIR = $(realpath ../..)
 OBJDIR = obj
 MKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
-LIBDIR = $(LIMBO_ROOT_DIR)/lib
 
 VPATH = .
 
@@ -59,8 +58,8 @@ $(OBJDIR)/%.o: %.cpp
 
 # Link executable
 
-test_ProgramOptions: $(LIBDIR)/libprogramoptions.a $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LIBDIR)/libprogramoptions.a
+test_ProgramOptions: $(OBJS) $(LIMBO_ROOT_DIR)/lib/libprogramoptions.a
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) -L $(LIMBO_ROOT_DIR)/lib -lprogramoptions
 
 install: libprogramoptions
 	rm -f $(OBJS)
@@ -76,4 +75,3 @@ cleandep:
 
 .PHONY: extraclean
 extraclean: clean
-	rm -f $(LIBDIR)/libprogramoptions.a

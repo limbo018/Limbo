@@ -5,7 +5,6 @@
 LIMBO_ROOT_DIR = $(realpath ../..)
 OBJDIR = obj
 MKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
-LIBDIR = $(LIMBO_ROOT_DIR)/lib
 
 VPATH = .
 
@@ -66,8 +65,8 @@ test_p2r: $(OBJDIR)/test_p2r.o
 test_blibapi: $(OBJDIR)/test_blibapi.o
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_blibapi.o 
 
-test_boostpolygonapi: $(OBJDIR)/test_boostpolygonapi.o $(LIBDIR)/libGeoBoostPolygonApi.a
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_boostpolygonapi.o $(LIBDIR)/libGeoBoostPolygonApi.a
+test_boostpolygonapi: $(OBJDIR)/test_boostpolygonapi.o $(LIMBO_ROOT_DIR)/lib/libGeoBoostPolygonApi.a
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_boostpolygonapi.o -L $(LIMBO_ROOT_DIR)/lib -lGeoBoostPolygonApi
 
 .PHONY: clean
 clean: cleandep
