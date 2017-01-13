@@ -5,11 +5,9 @@
 PARSER_PREFIX = Def
 LIB_PREFIX = def
 DEBUG_PREFIX = $(shell echo $(PARSER_PREFIX) | tr a-z A-Z)# lower case to upper case 
-LIMBO_ROOT_DIR = $(realpath ../../../..)
-OBJDIR = $(LIMBO_ROOT_DIR)/obj
+LIMBO_ROOT_DIR = $(realpath ../../..)
+OBJDIR = obj
 MKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
-LIBDIR = $(LIMBO_ROOT_DIR)/lib
-LIBMKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 
 VPATH = .
 
@@ -42,31 +40,15 @@ INCLUDE = -I $(realpath .) \
 # ==========================================================================
 
 # parser.cc and scanner.cc are generated 
-SRCS = $(wildcard *.cc) $(PARSER_PREFIX)Parser.cc $(PARSER_PREFIX)Scanner.cc
+SRCS = $(wildcard *.cc)
 OBJS = $(SRCS:%.cc=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-all: lib$(LIB_PREFIX)parser
-
-# Generate scanner and parser
-
-$(PARSER_PREFIX)Parser.cc: $(PARSER_PREFIX)Parser.yy
-	@$(YACC) --version
-	$(YACC) -o $(PARSER_PREFIX)Parser.cc --defines=$(PARSER_PREFIX)Parser.h $(PARSER_PREFIX)Parser.yy
-
-$(PARSER_PREFIX)Scanner.cc: $(PARSER_PREFIX)Scanner.ll
-	@$(LEX) --version
-	$(LEX) -o $(PARSER_PREFIX)Scanner.cc $(PARSER_PREFIX)Scanner.ll
+all: test_bison
 
 # Compile dependency 
 
 $(OBJDIR)/%.d: %.cc
-	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
-$(OBJDIR)/$(PARSER_PREFIX)Parser.d: $(PARSER_PREFIX)Parser.cc
-	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
-$(OBJDIR)/$(PARSER_PREFIX)Scanner.d: $(PARSER_PREFIX)Scanner.cc $(PARSER_PREFIX)Parser.cc
 	@$(MKDIR)
 	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
 
@@ -80,16 +62,12 @@ $(OBJDIR)/%.o: %.cc
 
 # Link executable
 
-lib$(LIB_PREFIX)parser: $(OBJS)
-	@$(LIBMKDIR)
-	$(AR) $(ARFLAGS) $(LIBDIR)/lib$(LIB_PREFIX)parser.a $(OBJS)
-
-install: lib$(LIB_PREFIX)parser
-	rm -f $(PARSER_PREFIX)Parser.cc $(PARSER_PREFIX)Parser.h $(PARSER_PREFIX)Scanner.cc 
-	rm -f $(OBJS)
+test_bison: $(OBJS) $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)parser
 
 .PHONY: clean
 clean: cleandep
+	rm -f test_bison 
 	rm -f $(OBJS)
 
 .PHONY: cleandep
@@ -98,6 +76,4 @@ cleandep:
 
 .PHONY: extraclean
 extraclean: clean
-	rm -f $(LIBDIR)/lib$(LIB_PREFIX)parser.a
-	rm -f $(PARSER_PREFIX)Parser.cc $(PARSER_PREFIX)Parser.h $(PARSER_PREFIX)Scanner.cc 
-	rm -f location.hh position.hh stack.hh
+	rm -rf $(OBJDIR)

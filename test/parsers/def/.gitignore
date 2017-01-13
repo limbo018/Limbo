@@ -1,0 +1,4 @@
+obj
+test_bison
+valgrind*.txt
+valgrind*.log
