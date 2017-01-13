@@ -13,7 +13,7 @@
 #include <boost/polygon/polygon.hpp>
 #include <limbo/geometry/Polygon2Rectangle.h>
 #include <limbo/geometry/api/BoostPolygonApi.h>
-#include <limbo/geometry/test/GeoBoostPolygonApi.h>
+#include <limbo/geometry/api/GeoBoostPolygonApi.h>
 using std::cout;
 using std::endl;
 using std::string;

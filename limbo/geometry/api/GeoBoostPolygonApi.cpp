@@ -7,6 +7,7 @@
 
 // for better potability 
 // I do not include from limbo dir 
+//#include <limbo/geometry/api/GeoBoostPolygonApi.h>
 #include "GeoBoostPolygonApi.h"
 #include <limbo/geometry/Polygon2Rectangle.h>
 #include <limbo/geometry/api/BoostPolygonApi.h>

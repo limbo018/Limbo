@@ -3,12 +3,11 @@
 # ==========================================================================
 
 LIMBO_ROOT_DIR = $(realpath ../..)
-OBJDIR = $(LIMBO_ROOT_DIR)/obj
+OBJDIR = obj
 MKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 LIBDIR = $(LIMBO_ROOT_DIR)/lib
-LIBMKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 
-VPATH = . ./api
+VPATH = .
 
 #==========================================================================
 #                         Compilation Flags
@@ -39,13 +38,11 @@ INCLUDE = -I $(realpath .) \
 #                         Standard Setting
 # ==========================================================================
 
-SRCS1 = $(wildcard *.cpp)
-SRCS2 = $(wildcard api/*.cpp)
-SRCS = $(SRCS1) $(SRCS2)
-OBJS = $(SRCS1:%.cpp=$(OBJDIR)/%.o) $(SRCS2:api/%.cpp=$(OBJDIR)/%.o)
+SRCS = $(wildcard *.cpp) 
+OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-all: $(LIBDIR)/libGeoBoostPolygonApi.a
+all: test_p2r test_blibapi test_boostpolygonapi 
 
 # Compile dependency 
 
@@ -54,7 +51,6 @@ $(OBJDIR)/%.d: %.cpp
 	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
 
 -include $(DEPS)
--include $(DEPS_TEST)
 
 # Implicit rule to compile c++ files
 
@@ -64,14 +60,21 @@ $(OBJDIR)/%.o: %.cpp
 
 # Link executable
 
-$(LIBDIR)/libGeoBoostPolygonApi.a: $(OBJDIR)/GeoBoostPolygonApi.o
-	@$(LIBMKDIR)
-	$(AR) $(ARFLAGS) $(LIBDIR)/libGeoBoostPolygonApi.a $(OBJDIR)/GeoBoostPolygonApi.o
+test_p2r: $(OBJDIR)/test_p2r.o 
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_p2r.o 
 
+test_blibapi: $(OBJDIR)/test_blibapi.o
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_blibapi.o 
+
+test_boostpolygonapi: $(OBJDIR)/test_boostpolygonapi.o $(LIBDIR)/libGeoBoostPolygonApi.a
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_boostpolygonapi.o $(LIBDIR)/libGeoBoostPolygonApi.a
 
 .PHONY: clean
 clean: cleandep
-	rm -f $(OBJS)
+	rm -f test_p2r 
+	rm -f test_blibapi 
+	rm -f test_boostpolygonapi 
+	rm -f $(OBJS) 
 
 .PHONY: cleandep
 cleandep:
@@ -79,4 +82,3 @@ cleandep:
 
 .PHONY: extraclean
 extraclean: clean
-	rm -f $(LIBDIR)/libGeoBoostPolygonApi.a
