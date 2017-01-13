@@ -76,3 +76,4 @@ cleandep:
 
 .PHONY: extraclean
 extraclean: clean
+	rm -rf $(OBJDIR)
