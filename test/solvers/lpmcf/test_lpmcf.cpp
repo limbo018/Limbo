@@ -1,5 +1,5 @@
 /*************************************************************************
-    > File Name: main.cpp
+    > File Name: test_lpmcf.cpp
     > Author: Yibo Lin
     > Mail: yibolin@utexas.edu
     > Created Time: Wed 15 Oct 2014 05:08:44 PM CDT

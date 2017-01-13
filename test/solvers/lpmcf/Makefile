@@ -1,16 +1,12 @@
-# $Id$
-# plain simple Makefile to build test
-
 #==========================================================================
 #                         Directories and names 
 # ==========================================================================
 
 LIMBO_ROOT_DIR = $(realpath ../../..)
-TEST_DIR = $(realpath ./test)
-OBJDIR = $(LIMBO_ROOT_DIR)/obj
+OBJDIR = obj
 MKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 
-VPATH = . $(TEST_DIR)
+VPATH = .
 
 #==========================================================================
 #                         Compilation Flags
@@ -37,7 +33,7 @@ endif
 INCLUDE = -I $(LIMBO_ROOT_DIR) \
 		  -I $(BOOST_DIR)/include \
 		  -I $(LIBRARIES_DIR)/lemon/include
-LIBS = -L $(LIBRARIES_DIR)/lemon/lib -lemon \
+LIBS = -L $(LEMON_DIR)/lib -lemon \
 		-L $(LIMBO_ROOT_DIR)/lib -llpparser
 
 # ==========================================================================
@@ -48,43 +44,33 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-SRCS_TEST = $(wildcard $(TEST_DIR)/*.cpp)
-OBJS_TEST = $(patsubst $(TEST_DIR)/%.cpp,$(TEST_DIR)/%.o,$(SRCS_TEST))
-DEPS_TEST = $(OBJS_TEST:%.o=%.d)
-
-all: $(TEST_DIR)/test
+all: test_lpmcf
 
 # Compile dependency 
 
 $(OBJDIR)/%.d: %.cpp
 	@$(MKDIR)
 	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
-$(TEST_DIR)/%.d: %.cpp
-	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
 
 -include $(DEPS)
--include $(DEPS_TEST)
 
 # Implicit rule to compile c++ files
 
 $(OBJDIR)/%.o: %.cpp
 	@$(MKDIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE)
-$(TEST_DIR)/%.o: %.cpp
-	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE)
 
 # Link executable
 
-$(TEST_DIR)/test: $(TEST_DIR)/test.o 
-	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test.o $(LIBS) 
+test_lpmcf: $(OBJDIR)/test_lpmcf.o 
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_lpmcf.o $(LIBS) 
 
 .PHONY: clean
 clean: cleandep
-	rm -f $(TEST_DIR)/test $(OBJS) $(OBJS_TEST)
+	rm -f test_lpmcf
+	rm -f $(OBJS) 
 
 .PHONY: cleandep
 cleandep:
-	rm -f $(DEPS) $(DEPS_TEST)
+	rm -f $(DEPS)
 
