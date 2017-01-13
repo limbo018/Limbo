@@ -33,22 +33,22 @@ endif
 
 INCLUDE = -I $(realpath .) \
 		  -I $(LIMBO_ROOT_DIR) \
-		  -I $(LEX_INCLUDE_DIR)
+		  -I $(LEX_INCLUDE_DIR) \
+		  -I $(BOOST_DIR)/include
 
 # ==========================================================================
 #                         Standard Setting
 # ==========================================================================
 
-# parser.cc and scanner.cc are generated 
-SRCS = $(wildcard *.cc)
-OBJS = $(SRCS:%.cc=$(OBJDIR)/%.o)
+SRCS = $(wildcard *.cpp)
+OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
 all: test_bison
 
 # Compile dependency 
 
-$(OBJDIR)/%.d: %.cc
+$(OBJDIR)/%.d: %.cpp
 	@$(MKDIR)
 	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
 
@@ -56,14 +56,14 @@ $(OBJDIR)/%.d: %.cc
 
 # Implicit rule to compile c++ files
 
-$(OBJDIR)/%.o: %.cc
+$(OBJDIR)/%.o: %.cpp
 	@$(MKDIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE) 
 
 # Link executable
 
-test_bison: $(OBJS) $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)parser
+test_bison: $(OBJDIR)/test_bison.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_bison.o -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)parser
 
 .PHONY: clean
 clean: cleandep
