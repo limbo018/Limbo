@@ -17,6 +17,8 @@ CTHREADPOOL_LIB = $(LIMBO_ROOT_DIR)/lib/libthpool.a
 #                         Compilation Flags
 # ==========================================================================
 
+# default OPENBLAS is off 
+OPENBLAS = 0
 # default DBG is off
 DBG = 0
 
@@ -33,13 +35,18 @@ endif
 #                         Standard Setting
 # ==========================================================================
 
+ifeq ($(OPENBLAS), 1)
 all: $(CSDP_LIB) $(OPENBLAS_LIB) $(LIBLINEAR_LIB) $(CTHREADPOOL_LIB)
-	@echo ">> building default"
+	@echo ">> building default with OPENBLAS on"
+else 
+all: $(CTHREADPOOL_LIB)
+	@echo ">> building default with OPENBLAS off"
+endif 
 
 $(OPENBLAS_LIB): 
 	@echo ">> building OpenBLAS"
 	@make -C $(OPENBLAS_SRCS) -f Makefile.limbo
-	mv $(OPENBLAS_SRCS)/libopenblas_*-r0.2.14.a $(OPENBLAS_LIB) # the name may vary from architectures 
+	mv $(OPENBLAS_SRCS)/OpenBLAS/libopenblas_*.a $(OPENBLAS_LIB) # the name may vary from architectures 
 
 $(CSDP_LIB): $(OPENBLAS_LIB)
 	@echo ">> building Csdp"

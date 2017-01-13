@@ -18,6 +18,7 @@
 #include <time.h>
 #include <assert.h>
 #include <vector>
+#include <iostream>
 #include <fstream>
 
 // Setting BYTESWAP to 1 is appropriate for big-endian Intel processors. 
@@ -87,6 +88,9 @@ struct gds_celltype                  /* A GDS library is a linked list of cells.
 	struct gds_celltype *nextcell;   /* pointer to the next cell, forming a linked list                           */  
 };
 
+/// forward declaration of a writer class 
+/// which is flexiable to choose std::ofstream or boost::iostreams
+class GdsStream; 
 
 struct GdsWriter
 {
@@ -157,8 +161,8 @@ struct GdsWriter
         /// flush all contents in the buffer 
         void gds_flush(); 
 
-        std::ofstream m_os; 
-        int out; // output gds file descriptor
+        GdsStream* m_os; 
+        //int out; // output gds file descriptor
         BYTE  gdsswap;
         short gdsword;
 
