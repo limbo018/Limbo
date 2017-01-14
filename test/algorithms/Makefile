@@ -48,10 +48,12 @@ LIBS += -L $(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi60 \
 		-lpthread 
 # ==== Csdp api (OpenBLAS and Fortran library are necessary)
 # it looks like pthead must be linked dynamically when GUROBI is also on 
+ifeq ($(OPENBLAS), 1)
 LIBS += -L $(LIMBO_ROOT_DIR)/lib -lsdp -lopenblas-st -lm 
 # ==== Csdp links to Fortran under Linux 
 ifeq ($(UNAME_S), Linux)
 LIBS += -lgfortran 
+endif
 endif
 
 # ==========================================================================
@@ -62,7 +64,13 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
+ifeq ($(OPENBLAS), 1)
 all: test_ChromaticNumber test_LPColoring test_GraphSimplification test_ILPColoring  test_SDPColoring test_FM
+	@echo ">> building with OPENBLAS on"
+else
+all: test_ChromaticNumber test_LPColoring test_GraphSimplification test_ILPColoring  test_FM
+	@echo ">> building with OPENBLAS off"
+endif 
 
 # Compile dependency 
 
