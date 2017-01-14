@@ -74,3 +74,6 @@ clean: cleandep
 cleandep:
 	rm -f $(DEPS)
 
+.PHONY: extraclean
+extraclean: clean
+	rm -rf $(OBJDIR)

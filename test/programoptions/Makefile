@@ -48,7 +48,6 @@ $(OBJDIR)/%.d: %.cpp
 	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
 
 -include $(DEPS)
--include $(DEPS_TEST)
 
 # Implicit rule to compile c++ files
 
@@ -75,3 +74,4 @@ cleandep:
 
 .PHONY: extraclean
 extraclean: clean
+	rm -rf $(OBJDIR)
