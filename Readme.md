@@ -109,7 +109,8 @@ Users need to make sure they are properly installed and the corresponding settin
 
 * In the directory of limbo library, run
 ```
-make install
+make
+make test (optional)
 ```
 After installation, it is strongly recommended to export LIMBO_DIR to the path where Limbo library is installed as an environment variable. 
 
@@ -118,8 +119,8 @@ After installation, it is strongly recommended to export LIMBO_DIR to the path w
 * CXX sets the compiler for C++ and CC sets the compiler for C. FC sets the fortran compiler which is only needed by some third party packages like OpenBLAS. 
 Some examples are as follows, 
 ```
-make install CXX=g++ CC=gcc FC=gfortran (default for Linux)
-make install CXX=clang++ CC=clang FC=gfortran (default for Mac/Darwin)
+make CXX=g++ CC=gcc FC=gfortran (default for Linux)
+make CXX=clang++ CC=clang FC=gfortran (default for Mac/Darwin)
 ```
 
 ### 3. Customize CXXSTDLIB and CXXSTD options
@@ -128,15 +129,15 @@ make install CXX=clang++ CC=clang FC=gfortran (default for Mac/Darwin)
 
 Under clang, following combinations are valid, 
 ```
-make install CXXSTDLIB="-stdlib=libstdc++" CXXSTD="-std=c++98" (default)
-make install CXXSTDLIB="-stdlib=libc++" CXXSTD="-std=c++98"
-make install CXXSTDLIB="-stdlib=libc++" CXXSTD="-std=c++11"
+make CXXSTDLIB="-stdlib=libstdc++" CXXSTD="-std=c++98" (default)
+make CXXSTDLIB="-stdlib=libc++" CXXSTD="-std=c++98"
+make CXXSTDLIB="-stdlib=libc++" CXXSTD="-std=c++11"
 ```
 
 Under gcc, there is no -stdlib option, so following combinations are valid, 
 ```
-make install CXXSTD="-std=c++98" (default)
-make install CXXSTD="-std=c++11"
+make CXXSTD="-std=c++98" (default)
+make CXXSTD="-std=c++11"
 ```
 
 Users must make sure the setting is consistent to dependent libraries during compilation, such as Boost, Lemon, etc. 

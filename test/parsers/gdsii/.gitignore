@@ -1,0 +1,6 @@
+obj
+test_reader
+test_writer
+test_driver
+valgrind.*
+test_writer2.gds

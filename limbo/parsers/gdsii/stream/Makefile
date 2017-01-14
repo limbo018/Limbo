@@ -1,6 +1,3 @@
-# $Id$
-# plain simple Makefile to build test
-
 #==========================================================================
 #                         Directories and names 
 # ==========================================================================
@@ -9,11 +6,12 @@ PARSER_PREFIX = Gds
 LIB_PREFIX = gds
 DEBUG_PREFIX = $(shell echo $(PARSER_PREFIX) | tr a-z A-Z) # lower case to upper case 
 LIMBO_ROOT_DIR = $(realpath ../../../..)
-TEST_DIR = $(realpath ../test)
 OBJDIR = $(LIMBO_ROOT_DIR)/obj
 MKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
+LIBDIR = $(LIMBO_ROOT_DIR)/lib
+LIBMKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 
-VPATH = . $(TEST_DIR)
+VPATH = .
 
 #==========================================================================
 #                         Compilation Flags
@@ -47,8 +45,8 @@ INCLUDE = -I $(LIMBO_ROOT_DIR)
 ifdef ZLIB_DIR
 ifdef BOOST_DIR
 	INCLUDE += -I $(BOOST_DIR)/include
-	LIB += -L$(BOOST_DIR)/lib -lboost_iostreams \
-		   -L$(ZLIB_DIR) -lz
+	LIB += -L $(BOOST_DIR)/lib -lboost_iostreams \
+		   -L $(ZLIB_DIR) -lz
 endif
 endif
 
@@ -60,58 +58,39 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-SRCS_TEST = $(wildcard $(TEST_DIR)/*.cpp)
-OBJS_TEST = $(patsubst $(TEST_DIR)/%.cpp,$(TEST_DIR)/%.o,$(SRCS_TEST))
-DEPS_TEST = $(OBJS_TEST:%.o=%.d)
-
-all: lib$(LIB_PREFIX)parser $(TEST_DIR)/test_reader $(TEST_DIR)/test_writer $(TEST_DIR)/test_driver
+all: lib$(LIB_PREFIX)parser
 
 # Compile dependency 
 
 $(OBJDIR)/%.d: %.cpp
 	@$(MKDIR)
 	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
-$(TEST_DIR)/%.d: %.cpp
-	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
 
 -include $(DEPS)
--include $(DEPS_TEST)
 
 # Implicit rule to compile c++ files
 
 $(OBJDIR)/%.o: %.cpp
 	@$(MKDIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE)
-$(TEST_DIR)/%.o: %.cpp
-	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE)
 
 # Link executable
 
-$(TEST_DIR)/test_reader: lib$(LIB_PREFIX)parser $(TEST_DIR)/test_reader.o
-	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_reader.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a $(LIB)
-
-$(TEST_DIR)/test_writer: lib$(LIB_PREFIX)parser $(TEST_DIR)/test_writer.o
-	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_writer.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a $(LIB)
-
-$(TEST_DIR)/test_driver: lib$(LIB_PREFIX)parser $(TEST_DIR)/test_driver.o
-	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_driver.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a $(LIB)
-
 lib$(LIB_PREFIX)parser: $(OBJS)
-	$(AR) $(ARFLAGS) lib$(LIB_PREFIX)parser.a $(OBJS)
-	mv lib$(LIB_PREFIX)parser.a $(LIMBO_ROOT_DIR)/lib
+	@$(LIBMKDIR)
+	$(AR) $(ARFLAGS) $(LIBDIR)/lib$(LIB_PREFIX)parser.a $(OBJS)
 
 install: lib$(LIB_PREFIX)parser
+	rm -f $(OBJS)
 
 .PHONY: clean
 clean: cleandep
-	rm -f $(TEST_DIR)/test_reader $(TEST_DIR)/test_writer $(TEST_DIR)/test_driver $(OBJS) $(OBJS_TEST)
+	rm -f $(OBJS)
 
 .PHONY: cleandep
 cleandep:
-	rm -f $(DEPS) $(DEPS_TEST)
+	rm -f $(DEPS)
 
 .PHONY: extraclean
 extraclean: clean
-	rm -f $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
+	rm -f $(LIBDIR)/lib$(LIB_PREFIX)parser.a

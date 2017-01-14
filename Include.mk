@@ -10,7 +10,7 @@
 # determine linking flags 
 UNAME_S = $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
-	LINK_FLAG = -static # overall linking flag, maybe changed later 
+	LINK_FLAG = # overall linking flag, maybe changed later 
 	STATIC_LINK_FLAG = -Wl,-Bstatic # ld under Linux has fine control 
 	DYNAMIC_LINK_FLAG = -Wl,-Bdynamic # ld under Linux has fine control 
 endif 
