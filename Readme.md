@@ -33,7 +33,7 @@ Please read this **Readme** file carefully for proper instructions to **install*
 | Graph Algorithms        | c++                             | basic graph algorithms based on Boost.Graph structure    |
 | Program Options         | c++                             | package for easy command line options for a program      |
 | Makefile Utilities      | makefile                        | makefile help functions                                  |
-| Third Party Libraries   | c/c++/fortran                   | OpenBLAS, Csdp                                           |
+| Third Party Libraries   | c/c++/fortran                   | OpenBLAS, Csdp, CThreadPool, liblinear, dlx, libdivide   |
 
 ## Authors & Maintainers
 
