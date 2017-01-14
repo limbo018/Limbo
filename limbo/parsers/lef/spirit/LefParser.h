@@ -33,6 +33,7 @@ using boost::int8_t;
 using boost::int32_t;
 using boost::int64_t;
 using boost::uint8_t;
+using boost::uint32_t;
 using boost::array;
 using boost::iequals;
 
@@ -489,7 +490,7 @@ struct LefParser
 				m_layer.offset.fill(v1[0]);
 			else 
 			{
-				for (int32_t i = 0; i < v1.size(); ++i)
+				for (uint32_t i = 0; i < v1.size(); ++i)
 					m_layer.offset[i] = v1[i];
 			}
 		}
