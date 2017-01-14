@@ -14,9 +14,9 @@ Please read this **Readme** file carefully for proper instructions to **install*
 | Components              | Languages & Libraries           | Description                                              |
 | ----------------------- | ------------------------------- | -------------------------------------------------------- |
 | Lef Parser              | flex/bison                      |                                                          |
-|                         | boost.spirit                    |                                                          |
+|                         | boost.spirit                    | deprecated due to efficiency                             |
 | Def Parser              | flex/bison                      |                                                          |
-|                         | boost.spirit                    |                                                          |
+|                         | boost.spirit                    | deprecated due to efficiency                             |
 | Gds Parser              | stream parser: c/c++            | support .gds and .gds.gz when Boost and Zlib available   |
 |                         | ascii parser: boost.spirit      |                                                          |
 | Tf Parser               | boost.spirit                    |                                                          |
