@@ -1,6 +1,7 @@
 # top makefile 
 
 MAKE = make
+TEST_DIR = test
 
 # list of components 
 PARSERS = limbo/parsers
@@ -50,6 +51,22 @@ install:
 	$(MAKE) install -C $(PROGRAMOPTIONS)
 	$(MAKE) install -C $(THIRDPARTY)
 
+test: 
+	$(MAKE) -C $(TEST_DIR)/algorithms
+	$(MAKE) -C $(TEST_DIR)/geometry
+	$(MAKE) -C $(TEST_DIR)/parsers/def
+	$(MAKE) -C $(TEST_DIR)/parsers/lef
+	$(MAKE) -C $(TEST_DIR)/parsers/ebeam
+	$(MAKE) -C $(TEST_DIR)/parsers/lp
+	$(MAKE) -C $(TEST_DIR)/parsers/tf
+	$(MAKE) -C $(TEST_DIR)/parsers/verilog
+	$(MAKE) -C $(TEST_DIR)/parsers/gdf
+	$(MAKE) -C $(TEST_DIR)/parsers/gdsii
+	$(MAKE) -C $(TEST_DIR)/parsers/bookshelf
+	$(MAKE) -C $(TEST_DIR)/programoptions
+	$(MAKE) -C $(TEST_DIR)/solvers/lpmcf
+	$(MAKE) -C $(TEST_DIR)/string
+
 clean:
 	$(MAKE) extraclean -C $(PARSERS)/def/bison
 	$(MAKE) extraclean -C $(PARSERS)/lef/bison
@@ -61,3 +78,17 @@ clean:
 	$(MAKE) extraclean -C $(PARSERS)/bookshelf/bison
 	$(MAKE) extraclean -C $(PROGRAMOPTIONS)
 	$(MAKE) extraclean -C $(THIRDPARTY)
+	$(MAKE) extraclean -C $(TEST_DIR)/algorithms
+	$(MAKE) extraclean -C $(TEST_DIR)/geometry
+	$(MAKE) extraclean -C $(TEST_DIR)/parsers/def
+	$(MAKE) extraclean -C $(TEST_DIR)/parsers/lef
+	$(MAKE) extraclean -C $(TEST_DIR)/parsers/ebeam
+	$(MAKE) extraclean -C $(TEST_DIR)/parsers/lp
+	$(MAKE) extraclean -C $(TEST_DIR)/parsers/tf
+	$(MAKE) extraclean -C $(TEST_DIR)/parsers/verilog
+	$(MAKE) extraclean -C $(TEST_DIR)/parsers/gdf
+	$(MAKE) extraclean -C $(TEST_DIR)/parsers/gdsii
+	$(MAKE) extraclean -C $(TEST_DIR)/parsers/bookshelf
+	$(MAKE) extraclean -C $(TEST_DIR)/programoptions
+	$(MAKE) extraclean -C $(TEST_DIR)/solvers/lpmcf
+	$(MAKE) extraclean -C $(TEST_DIR)/string
