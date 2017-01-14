@@ -1,16 +1,14 @@
-# $Id$
-# plain simple Makefile to build test
-
 #==========================================================================
 #                         Directories and names 
 # ==========================================================================
 
 LIMBO_ROOT_DIR = $(realpath ../..)
-TEST_DIR = $(realpath ./test)
 OBJDIR = $(LIMBO_ROOT_DIR)/obj
 MKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
+LIBDIR = $(LIMBO_ROOT_DIR)/lib
+LIBMKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 
-VPATH = . $(TEST_DIR)
+VPATH = . ./api
 
 #==========================================================================
 #                         Compilation Flags
@@ -41,22 +39,17 @@ INCLUDE = -I $(realpath .) \
 #                         Standard Setting
 # ==========================================================================
 
-SRCS = $(wildcard *.cpp) 
-OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
+SRCS1 = $(wildcard *.cpp)
+SRCS2 = $(wildcard api/*.cpp)
+SRCS = $(SRCS1) $(SRCS2)
+OBJS = $(SRCS1:%.cpp=$(OBJDIR)/%.o) $(SRCS2:api/%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-SRCS_TEST = $(wildcard $(TEST_DIR)/*.cpp)
-OBJS_TEST = $(patsubst $(TEST_DIR)/%.cpp,$(TEST_DIR)/%.o,$(SRCS_TEST))
-DEPS_TEST = $(OBJS_TEST:%.o=%.d)
-
-all: $(TEST_DIR)/test_p2r $(TEST_DIR)/test_blibapi $(TEST_DIR)/test_boostpolygonapi $(TEST_DIR)/libGeoBoostPolygonApi.a
+all: $(LIBDIR)/libGeoBoostPolygonApi.a
 
 # Compile dependency 
 
 $(OBJDIR)/%.d: %.cpp
-	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
-$(TEST_DIR)/%.d: %.cpp
 	@$(MKDIR)
 	$(CXX) $(CXXFLAGS) $< -MM -MT $(@:%.d=%.o) >$@ $(INCLUDE)
 
@@ -68,34 +61,22 @@ $(TEST_DIR)/%.d: %.cpp
 $(OBJDIR)/%.o: %.cpp
 	@$(MKDIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE) 
-$(TEST_DIR)/%.o: %.cpp
-	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -c -o $@ $< $(INCLUDE) 
 
 # Link executable
 
-$(TEST_DIR)/test_p2r: $(TEST_DIR)/test_p2r.o 
-	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_p2r.o 
-
-$(TEST_DIR)/test_blibapi: $(TEST_DIR)/test_blibapi.o
-	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_blibapi.o 
-
-$(TEST_DIR)/test_boostpolygonapi: $(TEST_DIR)/test_boostpolygonapi.o $(TEST_DIR)/libGeoBoostPolygonApi.a
-	$(CXX) $(CXXFLAGS) -o $@ $(TEST_DIR)/test_boostpolygonapi.o $(LIMBO_ROOT_DIR)/lib/libGeoBoostPolygonApi.a
-
-$(TEST_DIR)/libGeoBoostPolygonApi.a: $(TEST_DIR)/GeoBoostPolygonApi.o
-	$(AR) $(ARFLAGS) libGeoBoostPolygonApi.a $(TEST_DIR)/GeoBoostPolygonApi.o
-	mv libGeoBoostPolygonApi.a $(LIMBO_ROOT_DIR)/lib
+$(LIBDIR)/libGeoBoostPolygonApi.a: $(OBJDIR)/GeoBoostPolygonApi.o
+	@$(LIBMKDIR)
+	$(AR) $(ARFLAGS) $(LIBDIR)/libGeoBoostPolygonApi.a $(OBJDIR)/GeoBoostPolygonApi.o
 
 
 .PHONY: clean
 clean: cleandep
-	rm -f $(TEST_DIR)/test_p2r $(TEST_DIR)/test_blibapi $(TEST_DIR)/test_boostpolygonapi $(OBJS) $(OBJS_TEST)
+	rm -f $(OBJS)
 
 .PHONY: cleandep
 cleandep:
-	rm -f $(DEPS) $(DEPS_TEST)
+	rm -f $(DEPS) 
 
 .PHONY: extraclean
 extraclean: clean
-	rm -f $(LIMBO_ROOT_DIR)/lib/libGeoBoostPolygonApi.a
+	rm -f $(LIBDIR)/libGeoBoostPolygonApi.a
