@@ -31,7 +31,7 @@ int main(int argc, char** argv)
         limbo::GdsParser::GdsWriter flatGw (flatDB); 
         flatGw(argv[3]);
     }
-	else std::cout << "at least 2 argument is required: input gds, output gds, flat output gds, top cell name" << std::endl;
+	else std::cout << "at least 4 argument is required: input gds, output gds, flat output gds, flat cell name" << std::endl;
 
 	return 0;
 }

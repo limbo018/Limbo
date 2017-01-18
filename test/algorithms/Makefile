@@ -35,7 +35,7 @@ endif
 # external dependency is boost
 INCLUDE = -I $(LIMBO_ROOT_DIR) \
 		  -I $(BOOST_DIR)/include 
-LIBS = -L $(BOOST_DIR)/lib -lboost_graph -lboost_regex -lboost_unit_test_framework 
+LIBS = $(BOOST_LINK_FLAG) -L $(BOOST_DIR)/lib -lboost_graph -lboost_regex -lboost_unit_test_framework $(DYNAMIC_LINK_FLAG)
 
 # ==== boost chrono links to to librt.a under Linux
 ifeq ($(UNAME_S), Linux)
