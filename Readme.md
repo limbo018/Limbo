@@ -19,6 +19,7 @@ Please read this **Readme** file carefully for proper instructions to **install*
 |                         | boost.spirit                    | deprecated due to efficiency                             |
 | Gds Parser              | stream parser: c/c++            | support .gds and .gds.gz when Boost and Zlib available   |
 |                         | ascii parser: boost.spirit      |                                                          |
+|                         | gdsdb wrapper: c/c++, boost     | high level wrapper for full layout import/export/flatten |
 | Tf Parser               | boost.spirit                    |                                                          |
 | Verilog netlist parser  | flex/bison                      | read verilog netlist to initialize nets during placement |
 | Lp Parser               | flex/bison                      |                                                          |
