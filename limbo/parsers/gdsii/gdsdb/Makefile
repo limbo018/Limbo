@@ -5,9 +5,11 @@
 PARSER_PREFIX = Gds
 LIB_PREFIX = gds
 DEBUG_PREFIX = $(shell echo $(PARSER_PREFIX) | tr a-z A-Z) # lower case to upper case 
-LIMBO_ROOT_DIR = $(realpath ../../..)
-OBJDIR = obj
+LIMBO_ROOT_DIR = $(realpath ../../../..)
+OBJDIR = $(LIMBO_ROOT_DIR)/obj
 MKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
+LIBDIR = $(LIMBO_ROOT_DIR)/lib
+LIBMKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 
 VPATH = .
 
@@ -42,6 +44,7 @@ INCLUDE = -I $(LIMBO_ROOT_DIR)
 
 ifdef ZLIB_DIR
 ifdef BOOST_DIR
+	INCLUDE += -I $(BOOST_DIR)/include
 	LIB += -L $(BOOST_DIR)/lib -lboost_iostreams \
 		   -L $(ZLIB_DIR) -lz
 endif
@@ -55,12 +58,7 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-# boost is required for gdsdb
-ifdef BOOST_DIR
-all: test_reader test_writer test_driver test_gdsdb
-else
-all: test_reader test_writer test_driver
-endif
+all: lib$(LIB_PREFIX)db
 
 # Compile dependency 
 
@@ -78,30 +76,21 @@ $(OBJDIR)/%.o: %.cpp
 
 # Link executable
 
-test_reader: $(OBJDIR)/test_reader.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_reader.o -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)parser $(LIB)
+lib$(LIB_PREFIX)db: $(OBJS)
+	@$(LIBMKDIR)
+	$(AR) $(ARFLAGS) $(LIBDIR)/lib$(LIB_PREFIX)db.a $(OBJS)
 
-test_writer: $(OBJDIR)/test_writer.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_writer.o -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)parser $(LIB)
-
-test_driver: $(OBJDIR)/test_driver.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_driver.o -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)parser $(LIB)
-
-test_gdsdb: $(OBJDIR)/test_gdsdb.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)db.a
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_gdsdb.o -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)db -l$(LIB_PREFIX)parser $(LIB)
+install: lib$(LIB_PREFIX)db
+	rm -f $(OBJS)
 
 .PHONY: clean
 clean: cleandep
-	rm -f test_reader 
-	rm -f test_writer 
-	rm -f test_driver 
-	rm -f test_gdsdb
-	rm -f $(OBJS) 
+	rm -f $(OBJS)
 
 .PHONY: cleandep
 cleandep:
-	rm -f $(DEPS) 
+	rm -f $(DEPS)
 
 .PHONY: extraclean
 extraclean: clean
-	rm -rf $(OBJDIR)
+	rm -f $(LIBDIR)/lib$(LIB_PREFIX)db.a
