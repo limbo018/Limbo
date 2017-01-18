@@ -24,45 +24,7 @@ endif
 #                                Compilers
 # ==========================================================================
 
-# ==== search compilers under Linux
-ifeq ($(UNAME_S), Linux)
-ifneq ($(shell which g++48),)
-	CXX = g++48
-	CC = gcc48
-	AR = ar
-else
-ifneq ($(shell which g++47),)
-	CXX = g++47
-	CC = gcc47
-	AR = ar
-else 
-ifneq ($(shell which g++44),)
-	CXX = g++44
-	CC = gcc44
-	AR = ar
-else
-	CXX = g++
-	CC = gcc
-	AR = ar
-endif
-endif
-endif
-endif 
-# ==== search for compilers under Darwin
-ifeq ($(UNAME_S), Darwin)
-ifneq ($(shell which clang++),)
-	CXX = clang++
-	CC = clang
-	AR = ar
-else
-	CXX = g++ 
-	CC = gcc
-	AR = ar
-endif
-endif 
-
-# fortran compiler 
-FC = gfortran
+include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindCompiler.mk
 
 # ==========================================================================
 #                                Compilation Flags
@@ -73,6 +35,11 @@ ifneq ($(findstring clang, $(CXX)), ) # CXX contains clang
 else 
 	include $(LIMBO_ROOT_DIR)/Makefile.gcc
 endif 
+
+# dependency to boost and get BOOST_LINK_FLAG
+include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindBoost.mk
+# dependency to Zlib and get ZLIB_LINK_FLAG
+include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindZlib.mk
 
 # ==========================================================================
 #                                 Lex/Yacc

@@ -15,6 +15,7 @@ gdf:
 
 gdsii:
 	$(MAKE) -C gdsii/stream
+	$(MAKE) -C gdsii/gdsdb
 
 lef:
 	$(MAKE) -C lef/bison
@@ -34,6 +35,7 @@ clean:
 	$(MAKE) clean -C ebeam/bison
 	$(MAKE) clean -C gdf/bison
 	$(MAKE) clean -C gdsii/stream
+	$(MAKE) clean -C gdsii/gdsdb
 	$(MAKE) clean -C lef/bison
 	$(MAKE) clean -C lp/bison
 	$(MAKE) clean -C verilog/bison
@@ -45,6 +47,7 @@ extraclean:
 	$(MAKE) extraclean -C ebeam/bison
 	$(MAKE) extraclean -C gdf/bison
 	$(MAKE) extraclean -C gdsii/stream
+	$(MAKE) extraclean -C gdsii/gdsdb
 	$(MAKE) extraclean -C lef/bison
 	$(MAKE) extraclean -C lp/bison
 	$(MAKE) extraclean -C verilog/bison
