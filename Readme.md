@@ -14,9 +14,9 @@ Please read this **Readme** file carefully for proper instructions to **install*
 | Components              | Languages & Libraries           | Description                                              |
 | ----------------------- | ------------------------------- | -------------------------------------------------------- |
 | Lef Parser              | flex/bison                      |                                                          |
-|                         | boost.spirit                    |                                                          |
+|                         | boost.spirit                    | deprecated due to efficiency                             |
 | Def Parser              | flex/bison                      |                                                          |
-|                         | boost.spirit                    |                                                          |
+|                         | boost.spirit                    | deprecated due to efficiency                             |
 | Gds Parser              | stream parser: c/c++            | support .gds and .gds.gz when Boost and Zlib available   |
 |                         | ascii parser: boost.spirit      |                                                          |
 | Tf Parser               | boost.spirit                    |                                                          |
@@ -33,7 +33,7 @@ Please read this **Readme** file carefully for proper instructions to **install*
 | Graph Algorithms        | c++                             | basic graph algorithms based on Boost.Graph structure    |
 | Program Options         | c++                             | package for easy command line options for a program      |
 | Makefile Utilities      | makefile                        | makefile help functions                                  |
-| Third Party Libraries   | c/c++/fortran                   | OpenBLAS, Csdp                                           |
+| Third Party Libraries   | c/c++/fortran                   | OpenBLAS, Csdp, CThreadPool, liblinear, dlx, libdivide   |
 
 ## Authors & Maintainers
 

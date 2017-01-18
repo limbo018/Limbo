@@ -33,4 +33,8 @@ endif
 
 .PHONY: clean
 clean: 
+ifeq ($(wildcard OpenBLAS/*.*),)
+	@echo "OpenBLAS submodule is EMPTY" 
+else 
 	$(MAKE) -C OpenBLAS -f Makefile clean
+endif 
