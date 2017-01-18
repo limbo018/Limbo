@@ -11,16 +11,27 @@
 
 int main(int argc, char** argv)
 {
-	if (argc > 2)
+	if (argc > 4)
     {
         limbo::GdsParser::GdsDB db; 
         limbo::GdsParser::GdsReader reader (db); 
         limboAssert(reader(argv[1]));
 
+        // write 
         limbo::GdsParser::GdsWriter gw (db); 
         gw(argv[2]);
+
+        // test flatten 
+        limbo::GdsParser::GdsCell flatCell = db.extractCell(argv[4]);
+
+        limbo::GdsParser::GdsDB flatDB; 
+        flatDB.addCell(flatCell); 
+
+        // write flatten cell 
+        limbo::GdsParser::GdsWriter flatGw (flatDB); 
+        flatGw(argv[3]);
     }
-	else std::cout << "at least 2 argument is required: input gds, output gds" << std::endl;
+	else std::cout << "at least 2 argument is required: input gds, output gds, flat output gds, top cell name" << std::endl;
 
 	return 0;
 }

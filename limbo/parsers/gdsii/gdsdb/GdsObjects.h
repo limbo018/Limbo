@@ -517,6 +517,7 @@ class GdsDB : public GdsObject
 
 		/// add a cell and return the reference to the new cell 
 		GdsCell& addCell(std::string const& name = ""); 
+        GdsCell& addCell(GdsCell const& cell); 
 
 		/// accessors 
 		std::string const& header() const {return m_header;}

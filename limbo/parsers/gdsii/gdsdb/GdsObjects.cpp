@@ -562,6 +562,15 @@ GdsCell& GdsDB::addCell(std::string const& name)
 	return m_vCell.back();
 }
 
+GdsCell& GdsDB::addCell(GdsCell const& cell) 
+{
+	// update cell map 
+	limboAssertMsg(m_mCellName2Idx.insert(std::make_pair(cell.name(), (unsigned int)m_vCell.size())).second, "duplicate cell name %s", cell.name().c_str()); 
+	// add cell 
+	m_vCell.push_back(cell); 
+	return m_vCell.back();
+}
+
 GdsCell const* GdsDB::getCell(std::string const& cellName) const 
 {
 	std::map<std::string, unsigned int>::const_iterator found = m_mCellName2Idx.find(cellName); 
