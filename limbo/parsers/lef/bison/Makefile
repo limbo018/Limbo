@@ -93,6 +93,7 @@ install:
 		cp $(LIBDIR)/lib$(LIB_PREFIX)parser.* $(PREFIX)/lib; \
 	fi
 	mkdir -p $(PREFIX)/include/limbo/parsers/$(LIB_PREFIX)/bison
+	cp $(wildcard *.hpp) $(PREFIX)/include/limbo/parsers/$(LIB_PREFIX)/bison
 	cp $(PARSER_PREFIX)DataBase.h $(PREFIX)/include/limbo/parsers/$(LIB_PREFIX)/bison
 	cp $(PARSER_PREFIX)Driver.h $(PREFIX)/include/limbo/parsers/$(LIB_PREFIX)/bison
 	rm -f $(PARSER_PREFIX)Parser.cc $(PARSER_PREFIX)Parser.h $(PARSER_PREFIX)Scanner.cc 

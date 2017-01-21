@@ -5,7 +5,7 @@
     > Created Time: Thu 11 Dec 2014 04:28:14 PM CST
  ************************************************************************/
 
-#include "LefDataBase.h"
+#include <limbo/parsers/lef/bison/LefDataBase.h>
 #include <cstring>
 #include <cstdlib>
 

@@ -15,10 +15,10 @@
 #include <stdlib.h>
 #include <string.h>
 //#include "lex.h"
-#include "lefiNonDefault.hpp"
-#include "lefiDebug.hpp"
-//#include "lefrCallBacks.hpp"
-#include "LefDataBase.h" // be careful about cross reference
+#include <limbo/parsers/lef/bison/lefiNonDefault.hpp>
+#include <limbo/parsers/lef/bison/lefiDebug.hpp>
+//#include <limbo/parsers/lef/bison/lefrCallBacks.hpp>
+#include <limbo/parsers/lef/bison/LefDataBase.h> // be careful about cross reference
 
 namespace LefParser {
 

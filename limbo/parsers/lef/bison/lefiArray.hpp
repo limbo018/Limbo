@@ -16,8 +16,8 @@
 #define lefiArray_h
 
 #include <stdio.h>
-//#include "lefiKRDefs.hpp"
-#include "lefiMisc.hpp"
+//#include <limbo/parsers/lef/bison/lefiKRDefs.hpp>
+#include <limbo/parsers/lef/bison/lefiMisc.hpp>
 
 namespace LefParser {
 

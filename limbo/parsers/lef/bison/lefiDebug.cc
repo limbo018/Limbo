@@ -12,13 +12,13 @@
  *  check www.openeda.org for details.
  */
 
-#include "lefiDebug.hpp"
-//#include "lefrReader.hpp"
+#include <limbo/parsers/lef/bison/lefiDebug.hpp>
+//#include <limbo/parsers/lef/bison/lefrReader.hpp>
 //#include "lex.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "LefDataBase.h" // be careful about cross reference
+#include <limbo/parsers/lef/bison/LefDataBase.h> // be careful about cross reference
 
 
 namespace LefParser {

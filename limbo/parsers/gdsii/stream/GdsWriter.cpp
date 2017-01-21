@@ -101,7 +101,7 @@ ENDEL
 
 */
 
-#include "GdsWriter.h"
+#include <limbo/parsers/gdsii/stream/GdsWriter.h>
 #include <limbo/string/String.h>
 /// support to .gds.gz if BOOST is available 
 #if ZLIB == 1 

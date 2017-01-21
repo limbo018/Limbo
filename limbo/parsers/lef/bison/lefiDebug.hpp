@@ -15,7 +15,7 @@
 #ifndef lefiDebug_h
 #define lefiDebug_h 1
 
-#include "lefiKRDefs.hpp"
+#include <limbo/parsers/lef/bison/lefiKRDefs.hpp>
 
 namespace LefParser {
 

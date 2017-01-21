@@ -14,9 +14,9 @@
 #include <fstream>
 #include <sstream>
 #include <cassert>
-#include "lefiUser.hpp"
-#include "lefiDefs.hpp"
-#include "lefiUtil.hpp"
+#include <limbo/parsers/lef/bison/lefiUser.hpp>
+#include <limbo/parsers/lef/bison/lefiDefs.hpp>
+#include <limbo/parsers/lef/bison/lefiUtil.hpp>
 
 namespace LefParser {
 

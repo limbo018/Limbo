@@ -26,24 +26,24 @@
 #define LEFI_USER_H
 
 /* General utilities. */
-/* #include "lefiMalloc.hpp" */
-/* #include "lefiUtils.hpp" */
+/* #include <limbo/parsers/lef/bison/lefiMalloc.hpp> */
+/* #include <limbo/parsers/lef/bison/lefiUtils.hpp> */
 
 /*
  * API objects
  */
-//#include "lefiDebug.hpp"
-#include "lefiUnits.hpp"
-#include "lefiLayer.hpp"
-#include "lefiVia.hpp"
-#include "lefiViaRule.hpp"
-#include "lefiMisc.hpp"
-#include "lefiNonDefault.hpp"
-#include "lefiMacro.hpp"
-#include "lefiArray.hpp"
-#include "lefiCrossTalk.hpp"
-#include "lefiProp.hpp"
-#include "lefiPropType.hpp"
+//#include <limbo/parsers/lef/bison/lefiDebug.hpp>
+#include <limbo/parsers/lef/bison/lefiUnits.hpp>
+#include <limbo/parsers/lef/bison/lefiLayer.hpp>
+#include <limbo/parsers/lef/bison/lefiVia.hpp>
+#include <limbo/parsers/lef/bison/lefiViaRule.hpp>
+#include <limbo/parsers/lef/bison/lefiMisc.hpp>
+#include <limbo/parsers/lef/bison/lefiNonDefault.hpp>
+#include <limbo/parsers/lef/bison/lefiMacro.hpp>
+#include <limbo/parsers/lef/bison/lefiArray.hpp>
+#include <limbo/parsers/lef/bison/lefiCrossTalk.hpp>
+#include <limbo/parsers/lef/bison/lefiProp.hpp>
+#include <limbo/parsers/lef/bison/lefiPropType.hpp>
 
 /* NEW CALLBACK add the reference here */
 

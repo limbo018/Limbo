@@ -15,9 +15,9 @@
 #include <stdlib.h>
 #include <string.h>
 //#include "lex.h"
-#include "lefiProp.hpp"
-#include "lefiDebug.hpp"
-#include "LefDataBase.h" // be careful about cross reference
+#include <limbo/parsers/lef/bison/lefiProp.hpp>
+#include <limbo/parsers/lef/bison/lefiDebug.hpp>
+#include <limbo/parsers/lef/bison/LefDataBase.h> // be careful about cross reference
 
 namespace LefParser {
 

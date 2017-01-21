@@ -1,9 +1,9 @@
 // $Id: driver.cc 39 2008-08-03 10:07:15Z tb $
 /** \file driver.cc Implementation of the example::Driver class. */
 
-#include "LefDriver.h"
-#include "LefScanner.h"
-#include "lefiDebug.hpp"
+#include <limbo/parsers/lef/bison/LefDriver.h>
+#include <limbo/parsers/lef/bison/LefScanner.h>
+#include <limbo/parsers/lef/bison/lefiDebug.hpp>
 #include <cctype>
 #include <cstring>
 #include <unistd.h>
