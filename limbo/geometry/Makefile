@@ -68,6 +68,18 @@ $(LIBDIR)/libGeoBoostPolygonApi.a: $(OBJDIR)/GeoBoostPolygonApi.o
 	@$(LIBMKDIR)
 	$(AR) $(ARFLAGS) $(LIBDIR)/libGeoBoostPolygonApi.a $(OBJDIR)/GeoBoostPolygonApi.o
 
+.PHONY: install
+install:
+	cmp -s $(PREFIX)/lib/libGeoBoostPolygonApi.a $(LIBDIR)/libGeoBoostPolygonApi.a; \
+	RETVAL=$$?; \
+	if [ $$RETVAL -ne 0 ]; then \
+		mkdir -p $(PREFIX)/lib; \
+		cp $(LIBDIR)/libGeoBoostPolygonApi.* $(PREFIX)/lib; \
+	fi
+	mkdir -p $(PREFIX)/include/limbo/geometry
+	cp $(wildcard *.h) $(PREFIX)/include/limbo/geometry
+	mkdir -p $(PREFIX)/include/limbo/geometry/api
+	cp $(wildcard *.h) $(PREFIX)/include/limbo/geometry/api
 
 .PHONY: clean
 clean: cleandep

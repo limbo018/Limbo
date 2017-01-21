@@ -1,10 +1,8 @@
-# top makefile 
-#
 #==========================================================================
 #                         Directories and names 
 # ==========================================================================
 
-LIMBO_ROOT_DIR = $(realpath .)
+LIMBO_ROOT_DIR = $(realpath ../..)
 
 #==========================================================================
 #                         Compilation Flags
@@ -17,26 +15,9 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 #                         Standard Setting
 # ==========================================================================
 
-all: limbo
-
-.PHONY: limbo
-limbo:
-	$(MAKE) -C limbo
-
-.PHONY: test
-test: 
-	$(MAKE) -C test
-
 .PHONY: install
 install:
-	$(MAKE) install -C limbo
-
-.PHONY: clean
-clean:
-	$(MAKE) clean -C limbo
-	$(MAKE) clean -C test
-
-.PHONY: extraclean
-extraclean:
-	$(MAKE) extraclean -C limbo
-	$(MAKE) extraclean -C test
+	mkdir -p $(PREFIX)/include/limbo/solvers/api
+	cp -u $(wildcard api/*.h) $(PREFIX)/include/limbo/solvers/api
+	mkdir -p $(PREFIX)/include/limbo/solvers/lpmcf
+	cp -u $(wildcard lpmcf/*.h) $(PREFIX)/include/limbo/solvers/lpmcf

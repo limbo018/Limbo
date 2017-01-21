@@ -80,7 +80,16 @@ lib$(LIB_PREFIX)db: $(OBJS)
 	@$(LIBMKDIR)
 	$(AR) $(ARFLAGS) $(LIBDIR)/lib$(LIB_PREFIX)db.a $(OBJS)
 
-install: lib$(LIB_PREFIX)db
+.PHONY: install
+install: 
+	cmp -s $(PREFIX)/lib/lib$(LIB_PREFIX)db.a $(LIBDIR)/lib$(LIB_PREFIX)db.a; \
+	RETVAL=$$?; \
+	if [ $$RETVAL -ne 0 ]; then \
+		mkdir -p $(PREFIX)/lib; \
+		cp $(LIBDIR)/lib$(LIB_PREFIX)db.* $(PREFIX)/lib; \
+	fi
+	mkdir -p $(PREFIX)/include/limbo/parsers/$(LIB_PREFIX)ii/gdsdb
+	cp $(wildcard *.h) $(PREFIX)/include/limbo/parsers/$(LIB_PREFIX)ii/gdsdb
 	rm -f $(OBJS)
 
 .PHONY: clean

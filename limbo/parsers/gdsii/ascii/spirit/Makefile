@@ -1,10 +1,11 @@
-# top makefile 
-#
 #==========================================================================
 #                         Directories and names 
 # ==========================================================================
 
-LIMBO_ROOT_DIR = $(realpath .)
+PARSER_PREFIX = Gds
+LIB_PREFIX = gds
+DEBUG_PREFIX = $(shell echo $(PARSER_PREFIX) | tr a-z A-Z)# lower case to upper case 
+LIMBO_ROOT_DIR = $(realpath ../../../../..)
 
 #==========================================================================
 #                         Compilation Flags
@@ -17,26 +18,7 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 #                         Standard Setting
 # ==========================================================================
 
-all: limbo
-
-.PHONY: limbo
-limbo:
-	$(MAKE) -C limbo
-
-.PHONY: test
-test: 
-	$(MAKE) -C test
-
 .PHONY: install
 install:
-	$(MAKE) install -C limbo
-
-.PHONY: clean
-clean:
-	$(MAKE) clean -C limbo
-	$(MAKE) clean -C test
-
-.PHONY: extraclean
-extraclean:
-	$(MAKE) extraclean -C limbo
-	$(MAKE) extraclean -C test
+	mkdir -p $(PREFIX)/include/limbo/parsers/$(LIB_PREFIX)ii/ascii/spirit
+	cp -u $(wildcard *.h) $(PREFIX)/include/limbo/parsers/$(LIB_PREFIX)ii/ascii/spirit

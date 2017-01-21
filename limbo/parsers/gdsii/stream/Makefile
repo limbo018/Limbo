@@ -80,7 +80,16 @@ lib$(LIB_PREFIX)parser: $(OBJS)
 	@$(LIBMKDIR)
 	$(AR) $(ARFLAGS) $(LIBDIR)/lib$(LIB_PREFIX)parser.a $(OBJS)
 
-install: lib$(LIB_PREFIX)parser
+.PHONY: install
+install: 
+	cmp -s $(PREFIX)/lib/lib$(LIB_PREFIX)parser.a $(LIBDIR)/lib$(LIB_PREFIX)parser.a; \
+	RETVAL=$$?; \
+	if [ $$RETVAL -ne 0 ]; then \
+		mkdir -p $(PREFIX)/lib; \
+		cp $(LIBDIR)/lib$(LIB_PREFIX)parser.* $(PREFIX)/lib; \
+	fi
+	mkdir -p $(PREFIX)/include/limbo/parsers/$(LIB_PREFIX)ii/stream
+	cp $(wildcard *.h) $(PREFIX)/include/limbo/parsers/$(LIB_PREFIX)ii/stream
 	rm -f $(OBJS)
 
 .PHONY: clean

@@ -2,6 +2,7 @@
 *.a
 lib/*
 bin/*
+include/*
 wiki
 obj/*
 *.d

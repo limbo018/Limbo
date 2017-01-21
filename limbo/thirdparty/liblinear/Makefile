@@ -1,3 +1,7 @@
+#==========================================================================
+#                         Directories and names 
+# ==========================================================================
+
 #CXX ?= g++
 #CC ?= gcc
 #LIBS = blas/blas.a
@@ -5,6 +9,11 @@ SHVER = 3
 OS = $(shell uname)
 
 LIMBO_ROOT_DIR = $(realpath ../../..)
+LIBDIR = $(LIMBO_ROOT_DIR)/lib
+
+#==========================================================================
+#                         Compilation Flags
+# ==========================================================================
 
 DBG = 0
 
@@ -24,6 +33,10 @@ LIBS = $(LINK_FLAG) -L$(LIMBO_ROOT_DIR)/lib -lopenblas-st
 ifeq ($(UNAME_S), Linux)
 	LIBS += -lrt -lgfortran
 endif 
+
+# ==========================================================================
+#                         Standard Setting
+# ==========================================================================
 
 all: train predict static_lib
 
@@ -52,6 +65,19 @@ linear.o: linear.cpp linear.h
 
 blas/blas.a: blas/*.c blas/*.h
 	make -C blas OPTFLAGS='$(CFLAGS)' CC='$(CC)';
+
+.PHONY: install 
+install: 
+	cmp -s $(PREFIX)/lib/liblinear.a $(LIBDIR)/liblinear.a; \
+	RETVAL=$$?; \
+	if [ $$RETVAL -ne 0 ]; then \
+		mkdir -p $(PREFIX)/lib; \
+		cp $(LIBDIR)/liblinear.* $(PREFIX)/lib; \
+		mkdir -p $(PREFIX)/bin; \
+		cp $(LIMBO_ROOT_DIR)/bin/liblinear-* $(PREFIX)/bin; \
+	fi
+	mkdir -p $(PREFIX)/include/limbo/thirdparty/liblinear
+	cp $(wildcard *.h) $(PREFIX)/include/limbo/thirdparty/liblinear
 
 clean:
 	make -C blas clean

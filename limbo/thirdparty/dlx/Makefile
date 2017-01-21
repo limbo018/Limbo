@@ -10,6 +10,8 @@ LIMBO_ROOT_DIR = $(realpath ../../..)
 TEST_DIR = $(realpath ./example)
 OBJDIR = $(LIMBO_ROOT_DIR)/obj
 MKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
+LIBDIR = $(LIMBO_ROOT_DIR)/lib
+LIBMKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
 
 VPATH = ./include ./src $(TEST_DIR)
 
@@ -74,13 +76,22 @@ $(TEST_DIR)/%.o: %.cpp
 # Link executable
 
 $(TEST_DIR)/dlx/dlx: libdlx $(OBJS_TEST)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS_TEST) $(INCLUDE) $(LIMBO_ROOT_DIR)/lib/libdlx.a
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS_TEST) $(INCLUDE) $(LIBDIR)/libdlx.a
 
 libdlx: $(OBJS)
-	$(AR) $(ARFLAGS) libdlx.a $(OBJS)
-	mv libdlx.a $(LIMBO_ROOT_DIR)/lib
+	@$(LIBMKDIR)
+	$(AR) $(ARFLAGS) $(LIBDIR)/libdlx.a $(OBJS)
 
-install: libdlx
+.PHONY: install 
+install: 
+	cmp -s $(PREFIX)/lib/libdlx.a $(LIBDIR)/libdlx.a; \
+	RETVAL=$$?; \
+	if [ $$RETVAL -ne 0 ]; then \
+		mkdir -p $(PREFIX)/lib; \
+		cp $(LIBDIR)/libdlx.* $(PREFIX)/lib; \
+	fi
+	mkdir -p $(PREFIX)/include/limbo/thirdparty/dlx/include/dlx 
+	cp $(wildcard include/dlx/*.hpp) $(PREFIX)/include/limbo/thirdparty/dlx/include/dlx 
 	rm -f $(OBJS) $(OBJS_TEST) 
 
 .PHONY: clean
@@ -93,7 +104,7 @@ cleandep:
 
 .PHONY: extraclean
 extraclean: clean
-	rm -f $(LIMBO_ROOT_DIR)/lib/libdlx.a
+	rm -f $(LIBDIR)/libdlx.a
 
 # ==========================================================================
 # following packages are not available 
