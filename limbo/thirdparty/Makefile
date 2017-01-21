@@ -10,6 +10,8 @@ OPENBLAS_SRCS = OpenBLAS
 LIBLINEAR_SRCS = liblinear
 CTHREADPOOL_SRCS = CThreadPool
 DLX_SRCS = dlx
+LIBDIVIDE_SRCS = libdivide
+FLEX_SRCS = flex
 
 CSDP_LIB = $(LIMBO_ROOT_DIR)/lib/libsdp.a
 OPENBLAS_LIB = $(LIMBO_ROOT_DIR)/lib/libopenblas-st.a
@@ -86,6 +88,8 @@ ifneq ($(wildcard $(LIBLINEAR_LIB)),)
 endif 
 	$(MAKE) install -C $(CTHREADPOOL_SRCS)
 	$(MAKE) install -C $(DLX_SRCS)
+	$(MAKE) install -C $(LIBDIVIDE_SRCS)
+	$(MAKE) install -C $(FLEX_SRCS)
 
 .PHONY: clean
 clean: 
@@ -94,6 +98,8 @@ clean:
 	$(MAKE) clean -C $(LIBLINEAR_SRCS)
 	$(MAKE) clean -C $(CTHREADPOOL_SRCS)
 	$(MAKE) clean -C $(DLX_SRCS)
+	$(MAKE) clean -C $(LIBDIVIDE_SRCS)
+	$(MAKE) clean -C $(FLEX_SRCS)
 
 .PHONY: extraclean
 extraclean: clean
