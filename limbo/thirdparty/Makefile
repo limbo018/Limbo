@@ -61,6 +61,7 @@ $(LIBLINEAR_LIB): $(OPENBLAS_LIB)
 	@echo ">> building liblinear"
 	$(MAKE) -C $(LIBLINEAR_SRCS)
 	mv $(LIBLINEAR_SRCS)/liblinear.a $(LIBLINEAR_LIB)
+	@mkdir -p $(LIMBO_ROOT_DIR)/bin
 	mv $(LIBLINEAR_SRCS)/train $(LIMBO_ROOT_DIR)/bin/liblinear-train
 	mv $(LIBLINEAR_SRCS)/predict $(LIMBO_ROOT_DIR)/bin/liblinear-predict 
 

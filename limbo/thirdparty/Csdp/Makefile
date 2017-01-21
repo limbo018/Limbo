@@ -34,6 +34,7 @@ all:
 	make -C example CC=$(CC) all 
 	@$(LIBMKDIR)
 	mv lib/libsdp.a $(LIBDIR)
+	@mkdir -p $(LIMBO_ROOT_DIR)/bin
 	mv solver/csdp $(LIMBO_ROOT_DIR)/bin
 
 #
