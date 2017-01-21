@@ -40,7 +40,7 @@
 #include <ctype.h>
 #include <math.h>
 #include <fstream>
-#include "GdsReader.h"
+#include <limbo/parsers/gdsii/stream/GdsReader.h>
 /// support to .gds.gz if BOOST is available 
 /// better to put them in .cpp, which is not seen by users 
 #if ZLIB == 1 

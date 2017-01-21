@@ -63,7 +63,16 @@ libprogramoptions: $(OBJS)
 	@$(LIBMKDIR)
 	$(AR) $(ARFLAGS) $(LIBDIR)/libprogramoptions.a $(OBJS)
 
-install: libprogramoptions
+.PHONY: install
+install: 
+	cmp -s $(PREFIX)/lib/libprogramoptions.a $(LIBDIR)/libprogramoptions.a; \
+	RETVAL=$$?; \
+	if [ $$RETVAL -ne 0 ]; then \
+		mkdir -p $(PREFIX)/lib; \
+		cp $(LIBDIR)/libprogramoptions.* $(PREFIX)/lib; \
+	fi
+	mkdir -p $(PREFIX)/include/limbo/programoptions
+	cp $(wildcard *.h) $(PREFIX)/include/limbo/programoptions
 	rm -f $(OBJS) 
 
 .PHONY: clean

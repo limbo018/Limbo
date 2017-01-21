@@ -112,7 +112,10 @@ Users need to make sure they are properly installed and the corresponding settin
 ```
 make
 make test (optional)
+make install PREFIX=an_absolute_path
 ```
+The default installation path is the same as building path. 
+Please do not set PREFIX with a relative path. 
 After installation, it is strongly recommended to export LIMBO_DIR to the path where Limbo library is installed as an environment variable. 
 
 ### 2. Customize CXX, CC and FC options 

@@ -1,5 +1,5 @@
 
-#include "lefiUtil.hpp"
+#include <limbo/parsers/lef/bison/lefiUtil.hpp>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>

@@ -17,8 +17,8 @@
 
 #include <stdio.h>
 #include <vector>
-//#include "lefiKRDefs.hpp"
-#include "lefiMisc.hpp"
+//#include <limbo/parsers/lef/bison/lefiKRDefs.hpp>
+#include <limbo/parsers/lef/bison/lefiMisc.hpp>
 
 namespace LefParser {
 

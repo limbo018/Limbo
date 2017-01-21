@@ -16,9 +16,9 @@
 #define lefiNonDefault_h
 
 #include <stdio.h>
-//#include "lefiKRDefs.hpp"
-#include "lefiVia.hpp"
-#include "lefiMisc.hpp"
+//#include <limbo/parsers/lef/bison/lefiKRDefs.hpp>
+#include <limbo/parsers/lef/bison/lefiVia.hpp>
+#include <limbo/parsers/lef/bison/lefiMisc.hpp>
 
 namespace LefParser {
 

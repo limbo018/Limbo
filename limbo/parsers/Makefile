@@ -28,6 +28,23 @@ tf:
 verilog:
 	$(MAKE) -C verilog/bison
 
+.PHONY: install
+install:
+	$(MAKE) install -C bookshelf/bison
+	$(MAKE) install -C def/bison
+	$(MAKE) install -C def/spirit
+	$(MAKE) install -C ebeam/bison
+	$(MAKE) install -C ebeam/spirit
+	$(MAKE) install -C gdf/bison
+	$(MAKE) install -C gdsii/stream
+	$(MAKE) install -C gdsii/gdsdb
+	$(MAKE) install -C gdsii/ascii/spirit
+	$(MAKE) install -C lef/bison
+	$(MAKE) install -C lef/spirit
+	$(MAKE) install -C lp/bison
+	$(MAKE) install -C tf/spirit
+	$(MAKE) install -C verilog/bison
+
 .PHONY: clean
 clean:
 	$(MAKE) clean -C bookshelf/bison

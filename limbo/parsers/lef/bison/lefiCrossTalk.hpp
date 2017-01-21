@@ -16,7 +16,7 @@
 #define lefiCrossTalk_h
 
 #include <stdio.h>
-//#include "lefiKRDefs.hpp"
+//#include <limbo/parsers/lef/bison/lefiKRDefs.hpp>
 
 namespace LefParser {
 

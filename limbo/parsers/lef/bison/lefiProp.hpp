@@ -15,7 +15,7 @@
 #ifndef lefiProp_h
 #define lefiProp_h
 
-//#include "lefiKRDefs.hpp"
+//#include <limbo/parsers/lef/bison/lefiKRDefs.hpp>
 #include <stdio.h>
 
 namespace LefParser {

@@ -5,7 +5,7 @@
 #define LEFPARSER_DRIVER_H
 
 #include <map>
-#include "LefDataBase.h"
+#include <limbo/parsers/lef/bison/LefDataBase.h>
 
 ////////////////////////////////////////////////////////////////
 ///
