@@ -18,7 +18,7 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 .PHONY: install
 install:
 	mkdir -p $(PREFIX)/include/limbo/thirdparty/libdivide
-	cp -u $(wildcard *.h) $(PREFIX)/include/limbo/thirdparty/libdivide
+	cp $(wildcard *.h) $(PREFIX)/include/limbo/thirdparty/libdivide
 
 .PHONY: clean
 clean:

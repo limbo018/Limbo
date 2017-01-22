@@ -18,6 +18,6 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 .PHONY: install
 install:
 	mkdir -p $(PREFIX)/include/limbo/solvers/api
-	cp -u $(wildcard api/*.h) $(PREFIX)/include/limbo/solvers/api
+	cp $(wildcard api/*.h) $(PREFIX)/include/limbo/solvers/api
 	mkdir -p $(PREFIX)/include/limbo/solvers/lpmcf
-	cp -u $(wildcard lpmcf/*.h) $(PREFIX)/include/limbo/solvers/lpmcf
+	cp $(wildcard lpmcf/*.h) $(PREFIX)/include/limbo/solvers/lpmcf

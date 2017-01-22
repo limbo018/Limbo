@@ -18,7 +18,7 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 .PHONY: install
 install:
 	mkdir -p $(PREFIX)/include/limbo/thirdparty/flex/2.5.37
-	cp -u $(wildcard 2.5.37/*.h) $(PREFIX)/include/limbo/thirdparty/flex/2.5.37
+	cp $(wildcard 2.5.37/*.h) $(PREFIX)/include/limbo/thirdparty/flex/2.5.37
 
 .PHONY: clean
 clean:

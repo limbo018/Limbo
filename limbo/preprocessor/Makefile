@@ -18,4 +18,4 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 .PHONY: install
 install:
 	mkdir -p $(PREFIX)/include/limbo/preprocessor
-	cp -u $(wildcard *.h) $(PREFIX)/include/limbo/preprocessor
+	cp $(wildcard *.h) $(PREFIX)/include/limbo/preprocessor
