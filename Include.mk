@@ -42,10 +42,22 @@ else
 	include $(LIMBO_ROOT_DIR)/Makefile.gcc
 endif 
 
-# dependency to boost and get BOOST_LINK_FLAG
+# dependency to Boost and get BOOST_LINK_FLAG
+ifdef BOOST_DIR
 include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindBoost.mk
+endif
 # dependency to Zlib and get ZLIB_LINK_FLAG
+ifdef ZLIB_DIR
 include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindZlib.mk
+endif
+# dependency to GUROBI and get GUROBI_LINK_LIB
+ifdef GUROBI_HOME
+include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindGurobi.mk
+endif
+# dependency to Lemon and get LEMON_LINK_FLAG
+ifdef LEMON_DIR
+include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindLemon.mk
+endif
 
 # ==========================================================================
 #                                 Lex/Yacc
