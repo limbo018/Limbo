@@ -233,7 +233,7 @@ int main()
 ```
 Compiling and running commands (assuming LIMBO_DIR is exported as the environment variable to the path where limbo library is installed)
 ```
-g++ compare.cpp -I $LIMBO_DIR
+g++ compare.cpp -I $LIMBO_DIR/include
 ./a.out
 ```
 Output 
@@ -304,7 +304,7 @@ int main(int argc, char** argv)
 Compiling and running commands (assuming LIMBO_DIR is valid and limbo library has been properly installed)
 ```
 # linkage is necessary for Limbo.ProgramOptions
-g++ ProgramOptionsExample.cpp -I $LIMBO_DIR -L $LIMBO_DIR/lib -lprogramoptions
+g++ ProgramOptionsExample.cpp -I $LIMBO_DIR/include -L $LIMBO_DIR/lib -lprogramoptions
 # test help message 
 ./a.out -help
 # test integer and floating point number 
