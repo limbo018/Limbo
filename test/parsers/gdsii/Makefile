@@ -41,10 +41,10 @@ endif
 INCLUDE = -I $(LIMBO_ROOT_DIR) 
 
 ifdef BOOST_DIR
-	LIB += $(BOOST_LINK_FLAG)-L $(BOOST_DIR)/lib -lboost_iostreams $(DYNAMIC_LINK_FLAG)
+	LIB += $(BOOST_LINK_FLAG) -L $(BOOST_DIR)/lib -lboost_iostreams $(DYNAMIC_LINK_FLAG)
 endif
 ifdef ZLIB_DIR
-	LIB += $(ZLIB_LINK_FLAG)-L $(ZLIB_DIR) -lz $(DYNAMIC_LINK_FLAG)
+	LIB += $(ZLIB_LINK_FLAG) -L $(ZLIB_DIR) -lz $(DYNAMIC_LINK_FLAG)
 endif
 
 # ==========================================================================
