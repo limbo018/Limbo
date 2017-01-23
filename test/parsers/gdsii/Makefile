@@ -27,13 +27,6 @@ else
 	CXXFLAGS = $(CXXFLAGS_RELEASE)
 endif
 
-# if zlib and boost are available, support compression/decompression features 
-ifdef ZLIB_DIR
-ifdef BOOST_DIR
-	CXXFLAGS += -DZLIB=1
-endif
-endif
-
 #==========================================================================
 #                         Special Library
 # ==========================================================================

@@ -10,6 +10,15 @@
 # detect platform
 UNAME_S = $(shell uname -s)
 
+# consider two cases, called when building Limbo library or called from other programs 
+ifndef LIMBO_ROOT_DIR
+ifdef LIMBO_DIR
+	LIMBO_ROOT_DIR = $(LIMBO_DIR)/include
+else
+	$(error LIMBO_ROOT_DIR = $(LIMBO_ROOT_DIR), LIMBO_DIR = $(LIMBO_DIR))
+endif
+endif
+
 # ==== search compilers under Linux
 ifeq ($(UNAME_S), Linux)
 #FOUNDCC = $(shell find ${PATH//:/ } -maxdepth 1 -executable -name gcc* -exec basename {} \;)
