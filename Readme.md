@@ -189,11 +189,10 @@ To solve the problem, users can set the environment variable FLEX_DIR such that 
 The decision can be made according to how the flex package is installed.  
 
 
-###4. Crappy linkage error like 
+###4. Crappy linkage error under gcc 5.1 or later, even though libxxx.a is correctly linked, like 
 ```
-"undefined reference to `GdsParser::read(GdsParser::GdsDataBaseKernel&, std::string const&)'" 
+undefined reference to `GdsParser::read(GdsParser::GdsDataBaseKernel&, std::string const&)'
 ```
-under gcc 5.1 or later, even though libgdsparser.a is correctly linked. 
 **A:** The issue probably comes from potential inconsistent compiling configuration for Limbo and target program due to the new [Dual ABI](https://gcc.gnu.org/onlinedocs/libstdc%2B%2B/manual/using_dual_abi.html) introduced since gcc 5.1. 
 The compilation flag _GLIBCXX_USE_CXX11_ABI is used to control whether gcc uses new C++11 ABI, which is turned on in default. 
 If Limbo is compiled with C++11 ABI, while target program is compiled with old ABI, then the linkage error appears, vice versa. 
