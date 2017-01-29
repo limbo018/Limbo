@@ -1,10 +1,12 @@
-# top makefile 
-#
 #==========================================================================
 #                         Directories and names 
 # ==========================================================================
 
-LIMBO_ROOT_DIR = $(realpath .)
+LIMBO_ROOT_DIR = $(realpath ..)
+#SRCSDIR = $(LIMBO_ROOT_DIR)/limbo
+SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md
+DOCDIR = $(LIMBO_ROOT_DIR)/doc
+
 
 #==========================================================================
 #                         Compilation Flags
@@ -17,32 +19,28 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 #                         Standard Setting
 # ==========================================================================
 
-all: limbo
+all: doc
 
-.PHONY: limbo
-limbo:
-	$(MAKE) -C limbo
+Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile
+	echo INPUT                  = $(SRCSDIR) > $(DOCDIR)/Doxyfile
+	echo OUTPUT_DIRECTORY       = $(DOCDIR) >> $(DOCDIR)/Doxyfile
+	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md >> $(DOCDIR)/Doxyfile
+	echo INCLUDE_FILE_PATTERNS  = *.h *.hpp >> $(DOCDIR)/Doxyfile
 
-.PHONY: test
-test: 
-	$(MAKE) -C test
-
-.PHONY: doc
-doc:
-	$(MAKE) -C doc
+doc: Doxyfile $(SRCS)
+	$(DOXYGEN) $(DOCDIR)/Doxyfile.in
 
 .PHONY: install
-install:
-	$(MAKE) install -C limbo
-	$(MAKE) install -C doc
+install: 
+	mkdir -p $(PREFIX)/doc
+	cp -r $(DOCDIR)/html $(PREFIX)/doc
+	#cp -r $(DOCDIR)/latex $(PREFIX)/doc
 
 .PHONY: clean
-clean:
-	$(MAKE) clean -C limbo
-	$(MAKE) clean -C test
+clean: 
+	rm -rf $(DOCDIR)/html
+	rm -rf $(DOCDIR)/latex
+	rm -f $(DOCDIR)/Doxyfile
 
 .PHONY: extraclean
-extraclean:
-	$(MAKE) extraclean -C limbo
-	$(MAKE) extraclean -C test
-	$(MAKE) extraclean -C doc
+extraclean: clean
