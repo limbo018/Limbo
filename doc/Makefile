@@ -3,9 +3,21 @@
 # ==========================================================================
 
 LIMBO_ROOT_DIR = $(realpath ..)
-#SRCSDIR = $(LIMBO_ROOT_DIR)/limbo
-SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md
 DOCDIR = $(LIMBO_ROOT_DIR)/doc
+#SRCSDIR = $(LIMBO_ROOT_DIR)/limbo
+SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
+		  $(DOCDIR)/algorithms \
+		  $(DOCDIR)/bibtex \
+		  $(DOCDIR)/containers \
+		  $(DOCDIR)/geometry \
+		  $(DOCDIR)/makeutils \
+		  $(DOCDIR)/math \
+		  $(DOCDIR)/parsers \
+		  $(DOCDIR)/preprocessor \
+		  $(DOCDIR)/programoptions \
+		  $(DOCDIR)/solvers \
+		  $(DOCDIR)/string \
+		  $(DOCDIR)/thirdparty
 
 
 #==========================================================================
