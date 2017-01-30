@@ -1,9 +1,8 @@
-/*************************************************************************
-    > File Name: test_ProgramOptions.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed Jul 15 21:44:22 2015
- ************************************************************************/
+/**
+ * @file   test_ProgramOptions.cpp
+ * @author Yibo Lin
+ * @date   Wed Jul 15 21:44:22 2015
+ */
 
 #include <iostream>
 #include <string>

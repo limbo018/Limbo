@@ -17,7 +17,8 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(DOCDIR)/programoptions \
 		  $(DOCDIR)/solvers \
 		  $(DOCDIR)/string \
-		  $(DOCDIR)/thirdparty
+		  $(DOCDIR)/thirdparty \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/programoptions/*.cpp)
 
 
 #==========================================================================
@@ -34,7 +35,9 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 all: doc
 
 Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile
-	echo INPUT                  = $(SRCSDIR) > $(DOCDIR)/Doxyfile
+	echo INCLUDE_PATH           = $(LIMBO_ROOT_DIR) > $(DOCDIR)/Doxyfile
+	echo EXAMPLE_PATH           = $(LIMBO_ROOT_DIR) >> $(DOCDIR)/Doxyfile
+	echo INPUT                  = $(SRCSDIR) >> $(DOCDIR)/Doxyfile
 	echo OUTPUT_DIRECTORY       = $(DOCDIR) >> $(DOCDIR)/Doxyfile
 	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md >> $(DOCDIR)/Doxyfile
 	echo INCLUDE_FILE_PATTERNS  = *.h *.hpp >> $(DOCDIR)/Doxyfile
