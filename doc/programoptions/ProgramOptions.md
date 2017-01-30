@@ -3,16 +3,16 @@ Limbo.ProgramOptions {#ProgramOptions}
 
 [TOC]
 
-## Introduction {#Introduction}
+# Introduction {#ProgramOptions_Introduction}
 
 The package allows programs obtain command line options, such as (name, value) pairs, from user input without writing wordy parsing blocks in the source code. 
 It supports various data types, including integer, floating point number, char, boolean, string, vector, etc. 
 It provides easy API for developers to define command line options to their programs with a highly extendable manner, i.e., only single line of code for each option. No need to write any code for parsing. 
 It also offers detailed error reporting scheme that print incorrect and missing arguments. 
 
-## Examples {#Examples}
+# Examples {#ProgramOptions_Examples}
 
-### Example 1 {#Example1}
+## Example 1 {#ProgramOptions_Example1}
 
 [test/programoptions/test_ProgramOptions_simple.cpp](@ref test_ProgramOptions_simple.cpp)
 \include test/programoptions/test_ProgramOptions_simple.cpp
@@ -53,7 +53,12 @@ fp = 1.5
 vInteger = 10 30 50
 ~~~~~~~~~~~~~~~~
 
-### Example 2 {#Example2}
+## Example 2 {#ProgramOptions_Example2}
 
 [test/programoptions/test_ProgramOptions.cpp](@ref test_ProgramOptions.cpp)
 \include test/programoptions/test_ProgramOptions.cpp
+
+# References {#ProgramOptions_References}
+
+- [limbo/programoptions/ConversionHelpers.h](@ref ConversionHelpers.h)
+- [limbo/programoptions/ProgramOptions.h](@ref ProgramOptions.h)

@@ -8,7 +8,7 @@ Please read this **Readme** file carefully for proper instructions to **install*
 
 [TOC]
 
-## Packages {#Packages}
+# Packages {#Packages}
 | Packages                                | Languages                       | Description                                                                |
 | --------------------------------------- | ------------------------------- | -------------------------------------------------------------------------- |
 | [Algorithms](@ref Algorithms)           | C++                             | Useful algorithms including partitioning, coloring, etc.                   |
@@ -24,46 +24,46 @@ Please read this **Readme** file carefully for proper instructions to **install*
 | [String](@ref String)                   | C++                             | Utilities to char and string                                               |
 | [ThirdParty](@ref ThirdParty)           | C/C++, Fortran                  | Third party packages required                                              |
 
-## Developers & Maintainers {#Developers}
+# Developers & Maintainers {#Developers}
 
 | Name               | Affiliation                | Email                             |
 | ------------------ | -------------------------- | --------------------------------- |
 | Yibo Lin           | ECE Department, UT Austin  | yibolin@utexas.edu			      |
 
-## Introduction {#Introduction}
+# Introduction {#Introduction}
 
-### 1. Flex
+## 1. Flex
 
 * A fast scanner generator or lexical analyzer generator. Another famous related software is Lex.
 Current parsers support flex 2.5.37. 
 
-### 2. Bison 
+## 2. Bison 
 
 * A Yacc-compatible parser generator that is part of the GNU Project. 
 	For details, please refer to [here](http://en.wikipedia.org/wiki/GNU_bison).
 	Another famous related software is Yacc.
 
-### 3. (*Deprecated*) Boost.Spirit
+## 3. (*Deprecated*) Boost.Spirit
 
 * An object-oriented, recursive-descent parser and output generation library for C++. 
 	For details, please refer to [here](http://www.boost.org/doc/libs/1_55_0/libs/spirit/doc/html/index.html).
 
-### 4. LL Parser 
+## 4. LL Parser 
 
 * In computer science, a LL parser is a top-down parser for a subset of context-free languages. 
 	It parses the input from Left to right, performing Leftmost derivation of the sentence. 
 
-### 5. LR Parser 
+## 5. LR Parser 
 
 * In computer science, LR parsers are a type of bottom-up parsers that efficiently handle 
 	deterministic context-free languages in guaranteed linear time. 
 
-### 6. LL v.s. LR
+## 6. LL v.s. LR
 
 * Bison is based on LR parser and Boost.Spirit is based on LL parser.
 Please refer to [here](http://cs.stackexchange.com/questions/43/language-theoretic-comparison-of-ll-and-lr-grammars).
 
-### 7. LP and Min-Cost Flow 
+## 7. LP and Min-Cost Flow 
 
 * Min-cost flow (MCF) is a special case of linear programs (LP). 
 It is usually faster than general LP solver and is also able to achieve integer solution.
@@ -72,11 +72,11 @@ In this library, an API for lemon (MFC solver) is implemented to solve LP and du
 The API supports reading files with both LGF (lemon graph format) and LP (linear program format) and then dump out solutions. 
 Thus, it will be easier to verify results with general LP solvers such as Gurobi or CBC.
 
-## Bug Report {#BugReport}
+# Bug Report {#BugReport}
 
 Please report bugs to Yibo Lin (yibolin at utexas dot edu). 
 
-## Installation {#Installation}
+# Installation {#Installation}
 
 Some components depend on external libraries, such as 
 
@@ -88,7 +88,7 @@ Some components depend on external libraries, such as
 
 Users need to make sure they are properly installed and the corresponding settings are configured. 
 
-### 1. Default installation
+## 1. Default installation
 
 * In the directory of limbo library, run 
 ~~~~~~~~~~~~~~~~
@@ -102,7 +102,7 @@ The default installation path is the same as building path.
 Please do not set PREFIX with a relative path. 
 After installation, it is strongly recommended to export LIMBO_DIR to the path where Limbo library is installed as an environment variable. 
 
-### 2. Customize CXX, CC and FC options 
+## 2. Customize CXX, CC and FC options 
 
 * CXX sets the compiler for C++ and CC sets the compiler for C. FC sets the fortran compiler which is only needed by some third party packages like OpenBLAS. 
 Some examples are as follows, 
@@ -112,7 +112,7 @@ make CXX=clang++ CC=clang FC=gfortran (default for Mac/Darwin)
 ~~~~~~~~~~~~~~~~
 
 
-### 3. Customize CXXSTDLIB and CXXSTD options
+## 3. Customize CXXSTDLIB and CXXSTD options
 
 * CXXSTDLIB is used to control -stdlib=xxx under clang++, and CXXSTD is used to control -std=xxx in most compilers. 
 
@@ -134,7 +134,7 @@ make CXXSTD="-std=c++11"
 Users must make sure the setting is consistent to dependent libraries during compilation, such as Boost, Lemon, etc. 
 For example, if Boost is compiled with "clang++ -stdlib=libstdc++ -std=c++98", the same setting should be used for components dependent to Boost. 
 
-### 4. Customize OPENBLAS options 
+## 4. Customize OPENBLAS options 
 
 * There is a third party OpenBLAS required by some other third party packages, such as Csdp and liblinear. OPENBLAS option is used to control whether compiling these packages. 
 
@@ -144,13 +144,13 @@ The default version of OpenBLAS is not very stable for cross platforms, which of
 OpenBLAS is integrated as a submodule which fetch source code from remote repository, so it is always up-to-date version. 
 If you already have OpenBLAS in the directory, simply run "git submodule update" to fetch the latest version in the submodule directory. 
 
-## Examples {#Examples}
+# Examples {#Examples}
 
 In the subdirectories of source code, there are test folders including test/example programs.
 
-## FAQ {#FAQ}
+# FAQ {#FAQ}
 
-###1. (*Deprecated*) Compiling errors like
+##1. (*Deprecated*) Compiling errors like
 ~~~~~~~~~~~~~~~~
 LefScanner.cc:5582:21: error: out-of-line definition of 'LexerInput' does not match any declaration in 'LefParserFlexLexer'
                         size_t yyFlexLexer::LexerInput( char* buf, size_t max_size )
@@ -160,7 +160,7 @@ come from old versions of flex, such as 2.5.35.
 
 **A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environment variable. 
 
-###2. (*Deprecated*) Compiling errors like 
+##2. (*Deprecated*) Compiling errors like 
 ~~~~~~~~~~~~~~~~
 LefScanner.cc:3195:8: error: member reference type 'std::istream *' (aka 'basic_istream<char> *') is a pointer; did you mean to use '->'?
                         yyin.rdbuf(std::cin.rdbuf());
@@ -170,7 +170,7 @@ come from new versions of flex, such as 2.6.0.
 
 **A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environment variable. 
 
-###3. Compiling errors related to LefScanner.cc usually come from the configurations of flex version and environment variables FLEX_DIR and LEX_INCLUDE_DIR. 
+##3. Compiling errors related to LefScanner.cc usually come from the configurations of flex version and environment variables FLEX_DIR and LEX_INCLUDE_DIR. 
 
 **A:** LefScanner.cc needs to include the correct FlexLexer.h from the flex package for compilation; i.e., the version of FlexLexer.h must match the version of the flex executable. 
 Most errors for LefScanner.cc are caused by the failure of finding the correct FlexLexer.h (be careful when you have multiple versions of flex installed). 
@@ -178,7 +178,7 @@ To solve the problem, users can set the environment variable FLEX_DIR such that 
 The decision can be made according to how the flex package is installed.  
 
 
-###4. Crappy linkage error under gcc 5.1 or later, even though libxxx.a is correctly linked, like 
+##4. Crappy linkage error under gcc 5.1 or later, even though libxxx.a is correctly linked, like 
 ~~~~~~~~~~~~~~~~
 undefined reference to `GdsParser::read(GdsParser::GdsDataBaseKernel&, std::string const&)'
 ~~~~~~~~~~~~~~~~
@@ -190,7 +190,7 @@ Therefore, it is necessary to make sure the same STL ABI is used for compiling L
 In other words, set consistent _GLIBCXX_USE_CXX11_ABI values. 
 A safe way is to leave it to the default value. 
 
-## Copyright {#Copyright}
+# Copyright {#Copyright}
 The software is released under MIT license except third party packages. Please see the LICENSE file for details. 
 
 Third party package **c-thread-pool** is released under MIT license. 
@@ -201,13 +201,13 @@ Third party package **OpenBLAS** has its copyright reserved; please check its li
 
 Third party package **liblinear** has its copyright reserved; please check its license.
 
-## Tutorial {#Tutorial}
+# Tutorial {#Tutorial}
 
 Some components in limbo library do not need linkage, so they can be used directly by including the headers, while some components require linkage to the corresponding static libraries.  
 Here are some simple example to show the basic usage and compiling commands with gcc under Linux. 
 For clang, the compiling commands are slightly different as users need to specify the same **-stdlib** as that in **CXXSTDLIB** flag used to install the library. 
 
-###1. Compare two strings case-insensitive 
+##1. Compare two strings case-insensitive 
 
 Source code: compare.cpp
 ~~~~~~~~~~~~~~~~{.cpp}
@@ -245,9 +245,9 @@ string limbo2343slimbo and LiMbo2343SliMbo is not equal case-sensitive
 string limbo2343slimbo and LiMbo2343SliMbo is equal case-insensitive
 ~~~~~~~~~~~~~~~~
 
-###2. Basic usage of Limbo.ProgramOptions component
+##2. Basic usage of Limbo.ProgramOptions component
 
-###3. Basic usage of Limbo.Gdsii component
+##3. Basic usage of Limbo.Gdsii component
 
 Limbo.Gdsii consists of Gds parser and Gds database, which provides reading and writing in GDSII format as well as easy API for IO and flattening of full layout with hierarchies. 
 More specifically, it supports IO for .gds files and compressed .gds files (i.e., .gds.gz, supported by Boost.Iostreams and ZLIB). 

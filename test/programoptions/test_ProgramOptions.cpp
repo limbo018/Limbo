@@ -1,7 +1,8 @@
 /**
  * @file   test_ProgramOptions.cpp
+ * @brief  test usage of program options
  * @author Yibo Lin
- * @date   Wed Jul 15 21:44:22 2015
+ * @date   Jul 2015
  */
 
 #include <iostream>
@@ -11,6 +12,12 @@
 using std::cout;
 using std::endl;
 
+/**
+ * @brief test usage of program options, such as help, boolean, integer, floating point number, and vector
+ * @param argc number of arguments
+ * @param argv values of arguments
+ * @return 0 if parsing succeeds, 1 if help message is specified 
+ */
 int main(int argc, char** argv)
 {
     using namespace limbo;

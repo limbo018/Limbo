@@ -1,9 +1,12 @@
-/*************************************************************************
-    > File Name: ProgramOptions.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Mon 13 Jul 2015 08:44:13 PM CDT
- ************************************************************************/
+/**
+ * @file   ProgramOptions.h
+ * @brief  Top API for Limbo.ProgramOptions
+ *
+ * Mimic Boost.ProgramOptions with easy wrapper for program to parser command line options
+ *
+ * @author Yibo Lin
+ * @date   Jul 2015
+ */
 
 #ifndef _LIMBO_PROGRAMOPTIONS_PROGRAMOPTIONS_H
 #define _LIMBO_PROGRAMOPTIONS_PROGRAMOPTIONS_H

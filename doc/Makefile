@@ -18,7 +18,8 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(DOCDIR)/solvers \
 		  $(DOCDIR)/string \
 		  $(DOCDIR)/thirdparty \
-		  $(wildcard $(LIMBO_ROOT_DIR)/test/programoptions/*.cpp)
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/programoptions/*.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/programoptions/*.h)
 
 
 #==========================================================================
