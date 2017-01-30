@@ -1,9 +1,8 @@
-/*************************************************************************
-    > File Name: test_boostpolygonapi.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Fri 31 Oct 2014 02:53:46 PM CDT
- ************************************************************************/
+/**
+ * @file   test_boostpolygonapi.cpp
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #include <iostream>
 #include <string>
@@ -24,6 +23,16 @@ using std::set;
 namespace gtl = boost::polygon;
 namespace lg = limbo::geometry; 
 
+/**
+ * @brief test Boost.Polygon API 
+ *
+ * use boost::polygon::point and boost::polygon::rectangle_data as data type for polygon-to-rectangle conversion 
+ */
+
+/**
+ * @brief test polygon-to-rectangle for std::vector
+ * @param filename input gnuplot file 
+ */
 void test1(string const& filename)
 {
     std::vector<gtl::rectangle_data<int> > vRect; 
@@ -33,6 +42,10 @@ void test1(string const& filename)
 	p2r.print("p2r1.gp");
 }
 
+/**
+ * @brief test polygon-to-rectangle for std::list
+ * @param filename input gnuplot file 
+ */
 void test2(string const& filename)
 {
     std::vector<gtl::rectangle_data<int> > vRect; 
@@ -42,6 +55,10 @@ void test2(string const& filename)
 	p2r.print("p2r2.gp");
 }
 
+/**
+ * @brief test polygon-to-rectangle for std::set
+ * @param filename input gnuplot file 
+ */
 void test3(string const& filename)
 {
     std::vector<gtl::rectangle_data<int> > vRect; 
@@ -51,6 +68,9 @@ void test3(string const& filename)
 	p2r.print("p2r3.gp");
 }
 
+/**
+ * @brief test polygon-to-rectangle for array of points
+ */
 void test4()
 {
     vector<gtl::point_data<int> > vPoint (8);
@@ -73,6 +93,12 @@ void test4()
     cout << "test 4 passed\n";
 }
 
+/**
+ * @brief main function requires an input benchmark in gnuplot format  
+ * @param argc number of arguments 
+ * @param argv values of arguments 
+ * @return 0
+ */
 int main(int argc, char** argv)
 {
     test4();

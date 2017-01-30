@@ -24,7 +24,7 @@ Please read this **Readme** file carefully for proper instructions to **install*
 | [String](@ref String)                   | C++                             | Utilities to char and string                                               |
 | [ThirdParty](@ref ThirdParty)           | C/C++, Fortran                  | Third party packages required                                              |
 
-# Developers & Maintainers {#Developers}
+# Developers {#Developers}
 
 - [Yibo Lin](http://www.yibolin.com), ECE Department, UT Austin 
 

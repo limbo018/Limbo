@@ -18,6 +18,7 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(DOCDIR)/solvers \
 		  $(DOCDIR)/string \
 		  $(DOCDIR)/thirdparty \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/geometry/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/programoptions/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/programoptions/*.h)
 
@@ -38,6 +39,7 @@ all: doc
 Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile
 	echo INCLUDE_PATH           = $(LIMBO_ROOT_DIR) > $(DOCDIR)/Doxyfile
 	echo EXAMPLE_PATH           = $(LIMBO_ROOT_DIR) >> $(DOCDIR)/Doxyfile
+	echo IMAGE_PATH             = $(LIMBO_ROOT_DIR)/doc/geometry >> $(DOCDIR)/Doxyfile
 	echo INPUT                  = $(SRCSDIR) >> $(DOCDIR)/Doxyfile
 	echo OUTPUT_DIRECTORY       = $(DOCDIR) >> $(DOCDIR)/Doxyfile
 	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md >> $(DOCDIR)/Doxyfile
