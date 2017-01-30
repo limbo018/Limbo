@@ -26,16 +26,13 @@ Please read this **Readme** file carefully for proper instructions to **install*
 
 # Developers & Maintainers {#Developers}
 
-| Name               | Affiliation                | Email                             |
-| ------------------ | -------------------------- | --------------------------------- |
-| Yibo Lin           | ECE Department, UT Austin  | yibolin@utexas.edu			      |
+- [Yibo Lin](http://www.yibolin.com), ECE Department, UT Austin 
 
 # Introduction {#Introduction}
 
 ## 1. Flex
 
 * A fast scanner generator or lexical analyzer generator. Another famous related software is Lex.
-Current parsers support flex 2.5.37. 
 
 ## 2. Bison 
 
@@ -74,7 +71,7 @@ Thus, it will be easier to verify results with general LP solvers such as Gurobi
 
 # Bug Report {#BugReport}
 
-Please report bugs to Yibo Lin (yibolin at utexas dot edu). 
+Please report bugs to [yibolin at utexas dot edu](mailto:yibolin@utexas.edu). 
 
 # Installation {#Installation}
 

@@ -22,6 +22,7 @@ namespace limbo { namespace programoptions {
 /// template specialization is needed if default operators are not defined 
 
 /**
+ * @class limbo::programoptions::parse_helper
  * @brief metafunction for parsing a char-based string to a target data type 
  * @tparam T target data type 
  */
@@ -39,6 +40,7 @@ struct parse_helper
 };
 
 /**
+ * @class limbo::programoptions::print_helper
  * @brief metafunction for printing a target data type 
  * @tparam T target data type 
  */
@@ -55,6 +57,7 @@ struct print_helper
 };
 
 /**
+ * @class limbo::programoptions::assign_helper
  * @brief metafunction for assign a source data type to a target data type 
  * @tparam T target data type 
  */
@@ -71,6 +74,7 @@ struct assign_helper
 };
 
 /**
+ * @class limbo::programoptions::boolean_helper
  * @brief metafunction for boolean operation 
  * @tparam T target data type 
  */
@@ -87,7 +91,7 @@ struct boolean_helper
 
 /////////////////// specialization for parse_helper /////////////////
 /**
- * @brief template specialization for boolean type to struct @ref parse_helper
+ * @brief template specialization for boolean type to struct @ref limbo::programoptions::parse_helper
  */
 template <>
 struct parse_helper<bool>
@@ -106,7 +110,7 @@ struct parse_helper<bool>
     }
 };
 /**
- * @brief template specialization for char type to struct @ref parse_helper
+ * @brief template specialization for char type to struct @ref limbo::programoptions::parse_helper
  */
 template <>
 struct parse_helper<char>
@@ -121,7 +125,7 @@ struct parse_helper<char>
     }
 };
 /**
- * @brief template specialization for unsigned char type to struct @ref parse_helper
+ * @brief template specialization for unsigned char type to struct @ref limbo::programoptions::parse_helper
  */
 template <>
 struct parse_helper<unsigned char>
@@ -136,7 +140,7 @@ struct parse_helper<unsigned char>
     }
 };
 /**
- * @brief template specialization for int type to struct @ref parse_helper
+ * @brief template specialization for int type to struct @ref limbo::programoptions::parse_helper
  */
 template <>
 struct parse_helper<int>
@@ -151,7 +155,7 @@ struct parse_helper<int>
     }
 };
 /**
- * @brief template specialization for unsigned int type to struct @ref parse_helper
+ * @brief template specialization for unsigned int type to struct @ref limbo::programoptions::parse_helper
  */
 template <>
 struct parse_helper<unsigned int>
@@ -166,7 +170,7 @@ struct parse_helper<unsigned int>
     }
 };
 /**
- * @brief template specialization for long type to struct @ref parse_helper
+ * @brief template specialization for long type to struct @ref limbo::programoptions::parse_helper
  */
 template <>
 struct parse_helper<long>
@@ -181,7 +185,7 @@ struct parse_helper<long>
     }
 };
 /**
- * @brief template specialization for unsigned long type to struct @ref parse_helper
+ * @brief template specialization for unsigned long type to struct @ref limbo::programoptions::parse_helper
  */
 template <>
 struct parse_helper<unsigned long>
@@ -196,7 +200,7 @@ struct parse_helper<unsigned long>
     }
 };
 /**
- * @brief template specialization for long long type to struct @ref parse_helper
+ * @brief template specialization for long long type to struct @ref limbo::programoptions::parse_helper
  */
 template <>
 struct parse_helper<long long>
@@ -211,7 +215,7 @@ struct parse_helper<long long>
     }
 };
 /**
- * @brief template specialization for unsigned long long type to struct @ref parse_helper
+ * @brief template specialization for unsigned long long type to struct @ref limbo::programoptions::parse_helper
  */
 template <>
 struct parse_helper<unsigned long long>
@@ -226,7 +230,7 @@ struct parse_helper<unsigned long long>
     }
 };
 /**
- * @brief template specialization for float type to struct @ref parse_helper
+ * @brief template specialization for float type to struct @ref limbo::programoptions::parse_helper
  */
 template <>
 struct parse_helper<float>
@@ -241,7 +245,7 @@ struct parse_helper<float>
     }
 };
 /**
- * @brief template specialization for double type to struct @ref parse_helper
+ * @brief template specialization for double type to struct @ref limbo::programoptions::parse_helper
  */
 template <>
 struct parse_helper<double>
@@ -256,7 +260,7 @@ struct parse_helper<double>
     }
 };
 /**
- * @brief template specialization for std::vector<T> type to struct @ref parse_helper
+ * @brief template specialization for std::vector<T> type to struct @ref limbo::programoptions::parse_helper
  * @tparam T data type 
  */
 template <typename T>
@@ -274,7 +278,7 @@ struct parse_helper<std::vector<T> >
     }
 };
 /**
- * @brief template specialization for std::set<T> type to struct @ref parse_helper
+ * @brief template specialization for std::set<T> type to struct @ref limbo::programoptions::parse_helper
  * @tparam T data type 
  */
 template <typename T>
@@ -294,7 +298,7 @@ struct parse_helper<std::set<T> >
 
 /////////////////// specialization for print_helper /////////////////
 /**
- * @brief template specialization for boolean type to struct @ref print_helper
+ * @brief template specialization for boolean type to struct @ref limbo::programoptions::print_helper
  */
 template <>
 struct print_helper<bool>
@@ -308,7 +312,7 @@ struct print_helper<bool>
     }
 };
 /**
- * @brief template specialization for std::vector<T> type to struct @ref print_helper
+ * @brief template specialization for std::vector<T> type to struct @ref limbo::programoptions::print_helper
  * @tparam T data type 
  */
 template <typename T>
@@ -329,7 +333,7 @@ struct print_helper<std::vector<T> >
     }
 };
 /**
- * @brief template specialization for std::set<T> type to struct @ref print_helper
+ * @brief template specialization for std::set<T> type to struct @ref limbo::programoptions::print_helper
  * @tparam T data type 
  */
 template <typename T>
@@ -354,7 +358,7 @@ struct print_helper<std::set<T> >
 
 /////////////////// specialization for boolean_helper /////////////////
 /**
- * @brief template specialization for boolean type to struct @ref boolean_helper
+ * @brief template specialization for boolean type to struct @ref limbo::programoptions::boolean_helper
  */
 template <>
 struct boolean_helper<bool>
