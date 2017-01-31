@@ -18,6 +18,7 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(DOCDIR)/solvers \
 		  $(DOCDIR)/string \
 		  $(DOCDIR)/thirdparty \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/math/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/geometry/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/api/*.h) \
