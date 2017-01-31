@@ -14,7 +14,7 @@ It also offers detailed error reporting scheme that print incorrect and missing 
 
 ## Example 1 {#ProgramOptions_Example1}
 
-[test/programoptions/test_ProgramOptions_simple.cpp](@ref test_ProgramOptions_simple.cpp)
+See documented version: [test/programoptions/test_ProgramOptions_simple.cpp](@ref test_ProgramOptions_simple.cpp)
 \include test/programoptions/test_ProgramOptions_simple.cpp
 
 Compiling and running commands (assuming LIMBO_DIR is valid and limbo library has been properly installed)
@@ -55,7 +55,7 @@ vInteger = 10 30 50
 
 ## Example 2 {#ProgramOptions_Example2}
 
-[test/programoptions/test_ProgramOptions.cpp](@ref test_ProgramOptions.cpp)
+See documented version: [test/programoptions/test_ProgramOptions.cpp](@ref test_ProgramOptions.cpp)
 \include test/programoptions/test_ProgramOptions.cpp
 
 # References {#ProgramOptions_References}

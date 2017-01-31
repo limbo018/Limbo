@@ -1,9 +1,8 @@
-/*************************************************************************
-    > File Name: GeoBoostPolygonApi.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Thu 10 Sep 2015 08:15:51 PM CDT
- ************************************************************************/
+/**
+ * @file   GeoBoostPolygonApi.h
+ * @author Yibo Lin
+ * @date   Sep 2015
+ */
 
 #ifndef LIMBO_GEOMETRY_GEOBOOSTPOLYGONAPI_H
 #define LIMBO_GEOMETRY_GEOBOOSTPOLYGONAPI_H

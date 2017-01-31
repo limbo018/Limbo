@@ -1,9 +1,8 @@
-/*************************************************************************
-    > File Name: BoostPolygonApi.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Fri 31 Oct 2014 01:27:26 PM CDT
- ************************************************************************/
+/**
+ * @file   BoostPolygonApi.h
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #ifndef _LIMBO_GEOMETRY_API_BOOSTPOLYGONAPI_H
 #define _LIMBO_GEOMETRY_API_BOOSTPOLYGONAPI_H

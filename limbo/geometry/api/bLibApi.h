@@ -1,9 +1,8 @@
-/*************************************************************************
-    > File Name: bLibApi.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Fri 31 Oct 2014 01:12:59 PM CDT
- ************************************************************************/
+/**
+ * @file   bLibApi.h
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #ifndef _LIMBO_GEOMETRY_API_BLIBAPI_H
 #define _LIMBO_GEOMETRY_API_BLIBAPI_H

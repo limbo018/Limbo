@@ -1,9 +1,8 @@
-/*************************************************************************
-    > File Name: Geometry.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Tue 28 Oct 2014 02:11:57 PM CDT
- ************************************************************************/
+/**
+ * @file   Geometry.h
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #ifndef _LIMBO_GEOMETRY_GEOMETRY_H
 #define _LIMBO_GEOMETRY_GEOMETRY_H

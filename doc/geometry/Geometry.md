@@ -14,7 +14,7 @@ It is developed in a generic way to be flexible to different data types either i
 
 Define custom classes for points and rectangles and use Polygon2Rectangle to convert polygon to rectangles. 
 
-[test/geometry/test_p2r.cpp](@ref test_p2r.cpp)
+See documented version: [test/geometry/test_p2r.cpp](@ref test_p2r.cpp)
 \include test/geometry/test_p2r.cpp
 
 Compiling and running commands (assuming LIMBO_DIR is valid and limbo library has been properly installed)
@@ -32,7 +32,7 @@ Output drawn with gnuplot
 
 Use point and rectangle types in Boost.Polygon. 
 
-[test/geometry/test_boostpolygonapi.cpp](@ref test_boostpolygonapi.cpp)
+See documented version: [test/geometry/test_boostpolygonapi.cpp](@ref test_boostpolygonapi.cpp)
 \include test/geometry/test_boostpolygonapi.cpp
 
 Compiling and running commands (assuming LIMBO_DIR is valid and limbo library has been properly installed)
@@ -45,3 +45,12 @@ Output drawn with gnuplot
 ![test 1 solution](@ref p2rboost1.png "doc/geometry/p2rboost1.png")
 ![test 2 solution](@ref p2rboost2.png "doc/geometry/p2rboost2.png")
 ![test 3 solution](@ref p2rboost3.png "doc/geometry/p2rboost3.png")
+
+# References {#Geometry_References}
+
+- [limbo/geometry/Geometry.h](@ref Geometry.h)
+- [limbo/geometry/Polygon2Rectangle.h](@ref Polygon2Rectangle.h)
+- [limbo/geometry/Polygon2RectangleVec.h](@ref Polygon2RectangleVec.h)
+- [limbo/geometry/api/BoostPolygonApi.h](@ref BoostPolygonApi.h)
+- [limbo/geometry/api/GeoBoostPolygonApi.h](@ref GeoBoostPolygonApi.h)
+

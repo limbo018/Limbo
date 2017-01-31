@@ -1,9 +1,8 @@
-/*************************************************************************
-    > File Name: Polygon2RectangleVec.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Thu 26 May 2016 11:15:21 AM CDT
- ************************************************************************/
+/**
+ * @file   Polygon2RectangleVec.h
+ * @author Yibo Lin
+ * @date   May 2016
+ */
 
 #ifndef _LIMBO_GEOMETRY_POLYGON2RECTANGLEVEC_H
 #define _LIMBO_GEOMETRY_POLYGON2RECTANGLEVEC_H
