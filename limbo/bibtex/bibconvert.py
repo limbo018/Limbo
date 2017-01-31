@@ -1,16 +1,21 @@
-#########################################################################
-# File Name: bibconvert.py
-# Author: Yibo Lin
-# mail: yibolin@utexas.edu
-# Created Time: Fri Dec  9 12:00:28 2016
-#########################################################################
+##
+# @package bibconvert
+# @brief  convert bibtex format of references to jemdoc and latex formats 
+# @author Yibo Lin
+# @date   Dec 2016
+#
 #!/bin/python
 
 import sys
 import re
 import datetime
+## require bibtexparser package 
 import bibtexparser 
 
+## @brief read bibtex files with bibtexparser 
+#  @param filenames array of bibtex files 
+#  @param commentPrefix take lines starting with specific charactors as comment
+#  @return bibtex database 
 def read(filenames, commentPrefix):
     # read content from bibtex files 
     content = ""
@@ -26,6 +31,9 @@ def read(filenames, commentPrefix):
     bibDB = bibtexparser.loads(content)
     return bibDB
 
+## @brief extract date time from entry 
+#  @param entry bibentry 
+#  @return formated date time 
 def getDatetime(entry):
     date = entry['year']
     timeFormat = "%Y"
@@ -37,6 +45,9 @@ def getDatetime(entry):
             timeFormat = "%Y,%B,%d"
     return datetime.datetime.strptime(date, timeFormat)
 
+## @brief extract address and date time from entry 
+#  @param entry bibentry 
+#  @return formated address and date 
 def getAddressAndDate(entry):
     addressAndDate = ""
     prefix = ""
@@ -53,7 +64,9 @@ def getAddressAndDate(entry):
         addressAndDate += prefix + entry['year']
     return addressAndDate
 
-# switch from [last name, first name] to [first name last name]
+## @brief switch from [last name, first name] to [first name last name]
+#  @param author author list 
+#  @return formated author list 
 def switchToFirstLastNameStyle(author):
     authorArray = author.split('and')
     for i, oneAuthor in enumerate(authorArray):
@@ -69,6 +82,10 @@ def switchToFirstLastNameStyle(author):
             author += " and " + authorArray[i]
     return author
 
+## @brief print bibtex database with target format 
+#  @param bibDB bibtex database 
+#  @param highlightAuthors authors need to be highlighted 
+#  @param suffix target format 
 def printBibDB(bibDB, highlightAuthors, suffix):
     # differentiate journal and conference 
     # I assume journal uses 'journal' 
@@ -110,6 +127,13 @@ def printBibDB(bibDB, highlightAuthors, suffix):
     else:
         assert 0, "unknown suffix = %s" % suffix
 
+## @brief print in Jemdoc format 
+#  @param bibDB bibtex database 
+#  @param stringMap strings defined in bibtex database, which will be used to replace some references 
+#  @param highlightAuthors authors to be highlighed 
+#  @param entries list of bibentry to be printed 
+#  @param publishType type of publications 
+#  @param booktitleKey the keyword of entries need to search in the stringMap 
 def printWeb(bibDB, stringMap, highlightAuthors, entries, publishType, booktitleKey):
     prefix = ""
     if publishType == 'journal':
@@ -146,6 +170,13 @@ def printWeb(bibDB, stringMap, highlightAuthors, entries, publishType, booktitle
         """ % (prefix, count, author, title, booktitle, addressAndDate, annotate)
         count = count-1
 
+## @brief print in Latex format 
+#  @param bibDB bibtex database 
+#  @param stringMap strings defined in bibtex database, which will be used to replace some references 
+#  @param highlightAuthors authors to be highlighed 
+#  @param entries list of bibentry to be printed 
+#  @param publishType type of publications 
+#  @param booktitleKey the keyword of entries need to search in the stringMap 
 def printCV(bibDB, stringMap, highlightAuthors, entries, publishType, booktitleKey):
     prefix = ""
     if publishType == 'journal':
@@ -196,6 +227,7 @@ def printCV(bibDB, stringMap, highlightAuthors, entries, publishType, booktitleK
 \end{description}
     """
 
+## @brief print help message 
 def printHelp():
     print """
 usage: python bibconvert.py --suffix suffix --highlight author1 [--highlight author2] --input 1.bib [--input 2.bib]
@@ -205,8 +237,11 @@ suffix can be 'web' or 'cv'
 """
 
 if __name__ == "__main__":
+    ## target format 
     suffix = None
+    ## list of authors for highlight 
     highlightAuthors = []
+    ## list of bibtex files 
     filenames = []
 
     if len(sys.argv) < 3 or sys.argv[1] in ('--help', '-h'):
@@ -224,6 +259,7 @@ if __name__ == "__main__":
         else:
             break
 
+    ## bibtex database 
     bibDB = read(filenames, "%")
     #print(bibDB.strings)
     #print(bibDB.entries)

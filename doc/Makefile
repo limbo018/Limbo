@@ -18,6 +18,7 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(DOCDIR)/solvers \
 		  $(DOCDIR)/string \
 		  $(DOCDIR)/thirdparty \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/bibtex/*.py) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/math/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/geometry/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/*.h) \
@@ -47,7 +48,7 @@ Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile
 	echo IMAGE_PATH             = $(LIMBO_ROOT_DIR)/doc/geometry >> $(DOCDIR)/Doxyfile
 	echo INPUT                  = $(SRCSDIR) >> $(DOCDIR)/Doxyfile
 	echo OUTPUT_DIRECTORY       = $(DOCDIR) >> $(DOCDIR)/Doxyfile
-	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md >> $(DOCDIR)/Doxyfile
+	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md *.py >> $(DOCDIR)/Doxyfile
 	echo INCLUDE_FILE_PATTERNS  = *.h *.hpp >> $(DOCDIR)/Doxyfile
 	echo ALIASES               += nowarn=\"\\{\" endnowarn=\"\\}\" >> $(DOCDIR)/Doxyfile
 
