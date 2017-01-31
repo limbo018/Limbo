@@ -19,6 +19,7 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(DOCDIR)/string \
 		  $(DOCDIR)/thirdparty \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/bibtex/*.py) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/makeutils/*.mk) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/math/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/geometry/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/*.h) \
@@ -48,9 +49,10 @@ Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile
 	echo IMAGE_PATH             = $(LIMBO_ROOT_DIR)/doc/geometry >> $(DOCDIR)/Doxyfile
 	echo INPUT                  = $(SRCSDIR) >> $(DOCDIR)/Doxyfile
 	echo OUTPUT_DIRECTORY       = $(DOCDIR) >> $(DOCDIR)/Doxyfile
-	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md *.py >> $(DOCDIR)/Doxyfile
+	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md *.py *.mk >> $(DOCDIR)/Doxyfile
 	echo INCLUDE_FILE_PATTERNS  = *.h *.hpp >> $(DOCDIR)/Doxyfile
 	echo ALIASES               += nowarn=\"\\{\" endnowarn=\"\\}\" >> $(DOCDIR)/Doxyfile
+	echo FILTER_PATTERNS = *.mk=$(LIMBO_ROOT_DIR)/doc/MKFilter.sh >> $(DOCDIR)/Doxyfile
 
 doc: Doxyfile $(SRCS)
 	$(DOXYGEN) $(DOCDIR)/Doxyfile.in

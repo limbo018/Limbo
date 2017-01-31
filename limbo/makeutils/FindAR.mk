@@ -1,9 +1,17 @@
-#########################################################################
-# File Name: FindAR.mk
-# Author: Yibo Lin
-# mail: yibolin@utexas.edu
-# Created Time: Wed 18 Jan 2017 02:02:33 PM CST
-#########################################################################
+## @file   FindAR.mk
+## @brief  find ar and set to AR 
+## 
+## Use following command in the Makefile to view the results 
+## 
+##     $(info AR = $(AR))
+##
+## @author Yibo Lin
+## @date   Jan 2017
+##
+## @param  AR 
 
-## find ar, determine AR 
+## @cond 
+
 AR = ar
+
+## @endcond

@@ -1,11 +1,12 @@
-#########################################################################
-# File Name: FindGcc.mk
-# Author: Yibo Lin
-# mail: yibolin@utexas.edu
-# Created Time: Wed 18 Jan 2017 02:01:01 PM CST
-#########################################################################
+## @file   FindGcc.mk
+## @brief  find gcc, determine CC
+## @author Yibo Lin
+## @date   Jan 2017
+##
+## @param  CC set CC as C compiler 
 
-## find gcc, determine CC
+## @cond 
+
 ifneq ($(shell which gcc48),)
 	CC = gcc48
 else
@@ -31,3 +32,5 @@ endif
 endif
 endif
 endif 
+
+## @endcond

@@ -1,11 +1,19 @@
-#########################################################################
-# File Name: GCCVersion.mk
-# Author: Yibo Lin
-# mail: yibolin@utexas.edu
-# Created Time: Sat 01 Aug 2015 01:05:15 PM CDT
-#########################################################################
-
+## @file   GCCVersion.mk
+## @brief  compute version of CXX, set GCCVERSION, assume CXX is gcc
+##
 ## calculate gcc version without . and save to GCCVERSION
+## Use following command in the Makefile to view the results 
+## 
+##     $(info GCCVERSION = $(GCCVERSION))
+##
+## @author Yibo Lin
+## @date   Aug 2015
+##
+## @param CXX given CXX and assume it is gcc 
+## @param GCCVERSION set version of gcc 
+
+## @cond
+
 empty:=
 space:= $(empty) $(empty)
 GCCVERSIONSTRING := $(shell expr `$(CXX) -dumpversion`)
@@ -19,3 +27,5 @@ GCCVERSION += 00
 GCCVERSION := $(subst $(space),$(empty),$(GCCVERSION))
 # Crop the version number to 3 decimals.
 GCCVERSION := $(shell expr `echo $(GCCVERSION)` | cut -b1-3)
+
+## @endcond
