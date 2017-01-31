@@ -16,7 +16,12 @@
 #include <set>
 #include <limbo/string/String.h>
 
-namespace limbo { namespace programoptions {
+/// @brief namespace for Limbo
+namespace limbo 
+{ 
+/// @brief namespace for Limbo.ProgramOptions
+namespace programoptions 
+{
 
 /// template function objects to parse, print and assign values 
 /// template specialization is needed if default operators are not defined 
@@ -371,6 +376,7 @@ struct boolean_helper<bool>
     }
 };
 
-}} // namespace limbo // programoptions
+} // programoptions
+} // namespace limbo
 
 #endif

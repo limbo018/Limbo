@@ -41,7 +41,7 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-all: test_string
+all: test_string test_compare
 
 # Compile dependency 
 
@@ -62,9 +62,13 @@ $(OBJDIR)/%.o: %.cpp
 test_string: $(OBJDIR)/test_string.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_string.o $(LIBS) 
 
+test_compare: $(OBJDIR)/test_compare.o 
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_compare.o $(LIBS) 
+
 .PHONY: clean
 clean: cleandep
 	rm -f test_string 
+	rm -f test_compare 
 	rm -f $(OBJS) 
 
 .PHONY: cleandep

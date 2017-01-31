@@ -21,7 +21,12 @@
 #include <limbo/preprocessor/AssertMsg.h>
 #include <limbo/programoptions/ConversionHelpers.h>
 
-namespace limbo { namespace programoptions {
+/// @brief namespace for Limbo
+namespace limbo 
+{ 
+/// @brief namespace for Limbo.ProgramOptions
+namespace programoptions 
+{
 
 /**
  * @class limbo::programoptions::ProgramOptionsException
@@ -537,6 +542,7 @@ ProgramOptions& ProgramOptions::add_option(ValueType const& data)
     return *this;
 }
 
-}} // namespace limbo // programoptions
+} // programoptions
+} // namespace limbo
 
 #endif

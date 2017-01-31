@@ -1,32 +1,30 @@
-/*************************************************************************
-    > File Name: String.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Tue 28 Oct 2014 11:24:15 AM CDT
- ************************************************************************/
+/**
+ * @file   String.h
+ * @brief  Check string is integer, floating point, number...
+ * Convert string to upper/lower cases 
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #ifndef _LIMBO_STRING_STRING
 #define _LIMBO_STRING_STRING
-
-/// ===================================================================
-///    File          : String
-///    Function      : Check string is integer, floating point, number...
-///                    Convert string to upper/lower cases 
-///
-/// ===================================================================
 
 #include <iostream>
 #include <string>
 #include <cctype>
 #include <limbo/string/ToString.h>
 
-namespace limbo { 
+/// @brief namespace for Limbo
+namespace limbo 
+{ 
 
 using std::cout;
 using std::endl;
 using std::string;
 
-/// check whether string represents an integer 
+/// @brief check whether string represents an integer 
+/// @param s string 
+/// @return true if s is an integer 
 inline bool is_integer(string const& s)
 {
 	if (s.empty()) return false;
@@ -37,7 +35,9 @@ inline bool is_integer(string const& s)
 	return true;
 }
 
-/// check whether string represents a floating point 
+/// @brief check whether string represents an float 
+/// @param s string 
+/// @return true if s is an float 
 inline bool is_float(string const& s)
 {
 	if (s.empty()) return false;
@@ -56,7 +56,9 @@ inline bool is_float(string const& s)
 	return dp_cnt == 1;
 }
 
-/// check whether string represents a number, either an integer or a floating point 
+/// @brief check whether string represents a number, either integer or floating point number 
+/// @param s string 
+/// @return true if s is a number 
 inline bool is_number(string const& s)
 {
 	if (s.empty()) return false;
@@ -75,7 +77,9 @@ inline bool is_number(string const& s)
 	return true;
 }
 
-/// convert string to upper case 
+/// @brief convert string to upper case 
+/// @param s string 
+/// @return upper case copy of s 
 inline string toupper(string const& s)
 {
 	string s_up;
@@ -85,7 +89,9 @@ inline string toupper(string const& s)
 	return s_up;
 }
 
-/// convert string to lower case 
+/// @brief convert string to lower case 
+/// @param s string 
+/// @return lower case copy of s 
 inline string tolower(string const& s)
 {
 	string s_low;
@@ -95,7 +101,10 @@ inline string tolower(string const& s)
 	return s_low;
 }
 
-/// check two strings equal, case-insensitive 
+/// @brief check two strings equal, case-insensitive 
+/// @param s1 string 
+/// @param s2 string 
+/// @return true if s1 and s2 are equal case-insensitively 
 inline bool iequals(string const& s1, string const& s2)
 {
 	string s1_up = toupper(s1);
@@ -103,35 +112,45 @@ inline bool iequals(string const& s1, string const& s2)
 	return s1_up == s2_up;
 }
 
-/// return the relative path of a file
+/// @brief get relative path of a file
+/// @param s file name 
+/// @return the relative path of a file
 inline string get_file_path(const string& s)
 {
 	size_t found = s.rfind('/');
 	if (found != string::npos) return s.substr(0, found);
 	else return ".";
 }
-/// return the pure name of a file (no path)
+/// @brief get pure name of a file (no path)
+/// @param s file name 
+/// @return the pure name of a file (no path)
 inline string get_file_name(const string& s)
 {
 	size_t found = s.rfind('/');
 	if (found != string::npos) return s.substr(found+1);
 	else return s;
 }
-/// return the suffix of a file 
+/// @brief get suffix of a file 
+/// @param s file name 
+/// @return the suffix of a file 
 inline string get_file_suffix(const string& s)
 {
 	size_t found = s.rfind('.');
 	if (found != string::npos) return s.substr(found+1);
 	else return string("");
 }
-/// trim the suffix of a file 
+/// @brief trim the suffix of a file 
+/// @param s file name 
+/// @return string without suffix of the file 
 inline string trim_file_suffix(string const& s)
 {
 	size_t found = s.rfind('.');
 	if (found != string::npos) return s.substr(0, found);
 	else return s;
 }
-/// return the first word of a string, assume delimiter is space or tab
+/// @brief fetch the first word of a string, assume delimiter is space or tab
+/// @param str string 
+/// @return the first word of a string, assume delimiter is space or tab
 inline string get_first_word(string const& str)
 {
 	size_t pos1 = std::string::npos;

@@ -1,5 +1,7 @@
 /**
  * @file   Geometry.h
+ * @brief  Contains utilities for geometric types, such as type traits, area calculator. 
+ * I'm trying to make these setting as similar as Boost.Polygon, which will lead to easier embedding
  * @author Yibo Lin
  * @date   Oct 2014
  */
@@ -10,14 +12,6 @@
 #include <vector>
 #include <list>
 #include <ostream>
-
-/// ===================================================================
-///    class          : Geometry
-///
-///  Contains utilities for geometric types, such as type traits, area calculator
-///  I'm trying to make these setting as similar as Boost.Polygon, which will lead to easier embedding
-///
-/// ===================================================================
 
 /// @brief namespace for Limbo
 namespace limbo 
