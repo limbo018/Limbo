@@ -1,5 +1,7 @@
 /**
  * @file   Polygon2RectangleVec.h
+ * @brief  a template specialization for std::vector.  
+ * It is more efficient than generic version 
  * @author Yibo Lin
  * @date   May 2016
  */
@@ -10,45 +12,55 @@
 #include <vector>
 #include <limits>
 
-namespace limbo { namespace geometry {
+/// @brief namespace for Limbo
+namespace limbo 
+{ 
+/// @brief namespace for Limbo.Geometry
+namespace geometry 
+{
 
+// forward declaration 
 struct point_compare_type; 
 template <typename PointSet,
 		 typename RectSet>
 class Polygon2Rectangle; 
 
-/// a template specialization for std::vector 
-/// it is more efficient than generic version 
-
-/// \brief a class implement conversion from manhattan polygon to rectangle 
-/// \param PointSet is the container for internal storing vertices of polygon 
+/// @brief a class implement conversion from manhattan polygon to rectangle 
+/// @param PointSet is the container for internal storing vertices of polygon 
 /// according to some experiments, std::vector is much faster than list, and set 
-/// \param RectSet is the container storing output rectangles 
+/// @param RectSet is the container storing output rectangles 
 template <typename PointType,
 		 typename RectangleType>
 class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 {
 	public:
-		/// \brief internal rectangle set type 
+		/// @brief internal rectangle set type 
 		typedef std::vector<RectangleType> rectangle_set_type; 
-		/// \brief internal point set type 
+		/// @brief internal point set type 
 		typedef std::vector<PointType> point_set_type;
-		/// \brief internal point type 
+		/// @brief internal point type 
 		//typedef typename polygon_90_traits<polygon_type>::point_type point_type;
 		typedef typename container_traits<point_set_type>::value_type point_type;
-		/// \brief point set type for polygon 
+		/// @brief point set type for polygon 
 		//typedef typename polygon_90_traits<polygon_type>::coordinate_type coordinate_type;
 		typedef typename point_traits<point_type>::coordinate_type coordinate_type;
-		/// \brief internal rectangle type 
+		/// @brief internal rectangle type 
 		typedef typename container_traits<rectangle_set_type>::value_type rectangle_type;
+		/// @brief coordinate distance type 
         typedef typename coordinate_traits<coordinate_type>::coordinate_distance coordinate_distance; 
+		/// @brief manhattan area type 
         typedef typename coordinate_traits<coordinate_type>::manhattan_area_type manhattan_area_type; 
 
-		/// constructor 
-		/// \param slicing_orient indicates the orientation of slicing 
-		/// if slicing_orient == HORIZONTAL_SLICING or slicing_orient == VERTICAL_SLICING, only 1 copy of points is stored 
-		/// if slicing_orient == HOR_VER_SLICING, 2 copies of points sorted by different orientation are stored 
-		/// btw, slicing orientation is perpendicular to its corresponding sorting orientation 
+        /**
+         * @brief constructor 
+         *
+         * if slicing_orient == HORIZONTAL_SLICING or slicing_orient == VERTICAL_SLICING, only 1 copy of points is stored 
+         * if slicing_orient == HOR_VER_SLICING, 2 copies of points sorted by different orientation are stored 
+         * btw, slicing orientation is perpendicular to its corresponding sorting orientation 
+         *
+         * @param vRect reference to the container for output rectangles 
+         * @param slicing_orient indicates the orientation of slicing 
+         */
 		Polygon2Rectangle(rectangle_set_type& vRect, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
             : m_mPoint((slicing_orient != HORIZONTAL_SLICING && slicing_orient != VERTICAL_SLICING)? 2 : 1)
             , m_vOrient2Id(2, std::numeric_limits<unsigned char>::max())
@@ -57,8 +69,14 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 		{
 			this->initialize(slicing_orient);
 		}
-		/// constructor 
-		/// \param InputIterator represents the iterator type of point set container for construction only 
+        /**
+         * @brief constructor 
+         * @tparam InputIterator represents the iterator type of point set container for construction only 
+         * @param vRect reference to container for rectangles 
+         * @param input_begin begin iterator of points 
+         * @param input_end end iterator of points 
+         * @param slicing_orient slicing orientation 
+         */
 		template <typename InputIterator>
 		Polygon2Rectangle(rectangle_set_type& vRect, InputIterator input_begin, InputIterator input_end, slicing_orientation_2d slicing_orient)
             : m_mPoint((slicing_orient != HORIZONTAL_SLICING && slicing_orient != VERTICAL_SLICING)? 2 : 1)
@@ -69,7 +87,12 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 			this->initialize(slicing_orient);
 			this->initialize(input_begin, input_end);
 		}
-		/// \brief initialize polygon points  
+        /**
+         * @brief initialize polygon points  
+         * @tparam InputIterator represents the iterator type of point set container for construction only 
+         * @param input_begin begin iterator of points 
+         * @param input_end end iterator of points 
+         */
 		template <typename InputIterator>
 		void initialize(InputIterator input_begin, InputIterator input_end)
 		{
@@ -174,7 +197,10 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
             }
 		}
 
-		/// top api for Polygon2Rectangle 
+        /**
+         * @brief top api for @ref limbo::geometry::Polygon2Rectangle
+         * @return true if succeed
+         */
 		bool operator()()
 		{
 			std::vector<rectangle_type> vRect (m_mPoint.size());
@@ -281,13 +307,19 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 
 			return true;
 		}
-		/// return result rectangles 
+        /**
+         * @brief get rectangles 
+         * @return result rectangles 
+         */
 		rectangle_set_type const& get_rectangles() const 
 		{
 			return m_vRect;
 		}
-		/// read polygon from file 
-		/// try to be compatible to gnuplot format 
+        /**
+         * @brief read polygon from file 
+         * try to be compatible to gnuplot format 
+         * @return true if succeed
+         */
 		bool read(string const& filename)
 		{
 			ifstream in (filename.c_str());
@@ -345,8 +377,10 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 
 			return true;
 		}
-		/// print polygon to file 
-		/// in gnuplot format 
+        /**
+         * @brief print polygon to file in gnuplot format 
+         * @param filename output file name 
+         */
 		void print(string const& filename) const 
 		{
 			ofstream out (filename.c_str());
@@ -389,22 +423,57 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 		}
 
 	protected:
+        /**
+         * @brief get coordinate from point 
+         * @param p point 
+         * @param o orientation 
+         * @return coordinate
+         */
 		inline coordinate_type get(point_type const& p, orientation_2d o) const {return point_traits<point_type>::get(p, o);}
+        /**
+         * @brief get coordinate from rectangle  
+         * @param r rectangle  
+         * @param d direction 
+         * @return coordinate
+         */
 		inline coordinate_type get(rectangle_type const& r, direction_2d d) const {return rectangle_traits<rectangle_type>::get(r, d);}
+        /**
+         * @brief set coordinate of point 
+         * @param p point 
+         * @param o orientation 
+         * @param v coordinate value
+         */
 		inline void set(point_type& p, orientation_2d o, coordinate_type v) const {point_traits<point_type>::set(p, o, v);}
+        /**
+         * @brief set coordinate of rectangle  
+         * @param r rectangle 
+         * @param d direction
+         * @param v coordinate value
+         */
 		inline void set(rectangle_type& r, direction_2d d, coordinate_type v) const {rectangle_traits<rectangle_type>::set(r, d, v);}
 
-		/// \brief is equal helper 
+        /**
+         * @brief is equal helper 
+         */
 		struct is_equal_type
 		{
+            /**
+             * @brief is equal helper 
+             * @param p1 point 
+             * @param p2 point
+             * @return true if two points are equal 
+             */
 			inline bool operator() (point_type const& p1, point_type const& p2) const 
 			{
 				return point_traits<point_type>::get(p1, HORIZONTAL) == point_traits<point_type>::get(p2, HORIZONTAL) 
 					&& point_traits<point_type>::get(p1, VERTICAL) == point_traits<point_type>::get(p2, VERTICAL);
 			}
 		};
-		/// \brief initialize with slicing orientation 
-		/// it must be called before initializing other data  
+        /**
+         * @brief initialize with slicing orientation 
+         * it must be called before initializing other data  
+         * @param slicing_orient slicing orientation
+         */
 		void initialize(slicing_orientation_2d slicing_orient)
 		{
 			switch (slicing_orient)
@@ -431,12 +500,15 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 					assert(0);
 			}
 		}
-		/// \brief find Pk, Pl, Pm, please refer to the paper for definition 
-		/// Given points, find Pk, Pl and Pm
-		/// \param Pk: the leftmost of the lowest points
-		/// \param Pl: the next leftmost of the lowest points
-		/// \param Pm: 1) Xk <= Xm < Xl
-		///            2) Ym is lowest but Ym > Yk (Yk == Yl)
+        /**
+         * @brief find Pk, Pl, Pm, please refer to the paper for definition 
+         * Given points, find Pk, Pl and Pm
+         * @param Pk the leftmost of the lowest points
+         * @param Pl the next leftmost of the lowest points
+         * @param Pm 1) Xk <= Xm < Xl
+         *           2) Ym is lowest but Ym > Yk (Yk == Yl)
+         * @param orient orientation 
+         */
 		bool find_Pk_Pl_Pm(point_type& Pk, point_type& Pl, point_type& Pm, orientation_2d const& orient) 
 		{
 			point_set_type const& vPoint = m_mPoint.at(m_vOrient2Id[orient.to_int()]).second;
@@ -472,6 +544,12 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 
 			return true;
 		}
+        /**
+         * @brief F function in the original paper 
+         * remove point if found, otherwise insert 
+         * @param point a point to insert or remove 
+         * @param orient orientation 
+         */
 		void F(point_type const& point, orientation_2d const& orient)
 		{
 			point_set_type& vPoint = m_mPoint.at(m_vOrient2Id[orient.to_int()]).second;
@@ -497,6 +575,7 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
         slicing_orientation_2d m_slicing_orient; ///< slicing orient
 };
 
-}} // namespace limbo // namespace geometry
+} // namespace geometry
+} // namespace limbo
 
 #endif

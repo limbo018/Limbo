@@ -46,6 +46,7 @@ Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile
 	echo OUTPUT_DIRECTORY       = $(DOCDIR) >> $(DOCDIR)/Doxyfile
 	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md >> $(DOCDIR)/Doxyfile
 	echo INCLUDE_FILE_PATTERNS  = *.h *.hpp >> $(DOCDIR)/Doxyfile
+	echo ALIASES               += nowarn=\"\\{\" endnowarn=\"\\}\" >> $(DOCDIR)/Doxyfile
 
 doc: Doxyfile $(SRCS)
 	$(DOXYGEN) $(DOCDIR)/Doxyfile.in

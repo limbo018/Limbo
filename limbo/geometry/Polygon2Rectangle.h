@@ -1,20 +1,17 @@
 /**
  * @file   Polygon2Rectangle.h
- * @author Yibo Lin
- * @date   Oct 2014
- */
-
-#ifndef _LIMBO_GEOMETRY_POLYGON2RECTANGLE
-#define _LIMBO_GEOMETRY_POLYGON2RECTANGLE
-
-/**
  * @brief a generic implementation of polygon-to-rectangle conversion 
  *                                                                         
  * K.D.Gourley and D.M. Green, [A Polygon-to-Rectangle Conversion Algorithm](http://doi.ieeecomputersociety.org/10.1109/MCG.1983.262975), IEEE COMP. GRAPHICS & APPLIC. 3.1 (1983): 31-32.
  * 
  * If a contour polygon has duplicate points, remove all of them and form a polygon with holes 
  *
+ * @author Yibo Lin
+ * @date   Oct 2014
  */
+
+#ifndef _LIMBO_GEOMETRY_POLYGON2RECTANGLE
+#define _LIMBO_GEOMETRY_POLYGON2RECTANGLE
 
 #include <iostream>
 #include <fstream>
@@ -29,7 +26,12 @@
 #include <limbo/string/String.h>
 #include <limbo/preprocessor/AssertMsg.h>
 
-namespace limbo { namespace geometry {
+/// @brief namespace for Limbo
+namespace limbo 
+{ 
+/// @brief namespace for Limbo.Geometry
+namespace geometry 
+{
 
 using std::cout;
 using std::endl;
@@ -120,8 +122,14 @@ class Polygon2Rectangle
 		{
 			this->initialize(slicing_orient);
 		}
-		/// constructor 
-		/// @param InputIterator represents the iterator type of point set container for construction only 
+        /**
+         * @brief constructor 
+         * @tparam InputIterator represents the iterator type of point set container for construction only 
+         * @param vRect reference to container for rectangles 
+         * @param input_begin begin iterator of points 
+         * @param input_end end iterator of points 
+         * @param slicing_orient slicing orientation 
+         */
 		template <typename InputIterator>
 		Polygon2Rectangle(rectangle_set_type& vRect, InputIterator input_begin, InputIterator input_end, slicing_orientation_2d slicing_orient)
             : m_mPoint()
@@ -131,7 +139,12 @@ class Polygon2Rectangle
 			this->initialize(slicing_orient);
 			this->initialize(input_begin, input_end);
 		}
-		/// @brief initialize polygon points  
+        /**
+         * @brief initialize polygon points  
+         * @tparam InputIterator represents the iterator type of point set container for construction only 
+         * @param input_begin begin iterator of points 
+         * @param input_end end iterator of points 
+         */
 		template <typename InputIterator>
 		void initialize(InputIterator input_begin, InputIterator input_end)
 		{
@@ -236,7 +249,10 @@ class Polygon2Rectangle
 #endif 
 		}
 
-		/// top api for Polygon2Rectangle 
+        /**
+         * @brief top api for @ref limbo::geometry::Polygon2Rectangle
+         * @return true if succeed
+         */
 		bool operator()()
 		{
 #ifdef _DEBUG_PTR
@@ -348,13 +364,19 @@ class Polygon2Rectangle
 
 			return true;
 		}
-		/// return result rectangles 
+        /**
+         * @brief get rectangles 
+         * @return result rectangles 
+         */
 		rectangle_set_type const& get_rectangles() const 
 		{
 			return m_vRect;
 		}
-		/// read polygon from file 
-		/// try to be compatible to gnuplot format 
+        /**
+         * @brief read polygon from file 
+         * try to be compatible to gnuplot format 
+         * @return true if succeed
+         */
 		bool read(string const& filename)
 		{
 			ifstream in (filename.c_str());
@@ -412,8 +434,10 @@ class Polygon2Rectangle
 
 			return true;
 		}
-		/// print polygon to file 
-		/// in gnuplot format 
+        /**
+         * @brief print polygon to file in gnuplot format 
+         * @param filename output file name 
+         */
 		void print(string const& filename) const 
 		{
 			ofstream out (filename.c_str());
@@ -456,22 +480,57 @@ class Polygon2Rectangle
 		}
 
 	protected:
+        /**
+         * @brief get coordinate from point 
+         * @param p point 
+         * @param o orientation 
+         * @return coordinate
+         */
 		inline coordinate_type get(point_type const& p, orientation_2d o) const {return point_traits<point_type>::get(p, o);}
+        /**
+         * @brief get coordinate from rectangle  
+         * @param r rectangle  
+         * @param d direction 
+         * @return coordinate
+         */
 		inline coordinate_type get(rectangle_type const& r, direction_2d d) const {return rectangle_traits<rectangle_type>::get(r, d);}
+        /**
+         * @brief set coordinate of point 
+         * @param p point 
+         * @param o orientation 
+         * @param v coordinate value
+         */
 		inline void set(point_type& p, orientation_2d o, coordinate_type v) const {point_traits<point_type>::set(p, o, v);}
+        /**
+         * @brief set coordinate of rectangle  
+         * @param r rectangle 
+         * @param d direction
+         * @param v coordinate value
+         */
 		inline void set(rectangle_type& r, direction_2d d, coordinate_type v) const {rectangle_traits<rectangle_type>::set(r, d, v);}
 
-		/// @brief is equal helper 
+        /**
+         * @brief is equal helper 
+         */
 		struct is_equal_type
 		{
+            /**
+             * @brief is equal helper 
+             * @param p1 point 
+             * @param p2 point
+             * @return true if two points are equal 
+             */
 			inline bool operator() (point_type const& p1, point_type const& p2) const 
 			{
 				return point_traits<point_type>::get(p1, HORIZONTAL) == point_traits<point_type>::get(p2, HORIZONTAL) 
 					&& point_traits<point_type>::get(p1, VERTICAL) == point_traits<point_type>::get(p2, VERTICAL);
 			}
 		};
-		/// @brief initialize with slicing orientation 
-		/// it must be called before initializing other data  
+        /**
+         * @brief initialize with slicing orientation 
+         * it must be called before initializing other data  
+         * @param slicing_orient slicing orientation
+         */
 		void initialize(slicing_orientation_2d slicing_orient)
 		{
 			switch (slicing_orient)
@@ -505,12 +564,15 @@ class Polygon2Rectangle
 					assert(0);
 			}
 		}
-		/// @brief find Pk, Pl, Pm, please refer to the paper for definition 
-		/// Given points, find Pk, Pl and Pm
-		/// @param Pk: the leftmost of the lowest points
-		/// @param Pl: the next leftmost of the lowest points
-		/// @param Pm: 1) Xk <= Xm < Xl
-		///            2) Ym is lowest but Ym > Yk (Yk == Yl)
+        /**
+         * @brief find Pk, Pl, Pm, please refer to the paper for definition 
+         * Given points, find Pk, Pl and Pm
+         * @param Pk the leftmost of the lowest points
+         * @param Pl the next leftmost of the lowest points
+         * @param Pm 1) Xk <= Xm < Xl
+         *           2) Ym is lowest but Ym > Yk (Yk == Yl)
+         * @param orient orientation 
+         */
 		bool find_Pk_Pl_Pm(point_type& Pk, point_type& Pl, point_type& Pm, orientation_2d const& orient) 
 		{
 			point_set_type const& vPoint = m_mPoint[orient];
@@ -546,6 +608,12 @@ class Polygon2Rectangle
 
 			return true;
 		}
+        /**
+         * @brief F function in the original paper 
+         * remove point if found, otherwise insert 
+         * @param point a point to insert or remove 
+         * @param orient orientation 
+         */
 		void F(point_type const& point, orientation_2d const& orient)
 		{
 			point_set_type& vPoint = m_mPoint[orient];
@@ -606,17 +674,26 @@ class Polygon2Rectangle
         slicing_orientation_2d m_slicing_orient; ///< slicing orient
 };
 
-}} // namespace limbo // namespace geometry
+} // namespace geometry
+} // namespace limbo
 
-/// a specialization for vectors 
+// a specialization for vectors 
 #include <limbo/geometry/Polygon2RectangleVec.h>
 
-namespace limbo { namespace geometry {
+namespace limbo 
+{ 
+namespace geometry 
+{
 
 /// @brief standby function for polygon-to-rectangle conversion 
-/// @param InputIterator represents the input iterators for points of polygon 
-/// @param PointSet represents the internal container for points of polygon, user needs to pass a hint for type deduction 
-/// @param RectSet represents the container for rectangles 
+/// @tparam InputIterator represents the input iterators for points of polygon 
+/// @tparam PointSet represents the internal container for points of polygon, user needs to pass a hint for type deduction 
+/// @tparam RectSet represents the container for rectangles 
+/// @param input_begin begin iterator of input 
+/// @param input_end end iterator of input 
+/// @param r reference to container for rectangles 
+/// @param slicing_orient slicing orientations 
+/// @return true if succeed 
 template <typename InputIterator, typename PointSet, typename RectSet>
 inline bool polygon2rectangle(InputIterator input_begin, InputIterator input_end, 
 		PointSet const&, RectSet& r, slicing_orientation_2d slicing_orient = HORIZONTAL_SLICING)
@@ -626,6 +703,7 @@ inline bool polygon2rectangle(InputIterator input_begin, InputIterator input_end
 	return true;
 }
 
-}} // namespace limbo // namespace geometry
+} // namespace geometry
+} // namespace limbo
 
 #endif 
