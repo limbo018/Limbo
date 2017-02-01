@@ -1,11 +1,12 @@
-#########################################################################
-# File Name: FindGfortran.mk
-# Author: Yibo Lin
-# mail: yibolin@utexas.edu
-# Created Time: Wed 18 Jan 2017 02:02:07 PM CST
-#########################################################################
+## @file   FindGfortran.mk
+## @brief  find gfortran, determine FC
+## @author Yibo Lin
+## @date   Jan 2017
+##
+## @param  FC set FC as fortran compiler 
 
-## find gfortran, determine FC
+## @cond
+
 ifneq ($(shell which gfortran48),)
 	FC = gfortran48
 else
@@ -31,3 +32,5 @@ endif
 endif
 endif
 endif 
+
+## @endcond

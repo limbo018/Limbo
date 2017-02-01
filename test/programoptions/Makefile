@@ -39,7 +39,7 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-all: test_ProgramOptions
+all: test_ProgramOptions test_ProgramOptions_simple
 
 # Compile dependency 
 
@@ -57,8 +57,11 @@ $(OBJDIR)/%.o: %.cpp
 
 # Link executable
 
-test_ProgramOptions: $(OBJS) $(LIMBO_ROOT_DIR)/lib/libprogramoptions.a
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) -L $(LIMBO_ROOT_DIR)/lib -lprogramoptions
+test_ProgramOptions: $(OBJDIR)/test_ProgramOptions.o $(LIMBO_ROOT_DIR)/lib/libprogramoptions.a
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_ProgramOptions.o -L $(LIMBO_ROOT_DIR)/lib -lprogramoptions
+
+test_ProgramOptions_simple: $(OBJDIR)/test_ProgramOptions_simple.o $(LIMBO_ROOT_DIR)/lib/libprogramoptions.a
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_ProgramOptions_simple.o -L $(LIMBO_ROOT_DIR)/lib -lprogramoptions
 
 install: libprogramoptions
 	rm -f $(OBJS)

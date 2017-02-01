@@ -1,9 +1,8 @@
-/*************************************************************************
-    > File Name: test_blibapi.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Fri 31 Oct 2014 01:57:11 PM CDT
- ************************************************************************/
+/**
+ * @file   test_blibapi.cpp
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #include <iostream>
 #include <string>
@@ -23,6 +22,15 @@ using std::set;
 
 namespace lg = limbo::geometry; 
 
+/**
+ * @brief test bLib API 
+ *
+ * use bLib::bPoint and bLib::bBox as data type for polygon-to-rectangle conversion
+ */
+
+/**
+ * @brief test std::vector 
+ */
 void test1(string const& filename)
 {
     std::vector<bLib::bBox> vRect; 
@@ -32,6 +40,9 @@ void test1(string const& filename)
 	p2r.print("p2r1.gp");
 }
 
+/**
+ * @brief test std::list
+ */
 void test2(string const& filename)
 {
     std::vector<bLib::bBox> vRect; 
@@ -41,6 +52,9 @@ void test2(string const& filename)
 	p2r.print("p2r2.gp");
 }
 
+/**
+ * @brief test std::set
+ */
 void test3(string const& filename)
 {
     std::vector<bLib::bBox> vRect; 
@@ -50,6 +64,12 @@ void test3(string const& filename)
 	p2r.print("p2r3.gp");
 }
 
+/**
+ * @brief main function requires an input benchmark in gnuplot format  
+ * @param argc number of arguments 
+ * @param argv values of arguments 
+ * @return 0
+ */
 int main(int argc, char** argv)
 {
 	if (argc > 1)

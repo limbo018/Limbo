@@ -1,13 +1,16 @@
-#########################################################################
-# File Name: FindClangxx.mk
-# Author: Yibo Lin
-# mail: yibolin@utexas.edu
-# Created Time: Wed 18 Jan 2017 02:03:20 PM CST
-#########################################################################
+## @file   FindClangxx.mk
+## @brief  find clang++, determine CXX
+## @author Yibo Lin
+## @date   Jan 2017 
+##
+## @param  CXX set CXX as C++ compiler 
 
-## find clang++, determine CXX
+## @cond 
+
 ifneq ($(shell which clang++),)
 	CXX = clang++
 else 
 	CXX = g++
 endif
+
+## @endcond

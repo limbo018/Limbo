@@ -1,13 +1,16 @@
-#########################################################################
-# File Name: FindClang.mk
-# Author: Yibo Lin
-# mail: yibolin@utexas.edu
-# Created Time: Wed 18 Jan 2017 02:02:57 PM CST
-#########################################################################
+## @file   FindClang.mk
+## @brief  find clang, determine CC
+## @author Yibo Lin
+## @date   Jan 2017
+##
+## @param  CC set CC as C compiler 
 
-## find clang, determine CC
+## @cond
+
 ifneq ($(shell which clang),)
 	CC = clang
 else 
 	CC = gcc
 endif
+
+## @endcond

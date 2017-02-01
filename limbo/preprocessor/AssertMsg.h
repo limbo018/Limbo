@@ -1,28 +1,34 @@
-/*************************************************************************
-    > File Name: AssertMsg.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 05 Nov 2014 04:13:47 PM CST
- ************************************************************************/
+/**
+ * @file   AssertMsg.h
+ * @brief  assertion with message 
+ *
+ * macro: assert_msg (deprecated)
+ *
+ * attribute: assertion with message. 
+ *            if defined NO_LIMBO_ASSERTION, call assert in STL; 
+ *            else call custom assertion
+ *  
+ * macro: limboAssertMsg, limboAssert
+ *
+ * attribute: assertion with or without message. 
+ *            compared with assert in STL, it provides detailed information on the failures and positions 
+ *
+ * @author Yibo Lin
+ * @date   Nov 2014
+ */
 
 #ifndef LIMBO_PREPROCESSOR_ASSERTMSG_H
 #define LIMBO_PREPROCESSOR_ASSERTMSG_H
 
-/// =======================================================
-///      macro: assert_msg (deprecated)
-///      attribute: assertion with message 
-///                 if defined NO_LIMBO_ASSERTION, call assert in stl
-///                 else call custom assertion
-///       
-///      macro: limboAssertMsg, limboAssert
-///      attribute: assertion with or without message 
-/// =======================================================
 #include <iostream>
 #include <limbo/preprocessor/Msg.h>
 
 /// deprecated
-/// I leave it here for backward compatibility
-/// custom assertion with message 
+/// @def assert_msg(condition, message)
+/// @brief assertion with message 
+/// 
+/// I leave it here for backward compatibility. 
+/// custom assertion with message. 
 /// example usage: assert_msg(condition, "this is " << value << " for test");
 #ifndef NO_LIMBO_ASSERTION
 #define assert_msg(condition, message) \
@@ -39,8 +45,10 @@
 	} while (false)
 #endif
 
-/// custom assertion with message 
-/// example usage: limboAssertMsg(condition, "this is %s", name);
+/// @def limboAssertMsg(condition, args...)
+/// @brief custom assertion with message 
+/// 
+/// example usage: limboAssertMsg(a == 1, "this is %s", name);
 #define limboAssertMsg(condition, args...) do {\
     if (!(condition)) \
     {\
@@ -49,6 +57,10 @@
     }\
 } while (false)
 
+/// @def limboAssert(condition)
+/// @brief custom assertion without message 
+///
+/// example usage: limboAssert(a == 1);
 #define limboAssert(condition) do {\
     if (!(condition)) \
     {\

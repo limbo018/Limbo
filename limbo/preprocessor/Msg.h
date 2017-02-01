@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: PrintMsg.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Tue 17 Jan 2017 09:11:46 PM CST
- ************************************************************************/
+/**
+ * @file   Msg.h
+ * @brief  header to include @ref PrintMsg.h and @ref AssertMsg.h 
+ * @author Yibo Lin
+ * @date   Jan 2017
+ */
 
 #ifndef LIMBO_PREPROCESSOR_MSG_H
 #define LIMBO_PREPROCESSOR_MSG_H

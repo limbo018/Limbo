@@ -1,11 +1,12 @@
-#########################################################################
-# File Name: FindGxx.mk
-# Author: Yibo Lin
-# mail: yibolin@utexas.edu
-# Created Time: Wed 18 Jan 2017 02:01:36 PM CST
-#########################################################################
+## @file   FindGxx.mk
+## @brief  find g++, determine CXX
+## @author Yibo Lin
+## @date   Jan 2017
+##
+## @param  CXX set CXX as C++ compiler 
 
-## find g++, determine CXX
+## @cond 
+
 ifneq ($(shell which g++48),)
 	CXX = g++48
 else
@@ -31,3 +32,5 @@ endif
 endif
 endif
 endif 
+
+## @endcond

@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: PrintMsg.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Tue 17 Jan 2017 09:11:46 PM CST
- ************************************************************************/
+/**
+ * @file   PrintMsg.h
+ * @brief  functions for printing messages 
+ * @author Yibo Lin
+ * @date   Jan 2017
+ */
 
 #include <cstdarg>
 #include <cassert>
@@ -14,9 +14,12 @@
 #ifndef LIMBO_PREPROCESSOR_PRINTMSG_H
 #define LIMBO_PREPROCESSOR_PRINTMSG_H
 
-namespace limbo {
+/// namespace for Limbo
+namespace limbo 
+{
 
-/// message type for print functions 
+/// @enum limbo::MessageType
+/// @brief message type for print functions 
 enum MessageType {
 	kNONE = 0, 
 	kINFO = 1, 
@@ -27,6 +30,7 @@ enum MessageType {
 };
 
 /// forward declaration
+/// @cond
 int limboPrint(MessageType m, const char* format, ...);
 int limboPrintStream(MessageType m, FILE* stream, const char* format, ...);
 int limboVPrintStream(MessageType m, FILE* stream, const char* format, va_list args);
@@ -35,8 +39,13 @@ int limboVSPrint(MessageType m, char* buf, const char* format, va_list args);
 int limboSPrintPrefix(MessageType m, char* prefix);
 void limboPrintAssertMsg(const char* expr, const char* fileName, unsigned lineNum, const char* funcName, const char* format, ...);
 void limboPrintAssertMsg(const char* expr, const char* fileName, unsigned lineNum, const char* funcName);
+/// @endcond
 
 
+/// @brief formatted print with prefix 
+/// @param m prefix message 
+/// @param format refer to the usage of printf 
+/// @return 
 inline int limboPrint(MessageType m, const char* format, ...)
 {
 	va_list args;
@@ -47,6 +56,11 @@ inline int limboPrint(MessageType m, const char* format, ...)
 	return ret;
 }
 
+/// @brief formatted print with prefix to stream 
+/// @param m prefix message 
+/// @param stream 
+/// @param format refer to the usage of printf 
+/// @return 
 inline int limboPrintStream(MessageType m, FILE* stream, const char* format, ...)
 {
 	va_list args;
@@ -57,6 +71,12 @@ inline int limboPrintStream(MessageType m, FILE* stream, const char* format, ...
 	return ret;
 }
 
+/// @brief formatted print with prefix to stream 
+/// @param m prefix message 
+/// @param stream 
+/// @param format refer to the usage of printf 
+/// @param args argument list 
+/// @return 
 inline int limboVPrintStream(MessageType m, FILE* stream, const char* format, va_list args)
 {
 	// print prefix 
@@ -73,6 +93,11 @@ inline int limboVPrintStream(MessageType m, FILE* stream, const char* format, va
 	return ret;
 }
 
+/// @brief formatted print with prefix to buffer  
+/// @param m prefix message 
+/// @param buf buffer 
+/// @param format refer to the usage of printf 
+/// @return 
 inline int limboSPrint(MessageType m, char* buf, const char* format, ...)
 {
 	va_list args;
@@ -83,6 +108,12 @@ inline int limboSPrint(MessageType m, char* buf, const char* format, ...)
 	return ret;
 }
 
+/// @brief formatted print with prefix to buffer  
+/// @param m prefix message 
+/// @param buf buffer 
+/// @param format refer to the usage of printf 
+/// @param args argument list 
+/// @return 
 inline int limboVSPrint(MessageType m, char* buf, const char* format, va_list args)
 {
 	// print prefix 
@@ -96,6 +127,10 @@ inline int limboVSPrint(MessageType m, char* buf, const char* format, va_list ar
 	return ret;
 }
 
+/// @brief print prefix message to buffer 
+/// @param m prefix message 
+/// @param prefix target buffer 
+/// @return 
 inline int limboSPrintPrefix(MessageType m, char* prefix)
 {
 	switch (m)
@@ -118,6 +153,13 @@ inline int limboSPrintPrefix(MessageType m, char* prefix)
     return 0;
 }
 
+/// @brief print message for assertion failure with additional message, see #limboAssertMsg(condition, args...) 
+/// @param expr assertion condition  
+/// @param fileName source code of file where the assertion is 
+/// @param lineNum line number of the assertion 
+/// @param funcName function name where the assertion is 
+/// @param format refer to the usage of printf 
+/// @return 
 inline void limboPrintAssertMsg(const char* expr, const char* fileName, unsigned lineNum, const char* funcName, const char* format, ...)
 {
     // construct message 
@@ -131,6 +173,12 @@ inline void limboPrintAssertMsg(const char* expr, const char* fileName, unsigned
     limboPrintStream(kASSERT, stderr, "%s:%u: %s: Assertion `%s' failed: %s\n", fileName, lineNum, funcName, expr, buf);
 }
 
+/// @brief print message for assertion failure without additional message, see #limboAssert(condition)
+/// @param expr assertion condition  
+/// @param fileName source code of file where the assertion is 
+/// @param lineNum line number of the assertion 
+/// @param funcName function name where the assertion is 
+/// @return 
 inline void limboPrintAssertMsg(const char* expr, const char* fileName, unsigned lineNum, const char* funcName)
 {
     // print message
