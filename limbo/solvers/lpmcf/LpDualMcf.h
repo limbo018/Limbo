@@ -1,18 +1,15 @@
-/*************************************************************************
-    > File Name: LpDualMcf.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Mon 13 Oct 2014 07:30:40 PM CDT
- ************************************************************************/
+/**
+ * @file   LpDualMcf.h
+ * @brief  solve linear programming problem with dual min-cost flow 
+ *
+ * [Lemon](https://lemon.cs.elte.hu) is used as min-cost flow solver 
+ *
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #ifndef _LIMBO_SOLVERS_LPMCF_LPDUALMCF_H
 #define _LIMBO_SOLVERS_LPMCF_LPDUALMCF_H
-
-/// ===================================================================
-///    class          : LpDualMcf
-///    attributes     : Solve Lp problem with min-cost flow 
-///                     This is the api for Lemon (a min-cost flow solver)
-/// ===================================================================
 
 #include <cstdlib>
 #include <iostream>

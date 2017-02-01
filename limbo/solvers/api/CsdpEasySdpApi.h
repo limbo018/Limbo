@@ -1,3 +1,12 @@
+/**
+ * @file   CsdpEasySdpApi.h
+ * @brief  this file is a modified version of easysdp.c in Csdp package.  
+ *         Original version does not provide control over parameters and print level.  
+ *         The function limbo::solvers::easy_sdp_ext passes two additional parameters for better flexibility.  
+ *
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 /*
  *  This is an easy to call version of the sdp routine.  It takes as
  *  input a problem (n,k,C,a,constraints,constant_offset), and an 
@@ -24,12 +33,6 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-
-/////////////////////////////////////////////////////////////////////////
-/// this file is a modified version of easysdp.c in Csdp package 
-/// original version does not provide control over parameters and print level 
-/// the function easy_sdp_ext() passes two additional parameters for better flexibility 
-/////////////////////////////////////////////////////////////////////////
 
 namespace limbo { namespace solvers {
 

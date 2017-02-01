@@ -20,7 +20,7 @@
  * But the data the pointers point to can change, so that no data race between the order of update data and update multiset.
  *
  * @author Yibo Lin
- * @data   Feb 2015
+ * @date   Feb 2015
  */
 
 #ifndef LIMBO_CONTAINERS_FASTMULTISET_H

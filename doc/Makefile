@@ -28,6 +28,9 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/preprocessor/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/programoptions/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/programoptions/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/api/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/lpmcf/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/solvers/lpmcf/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/string/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/string/*.h) 
 
@@ -54,7 +57,7 @@ Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile
 	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md *.py *.mk >> $(DOCDIR)/Doxyfile
 	echo INCLUDE_FILE_PATTERNS  = *.h *.hpp >> $(DOCDIR)/Doxyfile
 	echo ALIASES               += nowarn=\"\\{\" endnowarn=\"\\}\" >> $(DOCDIR)/Doxyfile
-	echo FILTER_PATTERNS = *.mk=$(LIMBO_ROOT_DIR)/doc/MKFilter.sh >> $(DOCDIR)/Doxyfile
+	echo FILTER_PATTERNS        = *.mk=$(LIMBO_ROOT_DIR)/doc/MKFilter.sh >> $(DOCDIR)/Doxyfile
 
 doc: Doxyfile $(SRCS)
 	$(DOXYGEN) $(DOCDIR)/Doxyfile.in

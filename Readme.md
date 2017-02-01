@@ -141,10 +141,6 @@ The default version of OpenBLAS is not very stable for cross platforms, which of
 OpenBLAS is integrated as a submodule which fetch source code from remote repository, so it is always up-to-date version. 
 If you already have OpenBLAS in the directory, simply run "git submodule update" to fetch the latest version in the submodule directory. 
 
-# Examples {#Examples}
-
-In the subdirectories of source code, there are test folders including test/example programs.
-
 # FAQ {#FAQ}
 
 ##1. (*Deprecated*) Compiling errors like
@@ -203,10 +199,6 @@ Third party package **liblinear** has its copyright reserved; please check its l
 Some components in limbo library do not need linkage, so they can be used directly by including the headers, while some components require linkage to the corresponding static libraries.  
 Here are some simple example to show the basic usage and compiling commands with gcc under Linux. 
 For clang, the compiling commands are slightly different as users need to specify the same **-stdlib** as that in **CXXSTDLIB** flag used to install the library. 
-
-##1. Compare two strings case-insensitive 
-
-##2. Basic usage of Limbo.ProgramOptions component
 
 ##3. Basic usage of Limbo.Gdsii component
 

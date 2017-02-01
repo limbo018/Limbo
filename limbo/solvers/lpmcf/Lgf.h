@@ -1,9 +1,12 @@
-/*************************************************************************
-    > File Name: Lgf.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Sat 25 Oct 2014 05:33:19 PM CDT
- ************************************************************************/
+/**
+ * @file   Lgf.h
+ * @brief  solve linear programming with min-cost flow 
+ *
+ * [Lemon](https://lemon.cs.elte.hu) is used as min-cost flow solver 
+ *
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #ifndef _LIMBO_SOLVERS_LPMCF_LGF_H
 #define _LIMBO_SOLVERS_LPMCF_LGF_H

@@ -1,19 +1,13 @@
-/*************************************************************************
-    > File Name: GurobiApi.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Fri 07 Nov 2014 11:51:22 PM CST
- ************************************************************************/
+/**
+ * @file   GurobiApi.h
+ * @brief  Gurobi API by writing out problem file in LP format and read solution. 
+ *         Consider the file IO overhead before using it. 
+ * @author Yibo Lin
+ * @date   Nov 2014
+ */
 
 #ifndef _LIMBO_SOLVERS_API_GUROBIAPI_H
 #define _LIMBO_SOLVERS_API_GUROBIAPI_H
-
-/// ===================================================================
-///    class          : GurobiApi
-///    attributes     : Solve Lp problem with Gurobi and read results 
-///    compilation    : -I$(GUROBI_HOME)/include -L$(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi56
-///                     static compilation is not supported due to shared library libgurobi56.so
-/// ===================================================================
 
 #include <iostream>
 #include <string>
