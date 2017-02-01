@@ -19,6 +19,7 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(DOCDIR)/string \
 		  $(DOCDIR)/thirdparty \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/bibtex/*.py) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/containers/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/makeutils/*.mk) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/math/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/geometry/*.cpp) \
