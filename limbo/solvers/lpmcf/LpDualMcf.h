@@ -46,21 +46,38 @@ namespace solvers
 namespace lpmcf 
 {
 
-/// hash calculator for pairs 
+/// @class limbo::solvers::lpmcf::hash_pair
+/// @brief hash calculator for pairs 
+/// @tparam T1 first data type 
+/// @tparam T2 second data type 
 template <typename T1, typename T2>
 struct hash_pair : pair<T1, T2>
 {
+    /// @nowarn
 	typedef pair<T1, T2> base_type;
 	using typename base_type::first_type;
 	using typename base_type::second_type;
+    /// @endnowarn
 
+    /// @brief constructor 
 	hash_pair() : base_type() {}
+    /// @brief constructor 
+    /// @param a first data value 
+    /// @param b second data value 
 	hash_pair(first_type const& a, second_type const& b) : base_type(a, b) {}
+    /// @brief copy constructor 
+    /// @param rhs a pair of data 
 	hash_pair(base_type const& rhs) : base_type(rhs) {}
 
+    /// @brief override equality comparison 
+    /// @param rhs a pair of data in the right hand side 
+    /// @return true if two pairs are equal 
 	bool operator==(base_type const& rhs) const 
 	{return this->first == rhs.first && this->second == rhs.second;}
 
+    /// @brief compute hash value for a pair of data 
+    /// @param key a pair of data 
+    /// @return hash value 
 	friend std::size_t hash_value(base_type const& key) 
 	{
 		std::size_t seed = 0;
@@ -124,8 +141,11 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 	public:
 		/// value_type can only be integer types 
 		typedef T value_type;
+        /// inherit from limbo::solvers::lpmcf::Lgf 
 		typedef Lgf<value_type> base_type1;
+        /// inherit from LpParser::LpDataBase
 		typedef LpParser::LpDataBase base_type2;
+        /// @nowarn
 		using typename base_type1::cost_type;
 		using typename base_type1::graph_type;
 		using typename base_type1::node_type;
@@ -137,23 +157,31 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 		using typename base_type1::arc_flow_map_type;
 		using typename base_type1::node_pot_map_type;
 
-		/// I don't know why it does not work with 
-		/// using typename base_type1::alg_type;
+		// I don't know why it does not work with 
+		// using typename base_type1::alg_type;
 		typedef typename base_type1::alg_type alg_type;
+        /// @endnowarn
 
-		/// standard format 
-		/// li <= xi <= ui 
-		/// mapping to 
-		/// node i 
-		/// arcs from node i to node st 
+        /// @class limbo::solvers::lpmcf::LpDualMcf::variable_type
+		/// @brief variable \f$x_i\f$ in the primal linear programming problem.
+        /// standard format: \f$l_i \le x_i \le u_i\f$
+		/// maps to 
+		/// node \f$i\f$, 
+		/// arcs from node \f$i\f$ to node \f$st\f$. 
 		struct variable_type 
 		{
-			string name;
-			pair<value_type, value_type> range;
-			value_type weight;
-			value_type value;
-			node_type node;
+			string name; ///< name of variable 
+			pair<value_type, value_type> range; ///< pair of \f$(l_i, u_i)\f$
+			value_type weight; ///< weight in the objective, i.e., \f$c_i\f$
+			value_type value; ///< solved value 
+			node_type node; ///< node \f$i\f$ in the graph 
 
+            /// @brief constructor 
+            /// @param n name 
+            /// @param l lower bound of range, i.e., \f$l_i\f$
+            /// @param r upper bound of range, i.e., \f$u_i\f$
+            /// @param w weight in the objective, i.e., \f$c_i\f$
+            /// @param v solved value 
 			variable_type(string const& n, 
 					value_type const& l = 0, 
 					value_type const& r = std::numeric_limits<value_type>::max(),
@@ -161,27 +189,38 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 					value_type const& v = 0)
 				: name(n), range(make_pair(l, r)), weight(w), value(v) {}
 
+            /// @brief check if the variable is lower bounded 
+            /// @return true if the variable has a lower bound 
 			bool is_lower_bounded() const {return range.first != std::numeric_limits<value_type>::min();}
+            /// @brief check if the variable is upper bounded 
+            /// @return true if the variable is an upper bound 
 			bool is_upper_bounded() const {return range.second != std::numeric_limits<value_type>::max();}
+            /// @brief check if the variable is bounded 
+            /// @return true if the variable is eitehr lower bounded or upper bounded 
 			bool is_bounded() const {return is_lower_bounded() || is_upper_bounded();}
 		};
 
-		/// standard format 
-		/// xi - xj >= cij 
-		/// mapping to 
-		/// xi ----> xj, cost = -cij
+        /// @class limbo::solvers::lpmcf::LpDualMcf::constraint_type
+        /// @brief constraint object in the primal linear programming problem. 
+		/// standard format: \f$x_i - x_j \ge c_{ij}\f$
+		/// maps to 
+		/// arc \f$x_i \rightarrow x_j, \textrm{cost} = -c_{ij}\f$. 
 		struct constraint_type 
 		{
-			pair<string, string> variable;
-			value_type constant;
-			arc_type arc;
+			pair<string, string> variable; ///< variable \f$x_i\f$ and \f$x_j\f$
+			value_type constant; ///< constant in the right hand side, i.e., \f$c_{ij}\f$
+			arc_type arc; ///< arc \f$x_i \rightarrow x_j\f$ in the graph 
 			
+            /// @brief constructor 
+            /// @param xi \f$x_i\f$
+            /// @param xj \f$x_j\f$
+            /// @param c \f$c_{ij}\f$
 			constraint_type(string const& xi, string const& xj, value_type const& c)
 				: variable(make_pair(xi, xj)), constant(c) {}
 		};
 
-		/// constructor 
-		/// \param max_limit represents unlimited arc capacity, default value is 2^(32*3/4) for int32_t, 2^(64*3/4) for int64_t...
+		/// @brief constructor 
+		/// @param max_limit represents unlimited arc capacity, default value is \f$2^{32 \times \frac{3}{4}}\f$ for int32_t, \f$2^{64 \times \frac{3}{4}}\f$ for int64_t...
 		LpDualMcf(value_type max_limit = (value_type(2) << (sizeof(value_type)*8*3/4))) 
 			: base_type1(), 
 			base_type2(),
@@ -191,9 +230,12 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			if (m_M < 0) m_M = -m_M; // make sure m_M is positive 
 		}
 
-		/// add variable with range 
+		/// @brief add variable with range. 
 		/// default range is 
-		/// -inf <= xi <= inf 
+		/// \f$-\infty \le x_i \le \infty\f$. 
+        /// @param xi variable \f$x_i\f$
+        /// @param l lower bound \f$l_i\f$
+        /// @param r upper bound \f$u_i\f$
 		virtual void add_variable(string const& xi, 
 				value_type const& l = std::numeric_limits<value_type>::min(), 
 				value_type const& r = std::numeric_limits<value_type>::max())
@@ -217,9 +259,13 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			if (l != std::numeric_limits<value_type>::min() || r != std::numeric_limits<value_type>::max())
 				this->is_bounded(true);
 		}
-		/// add constraint 
-		/// xi - xj >= cij 
-		/// assume there's no duplicate 
+		/// @brief add constraint 
+		/// \f$x_i - x_j \ge c_{ij}\f$. 
+        /// 
+		/// Assume there's no duplicate.  
+        /// @param xi variable \f$x_i\f$
+        /// @param xj variable \f$x_j\f$
+        /// @param cij constant \f$c_{ij}\f$
 		virtual void add_constraint(string const& xi, string const& xj, cost_type const& cij)
 		{
 			BOOST_AUTO(found, m_hConstraint.find(make_pair(xi, xj)));
@@ -235,8 +281,12 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			else // automatically reduce constraints 
 				found->second.constant = std::max(found->second.constant, cij);
 		}
-		/// add linear terms for objective function of LP 
-		/// we allow repeat adding weight 
+		/// @brief add linear terms for objective function of the primal linear programming problem. 
+        /// 
+        /// Assume the variable is already been setup. 
+		/// We allow repeat adding weight and the weight will be accumulated. 
+        /// @param xi variable \f$x_i\f$
+        /// @param w weight 
 		virtual void add_objective(string const& xi, value_type const& w)
 		{
 			if (w == 0) return;
@@ -247,12 +297,18 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			found->second.weight += w;
 		}
 
-		/// check if lp problem is bounded 
+		/// @brief check if lp problem is bounded 
+        /// @return true if the problem is bounded 
 		bool is_bounded() const {return m_is_bounded;}
+        /// @brief set if the problem is bounded 
+        /// @param v flag for whether the problem is bounded 
 		void is_bounded(bool v) {m_is_bounded = v;}
 
-		/// read lp format 
-		/// and then dump solution 
+		/// @brief API to run the algorithm with input file. 
+        /// 
+        /// Read primal problem in lp format and then dump solution. 
+        /// @param filename input file name, the output file will be dumped to filename+".sol"
+        /// @return solving status 
 		typename alg_type::ProblemType operator()(string const& filename)
 		{
 			read_lp(filename);
@@ -262,8 +318,11 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 
 			return status;
 		}
-		/// execute solver 
-		/// write out solution file if provided 
+		/// @brief API to run the algorithm.
+        /// 
+		/// Execute solver 
+		/// and write out solution file if provided. 
+        /// @return solving status 
 		typename alg_type::ProblemType operator()() 
 		{
 			prepare();
@@ -272,7 +331,9 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 #endif 
 			return run();
 		}
-		/// return solution 
+        /// @brief get solution to \f$x_i\f$ 
+        /// @param xi variable \f$x_i\f$
+		/// @return solution 
 		value_type solution(string const& xi) const 
 		{
 			BOOST_AUTO(found, m_hVariable.find(xi));
@@ -280,18 +341,20 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 
 			return found->second.value;
 		}
-		/// read lp format 
+		/// @brief read lp format 
+        /// @param filename input file in lp format 
 		/// initializing graph 
 		void read_lp(string const& filename) 
 		{
 			LpParser::read(*this, filename);
 		}
-		/// check empty
-		/// return true if there's no variable created
+		/// @brief check empty
+		/// @return true if there's no variable created
 		bool empty() const {return m_hVariable.empty();}
 
-		/// print solutions into a file 
-		/// including prime problem and dual problem
+		/// @brief print solutions into a file 
+		/// including primal problem and dual problem
+        /// @param filename output file name 
 		virtual void print_solution(string const& filename) const 
 		{
 			this->base_type1::print_solution(filename);
@@ -312,7 +375,8 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 
 			out.close();
 		}
-		/// print primal problem in LP format to a file 
+		/// @brief print primal problem in LP format to a file 
+        /// @param filename output file name 
 		void print_problem(string const& filename) const 
 		{
 			std::ofstream out (filename.c_str());
@@ -372,7 +436,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			out.close();
 		}
 	protected:
-		/// prepare before run 
+		/// @brief prepare before run 
 		void prepare()
 		{
 			// 1. preparing nodes 
@@ -448,7 +512,8 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 				}
 			}
 		}
-		/// core function for run
+		/// @brief kernel function to run algorithm 
+        /// @return solving status, OPTIMAL, INFEASIBLE, UNBOUNDED 
 		typename alg_type::ProblemType run()
 		{
 			// 1. choose algorithm 

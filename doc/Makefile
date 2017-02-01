@@ -18,6 +18,10 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(DOCDIR)/solvers \
 		  $(DOCDIR)/string \
 		  $(DOCDIR)/thirdparty \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/coloring/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/partition/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/placement/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/bibtex/*.py) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/containers/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/makeutils/*.mk) \

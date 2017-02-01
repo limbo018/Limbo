@@ -153,6 +153,21 @@ R2: 5
 R1: 5
 ~~~~~~~~~~~~~~~~
 
+## Csdp Solver {#Solvers_Csdp}
+
+See documented version: [limbo/algorithms/coloring/SDPColoringCsdp.h](@ref SDPColoringCsdp.h)
+\include limbo/algorithms/coloring/SDPColoringCsdp.h
+See documented version: [test/algorithms/test_SDPColoring.cpp](@ref test_SDPColoring.cpp)
+\include test/algorithms/test_SDPColoring.cpp
+
+Compiling and running commands (assuming LIMBO_DIR, BOOST_DIR and LEMON_DIR are well defined). 
+@ref Parsers_LpParser is required for @ref limbo::solvers::lpmcf::LpDualMcf to read input files in .lp format. 
+~~~~~~~~~~~~~~~~
+g++ -o test_lpmcf compare.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -I $LEMON_DIR/include -L $LEMON_DIR/lib -lemon -L $LIMBO_DIR/lib -llpparser
+# test: min-cost flow for network graph 
+./test_lpmcf benchmarks/graph.lgf 
+~~~~~~~~~~~~~~~~
+
 # References {#Solvers_References}
 
 - [limbo/solvers/lpmcf/Lgf.h](@ref Lgf.h)

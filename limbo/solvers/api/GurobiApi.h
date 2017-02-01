@@ -17,10 +17,15 @@
 #include <boost/cstdint.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/assert.hpp> 
-/// make sure gurobi is configured properly 
+// make sure gurobi is configured properly 
 #include "gurobi_c++.h"
 
-namespace limbo { namespace solvers {
+/// namespace for Limbo
+namespace limbo 
+{ 
+/// namespace for Solvers 
+namespace solvers 
+{
 
 using std::cout;
 using std::endl;
@@ -38,15 +43,18 @@ using boost::shared_ptr;
 template <typename T>
 struct GurobiFileApi 
 {
+    /// @brief value type 
 	typedef T value_type;
 
-	/// data structure to save solution
+	/// @brief data structure to save solution
 	struct solution_type 
 	{
-		value_type obj;
-		list<pair<string, value_type> > vVariable;
+		value_type obj; ///< objective value 
+		list<pair<string, value_type> > vVariable; ///< list of (variable, solution) pairs 
 	};
-	/// top api function 
+	/// @brief API function 
+    /// @param fileName input file name 
+    /// @return solution 
 	virtual shared_ptr<solution_type> operator()(string const& fileName, bool = true) const 
 	{
 		// better to use full path for file name 
@@ -80,9 +88,10 @@ struct GurobiFileApi
 
 		return pSol;
 	}
-	/// core function to solve lp problem with Gurobi
-	/// it is modified from examples of Gurobi
-	/// basically it reads input problem file, and output solution file 
+	/// Core function to solve lp problem with Gurobi. 
+	/// It is modified from examples of Gurobi. 
+	/// Basically it reads input problem file, and output solution file. 
+    /// @param fileName input file 
 	virtual void solve_lp(string fileName) const 
 	{
 		try 
@@ -140,6 +149,7 @@ struct GurobiFileApi
 
 };
 
-}} // namespace limbo // namespace solvers
+} // namespace solvers
+} // namespace limbo
 
 #endif 
