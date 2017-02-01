@@ -212,7 +212,7 @@ struct rectangle_traits<Rectangle>
 	}
     /**
      * @brief construct rectangle 
-     * @param \xl, \yl, \xh, \yh coordinates of rectangle
+     * @param xl, yl, xh, yh coordinates of rectangle
      * @return a rectangle object
      */
 	static rectangle_type construct(coordinate_type xl, coordinate_type yl, coordinate_type xh, coordinate_type yh) 

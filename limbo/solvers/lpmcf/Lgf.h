@@ -33,13 +33,23 @@
 
 #include <limbo/preprocessor/AssertMsg.h>
 
-// solving LP with min-cost flow 
-namespace limbo { namespace solvers { namespace lpmcf {
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.Solvers 
+namespace solvers 
+{ 
+/// namespace for Limbo.Solvers.lpmcf 
+namespace lpmcf 
+{
 
 using std::cout;
 using std::endl;
 using std::string;
 
+/// @class limbo::solvers::lpmcf::Lgf 
+/// @brief solve network flow graph with min-cost flow 
+/// @tparam T data type 
 template <typename T>
 class Lgf 
 {

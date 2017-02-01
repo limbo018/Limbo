@@ -36,8 +36,15 @@ using boost::int64_t;
 using boost::unordered_map;
 using boost::iequals;
 
-/// solving LP with min-cost flow 
-namespace limbo { namespace solvers { namespace lpmcf {
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.Solvers 
+namespace solvers 
+{ 
+/// namespace for Limbo.Solvers.lpmcf 
+namespace lpmcf 
+{
 
 /// hash calculator for pairs 
 template <typename T1, typename T2>
@@ -63,39 +70,54 @@ struct hash_pair : pair<T1, T2>
 	}
 };
 
-/// LP solved with min-cost flow 
-/// the dual problem of this LP is a min-cost flow problem 
+/// @class limbo::solvers::lpmcf::LpDualMcf
+/// @brief LP solved with min-cost flow. 
+/// 
+/// The dual problem of this LP is a min-cost flow problem, 
 /// so we can solve the graph problem and then 
-/// call shortest path algrithm to calculate optimum of primal problem 
+/// call shortest path algrithm to calculate optimum of primal problem. 
 ///
-/// 1. primal problem 
-/// min. sum ci*xi
-/// s.t. xi - xj >= bij for (i, j) in E
-///      di <= xi <= ui for i in [1, n]
-///
-/// 2. introduce new variables yi in [0, n]
-///    set xi = yi - y0 
-/// min. sum ci*(yi-y0)
-/// s.t. yi - yj >= bij for (i, j) in E 
-///      di <= yi - y0 <= ui for i in [1, n]
-///      yi is unbounded integer for i in [0, n]
-///
-/// 3. re-write the problem 
-///                              ci for i in [1, n]
-/// min. sum ci*yi, where ci =   - sum ci for i in [1, n]
-///                    bij for (i, j) in E 
-/// s.t. yi - yj >=    di  for j = 0, i in [1, n]
-///                    -ui for i = 0, i in [1, n]
-///      yi is unbounded integer for i in [0, n]
-///
-/// 4. map to dual min-cost flow problem 
-///    let's use c'i for generalized ci and b'ij for generalized bij 
-///    c'i is node supply 
-///    for each (i, j) in E', an arc from i to j with cost -b'ij and flow range [0, unlimited]
-///
-/// caution: the cost-scaling algorithm in lemon cannot take an arc with negative cost but unlimited capacity.
+/// 1. Primal problem \n
+/// \f{eqnarray*}{
+/// & min. & \sum_{i=1}^{n} c_i \cdot x_i, \\
+/// & s.t. & x_i - x_j \ge b_{ij}, \forall (i, j) \in E,  \\
+/// &     & d_i \le x_i \le u_i, \forall i \in [1, n].  
+/// \f}
+/// \n
+/// 2. Introduce new variables \f$y_i\f$ in \f$[0, n]\f$, set \f$x_i = y_i - y_0\f$, \n
+/// \f{eqnarray*}{
+/// & min. & \sum_{i=1}^{n} c_i \cdot (y_i-y_0), \\
+/// & s.t. & y_i - y_j \ge b_{ij}, \forall (i, j) \in E \\
+/// &      & d_i \le y_i - y_0 \le u_i, \forall i \in [1, n], \\
+/// &      & y_i \textrm{ is unbounded integer}, \forall i \in [0, n].  
+/// \f}
+/// \n
+/// 3. Re-write the problem \n
+/// \f{eqnarray*}{
+/// & min. & \sum_{i=0}^{n} c_i \cdot y_i, \textrm{ where } \
+///   c_i = \begin{cases}
+///             c_i, & \forall i \in [1, n],  \\
+///             - \sum_{j=1}^{n} c_i, & i = 0, \\
+///           \end{cases} \\
+/// & s.t. & y_i - y_j \ge \
+///        \begin{cases}
+///            b_{ij}, & \forall (i, j) \in E, \\
+///            d_i,  & \forall j = 0, i \in [1, n], \\
+///            -u_i, & \forall i = 0, j \in [1, n], \\
+///        \end{cases} \\
+/// &      & y_i \textrm{ is unbounded integer}, \forall i \in [0, n].  
+/// \f}
+/// \n
+/// 4. Map to dual min-cost flow problem. \n
+///    Let's use \f$c'_i\f$ for generalized \f$c_i\f$ and \f$b'_{ij}\f$ for generalized \f$b_{ij}\f$. \n
+///    Then \f$c'_i\f$ is node supply. 
+///    For each \f$(i, j) \in E'\f$, an arc from i to j with cost \f$-b'_{ij}\f$ and flow range \f$[0, \infty]\f$. \n
+/// \n
+/// Caution: the cost-scaling algorithm in lemon cannot take an arc with negative cost but unlimited capacity.
 /// So here I introduce a member variable m_M to represent unlimit, but it is much smaller than real bound of integer.
 /// But there may be problem if potential overflow appears. 
+/// 
+/// @tparam T data type 
 template <typename T = int64_t>
 class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 {
