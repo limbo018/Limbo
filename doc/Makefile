@@ -24,6 +24,7 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/geometry/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/api/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/preprocessor/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/programoptions/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/programoptions/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/string/*.cpp) \
