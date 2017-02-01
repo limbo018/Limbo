@@ -68,7 +68,7 @@ install:
 .PHONY: clean
 clean: 
 	rm -rf $(DOCDIR)/html
-	rm -rf $(DOCDIR)/latex
+	#rm -rf $(DOCDIR)/latex
 	rm -f $(DOCDIR)/Doxyfile
 
 .PHONY: extraclean
