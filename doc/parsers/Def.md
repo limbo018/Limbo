@@ -5,6 +5,11 @@ Limbo.Parsers.DefParser {#Parsers_DefParser}
 
 # Introduction {#Parsers_DefParser_Introduction}
 
+[DEF](https://en.wikipedia.org/wiki/Design_Exchange_Format) together with [LEF](https://en.wikipedia.org/wiki/Library_Exchange_Format) is a common file format in VLSI physical design. 
+Generally LEF/DEF formats are quit complicated due to the complex cases in chip design. 
+The parser is not a full implementation of the LEF/DEF manual, but it is tested under various academic benchmarks. 
+It is also easy to support additional features with low effort. 
+
 # Examples {#Parsers_DefParser_Examples}
 
 ## Flex/Bison Parser {#Parsers_DefParser_Flex_Bison}
