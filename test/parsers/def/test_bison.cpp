@@ -20,7 +20,7 @@ using std::string;
 class DefDataBase : public DefParser::DefDataBase
 {
 	public:
-        /// constructor 
+        /// @brief constructor 
 		DefDataBase()
 		{
 			cout << "DefDataBase::" << __func__ << endl;

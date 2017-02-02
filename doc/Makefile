@@ -33,6 +33,9 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/def/test_bison.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/bison/DefDataBase.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/bison/DefDriver.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/ebeam/test_bison.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/ebeam/bison/EbeamDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/ebeam/bison/EbeamDriver.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/geometry/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/api/*.h) \
