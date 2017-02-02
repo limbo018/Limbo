@@ -5,7 +5,7 @@
  * These are add-ons for Boost.Graph library. 
  *
  * @author Yibo Lin
- * @ate    Feb 2015
+ * @date   Feb 2015
  */
 
 #ifndef LIMBO_ALGORITHMS_GRAPHUTILITY_H

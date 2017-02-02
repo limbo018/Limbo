@@ -1,3 +1,9 @@
+/**
+ * @file   gdf/test_bison.cpp
+ * @brief  test gdf parser, see @ref GdfParser::Driver and @ref GdfParser::GdfDataBase
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #include <iostream>
 #include <fstream>
@@ -9,31 +15,38 @@ using std::cin;
 using std::endl;
 using std::string;
 
-class DataBase : public GdfParser::GdfDataBase
+/// @brief Custom class that inheritates @ref GdfParser::GdfDataBase 
+/// with all the required callbacks gdfined. 
+class GdfDataBase : public GdfParser::GdfDataBase
 {
 	public:
-		DataBase()
+        /// @brief constructor 
+		GdfDataBase()
 		{
-			cout << "DataBase::" << __func__ << endl;
+			cout << "GdfDataBase::" << __func__ << endl;
 		}
 		//////////////////// required callbacks from abstract GdfParser::GdfDataBase ///////////////////
+        /// @brief add routing cell 
+        /// @param cell describes the whole layout for routing 
         virtual void add_gdf_cell(GdfParser::Cell& cell) 
         {
             cout << cell << endl;
         }
 };
 
+/// @brief test 1: use function wrapper @ref GdfParser::read  
 void test1(string const& filename)
 {
 	cout << "////////////// test1 ////////////////" << endl;
-	DataBase db;
+	GdfDataBase db;
 	GdfParser::read(db, filename);
 }
 
+/// @brief test 2: use class wrapper @ref GdfParser::Driver 
 void test2(string const& filename)
 {
 	cout << "////////////// test2 ////////////////" << endl;
-	DataBase db;
+	GdfDataBase db;
 	GdfParser::Driver driver (db);
 	//driver.trace_scanning = true;
 	//driver.trace_parsing = true;
@@ -41,6 +54,10 @@ void test2(string const& filename)
 	driver.parse_file(filename);
 }
 
+/// @brief main function 
+/// @param argc number of arguments 
+/// @param argv values of arguments 
+/// @return 0 
 int main(int argc, char** argv)
 {
 

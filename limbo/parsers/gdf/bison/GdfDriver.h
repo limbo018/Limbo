@@ -1,5 +1,9 @@
-// $Id: driver.h 17 2007-08-19 18:51:39Z tb $ 	
-/** \file driver.h Declaration of the example::Driver class. */
+/**
+ * @file   GdfDriver.h
+ * @brief  Driver for Gdf parser 
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #ifndef GDFPARSER_DRIVER_H
 #define GDFPARSER_DRIVER_H
@@ -8,6 +12,7 @@
 
 /** The example namespace is used to encapsulate the three parser classes
  * example::Parser, example::Scanner and example::Driver */
+/** @brief namespace for GdfParser */
 namespace GdfParser {
 
 	using std::cout;
@@ -19,7 +24,9 @@ namespace GdfParser {
 	using std::make_pair;
 	using std::ostringstream;
 
-/** The Driver class brings together all components. It creates an instance of
+/** 
+ * @class GdfParser::Driver
+ * The Driver class brings together all components. It creates an instance of
  * the Parser and Scanner classes and connects them. Then the input stream is
  * fed into the scanner object and the parser gets it's token
  * sequence. Furthermore the driver object is available in the grammar rules as
@@ -29,6 +36,7 @@ class Driver
 {
 public:
     /// construct a new parser driver context
+    /// @param db reference to database 
     Driver(GdfDataBase& db);
 
     /// enable debug output in the flex scanner
@@ -83,6 +91,7 @@ public:
      * expressions. */
     GdfDataBase& m_db;
 
+    /// @cond 
     void cellPortCbk(std::string& name, CellPort::PortTypeEnum type, std::string& layer, double x, double y);
     void cellInstanceCbk(std::string& name, std::string& cellType, double x, double y, int32_t orient);
     void textCbk(Text::TextTypeEnum textType, std::string const& name, std::string& content);
@@ -91,15 +100,21 @@ public:
     void netPortCbk(std::string& name, std::string& instName);
     void netPortCbk(std::string& name);
     void netCbk(std::string& name);
-    /// cellCbk is called after all the contents in the cell initialized 
+    /// @endcond 
+
+    /// cellCbk is called after all the contents in the cell is initialized 
     /// this is different from some other callbacks 
     void cellCbk(std::string& name);
 
 protected:
+    /// @brief temporary storage of cell  
     Cell m_cell;
 };
 
-// top api for GdfParser
+/// @brief API for GdfParser. 
+/// Read GDF file and initialize database by calling user-defined callback functions. 
+/// @param db database which is derived from @ref GdfParser::GdfDataBase
+/// @param filename GDF file 
 bool read(GdfDataBase& db, const string& filename);
 
 } // namespace example

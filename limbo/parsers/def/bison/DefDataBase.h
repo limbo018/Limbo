@@ -222,6 +222,7 @@ struct Net : public Item
 	}
 };
 // forward declaration
+/// @class DefParser::DefDataBase
 /// @brief Base class for def database. 
 /// Only pure virtual functions are defined.  
 /// User needs to inheritate this class and derive a custom database type with all callback functions defined.  

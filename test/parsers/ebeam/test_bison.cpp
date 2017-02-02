@@ -17,13 +17,13 @@ using std::string;
 
 /// @brief Custom class that inheritates @ref EbeamParser::EbeamDataBase 
 /// with all the required callbacks defined. 
-class DataBase : public EbeamParser::EbeamDataBase
+class EbeamDataBase : public EbeamParser::EbeamDataBase
 {
 	public:
         /// @brief constructor 
-		DataBase()
+		EbeamDataBase()
 		{
-			cout << "constructing DataBase" << endl;
+			cout << "constructing EbeamDataBase" << endl;
 		}
         /// @brief set database unit
         /// @param token unit  
@@ -47,7 +47,7 @@ class DataBase : public EbeamParser::EbeamDataBase
 void test1(string const& filename)
 {
 	cout << "////////////// test1 ////////////////" << endl;
-	DataBase db;
+	EbeamDataBase db;
 	EbeamParser::read(db, filename);
 }
 
@@ -55,7 +55,7 @@ void test1(string const& filename)
 void test2(string const& filename)
 {
 	cout << "////////////// test2 ////////////////" << endl;
-	DataBase db;
+	EbeamDataBase db;
 	EbeamParser::Driver driver (db);
 	//driver.trace_scanning = true;
 	//driver.trace_parsing = true;
