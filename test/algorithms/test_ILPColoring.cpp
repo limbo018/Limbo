@@ -1,9 +1,9 @@
-/*************************************************************************
-  > File Name: test_ChromaticNumber.cpp
-  > Author: Yibo Lin
-  > Mail: yibolin@utexas.edu
-  > Created Time: Wed 11 Feb 2015 04:44:03 PM CST
- ************************************************************************/
+/**
+ * @file   test_ILPColoring.cpp
+ * @brief  test ILP based coloring algorithm @ref limbo::algorithms::coloring::ILPColoring
+ * @author Yibo Lin
+ * @date   Feb 2015
+ */
 
 #include <iostream>
 #include <fstream>
@@ -33,6 +33,7 @@ using std::string;
 using std::pair;
 using namespace boost;
 
+/// @nowarn 
 // do not use setS, it does not compile for subgraph
 // do not use custom property tags, it does not compile for most utilities
 typedef adjacency_list<vecS, vecS, undirectedS, 
@@ -46,7 +47,9 @@ typedef graph_traits<graph_type>::vertex_descriptor vertex_descriptor;
 typedef graph_traits<graph_type>::edge_descriptor edge_descriptor; 
 typedef property_map<graph_type, edge_weight_t>::type edge_weight_map_type;
 typedef property_map<graph_type, vertex_color_t>::type vertex_color_map_type;
+/// @endnowarn
 
+/// test 1: a random graph 
 void randomGraph() 
 {
 	mt19937 gen;
@@ -79,6 +82,8 @@ void randomGraph()
     cout << "final cost = " << cost << endl;
 }
 
+/// test 2: a real graph from input 
+/// @param filename input file in graphviz format 
 void realGraph(string const& filename)
 {
 	ifstream in (filename.c_str());
@@ -142,6 +147,11 @@ void realGraph(string const& filename)
 	in.close();
 }
 
+/// main function \n
+/// test either on random graph or real graph 
+/// @param argc number of arguments 
+/// @param argv values of arguments 
+/// @return 0 
 int main(int argc, char** argv)
 {
 	if (argc < 2)

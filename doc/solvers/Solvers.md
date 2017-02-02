@@ -6,7 +6,7 @@ Limbo.Solvers {#Solvers}
 # Introduction {#Solvers_Introduction}
 
 Solvers and API for specialized problems, such as solving special linear programming problems with min-cost flow algorithms. 
-It also wraps solvers like semidefinite programming solver [Csdp](https://projects.coin-or.org/Csdp "Csdp") and convex optimization solver [Gurobi](www.gurobi.com "Gurobi"). 
+It also wraps solvers like semidefinite programming solver [Csdp](https://projects.coin-or.org/Csdp "Csdp") and convex optimization solver [Gurobi](https://www.gurobi.com "Gurobi"). 
 
 # Examples {#Solvers_Examples}
 
@@ -20,7 +20,7 @@ See documented version: [test/solvers/lpmcf/test_lpmcf.cpp](@ref test_lpmcf.cpp)
 Compiling and running commands (assuming LIMBO_DIR, BOOST_DIR and LEMON_DIR are well defined). 
 @ref Parsers_LpParser is required for @ref limbo::solvers::lpmcf::LpDualMcf to read input files in .lp format. 
 ~~~~~~~~~~~~~~~~
-g++ -o test_lpmcf compare.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -I $LEMON_DIR/include -L $LEMON_DIR/lib -lemon -L $LIMBO_DIR/lib -llpparser
+g++ -o test_lpmcf test_lpmcf.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -I $LEMON_DIR/include -L $LEMON_DIR/lib -lemon -L $LIMBO_DIR/lib -llpparser
 # test 1: min-cost flow for network graph 
 ./test_lpmcf benchmarks/graph.lgf 
 # test 2: dual min-cost flow for linear programming problem 
@@ -167,6 +167,14 @@ g++ -o test_lpmcf compare.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -I $LE
 # test: min-cost flow for network graph 
 ./test_lpmcf benchmarks/graph.lgf 
 ~~~~~~~~~~~~~~~~
+
+## All Examples {#Solvers_Examples_All}
+
+Possible dependencies: 
+[Boost](http://www.boost.org), 
+[Lemon](https://lemon.cs.elte.hu).  
+
+- [test/solvers/lpmcf/test_lpmcf.cpp](@ref test_lpmcf.cpp)
 
 # References {#Solvers_References}
 

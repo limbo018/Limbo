@@ -1,17 +1,15 @@
-/*************************************************************************
-    > File Name: GraphUtility.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 11 Feb 2015 02:25:12 PM CST
- ************************************************************************/
+/**
+ * @file   GraphUtility.h
+ * @brief  some graph utilities such as compute complement graph and graphviz writer. 
+ *
+ * These are add-ons for Boost.Graph library. 
+ *
+ * @author Yibo Lin
+ * @ate    Feb 2015
+ */
 
 #ifndef LIMBO_ALGORITHMS_GRAPHUTILITY_H
 #define LIMBO_ALGORITHMS_GRAPHUTILITY_H
-
-/// =====================================================
-/// class: GraphUtility
-/// description: add-ons for Boost Graph Library
-/// =====================================================
 
 #include <fstream>
 #include <string>
@@ -20,10 +18,18 @@
 #include <boost/graph/graph_concepts.hpp>
 #include <boost/graph/iteration_macros.hpp>
 
-namespace limbo { namespace algorithms {
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.algorithms
+namespace algorithms 
+{
 
-/// \param mCompG2G, a vertex mapping from complement graph to original graph 
-/// get the complement graph of original graph 
+/// @brief get the complement graph of original graph 
+/// @tparam GraphType graph type 
+/// @param g original graph 
+/// @param gp complement graph 
+/// @param mCompG2G a vertex mapping from complement graph to original graph 
 template <typename GraphType>
 void complement_graph(GraphType const& g, GraphType& gp, 
 		std::map<typename boost::graph_traits<GraphType>::vertex_descriptor, 
@@ -55,39 +61,60 @@ void complement_graph(GraphType const& g, GraphType& gp,
 	} 
 } 
 
-/// default VertexLabelWriter for write_graph
+/// @brief default VertexLabelWriter for write_graph
+/// @tparam GraphType graph type 
 template <typename GraphType>
 struct VertexLabelWriter
 {
+    /// @nowarn 
     typedef GraphType graph_type;
     typedef typename boost::graph_traits<graph_type>::vertex_descriptor vertex_descriptor;
+    /// @endnowarn
 
     graph_type const& g; ///< bind graph object 
 
+    /// constructor 
+    /// @param _g graph 
     VertexLabelWriter(graph_type const& _g) : g(_g) {}
+    /// @param v vertex 
+    /// @return label of vertex 
     vertex_descriptor label(vertex_descriptor v) const {return v;}
 };
 
-/// default EdgeLabelWriter for write_graph 
+/// @brief default EdgeLabelWriter for write_graph 
+/// @tparam GraphType graph type 
 template <typename GraphType>
 struct EdgeLabelWriter 
 {
+    /// @nowarn 
     typedef GraphType graph_type;
     typedef typename boost::graph_traits<graph_type>::edge_descriptor edge_descriptor;
     typedef typename boost::property_traits<typename boost::property_map<graph_type, boost::edge_weight_t>::const_type>::value_type edge_weight_type;
+    /// @endnowarn 
 
     graph_type const& g; ///< bind graph object 
 
+    /// constructor 
+    /// @param _g graph 
     EdgeLabelWriter(graph_type const& _g) : g(_g) {}
+    /// @param e edge 
+    /// @return label of edge 
     edge_weight_type label(edge_descriptor e) const {return boost::get(boost::edge_weight, g, e);}
+    /// @return color 
     std::string color(edge_descriptor ) const {return "black";}
+    /// @return style 
     std::string style(edge_descriptor ) const {return "solid";}
 };
 
-/// write graph to graphviz format and convert to pdf 
-/// although Boost.Graph has write_graphviz component, it is not easy to use 
-/// \param vl, VertexLabelType must provide label() member function 
-/// \param el, EdgeLabelType must provide label(), color(), and style() member function
+/// @brief write graph to graphviz format and convert to pdf. 
+/// Although Boost.Graph has write_graphviz component, it is not easy to use. 
+/// @tparam GraphType graph type 
+/// @tparam VertexLabelType must provide label() member function 
+/// @tparam EdgeLabelType must provide label(), color(), and style() member function
+/// @param out output stream 
+/// @param g graph 
+/// @param vl function object for vertex label
+/// @param el function object for edge label 
 template <typename GraphType, typename VertexLabelType, typename EdgeLabelType>
 void write_graph(std::ofstream& out, GraphType const& g, VertexLabelType const& vl, EdgeLabelType const& el) 
 {
@@ -116,8 +143,10 @@ void write_graph(std::ofstream& out, GraphType const& g, VertexLabelType const& 
 	out << "}";
 }
 
-/// convert graphviz format to pdf 
-/// the input filename should be filename+suffix
+/// @brief convert graphviz format to pdf.  
+/// The input filename should be filename+suffix
+/// @param filename output file name 
+/// @param suffix file suffix 
 inline void graphviz2pdf(std::string const& filename, const char* suffix = ".gv")
 {
 	char cmd[100];
@@ -125,6 +154,7 @@ inline void graphviz2pdf(std::string const& filename, const char* suffix = ".gv"
 	system(cmd);
 }
 
-}} // namespace limbo // namespace algorithms
+} // namespace algorithms
+} // namespace limbo
 
 #endif

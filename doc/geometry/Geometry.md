@@ -46,6 +46,14 @@ Output drawn with gnuplot
 ![test 2 solution](@ref p2rboost2.png "doc/geometry/p2rboost2.png")
 ![test 3 solution](@ref p2rboost3.png "doc/geometry/p2rboost3.png")
 
+## All Examples {#Geometry_Examples_All}
+
+Possible dependencies: 
+[Boost](http://www.boost.org).
+
+- [test/geometry/test_boostpolygonapi.cpp](@ref test_boostpolygonapi.cpp)
+- [test/geometry/test_p2r.cpp](@ref test_p2r.cpp)
+
 # References {#Geometry_References}
 
 - [limbo/geometry/Geometry.h](@ref Geometry.h)

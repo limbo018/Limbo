@@ -1,3 +1,16 @@
+/**
+ * @file   LPColoring.h
+ * @brief  coloring algorithm based on iterative linear programming (LP) and rounding 
+ *
+ * Implementation algorithm in 
+ * "Triple/quadruple patterning layout decomposition via novel linear programming and iterative rounding", 
+ * Yibo Lin, Xiaoqing Xu, Bei Yu, Ross Baldick, and David Z. Pan, 
+ * SPIE Advanced Lithography, volume 9781, 2016.
+ *
+ * @author Yibo Lin, Xiaoqing Xu 
+ * @date   Sep 2015
+ */
+
 #ifndef LIMBO_ALGORITHMS_COLORING_LP
 #define LIMBO_ALGORITHMS_COLORING_LP
 
@@ -19,7 +32,15 @@
 #include <limbo/algorithms/coloring/Coloring.h>
 #include "gurobi_c++.h"
 
-namespace limbo { namespace algorithms { namespace coloring {
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.Algorithms 
+namespace algorithms 
+{ 
+/// namespace for Limbo.Algorithms.Coloring 
+namespace coloring 
+{
 
 using std::vector;
 using std::queue;
@@ -28,10 +49,15 @@ using std::cout;
 using std::endl;
 using std::string;
 
+/// @class limbo::algorithms::coloring::LPColoring
+/// LP based graph coloring.  
+/// 
+/// @tparam GraphType graph type 
 template <typename GraphType>
 class LPColoring : public Coloring<GraphType>
 {
 	public:
+        /// @nowarn
         typedef Coloring<GraphType> base_type;
 		typedef typename base_type::graph_type graph_type;
 		typedef typename base_type::graph_vertex_type graph_vertex_type;
@@ -40,14 +66,17 @@ class LPColoring : public Coloring<GraphType>
 		typedef typename base_type::edge_iterator_type edge_iterator_type;
         typedef typename base_type::edge_weight_type edge_weight_type;
         typedef typename base_type::EdgeHashType edge_hash_type;
+        /// @endnowarn
 
+        /// records the information of non-integer values 
         struct NonIntegerInfo
         {
-            uint32_t vertex_non_integer_num;
-            uint32_t edge_non_integer_num;
-            uint32_t vertex_half_integer_num;
-            uint32_t edge_half_integer_num;
+            uint32_t vertex_non_integer_num; ///< number of vertices with non-integer solutions 
+            uint32_t edge_non_integer_num; ///< number of edges with non-integer solutions 
+            uint32_t vertex_half_integer_num; ///< number of vertices with half-integer solutions 
+            uint32_t edge_half_integer_num; ///< number of edges with half-integer solutions 
 
+            /// constructor 
             NonIntegerInfo() 
                 : vertex_non_integer_num(std::numeric_limits<uint32_t>::max())
                 , edge_non_integer_num(std::numeric_limits<uint32_t>::max())
@@ -58,18 +87,25 @@ class LPColoring : public Coloring<GraphType>
         /// information for a variable of a constraint 
         struct ConstrVariableInfo
         {
-            double coeff; 
+            double coeff; ///< coefficient
             char sense; ///< '>' or '<'
 
+            /// constructor 
             ConstrVariableInfo() 
                 : coeff(0.0)
                 , sense('>')
             {}
+            /// set data 
+            /// @param c coefficient 
+            /// @param s sense 
             void set(double c, char s)
             {
                 coeff = c;
                 sense = s;
             }
+            /// check whether two constraints have the same direction 
+            /// @param rhs constraint 
+            /// @return true if two constraints have the same direction 
             bool same_direction(ConstrVariableInfo const& rhs) const 
             {
                 if (coeff == 0.0 || rhs.coeff == 0.0)
@@ -81,61 +117,95 @@ class LPColoring : public Coloring<GraphType>
             }
         };
 
-		/// member functions
+		// member functions
 		/// constructor
+        /// @param g graph 
 		LPColoring(graph_type const& g);
 		/// destructor
 		~LPColoring() {};
 
+        /// @return number of LP iterations 
         uint32_t lp_iters() const {return m_lp_iters;}
 
-        /// for debug 
+        // for debug 
+        /// print solution 
+        /// @param vColorBits LP solutions 
         void print_solution(vector<GRBVar> const& vColorBits) const;
 	protected:
-		/// \return objective value 
-		/// relaxed linear programming based coloring for the conflict graph (this->m_graph)
+		/// kernel coloring algorithm; 
+        /// relaxed linear programming based coloring for the conflict graph (this->m_graph)
+		/// @return objective value 
 		double coloring(); 
 
 		/// apply coloring solution 
+        /// @param vColorBits LP solutions 
 		void apply_solution(vector<GRBVar> const& vColorBits);
 
 		/// create the NoStitchGraph (this->m_graph) from the (m_conflict_graph)
 		void initialize();
         /// create basic variables, objective and constraints
+        /// @param vColorBits vertex bits of LP 
+        /// @param vEdgeBits edge bits of LP 
+        /// @param obj objective of LP 
+        /// @param optModel LP model 
         void set_optimize_model(vector<GRBVar>& vColorBits, vector<GRBVar>& vEdgeBits, GRBLinExpr& obj, GRBModel& optModel);
         /// set anchor vertex 
+        /// @param vColorBits vertex bits of LP 
         void set_anchor(vector<GRBVar>& vColorBits) const; 
         /// for each color bit pair of a vertex 
+        /// @param vColorBits vertex bits of LP 
+        /// @param obj objective of LP 
         void adjust_variable_pair_in_objective(vector<GRBVar> const& vColorBits, GRBLinExpr& obj) const; 
         /// for each color bit pair of vertices of an edge 
+        /// @param vColorBits vertex bits of LP 
+        /// @param obj objective of LP 
         void adjust_conflict_edge_vertices_in_objective(vector<GRBVar> const& vColorBits, GRBLinExpr& obj) const;
         /// odd cycle constraints from Prof. Baldick
+        /// @param vColorBits vertex bits of LP 
+        /// @param optModel LP model 
         void add_odd_cycle_constraints(vector<GRBVar> const& vColorBits, GRBModel& optModel); 
         /// solve model 
+        /// @param optModel LP model 
         void solve_model(GRBModel& optModel);
 
 		/// DFS to search for the odd cycles, stored in m_odd_cycles
+        /// @param v vertex 
+        /// @param vOddCyle container to store odd cycles 
 		void get_odd_cycles(graph_vertex_type const& v, vector<vector<graph_vertex_type> >& vOddCyle);
-        /// \return the vertex with the largest degree
+        /// @return the vertex with the largest degree
 		graph_vertex_type max_degree_vertex() const;
 
 		/// Optimal rounding based on binding constraints
+        /// @param optModel LP model 
+        /// @param vColorBits vertex bits of LP 
+        /// @param vEdgeBits edge bits of LP 
 		void rounding_with_binding_analysis(GRBModel& optModel, vector<GRBVar>& vColorBits, vector<GRBVar>& vEdgeBits);
 
 		/// greedy final coloring refinement
 		uint32_t post_refinement();
-        ///  refine coloring solution of an edge 
+        /// refine coloring solution of an edge 
+        /// @param e edge 
 		bool refine_color(graph_edge_type const& e);
 
         /// compute number of non-integers and half-integers for both vertex variables and edge variables 
+        /// @param vColorBits vertex bits of LP 
+        /// @param vEdgeBits edge bits of LP 
+        /// @param info non-integer information 
         void non_integer_num(vector<GRBVar> const& vColorBits, vector<GRBVar> const& vEdgeBits, NonIntegerInfo& info) const;
         /// compute number of non-integers and half-integers with given variable array 
+        /// @param vVariables variables 
+        /// @param nonIntegerNum number of non-integers 
+        /// @param halfIntegerNum number of half-integers 
         void non_integer_num(vector<GRBVar> const& vVariables, uint32_t& nonIntegerNum, uint32_t& halfIntegerNum) const;
 
 		/// check if a variable is integer or not 
+        /// @param value target value to be checked 
+        /// @return true if value is an integer 
 		bool is_integer(double value) const {return value == floor(value);}
 
-        /// \return number of precolored vertices 
+        /// check number of precolored vertices 
+        /// @param vVertex vertices of the graph 
+        /// @return number of precolored vertices 
         uint32_t check_precolored_num(vector<LPColoring<GraphType>::graph_vertex_type> const& vVertex) const; 
 
 		/// members
@@ -709,7 +779,7 @@ uint32_t LPColoring<GraphType>::post_refinement()
     return count;
 }
 
-/// \return true if found a coloring solution to resolve conflicts 
+/// @return true if found a coloring solution to resolve conflicts 
 template <typename GraphType>
 bool LPColoring<GraphType>::refine_color(LPColoring<GraphType>::graph_edge_type const& e) 
 { 
@@ -816,6 +886,8 @@ void LPColoring<GraphType>::print_solution(vector<GRBVar> const& vColorBits) con
     printf("\n");
 }
 
-}}} // namespace limbo // namespace algorithms // namespace coloring
+} // namespace coloring
+} // namespace algorithms
+} // namespace limbo
 
 #endif

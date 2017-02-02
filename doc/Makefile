@@ -22,6 +22,7 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/coloring/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/partition/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/placement/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/algorithms/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/bibtex/*.py) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/containers/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/makeutils/*.mk) \
@@ -62,6 +63,7 @@ Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile
 	echo INCLUDE_FILE_PATTERNS  = *.h *.hpp >> $(DOCDIR)/Doxyfile
 	echo ALIASES               += nowarn=\"\\{\" endnowarn=\"\\}\" >> $(DOCDIR)/Doxyfile
 	echo FILTER_PATTERNS        = *.mk=$(LIMBO_ROOT_DIR)/doc/MKFilter.sh >> $(DOCDIR)/Doxyfile
+	echo CITE_BIB_FILES         = $(LIMBO_ROOT_DIR)/doc/ref/Top.bib $(wildcard $(LIMBO_ROOT_DIR)/doc/ref/*.bib) >> $(DOCDIR)/Doxyfile 
 
 doc: Doxyfile $(SRCS)
 	$(DOXYGEN) $(DOCDIR)/Doxyfile.in

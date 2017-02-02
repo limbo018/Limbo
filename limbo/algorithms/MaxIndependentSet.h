@@ -1,9 +1,12 @@
-/*************************************************************************
-    > File Name: MaxIndependentSet.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 11 Feb 2015 02:07:55 PM CST
- ************************************************************************/
+/**
+ * @file   MaxIndependentSet.h
+ * @brief  solve maximum independent sets with maximum cliques 
+ *
+ * The maximum independent set of a graph is the maximum clique of its complement graph. 
+ *
+ * @author Yibo Lin
+ * @date   Feb 2015
+ */
 
 #ifndef LIMBO_ALGORITHMS_MAXINDEPENDENTSET_H
 #define LIMBO_ALGORITHMS_MAXINDEPENDENTSET_H
@@ -14,26 +17,39 @@
 
 namespace limbo { namespace algorithms {
 
+/// @class limbo::algorithms::MaxIndependentSetByMaxClique
 /// a tag for solving maximum independent sets with maximum cliques 
 struct MaxIndependentSetByMaxClique 
 {
-	/// callback for boost::bron_kerbosch_all_cliques
+    /// @class limbo::algorithms::MaxIndependentSetByMaxClique::clique_visitor_type
+	/// @brief callback for boost::bron_kerbosch_all_cliques
+    /// @tparam GraphType graph type 
+    /// @tparam MisVisitorType a function object for visiting each independent set.   
+    /// Refer to @ref limbo::algorithms::coloring::LawlerChromaticNumber::mis_visitor_type for example. 
 	template <typename GraphType, typename MisVisitorType>
 	struct clique_visitor_type
 	{
+        /// @nowarn 
 		typedef GraphType graph_type;
 		typedef MisVisitorType mis_visitor_type;
 		typedef typename boost::graph_traits<graph_type>::vertex_descriptor vertex_descriptor_type; 
 		typedef std::map<vertex_descriptor_type, vertex_descriptor_type> map_type;
+        /// @endnowarn
 
 		MisVisitorType& mis_visitor; ///< bind mis visitor
 		map_type& mCompG2G; ///< bind vertex mapping from complement graph to original graph
 
+        /// constructor 
+        /// @param mv visitor of maximum independent set 
+        /// @param mCG2G mapping from complement graph to original graph 
 		clique_visitor_type(mis_visitor_type& mv, map_type& mCG2G) : mis_visitor(mv), mCompG2G(mCG2G) {}
+        /// copy constructor 
+        /// @param rhs a clique_visitor_type object 
 		clique_visitor_type(clique_visitor_type const& rhs) : mis_visitor(rhs.mis_visitor), mCompG2G(rhs.mCompG2G) {}
 
-		/// \param c, clique vertices in complement graph 
-		/// \param cg, complement graph
+        /// @tparam CliqueType container type for vertices of a clique 
+		/// @param c clique vertices in complement graph 
+		/// @param cg complement graph
 		template <typename CliqueType>
 		void clique(CliqueType const& c, graph_type const& cg)
 		{
@@ -55,13 +71,24 @@ struct MaxIndependentSetByMaxClique
 };
 
 /// generic function to calculate maximum independent sets with different algorithms 
-/// \param vis, once an independent set is found, callback vis.mis(MisType const&) will be called 
-/// in this way, user can choose to store all the independent sets or process one by one 
+/// @tparam GraphType graph type 
+/// @tparam VisitorType type of maximum independent set visitor 
+/// @tparam AlgorithmType algorithm type 
+/// @param g graph 
+/// @param vis once an independent set is found, callback vis.mis(MisType const&) will be called.  
+/// In this way, user can choose to store all the independent sets or process one by one. 
+/// Refer to @ref limbo::algorithms::coloring::LawlerChromaticNumber::mis_visitor_type for example. 
 template <typename GraphType, typename VisitorType, typename AlgorithmType>
 inline void max_independent_set(GraphType const& g, VisitorType vis, AlgorithmType const&);
 
-/// a maximum independent set of a graph g is also a maximum clique of its complement graph 
-/// this function searches maximum cliques of the complement graph to get maximum independent sets
+/// A maximum independent set of a graph g is also a maximum clique of its complement graph.  
+/// This function searches maximum cliques of the complement graph to get maximum independent sets
+/// @tparam GraphType graph type 
+/// @tparam VisitorType type of maximum independent set visitor 
+/// @param g graph 
+/// @param vis once an independent set is found, callback vis.mis(MisType const&) will be called.  
+/// In this way, user can choose to store all the independent sets or process one by one. 
+/// Refer to @ref limbo::algorithms::coloring::LawlerChromaticNumber::mis_visitor_type for example. 
 template <typename GraphType, typename MisVisitorType>
 inline void max_independent_set(GraphType const& g, MisVisitorType vis, MaxIndependentSetByMaxClique const&)
 {
@@ -76,6 +103,7 @@ inline void max_independent_set(GraphType const& g, MisVisitorType vis, MaxIndep
 	boost::bron_kerbosch_all_cliques(cg, MaxIndependentSetByMaxClique::clique_visitor_type<GraphType, MisVisitorType>(vis, mCompG2G), 1);
 }
 
-}} // namespace limbo // namespace algorithms
+} // namespace algorithms
+} // namespace limbo
 
 #endif

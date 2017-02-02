@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: ILPColoring.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Sat 23 May 2015 11:21:08 AM CDT
- ************************************************************************/
+/**
+ * @file   ILPColoring.h
+ * @brief  coloring algorithm based on integer linear programming (ILP) with Gurobi as ILP solver.
+ * @author Yibo Lin
+ * @date   May 2015
+ */
 
 #ifndef LIMBO_ALGORITHMS_COLORING_ILPCOLORING
 #define LIMBO_ALGORITHMS_COLORING_ILPCOLORING
@@ -32,12 +32,28 @@
 #include <limbo/algorithms/coloring/Coloring.h>
 #include "gurobi_c++.h"
 
-namespace limbo { namespace algorithms { namespace coloring {
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.Algorithms 
+namespace algorithms 
+{ 
+/// namespace for Limbo.Algorithms.Coloring 
+namespace coloring 
+{
 
+/// @class limbo::algorithms::coloring::ILPColoring
+/// ILP based graph coloring.  
+/// Edge weight is used to differentiate conflict edge and stitch edge. 
+/// Non-negative weight implies conflict edge, 
+/// while negative weight implies stitch edge. 
+/// 
+/// @tparam GraphType graph type 
 template <typename GraphType>
 class ILPColoring : public Coloring<GraphType>
 {
 	public:
+        /// @nowarn 
 		typedef Coloring<GraphType> base_type;
 		using typename base_type::graph_type;
 		using typename base_type::graph_vertex_type;
@@ -47,11 +63,10 @@ class ILPColoring : public Coloring<GraphType>
         using typename base_type::edge_weight_type;
 		using typename base_type::ColorNumType;
         typedef typename base_type::EdgeHashType edge_hash_type;
-		/// edge weight is used to differentiate conflict edge and stitch edge 
-		/// non-negative weight implies conflict edge 
-		/// negative weight implies stitch edge 
-
+        /// @endnowarn
+        
 		/// constructor
+        /// @param g graph 
 		ILPColoring(graph_type const& g) 
 			: base_type(g)
 		{}
@@ -59,10 +74,13 @@ class ILPColoring : public Coloring<GraphType>
 		virtual ~ILPColoring() {}
 
         /// write raw solution of ILP 
+        /// @param filename output file name 
+        /// @param vVertexBit array of vertex bits that indicate coloring solutions; each vertex corresponds to two bits 
         void write_graph_sol(string const& filename, vector<GRBVar> const& vVertexBit) const;
 
 	protected:
-		/// \return objective value 
+        /// kernel coloring algorithm 
+		/// @return objective value 
 		virtual double coloring();
 };
 
@@ -295,6 +313,8 @@ void ILPColoring<GraphType>::write_graph_sol(string const& filename, vector<GRBV
     la::graphviz2pdf(filename);
 }
 
-}}} // namespace limbo // namespace algorithms // namespace coloring
+} // namespace coloring
+} // namespace algorithms
+} // namespace limbo
 
 #endif

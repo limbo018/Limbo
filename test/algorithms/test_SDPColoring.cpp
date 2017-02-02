@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: test_SDPColoring.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Mon 07 Sep 2015 10:31:32 PM CDT
- ************************************************************************/
+/**
+ * @file   test_SDPColoring.cpp
+ * @brief  test SDP coloring algorithm 
+ * @author Yibo Lin
+ * @date   Sep 2015
+ */
 
 #include <iostream>
 #include <fstream>
@@ -33,6 +33,7 @@ using std::string;
 using std::pair;
 using namespace boost;
 
+/// @nowarn
 // do not use setS, it does not compile for subgraph
 // do not use custom property tags, it does not compile for most utilities
 typedef adjacency_list<vecS, vecS, undirectedS, 
@@ -46,7 +47,9 @@ typedef graph_traits<graph_type>::vertex_descriptor vertex_descriptor;
 typedef graph_traits<graph_type>::edge_descriptor edge_descriptor; 
 typedef property_map<graph_type, edge_weight_t>::type edge_weight_map_type;
 typedef property_map<graph_type, vertex_color_t>::type vertex_color_map_type;
+/// @endnowarn
 
+/// test 1: a simple graph 
 double simple_graph() 
 {
 	graph_type g;
@@ -82,6 +85,7 @@ double simple_graph()
 	return lc();
 }
 
+/// test 2: a random graph 
 double random_graph() 
 {
 	mt19937 gen;
@@ -113,6 +117,8 @@ double random_graph()
     return lc();
 }
 
+/// test 3: a real graph from input 
+/// @param filename input file in graphviz format  
 double real_graph(string const& filename)
 {
 	ifstream in (filename.c_str());
@@ -176,6 +182,10 @@ double real_graph(string const& filename)
     return cost;
 }
 
+/// main function 
+/// @param argc number of arguments 
+/// @param argv values of arguments 
+/// @return 0
 int main(int argc, char** argv)
 {
     double cost;
