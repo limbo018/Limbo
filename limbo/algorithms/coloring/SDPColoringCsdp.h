@@ -39,7 +39,7 @@ namespace coloring
 /// @class limbo::algorithms::coloring::SDPColoringCsdp
 /// Thread control is not available as Csdp does not provide any API for that. \n
 /// 
-/// SDP formulation from Bei Yu's TCAD 2015 paper \cite TPL_TCAD2015_Yu. \n
+/// SDP formulation from Bei Yu's TCAD 2015 paper \cite TPL_TCAD2015_Yu \n
 /// \f{eqnarray*}{
 /// & min. & C X, \\
 /// & s.t. & x_{ii} = 1, \forall i \in V, \\

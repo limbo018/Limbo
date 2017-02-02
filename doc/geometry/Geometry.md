@@ -10,7 +10,7 @@ It is developed in a generic way to be flexible to different data types either i
 
 # Examples {#Geometry_Examples}
 
-## Custom Geometric Classes {#ProgramOptions_Example1}
+## Custom Geometric Classes {#Geometry_Example1}
 
 Define custom classes for points and rectangles and use Polygon2Rectangle to convert polygon to rectangles. 
 
@@ -28,7 +28,7 @@ Output drawn with gnuplot
 ![test 2 solution](@ref p2r2.png "doc/geometry/p2r2.png")
 ![test 3 solution](@ref p2r3.png "doc/geometry/p2r3.png")
 
-## Boost.Polygon API {#ProgramOptions_Example2}
+## Boost.Polygon API {#Geometry_Example2}
 
 Use point and rectangle types in Boost.Polygon. 
 

@@ -5,6 +5,11 @@ Limbo.Parsers.BookshelfParser {#Parsers_BookshelfParser}
 
 # Introduction {#Parsers_BookshelfParser_Introduction}
 
+[Bookshelf format](http://vlsicad.ucsd.edu/GSRC/bookshelf/formats) is widely used in VLSI physical design such as placement and routing. 
+It is originally developed by UCSD. 
+The Bookshelf parser can read .aux file and extract all other files. 
+Then it parses the rest files and invokes user-defined callback functions. 
+
 # Examples {#Parsers_BookshelfParser_Examples}
 
 ## Flex/Bison Parser {#Parsers_BookshelfParser_Flex_Bison}

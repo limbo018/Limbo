@@ -58,7 +58,7 @@ vInteger = 10 30 50
 See documented version: [test/programoptions/test_ProgramOptions.cpp](@ref test_ProgramOptions.cpp)
 \include test/programoptions/test_ProgramOptions.cpp
 
-## All Examples {#Geometry_Examples_All}
+## All Examples {#ProgramOptions_Examples_All}
 
 - [test/programoptions/test_ProgramOptions_simple.cpp](@ref test_ProgramOptions_simple.cpp)
 - [test/programoptions/test_ProgramOptions.cpp](@ref test_ProgramOptions.cpp)

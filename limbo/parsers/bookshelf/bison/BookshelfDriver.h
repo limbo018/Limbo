@@ -15,14 +15,14 @@
 /** @brief namespace for BookshelfParser */
 namespace BookshelfParser {
 
-	using std::cout;
-	using std::endl;
-	using std::cerr;
-	using std::string; 
-	using std::vector;
-	using std::pair;
-	using std::make_pair;
-	using std::ostringstream;
+using std::cout;
+using std::endl;
+using std::cerr;
+using std::string; 
+using std::vector;
+using std::pair;
+using std::make_pair;
+using std::ostringstream;
 
 /**
  * @class BookshelfParser::Driver
@@ -154,8 +154,6 @@ public:
     /// @return bookshelf files except .aux 
     vector<string> const& bookshelfFiles() const {return m_vBookshelfFiles;}
 protected:
-	// Use as a stack for node and pin pairs in a net,  
-	// because net_cbk_pin will be called before net_cbk_name
 	Row m_row; ///< temporary storage of row 
 	Net m_net; ///< temporary storage of net 
     vector<string> m_vBookshelfFiles; ///< store bookshelf files except .aux 

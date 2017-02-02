@@ -839,7 +839,9 @@ bool LPColoring<GraphType>::refine_color(LPColoring<GraphType>::graph_edge_type 
     return retFlag;
 }
 
-//for debug use
+// for debug use
+// it seems doxygen cannot handle template functions with the same name correctly 
+/// @cond 
 template <typename GraphType>
 void LPColoring<GraphType>::non_integer_num(vector<GRBVar> const& vColorBits, vector<GRBVar> const& vEdgeBits, LPColoring<GraphType>::NonIntegerInfo& info) const
 {
@@ -863,6 +865,7 @@ void LPColoring<GraphType>::non_integer_num(vector<GRBVar> const& vVariables, ui
         }
     }
 }
+/// @endcond 
 
 template <typename GraphType>
 uint32_t LPColoring<GraphType>::check_precolored_num(vector<LPColoring<GraphType>::graph_vertex_type> const& vVertex) const 

@@ -1,7 +1,16 @@
 Limbo.Parsers {#Parsers}
 ---------
 
-## Components 
+This package provides parsers for various file formats. 
+In general, a parser provides API for users to read and initialize data easily to their own database. 
+Parsers should not be storage hungry since they only need to store temporary data before render to users' database. 
+Therefore, all the parsers developed in the package follows the same philosophy. 
+That is, users only need to provide a database object with required callback functions well defined, 
+and a parser will read input files and invoke those callback functions with proper data. 
+There is no need for users to know the process of parsing. 
+The only thing they need to do is to initialize their own database in the callback functions with the data from the parser. 
+
+# Components 
 | Components                                              | Languages & Libraries           | Description                                              |
 | ------------------------------------------------------- | ------------------------------- | -------------------------------------------------------- |
 | [Bookshelf Parser](@ref Parsers_BookshelfParser)        | Flex/Bison                      | Placement file format from UCSD                          |

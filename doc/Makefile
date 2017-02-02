@@ -30,6 +30,9 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/bookshelf/test_bison.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/bookshelf/bison/BookshelfDataBase.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/bookshelf/bison/BookshelfDriver.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/def/test_bison.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/bison/DefDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/bison/DefDriver.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/geometry/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/api/*.h) \
@@ -65,6 +68,7 @@ Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile
 	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md *.py *.mk >> $(DOCDIR)/Doxyfile
 	echo INCLUDE_FILE_PATTERNS  = *.h *.hpp >> $(DOCDIR)/Doxyfile
 	echo ALIASES               += nowarn=\"\\{\" endnowarn=\"\\}\" >> $(DOCDIR)/Doxyfile
+	echo EXTENSION_MAPPING      = mk=C++ >> $(DOCDIR)/Doxyfile 
 	echo FILTER_PATTERNS        = *.mk=$(LIMBO_ROOT_DIR)/doc/MKFilter.sh >> $(DOCDIR)/Doxyfile
 	echo CITE_BIB_FILES         = $(LIMBO_ROOT_DIR)/doc/ref/Top.bib $(wildcard $(LIMBO_ROOT_DIR)/doc/ref/*.bib) >> $(DOCDIR)/Doxyfile 
 

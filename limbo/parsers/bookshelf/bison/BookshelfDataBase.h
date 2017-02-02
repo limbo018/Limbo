@@ -214,27 +214,27 @@ struct Net : public Item
 class BookshelfDataBase
 {
 	public:
-        /// set number of terminals 
+        /// @brief set number of terminals 
         virtual void resize_bookshelf_node_terminals(int, int) = 0;
-        /// set number of nets 
+        /// @brief set number of nets 
         virtual void resize_bookshelf_net(int) = 0;
-        /// set number of pins 
+        /// @brief set number of pins 
         virtual void resize_bookshelf_pin(int) = 0;
-        /// set number of rows 
+        /// @brief set number of rows 
         virtual void resize_bookshelf_row(int) = 0;
-        /// add terminal 
+        /// @brief add terminal 
         virtual void add_bookshelf_terminal(string&, int, int) = 0;
-        /// add node 
+        /// @brief add node 
         virtual void add_bookshelf_node(string&, int, int) = 0;
-        /// add net 
+        /// @brief add net 
         virtual void add_bookshelf_net(Net const&) = 0;
-        /// add row 
+        /// @brief add row 
         virtual void add_bookshelf_row(Row const&) = 0;
-        /// set node position 
+        /// @brief set node position 
         virtual void set_bookshelf_node_position(string const&, double, double, string const&, string const&, bool) = 0;
-        /// set design name 
+        /// @brief set design name 
         virtual void set_bookshelf_design(string&) = 0;
-        /// a callback when a bookshelf file reaches to the end 
+        /// @brief a callback when a bookshelf file reaches to the end 
         virtual void bookshelf_end() = 0;
 };
 

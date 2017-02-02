@@ -17,13 +17,13 @@ using std::string;
 
 /// @brief Custom class that inheritates @ref BookshelfParser::BookshelfDataBase 
 /// with all the required callbacks defined. 
-class DataBase : public BookshelfParser::BookshelfDataBase
+class BookshelfDataBase : public BookshelfParser::BookshelfDataBase
 {
 	public:
         /// constructor 
-		DataBase()
+		BookshelfDataBase()
 		{
-			cout << "DataBase::" << __func__ << endl;
+			cout << "BookshelfDataBase::" << __func__ << endl;
 		}
 		//////////////////// required callbacks from abstract BookshelfParser::BookshelfDataBase ///////////////////
         /// @param nn number of nodes 
@@ -96,7 +96,7 @@ class DataBase : public BookshelfParser::BookshelfDataBase
 void test1(string const& filename)
 {
 	cout << "////////////// test1 ////////////////" << endl;
-	DataBase db;
+	BookshelfDataBase db;
 	BookshelfParser::read(db, filename);
 }
 
@@ -104,7 +104,7 @@ void test1(string const& filename)
 void test2(string const& filename)
 {
 	cout << "////////////// test2 ////////////////" << endl;
-	DataBase db;
+	BookshelfDataBase db;
 	BookshelfParser::Driver driver (db);
 	//driver.trace_scanning = true;
 	//driver.trace_parsing = true;

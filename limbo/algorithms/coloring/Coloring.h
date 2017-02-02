@@ -319,6 +319,8 @@ void Coloring<GraphType>::print_edge_weight(typename Coloring<GraphType>::graph_
     std::cout << "\n";
 }
 
+// it seems doxygen cannot handle template functions with the same name correctly 
+/// @cond
 template <typename GraphType>
 void Coloring<GraphType>::write_graph(std::string const& filename) const 
 {
@@ -333,6 +335,7 @@ void Coloring<GraphType>::write_graph(std::string const& filename, Coloring<Grap
     out.close();
     la::graphviz2pdf(filename);
 }
+/// @endcond
 
 } // namespace coloring
 } // namespace algorithms
