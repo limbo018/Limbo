@@ -27,6 +27,9 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/containers/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/makeutils/*.mk) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/math/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/bookshelf/test_bison.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/bookshelf/bison/BookshelfDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/bookshelf/bison/BookshelfDriver.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/geometry/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/api/*.h) \
