@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: test_gdsdb.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Tue 17 Jan 2017 10:12:44 PM CST
- ************************************************************************/
+/**
+ * @file   test_gdsdb.cpp
+ * @brief  test @ref limbo::GdsParser::GdsDB 
+ * @author Yibo Lin
+ * @date   Jan 2017
+ */
 
 #include <iostream>
 #include <limbo/parsers/gdsii/gdsdb/GdsIO.h>

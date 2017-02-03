@@ -11,6 +11,9 @@
  *     For updates, support, or to become part of the LEF/DEF Community,
  *  check www.openeda.org for details.
  */
+/**
+ * @file lefiUtil.hpp
+ */
 
 #ifndef lefiUtil_h
 #define lefiUtil_h

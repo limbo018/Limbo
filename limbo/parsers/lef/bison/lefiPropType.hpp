@@ -11,6 +11,9 @@
  *     For updates, support, or to become part of the LEF/DEF Community,
  *  check www.openeda.org for details.
  */
+/**
+ * @file lefiPropType.hpp
+ */
 
 #ifndef lefiPropType_h
 #define lefiPropType_h

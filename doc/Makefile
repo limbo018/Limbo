@@ -49,9 +49,14 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdf/bison/GdfDataBase.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdf/bison/GdfDriver.h) \
 		  \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/gdsii/*.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdsii/stream/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdsii/gdsdb/*.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/lef/test_bison.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/bison/LefDataBase.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/bison/LefDriver.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/bison/*.hpp) \
 		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/lp/test_bison.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lp/bison/LpDataBase.h) \

@@ -11,6 +11,9 @@
  *     For updates, support, or to become part of the LEF/DEF Community,
  *  check www.openeda.org for details.
  */
+/**
+ * @file lefiNonDefault.hpp
+ */
 
 #ifndef lefiNonDefault_h
 #define lefiNonDefault_h

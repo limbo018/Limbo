@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: GdsReader.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 22 Oct 2014 10:41:23 PM CDT
- ************************************************************************/
+/**
+ * @file   GdsReader.h
+ * @brief  read GDSII file 
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #ifndef _GDSPARSER_GDSREADER_H
 #define _GDSPARSER_GDSREADER_H

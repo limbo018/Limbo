@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: test.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 22 Oct 2014 10:43:22 PM CDT
- ************************************************************************/
+/**
+ * @file   test_reader.cpp
+ * @brief  test @ref GdsParser::GdsReader 
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #include <iostream>
 #include <limbo/parsers/gdsii/stream/GdsReader.h>

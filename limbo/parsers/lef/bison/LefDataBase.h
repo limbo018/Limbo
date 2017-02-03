@@ -21,6 +21,7 @@
 /// namespace for LefParser
 namespace LefParser {
 
+/// @nowarn 
 using std::cout;
 using std::endl;
 using std::cerr;
@@ -32,6 +33,7 @@ using std::ostringstream;
 typedef int int32_t;
 typedef unsigned int uint32_t;
 typedef long int64_t;
+/// @endnowarn
 
 /// @brief bison does not support vector very well, 
 /// so here create a dummy class for integer array. 
@@ -225,8 +227,8 @@ class LefDataBase
 	protected:
 		double m_current_version; /*!< default current lef version, use static variable to mimic definitions */
 	public:
-		static int lefNamesCaseSensitive; /* case sensitive or not, mimic global variable lefNamesCaseSensitive */
-		static int lefrShiftCase; /* shift to upper case or not  */
+		static int lefNamesCaseSensitive; /*!< case sensitive or not, mimic global variable lefNamesCaseSensitive */
+		static int lefrShiftCase; /*!< shift to upper case or not  */
 	private:
         /// @brief remind users to define some optional callback functions at runtime 
         /// @param str message including the information to the callback function in the reminder 

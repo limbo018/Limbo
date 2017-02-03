@@ -11,6 +11,9 @@
  *     For updates, support, or to become part of the LEF/DEF Community,
  *  check www.openeda.org for details.
  */
+/**
+ * @file lefiDefs.hpp
+ */
 
 /* Definitions header file for the DEF Interface */
 
