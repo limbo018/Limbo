@@ -44,11 +44,11 @@ class IntegerArray : public vector<int>
 		using base_type::allocator_type;
         /// @endnowarn
 
-        /// constructor 
+        /// @brief constructor 
         /// @param alloc memory allocator 
 		IntegerArray(const allocator_type& alloc = allocator_type())
 			: base_type(alloc) {}
-        /// constructor 
+        /// @brief constructor 
         /// @param n number of values 
         /// @param val data value
         /// @param alloc memory allocator 
@@ -68,11 +68,11 @@ class StringArray : public vector<string>
 		using base_type::allocator_type;
         /// @endnowarn
 
-        /// constructor 
+        /// @brief constructor 
         /// @param alloc memory allocator 
 		StringArray(const allocator_type& alloc = allocator_type())
 			: base_type(alloc) {}
-        /// constructor 
+        /// @brief constructor 
         /// @param n number of values 
         /// @param val data value
         /// @param alloc memory allocator 

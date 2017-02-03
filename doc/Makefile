@@ -18,36 +18,54 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(DOCDIR)/solvers \
 		  $(DOCDIR)/string \
 		  $(DOCDIR)/thirdparty \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/coloring/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/partition/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/placement/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/algorithms/*.cpp) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/bibtex/*.py) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/containers/*.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/makeutils/*.mk) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/math/*.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/bookshelf/test_bison.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/bookshelf/bison/BookshelfDataBase.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/bookshelf/bison/BookshelfDriver.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/def/test_bison.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/bison/DefDataBase.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/bison/DefDriver.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/ebeam/test_bison.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/ebeam/bison/EbeamDataBase.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/ebeam/bison/EbeamDriver.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/gdf/test_bison.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdf/bison/GdfDataBase.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdf/bison/GdfDriver.h) \
+		  \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/verilog/test_bison.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/verilog/bison/VerilogDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/verilog/bison/VerilogDriver.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/geometry/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/api/*.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/preprocessor/*.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/programoptions/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/programoptions/*.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/api/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/lpmcf/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/solvers/lpmcf/*.cpp) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/string/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/string/*.h) 
 
