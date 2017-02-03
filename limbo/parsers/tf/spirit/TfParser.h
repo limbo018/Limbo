@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: TfParser.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 17 Sep 2014 08:47:19 PM CDT
- ************************************************************************/
+/**
+ * @file   TfParser.h
+ * @brief  tf parser for technology file 
+ * @author Yibo Lin
+ * @date   Sep 2014
+ */
 
 #ifndef _TFPARSER_H
 #define _TFPARSER_H
@@ -38,34 +38,56 @@ namespace ascii = boost::spirit::ascii;
 namespace spirit = boost::spirit;
 namespace phoenix =  boost::phoenix;
 
+/// @brief an option to control case insensitivity
 #ifdef CASE_INSENSITIVE
 	#define TF_NO_CASE(X) no_case[X]
 #else 
 	#define TF_NO_CASE(X) X
 #endif 
 
+/// @class TfParser 
+/// @brief Tf parser for technology file. 
+/// 
+/// Developed with Boost.Spirit 
 struct TfParser
 {
+    /// @class TfParser::TfDataBase 
+    /// @brief Base class for tf database. 
+    /// Only pure virtual functions are defined.  
+    /// User needs to inheritate this class and derive a custom database type with all callback functions defined.  
+    /// 
+    /// Currently only read layer mapping. 
+    /// @todo parse other information besides layer mapping in tf file 
 	struct TfDataBase 
 	{
 		// required callbacks 
-		virtual void add_tf_layer_id(string const&, int32_t const&, string const&) = 0;
+        /// @brief add layer name, layer id, layer abbreviation 
+        /// @param s1 layer name 
+        /// @param s2 layer id 
+        /// @param s3 layer abbreviation 
+		virtual void add_tf_layer_id(string const& s1, int32_t const& s2, string const& s3) = 0;
 	};
 
-	// grammar 
+	/// @brief define grammar 
+    /// @tparam Iterator iterator of text 
+    /// @tparam Skipper skip some contens 
+    /// @tparam DataBaseType database to store the parsed content 
 	template <typename Iterator, typename Skipper, typename DataBaseType>
 	struct TfGrammar : qi::grammar<Iterator, Skipper>
 	{
-		qi::rule<Iterator, Skipper> expression;
-		qi::rule<Iterator, Skipper> block_defn;
-		qi::rule<Iterator, Skipper> block_layer_id;
-		qi::rule<Iterator, Skipper> block_layer_purpose;
-		qi::rule<Iterator, Skipper> block_display;
-		qi::rule<Iterator, string(), Skipper> text;
-		qi::rule<Iterator, string(), Skipper> text_nc; // no constraints
+		qi::rule<Iterator, Skipper> expression; ///< expression 
+		qi::rule<Iterator, Skipper> block_defn; ///< layer definitions
+		qi::rule<Iterator, Skipper> block_layer_id; ///< layer id 
+		qi::rule<Iterator, Skipper> block_layer_purpose; ///< layer purpose 
+		qi::rule<Iterator, Skipper> block_display; ///< technology display 
+		qi::rule<Iterator, string(), Skipper> text; ///< text 
+		qi::rule<Iterator, string(), Skipper> text_nc; ///< no constraints
 
-		DataBaseType& m_db;
+		DataBaseType& m_db; ///< reference to database 
 
+        /// @brief constructor 
+        /// @param db database 
+        /// @param error_handler error handler 
 		TfGrammar(DataBaseType& db, ErrorHandler<Iterator>& error_handler) : TfGrammar::base_type(expression), m_db(db)
 		{
 			using qi::int_;
@@ -142,16 +164,23 @@ struct TfParser
 #endif 
 		}
 
+        /// @brief callback of layer id 
+        /// @param s1 layer name 
+        /// @param d2 layer id 
+        /// @param s3 layer abbreviation
 		void layer_id_cbk(string const& s1, int32_t const& d2, string const& s3)
 		{
 			m_db.add_tf_layer_id(s1, d2, s3);
 		}
 	};
+    /// @brief grammar of skipper 
+    /// @param Iterator iterator of text 
 	template <typename Iterator>
 	struct SkipperGrammar : qi::grammar<Iterator>
 	{
-		qi::rule<Iterator> skip;
+		qi::rule<Iterator> skip; ///< grammar to skip text 
 
+        /// @brief constructor 
 		SkipperGrammar() : SkipperGrammar::base_type(skip)
 		{
 			using qi::char_;
@@ -163,6 +192,9 @@ struct TfParser
 				;
 		}
 	};
+    /// @brief API to read tf file 
+    /// @param db database 
+    /// @param tfFile tf file 
 	template <typename DataBaseType>
 	static bool read(DataBaseType& db, const string& tfFile)
 	{
