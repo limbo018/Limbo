@@ -10,7 +10,7 @@
 
 #include <iterator>
 
-namespace for Limbo
+/// namespace for Limbo
 namespace limbo 
 {
 

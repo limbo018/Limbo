@@ -50,6 +50,6 @@ g++ -o test_bison test_bison.cpp -I $LIMBO_DIR/include -L $LIMBO_DIR/lib -llefpa
 - [/limbo/parsers/lef/bison/lefiUnits.hpp](@ref lefiUnits.hpp)       
 - [/limbo/parsers/lef/bison/lefiViaRule.hpp](@ref lefiViaRule.hpp)
 
-# License {#Parsers_LefParser_License}
+# LICENSE {#Parsers_LefParser_License}
 
 \include limbo/parsers/lef/bison/LICENSE.TXT
