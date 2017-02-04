@@ -37,11 +37,20 @@ INCLUDE = -I $(realpath .) \
 #                         Standard Setting
 # ==========================================================================
 
-SRCS = $(wildcard *.cpp) 
+SRCS = test_p2r.cpp test_boostpolygonapi.cpp 
+# blib is optional 
+ifdef BLIB_DIR
+SRCS += test_blibapi.cpp
+endif 
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
+# blib is optional 
+ifdef BLIB_DIR 
 all: test_p2r test_blibapi test_boostpolygonapi 
+else 
+all: test_p2r test_boostpolygonapi 
+endif 
 
 # Compile dependency 
 
