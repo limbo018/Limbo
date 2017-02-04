@@ -1,6 +1,6 @@
 /**
  * @file   gdsii/test_gdsdb.cpp
- * @brief  test @ref limbo::GdsParser::GdsDB 
+ * @brief  test @ref GdsParser::GdsDB::GdsDB 
  * @author Yibo Lin
  * @date   Jan 2017
  */
@@ -15,18 +15,18 @@
 /// @return 0 if succeed 
 int main(int argc, char** argv)
 {
-    limbo::GdsParser::GdsDB db; 
+    GdsParser::GdsDB::GdsDB db; 
     if (argc > 2 && argc <= 4)
     {
         // test simple read and write
-        limbo::GdsParser::GdsReader reader (db); 
+        GdsParser::GdsDB::GdsReader reader (db); 
         limboAssert(reader(argv[1]));
 
-        for (std::vector<limbo::GdsParser::GdsCell>::const_iterator it = db.cells().begin(); it != db.cells().end(); ++it)
+        for (std::vector<GdsParser::GdsDB::GdsCell>::const_iterator it = db.cells().begin(); it != db.cells().end(); ++it)
             std::cout << "cell: " << it->name() << std::endl; 
 
         // write 
-        limbo::GdsParser::GdsWriter gw (db); 
+        GdsParser::GdsDB::GdsWriter gw (db); 
         gw(argv[2]);
 
         std::cout << "4 arguments to test flatten: input gds, output gds, flat output gds, flat cell name" << std::endl;
@@ -34,13 +34,13 @@ int main(int argc, char** argv)
 	else if (argc > 4)
     {
         // test flatten 
-        limbo::GdsParser::GdsCell flatCell = db.extractCell(argv[4]);
+        GdsParser::GdsDB::GdsCell flatCell = db.extractCell(argv[4]);
 
-        limbo::GdsParser::GdsDB flatDB; 
+        GdsParser::GdsDB::GdsDB flatDB; 
         flatDB.addCell(flatCell); 
 
         // write flatten cell 
-        limbo::GdsParser::GdsWriter flatGw (flatDB); 
+        GdsParser::GdsDB::GdsWriter flatGw (flatDB); 
         flatGw(argv[3]);
     }
 	else std::cout << "at least 4 arguments are required: input gds, output gds, flat output gds, flat cell name" << std::endl;

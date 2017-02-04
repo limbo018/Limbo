@@ -14,11 +14,11 @@
 #include <limbo/parsers/gdsii/stream/GdsWriter.h>
 #include <limbo/preprocessor/Msg.h>
 
-/// namespace for Limbo 
-namespace limbo 
-{ 
-/// namespace for Limbo.GdsParser
+/// namespace for Limbo.GdsParser 
 namespace GdsParser 
+{
+/// namespace for Limbo.GdsParser.GdsDB 
+namespace GdsDB 
 {
 
 /// @brief a helper to facilitate actions on different GDSII objects.
@@ -76,7 +76,7 @@ struct GdsObjectHelpers
 		}
 		catch (std::exception& e)
 		{
-			limboPrint(kERROR, "exception in action %s: %s\n", action.message().c_str(), e.what()); 
+			limboPrint(limbo::kERROR, "exception in action %s: %s\n", action.message().c_str(), e.what()); 
 			limboAssert(0);
 		}
 	}
@@ -174,7 +174,7 @@ struct WriteCellObjectAction
 	}
 }; 
 
-/// @namespace limbo::GdsParser::ExtractCellObjectActionDetails 
+/// @namespace GdsParser::GdsDB::ExtractCellObjectActionDetails 
 /// @brief Detailed action functions for extract objects of a cell 
 namespace ExtractCellObjectActionDetails 
 {
@@ -245,7 +245,7 @@ struct ExtractCellObjectAction
     /// @brief API to run the extraction 
     /// 
 	/// Since template specialization for member function is not supported 
-	/// I have to use external function within a namespace @ref limbo::GdsParser::ExtractCellObjectActionDetails
+	/// I have to use external function within a namespace @ref GdsParser::GdsDB::ExtractCellObjectActionDetails
     /// 
     /// @param type GDSII record 
     /// @param object GDSII object 
@@ -262,7 +262,7 @@ struct ExtractCellObjectAction
 	}
 };
 
-/// @namespace limbo::GdsParser::ApplyCellReferenceActionDetails 
+/// @namespace GdsParser::GdsDB::ApplyCellReferenceActionDetails 
 /// @brief An action function to apply changes to a copied cell reference. 
 /// It contains various transformers. 
 namespace ApplyCellReferenceActionDetails 
@@ -438,7 +438,7 @@ inline void apply<GdsCellArray>(GdsCellReference const& /*cellRef*/, GdsCellArra
 } // namespace ApplyCellReferenceActionDetails
 
 /// @brief Apply cell reference action. 
-/// It needs to call functions in @ref limbo::GdsParser::ApplyCellReferenceActionDetails
+/// It needs to call functions in @ref GdsParser::GdsDB::ApplyCellReferenceActionDetails
 struct ApplyCellReferenceAction
 {
 	GdsCellReference const& cellRef; ///< CREF object 
@@ -466,7 +466,7 @@ struct ApplyCellReferenceAction
 	}
 };
 
+} // namespace GdsDB
 } // namespace GdsParser
-} // namespace limbo
 
 #endif

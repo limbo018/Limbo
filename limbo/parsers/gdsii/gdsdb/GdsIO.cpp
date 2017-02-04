@@ -1,16 +1,16 @@
-/*************************************************************************
-    > File Name: GdsIO.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 26 Aug 2015 10:59:58 AM CDT
- ************************************************************************/
+/**
+ * @file   GdsIO.cpp
+ * @brief  Implementation of wrapper to GDSII read and write with GDSII database @ref GdsParser::GdsDB::GdsDB
+ * @author Yibo Lin
+ * @date   Nov 2016
+ */
 
 #include <limbo/parsers/gdsii/gdsdb/GdsIO.h>
 #include <limbo/parsers/gdsii/gdsdb/GdsObjectHelpers.h>
 #include <limbo/preprocessor/Msg.h>
 #include <exception>
 
-namespace limbo { namespace GdsParser {
+namespace GdsParser { namespace GdsDB {
 
 namespace gtl = boost::polygon;
 using namespace gtl::operators;
@@ -61,7 +61,7 @@ void GdsReader::printUnsupportRecords() const
 	{
 		if (m_vUnsupportRecord[i])
 		{
-			limboPrint(kWARN, "Unsupported record_type = %s message suppressed %u times\n", ::GdsParser::gds_record_ascii(i), m_vUnsupportRecord[i]);
+			limboPrint(limbo::kWARN, "Unsupported record_type = %s message suppressed %u times\n", ::GdsParser::gds_record_ascii(i), m_vUnsupportRecord[i]);
 		}
 	}
 }
@@ -114,7 +114,7 @@ void GdsReader::string_cbk(::GdsParser::GdsRecords::EnumType record_type, ::GdsP
 			{
 				// only print invalid records or unsupported records for the first time 
 				if (record_type >= (int)m_vUnsupportRecord.size() || m_vUnsupportRecord[record_type] == 0)
-					limboPrint(kWARN, "%s() invalid record_type = %s, data_type = %s\n", __func__, ::GdsParser::gds_record_ascii(record_type), ::GdsParser::gds_data_ascii(data_type));
+					limboPrint(limbo::kWARN, "%s() invalid record_type = %s, data_type = %s\n", __func__, ::GdsParser::gds_record_ascii(record_type), ::GdsParser::gds_data_ascii(data_type));
 				m_vUnsupportRecord[record_type] += 1; 
 			}
 			break;
@@ -172,7 +172,7 @@ void GdsReader::begin_end_cbk(::GdsParser::GdsRecords::EnumType record_type)
 			{
 				// only print invalid records or unsupported records for the first time 
 				if (record_type >= (int)m_vUnsupportRecord.size() || m_vUnsupportRecord[record_type] == 0)
-					limboPrint(kWARN, "%s() invalid record_type = %s\n", __func__, ::GdsParser::gds_record_ascii(record_type));
+					limboPrint(limbo::kWARN, "%s() invalid record_type = %s\n", __func__, ::GdsParser::gds_record_ascii(record_type));
 				m_vUnsupportRecord[record_type] += 1; 
 			}
             break;
@@ -234,7 +234,7 @@ void GdsReader::integer_cbk(::GdsParser::GdsRecords::EnumType record_type, ::Gds
 			{
 				// only print invalid records or unsupported records for the first time 
 				if (record_type >= (int)m_vUnsupportRecord.size() || m_vUnsupportRecord[record_type] == 0)
-					limboPrint(kWARN, "%s() invalid record_type = %s, data_type = %s\n", __func__, ::GdsParser::gds_record_ascii(record_type), ::GdsParser::gds_data_ascii(data_type));
+					limboPrint(limbo::kWARN, "%s() invalid record_type = %s, data_type = %s\n", __func__, ::GdsParser::gds_record_ascii(record_type), ::GdsParser::gds_data_ascii(data_type));
 				m_vUnsupportRecord[record_type] += 1; 
 			}
             break;
@@ -258,7 +258,7 @@ void GdsReader::float_cbk(::GdsParser::GdsRecords::EnumType record_type, ::GdsPa
 			{
 				// only print invalid records or unsupported records for the first time 
 				if (record_type >= (int)m_vUnsupportRecord.size() || m_vUnsupportRecord[record_type] == 0)
-					limboPrint(kWARN, "%s() invalid record_type = %s, data_type = %s\n", __func__, ::GdsParser::gds_record_ascii(record_type), ::GdsParser::gds_data_ascii(data_type));
+					limboPrint(limbo::kWARN, "%s() invalid record_type = %s, data_type = %s\n", __func__, ::GdsParser::gds_record_ascii(record_type), ::GdsParser::gds_data_ascii(data_type));
 				m_vUnsupportRecord[record_type] += 1; 
 			}
             break;
@@ -419,4 +419,4 @@ void GdsWriter::write(::GdsParser::GdsWriter& gw, GdsCellArray const& object) co
     gw.gds_write_endel();                   // end of element
 }
 
-}} // namespace limbo // GdsParser
+}} // namespace GdsParser // GdsDB
