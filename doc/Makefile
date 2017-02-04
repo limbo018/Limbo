@@ -18,16 +18,71 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(DOCDIR)/solvers \
 		  $(DOCDIR)/string \
 		  $(DOCDIR)/thirdparty \
+		  \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/coloring/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/partition/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/placement/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/algorithms/*.cpp) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/bibtex/*.py) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/containers/*.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/makeutils/*.mk) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/math/*.h) \
+		  \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/bookshelf/test_bison.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/bookshelf/bison/BookshelfDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/bookshelf/bison/BookshelfDriver.h) \
+		  \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/def/test_bison.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/bison/DefDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/bison/DefDriver.h) \
+		  \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/ebeam/test_bison.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/ebeam/bison/EbeamDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/ebeam/bison/EbeamDriver.h) \
+		  \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/gdf/test_bison.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdf/bison/GdfDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdf/bison/GdfDriver.h) \
+		  \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/gdsii/*.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdsii/stream/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdsii/gdsdb/*.h) \
+		  \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/lef/test_bison.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/bison/LefDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/bison/LefDriver.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/bison/*.hpp) \
+		  \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/lp/test_bison.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lp/bison/LpDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lp/bison/LpDriver.h) \
+		  \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/tf/test_spirit.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/tf/spirit/TfParser.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/tf/spirit/ErrorHandler.h) \
+		  \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/verilog/test_bison.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/verilog/bison/VerilogDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/verilog/bison/VerilogDriver.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/geometry/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/geometry/api/*.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/preprocessor/*.h) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/programoptions/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/programoptions/*.h) \
+		  \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/api/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/lpmcf/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/solvers/lpmcf/*.cpp) \
+		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/string/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/string/*.h) 
 
@@ -54,7 +109,9 @@ Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile
 	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md *.py *.mk >> $(DOCDIR)/Doxyfile
 	echo INCLUDE_FILE_PATTERNS  = *.h *.hpp >> $(DOCDIR)/Doxyfile
 	echo ALIASES               += nowarn=\"\\{\" endnowarn=\"\\}\" >> $(DOCDIR)/Doxyfile
-	echo FILTER_PATTERNS = *.mk=$(LIMBO_ROOT_DIR)/doc/MKFilter.sh >> $(DOCDIR)/Doxyfile
+	echo EXTENSION_MAPPING      = mk=C++ >> $(DOCDIR)/Doxyfile 
+	echo FILTER_PATTERNS        = *.mk=$(LIMBO_ROOT_DIR)/doc/MKFilter.sh >> $(DOCDIR)/Doxyfile
+	echo CITE_BIB_FILES         = $(LIMBO_ROOT_DIR)/doc/ref/Top.bib $(wildcard $(LIMBO_ROOT_DIR)/doc/ref/*.bib) >> $(DOCDIR)/Doxyfile 
 
 doc: Doxyfile $(SRCS)
 	$(DOXYGEN) $(DOCDIR)/Doxyfile.in
@@ -62,13 +119,13 @@ doc: Doxyfile $(SRCS)
 .PHONY: install
 install: 
 	mkdir -p $(PREFIX)/doc
-	cp -r $(DOCDIR)/html $(PREFIX)/doc
-	#cp -r $(DOCDIR)/latex $(PREFIX)/doc
+	if [ -a $(DOCDIR)/html/index.html ]; then \
+		cp -r $(DOCDIR)/html $(PREFIX)/doc; \
+	fi 
 
 .PHONY: clean
 clean: 
 	rm -rf $(DOCDIR)/html
-	#rm -rf $(DOCDIR)/latex
 	rm -f $(DOCDIR)/Doxyfile
 
 .PHONY: extraclean

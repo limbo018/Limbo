@@ -1,19 +1,13 @@
-/*************************************************************************
-    > File Name: GurobiApi.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Fri 07 Nov 2014 11:51:22 PM CST
- ************************************************************************/
+/**
+ * @file   GurobiApi.h
+ * @brief  Gurobi API by writing out problem file in LP format and read solution. 
+ *         Consider the file IO overhead before using it. 
+ * @author Yibo Lin
+ * @date   Nov 2014
+ */
 
 #ifndef _LIMBO_SOLVERS_API_GUROBIAPI_H
 #define _LIMBO_SOLVERS_API_GUROBIAPI_H
-
-/// ===================================================================
-///    class          : GurobiApi
-///    attributes     : Solve Lp problem with Gurobi and read results 
-///    compilation    : -I$(GUROBI_HOME)/include -L$(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi56
-///                     static compilation is not supported due to shared library libgurobi56.so
-/// ===================================================================
 
 #include <iostream>
 #include <string>
@@ -23,10 +17,15 @@
 #include <boost/cstdint.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/assert.hpp> 
-/// make sure gurobi is configured properly 
+// make sure gurobi is configured properly 
 #include "gurobi_c++.h"
 
-namespace limbo { namespace solvers {
+/// namespace for Limbo
+namespace limbo 
+{ 
+/// namespace for Solvers 
+namespace solvers 
+{
 
 using std::cout;
 using std::endl;
@@ -44,15 +43,18 @@ using boost::shared_ptr;
 template <typename T>
 struct GurobiFileApi 
 {
+    /// @brief value type 
 	typedef T value_type;
 
-	/// data structure to save solution
+	/// @brief data structure to save solution
 	struct solution_type 
 	{
-		value_type obj;
-		list<pair<string, value_type> > vVariable;
+		value_type obj; ///< objective value 
+		list<pair<string, value_type> > vVariable; ///< list of (variable, solution) pairs 
 	};
-	/// top api function 
+	/// @brief API function 
+    /// @param fileName input file name 
+    /// @return solution 
 	virtual shared_ptr<solution_type> operator()(string const& fileName, bool = true) const 
 	{
 		// better to use full path for file name 
@@ -86,9 +88,10 @@ struct GurobiFileApi
 
 		return pSol;
 	}
-	/// core function to solve lp problem with Gurobi
-	/// it is modified from examples of Gurobi
-	/// basically it reads input problem file, and output solution file 
+	/// Core function to solve lp problem with Gurobi. 
+	/// It is modified from examples of Gurobi. 
+	/// Basically it reads input problem file, and output solution file. 
+    /// @param fileName input file 
 	virtual void solve_lp(string fileName) const 
 	{
 		try 
@@ -146,6 +149,7 @@ struct GurobiFileApi
 
 };
 
-}} // namespace limbo // namespace solvers
+} // namespace solvers
+} // namespace limbo
 
 #endif 

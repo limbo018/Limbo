@@ -1,29 +1,33 @@
-/*************************************************************************
-    > File Name: GreedySearch.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Tue 05 May 2015 10:22:00 AM CDT
- ************************************************************************/
+/**
+ * @file   GreedySearch.h
+ * @brief  A greedy search algorithm for placement. 
+ *
+ * This class provides generic functions to bruce-force search 
+ * all legal positions (including swap with smaller cells) within 
+ * displacment range. 
+ * The flow can be customized, but the basic functions can be shared. 
+ * This approach is very powerful to legalize a placement or 
+ * find positions without stitch or conflict in DFM aware placement. 
+ *
+ * @author Yibo Lin
+ * @date   May 2015
+ */
 
 #ifndef _LIMBO_ALGORITHMS_PLACEMENT_GREEDYSEARCH_H
 #define _LIMBO_ALGORITHMS_PLACEMENT_GREEDYSEARCH_H
 
-/// ===================================================================
-///    class          : GreedySearch
-///
-///    This class provides generic functions to bruce-force search 
-///    all legal positions (including swap with smaller cells) within 
-///    displacment range. 
-///    The flow can be customized, but the basic functions can be shared. 
-///    This approach is very powerful to legalize a placement or 
-///    find positions without stitch or conflict in DFM aware placement. 
-///  
-/// ===================================================================
-
 #include <iostream>
 #include <iterator>
 
-namespace limbo { namespace algorithms { namespace placement {
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.Algorithms
+namespace algorithms 
+{ 
+/// namespace for Limbo.Algorithms.Placement 
+namespace placement 
+{
 
 using std::cout;
 using std::endl;
@@ -92,10 +96,10 @@ struct GSCallback
 
 	/// user-defined cost callbacks
 	/// and return the best cost with the best solution 
-	/// \param CostType should be comparable according to cost values 
+	/// @param CostType should be comparable according to cost values 
 	/// 
 	/// it should also contain the method to obtain the corresponding solution
-	/// \param swap_cnt indicates how many smaller cells have to be replaced to place node \param n 
+	/// @param swap_cnt indicates how many smaller cells have to be replaced to place node @param n 
 	/// if swap_cnt is zero, then n is directly placed into a whitespace 
 	cost_type calc_cost(const node_type* pcomp2, site_coordinate_type seg_id2, 
 			site_coordinate_type site_id2, vector<list<node_type*>::iterator> const& vItNode, unsigned int swap_cnt) const{}
@@ -113,25 +117,29 @@ struct GSCallback
 #endif
 
 /// choose T& or T*
+/// @tparam T 
 template <typename T>
 struct gs_choose_type
 {
-	typedef T& value_type;
-	typedef T const& const_value_type;
+	typedef T& value_type; ///< value type 
+	typedef T const& const_value_type; ///< constant value type 
 };
+/// choose T& or T*
+/// @tparam T 
 template <typename T>
 struct gs_choose_type<T*>
 {
-	typedef T* value_type;
-	typedef const T* const_value_type;
+	typedef T* value_type; ///< value type 
+	typedef const T* const_value_type; ///< constant value type 
 };
 
 /// core class to perform greedy search functions
-/// \param CallbackType provides all the information needed 
+/// @tparam CallbackType provides all the information needed 
 template <typename CallbackType>
 class GreedySearch
 {
 	public:
+        /// @nowarn
 		typedef CallbackType callback_type;
 		typedef typename callback_type::node_type node_type;
 		typedef typename callback_type::cost_type cost_type;
@@ -141,16 +149,25 @@ class GreedySearch
 		typedef typename callback_type::node_fail_vector_type node_fail_vector_type;
 		typedef typename callback_type::row_vector_type row_vector_type;
 
-		/// it can be row_type& or row_type*
+		// it can be row_type& or row_type*
 		typedef typename gs_choose_type<typename row_vector_type::value_type>::value_type row_value_type;
 		typedef typename gs_choose_type<typename row_vector_type::value_type>::const_value_type row_const_value_type;
-		/// it can be node_type& or node_type*
+		// it can be node_type& or node_type*
 		typedef typename gs_choose_type<typename node_vector_type::value_type>::value_type node_value_type;
 		typedef typename gs_choose_type<typename node_vector_type::value_type>::const_value_type node_const_value_type;
+        /// @endnowarn
 
+        /// constructor 
+        /// @param cbk callback object 
 		GreedySearch(callback_type cbk = callback_type()) : m_cbk(cbk) {}
 
+        /// API to run the algorithm 
+        /// @param vFailNode container to store failed nodes 
+        /// @param max_swap_cnt one cell can swap with how many other cells 
 		void operator()(node_fail_vector_type& vFailNode, int max_swap_cnt) {this->run(vFailNode, max_swap_cnt);}
+        /// kernel function to run the algorithm 
+        /// @param vFailNode container to store failed nodes 
+        /// @param max_swap_cnt one cell can swap with how many other cells 
 		void run(node_fail_vector_type& vFailNode, int max_swap_cnt)
 		{
 			for (typename node_fail_vector_type::iterator it = vFailNode.begin();
@@ -177,6 +194,9 @@ class GreedySearch
 		}
 		/// node_map_type can be vector<list<node_type> >
 		/// row_vector_type can be vector<row_type>
+        /// @param n node 
+        /// @param vFailNode container to store failed nodes 
+        /// @param swap_cnt number of swaps occurs 
 		bool search_swap(node_value_type n, node_fail_vector_type& vFailNode, int swap_cnt) 
 		{
 			typedef typename node_vector_type::iterator node_iterator_type;
@@ -267,18 +287,27 @@ class GreedySearch
 			return false;
 		}
 	protected:
+        /// @param n node 
+        /// @return width of node 
 		site_coordinate_type node_site_size_x(node_const_value_type n) const 
 		{
 			return m_cbk.site_xh(n)-m_cbk.site_xl(n);
 		}
+        /// @param n1 node 
+        /// @param n2 node 
+        /// @return gap in number of sites between nodes 
 		site_coordinate_type node_site_gap_x(node_const_value_type n1, node_const_value_type n2) const 
 		{
 			return m_cbk.site_xl(n2)-m_cbk.site_xh(n1);
 		}
+        /// @param n node 
+        /// @return left coordiate in sites 
 		site_coordinate_type site_xl(node_const_value_type n) const 
 		{
 			return m_cbk.site_xl(n);
 		}
+        /// @param n node 
+        /// @return right coordiate in sites 
 		site_coordinate_type site_xh(node_const_value_type n) const 
 		{
 			return m_cbk.site_xh(n);
@@ -287,6 +316,8 @@ class GreedySearch
 		callback_type m_cbk; ///< a copiable callback_type is required
 };
 
-}}} // namespace limbo  // namespace algorithms // namespace placement
+} // namespace placement
+} // namespace algorithms
+} // namespace limbo 
 
 #endif

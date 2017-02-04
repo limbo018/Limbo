@@ -11,6 +11,9 @@
  *     For updates, support, or to become part of the LEF/DEF Community,
  *  check www.openeda.org for details.
  */
+/**
+ * @file lefiLayer.hpp
+ */
 
 #ifndef lefiLayer_h
 #define lefiLayer_h

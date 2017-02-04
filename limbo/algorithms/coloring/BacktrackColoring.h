@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: BacktrackColoring.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Mon Jun  1 22:22:14 2015
- ************************************************************************/
+/**
+ * @file   BacktrackColoring.h
+ * @brief  graph coloring by backtracking 
+ * @author Yibo Lin
+ * @date   Jun 2015
+ */
 
 #ifndef LIMBO_ALGORITHMS_COLORING_BACKTRACKCOLORING
 #define LIMBO_ALGORITHMS_COLORING_BACKTRACKCOLORING
@@ -11,12 +11,24 @@
 #include <limbo/algorithms/coloring/Coloring.h>
 #include <limbo/algorithms/coloring/GreedyColoring.h>
 
-namespace limbo { namespace algorithms { namespace coloring {
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.Algorithms 
+namespace algorithms 
+{ 
+/// namespace for Limbo.Algorithms.Coloring 
+namespace coloring 
+{
 
+/// @class limbo::algorithms::coloring::BacktrackColoring
+/// Solve graph coloring with backtracking 
+/// @tparam GraphType graph type 
 template <typename GraphType>
 class BacktrackColoring : public Coloring<GraphType>
 {
 	public:
+        /// @nowarn 
 		typedef Coloring<GraphType> base_type;
 		using typename base_type::graph_type;
 		using typename base_type::graph_vertex_type;
@@ -26,20 +38,30 @@ class BacktrackColoring : public Coloring<GraphType>
         using typename base_type::edge_weight_type;
 		using typename base_type::ColorNumType;
 		typedef typename boost::graph_traits<graph_type>::adjacency_iterator adjacency_iterator_type;
+        /// @endnowarn
 
 		/// constructor
+        /// @param g graph 
 		BacktrackColoring(graph_type const& g) 
 			: base_type(g)
 		{}
 		/// destructor
 		virtual ~BacktrackColoring() {}
 	protected:
-		/// \return objective value 
+		/// @return objective value 
 		virtual double coloring();
 		/// initial color assignment by greedy approach 
-		/// \return cost 
+        /// @param vColor array to store coloring solution 
+		/// @return cost 
 		double init_coloring(vector<int8_t>& vColor) const;
 		/// kernel function for recursive backtracking 
+        /// @param vBestColor best coloring solution assignment 
+        /// @param vColor current coloring solution assignment 
+        /// @param best_cost best cost 
+        /// @param cur_cost current cost 
+        /// @param v current vertex 
+        /// @param cost_lb cost lower bound 
+        /// @param cost_ub cost upper bound 
 		void coloring_kernel(vector<int8_t>& vBestColor, vector<int8_t>& vColor, double& best_cost, double& cur_cost, graph_vertex_type v, double cost_lb, double cost_ub) const;
 };
 
@@ -165,6 +187,8 @@ void BacktrackColoring<GraphType>::coloring_kernel(vector<int8_t>& vBestColor, v
 	}
 }
 
-}}} // namespace limbo // namespace algorithms // namespace coloring
+} // namespace coloring
+} // namespace algorithms
+} // namespace limbo
 
 #endif

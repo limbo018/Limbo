@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: test_ChromaticNumber.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 11 Feb 2015 04:44:03 PM CST
- ************************************************************************/
+/**
+ * @file   test_ChromaticNumber.cpp
+ * @brief  test chromatic number algorithm 
+ * @author Yibo Lin
+ * @date   Feb 2015
+ */
 
 #include <iostream>
 #include <fstream>
@@ -32,14 +32,23 @@ using std::ofstream;
 using std::string;
 using namespace boost;
 
+/// maximum independent set visitor 
+/// @tparam GraphType graph type 
 template <typename GraphType>
 struct MisVisitor
 {
-	GraphType& g;
+	GraphType& g; ///< graph 
 
+    /// constructor 
+    /// @param g_ graph 
 	MisVisitor(GraphType& g_) : g(g_) {}
+    /// copy constructor 
+    /// @param rhs a MisVisitor object  
 	MisVisitor(MisVisitor const& rhs) : g(rhs.g) {}
 
+    /// required callback for @ref limbo::algorithms::MaxIndependentSetByMaxClique
+    /// @tparam MisType a container type, default is std::deque 
+    /// @param is independent set 
 	template <typename MisType>
 	void mis(MisType const& is)
 	{
@@ -60,6 +69,11 @@ struct MisVisitor
 	}
 };
 
+/// main function \n
+/// generate a random graph, then \n 
+/// - test 1: find maximum independent set by @ref limbo::algorithms::MaxIndependentSetByMaxClique
+/// - test 2: compute chromatic number by @ref limbo::algorithms::coloring::LawlerChromaticNumber
+/// - test 3: greedy coloring by @ref limbo::algorithms::coloring::DsatColoring
 int main()
 {
 	// do not use setS, it does not compile for subgraph

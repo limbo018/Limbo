@@ -1,9 +1,16 @@
-/*************************************************************************
-    > File Name: SDPColoringCsdp.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Tue 01 Sep 2015 12:01:32 PM CDT
- ************************************************************************/
+/**
+ * @file   SDPColoringCsdp.h
+ * @brief  graph coloring algorithm based on semidefinite programming (SDP)
+ *
+ * "Layout decomposition for triple patterning lithography", 
+ * Bei Yu, Kun Yuan, Duo Ding, and David Z. Pan, 
+ * IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD), 34(3):433–446, March 2015.
+ *
+ * See @ref limbo::algorithms::coloring::SDPColoringCsdp for details. 
+ *
+ * @author Yibo Lin
+ * @date   Sep 2015
+ */
 
 #ifndef LIMBO_ALGORITHMS_COLORING_SDPCOLORINGCSDP
 #define LIMBO_ALGORITHMS_COLORING_SDPCOLORINGCSDP
@@ -19,25 +26,44 @@
 // I made small modification to support that 
 #include <limbo/solvers/api/CsdpEasySdpApi.h>
 
-//////////////////////////////////////////////////////////////////////////////////
-/// SDP formulation from Bei Yu's TCAD 2015 paper 
-/// min. C X 
-/// s.t. xii = 1, for all i in V
-///      xij >= -0.5, for all (i, j) in E 
-///      X >= 0 (PSD)
-/// Note that Csdp only solves equality problem for constraints 
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.Algorithms 
+namespace algorithms 
+{ 
+/// namespace for Limbo.Algorithms.Coloring 
+namespace coloring 
+{
+
+/// @class limbo::algorithms::coloring::SDPColoringCsdp
+/// Thread control is not available as Csdp does not provide any API for that. \n
+/// 
+/// SDP formulation from Bei Yu's TCAD 2015 paper \cite TPL_TCAD2015_Yu \n
+/// \f{eqnarray*}{
+/// & min. & C X, \\
+/// & s.t. & x_{ii} = 1, \forall i \in V, \\
+/// &      & x_{ij} \ge -0.5, \forall (i, j) \in E, \\
+/// &      & X \succeq 0, \textrm{(PSD)}. 
+/// \f}
+/// Note that Csdp only solves equality problem for constraints, 
 /// so it is necessary to introduce slack variables for each conflict edge.
 /// The total number of variables are N = (vertex number + conflict edge number).
 /// The variable matrix has dimension NxN. 
-//////////////////////////////////////////////////////////////////////////////////
-
-namespace limbo { namespace algorithms { namespace coloring {
-
-/// thread control is not available as Csdp does not provide any API for that
+/// 
+/// Based on the solution of X, we group vertices and construct merged graph. 
+/// Then we color the merged graph. 
+/// 
+/// Edge weight is used to differentiate conflict edge and stitch edge.  
+/// Non-negative weight implies conflict edge. 
+/// Negative weight implies stitch edge. 
+/// 
+/// @tparam GraphType graph_type 
 template <typename GraphType>
 class SDPColoringCsdp : public Coloring<GraphType>
 {
 	public:
+        /// @nowarn
 		typedef Coloring<GraphType> base_type;
 		using typename base_type::graph_type;
 		using typename base_type::graph_vertex_type;
@@ -47,16 +73,25 @@ class SDPColoringCsdp : public Coloring<GraphType>
         using typename base_type::edge_weight_type;
 		using typename base_type::ColorNumType;
         typedef typename base_type::EdgeHashType edge_hash_type;
-		/// edge weight is used to differentiate conflict edge and stitch edge 
-		/// non-negative weight implies conflict edge 
-		/// negative weight implies stitch edge 
+        /// @endnowarn
 
+        /// @class limbo::algorithms::coloring::SDPColoringCsdp::FMGainCalcType
+        /// compute the gain when moving a vertex from one partition to another 
         struct FMGainCalcType
         {
+            /// define edge_weight_type as value_type 
             typedef edge_weight_type value_type;
-            graph_type const& graph;
+            graph_type const& graph; ///< graph 
 
+            /// constructor 
+            /// @param g graph 
             FMGainCalcType(graph_type const& g) : graph(g) {}
+            /// compute the gain when moving a vertex from one partition to another 
+            /// @param v vertex 
+            /// @param origp original partition 
+            /// @param newp new partition 
+            /// @param vPartition array of partition for each vertex  
+            /// @return gain 
             edge_weight_type operator()(int32_t v, int8_t origp, int8_t newp, std::vector<int8_t> const& vPartition) const
             {
                 typedef typename boost::graph_traits<graph_type>::out_edge_iterator out_edge_iterator_type;
@@ -81,36 +116,69 @@ class SDPColoringCsdp : public Coloring<GraphType>
             }
         };
 		/// constructor
+        /// @param g graph 
 		SDPColoringCsdp(graph_type const& g); 
 		/// destructor
 		virtual ~SDPColoringCsdp() {}
 
         /// for debug 
         /// write sdp solution to file 
+        /// @param filename file name 
+        /// @param X variable matrix X 
         void write_sdp_sol(std::string const& filename, struct blockmatrix const& X) const; 
         /// print data in blockrec 
+        /// @param label to mark what \a block is used for 
+        /// @param block compact representation of a matrix 
         void print_blockrec(const char* label, blockrec const& block) const; 
 	protected:
-		/// \return objective value 
+        /// kernel coloring algorithm 
+		/// @return objective value 
 		virtual double coloring();
 
         /// helper functions 
         /// construct blockrec in C for objective 
+        /// @param C objective matrix C 
+        /// @param blocknum block number 
+        /// @param blocksize size of block 
+        /// @param blockcategory which type of compact representation, MATRIX or DIAG 
         void construct_objectve_blockrec(blockmatrix& C, int32_t blocknum, int32_t blocksize, blockcat blockcategory) const; 
         /// construct sparseblock for constraint 
+        /// @param blocknum block number 
+        /// @param blocksize size of block 
+        /// @param constraintnum constraint number 
+        /// @param entrynum number of entries 
         struct sparseblock* construct_constraint_sparseblock(int32_t blocknum, int32_t blocksize, int32_t constraintnum, int32_t entrynum) const; 
         /// set entry for sparseblock 
+        /// @param block target block 
+        /// @param entryid entry id 
+        /// @param i, j indices 
+        /// @param value data value 
         void set_sparseblock_entry(struct sparseblock& block, int32_t entryid, int32_t i, int32_t j, double value) const; 
-        /// round sdp solution 
+        /// Round sdp solution. 
+        /// Based on the solution of X, we group vertices and construct merged graph. 
+        /// Then we color the merged graph. 
+        /// @param X variable matrix X 
         void round_sol(struct blockmatrix const& X);
+        /// coloring merged graph 
+        /// @param mg graph 
+        /// @param vMColor coloring solutions 
         void coloring_merged_graph(graph_type const& mg, std::vector<int8_t>& vMColor) const;
+        /// use different algorithms to color merged graph 
+        /// @param g graph 
+        /// @param vColor coloring solutions 
         void coloring_algos(graph_type const& g, std::vector<int8_t>& vColor) const;
+        /// use @ref limbo::algorithms::coloring::BacktrackColoring to color merged graph 
+        /// @param mg graph 
+        /// @param vColor coloring solutions 
         virtual void coloring_by_backtrack(graph_type const& mg, std::vector<int8_t>& vColor) const;
+        /// use @ref limbo::algorithms::partition::FMMultiWay to color merged graph 
+        /// @param mg graph 
+        /// @param vColor coloring solutions 
         virtual void coloring_by_FM(graph_type const& mg, std::vector<int8_t>& vColor) const;
 
         double m_rounding_lb; ///< if SDP solution x < m_rounding_lb, take x as -0.5
         double m_rounding_ub; ///< if SDP solution x > m_rounding_ub, take x as 1.0
-        const static uint32_t max_backtrack_num_vertices = 7;
+        const static uint32_t max_backtrack_num_vertices = 7; ///< maximum number of graph size that @ref limbo::algorithms::coloring::BacktrackColoring can handle
 };
 
 template <typename GraphType>
@@ -589,6 +657,8 @@ void SDPColoringCsdp<GraphType>::print_blockrec(const char* label, blockrec cons
     printf("\n");
 }
 
-}}} // namespace limbo // namespace algorithms // namespace coloring
+} // namespace coloring
+} // namespace algorithms
+} // namespace limbo
 
 #endif

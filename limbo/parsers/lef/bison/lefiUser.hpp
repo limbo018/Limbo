@@ -21,6 +21,9 @@
  * an application only needs to include either lefrReader.h(pp)
  * or lefwWriter.h(pp).
  */
+/**
+ * @file lefiUser.hpp
+ */
 
 #ifndef LEFI_USER_H
 #define LEFI_USER_H

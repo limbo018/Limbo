@@ -1,14 +1,18 @@
-/*************************************************************************
-    > File Name: test_gdsdb.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Tue 17 Jan 2017 10:12:44 PM CST
- ************************************************************************/
+/**
+ * @file   gdsii/test_gdsdb.cpp
+ * @brief  test @ref limbo::GdsParser::GdsDB 
+ * @author Yibo Lin
+ * @date   Jan 2017
+ */
 
 #include <iostream>
 #include <limbo/parsers/gdsii/gdsdb/GdsIO.h>
 #include <limbo/preprocessor/Msg.h>
 
+/// @brief main function 
+/// @param argc number of arguments 
+/// @param argv values of arguments, 4 arguments: input gds, output gds, flat output gds, flat cell name  
+/// @return 0 if succeed 
 int main(int argc, char** argv)
 {
     limbo::GdsParser::GdsDB db; 

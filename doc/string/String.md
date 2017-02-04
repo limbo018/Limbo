@@ -26,6 +26,11 @@ string limbo2343slimbo and LiMbo2343SliMbo is not equal case-sensitive
 string limbo2343slimbo and LiMbo2343SliMbo is equal case-insensitive
 ~~~~~~~~~~~~~~~~
 
+## All Examples {#String_Examples_All}
+
+- [test/string/test_compare.cpp](@ref test_compare.cpp)
+- [test/string/test_string.cpp](@ref test_string.cpp)
+
 # References {#String_References}
 
 - [limbo/string/String.h](@ref String.h)

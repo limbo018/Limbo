@@ -1,9 +1,14 @@
-/*************************************************************************
-    > File Name: GraphSimplification.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Mon May 18 15:55:09 2015
- ************************************************************************/
+/**
+ * @file   GraphSimplification.h
+ * @brief  Various graph simplification techniques for graph coloring. 
+ * Some of them can also be used in other applications. 
+ *
+ * Current simplification techniques include iterative vertex removal, biconnected component, merge 4-clique structures, etc. 
+ * See @ref limbo::algorithms::coloring::GraphSimplification::strategy_type for detailed strategies. 
+ *
+ * @author Yibo Lin
+ * @date   May 2015
+ */
 
 #ifndef LIMBO_ALGORITHMS_GRAPHSIMPLIFICATION_H
 #define LIMBO_ALGORITHMS_GRAPHSIMPLIFICATION_H
@@ -26,37 +31,54 @@
 #include <limbo/math/Math.h>
 #include <limbo/algorithms/GraphUtility.h>
 
-namespace limbo { namespace algorithms { namespace coloring {
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.Algorithms 
+namespace algorithms 
+{ 
+/// namespace for Limbo.Algorithms.Coloring 
+namespace coloring 
+{
 
 namespace la = ::limbo::algorithms;
 
+/// @class limbo::algorithms::coloring::GraphSimplification
+/// Various graph simplification techniques for graph coloring.  
+/// 
+/// @tparam GraphType graph type 
 template <typename GraphType>
 class GraphSimplification
 {
 	public:
+        /// @nowarn
 		typedef GraphType graph_type;
 		typedef typename boost::graph_traits<graph_type>::vertex_descriptor graph_vertex_type;
 		typedef typename boost::graph_traits<graph_type>::edge_descriptor graph_edge_type;
 		typedef typename boost::graph_traits<graph_type>::vertex_iterator vertex_iterator;
 		typedef typename boost::graph_traits<graph_type>::adjacency_iterator adjacency_iterator;
 		typedef typename boost::graph_traits<graph_type>::edge_iterator edge_iterator;
+        /// @endnowarn
 
+        /// @brief status of vertex. 
 		enum vertex_status_type {
-			GOOD, // still in graph 
-			HIDDEN, // vertex is hidden by simplification  
-			MERGED // vertex is merged to other vertex 
+			GOOD, ///< still in graph 
+			HIDDEN, ///< vertex is hidden by simplification  
+			MERGED ///< vertex is merged to other vertex 
 		};
-		/// simplification strategies available 
-		/// these strategies are order-sensitive 
-		/// it is recommended to call simplify() 
+		/// @brief simplification strategies available. 
+		/// These strategies are order-sensitive.  
+		/// It is recommended to call simplify(), 
 		/// e.g. simplify(HIDE_SMALL_DEGREE | BICONNECTED_COMPONENT) 
 		enum strategy_type {
-			NONE = 0, 
-			HIDE_SMALL_DEGREE = 1, 
-			MERGE_SUBK4 = 2,
-			BICONNECTED_COMPONENT = 4
+			NONE = 0, ///< no simplification 
+			HIDE_SMALL_DEGREE = 1, ///< hide vertices whose degree is smaller than number of colors available 
+			MERGE_SUBK4 = 2, ///< merge 4-clique structures, no longer optimal 
+			BICONNECTED_COMPONENT = 4 ///< divide graph by biconnected components 
 		};
 		/// constructor 
+        /// @param g graph 
+        /// @param color_num number of colors 
 		GraphSimplification(graph_type const& g, uint32_t color_num) 
 			: m_graph (g)
 			, m_color_num (color_num)
@@ -84,8 +106,12 @@ class GraphSimplification
 #endif
 		}
 		/// copy constructor is not allowed 
+        /// @param rhs a GraphSimplification object 
 		GraphSimplification(GraphSimplification const& rhs);
 
+        /// set precolored vertices 
+        /// @tparam Iterator iterator type 
+        /// @param first, last begin and end of the precolored vertex array 
 		template <typename Iterator>
 		void precolor(Iterator first, Iterator last)
 		{
@@ -95,62 +121,97 @@ class GraphSimplification
 #endif
 		}
 
+        /// @return status array of vertices 
 		std::vector<vertex_status_type> const& status() const {return m_vStatus;}
+        /// @return parent array of vertices 
 		std::vector<graph_vertex_type> const& parents() const {return m_vParent;}
+        /// @return children map of vertices 
 		std::vector<std::vector<graph_vertex_type> > const& children() const {return m_vChildren;}
+        /// @return hidden vertex array of vertices 
 		std::stack<graph_vertex_type> const& hidden_vertices() const {return m_vHiddenVertex;}
 
-		/// \return simplified graph and a std::map from merged graph vertices to original graph vertices 
+		/// @return simplified graph and a std::map from merged graph vertices to original graph vertices 
 		std::pair<graph_type, std::map<graph_vertex_type, graph_vertex_type> > simplified_graph() const; 
+        /// extract a component from simplified graph 
+        /// @param comp_id component id 
+        /// @param sg component of simplified graph 
+        /// @param vSimpl2Orig mapping from simplified graph to original graph 
+        /// @return true if succeed 
 		bool simplified_graph_component(uint32_t comp_id, graph_type& sg, std::vector<graph_vertex_type>& vSimpl2Orig) const;
+        /// @return number of components 
 		uint32_t num_component() const {return m_mCompVertex.size();}
 
-        /// std::set m_max_merge_level
+        /// set maximum merge level 
+        /// @param l level 
         void max_merge_level(int32_t l) {m_max_merge_level = l;}
 
+        /// API to run the simplification algorithm 
+        /// @param level simplification level, can be combination of items in @ref limbo::algorithms::coloring::GraphSimplification::strategy_type
 		void simplify(uint32_t level);
+        /// API to recover coloring solutions from color assignment of simplified graph 
+        /// @param vColorFlat flatten coloring solutions for original graph 
+        /// @param mColor coloring solutions arranged by components 
+        /// @param mSimpl2Orig mapping from simplified graph components to original graph 
 		void recover(std::vector<int8_t>& vColorFlat, std::vector<std::vector<int8_t> >& mColor, std::vector<std::vector<graph_vertex_type> > const& mSimpl2Orig) const;
 
-		/// for a structure of K4 with one fewer edge 
-		/// suppose we have 4 vertices 1, 2, 3, 4
-		/// 1--2, 1--3, 2--3, 2--4, 3--4, vertex 4 is merged to 1 
-		/// this strategy only works for 3-coloring 
-		/// it cannot guarantee minimal conflicts 
-		/// but it can be used in a native conflict checker 
+		/// For a structure of K4 with one fewer edge,  
+		/// suppose we have 4 vertices 1, 2, 3, 4, 
+		/// edges 1--2, 1--3, 2--3, 2--4, 3--4. 
+        /// Vertex 4 is merged to 1. 
+		/// This strategy only works for 3-coloring. 
+		/// It cannot guarantee minimal conflicts,
+		/// but it can be used in a native conflict checker.
 		void merge_subK4();
 
-		/// \param color_num number of colors available 
-		/// hide vertices whose degree is no larger than color_num-1
+		/// hide vertices whose degree is no larger than number of colors - 1
 		void hide_small_degree();
-		/// find all bridge edges and divided graph into components  
+		// find all bridge edges and divided graph into components  
 		//void remove_bridge();
 		/// find all articulation points and biconnected components 
 		void biconnected_component();
 
 		/// recover merged vertices 
-		/// \param vColor must be partially assigned colors except simplified vertices  
+		/// @param vColor must be partially assigned colors except simplified vertices  
 		void recover_merge_subK4(std::vector<int8_t>& vColor) const;
-		/// recover color for bridges 
-		/// \param vColor must be partially assigned colors except simplified vertices  
+		// recover color for bridges 
+		// @param vColor must be partially assigned colors except simplified vertices  
 		//void recover_bridge(std::vector<int8_t>& vColor) const;
+
 		/// recover color for biconnected components  
+        /// @param mColor coloring solutions arranged by components 
+        /// @param mSimpl2Orig mapping from simplified graph components to original graph 
 		void recover_biconnected_component(std::vector<std::vector<int8_t> >& mColor, std::vector<std::vector<graph_vertex_type> > const& mSimpl2Orig) const;
         /// recover color for hidden vertices 
         /// need to be called manually, no density balance considered 
         /// this function is mutable because it pops out elements in m_vHiddenVertex 
+		/// @param vColor coloring solutions, it must be partially assigned colors except simplified vertices  
         void recover_hide_small_degree(std::vector<int8_t>& vColor);
 
+        /// write graph in graphviz format 
+        /// @param filename output file name 
 		void write_graph_dot(std::string const& filename) const; 
+        /// write simplified graph in graphviz format 
+        /// @param filename output file name 
 		void write_simplified_graph_dot(std::string const& filename) const;
 		
 	protected:
+        /// recursive implementation of computing biconnected components 
+        /// @param v current vertex 
+        /// @param vVisited an array records whether a vertex has been visited 
+        /// @param vDisc discovery time of vertices 
+        /// @param vLow low values of vertices 
+        /// @param vParent parents of vertices 
+        /// @param visit_time records current visiting time 
+        /// @param vEdge a stack of edges for DFS 
+        /// @param mCompVertex vertices arranged by independent components 
 		void biconnected_component_recursion(graph_vertex_type v, std::deque<bool>& vVisited, std::vector<uint32_t>& vDisc, 
 				std::vector<uint32_t>& vLow, std::vector<graph_vertex_type>& vParent, uint32_t& visit_time, 
 				std::stack<std::pair<graph_vertex_type, graph_vertex_type> >& vEdge, 
 				std::list<std::pair<graph_vertex_type, std::set<graph_vertex_type> > >& mCompVertex) const;
 		/// compute connected components 
 		void connected_component();
-		/// \return the root parent 
+        /// @param v vertex 
+		/// @return the root parent 
 		/// i.e. the vertex that is not merged 
 		graph_vertex_type parent(graph_vertex_type v) const 
 		{
@@ -161,7 +222,9 @@ class GraphSimplification
 				v = m_vParent.at(v);
 			return v;
 		}
-		/// \return the root parent 
+        /// @param v vertex 
+        /// @param vParent parent array of vertices 
+		/// @return the root parent 
 		/// generalized version 
 		graph_vertex_type parent(uint32_t v, std::vector<uint32_t> const& vParent) const 
 		{
@@ -169,7 +232,9 @@ class GraphSimplification
 				v = vParent.at(v);
 			return v;
 		}
-		/// \return true if two vertices (parents) are connected by conflict edges 
+        /// @param v1 vertex 
+        /// @param v2 vertex 
+		/// @return true if two vertices (parents) are connected by conflict edges 
 		bool connected_conflict(graph_vertex_type v1, graph_vertex_type v2) const 
 		{
 			graph_vertex_type vp1 = this->parent(v1);
@@ -185,7 +250,9 @@ class GraphSimplification
 				}
 			return false;
 		}
-		/// \return true if two vertices (parents) are connected by stitch edges 
+        /// @param v1 vertex 
+        /// @param v2 vertex 
+		/// @return true if two vertices (parents) are connected by stitch edges 
 		bool connected_stitch(graph_vertex_type v1, graph_vertex_type v2) const 
 		{
 			graph_vertex_type vp1 = this->parent(v1);
@@ -201,7 +268,9 @@ class GraphSimplification
 				}
 			return false;
 		}
-		/// \return the edge of two vertices (parents)
+        /// @param v1 vertex 
+        /// @param v2 vertex 
+		/// @return the edge of two vertices (parents)
 		std::pair<graph_edge_type, bool> connected_edge(graph_vertex_type v1, graph_vertex_type v2) const 
 		{
 			graph_vertex_type vp1 = this->parent(v1);
@@ -216,7 +285,8 @@ class GraphSimplification
 				}
 			return std::make_pair(graph_edge_type(), false);
 		}
-		/// \return true if current vertex is merged 
+        /// @param v1 vertex 
+		/// @return true if current vertex is merged 
 		bool merged(graph_vertex_type v1) const 
 		{
 			bool flag = (m_vStatus.at(v1) == MERGED);
@@ -227,27 +297,31 @@ class GraphSimplification
 #endif
 			return flag;
 		}
-		/// \return true if current vertex is still in graph 
+        /// @param v1 vertex 
+		/// @return true if current vertex is still in graph 
 		bool good(graph_vertex_type v1) const 
 		{
 			return (m_vStatus.at(v1) == GOOD);
 		}
-		/// \return true if current vertex is hidden  
+        /// @param v1 vertex 
+		/// @return true if current vertex is hidden  
 		bool hidden(graph_vertex_type v1) const 
 		{
 			return (m_vStatus.at(v1) == HIDDEN);
 		}
-		/// \return true if current vertex is precolored
+        /// @param v1 vertex 
+		/// @return true if current vertex is precolored
 		bool precolored(graph_vertex_type v1) const 
 		{
 			return (m_vPrecolor.at(v1) >= 0);
 		}
-		/// \return true if the point is a articulation point 
+        /// @param v vertex 
+		/// @return true if the point is a articulation point 
 		bool articulation_point(graph_vertex_type v) const 
 		{
 			return m_mArtiPoint.count(v);
 		}
-		/// \return true if there exist precolored vertices 
+		/// @return true if there exist precolored vertices 
 		bool has_precolored() const 
 		{
 			for (std::vector<int8_t>::const_iterator it = m_vPrecolor.begin(); it != m_vPrecolor.end(); ++it)
@@ -257,13 +331,14 @@ class GraphSimplification
 			}
 			return false;
 		}
-        /// \return true if the vertex satisfies max merge level constraint 
+        /// @param l merge level 
+        /// @return true if the vertex satisfies maximum merge level constraint 
         bool check_max_merge_level(uint32_t l) const 
         {
             return l <= m_max_merge_level;
         }
-		graph_type const& m_graph;
-		uint32_t m_color_num;
+		graph_type const& m_graph; ///< original graph 
+		uint32_t m_color_num; ///< number of colors 
 		uint32_t m_level; ///< simplification level 
         uint32_t m_max_merge_level; ///< in MERGE_SUBK4, any merge that results in the children number of a vertex larger than m_max_merge_level is disallowed 
 		std::vector<vertex_status_type> m_vStatus; ///< status of each vertex 
@@ -277,12 +352,12 @@ class GraphSimplification
 //		std::vector<uint32_t> m_vComponent; ///< component id for each vertex 
 
 //		std::set<graph_edge_type> m_sBridgeEdge; ///< bridge edges that are removed during graph division 
-		std::map<graph_vertex_type, std::set<uint32_t> > m_mArtiPoint;
+		std::map<graph_vertex_type, std::set<uint32_t> > m_mArtiPoint; ///< map of (vertex of articulation point, set of components split by the vertex)
 
 		std::vector<int8_t> m_vPrecolor; ///< precolor information, if uncolored, std::set to -1
 };
 
-/// \return simplified graph and a std::map from merged graph vertices to original graph vertices 
+/// @return simplified graph and a std::map from merged graph vertices to original graph vertices 
 template <typename GraphType>
 std::pair<typename GraphSimplification<GraphType>::graph_type, std::map<typename GraphSimplification<GraphType>::graph_vertex_type, typename GraphSimplification<GraphType>::graph_vertex_type> > 
 GraphSimplification<GraphType>::simplified_graph() const 
@@ -598,7 +673,6 @@ void GraphSimplification<GraphType>::merge_subK4()
 	} while (merge_flag);
 }
 
-/// \param color_num number of colors available 
 /// hide vertices whose degree is no larger than color_num-1
 template <typename GraphType>
 void GraphSimplification<GraphType>::hide_small_degree()
@@ -954,7 +1028,7 @@ void GraphSimplification<GraphType>::connected_component()
 }
 
 /// recover merged vertices 
-/// \param vColor must be partially assigned colors except simplified vertices  
+/// @param vColor must be partially assigned colors except simplified vertices  
 template <typename GraphType>
 void GraphSimplification<GraphType>::recover_merge_subK4(std::vector<int8_t>& vColor) const
 {
@@ -976,7 +1050,6 @@ void GraphSimplification<GraphType>::recover_merge_subK4(std::vector<int8_t>& vC
 }
 
 /// recover color for biconnected components  
-/// \param vColor must be partially assigned colors except simplified vertices  
 template <typename GraphType>
 void GraphSimplification<GraphType>::recover_biconnected_component(std::vector<std::vector<int8_t> >& mColor, std::vector<std::vector<graph_vertex_type> > const& mSimpl2Orig) const
 {
@@ -1245,7 +1318,9 @@ void GraphSimplification<GraphType>::write_simplified_graph_dot(std::string cons
     la::graphviz2pdf(filename);
 }
 
-}}} // namespace limbo // namespace algorithms // namespace coloring 
+} // namespace coloring
+} // namespace algorithms
+} // namespace limbo
 
 #endif
 
