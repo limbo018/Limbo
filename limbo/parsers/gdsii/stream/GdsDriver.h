@@ -1,20 +1,19 @@
-/*************************************************************************
-    > File Name: GdsDriver.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 12 Nov 2014 01:23:35 PM CST
- ************************************************************************/
+/**
+ * @file   GdsDriver.h
+ * @brief  high-level wrapper for GdsReader (deprecated)
+ *
+ * Try to mimic same callback functions in GdsTxtParser. 
+ * There will be many self-included classes for temporary storage. 
+ * This class is more convenient but less general. 
+ *
+ * See a general wrapper in @ref GdsIO.h
+ *
+ * @author Yibo Lin
+ * @date   Nov 2014
+ */
 
 #ifndef _GDSPARSER_GDSDRIVER_H
 #define _GDSPARSER_GDSDRIVER_H
-
-/// ======================================================
-///        class: GdsDriver
-///        attribute: high-level wrapper for GdsReader
-///                   try to mimic same callback functions in GdsTxtParser
-///                   there will be many self-included classes for temporary storage
-///                   this class is more convenient but less general 
-/// ======================================================
 
 #include <sstream>
 #include <limbo/parsers/gdsii/stream/GdsReader.h>
@@ -22,18 +21,22 @@
 
 using std::ostringstream;
 
+/// namespace for Limbo.GdsParser
 namespace GdsParser 
 {
 
+/// @nowarn 
 typedef int int32_t;
 typedef unsigned int uint32_t;
+/// @endnowarn 
 
-/// internal structure to store gds information
+/// @brief internal structure to store gds information
 struct GdsBoundary 
 {
-	int32_t layer;
-	int32_t datatype;
-	vector<vector<int32_t> > vPoint;
+	int32_t layer; ///< layer 
+	int32_t datatype; ///< data type 
+	vector<vector<int32_t> > vPoint; ///< points 
+    /// @brief reset all data members 
 	void reset()
 	{
 		layer = -1;
@@ -41,19 +44,22 @@ struct GdsBoundary
 		vPoint.clear();
 	}
 };
+/// @brief GDSII TEXT 
 struct GdsText 
 {
-	int32_t layer;
-	int32_t texttype;
-	int32_t presentation;
-	int32_t strans;
-	double mag;
-	vector<int32_t> position;
-	string content;
+	int32_t layer; ///< layer 
+	int32_t texttype; ///< text type 
+	int32_t presentation; ///< presentation 
+	int32_t strans; ///< strans 
+	double mag; ///< magnitude 
+	vector<int32_t> position; ///< position 
+	string content; ///< content 
+    /// @brief constructor 
 	GdsText() 
 	{
 		position.resize(2, 0);
 	}
+    /// @brief reset all data members 
 	void reset()
 	{
 		layer = texttype = presentation = strans = 0;
@@ -62,27 +68,33 @@ struct GdsText
 		content = "";
 	}
 };
-/// thanks to Biying Xu for the benchmarks and sample code 
+/// @brief GDSII SREF 
+/// 
+/// Thanks to Biying Xu for the benchmarks and sample code 
 struct GdsSref
 {
-	string sname;
-	vector<int32_t> position;
+	string sname; ///< reference name 
+	vector<int32_t> position; ///< position 
+    /// @brief constructor 
 	GdsSref() 
 	{
 		position.resize(2, 0);
 	}
+    /// @brief reset all data members 
 	void reset()
 	{
 		sname = "";
 		position.resize(2, 0);
 	}
 };
+/// @brief GDSII cell 
 struct GdsCell 
 {
-	string cell_name;
-	vector<GdsBoundary> vBoundary;
-	vector<GdsText> vText;
-	vector<GdsSref> vSref;
+	string cell_name; ///< cell name 
+	vector<GdsBoundary> vBoundary; ///< array of boundaries 
+	vector<GdsText> vText; ///< array of texts 
+	vector<GdsSref> vSref; ///< array of SREF
+    /// @brief reset all data members 
 	void reset()
 	{
 		cell_name = "";
@@ -91,15 +103,18 @@ struct GdsCell
 		vSref.clear();
 	}
 };
+/// @brief Top GDSII library 
 struct GdsLib 
 {
-	string lib_name;
-	vector<double> unit;
-	vector<GdsCell> vCell;
+	string lib_name; ///< library name 
+	vector<double> unit; ///< unit 
+	vector<GdsCell> vCell; ///< array of cells 
+    /// @brief constructor 
 	GdsLib()
 	{
 		unit.resize(2, 0);
 	}
+    /// @brief reset all data members 
 	void reset()
 	{
 		lib_name = "";
@@ -107,6 +122,7 @@ struct GdsLib
 		vCell.clear();
 	}
 };
+/// @brief database for the driver 
 class GdsDriverDataBase
 {
 	public:
@@ -114,21 +130,26 @@ class GdsDriverDataBase
 		virtual void add_gds_lib(GdsLib const&) = 0;
 };
 
-/// high-level wrapper class for GdsReader 
-/// everything is saved in an internal data structure and users only need to provide simple callbacks
+/// @brief High-level wrapper class for GdsReader. 
+/// Everything is saved in an internal data structure and users only need to provide simple callbacks
 class GdsDriver : public GdsDataBase
 {
 	public:
+        /// @nowarn 
 		typedef GdsDataBase base_type;
 		typedef GdsDriverDataBase database_type;
+        /// @endnowarn
 
+        /// @brief constructor 
 		GdsDriver(database_type&);
 
-		/// top function for GdsDriver
+		/// @brief Top function for GdsDriver
+        /// @param filename GDSII file 
 		bool operator()(string const& filename);
 
 	protected:
-		/// required callbacks from GdsDataBase
+		/// @name required callbacks from GdsDataBase
+        ///@{
 		virtual void bit_array_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vBitArray);
 		virtual void integer_2_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vInteger);
 		virtual void integer_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vInteger);
@@ -136,14 +157,19 @@ class GdsDriver : public GdsDataBase
 		virtual void real_8_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<double> const& vFloat);
 		virtual void string_cbk(const char* ascii_record_type, const char* ascii_data_type, string const& str);
 		virtual void begin_end_cbk(const char* ascii_record_type); // begin or end indicater of a block 
-		/// generalized callback for all cases 
+        ///@}
+		/// @brief Generalized callback for all cases 
+        /// @tparam ContainerType container type 
+        /// @param ascii_record_type record in ASCII 
+        /// @param ascii_data_type data type in ASCII 
+        /// @param vData data 
 		template <typename ContainerType>
 		void general_cbk(string const& ascii_record_type, string const& ascii_data_type, ContainerType const& vData);
 
 		database_type& m_db; ///< database type 
-		GdsLib m_lib; ///< temporary GdsLib object 
+		GdsLib m_lib; ///< temporary GdsLib object. 
 									///< when parsed a lib, pass it using add_gds_lib function
-		string m_current; ///< current block name 
+		string m_current; ///< current block name.
 						///< it can be HEADER, LIBRARY, CELL, BOUNDARY, BOX, TEXT, SREF
 };
 
@@ -286,7 +312,9 @@ void GdsDriver::general_cbk(string const& ascii_record_type, string const&, Cont
 	else assert_msg(0, "unsupported record type: " << ascii_record_type);
 }
 
-/// top api function for GdsDriver
+/// @brief API function for GdsDriver
+/// @param db database 
+/// @param filename GDSII file 
 bool read(GdsDriverDataBase& db, string const& filename);
 
 } // namespace GdsParser

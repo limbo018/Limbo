@@ -1,5 +1,5 @@
 /**
- * @file   test_writer.cpp
+ * @file   gdsii/test_writer.cpp
  * @brief  test @ref GdsParser::GdsWriter 
  * @author Yibo Lin
  * @date   Oct 2014
@@ -8,6 +8,10 @@
 #include <vector>
 #include <limbo/parsers/gdsii/stream/GdsWriter.h>
 
+/// @brief main function 
+/// @param argc number of arguments 
+/// @param argv values of arguments 
+/// @return 0 if succeed 
 int main( int argc, char *argv[] )
     {
     

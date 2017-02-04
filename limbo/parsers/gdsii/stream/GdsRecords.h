@@ -1,21 +1,25 @@
-/*************************************************************************
-    > File Name: GdsRecords.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 07 Oct 2015 11:23:12 AM CDT
- ************************************************************************/
+/**
+ * @file   GdsRecords.h
+ * @brief  enum of GDSII records and data types 
+ * @author Yibo Lin
+ * @date   Oct 2015
+ */
 
 #ifndef _GDSPARSER_GDSRECORDS_H
 #define _GDSPARSER_GDSRECORDS_H
 
+/// namespace for Limbo.GdsParser
 namespace GdsParser 
 {
 
-/* the records are numbered with consecutive integers
+/**
+ * @brief GDSII records.  
+ * The records are numbered with consecutive integers, 
  * so we can use simple array to save all the data 
- * */
+ */
 struct GdsRecords 
 {
+    /// @brief enum type of GDSII records 
     enum EnumType {
         HEADER = 0x00, 
         BGNLIB = 0x01, 
@@ -81,6 +85,7 @@ struct GdsRecords
     };
 };
 
+/// @brief array to map enum of GDSII records to ASCII 
 static const char* gdsRecordsAscii[] = {
         "HEADER", 
         "BGNLIB", 
@@ -145,6 +150,7 @@ static const char* gdsRecordsAscii[] = {
         "UNKNOWN" /* unknown is set to the total number of records */
 };
 
+/// @brief array to map enum of GDSII records to descriptions
 static const char* gdsRecordsDescription[] = {
     "Start of stream, contains version number of stream file", 
     "Beginning of library, plus mod and access dates", 
@@ -209,8 +215,10 @@ static const char* gdsRecordsDescription[] = {
     "***ERROR*** Unknown record type type" 
 };
 
+/// @brief data type 
 struct GdsData 
 {
+    /// @brief enum type of data type 
     enum EnumType {
         NO_DATA = 0x00, 
         BIT_ARRAY = 0x01, 
@@ -223,6 +231,7 @@ struct GdsData
     };
 };
 
+/// @brief array to map from enum of GDSII data type to ASCII 
 static const char* gdsDataAscii[] = {
     "NO_DATA", 
     "BIT_ARRAY", 
@@ -234,6 +243,7 @@ static const char* gdsDataAscii[] = {
     "UNKNOWN" 
 };
 
+/// @brief array to map from enum of GDSII data type to descriptions 
 static const char* gdsDataDescription[] = {
     "No data present (nothing after the record header)",
     "Bit array (2 bytes)",
@@ -245,6 +255,7 @@ static const char* gdsDataDescription[] = {
     "UNKNOWN"
 };
 
+/// @brief array to map from enum of GDSII record to expected data 
 static const int gdsRecordsExpectData[] = {
     0x02,
     0x02,
@@ -309,39 +320,59 @@ static const int gdsRecordsExpectData[] = {
     0xffff
 };
 
-/// accessers
+/// @name accessors
+///@{
+/// accessors to enum types and mapping arrays 
+
+/// @param record_type GDSII record 
+/// @return ASCII 
 inline const char* gds_record_ascii(int record_type) 
 {
     return gdsRecordsAscii[record_type];
 }
+/// @param record_type GDSII record 
+/// @return description 
 inline const char* gds_record_description(int record_type)
 {
     return gdsRecordsDescription[record_type];
 }
+/// @param record_type GDSII record 
+/// @return expected data 
 inline int gds_record_expected_data(int record_type)
 {
     return gdsRecordsExpectData[record_type];
 }
+/// @param data_type data type 
+/// @return ASCII 
 inline const char* gds_data_ascii(int data_type)
 {
     return gdsDataAscii[data_type];
 }
+/// @param data_type data type 
+/// @return description 
 inline const char* gds_data_description(int data_type)
 {
     return gdsDataDescription[data_type];
 }
+/// @brief convert integer to enum 
+/// @param numeric integer number for GDSII record 
+/// @return enum type of GDSII record 
 inline GdsRecords::EnumType gds_record_type(int numeric)
 {
     if (numeric > GdsRecords::UNKNOWN)
         numeric = GdsRecords::UNKNOWN;
     return (GdsRecords::EnumType)numeric;
 }
+/// @brief convert integer to enum 
+/// @param numeric integer number of GDSII data type 
+/// @return enum type of GDSII data type 
 inline GdsData::EnumType gds_data_type(int numeric)
 {
     if (numeric > GdsData::UNKNOWN)
         numeric = GdsData::UNKNOWN;
     return (GdsData::EnumType)numeric;
 }
+///@}
 
 } // namespace GdsParser
 
