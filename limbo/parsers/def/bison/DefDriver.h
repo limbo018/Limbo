@@ -1,5 +1,9 @@
-// $Id: driver.h 17 2007-08-19 18:51:39Z tb $ 	
-/** \file driver.h Declaration of the example::Driver class. */
+/**
+ * @file   DefDriver.h
+ * @brief  Driver for Def parser 
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #ifndef DEFPARSER_DRIVER_H
 #define DEFPARSER_DRIVER_H
@@ -8,18 +12,21 @@
 
 /** The example namespace is used to encapsulate the three parser classes
  * example::Parser, example::Scanner and example::Driver */
+/** @brief namespace for DefParser */
 namespace DefParser {
 
-	using std::cout;
-	using std::endl;
-	using std::cerr;
-	using std::string; 
-	using std::vector;
-	using std::pair;
-	using std::make_pair;
-	using std::ostringstream;
+using std::cout;
+using std::endl;
+using std::cerr;
+using std::string; 
+using std::vector;
+using std::pair;
+using std::make_pair;
+using std::ostringstream;
 
-/** The Driver class brings together all components. It creates an instance of
+/** 
+ * @class DefParser::Driver
+ * The Driver class brings together all components. It creates an instance of
  * the Parser and Scanner classes and connects them. Then the input stream is
  * fed into the scanner object and the parser gets it's token
  * sequence. Furthermore the driver object is available in the grammar rules as
@@ -29,6 +36,7 @@ class Driver
 {
 public:
     /// construct a new parser driver context
+    /// @param db reference to database 
     Driver(DefDataBase& db);
 
     /// enable debug output in the flex scanner
@@ -83,6 +91,7 @@ public:
      * expressions. */
     DefDataBase& m_db;
 
+    /// @cond
 	void dividerchar_cbk(string const&) ;
 	void busbitchars_cbk(string const&) ;
 	void version_cbk(double) ;
@@ -118,18 +127,26 @@ public:
     void blockage_cbk_size(int);
     void blockage_cbk_placement(int, int, int, int);
     void blockage_cbk_routing(int, int, int, int);
+    /// @endcond
 
 protected:
-	// use as a stack for node and pin pairs in a net 
-	// because net_cbk_pin will be called before net_cbk_name
+	/// @brief Use as a stack for node and pin pairs in a net,  
+	/// because net_cbk_pin will be called before net_cbk_name
 	vector<pair<string, string> > m_vNetPin;
+    /// @brief temporary row 
 	Row m_row;
+    /// @brief temporary component 
 	Component m_comp;
+    /// @brief temporary pin 
 	Pin m_pin;
+    /// @brief temporary net 
 	Net m_net;
 };
 
-// top api for DefParser
+/// @brief API for DefParser. 
+/// Read DEF file and initialize database by calling user-defined callback functions. 
+/// @param db database which is derived from @ref DefParser::DefDataBase
+/// @param defFile DEF file 
 bool read(DefDataBase& db, const string& defFile);
 
 } // namespace example

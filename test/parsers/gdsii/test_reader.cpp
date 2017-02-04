@@ -1,59 +1,92 @@
-/*************************************************************************
-    > File Name: test.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 22 Oct 2014 10:43:22 PM CDT
- ************************************************************************/
+/**
+ * @file   gdsii/test_reader.cpp
+ * @brief  test @ref GdsParser::GdsReader 
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #include <iostream>
 #include <limbo/parsers/gdsii/stream/GdsReader.h>
 using std::cout;
 using std::endl;
 
-/// test ascii callbacks 
+/// @brief test ascii callbacks 
 struct AsciiDataBase : public GdsParser::GdsDataBase
 {
+    /// @brief constructor 
 	AsciiDataBase()
 	{
 		cout << "constructing AsciiDataBase" << endl;
 	}
 	///////////////////// required callbacks /////////////////////
+    /// @brief bit array callback 
+    /// @param ascii_record_type record 
+    /// @param ascii_data_type data type 
+    /// @param vBitArray data array  
 	virtual void bit_array_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vBitArray)
 	{
 		cout << __func__ << endl;
 		this->general_cbk(ascii_record_type, ascii_data_type, vBitArray);
 	}
+    /// @brief 2-byte integer callback 
+    /// @param ascii_record_type record 
+    /// @param ascii_data_type data type 
+    /// @param vInteger data array  
 	virtual void integer_2_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vInteger)
 	{
 		cout << __func__ << endl;
 		this->general_cbk(ascii_record_type, ascii_data_type, vInteger);
 	}
+    /// @brief 4-byte integer callback 
+    /// @param ascii_record_type record 
+    /// @param ascii_data_type data type 
+    /// @param vInteger data array  
 	virtual void integer_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<int> const& vInteger)
 	{
 		cout << __func__ << endl;
 		this->general_cbk(ascii_record_type, ascii_data_type, vInteger);
 	}
+    /// @brief 4-byte floating point number callback 
+    /// @param ascii_record_type record 
+    /// @param ascii_data_type data type 
+    /// @param vFloat data array  
 	virtual void real_4_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<double> const& vFloat) 
 	{
 		cout << __func__ << endl;
 		this->general_cbk(ascii_record_type, ascii_data_type, vFloat);
 	}
+    /// @brief 8-byte floating point number callback 
+    /// @param ascii_record_type record 
+    /// @param ascii_data_type data type 
+    /// @param vFloat data array  
 	virtual void real_8_cbk(const char* ascii_record_type, const char* ascii_data_type, vector<double> const& vFloat) 
 	{
 		cout << __func__ << endl;
 		this->general_cbk(ascii_record_type, ascii_data_type, vFloat);
 	}
+    /// @brief string callback 
+    /// @param ascii_record_type record 
+    /// @param ascii_data_type data type 
+    /// @param str data 
 	virtual void string_cbk(const char* ascii_record_type, const char* ascii_data_type, string const& str) 
 	{
 		cout << __func__ << endl;
 		this->general_cbk(ascii_record_type, ascii_data_type, str);
 	}
+    /// @brief begin or end indicator of a block 
+    /// @param ascii_record_type record 
 	virtual void begin_end_cbk(const char* ascii_record_type)
 	{
 		cout << __func__ << endl;
 		this->general_cbk(ascii_record_type, "", vector<int>(0));
 	}
 
+    /// @brief A generic callback function handles all other callback functions. 
+    /// It is not efficient but concise as a demo. 
+    /// @tparam ContainerType container type 
+    /// @param ascii_record_type record 
+    /// @param ascii_data_type data type 
+    /// @param data data values 
 	template <typename ContainerType>
 	void general_cbk(string const& ascii_record_type, string const& ascii_data_type, ContainerType const& data)
 	{
@@ -79,56 +112,89 @@ struct AsciiDataBase : public GdsParser::GdsDataBase
 	}
 };
 
-/// test enum callbacks
+/// @brief test enum callbacks
 struct EnumDataBase : public GdsParser::GdsDataBaseKernel
 {
-	EnumDataBase()
-	{
-		cout << "constructing EnumDataBase" << endl;
-	}
-	///////////////////// required callbacks /////////////////////
-	virtual void bit_array_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<int> const& vBitArray)
-	{
-		cout << __func__ << endl;
-		this->general_cbk(record_type, data_type, vBitArray);
-	}
-	virtual void integer_2_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<int> const& vInteger)
-	{
-		cout << __func__ << endl;
-		this->general_cbk(record_type, data_type, vInteger);
-	}
-	virtual void integer_4_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<int> const& vInteger)
-	{
-		cout << __func__ << endl;
-		this->general_cbk(record_type, data_type, vInteger);
-	}
-	virtual void real_4_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<double> const& vFloat) 
-	{
-		cout << __func__ << endl;
-		this->general_cbk(record_type, data_type, vFloat);
-	}
-	virtual void real_8_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<double> const& vFloat) 
-	{
-		cout << __func__ << endl;
-		this->general_cbk(record_type, data_type, vFloat);
-	}
-	virtual void string_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, string const& str) 
-	{
-		cout << __func__ << endl;
-		this->general_cbk(record_type, data_type, str);
-	}
-	virtual void begin_end_cbk(GdsParser::GdsRecords::EnumType record_type)
-	{
-		cout << __func__ << endl;
-		this->general_cbk(record_type, GdsParser::GdsData::NO_DATA, vector<int>(0));
-	}
+    /// @brief constructor 
+    EnumDataBase()
+    {
+        cout << "constructing EnumDataBase" << endl;
+    }
+    ///////////////////// required callbacks /////////////////////
+    /// @brief bit array callback 
+    /// @param record_type record 
+    /// @param data_type data type 
+    /// @param vBitArray data array  
+    virtual void bit_array_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<int> const& vBitArray)
+    {
+        cout << __func__ << endl;
+        this->general_cbk(record_type, data_type, vBitArray);
+    }
+    /// @brief 2-byte integer callback 
+    /// @param record_type record 
+    /// @param data_type data type 
+    /// @param vInteger data array  
+    virtual void integer_2_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<int> const& vInteger)
+    {
+        cout << __func__ << endl;
+        this->general_cbk(record_type, data_type, vInteger);
+    }
+    /// @brief 4-byte integer callback 
+    /// @param record_type record 
+    /// @param data_type data type 
+    /// @param vInteger data array  
+    virtual void integer_4_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<int> const& vInteger)
+    {
+        cout << __func__ << endl;
+        this->general_cbk(record_type, data_type, vInteger);
+    }
+    /// @brief 4-byte floating point number callback 
+    /// @param record_type record 
+    /// @param data_type data type 
+    /// @param vFloat data array  
+    virtual void real_4_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<double> const& vFloat) 
+    {
+        cout << __func__ << endl;
+        this->general_cbk(record_type, data_type, vFloat);
+    }
+    /// @brief 8-byte floating point number callback 
+    /// @param record_type record 
+    /// @param data_type data type 
+    /// @param vFloat data array  
+    virtual void real_8_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector<double> const& vFloat) 
+    {
+        cout << __func__ << endl;
+        this->general_cbk(record_type, data_type, vFloat);
+    }
+    /// @brief string callback 
+    /// @param record_type record 
+    /// @param data_type data type 
+    /// @param str data 
+    virtual void string_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, string const& str) 
+    {
+        cout << __func__ << endl;
+        this->general_cbk(record_type, data_type, str);
+    }
+    /// @brief begin or end indicator of a block 
+    /// @param record_type record 
+    virtual void begin_end_cbk(GdsParser::GdsRecords::EnumType record_type)
+    {
+        cout << __func__ << endl;
+        this->general_cbk(record_type, GdsParser::GdsData::NO_DATA, vector<int>(0));
+    }
 
-	template <typename ContainerType>
-	void general_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, ContainerType const& data)
-	{
-		cout << "ascii_record_type: " << GdsParser::gds_record_ascii(record_type) << endl
-			<< "ascii_data_type: " << GdsParser::gds_data_ascii(data_type) << endl 
-			<< "data size: " << data.size() << endl;
+    /// @brief A generic callback function handles all other callback functions. 
+    /// It is not efficient but concise as a demo. 
+    /// @tparam ContainerType container type 
+    /// @param record_type record 
+    /// @param data_type data type 
+    /// @param data data values 
+    template <typename ContainerType>
+    void general_cbk(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, ContainerType const& data)
+    {
+        cout << "ascii_record_type: " << GdsParser::gds_record_ascii(record_type) << endl
+            << "ascii_data_type: " << GdsParser::gds_data_ascii(data_type) << endl 
+            << "data size: " << data.size() << endl;
         switch (record_type)
         {
             case GdsParser::GdsRecords::UNITS:
@@ -149,7 +215,7 @@ struct EnumDataBase : public GdsParser::GdsDataBaseKernel
             default:
                 break;
         }
-	}
+    }
 };
 
 /* ===========================================
@@ -166,6 +232,10 @@ in.push(boost::iostreams::file_source(argv[1]));
 cout << "test enum api\n" << GdsParser::read(edb, in) << endl;
 =========================================== */
 
+/// @brief main function 
+/// @param argc number of arguments 
+/// @param argv values of arguments 
+/// @return 0 if succeed 
 int main(int argc, char** argv)
 {
 	if (argc > 1)

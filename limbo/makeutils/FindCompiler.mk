@@ -1,14 +1,29 @@
-#########################################################################
-# File Name: FindCompiler.mk
-# Author: Yibo Lin
-# mail: yibolin@utexas.edu
-# Created Time: Wed 18 Jan 2017 12:55:16 PM CST
-#########################################################################
+## @file   FindCompiler.mk
+## @brief  find compiler under various platform, determine CXX, CC, FC, AR 
+##
+## Use following command in the Makefile to view the results 
+## 
+##     $(info Compilers: CC = $(CC), CXX = $(CXX), FC = $(FC), AR = $(AR))
+##
+## @author Yibo Lin
+## @date   Jan 2017
+##
+## @param  LIMBO_DIR, LIMBO_ROOT_DIR given LIMBO_DIR or LIMBO_ROOT_DIR 
+## @param  CC, CXX, FC, AR set CC as c compiler, CXX as c++ compiler, FC as fortran compiler, AR as archiver 
 
-## find compiler under various platform, determine CXX, CC, FC, AR 
+## @cond 
 
 # detect platform
 UNAME_S = $(shell uname -s)
+
+# consider two cases, called when building Limbo library or called from other programs 
+ifndef LIMBO_ROOT_DIR
+ifdef LIMBO_DIR
+	LIMBO_ROOT_DIR = $(LIMBO_DIR)/include
+else
+	$(error LIMBO_ROOT_DIR = $(LIMBO_ROOT_DIR), LIMBO_DIR = $(LIMBO_DIR))
+endif
+endif
 
 # ==== search compilers under Linux
 ifeq ($(UNAME_S), Linux)
@@ -31,4 +46,4 @@ include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindAR.mk
 
 endif 
 
-$(info Compilers: CC = $(CC), CXX = $(CXX), FC = $(FC), AR = $(AR))
+## @endcond 

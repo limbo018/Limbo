@@ -27,9 +27,14 @@ limbo:
 test: 
 	$(MAKE) -C test
 
+.PHONY: doc
+doc:
+	$(MAKE) -C doc
+
 .PHONY: install
 install:
 	$(MAKE) install -C limbo
+	$(MAKE) install -C doc
 
 .PHONY: clean
 clean:
@@ -40,3 +45,4 @@ clean:
 extraclean:
 	$(MAKE) extraclean -C limbo
 	$(MAKE) extraclean -C test
+	$(MAKE) extraclean -C doc

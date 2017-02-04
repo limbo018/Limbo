@@ -1,5 +1,9 @@
-// $Id: driver.h 17 2007-08-19 18:51:39Z tb $ 	
-/** \file driver.h Declaration of the example::Driver class. */
+/**
+ * @file   EbeamDriver.h
+ * @brief  Driver for Ebeam parser 
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #ifndef EBEAMPARSER_DRIVER_H
 #define EBEAMPARSER_DRIVER_H
@@ -8,18 +12,21 @@
 
 /** The example namespace is used to encapsulate the three parser classes
  * example::Parser, example::Scanner and example::Driver */
+/** @brief namespace for EbeamParser */
 namespace EbeamParser {
 
-	using std::cout;
-	using std::endl;
-	using std::cerr;
-	using std::string; 
-	using std::vector;
-	using std::pair;
-	using std::make_pair;
-	using std::ostringstream;
+using std::cout;
+using std::endl;
+using std::cerr;
+using std::string; 
+using std::vector;
+using std::pair;
+using std::make_pair;
+using std::ostringstream;
 
-/** The Driver class brings together all components. It creates an instance of
+/** 
+ * @class EbeamParser::Driver
+ * The Driver class brings together all components. It creates an instance of
  * the Parser and Scanner classes and connects them. Then the input stream is
  * fed into the scanner object and the parser gets it's token
  * sequence. Furthermore the driver object is available in the grammar rules as
@@ -29,6 +36,7 @@ class Driver
 {
 public:
     /// construct a new parser driver context
+    /// @param db reference to database 
     Driver(EbeamDataBase& db);
 
     /// enable debug output in the flex scanner
@@ -79,6 +87,7 @@ public:
      * parser to the scanner. It is used in the yylex macro. */
     class Scanner* lexer;
 
+    /// @cond 
 	void units_cbk(int d1);
 	void ebeam_cbk();
 	void ebeam_cbk_offset(double d1);
@@ -93,17 +102,23 @@ public:
 	void macro_cbk_confsite_layer(string const& s1);
 	void macro_cbk_confsite_site(vector<int> const& v1);
 	void macro_cbk_confsite(string const& s1);
+    /// @endcond 
 protected:
     /** Reference to the database filled during parsing of the
      * expressions. */
     EbeamDataBase& m_db;
 
+    /// temporary storage of ebeam boundary 
 	EbeamBoundary m_ebeam_boundary;
+    /// temporary storage of ebeam macro for a standard cell 
 	Macro m_macro;
 
 };
 
-// top api for EbeamParser
+/// @brief API for EbeamParser. 
+/// Read Ebeam file and initialize database by calling user-defined callback functions. 
+/// @param db database which is derived from @ref EbeamParser::EbeamDataBase
+/// @param ebeamFile Ebeam file 
 bool read(EbeamDataBase& db, const string& ebeamFile);
 
 } // namespace example

@@ -18,4 +18,4 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 .PHONY: install
 install:
 	mkdir -p $(PREFIX)/include/limbo/containers
-	cp -u $(wildcard *.h) $(PREFIX)/include/limbo/containers
+	cp $(wildcard *.h) $(PREFIX)/include/limbo/containers

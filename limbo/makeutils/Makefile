@@ -18,4 +18,4 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 .PHONY: install
 install:
 	mkdir -p $(PREFIX)/include/limbo/makeutils
-	cp -u $(wildcard *.mk) $(PREFIX)/include/limbo/makeutils
+	cp $(wildcard *.mk) $(PREFIX)/include/limbo/makeutils

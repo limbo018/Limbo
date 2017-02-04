@@ -11,6 +11,9 @@
  *     For updates, support, or to become part of the LEF/DEF Community,
  *  check www.openeda.org for details.
  */
+/**
+ * @file lefiMacro.hpp
+ */
 
 #ifndef lefiMacro_h
 #define lefiMacro_h

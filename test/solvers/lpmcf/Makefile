@@ -33,7 +33,7 @@ endif
 INCLUDE = -I $(LIMBO_ROOT_DIR) \
 		  -I $(BOOST_DIR)/include \
 		  -I $(LIBRARIES_DIR)/lemon/include
-LIBS = -L $(LEMON_DIR)/lib -lemon \
+LIBS = $(LEMON_LINK_FLAG) -L $(LEMON_DIR)/lib -lemon \
 		-L $(LIMBO_ROOT_DIR)/lib -llpparser
 
 # ==========================================================================

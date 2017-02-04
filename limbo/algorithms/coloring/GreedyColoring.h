@@ -1,9 +1,15 @@
-/*************************************************************************
-    > File Name: GreedyColoring.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Thu 12 Feb 2015 02:02:44 PM CST
- ************************************************************************/
+/**
+ * @file   GreedyColoring.h
+ * @brief  coloring a graph with saturation degree based heuristics
+ *
+ * Implement the algorithm in 
+ * "New Methods to Color the Vertics of a Graph"
+ * Daniel Brelaz, 
+ * CACM, 1979
+ *
+ * @author Yibo Lin
+ * @date   Feb 2015
+ */
 
 #ifndef LIMBO_ALGORITHMS_COLORING_GREEDYCOLORING
 #define LIMBO_ALGORITHMS_COLORING_GREEDYCOLORING
@@ -19,31 +25,40 @@ using std::vector;
 using std::set;
 using std::map;
 
-/// =====================================================
-/// class: DsatColoring
-/// description: coloring a graph with saturation degree based heuristics
-/// implement the algorithm in 
-/// New Methods to Color the Vertics of a Graph
-/// Daniel Brelaz
-/// CACM, 1979
-/// =====================================================
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.Algorithms 
+namespace algorithms 
+{ 
+/// namespace for Limbo.Algorithms.Coloring 
+namespace coloring 
+{
 
-namespace limbo { namespace algorithms { namespace coloring {
-
+/// @class limbo::algorithms::coloring::DsatColoring
+/// Coloring a graph with saturation degree based heuristics
+/// @tparam GraphType graph type 
 template <typename GraphType>
 class DsatColoring
 {
 	public:
+        /// @nowarn 
 		typedef GraphType graph_type;
 		typedef typename boost::graph_traits<graph_type>::vertex_descriptor graph_vertex_type;
+        /// @endnowarn
 
-		/// for sorting and comparison 
+		/// for sorting and comparison;  
 		/// calculate saturation degree 
 		class saturation_degree_type
 		{
 			public:
+                /// constructor 
+                /// @param dc bind @ref limbo::algorithms::coloring::DsatColoring object 
 				saturation_degree_type(DsatColoring const& dc) : m_dc(dc) {}
 
+                /// calculate saturation degree 
+                /// @param v vertex 
+                /// @return saturation degree 
 				int saturation_degree(graph_vertex_type const& v) const 
 				{
 					set<int> sColor; // used colors 
@@ -61,6 +76,9 @@ class DsatColoring
 					return sColor.size();
 				}
 				/// sort by saturation_degree degree first and then by degree
+                /// @param v1 vertex 
+                /// @param v2 vertex 
+                /// @return comparison result 
 				bool operator()(graph_vertex_type const& v1, graph_vertex_type const& v2) const
 				{
 					return this->saturation_degree(v1) < this->saturation_degree(v2)
@@ -70,6 +88,8 @@ class DsatColoring
 				DsatColoring const& m_dc; ///< bind DsatColoring class
 		};
 
+        /// constructor 
+        /// @param g graph 
 		DsatColoring(graph_type const& g) : m_graph(g)
 		{
 			BGL_FORALL_VERTICES_T(v, g, graph_type)
@@ -78,7 +98,12 @@ class DsatColoring
 			}
 		}
 
+        /// access to color map 
+        /// @return reference to color map 
 		map<graph_vertex_type, int> const& color_map() const {return m_mColor;}
+        /// get color of vertex 
+        /// @param v vertex 
+        /// @return color 
 		int color(graph_vertex_type v) const 
 		{
 			BOOST_AUTO(found, m_mColor.find(v));
@@ -86,11 +111,15 @@ class DsatColoring
 			else return found->second;
 		}
 
+        /// API to run the algorithm 
+        /// @return objective 
 		int operator()()
 		{
 			return this->run();
 		}
 	protected:
+        /// kernel function to run the algorithm 
+        /// @return objective 
 		int run()
 		{
 			vector<graph_vertex_type> vNode;
@@ -135,11 +164,13 @@ class DsatColoring
 			return color_cnt;
 		}
 
-		graph_type const& m_graph;
-		map<graph_vertex_type, int> m_mColor;
+		graph_type const& m_graph; ///< graph 
+		map<graph_vertex_type, int> m_mColor; ///< color map 
 
 };
 
-}}} // namespace limbo  // namespace algorithms // namespace coloring
+} // namespace coloring
+} // namespace algorithms
+} // namespace limbo
 	
 #endif

@@ -44,7 +44,7 @@ endif
 
 # ==== GUROBI 
 INCLUDE += -I $(GUROBI_HOME)/include
-LIBS += -L $(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi60 \
+LIBS += $(GUROBI_LINK_LIB) \
 		-lpthread 
 # ==== Csdp api (OpenBLAS and Fortran library are necessary)
 # it looks like pthead must be linked dynamically when GUROBI is also on 
@@ -64,13 +64,16 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-ifeq ($(OPENBLAS), 1)
-all: test_ChromaticNumber test_LPColoring test_GraphSimplification test_ILPColoring  test_SDPColoring test_FM
-	@echo ">> building with OPENBLAS on"
-else
-all: test_ChromaticNumber test_LPColoring test_GraphSimplification test_ILPColoring  test_FM
-	@echo ">> building with OPENBLAS off"
+TARGETS = test_ChromaticNumber test_GraphSimplification test_FM
+ifdef GUROBI_HOME
+	TARGETS += test_LPColoring test_ILPColoring 
 endif 
+ifeq ($(OPENBLAS), 1)
+	TARGETS += test_SDPColoring
+endif 
+
+all: $(TARGETS)
+	@echo ">> building with GUROBI_HOME = $(GUROBI_HOME), OPENBLAS = $(OPENBLAS)"
 
 # Compile dependency 
 

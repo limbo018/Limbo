@@ -1,31 +1,31 @@
-/*************************************************************************
-    > File Name: Math.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 17 Dec 2014 12:53:24 PM CST
- ************************************************************************/
+/**
+ * @file   Math.h
+ * @brief  mathematical utilities such as abs 
+ * @author Yibo Lin
+ * @date   Dec 2014
+ */
 
 #ifndef _LIMBO_MATH_MATH
 #define _LIMBO_MATH_MATH
 
 #include <iterator>
 
-/// ===================================================================
-///    File          : Math
-///    Function      : mathematical utilities such as abs 
-///
-/// ===================================================================
+namespace for Limbo
+namespace limbo 
+{
 
-namespace limbo {
-
-/// return absolute value of a number 
-/// generalized api can handle both integer and floating points 
+/// @brief generalized api can handle both integer and floating points 
+/// @return absolute value of a number 
 template <typename T>
 inline T abs(T const& t)
 {
 	return (t > 0)? t : -t;
 }
-/// return sum value of an array
+/// @brief get summation of an array 
+/// @param first begin iterator 
+/// @param last end iterator 
+/// @return sum value of an array
+/// @tparam Iterator iterator type 
 template <typename Iterator>
 inline typename std::iterator_traits<Iterator>::value_type sum(Iterator first, Iterator last)
 {
@@ -34,7 +34,11 @@ inline typename std::iterator_traits<Iterator>::value_type sum(Iterator first, I
 		v += *first;
 	return v;
 }
-/// return average value of an array 
+/// @brief get average of an array 
+/// @param first begin iterator 
+/// @param last end iterator 
+/// @return average value of an array
+/// @tparam Iterator iterator type 
 template <typename Iterator>
 inline typename std::iterator_traits<Iterator>::value_type average(Iterator first, Iterator last)
 {
@@ -47,7 +51,11 @@ inline typename std::iterator_traits<Iterator>::value_type average(Iterator firs
 	}
 	return v/cnt;
 }
-/// return max value of an array 
+/// @brief get max of an array 
+/// @param first begin iterator 
+/// @param last end iterator 
+/// @return max value of an array
+/// @tparam Iterator iterator type 
 template <typename Iterator>
 inline typename std::iterator_traits<Iterator>::value_type max(Iterator first, Iterator last)
 {
@@ -59,7 +67,11 @@ inline typename std::iterator_traits<Iterator>::value_type max(Iterator first, I
 	}
 	return v;
 }
-/// return min value of an array 
+/// @brief get min of an array 
+/// @param first begin iterator 
+/// @param last end iterator 
+/// @return min value of an array
+/// @tparam Iterator iterator type 
 template <typename Iterator>
 inline typename std::iterator_traits<Iterator>::value_type min(Iterator first, Iterator last)
 {

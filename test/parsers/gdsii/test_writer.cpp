@@ -1,15 +1,19 @@
-/*************************************************************************
-    > File Name: test.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 22 Oct 2014 10:43:22 PM CDT
- ************************************************************************/
+/**
+ * @file   gdsii/test_writer.cpp
+ * @brief  test @ref GdsParser::GdsWriter 
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #include <vector>
 #include <limbo/parsers/gdsii/stream/GdsWriter.h>
 
+/// @brief main function 
+/// @param argc number of arguments 
+/// @param argv values of arguments 
+/// @return 0 if succeed 
 int main( int argc, char *argv[] )
-    {
+{
     
     int 
         x[5],
@@ -33,7 +37,6 @@ int main( int argc, char *argv[] )
     gw.gds_write_strname(  "hotdogs" );
 
 	/////////////////////////// 3 ways to create polygons ///////////////////////////
-#if 1
     //-----------------------------------------------------------------------------
     // create a polygon 1
 
@@ -49,8 +52,6 @@ int main( int argc, char *argv[] )
 
     gw.gds_write_xy(  x, y, 5 );    // polygon, four vertices, first vertex repeated => 5 points
     gw.gds_write_endel(  );          // end of element
-#endif 
-#if 1
     //-----------------------------------------------------------------------------
     // create a polygon 2
 	// use high-level interfaces 
@@ -63,8 +64,6 @@ int main( int argc, char *argv[] )
     vx[3] = 1000;  vy[3] =   0;
 
 	gw.write_boundary(10002, 0, vx, vy, false);
-#endif 
-#if 1
     //-----------------------------------------------------------------------------
     // create a polygon 3
 	// for rectangles 
@@ -72,7 +71,6 @@ int main( int argc, char *argv[] )
 
     for (int i = 0; i < 1; ++i)
         gw.write_box(10003, 0, 10, 10, 20, 20);
-#endif 
 
     //-----------------------------------------------------------------------------
     // create some text, reflected about the x axis
@@ -172,5 +170,5 @@ int main( int argc, char *argv[] )
 
     printf( "\nDone. Look at %s\n\n", argv[1] );
 
-
-    }
+    return 0; 
+}

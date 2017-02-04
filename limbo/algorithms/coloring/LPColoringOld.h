@@ -1,3 +1,21 @@
+/**
+ * @file   LPColoringOld.h
+ * @brief  coloring algorithm based on iterative linear programming (LP) and rounding 
+ *
+ * Implementation algorithm in 
+ * "Triple/quadruple patterning layout decomposition via novel linear programming and iterative rounding", 
+ * Yibo Lin, Xiaoqing Xu, Bei Yu, Ross Baldick, and David Z. Pan, 
+ * SPIE Advanced Lithography, volume 9781, 2016.
+ *
+ * @author Yibo Lin, Xiaoqing Xu 
+ * @date   Sep 2015
+ */
+/**
+ * Old implementation, deprecated 
+ */
+
+/// @cond 
+
 #ifndef LIMBO_ALGORITHMS_COLORING_LP
 #define LIMBO_ALGORITHMS_COLORING_LP
 
@@ -30,7 +48,15 @@ using boost::unordered_map;
 using boost::uint32_t;
 using boost::int32_t;
 
-namespace limbo { namespace algorithms { namespace coloring {
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.Algorithms 
+namespace algorithms 
+{ 
+/// namespace for Limbo.Algorithms.Coloring 
+namespace coloring 
+{
 
 template <typename GraphType>
 class LPColoring 
@@ -2167,10 +2193,10 @@ void LPColoring<GraphType>::write_graph_color() const
 	system("dot -Tpdf color_graph.dot -o color_graph.pdf");
 }
 
-}//end namespace coloring
-
-}//end namespace algorithms
-
-}//end namespace limbo
+} // namespace coloring
+} // namespace algorithms
+} // namespace limbo
 
 #endif
+
+/// @endcond

@@ -1,3 +1,12 @@
+/**
+ * @file   CsdpEasySdpApi.h
+ * @brief  this file is a modified version of easysdp.c in Csdp package.  
+ *         Original version does not provide control over parameters and print level.  
+ *         The function limbo::solvers::easy_sdp_ext passes two additional parameters for better flexibility.  
+ *
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 /*
  *  This is an easy to call version of the sdp routine.  It takes as
  *  input a problem (n,k,C,a,constraints,constant_offset), and an 
@@ -25,19 +34,30 @@ extern "C" {
 }
 #endif
 
-/////////////////////////////////////////////////////////////////////////
-/// this file is a modified version of easysdp.c in Csdp package 
-/// original version does not provide control over parameters and print level 
-/// the function easy_sdp_ext() passes two additional parameters for better flexibility 
-/////////////////////////////////////////////////////////////////////////
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace Limbo.Solvers
+namespace solvers 
+{
 
-namespace limbo { namespace solvers {
-
-/// dummy template 
-/// so I do not need to write a .c file 
+/// @brief API to call Csdp solver.  
+/// 
+/// This is a dummy template, 
+/// so I do not need to write a .c file. 
+/// See the documentation of Csdp for details on how to describe an SDP problem. 
+/// 
+/// @tparam T dummy data type, any type works 
+/// @param n, k, C, a, constraints, constant_offset as input problem 
+/// @param pX, py, pZ as initial solution and final solution  
+/// @param ppobj as primal objective 
+/// @param pdobj as dual objective 
+/// @param params pass customized parameters to control the solver 
+/// @param printlevel verbose level in printing 
+/// @return the return code from sdp
 template <typename T>
 int easy_sdp_ext(
-        /// this part is same as original version 
+        // this part is same as original version 
         int n, 
         int k, 
         struct blockmatrix C, 
@@ -49,7 +69,7 @@ int easy_sdp_ext(
         struct blockmatrix *pZ, 
         double *ppobj, 
         double *pdobj, 
-        /// newly added parameters 
+        // newly added parameters 
         struct paramstruc const& params, 
         int const& printlevel
         )

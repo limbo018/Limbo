@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: ChromaticNumber.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 11 Feb 2015 11:00:48 AM CST
- ************************************************************************/
+/**
+ * @file   ChromaticNumber.h
+ * @brief  return chromatic number of a graph
+ * @author Yibo Lin
+ * @date   Feb 2015
+ */
 
 #ifndef LIMBO_ALGORITHMS_COLORING_CHROMATICNUMBER
 #define LIMBO_ALGORITHMS_COLORING_CHROMATICNUMBER
@@ -20,42 +20,60 @@ using std::set;
 using std::cout;
 using std::endl;
 
-/// =====================================================
-/// class: LawlerChromaticNumber
-/// description: return chromatic number of a graph
-/// implement the algorithm in 
-/// A note on the complexity of the chromatic number problem.
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.Algorithms 
+namespace algorithms 
+{ 
+/// namespace for Limbo.Algorithms.Coloring 
+namespace coloring 
+{
+	
+/// @class limbo::algorithms::coloring::LawlerChromaticNumber
+/// 
+/// Implement the algorithm in 
+/// "A note on the complexity of the chromatic number problem", 
 /// E.L. Lawler
 /// Inf. Process. Lett. 
 ///
 /// Candidates for possible improvments
-/// 1. Chromatic Number in Time O(2.4023^n) Using Maximal Independent Sets
-/// Jesper Makholm Byskov
+///
+/// - "Chromatic Number in Time O(2.4023^n) Using Maximal Independent Sets", 
+/// Jesper Makholm Byskov, 
 /// BRICS, 2002
-/// 2. Small Maximal Independent Sets and Faster Exact Graphing Coloring
-/// David Eppstein
+///
+/// - "Small Maximal Independent Sets and Faster Exact Graphing Coloring", 
+/// David Eppstein, 
 /// Worksh. Algorithms and Data Structures, 2001
-/// =====================================================
-
-namespace limbo { namespace algorithms { namespace coloring {
-	
+/// 
+/// @tparam GraphType graph type 
 template <typename GraphType>
 class LawlerChromaticNumber
 {
 	public:
+        /// @nowarn 
 		typedef GraphType graph_type;
 		typedef boost::subgraph<graph_type> subgraph_type;
 		typedef typename boost::graph_traits<graph_type>::vertex_descriptor graph_vertex_type;
+        /// @endnowarn
 
+        /// @class limbo::algorithms::coloring::LawlerChromaticNumber::mis_visitor_type
+        /// A maximum independent set visitor for @ref limbo::algorithms::MaxIndependentSetByMaxClique that records the largest independent sets so far 
 		struct mis_visitor_type
 		{
 			vector<set<graph_vertex_type> >& mMisNode; ///< bind mis nodes 
 
+            /// constructor 
+            /// @param mMisNode_ container to store all the largest independent sets so far 
 			mis_visitor_type(vector<set<graph_vertex_type> >& mMisNode_) : mMisNode(mMisNode_) {}
+            /// copy constructor 
+            /// @param rhs a mis_visitor_type object 
 			mis_visitor_type(mis_visitor_type const& rhs) : mMisNode(rhs.mMisNode) {}
 
-			/// requied callback for max_independent_set function
-			/// \param MisType is a container type, default is std::deque
+			/// required callback for max_independent_set function
+            /// @tparam MisType a container type, default is std::deque 
+			/// @param is independent set 
 			template <typename MisType>
 			void mis(MisType const& is)
 			{
@@ -74,16 +92,21 @@ class LawlerChromaticNumber
 					mMisNode.back().insert(*it);
 			}
 		};
+        /// API for computing chromatic number 
+        /// @param g graph 
+        /// @return chromatic number 
 		int operator()(subgraph_type g) const 
 		{
 			return chromatic_number(g);
 		}
 
 	protected:
-		/// the chromatic number of G is related to the complement graph of G \ I, 
-		/// where I is maximum independent set 
-		/// traversing over all maximum independent sets are necessary to calculate the chromatic number
-		/// this function is implemented in a recursive way
+		/// The chromatic number of G is related to the complement graph of G \ I, 
+		/// where I is maximum independent set.  
+		/// Traversing over all maximum independent sets are necessary to calculate the chromatic number. 
+		/// This function is implemented in a recursive way
+        /// @param g graph 
+        /// @return chromatic number of the graph 
 		int chromatic_number(subgraph_type& g) const
 		{
 			int cn = boost::num_vertices(g); // initial chromatic number 
@@ -156,6 +179,8 @@ class LawlerChromaticNumber
 		}
 };
 
-}}} // namespace limbo  // namespace algorithms // namespace coloring
+} // namespace coloring
+} // namespace algorithms
+} // namespace limbo
 
 #endif

@@ -1,5 +1,9 @@
-// $Id: driver.h 17 2007-08-19 18:51:39Z tb $ 	
-/** \file driver.h Declaration of the example::Driver class. */
+/**
+ * @file   LpDriver.h
+ * @brief  Driver for Lp parser 
+ * @author Yibo Lin
+ * @date   Oct 2014
+ */
 
 #ifndef LPPARSER_DRIVER_H
 #define LPPARSER_DRIVER_H
@@ -8,18 +12,21 @@
 
 /** The example namespace is used to encapsulate the three parser classes
  * example::Parser, example::Scanner and example::Driver */
+/** @brief namespace for LpParser */
 namespace LpParser {
 
-	using std::cout;
-	using std::endl;
-	using std::cerr;
-	using std::string; 
-	using std::vector;
-	using std::pair;
-	using std::make_pair;
-	using std::ostringstream;
+using std::cout;
+using std::endl;
+using std::cerr;
+using std::string; 
+using std::vector;
+using std::pair;
+using std::make_pair;
+using std::ostringstream;
 
-/** The Driver class brings together all components. It creates an instance of
+/** 
+ * @class LpParser::Driver
+ * The Driver class brings together all components. It creates an instance of
  * the Parser and Scanner classes and connects them. Then the input stream is
  * fed into the scanner object and the parser gets it's token
  * sequence. Furthermore the driver object is available in the grammar rules as
@@ -29,6 +36,7 @@ class Driver
 {
 public:
     /// construct a new parser driver context
+    /// @param db reference to database 
     Driver(LpDataBase& db);
 
     /// enable debug output in the flex scanner
@@ -83,6 +91,7 @@ public:
      * expressions. */
     LpDataBase& m_db;
 
+    /// @cond 
 	// coef*var 
 	void obj_cbk(int64_t coef, string const& var);
 	// coef1*var1 + coef2*var2 >= constant 
@@ -93,10 +102,14 @@ public:
 	void generals_cbk(StringArray const&);
 	// binary type  
 	void binary_cbk(StringArray const&);
+    /// @endcond 
 protected:
 };
 
-// top api for LpParser
+/// @brief API for LpParser. 
+/// Read LP file and initialize database by calling user-defined callback functions. 
+/// @param db database which is derived from @ref LpParser::LpDataBase
+/// @param lpFile LP file 
 bool read(LpDataBase& db, const string& lpFile);
 
 } // namespace example

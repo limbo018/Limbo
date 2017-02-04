@@ -21,4 +21,4 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 .PHONY: install
 install:
 	mkdir -p $(PREFIX)/include/limbo/parsers/$(LIB_PREFIX)/spirit
-	cp -u $(wildcard *.h) $(PREFIX)/include/limbo/parsers/$(LIB_PREFIX)/spirit
+	cp $(wildcard *.h) $(PREFIX)/include/limbo/parsers/$(LIB_PREFIX)/spirit

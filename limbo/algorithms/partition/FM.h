@@ -1,20 +1,16 @@
-/*************************************************************************
-    > File Name: FM.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Tue 03 Feb 2015 03:56:27 PM CST
- ************************************************************************/
+/**
+ * @file   FM.h
+ * @brief  Implementation of the FM partitioning algorithm 
+ *
+ * Refer to Fiduccia and Mattheyses,
+ * "A Linear-time Heuristics for Improving Network Partitions", DAC 1982
+ *
+ * @author Yibo Lin
+ * @date   Feb 2015
+ */
 
 #ifndef _LIMBO_ALGORITHMS_PARTITION_FM_H
 #define _LIMBO_ALGORITHMS_PARTITION_FM_H
-
-/// ===================================================================
-///    class          : FM
-///
-///  Refer to Fiduccia and Mattheyses,
-///  "A Linear-time Heuristics for Improving Network Partitions", DAC 1982
-///  
-/// ===================================================================
 
 #include <iostream>
 #include <vector>
@@ -34,46 +30,69 @@ using std::make_pair;
 using boost::array;
 using boost::unordered_map;
 
-namespace limbo { namespace algorithms { namespace partition {
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.Algorithms 
+namespace algorithms 
+{ 
+/// namespace for Limbo.Algorithms.Partition
+namespace partition 
+{
 
-/// \param NodeType, type of nodes in the graph
+/// @class limbo::algorithms::partition::FM_node_traits
+/// Node traits in graph 
+/// @tparam NodeType, type of nodes in the graph
 template <typename NodeType>
 struct FM_node_traits
 {
+    /// @nowarn
 	typedef NodeType node_type;
 	typedef typename node_type::tie_id_type tie_id_type;
 	typedef typename node_type::weight_type node_weight_type;
+    /// @endnowarn
 	
-	/// \return id of a node to sort nodes in each bucket
+    /// @param n node 
+	/// @return id of a node to sort nodes in each bucket
 	static tie_id_type tie_id(node_type const& n)
 	{return n.tie_id();}
-	/// \return weight of a node for balancing constraint, e.g. area 
+    /// @param n node 
+	/// @return weight of a node for balancing constraint, e.g. area 
 	static node_weight_type weight(node_type const& n)
 	{return n.weight();}
 };
 
-/// \param NodeType indicates type of nodes in the graph 
+/// @class limbo::algorithms::partition::FM
+/// @brief Implementation of FM partitioning algorithm 
+/// 
 /// Only support two partitions 
+/// @tparam NodeType indicates type of nodes in the graph 
+/// @tparam NetWeightType type of net weight values 
 template <typename NodeType, typename NetWeightType = double>
 class FM
 {
 	public:
+        /// @nowarn 
 		typedef NodeType node_type;
 		typedef NetWeightType net_weight_type;
 		typedef typename FM_node_traits<node_type>::node_weight_type node_weight_type;
+        /// @endnowarn
 
 		struct FM_node_type;
 		struct FM_net_type;
 
+        /// @class limbo::algorithms::partition::FM::FM_node_type
+        /// @brief node type for the algorithm 
 		struct FM_node_type
 		{
-			node_type* pNode;
-			vector<FM_net_type*> vNet;
+			node_type* pNode; ///< node in the graph 
+			vector<FM_net_type*> vNet; ///< nets related to the node 
 			bool locked; ///< locked or not
 			int partition; ///< partition id: 0 or 1, -1 for uninitialized
 			int partition_bak; ///< back up partition for trial pass
 			node_weight_type weight; ///< node weight for balancing constraint, like area
 
+            /// @brief constructor 
 			FM_node_type()
 			{
 				pNode = NULL;
@@ -82,6 +101,8 @@ class FM
 				partition_bak = -1;
 				weight = 0;
 			}
+            /// @brief compute gain 
+            /// @return gain of a node 
 			net_weight_type gain() const
 			{
 				net_weight_type g = 0;
@@ -116,12 +137,15 @@ class FM
 				return g;
 			}
 		};
+        /// @class limbo::algorithms::partition::FM::FM_net_type
+        /// @brief net type for the algorithm 
 		struct FM_net_type
 		{
-			vector<FM_node_type*> vNode;
+			vector<FM_node_type*> vNode; ///< nodes in the net 
 			net_weight_type weight; ///< net weight
 
-			/// \return 0 or weight 
+            /// @brief compute cut size for the net 
+			/// @return 0 or weight 
 			net_weight_type cutsize() const
 			{
 				if (vNode.size() < 2) return 0;
@@ -134,10 +158,11 @@ class FM
 				}
 				return 0;
 			}
-			/// partition excludes a certain node  
-			/// \return 0 indicates all nodes except pFMNode are in partition 0
-			/// \return 1 indicates all nodes except pFMNode are in partition 1
-			/// \return 2 indicates all nodes except are in both partitions 
+			/// @brief partition excludes a certain node  
+            /// @param fmNode node 
+			/// @return 0 indicates all nodes except pFMNode are in partition 0;
+			///         1 indicates all nodes except pFMNode are in partition 1;
+			///         2 indicates all nodes except are in both partitions 
 			int exclusive_partition(FM_node_type const& fmNode) const 
 			{
 				int prevPartition = -1;
@@ -166,16 +191,26 @@ class FM
 			}
 		};
 
-		/// forward declaration
+		// forward declaration
 		struct compare_type1;
 		struct compare_type2;
-		/// largest gain comes first
+		/// @brief compare function object 
+        /// 
+        /// largest gain comes first
 		struct compare_type1
 		{
+            /// @brief API for comparison 
+            /// @param pFMNode1 a node 
+            /// @param pFMNode2 a node 
+            /// @return compare result 
 			bool operator()(FM_node_type* pFMNode1, FM_node_type* pFMNode2) const 
 			{
 				return pFMNode1->gain() > pFMNode2->gain();
 			}
+            /// @brief API for comparison 
+            /// @param g1 a net weight 
+            /// @param g2 a net weight 
+            /// @return compare result 
 			bool operator()(net_weight_type const& g1, net_weight_type const& g2) const
 			{
 				return g1 > g2;
@@ -188,25 +223,39 @@ class FM
 			}
 #endif
 		};
+		/// @brief compare function object 
+        /// 
 		/// smallest tie_id comes first
 		struct compare_type2
 		{
+            /// @brief API for comparison 
+            /// @param pFMNode1 a node 
+            /// @param pFMNode2 a node 
+            /// @return compare result 
 			bool operator()(FM_node_type* pFMNode1, FM_node_type* pFMNode2) const 
 			{
 				return FM_node_traits<node_type>::tie_id(*(pFMNode1->pNode)) < FM_node_traits<node_type>::tie_id(*(pFMNode2->pNode));
 			}
 		};
 
-		/// gain bucket type
+        /// @class limbo::algorithms::partition::FM::gain_bucket_type
+		/// @brief gain bucket type
 		class gain_bucket_type : public map<net_weight_type, set<FM_node_type*, compare_type2>, compare_type1>
 		{
 			public:
+                /// @nowarn 
 				typedef set<FM_node_type*, compare_type2> nested_type;
 				typedef map<net_weight_type, nested_type, compare_type1> base_type;
+                /// @endnowarn
 
+                /// constructor 
 				gain_bucket_type() : base_type() {}
+                /// copy constructor 
+                /// @param rhs a gain_bucket_type object 
 				gain_bucket_type(gain_bucket_type const& rhs) : base_type(rhs) {}
 
+                /// insert node 
+                /// @param pFMNode a node 
 				virtual void insert(FM_node_type* const& pFMNode)
 				{
 					net_weight_type gain = pFMNode->gain();
@@ -222,6 +271,8 @@ class FM
 						found->second.insert(pFMNode);
 					}
 				}
+                /// erase node 
+                /// @param pFMNode a node 
 				virtual void erase(FM_node_type* const& pFMNode)
 				{
 					net_weight_type gain = pFMNode->gain();
@@ -235,6 +286,8 @@ class FM
 							found->second.erase(pFMNode);
 					}
 				}
+                /// count number of elements 
+                /// @return number of elements 
 				size_t element_size() const 
 				{
 					size_t cnt = 0;
@@ -245,6 +298,7 @@ class FM
 							cnt += 1;
 					return cnt;
 				}
+                /// print gain bucket 
 				void print() const 
 				{
 					cout << "------- gain_bucket -------" << endl;
@@ -261,7 +315,9 @@ class FM
 				}
 		};
 
+        /// @brief constructor 
 		FM() {}
+        /// @brief destructor 
 		~FM()
 		{
 			for (typename unordered_map<node_type*, FM_node_type*>::const_iterator it = m_hNode.begin();
@@ -271,8 +327,10 @@ class FM
 					it != m_vNet.end(); ++it)
 				delete *it;
 		}
-		/// \param initialPartition, 0 or 1
-		/// \return whehter insertion is successful
+        /// @brief add node 
+        /// @param pNode a node 
+		/// @param initialPartition initial partition, 0 or 1
+		/// @return whehter insertion is successful
 		bool add_node(node_type* pNode, int initialPartition)
 		{
 			assert(initialPartition == 0 || initialPartition == 1);
@@ -283,10 +341,15 @@ class FM
 			pFMNode->weight = FM_node_traits<node_type>::weight(*pNode);
 			return m_hNode.insert(make_pair(pNode, pFMNode)).second;
 		}
-		/// \param Iterator, dereference of which must be type of node
-		/// \return whehter a net is successfully added
-		/// this function must be called after all nodes are inserted
-		/// if C++11 is allowed, we can extend it to variant length arguments
+        /// @brief add nets 
+        /// 
+		/// This function must be called after all nodes are inserted. 
+		/// If C++11 is allowed, we can extend it to variant length arguments. 
+        /// 
+        /// @tparam Iterator iterator of net array, dereference of which must be type of node
+        /// @param weight weight of nets 
+		/// @param first, last begin and end iterator of net array 
+		/// @return whehter a net is successfully added
 		template <typename Iterator>
 		bool add_net(net_weight_type const& weight, Iterator first, Iterator last)
 		{
@@ -313,7 +376,7 @@ class FM
 
 			return true;
 		}
-		/// \return cutsize of current partition
+		/// @return cut size of current partition
 		net_weight_type cutsize() const 
 		{
 			net_weight_type cs = 0;
@@ -322,8 +385,10 @@ class FM
 				cs += (*it)->cutsize();
 			return cs;
 		}
-		/// top api for FM 
-		/// \return final cutsize after partition
+		/// Top api for FM 
+		/// @param ratio1 minimum target ratio for partition 0 over partition 1
+		/// @param ratio2 maximum target ratio for partition 0 over partition 1
+		/// @return final cutsize after partition
 		net_weight_type operator()(double ratio1, double ratio2)
 		{
 			return this->run(ratio1, ratio2);
@@ -391,9 +456,10 @@ class FM
 			}
 		}
 	protected:
-		/// \param ratio1, minimum target ratio for partition 0 over partition 1
-		/// \param ratio2, maximum target ratio for partition 0 over partition 1
-		/// \return, final cut size
+        /// @brief kernel function to run the algorithm 
+		/// @param ratio1 minimum target ratio for partition 0 over partition 1
+		/// @param ratio2 maximum target ratio for partition 0 over partition 1
+		/// @return, final cut size
 		net_weight_type run(double ratio1, double ratio2)
 		{
 			net_weight_type prev_cutsize;
@@ -422,10 +488,11 @@ class FM
 
 			return cur_cutsize;
 		}
-		/// \param ratio1, minimum target ratio for partition 0 over partition 1
-		/// \param ratio2, maximum target ratio for partition 0 over partition 1
-		/// \param target_cnt, generalized iteration count, if it is negative, then run in trial mode 
-		/// \return, pair of best cut size and iteration count
+        /// @brief one pass of moving nodes 
+		/// @param ratio1 minimum target ratio for partition 0 over partition 1
+		/// @param ratio2 maximum target ratio for partition 0 over partition 1
+		/// @param target_cnt generalized iteration count, if it is negative, then run in trial mode 
+		/// @return pair of best cut size and iteration count
 		pair<net_weight_type, int> single_pass(double ratio1, double ratio2, int target_cnt)
 		{
 			// trial mode, back up partition
@@ -626,6 +693,8 @@ class FM
 		gain_bucket_type m_gain_bucket; ///< gain buckets
 };
 
-}}} // namespace limbo  // namespace algorithms // namespace partition
+} // namespace partition
+} // namespace algorithms 
+} // namespace limbo
 
 #endif

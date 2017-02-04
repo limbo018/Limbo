@@ -18,4 +18,4 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 .PHONY: install
 install:
 	mkdir -p $(PREFIX)/include/limbo/bibtex
-	cp -u $(wildcard *.py) $(PREFIX)/include/limbo/bibtex
+	cp $(wildcard *.py) $(PREFIX)/include/limbo/bibtex

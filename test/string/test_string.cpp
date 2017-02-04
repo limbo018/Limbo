@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: test_string.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 17 Dec 2014 12:47:43 PM CST
- ************************************************************************/
+/**
+ * @file   test_string.cpp
+ * @brief  test string functions 
+ * @author Yibo Lin
+ * @date   Dec 2014
+ */
 
 #include <iostream>
 #include <string>
@@ -13,6 +13,8 @@ using std::cout;
 using std::endl;
 using std::string;
 
+/// @brief main function 
+/// @return 0 
 int main()
 {
 	string s1 = "limbo2343slimbo";

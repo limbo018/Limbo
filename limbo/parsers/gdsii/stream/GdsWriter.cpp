@@ -110,6 +110,13 @@ ENDEL
 #include <boost/iostreams/filtering_stream.hpp>
 #endif
 
+#define SKIPOVER( fd, count )  { for ( i=0; i < ((count)-4); i+=2 ) read( (fd), &gdsword, 2 ); }
+#define BAILOUT( message )     { printf( "\n\nERROR: %s\n\n", (message) ); fflush(stdout); exit(-1); }
+#define WARNING( message )     { printf( "\n                            WARNING: %s\n\n", (message) ); fflush(stdout); }
+
+
+#define MAX_FORWARD_REFS 1000
+
 namespace GdsParser 
 {
 

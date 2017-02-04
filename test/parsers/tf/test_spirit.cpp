@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: test_spirit.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Sun 26 Oct 2014 02:49:27 AM CDT
- ************************************************************************/
+/**
+ * @file   tf/test_spirit.cpp
+ * @brief  test tf parser, see @ref TfParser::read and @ref TfParser::TfDataBase
+ * @author Yibo Lin
+*  @date   Oct 2014
+ */
 
 #include <iostream>
 #include <string>
@@ -14,8 +14,14 @@ using std::cout;
 using std::endl;
 using std::string;
 
-struct DataBase : public TfParser::TfDataBase
+/// @brief Custom class that inheritates @ref TfParser::TfDataBase 
+/// with all the required callbacks defined. 
+struct TfDataBase : public TfParser::TfDataBase
 {
+    /// @brief add layer name, layer id, layer abbreviation 
+    /// @param s1 layer name 
+    /// @param s2 layer id 
+    /// @param s3 layer abbreviation 
 	void add_tf_layer_id(string const& s1, int32_t const& s2, string const& s3)
 	{
 		cout << __func__ << endl; 
@@ -23,13 +29,18 @@ struct DataBase : public TfParser::TfDataBase
 	}
 };
 
+/// @brief test 1: use function wrapper @ref TfParser::read  
 void test1(string const& filename)
 {
 	cout << "////////////// test1 ////////////////" << endl;
-	DataBase db;
+	TfDataBase db;
 	TfParser::read(db, filename);
 }
 
+/// @brief main function 
+/// @param argc number of arguments 
+/// @param argv values of arguments 
+/// @return 0 
 int main(int argc, char** argv)
 {
 

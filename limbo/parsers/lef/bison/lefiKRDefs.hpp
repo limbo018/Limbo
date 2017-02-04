@@ -11,6 +11,9 @@
  *     For updates, support, or to become part of the LEF/DEF Community,
  *  check www.openeda.org for details.
  */
+/**
+ * @file lefiKRDefs.hpp
+ */
 
 
 /* Definitions header file for K&R related defines */

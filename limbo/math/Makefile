@@ -18,4 +18,4 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 .PHONY: install
 install:
 	mkdir -p $(PREFIX)/include/limbo/math
-	cp -u $(wildcard *.h) $(PREFIX)/include/limbo/math
+	cp $(wildcard *.h) $(PREFIX)/include/limbo/math

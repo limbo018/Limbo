@@ -1,22 +1,26 @@
-/*************************************************************************
-    > File Name: ../test/test_driver.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 12 Nov 2014 03:01:03 PM CST
- ************************************************************************/
+/**
+ * @file   gdsii/test_gdsdb.cpp
+ * @brief  test @ref GdsParser::GdsDriver 
+ * @author Yibo Lin
+ * @date   Nov 2014
+ */
 
 #include <iostream>
 #include <limbo/parsers/gdsii/stream/GdsDriver.h>
 using std::cout;
 using std::endl;
 
+/// @brief a database for GdsParser::GdsDriver
 struct DataBase : public GdsParser::GdsDriverDataBase
 {
+    /// @brief constructor 
 	DataBase()
 	{
 		cout << "constructing DataBase" << endl;
 	}
 	///////////////////// required callbacks /////////////////////
+    /// @brief add GDSII library 
+    /// @param lib GDSII library 
 	virtual void add_gds_lib(GdsParser::GdsLib const& lib) 
 	{
 		cout << "library name = " << lib.lib_name << endl;
@@ -54,6 +58,10 @@ struct DataBase : public GdsParser::GdsDriverDataBase
 	}
 };
 
+/// @brief main function 
+/// @param argc number of arguments 
+/// @param argv values of arguments 
+/// @return 0 if succeed 
 int main(int argc, char** argv)
 {
 	DataBase db;

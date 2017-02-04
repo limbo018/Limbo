@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: test_FM.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 04 Feb 2015 03:30:55 PM CST
- ************************************************************************/
+/**
+ * @file   test_FM.cpp
+ * @brief  test FM partitioning algorithms 
+ * @author Yibo Lin
+ * @date   Feb 2015
+ */
 
 #include <iostream>
 #include <limbo/algorithms/partition/FM.h>
@@ -11,26 +11,37 @@
 using std::cout;
 using std::endl;
 
+/// a class to describe graph vertex 
 class Node 
 {
 	public:
+        /// @nowarn
 		typedef char tie_id_type;
 		typedef int weight_type;
+        /// @endnowarn
 
+        /// constructor 
+        /// @param w node weight 
+        /// @param id node label  
 		Node(weight_type const& w, tie_id_type const& id) 
 		{
 			m_weight = w;
 			m_id = id;
 		}
 
+        /// @return node label  
 		tie_id_type tie_id() const {return m_id;}
+        /// @return node weight 
 		weight_type weight() const {return m_weight;}
 
 	protected:
-		tie_id_type m_id;
-		weight_type m_weight;
+		tie_id_type m_id; ///< node label  
+		weight_type m_weight; ///< node weight 
 };
 
+/// main function \n
+/// construct a graph and verify @ref limbo::algorithms::partition::FM
+/// @return 0 
 int main()
 {
 	array<Node*, 8> vNode;

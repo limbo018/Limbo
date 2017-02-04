@@ -1,9 +1,13 @@
-/*************************************************************************
-    > File Name: ILPColoringLemonCbc.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Tue 02 Jun 2015 09:08:48 PM CDT
- ************************************************************************/
+/**
+ * @file   ILPColoringLemonCbc.h
+ * @brief  coloring algorithm based on integer linear programming (ILP) with Cbc as ILP solver. 
+ *
+ * Cbc is accessed with the API provided by Lemon, so both Cbc and Lemon should be installed properly. 
+ * It is necessary for Lemon to bind CBC when installing. 
+ *
+ * @author Yibo Lin
+ * @date   Jun 2015
+ */
 
 #ifndef LIMBO_ALGORITHMS_COLORING_ILPCOLORINGLEMONCBC
 #define LIMBO_ALGORITHMS_COLORING_ILPCOLORINGLEMONCBC
@@ -33,18 +37,35 @@
 #include <lemon/cbc.h>
 #include <lemon/lp.h>
 
-namespace limbo { namespace algorithms { namespace coloring {
+/// namespace for Limbo 
+namespace limbo 
+{ 
+/// namespace for Limbo.Algorithms 
+namespace algorithms 
+{ 
+/// namespace for Limbo.Algorithms.Coloring 
+namespace coloring 
+{
 
 using std::ostringstream;
 using boost::unordered_map;
 
-/// ILP coloring algorithm using Cbc as ILP solver and lemon as api to Cbc
-/// i.e. this class has dependency to Cbc and lemon
-/// lemon should be installed with Cbc flag enabled 
+/// @class limbo::algorithms::coloring::ILPColoringLemonCbc
+/// ILP coloring algorithm using Cbc as ILP solver and Lemon as API to Cbc, 
+/// i.e. this class has dependency to Cbc and Lemon. 
+/// Lemon should be installed with Cbc flag enabled 
+/// 
+/// Edge weight is used to differentiate conflict edge and stitch edge.
+/// Non-negative weight implies conflict edge. 
+/// Negative weight implies stitch edge. 
+/// Use vertex color to save vertex stitch candidate number.
+/// 
+/// @tparam GraphType graph type 
 template <typename GraphType>
 class ILPColoringLemonCbc : public Coloring<GraphType>
 {
 	public:
+        /// @nowarn 
 		typedef Coloring<GraphType> base_type;
 		using typename base_type::graph_type;
 		using typename base_type::graph_vertex_type;
@@ -53,14 +74,14 @@ class ILPColoringLemonCbc : public Coloring<GraphType>
 		using typename base_type::edge_iterator_type;
         using typename base_type::edge_weight_type;
 		using typename base_type::ColorNumType;
-		/// edge weight is used to differentiate conflict edge and stitch edge 
-		/// non-negative weight implies conflict edge 
-		/// negative weight implies stitch edge 
-		/// use vertex color to save vertex stitch candidate number 
+        /// @endnowarn
 
-		// hasher class for graph_edge_type
+		/// hasher class for graph_edge_type
 		struct edge_hash_type : std::unary_function<graph_edge_type, std::size_t>
 		{
+            /// get hash value for an edge 
+            /// @param e edge 
+            /// @return hash value 
 			std::size_t operator()(graph_edge_type const& e) const 
 			{
 				std::size_t seed = 0;
@@ -71,6 +92,7 @@ class ILPColoringLemonCbc : public Coloring<GraphType>
 		};
 
 		/// constructor
+        /// @param g graph 
 		ILPColoringLemonCbc(graph_type const& g) 
 			: base_type(g)
 		{}
@@ -78,7 +100,7 @@ class ILPColoringLemonCbc : public Coloring<GraphType>
 		virtual ~ILPColoringLemonCbc() {}
 
 	protected:
-		/// \return objective value 
+		/// @return objective value 
 		virtual double coloring();
 };
 
@@ -277,6 +299,8 @@ double ILPColoringLemonCbc<GraphType>::coloring()
 	return opt_model.solValue();
 }
 
-}}} // namespace limbo // namespace algorithms // namespace coloring
+} // namespace coloring
+} // namespace algorithms
+} // namespace limbo
 
 #endif
