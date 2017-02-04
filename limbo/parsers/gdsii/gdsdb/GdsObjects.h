@@ -14,11 +14,11 @@
 #include <boost/geometry/geometries/geometries.hpp>
 #include <limbo/parsers/gdsii/stream/GdsReader.h>
 
-/// namespace for Limbo 
-namespace limbo 
-{
 /// namespace for Limbo.GdsParser 
 namespace GdsParser 
+{
+/// namespace for Limbo.GdsParser.GdsDB 
+namespace GdsDB 
 {
 
 // some shortcuts for namespace 
@@ -716,45 +716,45 @@ class GdsDB : public GdsObject
 		std::map<std::string, unsigned int> m_mCellName2Idx; ///< map from cell name to index 
 };
 
-} // GdsParser
-} // namespace limbo
+} // namespace GdsDB 
+} // namespace GdsParser
 
 
 /// Boost.Geometry 
 namespace boost { namespace geometry { namespace traits {
 
-/// @name specialization of Boost.Geometry traits for @ref limbo::GdsParser::GdsRectangle
+/// @name specialization of Boost.Geometry traits for @ref GdsParser::GdsDB::GdsRectangle
 ///@{
 
 /// specialization for tag 
 template <>
-struct tag<limbo::GdsParser::GdsRectangle > : public tag<limbo::GdsParser::GdsRectangle::base_ext_type>
+struct tag<GdsParser::GdsDB::GdsRectangle > : public tag<GdsParser::GdsDB::GdsRectangle::base_ext_type>
 {
 };
 /// specialization for point_type 
 template <>
-struct point_type<limbo::GdsParser::GdsRectangle >
+struct point_type<GdsParser::GdsDB::GdsRectangle >
 {
     /// @nowarn 
-    typedef limbo::GdsParser::GdsRectangle::point_type type;
+    typedef GdsParser::GdsDB::GdsRectangle::point_type type;
     /// @endnowarn
 };
 ///@}
 
-/// @name specialization of Boost.Geometry traits for @ref limbo::GdsParser::GdsPolygon
+/// @name specialization of Boost.Geometry traits for @ref GdsParser::GdsDB::GdsPolygon
 ///@{
 
 /// specialization for tag 
 template <>
-struct tag<limbo::GdsParser::GdsPolygon > : public tag<limbo::GdsParser::GdsPolygon::base_ext_type>
+struct tag<GdsParser::GdsDB::GdsPolygon > : public tag<GdsParser::GdsDB::GdsPolygon::base_ext_type>
 {
 };
 /// specialization for point_type 
 template <>
-struct point_type<limbo::GdsParser::GdsPolygon >
+struct point_type<GdsParser::GdsDB::GdsPolygon >
 {
     /// @nowarn
-    typedef limbo::GdsParser::GdsObject::point_type type;
+    typedef GdsParser::GdsDB::GdsObject::point_type type;
     /// @endnowarn
 };
 ///@}
@@ -764,18 +764,18 @@ struct point_type<limbo::GdsParser::GdsPolygon >
 /// Boost.Polygon
 namespace boost { namespace polygon {
 
-/// specialization for Boost.Polygon traits for @ref limbo::GdsParser::GdsRectangle
+/// specialization for Boost.Polygon traits for @ref GdsParser::GdsDB::GdsRectangle
 template <>
-struct geometry_concept<limbo::GdsParser::GdsRectangle> 
+struct geometry_concept<GdsParser::GdsDB::GdsRectangle> 
 {
     /// @nowarn
 	typedef rectangle_concept type;
     /// @endnowarn
 };
 
-/// specialization for Boost.Polygon traits for @ref limbo::GdsParser::GdsPolygon
+/// specialization for Boost.Polygon traits for @ref GdsParser::GdsDB::GdsPolygon
 template <>
-struct geometry_concept<limbo::GdsParser::GdsPolygon> 
+struct geometry_concept<GdsParser::GdsDB::GdsPolygon> 
 {
     /// @nowarn 
 	typedef polygon_concept type;

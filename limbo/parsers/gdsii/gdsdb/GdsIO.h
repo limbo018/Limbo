@@ -1,6 +1,6 @@
 /**
  * @file   GdsIO.h
- * @brief  Wrapper to GDSII read and write with GDSII database @ref limbo::GdsParser::GdsDB
+ * @brief  Wrapper to GDSII read and write with GDSII database @ref GdsParser::GdsDB::GdsDB
  * @author Yibo Lin
  * @date   Nov 2016
  */
@@ -15,14 +15,14 @@
 
 #include <limbo/parsers/gdsii/gdsdb/GdsObjects.h>
 
-/// namespace for Limbo 
-namespace limbo 
-{ 
 /// namespace for Limbo.GdsParser 
 namespace GdsParser 
 {
+/// namespace for Limbo.GdsParser.GdsDB 
+namespace GdsDB 
+{
 
-/// read GDSII file with GDSII database @ref limbo::GdsParser::GdsDB
+/// read GDSII file with GDSII database @ref GdsParser::GdsDB::GdsDB
 class GdsReader : ::GdsParser::GdsDataBaseKernel
 {
 	public:
@@ -114,7 +114,7 @@ class GdsReader : ::GdsParser::GdsDataBaseKernel
 		std::vector<unsigned int> m_vUnsupportRecord; ///< try to be clean at screen output, record the times of unsupported records 
 };
 
-/// write GDSII file with GDSII database @ref limbo::GdsParser::GdsDB
+/// write GDSII file with GDSII database @ref GdsParser::GdsDB::GdsDB
 class GdsWriter
 {
 	public:
@@ -157,6 +157,7 @@ class GdsWriter
 		gdsdb_type const& m_db; ///< reference to GDSII database 
 };
 
-}} // namespace limbo // GdsParser
+} // namespace GdsDB
+} // namespace GdsParser
 
 #endif 

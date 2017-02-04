@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: GdsObjects.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 05 Oct 2016 01:29:12 PM CEST
- ************************************************************************/
+/**
+ * @file   GdsObjects.cpp
+ * @brief  Implementation of various GDSII objects and a top GDSII database 
+ * @author Yibo Lin
+ * @date   Oct 2016
+ */
 
 #include <limbo/parsers/gdsii/gdsdb/GdsObjects.h>
 #include <limbo/parsers/gdsii/gdsdb/GdsObjectHelpers.h>
@@ -13,7 +13,7 @@
 #include <cmath>
 #include <deque>
 
-namespace limbo { namespace GdsParser {
+namespace GdsParser { namespace GdsDB {
 
 GdsObject::GdsObject() 
 {
@@ -548,7 +548,7 @@ GdsDB::~GdsDB()
 void GdsDB::setHeader(int h) 
 {
 	char buf[64]; 
-	limboSPrint(kNONE, buf, "%d", h);
+	limboSPrint(limbo::kNONE, buf, "%d", h);
 	m_header = buf; 
 }
 
@@ -604,4 +604,4 @@ GdsCell GdsDB::extractCell(std::string const& cellName) const
 	return targetCell; 
 }
 
-}} // namespace limbo // GdsParser
+}} // namespace GdsParser // GdsDB

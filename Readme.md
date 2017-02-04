@@ -133,7 +133,7 @@ For example, if Boost is compiled with "clang++ -stdlib=libstdc++ -std=c++98", t
 
 ## 4. Customize OPENBLAS options 
 
-* There is a third party OpenBLAS required by some other third party packages, such as Csdp and liblinear. OPENBLAS option is used to control whether compiling these packages. 
+* There is a third party OpenBLAS required by some other third party packages, such as Csdp. OPENBLAS option is used to control whether compiling these packages. 
 
 If you do not need these packages, set OPENBLAS=0 (default); 
 otherwise, set OPENBLAS=1.
@@ -191,8 +191,6 @@ Third party package **c-thread-pool** is released under MIT license.
 Third party package **csdp** is released under CPL v1.0 license. 
 
 Third party package **OpenBLAS** has its copyright reserved; please check its license. 
-
-Third party package **liblinear** has its copyright reserved; please check its license.
 
 # Tutorial {#Tutorial}
 
