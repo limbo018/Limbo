@@ -119,13 +119,13 @@ doc: Doxyfile $(SRCS)
 .PHONY: install
 install: 
 	mkdir -p $(PREFIX)/doc
-	cp -r $(DOCDIR)/html $(PREFIX)/doc
-	#cp -r $(DOCDIR)/latex $(PREFIX)/doc
+	if [ -a $(DOCDIR)/html/index.html ]; then \
+		cp -r $(DOCDIR)/html $(PREFIX)/doc; \
+	fi 
 
 .PHONY: clean
 clean: 
 	rm -rf $(DOCDIR)/html
-	#rm -rf $(DOCDIR)/latex
 	rm -f $(DOCDIR)/Doxyfile
 
 .PHONY: extraclean
