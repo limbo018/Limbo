@@ -77,7 +77,7 @@ Please report bugs to [yibolin at utexas dot edu](mailto:yibolin@utexas.edu).
 
 Some components depend on external libraries, such as 
 
-* [Boost](www.boost.org): require BOOST_DIR environment variable to the path where Boost is installed. 
+* [Boost](www.boost.org): require BOOST_DIR environment variable to the path where Boost is installed. Limbo library is tested through Boost 1.55.0 to 1.57.0.
 * [Lemon](https://lemon.cs.elte.hu): require LEMON_DIR environment variable to the path where Lemon is installed. 
 * [Gurobi](www.gurobi.com): require GUROBI_HOME environment variable to the path where Gurobi is installed. 
 * [Flex](http://flex.sourceforge.net): require FLEX_DIR or LEX_INCLUDE_DIR environment variable if the flex version is not 2.5.37. See FAQ for details. 
@@ -90,7 +90,8 @@ Users need to make sure they are properly installed and the corresponding settin
 * In the directory of limbo library, run 
 ~~~~~~~~~~~~~~~~
 make
-make test (optional)
+make doc (optional)                       # generate documentation 
+make test (optional)                      # build test programs 
 make install PREFIX=an_absolute_path
 ~~~~~~~~~~~~~~~~
 

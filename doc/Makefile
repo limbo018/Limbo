@@ -118,10 +118,12 @@ doc: Doxyfile $(SRCS)
 
 .PHONY: install
 install: 
+ifneq ($(realpath $(LIMBO_ROOT_DIR)),$(realpath $(PREFIX)))
 	mkdir -p $(PREFIX)/doc
 	if [ -a $(DOCDIR)/html/index.html ]; then \
 		cp -r $(DOCDIR)/html $(PREFIX)/doc; \
 	fi 
+endif
 
 .PHONY: clean
 clean: 
