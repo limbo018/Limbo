@@ -79,7 +79,7 @@ install:
 	mkdir -p $(PREFIX)/include/limbo/geometry
 	cp $(wildcard *.h) $(PREFIX)/include/limbo/geometry
 	mkdir -p $(PREFIX)/include/limbo/geometry/api
-	cp $(wildcard *.h) $(PREFIX)/include/limbo/geometry/api
+	cp $(wildcard api/*.h) $(PREFIX)/include/limbo/geometry/api
 
 .PHONY: clean
 clean: cleandep
