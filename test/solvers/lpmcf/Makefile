@@ -19,7 +19,7 @@ DBG = 0
 include $(LIMBO_ROOT_DIR)/Include.mk
 
 ifeq ($(DBG), 1)
-	CXXFLAGS = $(CXXFLAGS_DEBUG) 
+	CXXFLAGS = $(CXXFLAGS_DEBUG) -DDEBUG_EQUALITYCONSTRAINEDMINCOSTFLOW
 else
 	CXXFLAGS = $(CXXFLAGS_RELEASE)
 endif
@@ -34,7 +34,8 @@ INCLUDE = -I $(LIMBO_ROOT_DIR) \
 		  -I $(BOOST_DIR)/include \
 		  -I $(LIBRARIES_DIR)/lemon/include
 LIBS = $(LEMON_LINK_FLAG) -L $(LEMON_DIR)/lib -lemon \
-		-L $(LIMBO_ROOT_DIR)/lib -llpparser
+		-L $(LIMBO_ROOT_DIR)/lib -llpparser \
+		$(DYNAMIC_LINK_FLAG) 
 
 # ==========================================================================
 #                         Standard Setting
@@ -44,7 +45,7 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-all: test_lpmcf
+all: test_lpmcf test_EqualityConstrainedMinCostFlow
 
 # Compile dependency 
 
@@ -65,9 +66,13 @@ $(OBJDIR)/%.o: %.cpp
 test_lpmcf: $(OBJDIR)/test_lpmcf.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_lpmcf.o $(LIBS) 
 
+test_EqualityConstrainedMinCostFlow: $(OBJDIR)/test_EqualityConstrainedMinCostFlow.o 
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_EqualityConstrainedMinCostFlow.o $(LIBS) 
+
 .PHONY: clean
 clean: cleandep
 	rm -f test_lpmcf
+	rm -f test_EqualityConstrainedMinCostFlow
 	rm -f $(OBJS) 
 
 .PHONY: cleandep

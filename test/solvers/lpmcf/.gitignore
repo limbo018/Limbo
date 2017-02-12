@@ -1,5 +1,6 @@
 obj
 test_lpmcf
+test_EqualityConstrainedMinCostFlow
 problem.lp.*
 graph.lgf.*
 graph.lp*
