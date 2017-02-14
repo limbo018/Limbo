@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: VerilogDataBase.h
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Fri 10 Oct 2014 11:49:28 PM CDT
- ************************************************************************/
+/**
+ @file   VerilogDataBase.h
+ @author Yibo Lin
+ @date   Oct 2014
+ @brief  Implementation of @ref VerilogParser::VerilogDataBase
+ */
 
 #include "VerilogDataBase.h"
 #include <cstdlib>

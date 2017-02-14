@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: GdsDriver.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Wed 12 Nov 2014 01:29:25 PM CST
- ************************************************************************/
+/**
+ @file   GdsDriver.cpp
+ @author Yibo Lin
+ @date   Nov 2014
+ @brief  Driver for GDSII 
+ */
 
 #include <limbo/parsers/gdsii/stream/GdsDriver.h>
 

@@ -1,14 +1,15 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * 
+/**
+ * @file   GdsReader.cpp
+ * @author Jim Buchanan, Yibo Lin
+ * @brief  GDSII reader
+ *
+ * It is originally developed by Jim Buchanan and released under GPL. 
+ *
  * sf2ascii
  * 
  * You can contact me via email at:
  * 
  * jim@buchanan1.net
- * 
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  *
  * Copyright (C) 1996-1998 Jim Buchanan
  *
@@ -16,8 +17,7 @@
  * General Public License, any version you prefer. The GPL may be found
  * at http://www.gnu.org/
  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
+ */
 
 /* I tried to make this really robust. In theory, no matter how corrupt the file is, this should
  * completely read it and output it, in raw form if nothing else. In theory, it should

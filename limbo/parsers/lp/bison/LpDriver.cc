@@ -1,5 +1,9 @@
-// $Id: driver.cc 39 2008-08-03 10:07:15Z tb $
-/** \file driver.cc Implementation of the example::Driver class. */
+/**
+ * @file   LpDriver.cc
+ * @author Yibo Lin
+ * @date   Oct 2014
+ * @brief  Implementation of @ref LpParser::Driver
+ */
 
 #include <limits>
 #include "LpDriver.h"
