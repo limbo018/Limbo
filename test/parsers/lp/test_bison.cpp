@@ -31,24 +31,33 @@ class LpDataBase : public LpParser::LpDataBase
         /// @param vname variable name 
         /// @param l lower bound 
         /// @param r upper bound 
-		void add_variable(string const& vname, int64_t const& l, int64_t const& r) 
+		void add_variable(string const& vname, double const& l, double const& r) 
 		{
 			cout << l << " <= " << vname << " <= " << r << endl;
 		}
-        /// @brief add constraint that \a vname1 - \a vname2 >= \a constant. 
-        /// @param vname1 first variable 
-        /// @param vname2 second variable 
-        /// @param constant constant value 
-		void add_constraint(string const& vname1, string const& vname2, int64_t const& constant) 
+        /// @brief add constraint that \a terms \a compare \a constant. 
+        /// @param terms array of terms in left hand side 
+        /// @param compare operator '<', '>', '='
+        /// @param constant constant in the right hand side 
+		void add_constraint(LpParser::TermArray const& terms, char compare, double constant) 
 		{
-			cout << vname1 << " - " << vname2 << " >= " << constant << endl;
+            for (LpParser::TermArray::const_iterator it = terms.begin(); it != terms.end(); ++it)
+                cout << " + " << it->coef << " " << it->var; 
+            cout << " " << compare << " " << constant << endl; 
 		}
-        /// @brief add object terms that \a coef * \a vname 
-        /// @param vname variable name 
-        /// @param coef coefficient 
-		void add_objective(string const& vname, int64_t const& coef) 
+        /// @brief add object terms 
+        /// @param minimize true denotes minimizing object, false denotes maximizing object 
+        /// @param terms array of terms 
+		void add_objective(bool minimize, LpParser::TermArray const& terms)
 		{
-			cout << " + " << coef << "*" << vname << endl;
+            if (minimize)
+                cout << "Minimize\n"; 
+            else 
+                cout << "Maximize\n";
+            for (LpParser::TermArray::const_iterator it = terms.begin(); it != terms.end(); ++it)
+                cout << " + " << it->coef << " " << it->var; 
+            cout << endl; 
+            cout << "Subject To\n";
 		}
 };
 
