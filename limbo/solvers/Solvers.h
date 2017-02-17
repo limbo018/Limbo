@@ -5,11 +5,14 @@
  * @brief  Basic utilities such as variables and linear expressions in solvers 
  */
 #include <iostream>
-#include <limit>
+#include <limits>
 #include <string>
 #include <vector>
+#include <map>
 #include <algorithm>
 #include <limbo/preprocessor/Msg.h>
+#include <limbo/math/Math.h>
+#include <limbo/parsers/lp/bison/LpDriver.h>
 
 /// namespace for Limbo 
 namespace limbo 
@@ -31,10 +34,29 @@ enum SolverProperty
     SUBOPTIMAL ///< the model is suboptimal 
 };
 
+// forward declaration 
+template <typename T>
+class Variable;
+template <typename T>
+class VariableProperty;
+template <typename T>
+class LinearTerm; 
+template <typename T>
+class LinearExpression;
+template <typename T>
+class LinearConstraint;
+template <typename T, typename V>
+class LinearModel; 
+
 /// @brief Describe variables in optimization problem 
+/// @tparam T coefficient type of the variable, not the value type of variable itself. It is necessary for operator overloading 
+template <typename T>
 class Variable 
 {
     public:
+        /// @brief coefficient type 
+        typedef T coefficient_value_type;
+
         /// @brief constructor 
         /// @param id variable index 
         Variable(unsigned int id = std::numeric_limits<unsigned int>::max()) 
@@ -71,6 +93,53 @@ class Variable
         {
             return m_id == rhs.m_id;
         }
+        /// overload negation 
+        /// @return a copy of new object 
+        LinearTerm<coefficient_value_type> operator-() const 
+        {
+            LinearTerm<coefficient_value_type> term (*this); 
+            return term.negate();
+        }
+        /// overload multiply var*coef  
+        /// @param var variable 
+        /// @param coef coefficient 
+        /// @return result object 
+        friend LinearTerm<coefficient_value_type> operator*(Variable const& var, coefficient_value_type coef)
+        {
+            return LinearTerm<coefficient_value_type>(var, coef); 
+        }
+        /// overload multiply coef*var 
+        /// @param var variable 
+        /// @param coef coefficient 
+        /// @return result object 
+        friend LinearTerm<coefficient_value_type> operator*(coefficient_value_type coef, Variable const& var)
+        {
+            return var*coef; 
+        }
+        /// overload divide var/coef 
+        /// @param var variable 
+        /// @param coef coefficient 
+        /// @return result object 
+        friend LinearTerm<coefficient_value_type> operator/(Variable const& var, coefficient_value_type coef)
+        {
+            return LinearTerm<coefficient_value_type>(var)/coef; 
+        }
+        /// overload plus var+var
+        /// @param var1 variable 
+        /// @param var2 variable 
+        /// @return result object 
+        friend LinearExpression<coefficient_value_type> operator+(Variable const& var1, Variable const& var2)
+        {
+            return LinearTerm<coefficient_value_type>(var1)+var2; 
+        }
+        /// overload minus var-var
+        /// @param var1 variable 
+        /// @param var2 variable 
+        /// @return result object 
+        friend LinearExpression<coefficient_value_type> operator-(Variable const& var1, Variable const& var2)
+        {
+            return LinearTerm<coefficient_value_type>(var1)-var2; 
+        }
     protected:
         /// @brief copy object 
         void copy(Variable const& rhs)
@@ -82,20 +151,20 @@ class Variable
 };
 
 /// @brief Describe properties of a variable 
-/// @tparam T type of variable bound 
-template <typename T>
+/// @tparam V type of variable bound 
+template <typename V>
 class VariableProperty
 {
     public:
         /// type of bounds 
-        typedef T value_type; 
+        typedef V variable_value_type; 
 
         /// @brief constructor 
         /// @param lb lower bound 
         /// @param ub upper bound 
         /// @param nt numeric type 
         /// @param n name 
-        VariableProperty(value_type lb, value_type ub, SolverProperty nt, std::string const& n)
+        VariableProperty(variable_value_type lb, variable_value_type ub, SolverProperty nt, std::string const& n)
             : m_lowerBound(lb)
             , m_upperBound(ub)
             , m_numericType(nt)
@@ -118,17 +187,17 @@ class VariableProperty
         }
 
         /// @return lower bound 
-        value_type lowerBound() const {return m_lowerBound;}
+        variable_value_type lowerBound() const {return m_lowerBound;}
         /// @param lb lower bound 
-        void setLowerBound(value_type lb) {m_lowerBound = lb;}
+        void setLowerBound(variable_value_type lb) {m_lowerBound = lb;}
         /// @param lb lower bound 
-        void updateLowerBound(value_type lb) {m_lowerBound = std::max(m_lowerBound, lb);}
+        void updateLowerBound(variable_value_type lb) {m_lowerBound = std::max(m_lowerBound, lb);}
         /// @return upper bound 
-        value_type upperBound() const {return m_upperBound;}
+        variable_value_type upperBound() const {return m_upperBound;}
         /// @param up upper bound 
-        void setUpperBound(value_type ub) {m_upperBound = ub;}
+        void setUpperBound(variable_value_type ub) {m_upperBound = ub;}
         /// @param up upper bound 
-        void updateUpperBound(value_type ub) {m_upperBound = std::min(m_upperBound, ub);}
+        void updateUpperBound(variable_value_type ub) {m_upperBound = std::min(m_upperBound, ub);}
         /// @return numeric type 
         SolverProperty numericType() const {return m_numericType;}
         /// @param nt numeric type 
@@ -149,8 +218,8 @@ class VariableProperty
             m_name = rhs.m_name;
         }
 
-        value_type m_lowerBound; ///< lower bound 
-        value_type m_upperBound; ///< upper bound 
+        variable_value_type m_lowerBound; ///< lower bound 
+        variable_value_type m_upperBound; ///< upper bound 
         SolverProperty m_numericType; ///< numeric type, BINARY, INTEGER, CONTINUOUS
         std::string m_name; ///< name of variable 
 };
@@ -161,13 +230,15 @@ template <typename T>
 class LinearTerm
 {
     public:
-        /// @coefficient type 
-        typedef T value_type;
+        /// @brief coefficient type 
+        typedef T coefficient_value_type;
+        /// @brief variable type 
+        typedef Variable<coefficient_value_type> variable_type; 
 
         /// @brief constructor 
         /// @param var variable 
         /// @param coef coefficient 
-        LinearTerm(Variable var, value_type coef = 1)
+        LinearTerm(variable_type var = variable_type(), coefficient_value_type coef = 1)
             : m_var(var)
             , m_coef(coef)
         {
@@ -192,34 +263,153 @@ class LinearTerm
         }
 
         /// @return variable 
-        Variable const& variable() const {return m_var;}
+        variable_type const& variable() const {return m_var;}
         /// @param var variable
-        void setVariable(Variable const& var) {m_var = var;}
+        void setVariable(variable_type const& var) {m_var = var;}
         /// @return coefficient 
-        value_type coefficient() const {return m_coef;}
+        coefficient_value_type coefficient() const {return m_coef;}
         /// @param coef coefficient 
-        void setCoefficient(value_type coef) {m_coef = coef;}
+        void setCoefficient(coefficient_value_type coef) {m_coef = coef;}
 
+        /// overload negation 
+        /// @return a copy of new object 
+        LinearTerm operator-() const 
+        {
+            LinearTerm term (*this); 
+            return term.negate();
+        }
+        /// self-negation 
+        /// @return the object 
+        LinearTerm& negate() 
+        {
+            m_coef = -m_coef; 
+            return *this; 
+        }
         /// overload multiply by a value 
         /// @param coef coefficient 
+        /// @return result object 
+        friend LinearTerm operator*(LinearTerm const& term, coefficient_value_type coef)
+        {
+            LinearTerm other (term); 
+            other *= coef; 
+            return other; 
+        }
+        /// overload a value multiply a term
+        friend LinearTerm operator*(coefficient_value_type coef, LinearTerm const& term)
+        {
+            return term*coef; 
+        }
+        /// overload multiply and assignment  
+        /// @param coef coefficient 
         /// @return reference to the object 
-        LinearTerm& operator*(value_type coef)
+        LinearTerm& operator*=(coefficient_value_type coef)
         {
             m_coef *= coef; 
             return *this;
         }
-        /// overload a value multiply a term
-        friend LinearTerm operator*(value_type coef, LinearTerm const& term)
-        {
-            return term*coef; 
-        }
         /// overload divide by a value 
         /// @param coef coefficient 
         /// @return reference to the object 
-        LinearTerm& operator/(value_type coef)
+        friend LinearTerm operator/(LinearTerm const& term, coefficient_value_type coef)
+        {
+            LinearTerm other (term); 
+            other /= coef; 
+            return other; 
+        }
+        /// overload divide and assignment 
+        /// @param coef coefficient 
+        /// @return reference to the object 
+        LinearTerm& operator/=(coefficient_value_type coef)
         {
             m_coef /= coef; 
             return *this; 
+        }
+        /// overload plus term+var 
+        /// @param term term 
+        /// @param var variable 
+        /// @return expression 
+        friend LinearExpression<coefficient_value_type> operator+(LinearTerm const& term, variable_type const& var)
+        {
+            return term+LinearTerm(var);
+        }
+        /// overload plus term+var 
+        /// @param term term 
+        /// @param var variable 
+        /// @return expression 
+        friend LinearExpression<coefficient_value_type> operator+(variable_type const& var, LinearTerm const& term)
+        {
+            return LinearTerm(var)+term;
+        }
+        /// overload plus for two terms 
+        /// @param term1 term 
+        /// @param term2 term 
+        /// @return result expression 
+        friend LinearExpression<coefficient_value_type> operator+(LinearTerm const& term1, LinearTerm const& term2)
+        {
+            LinearExpression<coefficient_value_type> expr (term1);
+            expr += term2; 
+            return expr; 
+        }
+        /// overload minus term-var 
+        /// @param term term 
+        /// @param var variable 
+        /// @return expression 
+        friend LinearExpression<coefficient_value_type> operator-(LinearTerm const& term, variable_type const& var)
+        {
+            return term-LinearTerm(var);
+        }
+        /// overload minus term-var 
+        /// @param term term 
+        /// @param var variable 
+        /// @return expression 
+        friend LinearExpression<coefficient_value_type> operator-(variable_type const& var, LinearTerm const& term)
+        {
+            return LinearTerm(var)-term;
+        }
+        /// overload minus for two terms 
+        /// @param term1 term 
+        /// @param term2 term 
+        /// @return result expression 
+        friend LinearExpression<coefficient_value_type> operator-(LinearTerm const& term1, LinearTerm const& term2)
+        {
+            LinearExpression<coefficient_value_type> expr (term1);
+            expr -= term2; 
+            return expr; 
+        }
+        /// @brief overload < 
+        /// @param term linear term 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator<(LinearTerm const& term, coefficient_value_type rhs)
+        {
+            return LinearConstraint<coefficient_value_type>(term, rhs, '<');
+        }
+        /// @brief overload <=, same as < 
+        /// @param term linear term 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator<=(LinearTerm const& term, coefficient_value_type rhs)
+        {
+            return (term < rhs);
+        }
+        /// @brief overload > 
+        /// @param term linear term 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator>(LinearTerm const& term, coefficient_value_type rhs)
+        {
+            return LinearConstraint<coefficient_value_type>(term, rhs, '>');
+        }
+        /// @brief overload >=, same as >
+        /// @param term linear term 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator>=(LinearTerm const& term, coefficient_value_type rhs)
+        {
+            return (term > rhs);
+        }
+        /// overload == 
+        /// @param term linear term 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator==(LinearTerm const& term, coefficient_value_type rhs)
+        {
+            return LinearConstraint<coefficient_value_type>(term, rhs, '=');
         }
         /// overload equal 
         /// @param rhs right hand side 
@@ -237,8 +427,8 @@ class LinearTerm
             m_coef = rhs.m_coef; 
         }
 
-        Variable m_var; ///< variable 
-        value_type m_coef; ///< coefficient 
+        variable_type m_var; ///< variable 
+        coefficient_value_type m_coef; ///< coefficient 
 };
 
 /// @brief Comapre term by variable 
@@ -262,7 +452,11 @@ class LinearExpression
 {
     public:
         /// @brief coefficient type 
-        typedef T value_type;
+        typedef T coefficient_value_type;
+        /// @brief term type 
+        typedef LinearTerm<coefficient_value_type> term_type;
+        /// @brief variable type 
+        typedef Variable<coefficient_value_type> variable_type; 
 
         /// @brief constructor
         /// @param c constant value 
@@ -270,7 +464,7 @@ class LinearExpression
         {
         }
         /// @brief constructor 
-        LinearExpression(LinearTerm const& term)
+        LinearExpression(term_type const& term)
         {
             m_vTerm.push_back(term);
         }
@@ -293,38 +487,143 @@ class LinearExpression
         {
         }
 
+        /// @return terms 
+        std::vector<term_type> const& terms() const {return m_vTerm;}
+        /// @brief clear expression 
+        void clear() {m_vTerm.clear();}
+
         /// overload plus 
+        /// @param expr expression 
+        /// @param term right hand side is a term 
+        /// @return result object 
+        friend LinearExpression operator+(LinearExpression const& expr, term_type const& term)
+        {
+            LinearExpression other (expr); 
+            other += term; 
+            return other; 
+        }
+        /// overload plus term+expr 
+        /// @param expr expression 
+        /// @param term a term 
+        /// @return result object 
+        friend LinearExpression operator+(term_type const& term, LinearExpression const& expr)
+        {
+            return expr+term; 
+        }
+        /// overload plus expr+expr 
+        /// @param expr1 expression 
+        /// @param expr2 expression
+        /// @return result object 
+        friend LinearExpression operator+(LinearExpression const& expr1, LinearExpression const& expr2)
+        {
+            LinearExpression other (expr1);
+            other += expr2; 
+            return other; 
+        }
+        /// overload plus assignment  
         /// @param term right hand side is a term 
         /// @return the object 
-        LinearExpression& operator+(LinearTerm const& term)
+        LinearExpression& operator+=(term_type const& term)
         {
             m_vTerm.push_back(term); 
             return *this; 
         }
+        /// overload plus assignment for expression 
+        /// @param expr right hand side is an expression
+        /// @return the object 
+        LinearExpression& operator+=(LinearExpression const& expr)
+        {
+            m_vTerm.insert(m_vTerm.end(), expr.terms().begin(), expr.terms().end()); 
+            return *this; 
+        }
         /// overload minus 
+        /// @param expr expression 
         /// @param term right hand side is a term 
         /// @return the object 
-        LinearExpression& operator-(LinearTerm term)
+        friend LinearExpression operator-(LinearExpression const& expr, term_type const& term)
+        {
+            LinearExpression other (expr); 
+            other -= term; 
+            return other; 
+        }
+        /// overload minus term-expr
+        /// @param term term 
+        /// @param expr expression 
+        /// @return the object 
+        friend LinearExpression operator-(term_type const& term, LinearExpression const& expr)
+        {
+            return (-expr)+term; 
+        }
+        /// overload minus 
+        /// @param expr1 expression 
+        /// @param expr2 expression 
+        /// @return the object 
+        friend LinearExpression operator-(LinearExpression const& expr1, LinearExpression const& expr2)
+        {
+            LinearExpression other (expr1); 
+            other -= expr2; 
+            return other; 
+        }
+        /// overload minus assignment  
+        /// @param term right hand side is a term 
+        /// @return the object 
+        LinearExpression& operator-=(term_type term)
         {
             term.setCoefficient(-term.coefficient());
-            return this->operator+(term);
+            return this->operator+=(term);
+        }
+        /// overload minus assignment for expression  
+        /// @param expr right hand side is an expression
+        /// @return the object 
+        LinearExpression& operator-=(LinearExpression const& expr)
+        {
+            for (typename std::vector<term_type>::const_iterator it = expr.terms().begin(), ite = expr.terms().end(); it != ite; ++it)
+                this->operator-=(*it);
+            return *this;
         }
         /// overload multiply 
         /// @param c constant value 
         /// @return the object 
-        LinearExpression& operator*(value_type c)
+        friend LinearExpression operator*(LinearExpression const& expr, coefficient_value_type c)
         {
-            for (std::vector<LinearTerm<value_type> >::iterator it = m_vTerm.begin(); it != m_vTerm.end(); ++it)
-                it->setCoefficient(c*it->coefficient());
-            return *this; 
+            LinearExpression other (expr);
+            other *= c; 
+            return other; 
         }
         /// overload multiply in case of c*expr 
         /// @param c constant value 
         /// @param expr expression 
         /// @return the object of \expr
-        friend LinearExpression& operator*(value_type c, LinearExpression& expr)
+        friend LinearExpression operator*(coefficient_value_type c, LinearExpression const& expr)
         {
-            return expr.operator*(c); 
+            return expr*c; 
+        }
+        /// overload multiply assignment 
+        /// @param c constant value 
+        /// @return the object 
+        LinearExpression& operator*=(coefficient_value_type c)
+        {
+            for (typename std::vector<term_type>::iterator it = m_vTerm.begin(); it != m_vTerm.end(); ++it)
+                it->setCoefficient(c*it->coefficient());
+            return *this; 
+        }
+        /// overload divide  
+        /// @param c constant value 
+        /// @return the object 
+        friend LinearExpression operator/(LinearExpression const& expr, coefficient_value_type c)
+        {
+            LinearExpression other (expr);
+            other /= c; 
+            return other; 
+        }
+        /// overload divide assignment 
+        /// @param c constant value 
+        /// @return the object 
+        LinearExpression& operator/=(coefficient_value_type c)
+        {
+            for (typename std::vector<term_type>::iterator it = m_vTerm.begin(); it != m_vTerm.end(); ++it)
+                it->setCoefficient(it->coefficient()/c);
+            return *this; 
         }
         /// overload negation 
         /// @return a copy of new object 
@@ -337,18 +636,55 @@ class LinearExpression
         /// @return the object 
         LinearExpression& negate() 
         {
-            for (std::vector<LinearTerm<value_type> >::iterator it = m_vTerm.begin(); it != m_vTerm.end(); ++it)
+            for (typename std::vector<term_type>::iterator it = m_vTerm.begin(); it != m_vTerm.end(); ++it)
                 it->setCoefficient(-it->coefficient());
             return *this; 
         }
+        /// @brief overload < 
+        /// @param expr linear expression 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator<(LinearExpression const& expr, coefficient_value_type rhs)
+        {
+            return LinearConstraint<coefficient_value_type>(expr, rhs, '<');
+        }
+        /// @brief overload <=, same as < 
+        /// @param expr linear expression 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator<=(LinearExpression const& expr, coefficient_value_type rhs)
+        {
+            return (expr < rhs);
+        }
+        /// @brief overload > 
+        /// @param expr linear expression 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator>(LinearExpression const& expr, coefficient_value_type rhs)
+        {
+            return LinearConstraint<coefficient_value_type>(expr, rhs, '>');
+        }
+        /// @brief overload >=, same as >
+        /// @param expr linear expression 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator>=(LinearExpression const& expr, coefficient_value_type rhs)
+        {
+            return (expr > rhs);
+        }
+        /// overload == 
+        /// @param expr linear expression 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator==(LinearExpression const& expr, coefficient_value_type rhs)
+        {
+            return LinearConstraint<coefficient_value_type>(expr, rhs, '=');
+        }
 
         /// @brief simplify expression by merge terms of the same variables 
+        /// and remove terms with zero coefficients 
         void simplify()
         {
             std::sort(m_vTerm.begin(), m_vTerm.end(), CompareTermByVariable()); 
-            std::vector<LinearTerm>::iterator itw = m_vTerm.begin(); // write iterator 
-            std::vector<LinearTerm>::iterator itr = m_vTerm.begin(); // read iterator 
-            std::vector<LinearTerm>::iterator ite = m_vTerm.end();
+            // merge terms 
+            typename std::vector<term_type>::iterator itw = m_vTerm.begin(); // write iterator 
+            typename std::vector<term_type>::iterator itr = m_vTerm.begin(); // read iterator 
+            typename std::vector<term_type>::iterator ite = m_vTerm.end();
             for (; itr != ite; ++itr)
             {
                 if (itr != itw)
@@ -356,10 +692,25 @@ class LinearExpression
                     if (itr->variable() == itw->variable())
                         itw->setCoefficient(itw->coefficient()+itr->coefficient());
                     else
+                    {
                         ++itw; 
+                        *itw = *itr; 
+                    }
                 }
             }
             m_vTerm.resize(std::distance(m_vTerm.begin(), itw+1));
+            // remove terms with zero coefficients 
+            // the order is not maintained 
+            for (itr = m_vTerm.begin(); itr != m_vTerm.end(); )
+            {
+                if (itr->coefficient() == 0)
+                {
+                    *itr = m_vTerm.back(); 
+                    m_vTerm.pop_back(); 
+                }
+                else 
+                    ++itr; 
+            }
         }
 
     protected:
@@ -370,7 +721,7 @@ class LinearExpression
             m_vTerm = rhs.m_vTerm;
         }
 
-        std::vector<LinearTerm> m_vTerm; ///< linear expression with terms 
+        std::vector<term_type> m_vTerm; ///< linear expression with terms 
 };
 
 /// @brief Describe linear constraint 
@@ -380,13 +731,19 @@ class LinearConstraint
 {
     public:
         /// @brief coefficient type 
-        typedef T value_type; 
+        typedef T coefficient_value_type; 
+        /// @brief variable type 
+        typedef Variable<coefficient_value_type> variable_type; 
+        /// @brief term type 
+        typedef LinearTerm<coefficient_value_type> term_type;
+        /// @brief expression type 
+        typedef LinearExpression<coefficient_value_type> expression_type;
 
         /// @brief constructor 
         /// @param expr expression 
         /// @param rhs right hand side 
         /// @param s sense 
-        LinearConstraint(LinearExpression expr = LinearExpression(), value_type rhs = 0, char s = '<')
+        LinearConstraint(expression_type expr = expression_type(), coefficient_value_type rhs = 0, char s = '<')
             : m_expr(expr)
             , m_rhs(rhs)
             , m_sense(s)
@@ -410,21 +767,27 @@ class LinearConstraint
         }
 
         /// @return linear expression 
-        LinearExpression<value_type> const& expression() const {return m_expr;}
+        expression_type const& expression() const {return m_expr;}
         /// @param expr expression
-        void setExpression(LinearExpression<value_type> const& expr) {m_expr = expr;}
+        void setExpression(expression_type const& expr) {m_expr = expr;}
         /// @return right hand side constant 
-        value_type rightHandSide() const {return m_rhs;}
+        coefficient_value_type rightHandSide() const {return m_rhs;}
         /// @param rhs right hand side 
-        void setRightHandSide(value_type rhs) {m_rhs = rhs;}
+        void setRightHandSide(coefficient_value_type rhs) {m_rhs = rhs;}
         /// @return sense 
         char sense() const {return m_sense;}
         /// @param s sense 
         void setSense(char s) {m_sense = s;}
+        /// @brief simplify expression by merge terms of the same variables 
+        void simplify()
+        {
+            m_expr.simplify();
+        }
         /// @brief normalize sense 
         /// @param s target sense 
         void normalize(char s)
         {
+            simplify();
             if ((m_sense == '<' && s == '>')
                     || (m_sense == '>' && s == '<'))
             {
@@ -434,44 +797,18 @@ class LinearConstraint
             }
         }
 
-        /// @brief overload < 
-        /// @param expr linear expression 
-        /// @param rhs right hand side constant 
-        friend LinearConstraint& operator<(LinearExpression const& expr, value_type rhs)
-        {
-            return LinearConstraint(expr, rhs, '<');
-        }
-        /// @brief overload <=, same as < 
-        /// @param expr linear expression 
-        /// @param rhs right hand side constant 
-        friend LinearConstraint& operator<=(LinearExpression const& expr, value_type rhs)
-        {
-            return (expr < rhs);
-        }
-        /// @brief overload > 
-        /// @param expr linear expression 
-        /// @param rhs right hand side constant 
-        friend LinearConstraint& operator>(LinearExpression const& expr, value_type rhs)
-        {
-            return LinearConstraint(expr, rhs, '>');
-        }
-        /// @brief overload >=, same as >
-        /// @param expr linear expression 
-        /// @param rhs right hand side constant 
-        friend LinearConstraint& operator>=(LinearExpression const& expr, value_type rhs)
-        {
-            return (expr > rhs);
-        }
-        /// overload == 
-        /// @param expr linear expression 
-        /// @param rhs right hand side constant 
-        friend LinearConstraint& operator==(LinearExpression const& expr, value_type rhs)
-        {
-            return LinearConstraint(expr, rhs, '=');
-        }
     protected:
-        LinearExpression<value_type> m_expr; ///< linear expression 
-        value_type m_rhs; ///< constant at the right hand side 
+        /// @brief copy object 
+        /// @param right hand side 
+        void copy(LinearConstraint const& rhs)
+        {
+            m_expr = rhs.m_expr;
+            m_rhs = rhs.m_rhs;
+            m_sense = rhs.m_sense;
+        }
+
+        expression_type m_expr; ///< linear expression 
+        coefficient_value_type m_rhs; ///< constant at the right hand side 
         char m_sense; ///< sign of operator, < (<=), > (>=), = (==)
 };
 
@@ -488,6 +825,8 @@ class LinearModel : public LpParser::LpDataBase
         typedef V variable_value_type; 
         /// @brief base class 
         typedef LpParser::LpDataBase base_type; 
+        /// @brief variable type 
+        typedef Variable<coefficient_value_type> variable_type; 
         /// @brief term type 
         typedef LinearTerm<coefficient_value_type> term_type; 
         /// @brief expression type 
@@ -501,6 +840,7 @@ class LinearModel : public LpParser::LpDataBase
         LinearModel() 
             : base_type()
         {
+            m_optType = MIN; 
         }
         /// @brief copy constructor 
         /// @param rhs right hand side 
@@ -564,7 +904,7 @@ class LinearModel : public LpParser::LpDataBase
                         m_vVariableProperty.at(term.variable().id()).updateUpperBound(constr.rightHandSide()/term.coefficient());
                         break; 
                     default:
-                        limboAssertMsg(0, 'Unknown sense %c', constr.sense());
+                        limboAssertMsg(0, "Unknown sense %c", constr.sense());
                 }
             }
             else // actual constraint 
@@ -575,8 +915,12 @@ class LinearModel : public LpParser::LpDataBase
         }
         /// @return objective 
         expression_type const& objective() const {return m_objective;}
-        /// @return objective 
-        expression_type& objective() const {return m_objective;}
+        /// @param expr objective 
+        void setObjective(expression_type const& expr) 
+        {
+            m_objective = expr;
+            m_objective.simplify();
+        }
         /// @return optimization objective, whether maximize or minimize the objective 
         SolverProperty optimizeType() const {return m_optType;}
         /// @param optType optimization objective 
@@ -588,9 +932,9 @@ class LinearModel : public LpParser::LpDataBase
         /// @return number of variables 
         unsigned int numVariables() const {return m_vVariableProperty.size();}
         /// @return variable 
-        Variable variable(unsigned int id) const {return Variable(id);}
+        variable_type variable(unsigned int id) const {return variable_type(id);}
         /// @return name of variables 
-        std::string variableName(Variable const& var) const
+        std::string variableName(variable_type const& var) const
         {
             char buf[256];
             if (m_vVariableProperty.at(var.id()).name().empty())
@@ -600,32 +944,32 @@ class LinearModel : public LpParser::LpDataBase
             return buf; 
         }
         /// @return lower bound of variables 
-        variable_value_type variableLowerBound(Variable const& var) {return m_vVariableProperty.at(var.id()).lowerBound();}
+        variable_value_type variableLowerBound(variable_type const& var) {return m_vVariableProperty.at(var.id()).lowerBound();}
         /// @return upper bound of variables 
-        variable_value_type variableUpperBound(Variable const& var) {return m_vVariableProperty.at(var.id()).upperBound();}
+        variable_value_type variableUpperBound(variable_type const& var) {return m_vVariableProperty.at(var.id()).upperBound();}
         /// @return numeric type of variable 
-        SolverProperty variableNumericType(Variable const& var) {return m_vVariableProperty.at(var.id()).numericType();}
+        SolverProperty variableNumericType(variable_type const& var) {return m_vVariableProperty.at(var.id()).numericType();}
         /// @brief add one variable 
         /// @param lb lower bound 
         /// @param ub upper bound 
         /// @param nt numeric type 
         /// @param name variable name 
         /// @return variable 
-        Variable addVariable(variable_value_type lb, variable_value_type ub, SolverProperty nt, std::string name = "") 
+        variable_type addVariable(variable_value_type lb, variable_value_type ub, SolverProperty nt, std::string name = "") 
         {
-            m_vVariableProperty.push_back(VariableProperty(lb, ub, nt, name)); 
+            m_vVariableProperty.push_back(property_type(lb, ub, nt, name)); 
             m_vVariableSol.push_back(lb);
-            return Variable(m_vVariableProperty.size()-1);
+            return variable_type(m_vVariableProperty.size()-1);
         }
         /// @return array of solution 
         std::vector<variable_value_type> const& variableSolutions() const {return m_vVariableSol;}
         /// @return array of solution 
         std::vector<variable_value_type>& variableSolutions() {return m_vVariableSol;}
         /// @return solution of a variable 
-        variable_value_type variableSolution(Variable const& var) const {return m_vVariableSol.at(var.id());}
+        variable_value_type variableSolution(variable_type const& var) const {return m_vVariableSol.at(var.id());}
         /// @param var variable 
         /// @param v initial solution 
-        void setVariableSolution(Variable const& var, variable_value_type v) {m_vVariableSol.at(var.id()) = v;}
+        void setVariableSolution(variable_type const& var, variable_value_type v) {m_vVariableSol.at(var.id()) = v;}
         /// @brief reserve space for variables 
         /// @param n number of variables to reserve 
         void reserveVariables(unsigned int n)
@@ -646,7 +990,7 @@ class LinearModel : public LpParser::LpDataBase
         coefficient_value_type evaluateExpression(expression_type const& expr, std::vector<variable_value_type> const& vVariableSol) const 
         {
             coefficient_value_type result = 0; 
-            for (std::vector<term_type>::const_iterator it = expr.terms().begin(), ite = expr.terms().end(); it != ite; ++it)
+            for (typename std::vector<term_type>::const_iterator it = expr.terms().begin(), ite = expr.terms().end(); it != ite; ++it)
                 result += it->coefficient()*vVariableSol.at(it->variable().id());
             return result;
         }
@@ -686,17 +1030,96 @@ class LinearModel : public LpParser::LpDataBase
 		/// @brief read lp format 
         /// @param filename input file in lp format 
 		/// initializing graph 
-		void read_lp(string const& filename) 
+		void read(std::string const& filename) 
 		{
 			LpParser::read(*this, filename);
 		}
+        /// @name required callback from @ref LpParser::LpDataBase
+        ///@{
+        /// @brief add variable that \a l <= \a vname <= \a r. 
+        /// @param vname variable name 
+        /// @param l lower bound 
+        /// @param r upper bound 
+		void add_variable(std::string const& vname, double l = limbo::lowest<double>(), double r = std::numeric_limits<double>::max())
+        {
+            // in case of overflow 
+            variable_value_type lb = l; 
+            variable_value_type ub = r;
+            if (l == -10)
+                limboAssert(lb == -10);
+            if (l <= (double)limbo::lowest<variable_value_type>())
+                lb = limbo::lowest<variable_value_type>();
+            if (r >= (double)std::numeric_limits<variable_value_type>::max())
+                ub = std::numeric_limits<variable_value_type>::max();
+            limboAssertMsg(lb <= ub, "failed to add bound %g <= %s <= %g", l, vname.c_str(), r); 
+            if (l == -10)
+                limboAssert(lb == -10);
+
+			// no variables with the same name is allowed 
+            typename std::map<std::string, variable_type>::const_iterator found = m_mName2Variable.find(vname); 
+			if (found == m_mName2Variable.end()) // new variable 
+				limboAssertMsg(m_mName2Variable.insert(std::make_pair(vname, addVariable(lb, ub, CONTINUOUS, vname))).second,
+						"failed to insert variable %s to hash table", vname.c_str());
+			else // update variable 
+			{
+				m_vVariableProperty.at(found->second.id()).updateLowerBound(lb);
+				m_vVariableProperty.at(found->second.id()).updateUpperBound(ub);
+				limboAssertMsg(m_vVariableProperty.at(found->second.id()).lowerBound() <= m_vVariableProperty.at(found->second.id()).upperBound(), 
+                        "failed to set bound %g <= %s <= %g", m_vVariableProperty.at(found->second.id()).lowerBound(), vname.c_str(), m_vVariableProperty.at(found->second.id()).upperBound());
+			}
+        }
+        /// @brief add constraint that \a terms \a compare \a constant. 
+        /// @param terms array of terms in left hand side 
+        /// @param compare operator '<', '>', '='
+        /// @param constant constant in the right hand side 
+        void add_constraint(LpParser::TermArray const& terms, char compare, double constant) 
+        {
+            expression_type expr; 
+            for (LpParser::TermArray::const_iterator it = terms.begin(); it != terms.end(); ++it)
+            {
+                // in case variable is not added yet 
+                add_variable(it->var);
+                expr += m_mName2Variable.at(it->var)*it->coef; 
+            }
+            addConstraint(constraint_type(expr, constant, compare));
+        }
+        /// @brief add object terms 
+        /// @param minimize true denotes minimizing object, false denotes maximizing object 
+        /// @param terms array of terms 
+		void add_objective(bool minimize, LpParser::TermArray const& terms)
+        {
+            setOptimizeType((minimize)? MIN : MAX); 
+
+            expression_type expr; 
+            for (LpParser::TermArray::const_iterator it = terms.begin(); it != terms.end(); ++it)
+            {
+                // in case variable is not added yet 
+                add_variable(it->var);
+                expr += m_mName2Variable.at(it->var)*it->coef; 
+            }
+            setObjective(expr);
+        }
+        /// @brief set integer variables 
+        /// @param vname integer variables  
+        /// @param binary denotes whether they are binary variables 
+        void set_integer(std::string const& vname, bool binary)
+        {
+            // in case variable is not added yet 
+            add_variable(vname);
+            variable_type var = m_mName2Variable.at(vname); 
+            if (binary)
+                m_vVariableProperty.at(var.id()).setNumericType(BINARY); 
+            else 
+                m_vVariableProperty.at(var.id()).setNumericType(INTEGER); 
+        }
+        ///@}
 
         /// @brief print problem in lp format 
         /// @param os output stream 
         /// @return output stream 
         std::ostream& print(std::ostream& os) const 
         {
-            switch (optType())
+            switch (optimizeType())
             {
                 case MIN:
                     os << "Minimize\n";
@@ -716,7 +1139,7 @@ class LinearModel : public LpParser::LpDataBase
 
             // print constraints 
             unsigned int i = 0; 
-            for (std::vector<constraint_type>::const_iterator it = constraints().begin(), ite = constraints().end(); it != ite; ++it, ++i)
+            for (typename std::vector<constraint_type>::const_iterator it = constraints().begin(), ite = constraints().end(); it != ite; ++it, ++i)
             {
                 os << "C" << i << ": ";
                 print(os, *it); 
@@ -724,25 +1147,28 @@ class LinearModel : public LpParser::LpDataBase
             }
 
             // print bounds 
-            for (std::vector<property_type>::const_iterator it = m_vVariableProperty.begin(), ite = m_vVariableProperty.end(); it != ite; ++it)
+            os << "Bounds\n";
+            i = 0; 
+            for (typename std::vector<property_type>::const_iterator it = m_vVariableProperty.begin(), ite = m_vVariableProperty.end(); it != ite; ++it, ++i)
             {
-                if (it->lowerBound() <= std::numeric_limits<variable_value_type>::min() && it->upperBound() >= std::numeric_limits<variable_value_type>::max())
-                    os << it->name() << " free";
-                else if (it->lowerBound() <= std::numeric_limits<variable_value_type>::min())
-                    os << it->name() << " <= " << it->upperBound();
+                if (it->lowerBound() <= limbo::lowest<variable_value_type>() && it->upperBound() >= std::numeric_limits<variable_value_type>::max())
+                    os << variableName(variable_type(i)) << " free";
+                else if (it->lowerBound() <= limbo::lowest<variable_value_type>())
+                    os << variableName(variable_type(i)) << " <= " << it->upperBound();
                 else if (it->upperBound() >= std::numeric_limits<variable_value_type>::max())
-                    os << it->name() << " >= " << it->lowerBound();
+                    os << variableName(variable_type(i)) << " >= " << it->lowerBound();
                 else 
-                    os << it->lowerBound() << " <= " << it->name() << " <= " << it->upperBound();
+                    os << it->lowerBound() << " <= " << variableName(variable_type(i)) << " <= " << it->upperBound();
                 os << "\n";
             }
 
             // print numeric type 
-            os << "General\n";
-            for (std::vector<property_type>::const_iterator it = m_vVariableProperty.begin(), ite = m_vVariableProperty.end(); it != ite; ++it)
+            os << "Generals\n";
+            i = 0; 
+            for (typename std::vector<property_type>::const_iterator it = m_vVariableProperty.begin(), ite = m_vVariableProperty.end(); it != ite; ++it, ++i)
             {
                 if (it->numericType() == BINARY || it->numericType() == INTEGER)
-                    os << it->name() << "\n";
+                    os << variableName(variable_type(i)) << "\n";
             }
 
             os << "End"; 
@@ -755,7 +1181,7 @@ class LinearModel : public LpParser::LpDataBase
         /// @return output stream 
         std::ostream& print(std::ostream& os, term_type const& term) const 
         {
-            os << term.coefficient() << "*" << variableName(term.variable());
+            os << term.coefficient() << " " << variableName(term.variable());
             return os; 
         }
         /// @brief print expression 
@@ -765,7 +1191,7 @@ class LinearModel : public LpParser::LpDataBase
         std::ostream& print(std::ostream& os, expression_type const& expr) const 
         {
             int i = 0; 
-            for (std::vector<term_type>::const_iterator it = expr.terms().begin(), ite = expr.terms().end(); it != ite; ++it, ++i)
+            for (typename std::vector<term_type>::const_iterator it = expr.terms().begin(), ite = expr.terms().end(); it != ite; ++it, ++i)
             {
                 if (i)
                     os << " + "; 
@@ -803,6 +1229,8 @@ class LinearModel : public LpParser::LpDataBase
         SolverProperty m_optType; ///< optimization objective 
 
         std::vector<variable_value_type> m_vVariableSol; ///< variable solutions, it can be either initial solution or final solution 
+
+        std::map<std::string, variable_type> m_mName2Variable; ///< mapping from variable name to variable, only used when reading from files 
 };
 
 } // namespace solvers 

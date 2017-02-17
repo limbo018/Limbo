@@ -4,6 +4,7 @@
  * @date   Feb 2017
  */
 #include <limbo/solvers/MultiKnapsackLagRelax.h>
+#include <cmath>
 
 /// namespace for Limbo 
 namespace limbo 
@@ -135,8 +136,8 @@ void MultiKnapsackLagRelax::prepare()
     {
         limboAssert(it->sense() == '='); 
         expression_type const& expr = it->expression();
-        for (std::vector<term_type>::const_iterator itt = expr.terms().begin(), itte = expr.terms().end(); itt != itte)
-            m_vVariableGroup[itt->variable().id()].push_back(itt.variable());
+        for (std::vector<term_type>::const_iterator itt = expr.terms().begin(), itte = expr.terms().end(); itt != itte; ++itt)
+            m_vVariableGroup[itt->variable().id()].push_back(itt->variable());
     }
 }
 void MultiKnapsackLagRelax::updateLagMultipliers()
@@ -156,7 +157,7 @@ void MultiKnapsackLagRelax::updateLagMultipliers()
 
         // apply lagrangian multiplier to objective 
         // \f$ \sum_j \lambda_j (a_i x_{ij}) \f$
-        for (std::vector<term_type>::const_iterator it = constr.expression().begin(), ite = constr.expression().end(); it != ite; ++it)
+        for (std::vector<term_type>::const_iterator it = constr.expression().terms().begin(), ite = constr.expression().terms().end(); it != ite; ++it)
             m_vObjCoef[it->variable().id()] += it->coefficient()*deltaMultiplier;
         // \f$ \sum_j -\lambda_j b_j \f$
         m_objConstant += -constr.rightHandSide()*deltaMultiplier;
@@ -226,13 +227,16 @@ LagMultiplierUpdater& LagMultiplierUpdater::operator=(LagMultiplierUpdater const
         copy(rhs);
     return *this; 
 }
+LagMultiplierUpdater::~LagMultiplierUpdater() 
+{
+}
 void LagMultiplierUpdater::copy(LagMultiplierUpdater const& rhs)
 {
     m_alpha = rhs.m_alpha;
     m_iter = rhs.m_iter; 
     m_scalingFactor = rhs.m_scalingFactor; 
 }
-LagMultiplierUpdater::value_type LagMultiplierUpdater::operator()(unsigned int iter, LagMultiplierUpdater::value_type multiplier, LagMultiplierUpdater::value_type slackness) const 
+LagMultiplierUpdater::value_type LagMultiplierUpdater::operator()(unsigned int iter, LagMultiplierUpdater::value_type multiplier, LagMultiplierUpdater::value_type slackness)
 {
     // avoid frequent computation of scaling factor  
     if (m_iter != iter)
@@ -240,7 +244,7 @@ LagMultiplierUpdater::value_type LagMultiplierUpdater::operator()(unsigned int i
         m_scalingFactor = pow(m_iter+1, -m_alpha);
         m_iter = iter; 
     }
-    return std::max(0.0, multiplier+m_scalingFactor*(-slackness));
+    return std::max((value_type)0, multiplier+m_scalingFactor*(-slackness));
 }
 
 } // namespace solvers 

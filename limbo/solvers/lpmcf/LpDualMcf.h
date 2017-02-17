@@ -25,6 +25,7 @@
 
 #include <limbo/solvers/lpmcf/Lgf.h>
 #include <limbo/parsers/lp/bison/LpDriver.h>
+#include <limbo/math/Math.h>
 
 using std::cout;
 using std::endl;
@@ -191,7 +192,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 
             /// @brief check if the variable is lower bounded 
             /// @return true if the variable has a lower bound 
-			bool is_lower_bounded() const {return range.first != std::numeric_limits<value_type>::min();}
+			bool is_lower_bounded() const {return range.first != limbo::lowest<value_type>();}
             /// @brief check if the variable is upper bounded 
             /// @return true if the variable is an upper bound 
 			bool is_upper_bounded() const {return range.second != std::numeric_limits<value_type>::max();}
@@ -237,14 +238,14 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
         /// @param l lower bound \f$l_i\f$
         /// @param r upper bound \f$u_i\f$
 		virtual void add_variable(string const& xi, 
-				double l = std::numeric_limits<value_type>::min(), 
+				double l = limbo::lowest<double>(), 
 				double r = std::numeric_limits<value_type>::max())
 		{
             // in case of overflow 
             value_type lb = l; 
             value_type ub = r;
-            if (l <= (double)std::numeric_limits<value_type>::min())
-                lb = std::numeric_limits<value_type>::min();
+            if (l <= (double)limbo::lowest<value_type>())
+                lb = limbo::lowest<value_type>();
             if (r >= (double)std::numeric_limits<value_type>::max())
                 ub = std::numeric_limits<value_type>::max();
 			assert_msg(lb <= ub, "failed to add bound " << lb << " <= " << xi << " <= " << ub);
@@ -263,7 +264,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			}
 			// if user set bounds to variables 
 			// switch to bounded mode, which means there will be an additional node to the graph 
-			if (lb != std::numeric_limits<value_type>::min() || ub != std::numeric_limits<value_type>::max())
+			if (lb != limbo::lowest<value_type>() || ub != std::numeric_limits<value_type>::max())
 				this->is_bounded(true);
 		}
         /// @brief add constraint callback for LpParser::LpDataBase
@@ -361,6 +362,13 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 
 			found->second.weight += w;
 		}
+        /// @brief set integer variables 
+        /// param vname integer variables  
+        /// param binary denotes whether they are binary variables 
+        void set_integer(std::string const& /*vname*/, bool /*binary*/)
+        {
+            // ignored 
+        }
 
 		/// @brief check if lp problem is bounded 
         /// @return true if the problem is bounded 
@@ -476,12 +484,12 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 				variable_type const& variable = it->second;
 				out << "\t";
 				// both lower bound and upper bound 
-				if (variable.range.first != std::numeric_limits<value_type>::min()
+				if (variable.range.first != limbo::lowest<value_type>()
 						&& variable.range.second != std::numeric_limits<value_type>::max())
 					out << variable.range.first << " <= " 
 						<< variable.name << " <= " << variable.range.second << endl;
 				// lower bound only 
-				else if (variable.range.first != std::numeric_limits<value_type>::min())
+				else if (variable.range.first != limbo::lowest<value_type>())
 					out << variable.name << " >= " << variable.range.first << endl;
 				// upper bound only 
 				else if (variable.range.second != std::numeric_limits<value_type>::max())

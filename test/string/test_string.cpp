@@ -9,6 +9,7 @@
 #include <string>
 #include <limbo/string/String.h>
 #include <limbo/preprocessor/AssertMsg.h>
+#include <limbo/math/Math.h>
 using std::cout;
 using std::endl;
 using std::string;
@@ -25,12 +26,12 @@ int main()
 	assert_msg(limbo::iequals(s1, s2), "limbo::iequals failed");
 
 	string tmp;
-	tmp = limbo::to_string(std::numeric_limits<int>::min());
-	cout << tmp << "(" << tmp.size() << ")" << " == " << std::numeric_limits<int>::min() << endl;
+	tmp = limbo::to_string(limbo::lowest<int>());
+	cout << tmp << "(" << tmp.size() << ")" << " == " << limbo::lowest<int>() << endl;
 	tmp = limbo::to_string(std::numeric_limits<int>::max());
 	cout << tmp << "(" << tmp.size() << ")" << " == " << std::numeric_limits<int>::max() << endl;
-	tmp = limbo::to_string(std::numeric_limits<float>::min());
-	cout << tmp << "(" << tmp.size() << ")" << " == " << std::numeric_limits<float>::min() << endl;
+	tmp = limbo::to_string(limbo::lowest<float>());
+	cout << tmp << "(" << tmp.size() << ")" << " == " << limbo::lowest<float>() << endl;
 	tmp = limbo::to_string(std::numeric_limits<float>::max());
 	cout << tmp << "(" << tmp.size() << ")" << " == " << std::numeric_limits<float>::max() << endl;
 

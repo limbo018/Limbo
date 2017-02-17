@@ -31,7 +31,7 @@ class LpDataBase : public LpParser::LpDataBase
         /// @param vname variable name 
         /// @param l lower bound 
         /// @param r upper bound 
-		void add_variable(string const& vname, double const& l, double const& r) 
+		void add_variable(string const& vname, double l, double r) 
 		{
 			cout << l << " <= " << vname << " <= " << r << endl;
 		}
@@ -59,6 +59,16 @@ class LpDataBase : public LpParser::LpDataBase
             cout << endl; 
             cout << "Subject To\n";
 		}
+        /// @brief set integer variables 
+        /// @param vname integer variables  
+        /// @param binary denotes whether they are binary variables 
+        void set_integer(string const& vname, bool binary)
+        {
+            if (binary)
+                cout << vname << ": BINARY\n";
+            else 
+                cout << vname << ": INTEGER\n";
+        }
 };
 
 /// @brief test 1: use function wrapper @ref LpParser::read  

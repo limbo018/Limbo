@@ -15,6 +15,7 @@
 #include <sstream>
 #include <cassert>
 #include <limits>
+#include <limbo/math/Math.h>
 
 /// namespace for LpParser
 namespace LpParser {
@@ -116,7 +117,7 @@ class LpDataBase
         /// @param l lower bound 
         /// @param r upper bound 
 		virtual void add_variable(string const& vname, 
-				double l = std::numeric_limits<double>::min(), 
+				double l = limbo::lowest<double>(), 
 				double r = std::numeric_limits<double>::max()) = 0;
         /// @brief add constraint that \a terms \a compare \a constant. 
         /// @param terms array of terms in left hand side 
@@ -127,6 +128,10 @@ class LpDataBase
         /// @param minimize true denotes minimizing object, false denotes maximizing object 
         /// @param terms array of terms 
 		virtual void add_objective(bool minimize, TermArray const& terms) = 0;
+        /// @brief set integer variables 
+        /// @param vname integer variables  
+        /// @param binary denotes whether they are binary variables 
+        virtual void set_integer(string const& vname, bool binary) = 0; 
 };
 
 } // namespace DefParser

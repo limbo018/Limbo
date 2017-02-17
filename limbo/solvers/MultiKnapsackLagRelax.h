@@ -66,7 +66,7 @@ class MultiKnapsackLagRelax
         MultiKnapsackLagRelax(MultiKnapsackLagRelax const& rhs);
         /// @brief assignment
         /// @param rhs right hand side 
-        MultiKnapsackLagRelax operator=(MultiKnapsackLagRelax const& rhs);
+        MultiKnapsackLagRelax& operator=(MultiKnapsackLagRelax const& rhs);
         /// @brief destructor 
         ~MultiKnapsackLagRelax(); 
         
@@ -121,6 +121,8 @@ class LagMultiplierUpdater
         /// @brief assignment 
         /// @brief right hand side 
         LagMultiplierUpdater& operator=(LagMultiplierUpdater const& rhs); 
+        /// @brief destructor 
+        virtual ~LagMultiplierUpdater();
 
         /// @brief API to update lagrangian multiplier using subgradient descent 
         /// @param iter current iteration 

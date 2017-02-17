@@ -67,7 +67,7 @@ void Driver::constraint_cbk(TermArray& terms, char compare, double constant)
 // var compare_op constant 
 void Driver::bound_cbk(string const& var, char compare, double constant)
 {
-    double lb = std::numeric_limits<double>::min(); 
+    double lb = limbo::lowest<double>(); 
     double ub = std::numeric_limits<double>::max(); 
 
     switch (compare)
@@ -87,7 +87,7 @@ void Driver::bound_cbk(string const& var, char compare, double constant)
 // constant compare_op var
 void Driver::bound_cbk(double constant, char compare, string const& var) 
 {
-    double lb = std::numeric_limits<double>::min(); 
+    double lb = limbo::lowest<double>(); 
     double ub = std::numeric_limits<double>::max(); 
 
     switch (compare)
@@ -108,7 +108,7 @@ void Driver::bound_cbk(double constant, char compare, string const& var)
 // constant1 compare_op1 var compare_op2 constant2 
 void Driver::bound_cbk(double constant1, char compare1, string const& var, char compare2, double constant2)
 {
-    double lb = std::numeric_limits<double>::min(); 
+    double lb = limbo::lowest<double>(); 
     double ub = std::numeric_limits<double>::max(); 
 
     // compare1 is different from compare2 
@@ -141,11 +141,17 @@ void Driver::bound_cbk(double constant1, char compare1, string const& var, char 
     m_db.add_variable(var, lb, ub);
 }
 // generals type (integer)
-void Driver::generals_cbk(StringArray const&)
-{}
+void Driver::generals_cbk(StringArray const& vIntegerVar)
+{
+    for (StringArray::const_iterator it = vIntegerVar.begin(); it != vIntegerVar.end(); ++it)
+        m_db.set_integer(*it, false);
+}
 // binary type  
-void Driver::binary_cbk(StringArray const&)
-{}
+void Driver::binary_cbk(StringArray const& vIntegerVar)
+{
+    for (StringArray::const_iterator it = vIntegerVar.begin(); it != vIntegerVar.end(); ++it)
+        m_db.set_integer(*it, true);
+}
 
 bool read(LpDataBase& db, const string& lpFile)
 {
