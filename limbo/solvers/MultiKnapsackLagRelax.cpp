@@ -64,6 +64,7 @@ MultiKnapsackLagRelax::MultiKnapsackLagRelax(model_type* model)
     m_objConstant = 0; 
     m_iter = 0; 
     m_maxIters = 1000; 
+    m_bestObj = std::numeric_limits<coefficient_value_type>::max();
 }
 MultiKnapsackLagRelax::MultiKnapsackLagRelax(MultiKnapsackLagRelax const& rhs)
 {
@@ -78,7 +79,7 @@ MultiKnapsackLagRelax& MultiKnapsackLagRelax::operator=(MultiKnapsackLagRelax co
 MultiKnapsackLagRelax::~MultiKnapsackLagRelax() 
 {
 }
-SolverProperty MultiKnapsackLagRelax::operator()(LagMultiplierUpdater* updater) 
+SolverProperty MultiKnapsackLagRelax::operator()(LagMultiplierUpdater* updater, ProblemScaler* scaler) 
 {
     return solve(updater);
 }
@@ -102,22 +103,34 @@ void MultiKnapsackLagRelax::copy(MultiKnapsackLagRelax const& rhs)
     m_lagObj = rhs.m_lagObj; 
     m_iter = rhs.m_iter; 
     m_maxIters = rhs.m_maxIters;
+
+    m_vBestVariableSol = rhs.m_vBestVariableSol;
+    m_bestObj = rhs.m_bestObj;
 }
-SolverProperty MultiKnapsackLagRelax::solve(LagMultiplierUpdater* updater)
+SolverProperty MultiKnapsackLagRelax::solve(LagMultiplierUpdater* updater, ProblemScaler* scaler)
 {
     bool defaultUpdater = false; 
+    bool defaultScaler = false; 
     // use default updater if NULL 
     if (updater == NULL)
     {
-        updater = new SubGradientDescent(1.0); 
+        updater = new SubGradientDescent(); 
         defaultUpdater = true; 
     }
+    // use default scaler if NULL 
+    if (scaler == NULL)
+    {
+        scaler = new ProblemScaler(); 
+        defaultScaler = true; 
+    }
 
+    // scale problem 
+    scale(scaler); 
     // prepare data structure 
     prepare(); 
 
     // solve lagrangian subproblem 
-    bool convergeFlag = false; 
+    SolverProperty status = INFEASIBLE; 
     for (m_iter = 0; m_iter < m_maxIters; ++m_iter)
     {
         solveLag(); 
@@ -127,7 +140,7 @@ SolverProperty MultiKnapsackLagRelax::solve(LagMultiplierUpdater* updater)
         printObjCoef(std::cout);
         printLagMultiplier(std::cout);
 #endif
-        if ((convergeFlag = converge()))
+        if ((status = converge()) == OPTIMAL)
             break; 
 
         updateLagMultipliers(updater);
@@ -136,14 +149,42 @@ SolverProperty MultiKnapsackLagRelax::solve(LagMultiplierUpdater* updater)
 
     // still not converge 
     // try to find a feasible solution by post refinement 
-    if (!convergeFlag)
-        return postRefine(); 
+    if (status != OPTIMAL)
+        status = postRefine(); 
+
+    // recover problem from scaling 
+    unscale();
 
     // recycle default updater 
     if (defaultUpdater)
         delete updater; 
+    // recycle default scaler 
+    if (defaultScaler)
+        delete scaler;
 
-    return OPTIMAL;
+    return status;
+}
+void MultiKnapsackLagRelax::scale(ProblemScaler* scaler)
+{
+    // compute scaling factors and perform scale 
+    m_vScalingFactor.resize(m_model->constraints().size()+1);
+    // constraints 
+    for (unsigned int i = 0, ie = m_model->constraints().size(); i < ie; ++i)
+    {
+        m_vScalingFactor[i] = scaler->operator()(m_model->constraints()[i]); 
+        m_model->scaleConstraint(i, 1.0/m_vScalingFactor[i]);
+    }
+    // objective 
+    m_vScalingFactor.back() = scaler->operator()(m_model->objective()); 
+    m_model->scaleObjective(1.0/m_vScalingFactor.back());
+}
+void MultiKnapsackLagRelax::unscale()
+{
+    // constraints 
+    for (unsigned int i = 0, ie = m_model->constraints().size(); i < ie; ++i)
+        m_model->scaleConstraint(i, m_vScalingFactor[i]);
+    // objective 
+    m_model->scaleObjective(m_vScalingFactor.back());
 }
 void MultiKnapsackLagRelax::prepare() 
 {
@@ -243,8 +284,9 @@ MultiKnapsackLagRelax::coefficient_value_type MultiKnapsackLagRelax::evaluateLag
         objValue += (*it)*m_model->variableSolution(variable_type(i));
     return objValue; 
 }
-bool MultiKnapsackLagRelax::converge() const
+SolverProperty MultiKnapsackLagRelax::converge() const
 {
+    bool feasibleFlag = true; 
     bool convergeFlag = true; 
     for (unsigned int i = 0, ie = m_vLagMultiplier.size(); i < ie; ++i)
     {
@@ -256,14 +298,29 @@ bool MultiKnapsackLagRelax::converge() const
         // lambda * g(x) = 0
         //
         // g(x) = Ax-b = -slackness 
-        if (slackness < 0 || multiplier*slackness != 0)
+        if (slackness < 0)
         {
-            convergeFlag = false; 
+            convergeFlag = feasibleFlag = false; 
             break; 
         }
+        else if (multiplier*slackness != 0)
+        {
+            convergeFlag = false; 
+        }
     }
+    SolverProperty status = INFEASIBLE; 
+    // store feasible solutions with better objective 
+    if (feasibleFlag)
+    {
+        coefficient_value_type obj = m_model->evaluateObjective(); 
+        if (obj < m_bestObj)
+            m_vBestVariableSol = m_model->variableSolutions();
+        status = SUBOPTIMAL;
+    }
+    if (convergeFlag)
+        status = OPTIMAL;
 
-    return convergeFlag;
+    return status;
 }
 SolverProperty MultiKnapsackLagRelax::postRefine()
 {
@@ -355,6 +412,24 @@ SubGradientDescent::value_type SubGradientDescent::operator()(unsigned int iter,
     }
     value_type result = std::max((value_type)0, multiplier+m_scalingFactor*(-slackness));
     return result; 
+}
+
+ProblemScaler::ProblemScaler()
+{
+}
+ProblemScaler::~ProblemScaler()
+{
+}
+ProblemScaler::value_type ProblemScaler::operator()(expression_type const& expr) const 
+{
+    value_type result = 0; 
+    for (std::vector<term_type>::const_iterator it = expr.terms().begin(), ite = expr.terms().end(); it != ite; ++it)
+        result += it->coefficient()*it->coefficient(); 
+    return result; 
+}
+ProblemScaler::value_type ProblemScaler::operator()(constraint_type const& constr) const 
+{
+    return this->operator()(constr.expression());
 }
 
 } // namespace solvers 

@@ -832,6 +832,21 @@ class LinearConstraint
                 m_sense = s; 
             }
         }
+        /// @brief scale constraint by a scaling factor 
+        /// @param factor scaling factor 
+        void scale(coefficient_value_type factor)
+        {
+            // in case factor is negative 
+            if (factor < 0)
+            {
+                if (m_sense == '<')
+                    m_sense = '>';
+                else if (m_sense == '>')
+                    m_sense = '<';
+            }
+            m_expr *= factor; 
+            m_rhs *= factor; 
+        }
 
     protected:
         /// @brief copy object 
@@ -1019,6 +1034,13 @@ class LinearModel : public LpParser::LpDataBase
         {
             m_vConstraint.reserve(n);
         }
+        /// @brief scale objective 
+        /// @param factor scaling factor 
+        void scaleObjective(coefficient_value_type factor) {m_objective *= factor;}
+        /// @brief scaling a constraint 
+        /// @param id constraint index 
+        /// @param factor scaling factor 
+        void scaleConstraint(unsigned int id, coefficient_value_type factor) {m_vConstraint.at(id).scale(factor);}
         /// @brief evaluate expression given solutions of variables 
         /// @param expr expression 
         /// @param vVariableSol variable solutions 

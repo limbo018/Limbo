@@ -75,7 +75,8 @@ class MultiKnapsackLagRelax
         
         /// @brief API to run the algorithm 
         /// @param updater an object to update lagrangian multipliers, use default updater if NULL  
-        SolverProperty operator()(LagMultiplierUpdater* updater = NULL); 
+        /// @param scaler an object to scale constraints and objective, use default scaler if NULL 
+        SolverProperty operator()(LagMultiplierUpdater* updater = NULL, ProblemScaler* scaler = NULL); 
 
         /// @return maximum iterations 
         unsigned int maxIterations() const;
@@ -102,7 +103,13 @@ class MultiKnapsackLagRelax
         void copy(MultiKnapsackLagRelax const& rhs);
         /// @brief kernel function to solve the problem 
         /// @param updater an object to update lagrangian multipliers
-        SolverProperty solve(LagMultiplierUpdater* updater);
+        /// @param scaler an object to scale constraints and objective, use default scaler if NULL 
+        SolverProperty solve(LagMultiplierUpdater* updater, ProblemScaler* scaler);
+        /// @brief scale problem for better numerical instability 
+        /// @param scaler an object to scale constraints and objective, use default scaler if NULL 
+        void scale(ProblemScaler* scaler); 
+        /// @brief recover problem from scaling 
+        void unscale(); 
         /// @brief prepare weights of variables in objective 
         /// and classify constraints by marking capacity constraints and single item constraints 
         void prepare();
@@ -116,8 +123,8 @@ class MultiKnapsackLagRelax
         /// @brief evaluate objective of the lagrangian subproblem 
         coefficient_value_type evaluateLagObjective() const;
         /// @brief check convergence of current solution 
-        /// @return true if already converged 
-        bool converge() const; 
+        /// @return @ref SolverProperty::OPTIMAL if converged; @ref SolverProperty::SUBOPTIMAL if a feasible solution found 
+        SolverProperty converge() const; 
         /// @brief post refine solution if failed to converge after maximum iteration 
         SolverProperty postRefine(); 
 
@@ -128,10 +135,14 @@ class MultiKnapsackLagRelax
         std::vector<unsigned int> m_vConstraintPartition; ///< indices of constraints, the first partition is capacity constraints 
         std::vector<coefficient_value_type> m_vLagMultiplier; ///< array of lagrangian multipliers 
         std::vector<coefficient_value_type> m_vSlackness; ///< array of slackness values in each iteration, \f$ b-Ax \f$
+        std::vector<coefficient_value_type> m_vScalingFactor; ///< scaling factor for constraints and objective, last entry is for objective
         coefficient_value_type m_objConstant; ///< constant value in objective from lagrangian relaxation
         coefficient_value_type m_lagObj; ///< current objective of the lagrangian subproblem 
         unsigned int m_iter; ///< current iteration 
         unsigned int m_maxIters; ///< maximum number of iterations 
+
+        std::vector<variable_value_type> m_vBestVariableSol; ///< best feasible solution found so far 
+        coefficient_value_type m_bestObj; ///< best objective found so far 
 };
 
 /// @brief A base helper function object to update lagrangian multipliers using subgradient descent. 
@@ -164,7 +175,7 @@ class SubGradientDescent : public LagMultiplierUpdater
 
         /// @brief constructor 
         /// @param alpha the power term for scaling factor \f$ t_k = k^{-\alpha} \f$
-        SubGradientDescent(value_type alpha);
+        SubGradientDescent(value_type alpha = 1);
         /// @brief copy constructor 
         /// @brief right hand side 
         SubGradientDescent(SubGradientDescent const& rhs);
@@ -188,6 +199,32 @@ class SubGradientDescent : public LagMultiplierUpdater
         value_type m_alpha; ///< power 
         unsigned int m_iter; ///< current iteration 
         value_type m_scalingFactor; ///< scaling factor \f$ t_k = k^{-\alpha} \f$
+};
+
+/// @brief Base class for scaling scheme with default L2 norm scaling  
+class ProblemScaler
+{
+    public:
+        /// @brief value type 
+        typedef MultiKnapsackLagRelax::coefficient_value_type value_type; 
+        /// @brief expression type 
+        typedef model_type::expression_type expression_type; 
+        /// @brief constraint type 
+        typedef MultiKnapsackLagRelax::constraint_type constraint_type; 
+
+        /// @brief constructor 
+        ProblemScaler();
+        /// @brief destructor 
+        virtual ~ProblemScaler();
+
+        /// @brief API to compute scaling factor for expression using L2 norm  
+        /// @param expr expression 
+        /// @return scaling factor 
+        virtual value_type operator()(expression_type const& expr) const;
+        /// @brief API to compute scaling factor for constraints  using L2 norm 
+        /// @param constr constraint 
+        /// @return scaling factor 
+        virtual value_type operator()(constraint_type const& constr) const;
 };
 
 } // namespace solvers 
