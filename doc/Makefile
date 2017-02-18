@@ -81,7 +81,9 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/api/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/lpmcf/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/solvers/lpmcf/*.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/solvers/*.cpp) \
 		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/string/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/string/*.h) 

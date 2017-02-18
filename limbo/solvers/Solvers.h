@@ -38,6 +38,8 @@ enum SolverProperty
     SUBOPTIMAL ///< the model is suboptimal 
 };
 
+/// @brief Convert @ref limbo::solvers::SolverProperty to std::string 
+/// @param sp solver property 
 inline std::string toString(SolverProperty sp)
 {
     switch (sp)
@@ -222,9 +224,9 @@ class VariableProperty
         void updateLowerBound(variable_value_type lb) {m_lowerBound = std::max(m_lowerBound, lb);}
         /// @return upper bound 
         variable_value_type upperBound() const {return m_upperBound;}
-        /// @param up upper bound 
+        /// @param ub upper bound 
         void setUpperBound(variable_value_type ub) {m_upperBound = ub;}
-        /// @param up upper bound 
+        /// @param ub upper bound 
         void updateUpperBound(variable_value_type ub) {m_upperBound = std::min(m_upperBound, ub);}
         /// @return numeric type 
         SolverProperty numericType() const {return m_numericType;}
@@ -322,6 +324,7 @@ class LinearTerm
             return *this; 
         }
         /// overload multiply by a value 
+        /// @param term term 
         /// @param coef coefficient 
         /// @return result object 
         friend LinearTerm operator*(LinearTerm const& term, coefficient_value_type coef)
@@ -331,6 +334,9 @@ class LinearTerm
             return other; 
         }
         /// overload a value multiply a term
+        /// @param coef coefficient
+        /// @param term term 
+        /// @return result object 
         friend LinearTerm operator*(coefficient_value_type coef, LinearTerm const& term)
         {
             return term*coef; 
@@ -344,6 +350,7 @@ class LinearTerm
             return *this;
         }
         /// overload divide by a value 
+        /// @param term term 
         /// @param coef coefficient 
         /// @return reference to the object 
         friend LinearTerm operator/(LinearTerm const& term, coefficient_value_type coef)
@@ -473,7 +480,7 @@ struct CompareTermByVariable
     /// @tparam TermType term type 
     /// @param t1 term 
     /// @param t2 term 
-    /// @return true if the variable of \t1 is smaller than that of \t2 
+    /// @return true if the variable of \a t1 is smaller than that of \a t2 
     template <typename TermType>
     bool operator()(TermType const& t1, TermType const& t2) const 
     {
@@ -495,7 +502,6 @@ class LinearExpression
         typedef Variable<coefficient_value_type> variable_type; 
 
         /// @brief constructor
-        /// @param c constant value 
         LinearExpression()
         {
         }
@@ -618,6 +624,7 @@ class LinearExpression
             return *this;
         }
         /// overload multiply 
+        /// @param expr expression 
         /// @param c constant value 
         /// @return the object 
         friend LinearExpression operator*(LinearExpression const& expr, coefficient_value_type c)
@@ -629,7 +636,7 @@ class LinearExpression
         /// overload multiply in case of c*expr 
         /// @param c constant value 
         /// @param expr expression 
-        /// @return the object of \expr
+        /// @return the object of \a expr
         friend LinearExpression operator*(coefficient_value_type c, LinearExpression const& expr)
         {
             return expr*c; 
@@ -644,6 +651,7 @@ class LinearExpression
             return *this; 
         }
         /// overload divide  
+        /// @param expr expression 
         /// @param c constant value 
         /// @return the object 
         friend LinearExpression operator/(LinearExpression const& expr, coefficient_value_type c)
@@ -850,7 +858,7 @@ class LinearConstraint
 
     protected:
         /// @brief copy object 
-        /// @param right hand side 
+        /// @param rhs right hand side 
         void copy(LinearConstraint const& rhs)
         {
             m_expr = rhs.m_expr;
@@ -1235,7 +1243,7 @@ class LinearModel : public LpParser::LpDataBase
         }
         /// @brief print expression 
         /// @param os output stream 
-        /// @param expr term
+        /// @param term term
         /// @return output stream 
         std::ostream& print(std::ostream& os, term_type const& term) const 
         {

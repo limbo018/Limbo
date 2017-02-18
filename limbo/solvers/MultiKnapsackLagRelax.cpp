@@ -81,13 +81,13 @@ MultiKnapsackLagRelax::~MultiKnapsackLagRelax()
 }
 SolverProperty MultiKnapsackLagRelax::operator()(LagMultiplierUpdater* updater, ProblemScaler* scaler) 
 {
-    return solve(updater);
+    return solve(updater, scaler);
 }
 unsigned int MultiKnapsackLagRelax::maxIterations() const 
 {
     return m_maxIters;
 }
-void MultiKnapsackLagRelax::setMaxIterations(unsigned int maxIter) 
+void MultiKnapsackLagRelax::setMaxIterations(unsigned int maxIters) 
 {
     m_maxIters = maxIters; 
 }
@@ -147,10 +147,8 @@ SolverProperty MultiKnapsackLagRelax::solve(LagMultiplierUpdater* updater, Probl
 
     }
 
-    // still not converge 
     // try to find a feasible solution by post refinement 
-    if (status != OPTIMAL)
-        status = postRefine(); 
+    status = postProcess(status); 
 
     // recover problem from scaling 
     unscale();
@@ -284,7 +282,7 @@ MultiKnapsackLagRelax::coefficient_value_type MultiKnapsackLagRelax::evaluateLag
         objValue += (*it)*m_model->variableSolution(variable_type(i));
     return objValue; 
 }
-SolverProperty MultiKnapsackLagRelax::converge() const
+SolverProperty MultiKnapsackLagRelax::converge()
 {
     bool feasibleFlag = true; 
     bool convergeFlag = true; 
@@ -322,11 +320,17 @@ SolverProperty MultiKnapsackLagRelax::converge() const
 
     return status;
 }
-SolverProperty MultiKnapsackLagRelax::postRefine()
+SolverProperty MultiKnapsackLagRelax::postProcess(SolverProperty status)
 {
-    limboAssertMsg(0, "not implemented yet");
-
-    return SUBOPTIMAL;
+    if (status == OPTIMAL) // already OPTIMAL
+        return status; 
+    else if (m_bestObj == std::numeric_limits<coefficient_value_type>::max()) // no best solutions in store 
+        return status; 
+    else // there is a best feasible solution in store 
+    {
+        m_model->variableSolutions() = m_vBestVariableSol; 
+        return SUBOPTIMAL;
+    }
 }
 std::ostream& MultiKnapsackLagRelax::printVariableGroup(std::ostream& os) const 
 {
@@ -425,7 +429,7 @@ ProblemScaler::value_type ProblemScaler::operator()(expression_type const& expr)
     value_type result = 0; 
     for (std::vector<term_type>::const_iterator it = expr.terms().begin(), ite = expr.terms().end(); it != ite; ++it)
         result += it->coefficient()*it->coefficient(); 
-    return result; 
+    return sqrt(result/expr.terms().size()); 
 }
 ProblemScaler::value_type ProblemScaler::operator()(constraint_type const& constr) const 
 {

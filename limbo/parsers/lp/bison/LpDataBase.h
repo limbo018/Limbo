@@ -34,7 +34,9 @@ typedef unsigned int uint32_t;
 typedef long int64_t;
 /// @endnowarn
 
+/// @brief integer array 
 typedef std::vector<int64_t> IntegerArray; 
+/// @brief string array 
 typedef std::vector<std::string> StringArray; 
 
 #if 0

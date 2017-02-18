@@ -2,7 +2,7 @@
  * @file   test_solvers.cpp
  * @author Yibo Lin
  * @date   Feb 2017
- * @brief  test API of solvers in @ref limbo::solvers::Solver 
+ * @brief  test API of solvers in @ref limbo::solvers::LinearModel
  */
 #include <iostream>
 #include <limbo/solvers/Solvers.h>

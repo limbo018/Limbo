@@ -2,6 +2,7 @@
  * @file   test_MultiKnapsackLagRelax.cpp
  * @author Yibo Lin
  * @date   Feb 2017
+ * @brief  test @ref limbo::solvers::MultiKnapsackLagRelax algorithm 
  */
 #include <iostream>
 #include <limbo/solvers/MultiKnapsackLagRelax.h>
@@ -24,7 +25,10 @@ void test(std::string const& filename)
     limbo::solvers::SolverProperty status = solver();
     std::cout << "Problem solved " << limbo::solvers::toString(status) << "\n";
 
+    // print solutions 
     optModel.printSolution(std::cout);
+    // print problem 
+    optModel.print(std::cout); 
 }
 
 /// @brief main function 

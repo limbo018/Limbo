@@ -18,6 +18,7 @@ namespace solvers
 
 // forward declaration 
 struct LagMultiplierUpdater;
+struct ProblemScaler; 
 
 /// @brief Solve multiple knapsack problem with lagrangian relaxation 
 /// 
@@ -123,10 +124,12 @@ class MultiKnapsackLagRelax
         /// @brief evaluate objective of the lagrangian subproblem 
         coefficient_value_type evaluateLagObjective() const;
         /// @brief check convergence of current solution 
-        /// @return @ref SolverProperty::OPTIMAL if converged; @ref SolverProperty::SUBOPTIMAL if a feasible solution found 
-        SolverProperty converge() const; 
-        /// @brief post refine solution if failed to converge after maximum iteration 
-        SolverProperty postRefine(); 
+        /// @return @ref limbo::solvers::SolverProperty OPTIMAL if converged; @ref limbo::solvers::SolverProperty  SUBOPTIMAL if a feasible solution found 
+        SolverProperty converge(); 
+        /// @brief post process solution if failed to converge to OPTIMAL after maximum iteration. 
+        /// It choose the best feasible solutions in store 
+        /// @param status current status of solutions 
+        SolverProperty postProcess(SolverProperty status); 
 
         model_type* m_model; ///< model for the problem 
 
@@ -208,9 +211,11 @@ class ProblemScaler
         /// @brief value type 
         typedef MultiKnapsackLagRelax::coefficient_value_type value_type; 
         /// @brief expression type 
-        typedef model_type::expression_type expression_type; 
+        typedef MultiKnapsackLagRelax::expression_type expression_type; 
         /// @brief constraint type 
         typedef MultiKnapsackLagRelax::constraint_type constraint_type; 
+        /// @brief term type 
+        typedef MultiKnapsackLagRelax::term_type term_type; 
 
         /// @brief constructor 
         ProblemScaler();
