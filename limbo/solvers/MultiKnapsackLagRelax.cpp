@@ -16,11 +16,23 @@ namespace solvers
 /// @brief Predicate whether a constraint is a capacity constraint 
 struct CapacityConstraintPred
 {
+    std::vector<MultiKnapsackLagRelax::constraint_type> const& vConstraint; ///< constraints 
+
+    /// @brief constructor 
+    /// @param v array of constraints 
+    CapacityConstraintPred(std::vector<MultiKnapsackLagRelax::constraint_type> const& v) : vConstraint(v) {}
+
     /// @return true if \constr is a capacity constraint 
     /// @param constr constraint 
     bool operator()(MultiKnapsackLagRelax::constraint_type const& constr) const 
     {
         return constr.sense() != '='; 
+    }
+    /// @return true if constraint is a capacity constraint 
+    /// @param id constraint index 
+    bool operator()(unsigned int id) const 
+    {
+        return vConstraint[id].sense() != '='; 
     }
 };
 
@@ -39,29 +51,19 @@ struct CompareVariableByCoefficient
     /// @param v1 variable 
     /// @param v2 variable 
     /// @return true if \v1 has smaller coefficient than \v2 
-    bool operator()(Variable const& v1, Variable const& v2) const 
+    bool operator()(MultiKnapsackLagRelax::variable_type const& v1, MultiKnapsackLagRelax::variable_type const& v2) const 
     {
         return vObjCoef[v1.id()] < vObjCoef[v2.id()]; 
     }
 };
 
-MultiKnapsackLagRelax::MultiKnapsackLagRelax(model_type* model, LagMultiplierUpdater* updater)
+MultiKnapsackLagRelax::MultiKnapsackLagRelax(model_type* model)
 {
     m_model = model; 
-    if (updater)
-    {
-        m_lagMultiplierUpdater = updater; 
-        m_defaultUpdater = false; 
-    }
-    else 
-    {
-        m_lagMultiplierUpdater = new LagMultiplierUpdater(0.1); 
-        m_defaultUpdater = true; 
-    }
     m_lagObj = 0; 
     m_objConstant = 0; 
     m_iter = 0; 
-    m_maxIters = 100; 
+    m_maxIters = 1000; 
 }
 MultiKnapsackLagRelax::MultiKnapsackLagRelax(MultiKnapsackLagRelax const& rhs)
 {
@@ -73,43 +75,73 @@ MultiKnapsackLagRelax& MultiKnapsackLagRelax::operator=(MultiKnapsackLagRelax co
         copy(rhs);
     return *this;
 }
-SolverProperty MultiKnapsackLagRelax::operator()() 
-{
-    return solve();
-}
 MultiKnapsackLagRelax::~MultiKnapsackLagRelax() 
 {
-    if (m_defaultUpdater)
-        delete m_lagMultiplierUpdater; 
+}
+SolverProperty MultiKnapsackLagRelax::operator()(LagMultiplierUpdater* updater) 
+{
+    return solve(updater);
+}
+unsigned int MultiKnapsackLagRelax::maxIterations() const 
+{
+    return m_maxIters;
+}
+void MultiKnapsackLagRelax::setMaxIterations(unsigned int maxIter) 
+{
+    m_maxIters = maxIters; 
 }
 void MultiKnapsackLagRelax::copy(MultiKnapsackLagRelax const& rhs)
 {
     m_model = rhs.m_model; 
-    m_lagMultiplierUpdater = rhs.m_lagMultiplierUpdater;
     m_vObjCoef = rhs.m_vObjCoef; 
     m_vVariableGroup = rhs.m_vVariableGroup;
+    m_vConstraintPartition = rhs.m_vConstraintPartition;
     m_vLagMultiplier = rhs.m_vLagMultiplier;
+    m_vSlackness = rhs.m_vSlackness;
     m_objConstant = rhs.m_objConstant; 
     m_lagObj = rhs.m_lagObj; 
     m_iter = rhs.m_iter; 
     m_maxIters = rhs.m_maxIters;
 }
-SolverProperty MultiKnapsackLagRelax::solve()
+SolverProperty MultiKnapsackLagRelax::solve(LagMultiplierUpdater* updater)
 {
+    bool defaultUpdater = false; 
+    // use default updater if NULL 
+    if (updater == NULL)
+    {
+        updater = new SubGradientDescent(1.0); 
+        defaultUpdater = true; 
+    }
+
+    // prepare data structure 
+    prepare(); 
+
+    // solve lagrangian subproblem 
     bool convergeFlag = false; 
     for (m_iter = 0; m_iter < m_maxIters; ++m_iter)
     {
         solveLag(); 
-        updateLagMultipliers();
-
+        computeSlackness();
+#ifdef DEBUG_MULTIKNAPSACKLAGRELAX
+        printVariableGroup(std::cout);
+        printObjCoef(std::cout);
+        printLagMultiplier(std::cout);
+#endif
         if ((convergeFlag = converge()))
             break; 
+
+        updateLagMultipliers(updater);
+
     }
 
     // still not converge 
     // try to find a feasible solution by post refinement 
     if (!convergeFlag)
         return postRefine(); 
+
+    // recycle default updater 
+    if (defaultUpdater)
+        delete updater; 
 
     return OPTIMAL;
 }
@@ -121,38 +153,48 @@ void MultiKnapsackLagRelax::prepare()
         m_vObjCoef[it->variable().id()] += it->coefficient();
 
     // partition all capacity constraints to the beginning of the array 
-    std::vector<constraint_type>::iterator bound = std::partition(m_model->constraints().begin(), m_model->constraints().end(), CapacityConstraintPred());
-    m_vLagMultiplier.assign(std::distance(m_model->constraints().begin(), bound), 0); 
+    m_vConstraintPartition.resize(m_model->constraints().size()); 
+    unsigned int i = 0; 
+    for (unsigned int ie = m_model->constraints().size(); i < ie; ++i)
+        m_vConstraintPartition[i] = i; 
+    std::vector<unsigned int>::iterator bound = std::partition(m_vConstraintPartition.begin(), m_vConstraintPartition.end(), CapacityConstraintPred(m_model->constraints()));
+    m_vLagMultiplier.assign(std::distance(m_vConstraintPartition.begin(), bound), 0); 
+    m_vSlackness.assign(m_vLagMultiplier.size(), 0);
 
     // change the sense of '>' to '<'
-    for (std::vector<constraint_type>::iterator it = m_model->constraints().begin(); it != bound; ++it)
-        it->normalize('<');
+    for (std::vector<unsigned int>::iterator it = m_vConstraintPartition.begin(); it != bound; ++it)
+        m_model->constraints().at(*it).normalize('<');
 
     // group variables according items 
     // the variables for one item will be grouped 
     // I assume the rest constraints are all single item constraints 
-    m_vVariableGroup.resize(std::distance(bound, m_model->constraints().end()));
-    for (std::vector<constraint_type>::iterator it = bound, ite = m_model->constraints().end(); it != ite; ++it)
+    m_vVariableGroup.resize(std::distance(bound, m_vConstraintPartition.end()));
+    i = 0; 
+    for (std::vector<unsigned int>::iterator it = bound, ite = m_vConstraintPartition.end(); it != ite; ++it, ++i)
     {
-        limboAssert(it->sense() == '='); 
-        expression_type const& expr = it->expression();
+        constraint_type const& constr = m_model->constraints()[*it];
+#ifdef DEBUG_MULTIKNAPSACKLAGRELAX
+        limboAssert(constr.sense() == '='); 
+#endif
+        expression_type const& expr = constr.expression();
         for (std::vector<term_type>::const_iterator itt = expr.terms().begin(), itte = expr.terms().end(); itt != itte; ++itt)
-            m_vVariableGroup[itt->variable().id()].push_back(itt->variable());
+            m_vVariableGroup[i].push_back(itt->variable());
     }
+
 }
-void MultiKnapsackLagRelax::updateLagMultipliers()
+void MultiKnapsackLagRelax::updateLagMultipliers(LagMultiplierUpdater* updater)
 {
     // for each capacity constraint of bin 
     for (unsigned int i = 0, ie = m_vLagMultiplier.size(); i < ie; ++i)
     {
-        constraint_type const& constr = m_model->constraints().at(i); 
-        // compute slackness with current solution 
-        coefficient_value_type slackness = m_model->evaluateConstraint(constr);
+        constraint_type const& constr = m_model->constraints().at(m_vConstraintPartition[i]); 
+        // get slackness with current solution 
+        coefficient_value_type slackness = m_vSlackness[i];
 
         coefficient_value_type& multiplier = m_vLagMultiplier[i];
 
         // compute new lagrangian multiplier 
-        coefficient_value_type newMultiplier = m_lagMultiplierUpdater->operator()(m_iter, multiplier, slackness);
+        coefficient_value_type newMultiplier = updater->operator()(m_iter, multiplier, slackness);
         coefficient_value_type deltaMultiplier = newMultiplier-multiplier; 
 
         // apply lagrangian multiplier to objective 
@@ -172,14 +214,25 @@ void MultiKnapsackLagRelax::solveLag()
     for (std::vector<variable_value_type>::iterator it = m_model->variableSolutions().begin(), ite = m_model->variableSolutions().end(); it != ite; ++it)
         *it = 0; 
     // for each item 
-    for (std::vector<std::vector<Variable> >::iterator it = m_vVariableGroup.begin(), ite = m_vVariableGroup.end(); it != ite; ++it)
+    for (std::vector<std::vector<variable_type> >::iterator it = m_vVariableGroup.begin(), ite = m_vVariableGroup.end(); it != ite; ++it)
     {
         // find the bin with minimum cost for each item 
-        std::vector<Variable>::iterator itv = std::min_element(it->begin(), it->end(), CompareVariableByCoefficient(m_vObjCoef));
+        std::vector<variable_type>::iterator itv = std::min_element(it->begin(), it->end(), CompareVariableByCoefficient(m_vObjCoef));
         m_model->setVariableSolution(*itv, 1);
     }
     // evaluate current objective 
     m_lagObj = evaluateLagObjective();
+
+}
+void MultiKnapsackLagRelax::computeSlackness() 
+{
+    // for each capacity constraint of bin 
+    for (unsigned int i = 0, ie = m_vSlackness.size(); i < ie; ++i)
+    {
+        constraint_type const& constr = m_model->constraints().at(m_vConstraintPartition[i]); 
+        // compute slackness with current solution 
+        m_vSlackness[i] = m_model->evaluateConstraint(constr);
+    }
 }
 MultiKnapsackLagRelax::coefficient_value_type MultiKnapsackLagRelax::evaluateLagObjective() const 
 {
@@ -187,15 +240,23 @@ MultiKnapsackLagRelax::coefficient_value_type MultiKnapsackLagRelax::evaluateLag
     coefficient_value_type objValue = m_objConstant; 
     unsigned int i = 0; 
     for (std::vector<coefficient_value_type>::const_iterator it = m_vObjCoef.begin(); it != m_vObjCoef.end(); ++it, ++i)
-        objValue += (*it)*m_model->variableSolution(Variable(i));
+        objValue += (*it)*m_model->variableSolution(variable_type(i));
     return objValue; 
 }
 bool MultiKnapsackLagRelax::converge() const
 {
     bool convergeFlag = true; 
-    for (std::vector<coefficient_value_type>::const_iterator it = m_vLagMultiplier.begin(); it != m_vLagMultiplier.end(); ++it)
+    for (unsigned int i = 0, ie = m_vLagMultiplier.size(); i < ie; ++i)
     {
-        if (*it > 0)
+        coefficient_value_type multiplier = m_vLagMultiplier[i];
+        coefficient_value_type slackness = m_vSlackness[i];
+        // must satisfy KKT condition 
+        // lambda >= 0
+        // g(x) <= 0
+        // lambda * g(x) = 0
+        //
+        // g(x) = Ax-b = -slackness 
+        if (slackness < 0 || multiplier*slackness != 0)
         {
             convergeFlag = false; 
             break; 
@@ -210,41 +271,90 @@ SolverProperty MultiKnapsackLagRelax::postRefine()
 
     return SUBOPTIMAL;
 }
+std::ostream& MultiKnapsackLagRelax::printVariableGroup(std::ostream& os) const 
+{
+    os << __func__ << " iteration " << m_iter << "\n";
+    unsigned int i = 0; 
+    for (std::vector<std::vector<variable_type> >::const_iterator it = m_vVariableGroup.begin(); it != m_vVariableGroup.end(); ++it, ++i)
+    {
+        os << "[" << i << "]";
+        for (std::vector<variable_type>::const_iterator itv = it->begin(); itv != it->end(); ++itv)
+        {
+            if (m_model->variableSolution(*itv) == 1)
+                os << " *" << m_model->variableName(*itv) << "*";
+            else 
+                os << " " << m_model->variableName(*itv);
+        }
+        os << "\n";
+    }
+    return os; 
+}
+std::ostream& MultiKnapsackLagRelax::printObjCoef(std::ostream& os) const 
+{
+    os << __func__ << " iteration " << m_iter << "\n";
+    os << "lagrangian objective = " << m_lagObj << "\n";
+    os << "objective = " << m_model->evaluateObjective() << "\n";
+    for (unsigned int i = 0, ie = m_vObjCoef.size(); i < ie; ++i)
+        os << m_model->variableName(variable_type(i)) << " = " << m_vObjCoef[i] << "\n";
+    return os; 
+}
+std::ostream& MultiKnapsackLagRelax::printLagMultiplier(std::ostream& os) const 
+{
+    os << __func__ << " iteration " << m_iter << "\n";
+    for (unsigned int i = 0, ie = m_vLagMultiplier.size(); i < ie; ++i)
+        os << "[C" << m_vConstraintPartition[i] << "] = " << m_vLagMultiplier[i] 
+            << " slack = " << m_vSlackness[i]
+            << "\n";
+    return os; 
+}
 
-LagMultiplierUpdater::LagMultiplierUpdater(LagMultiplierUpdater::value_type alpha)
-    : m_alpha(alpha)
+LagMultiplierUpdater::LagMultiplierUpdater()
+{
+}
+LagMultiplierUpdater::~LagMultiplierUpdater()
+{
+}
+
+SubGradientDescent::SubGradientDescent(SubGradientDescent::value_type alpha)
+    : SubGradientDescent::base_type()
+    , m_alpha(alpha)
     , m_iter(std::numeric_limits<unsigned int>::max())
     , m_scalingFactor(1)
 {
 }
-LagMultiplierUpdater::LagMultiplierUpdater(LagMultiplierUpdater const& rhs)
+SubGradientDescent::SubGradientDescent(SubGradientDescent const& rhs)
+    : SubGradientDescent::base_type(rhs)
 {
     copy(rhs);
 }
-LagMultiplierUpdater& LagMultiplierUpdater::operator=(LagMultiplierUpdater const& rhs) 
+SubGradientDescent& SubGradientDescent::operator=(SubGradientDescent const& rhs) 
 {
     if (this != &rhs)
+    {
+        this->base_type::operator=(rhs);
         copy(rhs);
+    }
     return *this; 
 }
-LagMultiplierUpdater::~LagMultiplierUpdater() 
+SubGradientDescent::~SubGradientDescent() 
 {
 }
-void LagMultiplierUpdater::copy(LagMultiplierUpdater const& rhs)
+void SubGradientDescent::copy(SubGradientDescent const& rhs)
 {
     m_alpha = rhs.m_alpha;
     m_iter = rhs.m_iter; 
     m_scalingFactor = rhs.m_scalingFactor; 
 }
-LagMultiplierUpdater::value_type LagMultiplierUpdater::operator()(unsigned int iter, LagMultiplierUpdater::value_type multiplier, LagMultiplierUpdater::value_type slackness)
+SubGradientDescent::value_type SubGradientDescent::operator()(unsigned int iter, SubGradientDescent::value_type multiplier, SubGradientDescent::value_type slackness)
 {
     // avoid frequent computation of scaling factor  
     if (m_iter != iter)
     {
-        m_scalingFactor = pow(m_iter+1, -m_alpha);
         m_iter = iter; 
+        m_scalingFactor = pow((value_type)m_iter+1, -m_alpha);
     }
-    return std::max((value_type)0, multiplier+m_scalingFactor*(-slackness));
+    value_type result = std::max((value_type)0, multiplier+m_scalingFactor*(-slackness));
+    return result; 
 }
 
 } // namespace solvers 

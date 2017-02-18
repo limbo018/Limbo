@@ -41,7 +41,7 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-all: lpmcf test_solvers
+all: lpmcf test_solvers test_MultiKnapsackLagRelax
 .PHONY: lpmcf
 
 lpmcf:
@@ -66,10 +66,14 @@ $(OBJDIR)/%.o: %.cpp
 test_solvers: $(OBJDIR)/test_solvers.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_solvers.o $(LIBS) 
 
+test_MultiKnapsackLagRelax: $(OBJDIR)/test_MultiKnapsackLagRelax.o $(LIMBO_ROOT_DIR)/lib/libsolvers.a
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_MultiKnapsackLagRelax.o $(LIBS) 
+
 .PHONY: clean
 clean: cleandep
 	$(MAKE) clean -C lpmcf
 	rm -f test_solvers
+	rm -f test_MultiKnapsackLagRelax
 	rm -f $(OBJS) 
 
 .PHONY: cleandep

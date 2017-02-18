@@ -4,6 +4,9 @@
  * @date   Feb 2017
  * @brief  Solve multiple knapsack problem with lagrangian relaxation 
  */
+#ifndef LIMBO_SOLVERS_MULTIKNAPSACKLAGRELAX_H
+#define LIMBO_SOLVERS_MULTIKNAPSACKLAGRELAX_H
+
 #include <limbo/solvers/Solvers.h>
 
 /// namespace for Limbo 
@@ -51,6 +54,7 @@ class MultiKnapsackLagRelax
         /// @nowarn
         typedef model_type::coefficient_value_type coefficient_value_type; 
         typedef model_type::variable_value_type variable_value_type; 
+        typedef model_type::variable_type variable_type;
         typedef model_type::constraint_type constraint_type; 
         typedef model_type::expression_type expression_type; 
         typedef model_type::term_type term_type; 
@@ -59,8 +63,7 @@ class MultiKnapsackLagRelax
 
         /// @brief constructor 
         /// @param model pointer to the model of problem 
-        /// @param updater an object to update lagrangian multipliers 
-        MultiKnapsackLagRelax(model_type* model, LagMultiplierUpdater* updater = NULL);
+        MultiKnapsackLagRelax(model_type* model);
         /// @brief copy constructor 
         /// @param rhs right hand side 
         MultiKnapsackLagRelax(MultiKnapsackLagRelax const& rhs);
@@ -71,19 +74,45 @@ class MultiKnapsackLagRelax
         ~MultiKnapsackLagRelax(); 
         
         /// @brief API to run the algorithm 
-        SolverProperty operator()(); 
+        /// @param updater an object to update lagrangian multipliers, use default updater if NULL  
+        SolverProperty operator()(LagMultiplierUpdater* updater = NULL); 
+
+        /// @return maximum iterations 
+        unsigned int maxIterations() const;
+        /// @brief set maximum iterations 
+        void setMaxIterations(unsigned int maxIter);
+
+        /// @name print functions for debug 
+        ///@{
+        /// @brief print variable groups 
+        /// @param os output stream 
+        /// @return output stream 
+        std::ostream& printVariableGroup(std::ostream& os = std::cout) const; 
+        /// @brief print coefficients of variables in objective  
+        /// @param os output stream 
+        /// @return output stream 
+        std::ostream& printObjCoef(std::ostream& os = std::cout) const; 
+        /// @brief print lagrangian multipliers 
+        /// @param os output stream 
+        /// @return output stream 
+        std::ostream& printLagMultiplier(std::ostream& os = std::cout) const; 
+        ///@}
     protected:
         /// @brief copy object 
         void copy(MultiKnapsackLagRelax const& rhs);
         /// @brief kernel function to solve the problem 
-        SolverProperty solve();
+        /// @param updater an object to update lagrangian multipliers
+        SolverProperty solve(LagMultiplierUpdater* updater);
         /// @brief prepare weights of variables in objective 
         /// and classify constraints by marking capacity constraints and single item constraints 
         void prepare();
         /// @brief update lagrangian multipliers 
-        void updateLagMultipliers(); 
+        /// @param updater an object to update lagrangian multipliers
+        void updateLagMultipliers(LagMultiplierUpdater* updater); 
         /// @brief solve lagrangian subproblem 
         void solveLag(); 
+        /// @brief compute slackness in an iteration 
+        void computeSlackness(); 
         /// @brief evaluate objective of the lagrangian subproblem 
         coefficient_value_type evaluateLagObjective() const;
         /// @brief check convergence of current solution 
@@ -93,47 +122,68 @@ class MultiKnapsackLagRelax
         SolverProperty postRefine(); 
 
         model_type* m_model; ///< model for the problem 
-        LagMultiplierUpdater* m_lagMultiplierUpdater; ///< an object to update lagrangian multipliers
-        bool m_defaultUpdater; ///< a flag to record whether default updater is used 
 
         std::vector<coefficient_value_type> m_vObjCoef; ///< coefficients variables in objective 
-        std::vector<std::vector<Variable> > m_vVariableGroup; ///< group variables according to item 
+        std::vector<std::vector<variable_type> > m_vVariableGroup; ///< group variables according to item 
+        std::vector<unsigned int> m_vConstraintPartition; ///< indices of constraints, the first partition is capacity constraints 
         std::vector<coefficient_value_type> m_vLagMultiplier; ///< array of lagrangian multipliers 
+        std::vector<coefficient_value_type> m_vSlackness; ///< array of slackness values in each iteration, \f$ b-Ax \f$
         coefficient_value_type m_objConstant; ///< constant value in objective from lagrangian relaxation
         coefficient_value_type m_lagObj; ///< current objective of the lagrangian subproblem 
         unsigned int m_iter; ///< current iteration 
         unsigned int m_maxIters; ///< maximum number of iterations 
 };
 
-/// @brief A helper function object to update lagrangian multipliers using subgradient descent. 
+/// @brief A base helper function object to update lagrangian multipliers using subgradient descent. 
 /// All other schemes can be derived from this class 
 class LagMultiplierUpdater
 {
     public:
+        /// @brief value type 
         typedef MultiKnapsackLagRelax::coefficient_value_type value_type; 
 
         /// @brief constructor 
-        /// @param alpha the power term for scaling factor \f$ t_k = k^{-\alpha} \f$
-        LagMultiplierUpdater(value_type alpha);
-        /// @brief copy constructor 
-        /// @brief right hand side 
-        LagMultiplierUpdater(LagMultiplierUpdater const& rhs);
-        /// @brief assignment 
-        /// @brief right hand side 
-        LagMultiplierUpdater& operator=(LagMultiplierUpdater const& rhs); 
+        LagMultiplierUpdater();
         /// @brief destructor 
         virtual ~LagMultiplierUpdater();
+
+        /// @brief API to update lagrangian multiplier 
+        /// @param iter current iteration 
+        /// @param multiplier current multiplier value 
+        /// @param slackness current slackness value assuming the constraint is in \f$ Ax \le b \f$ and compute \f$ b-Ax \f$
+        /// @return updated multiplier value 
+        virtual value_type operator()(unsigned int iter, value_type multiplier, value_type slackness) = 0;
+};
+
+/// @brief Update lagrangian multiplier with subgradient descent 
+class SubGradientDescent : public LagMultiplierUpdater
+{
+    public:
+        /// @brief base type 
+        typedef LagMultiplierUpdater base_type;
+
+        /// @brief constructor 
+        /// @param alpha the power term for scaling factor \f$ t_k = k^{-\alpha} \f$
+        SubGradientDescent(value_type alpha);
+        /// @brief copy constructor 
+        /// @brief right hand side 
+        SubGradientDescent(SubGradientDescent const& rhs);
+        /// @brief assignment 
+        /// @brief right hand side 
+        SubGradientDescent& operator=(SubGradientDescent const& rhs); 
+        /// @brief destructor 
+        ~SubGradientDescent();
 
         /// @brief API to update lagrangian multiplier using subgradient descent 
         /// @param iter current iteration 
         /// @param multiplier current multiplier value 
         /// @param slackness current slackness value assuming the constraint is in \f$ Ax \le b \f$ and compute \f$ b-Ax \f$
         /// @return updated multiplier value 
-        virtual value_type operator()(unsigned int iter, value_type multiplier, value_type slackness);
+        value_type operator()(unsigned int iter, value_type multiplier, value_type slackness);
     protected:
         /// @brief copy object 
         /// @brief right hand side 
-        void copy(LagMultiplierUpdater const& rhs);
+        void copy(SubGradientDescent const& rhs);
 
         value_type m_alpha; ///< power 
         unsigned int m_iter; ///< current iteration 
@@ -142,3 +192,5 @@ class LagMultiplierUpdater
 
 } // namespace solvers 
 } // namespace limbo 
+
+#endif

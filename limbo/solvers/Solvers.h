@@ -4,6 +4,10 @@
  * @date   Feb 2017
  * @brief  Basic utilities such as variables and linear expressions in solvers 
  */
+
+#ifndef LIMBO_SOLVERS_SOLVERS_H
+#define LIMBO_SOLVERS_SOLVERS_H
+
 #include <iostream>
 #include <limits>
 #include <string>
@@ -33,6 +37,30 @@ enum SolverProperty
     INFEASIBLE, ///< the model is infeasible 
     SUBOPTIMAL ///< the model is suboptimal 
 };
+
+inline std::string toString(SolverProperty sp)
+{
+    switch (sp)
+    {
+        case MIN:
+            return "MIN";
+        case MAX:
+            return "MAX";
+        case BINARY:
+            return "BINARY";
+        case INTEGER:
+            return "INTEGER";
+        case CONTINUOUS:
+            return "CONTINUOUS";
+        case OPTIMAL:
+            return "OPTIMAL";
+        case INFEASIBLE:
+            return "INFEASIBLE";
+        case SUBOPTIMAL:
+        default:
+            return "SUBOPTIMAL";
+    }
+}
 
 // forward declaration 
 template <typename T>
@@ -201,7 +229,15 @@ class VariableProperty
         /// @return numeric type 
         SolverProperty numericType() const {return m_numericType;}
         /// @param nt numeric type 
-        void setNumericType(SolverProperty nt) {m_numericType = nt;}
+        void setNumericType(SolverProperty nt) 
+        {
+            m_numericType = nt;
+            if (m_numericType == BINARY) // update bounds for binary 
+            {
+                m_lowerBound = 0; 
+                m_upperBound = 1; 
+            }
+        }
         /// @return name of variable 
         std::string const& name() const {return m_name;}
         /// @param n name 
@@ -1117,7 +1153,7 @@ class LinearModel : public LpParser::LpDataBase
         /// @brief print problem in lp format 
         /// @param os output stream 
         /// @return output stream 
-        std::ostream& print(std::ostream& os) const 
+        std::ostream& print(std::ostream& os = std::cout) const 
         {
             switch (optimizeType())
             {
@@ -1211,6 +1247,17 @@ class LinearModel : public LpParser::LpDataBase
             os << " " << constr.sense() << " " << constr.rightHandSide();
             return os;  
         }
+        /// @brief print solutions 
+        /// @param os output stream 
+        /// @return output stream 
+        std::ostream& printSolution(std::ostream& os = std::cout) const 
+        {
+            coefficient_value_type obj = evaluateObjective(); 
+            os << "# Objective " << obj << "\n";
+            for (unsigned int i = 0, ie = variableSolutions().size(); i < ie; ++i)
+                os << variableName(variable_type(i)) << " " << variableSolution(variable_type(i)) << "\n";
+            return os; 
+        }
     protected:
         /// @brief copy object 
         void copy(LinearModel const& rhs)
@@ -1221,6 +1268,8 @@ class LinearModel : public LpParser::LpDataBase
             m_optType = rhs.m_optType;
 
             m_vVariableSol = rhs.m_vVariableSol;
+
+            m_mName2Variable = rhs.m_mName2Variable; 
         }
 
         std::vector<constraint_type> m_vConstraint; ///< constraints 
@@ -1235,3 +1284,5 @@ class LinearModel : public LpParser::LpDataBase
 
 } // namespace solvers 
 } // namespace limbo 
+
+#endif
