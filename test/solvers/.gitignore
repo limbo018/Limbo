@@ -1,3 +1,4 @@
 test_solvers
 test_MultiKnapsackLagRelax
+test_DualMinCostFlow
 benchmarks/problem.sol
