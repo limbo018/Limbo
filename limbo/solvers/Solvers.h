@@ -35,7 +35,8 @@ enum SolverProperty
     CONTINUOUS, ///< floating point number 
     OPTIMAL, ///< optimally solved 
     INFEASIBLE, ///< the model is infeasible 
-    SUBOPTIMAL ///< the model is suboptimal 
+    SUBOPTIMAL, ///< the model is suboptimal 
+    UNBOUNDED ///< the model is unbounded 
 };
 
 /// @brief Convert @ref limbo::solvers::SolverProperty to std::string 
