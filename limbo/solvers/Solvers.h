@@ -1238,7 +1238,7 @@ class LinearModel : public LpParser::LpDataBase
                     os << variableName(variable_type(i)) << "\n";
             }
 
-            os << "End"; 
+            os << "End\n"; 
 
             return os; 
         }
@@ -1275,7 +1275,10 @@ class LinearModel : public LpParser::LpDataBase
         std::ostream& print(std::ostream& os, constraint_type const& constr) const 
         {
             print(os, constr.expression());
-            os << " " << constr.sense() << " " << constr.rightHandSide();
+            if (constr.sense() == '=')
+                os << " " << constr.sense() << " " << constr.rightHandSide();
+            else 
+                os << " " << constr.sense() << "= " << constr.rightHandSide();
             return os;  
         }
         /// @brief print solutions 

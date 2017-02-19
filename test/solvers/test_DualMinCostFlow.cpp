@@ -9,7 +9,8 @@
 
 /// @brief test file API 
 /// @param filename input lp file 
-void test(std::string const& filename)
+/// @param alg algorithm type, 0 for cost scaling, 1 for capacity scaling, 2 for network simplex, 3 for cycle canceling 
+void test(std::string const& filename, int alg)
 {
     typedef limbo::solvers::LinearModel<int, int> model_type; 
     model_type optModel; 
@@ -18,11 +19,29 @@ void test(std::string const& filename)
     // print problem 
     optModel.print(std::cout); 
 
-    limbo::solvers::DualMinCostFlow solver (&optModel); 
-
     // solve 
-    limbo::solvers::SolverProperty status = solver();
+    limbo::solvers::MinCostFlowSolver* minCostFlowSolver = NULL; 
+    switch (alg)
+    {
+        case 0:
+            minCostFlowSolver = new limbo::solvers::CostScaling(); 
+            break;
+        case 1:
+            minCostFlowSolver = new limbo::solvers::CapacityScaling(); 
+            break;
+        case 2:
+            minCostFlowSolver = new limbo::solvers::NetworkSimplex(); 
+            break;
+        case 3:
+        default:
+            minCostFlowSolver = new limbo::solvers::CycleCanceling(); 
+            break; 
+    }
+    limbo::solvers::DualMinCostFlow solver (&optModel); 
+    limbo::solvers::SolverProperty status = solver(minCostFlowSolver);
+    //limbo::solvers::SolverProperty status = solver();
     std::cout << "Problem solved " << limbo::solvers::toString(status) << "\n";
+    delete minCostFlowSolver;
 
     // print solutions 
     optModel.printSolution(std::cout);
@@ -41,8 +60,11 @@ int main(int argc, char** argv)
 {
 	if (argc > 1)
 	{
+        int alg = 0; 
+        if (argc > 2)
+            alg = atoi(argv[2]);
         // test file API 
-        test(argv[1]);
+        test(argv[1], alg);
 	}
 	else 
 		std::cout << "at least 1 argument required\n";

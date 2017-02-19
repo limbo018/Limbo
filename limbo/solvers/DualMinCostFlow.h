@@ -120,7 +120,19 @@ class DualMinCostFlow
         arc_flow_map_type& flowMap();
         /// @return node potential map 
         node_pot_map_type& potentialMap(); 
+        /// @return total flow cost 
+        value_type totalFlowCost() const; 
+        /// @param cost total cost of min-cost flow graph 
+        void setTotalFlowCost(value_type cost); 
+        /// @return total cost of the original LP problem 
+        value_type totalCost() const; 
 
+        /// @name print functions to debug.lgf 
+        ///@{
+        /// @brief print graph 
+        /// @param writeSol if true write flow and potential as well 
+        void printGraph(bool writeSol) const; 
+        ///@}
     protected:
         /// @brief copy constructor, forbidden  
         /// @param rhs right hand side 
@@ -161,8 +173,9 @@ class DualMinCostFlow
 		arc_value_map_type m_mUpper; ///< upper bound of flow, arc capacity in min-cost flow  
 		arc_cost_map_type m_mCost; ///< arc cost in min-cost flow 
 		node_value_map_type m_mSupply; ///< node supply in min-cost flow 
-		//cost_type m_totalCost; ///< total cost after solving 
+		value_type m_totalFlowCost; ///< total cost after solving 
         value_type m_bigM; ///< a big number for infinity 
+        value_type m_reversedArcFlowCost; ///< normalized flow cost of overall reversed arcs to resolve negative arc cost, to get total flow cost of reversed arcs, it needs to times with big M 
 
 		arc_flow_map_type m_mFlow; ///< solution of min-cost flow, which is the dual solution of LP 
 		node_pot_map_type m_mPotential; ///< dual solution of min-cost flow, which is the solution of LP 
@@ -173,8 +186,7 @@ class MinCostFlowSolver
 {
     public:
         /// @brief constructor 
-        /// @param d dual min-cost flow object 
-        MinCostFlowSolver(DualMinCostFlow* d = NULL); 
+        MinCostFlowSolver(); 
         /// @brief copy constructor 
         /// @param rhs right hand side 
         MinCostFlowSolver(MinCostFlowSolver const& rhs); 
@@ -185,12 +197,11 @@ class MinCostFlowSolver
         virtual ~MinCostFlowSolver();
 
         /// @brief API to run min-cost flow solver 
-        virtual SolverProperty operator()() = 0; 
+        /// @param d dual min-cost flow object 
+        virtual SolverProperty operator()(DualMinCostFlow* d) = 0; 
     protected:
         /// @brief copy object 
         void copy(MinCostFlowSolver const& rhs); 
-
-        DualMinCostFlow* m_dualMinCostFlow; ///< pointer to dual min-cost flow object 
 };
 
 /// @brief Capacity scaling algorithm for min-cost flow 
@@ -205,9 +216,8 @@ class CapacityScaling : public MinCostFlowSolver
                 DualMinCostFlow::value_type> alg_type;
 
         /// @brief constructor 
-        /// @param d dual min-cost flow object 
         /// @param factor scaling factor 
-        CapacityScaling(DualMinCostFlow* d = NULL, int factor = 4);
+        CapacityScaling(int factor = 4);
         /// @brief copy constructor 
         /// @param rhs right hand side 
         CapacityScaling(CapacityScaling const& rhs); 
@@ -216,7 +226,8 @@ class CapacityScaling : public MinCostFlowSolver
         CapacityScaling& operator=(CapacityScaling const& rhs); 
 
         /// @brief API to run min-cost flow solver 
-        virtual SolverProperty operator()(); 
+        /// @param d dual min-cost flow object 
+        virtual SolverProperty operator()(DualMinCostFlow* d); 
     protected:
         /// @brief copy object 
         void copy(CapacityScaling const& rhs); 
@@ -236,10 +247,9 @@ class CostScaling : public MinCostFlowSolver
                 DualMinCostFlow::value_type> alg_type;
 
         /// @brief constructor 
-        /// @param d dual min-cost flow object 
         /// @param method internal method 
         /// @param factor scaling factor 
-        CostScaling(DualMinCostFlow* d = NULL, alg_type::Method method = alg_type::PARTIAL_AUGMENT, int factor = 16);
+        CostScaling(alg_type::Method method = alg_type::PARTIAL_AUGMENT, int factor = 16);
         /// @brief copy constructor 
         /// @param rhs right hand side 
         CostScaling(CostScaling const& rhs); 
@@ -248,7 +258,8 @@ class CostScaling : public MinCostFlowSolver
         CostScaling& operator=(CostScaling const& rhs); 
 
         /// @brief API to run min-cost flow solver 
-        virtual SolverProperty operator()(); 
+        /// @param d dual min-cost flow object 
+        virtual SolverProperty operator()(DualMinCostFlow* d); 
     protected:
         /// @brief copy object 
         void copy(CostScaling const& rhs); 
@@ -269,9 +280,8 @@ class NetworkSimplex : public MinCostFlowSolver
                 DualMinCostFlow::value_type> alg_type;
 
         /// @brief constructor 
-        /// @param d dual min-cost flow object 
         /// @param pivotRule pivot rule 
-        NetworkSimplex(DualMinCostFlow* d = NULL, alg_type::PivotRule pivotRule = alg_type::BLOCK_SEARCH);
+        NetworkSimplex(alg_type::PivotRule pivotRule = alg_type::BLOCK_SEARCH);
         /// @brief copy constructor 
         /// @param rhs right hand side 
         NetworkSimplex(NetworkSimplex const& rhs); 
@@ -280,7 +290,8 @@ class NetworkSimplex : public MinCostFlowSolver
         NetworkSimplex& operator=(NetworkSimplex const& rhs); 
 
         /// @brief API to run min-cost flow solver 
-        virtual SolverProperty operator()(); 
+        /// @param d dual min-cost flow object 
+        virtual SolverProperty operator()(DualMinCostFlow* d); 
     protected:
         /// @brief copy object 
         void copy(NetworkSimplex const& rhs); 
@@ -300,9 +311,8 @@ class CycleCanceling : public MinCostFlowSolver
                 DualMinCostFlow::value_type> alg_type;
 
         /// @brief constructor 
-        /// @param d dual min-cost flow object 
         /// @param factor scaling factor 
-        CycleCanceling(DualMinCostFlow* d = NULL, alg_type::Method method = alg_type::CANCEL_AND_TIGHTEN);
+        CycleCanceling(alg_type::Method method = alg_type::CANCEL_AND_TIGHTEN);
         /// @brief copy constructor 
         /// @param rhs right hand side 
         CycleCanceling(CycleCanceling const& rhs); 
@@ -311,7 +321,8 @@ class CycleCanceling : public MinCostFlowSolver
         CycleCanceling& operator=(CycleCanceling const& rhs); 
 
         /// @brief API to run min-cost flow solver 
-        virtual SolverProperty operator()(); 
+        /// @param d dual min-cost flow object 
+        virtual SolverProperty operator()(DualMinCostFlow* d); 
     protected:
         /// @brief copy object 
         void copy(CycleCanceling const& rhs); 
