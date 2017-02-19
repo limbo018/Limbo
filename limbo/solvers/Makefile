@@ -30,7 +30,8 @@ endif
 #                         Special Library
 # ==========================================================================
 
-INCLUDE = -I $(LIMBO_ROOT_DIR) 
+INCLUDE = -I $(LIMBO_ROOT_DIR) \
+		  -I $(LEMON_DIR)/include
 
 # ==========================================================================
 #                         Standard Setting

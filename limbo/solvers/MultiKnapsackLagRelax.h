@@ -17,8 +17,8 @@ namespace solvers
 {
 
 // forward declaration 
-struct LagMultiplierUpdater;
-struct ProblemScaler; 
+class LagMultiplierUpdater;
+class ProblemScaler; 
 
 /// @brief Solve multiple knapsack problem with lagrangian relaxation 
 /// 

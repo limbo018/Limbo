@@ -19,7 +19,6 @@ DualMinCostFlow::DualMinCostFlow(model_type* model)
     , m_mUpper(m_graph)
     , m_mCost(m_graph)
     , m_mSupply(m_graph)
-    , m_mName(m_graph)
     //, m_totalCost(std::numeric_limits<DualMinCostFlow::value_type>::max())
     , m_bigM(std::numeric_limits<DualMinCostFlow::value_type>::max())
     , m_mFlow(m_graph)
@@ -31,6 +30,7 @@ DualMinCostFlow::~DualMinCostFlow()
 }
 SolverProperty DualMinCostFlow::operator()(MinCostFlowSolver* solver)
 {
+    return solve(solver);
 }
 DualMinCostFlow::graph_type const& DualMinCostFlow::graph() const 
 {
@@ -64,7 +64,7 @@ SolverProperty DualMinCostFlow::solve(MinCostFlowSolver* solver)
 {
     bool defaultSolver = false; 
     // use default solver if NULL 
-    if (updater == NULL)
+    if (solver == NULL)
     {
         solver = new CostScaling(this); 
         defaultSolver = true; 
@@ -86,78 +86,93 @@ SolverProperty DualMinCostFlow::solve(MinCostFlowSolver* solver)
 }
 void DualMinCostFlow::prepare() 
 {
-    m_bigM = 10000; 
+    // big M should be larger than the summation of all non-negative supply in the graph 
+    // because this is the largest possible amount of flows. 
+    // The supply for each node is the coefficient of variable in the objective. 
+    m_bigM = 0; 
+    for (std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
+    {
+        if (it->coefficient() > 0)
+            m_bigM += it->coefficient();
+    }
 }
 void DualMinCostFlow::buildGraph() 
 {
     // 1. preparing nodes 
-    mapVariable2Graph();
+    mapObjective2Graph();
+
+    // reserve arcs 
+    // use count arcs mode to compute number of arcs needed 
+    unsigned int numArcs = mapDiffConstraint2Graph(true)+mapBoundConstraint2Graph(true);
+    m_graph.reserveArc(numArcs); 
 
     // 2. preparing arcs for differential constraints 
-    mapDiffConstraint2Graph();
+    mapDiffConstraint2Graph(false);
 
     // 3. arcs for variable bounds 
-    mapBoundConstraint2Graph();
+    mapBoundConstraint2Graph(false);
 }
-void DualMinCostFlow::mapVariable2Graph() 
+void DualMinCostFlow::mapObjective2Graph() 
 {
     // preparing nodes 
     // set supply to its weight in the objective 
-    m_graph.reserve(m_model->numVariables()+1); // in case an additional node is necessary, which will be the last node  
+    m_graph.reserveNode(m_model->numVariables()+1); // in case an additional node is necessary, which will be the last node  
     for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
-        node_type node = m_graph.addNode();
-    for (std::vector<term_type>::const_iterator it = m_model->objective().begin(), ite = m_model->objective().end(); it != ite; ++it)
+        m_graph.addNode();
+    for (std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
         m_mSupply[m_graph.nodeFromId(it->variable().id())] = it->coefficient();
 }
-void DualMinCostFlow::mapDiffConstraint2Graph() 
+unsigned int DualMinCostFlow::mapDiffConstraint2Graph(bool countArcs) 
 {
     // preparing arcs 
     // arcs constraints like xi - xj >= cij 
     // add arc from node i to node j with cost -cij and capacity unlimited 
 
-    // normalize to '>' format 
-    for (std::vector<constraint_type>::iterator it = m_model->constraints().begin(), ite = m_model->constraints().end(); it != ite; ++it)
+    unsigned int numArcs = m_model->constraints().size(); 
+    if (!countArcs) // skip in count arcs mode 
     {
-        constraint_type& constr = *it; 
-        limboAssertMsg(constr.expression().terms().size() == 2, "only support differential constraints like xi - xj >= cij");
-        constr.normalize('>');
-    }
-    for (std::vector<constraint_type>::const_iterator it = m_model->constraints().begin(), ite = m_model->constraints().end(); it != ite; ++it)
-    {
-        constraint_type const& constr = *it; 
-        std::vector<term_type> const& vTerm = constr.expression().terms();
-        variable_type xi = (vTerm[0].coefficient() > 0)? vTerm[0] : vTerm[1];
-        variable_type xj = (vTerm[0].coefficient() > 0)? vTerm[1] : vTerm[0];
+        // normalize to '>' format 
+        for (std::vector<constraint_type>::iterator it = m_model->constraints().begin(), ite = m_model->constraints().end(); it != ite; ++it)
+        {
+            constraint_type& constr = *it; 
+            limboAssertMsg(constr.expression().terms().size() == 2, "only support differential constraints like xi - xj >= cij");
+            constr.normalize('>');
+        }
+        for (std::vector<constraint_type>::const_iterator it = m_model->constraints().begin(), ite = m_model->constraints().end(); it != ite; ++it)
+        {
+            constraint_type const& constr = *it; 
+            std::vector<term_type> const& vTerm = constr.expression().terms();
+            variable_type xi = (vTerm[0].coefficient() > 0)? vTerm[0].variable() : vTerm[1].variable();
+            variable_type xj = (vTerm[0].coefficient() > 0)? vTerm[1].variable() : vTerm[0].variable();
 
-        arc_type arc = m_graph.addArc(m_graph.nodeFromId(xi.id()), m_graph.nodeFromId(xj.id())); 
-        m_mCost[arc] = -constr.rightHandSide(); 
-        //m_mLower[arc] = 0; 
-        m_mUpper[arc] = m_bigM;  
+            addArcForDiffConstraint(m_graph.nodeFromId(xi.id()), m_graph.nodeFromId(xj.id()), -constr.rightHandSide());
+        }
     }
+    return numArcs; 
 }
-void DualMinCostFlow::mapBoundConstraint2Graph() 
+unsigned int DualMinCostFlow::mapBoundConstraint2Graph(bool countArcs) 
 {
     // 3. arcs for variable bounds 
     // from node to additional node  
 
     // check whether there is node with non-zero lower bound or non-infinity upper bound 
-    bool boundFlag = false; 
+    unsigned int numArcs = 0; 
     for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
     {
-        if (m_model->variableLowerBound(variable_type(i)) != 0
-                || m_model->variableUpperBound(variable_type(i)) != std::numeric_limits<value_type>::max())
-        {
-            boundFlag = true; 
-            break; 
-        }
+        value_type lowerBound = m_model->variableLowerBound(variable_type(i)); 
+        value_type upperBound = m_model->variableLowerBound(variable_type(i)); 
+        if (lowerBound != 0)
+            ++numArcs; 
+        if (upperBound != std::numeric_limits<value_type>::max())
+            ++numArcs; 
     }
-    if (boundFlag)
+    if (!countArcs && numArcs) // skip in count arcs mode 
     {
         // 3.1 create additional node 
         // its corresponding weight is the negative sum of weight for other nodes 
         node_type addlNode = m_graph.addNode();
         value_type addlWeight = 0;
-        for (std::vector<term_type>::const_iterator it = m_model->objective().begin(), ite = m_model->objective().end(); it != ite; ++it)
+        for (std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
             addlWeight -= it->coefficient();
         m_mSupply[addlNode] = addlWeight; 
 
@@ -168,41 +183,39 @@ void DualMinCostFlow::mapBoundConstraint2Graph()
             // has lower bound 
             // add arc from node to additional node with cost d and cap unlimited
             if (lowerBound != 0)
-            {
-                arc_type arc = m_graph.addArc(m_graph.nodeFromId(i), addlNode);
-                m_mCost[arc] = -lowerBound;
-                //m_mLower[arc] = 0;
-                m_mUpper[arc] = m_bigM;
-            }
+                addArcForDiffConstraint(m_graph.nodeFromId(i), addlNode, -lowerBound);
             // has upper bound 
             // add arc from additional node to node with cost u and capacity unlimited
             if (upperBound != std::numeric_limits<value_type>::max())
-            {
-                arc_type arc = m_graph.addArc(addlNode, m_graph.nodeFromId(i));
-                m_mCost[arc] = upperBound;
-                //m_mLower[arc] = 0;
-                m_mUpper[arc] = m_bigM;
-            }
+                addArcForDiffConstraint(addlNode, m_graph.nodeFromId(i), upperBound); 
         }
     }
+    return numArcs; 
 }
-void DualMinCostFlow::resolveNegativeArcCost() 
+void DualMinCostFlow::addArcForDiffConstraint(DualMinCostFlow::node_type xi, DualMinCostFlow::node_type xj, DualMinCostFlow::value_type cij) 
 {
+    // add constraint xi - xj >= cij 
+    //
     // negative arc cost can be fixed by arc reversal 
     // for an arc with i -> j, with supply bi and bj, cost cij, capacity uij 
     // reverse the arc to 
     // i <- j, with supply bi-uij and bj+uij, cost -cij, capacity uij 
-    for (graph_type::ArcIt it(m_graph); it != graph_type::INVALID; ++it) 
-    {
-        if (m_mCost[it] < 0) 
-        {
-            node_type source = m_graph.source(it); 
-            node_type target = m_graph.target(it); 
 
-            m_mSupply[source] -= m_mUpper[it]; 
-            m_mSupply[target] += m_mUpper[it]; 
-            m_mCost[it] = -m_mCost[it]; 
-        }
+    if (cij <= 0)
+    {
+        arc_type arc = m_graph.addArc(xi, xj);
+        m_mCost[arc] = -cij; 
+        //m_mLower[arc] = 0;
+        m_mUpper[arc] = m_bigM; 
+    }
+    else 
+    {
+        arc_type arc = m_graph.addArc(xj, xi); // arc reversal 
+        m_mCost[arc] = cij; 
+        //m_mLower[arc] = 0;
+        m_mUpper[arc] = m_bigM;
+        m_mSupply[xi] -= m_bigM;
+        m_mSupply[xj] += m_bigM; 
     }
 }
 void DualMinCostFlow::applySolution()
@@ -211,7 +224,7 @@ void DualMinCostFlow::applySolution()
     value_type addlValue = 0;
     if ((unsigned int)m_graph.nodeNum() > m_model->numVariables()) // additional node has been introduced 
         addlValue = m_mPotential[m_graph.nodeFromId(m_graph.maxNodeId())];
-    unsigned int i = 0, 
+    unsigned int i = 0; 
     for (std::vector<value_type>::iterator it = m_model->variableSolutions().begin(), ite = m_model->variableSolutions().end(); it != ite; ++it, ++i)
         *it = m_mPotential[m_graph.nodeFromId(i)]-addlValue; 
 }
@@ -229,6 +242,9 @@ MinCostFlowSolver& MinCostFlowSolver::operator=(MinCostFlowSolver const& rhs)
     if (this != &rhs)
         copy(rhs);
     return *this;
+}
+MinCostFlowSolver::~MinCostFlowSolver()
+{
 }
 void MinCostFlowSolver::copy(MinCostFlowSolver const& rhs)
 {
@@ -363,7 +379,7 @@ void CostScaling::copy(CostScaling const& rhs)
 
 NetworkSimplex::NetworkSimplex(DualMinCostFlow* d, NetworkSimplex::alg_type::PivotRule pivotRule)
     : NetworkSimplex::base_type(d)
-    , m_pivotRule(PivotRule)
+    , m_pivotRule(pivotRule)
 {
 }
 NetworkSimplex::NetworkSimplex(NetworkSimplex const& rhs)
@@ -423,7 +439,7 @@ void NetworkSimplex::copy(NetworkSimplex const& rhs)
     m_pivotRule = rhs.m_pivotRule;
 }
 
-CycleCanceling::CycleCanceling(DualMinCostFlow* d, alg_type::Method method)
+CycleCanceling::CycleCanceling(DualMinCostFlow* d, CycleCanceling::alg_type::Method method)
     : CycleCanceling::base_type(d)
     , m_method(method)
 {
@@ -487,5 +503,3 @@ void CycleCanceling::copy(CycleCanceling const& rhs)
 
 } // namespace solvers 
 } // namespace limbo 
-
-#endif

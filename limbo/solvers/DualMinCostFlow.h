@@ -8,6 +8,7 @@
 #ifndef LIMBO_SOLVERS_DUALMINCOSTFLOW_H
 #define LIMBO_SOLVERS_DUALMINCOSTFLOW_H
 
+#include <lemon/smart_graph.h>
 #include <lemon/network_simplex.h>
 #include <lemon/cost_scaling.h>
 #include <lemon/capacity_scaling.h>
@@ -135,14 +136,21 @@ class DualMinCostFlow
         void prepare(); 
         /// @brief build dual min-cost flow graph 
         void buildGraph(); 
-        /// @brief map variables to graph nodes 
-        void mapVariable2Graph();
+        /// @brief map variables and the objective to graph nodes 
+        void mapObjective2Graph();
         /// @brief map differential constraints to graph arcs 
-        void mapDiffConstraint2Graph();
+        /// @param countArcs flag for counting arcs mode, if true, only count arcs and no actual arcs are added; otherwise, add arcs 
+        /// @return number of arcs added 
+        unsigned int mapDiffConstraint2Graph(bool countArcs);
         /// @brief map bound constraints to graph arcs 
-        void mapBoundConstraint2Graph();
-        /// @brief resolve negative arc costs by arc reversal 
-        void resolveNegativeArcCost(); 
+        /// @param countArcs flag for counting arcs mode, if true, only count arcs and no actual arcs are added; otherwise, add arcs 
+        /// @return number of arcs added 
+        unsigned int mapBoundConstraint2Graph(bool countArcs);
+        /// @brief generalized method to add an arc for differential constraint \f$ x_i - x_j \ge c_{ij} \f$, resolve negative arc costs by arc reversal 
+        /// @param xi node corresponding to variable \f$ x_i \f$
+        /// @param xj node corresponding to variable \f$ x_j \f$
+        /// @param cij constant at right hand side 
+        void addArcForDiffConstraint(node_type xi, node_type xj, value_type cij); 
         /// @brief apply solutions to model 
         void applySolution(); 
 
@@ -173,6 +181,8 @@ class MinCostFlowSolver
         /// @brief assignment 
         /// @param rhs right hand side 
         MinCostFlowSolver& operator=(MinCostFlowSolver const& rhs); 
+        /// @brief destructor 
+        virtual ~MinCostFlowSolver();
 
         /// @brief API to run min-cost flow solver 
         virtual SolverProperty operator()() = 0; 
@@ -229,7 +239,7 @@ class CostScaling : public MinCostFlowSolver
         /// @param d dual min-cost flow object 
         /// @param method internal method 
         /// @param factor scaling factor 
-        CostScaling(DualMinCostFlow* d = NULL, alg_type::Method method = lemon::PARTIAL_AUGMENT, int factor = 16);
+        CostScaling(DualMinCostFlow* d = NULL, alg_type::Method method = alg_type::PARTIAL_AUGMENT, int factor = 16);
         /// @brief copy constructor 
         /// @param rhs right hand side 
         CostScaling(CostScaling const& rhs); 
@@ -261,7 +271,7 @@ class NetworkSimplex : public MinCostFlowSolver
         /// @brief constructor 
         /// @param d dual min-cost flow object 
         /// @param pivotRule pivot rule 
-        NetworkSimplex(DualMinCostFlow* d = NULL, alg_type::PivotRule pivotRule = lemon::BLOCK_SEARCH);
+        NetworkSimplex(DualMinCostFlow* d = NULL, alg_type::PivotRule pivotRule = alg_type::BLOCK_SEARCH);
         /// @brief copy constructor 
         /// @param rhs right hand side 
         NetworkSimplex(NetworkSimplex const& rhs); 
@@ -292,7 +302,7 @@ class CycleCanceling : public MinCostFlowSolver
         /// @brief constructor 
         /// @param d dual min-cost flow object 
         /// @param factor scaling factor 
-        CycleCanceling(DualMinCostFlow* d = NULL, alg_type::Method method = CANCEL_AND_TIGHTEN);
+        CycleCanceling(DualMinCostFlow* d = NULL, alg_type::Method method = alg_type::CANCEL_AND_TIGHTEN);
         /// @brief copy constructor 
         /// @param rhs right hand side 
         CycleCanceling(CycleCanceling const& rhs); 
@@ -306,7 +316,7 @@ class CycleCanceling : public MinCostFlowSolver
         /// @brief copy object 
         void copy(CycleCanceling const& rhs); 
 
-        alg_type m_method; ///< method for the algorithm, SIMPLE_CYCLE_CANCELING, MINIMUM_MEAN_CYCLE_CANCELING, CANCEL_AND_TIGHTEN
+        alg_type::Method m_method; ///< method for the algorithm, SIMPLE_CYCLE_CANCELING, MINIMUM_MEAN_CYCLE_CANCELING, CANCEL_AND_TIGHTEN
 };
 
 
