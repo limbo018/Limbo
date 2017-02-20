@@ -13,6 +13,8 @@
 #include <lemon/cost_scaling.h>
 #include <lemon/capacity_scaling.h>
 #include <lemon/cycle_canceling.h>
+#include <lemon/lgf_writer.h>
+
 #include <limbo/solvers/Solvers.h>
 
 /// namespace for Limbo 
@@ -23,7 +25,16 @@ namespace solvers
 {
 
 // forward declaration 
+template <typename T, typename V>
 class MinCostFlowSolver;
+template <typename T, typename V>
+class CapacityScaling;
+template <typename T, typename V>
+class CostScaling;
+template <typename T, typename V>
+class NetworkSimplex;
+template <typename T, typename V>
+class CycleCanceling;
 
 /// @class limbo::solvers::DualMinCostFlow
 /// @brief LP solved with min-cost flow. A better implementation of @ref limbo::solvers::lpmcf::LpDualMcf
@@ -84,20 +95,24 @@ class MinCostFlowSolver;
 /// Caution: this mapping of LP to dual min-cost flow results may result in negative arc cost which is not supported 
 /// by all the algorithms (only capacity scaling algorithm supports). Therefore, graph transformation is introduced 
 /// to convert arcs with negative costs to positive costs with arc inversal. 
+/// 
+/// @tparam T coefficient type 
+/// @tparam V variable type 
+template <typename T, typename V>
 class DualMinCostFlow 
 {
     public:
         /// @brief linear model type for the problem 
-        typedef LinearModel<int, int> model_type; 
+        typedef LinearModel<T, V> model_type; 
         /// @nowarn
-        typedef model_type::coefficient_value_type coefficient_value_type; 
-        typedef model_type::variable_value_type variable_value_type; 
+        typedef typename model_type::coefficient_value_type coefficient_value_type; 
+        typedef typename model_type::variable_value_type variable_value_type; 
         typedef variable_value_type value_type; // use only one kind of value type 
-        typedef model_type::variable_type variable_type;
-        typedef model_type::constraint_type constraint_type; 
-        typedef model_type::expression_type expression_type; 
-        typedef model_type::term_type term_type; 
-        typedef model_type::property_type property_type;
+        typedef typename model_type::variable_type variable_type;
+        typedef typename model_type::constraint_type constraint_type; 
+        typedef typename model_type::expression_type expression_type; 
+        typedef typename model_type::term_type term_type; 
+        typedef typename model_type::property_type property_type;
 
 		typedef lemon::SmartDigraph graph_type;
 		typedef graph_type::Node node_type;
@@ -108,6 +123,8 @@ class DualMinCostFlow
 		typedef graph_type::ArcMap<value_type> arc_cost_map_type;
 		typedef graph_type::ArcMap<value_type> arc_flow_map_type;
 		typedef graph_type::NodeMap<value_type> node_pot_map_type; // potential of each node 
+
+        typedef MinCostFlowSolver<coefficient_value_type, variable_value_type> solver_type; 
         /// @endnowarn
 
         /// @brief constructor 
@@ -118,7 +135,7 @@ class DualMinCostFlow
         
         /// @brief API to run the algorithm 
         /// @param solver an object to solve min cost flow, use default updater if NULL  
-        SolverProperty operator()(MinCostFlowSolver* solver = NULL); 
+        SolverProperty operator()(solver_type* solver = NULL); 
 
         /// @return graph 
         graph_type const& graph() const; 
@@ -157,7 +174,7 @@ class DualMinCostFlow
 
         /// @brief kernel function to solve the problem 
         /// @param solver an object to solve min cost flow, use default updater if NULL  
-        SolverProperty solve(MinCostFlowSolver* solver);
+        SolverProperty solve(solver_type* solver);
         /// @brief prepare data like big M 
         void prepare(); 
         /// @brief build dual min-cost flow graph 
@@ -195,153 +212,715 @@ class DualMinCostFlow
 		node_pot_map_type m_mPotential; ///< dual solution of min-cost flow, which is the solution of LP 
 };
 
+template <typename T, typename V>
+DualMinCostFlow<T, V>::DualMinCostFlow(typename DualMinCostFlow<T, V>::model_type* model)
+    : m_model(model)
+    , m_graph()
+    //, m_mLower(m_graph)
+    , m_mUpper(m_graph)
+    , m_mCost(m_graph)
+    , m_mSupply(m_graph)
+    , m_totalFlowCost(std::numeric_limits<typename DualMinCostFlow<T, V>::value_type>::max())
+    , m_bigM(std::numeric_limits<typename DualMinCostFlow<T, V>::value_type>::max())
+    , m_mFlow(m_graph)
+    , m_mPotential(m_graph)
+{
+}
+template <typename T, typename V>
+DualMinCostFlow<T, V>::~DualMinCostFlow() 
+{
+}
+template <typename T, typename V>
+SolverProperty DualMinCostFlow<T, V>::operator()(typename DualMinCostFlow<T, V>::solver_type* solver)
+{
+    return solve(solver);
+}
+template <typename T, typename V>
+typename DualMinCostFlow<T, V>::graph_type const& DualMinCostFlow<T, V>::graph() const 
+{
+    return m_graph;
+}
+//template <typename T, typename V>
+//DualMinCostFlow<T, V>::arc_value_map_type const& DualMinCostFlow<T, V>::lowerMap() const
+//{
+//    return m_mLower;
+//}
+template <typename T, typename V>
+typename DualMinCostFlow<T, V>::arc_value_map_type const& DualMinCostFlow<T, V>::upperMap() const 
+{
+    return m_mUpper;
+}
+template <typename T, typename V>
+typename DualMinCostFlow<T, V>::arc_cost_map_type const& DualMinCostFlow<T, V>::costMap() const 
+{
+    return m_mCost;
+}
+template <typename T, typename V>
+typename DualMinCostFlow<T, V>::node_value_map_type const& DualMinCostFlow<T, V>::supplyMap() const 
+{
+    return m_mSupply;
+}
+template <typename T, typename V>
+typename DualMinCostFlow<T, V>::arc_flow_map_type& DualMinCostFlow<T, V>::flowMap() 
+{
+    return m_mFlow;
+}
+template <typename T, typename V>
+typename DualMinCostFlow<T, V>::node_pot_map_type& DualMinCostFlow<T, V>::potentialMap() 
+{
+    return m_mPotential;
+}
+template <typename T, typename V>
+typename DualMinCostFlow<T, V>::value_type DualMinCostFlow<T, V>::totalFlowCost() const
+{
+    return m_totalFlowCost; 
+}
+template <typename T, typename V>
+void DualMinCostFlow<T, V>::setTotalFlowCost(typename DualMinCostFlow<T, V>::value_type cost)
+{
+    m_totalFlowCost = cost; 
+}
+template <typename T, typename V>
+typename DualMinCostFlow<T, V>::value_type DualMinCostFlow<T, V>::totalCost() const 
+{
+    // the negation comes from we change maximization problem into minimization problem 
+    // the dual LP problem should be a maximization problem, but we solve it with min-cost flow 
+    return -(totalFlowCost()-m_bigM*m_reversedArcFlowCost);
+}
+template <typename T, typename V>
+void DualMinCostFlow<T, V>::printGraph(bool writeSol) const
+{
+    limboPrint(kDEBUG, "bigM = %d, reversedArcFlowCost = %d\n", (int)m_bigM, m_reversedArcFlowCost);
+    if (writeSol)
+        limboPrint(kDEBUG, "totalFlowCost = %d, totalCost = %d\n", (int)totalFlowCost(), (int)totalCost()); 
+
+    node_name_map_type nameMap (m_graph); 
+    for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
+        nameMap[m_graph.nodeFromId(i)] = m_model->variableName(variable_type(i)); 
+    nameMap[m_graph.nodeFromId(m_graph.maxNodeId())] = "additional";
+
+    // dump lgf file 
+    lemon::DigraphWriter<graph_type> writer(m_graph, "debug.lgf");
+    writer.nodeMap("supply", m_mSupply)
+        .nodeMap("name", nameMap)
+        .arcMap("capacity_upper", m_mUpper)
+        .arcMap("cost", m_mCost);
+    if (writeSol)
+        writer.nodeMap("potential", m_mPotential)
+            .arcMap("flow", m_mFlow);
+    writer.run();
+}
+template <typename T, typename V>
+SolverProperty DualMinCostFlow<T, V>::solve(typename DualMinCostFlow<T, V>::solver_type* solver)
+{
+    bool defaultSolver = false; 
+    // use default solver if NULL 
+    if (solver == NULL)
+    {
+        solver = new CostScaling<coefficient_value_type, variable_value_type>(); 
+        defaultSolver = true; 
+    }
+
+    // prepare 
+    prepare();
+    // build graph 
+    buildGraph();
+    // solve min-cost flow problem 
+    SolverProperty status = solver->operator()(this); 
+    // apply solution 
+    applySolution(); 
+
+#ifdef DEBUG_DUALMINCOSTFLOW
+    printGraph(true);
+#endif
+
+    if (defaultSolver)
+        delete solver; 
+
+    return status; 
+}
+template <typename T, typename V>
+void DualMinCostFlow<T, V>::prepare() 
+{
+    // big M should be larger than the summation of all non-negative supply in the graph 
+    // because this is the largest possible amount of flows. 
+    // The supply for each node is the coefficient of variable in the objective. 
+    m_bigM = 0; 
+    for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
+    {
+        if (it->coefficient() > 0)
+            m_bigM += it->coefficient();
+    }
+    //m_bigM *= 10000; 
+
+    // reset data members
+    m_reversedArcFlowCost = 0; 
+}
+template <typename T, typename V>
+void DualMinCostFlow<T, V>::buildGraph() 
+{
+    // 1. preparing nodes 
+    mapObjective2Graph();
+
+    // reserve arcs 
+    // use count arcs mode to compute number of arcs needed 
+    unsigned int numArcs = mapDiffConstraint2Graph(true)+mapBoundConstraint2Graph(true);
+    m_graph.reserveArc(numArcs); 
+
+    // 2. preparing arcs for differential constraints 
+    mapDiffConstraint2Graph(false);
+
+    // 3. arcs for variable bounds 
+    mapBoundConstraint2Graph(false);
+}
+template <typename T, typename V>
+void DualMinCostFlow<T, V>::mapObjective2Graph() 
+{
+    // preparing nodes 
+    // set supply to its weight in the objective 
+    m_graph.reserveNode(m_model->numVariables()+1); // in case an additional node is necessary, which will be the last node  
+    for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
+        m_graph.addNode();
+    for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
+        m_mSupply[m_graph.nodeFromId(it->variable().id())] = it->coefficient();
+}
+template <typename T, typename V>
+unsigned int DualMinCostFlow<T, V>::mapDiffConstraint2Graph(bool countArcs) 
+{
+    // preparing arcs 
+    // arcs constraints like xi - xj >= cij 
+    // add arc from node i to node j with cost -cij and capacity unlimited 
+
+    unsigned int numArcs = m_model->constraints().size(); 
+    if (!countArcs) // skip in count arcs mode 
+    {
+        // normalize to '>' format 
+        for (typename std::vector<constraint_type>::iterator it = m_model->constraints().begin(), ite = m_model->constraints().end(); it != ite; ++it)
+        {
+            constraint_type& constr = *it; 
+            limboAssertMsg(constr.expression().terms().size() == 2, "only support differential constraints like xi - xj >= cij");
+            constr.normalize('>');
+        }
+        for (typename std::vector<constraint_type>::const_iterator it = m_model->constraints().begin(), ite = m_model->constraints().end(); it != ite; ++it)
+        {
+            constraint_type const& constr = *it; 
+            std::vector<term_type> const& vTerm = constr.expression().terms();
+            variable_type xi = (vTerm[0].coefficient() > 0)? vTerm[0].variable() : vTerm[1].variable();
+            variable_type xj = (vTerm[0].coefficient() > 0)? vTerm[1].variable() : vTerm[0].variable();
+
+            addArcForDiffConstraint(m_graph.nodeFromId(xi.id()), m_graph.nodeFromId(xj.id()), constr.rightHandSide());
+        }
+    }
+    return numArcs; 
+}
+template <typename T, typename V>
+unsigned int DualMinCostFlow<T, V>::mapBoundConstraint2Graph(bool countArcs) 
+{
+    // 3. arcs for variable bounds 
+    // from node to additional node  
+
+    // check whether there is node with non-zero lower bound or non-infinity upper bound 
+    unsigned int numArcs = 0; 
+    for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
+    {
+        value_type lowerBound = m_model->variableLowerBound(variable_type(i)); 
+        value_type upperBound = m_model->variableUpperBound(variable_type(i)); 
+        if (lowerBound != 0)
+            ++numArcs; 
+        if (upperBound != std::numeric_limits<value_type>::max())
+            ++numArcs; 
+    }
+    if (!countArcs && numArcs) // skip in count arcs mode 
+    {
+        // 3.1 create additional node 
+        // its corresponding weight is the negative sum of weight for other nodes 
+        node_type addlNode = m_graph.addNode();
+        value_type addlWeight = 0;
+        for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
+            addlWeight -= it->coefficient();
+        m_mSupply[addlNode] = addlWeight; 
+
+        for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
+        {
+            value_type lowerBound = m_model->variableLowerBound(variable_type(i)); 
+            value_type upperBound = m_model->variableUpperBound(variable_type(i)); 
+            // has lower bound 
+            // add arc from node to additional node with cost d and cap unlimited
+            if (lowerBound != 0)
+                addArcForDiffConstraint(m_graph.nodeFromId(i), addlNode, lowerBound);
+            // has upper bound 
+            // add arc from additional node to node with cost u and capacity unlimited
+            if (upperBound != std::numeric_limits<value_type>::max())
+                addArcForDiffConstraint(addlNode, m_graph.nodeFromId(i), -upperBound); 
+        }
+    }
+    return numArcs; 
+}
+template <typename T, typename V>
+void DualMinCostFlow<T, V>::addArcForDiffConstraint(typename DualMinCostFlow<T, V>::node_type xi, typename DualMinCostFlow<T, V>::node_type xj, typename DualMinCostFlow<T, V>::value_type cij) 
+{
+    // add constraint xi - xj >= cij 
+    //
+    // negative arc cost can be fixed by arc reversal 
+    // for an arc with i -> j, with supply bi and bj, cost cij, capacity uij 
+    // reverse the arc to 
+    // i <- j, with supply bi-uij and bj+uij, cost -cij, capacity uij 
+
+    if (cij <= 0)
+    {
+        arc_type arc = m_graph.addArc(xi, xj);
+        m_mCost[arc] = -cij; 
+        //m_mLower[arc] = 0;
+        m_mUpper[arc] = m_bigM; 
+    }
+    else // reverse arc 
+    {
+        arc_type arc = m_graph.addArc(xj, xi); // arc reversal 
+        m_mCost[arc] = cij; 
+        //m_mLower[arc] = 0;
+        m_mUpper[arc] = m_bigM;
+        m_mSupply[xi] -= m_bigM;
+        m_mSupply[xj] += m_bigM; 
+
+        m_reversedArcFlowCost += cij;
+    }
+}
+template <typename T, typename V>
+void DualMinCostFlow<T, V>::applySolution()
+{
+    // update solution 
+    value_type addlValue = 0;
+    if ((unsigned int)m_graph.nodeNum() > m_model->numVariables()) // additional node has been introduced 
+        addlValue = m_mPotential[m_graph.nodeFromId(m_graph.maxNodeId())];
+    unsigned int i = 0; 
+    for (typename std::vector<value_type>::iterator it = m_model->variableSolutions().begin(), ite = m_model->variableSolutions().end(); it != ite; ++it, ++i)
+        *it = m_mPotential[m_graph.nodeFromId(i)]-addlValue; 
+}
+
+
 /// @brief A base class of min-cost flow solver 
+/// @tparam T coefficient type 
+/// @tparam V variable type 
+template <typename T, typename V>
 class MinCostFlowSolver
 {
     public:
+        /// @brief dual min-cost flow solver type 
+        typedef DualMinCostFlow<T, V> dualsolver_type; 
+
         /// @brief constructor 
-        MinCostFlowSolver(); 
+        MinCostFlowSolver() {} 
         /// @brief copy constructor 
         /// @param rhs right hand side 
-        MinCostFlowSolver(MinCostFlowSolver const& rhs); 
+        MinCostFlowSolver(MinCostFlowSolver const& rhs) 
+        {
+            copy(rhs);
+        }
         /// @brief assignment 
         /// @param rhs right hand side 
-        MinCostFlowSolver& operator=(MinCostFlowSolver const& rhs); 
+        MinCostFlowSolver& operator=(MinCostFlowSolver const& rhs)
+        {
+            if (this != &rhs)
+                copy(rhs);
+            return *this;
+        }
         /// @brief destructor 
-        virtual ~MinCostFlowSolver();
+        virtual ~MinCostFlowSolver() {}
 
         /// @brief API to run min-cost flow solver 
         /// @param d dual min-cost flow object 
-        virtual SolverProperty operator()(DualMinCostFlow* d) = 0; 
+        virtual SolverProperty operator()(dualsolver_type* d) = 0; 
     protected:
         /// @brief copy object 
-        void copy(MinCostFlowSolver const& rhs); 
+        void copy(MinCostFlowSolver const& /*rhs*/) {} 
 };
 
 /// @brief Capacity scaling algorithm for min-cost flow 
-class CapacityScaling : public MinCostFlowSolver
+/// @tparam T coefficient type 
+/// @tparam V variable type 
+template <typename T, typename V>
+class CapacityScaling : public MinCostFlowSolver<T, V>
 {
     public:
+        /// @brief value type 
+        typedef T value_type;
         /// @brief base type 
-        typedef MinCostFlowSolver base_type; 
+        typedef MinCostFlowSolver<T, V> base_type; 
+        /// @brief dual min-cost flow solver type 
+        typedef typename base_type::dualsolver_type dualsolver_type; 
         /// @brief algorithm type 
-        typedef lemon::CapacityScaling<DualMinCostFlow::graph_type, 
-                DualMinCostFlow::value_type, 
-                DualMinCostFlow::value_type> alg_type;
+        typedef lemon::CapacityScaling<typename dualsolver_type::graph_type, 
+                value_type, 
+                value_type> alg_type;
 
         /// @brief constructor 
         /// @param factor scaling factor 
-        CapacityScaling(int factor = 4);
+        CapacityScaling(int factor = 4)
+            : base_type()
+            , m_factor(factor)
+        {
+        }
         /// @brief copy constructor 
         /// @param rhs right hand side 
-        CapacityScaling(CapacityScaling const& rhs); 
+        CapacityScaling(CapacityScaling const& rhs)
+            : CapacityScaling::base_type(rhs)
+        {
+            copy(rhs);
+        }
         /// @brief assignment 
         /// @param rhs right hand side 
-        CapacityScaling& operator=(CapacityScaling const& rhs); 
+        CapacityScaling& operator=(CapacityScaling const& rhs)
+        {
+            if (this != &rhs)
+            {
+                this->base_type::operator=(rhs);
+                copy(rhs);
+            }
+            return *this;
+        }
 
         /// @brief API to run min-cost flow solver 
         /// @param d dual min-cost flow object 
-        virtual SolverProperty operator()(DualMinCostFlow* d); 
+        virtual SolverProperty operator()(dualsolver_type* d)
+        {
+            // 1. choose algorithm 
+            alg_type alg (d->graph());
+
+            // 2. run 
+            typename alg_type::ProblemType status = alg.reset().resetParams()
+                //.lowerMap(d->lowerMap())
+                .upperMap(d->upperMap())
+                .costMap(d->costMap())
+                .supplyMap(d->supplyMap())
+                .run(m_factor);
+
+            // 3. check results 
+            SolverProperty solverStatus; 
+            switch (status)
+            {
+                case alg_type::OPTIMAL:
+                    solverStatus = OPTIMAL; 
+                    break;
+                case alg_type::INFEASIBLE:
+                    solverStatus = INFEASIBLE; 
+                    break;
+                case alg_type::UNBOUNDED:
+                    solverStatus = UNBOUNDED; 
+                    break;
+                default:
+                    limboAssertMsg(0, "unknown status");
+            }
+
+            // 4. apply results 
+            // get dual solution of LP, which is the flow of min-cost flow, skip this if not necessary
+            alg.flowMap(d->flowMap());
+            // get solution of LP, which is the dual solution of min-cost flow 
+            alg.potentialMap(d->potentialMap());
+            // set total cost of min-cost flow 
+            d->setTotalFlowCost(alg.totalCost());
+
+            return solverStatus; 
+        }
     protected:
         /// @brief copy object 
-        void copy(CapacityScaling const& rhs); 
+        void copy(CapacityScaling const& rhs)
+        {
+            m_factor = rhs.m_factor;
+        }
 
         int m_factor; ///< scaling factor for the algorithm 
 };
 
 /// @brief Cost scaling algorithm for min-cost flow 
-class CostScaling : public MinCostFlowSolver
+/// @tparam T coefficient type 
+/// @tparam V variable type 
+template <typename T, typename V>
+class CostScaling : public MinCostFlowSolver<T, V>
 {
     public:
+        /// @brief value type 
+        typedef T value_type;
         /// @brief base type 
-        typedef MinCostFlowSolver base_type; 
+        typedef MinCostFlowSolver<T, V> base_type; 
+        /// @brief dual min-cost flow solver type 
+        typedef typename base_type::dualsolver_type dualsolver_type; 
         /// @brief algorithm type 
-        typedef lemon::CostScaling<DualMinCostFlow::graph_type, 
-                DualMinCostFlow::value_type, 
-                DualMinCostFlow::value_type> alg_type;
+        typedef lemon::CostScaling<typename dualsolver_type::graph_type, 
+                value_type, 
+                value_type> alg_type;
 
         /// @brief constructor 
         /// @param method internal method 
         /// @param factor scaling factor 
-        CostScaling(alg_type::Method method = alg_type::PARTIAL_AUGMENT, int factor = 16);
+        CostScaling(typename alg_type::Method method = alg_type::PARTIAL_AUGMENT, int factor = 16)
+            : base_type()
+            , m_method(method)
+            , m_factor(factor)
+        {
+        }
         /// @brief copy constructor 
         /// @param rhs right hand side 
-        CostScaling(CostScaling const& rhs); 
+        CostScaling(CostScaling const& rhs)
+            : base_type(rhs)
+        {
+            copy(rhs);
+        }
         /// @brief assignment 
         /// @param rhs right hand side 
-        CostScaling& operator=(CostScaling const& rhs); 
+        CostScaling& operator=(CostScaling const& rhs)
+        {
+            if (this != &rhs)
+            {
+                this->base_type::operator=(rhs);
+                copy(rhs);
+            }
+            return *this;
+        }
 
         /// @brief API to run min-cost flow solver 
         /// @param d dual min-cost flow object 
-        virtual SolverProperty operator()(DualMinCostFlow* d); 
+        virtual SolverProperty operator()(dualsolver_type* d)
+        {
+            // 1. choose algorithm 
+            alg_type alg (d->graph());
+
+            // 2. run 
+            typename alg_type::ProblemType status = alg.reset().resetParams()
+                //.lowerMap(d->lowerMap())
+                .upperMap(d->upperMap())
+                .costMap(d->costMap())
+                .supplyMap(d->supplyMap())
+                .run(m_method, m_factor);
+
+            // 3. check results 
+            SolverProperty solverStatus; 
+            switch (status)
+            {
+                case alg_type::OPTIMAL:
+                    solverStatus = OPTIMAL; 
+                    break;
+                case alg_type::INFEASIBLE:
+                    solverStatus = INFEASIBLE; 
+                    break;
+                case alg_type::UNBOUNDED:
+                    solverStatus = UNBOUNDED; 
+                    break;
+                default:
+                    limboAssertMsg(0, "unknown status");
+            }
+
+            // 4. apply results 
+            // get dual solution of LP, which is the flow of min-cost flow, skip this if not necessary
+            alg.flowMap(d->flowMap());
+            // get solution of LP, which is the dual solution of min-cost flow 
+            alg.potentialMap(d->potentialMap());
+            // set total cost of min-cost flow 
+            d->setTotalFlowCost(alg.totalCost());
+
+            return solverStatus; 
+        }
     protected:
         /// @brief copy object 
-        void copy(CostScaling const& rhs); 
+        void copy(CostScaling const& rhs)
+        {
+            m_method = rhs.m_method;
+            m_factor = rhs.m_factor;
+        }
 
-        alg_type::Method m_method; ///< PUSH, AUGMENT, PARTIAL_AUGMENT
+        typename alg_type::Method m_method; ///< PUSH, AUGMENT, PARTIAL_AUGMENT
         int m_factor; ///< scaling factor for the algorithm 
 };
 
 /// @brief Network simplex algorithm for min-cost flow 
-class NetworkSimplex : public MinCostFlowSolver
+/// @tparam T coefficient type 
+/// @tparam V variable type 
+template <typename T, typename V>
+class NetworkSimplex : public MinCostFlowSolver<T, V>
 {
     public:
+        /// @brief value type 
+        typedef T value_type;
         /// @brief base type 
-        typedef MinCostFlowSolver base_type; 
+        typedef MinCostFlowSolver<T, V> base_type; 
+        /// @brief dual min-cost flow solver type 
+        typedef typename base_type::dualsolver_type dualsolver_type; 
         /// @brief algorithm type 
-        typedef lemon::NetworkSimplex<DualMinCostFlow::graph_type, 
-                DualMinCostFlow::value_type, 
-                DualMinCostFlow::value_type> alg_type;
+        typedef lemon::NetworkSimplex<typename dualsolver_type::graph_type, 
+                value_type, 
+                value_type> alg_type;
 
         /// @brief constructor 
         /// @param pivotRule pivot rule 
-        NetworkSimplex(alg_type::PivotRule pivotRule = alg_type::BLOCK_SEARCH);
+        NetworkSimplex(typename alg_type::PivotRule pivotRule = alg_type::BLOCK_SEARCH)
+            : base_type()
+            , m_pivotRule(pivotRule)
+        {
+        }
         /// @brief copy constructor 
         /// @param rhs right hand side 
-        NetworkSimplex(NetworkSimplex const& rhs); 
+        NetworkSimplex(NetworkSimplex const& rhs)
+            : base_type(rhs)
+        {
+            copy(rhs);
+        }
         /// @brief assignment 
         /// @param rhs right hand side 
-        NetworkSimplex& operator=(NetworkSimplex const& rhs); 
+        NetworkSimplex& operator=(NetworkSimplex const& rhs)
+        {
+            if (this != &rhs)
+            {
+                this->base_type::operator=(rhs); 
+                copy(rhs);
+            }
+            return *this;
+        }
 
         /// @brief API to run min-cost flow solver 
         /// @param d dual min-cost flow object 
-        virtual SolverProperty operator()(DualMinCostFlow* d); 
+        virtual SolverProperty operator()(dualsolver_type* d)
+        {
+            // 1. choose algorithm 
+            alg_type alg (d->graph());
+
+            // 2. run 
+            typename alg_type::ProblemType status = alg.reset().resetParams()
+                //.lowerMap(d->lowerMap())
+                .upperMap(d->upperMap())
+                .costMap(d->costMap())
+                .supplyMap(d->supplyMap())
+                .run(m_pivotRule);
+
+            // 3. check results 
+            SolverProperty solverStatus; 
+            switch (status)
+            {
+                case alg_type::OPTIMAL:
+                    solverStatus = OPTIMAL; 
+                    break;
+                case alg_type::INFEASIBLE:
+                    solverStatus = INFEASIBLE; 
+                    break;
+                case alg_type::UNBOUNDED:
+                    solverStatus = UNBOUNDED; 
+                    break;
+                default:
+                    limboAssertMsg(0, "unknown status");
+            }
+
+            // 4. apply results 
+            // get dual solution of LP, which is the flow of min-cost flow, skip this if not necessary
+            alg.flowMap(d->flowMap());
+            // get solution of LP, which is the dual solution of min-cost flow 
+            alg.potentialMap(d->potentialMap());
+            // set total cost of min-cost flow 
+            d->setTotalFlowCost(alg.totalCost());
+
+            return solverStatus; 
+        }
     protected:
         /// @brief copy object 
-        void copy(NetworkSimplex const& rhs); 
+        void copy(NetworkSimplex const& rhs)
+        {
+            m_pivotRule = rhs.m_pivotRule;
+        }
 
-        alg_type::PivotRule m_pivotRule; ///< pivot rule for the algorithm, FIRST_ELIGIBLE, BEST_ELIGIBLE, BLOCK_SEARCH, CANDIDATE_LIST, ALTERING_LIST
+        typename alg_type::PivotRule m_pivotRule; ///< pivot rule for the algorithm, FIRST_ELIGIBLE, BEST_ELIGIBLE, BLOCK_SEARCH, CANDIDATE_LIST, ALTERING_LIST
 };
 
 /// @brief Cycle canceling algorithm for min-cost flow 
-class CycleCanceling : public MinCostFlowSolver
+/// @tparam T coefficient type 
+/// @tparam V variable type 
+template <typename T, typename V>
+class CycleCanceling : public MinCostFlowSolver<T, V>
 {
     public:
+        /// @brief value type 
+        typedef T value_type;
         /// @brief base type 
-        typedef MinCostFlowSolver base_type; 
+        typedef MinCostFlowSolver<T, V> base_type; 
+        /// @brief dual min-cost flow solver type 
+        typedef typename base_type::dualsolver_type dualsolver_type; 
         /// @brief algorithm type 
-        typedef lemon::CycleCanceling<DualMinCostFlow::graph_type, 
-                DualMinCostFlow::value_type, 
-                DualMinCostFlow::value_type> alg_type;
+        typedef lemon::CycleCanceling<typename dualsolver_type::graph_type, 
+                value_type, 
+                value_type> alg_type;
 
         /// @brief constructor 
         /// @param method method
-        CycleCanceling(alg_type::Method method = alg_type::CANCEL_AND_TIGHTEN);
+        CycleCanceling(typename alg_type::Method method = alg_type::CANCEL_AND_TIGHTEN)
+            : base_type()
+            , m_method(method)
+        {
+        }
         /// @brief copy constructor 
         /// @param rhs right hand side 
-        CycleCanceling(CycleCanceling const& rhs); 
+        CycleCanceling(CycleCanceling const& rhs)
+            : base_type(rhs)
+        {
+            copy(rhs);
+        }
         /// @brief assignment 
         /// @param rhs right hand side 
-        CycleCanceling& operator=(CycleCanceling const& rhs); 
+        CycleCanceling& operator=(CycleCanceling const& rhs)
+        {
+            if (this != &rhs)
+            {
+                this->operator=(rhs);
+                copy(rhs);
+            }
+            return *this;
+        }
 
         /// @brief API to run min-cost flow solver 
         /// @param d dual min-cost flow object 
-        virtual SolverProperty operator()(DualMinCostFlow* d); 
+        virtual SolverProperty operator()(dualsolver_type* d)
+        {
+            // 1. choose algorithm 
+            alg_type alg (d->graph());
+
+            // 2. run 
+            typename alg_type::ProblemType status = alg.reset().resetParams()
+                //.lowerMap(d->lowerMap())
+                .upperMap(d->upperMap())
+                .costMap(d->costMap())
+                .supplyMap(d->supplyMap())
+                .run(m_method);
+
+            // 3. check results 
+            SolverProperty solverStatus; 
+            switch (status)
+            {
+                case alg_type::OPTIMAL:
+                    solverStatus = OPTIMAL; 
+                    break;
+                case alg_type::INFEASIBLE:
+                    solverStatus = INFEASIBLE; 
+                    break;
+                case alg_type::UNBOUNDED:
+                    solverStatus = UNBOUNDED; 
+                    break;
+                default:
+                    limboAssertMsg(0, "unknown status");
+            }
+
+            // 4. apply results 
+            // get dual solution of LP, which is the flow of min-cost flow, skip this if not necessary
+            alg.flowMap(d->flowMap());
+            // get solution of LP, which is the dual solution of min-cost flow 
+            alg.potentialMap(d->potentialMap());
+            // set total cost of min-cost flow 
+            d->setTotalFlowCost(alg.totalCost());
+
+            return solverStatus; 
+        }
     protected:
         /// @brief copy object 
-        void copy(CycleCanceling const& rhs); 
+        void copy(CycleCanceling const& rhs)
+        {
+            m_method = rhs.m_method;
+        }
 
-        alg_type::Method m_method; ///< method for the algorithm, SIMPLE_CYCLE_CANCELING, MINIMUM_MEAN_CYCLE_CANCELING, CANCEL_AND_TIGHTEN
+        typename alg_type::Method m_method; ///< method for the algorithm, SIMPLE_CYCLE_CANCELING, MINIMUM_MEAN_CYCLE_CANCELING, CANCEL_AND_TIGHTEN
 };
 
 

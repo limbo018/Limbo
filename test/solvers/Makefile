@@ -32,7 +32,7 @@ endif
 # external dependency is boost
 INCLUDE = -I $(LIMBO_ROOT_DIR) \
 		  -I $(LEMON_DIR)/include
-LIBS = -L $(LIMBO_ROOT_DIR)/lib -llpparser -lsolvers \
+LIBS = -L $(LIMBO_ROOT_DIR)/lib -llpparser \
 	   -L $(LEMON_DIR)/lib -lemon
 
 # ==========================================================================
@@ -68,10 +68,10 @@ $(OBJDIR)/%.o: %.cpp
 test_solvers: $(OBJDIR)/test_solvers.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_solvers.o $(LIBS) 
 
-test_MultiKnapsackLagRelax: $(OBJDIR)/test_MultiKnapsackLagRelax.o $(LIMBO_ROOT_DIR)/lib/libsolvers.a
+test_MultiKnapsackLagRelax: $(OBJDIR)/test_MultiKnapsackLagRelax.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_MultiKnapsackLagRelax.o $(LIBS) 
 
-test_DualMinCostFlow: $(OBJDIR)/test_DualMinCostFlow.o $(LIMBO_ROOT_DIR)/lib/libsolvers.a
+test_DualMinCostFlow: $(OBJDIR)/test_DualMinCostFlow.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_DualMinCostFlow.o $(LIBS) 
 
 .PHONY: clean

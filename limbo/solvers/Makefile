@@ -42,7 +42,8 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-all: $(LIBDIR)/libsolvers.a
+all: 
+	#$(LIBDIR)/libsolvers.a
 
 # Compile dependency 
 
@@ -60,18 +61,18 @@ $(OBJDIR)/%.o: %.cpp
 
 # Link executable
 
-$(LIBDIR)/libsolvers.a: $(OBJS)
-	@$(LIBMKDIR)
-	$(AR) $(ARFLAGS) $(LIBDIR)/libsolvers.a $(OBJS)
+#$(LIBDIR)/libsolvers.a: $(OBJS)
+#	@$(LIBMKDIR)
+#	$(AR) $(ARFLAGS) $(LIBDIR)/libsolvers.a $(OBJS)
 
 .PHONY: install
 install:
-	cmp -s $(PREFIX)/lib/libsolvers.a $(LIBDIR)/libsolvers.a; \
-	RETVAL=$$?; \
-	if [ $$RETVAL -ne 0 ]; then \
-		mkdir -p $(PREFIX)/lib; \
-		cp $(LIBDIR)/libsolvers.* $(PREFIX)/lib; \
-	fi
+	#cmp -s $(PREFIX)/lib/libsolvers.a $(LIBDIR)/libsolvers.a; \
+	#RETVAL=$$?; \
+	#if [ $$RETVAL -ne 0 ]; then \
+	#	mkdir -p $(PREFIX)/lib; \
+	#	cp $(LIBDIR)/libsolvers.* $(PREFIX)/lib; \
+	#fi
 	mkdir -p $(PREFIX)/include/limbo/solvers/api
 	cp $(wildcard api/*.h) $(PREFIX)/include/limbo/solvers/api
 	mkdir -p $(PREFIX)/include/limbo/solvers/lpmcf

@@ -21,24 +21,24 @@ void test(std::string const& filename, int alg)
     optModel.print(std::cout); 
 
     // solve 
-    limbo::solvers::MinCostFlowSolver* minCostFlowSolver = NULL; 
+    limbo::solvers::MinCostFlowSolver<int, int>* minCostFlowSolver = NULL; 
     switch (alg)
     {
         case 0:
-            minCostFlowSolver = new limbo::solvers::CostScaling(); 
+            minCostFlowSolver = new limbo::solvers::CostScaling<int, int>(); 
             break;
         case 1:
-            minCostFlowSolver = new limbo::solvers::CapacityScaling(); 
+            minCostFlowSolver = new limbo::solvers::CapacityScaling<int, int>(); 
             break;
         case 2:
-            minCostFlowSolver = new limbo::solvers::NetworkSimplex(); 
+            minCostFlowSolver = new limbo::solvers::NetworkSimplex<int, int>(); 
             break;
         case 3:
         default:
-            minCostFlowSolver = new limbo::solvers::CycleCanceling(); 
+            minCostFlowSolver = new limbo::solvers::CycleCanceling<int, int>(); 
             break; 
     }
-    limbo::solvers::DualMinCostFlow solver (&optModel); 
+    limbo::solvers::DualMinCostFlow<int, int> solver (&optModel); 
     limbo::solvers::SolverProperty status = solver(minCostFlowSolver);
     //limbo::solvers::SolverProperty status = solver();
     std::cout << "Problem solved " << limbo::solvers::toString(status) << "\n";
