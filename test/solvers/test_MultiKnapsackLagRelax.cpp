@@ -19,7 +19,7 @@ void test(std::string const& filename)
     // print problem 
     optModel.print(std::cout); 
 
-    limbo::solvers::MultiKnapsackLagRelax solver (&optModel);
+    limbo::solvers::MultiKnapsackLagRelax<float, int> solver (&optModel);
 
     // solve 
     limbo::solvers::SolverProperty status = solver();

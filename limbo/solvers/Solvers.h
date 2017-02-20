@@ -1181,6 +1181,18 @@ class LinearModel : public LpParser::LpDataBase
         }
         ///@}
 
+        /// @brief print problem in lp format to file 
+        /// @param filename output file name 
+        /// @return true if succeed; otherwise false 
+        bool print(std::string const& filename) const 
+        {
+            std::ofstream out (filename.c_str()); 
+            if (!out.good())
+                return false; 
+            print(out); 
+            out.close();
+            return true; 
+        }
         /// @brief print problem in lp format 
         /// @param os output stream 
         /// @return output stream 
@@ -1280,6 +1292,16 @@ class LinearModel : public LpParser::LpDataBase
             else 
                 os << " " << constr.sense() << "= " << constr.rightHandSide();
             return os;  
+        }
+        /// @brief print solutions to file 
+        bool printSolution(std::string const& filename) const 
+        {
+            std::ofstream out (filename.c_str()); 
+            if (!out.good())
+                return false; 
+            printSolution(out); 
+            out.close();
+            return true; 
         }
         /// @brief print solutions 
         /// @param os output stream 
