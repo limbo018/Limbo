@@ -1,7 +1,8 @@
 /**
- * @file   ../../test/solvers/test_DualMinCostFlow.cpp
+ * @file   test_DualMinCostFlow.cpp
  * @author Yibo Lin
  * @date   Feb 2017
+ * @brief  Test dual min-cost flow solver @ref limbo::solvers::DualMinCostFlow
  */
 
 #include <iostream>
@@ -47,6 +48,9 @@ void test(std::string const& filename, int alg)
     optModel.printSolution(std::cout);
     // print problem 
     optModel.print(std::cout); 
+
+    // print graph with solution information 
+    solver.printGraph(true);
 }
 
 /// @brief main function 

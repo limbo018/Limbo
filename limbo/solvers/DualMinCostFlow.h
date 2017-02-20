@@ -25,6 +25,7 @@ namespace solvers
 // forward declaration 
 class MinCostFlowSolver;
 
+/// @class limbo::solvers::DualMinCostFlow
 /// @brief LP solved with min-cost flow. A better implementation of @ref limbo::solvers::lpmcf::LpDualMcf
 /// 
 /// The dual problem of this LP is a min-cost flow problem, 
@@ -33,22 +34,24 @@ class MinCostFlowSolver;
 ///
 /// 1. Primal problem \n
 /// \f{eqnarray*}{
-/// & min. & \sum_{i=1}^{n} c_i \cdot x_i, \\
-/// & s.t. & x_i - x_j \ge b_{ij}, \forall (i, j) \in E,  \\
-/// &     & d_i \le x_i \le u_i, \forall i \in [1, n].  
+/// & min. & \sum_{i=1}^{n} c_i \cdot x_i - \sum_{i,j} u_{ij} \alpha_{ij}, \\
+/// & s.t. & x_i - x_j - \alpha_{ij} \ge b_{ij}, \forall (i, j) \in E,  \\
+/// &     & d_i \le x_i \le u_i, \forall i \in [1, n], \\
+/// &     & \alpha_{ij} \ge 0, \forall (i, j) \in A.  
 /// \f}
 /// \n
 /// 2. Introduce new variables \f$y_i\f$ in \f$[0, n]\f$, set \f$x_i = y_i - y_0\f$, \n
 /// \f{eqnarray*}{
-/// & min. & \sum_{i=1}^{n} c_i \cdot (y_i-y_0), \\
-/// & s.t. & y_i - y_j \ge b_{ij}, \forall (i, j) \in E \\
-/// &      & d_i \le y_i - y_0 \le u_i, \forall i \in [1, n], \\
-/// &      & y_i \textrm{ is unbounded integer}, \forall i \in [0, n].  
+/// & min. & \sum_{i=1}^{n} c_i \cdot (y_i-y_0) - \sum_{i,j} u_{ij} \alpha_{ij}, \\
+/// & s.t. & y_i - y_j -\alpha_{ij} \ge b_{ij}, \forall (i, j) \in E \\
+/// &      & d_i \le y_i - y_0 - \alpha_{ij} \le u_i, \forall i \in [1, n], \\
+/// &      & y_i \textrm{ is unbounded integer}, \forall i \in [0, n], \\
+/// &      & \alpha_{ij} \ge 0, \forall (i, j) \in A.  
 /// \f}
 /// \n
 /// 3. Re-write the problem \n
 /// \f{eqnarray*}{
-/// & min. & \sum_{i=0}^{n} c_i \cdot y_i, \textrm{ where } \
+/// & min. & \sum_{i=0}^{n} c_i \cdot y_i - \sum_{i,j} u_{ij} \alpha_{ij}, \textrm{ where } \
 ///   c_i = \begin{cases}
 ///             c_i, & \forall i \in [1, n],  \\
 ///             - \sum_{j=1}^{n} c_i, & i = 0, \\
@@ -59,13 +62,24 @@ class MinCostFlowSolver;
 ///            d_i,  & \forall j = 0, i \in [1, n], \\
 ///            -u_i, & \forall i = 0, j \in [1, n], \\
 ///        \end{cases} \\
-/// &      & y_i \textrm{ is unbounded integer}, \forall i \in [0, n].  
+/// &      & y_i \textrm{ is unbounded integer}, \forall i \in [0, n], \\
+/// &      & \alpha_{ij} \ge 0, \forall (i, j) \in A.  
 /// \f}
 /// \n
 /// 4. Map to dual min-cost flow problem. \n
 ///    Let's use \f$c'_i\f$ for generalized \f$c_i\f$ and \f$b'_{ij}\f$ for generalized \f$b_{ij}\f$. \n
 ///    Then \f$c'_i\f$ is node supply. 
-///    For each \f$(i, j) \in E'\f$, an arc from i to j with cost \f$-b'_{ij}\f$ and flow range \f$[0, \infty]\f$. \n
+///    For each \f$(i, j) \in E'\f$, an arc from i to j with cost \f$-b'_{ij}\f$ and flow range \f$[0, u_{ij}]\f$. 
+///    The variable \f$\alpha_{ij}\f$ denotes the slackness in the primal problem, but the capacity constraint 
+///    in the dual problem. We can set the edge capacity as \f$u_{ij}\f$. We can also leave the edge uncapacited (\f$\infty\f$)
+///    if there are no such variables. \n
+///    Some concolusions from \cite FLOW_B2005_Ahuja where \f$f_{ij}^*\f$ denotes the optimal flow on edge \f$(i, j)\f$ 
+///    and \f$c_{ij}^\pi\f$ denotes the reduced cost in the residual network. \n
+///    - If \f$c_{ij}^\pi > 0\f$, then \f$f_{ij}^* = 0\f$. 
+///    - If \f$ 0 < f_{ij}^* < u_{ij} \f$, then \f$ c_{ij}^\pi = 0 \f$. 
+///    - If \f$c_{ij}^\pi < 0\f$, then \f$f_{ij}^* = u_{ij}\f$. 
+/// 
+///    These conclusions might be useful to check optimality for the primal problem. 
 /// \n
 /// Caution: this mapping of LP to dual min-cost flow results may result in negative arc cost which is not supported 
 /// by all the algorithms (only capacity scaling algorithm supports). Therefore, graph transformation is introduced 
@@ -311,7 +325,7 @@ class CycleCanceling : public MinCostFlowSolver
                 DualMinCostFlow::value_type> alg_type;
 
         /// @brief constructor 
-        /// @param factor scaling factor 
+        /// @param method method
         CycleCanceling(alg_type::Method method = alg_type::CANCEL_AND_TIGHTEN);
         /// @brief copy constructor 
         /// @param rhs right hand side 
