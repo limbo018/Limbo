@@ -124,6 +124,13 @@ class Variable
         {
             return m_id == rhs.m_id;
         }
+        /// overload inequal 
+        /// @param rhs right hand side 
+        /// @return true if the indices of variables are equal 
+        bool operator!=(Variable const& rhs) const 
+        {
+            return !this->operator==(rhs);
+        }
         /// overload negation 
         /// @return a copy of new object 
         LinearTerm<coefficient_value_type> operator-() const 
@@ -170,6 +177,41 @@ class Variable
         friend LinearExpression<coefficient_value_type> operator-(Variable const& var1, Variable const& var2)
         {
             return LinearTerm<coefficient_value_type>(var1)-var2; 
+        }
+        /// @brief overload < 
+        /// @param var variable 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator<(Variable const& var, coefficient_value_type rhs)
+        {
+            return (LinearTerm<coefficient_value_type>(var) < rhs);
+        }
+        /// @brief overload <= 
+        /// @param var variable 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator<=(Variable const& var, coefficient_value_type rhs)
+        {
+            return (var < rhs);
+        }
+        /// @brief overload > 
+        /// @param var variable 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator>(Variable const& var, coefficient_value_type rhs)
+        {
+            return (LinearTerm<coefficient_value_type>(var) > rhs);
+        }
+        /// @brief overload >= 
+        /// @param var variable 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator>=(Variable const& var, coefficient_value_type rhs)
+        {
+            return (var > rhs);
+        }
+        /// @brief overload == 
+        /// @param var variable 
+        /// @param rhs right hand side constant 
+        friend LinearConstraint<coefficient_value_type> operator==(Variable const& var, coefficient_value_type rhs)
+        {
+            return (LinearTerm<coefficient_value_type>(var) == rhs);
         }
     protected:
         /// @brief copy object 
@@ -725,6 +767,8 @@ class LinearExpression
         /// and remove terms with zero coefficients 
         void simplify()
         {
+            if (m_vTerm.empty())
+                return;
             std::sort(m_vTerm.begin(), m_vTerm.end(), CompareTermByVariable()); 
             // merge terms 
             typename std::vector<term_type>::iterator itw = m_vTerm.begin(); // write iterator 
@@ -789,7 +833,8 @@ class LinearConstraint
         /// @param rhs right hand side 
         /// @param s sense 
         LinearConstraint(expression_type expr = expression_type(), coefficient_value_type rhs = 0, char s = '<')
-            : m_expr(expr)
+            : m_id (std::numeric_limits<unsigned int>::max())
+            , m_expr(expr)
             , m_rhs(rhs)
             , m_sense(s)
         {
@@ -811,6 +856,10 @@ class LinearConstraint
         {
         }
 
+        /// @return index 
+        unsigned int id() const {return m_id;}
+        /// @param i index 
+        void setId(unsigned int i) {m_id = i;}
         /// @return linear expression 
         expression_type const& expression() const {return m_expr;}
         /// @param expr expression
@@ -862,11 +911,13 @@ class LinearConstraint
         /// @param rhs right hand side 
         void copy(LinearConstraint const& rhs)
         {
+            m_id = rhs.m_id; 
             m_expr = rhs.m_expr;
             m_rhs = rhs.m_rhs;
             m_sense = rhs.m_sense;
         }
 
+        unsigned int m_id; ///< constraint index 
         expression_type m_expr; ///< linear expression 
         coefficient_value_type m_rhs; ///< constant at the right hand side 
         char m_sense; ///< sign of operator, < (<=), > (>=), = (==)
@@ -931,8 +982,9 @@ class LinearModel : public LpParser::LpDataBase
         std::vector<constraint_type>& constraints() {return m_vConstraint;}
         /// @brief add a constraint 
         /// @param constr constraint 
+        /// @param name constraint name 
         /// @return true if added 
-        bool addConstraint(constraint_type constr) 
+        bool addConstraint(constraint_type constr, std::string name = "") 
         {
             // simplify constraint 
             constr.simplify();
@@ -969,10 +1021,15 @@ class LinearModel : public LpParser::LpDataBase
             }
             else // actual constraint 
             {
+                constr.setId(m_vConstraint.size()); 
                 m_vConstraint.push_back(constr);
+                m_vConstraintName.push_back(name);
             }
             return true; 
         }
+        /// @param constr constraint 
+        /// @return constraint name 
+        std::string const& constraintName(constraint_type const& constr) const {return m_vConstraintName[constr.id()];}
         /// @return objective 
         expression_type const& objective() const {return m_objective;}
         /// @param expr objective 
@@ -1092,6 +1149,12 @@ class LinearModel : public LpParser::LpDataBase
         coefficient_value_type evaluateConstraint(constraint_type const& constr) const 
         {
             return evaluateConstraint(constr, m_vVariableSol);
+        }
+        /// @brief evaluate slackness of all constraints given solutions of variables and print to screen 
+        void evaluateConstraint() const 
+        {
+            for (unsigned int i = 0, ie = m_vConstraint.size(); i < ie; ++i)
+                limboPrint(kNONE, "C[%u] slack = %g\n", i, (double)evaluateConstraint(m_vConstraint.at(i)));
         }
 
 		/// @brief read lp format 
@@ -1332,6 +1395,7 @@ class LinearModel : public LpParser::LpDataBase
         expression_type m_objective; ///< objective 
         std::vector<property_type> m_vVariableProperty; ///< variable properties  
         SolverProperty m_optType; ///< optimization objective 
+        std::vector<std::string> m_vConstraintName; ///< constraint names 
 
         std::vector<variable_value_type> m_vVariableSol; ///< variable solutions, it can be either initial solution or final solution 
 

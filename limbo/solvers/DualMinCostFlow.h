@@ -321,10 +321,22 @@ SolverProperty DualMinCostFlow<T, V>::solve(typename DualMinCostFlow<T, V>::solv
         defaultSolver = true; 
     }
 
+    // skip empty problem 
+    if (m_model->numVariables() == 0)
+        return OPTIMAL; 
+
     // prepare 
     prepare();
     // build graph 
     buildGraph();
+#ifdef DEBUG_DUALMINCOSTFLOW
+    printGraph(false);
+    // total supply must be zero 
+    coefficient_value_type totalSupply = 0; 
+    for (graph_type::NodeIt it (m_graph); it != lemon::INVALID; ++it)
+        totalSupply += m_mSupply[it]; 
+    limboAssert(totalSupply == 0);
+#endif
     // solve min-cost flow problem 
     SolverProperty status = solver->operator()(this); 
     // apply solution 
@@ -425,7 +437,7 @@ unsigned int DualMinCostFlow<T, V>::mapBoundConstraint2Graph(bool countArcs)
     {
         value_type lowerBound = m_model->variableLowerBound(variable_type(i)); 
         value_type upperBound = m_model->variableUpperBound(variable_type(i)); 
-        if (lowerBound != 0)
+        if (lowerBound != limbo::lowest<value_type>())
             ++numArcs; 
         if (upperBound != std::numeric_limits<value_type>::max())
             ++numArcs; 
@@ -446,7 +458,7 @@ unsigned int DualMinCostFlow<T, V>::mapBoundConstraint2Graph(bool countArcs)
             value_type upperBound = m_model->variableUpperBound(variable_type(i)); 
             // has lower bound 
             // add arc from node to additional node with cost d and cap unlimited
-            if (lowerBound != 0)
+            if (lowerBound != limbo::lowest<value_type>())
                 addArcForDiffConstraint(m_graph.nodeFromId(i), addlNode, lowerBound);
             // has upper bound 
             // add arc from additional node to node with cost u and capacity unlimited
