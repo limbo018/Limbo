@@ -165,6 +165,9 @@ block_obj : KWD_MINIMIZE multiple_terms {
 single_constraint : multiple_terms KWD_COMPARE number {
                   driver.constraint_cbk(*$1, $2, $3);
 				 } 
+                 | STRING ':' multiple_terms KWD_COMPARE number {
+                  driver.constraint_cbk(*$1, *$3, $4, $5);
+				 } 
 multiple_constraints : single_constraint
 					| multiple_constraints single_constraint
 					;

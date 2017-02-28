@@ -62,7 +62,11 @@ void Driver::obj_cbk(bool minimize, TermArray const& terms)
 }
 void Driver::constraint_cbk(TermArray& terms, char compare, double constant)
 {
-    m_db.add_constraint(terms, compare, constant); 
+    m_db.add_constraint("", terms, compare, constant); 
+}
+void Driver::constraint_cbk(string const& name, TermArray& terms, char compare, double constant)
+{
+    m_db.add_constraint(name, terms, compare, constant); 
 }
 // var compare_op constant 
 void Driver::bound_cbk(string const& var, char compare, double constant)

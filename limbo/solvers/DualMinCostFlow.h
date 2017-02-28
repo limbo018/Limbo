@@ -137,6 +137,17 @@ class DualMinCostFlow
         /// @param solver an object to solve min cost flow, use default updater if NULL  
         SolverProperty operator()(solver_type* solver = NULL); 
 
+        /// @return big M for differential constraints 
+        value_type diffBigM() const; 
+        /// @brief set big M as a large number for differential constraints 
+        /// @param v value 
+        void setDiffBigM(value_type v);
+        /// @return big M for bound constraints 
+        value_type boundBigM() const; 
+        /// @brief set big M as a large number for bound constraints  
+        /// @param v value 
+        void setBoundBigM(value_type v);
+
         /// @return graph 
         graph_type const& graph() const; 
         /// @return arc lower bound map 
@@ -193,7 +204,8 @@ class DualMinCostFlow
         /// @param xi node corresponding to variable \f$ x_i \f$
         /// @param xj node corresponding to variable \f$ x_j \f$
         /// @param cij constant at right hand side 
-        void addArcForDiffConstraint(node_type xi, node_type xj, value_type cij); 
+        /// @param bigM large number for upper bound of capacity 
+        void addArcForDiffConstraint(node_type xi, node_type xj, value_type cij, value_type bigM); 
         /// @brief apply solutions to model 
         void applySolution(); 
 
@@ -205,7 +217,8 @@ class DualMinCostFlow
 		arc_cost_map_type m_mCost; ///< arc cost in min-cost flow 
 		node_value_map_type m_mSupply; ///< node supply in min-cost flow 
 		value_type m_totalFlowCost; ///< total cost after solving 
-        value_type m_bigM; ///< a big number for infinity 
+        value_type m_diffBigM; ///< a big number for infinity for differential constraints
+        value_type m_boundBigM; ///< a big number for infinity for bound constraints 
         value_type m_reversedArcFlowCost; ///< normalized flow cost of overall reversed arcs to resolve negative arc cost, to get total flow cost of reversed arcs, it needs to times with big M 
 
 		arc_flow_map_type m_mFlow; ///< solution of min-cost flow, which is the dual solution of LP 
@@ -221,7 +234,8 @@ DualMinCostFlow<T, V>::DualMinCostFlow(typename DualMinCostFlow<T, V>::model_typ
     , m_mCost(m_graph)
     , m_mSupply(m_graph)
     , m_totalFlowCost(std::numeric_limits<typename DualMinCostFlow<T, V>::value_type>::max())
-    , m_bigM(std::numeric_limits<typename DualMinCostFlow<T, V>::value_type>::max())
+    , m_diffBigM(std::numeric_limits<typename DualMinCostFlow<T, V>::value_type>::max())
+    , m_boundBigM(std::numeric_limits<typename DualMinCostFlow<T, V>::value_type>::max())
     , m_mFlow(m_graph)
     , m_mPotential(m_graph)
 {
@@ -234,6 +248,26 @@ template <typename T, typename V>
 SolverProperty DualMinCostFlow<T, V>::operator()(typename DualMinCostFlow<T, V>::solver_type* solver)
 {
     return solve(solver);
+}
+template <typename T, typename V>
+typename DualMinCostFlow<T, V>::value_type DualMinCostFlow<T, V>::diffBigM() const
+{
+    return m_diffBigM; 
+}
+template <typename T, typename V>
+void DualMinCostFlow<T, V>::setDiffBigM(DualMinCostFlow<T, V>::value_type v)
+{
+    m_diffBigM = v; 
+}
+template <typename T, typename V>
+typename DualMinCostFlow<T, V>::value_type DualMinCostFlow<T, V>::boundBigM() const
+{
+    return m_boundBigM; 
+}
+template <typename T, typename V>
+void DualMinCostFlow<T, V>::setBoundBigM(DualMinCostFlow<T, V>::value_type v)
+{
+    m_boundBigM = v; 
 }
 template <typename T, typename V>
 typename DualMinCostFlow<T, V>::graph_type const& DualMinCostFlow<T, V>::graph() const 
@@ -285,14 +319,14 @@ typename DualMinCostFlow<T, V>::value_type DualMinCostFlow<T, V>::totalCost() co
 {
     // the negation comes from we change maximization problem into minimization problem 
     // the dual LP problem should be a maximization problem, but we solve it with min-cost flow 
-    return -(totalFlowCost()-m_bigM*m_reversedArcFlowCost);
+    return -(totalFlowCost()-m_reversedArcFlowCost);
 }
 template <typename T, typename V>
 void DualMinCostFlow<T, V>::printGraph(bool writeSol) const
 {
-    limboPrint(kDEBUG, "bigM = %d, reversedArcFlowCost = %d\n", (int)m_bigM, m_reversedArcFlowCost);
+    limboPrint(kDEBUG, "diffBigM = %ld, boundBigM = %ld, reversedArcFlowCost = %ld\n", (long)m_diffBigM, (long)m_boundBigM, (long)m_reversedArcFlowCost);
     if (writeSol)
-        limboPrint(kDEBUG, "totalFlowCost = %d, totalCost = %d\n", (int)totalFlowCost(), (int)totalCost()); 
+        limboPrint(kDEBUG, "totalFlowCost = %ld, totalCost = %ld\n", (long)totalFlowCost(), (long)totalCost()); 
 
     node_name_map_type nameMap (m_graph); 
     for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
@@ -357,13 +391,19 @@ void DualMinCostFlow<T, V>::prepare()
     // big M should be larger than the summation of all non-negative supply in the graph 
     // because this is the largest possible amount of flows. 
     // The supply for each node is the coefficient of variable in the objective. 
-    m_bigM = 0; 
-    for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
+    if (m_diffBigM == std::numeric_limits<value_type>::max()) // if not set 
     {
-        if (it->coefficient() > 0)
-            m_bigM += it->coefficient();
+        m_diffBigM = 0; 
+        for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
+        {
+            if (it->coefficient() > 0)
+                m_diffBigM += it->coefficient();
+        }
     }
-    //m_bigM *= 10000; 
+    // big M for bound constraints should be larger than that for differential constraints 
+    // so the results are more controllable for INFEASIBLE models  
+    if (m_boundBigM == std::numeric_limits<value_type>::max())
+        m_boundBigM = m_diffBigM<<1; 
 
     // reset data members
     m_reversedArcFlowCost = 0; 
@@ -420,7 +460,7 @@ unsigned int DualMinCostFlow<T, V>::mapDiffConstraint2Graph(bool countArcs)
             variable_type xi = (vTerm[0].coefficient() > 0)? vTerm[0].variable() : vTerm[1].variable();
             variable_type xj = (vTerm[0].coefficient() > 0)? vTerm[1].variable() : vTerm[0].variable();
 
-            addArcForDiffConstraint(m_graph.nodeFromId(xi.id()), m_graph.nodeFromId(xj.id()), constr.rightHandSide());
+            addArcForDiffConstraint(m_graph.nodeFromId(xi.id()), m_graph.nodeFromId(xj.id()), constr.rightHandSide(), m_diffBigM);
         }
     }
     return numArcs; 
@@ -452,6 +492,8 @@ unsigned int DualMinCostFlow<T, V>::mapBoundConstraint2Graph(bool countArcs)
             addlWeight -= it->coefficient();
         m_mSupply[addlNode] = addlWeight; 
 
+        // bound constraint is more important 
+        // so it has higher cost than normal differential constraints  
         for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
         {
             value_type lowerBound = m_model->variableLowerBound(variable_type(i)); 
@@ -459,17 +501,17 @@ unsigned int DualMinCostFlow<T, V>::mapBoundConstraint2Graph(bool countArcs)
             // has lower bound 
             // add arc from node to additional node with cost d and cap unlimited
             if (lowerBound != limbo::lowest<value_type>())
-                addArcForDiffConstraint(m_graph.nodeFromId(i), addlNode, lowerBound);
+                addArcForDiffConstraint(m_graph.nodeFromId(i), addlNode, lowerBound, m_boundBigM);
             // has upper bound 
             // add arc from additional node to node with cost u and capacity unlimited
             if (upperBound != std::numeric_limits<value_type>::max())
-                addArcForDiffConstraint(addlNode, m_graph.nodeFromId(i), -upperBound); 
+                addArcForDiffConstraint(addlNode, m_graph.nodeFromId(i), -upperBound, m_boundBigM); 
         }
     }
     return numArcs; 
 }
 template <typename T, typename V>
-void DualMinCostFlow<T, V>::addArcForDiffConstraint(typename DualMinCostFlow<T, V>::node_type xi, typename DualMinCostFlow<T, V>::node_type xj, typename DualMinCostFlow<T, V>::value_type cij) 
+void DualMinCostFlow<T, V>::addArcForDiffConstraint(typename DualMinCostFlow<T, V>::node_type xi, typename DualMinCostFlow<T, V>::node_type xj, typename DualMinCostFlow<T, V>::value_type cij, typename DualMinCostFlow<T, V>::value_type bigM) 
 {
     // add constraint xi - xj >= cij 
     //
@@ -483,18 +525,18 @@ void DualMinCostFlow<T, V>::addArcForDiffConstraint(typename DualMinCostFlow<T, 
         arc_type arc = m_graph.addArc(xi, xj);
         m_mCost[arc] = -cij; 
         //m_mLower[arc] = 0;
-        m_mUpper[arc] = m_bigM; 
+        m_mUpper[arc] = bigM; 
     }
     else // reverse arc 
     {
         arc_type arc = m_graph.addArc(xj, xi); // arc reversal 
         m_mCost[arc] = cij; 
         //m_mLower[arc] = 0;
-        m_mUpper[arc] = m_bigM;
-        m_mSupply[xi] -= m_bigM;
-        m_mSupply[xj] += m_bigM; 
+        m_mUpper[arc] = bigM;
+        m_mSupply[xi] -= bigM;
+        m_mSupply[xj] += bigM; 
 
-        m_reversedArcFlowCost += cij;
+        m_reversedArcFlowCost += cij*bigM;
     }
 }
 template <typename T, typename V>

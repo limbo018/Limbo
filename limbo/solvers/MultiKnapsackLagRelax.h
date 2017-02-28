@@ -97,11 +97,6 @@ class MultiKnapsackLagRelax
         /// @param scaler an object to scale constraints and objective, use default scaler if NULL 
         /// @param searcher an object to search for feasible solutions, use default searcher if NULL 
         SolverProperty operator()(updater_type* updater = NULL, scaler_type* scaler = NULL, searcher_type* searcher = NULL); 
-        /// @brief kernel lagrangian iterations 
-        /// @param updater an object to update lagrangian multipliers
-        /// @param beginIter begin iteration number 
-        /// @param endIter end iteration number 
-        SolverProperty solveSubproblems(updater_type* updater, unsigned int beginIter, unsigned int endIter);
 
         /// @return maximum iterations 
         unsigned int maxIterations() const;
@@ -140,6 +135,11 @@ class MultiKnapsackLagRelax
         /// @param os output stream 
         /// @return output stream 
         std::ostream& printLagMultiplier(std::ostream& os = std::cout) const; 
+        /// @brief print constraint 
+        /// @param os output stream 
+        /// @param name constraint name 
+        /// @return output stream 
+        std::ostream& printConstraint(std::ostream& os, std::string const& name) const; 
         ///@}
 
         /// @brief Predicate whether a constraint is a capacity constraint 
@@ -194,6 +194,11 @@ class MultiKnapsackLagRelax
         /// @param scaler an object to scale constraints and objective, use default scaler if NULL 
         /// @param searcher an object to search for feasible solutions, use default searcher if NULL 
         SolverProperty solve(updater_type* updater, scaler_type* scaler, searcher_type* searcher);
+        /// @brief kernel lagrangian iterations 
+        /// @param updater an object to update lagrangian multipliers
+        /// @param beginIter begin iteration number 
+        /// @param endIter end iteration number 
+        SolverProperty solveSubproblems(updater_type* updater, unsigned int beginIter, unsigned int endIter);
         /// @brief scale problem for better numerical instability 
         /// @param scaler an object to scale constraints and objective, use default scaler if NULL 
         void scale(scaler_type* scaler); 
@@ -680,6 +685,21 @@ std::ostream& MultiKnapsackLagRelax<T, V>::printLagMultiplier(std::ostream& os) 
             << "\n";
     return os; 
 }
+template <typename T, typename V>
+std::ostream& MultiKnapsackLagRelax<T, V>::printConstraint(std::ostream& os, std::string const& name) const 
+{
+    for (unsigned int i = 0, ie = this->m_vSlackness.size(); i < ie; ++i)
+    {
+        constraint_type const& constr = this->m_model->constraints()[i];
+        if (m_model->constraintName(constr) == name) 
+        {
+            os << "constraint " << name << ": rhs = " << constr.rightHandSide() << "\n";
+            for (typename std::vector<term_type>::const_iterator it = constr.expression().terms().begin(), ite = constr.expression().terms().end(); it != ite; ++it)
+                os << m_model->variableName(it->variable()) << ": " << m_model->variableSolution(it->variable()) << "*" << it->coefficient() << "\n"; 
+        }
+    }
+    return os; 
+}
 
 /// @brief A base helper function object to update lagrangian multipliers using subgradient descent. 
 /// All other schemes can be derived from this class 
@@ -967,6 +987,20 @@ class FeasibleSearcher
         virtual SolverProperty operator()(updater_type* /*updater*/) {return INFEASIBLE;} 
 
     protected:
+        /// @brief compute slackness in an iteration 
+        void computeSlackness()
+        {
+            m_solver->computeSlackness(); 
+        }
+        /// @brief kernel lagrangian iterations 
+        /// @param updater an object to update lagrangian multipliers
+        /// @param beginIter begin iteration number 
+        /// @param endIter end iteration number 
+        SolverProperty solveSubproblems(updater_type* updater, unsigned int beginIter, unsigned int endIter)
+        {
+            return m_solver->solveSubproblems(updater, beginIter, endIter);
+        }
+
         solver_type* m_solver; ///< problem solver 
         model_type* m_model; ///< model for the problem 
 
@@ -1060,7 +1094,7 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
         {
             SolverProperty status = INFEASIBLE; 
             // map variable to group 
-            this->mapVariable2GroupAndConstr(); 
+            this->mapVariable2Group(); 
             // record number of bins with negative slack 
             unsigned int numNegativeSlacksPrev = std::numeric_limits<unsigned int>::max();
             unsigned int numNegativeSlacks = std::numeric_limits<unsigned int>::max();
@@ -1137,14 +1171,14 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
                 if (numNegativeSlacks == 0)
                     break; 
                 // run more iterations with the updated coefficients 
-                status = this->m_solver->solveSubproblems(updater, this->m_iter+1, this->m_iter+this->m_maxIters/2);
+                status = this->solveSubproblems(updater, this->m_iter+1, this->m_iter+this->m_maxIters/2);
             } while (numNegativeSlacks && numNegativeSlacks < numNegativeSlacksPrev);
 
             return status; 
         }
     protected:
         /// @brief construct mapping from variables to groups 
-        void mapVariable2GroupAndConstr()
+        void mapVariable2Group()
         {
             this->m_vVariable2Group.assign(this->m_model->numVariables(), std::numeric_limits<unsigned int>::max());
             for (unsigned int i = 0, ie = this->m_vVariableGroup.size(); i < ie; ++i)
@@ -1185,13 +1219,11 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
         std::vector<unsigned int> m_vVariable2Group; ///< map variables to groups 
 };
 
-#if 0
-
-/// @brief Heuristic to search for feasible solutions by select items for bins. 
+/// @brief Heuristic to search for feasible solutions by smoothing dense bins. 
 /// @tparam T coefficient value type 
 /// @tparam V variable value type 
 template <typename T, typename V>
-class SearchByBinSelection : public SearchByAdjustCoefficient<T, V>
+class SearchByBinSmoothing : public SearchByAdjustCoefficient<T, V>
 {
     public:
         /// @brief base type 
@@ -1213,25 +1245,60 @@ class SearchByBinSelection : public SearchByAdjustCoefficient<T, V>
         /// @brief term type 
         typedef typename model_type::term_type term_type; 
 
-        /// @brief compare pair by second element 
-        struct ComparePairBySecond
+        /// @brief Wrapper for the move cost of an item 
+        struct VariableMoveCost 
         {
-            /// @tparam PairType type of pair 
-            /// @param p1 pair 
-            /// @param p2 pair 
-            /// @return true if \a p1 is smaller than \a p2 
-            template <typename PairType>
-            bool operator()(PairType const& p1, PairType const& p2) const 
+            variable_type variable; ///< variable of the item for the original bin 
+            variable_type targetVariable; ///< variable of the item for the target bin 
+            coefficient_value_type moveCost; ///< move cost 
+
+            /// @brief constructor 
+            /// @param var variable 
+            /// @param targetVar target variable 
+            /// @param mc move cost 
+            VariableMoveCost(variable_type var, variable_type targetVar, coefficient_value_type mc)
+                : variable(var)
+                , targetVariable(targetVar)
+                , moveCost(mc)
             {
-                return p1.second < p2.second; 
+            }
+        };
+
+        /// @brief Compare variables by its move cost 
+        struct CompareVariableMoveCost
+        {
+            /// @param c1 pair of variable and cost 
+            /// @param c2 pair of variable and cost 
+            /// @return true if \a c1 has smaller cost ratio than \a c2
+            bool operator()(VariableMoveCost const& c1, VariableMoveCost const& c2) const 
+            {
+                return c1.moveCost < c2.moveCost; 
+            }
+        };
+
+
+        /// @brief Compare constraints by their slackness 
+        struct CompareConstraintSlack
+        {
+            std::vector<coefficient_value_type> const& vSlackness; ///< array of slackness 
+
+            /// @brief constructor 
+            /// @param v array of slackness 
+            CompareConstraintSlack(std::vector<coefficient_value_type> const& v) : vSlackness(v) {}
+            /// @param i constraint index 
+            /// @param j constraint index 
+            /// @return true if constraint \a i has smaller slack than \a j
+            bool operator()(unsigned int i, unsigned int j) const 
+            {
+                return vSlackness[i] < vSlackness[j];
             }
         };
 
         /// @brief constructor 
         /// @param solver problem solver 
-        SearchByBinSelection(solver_type* solver) : base_type(solver) {}
+        SearchByBinSmoothing(solver_type* solver) : base_type(solver) {}
         /// @brief destructor 
-        ~SearchByBinSelection() {}
+        ~SearchByBinSmoothing() {}
 
         /// @brief API to search for feasible solutions 
         /// @param updater updater for lagrangian multipliers 
@@ -1243,115 +1310,86 @@ class SearchByBinSelection : public SearchByAdjustCoefficient<T, V>
             this->mapVariable2Group();
             // map variable to constraint 
             this->mapVariable2Constraint(); 
-            // mark whether a variable has been processed 
-            std::vector<bool> vVariableProcess (this->m_model->numVariables(), false);
-            // record whether an item has been processed 
-            // we do not allow an item to be processed more than once 
-            std::vector<bool> vGroupProcess (this->m_vVariableGroup.size(), false); 
             // record move cost of items 
-            std::vector<typename base_type::VariableMoveCost> vVariableMoveCost;
-            // collect remaining items, pair of group and capacity 
-            // it does not work for items that have different capacities in different bins 
-            std::vector<std::pair<unsigned int, coefficient_value_type> > vRemainGroup; 
+            std::vector<VariableMoveCost> vVariableMoveCost;
+            // collect bins with negative slack 
+            std::vector<unsigned int> vNegativeSlackConstr; 
 
             // go through all bins with negative slack 
             for (unsigned int i = 0, ie = this->m_vSlackness.size(); i < ie; ++i)
             {
-                coefficient_value_type& slackness = this->m_vSlackness[i];
-                constraint_type const& constr = this->m_model->constraints()[i];
+                coefficient_value_type slackness = this->m_vSlackness[i];
                 if (slackness < 0)
+                    vNegativeSlackConstr.push_back(i);
+            }
+
+            // sort bins from small slackness to large 
+            std::sort(vNegativeSlackConstr.begin(), vNegativeSlackConstr.end(), CompareConstraintSlack(this->m_vSlackness)); 
+                    
+            // go through all bins with negative slack 
+            for (std::vector<unsigned int>::const_iterator it = vNegativeSlackConstr.begin(), ite = vNegativeSlackConstr.end(); it != ite; ++it)
+            {
+                constraint_type const& constr = this->m_model->constraints()[*it]; 
+#if 0
+                limboPrint(kDEBUG, "processing bin row %s\n", this->m_model->constraintName(constr).c_str()); 
+#endif
+
+                while (this->m_vSlackness[*it] < 0)
                 {
                     // compute move cost for items in this bin 
-                    this->computeMoveCost(constr, vVariableProcess, vVariableMoveCost);  
-                    // try to forbid some items to be assigned to this bin 
+                    vVariableMoveCost.clear(); 
+                    computeMoveCost(constr, vVariableMoveCost); 
                     // sort items by its cost of moving to other bins 
-                    std::sort(vVariableMoveCost.begin(), vVariableMoveCost.end(), typename base_type::CompareVariableMoveCost());
+                    typename std::vector<VariableMoveCost>::const_iterator itm = std::min_element(vVariableMoveCost.begin(), vVariableMoveCost.end(), CompareVariableMoveCost());
 
-                    // the total capacity of items moving out 
-                    coefficient_value_type outCapacity = 0; 
-                    for (typename std::vector<typename base_type::VariableMoveCost>::const_iterator it = vVariableMoveCost.begin(), ite = vVariableMoveCost.end(); it != ite; ++it)
+                    // move out at most one item once 
+                    // so that we can always get the accurate capacity of all bins 
+                    if (itm->moveCost != std::numeric_limits<coefficient_value_type>::max())
                     {
-                        if (outCapacity+slackness < 0)
+                        // update total capacity of all bins when the item moves out 
+                        variable_type const& var = itm->variable;
+                        this->m_model->setVariableSolution(var, 0); 
+                        for (std::vector<std::pair<unsigned int, unsigned int> >::const_iterator itc = this->m_mVariable2Constr[var.id()].begin(), itce = this->m_mVariable2Constr[var.id()].end(); itc != itce; ++itc)
                         {
-                            // increase the cost of assigning the item to this bin 
-                            this->m_vObjCoef[it->variable.id()] = std::numeric_limits<coefficient_value_type>::max(); 
-                            // update total capacity of items moving out 
-                            outCapacity += it->capacity; 
-                            // revert variable solutions 
-                            this->m_model->setVariableSolution(it->variable, 0); 
-                            // collect item 
-                            vRemainGroup.push_back(std::make_pair(this->m_vVariable2Group[it->variable.id()], it->capacity));
-                            // mark as processed 
-                            vVariableProcess[it->variable.id()] = true; 
+                            constraint_type const& curConstr = this->m_model->constraints()[itc->first]; 
+                            term_type const& curTerm = curConstr.expression().terms()[itc->second]; 
+                            coefficient_value_type& curSlackness = this->m_vSlackness[itc->first]; 
+
+                            curSlackness += curTerm.coefficient(); 
                         }
-                        else break; 
+                        // update capacity of all bins when the item moves into other bins 
+                        variable_type const& targetVar = itm->targetVariable; 
+                        this->m_model->setVariableSolution(targetVar, 1); 
+                        for (std::vector<std::pair<unsigned int, unsigned int> >::const_iterator itc = this->m_mVariable2Constr[targetVar.id()].begin(), itce = this->m_mVariable2Constr[targetVar.id()].end(); itc != itce; ++itc)
+                        {
+                            constraint_type const& curConstr = this->m_model->constraints()[itc->first]; 
+                            term_type const& curTerm = curConstr.expression().terms()[itc->second]; 
+                            coefficient_value_type& curSlackness = this->m_vSlackness[itc->first]; 
+
+                            curSlackness -= curTerm.coefficient(); 
+                        }
                     }
-                    // update slack 
-                    slackness += outCapacity; 
-                }
-                else // for bins with non-negative slack, mark all items as processed 
-                {
-                    for (typename std::vector<term_type>::const_iterator it = constr.expression().terms().begin(), ite = constr.expression().terms().end(); it != ite; ++it)
-                        vGroupProcess[this->m_vVariable2Group[it->variable().id()]] = true; 
+                    else break; 
                 }
             }
-
-            // process remaining items 
-            // build map from item to bins, only entries not processed yet are valid  
-            std::vector<std::vector<unsigned int> > mMapGroup2Constrs (this->m_vVariableGroup.size()); 
+            // go through all bins with negative slack and compute status  
+            status = SUBOPTIMAL;
+            for (std::vector<unsigned int>::const_iterator it = vNegativeSlackConstr.begin(), ite = vNegativeSlackConstr.end(); it != ite; ++it)
+            {
+                if (this->m_vSlackness[*it] < 0)
+                {
+                    status = INFEASIBLE;
+                    break; 
+                }
+            }
+#if 1
+            // go through all bins with negative slack 
+            this->computeSlackness(); 
+            unsigned int numNegativeSlacks = 0; 
             for (unsigned int i = 0, ie = this->m_vSlackness.size(); i < ie; ++i)
-            {
-                constraint_type const& constr = this->m_model->constraints()[i];
-                for (typename std::vector<term_type>::const_iterator it = constr.expression().terms().begin(), ite = constr.expression().terms().end(); it != ite; ++it)
-                {
-                    unsigned int group = this->m_vVariable2Group[it->variable().id()]; 
-                    if (!vGroupProcess[group])
-                        mMapGroup2Constrs[group].push_back(i); 
-                }
-            }
-            std::sort(vRemainGroup.begin(), vRemainGroup.end(), ComparePairBySecond()); 
-            for (typename std::vector<std::pair<unsigned int, coefficient_value_type> >::const_reverse_iterator it = vRemainGroup.rbegin(), ite = vRemainGroup.rend(); it != ite; ++it)
-            {
-                unsigned int group = it->first; 
-                // variable corresponding to the best bin 
-                variable_type bestVar; 
-                unsigned int bestConstr = std::numeric_limits<unsigned int>::max(); 
-                coefficient_value_type bestCapInConstr = std::numeric_limits<coefficient_value_type>::max(); 
-                coefficient_value_type bestCost = std::numeric_limits<coefficient_value_type>::max(); 
-                for (std::vector<unsigned int>::const_iterator itb = mMapGroup2Constrs[group].begin(), itbe = mMapGroup2Constrs[group].end(); itb != itbe; ++itb)
-                {
-                    constraint_type const& constr = this->m_model->constraints()[*itb];
-                    coefficient_value_type slackness = this->m_vSlackness[*itb];
-                    for (typename std::vector<term_type>::const_iterator itv = constr.expression().terms().begin(), itve = constr.expression().terms().end(); itv != itve; ++itv)
-                    {
-                        if (this->m_vVariable2Group[itv->variable().id()] == group)
-                        {
-                            if (slackness >= itv->coefficient()) // bin is large enough 
-                            {
-                                if (this->m_vObjCoef[itv->variable().id()] < bestCost)
-                                {
-                                    bestVar = itv->variable(); 
-                                    bestConstr = *itb; 
-                                    bestCapInConstr = itv->coefficient(); 
-                                    bestCost = this->m_vObjCoef[itv->variable().id()];
-                                }
-                            }
-                        }
-                    }
-                }
-                if (bestCost != std::numeric_limits<coefficient_value_type>::max())
-                {
-                    this->m_model->setVariableSolution(bestVar, 1);
-                    this->m_vSlackness[bestConstr] -= bestCapInConstr;
-                    vGroupProcess[group] = true; 
-                }
-            }
-
-            // count items not assigned yet 
-            unsigned int numUnprocess = std::count(vGroupProcess.begin(), vGroupProcess.end(), false); 
-            if (numUnprocess == 0)
-                status = SUBOPTIMAL; 
-            limboPrint(kDEBUG, "numUnprocess = %u\n", numUnprocess);
+                numNegativeSlacks += (this->m_vSlackness[i] < 0)? 1 : 0; 
+            limboPrint(kDEBUG, "numNegativeSlacks = %u\n", numNegativeSlacks);
+#endif
 
             return status; 
         }
@@ -1374,44 +1412,50 @@ class SearchByBinSelection : public SearchByAdjustCoefficient<T, V>
         }
         /// @brief compute move cost for an item to move out from current bin 
         /// @param constr constraint or bin 
-        /// @param vVariableProcess flags denoting whether variables are processed or not 
         /// @param vVariableMoveCost array of move cost 
-        void computeMoveCost(constraint_type const& constr, std::vector<bool> const& vVariableProcess, std::vector<VariableMoveCost>& vVariableMoveCost) const 
+        void computeMoveCost(constraint_type const& constr, std::vector<VariableMoveCost>& vVariableMoveCost) const 
         {
             // extract items that are currently assigned to this bin 
             vVariableMoveCost.clear();
             unsigned int j = 0; 
             for (typename std::vector<term_type>::const_iterator it = constr.expression().terms().begin(), ite = constr.expression().terms().end(); it != ite; ++it, ++j)
             {
-                // selected but not processed yet 
-                if (this->m_model->variableSolution(it->variable()) && !vVariableProcess[it->variable().id()]) 
+                variable_type const& var = it->variable(); 
+                // selected items 
+                if (this->m_model->variableSolution(var)) 
                 {
                     // compute move cost of moving item to other bins 
                     coefficient_value_type moveCost = std::numeric_limits<coefficient_value_type>::max(); 
+                    variable_type targetVar; 
                     unsigned int group = this->m_vVariable2Group[it->variable().id()];
                     for (typename std::vector<variable_type>::const_iterator itv = this->m_vVariableGroup[group].begin(), itve = this->m_vVariableGroup[group].end(); itv != itve; ++itv)
                     {
-                        if (it->variable() != *itv) // different variables 
+                        if (var != *itv) // different variables 
                         {
                             // find the minimum slackness of target bins 
-                            coefficient_value_type targetSlackness = std::numeric_limits<coefficient_value_type>::max(); 
-                            coefficient_value_type targetCoeff = std::numeric_limits<coefficient_value_type>::max(); 
+                            bool enoughCapacityFlag = true; 
                             for (std::vector<std::pair<unsigned int, unsigned int> >::const_iterator itc = this->m_mVariable2Constr[itv->id()].begin(), itce = this->m_mVariable2Constr[itv->id()].end(); itc != itce; ++itc)
                             {
-                                if (targetSlackness > this->m_vSlackness[itc->first])
+                                coefficient_value_type slackness = this->m_vSlackness[itc->first]; 
+                                coefficient_value_type coeff = this->m_model->constraints()[itc->first].expression().terms()[itc->second].coefficient(); 
+                                if (slackness < coeff)
                                 {
-                                    targetSlackness = this->m_vSlackness[itc->first]; 
-                                    targetCoeff = this->m_model->constraints()[itc->first].expression().terms()[itc->second].coefficient();
+                                    enoughCapacityFlag = false; 
+                                    break; 
                                 }
                             }
-                            if (targetSlackness < targetCoeff)
+                            if (!enoughCapacityFlag)
                                 continue; 
-                            coefficient_value_type targetCost = this->m_vObjCoefOrig[itv->id()]*std::max((coefficient_value_type)1, (targetCoeff+std::numeric_limits<coefficient_value_type>::epsilon())/(targetSlackness+std::numeric_limits<coefficient_value_type>::epsilon()));
-                            moveCost = std::min(moveCost, targetCost);
+                            coefficient_value_type targetCost = this->m_vObjCoefOrig[itv->id()];
+                            if (moveCost > targetCost)
+                            {
+                                moveCost = targetCost; 
+                                targetVar = *itv; 
+                            }
                         }
                     }
                     // use the ratio of move cost to capacity 
-                    vVariableMoveCost.push_back(VariableMoveCost(it->variable(), moveCost, it->coefficient()));
+                    vVariableMoveCost.push_back(VariableMoveCost(var, targetVar, moveCost));
                 }
             }
         }
@@ -1420,7 +1464,68 @@ class SearchByBinSelection : public SearchByAdjustCoefficient<T, V>
         std::vector<coefficient_value_type> m_vObjCoefOrig; ///< original coefficient of variable in objective 
 };
 
+/// @brief Heuristic to search for feasible solutions by combined strategies. 
+/// @tparam T coefficient value type 
+/// @tparam V variable value type 
+template <typename T, typename V>
+class SearchByCombinedStrategy : public FeasibleSearcher<T, V>
+{
+    public:
+        /// @brief base type 
+        typedef FeasibleSearcher<T, V> base_type; 
+        /// @brief model type 
+        typedef typename base_type::model_type model_type; 
+        /// @brief solver type 
+        typedef typename base_type::solver_type solver_type; 
+        /// @brief updater type for lagrangian multipliers 
+        typedef typename solver_type::updater_type updater_type;
+        /// @brief coefficient value type 
+        typedef typename model_type::coefficient_value_type coefficient_value_type; 
+        /// @brief variable value type 
+        typedef typename model_type::variable_value_type variable_value_type; 
+        /// @brief variable type 
+        typedef typename model_type::variable_type variable_type; 
+        /// @brief expression type 
+        typedef typename model_type::expression_type expression_type; 
+        /// @brief constraint type 
+        typedef typename model_type::constraint_type constraint_type; 
+        /// @brief term type 
+        typedef typename model_type::term_type term_type; 
+
+        /// @brief constructor 
+        /// @param solver problem solver 
+        SearchByCombinedStrategy(solver_type* solver) 
+            : base_type(solver)
+            , m_searcherCoeff(solver)
+            , m_searcherSmoothing(solver)
+        {
+        }
+        /// @brief destructor 
+        ~SearchByCombinedStrategy() {}
+
+        /// @brief API to search for feasible solutions 
+        /// @param updater updater for lagrangian multipliers 
+        /// @return solving status 
+        virtual SolverProperty operator()(updater_type* updater) 
+        {
+            SolverProperty status = m_searcherCoeff(updater); 
+            if (status == INFEASIBLE)
+                status = m_searcherSmoothing(updater);
+#if 0
+            // go through all bins with negative slack 
+            for (unsigned int i = 0, ie = this->m_vSlackness.size(); i < ie; ++i)
+            {
+                if (this->m_vSlackness[i] < 0)
+                    limboPrint(kDEBUG, "bin %s %g\n", this->m_model->constraintName(this->m_model->constraints()[i]).c_str(), (double)this->m_vSlackness[i]);
+            }
 #endif
+            return status; 
+        }
+
+    protected:
+        SearchByAdjustCoefficient<coefficient_value_type, variable_value_type> m_searcherCoeff; ///< search by adjusting coefficient
+        SearchByBinSmoothing<coefficient_value_type, variable_value_type> m_searcherSmoothing; ///< search by smoothing dense bins 
+};
 
 } // namespace solvers 
 } // namespace limbo 

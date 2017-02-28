@@ -1199,10 +1199,11 @@ class LinearModel : public LpParser::LpDataBase
 			}
         }
         /// @brief add constraint that \a terms \a compare \a constant. 
+        /// @param cname constraint name 
         /// @param terms array of terms in left hand side 
         /// @param compare operator '<', '>', '='
         /// @param constant constant in the right hand side 
-        void add_constraint(LpParser::TermArray const& terms, char compare, double constant) 
+        void add_constraint(std::string const& cname, LpParser::TermArray const& terms, char compare, double constant) 
         {
             expression_type expr; 
             for (LpParser::TermArray::const_iterator it = terms.begin(); it != terms.end(); ++it)
@@ -1211,7 +1212,7 @@ class LinearModel : public LpParser::LpDataBase
                 add_variable(it->var);
                 expr += m_mName2Variable.at(it->var)*it->coef; 
             }
-            addConstraint(constraint_type(expr, constant, compare));
+            addConstraint(constraint_type(expr, constant, compare), cname);
         }
         /// @brief add object terms 
         /// @param minimize true denotes minimizing object, false denotes maximizing object 
@@ -1283,7 +1284,10 @@ class LinearModel : public LpParser::LpDataBase
             unsigned int i = 0; 
             for (typename std::vector<constraint_type>::const_iterator it = constraints().begin(), ite = constraints().end(); it != ite; ++it, ++i)
             {
-                os << "C" << i << ": ";
+                if (constraintName(*it).empty())
+                    os << "C" << i << ": ";
+                else 
+                    os << constraintName(*it) << ": ";
                 print(os, *it); 
                 os << "\n";
             }

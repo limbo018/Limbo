@@ -271,7 +271,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
         /// @param terms array of terms in left hand side 
         /// @param compare operator '<', '>', '='
         /// @param constant constant in the right hand side 
-        virtual void add_constraint(LpParser::TermArray const& terms, char compare, double constant)
+        virtual void add_constraint(std::string const& /*cname*/, LpParser::TermArray const& terms, char compare, double constant)
         {
             assert(terms.size() == 2 && terms[0].coef*terms[1].coef < 0);
             // in case some variables are not added yet 

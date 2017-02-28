@@ -122,10 +122,11 @@ class LpDataBase
 				double l = limbo::lowest<double>(), 
 				double r = std::numeric_limits<double>::max()) = 0;
         /// @brief add constraint that \a terms \a compare \a constant. 
+        /// @param cname constraint name 
         /// @param terms array of terms in left hand side 
         /// @param compare operator '<', '>', '='
         /// @param constant constant in the right hand side 
-        virtual void add_constraint(TermArray const& terms, char compare, double constant) = 0; 
+        virtual void add_constraint(string const& cname, TermArray const& terms, char compare, double constant) = 0; 
         /// @brief add object terms 
         /// @param minimize true denotes minimizing object, false denotes maximizing object 
         /// @param terms array of terms 

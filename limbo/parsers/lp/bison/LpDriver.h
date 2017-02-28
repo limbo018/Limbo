@@ -96,6 +96,8 @@ public:
 	void obj_cbk(bool minimize, TermArray const& terms);
     // sum coef*var compare_op constant 
 	void constraint_cbk(TermArray& terms, char compare, double constant);
+    // sum coef*var compare_op constant 
+	void constraint_cbk(string const& name, TermArray& terms, char compare, double constant);
 	// var compare_op constant 
 	void bound_cbk(string const& var, char compare, double constant);
 	// constant compare_op var
