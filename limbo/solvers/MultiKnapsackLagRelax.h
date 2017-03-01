@@ -108,6 +108,10 @@ class MultiKnapsackLagRelax
         /// @brief set whether use initial solutions 
         /// @param f flag 
         void setUseInitialSolutions(bool f); 
+        ///@return flag of whether evaluating objective of lagrangian subproblem 
+        bool lagObjFlag() const; 
+        /// @brief set evaluating objective of lagrangian subproblem in each iteration 
+        void setLagObjFlag(bool f); 
 
         /// @name print functions for debug 
         ///@{
@@ -235,8 +239,11 @@ class MultiKnapsackLagRelax
         std::vector<coefficient_value_type> m_vSlackness; ///< array of slackness values in each iteration, \f$ b-Ax \f$
         std::vector<coefficient_value_type> m_vScalingFactor; ///< scaling factor for constraints and objective, last entry is for objective
         std::vector<bool> m_vFixedGroup; ///< groups/items that are fixed, which means we will not change the assignment 
+
         coefficient_value_type m_objConstant; ///< constant value in objective from lagrangian relaxation
         coefficient_value_type m_lagObj; ///< current objective of the lagrangian subproblem 
+        bool m_lagObjFlag; ///< whether evaluate objective of the lagrangian subproblem in each iteration 
+
         unsigned int m_iter; ///< current iteration 
         unsigned int m_maxIters; ///< maximum number of iterations 
         bool m_useInitialSol; ///< whether use initial solutions or not 
@@ -257,8 +264,10 @@ MultiKnapsackLagRelax<T, V>::MultiKnapsackLagRelax(typename MultiKnapsackLagRela
     limboStaticAssert(std::numeric_limits<V>::is_integer);
 
     m_model = model; 
-    m_lagObj = 0; 
     m_objConstant = 0; 
+    m_lagObj = 0; 
+    m_lagObjFlag = false; 
+
     m_iter = 0; 
     m_maxIters = 1000; 
     m_bestObj = std::numeric_limits<coefficient_value_type>::max();
@@ -306,6 +315,16 @@ void MultiKnapsackLagRelax<T, V>::setUseInitialSolutions(bool f)
     m_useInitialSol = f; 
 }
 template <typename T, typename V>
+bool MultiKnapsackLagRelax<T, V>::lagObjFlag() const
+{
+    return m_lagObjFlag;
+}
+template <typename T, typename V>
+void MultiKnapsackLagRelax<T, V>::setLagObjFlag(bool f)
+{
+    m_lagObjFlag = f; 
+}
+template <typename T, typename V>
 void MultiKnapsackLagRelax<T, V>::copy(MultiKnapsackLagRelax<T, V> const& rhs)
 {
     m_model = rhs.m_model; 
@@ -316,6 +335,7 @@ void MultiKnapsackLagRelax<T, V>::copy(MultiKnapsackLagRelax<T, V> const& rhs)
     m_vSlackness = rhs.m_vSlackness;
     m_objConstant = rhs.m_objConstant; 
     m_lagObj = rhs.m_lagObj; 
+    m_lagObjFlag = rhs.m_lagObjFlag;
     m_iter = rhs.m_iter; 
     m_maxIters = rhs.m_maxIters;
     m_useInitialSol = rhs.m_useInitialSol; 
@@ -472,10 +492,11 @@ void MultiKnapsackLagRelax<T, V>::prepare()
 template <typename T, typename V>
 void MultiKnapsackLagRelax<T, V>::updateLagMultipliers(typename MultiKnapsackLagRelax<T, V>::updater_type* updater)
 {
+    constraint_type* vConstraint = &m_model->constraints()[0];
     // for each capacity constraint of bin 
     for (unsigned int i = 0, ie = m_vLagMultiplier.size(); i < ie; ++i)
     {
-        constraint_type const& constr = m_model->constraints().at(m_vConstraintPartition[i]); 
+        constraint_type const& constr = vConstraint[m_vConstraintPartition[i]]; 
         // get slackness with current solution 
         coefficient_value_type slackness = m_vSlackness[i];
 
@@ -490,7 +511,7 @@ void MultiKnapsackLagRelax<T, V>::updateLagMultipliers(typename MultiKnapsackLag
         for (typename std::vector<term_type>::const_iterator it = constr.expression().terms().begin(), ite = constr.expression().terms().end(); it != ite; ++it)
             m_vObjCoef[it->variable().id()] += it->coefficient()*deltaMultiplier;
         // \f$ \sum_j -\lambda_j b_j \f$
-        m_objConstant += -constr.rightHandSide()*deltaMultiplier;
+        m_objConstant -= constr.rightHandSide()*deltaMultiplier;
 
         // update multiplier 
         multiplier = newMultiplier; 
@@ -501,42 +522,35 @@ void MultiKnapsackLagRelax<T, V>::solveLag()
 {
     // for each item 
     unsigned int i = 0; 
+    CompareVariableByCoefficient helper (m_vObjCoef);
+    variable_value_type* vVariableSol = &m_model->variableSolutions()[0];
     for (typename std::vector<std::vector<variable_type> >::iterator it = m_vVariableGroup.begin(), ite = m_vVariableGroup.end(); it != ite; ++it, ++i)
     {
-#if 0
-        for (typename std::vector<variable_type>::const_iterator it2 = it->begin(); it2 != it->end(); ++it2)
-        {
-            if (m_model->variableName(*it2) == "v151841_1986" || m_model->variableName(*it2) == "v151841_1958" || m_model->variableName(*it2) == "v152237_1986" || m_model->variableName(*it2) == "v152237_1958")
-                limboPrint(kDEBUG, "group %u, %s = %g\n", std::distance(m_vVariableGroup.begin(), it), m_model->variableName(*it2).c_str(), (double)m_vObjCoef[it2->id()]);
-        }
-#endif
         // skip fixed groups 
         if (m_vFixedGroup[i])
             continue; 
         // reset variables in this group 
         for (typename std::vector<variable_type>::const_iterator itt = it->begin(), itte = it->end(); itt != itte; ++itt)
-            m_model->setVariableSolution(*itt, 0); 
+            vVariableSol[itt->id()] = 0; 
         // find the bin with minimum cost for each item 
-        typename std::vector<variable_type>::iterator itv = std::min_element(it->begin(), it->end(), CompareVariableByCoefficient(m_vObjCoef));
-        m_model->setVariableSolution(*itv, 1);
+        typename std::vector<variable_type>::iterator itv = std::min_element(it->begin(), it->end(), helper);
+        vVariableSol[itv->id()] = 1; 
     }
     // evaluate current objective 
-    m_lagObj = evaluateLagObjective();
+    if (m_lagObjFlag)
+        m_lagObj = evaluateLagObjective();
 
 }
 template <typename T, typename V>
 void MultiKnapsackLagRelax<T, V>::computeSlackness() 
 {
+    constraint_type* vConstraint = &m_model->constraints()[0];
     // for each capacity constraint of bin 
     for (unsigned int i = 0, ie = m_vSlackness.size(); i < ie; ++i)
     {
-        constraint_type const& constr = m_model->constraints().at(m_vConstraintPartition[i]); 
+        constraint_type const& constr = vConstraint[m_vConstraintPartition[i]]; 
         // compute slackness with current solution 
         m_vSlackness[i] = m_model->evaluateConstraint(constr);
-#if 0
-        if (m_model->constraintName(constr) == "br1986" || m_model->constraintName(constr) == "br1958")
-            limboPrint(kDEBUG, "bin %s slackness %g\n", m_model->constraintName(constr).c_str(), (double)m_vSlackness[i]);
-#endif
     }
 }
 template <typename T, typename V>
@@ -1083,7 +1097,8 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
 
         /// @brief constructor 
         /// @param solver problem solver 
-        SearchByAdjustCoefficient(solver_type* solver) : base_type(solver) {}
+        /// @param convergeRatio ratio of convergence ratio 
+        SearchByAdjustCoefficient(solver_type* solver, coefficient_value_type convergeRatio = 0.1) : base_type(solver), m_convergeRatio(convergeRatio) {}
         /// @brief destructor 
         ~SearchByAdjustCoefficient() {}
 
@@ -1172,7 +1187,7 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
                     break; 
                 // run more iterations with the updated coefficients 
                 status = this->solveSubproblems(updater, this->m_iter+1, this->m_iter+this->m_maxIters/2);
-            } while (numNegativeSlacks && numNegativeSlacks < numNegativeSlacksPrev);
+            } while (numNegativeSlacks && numNegativeSlacks*(1+m_convergeRatio) < numNegativeSlacksPrev);
 
             return status; 
         }
@@ -1217,6 +1232,7 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
         }
 
         std::vector<unsigned int> m_vVariable2Group; ///< map variables to groups 
+        coefficient_value_type m_convergeRatio; ///< ratio for convergence criteria, how much percent the number of negative slacks reduced 
 };
 
 /// @brief Heuristic to search for feasible solutions by smoothing dense bins. 
@@ -1494,9 +1510,10 @@ class SearchByCombinedStrategy : public FeasibleSearcher<T, V>
 
         /// @brief constructor 
         /// @param solver problem solver 
-        SearchByCombinedStrategy(solver_type* solver) 
+        /// @param convergeRatio ratio of convergence for @ref limbo::solvers::SearchByAdjustCoefficient
+        SearchByCombinedStrategy(solver_type* solver, coefficient_value_type convergeRatio = 0.1) 
             : base_type(solver)
-            , m_searcherCoeff(solver)
+            , m_searcherCoeff(solver, convergeRatio)
             , m_searcherSmoothing(solver)
         {
         }
