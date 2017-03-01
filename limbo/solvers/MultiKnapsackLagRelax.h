@@ -233,7 +233,9 @@ class MultiKnapsackLagRelax
         model_type* m_model; ///< model for the problem 
 
         std::vector<coefficient_value_type> m_vObjCoef; ///< coefficients variables in objective 
-        std::vector<std::vector<variable_type> > m_vVariableGroup; ///< group variables according to item 
+        variable_type* m_vGroupedVariable; ///< array of grouped variables according to item 
+        unsigned int* m_vVariableGroupBeginIndex; ///< begin index of grouped variable
+        unsigned int m_numGroups; ///< number of groups 
         std::vector<unsigned int> m_vConstraintPartition; ///< indices of constraints, the first partition is capacity constraints 
         std::vector<coefficient_value_type> m_vLagMultiplier; ///< array of lagrangian multipliers 
         std::vector<coefficient_value_type> m_vSlackness; ///< array of slackness values in each iteration, \f$ b-Ax \f$
@@ -264,6 +266,11 @@ MultiKnapsackLagRelax<T, V>::MultiKnapsackLagRelax(typename MultiKnapsackLagRela
     limboStaticAssert(std::numeric_limits<V>::is_integer);
 
     m_model = model; 
+
+    m_vGroupedVariable = NULL;
+    m_vVariableGroupBeginIndex = NULL; 
+    m_numGroups = 0; 
+
     m_objConstant = 0; 
     m_lagObj = 0; 
     m_lagObjFlag = false; 
@@ -329,7 +336,16 @@ void MultiKnapsackLagRelax<T, V>::copy(MultiKnapsackLagRelax<T, V> const& rhs)
 {
     m_model = rhs.m_model; 
     m_vObjCoef = rhs.m_vObjCoef; 
-    m_vVariableGroup = rhs.m_vVariableGroup;
+
+    if (rhs.m_vGroupedVariable)
+    {
+        m_vGroupedVariable = new variable_type [m_model->numVariables()]; 
+        m_numGroups = rhs.m_numGroups;
+        m_vVariableGroupBeginIndex = new unsigned int [m_numGroups+1];
+        std::copy(rhs.m_vGroupedVariable, rhs.m_vGroupedVariable+m_model->numVariables(), m_vGroupedVariable); 
+        std::copy(rhs.m_vVariableGroupBeginIndex, rhs.m_vVariableGroupBeginIndex+rhs.m_numGroups+1, m_vVariableGroupBeginIndex);
+    }
+
     m_vConstraintPartition = rhs.m_vConstraintPartition;
     m_vLagMultiplier = rhs.m_vLagMultiplier;
     m_vSlackness = rhs.m_vSlackness;
@@ -391,6 +407,13 @@ SolverProperty MultiKnapsackLagRelax<T, V>::solve(typename MultiKnapsackLagRelax
     // recycle default searcher 
     if (defaultSearcher)
         delete searcher; 
+    if (m_vGroupedVariable)
+    {
+        delete [] m_vGroupedVariable; 
+        delete [] m_vVariableGroupBeginIndex;
+        m_vGroupedVariable = NULL;
+        m_vVariableGroupBeginIndex = NULL;
+    }
 
     return status;
 }
@@ -469,9 +492,14 @@ void MultiKnapsackLagRelax<T, V>::prepare()
     // group variables according items 
     // the variables for one item will be grouped 
     // I assume the rest constraints are all single item constraints 
-    m_vVariableGroup.resize(std::distance(bound, m_vConstraintPartition.end()));
-    m_vFixedGroup.assign(m_vVariableGroup.size(), false); 
-    i = 0; 
+    m_numGroups = std::distance(bound, m_vConstraintPartition.end());
+    m_vGroupedVariable = new variable_type [m_model->numVariables()];
+    m_vVariableGroupBeginIndex = new unsigned int [m_numGroups+1]; // append a dummy begin index as the ending index for last group 
+    // append a dummy begin index as the ending index for last group 
+    m_vVariableGroupBeginIndex[m_numGroups] = m_model->numVariables(); 
+    m_vFixedGroup.assign(m_numGroups, false); 
+    i = 0; // use as group index 
+    unsigned int j = 0; // use as group variable index 
     for (std::vector<unsigned int>::iterator it = bound, ite = m_vConstraintPartition.end(); it != ite; ++it, ++i)
     {
         constraint_type const& constr = m_model->constraints()[*it];
@@ -479,9 +507,10 @@ void MultiKnapsackLagRelax<T, V>::prepare()
         limboAssert(constr.sense() == '='); 
 #endif
         expression_type const& expr = constr.expression();
-        for (typename std::vector<term_type>::const_iterator itt = expr.terms().begin(), itte = expr.terms().end(); itt != itte; ++itt)
+        m_vVariableGroupBeginIndex[i] = j; 
+        for (typename std::vector<term_type>::const_iterator itt = expr.terms().begin(), itte = expr.terms().end(); itt != itte; ++itt, ++j)
         {
-            m_vVariableGroup[i].push_back(itt->variable());
+            m_vGroupedVariable[j] = itt->variable(); 
             // this item always assign to this bin 
             if (m_model->variableLowerBound(itt->variable())) 
                 m_vFixedGroup[i] = true; 
@@ -521,20 +550,27 @@ template <typename T, typename V>
 void MultiKnapsackLagRelax<T, V>::solveLag()
 {
     // for each item 
-    unsigned int i = 0; 
     CompareVariableByCoefficient helper (m_vObjCoef);
     variable_value_type* vVariableSol = &m_model->variableSolutions()[0];
-    for (typename std::vector<std::vector<variable_type> >::iterator it = m_vVariableGroup.begin(), ite = m_vVariableGroup.end(); it != ite; ++it, ++i)
+    unsigned int i = 0; 
+    variable_type const* variableGroupBegin = m_vGroupedVariable; 
+    variable_type const* variableGroupEnd;
+    variable_type const* variable; 
+    //std::fill(m_vGroupedVariable, m_vGroupedVariable+m_model->numVariables(), 0);
+    for (i = 0; i < m_numGroups; ++i)
     {
         // skip fixed groups 
         if (m_vFixedGroup[i])
             continue; 
+        variableGroupEnd = m_vGroupedVariable+m_vVariableGroupBeginIndex[i+1];
         // reset variables in this group 
-        for (typename std::vector<variable_type>::const_iterator itt = it->begin(), itte = it->end(); itt != itte; ++itt)
-            vVariableSol[itt->id()] = 0; 
+        for (variable = variableGroupBegin; variable != variableGroupEnd; ++variable)
+            vVariableSol[variable->id()] = 0; 
         // find the bin with minimum cost for each item 
-        typename std::vector<variable_type>::iterator itv = std::min_element(it->begin(), it->end(), helper);
-        vVariableSol[itv->id()] = 1; 
+        variable = std::min_element(variableGroupBegin, variableGroupEnd, helper);
+        vVariableSol[variable->id()] = 1; 
+
+        variableGroupBegin = variableGroupEnd;
     }
     // evaluate current objective 
     if (m_lagObjFlag)
@@ -638,16 +674,16 @@ template <typename T, typename V>
 std::ostream& MultiKnapsackLagRelax<T, V>::printVariableGroup(std::ostream& os) const 
 {
     os << __func__ << " iteration " << m_iter << "\n";
-    unsigned int i = 0; 
-    for (typename std::vector<std::vector<variable_type> >::const_iterator it = m_vVariableGroup.begin(); it != m_vVariableGroup.end(); ++it, ++i)
+    for (unsigned int i = 0; i < m_numGroups; ++i)
     {
         os << "[" << i << "]";
-        for (typename std::vector<variable_type>::const_iterator itv = it->begin(); itv != it->end(); ++itv)
+        for (unsigned int j = m_vVariableGroupBeginIndex[i]; j < m_vVariableGroupBeginIndex[i+1]; ++j)
         {
-            if (m_model->variableSolution(*itv) == 1)
-                os << " *" << m_model->variableName(*itv) << "*";
+            variable_type* variable = m_vGroupedVariable[j]; 
+            if (m_model->variableSolution(*variable) == 1)
+                os << " *" << m_model->variableName(*variable) << "*";
             else 
-                os << " " << m_model->variableName(*itv);
+                os << " " << m_model->variableName(*variable);
         }
         os << "\n";
     }
@@ -977,7 +1013,9 @@ class FeasibleSearcher
             : m_solver(solver)
             , m_model(solver->m_model)
             , m_vObjCoef(solver->m_vObjCoef)
-            , m_vVariableGroup(solver->m_vVariableGroup)
+            , m_vGroupedVariable(solver->m_vGroupedVariable)
+            , m_vVariableGroupBeginIndex(solver->m_vVariableGroupBeginIndex)
+            , m_numGroups(solver->m_numGroups)
             , m_vConstraintPartition(solver->m_vConstraintPartition)
             , m_vLagMultiplier(solver->m_vLagMultiplier)
             , m_vSlackness(solver->m_vSlackness)
@@ -1016,14 +1054,16 @@ class FeasibleSearcher
         }
 
         solver_type* m_solver; ///< problem solver 
-        model_type* m_model; ///< model for the problem 
+        model_type* const& m_model; ///< model for the problem 
 
         std::vector<coefficient_value_type>& m_vObjCoef; ///< coefficients variables in objective 
-        std::vector<std::vector<variable_type> >& m_vVariableGroup; ///< group variables according to item 
-        std::vector<unsigned int>& m_vConstraintPartition; ///< indices of constraints, the first partition is capacity constraints 
+        variable_type* const& m_vGroupedVariable; ///< array of grouped variables according to item 
+        unsigned int* const& m_vVariableGroupBeginIndex; ///< begin index of grouped variable
+        unsigned int const& m_numGroups; ///< number of groups 
+        std::vector<unsigned int> const& m_vConstraintPartition; ///< indices of constraints, the first partition is capacity constraints 
         std::vector<coefficient_value_type>& m_vLagMultiplier; ///< array of lagrangian multipliers 
         std::vector<coefficient_value_type>& m_vSlackness; ///< array of slackness values in each iteration, \f$ b-Ax \f$
-        std::vector<coefficient_value_type>& m_vScalingFactor; ///< scaling factor for constraints and objective, last entry is for objective
+        std::vector<coefficient_value_type> const& m_vScalingFactor; ///< scaling factor for constraints and objective, last entry is for objective
         std::vector<bool>& m_vFixedGroup; ///< groups/items that are fixed, which means we will not change the assignment 
         coefficient_value_type& m_objConstant; ///< constant value in objective from lagrangian relaxation
         coefficient_value_type& m_lagObj; ///< current objective of the lagrangian subproblem 
@@ -1167,19 +1207,6 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
                         ++numNegativeSlacks; 
                     }
                 }
-                // mark fixed groups 
-                //for (unsigned int i = 0, ie = this->m_vVariableGroup.size(); i < ie; ++i)
-                //{
-                //    for (typename std::vector<variable_type>::const_iterator it = this->m_vVariableGroup[i].begin(), ite = this->m_vVariableGroup[i].end(); it != ite; ++it)
-                //    {
-                //        // any variable not processed yet means that it is fixed 
-                //        if (!vVariableProcess[it->id()] && this->m_model->variableSolution(*it)) 
-                //        {
-                //            this->m_vFixedGroup[i] = true; 
-                //            break; 
-                //        }
-                //    }
-                //}
 #if 1
                 limboPrint(kDEBUG, "numNegativeSlacks = %u\n", numNegativeSlacks); 
 #endif
@@ -1196,9 +1223,15 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
         void mapVariable2Group()
         {
             this->m_vVariable2Group.assign(this->m_model->numVariables(), std::numeric_limits<unsigned int>::max());
-            for (unsigned int i = 0, ie = this->m_vVariableGroup.size(); i < ie; ++i)
-                for (typename std::vector<variable_type>::const_iterator it = this->m_vVariableGroup[i].begin(), ite = this->m_vVariableGroup[i].end(); it != ite; ++it)
+            for (unsigned int i = 0; i < this->m_numGroups; ++i)
+            {
+                variable_type const* it = this->m_vGroupedVariable+this->m_vVariableGroupBeginIndex[i];
+                variable_type const* ite = this->m_vGroupedVariable+this->m_vVariableGroupBeginIndex[i+1];
+                for (; it != ite; ++it)
+                {
                     this->m_vVariable2Group[it->id()] = i; 
+                }
+            }
         }
         /// @brief compute move cost for an item to move out from current bin 
         /// @param constr constraint or bin 
@@ -1217,11 +1250,12 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
                     // compute move cost of moving item to other bins 
                     coefficient_value_type moveCost = std::numeric_limits<coefficient_value_type>::max(); 
                     unsigned int group = this->m_vVariable2Group[it->variable().id()];
-                    for (typename std::vector<variable_type>::const_iterator itv = this->m_vVariableGroup[group].begin(), itve = this->m_vVariableGroup[group].end(); itv != itve; ++itv)
+                    variable_type const* itv = this->m_vGroupedVariable+this->m_vVariableGroupBeginIndex[group];
+                    variable_type const* itve = this->m_vGroupedVariable+this->m_vVariableGroupBeginIndex[group+1];
+                    for (; itv != itve; ++itv)
                     {
                         if (it->variable() != *itv) // different variables 
                         {
-                            //limboAssert(this->m_vObjCoef[itv->id()]-this->m_vObjCoef[it->variable().id()] >= 0); 
                             moveCost = std::min(moveCost, this->m_vObjCoef[itv->id()]-this->m_vObjCoef[it->variable().id()]);
                         }
                     }
@@ -1444,7 +1478,9 @@ class SearchByBinSmoothing : public SearchByAdjustCoefficient<T, V>
                     coefficient_value_type moveCost = std::numeric_limits<coefficient_value_type>::max(); 
                     variable_type targetVar; 
                     unsigned int group = this->m_vVariable2Group[it->variable().id()];
-                    for (typename std::vector<variable_type>::const_iterator itv = this->m_vVariableGroup[group].begin(), itve = this->m_vVariableGroup[group].end(); itv != itve; ++itv)
+                    variable_type const* itv = this->m_vGroupedVariable+this->m_vVariableGroupBeginIndex[group];
+                    variable_type const* itve = this->m_vGroupedVariable+this->m_vVariableGroupBeginIndex[group+1];
+                    for (; itv != itve; ++itv)
                     {
                         if (var != *itv) // different variables 
                         {
