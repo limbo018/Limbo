@@ -147,7 +147,7 @@ Driver::Driver(LefDataBase& db)
 	lef_ntokens = 0;
 	lef_nlines = 1;
 
-	lefrLog = 0;
+	lefrLog = stdout; // dump to screen, original is 0 
 }
 Driver::~Driver()
 {
