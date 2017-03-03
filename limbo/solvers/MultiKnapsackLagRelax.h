@@ -9,6 +9,7 @@
 
 #include <cmath>
 #include <limbo/solvers/Solvers.h>
+#include <limbo/solvers/Numerical.h>
 
 /// namespace for Limbo 
 namespace limbo 
@@ -75,6 +76,7 @@ class MultiKnapsackLagRelax
         typedef typename model_type::expression_type expression_type; 
         typedef typename model_type::term_type term_type; 
         typedef typename model_type::property_type property_type;
+        typedef MatrixCSR<coefficient_value_type, int, 1> matrix_type; 
         typedef LagMultiplierUpdater<coefficient_value_type> updater_type; 
         typedef ProblemScaler<coefficient_value_type, variable_value_type> scaler_type; 
         typedef FeasibleSearcher<coefficient_value_type, variable_value_type> searcher_type; 
@@ -113,6 +115,10 @@ class MultiKnapsackLagRelax
         /// @brief set evaluating objective of lagrangian subproblem in each iteration 
         void setLagObjFlag(bool f); 
 
+        /// @brief get number of constraints with negative slackness in current iteration 
+        /// @param evaluateFlag if true, recompute slackness for each constraint 
+        unsigned int numNegativeSlackConstraints(bool evaluateFlag); 
+
         /// @name print functions for debug 
         ///@{
         /// @brief print variable groups to file 
@@ -144,6 +150,13 @@ class MultiKnapsackLagRelax
         /// @param name constraint name 
         /// @return output stream 
         std::ostream& printConstraint(std::ostream& os, std::string const& name) const; 
+        /// @brief print array 
+        /// @tparam TT array data type 
+        /// @param n dimension 
+        /// @param array array 
+        /// @param nonzeroFlag whether only dump nonzero elements 
+        template <typename TT>
+        void printArray(unsigned int n, TT const* array, bool nonzeroFlag) const; 
         ///@}
 
         /// @brief Predicate whether a constraint is a capacity constraint 
@@ -172,11 +185,11 @@ class MultiKnapsackLagRelax
         /// @brief Predicate to sort variables according to their coefficient from small to large 
         struct CompareVariableByCoefficient
         {
-            std::vector<coefficient_value_type> const& vObjCoef; ///< coefficients in objective for comparison 
+            coefficient_value_type const* vObjCoef; ///< coefficients in objective for comparison 
 
             /// @brief constructor 
             /// @param v array of coefficients in objective 
-            CompareVariableByCoefficient(std::vector<coefficient_value_type> const& v) 
+            CompareVariableByCoefficient(coefficient_value_type const* v) 
                 : vObjCoef(v)
             {
             }
@@ -193,6 +206,8 @@ class MultiKnapsackLagRelax
     protected:
         /// @brief copy object 
         void copy(MultiKnapsackLagRelax const& rhs);
+        /// @brief destroy model 
+        void destroy();
         /// @brief kernel function to solve the problem 
         /// @param updater an object to update lagrangian multipliers
         /// @param scaler an object to scale constraints and objective, use default scaler if NULL 
@@ -229,18 +244,28 @@ class MultiKnapsackLagRelax
         /// @param status current status of solutions 
         /// @param searcher an object to search for feasible solutions 
         SolverProperty postProcess(updater_type* updater, searcher_type* searcher, SolverProperty status); 
+        /// @brief function to compute \f$b-Ax\f$
+        /// @param A matrix 
+        /// @param x vector 
+        /// @param b vector 
+        /// @param y output vector 
+        template <typename TT, typename VV>
+        void bMinusAx(matrix_type const& A, VV const* x, TT const* b, TT* y) const; 
 
         model_type* m_model; ///< model for the problem 
 
-        std::vector<coefficient_value_type> m_vObjCoef; ///< coefficients variables in objective 
+        coefficient_value_type* m_vObjCoef; ///< coefficients variables in objective 
+        matrix_type m_constrMatrix; ///< constraint matrix \f$A\f$
+        coefficient_value_type* m_vConstrRhs; ///< constraint right hand side \f$b\f$
+
         variable_type* m_vGroupedVariable; ///< array of grouped variables according to item 
         unsigned int* m_vVariableGroupBeginIndex; ///< begin index of grouped variable
         unsigned int m_numGroups; ///< number of groups 
         std::vector<unsigned int> m_vConstraintPartition; ///< indices of constraints, the first partition is capacity constraints 
-        std::vector<coefficient_value_type> m_vLagMultiplier; ///< array of lagrangian multipliers 
-        std::vector<coefficient_value_type> m_vSlackness; ///< array of slackness values in each iteration, \f$ b-Ax \f$
+        coefficient_value_type* m_vLagMultiplier; ///< array of lagrangian multipliers 
+        coefficient_value_type* m_vNewLagMultiplier; ///< array of new lagrangian multipliers, temporary storage 
+        coefficient_value_type* m_vSlackness; ///< array of slackness values in each iteration, \f$ b-Ax \f$
         std::vector<coefficient_value_type> m_vScalingFactor; ///< scaling factor for constraints and objective, last entry is for objective
-        std::vector<bool> m_vFixedGroup; ///< groups/items that are fixed, which means we will not change the assignment 
 
         coefficient_value_type m_objConstant; ///< constant value in objective from lagrangian relaxation
         coefficient_value_type m_lagObj; ///< current objective of the lagrangian subproblem 
@@ -262,14 +287,22 @@ MultiKnapsackLagRelax<T, V>::MultiKnapsackLagRelax(typename MultiKnapsackLagRela
 {
     // T must be a floating point number 
     limboStaticAssert(!std::numeric_limits<T>::is_integer);
-    // V must be an integer number 
-    limboStaticAssert(std::numeric_limits<V>::is_integer);
+    // V must be a floating point number 
+    //limboStaticAssert(!std::numeric_limits<V>::is_integer);
 
     m_model = model; 
+
+    m_vObjCoef = NULL; 
+    m_constrMatrix.reset();
+    m_vConstrRhs = NULL; 
 
     m_vGroupedVariable = NULL;
     m_vVariableGroupBeginIndex = NULL; 
     m_numGroups = 0; 
+
+    m_vLagMultiplier = NULL;
+    m_vNewLagMultiplier = NULL;
+    m_vSlackness = NULL;
 
     m_objConstant = 0; 
     m_lagObj = 0; 
@@ -295,6 +328,8 @@ MultiKnapsackLagRelax<T, V>& MultiKnapsackLagRelax<T, V>::operator=(MultiKnapsac
 template <typename T, typename V>
 MultiKnapsackLagRelax<T, V>::~MultiKnapsackLagRelax() 
 {
+    // recycle model 
+    destroy(); 
 }
 template <typename T, typename V>
 SolverProperty MultiKnapsackLagRelax<T, V>::operator()(typename MultiKnapsackLagRelax<T, V>::updater_type* updater, typename MultiKnapsackLagRelax<T, V>::scaler_type* scaler, typename MultiKnapsackLagRelax<T, V>::searcher_type* searcher) 
@@ -332,11 +367,36 @@ void MultiKnapsackLagRelax<T, V>::setLagObjFlag(bool f)
     m_lagObjFlag = f; 
 }
 template <typename T, typename V>
+unsigned int MultiKnapsackLagRelax<T, V>::numNegativeSlackConstraints(bool evaluateFlag) 
+{
+    unsigned int result = 0; 
+    if (evaluateFlag)
+        computeSlackness();
+    for (typename matrix_type::index_type i = 0; i < m_constrMatrix.numRows; ++i)
+        result += (m_vSlackness[i] < 0)? 1 : 0; 
+    return result; 
+}
+template <typename T, typename V>
 void MultiKnapsackLagRelax<T, V>::copy(MultiKnapsackLagRelax<T, V> const& rhs)
 {
     m_model = rhs.m_model; 
-    m_vObjCoef = rhs.m_vObjCoef; 
 
+    // recycle model 
+    destroy(); 
+    // copy problem model 
+    if (rhs.m_vObjCoef)
+    {
+        m_vObjCoef = new coefficient_value_type [m_model->numVariables()]; 
+        std::copy(rhs.m_vObjCoef, rhs.m_vObjCoef+m_model->numVariables(), m_vObjCoef);
+    }
+    m_constrMatrix = rhs.m_constrMatrix; 
+    if (rhs.m_vConstrRhs)
+    {
+        m_vConstrRhs = new coefficient_value_type [m_constrMatrix.numRows];
+        std::copy(rhs.m_vConstrRhs, rhs.m_vConstrRhs+m_constrMatrix.numRows, m_vConstrRhs);
+    }
+
+    // copy variable groups 
     if (rhs.m_vGroupedVariable)
     {
         m_vGroupedVariable = new variable_type [m_model->numVariables()]; 
@@ -347,8 +407,15 @@ void MultiKnapsackLagRelax<T, V>::copy(MultiKnapsackLagRelax<T, V> const& rhs)
     }
 
     m_vConstraintPartition = rhs.m_vConstraintPartition;
-    m_vLagMultiplier = rhs.m_vLagMultiplier;
-    m_vSlackness = rhs.m_vSlackness;
+    if (rhs.m_vLagMultiplier)
+    {
+        m_vLagMultiplier = new coefficient_value_type [m_constrMatrix.numRows]; 
+        std::copy(rhs.m_vLagMultiplier, rhs.m_vLagMultiplier+m_constrMatrix.numRows, m_vLagMultiplier); 
+        m_vNewLagMultiplier = new coefficient_value_type [m_constrMatrix.numRows];
+        std::copy(rhs.m_vNewLagMultiplier, rhs.m_vNewLagMultiplier+m_constrMatrix.numRows, m_vNewLagMultiplier);
+        m_vSlackness = new coefficient_value_type [m_constrMatrix.numRows]; 
+        std::copy(rhs.m_vSlackness, rhs.m_vSlackness+m_constrMatrix.numRows, m_vSlackness); 
+    }
     m_objConstant = rhs.m_objConstant; 
     m_lagObj = rhs.m_lagObj; 
     m_lagObjFlag = rhs.m_lagObjFlag;
@@ -358,6 +425,39 @@ void MultiKnapsackLagRelax<T, V>::copy(MultiKnapsackLagRelax<T, V> const& rhs)
 
     m_vBestVariableSol = rhs.m_vBestVariableSol;
     m_bestObj = rhs.m_bestObj;
+}
+template <typename T, typename V>
+void MultiKnapsackLagRelax<T, V>::destroy() 
+{
+    // recycle variable groups 
+    if (m_vGroupedVariable)
+    {
+        delete [] m_vGroupedVariable; 
+        delete [] m_vVariableGroupBeginIndex;
+        m_vGroupedVariable = NULL;
+        m_vVariableGroupBeginIndex = NULL;
+    }
+    if (m_vObjCoef)
+    {
+        delete [] m_vObjCoef; 
+        m_vObjCoef = NULL;
+    }
+    m_constrMatrix.reset();
+    if (m_vConstrRhs)
+    {
+        delete [] m_vConstrRhs;
+        m_vConstrRhs = NULL;
+    }
+    // recycle lagrangian data 
+    if (m_vLagMultiplier)
+    {
+        delete [] m_vLagMultiplier;
+        delete [] m_vNewLagMultiplier;
+        delete [] m_vSlackness;
+        m_vLagMultiplier = NULL;
+        m_vNewLagMultiplier = NULL;
+        m_vSlackness = NULL;
+    }
 }
 template <typename T, typename V>
 SolverProperty MultiKnapsackLagRelax<T, V>::solve(typename MultiKnapsackLagRelax<T, V>::updater_type* updater, typename MultiKnapsackLagRelax<T, V>::scaler_type* scaler, typename MultiKnapsackLagRelax<T, V>::searcher_type* searcher)
@@ -384,6 +484,9 @@ SolverProperty MultiKnapsackLagRelax<T, V>::solve(typename MultiKnapsackLagRelax
         defaultSearcher = true; 
     }
 
+    // recycle old model 
+    destroy(); 
+
     // scale problem 
     scale(scaler); 
     // prepare data structure 
@@ -407,13 +510,6 @@ SolverProperty MultiKnapsackLagRelax<T, V>::solve(typename MultiKnapsackLagRelax
     // recycle default searcher 
     if (defaultSearcher)
         delete searcher; 
-    if (m_vGroupedVariable)
-    {
-        delete [] m_vGroupedVariable; 
-        delete [] m_vVariableGroupBeginIndex;
-        m_vGroupedVariable = NULL;
-        m_vVariableGroupBeginIndex = NULL;
-    }
 
     return status;
 }
@@ -424,9 +520,6 @@ SolverProperty MultiKnapsackLagRelax<T, V>::solveSubproblems(typename MultiKnaps
     SolverProperty status = INFEASIBLE; 
     for (m_iter = beginIter; m_iter < endIter; ++m_iter)
     {
-#if 1
-        limboPrint(kDEBUG, "iteration %u\n", m_iter); 
-#endif
         if (!useInitialSolutions() || m_iter != 0)
             solveLag(); 
         computeSlackness();
@@ -439,7 +532,6 @@ SolverProperty MultiKnapsackLagRelax<T, V>::solveSubproblems(typename MultiKnaps
             break; 
 
         updateLagMultipliers(updater);
-
     }
 
     return status; 
@@ -472,7 +564,8 @@ template <typename T, typename V>
 void MultiKnapsackLagRelax<T, V>::prepare() 
 {
     // initialize weights of variables in objective 
-    m_vObjCoef.assign(m_model->numVariables(), 0); 
+    m_vObjCoef = new coefficient_value_type [m_model->numVariables()]; 
+    std::fill(m_vObjCoef, m_vObjCoef+m_model->numVariables(), 0);
     for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
         m_vObjCoef[it->variable().id()] += it->coefficient();
 
@@ -482,12 +575,62 @@ void MultiKnapsackLagRelax<T, V>::prepare()
     for (unsigned int ie = m_model->constraints().size(); i < ie; ++i)
         m_vConstraintPartition[i] = i; 
     std::vector<unsigned int>::iterator bound = std::partition(m_vConstraintPartition.begin(), m_vConstraintPartition.end(), CapacityConstraintPred(m_model->constraints()));
-    m_vLagMultiplier.assign(std::distance(m_vConstraintPartition.begin(), bound), 0); 
-    m_vSlackness.assign(m_vLagMultiplier.size(), 0);
+    unsigned int numCapacityConstraints = std::distance(m_vConstraintPartition.begin(), bound);
+    m_vLagMultiplier = new coefficient_value_type [numCapacityConstraints]; 
+    std::fill(m_vLagMultiplier, m_vLagMultiplier+numCapacityConstraints, 0);
+    m_vNewLagMultiplier = new coefficient_value_type [numCapacityConstraints];
+    std::fill(m_vNewLagMultiplier, m_vNewLagMultiplier+numCapacityConstraints, 0);
+    m_vSlackness = new coefficient_value_type [numCapacityConstraints]; 
+    std::fill(m_vSlackness, m_vSlackness+numCapacityConstraints, 0);
 
     // change the sense of '>' to '<'
     for (std::vector<unsigned int>::iterator it = m_vConstraintPartition.begin(); it != bound; ++it)
         m_model->constraints().at(*it).normalize('<');
+
+    // initialize constraint matrix 
+    m_constrMatrix.numRows = numCapacityConstraints; 
+    m_constrMatrix.numColumns = m_model->numVariables(); 
+    m_constrMatrix.numElements = 0; 
+    m_constrMatrix.vRowBeginIndex = new typename matrix_type::index_type [m_constrMatrix.numRows+1]; 
+    m_constrMatrix.vRowBeginIndex[0] = matrix_type::s_startingIndex;
+
+    // initialize vRowBeginIndex 
+    i = 1; 
+    for (std::vector<unsigned int>::iterator it = m_vConstraintPartition.begin(); it != bound; ++it, ++i)
+    {
+#ifdef DEBUG_MULTIKNAPSACKLAGRELAX
+        limboAssert(i <= m_constrMatrix.numRows); 
+#endif
+        constraint_type const& constr = m_model->constraints()[*it];
+        m_constrMatrix.vRowBeginIndex[i] = m_constrMatrix.vRowBeginIndex[i-1]+constr.expression().terms().size(); 
+    }
+    // last element of vRowBeginIndex denotes the total number of elements 
+    m_constrMatrix.numElements = m_constrMatrix.vRowBeginIndex[m_constrMatrix.numRows]-matrix_type::s_startingIndex; 
+
+    // initialize vElement and vColumn 
+    m_constrMatrix.vElement = new coefficient_value_type [m_constrMatrix.numElements]; 
+    m_constrMatrix.vColumn = new typename matrix_type::index_type [m_constrMatrix.numElements];
+    i = 0; 
+    for (std::vector<unsigned int>::iterator it = m_vConstraintPartition.begin(); it != bound; ++it)
+    {
+        constraint_type const& constr = m_model->constraints()[*it];
+        for (typename std::vector<typename constraint_type::term_type>::const_iterator itt = constr.expression().terms().begin(), itte = constr.expression().terms().end(); itt != itte; ++itt, ++i)
+        {
+#ifdef DEBUG_MULTIKNAPSACKLAGRELAX
+            limboAssert(i < m_constrMatrix.numElements); 
+#endif
+            m_constrMatrix.vElement[i] = itt->coefficient(); 
+            m_constrMatrix.vColumn[i] = itt->variable().id()+matrix_type::s_startingIndex;
+        }
+    }
+    // initialize right hand side of constraints 
+    m_vConstrRhs = new coefficient_value_type [m_constrMatrix.numRows];
+    i = 0; 
+    for (std::vector<unsigned int>::iterator it = m_vConstraintPartition.begin(); it != bound; ++it, ++i)
+    {
+        constraint_type const& constr = m_model->constraints()[*it];
+        m_vConstrRhs[i] = constr.rightHandSide();
+    }
 
     // group variables according items 
     // the variables for one item will be grouped 
@@ -497,7 +640,6 @@ void MultiKnapsackLagRelax<T, V>::prepare()
     m_vVariableGroupBeginIndex = new unsigned int [m_numGroups+1]; // append a dummy begin index as the ending index for last group 
     // append a dummy begin index as the ending index for last group 
     m_vVariableGroupBeginIndex[m_numGroups] = m_model->numVariables(); 
-    m_vFixedGroup.assign(m_numGroups, false); 
     i = 0; // use as group index 
     unsigned int j = 0; // use as group variable index 
     for (std::vector<unsigned int>::iterator it = bound, ite = m_vConstraintPartition.end(); it != ite; ++it, ++i)
@@ -511,39 +653,27 @@ void MultiKnapsackLagRelax<T, V>::prepare()
         for (typename std::vector<term_type>::const_iterator itt = expr.terms().begin(), itte = expr.terms().end(); itt != itte; ++itt, ++j)
         {
             m_vGroupedVariable[j] = itt->variable(); 
-            // this item always assign to this bin 
-            if (m_model->variableLowerBound(itt->variable())) 
-                m_vFixedGroup[i] = true; 
         }
     }
-
 }
 template <typename T, typename V>
 void MultiKnapsackLagRelax<T, V>::updateLagMultipliers(typename MultiKnapsackLagRelax<T, V>::updater_type* updater)
 {
-    constraint_type* vConstraint = &m_model->constraints()[0];
-    // for each capacity constraint of bin 
-    for (unsigned int i = 0, ie = m_vLagMultiplier.size(); i < ie; ++i)
+    // update lagrangian multiplier 
+    // \lambda^{k+1} = \lambda^{k} + t_k (Ax-b) 
+    // vector scaling, the slackness we computed is b-Ax  
+    updater->operator()(m_iter, m_constrMatrix.numRows, m_vSlackness, m_vLagMultiplier, m_vNewLagMultiplier); 
+
+    // update objective coefficients
+    // c^{k+1, T} = c^{0, T} + \lambda^{k+1, T} (Ax-b) = c^{0, T} + \lambda^{k+1, T} A - \lambda^{k+1, T} b
+    // c^{k+1} = c^{0} + A^T \lambda^{k+1} - b^T \lambda^{k+1} = c^{k} + A^T \Delta \lambda^{k+1} - b^T \lambda^{k+1}
+    axpy(m_constrMatrix.numRows, (coefficient_value_type)-1, m_vLagMultiplier, m_vNewLagMultiplier); // m_vNewLagMultiplier becomes delta multipliers 
+    ATxPlusy((coefficient_value_type)1, m_constrMatrix, m_vNewLagMultiplier, m_vObjCoef); 
+    axpy(m_constrMatrix.numRows, (coefficient_value_type)1, m_vNewLagMultiplier, m_vLagMultiplier); // update delta multipliers of m_vNewLagMultiplier to m_vLagMultiplier
+
+    if (m_lagObjFlag)
     {
-        constraint_type const& constr = vConstraint[m_vConstraintPartition[i]]; 
-        // get slackness with current solution 
-        coefficient_value_type slackness = m_vSlackness[i];
-
-        coefficient_value_type& multiplier = m_vLagMultiplier[i];
-
-        // compute new lagrangian multiplier 
-        coefficient_value_type newMultiplier = updater->operator()(m_iter, multiplier, slackness);
-        coefficient_value_type deltaMultiplier = newMultiplier-multiplier; 
-
-        // apply lagrangian multiplier to objective 
-        // \f$ \sum_j \lambda_j (a_i x_{ij}) \f$
-        for (typename std::vector<term_type>::const_iterator it = constr.expression().terms().begin(), ite = constr.expression().terms().end(); it != ite; ++it)
-            m_vObjCoef[it->variable().id()] += it->coefficient()*deltaMultiplier;
-        // \f$ \sum_j -\lambda_j b_j \f$
-        m_objConstant -= constr.rightHandSide()*deltaMultiplier;
-
-        // update multiplier 
-        multiplier = newMultiplier; 
+        m_objConstant = -dot(m_constrMatrix.numRows, m_vConstrRhs, m_vLagMultiplier);
     }
 }
 template <typename T, typename V>
@@ -554,23 +684,18 @@ void MultiKnapsackLagRelax<T, V>::solveLag()
     variable_value_type* vVariableSol = &m_model->variableSolutions()[0];
     unsigned int i = 0; 
     variable_type const* variableGroupBegin = m_vGroupedVariable; 
-    variable_type const* variableGroupEnd;
+    variable_type const* variableGroupEnd = m_vGroupedVariable; 
     variable_type const* variable; 
-    //std::fill(m_vGroupedVariable, m_vGroupedVariable+m_model->numVariables(), 0);
+
+    // reset variables in this group 
+    std::fill(vVariableSol, vVariableSol+m_model->numVariables(), 0);
     for (i = 0; i < m_numGroups; ++i)
     {
-        // skip fixed groups 
-        if (m_vFixedGroup[i])
-            continue; 
+        variableGroupBegin = variableGroupEnd;
         variableGroupEnd = m_vGroupedVariable+m_vVariableGroupBeginIndex[i+1];
-        // reset variables in this group 
-        for (variable = variableGroupBegin; variable != variableGroupEnd; ++variable)
-            vVariableSol[variable->id()] = 0; 
         // find the bin with minimum cost for each item 
         variable = std::min_element(variableGroupBegin, variableGroupEnd, helper);
         vVariableSol[variable->id()] = 1; 
-
-        variableGroupBegin = variableGroupEnd;
     }
     // evaluate current objective 
     if (m_lagObjFlag)
@@ -580,23 +705,16 @@ void MultiKnapsackLagRelax<T, V>::solveLag()
 template <typename T, typename V>
 void MultiKnapsackLagRelax<T, V>::computeSlackness() 
 {
-    constraint_type* vConstraint = &m_model->constraints()[0];
-    // for each capacity constraint of bin 
-    for (unsigned int i = 0, ie = m_vSlackness.size(); i < ie; ++i)
-    {
-        constraint_type const& constr = vConstraint[m_vConstraintPartition[i]]; 
-        // compute slackness with current solution 
-        m_vSlackness[i] = m_model->evaluateConstraint(constr);
-    }
+    // s = b-Ax
+    bMinusAx(m_constrMatrix, &m_model->variableSolutions()[0], m_vConstrRhs, m_vSlackness);
 }
 template <typename T, typename V>
 typename MultiKnapsackLagRelax<T, V>::coefficient_value_type MultiKnapsackLagRelax<T, V>::evaluateLagObjective() const 
 {
     // evaluate current objective 
     coefficient_value_type objValue = m_objConstant; 
-    unsigned int i = 0; 
-    for (typename std::vector<coefficient_value_type>::const_iterator it = m_vObjCoef.begin(); it != m_vObjCoef.end(); ++it, ++i)
-        objValue += (*it)*m_model->variableSolution(variable_type(i));
+    for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
+        objValue += m_vObjCoef[i]*m_model->variableSolution(variable_type(i));
     return objValue; 
 }
 template <typename T, typename V>
@@ -604,7 +722,7 @@ SolverProperty MultiKnapsackLagRelax<T, V>::converge()
 {
     bool feasibleFlag = true; 
     bool convergeFlag = true; 
-    for (unsigned int i = 0, ie = m_vLagMultiplier.size(); i < ie; ++i)
+    for (typename matrix_type::index_type i = 0; i < m_constrMatrix.numRows; ++i)
     {
         coefficient_value_type multiplier = m_vLagMultiplier[i];
         coefficient_value_type slackness = m_vSlackness[i];
@@ -658,6 +776,14 @@ SolverProperty MultiKnapsackLagRelax<T, V>::postProcess(typename MultiKnapsackLa
     }
 }
 template <typename T, typename V>
+template <typename TT, typename VV>
+void MultiKnapsackLagRelax<T, V>::bMinusAx(typename MultiKnapsackLagRelax<T, V>::matrix_type const& A, VV const* x, TT const* b, TT* y) const
+{
+    // s = b-Ax
+    vcopy(A.numRows, b, y);
+    AxPlusy((coefficient_value_type)-1, A, x, y);
+}
+template <typename T, typename V>
 bool MultiKnapsackLagRelax<T, V>::printVariableGroup(std::string const& filename) const 
 {
     std::ofstream out (filename.c_str()); 
@@ -708,7 +834,7 @@ std::ostream& MultiKnapsackLagRelax<T, V>::printObjCoef(std::ostream& os) const
     os << __func__ << " iteration " << m_iter << "\n";
     os << "lagrangian objective = " << m_lagObj << "\n";
     os << "objective = " << m_model->evaluateObjective() << "\n";
-    for (unsigned int i = 0, ie = m_vObjCoef.size(); i < ie; ++i)
+    for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
         os << m_model->variableName(variable_type(i)) << " = " << m_vObjCoef[i] << "\n";
     return os; 
 }
@@ -729,7 +855,7 @@ template <typename T, typename V>
 std::ostream& MultiKnapsackLagRelax<T, V>::printLagMultiplier(std::ostream& os) const 
 {
     os << __func__ << " iteration " << m_iter << "\n";
-    for (unsigned int i = 0, ie = m_vLagMultiplier.size(); i < ie; ++i)
+    for (int i = 0; i < m_constrMatrix.numRows; ++i)
         os << "[C" << m_vConstraintPartition[i] << "] = " << m_vLagMultiplier[i] 
             << " slack = " << m_vSlackness[i]
             << "\n";
@@ -738,7 +864,7 @@ std::ostream& MultiKnapsackLagRelax<T, V>::printLagMultiplier(std::ostream& os) 
 template <typename T, typename V>
 std::ostream& MultiKnapsackLagRelax<T, V>::printConstraint(std::ostream& os, std::string const& name) const 
 {
-    for (unsigned int i = 0, ie = this->m_vSlackness.size(); i < ie; ++i)
+    for (int i = 0; i < this->m_constrMatrix.numRows; ++i)
     {
         constraint_type const& constr = this->m_model->constraints()[i];
         if (m_model->constraintName(constr) == name) 
@@ -749,6 +875,31 @@ std::ostream& MultiKnapsackLagRelax<T, V>::printConstraint(std::ostream& os, std
         }
     }
     return os; 
+}
+template <typename T, typename V>
+template <typename TT>
+void MultiKnapsackLagRelax<T, V>::printArray(unsigned int n, TT const* array, bool nonzeroFlag) const
+{
+    limboPrint(kNONE, "array of length %u = {", n); 
+    for (unsigned int i = 0; i < n; ++i)
+    {
+        if (nonzeroFlag)
+        {
+            if (array[i] != 0)
+            {
+                if (i != 0)
+                    limboPrint(kNONE, ", ");
+                limboPrint(kNONE, "%u:%g", i, (double)array[i]);
+            }
+        }
+        else 
+        {
+            if (i != 0)
+                limboPrint(kNONE, ", ");
+            limboPrint(kNONE, "%g", (double)array[i]); 
+        }
+    }
+    limboPrint(kNONE, "}\n"); 
 }
 
 /// @brief A base helper function object to update lagrangian multipliers using subgradient descent. 
@@ -772,6 +923,13 @@ class LagMultiplierUpdater
         /// @param slackness current slackness value assuming the constraint is in \f$ Ax \le b \f$ and compute \f$ b-Ax \f$
         /// @return updated multiplier value 
         virtual value_type operator()(unsigned int iter, value_type multiplier, value_type slackness) = 0;
+        /// @brief API to update lagrangian multiplier using subgradient descent 
+        /// @param iter current iteration 
+        /// @param n dimension 
+        /// @param vSlackness array of slackness 
+        /// @param vLagMultiplier array of lagrangian multipliers which will be updated 
+        /// @param vNewLagMultiplier array of new lagrangian multipliers 
+        virtual void operator()(unsigned int iter, unsigned int n, value_type const* vSlackness, value_type const* vLagMultiplier, value_type* vNewLagMultiplier) = 0; 
 };
 
 /// @brief Update lagrangian multiplier with subgradient descent 
@@ -824,14 +982,31 @@ class SubGradientDescent : public LagMultiplierUpdater<T>
         /// @return updated multiplier value 
         value_type operator()(unsigned int iter, value_type multiplier, value_type slackness)
         {
-            // avoid frequent computation of scaling factor  
-            if (m_iter != iter)
-            {
-                m_iter = iter; 
-                m_scalingFactor = pow((value_type)m_iter+1, -m_alpha)*m_beta;
-            }
-            value_type result = std::max((value_type)0, multiplier+m_scalingFactor*(-slackness));
+            // compute scaling factor 
+            computeScalingFactor(iter);
+            value_type result = std::max((value_type)0, multiplier-m_scalingFactor*slackness);
             return result; 
+        }
+        /// @brief API to update lagrangian multiplier using subgradient descent 
+        /// @param iter current iteration 
+        /// @param n dimension 
+        /// @param vSlackness array of slackness 
+        /// @param vLagMultiplier array of lagrangian multipliers 
+        /// @param vNewLagMultiplier array of new lagrangian multipliers 
+        void operator()(unsigned int iter, unsigned int n, value_type const* vSlackness, value_type const* vLagMultiplier, value_type* vNewLagMultiplier)
+        {
+            // compute scaling factor 
+            computeScalingFactor(iter);
+            value_type const* slackness = vSlackness; 
+            value_type const* multiplier = vLagMultiplier; 
+            value_type* newMultiplier = vNewLagMultiplier;
+            for (unsigned int i = 0; i < n; ++i)
+            {
+                *newMultiplier = std::max((value_type)0, *multiplier-m_scalingFactor*(*slackness));
+                ++multiplier;
+                ++slackness;
+                ++newMultiplier;
+            }
         }
     protected:
         /// @brief copy object 
@@ -842,6 +1017,17 @@ class SubGradientDescent : public LagMultiplierUpdater<T>
             m_beta = rhs.m_beta;
             m_iter = rhs.m_iter; 
             m_scalingFactor = rhs.m_scalingFactor; 
+        }
+        /// @brief compute scaling factor 
+        /// @param iter current iteration 
+        void computeScalingFactor(unsigned int iter)
+        {
+            // avoid frequent computation of scaling factor  
+            if (m_iter != iter)
+            {
+                m_iter = iter; 
+                m_scalingFactor = pow((value_type)m_iter+1, -m_alpha)*m_beta;
+            }
         }
 
         value_type m_alpha; ///< power 
@@ -1006,6 +1192,8 @@ class FeasibleSearcher
         typedef typename model_type::constraint_type constraint_type; 
         /// @brief term type 
         typedef typename model_type::term_type term_type; 
+        /// @brief matrix type 
+        typedef typename solver_type::matrix_type matrix_type;
 
         /// @brief constructor 
         /// @param solver problem solver 
@@ -1013,6 +1201,8 @@ class FeasibleSearcher
             : m_solver(solver)
             , m_model(solver->m_model)
             , m_vObjCoef(solver->m_vObjCoef)
+            , m_constrMatrix(solver->m_constrMatrix)
+            , m_vConstrRhs(solver->m_vConstrRhs)
             , m_vGroupedVariable(solver->m_vGroupedVariable)
             , m_vVariableGroupBeginIndex(solver->m_vVariableGroupBeginIndex)
             , m_numGroups(solver->m_numGroups)
@@ -1020,7 +1210,6 @@ class FeasibleSearcher
             , m_vLagMultiplier(solver->m_vLagMultiplier)
             , m_vSlackness(solver->m_vSlackness)
             , m_vScalingFactor(solver->m_vScalingFactor)
-            , m_vFixedGroup(solver->m_vFixedGroup)
             , m_objConstant(solver->m_objConstant)
             , m_lagObj(solver->m_lagObj)
             , m_iter(solver->m_iter)
@@ -1056,15 +1245,17 @@ class FeasibleSearcher
         solver_type* m_solver; ///< problem solver 
         model_type* const& m_model; ///< model for the problem 
 
-        std::vector<coefficient_value_type>& m_vObjCoef; ///< coefficients variables in objective 
+        coefficient_value_type*& m_vObjCoef; ///< coefficients variables in objective 
+        matrix_type const& m_constrMatrix; ///< constraint matrix \f$A\f$
+        coefficient_value_type* const& m_vConstrRhs; ///< constraint right hand side \f$b\f$
+
         variable_type* const& m_vGroupedVariable; ///< array of grouped variables according to item 
         unsigned int* const& m_vVariableGroupBeginIndex; ///< begin index of grouped variable
         unsigned int const& m_numGroups; ///< number of groups 
         std::vector<unsigned int> const& m_vConstraintPartition; ///< indices of constraints, the first partition is capacity constraints 
-        std::vector<coefficient_value_type>& m_vLagMultiplier; ///< array of lagrangian multipliers 
-        std::vector<coefficient_value_type>& m_vSlackness; ///< array of slackness values in each iteration, \f$ b-Ax \f$
+        coefficient_value_type*& m_vLagMultiplier; ///< array of lagrangian multipliers 
+        coefficient_value_type*& m_vSlackness; ///< array of slackness values in each iteration, \f$ b-Ax \f$
         std::vector<coefficient_value_type> const& m_vScalingFactor; ///< scaling factor for constraints and objective, last entry is for objective
-        std::vector<bool>& m_vFixedGroup; ///< groups/items that are fixed, which means we will not change the assignment 
         coefficient_value_type& m_objConstant; ///< constant value in objective from lagrangian relaxation
         coefficient_value_type& m_lagObj; ///< current objective of the lagrangian subproblem 
         unsigned int& m_iter; ///< current iteration 
@@ -1103,6 +1294,8 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
         typedef typename model_type::constraint_type constraint_type; 
         /// @brief term type 
         typedef typename model_type::term_type term_type; 
+        /// @brief matrix type 
+        typedef typename solver_type::matrix_type matrix_type;
 
         /// @brief Wrapper for the move cost of an item 
         struct VariableMoveCost 
@@ -1159,7 +1352,7 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
             std::vector<VariableMoveCost> vVariableMoveCost;
             // large cost 
             coefficient_value_type largeCost = 0; 
-            for (typename std::vector<coefficient_value_type>::const_iterator it = this->m_vObjCoef.begin(), ite = this->m_vObjCoef.end(); it != ite; ++it)
+            for (coefficient_value_type const* it = this->m_vObjCoef, * ite = this->m_vObjCoef+this->m_model->numVariables(); it != ite; ++it)
                 largeCost += (*it > 0)? *it : 0; 
             do 
             {
@@ -1168,13 +1361,9 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
                 numNegativeSlacksPrev = numNegativeSlacks; 
                 numNegativeSlacks = 0; 
                 // go through all bins with negative slack 
-                for (unsigned int i = 0, ie = this->m_vSlackness.size(); i < ie; ++i)
+                for (typename matrix_type::index_type i = 0; i < this->m_constrMatrix.numRows; ++i)
                 {
                     coefficient_value_type slackness = this->m_vSlackness[i];
-#if 0
-                    if (this->m_model->constraintName(this->m_model->constraints()[i]) == "br1986" || this->m_model->constraintName(this->m_model->constraints()[i]) == "br1958")
-                        limboPrint(kDEBUG, "slackness[%s] = %g\n", this->m_model->constraintName(this->m_model->constraints()[i]).c_str(), (double)slackness);
-#endif
                     if (slackness < 0)
                     {
                         constraint_type const& constr = this->m_model->constraints()[i];
@@ -1192,10 +1381,6 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
                                 // increase the cost of assigning the item to this bin 
                                 //this->m_vObjCoef[it->variable.id()] += (it->moveCost+1)*100; 
                                 this->m_vObjCoef[it->variable.id()] = largeCost; 
-#if 0
-                                if (this->m_model->constraintName(constr) == "br1986" || this->m_model->constraintName(constr) == "br1958")
-                                    limboPrint(kDEBUG, "kick out %s %g\n", this->m_model->variableName(it->variable).c_str(), (double)this->m_vObjCoef[it->variable.id()]); 
-#endif
                                 // update total capacity of items moving out 
                                 slackness += it->capacity; 
                                 // mark as processed 
@@ -1207,9 +1392,6 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
                         ++numNegativeSlacks; 
                     }
                 }
-#if 1
-                limboPrint(kDEBUG, "numNegativeSlacks = %u\n", numNegativeSlacks); 
-#endif
                 if (numNegativeSlacks == 0)
                     break; 
                 // run more iterations with the updated coefficients 
@@ -1294,6 +1476,8 @@ class SearchByBinSmoothing : public SearchByAdjustCoefficient<T, V>
         typedef typename model_type::constraint_type constraint_type; 
         /// @brief term type 
         typedef typename model_type::term_type term_type; 
+        /// @brief matrix type 
+        typedef typename solver_type::matrix_type matrix_type;
 
         /// @brief Wrapper for the move cost of an item 
         struct VariableMoveCost 
@@ -1330,11 +1514,11 @@ class SearchByBinSmoothing : public SearchByAdjustCoefficient<T, V>
         /// @brief Compare constraints by their slackness 
         struct CompareConstraintSlack
         {
-            std::vector<coefficient_value_type> const& vSlackness; ///< array of slackness 
+            coefficient_value_type const* vSlackness; ///< array of slackness 
 
             /// @brief constructor 
             /// @param v array of slackness 
-            CompareConstraintSlack(std::vector<coefficient_value_type> const& v) : vSlackness(v) {}
+            CompareConstraintSlack(coefficient_value_type const* v) : vSlackness(v) {}
             /// @param i constraint index 
             /// @param j constraint index 
             /// @return true if constraint \a i has smaller slack than \a j
@@ -1366,7 +1550,7 @@ class SearchByBinSmoothing : public SearchByAdjustCoefficient<T, V>
             std::vector<unsigned int> vNegativeSlackConstr; 
 
             // go through all bins with negative slack 
-            for (unsigned int i = 0, ie = this->m_vSlackness.size(); i < ie; ++i)
+            for (typename matrix_type::index_type i = 0; i < this->m_constrMatrix.numRows; ++i)
             {
                 coefficient_value_type slackness = this->m_vSlackness[i];
                 if (slackness < 0)
@@ -1380,9 +1564,6 @@ class SearchByBinSmoothing : public SearchByAdjustCoefficient<T, V>
             for (std::vector<unsigned int>::const_iterator it = vNegativeSlackConstr.begin(), ite = vNegativeSlackConstr.end(); it != ite; ++it)
             {
                 constraint_type const& constr = this->m_model->constraints()[*it]; 
-#if 0
-                limboPrint(kDEBUG, "processing bin row %s\n", this->m_model->constraintName(constr).c_str()); 
-#endif
 
                 while (this->m_vSlackness[*it] < 0)
                 {
@@ -1432,15 +1613,6 @@ class SearchByBinSmoothing : public SearchByAdjustCoefficient<T, V>
                     break; 
                 }
             }
-#if 1
-            // go through all bins with negative slack 
-            this->computeSlackness(); 
-            unsigned int numNegativeSlacks = 0; 
-            for (unsigned int i = 0, ie = this->m_vSlackness.size(); i < ie; ++i)
-                numNegativeSlacks += (this->m_vSlackness[i] < 0)? 1 : 0; 
-            limboPrint(kDEBUG, "numNegativeSlacks = %u\n", numNegativeSlacks);
-#endif
-
             return status; 
         }
     protected:
@@ -1448,7 +1620,7 @@ class SearchByBinSmoothing : public SearchByAdjustCoefficient<T, V>
         void mapVariable2Constraint()
         {
             this->m_mVariable2Constr.resize(this->m_model->numVariables());
-            for (unsigned int i = 0, ie = this->m_vSlackness.size(); i < ie; ++i)
+            for (typename matrix_type::index_type i = 0; i < this->m_constrMatrix.numRows; ++i)
             {
                 constraint_type const& constr = this->m_model->constraints()[i];
                 unsigned int j = 0; 
@@ -1564,14 +1736,6 @@ class SearchByCombinedStrategy : public FeasibleSearcher<T, V>
             SolverProperty status = m_searcherCoeff(updater); 
             if (status == INFEASIBLE)
                 status = m_searcherSmoothing(updater);
-#if 0
-            // go through all bins with negative slack 
-            for (unsigned int i = 0, ie = this->m_vSlackness.size(); i < ie; ++i)
-            {
-                if (this->m_vSlackness[i] < 0)
-                    limboPrint(kDEBUG, "bin %s %g\n", this->m_model->constraintName(this->m_model->constraints()[i]).c_str(), (double)this->m_vSlackness[i]);
-            }
-#endif
             return status; 
         }
 

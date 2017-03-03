@@ -78,6 +78,8 @@ template <typename T>
 class LinearConstraint;
 template <typename T, typename V>
 class LinearModel; 
+template <typename T, typename I, int StartingIndex>
+struct MatrixCSR; 
 
 /// @brief Describe variables in optimization problem 
 /// @tparam T coefficient type of the variable, not the value type of variable itself. It is necessary for operator overloading 
@@ -572,10 +574,19 @@ class LinearExpression
         {
         }
 
+        /// @brief swap with an expression 
+        /// @param rhs right hand side 
+        void swap(LinearExpression& rhs)
+        {
+            m_vTerm.swap(rhs.m_vTerm); 
+        }
         /// @return terms 
         std::vector<term_type> const& terms() const {return m_vTerm;}
         /// @brief clear expression 
         void clear() {m_vTerm.clear();}
+        /// @brief reserve space for terms 
+        /// @param n number of terms 
+        void reserve(unsigned int n) {m_vTerm.reserve(n);}
 
         /// overload plus 
         /// @param expr expression 
@@ -905,7 +916,42 @@ class LinearConstraint
             m_expr *= factor; 
             m_rhs *= factor; 
         }
+        /// @brief reserve space for expression terms 
+        /// @param n number of terms in expression 
+        void reserve(unsigned int n) {m_expr.reserve(n);}
 
+        /// overload plus assignment  
+        /// @param term right hand side is a term 
+        /// @return the object 
+        LinearConstraint& operator+=(term_type const& term)
+        {
+            m_expr += term; 
+            return *this; 
+        }
+        /// overload plus assignment for expression 
+        /// @param expr right hand side is an expression
+        /// @return the object 
+        LinearConstraint& operator+=(expression_type const& expr)
+        {
+            m_expr += expr; 
+            return *this; 
+        }
+        /// overload minus assignment  
+        /// @param term right hand side is a term 
+        /// @return the object 
+        LinearConstraint& operator-=(term_type term)
+        {
+            m_expr -= term; 
+            return *this;
+        }
+        /// overload minus assignment for expression  
+        /// @param expr right hand side is an expression
+        /// @return the object 
+        LinearConstraint& operator-=(expression_type const& expr)
+        {
+            m_expr -= expr; 
+            return *this;
+        }
     protected:
         /// @brief copy object 
         /// @param rhs right hand side 
@@ -1030,12 +1076,24 @@ class LinearModel : public LpParser::LpDataBase
         /// @param constr constraint 
         /// @return constraint name 
         std::string const& constraintName(constraint_type const& constr) const {return m_vConstraintName[constr.id()];}
+        /// @return array of constraint names 
+        std::vector<std::string> const& constraintNames() const {return m_vConstraintName;}
+        /// @return array of constraint names 
+        std::vector<std::string>& constraintNames() {return m_vConstraintName;}
         /// @return objective 
         expression_type const& objective() const {return m_objective;}
+        /// @brief set objective 
         /// @param expr objective 
         void setObjective(expression_type const& expr) 
         {
             m_objective = expr;
+            m_objective.simplify();
+        }
+        /// @brief set objective by swaping with the expression 
+        /// @param expr objective 
+        void emplaceObjective(expression_type& expr)
+        {
+            m_objective.swap(expr); 
             m_objective.simplify();
         }
         /// @return optimization objective, whether maximize or minimize the objective 
@@ -1099,6 +1157,16 @@ class LinearModel : public LpParser::LpDataBase
         void reserveConstraints(unsigned int n)
         {
             m_vConstraint.reserve(n);
+            m_vConstraintName.reserve(n);
+        }
+        /// @brief resize constraints 
+        /// @param n number of constraints 
+        void resizeConstraints(unsigned int n)
+        {
+            m_vConstraint.resize(n); 
+            m_vConstraintName.resize(n);
+            for (unsigned int i = 0; i < n; ++i)
+                m_vConstraint[i].setId(i);
         }
         /// @brief scale objective 
         /// @param factor scaling factor 
@@ -1405,6 +1473,202 @@ class LinearModel : public LpParser::LpDataBase
 
         std::map<std::string, variable_type> m_mName2Variable; ///< mapping from variable name to variable, only used when reading from files 
 };
+
+/// @brief Compressed sparse row (CSR) matrix 
+/// @tparam T value type 
+/// @tparam I index type 
+/// @tparam StartingIndex zero-based indexing or one-based indexing 
+template <typename T, typename I, int StartingIndex = 1>
+struct MatrixCSR 
+{
+    /// @brief value type 
+    typedef T value_type; 
+    /// @brief index type 
+    typedef I index_type; 
+
+    value_type* vElement; ///< Flatten data values. A real or complex array that contains the non-zero elements of A. Values of the non-zero elements of A are mapped into the values array using the row-major storage mapping described above.
+    index_type* vColumn; ///< Element i of the integer array columns is the number of the column in A that contains the i-th value in the values array.
+    index_type* vRowBeginIndex; ///< Element j of this integer array gives the index of the element in the values array that is first non-zero element in a row j of A. Note that this index is equal to vRowBeginIndex(j) - vRowBeginIndex(1)+StartingIndex.
+    index_type numRows; ///< number of rows, not in the CSR format 
+    index_type numColumns; ///< number of columns, not in the CSR format 
+    index_type numElements; ///< number of non-zero elements 
+    static index_type s_startingIndex; ///< starting index, like zero-based indexing or one-based indexing 
+
+    /// @brief constructor
+    MatrixCSR()
+        : vElement(NULL)
+        , vColumn(NULL)
+        , vRowBeginIndex(NULL)
+        , numRows(0)
+        , numColumns(0)
+        , numElements(0)
+    {
+    }
+    /// @brief copy constructor 
+    MatrixCSR(MatrixCSR const& rhs)
+    {
+        copy(rhs);
+    }
+    /// @brief assignment 
+    MatrixCSR& operator=(MatrixCSR const& rhs)
+    {
+        if (this != &rhs)
+            copy(rhs);
+        return *this;
+    }
+    /// @brief destructor 
+    ~MatrixCSR()
+    {
+        reset();
+    }
+
+    /// @brief Initialize matrix 
+    /// @param nr number of rows 
+    /// @param nc number of columns 
+    /// @param nv number of non-zero values 
+    void initialize(index_type nr, index_type nc, index_type nv)
+    {
+        reset();
+        numRows = nr; 
+        numColumns = nc; 
+        numElements = nv; 
+        vElement = new value_type [numElements];
+        vColumn = new index_type [numElements];
+        vRowBeginIndex = new index_type [numRows+1];
+    }
+
+    /// @brief Destroy matrix and recycle memory 
+    void reset() 
+    {
+        if (vElement)
+            delete [] vElement; 
+        if (vColumn)
+            delete [] vColumn; 
+        if (vRowBeginIndex)
+            delete [] vRowBeginIndex;
+        vElement = NULL;
+        vColumn = NULL;
+        vRowBeginIndex = NULL;
+        numRows = 0; 
+        numColumns = 0; 
+        numElements = 0; 
+    }
+
+    /// @brief copy object 
+    /// @param rhs right hand side 
+    void copy(MatrixCSR const& rhs)
+    {
+        reset(); 
+        numRows = rhs.numRows; 
+        numColumns = rhs.numColumns; 
+        numElements = rhs.numElements;
+        if (rhs.vElement)
+        {
+            vElement = new value_type [numElements];
+            vColumn = new index_type [numElements]; 
+            vRowBeginIndex = new index_type [numRows+1]; 
+            std::copy(rhs.vElement, rhs.vElement+numElements, vElement); 
+            std::copy(rhs.vColumn, rhs.vColumn+numElements, vColumn); 
+            std::copy(rhs.vRowBeginIndex, rhs.vRowBeginIndex+numRows+1, vRowBeginIndex);
+        }
+    }
+
+    /// @brief get element 
+    /// @param i row index 
+    /// @param j column index 
+    /// @return element found 
+    value_type const& at(index_type i, index_type j) const
+    {
+#ifdef DEBUG_SOLVERS 
+        limboAssert(i < numRows); 
+        limboAssert(i+1 <= numRows);
+#endif
+        index_type* elementColumnBegin = vColumn+vRowBeginIndex[i]-vRowBeginIndex[0];
+        index_type* elementColumnEnd = vColumn+vRowBeginIndex[i+1]-vRowBeginIndex[0];
+        // binary search to see if any element match column j 
+        index_type* found = std::lower_bound(elementColumnBegin, elementColumnEnd, j); 
+        if (found != elementColumnEnd && *found == j)
+        {
+#ifdef DEBUG_SOLVERS
+            limboAssert(std::distance(vColumn, found)-s_startingIndex < numElements);
+#endif
+            return vElement[std::distance(vColumn, found)]; 
+        }
+        else 
+            return 0; 
+    }
+    /// @brief get element 
+    /// @param i row index 
+    /// @param j column index 
+    /// @return element found 
+    value_type& at(index_type i, index_type j)
+    {
+#ifdef DEBUG_SOLVERS 
+        limboAssert(i < numRows); 
+        limboAssert(i+1 <= numRows);
+#endif
+        index_type* elementColumnBegin = vColumn+vRowBeginIndex[i]-vRowBeginIndex[0];
+        index_type* elementColumnEnd = vColumn+vRowBeginIndex[i+1]-vRowBeginIndex[0];
+        // binary search to see if any element match column j 
+        index_type* found = std::lower_bound(elementColumnBegin, elementColumnEnd, j); 
+        if (found != elementColumnEnd && *found == j)
+        {
+#ifdef DEBUG_SOLVERS
+            limboAssert(std::distance(vColumn, found)-s_startingIndex < numElements);
+#endif
+            return vElement[std::distance(vColumn, found)-s_startingIndex]; 
+        }
+        else 
+            return 0; 
+    }
+
+    /// @brief Set from array of constraints 
+    /// @param nr number of rows, i.e, number of constraints 
+    /// @param nc number of columns, i.e., number of variables 
+    /// @param vConstraint array of constraints 
+    void set(index_type nr, index_type nc, LinearConstraint<value_type> const* vConstraint) 
+    {
+        numRows = nr; 
+        numColumns = nc; 
+        numElements = 0; 
+        vRowBeginIndex = new index_type [numRows+1]; 
+        vRowBeginIndex[0] = s_startingIndex;
+
+        typedef LinearConstraint<value_type> constraint_type;
+        constraint_type const* it = vConstraint; 
+        constraint_type const* ite = vConstraint+nr; 
+        // initialize vRowBeginIndex 
+        index_type i = 1; 
+        for (; it != ite; ++it, ++i)
+        {
+#ifdef DEBUG_SOLVERS
+            limboAssert(i <= numRows); 
+#endif
+            vRowBeginIndex[i] = vRowBeginIndex[i-1]+it->expression().terms().size(); 
+        }
+        // last element of vRowBeginIndex denotes the total number of elements 
+        numElements = vRowBeginIndex[numRows]; 
+
+        // initialize vElement and vColumn 
+        vElement = new value_type [numElements]; 
+        vColumn = new index_type [numElements];
+        i = 0; 
+        for (it = vConstraint; it != ite; ++it)
+        {
+            for (typename std::vector<typename constraint_type::term_type>::const_iterator itt = it->expression().terms().begin(), itte = it->expression().terms().end(); itt != itte; ++itt, ++i)
+            {
+#ifdef DEBUG_SOLVERS
+                limboAssert(i < numElements);
+#endif
+                vElement[i] = itt->coefficient(); 
+                vColumn[i] = itt->variable().id()+s_startingIndex;
+            }
+        }
+    }
+};
+
+template <typename T, typename I, int StartingIndex>
+typename MatrixCSR<T, I, StartingIndex>::index_type MatrixCSR<T, I, StartingIndex>::s_startingIndex = StartingIndex; 
 
 } // namespace solvers 
 } // namespace limbo 
