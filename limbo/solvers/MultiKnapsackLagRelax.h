@@ -178,7 +178,7 @@ class MultiKnapsackLagRelax
             /// @param id constraint index 
             bool operator()(unsigned int id) const 
             {
-                return vConstraint[id].sense() != '='; 
+                return this->operator()(vConstraint[id]); 
             }
         };
 
@@ -399,10 +399,10 @@ void MultiKnapsackLagRelax<T, V>::copy(MultiKnapsackLagRelax<T, V> const& rhs)
     // copy variable groups 
     if (rhs.m_vGroupedVariable)
     {
-        m_vGroupedVariable = new variable_type [m_model->numVariables()]; 
+        m_vGroupedVariable = new variable_type [rhs.m_vVariableGroupBeginIndex[rhs.m_numGroups]]; 
         m_numGroups = rhs.m_numGroups;
         m_vVariableGroupBeginIndex = new unsigned int [m_numGroups+1];
-        std::copy(rhs.m_vGroupedVariable, rhs.m_vGroupedVariable+m_model->numVariables(), m_vGroupedVariable); 
+        std::copy(rhs.m_vGroupedVariable, rhs.m_vGroupedVariable+rhs.m_vVariableGroupBeginIndex[rhs.m_numGroups], m_vGroupedVariable); 
         std::copy(rhs.m_vVariableGroupBeginIndex, rhs.m_vVariableGroupBeginIndex+rhs.m_numGroups+1, m_vVariableGroupBeginIndex);
     }
 
@@ -569,9 +569,20 @@ void MultiKnapsackLagRelax<T, V>::prepare()
     for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
         m_vObjCoef[it->variable().id()] += it->coefficient();
 
+    // for fixed variables, set correct solutions 
+    unsigned int i = 0; 
+    for (unsigned int ie = m_model->numVariables(); i < ie; ++i)
+    {
+        variable_type var (i); 
+        variable_value_type lowerBound = m_model->variableLowerBound(var); 
+        variable_value_type upperBound = m_model->variableUpperBound(var); 
+        if (lowerBound == upperBound)
+            m_model->setVariableSolution(var, lowerBound); 
+    }
+
     // partition all capacity constraints to the beginning of the array 
     m_vConstraintPartition.resize(m_model->constraints().size()); 
-    unsigned int i = 0; 
+    i = 0; 
     for (unsigned int ie = m_model->constraints().size(); i < ie; ++i)
         m_vConstraintPartition[i] = i; 
     std::vector<unsigned int>::iterator bound = std::partition(m_vConstraintPartition.begin(), m_vConstraintPartition.end(), CapacityConstraintPred(m_model->constraints()));
@@ -636,10 +647,16 @@ void MultiKnapsackLagRelax<T, V>::prepare()
     // the variables for one item will be grouped 
     // I assume the rest constraints are all single item constraints 
     m_numGroups = std::distance(bound, m_vConstraintPartition.end());
-    m_vGroupedVariable = new variable_type [m_model->numVariables()];
+    unsigned int numGroupElements = 0; // it may be smaller than number of variables due to the existence of fixed variables 
+    for (std::vector<unsigned int>::iterator it = bound, ite = m_vConstraintPartition.end(); it != ite; ++it, ++i)
+    {
+        constraint_type const& constr = m_model->constraints()[*it];
+        numGroupElements += constr.expression().terms().size();
+    }
+    m_vGroupedVariable = new variable_type [numGroupElements];
     m_vVariableGroupBeginIndex = new unsigned int [m_numGroups+1]; // append a dummy begin index as the ending index for last group 
     // append a dummy begin index as the ending index for last group 
-    m_vVariableGroupBeginIndex[m_numGroups] = m_model->numVariables(); 
+    m_vVariableGroupBeginIndex[m_numGroups] = numGroupElements; 
     i = 0; // use as group index 
     unsigned int j = 0; // use as group variable index 
     for (std::vector<unsigned int>::iterator it = bound, ite = m_vConstraintPartition.end(); it != ite; ++it, ++i)
@@ -659,6 +676,7 @@ void MultiKnapsackLagRelax<T, V>::prepare()
 template <typename T, typename V>
 void MultiKnapsackLagRelax<T, V>::updateLagMultipliers(typename MultiKnapsackLagRelax<T, V>::updater_type* updater)
 {
+#if 1
     // update lagrangian multiplier 
     // \lambda^{k+1} = \lambda^{k} + t_k (Ax-b) 
     // vector scaling, the slackness we computed is b-Ax  
@@ -670,6 +688,14 @@ void MultiKnapsackLagRelax<T, V>::updateLagMultipliers(typename MultiKnapsackLag
     axpy(m_constrMatrix.numRows, (coefficient_value_type)-1, m_vLagMultiplier, m_vNewLagMultiplier); // m_vNewLagMultiplier becomes delta multipliers 
     ATxPlusy((coefficient_value_type)1, m_constrMatrix, m_vNewLagMultiplier, m_vObjCoef); 
     axpy(m_constrMatrix.numRows, (coefficient_value_type)1, m_vNewLagMultiplier, m_vLagMultiplier); // update delta multipliers of m_vNewLagMultiplier to m_vLagMultiplier
+#else 
+    updater->operator()(m_iter, m_constrMatrix.numRows, m_vSlackness, m_vLagMultiplier, m_vLagMultiplier); 
+
+    std::fill(m_vObjCoef, m_vObjCoef+m_model->numVariables(), 0);
+    for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
+        m_vObjCoef[it->variable().id()] += it->coefficient();
+    ATxPlusy((coefficient_value_type)1, m_constrMatrix, m_vLagMultiplier, m_vObjCoef); 
+#endif
 
     if (m_lagObjFlag)
     {
@@ -856,7 +882,7 @@ std::ostream& MultiKnapsackLagRelax<T, V>::printLagMultiplier(std::ostream& os) 
 {
     os << __func__ << " iteration " << m_iter << "\n";
     for (int i = 0; i < m_constrMatrix.numRows; ++i)
-        os << "[C" << m_vConstraintPartition[i] << "] = " << m_vLagMultiplier[i] 
+        os << "[" << m_model->constraintName(m_model->constraints().at(m_vConstraintPartition[i])) << "] = " << m_vLagMultiplier[i] 
             << " slack = " << m_vSlackness[i]
             << "\n";
     return os; 
@@ -1404,6 +1430,8 @@ class SearchByAdjustCoefficient : public FeasibleSearcher<T, V>
         /// @brief construct mapping from variables to groups 
         void mapVariable2Group()
         {
+            // be careful that some variables may not belong to any group 
+            // I do not handle this since it should not be a problem if the variables are accessed from constraints 
             this->m_vVariable2Group.assign(this->m_model->numVariables(), std::numeric_limits<unsigned int>::max());
             for (unsigned int i = 0; i < this->m_numGroups; ++i)
             {
