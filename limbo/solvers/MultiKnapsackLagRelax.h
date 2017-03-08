@@ -524,9 +524,13 @@ SolverProperty MultiKnapsackLagRelax<T, V>::solveSubproblems(typename MultiKnaps
             solveLag(); 
         computeSlackness();
 #ifdef DEBUG_MULTIKNAPSACKLAGRELAX
-        printVariableGroup(std::cout);
-        printObjCoef(std::cout);
-        printLagMultiplier(std::cout);
+        limboPrint(kDEBUG, "iteration %u with %u negative slacks, %g lagrangian objective, %g objective\n", m_iter, numNegativeSlackConstraints(false), evaluateLagObjective(), m_model->evaluateObjective());
+        char buf[64];
+        limboSPrint(kNONE, buf, "lag%u", m_iter);
+        std::ofstream out (buf);
+        printObjCoef(out);
+        printLagMultiplier(out);
+        out.close();
 #endif
         if ((status = converge()) == OPTIMAL || m_iter+1 == endIter)
             break; 
