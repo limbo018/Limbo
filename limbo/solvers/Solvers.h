@@ -875,6 +875,8 @@ class LinearConstraint
         expression_type const& expression() const {return m_expr;}
         /// @param expr expression
         void setExpression(expression_type const& expr) {m_expr = expr;}
+        /// @param expr expression 
+        void emplaceExpression(expression_type& expr) {m_expr.swap(expr);}
         /// @return right hand side constant 
         coefficient_value_type rightHandSide() const {return m_rhs;}
         /// @param rhs right hand side 
@@ -883,6 +885,15 @@ class LinearConstraint
         char sense() const {return m_sense;}
         /// @param s sense 
         void setSense(char s) {m_sense = s;}
+        /// @brief swap with a constraint 
+        /// @param rhs constraint at right hand side 
+        void swap(LinearConstraint& rhs)
+        {
+            std::swap(m_id, rhs.m_id);
+            m_expr.swap(rhs.m_expr); 
+            std::swap(m_rhs, rhs.m_rhs);
+            std::swap(m_sense, rhs.m_sense); 
+        }
         /// @brief simplify expression by merge terms of the same variables 
         void simplify()
         {
@@ -1030,46 +1041,70 @@ class LinearModel : public LpParser::LpDataBase
         /// @param constr constraint 
         /// @param name constraint name 
         /// @return true if added 
-        bool addConstraint(constraint_type constr, std::string name = "") 
+        bool addConstraint(constraint_type const& constr, std::string name = "") 
         {
-            // simplify constraint 
-            constr.simplify();
+            expression_type expr = constr.expression();
+            return emplaceConstraint(expr, constr.sense(), constr.rightHandSide(), name);
+        }
+        /// @brief emplace a constraint 
+        /// @param expr expression 
+        /// @param sense sense 
+        /// @param rhs right hand side 
+        /// @param name constraint name 
+        /// @return true if added 
+        bool emplaceConstraint(expression_type& expr, char sense, coefficient_value_type rhs, std::string name = "")
+        {
+            // simplify expression 
+            expr.simplify();
             // verify whether the constraint is actually a bound constraint 
-            std::vector<term_type> const& vTerm = constr.expression().terms();
+            std::vector<term_type> const& vTerm = expr.terms();
             if (vTerm.empty())
                 return false;
             if (vTerm.size() == 1) // one term, bound constraint  
             {
                 term_type const& term = vTerm.front();
-                switch (constr.sense())
+                switch (sense)
                 {
                     case '>':
                         if (term.coefficient() > 0) // lower bound 
-                            m_vVariableProperty.at(term.variable().id()).updateLowerBound(constr.rightHandSide()/term.coefficient());
+                            m_vVariableProperty.at(term.variable().id()).updateLowerBound(rhs/term.coefficient());
                         else if (term.coefficient() < 0) // upper bound 
-                            m_vVariableProperty.at(term.variable().id()).updateUpperBound(constr.rightHandSide()/term.coefficient());
+                            m_vVariableProperty.at(term.variable().id()).updateUpperBound(rhs/term.coefficient());
+                        else 
+                            return false; 
                         break; 
                     case '<':
                         if (term.coefficient() > 0) // upper bound 
-                            m_vVariableProperty.at(term.variable().id()).updateUpperBound(constr.rightHandSide()/term.coefficient());
+                            m_vVariableProperty.at(term.variable().id()).updateUpperBound(rhs/term.coefficient());
                         else if (term.coefficient() < 0) // lower bound 
-                            m_vVariableProperty.at(term.variable().id()).updateLowerBound(constr.rightHandSide()/term.coefficient());
+                            m_vVariableProperty.at(term.variable().id()).updateLowerBound(rhs/term.coefficient());
+                        else 
+                            return false; 
                         break; 
                     case '=':
-                        // lower bound 
-                        m_vVariableProperty.at(term.variable().id()).updateLowerBound(constr.rightHandSide()/term.coefficient());
-                        // upper bound 
-                        m_vVariableProperty.at(term.variable().id()).updateUpperBound(constr.rightHandSide()/term.coefficient());
+                        if (term.coefficient() != 0)
+                        {
+                            // lower bound 
+                            m_vVariableProperty.at(term.variable().id()).updateLowerBound(rhs/term.coefficient());
+                            // upper bound 
+                            m_vVariableProperty.at(term.variable().id()).updateUpperBound(rhs/term.coefficient());
+                        }
+                        else 
+                            return false; 
                         break; 
                     default:
-                        limboAssertMsg(0, "Unknown sense %c", constr.sense());
+                        limboAssertMsg(0, "Unknown sense %c", sense);
                 }
             }
             else // actual constraint 
             {
-                constr.setId(m_vConstraint.size()); 
-                m_vConstraint.push_back(constr);
+                m_vConstraint.push_back(constraint_type()); 
                 m_vConstraintName.push_back(name);
+                constraint_type& constr = m_vConstraint.back(); 
+                constr.setId(m_vConstraint.size()-1); 
+                constr.emplaceExpression(expr); 
+                constr.setSense(sense); 
+                constr.setRightHandSide(rhs); 
             }
             return true; 
         }
@@ -1574,10 +1609,10 @@ struct MatrixCSR
     }
 
     /// @brief get element 
-    /// @param i row index 
-    /// @param j column index 
+    /// @param i row index, starting from 0  
+    /// @param j column index, starting from 0
     /// @return element found 
-    value_type const& at(index_type i, index_type j) const
+    value_type at(index_type i, index_type j) const
     {
 #ifdef DEBUG_SOLVERS 
         limboAssert(i < numRows); 
@@ -1586,37 +1621,13 @@ struct MatrixCSR
         index_type* elementColumnBegin = vColumn+vRowBeginIndex[i]-vRowBeginIndex[0];
         index_type* elementColumnEnd = vColumn+vRowBeginIndex[i+1]-vRowBeginIndex[0];
         // binary search to see if any element match column j 
-        index_type* found = std::lower_bound(elementColumnBegin, elementColumnEnd, j); 
-        if (found != elementColumnEnd && *found == j)
+        index_type* found = std::lower_bound(elementColumnBegin, elementColumnEnd, j+s_startingIndex); 
+        if (found != elementColumnEnd && *found == j+s_startingIndex)
         {
 #ifdef DEBUG_SOLVERS
             limboAssert(std::distance(vColumn, found)-s_startingIndex < numElements);
 #endif
             return vElement[std::distance(vColumn, found)]; 
-        }
-        else 
-            return 0; 
-    }
-    /// @brief get element 
-    /// @param i row index 
-    /// @param j column index 
-    /// @return element found 
-    value_type& at(index_type i, index_type j)
-    {
-#ifdef DEBUG_SOLVERS 
-        limboAssert(i < numRows); 
-        limboAssert(i+1 <= numRows);
-#endif
-        index_type* elementColumnBegin = vColumn+vRowBeginIndex[i]-vRowBeginIndex[0];
-        index_type* elementColumnEnd = vColumn+vRowBeginIndex[i+1]-vRowBeginIndex[0];
-        // binary search to see if any element match column j 
-        index_type* found = std::lower_bound(elementColumnBegin, elementColumnEnd, j); 
-        if (found != elementColumnEnd && *found == j)
-        {
-#ifdef DEBUG_SOLVERS
-            limboAssert(std::distance(vColumn, found)-s_startingIndex < numElements);
-#endif
-            return vElement[std::distance(vColumn, found)-s_startingIndex]; 
         }
         else 
             return 0; 
