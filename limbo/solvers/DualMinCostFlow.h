@@ -641,7 +641,7 @@ class CapacityScaling : public MinCostFlowSolver<T, V>
             alg_type alg (d->graph());
 
             // 2. run 
-            typename alg_type::ProblemType status = alg.reset().resetParams()
+            typename alg_type::ProblemType status = alg.resetParams()
                 //.lowerMap(d->lowerMap())
                 .upperMap(d->upperMap())
                 .costMap(d->costMap())
@@ -739,7 +739,7 @@ class CostScaling : public MinCostFlowSolver<T, V>
             alg_type alg (d->graph());
 
             // 2. run 
-            typename alg_type::ProblemType status = alg.reset().resetParams()
+            typename alg_type::ProblemType status = alg.resetParams()
                 //.lowerMap(d->lowerMap())
                 .upperMap(d->upperMap())
                 .costMap(d->costMap())
@@ -837,7 +837,7 @@ class NetworkSimplex : public MinCostFlowSolver<T, V>
             alg_type alg (d->graph());
 
             // 2. run 
-            typename alg_type::ProblemType status = alg.reset().resetParams()
+            typename alg_type::ProblemType status = alg.resetParams()
                 //.lowerMap(d->lowerMap())
                 .upperMap(d->upperMap())
                 .costMap(d->costMap())
@@ -933,7 +933,7 @@ class CycleCanceling : public MinCostFlowSolver<T, V>
             alg_type alg (d->graph());
 
             // 2. run 
-            typename alg_type::ProblemType status = alg.reset().resetParams()
+            typename alg_type::ProblemType status = alg.resetParams()
                 //.lowerMap(d->lowerMap())
                 .upperMap(d->upperMap())
                 .costMap(d->costMap())

@@ -31,7 +31,11 @@ class GurobiParameters
 {
     public:
         /// @brief constructor 
-        GurobiParameters() {}
+        GurobiParameters() 
+            : m_outputFlag(0)
+            , m_numThreads(std::numeric_limits<int>::max())
+        {
+        }
         /// @brief destructor 
         virtual ~GurobiParameters() {}
         /// @brief customize environment 
@@ -39,13 +43,21 @@ class GurobiParameters
         virtual void operator()(GRBEnv& env) const 
         {
             // mute the log from the LP solver
-            env.set(GRB_IntParam_OutputFlag, 0);
+            env.set(GRB_IntParam_OutputFlag, m_outputFlag);
+            if (m_numThreads > 0 && m_numThreads != std::numeric_limits<int>::max())
+                env.set(GRB_IntParam_Threads, m_numThreads);
         }
         /// @brief customize model 
         /// @param model Gurobi model 
         virtual void operator()(GRBModel& /*model*/) const 
         {
         }
+
+        void setOutputFlag(int v) {m_outputFlag = v;}
+        void setNumThreads(int v) {m_numThreads = v;}
+    protected:
+        int m_outputFlag; ///< control log from Gurobi 
+        int m_numThreads; ///< number of threads 
 };
 
 /// @brief Gurobi API with @ref limbo::solvers::LinearModel
