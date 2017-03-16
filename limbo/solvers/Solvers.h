@@ -119,6 +119,9 @@ class Variable
         /// @param id index 
         void setId(unsigned int id) {m_id = id;}
 
+        /// @return true if the variable is valid 
+        bool valid() const {return m_id != std::numeric_limits<unsigned int>::max();}
+
         /// overload equal 
         /// @param rhs right hand side 
         /// @return true if the indices of variables are equal 
@@ -1153,12 +1156,36 @@ class LinearModel : public LpParser::LpDataBase
                 limboSPrint(kNONE, buf, "%s", m_vVariableProperty.at(var.id()).name().c_str());
             return buf; 
         }
+        /// @brief set variable name 
+        /// @param var variable 
+        /// @param name name 
+        void setVariableName(variable_type const& var, std::string const& name) {m_vVariableProperty[var.id()].setName(name);}
         /// @return lower bound of variables 
         variable_value_type variableLowerBound(variable_type const& var) {return m_vVariableProperty.at(var.id()).lowerBound();}
+        /// @brief set variable lower bound 
+        /// @param var variable 
+        /// @param lb lower bound 
+        void setVariableLowerBound(variable_type const& var, variable_value_type lb) {m_vVariableProperty[var.id()].setLowerBound(lb);}
+        /// @brief update variable lower bound 
+        /// @param var variable 
+        /// @param lb lower bound 
+        void updateVariableLowerBound(variable_type const& var, variable_value_type lb) {m_vVariableProperty[var.id()].updateLowerBound(lb);}
         /// @return upper bound of variables 
         variable_value_type variableUpperBound(variable_type const& var) {return m_vVariableProperty.at(var.id()).upperBound();}
+        /// @brief set variable upper bound 
+        /// @param var variable 
+        /// @param ub upper bound 
+        void setVariableUpperBound(variable_type const& var, variable_value_type ub) {m_vVariableProperty[var.id()].setUpperBound(ub);}
+        /// @brief update variable upper bound 
+        /// @param var variable 
+        /// @param ub upper bound 
+        void updateVariableUpperBound(variable_type const& var, variable_value_type ub) {m_vVariableProperty[var.id()].updateUpperBound(ub);}
         /// @return numeric type of variable 
         SolverProperty variableNumericType(variable_type const& var) {return m_vVariableProperty.at(var.id()).numericType();}
+        /// @brief set numeric type of variable 
+        /// @param var variable 
+        /// @param type numeric type 
+        void setVariableNumericType(variable_type const& var, SolverProperty type) {m_vVariableProperty[var.id()].setNumericType(type);}
         /// @brief add one variable 
         /// @param lb lower bound 
         /// @param ub upper bound 
