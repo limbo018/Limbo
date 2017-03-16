@@ -261,7 +261,7 @@ inline T dot(unsigned int n, T const* x, T const* y)
     return result; 
 }
 /// @brief copy vector 
-/// @param T data type 
+/// @tparam T data type 
 /// @param n dimension 
 /// @param x source vector 
 /// @param y target vector 

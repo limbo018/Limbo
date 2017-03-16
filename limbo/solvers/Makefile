@@ -67,12 +67,6 @@ $(OBJDIR)/%.o: %.cpp
 
 .PHONY: install
 install:
-	#cmp -s $(PREFIX)/lib/libsolvers.a $(LIBDIR)/libsolvers.a; \
-	#RETVAL=$$?; \
-	#if [ $$RETVAL -ne 0 ]; then \
-	#	mkdir -p $(PREFIX)/lib; \
-	#	cp $(LIBDIR)/libsolvers.* $(PREFIX)/lib; \
-	#fi
 	mkdir -p $(PREFIX)/include/limbo/solvers/api
 	cp $(wildcard api/*.h) $(PREFIX)/include/limbo/solvers/api
 	mkdir -p $(PREFIX)/include/limbo/solvers/lpmcf

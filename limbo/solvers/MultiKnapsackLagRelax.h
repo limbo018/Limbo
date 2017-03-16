@@ -168,7 +168,7 @@ class MultiKnapsackLagRelax
             /// @param v array of constraints 
             CapacityConstraintPred(std::vector<constraint_type> const& v) : vConstraint(v) {}
 
-            /// @return true if \constr is a capacity constraint 
+            /// @return true if \a constr is a capacity constraint 
             /// @param constr constraint 
             bool operator()(constraint_type const& constr) const 
             {
@@ -196,7 +196,7 @@ class MultiKnapsackLagRelax
 
             /// @param v1 variable 
             /// @param v2 variable 
-            /// @return true if \v1 has smaller coefficient than \v2 
+            /// @return true if \a v1 has smaller coefficient than \a v2 
             bool operator()(variable_type const& v1, variable_type const& v2) const 
             {
                 return vObjCoef[v1.id()] < vObjCoef[v2.id()]; 
@@ -245,6 +245,8 @@ class MultiKnapsackLagRelax
         /// @param searcher an object to search for feasible solutions 
         SolverProperty postProcess(updater_type* updater, searcher_type* searcher, SolverProperty status); 
         /// @brief function to compute \f$b-Ax\f$
+        /// @tparam TT coefficient value type 
+        /// @tparam VV variable value type 
         /// @param A matrix 
         /// @param x vector 
         /// @param b vector 
@@ -805,6 +807,7 @@ SolverProperty MultiKnapsackLagRelax<T, V>::postProcess(typename MultiKnapsackLa
         return searcher->operator()(updater); 
     }
 }
+/// @cond
 template <typename T, typename V>
 template <typename TT, typename VV>
 void MultiKnapsackLagRelax<T, V>::bMinusAx(typename MultiKnapsackLagRelax<T, V>::matrix_type const& A, VV const* x, TT const* b, TT* y) const
@@ -813,6 +816,7 @@ void MultiKnapsackLagRelax<T, V>::bMinusAx(typename MultiKnapsackLagRelax<T, V>:
     vcopy(A.numRows, b, y);
     AxPlusy((coefficient_value_type)-1, A, x, y);
 }
+/// @endcond
 template <typename T, typename V>
 bool MultiKnapsackLagRelax<T, V>::printVariableGroup(std::string const& filename) const 
 {
@@ -975,6 +979,7 @@ class SubGradientDescent : public LagMultiplierUpdater<T>
 
         /// @brief constructor 
         /// @param alpha the power term for scaling factor \f$ t_k = \beta \cdot k^{-\alpha} \f$
+        /// @param beta the constant  
         SubGradientDescent(value_type alpha = 1, value_type beta = 1)
             : SubGradientDescent::base_type()
             , m_alpha(alpha)
@@ -1090,7 +1095,8 @@ class ProblemScaler
         virtual ~ProblemScaler() {}
 
         /// @brief API to compute scaling factor for expression using L2 norm  
-        /// @param expr expression 
+        /// 
+        /// param expr expression 
         /// @return scaling factor 
         virtual value_type operator()(expression_type const& /*expr*/) const
         {
@@ -1253,7 +1259,8 @@ class FeasibleSearcher
         virtual ~FeasibleSearcher() {}
 
         /// @brief API to search for feasible solutions 
-        /// @param updater updater for lagrangian multipliers 
+        /// 
+        /// param updater updater for lagrangian multipliers 
         /// @return solving status 
         virtual SolverProperty operator()(updater_type* /*updater*/) {return INFEASIBLE;} 
 
@@ -1567,7 +1574,8 @@ class SearchByBinSmoothing : public SearchByAdjustCoefficient<T, V>
         ~SearchByBinSmoothing() {}
 
         /// @brief API to search for feasible solutions 
-        /// @param updater updater for lagrangian multipliers 
+        /// 
+        /// param updater updater for lagrangian multipliers 
         /// @return solving status 
         virtual SolverProperty operator()(updater_type* /*updater*/) 
         {

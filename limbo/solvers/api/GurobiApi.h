@@ -48,12 +48,17 @@ class GurobiParameters
                 env.set(GRB_IntParam_Threads, m_numThreads);
         }
         /// @brief customize model 
-        /// @param model Gurobi model 
+        /// 
+        /// param model Gurobi model 
         virtual void operator()(GRBModel& /*model*/) const 
         {
         }
 
+        /// @brief set output flag 
+        /// @param v value 
         void setOutputFlag(int v) {m_outputFlag = v;}
+        /// @brief set number of threads 
+        /// @param v value 
         void setNumThreads(int v) {m_numThreads = v;}
     protected:
         int m_outputFlag; ///< control log from Gurobi 
