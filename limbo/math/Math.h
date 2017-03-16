@@ -9,6 +9,7 @@
 #define _LIMBO_MATH_MATH
 
 #include <iterator>
+#include <limits>
 
 /// namespace for Limbo
 namespace limbo 
@@ -83,6 +84,93 @@ inline typename std::iterator_traits<Iterator>::value_type min(Iterator first, I
 	}
 	return v;
 }
+
+/// @name generic functions to get lowest value of numbers, i.e., min for integers, -max for floating point numbers 
+///@{
+/// @brief generic function to get lowest value of numbers 
+/// @tparam T number type 
+template <typename T>
+inline T lowest(); 
+
+/// @brief specialization for integer types 
+template <>
+inline char lowest<char>()
+{
+    return std::numeric_limits<char>::min();
+}
+/// @brief specialization for integer types 
+template <>
+inline unsigned char lowest<unsigned char>()
+{
+    return std::numeric_limits<unsigned char>::min();
+}
+/// @brief specialization for integer types 
+template <>
+inline short lowest<short>()
+{
+    return std::numeric_limits<short>::min();
+}
+/// @brief specialization for integer types 
+template <>
+inline unsigned short lowest<unsigned short>()
+{
+    return std::numeric_limits<unsigned short>::min();
+}
+/// @brief specialization for integer types 
+template <>
+inline int lowest<int>()
+{
+    return std::numeric_limits<int>::min();
+}
+/// @brief specialization for integer types 
+template <>
+inline unsigned int lowest<unsigned int>()
+{
+    return std::numeric_limits<unsigned int>::min();
+}
+/// @brief specialization for integer types 
+template <>
+inline long lowest<long>()
+{
+    return std::numeric_limits<long>::min();
+}
+/// @brief specialization for integer types 
+template <>
+inline unsigned long lowest<unsigned long>()
+{
+    return std::numeric_limits<unsigned long>::min();
+}
+/// @brief specialization for integer types 
+template <>
+inline long long lowest<long long>()
+{
+    return std::numeric_limits<long long>::min();
+}
+/// @brief specialization for integer types 
+template <>
+inline unsigned long long lowest<unsigned long long>()
+{
+    return std::numeric_limits<unsigned long long>::min();
+}
+/// @brief specialization for floating point types 
+template <>
+inline float lowest<float>()
+{
+    return -std::numeric_limits<float>::max();
+}
+/// @brief specialization for floating point types 
+template <>
+inline double lowest<double>()
+{
+    return -std::numeric_limits<double>::max();
+}
+/// @brief specialization for floating point types 
+template <>
+inline long double lowest<long double>()
+{
+    return -std::numeric_limits<long double>::max();
+}
+///@}
 
 } // namespace limbo 
 

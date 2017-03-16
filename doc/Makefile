@@ -4,8 +4,7 @@
 
 LIMBO_ROOT_DIR = $(realpath ..)
 DOCDIR = $(LIMBO_ROOT_DIR)/doc
-#SRCSDIR = $(LIMBO_ROOT_DIR)/limbo
-SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
+SRCS = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(DOCDIR)/algorithms \
 		  $(DOCDIR)/bibtex \
 		  $(DOCDIR)/containers \
@@ -81,7 +80,9 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/api/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/lpmcf/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/solvers/lpmcf/*.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/solvers/*.cpp) \
 		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/string/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/string/*.h) 
@@ -104,7 +105,7 @@ Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile
 	echo INCLUDE_PATH           = $(LIMBO_ROOT_DIR) > $(DOCDIR)/Doxyfile
 	echo EXAMPLE_PATH           = $(LIMBO_ROOT_DIR) >> $(DOCDIR)/Doxyfile
 	echo IMAGE_PATH             = $(LIMBO_ROOT_DIR)/doc/geometry >> $(DOCDIR)/Doxyfile
-	echo INPUT                  = $(SRCSDIR) >> $(DOCDIR)/Doxyfile
+	echo INPUT                  = $(SRCS) >> $(DOCDIR)/Doxyfile
 	echo OUTPUT_DIRECTORY       = $(DOCDIR) >> $(DOCDIR)/Doxyfile
 	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md *.py *.mk >> $(DOCDIR)/Doxyfile
 	echo INCLUDE_FILE_PATTERNS  = *.h *.hpp >> $(DOCDIR)/Doxyfile

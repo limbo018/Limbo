@@ -4,8 +4,10 @@
 %{ /*** C/C++ Declarations ***/
 
 #include <string>
+#include <vector>
+#include <limbo/parsers/lp/bison/LpDataBase.h>
 
-#include "LpScanner.h"
+#include <limbo/parsers/lp/bison/LpScanner.h>
 
 /* import the parser's token type into a local typedef */
 typedef LpParser::Parser::token token;
@@ -61,6 +63,9 @@ typedef LpParser::Parser::token_type token_type;
 "Minimize" {
 	return token::KWD_MINIMIZE;
 }
+"Maximize" {
+	return token::KWD_MAXIMIZE;
+}
 "Subject" {
 	return token::KWD_SUBJECT;
 }
@@ -85,8 +90,7 @@ typedef LpParser::Parser::token_type token_type;
 	return token::KWD_OP;
 }
 [\<\>]?[=] {
-	if (*yytext == '>' || *yytext == '=') yylval->integerVal = 1;
-	else yylval->integerVal = -1;
+    yylval->charVal = *yytext; /* >, <, = */
 	return token::KWD_COMPARE;
 }
 

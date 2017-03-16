@@ -55,38 +55,107 @@ void Driver::error(const std::string& m)
     std::cerr << m << std::endl;
 }
 
-// coef*var 
-void Driver::obj_cbk(int64_t coef, string const& var)
+// sum coef*var compare_op constant 
+void Driver::obj_cbk(bool minimize, TermArray const& terms) 
 {
-	m_db.add_variable(var);
-	m_db.add_objective(var, coef);
+    m_db.add_objective(minimize, terms); 
 }
-// coef1*var1 + coef2*var2 >= constant 
-void Driver::constraint_cbk(int64_t coef1, string const& var1, int64_t coef2, string const& var2, int64_t constant)
+void Driver::constraint_cbk(TermArray& terms, char compare, double constant)
 {
-	assert(coef1 == -coef2 && coef1 != 0);
-	m_db.add_variable(var1);
-	m_db.add_variable(var2);
-
-	if (coef1 > 0)
-		m_db.add_constraint(var1, var2, constant/coef1);
-	else 
-		m_db.add_constraint(var2, var1, constant/coef2);
+    m_db.add_constraint("", terms, compare, constant); 
+}
+void Driver::constraint_cbk(string const& name, TermArray& terms, char compare, double constant)
+{
+    m_db.add_constraint(name, terms, compare, constant); 
 }
 // var compare_op constant 
-void Driver::bound_cbk(string const& var, int64_t compare, int64_t constant)
+void Driver::bound_cbk(string const& var, char compare, double constant)
 {
-	if (compare > 0)
-		m_db.add_variable(var, constant, std::numeric_limits<int64_t>::max());
-	else 
-		m_db.add_variable(var, std::numeric_limits<int64_t>::min(), constant);
+    double lb = limbo::lowest<double>(); 
+    double ub = std::numeric_limits<double>::max(); 
+
+    switch (compare)
+    { 
+        case '>':
+            lb = constant; 
+            break; 
+        case '<':
+            ub = constant; 
+            break; 
+        case '=':
+        default:
+            lb = ub = constant; 
+    }
+    m_db.add_variable(var, lb, ub);
+}
+// constant compare_op var
+void Driver::bound_cbk(double constant, char compare, string const& var) 
+{
+    double lb = limbo::lowest<double>(); 
+    double ub = std::numeric_limits<double>::max(); 
+
+    switch (compare)
+    { 
+        case '>':
+            ub = constant; 
+            break; 
+        case '<':
+            lb = constant; 
+            break; 
+        case '=':
+        default:
+            lb = ub = constant; 
+            break; 
+    }
+    m_db.add_variable(var, lb, ub);
+}
+// constant1 compare_op1 var compare_op2 constant2 
+void Driver::bound_cbk(double constant1, char compare1, string const& var, char compare2, double constant2)
+{
+    double lb = limbo::lowest<double>(); 
+    double ub = std::numeric_limits<double>::max(); 
+
+    // compare1 is different from compare2 
+    switch (compare1)
+    { 
+        case '>':
+            ub = constant1; 
+            break; 
+        case '<':
+            lb = constant1; 
+            break; 
+        case '=':
+        default:
+            lb = ub = constant1; 
+            break; 
+    }
+    switch (compare2)
+    { 
+        case '>':
+            lb = constant2; 
+            break; 
+        case '<':
+            ub = constant2; 
+            break; 
+        case '=':
+        default:
+            lb = ub = constant2; 
+            break; 
+    }
+    m_db.add_variable(var, lb, ub);
 }
 // generals type (integer)
-void Driver::generals_cbk(StringArray const&)
-{}
+void Driver::generals_cbk(StringArray const& vIntegerVar)
+{
+    for (StringArray::const_iterator it = vIntegerVar.begin(); it != vIntegerVar.end(); ++it)
+        m_db.set_integer(*it, false);
+}
 // binary type  
-void Driver::binary_cbk(StringArray const&)
-{}
+void Driver::binary_cbk(StringArray const& vIntegerVar)
+{
+    for (StringArray::const_iterator it = vIntegerVar.begin(); it != vIntegerVar.end(); ++it)
+        m_db.set_integer(*it, true);
+}
 
 bool read(LpDataBase& db, const string& lpFile)
 {

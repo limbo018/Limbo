@@ -93,11 +93,17 @@ public:
 
     /// @cond 
 	// coef*var 
-	void obj_cbk(int64_t coef, string const& var);
-	// coef1*var1 + coef2*var2 >= constant 
-	void constraint_cbk(int64_t coef1, string const& var1, int64_t coef2, string const& var2, int64_t constant);
+	void obj_cbk(bool minimize, TermArray const& terms);
+    // sum coef*var compare_op constant 
+	void constraint_cbk(TermArray& terms, char compare, double constant);
+    // sum coef*var compare_op constant 
+	void constraint_cbk(string const& name, TermArray& terms, char compare, double constant);
 	// var compare_op constant 
-	void bound_cbk(string const& var, int64_t compare, int64_t constant);
+	void bound_cbk(string const& var, char compare, double constant);
+	// constant compare_op var
+	void bound_cbk(double constant, char compare, string const& var);
+    // constant1 compare_op1 var compare_op2 constant2 
+	void bound_cbk(double constant1, char compare1, string const& var, char compare2, double constant2);
 	// generals type (integer)
 	void generals_cbk(StringArray const&);
 	// binary type  

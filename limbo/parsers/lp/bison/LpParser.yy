@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-#include "LpDataBase.h"
+#include <limbo/parsers/lp/bison/LpDataBase.h>
 
 %}
 
@@ -56,14 +56,14 @@
 %union {
     int64_t 		integerVal;
     double 			doubleVal;
+    char            charVal; 
     std::string*		stringVal;
 	std::string*		quoteVal;
 
-	class IntegerArray* integerArrayVal;
-	class StringArray* stringArrayVal;
-	struct Term* termVal;
-
-/*    class CalcNode*		calcnode; */
+	Term* termVal;
+    IntegerArray* integerArrayVal;
+	StringArray* stringArrayVal;
+    TermArray* termArrayVal; 
 }
 
 %token			END	     0	"end of file"
@@ -73,23 +73,26 @@
 %token <stringVal> 	STRING		"string"
 %token			KWD_TO			"TO"
 %token			KWD_END			"END"
-%token			KWD_MINIMIZE	"MINIMIE"
+%token			KWD_MINIMIZE	"MINIMIZE"
+%token			KWD_MAXIMIZE	"MAXIMIZE"
 %token			KWD_SUBJECT		"SUBJECT"
 %token			KWD_BOUNDS		"BOUNDS"
 %token			KWD_GENERALS	"GENERALS"
 %token			KWD_BINARY		"BINARY"
-%token <integerVal>	KWD_COMPARE	"COMPARE"
+%token <charVal>	KWD_COMPARE	"COMPARE"
 %token <integerVal>	KWD_OP		"OP"
 
+%type <doubleVal> number
 %type <stringArrayVal> string_array
 %type <termVal> term;
+%type <termArrayVal> multiple_terms; 
 /*
 %type <integerVal>	block_other block_row block_comp block_pin block_net 
 %type <integerVal>	expression 
 */
 
 %destructor { delete $$; } STRING 
-%destructor { delete $$; } string_array term
+%destructor { delete $$; } string_array term multiple_terms
 /*
 %destructor { delete $$; } constant variable
 %destructor { delete $$; } atomexpr powexpr unaryexpr mulexpr addexpr expr
@@ -99,8 +102,8 @@
 
 %{
 
-#include "LpDriver.h"
-#include "LpScanner.h"
+#include <limbo/parsers/lp/bison/LpDriver.h>
+#include <limbo/parsers/lp/bison/LpScanner.h>
 
 /* this "connects" the bison parser in the driver to the flex scanner class
  * object. it defines the yylex() function call to pull the next token from the
@@ -113,7 +116,14 @@
 %% /*** Grammar Rules ***/
 
  /*** BEGIN EXAMPLE - Change the example grammar rules below ***/
-			
+
+number : INTEGER {
+       $$ = $1;
+       }
+       | DOUBLE {
+       $$ = $1; 
+       }
+
 string_array : STRING {
 				$$ = new StringArray(1, *$1);
 			  }
@@ -132,26 +142,32 @@ term : STRING {
 
  /*** grammar for obj ***/
 multiple_terms : term {
-				driver.obj_cbk($1->coef, $1->var);
+               $$ = new TermArray(1, *$1); 
 			   }
 			| KWD_OP term {
-				driver.obj_cbk($1*$2->coef, $2->var);
+               $$ = new TermArray(1, Term($1*$2->coef, $2->var)); 
 			}
 		  | multiple_terms KWD_OP term {
-				driver.obj_cbk($2*$3->coef, $3->var);
+          $1->push_back(Term($2*$3->coef, $3->var)); 
+          $$ = $1; 
 		  }
 		  ;
 
-block_obj : KWD_MINIMIZE multiple_terms
+block_obj : KWD_MINIMIZE multiple_terms {
+          driver.obj_cbk(true, *$2); 
+          }
+          | KWD_MAXIMIZE multiple_terms {
+          driver.obj_cbk(false, *$2); 
+          }
 		  ;
 
  /*** grammar for constraints ***/
-single_constraint : term KWD_OP term KWD_COMPARE INTEGER {
-					driver.constraint_cbk($1->coef*$4, $1->var, $3->coef*$4*$2, $3->var, $5*$4);
+single_constraint : multiple_terms KWD_COMPARE number {
+                  driver.constraint_cbk(*$1, $2, $3);
 				 } 
-				 | KWD_OP term KWD_OP term KWD_COMPARE INTEGER {
-					driver.constraint_cbk($2->coef*$5*$1, $2->var, $4->coef*$5*$3, $4->var, $6*$5);
-				 }
+                 | STRING ':' multiple_terms KWD_COMPARE number {
+                  driver.constraint_cbk(*$1, *$3, $4, $5);
+				 } 
 multiple_constraints : single_constraint
 					| multiple_constraints single_constraint
 					;
@@ -159,15 +175,14 @@ block_constraints : KWD_SUBJECT KWD_TO multiple_constraints
 				  ;
 				 
  /*** grammar for bounds ***/
-single_bound : STRING KWD_COMPARE INTEGER {
+single_bound : STRING KWD_COMPARE number {
 				driver.bound_cbk(*$1, $2, $3);
 			 }
-			 | INTEGER KWD_COMPARE STRING {
-				driver.bound_cbk(*$3, -$2, $1);
+			 | number KWD_COMPARE STRING {
+				driver.bound_cbk($1, $2, *$3);
 			 }
-			 | INTEGER KWD_COMPARE STRING KWD_COMPARE INTEGER {
-				driver.bound_cbk(*$3, -$2, $1);
-				driver.bound_cbk(*$3, $4, $5);
+			 | number KWD_COMPARE STRING KWD_COMPARE number {
+                driver.bound_cbk($1, $2, *$3, $4, $5);
 			 }
 			 ;
 multiple_bounds : single_bound

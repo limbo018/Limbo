@@ -25,6 +25,7 @@
 
 #include <limbo/solvers/lpmcf/Lgf.h>
 #include <limbo/parsers/lp/bison/LpDriver.h>
+#include <limbo/math/Math.h>
 
 using std::cout;
 using std::endl;
@@ -191,7 +192,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 
             /// @brief check if the variable is lower bounded 
             /// @return true if the variable has a lower bound 
-			bool is_lower_bounded() const {return range.first != std::numeric_limits<value_type>::min();}
+			bool is_lower_bounded() const {return range.first != limbo::lowest<value_type>();}
             /// @brief check if the variable is upper bounded 
             /// @return true if the variable is an upper bound 
 			bool is_upper_bounded() const {return range.second != std::numeric_limits<value_type>::max();}
@@ -237,28 +238,93 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
         /// @param l lower bound \f$l_i\f$
         /// @param r upper bound \f$u_i\f$
 		virtual void add_variable(string const& xi, 
-				value_type const& l = std::numeric_limits<value_type>::min(), 
-				value_type const& r = std::numeric_limits<value_type>::max())
+				double l = limbo::lowest<double>(), 
+				double r = std::numeric_limits<value_type>::max())
 		{
-			assert_msg(l <= r, "failed to add bound " << l << " <= " << xi << " <= " << r);
+            // in case of overflow 
+            value_type lb = l; 
+            value_type ub = r;
+            if (l <= (double)limbo::lowest<value_type>())
+                lb = limbo::lowest<value_type>();
+            if (r >= (double)std::numeric_limits<value_type>::max())
+                ub = std::numeric_limits<value_type>::max();
+			assert_msg(lb <= ub, "failed to add bound " << lb << " <= " << xi << " <= " << ub);
 
 			// no variables with the same name is allowed 
 			BOOST_AUTO(found, m_hVariable.find(xi));
 			if (found == m_hVariable.end())
-				assert_msg(m_hVariable.insert(make_pair(xi, variable_type(xi, l, r, 0))).second,
+				assert_msg(m_hVariable.insert(make_pair(xi, variable_type(xi, lb, ub, 0))).second,
 						"failed to insert variable " << xi << " to hash table");
 			else 
 			{
-				found->second.range.first = std::max(found->second.range.first, l);
-				found->second.range.second = std::min(found->second.range.second, r);
+				found->second.range.first = std::max(found->second.range.first, (value_type)lb);
+				found->second.range.second = std::min(found->second.range.second, (value_type)ub);
 				assert_msg(found->second.range.first <= found->second.range.second, 
 						"failed to set bound " << found->second.range.first << " <= " << xi << " <= " << found->second.range.second);
 			}
 			// if user set bounds to variables 
 			// switch to bounded mode, which means there will be an additional node to the graph 
-			if (l != std::numeric_limits<value_type>::min() || r != std::numeric_limits<value_type>::max())
+			if (lb != limbo::lowest<value_type>() || ub != std::numeric_limits<value_type>::max())
 				this->is_bounded(true);
 		}
+        /// @brief add constraint callback for LpParser::LpDataBase
+        /// @param terms array of terms in left hand side 
+        /// @param compare operator '<', '>', '='
+        /// @param constant constant in the right hand side 
+        virtual void add_constraint(std::string const& /*cname*/, LpParser::TermArray const& terms, char compare, double constant)
+        {
+            assert(terms.size() == 2 && terms[0].coef*terms[1].coef < 0);
+            // in case some variables are not added yet 
+            add_variable(terms[0].var); 
+            add_variable(terms[1].var); 
+            string xi = terms[0].var;
+            string xj = terms[1].var; 
+            if (compare == '<' || compare == '=')
+            {
+                if (terms[0].coef > 0)
+                {
+                    xi = terms[1].var; 
+                    xj = terms[0].var; 
+                }
+                else 
+                {
+                    xi = terms[0].var; 
+                    xj = terms[1].var; 
+                }
+                constant = -constant;
+                add_constraint(xi, xj, constant);
+            }
+            if (compare == '>' || compare == '=')
+            {
+                if (terms[0].coef > 0)
+                {
+                    xi = terms[0].var; 
+                    xj = terms[1].var; 
+                }
+                else 
+                {
+                    xi = terms[1].var; 
+                    xj = terms[0].var; 
+                }
+                add_constraint(xi, xj, constant);
+            }
+        }
+        /// @brief add object callback for LpParser::LpDataBase 
+        /// @param minimize true denotes minimizing object, false denotes maximizing object 
+        /// @param terms array of terms 
+		virtual void add_objective(bool minimize, LpParser::TermArray const& terms) 
+        {
+            for (LpParser::TermArray::const_iterator it = terms.begin(); it != terms.end(); ++it)
+            {
+                // in case variable is not added yet 
+                add_variable(it->var);
+
+                if (minimize) // minimize objective 
+                    add_objective(it->var, it->coef); 
+                else // maximize objective 
+                    add_objective(it->var, -it->coef); 
+            }
+        }
 		/// @brief add constraint 
 		/// \f$x_i - x_j \ge c_{ij}\f$. 
         /// 
@@ -296,6 +362,13 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 
 			found->second.weight += w;
 		}
+        /// @brief set integer variables 
+        /// param vname integer variables  
+        /// param binary denotes whether they are binary variables 
+        void set_integer(std::string const& /*vname*/, bool /*binary*/)
+        {
+            // ignored 
+        }
 
 		/// @brief check if lp problem is bounded 
         /// @return true if the problem is bounded 
@@ -411,12 +484,12 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 				variable_type const& variable = it->second;
 				out << "\t";
 				// both lower bound and upper bound 
-				if (variable.range.first != std::numeric_limits<value_type>::min()
+				if (variable.range.first != limbo::lowest<value_type>()
 						&& variable.range.second != std::numeric_limits<value_type>::max())
 					out << variable.range.first << " <= " 
 						<< variable.name << " <= " << variable.range.second << endl;
 				// lower bound only 
-				else if (variable.range.first != std::numeric_limits<value_type>::min())
+				else if (variable.range.first != limbo::lowest<value_type>())
 					out << variable.name << " >= " << variable.range.first << endl;
 				// upper bound only 
 				else if (variable.range.second != std::numeric_limits<value_type>::max())
