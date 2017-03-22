@@ -16,6 +16,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/assert.hpp> 
+#include <limbo/solvers/Solvers.h>
 // make sure gurobi is configured properly 
 #include "gurobi_c++.h"
 
@@ -196,6 +197,7 @@ SolverProperty GurobiLinearApi<T, V>::operator()(GurobiLinearApi<T, V>::paramete
 
     if (defaultParam)
         delete param; 
+    delete [] vGrbVar; 
     delete m_grbModel; 
 
     switch (status)

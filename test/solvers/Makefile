@@ -14,6 +14,8 @@ VPATH = .
 
 # default DBG is off
 DBG = 0
+# default GUROBI is off 
+GUROBI = 0
 
 # include environmental configurations 
 include $(LIMBO_ROOT_DIR)/Include.mk
@@ -22,6 +24,11 @@ ifeq ($(DBG), 1)
 	CXXFLAGS = $(CXXFLAGS_DEBUG) 
 else
 	CXXFLAGS = $(CXXFLAGS_RELEASE)
+endif
+
+# dependency to GUROBI and get GUROBI_LINK_LIB
+ifdef GUROBI_HOME
+include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindGurobi.mk
 endif
 
 #==========================================================================
@@ -35,6 +42,12 @@ INCLUDE = -I $(LIMBO_ROOT_DIR) \
 LIBS = -L $(LIMBO_ROOT_DIR)/lib -llpparser \
 	   -L $(LEMON_DIR)/lib -lemon
 
+# GUROBI 
+ifeq ($(GUROBI), 1)
+INCLUDE += -I $(GUROBI_HOME)/include
+LIBS += $(DYNAMIC_LINK_FLAG) $(GUROBI_LINK_LIB)
+endif 
+
 # ==========================================================================
 #                         Standard Setting
 # ==========================================================================
@@ -43,7 +56,12 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
+ifeq ($(GUROBI), 0)
 all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow
+else
+all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow test_GurobiApi 
+endif
+
 .PHONY: lpmcf
 
 lpmcf:
@@ -74,12 +92,16 @@ test_MultiKnapsackLagRelax: $(OBJDIR)/test_MultiKnapsackLagRelax.o
 test_DualMinCostFlow: $(OBJDIR)/test_DualMinCostFlow.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_DualMinCostFlow.o $(LIBS) 
 
+test_GurobiApi: $(OBJDIR)/test_GurobiApi.o
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_GurobiApi.o $(LIBS) 
+
 .PHONY: clean
 clean: cleandep
 	$(MAKE) clean -C lpmcf
 	rm -f test_solvers
 	rm -f test_MultiKnapsackLagRelax
 	rm -f test_DualMinCostFlow
+	rm -f test_GurobiApi
 	rm -f $(OBJS) 
 
 .PHONY: cleandep
