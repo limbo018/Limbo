@@ -101,7 +101,7 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 
 all: doc
 
-Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile
+Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile $(SRCS)
 	echo INCLUDE_PATH           = $(LIMBO_ROOT_DIR) > $(DOCDIR)/Doxyfile
 	echo EXAMPLE_PATH           = $(LIMBO_ROOT_DIR) >> $(DOCDIR)/Doxyfile
 	echo IMAGE_PATH             = $(LIMBO_ROOT_DIR)/doc/geometry >> $(DOCDIR)/Doxyfile

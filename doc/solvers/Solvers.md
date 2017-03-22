@@ -21,7 +21,7 @@ See documented version: [test/solvers/test_DualMinCostFlow.cpp](@ref test_DualMi
 Compiling and running commands (assuming LIMBO_DIR, BOOST_DIR and LEMON_DIR are well defined). 
 @ref Parsers_LpParser is required for @ref limbo::solvers::DualMinCostFlow to read input files in .lp format. 
 ~~~~~~~~~~~~~~~~
-g++ -o test_DualMinCostFlow test_DualMinCostFlow.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -I $LEMON_DIR/include -L $LIMBO_DIR/lib -lsolvers -L $LEMON_DIR/lib -lemon -L $LIMBO_DIR/lib -llpparser
+g++ -o test_DualMinCostFlow test_DualMinCostFlow.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -I $LEMON_DIR/include -L $LEMON_DIR/lib -lemon -L $LIMBO_DIR/lib -llpparser
 # test dual min-cost flow for linear programming problem 
 ./test_DualMinCostFlow lpmcf/benchmarks/problem.lp
 ~~~~~~~~~~~~~~~~
@@ -118,6 +118,39 @@ g++ -o test_lpmcf compare.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -I $LE
 ./test_lpmcf benchmarks/graph.lgf 
 ~~~~~~~~~~~~~~~~
 
+## Gurobi API {#Solvers_Examples_GurobiApi}
+
+A generalized API to solve problem described by @ref limbo::solvers::LinearModel with [Gurobi](https://www.gurobi.com "Gurobi") solver. 
+
+See documented version: [test/solvers/test_GurobiApi.cpp](@ref test_GurobiApi.cpp)
+\include test/solvers/test_GurobiApi.cpp
+
+Compiling and running commands (assuming LIMBO_DIR, and GUROBI_HOME are well defined). 
+~~~~~~~~~~~~~~~~
+g++ -o test_GurobiApi test_GurobiApi.cpp -I $LIMBO_DIR/include -I $GUROBI_HOME/include -L $GUROBI_HOME/lib -lgurobi_c++ -lgurobi60 
+# test Gurobi API for linear programming problem 
+./test_GurobiApi
+~~~~~~~~~~~~~~~~
+
+Output 
+~~~~~~~~~~~~~~~~
+Optimize a model with 3 rows, 4 columns and 6 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e-01, 5e-01]
+Presolve removed 3 rows and 4 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds
+Optimal objective  1.000000000e+00
+optStatus = 5
+~~~~~~~~~~~~~~~~
+
 ## All Examples {#Solvers_Examples_All}
 
 Possible dependencies: 
@@ -125,6 +158,10 @@ Possible dependencies:
 [Lemon](https://lemon.cs.elte.hu).  
 
 - [test/solvers/lpmcf/test_lpmcf.cpp](@ref test_lpmcf.cpp)
+- [test/solvers/test_solvers.cpp](@ref test_solvers.cpp)
+- [test/solvers/test_MultiKnapsackLagRelax.cpp](@ref test_MultiKnapsackLagRelax.cpp)
+- [test/solvers/test_DualMinCostFlow.cpp](@ref test_DualMinCostFlow.cpp)
+- [test/solvers/test_GurobiApi.cpp](@ref test_GurobiApi.cpp)
 
 # References {#Solvers_References}
 
