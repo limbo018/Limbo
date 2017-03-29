@@ -30,7 +30,8 @@
 //#include <boost/graph/dijkstra_shortest_paths.hpp>
 #include <limbo/string/String.h>
 #include <limbo/algorithms/coloring/Coloring.h>
-#include "gurobi_c++.h"
+#include <limbo/solvers/Solvers.h>
+#include <limbo/solvers/api/GurobiApi.h>
 
 /// namespace for Limbo 
 namespace limbo 
@@ -63,6 +64,8 @@ class ILPColoring : public Coloring<GraphType>
         using typename base_type::edge_weight_type;
 		using typename base_type::ColorNumType;
         typedef typename base_type::EdgeHashType edge_hash_type;
+        typedef limbo::solvers::LinearModel<float, int32_t> model_type; 
+        typedef limbo::solvers::GurobiLinearApi<model_type::coefficient_value_type, model_type::variable_value_type> solver_type; 
         /// @endnowarn
         
 		/// constructor
@@ -75,8 +78,9 @@ class ILPColoring : public Coloring<GraphType>
 
         /// write raw solution of ILP 
         /// @param filename output file name 
+        /// @param opt_model problem model 
         /// @param vVertexBit array of vertex bits that indicate coloring solutions; each vertex corresponds to two bits 
-        void write_graph_sol(string const& filename, vector<GRBVar> const& vVertexBit) const;
+        void write_graph_sol(string const& filename, model_type const& opt_model, std::vector<model_type::variable_type> const& vVertexBit) const;
 
 	protected:
         /// kernel coloring algorithm 
@@ -98,17 +102,20 @@ double ILPColoring<GraphType>::coloring()
 	for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei, ++cnt)
 		hEdgeIdx[*ei] = cnt;
 
-	// ILP environment
-	GRBEnv env = GRBEnv();
-	//mute the log from the LP solver
-	env.set(GRB_IntParam_OutputFlag, 0);
-	// set threads 
-	if (this->m_threads > 0 && this->m_threads < std::numeric_limits<int32_t>::max())
-		env.set(GRB_IntParam_Threads, this->m_threads);
-	GRBModel opt_model = GRBModel(env);
+	/// ILP model 
+    model_type opt_model;
+    limbo::solvers::GurobiParameters gurobiParams; 
+    gurobiParams.setOutputFlag(0); 
+    gurobiParams.setNumThreads(this->m_threads);
 	//set up the ILP variables
-	vector<GRBVar> vVertexBit;
-	vector<GRBVar> vEdgeBit;
+    std::vector<model_type::variable_type> vVertexBit;
+    std::vector<model_type::variable_type> vEdgeBit;
+
+    opt_model.reserveVariables(vertex_variable_num+edge_num); 
+    if (this->m_color_num == base_type::THREE)
+        opt_model.reserveConstraints(edge_num*4+vertex_num);
+    else 
+        opt_model.reserveConstraints(edge_num*4);
 
 	// vertex variables 
 	vVertexBit.reserve(vertex_variable_num); 
@@ -122,10 +129,10 @@ double ILPColoring<GraphType>::coloring()
 			int8_t color_bit;
 			if ((i&1) == 0) color_bit = (this->m_vColor[vertex_idx]>>1)&1;
 			else color_bit = this->m_vColor[vertex_idx]&1;
-			vVertexBit.push_back(opt_model.addVar(color_bit, color_bit, color_bit, GRB_INTEGER, oss.str()));
+			vVertexBit.push_back(opt_model.addVariable(color_bit, color_bit, limbo::solvers::INTEGER, oss.str()));
 		}
 		else // uncolored 
-			vVertexBit.push_back(opt_model.addVar(0, 1, 0, GRB_INTEGER, oss.str()));
+			vVertexBit.push_back(opt_model.addVariable(0, 1, limbo::solvers::INTEGER, oss.str()));
 	}
 
 	// edge variables 
@@ -134,14 +141,11 @@ double ILPColoring<GraphType>::coloring()
 	{
 		std::ostringstream oss;
 		oss << "e" << i;
-		vEdgeBit.push_back(opt_model.addVar(0, 1, 0, GRB_CONTINUOUS, oss.str()));
+		vEdgeBit.push_back(opt_model.addVariable(0, 1, limbo::solvers::INTEGER, oss.str()));
 	}
 
-	// update model 
-	opt_model.update();
-
 	// set up the objective 
-	GRBLinExpr obj (0);
+    model_type::expression_type obj;
 	for (boost::tie(ei, eie) = edges(this->m_graph); ei != eie; ++ei)
 	{
 		edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, *ei);
@@ -150,7 +154,8 @@ double ILPColoring<GraphType>::coloring()
 		else if (w < 0) // weighted stitch 
 			obj += this->m_stitch_weight*(-w)*vEdgeBit[hEdgeIdx[*ei]];
 	}
-	opt_model.setObjective(obj, GRB_MINIMIZE);
+	opt_model.setObjective(obj);
+    opt_model.setOptimizeType(limbo::solvers::MIN); 
 
 	// set up the constraints
 	uint32_t constr_num = 0;
@@ -170,53 +175,53 @@ double ILPColoring<GraphType>::coloring()
 		if (w >= 0) // constraints for conflict edges 
 		{
 			sprintf(buf, "R%u", constr_num++);  
-			opt_model.addConstr(
+			opt_model.addConstraint(
 					vVertexBit[vertex_idx1] + vVertexBit[vertex_idx1+1] 
 					+ vVertexBit[vertex_idx2] + vVertexBit[vertex_idx2+1] 
 					+ vEdgeBit[edge_idx] >= 1
 					, buf);
 
 			sprintf(buf, "R%u", constr_num++);  
-			opt_model.addConstr(
-					1 - vVertexBit[vertex_idx1] + vVertexBit[vertex_idx1+1] 
-					+ 1 - vVertexBit[vertex_idx2] + vVertexBit[vertex_idx2+1] 
-					+ vEdgeBit[edge_idx] >= 1
+			opt_model.addConstraint(
+					- vVertexBit[vertex_idx1] + vVertexBit[vertex_idx1+1] 
+					- vVertexBit[vertex_idx2] + vVertexBit[vertex_idx2+1] 
+					+ vEdgeBit[edge_idx] >= -1
 					, buf);
 
 			sprintf(buf, "R%u", constr_num++);  
-			opt_model.addConstr(
-					vVertexBit[vertex_idx1] + 1 - vVertexBit[vertex_idx1+1] 
-					+ vVertexBit[vertex_idx2] + 1 - vVertexBit[vertex_idx2+1] 
-					+ vEdgeBit[edge_idx] >= 1
+			opt_model.addConstraint(
+					vVertexBit[vertex_idx1] - vVertexBit[vertex_idx1+1] 
+					+ vVertexBit[vertex_idx2] - vVertexBit[vertex_idx2+1] 
+					+ vEdgeBit[edge_idx] >= -1
 					, buf);
 
 			sprintf(buf, "R%u", constr_num++);  
-			opt_model.addConstr(
-					1 - vVertexBit[vertex_idx1] + 1 - vVertexBit[vertex_idx1+1] 
-					+ 1 - vVertexBit[vertex_idx2] + 1 - vVertexBit[vertex_idx2+1] 
-					+ vEdgeBit[edge_idx] >= 1
+			opt_model.addConstraint(
+					- vVertexBit[vertex_idx1] - vVertexBit[vertex_idx1+1] 
+					- vVertexBit[vertex_idx2] - vVertexBit[vertex_idx2+1] 
+					+ vEdgeBit[edge_idx] >= -3
 					, buf);
 
 		}
 		else // constraints for stitch edges 
 		{
 			sprintf(buf, "R%u", constr_num++);  
-			opt_model.addConstr(
+			opt_model.addConstraint(
 					vVertexBit[vertex_idx1] - vVertexBit[vertex_idx2] - vEdgeBit[edge_idx] <= 0
 					, buf);
 
 			sprintf(buf, "R%u", constr_num++);  
-			opt_model.addConstr(
+			opt_model.addConstraint(
 					vVertexBit[vertex_idx2] - vVertexBit[vertex_idx1] - vEdgeBit[edge_idx] <= 0
 					, buf);
 
 			sprintf(buf, "R%u", constr_num++);  
-			opt_model.addConstr(
+			opt_model.addConstraint(
 					vVertexBit[vertex_idx1+1] - vVertexBit[vertex_idx2+1] - vEdgeBit[edge_idx] <= 0
 					, buf);      
 
 			sprintf(buf, "R%u", constr_num++);  
-			opt_model.addConstr(
+			opt_model.addConstraint(
 					vVertexBit[vertex_idx2+1] - vVertexBit[vertex_idx1+1] - vEdgeBit[edge_idx] <= 0
 					, buf);
 		}
@@ -229,32 +234,31 @@ double ILPColoring<GraphType>::coloring()
 		for(uint32_t k = 0; k != vertex_variable_num; k += 2) 
 		{
 			sprintf(buf, "R%u", constr_num++);  
-			opt_model.addConstr(vVertexBit[k] + vVertexBit[k+1] <= 1, buf);
+			opt_model.addConstraint(vVertexBit[k] + vVertexBit[k+1] <= 1, buf);
 		}
 	}
 
 	//optimize model 
-	opt_model.update();
-	opt_model.optimize();
+    solver_type solver (&opt_model); 
+    int32_t opt_status = solver(&gurobiParams); 
 #ifdef DEBUG_ILPCOLORING
-	opt_model.write("graph.lp");
-	opt_model.write("graph.sol");
+	opt_model.print("graph.lp");
+	opt_model.printSolution("graph.sol");
 #endif 
-	int32_t opt_status = opt_model.get(GRB_IntAttr_Status);
-	if(opt_status == GRB_INFEASIBLE) 
+	if(opt_status == limbo::solvers::INFEASIBLE) 
 	{
 		cout << "ERROR: The model is infeasible... EXIT" << endl;
 		exit(1);
 	}
 
 #ifdef DEBUG_ILPCOLORING
-    this->write_graph_sol("graph_sol", vVertexBit); // dump solution figure 
+    this->write_graph_sol("graph_sol", opt_model, vVertexBit); // dump solution figure 
 #endif
 
 	// collect coloring solution 
 	for (uint32_t k = 0; k != vertex_variable_num; k += 2)
 	{
-		int8_t color = (vVertexBit[k].get(GRB_DoubleAttr_X)*2)+vVertexBit[k+1].get(GRB_DoubleAttr_X);
+		int8_t color = (opt_model.variableSolution(vVertexBit[k])*2)+opt_model.variableSolution(vVertexBit[k+1]);
 		uint32_t vertex_idx = (k>>1);
 
 		assert(color >= 0 && color < this->m_color_num);
@@ -265,11 +269,12 @@ double ILPColoring<GraphType>::coloring()
 	}
 
 	// return objective value 
-	return opt_model.get(GRB_DoubleAttr_ObjVal);
+	return opt_model.evaluateObjective();
 }
 
 template <typename GraphType>
-void ILPColoring<GraphType>::write_graph_sol(string const& filename, vector<GRBVar> const& vVertexBit) const
+void ILPColoring<GraphType>::write_graph_sol(string const& filename, typename ILPColoring<GraphType>::model_type const& opt_model, 
+        std::vector<typename ILPColoring<GraphType>::model_type::variable_type> const& vVertexBit) const
 {
 	std::ofstream out((filename+".gv").c_str());
 	out << "graph D { \n"
@@ -285,7 +290,7 @@ void ILPColoring<GraphType>::write_graph_sol(string const& filename, vector<GRBV
 	{
 		out << "  " << k << "[shape=\"circle\"";
 		//output coloring label
-		out << ",label=\"" << k << ":(" << vVertexBit[(k<<1)].get(GRB_DoubleAttr_X) << "," << vVertexBit[(k<<1)+1].get(GRB_DoubleAttr_X)<< ")\"";
+		out << ",label=\"" << k << ":(" << opt_model.variableSolution(vVertexBit[(k<<1)]) << "," << opt_model.variableSolution(vVertexBit[(k<<1)+1]) << ")\"";
 		out << "]\n";
 	}//end for
 
@@ -298,7 +303,8 @@ void ILPColoring<GraphType>::write_graph_sol(string const& filename, vector<GRBV
 		graph_vertex_type t = boost::target(*ei, this->m_graph);
 		if (w >= 0) // conflict edge 
 		{
-            bool conflict_flag = (vVertexBit[(s<<1)].get(GRB_DoubleAttr_X) == vVertexBit[(t<<1)].get(GRB_DoubleAttr_X) && vVertexBit[(s<<1)+1].get(GRB_DoubleAttr_X) == vVertexBit[(t<<1)+1].get(GRB_DoubleAttr_X));
+            bool conflict_flag = (opt_model.variableSolution(vVertexBit[(s<<1)]) == opt_model.variableSolution(vVertexBit[(t<<1)]) 
+                    && opt_model.variableSolution(vVertexBit[(s<<1)+1]) == opt_model.variableSolution(vVertexBit[(t<<1)+1]));
 
 			if(conflict_flag)
 				out << "  " << s << "--" << t << "[color=\"red\",style=\"solid\",penwidth=3]\n";

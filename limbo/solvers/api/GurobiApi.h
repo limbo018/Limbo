@@ -18,7 +18,10 @@
 #include <boost/assert.hpp> 
 #include <limbo/solvers/Solvers.h>
 // make sure gurobi is configured properly 
-#include "gurobi_c++.h"
+extern "C" 
+{
+#include "gurobi_c.h"
+}
 
 /// namespace for Limbo
 namespace limbo 
@@ -41,17 +44,17 @@ class GurobiParameters
         virtual ~GurobiParameters() {}
         /// @brief customize environment 
         /// @param env Gurobi environment 
-        virtual void operator()(GRBEnv& env) const 
+        virtual void operator()(GRBenv* env) const 
         {
             // mute the log from the LP solver
-            env.set(GRB_IntParam_OutputFlag, m_outputFlag);
+            GRBsetintparam(env, GRB_INT_PAR_OUTPUTFLAG, m_outputFlag); 
             if (m_numThreads > 0 && m_numThreads != std::numeric_limits<int>::max())
-                env.set(GRB_IntParam_Threads, m_numThreads);
+                GRBsetintparam(env, GRB_INT_PAR_THREADS, m_numThreads);
         }
         /// @brief customize model 
         /// 
         /// param model Gurobi model 
-        virtual void operator()(GRBModel& /*model*/) const 
+        virtual void operator()(GRBmodel* /*model*/) const 
         {
         }
 
@@ -61,6 +64,7 @@ class GurobiParameters
         /// @brief set number of threads 
         /// @param v value 
         void setNumThreads(int v) {m_numThreads = v;}
+
     protected:
         int m_outputFlag; ///< control log from Gurobi 
         int m_numThreads; ///< number of threads 
@@ -96,6 +100,10 @@ class GurobiLinearApi
         /// @param param set additional parameters, use default if NULL 
         SolverProperty operator()(parameter_type* param = NULL); 
 
+        /// @brief error handler 
+        /// @param env environment 
+        /// @param error error type 
+        void errorHandler(GRBenv* env, int error) const; 
     protected:
         /// @brief copy constructor, forbidden 
         /// @param rhs right hand side 
@@ -105,7 +113,7 @@ class GurobiLinearApi
         GurobiLinearApi& operator=(GurobiLinearApi const& rhs);
 
         model_type* m_model; ///< model for the problem 
-        GRBModel* m_grbModel; ///< model for Gurobi 
+        GRBmodel* m_grbModel; ///< model for Gurobi 
 };
 
 template <typename T, typename V>
@@ -129,76 +137,102 @@ SolverProperty GurobiLinearApi<T, V>::operator()(GurobiLinearApi<T, V>::paramete
     }
 
 	// ILP environment
-	GRBEnv env = GRBEnv();
+	GRBenv* env = NULL; 
+    m_grbModel = NULL; 
+    // Create environment
+    int error = GRBloadenv(&env, NULL);
+    errorHandler(env, error);
     param->operator()(env); 
-	m_grbModel = new GRBModel(env);
+    // Create an empty model 
+    error = GRBnewmodel(env, &m_grbModel, "LP", m_model->numVariables(), NULL, NULL, NULL, NULL, NULL);
+    errorHandler(env, error);
 
     // create variables 
-    GRBVar* vGrbVar = m_grbModel->addVars(m_model->numVariables()); 
-    m_grbModel->update();
+    error = GRBupdatemodel(m_grbModel);
+    errorHandler(env, error);
     for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
     {
         variable_type var (i);
-        GRBVar& grbVar = vGrbVar[i]; 
-        grbVar.set(GRB_DoubleAttr_LB, m_model->variableLowerBound(var)); 
-        grbVar.set(GRB_DoubleAttr_UB, m_model->variableUpperBound(var)); 
-        grbVar.set(GRB_DoubleAttr_Start, m_model->variableSolution(var)); 
-        grbVar.set(GRB_CharAttr_VType, m_model->variableNumericType(var) == CONTINUOUS? GRB_CONTINUOUS : GRB_INTEGER); 
-        grbVar.set(GRB_StringAttr_VarName, m_model->variableName(var));
+        error = GRBsetdblattrelement(m_grbModel, GRB_DBL_ATTR_LB, var.id(), m_model->variableLowerBound(var));
+        errorHandler(env, error);
+        error = GRBsetdblattrelement(m_grbModel, GRB_DBL_ATTR_UB, var.id(), m_model->variableUpperBound(var));
+        errorHandler(env, error);
+        error = GRBsetdblattrelement(m_grbModel, GRB_DBL_ATTR_START, var.id(), m_model->variableSolution(var));
+        errorHandler(env, error);
+        error = GRBsetcharattrelement(m_grbModel, GRB_CHAR_ATTR_VTYPE, var.id(), m_model->variableNumericType(var) == CONTINUOUS? GRB_CONTINUOUS : GRB_INTEGER);
+        errorHandler(env, error);
+        error = GRBsetstrattrelement(m_grbModel, GRB_STR_ATTR_VARNAME, var.id(), m_model->variableName(var).c_str());
+        errorHandler(env, error);
     }
 
     // create constraints 
-    GRBLinExpr expr; 
+    std::vector<int> vIdx; 
+    std::vector<double> vValue; 
     for (unsigned int i = 0, ie = m_model->constraints().size(); i < ie; ++i)
     {
         constraint_type const& constr = m_model->constraints().at(i);
 
-        expr.clear();
+        vIdx.clear(); 
+        vValue.clear();
         for (typename std::vector<term_type>::const_iterator it = constr.expression().terms().begin(), ite = constr.expression().terms().end(); it != ite; ++it)
-            expr += vGrbVar[it->variable().id()]*it->coefficient();
+        {
+            vIdx.push_back(it->variable().id()); 
+            vValue.push_back(it->coefficient());
+        }
 
-        m_grbModel->addConstr(expr, constr.sense(), constr.rightHandSide(), m_model->constraintName(constr)); 
+        error = GRBaddconstr(m_grbModel, constr.expression().terms().size(), &vIdx[0], &vValue[0], constr.sense(), constr.rightHandSide(), m_model->constraintName(constr).c_str());
+        errorHandler(env, error);
     }
 
     // create objective 
-    expr.clear();
     for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
-        expr += vGrbVar[it->variable().id()]*it->coefficient();
-    m_grbModel->setObjective(expr, m_model->optimizeType() == MIN? GRB_MINIMIZE : GRB_MAXIMIZE); 
+    {
+        error = GRBsetdblattrelement(m_grbModel, GRB_DBL_ATTR_OBJ, it->variable().id(), it->coefficient());
+        errorHandler(env, error);
+    }
+    error = GRBsetintattr(m_grbModel, GRB_INT_ATTR_MODELSENSE, m_model->optimizeType() == MIN? GRB_MINIMIZE : GRB_MAXIMIZE);
+    errorHandler(env, error);
 
     // call parameter setting before optimization 
-    param->operator()(*m_grbModel); 
-
-    m_grbModel->update(); 
+    param->operator()(m_grbModel); 
+    error = GRBupdatemodel(m_grbModel);
+    errorHandler(env, error);
 
 #ifdef DEBUG_GUROBIAPI
-    m_grbModel->write("problem.lp");
+    GRBwrite(m_grbModel, "problem.lp");
 #endif 
-    m_grbModel->optimize();
+    error = GRBoptimize(m_grbModel);
 
-    int status = m_grbModel->get(GRB_IntAttr_Status);
+    int status = 0; 
+    error = GRBgetintattr(m_grbModel, GRB_INT_ATTR_STATUS, &status);
+    errorHandler(env, error);
+
     if (status == GRB_INFEASIBLE)
     {
-        m_grbModel->computeIIS();
-        m_grbModel->write("problem.ilp");
+        error = GRBcomputeIIS(m_grbModel);
+        errorHandler(env, error); 
+        GRBwrite(m_grbModel, "problem.ilp");
         limboPrint(kERROR, "Model is infeasible, compute IIS and write to problem.ilp\n");
     }
 #ifdef DEBUG_GUROBIAPI
-    m_grbModel->write("problem.sol");
+    GRBwrite(m_grbModel, "problem.sol");
 #endif 
 
-    for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
+    for (unsigned int i = 0; i < m_model->numVariables(); ++i)
     {
-        variable_type var (i);
-        GRBVar& grbVar = vGrbVar[i]; 
-
-        m_model->setVariableSolution(var, grbVar.get(GRB_DoubleAttr_X));
+        variable_type var = m_model->variable(i); 
+        double value = 0; 
+        error = GRBgetdblattrelement(m_grbModel, GRB_DBL_ATTR_X, var.id(), &value);
+        errorHandler(env, error);
+        m_model->setVariableSolution(m_model->variable(i), value);
     }
 
     if (defaultParam)
         delete param; 
-    delete [] vGrbVar; 
-    delete m_grbModel; 
+    // Free model 
+    GRBfreemodel(m_grbModel);
+    // Free environment 
+    GRBfreeenv(env);
 
     switch (status)
     {
@@ -214,6 +248,16 @@ SolverProperty GurobiLinearApi<T, V>::operator()(GurobiLinearApi<T, V>::paramete
     }
 }
 
+template <typename T, typename V>
+void GurobiLinearApi<T, V>::errorHandler(GRBenv* env, int error) const 
+{
+    // Error reporting 
+    if (error) 
+        limboAssertMsg(0, "%s", GRBgeterrormsg(env)); 
+}
+
+#if GUROBIFILEAPI == 1
+#include "gurobi_c++.h"
 /// This api needs a file in LP format as input.
 /// And then read the solution output by gurobi 
 /// I plan to come up with more efficient api without file io operations 
@@ -325,6 +369,7 @@ struct GurobiFileApi
 	}
 
 };
+#endif
 
 } // namespace solvers
 } // namespace limbo

@@ -50,7 +50,7 @@ endif
 ifdef ZLIB_DIR
 include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindZlib.mk
 endif
-# dependency to GUROBI and get GUROBI_LINK_LIB
+# dependency to GUROBI and get GUROBI_LINK_LIB and GUROBI_CXX_LINK_LIB
 ifdef GUROBI_HOME
 include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindGurobi.mk
 endif

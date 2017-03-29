@@ -11,11 +11,13 @@
 ## 
 ## @param  GUROBI_VERSION version of Gurobi
 ## @param  GUROBI_LINK_LIB link to Gurobi
+## @param  GUROBI_CXX_LINK_LIB link to Gurobi
 
 ## @cond
 
 GUROBI_VERSION = $(subst .so,,$(subst libgurobi,,$(notdir $(wildcard $(GUROBI_HOME)/lib/libgurobi*.so))))
-GUROBI_LINK_LIB = -Wl,-rpath,$(GUROBI_HOME)/lib -L $(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi$(GUROBI_VERSION)
+GUROBI_LINK_LIB = -Wl,-rpath,$(GUROBI_HOME)/lib -L $(GUROBI_HOME)/lib -lgurobi$(GUROBI_VERSION)
+GUROBI_CXX_LINK_LIB = -Wl,-rpath,$(GUROBI_HOME)/lib -L $(GUROBI_HOME)/lib -lgurobi_c++ -lgurobi$(GUROBI_VERSION)
 
 
 ## @endcond 

@@ -44,7 +44,7 @@ endif
 
 # ==== GUROBI 
 INCLUDE += -I $(GUROBI_HOME)/include
-LIBS += $(GUROBI_LINK_LIB) \
+LIBS += $(GUROBI_CXX_LINK_LIB) \
 		-lpthread 
 # ==== Csdp api (OpenBLAS and Fortran library are necessary)
 # it looks like pthead must be linked dynamically when GUROBI is also on 
