@@ -1,4 +1,4 @@
-module simple (
+module \./out/simple (
 inp1,
 inp2,
 iccad_clk,
