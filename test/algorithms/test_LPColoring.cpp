@@ -174,7 +174,7 @@ double real_graph(string const& filename)
 	//test relaxed LP based coloring
 	limbo::algorithms::coloring::LPColoring<graph_type> lc (g); 
 	// THREE or FOUR 
-	lc.color_num(limbo::algorithms::coloring::LPColoring<graph_type>::FOUR);
+	lc.color_num(limbo::algorithms::coloring::LPColoring<graph_type>::THREE);
 	double cost = lc();
     printf("solved in %u LP iterations\n", lc.lp_iters());
 
