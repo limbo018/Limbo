@@ -123,7 +123,7 @@ void realGraph(string const& filename)
 		put(edge_weight, g, pe.first, weight);
 	}
 
-#ifdef DEBUG_LPCOLORING
+#ifdef DEBUG_ILPCOLORING
 	dynamic_properties dp;
 	dp.property("id", get(vertex_index, g));
 	dp.property("node_id", get(vertex_index, g));
@@ -140,7 +140,7 @@ void realGraph(string const& filename)
 	limbo::algorithms::coloring::ILPColoring<graph_type> lc (g); 
 	lc.stitch_weight(0.1);
 	// THREE or FOUR 
-	lc.color_num(limbo::algorithms::coloring::ILPColoring<graph_type>::THREE);
+	lc.color_num(limbo::algorithms::coloring::ILPColoring<graph_type>::FOUR);
 	double cost = lc();
     cout << "final cost = " << cost << endl;
 

@@ -6,3 +6,8 @@ test_SDPColoring
 test_GraphSimplification
 obj
 graph*
+*.lp
+comp*.gv
+*.pdf
+initial_input.*
+final_output.*

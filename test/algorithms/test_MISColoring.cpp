@@ -1,16 +1,23 @@
 /**
- * @file   test_GraphSimplification.cpp
- * @brief  test graph simplification algorithms @ref limbo::algorithms::coloring::GraphSimplification
+ * @file   test_MISColoring.cpp
+ * @brief  test MIS based coloring algorithm @ref limbo::algorithms::coloring::MISColoring
  * @author Yibo Lin
- * @date   May 19 01:15:09 2015
+ * @date   Feb 2015
  */
 
 #include <iostream>
+#include <fstream>
+#include <string>
 #include <boost/graph/graphviz.hpp>
 #include <boost/graph/graph_utility.hpp>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/undirected_graph.hpp>
-#include <limbo/algorithms/coloring/GraphSimplification.h>
+#include <limbo/algorithms/coloring/MISColoring.h>
+#include <boost/graph/erdos_renyi_generator.hpp>
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/graph/random.hpp>
+#include <boost/graph/iteration_macros.hpp>
+
 #include <boost/version.hpp>
 #if BOOST_VERSION <= 14601
 #include <boost/graph/detail/is_same.hpp>
@@ -42,7 +49,35 @@ typedef property_map<graph_type, edge_weight_t>::type edge_weight_map_type;
 typedef property_map<graph_type, vertex_color_t>::type vertex_color_map_type;
 /// @endnowarn
 
-/// test 1: a real graph from input 
+/// test 1: a random graph 
+void randomGraph() 
+{
+	mt19937 gen;
+	graph_type g;
+	int N = 40;
+	std::vector<vertex_descriptor> vertex_set;
+	std::vector< std::pair<vertex_descriptor, vertex_descriptor> > edge_set;
+	generate_random_graph(g, N, N * 2, gen,
+			std::back_inserter(vertex_set),
+			std::back_inserter(edge_set));
+	BOOST_AUTO(edge_weight_map, get(edge_weight, g));
+	unsigned int i = 0; 
+	graph_traits<graph_type>::edge_iterator eit, eit_end;
+	for (tie(eit, eit_end) = edges(g); eit != eit_end; ++eit, ++i)
+	{
+        edge_weight_map[*eit] = 1;
+	}
+
+	//test relaxed LP based coloring
+	limbo::algorithms::coloring::MISColoring<graph_type> lc (g); 
+	lc.stitch_weight(0.1);
+	// THREE or FOUR 
+	lc.color_num(limbo::algorithms::coloring::MISColoring<graph_type>::THREE);
+	double cost = lc();
+    cout << "final cost = " << cost << endl;
+}
+
+/// test 2: a real graph from input 
 /// @param filename input file in graphviz format 
 void realGraph(string const& filename)
 {
@@ -83,7 +118,7 @@ void realGraph(string const& filename)
 		put(edge_weight, g, pe.first, weight);
 	}
 
-#ifdef DEBUG_GRAPHSIMPLIFICATION
+#ifdef DEBUG_MISCOLORING
 	dynamic_properties dp;
 	dp.property("id", get(vertex_index, g));
 	dp.property("node_id", get(vertex_index, g));
@@ -97,37 +132,28 @@ void realGraph(string const& filename)
 #endif
 
 	//test relaxed LP based coloring
-	typedef limbo::algorithms::coloring::GraphSimplification<graph_type> simplification_type;
-	simplification_type gs (g, 4); 
-	//std::vector<int> vPrecolor (num_vertices(g), -1);
-	//if (vPrecolor.size() > 0) vPrecolor[0] = 0;
-	//if (vPrecolor.size() > 3) vPrecolor[3] = 0;
-	//if (vPrecolor.size() > 4) vPrecolor[4] = 0;
-	//gs.precolor(vPrecolor.begin(), vPrecolor.end());
-#if 0
-	gs.hide_small_degree();
-	gs.write_graph_dot("graph_simpl1");
-	//gs.merge_subK4();
-	gs.biconnected_component();
-	//gs.connected_component();
-#else 
-	gs.simplify(simplification_type::HIDE_SMALL_DEGREE | simplification_type::BICONNECTED_COMPONENT);
-#endif
-	gs.write_graph_dot("graph_simpl3");
-	gs.write_simplified_graph_dot("graph_simpl_merge");
+	limbo::algorithms::coloring::MISColoring<graph_type> lc (g); 
+    // stitch is not supported 
+	// THREE or FOUR 
+	lc.color_num(limbo::algorithms::coloring::MISColoring<graph_type>::FOUR);
+	double cost = lc();
+    cout << "final cost = " << cost << endl;
 
 	in.close();
 }
 
 /// main function \n
-/// test either on real graph 
+/// test either on random graph or real graph 
 /// @param argc number of arguments 
 /// @param argv values of arguments 
 /// @return 0 
 int main(int argc, char** argv)
 {
-	assert(argc >= 2);
-	realGraph(argv[1]);
+	if (argc < 2)
+	{
+		randomGraph();
+	}
+	else realGraph(argv[1]);
 
 	return 0;
 }
