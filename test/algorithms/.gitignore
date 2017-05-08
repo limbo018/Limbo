@@ -4,6 +4,7 @@ test_LPColoring
 test_ILPColoring
 test_SDPColoring
 test_GraphSimplification
+test_MISColoring
 obj
 graph*
 *.lp

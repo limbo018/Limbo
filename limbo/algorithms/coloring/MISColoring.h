@@ -28,8 +28,10 @@
 //#include <boost/graph/dijkstra_shortest_paths.hpp>
 #include <limbo/string/String.h>
 #include <limbo/algorithms/coloring/Coloring.h>
+#if GUROBI == 1
 #include <limbo/solvers/Solvers.h>
 #include <limbo/solvers/api/GurobiApi.h>
+#endif
 
 /// namespace for Limbo 
 namespace limbo 
@@ -62,8 +64,10 @@ class MISColoring : public Coloring<GraphType>
         using typename base_type::edge_weight_type;
 		using typename base_type::ColorNumType;
         typedef typename base_type::EdgeHashType edge_hash_type;
+#if GUROBI == 1
         typedef limbo::solvers::LinearModel<float, int32_t> model_type; 
         typedef limbo::solvers::GurobiLinearApi<model_type::coefficient_value_type, model_type::variable_value_type> solver_type; 
+#endif
         /// @endnowarn
         
 		/// constructor
@@ -82,9 +86,53 @@ class MISColoring : public Coloring<GraphType>
         /// write raw solution of MIS 
         /// @param filename output file name 
         /// @param vVertexExcludeMark marked true for vertices to exclude from graph 
-        /// @param opt_model problem model 
-        /// @param vVertex2Var array of vertex bits that indicate coloring solutions; each vertex corresponds to two bits 
-        void write_graph_sol(string const& filename, std::vector<int8_t> const& vVertexExcludeMark, model_type const& opt_model, std::vector<model_type::variable_type> const& vVertex2Var) const;
+        /// @param vMISVertex vertices of maximum independent set 
+        void write_graph_sol(string const& filename, std::vector<int8_t> const& vVertexExcludeMark, std::vector<graph_vertex_type> const& vMISVertex) const
+        {
+            std::ofstream out((filename+".gv").c_str());
+            out << "graph D { \n"
+                << "  randir = LR\n"
+                << "  size=\"4, 3\"\n"
+                << "  ratio=\"fill\"\n"
+                << "  edge[style=\"bold\",fontsize=200]\n" 
+                << "  node[shape=\"circle\",fontsize=200]\n";
+
+            //output nodes 
+            uint32_t vertex_num = boost::num_vertices(this->m_graph);
+            for(uint32_t k = 0; k < vertex_num; ++k) 
+            {
+                out << "  " << k << "[shape=\"circle\"";
+                //output coloring label
+                if (vVertexExcludeMark[k]) // excluded
+                    out << ",label=\"" << k << "\",style=filled,fillcolor=\"grey\"";
+                else if (std::find(vMISVertex.begin(), vMISVertex.end(), k) != vMISVertex.end())
+                    out << ",label=\"" << k << "\",style=filled,fillcolor=\"red\"";
+                else 
+                    out << ",label=\"" << k << "\"";
+                out << "]\n";
+            }//end for
+
+            //output edges
+            edge_iterator_type ei, eie;
+            for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei)
+            {
+                edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, *ei);
+                graph_vertex_type s = boost::source(*ei, this->m_graph);
+                graph_vertex_type t = boost::target(*ei, this->m_graph);
+                if (w >= 0) // conflict edge 
+                {
+                    if (vVertexExcludeMark[s] || vVertexExcludeMark[t]) // skipped 
+                        out << "  " << s << "--" << t << "[color=\"grey\",style=\"solid\",penwidth=3]\n";
+                    else 
+                        out << "  " << s << "--" << t << "[color=\"black\",style=\"solid\",penwidth=3]\n";
+                }
+                else // stitch edge 
+                    out << "  " << s << "--" << t << "[color=\"blue\",style=\"dotted\",penwidth=3]\n";
+            }
+            out << "}";
+            out.close();
+            la::graphviz2pdf(filename);
+        }
 
 	protected:
         /// kernel coloring algorithm 
@@ -98,9 +146,15 @@ class MISColoring : public Coloring<GraphType>
             {
                 vMISVertex.clear(); 
                 // compute maximum independent set to the residual graph 
+#if GUROBI == 1
+                // find maximum independent set with maximum number of vertices 
+                computeMWISILP(vVertexExcludeMark, vMISVertex); 
+#else 
+                // only find maximum independent set 
                 computeMIS(vVertexExcludeMark, vMISVertex); 
+#endif
                 // apply color 
-                for (std::vector<graph_vertex_type>::const_iterator vi = vMISVertex.begin(); vi != vMISVertex.end(); ++vi)
+                for (typename std::vector<graph_vertex_type>::const_iterator vi = vMISVertex.begin(); vi != vMISVertex.end(); ++vi)
                 {
                     this->m_vColor[*vi] = c; 
                     vVertexExcludeMark[*vi] = true; 
@@ -115,12 +169,12 @@ class MISColoring : public Coloring<GraphType>
                 if (!vVertexExcludeMark[v]) // skip excluded vertices 
                 {
                     int8_t bestColor = 0; 
-                    int32_t bestColor = std::numeric_limits<int32_t>::max(); 
+                    edge_weight_type bestCost = std::numeric_limits<edge_weight_type>::max(); 
                     for (int8_t c = 0; c < this->color_num(); ++c)
                     {
-                        int32_t curCost = 0; 
+                        edge_weight_type curCost = 0; 
                         typename boost::graph_traits<graph_type>::adjacency_iterator ui, uie;
-                        for (boost::tie(ui, uie) = boost::adjacent_vertices(cv, this->m_graph); ui != uie; ++ui)
+                        for (boost::tie(ui, uie) = boost::adjacent_vertices(v, this->m_graph); ui != uie; ++ui)
                         {
                             graph_vertex_type u = *ui; 
                             if (this->m_vColor[u] >= 0 && this->m_vColor[u] < this->color_num())
@@ -143,20 +197,27 @@ class MISColoring : public Coloring<GraphType>
                             bestColor = c;
                         }
                     }
+                    this->m_vColor[v] = bestColor; 
                 }
             }
 
+#ifdef DEBUG_MISCOLORING
+            this->write_graph("final_output");
+#endif
             return this->calc_cost(this->m_vColor); 
         }
 
-        /// @brief compute maximum independent set with ILP, weight is not supported yet  
+#if GUROBI == 1
+        /// @brief compute maximum independent set with ILP assuming weight of vertices is 1. 
+        /// Other weight is not supported yet.  
+        /// The objective is to minimize the overall weight of edges in the residual graph.  
         /// @param vVertexExcludeMark marked true for vertices to exclude from graph 
         /// @param vMISVertex store vertices of maximum independent set 
         /// @return size of maximum independent set 
-        double computeMIS(std::vector<int8_t> const& vVertexExcludeMark, std::vector<graph_vertex_type>& vMISVertex)
+        double computeMWISILP(std::vector<int8_t> const& vVertexExcludeMark, std::vector<graph_vertex_type>& vMISVertex)
         {
             uint32_t vertex_num = boost::num_vertices(this->m_graph);
-            uint32_t edge_num = boost::num_edges(this->m_graph);
+            uint32_t edge_num = boost::num_edges(this->m_graph); 
             uint32_t exclude_vertex_num = std::count(vVertexExcludeMark.begin(), vVertexExcludeMark.end(), 1); 
 
             /// ILP model 
@@ -167,9 +228,10 @@ class MISColoring : public Coloring<GraphType>
             //set up the ILP variables
             // this is a map of length vertex_num 
             std::vector<model_type::variable_type> vVertex2Var (vertex_num);
+            boost::unordered_map<graph_edge_type, model_type::variable_type, edge_hash_type> hEdge2Var; // edge index 
 
             // vertex variables 
-            opt_model.reserveVariables(vertex_num-exclude_vertex_num); 
+            opt_model.reserveVariables(vertex_num-exclude_vertex_num+edge_num); 
             vertex_iterator_type vi, vie;
             for (boost::tie(vi, vie) = boost::vertices(this->m_graph); vi != vie; ++vi)
             {
@@ -181,25 +243,33 @@ class MISColoring : public Coloring<GraphType>
                     vVertex2Var[v] = opt_model.addVariable(0, 1, limbo::solvers::INTEGER, oss.str()); 
                 }
             }
-
-            // set up the objective 
-            model_type::expression_type obj;
-            vertex_iterator_type vi, vie;
-            for (boost::tie(vi, vie) = boost::vertices(this->m_graph); vi != vie; ++vi)
+            // edge variables 
+            edge_iterator_type ei, eie; 
+            for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei)
             {
-                graph_vertex_type v = *vi; 
-                if (!vVertexExcludeMark[v]) // skip excluded vertices 
+                graph_vertex_type s = boost::source(*ei, this->m_graph);
+                graph_vertex_type t = boost::target(*ei, this->m_graph);
+
+                if (!vVertexExcludeMark[s] && !vVertexExcludeMark[t]) // skip any edge connected to excluded vertices 
                 {
-                    obj += vVertex2Var[v]; 
+                    std::ostringstream oss; 
+                    oss << "e" << s << "_" << t; 
+                    hEdge2Var.insert(std::make_pair(*ei, opt_model.addVariable(0, 1, limbo::solvers::INTEGER, oss.str()))); 
                 }
             }
-            opt_model.setObjective(obj);
-            opt_model.setOptimizeType(limbo::solvers::MIN); 
 
-            // constraints 
+            // set up the objective 
+            // maximize the edge weight selected, which is equivalent to minimize the edge weight in the residual graph 
+            // max. sum e
+            model_type::expression_type obj;
+            for (typename boost::unordered_map<graph_edge_type, model_type::variable_type, edge_hash_type>::const_iterator it = hEdge2Var.begin(); it != hEdge2Var.end(); ++it)
+                obj += it->second; 
+            opt_model.setObjective(obj);
+            opt_model.setOptimizeType(limbo::solvers::MAX); 
+
+            // conflict constraints 
             char buf[100];
             uint32_t constr_num = 0; 
-            edge_iterator_type ei, eie; 
             for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei)
             {
                 graph_vertex_type s = boost::source(*ei, this->m_graph);
@@ -212,6 +282,23 @@ class MISColoring : public Coloring<GraphType>
                             vVertex2Var[s] + vVertex2Var[t] <= 1
                             , buf);
                 }
+            }
+            // edge selected constraints 
+            // the edge variable will be 1 if any of its vertices is selected 
+            // e <= vs + vt 
+            // if vs = vt = 0, e = 0
+            // else e can be any value between 0 and 1 
+            // consider that we are maximizing e in the objective 
+            for (typename boost::unordered_map<graph_edge_type, model_type::variable_type, edge_hash_type>::const_iterator it = hEdge2Var.begin(); it != hEdge2Var.end(); ++it)
+            {
+                graph_edge_type const& e = it->first; 
+                graph_vertex_type s = boost::source(e, this->m_graph);
+                graph_vertex_type t = boost::target(e, this->m_graph);
+
+                sprintf(buf, "E%u", constr_num++);  
+                opt_model.addConstraint(
+                        it->second - vVertex2Var[s] - vVertex2Var[t] <= 0
+                        , buf);
             }
 
             //optimize model 
@@ -227,10 +314,6 @@ class MISColoring : public Coloring<GraphType>
                 exit(1);
             }
 
-#ifdef DEBUG_MISCOLORING
-            this->write_graph_sol("graph_sol", vVertexExcludeMark, opt_model, vVertex2Var); // dump solution figure 
-#endif
-
             // collect maximum independent set vertices 
             for (boost::tie(vi, vie) = boost::vertices(this->m_graph); vi != vie; ++vi)
             {
@@ -243,58 +326,58 @@ class MISColoring : public Coloring<GraphType>
                 }
             }
 
+#ifdef DEBUG_MISCOLORING
+            this->write_graph_sol("graph_sol", vVertexExcludeMark, vMISVertex); // dump solution figure 
+#endif
+
             // return objective value 
             return opt_model.evaluateObjective();
         }
+#endif
+
+        /// @brief compute maximum independent set, weight is not supported yet  
+        /// @param vVertexExcludeMark marked true for vertices to exclude from graph 
+        /// @param vMISVertex store vertices of maximum independent set 
+        /// @return size of maximum independent set 
+        double computeMIS(std::vector<int8_t> const& vVertexExcludeMark, std::vector<graph_vertex_type>& vMISVertex)
+        {
+            uint32_t vertex_num = boost::num_vertices(this->m_graph);
+
+            // this is a map of length vertex_num 
+            std::set<graph_vertex_type> sVertex;
+
+            for (uint32_t i = 0; i < vertex_num; ++i)
+            {
+                if (!vVertexExcludeMark[i]) // skip excluded vertices 
+                    sVertex.insert(i); 
+            }
+
+            // while sVertex is not empty 
+            //     choose v \in V 
+            //     add v to vMISVertex 
+            //     remove neighbors of v from V 
+            while (!sVertex.empty())
+            {
+                graph_vertex_type v = *sVertex.begin(); 
+                vMISVertex.push_back(v); 
+
+                sVertex.erase(v);
+                typename boost::graph_traits<graph_type>::adjacency_iterator ui, uie;
+                for (boost::tie(ui, uie) = boost::adjacent_vertices(v, this->m_graph); ui != uie; ++ui)
+                {
+                    graph_vertex_type u = *ui; 
+                    sVertex.erase(u); 
+                }
+            }
+
+#ifdef DEBUG_MISCOLORING
+            this->write_graph_sol("graph_sol", vVertexExcludeMark, vMISVertex); // dump solution figure 
+#endif
+
+            // return size of independent set  
+            return vMISVertex.size();
+        }
 };
-
-template <typename GraphType>
-void MISColoring<GraphType>::write_graph_sol(string const& filename, std::vector<int8_t> const& vVertexExcludeMark, typename MISColoring<GraphType>::model_type const& opt_model, 
-        std::vector<typename MISColoring<GraphType>::model_type::variable_type> const& vVertex2Var) const
-{
-	std::ofstream out((filename+".gv").c_str());
-	out << "graph D { \n"
-		<< "  randir = LR\n"
-		<< "  size=\"4, 3\"\n"
-		<< "  ratio=\"fill\"\n"
-		<< "  edge[style=\"bold\",fontsize=200]\n" 
-		<< "  node[shape=\"circle\",fontsize=200]\n";
-
-	//output nodes 
-	uint32_t vertex_num = boost::num_vertices(this->m_graph);
-	for(uint32_t k = 0; k < vertex_num; ++k) 
-	{
-		out << "  " << k << "[shape=\"circle\"";
-		//output coloring label
-        if (vVertexExcludeMark[k]) // excluded
-            out << ",label=\"" << k << "\"";
-        else 
-            out << ",label=\"" << k << ":" << opt_model.variableSolution(vVertex2Var[k]) << "\"";
-		out << "]\n";
-	}//end for
-
-	//output edges
-	edge_iterator_type ei, eie;
-	for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei)
-	{
-		edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, *ei);
-		graph_vertex_type s = boost::source(*ei, this->m_graph);
-		graph_vertex_type t = boost::target(*ei, this->m_graph);
-		if (w >= 0) // conflict edge 
-		{
-            if (vVertexExcludeMark[s] || vVertexExcludeMark[t]) // skipped 
-				out << "  " << s << "--" << t << "[color=\"grey\",style=\"solid\",penwidth=3]\n";
-			else 
-				out << "  " << s << "--" << t << "[color=\"black\",style=\"solid\",penwidth=3]\n";
-		}
-		else // stitch edge 
-			out << "  " << s << "--" << t << "[color=\"blue\",style=\"dotted\",penwidth=3]\n";
-	}
-	out << "}";
-	out.close();
-    la::graphviz2pdf(filename);
-}
-
 
 } // namespace coloring
 } // namespace algorithms

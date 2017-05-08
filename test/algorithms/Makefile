@@ -14,6 +14,8 @@ VPATH = .
 
 # default DBG is off
 DBG = 0
+# default GUROBI is on 
+GUROBI = 1
 
 # include environmental configurations 
 include $(LIMBO_ROOT_DIR)/Include.mk
@@ -26,6 +28,7 @@ endif
 
 # moved to SDPColoringCsdp.h
 #CXXFLAGS += -DNOSHORTS
+CXXFLAGS += -DGUROBI=$(GUROBI)
 
 #==========================================================================
 #                         Special Library
