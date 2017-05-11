@@ -637,7 +637,7 @@ bool Driver::parse_file(const std::string &filename)
     lefrSetReallocFunction(reallocCB);
     lefrSetFreeFunction(freeCB);
 
-    lefrSetLineNumberFunction(lineNumberCB);
+    //lefrSetLineNumberFunction(lineNumberCB);
     lefrSetDeltaNumberLines(50);
 
     lefrSetRegisterUnusedCallbacks();
