@@ -349,9 +349,9 @@ void GdsWriter::gds_make_next_item( struct gds_itemtype **ci )
 	current_item->path_end      = 0;
 	current_item->mag           = 1.0;              /* mag */
 	current_item->angle         = 0.0;              /* angle */
-	current_item->abs_angle     = FALSE;            /* from strans */
-	current_item->abs_mag       = FALSE;            /* from strans */
-	current_item->reflect       = FALSE;            /* from strans, reflect before rotation */
+	current_item->abs_angle     = 0;            /* from strans */
+	current_item->abs_mag       = 0;            /* from strans */
+	current_item->reflect       = 0;            /* from strans, reflect before rotation */
 	current_item->rows          = 0;                /* n cols */
 	current_item->cols          = 0;                /* n rows */
 	current_item->col_pitch     = 0;                /* column pitch */

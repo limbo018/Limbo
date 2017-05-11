@@ -12,3 +12,11 @@ dlx/example/sudoku/sudoku
 dlx/example/nqueens/nqueens
 dlx/example/npieces/npieces
 dlx/example/polyomino/polyomino
+lefdef/5.8/lef/bin
+lefdef/5.8/lef/lib
+lefdef/5.8/lef/include
+lefdef/5.8/lef/lef/y.tab.h
+lefdef/5.8/lef/lef/y.tab.cpp
+lefdef/5.8/lef/lefdiff/lefdiff
+lefdef/5.8/lef/lefrw/lefrw
+lefdef/5.8/lef/lefwrite/lefwrite

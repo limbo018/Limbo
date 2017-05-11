@@ -6,3 +6,4 @@ test_SDPColoring
 test_GraphSimplification
 obj
 graph*
+comp130*.gv
