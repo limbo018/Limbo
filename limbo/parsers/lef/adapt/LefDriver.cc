@@ -762,6 +762,8 @@ bool Driver::parse_file(const std::string &filename)
     void lefrUnsetViaRuleCbk();
 
     lefrClear(); 
+    fclose(f); 
+    free(userData); 
 
     return true; 
 }

@@ -60,7 +60,7 @@ int done(defrCallbackType_e c, void*, defiUserData ud)
 {
     checkType(c);
     if (ud != userData) dataError();
-    //limboPrint(limbo::kNONE, "END DESIGN\n");
+    defDB->end_def_design(); 
     return 0;
 }
 
@@ -2767,6 +2767,7 @@ bool Driver::parse_file(const std::string &filename)
 
     // Release allocated singleton data.
     defrClear();
+    fclose(f); 
 
     return true; 
 }

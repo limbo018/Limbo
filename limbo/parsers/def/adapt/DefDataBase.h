@@ -215,6 +215,8 @@ class DefDataBase
         virtual void resize_def_blockage(int);
         /// @brief add placement blockages, array of boxes with xl, yl, xh, yh
         virtual void add_def_placement_blockage(std::vector<std::vector<int> > const&);
+        /// @brief end of design 
+        virtual void end_def_design(); 
 
     protected:
         /// @brief remind users to define some optional callback functions at runtime 
