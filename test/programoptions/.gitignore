@@ -1,3 +1,4 @@
 obj
 test_ProgramOptions
 test_ProgramOptions_simple
+valgrind.*
