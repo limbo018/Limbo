@@ -9,7 +9,21 @@
 .PHONY: all
 all: install release
 
+#==========================================================================
+#                         Directories and names 
+# ==========================================================================
+
 LIMBO_ROOT_DIR = $(realpath ../../../../..)
+LIBDIR = $(LIMBO_ROOT_DIR)/lib
+LIBMKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
+
+#==========================================================================
+#                         Compilation Flags
+# ==========================================================================
+
+# include environmental configurations 
+include $(LIMBO_ROOT_DIR)/Include.mk
+
 BUILD_ORDER	= \
 			lef \
 			clef \
