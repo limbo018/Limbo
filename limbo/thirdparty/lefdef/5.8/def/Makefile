@@ -60,10 +60,14 @@ myinstall:
 	mkdir -p $(PREFIX)/include/limbo/thirdparty/lefdef/5.8/def/include
 	cp $(wildcard include/*.h) $(PREFIX)/include/limbo/thirdparty/lefdef/5.8/def/include
 	cp $(wildcard include/*.hpp) $(PREFIX)/include/limbo/thirdparty/lefdef/5.8/def/include
-	cp $(LIMBO_ROOT_DIR)/lib/libcdef.a $(PREFIX)/lib
-	cp $(LIMBO_ROOT_DIR)/lib/libcdefzlib.a $(PREFIX)/lib
-	cp $(LIMBO_ROOT_DIR)/lib/libdef.a $(PREFIX)/lib
-	cp $(LIMBO_ROOT_DIR)/lib/libdefzlib.a $(PREFIX)/lib
+	cmp -s $(PREFIX)/lib/libcdef.a $(LIBDIR)/libcdef.a; \
+	RETVAL=$$?; \
+	if [ $$RETVAL -ne 0 ]; then \
+		cp $(LIMBO_ROOT_DIR)/lib/libcdef.a $(PREFIX)/lib; \
+		cp $(LIMBO_ROOT_DIR)/lib/libcdefzlib.a $(PREFIX)/lib; \
+		cp $(LIMBO_ROOT_DIR)/lib/libdef.a $(PREFIX)/lib; \
+		cp $(LIMBO_ROOT_DIR)/lib/libdefzlib.a $(PREFIX)/lib; \
+	fi
 
 test:
 	@$(MAKE) "BUILD_ORDER=TEST" dotest
