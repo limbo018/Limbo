@@ -4,6 +4,11 @@ test_LPColoring
 test_ILPColoring
 test_SDPColoring
 test_GraphSimplification
+test_MISColoring
 obj
 graph*
-comp130*.gv
+*.lp
+comp*.gv
+*.pdf
+initial_input.*
+final_output.*

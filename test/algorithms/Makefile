@@ -14,18 +14,21 @@ VPATH = .
 
 # default DBG is off
 DBG = 0
+# default GUROBI is on 
+GUROBI = 1
 
 # include environmental configurations 
 include $(LIMBO_ROOT_DIR)/Include.mk
 
 ifeq ($(DBG), 1)
-	CXXFLAGS = $(CXXFLAGS_DEBUG) -DDEBUG_LPCOLORING -DASSERT_LPCOLORING -DDEBUG_GRAPHSIMPLIFICATION -DDEBUG_ILPCOLORING -DDEBUG_SDPCOLORING -DDEBUG_FM
+	CXXFLAGS = $(CXXFLAGS_DEBUG) -DDEBUG_LPCOLORING -DASSERT_LPCOLORING -DDEBUG_GRAPHSIMPLIFICATION -DDEBUG_ILPCOLORING -DDEBUG_SDPCOLORING -DDEBUG_MISCOLORING -DDEBUG_FM
 else
 	CXXFLAGS = $(CXXFLAGS_RELEASE)
 endif
 
 # moved to SDPColoringCsdp.h
 #CXXFLAGS += -DNOSHORTS
+CXXFLAGS += -DGUROBI=$(GUROBI)
 
 #==========================================================================
 #                         Special Library
@@ -66,7 +69,7 @@ DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
 TARGETS = test_ChromaticNumber test_GraphSimplification test_FM
 ifdef GUROBI_HOME
-	TARGETS += test_LPColoring test_ILPColoring 
+	TARGETS += test_LPColoring test_ILPColoring test_MISColoring
 endif 
 ifeq ($(OPENBLAS), 1)
 	TARGETS += test_SDPColoring
@@ -106,6 +109,9 @@ test_ILPColoring: $(OBJDIR)/test_ILPColoring.o
 test_SDPColoring: $(OBJDIR)/test_SDPColoring.o $(LIMBO_ROOT_DIR)/lib/libsdp.a $(LIMBO_ROOT_DIR)/lib/libopenblas-st.a
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_SDPColoring.o $(CXXFLAGS) $(LIBS)
 
+test_MISColoring: $(OBJDIR)/test_MISColoring.o 
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_MISColoring.o $(CXXFLAGS) $(LIBS)
+
 test_FM: $(OBJDIR)/test_FM.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_FM.o $(LIBS) 
 
@@ -115,6 +121,7 @@ clean: cleandep
 	rm -f test_LPColoring 
 	rm -f test_GraphSimplification 
 	rm -f test_ILPColoring 
+	rm -f test_MISColoring 
 	rm -f test_SDPColoring 
 	rm -f test_FM
 	rm -f $(OBJS)
