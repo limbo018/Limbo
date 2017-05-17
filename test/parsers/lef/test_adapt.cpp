@@ -1,5 +1,5 @@
 /**
- * @file   lef/test_bison.cpp
+ * @file   lef/test_adapt.cpp
  * @brief  test lef parser, see @ref LefParser::Driver and @ref LefParser::LefDataBase
  * @author Yibo Lin
  * @date   Dec 2014

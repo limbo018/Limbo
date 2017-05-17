@@ -17,8 +17,6 @@
 /// &     & x_2 - x_3 \ge 0.2.  
 /// \f}
 /// 
-/// @param argc number of arguments 
-/// @param argv values of arguments 
 /// @return 0 
 int main()
 {

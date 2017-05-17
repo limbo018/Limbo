@@ -34,6 +34,7 @@ using std::make_pair;
 using std::ostringstream;
 /// @endnowarn
 
+/// @cond
 typedef LefDefParser::lefiArrayFloorPlan lefiArrayFloorPlan;
 typedef LefDefParser::lefiArray lefiArray;
 typedef LefDefParser::lefiNoiseVictim lefiNoiseVictim;
@@ -88,6 +89,7 @@ typedef LefDefParser::lefiGeomPolygonIter lefiGeomPolygonIter;
 typedef LefDefParser::lefiGeomVia lefiGeomVia;
 typedef LefDefParser::lefiGeomViaIter lefiGeomViaIter;
 typedef LefDefParser::lefiPoints lefiPoints;
+/// @endcond
 
 // forward declaration
 /// @class LefParser::LefDataBase

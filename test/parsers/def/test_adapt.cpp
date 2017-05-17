@@ -1,5 +1,5 @@
 /**
- * @file   def/test_bison.cpp
+ * @file   def/test_adapt.cpp
  * @brief  test def parser, see @ref DefParser::Driver and @ref DefParser::DefDataBase
  * @author Yibo Lin
  * @date   Oct 2014

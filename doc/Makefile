@@ -36,9 +36,9 @@ SRCS = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/bookshelf/bison/BookshelfDataBase.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/bookshelf/bison/BookshelfDriver.h) \
 		  \
-		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/def/test_bison.cpp) \
-		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/bison/DefDataBase.h) \
-		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/bison/DefDriver.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/def/test_adapt.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/adapt/DefDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/adapt/DefDriver.h) \
 		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/ebeam/test_bison.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/ebeam/bison/EbeamDataBase.h) \
@@ -52,10 +52,9 @@ SRCS = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdsii/stream/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdsii/gdsdb/*.h) \
 		  \
-		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/lef/test_bison.cpp) \
-		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/bison/LefDataBase.h) \
-		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/bison/LefDriver.h) \
-		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/bison/*.hpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/lef/test_adapt.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/adapt/LefDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/adapt/LefDriver.h) \
 		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/lp/test_bison.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lp/bison/LpDataBase.h) \
