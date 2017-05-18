@@ -67,13 +67,7 @@ $(OBJDIR)/%.o: %.cc
 lib$(LIB_PREFIX)parseradapt: $(OBJS) $(LIBDIR)/liblef.a
 	@$(LIBMKDIR)
 	$(AR) $(ARFLAGS) lib$(LIB_PREFIX)wrapper.a $(OBJS)
-	echo "create $(LIBDIR)/lib$(LIB_PREFIX)parseradapt.a" > lib$(LIB_PREFIX)parseradapt.mri 
-	echo "addlib lib$(LIB_PREFIX)wrapper.a" >> lib$(LIB_PREFIX)parseradapt.mri 
-	echo "addlib $(LIMBO_ROOT_DIR)/lib/liblef.a" >> lib$(LIB_PREFIX)parseradapt.mri 
-	echo "save" >> lib$(LIB_PREFIX)parseradapt.mri 
-	echo "end" >> lib$(LIB_PREFIX)parseradapt.mri 
-	$(AR) -M <lib$(LIB_PREFIX)parseradapt.mri 
-	rm -f lib$(LIB_PREFIX)parseradapt.mri 
+	$(LIBTOOL) -static -o $(LIBDIR)/lib$(LIB_PREFIX)parseradapt.a lib$(LIB_PREFIX)wrapper.a $(LIBDIR)/lib$(LIB_PREFIX).a
 	rm -f lib$(LIB_PREFIX)wrapper.a
 
 .PHONY: install

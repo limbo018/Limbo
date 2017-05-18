@@ -36,6 +36,23 @@ OPTIMIZE_FLAG = -O3
 endif
 endif
 
+#==========================================================================
+#                         Directories and names 
+# ==========================================================================
+
+LIMBO_ROOT_DIR = $(realpath ../../../../../..)
+
+#==========================================================================
+#                         Compilation Flags
+# ==========================================================================
+
+# include environmental configurations 
+include $(LIMBO_ROOT_DIR)/Include.mk
+
+CXX_OPTIMIZE_FLAG += $(OPTIMIZE_FLAG) $(CXXFLAGS_BASIC)
+C_OPTIMIZE_FLAG += $(OPTIMIZE_FLAG) $(CFLAGS_BASIC)
+BIN_LINK_FLAGS += $(CXX_OPTIMIZE_FLAG)
+
 .SUFFIXES: $(SUFFIXES) .cpp
 
 
@@ -87,10 +104,10 @@ $(INSTALLED_HDRS):	../include/%:	%
 installhdrs: $(INSTALLED_HDRS)
 
 .cpp.o:
-	$(COMPILE.cc) $(OPTIMIZE_FLAG) -I../include $<
+	$(COMPILE.cc) $(CXX_OPTIMIZE_FLAG) -I../include $<
 
 .c.o:
-	$(COMPILE.c) $(OPTIMIZE_FLAG) -I../include $<
+	$(COMPILE.c) $(C_OPTIMIZE_FLAG) -I../include $<
 
 $(LIBTARGET): $(LIBOBJS)
 	rm -f $(LIBTARGET)
