@@ -48,6 +48,7 @@ unitTest:
 # Install the executables in /usr/local/bin.
 #
 
+.PHONY: install
 install:
 	cmp -s $(PREFIX)/lib/libsdp.a $(LIBDIR)/libsdp.a; \
 	RETVAL=$$?; \
