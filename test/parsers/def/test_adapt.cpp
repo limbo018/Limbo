@@ -65,7 +65,7 @@ class DefDataBase : public DefParser::DefDataBase
         /// @param c component 
 		virtual void add_def_component(DefParser::Component const& c) 
 		{
-			cout << __func__ << ": " << c.comp_name << endl;
+			cout << __func__ << ": " << c.comp_name << ": status = " << c.status << endl;
 		}
         /// @param token number of components 
 		virtual void resize_def_component(int token) 

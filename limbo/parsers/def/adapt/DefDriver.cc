@@ -115,10 +115,14 @@ int compf(defrCallbackType_e c, defiComponent* co, defiUserData ud)
     if (ud != userData) dataError();
     defDriver->component().comp_name = co->id(); // instance name 
     defDriver->component().macro_name = co->name(); // cell type 
+    if (co->isUnplaced())
+        defDriver->component().status = "UNPLACED"; 
     if (co->isFixed())
         defDriver->component().status = "FIXED"; 
     if (co->isPlaced())
         defDriver->component().status = "PLACED"; 
+    if (co->isCover())
+        defDriver->component().status = "COVER"; 
     defDriver->component().origin[0] = co->placementX(); 
     defDriver->component().origin[1] = co->placementY(); 
     defDriver->component().orient = orientStr(co->placementOrient()); 
