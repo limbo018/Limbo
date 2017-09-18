@@ -15,7 +15,7 @@ all: install release
 
 LIMBO_ROOT_DIR = $(realpath ../../../../..)
 LIBDIR = $(LIMBO_ROOT_DIR)/lib
-LIBMKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
+LIBMKDIR = mkdir -p $(LIBDIR)
 
 #==========================================================================
 #                         Compilation Flags
@@ -51,22 +51,24 @@ install:
 
 release:
 	@$(MAKE) "DEBUG=$(OPTIMIZE_FLAG)" install
-	mv lib/libclef.a $(LIMBO_ROOT_DIR)/lib
-	mv lib/libclefzlib.a $(LIMBO_ROOT_DIR)/lib
-	mv lib/liblef.a $(LIMBO_ROOT_DIR)/lib
-	mv lib/liblefzlib.a $(LIMBO_ROOT_DIR)/lib
+	@$(LIBMKDIR)
+	mv lib/libclef.a $(LIBDIR)
+	mv lib/libclefzlib.a $(LIBDIR)
+	mv lib/liblef.a $(LIBDIR)
+	mv lib/liblefzlib.a $(LIBDIR)
 
 myinstall: 
+	@$(LIBMKDIR)
 	mkdir -p $(PREFIX)/include/limbo/thirdparty/lefdef/5.8/lef/include
 	cp $(wildcard include/*.h) $(PREFIX)/include/limbo/thirdparty/lefdef/5.8/lef/include
 	cp $(wildcard include/*.hpp) $(PREFIX)/include/limbo/thirdparty/lefdef/5.8/lef/include
 	cmp -s $(PREFIX)/lib/libclef.a $(LIBDIR)/libclef.a; \
 	RETVAL=$$?; \
 	if [ $$RETVAL -ne 0 ]; then \
-		cp $(LIMBO_ROOT_DIR)/lib/libclef.a $(PREFIX)/lib; \
-		cp $(LIMBO_ROOT_DIR)/lib/libclefzlib.a $(PREFIX)/lib; \
-		cp $(LIMBO_ROOT_DIR)/lib/liblef.a $(PREFIX)/lib; \
-		cp $(LIMBO_ROOT_DIR)/lib/liblefzlib.a $(PREFIX)/lib; \
+		cp $(LIBDIR)/libclef.a $(PREFIX)/lib; \
+		cp $(LIBDIR)/libclefzlib.a $(PREFIX)/lib; \
+		cp $(LIBDIR)/liblef.a $(PREFIX)/lib; \
+		cp $(LIBDIR)/liblefzlib.a $(PREFIX)/lib; \
 	fi
 
 test:

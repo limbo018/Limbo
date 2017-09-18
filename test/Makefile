@@ -1,6 +1,6 @@
-all: algorithms geometry parsers programoptions solvers string
+all: parsers 
 
-.PHONY: algorithms geometry parsers programoptions solvers string
+.PHONY: parsers 
 
 algorithms:
 	$(MAKE) -C algorithms
@@ -22,18 +22,8 @@ string:
 
 .PHONY: clean
 clean:
-	$(MAKE) clean -C algorithms
-	$(MAKE) clean -C geometry
 	$(MAKE) clean -C parsers
-	$(MAKE) clean -C programoptions
-	$(MAKE) clean -C solvers
-	$(MAKE) clean -C string
 
 .PHONY: extraclean
 extraclean:
-	$(MAKE) extraclean -C algorithms
-	$(MAKE) extraclean -C geometry
 	$(MAKE) extraclean -C parsers
-	$(MAKE) extraclean -C programoptions
-	$(MAKE) extraclean -C solvers
-	$(MAKE) extraclean -C string

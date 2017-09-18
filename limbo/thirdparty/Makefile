@@ -50,7 +50,7 @@ endif
 # ==========================================================================
 
 ifeq ($(OPENBLAS), 1)
-all: $(CSDP_LIB) $(OPENBLAS_LIB) $(CTHREADPOOL_LIB) $(DLX_LIB) $(LEF_LIB) $(DEF_LIB)
+all: $(LEF_LIB) $(DEF_LIB)
 	@echo ">> building default with OPENBLAS on"
 else 
 all: $(LEF_LIB) $(DEF_LIB)
@@ -85,27 +85,12 @@ $(DEF_LIB):
 
 install: 
 	@echo ">> building install"
-ifneq ($(wildcard $(CSDP_LIB)),)
-	$(MAKE) install -C $(CSDP_SRCS)
-endif
-ifneq ($(wildcard $(OPENBLAS_LIB)),)
-	$(MAKE) install -C $(OPENBLAS_SRCS) -f Makefile.limbo
-endif 
-	$(MAKE) install -C $(CTHREADPOOL_SRCS)
-	$(MAKE) install -C $(DLX_SRCS)
-	$(MAKE) install -C $(LIBDIVIDE_SRCS)
-	$(MAKE) install -C $(FLEX_SRCS)
 	$(MAKE) myinstall -C $(LEF_SRCS)
 	$(MAKE) myinstall -C $(DEF_SRCS)
 
 .PHONY: clean
 clean: 
-	$(MAKE) clean -C $(OPENBLAS_SRCS) -f Makefile.limbo
-	$(MAKE) clean -C $(CSDP_SRCS) 
-	$(MAKE) clean -C $(CTHREADPOOL_SRCS)
-	$(MAKE) clean -C $(DLX_SRCS)
-	$(MAKE) clean -C $(LIBDIVIDE_SRCS)
-	$(MAKE) clean -C $(FLEX_SRCS)
+	$(MAKE) clean -C $(LEF_SRCS)
 	$(MAKE) clean -C $(DEF_SRCS)
 
 .PHONY: extraclean

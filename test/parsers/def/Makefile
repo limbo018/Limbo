@@ -44,7 +44,7 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-all: test_bison test_adapt #test_spirit
+all: test_adapt #test_spirit
 
 # Compile dependency 
 
