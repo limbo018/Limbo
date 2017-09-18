@@ -751,12 +751,12 @@ void GraphSimplification<GraphType>::biconnected_component()
 	// there is a back edge from some descendant of u to w
 	std::vector<uint32_t> vLow (vertex_num, std::numeric_limits<uint32_t>::max()); // lowest vertex reachable from subtree under v  
 	std::vector<uint32_t> vDisc(vertex_num, std::numeric_limits<uint32_t>::max()); // discovery time 
-	std::deque<bool> vArtiPoint (vertex_num, false); // true of it is articulation point 
+	std::deque<bool> vArtiPoint (vertex_num, false); // true if it is articulation point 
 	std::stack<std::pair<graph_vertex_type, graph_vertex_type> > vEdge; // virtual edge, it can be connection between parents 
 	std::list<std::pair<graph_vertex_type, std::set<graph_vertex_type> > > mCompVertex; // save bi-connected components 
 	uint32_t visit_time = 0;
 
-	// std::set initial parent of current vertex to itself 
+	// set initial parent of current vertex to itself 
 	vertex_iterator vi, vie;
 	for (boost::tie(vi, vie) = boost::vertices(m_graph); vi != vie; ++vi)
 		vParent[*vi] = *vi;
@@ -768,7 +768,7 @@ void GraphSimplification<GraphType>::biconnected_component()
 		{
 			biconnected_component_recursion(source, vVisited, vDisc, vLow, vParent, visit_time, vEdge, mCompVertex);
 		}
-		// if std::stack is not empty, pop all edges from std::stack
+		// if stack is not empty, pop all edges from stack
 		if (!vEdge.empty())
 		{
 			mCompVertex.push_back(std::make_pair(std::numeric_limits<graph_vertex_type>::max(), std::set<graph_vertex_type>()));
@@ -843,7 +843,7 @@ void GraphSimplification<GraphType>::biconnected_component_recursion(graph_verte
     // Initialize discovery time and low value
     vDisc[v] = vLow[v] = visit_time++;
  
-    // Go through all vertices aadjacent to this
+    // Go through all vertices adjacent to this
 	if (!this->good(v)) return;
 
 	bool isolate = true;

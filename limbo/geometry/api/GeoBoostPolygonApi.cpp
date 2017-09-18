@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: GeoBoostPolygonApi.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Thu 10 Sep 2015 08:23:49 PM CDT
- ************************************************************************/
+/**
+ @file   GeoBoostPolygonApi.cpp
+ @author Yibo Lin
+ @date   Sep 2015
+ @brief  A simple API of @ref limbo::geometry::polygon2rectangle using Boost.Polygon API 
+ */
 
 // for better potability 
 // I do not include from limbo dir 

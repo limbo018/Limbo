@@ -4,8 +4,7 @@
 
 LIMBO_ROOT_DIR = $(realpath ..)
 DOCDIR = $(LIMBO_ROOT_DIR)/doc
-#SRCSDIR = $(LIMBO_ROOT_DIR)/limbo
-SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
+SRCS = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(DOCDIR)/algorithms \
 		  $(DOCDIR)/bibtex \
 		  $(DOCDIR)/containers \
@@ -37,9 +36,9 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/bookshelf/bison/BookshelfDataBase.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/bookshelf/bison/BookshelfDriver.h) \
 		  \
-		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/def/test_bison.cpp) \
-		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/bison/DefDataBase.h) \
-		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/bison/DefDriver.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/def/test_adapt.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/adapt/DefDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/def/adapt/DefDriver.h) \
 		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/ebeam/test_bison.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/ebeam/bison/EbeamDataBase.h) \
@@ -53,10 +52,9 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdsii/stream/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/gdsii/gdsdb/*.h) \
 		  \
-		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/lef/test_bison.cpp) \
-		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/bison/LefDataBase.h) \
-		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/bison/LefDriver.h) \
-		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/bison/*.hpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/lef/test_adapt.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/adapt/LefDataBase.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lef/adapt/LefDriver.h) \
 		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/parsers/lp/test_bison.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/parsers/lp/bison/LpDataBase.h) \
@@ -81,7 +79,9 @@ SRCSDIR = $(LIMBO_ROOT_DIR)/Readme.md \
 		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/api/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/lpmcf/*.h) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/solvers/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/solvers/lpmcf/*.cpp) \
+		  $(wildcard $(LIMBO_ROOT_DIR)/test/solvers/*.cpp) \
 		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/test/string/*.cpp) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/string/*.h) 
@@ -100,11 +100,11 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 
 all: doc
 
-Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile
+Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile $(SRCS)
 	echo INCLUDE_PATH           = $(LIMBO_ROOT_DIR) > $(DOCDIR)/Doxyfile
 	echo EXAMPLE_PATH           = $(LIMBO_ROOT_DIR) >> $(DOCDIR)/Doxyfile
 	echo IMAGE_PATH             = $(LIMBO_ROOT_DIR)/doc/geometry >> $(DOCDIR)/Doxyfile
-	echo INPUT                  = $(SRCSDIR) >> $(DOCDIR)/Doxyfile
+	echo INPUT                  = $(SRCS) >> $(DOCDIR)/Doxyfile
 	echo OUTPUT_DIRECTORY       = $(DOCDIR) >> $(DOCDIR)/Doxyfile
 	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md *.py *.mk >> $(DOCDIR)/Doxyfile
 	echo INCLUDE_FILE_PATTERNS  = *.h *.hpp >> $(DOCDIR)/Doxyfile

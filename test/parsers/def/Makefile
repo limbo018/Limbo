@@ -44,7 +44,7 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-all: test_bison #test_spirit
+all: test_bison test_adapt #test_spirit
 
 # Compile dependency 
 
@@ -65,12 +65,16 @@ $(OBJDIR)/%.o: %.cpp
 test_bison: $(OBJDIR)/test_bison.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_bison.o -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)parser
 
+test_adapt: $(OBJDIR)/test_adapt.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parseradapt.a
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_adapt.o -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)parseradapt
+
 test_spirit: $(OBJDIR)/test_spirit.o
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_spirit.o 
 
 .PHONY: clean
 clean: cleandep
 	rm -f test_bison 
+	rm -f test_adapt
 	rm -f test_spirit
 	rm -f $(OBJS)
 

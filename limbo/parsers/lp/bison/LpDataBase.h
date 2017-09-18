@@ -15,6 +15,7 @@
 #include <sstream>
 #include <cassert>
 #include <limits>
+#include <limbo/math/Math.h>
 
 /// namespace for LpParser
 namespace LpParser {
@@ -33,6 +34,12 @@ typedef unsigned int uint32_t;
 typedef long int64_t;
 /// @endnowarn
 
+/// @brief integer array 
+typedef std::vector<int64_t> IntegerArray; 
+/// @brief string array 
+typedef std::vector<std::string> StringArray; 
+
+#if 0
 /// @brief bison does not support vector very well, 
 /// so here create a dummy class for integer array. 
 class IntegerArray : public vector<int64_t>
@@ -80,18 +87,22 @@ class StringArray : public vector<string>
 		StringArray(size_type n, const value_type& val, const allocator_type& alloc = allocator_type())
 			: base_type(n, val, alloc) {}
 };
+#endif
 
 /// @brief a term denotes coefficient times a variable 
 struct Term 
 {
-	int64_t coef; ///< coefficient 
+	double coef; ///< coefficient 
 	string var; ///< variable 
 
     /// @brief constructor 
     /// @param c coefficient 
     /// @param v variable 
-	Term(int64_t c, string const& v) : coef(c), var(v) {}
+	Term(double c, string const& v) : coef(c), var(v) {}
 };
+
+/// @brief array of terms 
+typedef std::vector<Term> TermArray; 
 
 // temporary data structures to hold parsed data 
 
@@ -108,17 +119,22 @@ class LpDataBase
         /// @param l lower bound 
         /// @param r upper bound 
 		virtual void add_variable(string const& vname, 
-				int64_t const& l = std::numeric_limits<int64_t>::min(), 
-				int64_t const& r = std::numeric_limits<int64_t>::max()) = 0;
-        /// @brief add constraint that \a vname1 - \a vname2 >= \a constant. 
-        /// @param vname1 first variable 
-        /// @param vname2 second variable 
-        /// @param constant constant value 
-		virtual void add_constraint(string const& vname1, string const& vname2, int64_t const& constant) = 0;
-        /// @brief add object terms that \a coef * \a vname 
-        /// @param vname variable name 
-        /// @param coef coefficient 
-		virtual void add_objective(string const& vname, int64_t const& coef) = 0;
+				double l = limbo::lowest<double>(), 
+				double r = std::numeric_limits<double>::max()) = 0;
+        /// @brief add constraint that \a terms \a compare \a constant. 
+        /// @param cname constraint name 
+        /// @param terms array of terms in left hand side 
+        /// @param compare operator '<', '>', '='
+        /// @param constant constant in the right hand side 
+        virtual void add_constraint(string const& cname, TermArray const& terms, char compare, double constant) = 0; 
+        /// @brief add object terms 
+        /// @param minimize true denotes minimizing object, false denotes maximizing object 
+        /// @param terms array of terms 
+		virtual void add_objective(bool minimize, TermArray const& terms) = 0;
+        /// @brief set integer variables 
+        /// @param vname integer variables  
+        /// @param binary denotes whether they are binary variables 
+        virtual void set_integer(string const& vname, bool binary) = 0; 
 };
 
 } // namespace DefParser

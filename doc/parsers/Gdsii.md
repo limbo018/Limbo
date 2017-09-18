@@ -12,7 +12,7 @@ The parser consists of three parts, reader, writer and database for full chip pa
 @ref GdsParser::GdsReader provides API to read GDSII files (.gds or .gds.gz with Boost and Zlib support). 
 @ref GdsParser::GdsWriter provides API to write GDSII files (.gds or .gds.gz with Boost and Zlib support). 
 These two parts are basic functionalities for read and write in GDSII format. 
-@ref limbo::GdsParser::GdsDB is a database to store layout elements and provides easy API to read, write and flatten full layouts. 
+@ref GdsParser::GdsDB is a database to store layout elements and provides easy API to read, write and flatten full layouts. 
 
 # Examples {#Parsers_GdsiiParser_Examples}
 

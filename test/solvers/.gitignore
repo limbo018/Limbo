@@ -1,0 +1,7 @@
+test_solvers
+test_MultiKnapsackLagRelax
+test_DualMinCostFlow
+test_GurobiApi
+debug.*
+benchmarks/problem.sol
+valgrind.txt

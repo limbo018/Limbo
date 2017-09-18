@@ -32,6 +32,16 @@
 #include <limbo/algorithms/coloring/Coloring.h>
 #include "gurobi_c++.h"
 
+#ifdef DEBUG_NONINTEGERS
+extern std::vector<unsigned int> vLP1NonInteger; 
+extern std::vector<unsigned int> vLP1HalfInteger; 
+extern std::vector<unsigned int> vLP2NonInteger; 
+extern std::vector<unsigned int> vLP2HalfInteger; 
+extern std::vector<unsigned int> vLPEndNonInteger; 
+extern std::vector<unsigned int> vLPEndHalfInteger; 
+extern std::vector<unsigned int> vLPNumIter; 
+#endif
+
 /// namespace for Limbo 
 namespace limbo 
 { 
@@ -337,15 +347,15 @@ typename LPColoring<GraphType>::graph_vertex_type LPColoring<GraphType>::max_deg
 }
 
 template <typename GraphType>
-void LPColoring<GraphType>::set_optimize_model(vector<GRBVar>& vColorBits, vector<GRBVar>& vEdgeBits, GRBLinExpr& obj, GRBModel& optModel)
+void LPColoring<GraphType>::set_optimize_model(vector<GRBVar>& vColorBits, vector<GRBVar>& /*vEdgeBits*/, GRBLinExpr& obj, GRBModel& optModel)
 {
 	uint32_t numVertices = boost::num_vertices(this->m_graph);
-	uint32_t numEdges = boost::num_edges(this->m_graph);
+	//uint32_t numEdges = boost::num_edges(this->m_graph);
     uint32_t numColorBits = numVertices<<1;
 
 	//set up the LP variables
 	vColorBits.reserve(numColorBits);
-	vEdgeBits.reserve(numEdges);
+	//vEdgeBits.reserve(numEdges);
 	// vertex and edge variables 
     char buf[64];
 	for (uint32_t i = 0; i != numColorBits; ++i)
@@ -365,12 +375,12 @@ void LPColoring<GraphType>::set_optimize_model(vector<GRBVar>& vColorBits, vecto
             vColorBits.push_back(optModel.addVar(colorBit, colorBit, colorBit, GRB_CONTINUOUS, buf));
         }
 	}
-	for (uint32_t i = 0; i != numEdges; ++i)
-	{
-		// some variables here may not be used 
-        sprintf(buf, "e%u", i);
-		vEdgeBits.push_back(optModel.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS, buf));
-	}
+	//for (uint32_t i = 0; i != numEdges; ++i)
+	//{
+	//	// some variables here may not be used 
+    //    sprintf(buf, "e%u", i);
+	//	vEdgeBits.push_back(optModel.addVar(0.0, 1.0, 0.0, GRB_CONTINUOUS, buf));
+	//}
 	//Integrate new variables
 	optModel.update();
 
@@ -589,7 +599,9 @@ double LPColoring<GraphType>::coloring()
 
     // initialize model and set anchor vertex 
     set_optimize_model(vColorBits, vEdgeBits, obj, optModel);
+#ifndef DEBUG_NOANCHOR
     set_anchor(vColorBits);
+#endif
 
     solve_model(optModel);
 
@@ -601,6 +613,10 @@ double LPColoring<GraphType>::coloring()
     NonIntegerInfo prevInfo; // initialize to numeric max 
     NonIntegerInfo curInfo;
     non_integer_num(vColorBits, vEdgeBits, curInfo);
+#ifdef DEBUG_NONINTEGERS
+    vLP1NonInteger.push_back(curInfo.vertex_non_integer_num); 
+    vLP1HalfInteger.push_back(curInfo.vertex_half_integer_num); 
+#endif
 	//iteratively scheme
 	while(curInfo.vertex_non_integer_num > 0 && curInfo.vertex_non_integer_num < prevInfo.vertex_non_integer_num) 
 	{
@@ -609,7 +625,8 @@ double LPColoring<GraphType>::coloring()
 		// tune objective for a pair of values 
         adjust_variable_pair_in_objective(vColorBits, obj);
 		// tune objective for a pair of value along conflict edges 
-        adjust_conflict_edge_vertices_in_objective(vColorBits, obj);
+        // disabled because it has conflicts with odd cycle constraints 
+        //adjust_conflict_edge_vertices_in_objective(vColorBits, obj);
 
 		optModel.setObjective(obj);
 
@@ -626,7 +643,20 @@ double LPColoring<GraphType>::coloring()
 
         prevInfo = curInfo;
         non_integer_num(vColorBits, vEdgeBits, curInfo);
+#ifdef DEBUG_NONINTEGERS
+        if (m_lp_iters == 2)
+        {
+            vLP2NonInteger.push_back(curInfo.vertex_non_integer_num); 
+            vLP2HalfInteger.push_back(curInfo.vertex_half_integer_num); 
+        }
+#endif
 	}
+
+#ifdef DEBUG_NONINTEGERS
+    vLPEndNonInteger.push_back(curInfo.vertex_non_integer_num); 
+    vLPEndHalfInteger.push_back(curInfo.vertex_half_integer_num);
+    vLPNumIter.push_back(m_lp_iters); 
+#endif
 
 	// binding analysis
     //rounding_with_binding_analysis(optModel, vColorBits, vEdgeBits);
@@ -770,10 +800,15 @@ uint32_t LPColoring<GraphType>::post_refinement()
     uint32_t count = 0;
     if (!this->has_precolored()) // no post refinement if containing precolored vertices 
     {
-        //greedy post refinement
+        // greedy post refinement
+        // keep refining until no color changed 
         edge_iterator_type ei, eie;
-        for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei)
-            count += refine_color(*ei);
+        do 
+        {
+            count = 0; 
+            for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei)
+                count += refine_color(*ei);
+        } while (count); 
     }
 
     return count;
@@ -843,10 +878,15 @@ bool LPColoring<GraphType>::refine_color(LPColoring<GraphType>::graph_edge_type 
 // it seems doxygen cannot handle template functions with the same name correctly 
 /// @cond 
 template <typename GraphType>
-void LPColoring<GraphType>::non_integer_num(vector<GRBVar> const& vColorBits, vector<GRBVar> const& vEdgeBits, LPColoring<GraphType>::NonIntegerInfo& info) const
+void LPColoring<GraphType>::non_integer_num(vector<GRBVar> const& vColorBits, vector<GRBVar> const& /*vEdgeBits*/, LPColoring<GraphType>::NonIntegerInfo& info) const
 {
     non_integer_num(vColorBits, info.vertex_non_integer_num, info.vertex_half_integer_num);
-    non_integer_num(vEdgeBits, info.edge_non_integer_num, info.edge_half_integer_num);
+    //non_integer_num(vEdgeBits, info.edge_non_integer_num, info.edge_half_integer_num);
+
+#ifdef DEBUG_LPCOLORING
+    printf("vertex_non_integer_num = %u, vertex_half_integer_num = %u\n", info.vertex_non_integer_num, info.vertex_half_integer_num); 
+    //printf("edge_non_integer_num = %u, edge_half_integer_num = %u\n", info.edge_non_integer_num, info.edge_half_integer_num); 
+#endif
 }
 
 template <typename GraphType>

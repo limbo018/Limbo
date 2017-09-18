@@ -21,7 +21,7 @@ all: geometry parsers programoptions thirdparty
 geometry:
 	$(MAKE) -C geometry
 
-parsers:
+parsers: thirdparty
 	$(MAKE) -C parsers
 
 programoptions:

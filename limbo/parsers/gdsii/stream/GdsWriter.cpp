@@ -1,6 +1,7 @@
-/* 
-
-   GDSLIB 2.2
+/**
+ * @file   GdsWriter.cpp
+ * @author M. Rooks, Yibo Lin
+ * @brief  GDSLIB 2.2 writer
 
    A library of C functions for reading and writing GDSII Stream format,
    following the specification of Release 6 from 1987. This library was 
@@ -348,9 +349,9 @@ void GdsWriter::gds_make_next_item( struct gds_itemtype **ci )
 	current_item->path_end      = 0;
 	current_item->mag           = 1.0;              /* mag */
 	current_item->angle         = 0.0;              /* angle */
-	current_item->abs_angle     = FALSE;            /* from strans */
-	current_item->abs_mag       = FALSE;            /* from strans */
-	current_item->reflect       = FALSE;            /* from strans, reflect before rotation */
+	current_item->abs_angle     = 0;            /* from strans */
+	current_item->abs_mag       = 0;            /* from strans */
+	current_item->reflect       = 0;            /* from strans, reflect before rotation */
 	current_item->rows          = 0;                /* n cols */
 	current_item->cols          = 0;                /* n rows */
 	current_item->col_pitch     = 0;                /* column pitch */
@@ -362,161 +363,6 @@ void GdsWriter::gds_make_next_item( struct gds_itemtype **ci )
 	*ci = current_item;
 
 }  // make_next_item
-
-/*------------------------------------------------------------------------------------------*/
-
-#if 0
-	double
-gds_read_double(  )
-
-	/* Real numbers are not represented in IEEE format. A floating point number is    */
-	/* made up of three parts: the sign, the exponent, and the mantissa. The value    */
-	/* of the number is defined to be (mantissa) (16) (exponent) . If "S" is the      */
-	/* sign bit, "E" are exponent bits, and "M" are mantissa bits then an 8-byte      */
-	/* real number has the format                                                     */
-	/*                                                                                */
-	/* SEEEEEEE MMMMMMMM MMMMMMMM MMMMMMMM                                            */
-	/* MMMMMMMM MMMMMMMM MMMMMMMM MMMMMMMM                                            */
-	/*                                                                                */
-	/* The exponent is in "excess 64" notation; that is, the 7-bit field shows a      */
-	/* number that is 64 greater than the actual exponent. The mantissa is always     */
-	/* a positive fraction greater than or equal to 1/16 and less than 1. For an      */
-	/* 8-byte real, the mantissa is in bits 8 to 63. The decimal point of the         */
-	/* binary mantissa is just to the left of bit 8. Bit 8 represents the value       */
-	/* 1/2, bit 9 represents 1/4, and so on.                                          */
-	/*                                                                                */
-	/* In order to keep the mantissa in the range of 1/16 to 1, the results of        */
-	/* floating point arithmetic are normalized. Normalization is a process whereby   */
-	/* the mantissa is shifted left one hex digit at a time until its left four       */
-	/* bits represent a non-zero quantity. For every hex digit shifted, the           */
-	/* exponent is decreased by one. Since the mantssa is shifted four bits at a      */
-	/* time, it is possible for the left three bits of a normalized mantissa to be    */
-	/* zero. A zero value is represented by a number with all bits zero. The          */
-	/* representation of negative numbers is the same as that of positive numbers,    */
-	/* except that the highest order bit is 1, not 0.                                 */
-
-	/* Contributed by Hans Romijn (Raith/Vistec)                                      */
-
-{
-	BYTE
-		e,
-		m[8];
-
-	int
-		i,
-		b,
-		bit,
-		sign,
-		bitmask,
-		exponent;
-
-	long mant = 0;
-	long bitm = 0x80000000000000;
-
-	double
-		mantissa,
-		number;
-
-	read( this->out, &m, 8 );
-
-	if ( m[0] >> 7 )
-		sign = -1;
-	else
-		sign = 1;
-
-	exponent = (m[0] % 128) - 64;
-
-	for ( b = 1; b <8; b++ )
-	{
-		bitmask   = 0x80;
-		for ( bit = 7; bit >= 0; bit-- )
-		{
-			i = ( m[b] & bitmask ) >> bit;
-			if (i)
-				mant += bitm ;
-
-			// mantissa = (double)mant/(double)(0x100000000000000);
-			// number = sign * mantissa * pow( 16, exponent );
-			// printf("%d 0x%16lX: %.24lf %.24lf\n",i,bitm,number,(float)number);
-
-			bitmask = bitmask >> 1 ;
-			bitm = bitm >> 1;
-		}
-	}
-
-	mantissa = (double)mant/(double)(0x100000000000000);
-
-	number = sign * mantissa * pow( 16, exponent );
-
-	return( number );
-
-}  // read_double
-#endif 
-
-
-/*------------------------------------------------------------------------------------------*/
-
-
-#if 0
-	float
-gds_read_float(  )
-
-	/* Read 8 bytes and interpret the number as a wacky GDS float. The format must be */
-	/* the legacy of some very ancient General Electric computer, built before the    */
-	/* establishment of IEEE floating point format.                                   */
-
-{
-	BYTE 
-		e,
-		m[8];
-
-	int
-		i,
-		b,
-		bit,
-		sign,
-		bitmask,
-		exponent;
-
-	float
-		value,
-		mantissa, 
-		number;
-
-
-	read( this->out, &e, 1 );
-
-	if ( e >> 7 )
-		sign = -1;
-	else
-		sign = 1; 
-
-	exponent = (e % 128) - 64;
-
-	read( this->out, m, 7 );
-
-	value     = 2.0;                  
-	mantissa  = 0.0;
-
-	for ( b = 0; b <= 6; b++ )
-	{
-		bitmask   = 0x80;
-		for ( bit = 7; bit >= 0; bit-- )
-		{
-			i = ( m[b] & bitmask ) >> bit ;  
-			mantissa += i / value ;
-			value = value + value ;
-			bitmask = bitmask >> 1 ;
-		}
-	}
-
-
-	number = sign * mantissa * pow( 16, exponent );
-
-	return( number );
-
-}  // read_float
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -623,13 +469,6 @@ void GdsWriter::gds_write_float( double x )
 
 /* Contains GDS version number- we don't care */
 
-#if 0
-void gds_read_header( int count, BOOL verbose )
-{
-	int i;
-	SKIPOVER( this->out, count );
-}
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -657,41 +496,6 @@ void GdsWriter::gds_write_header(  )
 
 }  // write_header
 
-/*------------------------------------------------------------------------------------------*/
-/* Beginning of library. Allocate the first cell. */
-/* Ignore the creation date.                      */
-#if 0
-	void
-gds_read_bgnlib( int  this->out,                        // file descriptor
-		int  count,                     // bytes in this record (always 4)
-		int *cell_table_size,           // cell table size
-		struct gds_celltype **lib,      // pointer to library (main anchor point)
-		struct gds_celltype ***c,       // pointer to the cell table
-		struct gds_celltype **cc,       // pointer to the current cell 
-		BOOL verbose )
-
-{
-	struct gds_celltype *library, **cell, *current_cell;
-	int i;
-
-	SKIPOVER( this->out, count );
-	library = (struct gds_celltype *) malloc( sizeof( struct gds_celltype ) );   /* start of the list */
-	current_cell = library;                                              /* top of the list   */
-	library->nextcell = NULL;
-
-	if ( ! library ) BAILOUT( "UNABLE TO ALLOCATE LIBRARY POINTER. THAT'S STRANGE." );
-
-	cell = (struct gds_celltype **) malloc( 1025 * sizeof( struct gds_celltype * ) ); /* table of pointers to cells */
-	*cell_table_size = 1024;
-
-	if ( ! cell ) BAILOUT( "UNABLE TO ALLOCATE MEMORY FOR CELL TABLE." );
-
-	*lib = library;
-	*c   = cell;
-	*cc  = current_cell;
-
-}  // read_bgnlib
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -752,78 +556,6 @@ void GdsWriter::gds_write_bgnlib(  )
 }  // write_bgnlib
 
 
-/*------------------------------------------------------------------------------------------*/
-/* Beginning of a cell. If this is after the first cell */
-/* then allocate it.  Ignore the creation date.         */
-#if 0
-	void
-gds_read_bgnstr( int count, 
-		int *cell_table_size, 
-		int *num_cells, 
-		struct gds_celltype ***c,          // cell table
-		struct gds_celltype **cc,          // current cell
-		struct gds_itemtype **ci,          // current item
-		BOOL verbose )
-{
-	static BOOL 
-		first_cell = TRUE;
-
-	int i;
-
-	static struct gds_celltype
-		**cell,
-		*current_cell;
-
-	static struct gds_itemtype
-		*current_item;
-
-	current_item = *ci;
-	cell = *c;
-	current_cell = *cc;
-
-	SKIPOVER( this->out, count );
-
-	if ( first_cell )  /* Then we already created the first cell in bgnlib */
-	{
-		first_cell = FALSE;
-		*num_cells = 0;
-	}
-	else                       /* allocate a new cell and move up the pointer */
-	{
-		current_cell->nextcell = (struct gds_celltype *) malloc( sizeof( struct gds_celltype ) );  
-
-		if ( ! current_cell->nextcell ) BAILOUT( "UNABLE TO ALLOCATE MEMORY FOR THE NEXT CELL." );
-
-		current_cell = current_cell->nextcell;
-		current_cell->nextcell = NULL;
-
-		*num_cells = *num_cells + 1;
-
-		if ( *num_cells > *cell_table_size )
-		{
-			*cell_table_size *= 2;
-			cell = (struct gds_celltype **) realloc( cell, (1 + *cell_table_size) * sizeof( struct gds_celltype * ) );
-			if ( ! cell ) BAILOUT( "UNABLE TO REALLOCATE CELL TABLE. SORRY DUDE." );
-		}
-
-	}
-
-
-	current_cell->item = (struct gds_itemtype *) malloc( sizeof( struct gds_itemtype ) );
-	current_item = current_cell->item;
-	current_item->type = -1;
-	current_item->mag  = 1.0;
-	current_item->nextitem = NULL;
-
-	// Now let's be careful to not use the first item. 
-	// Seems like a waste, but it makes the logic simpler.
-
-	*c   = cell;
-	*cc  = current_cell;
-	*ci  = current_item;
-
-}  // read_bgnstr
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -884,16 +616,6 @@ void GdsWriter::gds_write_bgnstr(  )
     free(now);
 }  // write_bgnstr
 
-/*------------------------------------------------------------------------------------------*/
-/* Marks the end of a library */
-#if 0
-	void
-gds_read_endlib( int count, BOOL verbose )
-{
-	int i;
-	SKIPOVER( this->out, count );
-}
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -915,16 +637,6 @@ void GdsWriter::gds_write_endlib(  )
 
 }  // write_endlib
 
-/*------------------------------------------------------------------------------------------*/
-/* Marks the end of a structure */
-#if 0
-	void
-gds_read_endstr( int count, BOOL verbose )
-{
-	static int i;
-	SKIPOVER( this->out, count );
-}
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -942,23 +654,6 @@ void GdsWriter::gds_write_endstr(  )
 	gds_write((char*)(&token), 2 );
 
 }  // write_endstr
-
-/*------------------------------------------------------------------------------------------*/
-/* Read the library name. */
-#if 0
-	char *
-gds_read_libname( int count, BOOL verbose )
-{
-	char *name; 
-	name = (char *) malloc( count - 3 ); 
-
-	read( this->out, name, count-4 );
-	name[count-4] = '\0';
-	if ( verbose ) printf( "             %s\n", name );
-	return( name );
-
-}  // read_libname
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -988,40 +683,6 @@ void GdsWriter::gds_write_libname( const char *name )
 
 
 /*------------------------------------------------------------------------------------------*/
-/* Contains a structure name.  */
-#if 0
-	void
-gds_read_strname( 
-		int count, 
-		int num_cells,
-		struct gds_celltype ***c,
-		struct gds_celltype **cc,
-		BOOL verbose   )
-{
-	static struct gds_celltype
-		**cell,
-		*current_cell;
-
-	cell = *c;
-	current_cell = *cc;
-
-	current_cell->name = (char *) malloc( count - 3 );
-
-	if ( ! current_cell->name ) BAILOUT( "UNABLE TO ALLOCATE MEMORY FOR NEXT CELL NAME" );
-
-	read( this->out, current_cell->name, count-4 );
-	current_cell->name[count-4] = '\0';
-	if ( verbose ) printf( "             %s\n", current_cell->name );
-
-	cell[ num_cells ] = current_cell;    /* save the pointer to this cell */
-
-	*c   = cell;
-	*cc  = current_cell;
-
-}  // read_strname
-#endif 
-
-/*------------------------------------------------------------------------------------------*/
 
 void GdsWriter::gds_write_strname( const char *name )
 {
@@ -1047,50 +708,6 @@ void GdsWriter::gds_write_strname( const char *name )
 
 }  // write_strname
 
-
-/*------------------------------------------------------------------------------------------*/
-/* Contains a string for presentation, not for exposure.  */
-#if 0
-	void
-gds_read_string( int count, struct gds_itemtype **ci, BOOL verbose )
-
-{                            // A string should be saved as part of a text object
-	// So hopefully the current item is TEXT.
-	// gds_read_text generates a new text item.
-	static struct gds_itemtype
-		*current_item;
-
-	static char str[513];
-
-	static int n, m, i;
-
-	current_item = *ci;
-
-	if ( current_item->type != 4 ) BAILOUT( "SYNTAX ERROR: STRING APPEARS OUTSIDE OF TEXT OBJECT" );
-
-	m = count - 4;
-	n = m;
-	if ( n > 512 ) n = 512;      // that's the spec: maximum 512 characters
-	read( this->out, str, n );    
-	if ( m > n ) 
-	{
-		WARNING( "STRING HAS MORE THAN 512 CHARACTERS" );
-		printf(  "                                 [%s]\n", str  ); 
-		fflush( stdout );
-		SKIPOVER( this->out, m-n );
-	}
-	str[n] = '\0';
-
-	if ( verbose ) printf( "             %s\n", str );
-
-	current_item->n = count - 4;
-	current_item->text = (char *) malloc( n+1 );
-	strcpy( current_item->text, str );
-
-	*ci = current_item;
-
-}  // read_string
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -1126,90 +743,6 @@ void GdsWriter::gds_write_string( const char *s )
 
 /*------------------------------------------------------------------------------------------*/
 
-// Contains the name of a referenced structure (cell).  
-
-// Passes by reference (!) the 2D array of forward references.
-
-#if 0
-	void
-gds_read_sname( 
-		int count, 
-		int num_cells, 
-		int *forward_num, 
-		char ***f, 
-		struct gds_celltype ***c, 
-		struct gds_itemtype **ci,
-		BOOL verbose )
-{
-	static char name[256];
-	static int  i;
-	static BOOL forward_ref_init = FALSE;
-	static int  max_forward_refs = MAX_FORWARD_REFS;
-	static char **forward_name;
-	static struct gds_celltype **cell;
-	static struct gds_itemtype  *current_item;
-
-	current_item = *ci;    
-	cell = *c;             // cell table, passed in but not out
-
-	if ( count > 254 ) BAILOUT( "CELL NAME IS WAY TOO LONG" );
-
-	read( this->out, name, count-4 );
-	name[count-4] = '\0';
-	if ( verbose ) printf( "             %s\n", name );
-
-	/* look this up in the cell table */
-
-	i = 0;
-	while ( (strcmp( name, cell[i]->name ) != 0) && (i < num_cells) ) i++;
-
-	if ( i >= num_cells ) 
-	{
-		if ( verbose ) printf( "             forward reference\n" );
-		current_item->cell_number = -1;        /* indicates that we must look again on the second pass */
-
-		if ( ! forward_ref_init )
-		{
-			forward_ref_init = TRUE;  
-			forward_name = (char **) malloc( max_forward_refs * sizeof( char * ) ); 
-			if ( ! forward_name ) BAILOUT( "UNABLE TO ALLOCATE ARRAY OF FORWARD REFERENCE NAMES" );
-			*forward_num = -1;
-		}
-		else   // we use the array as it was passed in
-		{
-			forward_name = *f;
-		}
-
-		*forward_num = *forward_num + 1;
-
-		if ( *forward_num >= max_forward_refs )
-		{
-			max_forward_refs *= 2;
-			forward_name = (char **) realloc( forward_name, max_forward_refs * sizeof( char * ) ); 
-			if ( ! forward_name ) BAILOUT( "UNABLE TO REALLOCATE ARRAY OF FORWARD REFERENCE NAMES" );
-		}
-
-		forward_name[*forward_num] = (char *) malloc( 256 );
-
-		if ( ! forward_name[*forward_num] ) BAILOUT( "UNABLE TO ALLOCATE STRING FOR FORWARD NAME" );
-
-		strcpy( forward_name[*forward_num], name );
-
-	}
-	else
-	{
-		if ( verbose ) printf( "             this is cell [%d]\n", i );
-		current_item->cell_number = i;
-	}
-
-	*f = forward_name;       // send it back out again. yikes.
-	*ci = current_item;
-
-}  // read_sname
-#endif 
-
-/*------------------------------------------------------------------------------------------*/
-
 void GdsWriter::gds_write_sname( const char *s )
 {
 	static short int                // s should be null-terminated
@@ -1234,26 +767,6 @@ void GdsWriter::gds_write_sname( const char *s )
 
 
 /*------------------------------------------------------------------------------------------*/
-/* Marks the beginning of a boundary (polygon)  */
-#if 0
-	void
-gds_read_boundary( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	static struct gds_itemtype
-		*current_item;
-	int i;
-
-	current_item = *ci;
-	SKIPOVER( this->out, count );
-	gds_make_next_item( &current_item );
-	current_item->type = 0;  /* meaning, this is a polygon */
-
-	*ci = current_item;
-
-}  // read_boundary
-#endif 
-
-/*------------------------------------------------------------------------------------------*/
 
 void GdsWriter::gds_write_boundary(  )
 {                             // just the token here. "xy" writes the actual polygon.
@@ -1270,25 +783,6 @@ void GdsWriter::gds_write_boundary(  )
 
 } // write_boundary
 
-/*------------------------------------------------------------------------------------------*/
-/* Marks the beginning of a box  */
-#if 0
-	void
-gds_read_box( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	static struct gds_itemtype
-		*current_item;
-	int i;
-
-	current_item = *ci;
-	SKIPOVER( this->out, count );
-	gds_make_next_item( &current_item );
-	current_item->type = 5;  /* meaning, this is a box */
-
-	*ci = current_item;
-
-}  // read_box
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -1311,33 +805,6 @@ void GdsWriter::gds_write_box(  )
 	gds_write((char*)(&token), 2 );
 
 } // write_box
-
-/*------------------------------------------------------------------------------------------*/
-
-#if 0
-	void
-gds_read_boxtype( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	static short num;
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-
-	read( this->out, &num, 2 );
-	gds_swap2bytes( (BYTE *) &num );
-
-	if ( verbose ) printf( "             %d\n", num ) ;
-
-	if ( num < 0 )
-		WARNING( "NEGATIVE BOX TYPE NUMBER" ); 
-
-	if ( num > 255 )
-		WARNING( "BOX TYPE > 255 " ); 
-
-	current_item->dt = num;
-	*ci = current_item;
-
-}  // read_boxtype
-#endif 
 
 
 /*------------------------------------------------------------------------------------------*/
@@ -1365,22 +832,6 @@ void GdsWriter::gds_write_boxtype( short int dt )
 
 }  // write_boxtype
 
-/*------------------------------------------------------------------------------------------*/
-/* Marks the beginning of a path  */
-#if 0
-	void
-gds_read_path( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	int i;
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-	SKIPOVER( this->out, count );
-	gds_make_next_item( &current_item );
-	current_item->type = 1;           /* meaning, this is a path */
-	*ci = current_item;
-
-}  // read_path
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 void GdsWriter::gds_write_path(  )
@@ -1398,22 +849,6 @@ void GdsWriter::gds_write_path(  )
 
 }  // write_path
 
-/*------------------------------------------------------------------------------------------*/
-/* Marks the beginning of a sref (structure reference) */
-#if 0
-	void
-gds_read_sref( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	int i;
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-	SKIPOVER( this->out, count );
-	gds_make_next_item( &current_item );
-	current_item->type = 3;     /* meaning, this is a sref */
-	*ci = current_item;
-
-}  // read_sref
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -1432,23 +867,6 @@ void GdsWriter::gds_write_sref(  )
 
 }  // write_sref
 
-/*------------------------------------------------------------------------------------------*/
-/* Marks the beginning of an aref (array reference) */
-#if 0
-	void
-gds_read_aref( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	int i;
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-	SKIPOVER( this->out, count );
-	gds_make_next_item( &current_item );
-	current_item->type = 2;                  /* meaning, this is an aref */
-	current_item->cell_number = -1;          /* indicates not found yet */
-	*ci = current_item;
-
-}  // read_aref
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -1469,22 +887,6 @@ void GdsWriter::gds_write_aref(  )
 
 
 /*------------------------------------------------------------------------------------------*/
-/* Marks the beginning of a text element */
-#if 0
-	void
-gds_read_text( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	int i;
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-	SKIPOVER( this->out, count );
-	gds_make_next_item( &current_item );
-	current_item->type = 4;  /* meaning, this is text */
-	*ci = current_item;
-}
-#endif 
-
-/*------------------------------------------------------------------------------------------*/
 
 void GdsWriter::gds_write_text(  )
 {
@@ -1503,17 +905,6 @@ void GdsWriter::gds_write_text(  )
 
 
 /*------------------------------------------------------------------------------------------*/
-/* Marks the end of an element, pointlessly. */
-#if 0
-	void
-gds_read_endel( int count, BOOL verbose )
-{
-	int i;
-	SKIPOVER( this->out, count );
-}
-#endif 
-
-/*------------------------------------------------------------------------------------------*/
 
 void GdsWriter::gds_write_endel(  )
 {
@@ -1530,31 +921,6 @@ void GdsWriter::gds_write_endel(  )
 
 }  // write_endel
 
-
-/*------------------------------------------------------------------------------------------*/
-/* Contains the layer number 0..255 */
-#if 0
-	void
-gds_read_layer( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	static short num;
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-	read( this->out, &num, 2 );
-	gds_swap2bytes( (BYTE *) &num );
-	if ( verbose ) printf( "             %d\n", num );
-
-	if ( num < 0 )
-		WARNING( "NEGATIVE LAYER NUMBER" );
-
-	if ( num > 255 )
-		WARNING( "LAYER > 255 " );
-
-	current_item->layer = num;
-	*ci = current_item;
-
-}  // read_layer
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -1581,32 +947,6 @@ void GdsWriter::gds_write_layer( short int layer )
 
 }  // write_layer
 
-/*------------------------------------------------------------------------------------------*/
-/* Contains the width of a path. Negative means that */
-/* the width does not scale.                         */
-#if 0
-	void
-gds_read_width( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	static int num;
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-
-	read( this->out, &num, 4 );
-	gds_swap4bytes( (BYTE *) &num );
-
-	if ( verbose ) printf( "             %d", num );
-
-	if ( num < 0 )
-		if ( verbose ) printf( "    does not scale" );
-
-	if ( verbose ) printf( "\n" );
-
-	current_item->width = num; 
-	*ci = current_item;
-
-}  // read_width
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -1627,33 +967,6 @@ void GdsWriter::gds_write_width( int width )
 
 }  // write_width
 
-
-/*------------------------------------------------------------------------------------------*/
-/* Contains the datatype number 0..255 */
-#if 0
-	void
-gds_read_datatype( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	static short num;
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-
-	read( this->out, &num, 2 );
-	gds_swap2bytes( (BYTE *) &num );
-
-	if ( verbose ) printf( "             %d\n", num );
-
-	if ( num < 0 )
-		WARNING( "NEGATIVE DATATYPE NUMBER" ); 
-
-	if ( num > 255 )
-		WARNING( "DATATYPE > 255 " ); 
-
-	current_item->dt = num;
-	*ci = current_item;
-
-}  // read_datatype
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -1682,33 +995,6 @@ void GdsWriter::gds_write_datatype( short int dt )
 
 
 /*------------------------------------------------------------------------------------------*/
-/* Contains the text type. Should be 0..63, or whatever. */
-#if 0
-	void
-gds_read_texttype( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	static short num;
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-
-	read( this->out, &num, 2 );
-	gds_swap2bytes( (BYTE *) &num );
-
-	if ( verbose ) printf( "             %d\n", num ) ;
-
-	if ( num < 0 )
-		WARNING( "NEGATIVE TEXT TYPE NUMBER" ); 
-
-	if ( num > 255 )
-		WARNING( "TEXT TYPE > 255 " ); 
-
-	current_item->dt = num;
-	*ci = current_item;
-
-}  // read_texttype
-#endif 
-
-/*------------------------------------------------------------------------------------------*/
 
 void GdsWriter::gds_write_texttype( short int dt )
 {
@@ -1735,28 +1021,6 @@ void GdsWriter::gds_write_texttype( short int dt )
 
 
 /*------------------------------------------------------------------------------------------*/
-/* Number of generations to retain. Irrelevant. */
-#if 0
-	void
-gds_read_generations( int count, BOOL verbose )
-{
-	static short num;
-
-	read( this->out, &num, 2 );
-	gds_swap2bytes( (BYTE *) &num );
-
-	if ( verbose ) printf( "             %d\n", num ) ;
-
-	if ( num < 0 )
-		WARNING( "NEGATIVE NUMBER OF GENERATIONS TO RETAIN" ); 
-
-	if ( num > 99 )
-		WARNING( "NUMBER OF GENERATIONS > 99 " ); 
-
-} // read_generations
-#endif 
-
-/*------------------------------------------------------------------------------------------*/
 
 void GdsWriter::gds_write_generations( short int gens )
 {                                       // most useless parameter ever
@@ -1781,46 +1045,6 @@ void GdsWriter::gds_write_generations( short int gens )
 
 }  // write_generations
 
-/*------------------------------------------------------------------------------------------*/
-/* Defines what the ends of paths should look like */
-#if 0
-	void
-gds_read_pathtype( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	static short num;
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-
-	read( this->out, &num, 2 );
-	gds_swap2bytes( (BYTE *) &num );
-
-	if ( verbose ) printf( "             [0x%x] ", num ) ;
-
-	if ( num == 0 )
-	{ if ( verbose ) printf( " flush square ends" ) ; }
-	else if ( num == 1 )
-	{ if ( verbose ) printf( " round ends" ) ; }
-	else if ( num == 2 )
-	{ if ( verbose ) printf( " extended square ends" ) ; }
-	else if ( num == 4 )
-	{ if ( verbose ) printf( " variable square end extensions ARE NOT SUPPORTED HERE" ) ; }
-	else
-		WARNING( "UNKNOWN PATH END TYPE" ); 
-
-	if ( verbose ) printf( "\n" ) ;
-
-
-	if ( (num > 4) || (num < 0) )
-	{
-		num = 0;
-		WARNING( "INVALID PATH TYPE" );
-	}
-
-	current_item->path_end = num;
-	*ci = current_item;
-
-}  // read_pathtype
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -1844,70 +1068,6 @@ void GdsWriter::gds_write_pathtype( short int pt )
 
 }  // write_pathtype
 
-
-/*------------------------------------------------------------------------------------------*/
-/* Contains the font and orientation of text */
-#if 0
-	void
-gds_read_presentation( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	static short 
-		num,
-		vp,
-		hp,
-		font;
-
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-
-	read( this->out, &num, 2 );
-	gds_swap2bytes( (BYTE *) &num ); 
-
-	if ( verbose ) printf( "             [0x%x] ", num ) ;
-
-	/* extract font from bits "10" and "11", meaning actually bits 5 and 4.  */
-
-	font = ( num >> 4 ) % 4;
-
-	/* extract vertical presentation from bits "12" and "13", meaning actually bits 3 and 2. */
-
-	vp = ( num >> 2 ) % 4;
-
-	/* extract horizontal presentation from bits "14" and "15", meaning acutally bits 1 and 0. */
-
-	hp = num % 4;
-
-
-	if ( verbose ) printf( "font %d ", font ) ;
-
-	if ( vp == 0 )
-	{ if ( verbose ) printf( " vertical: top " ) ; }
-	else if ( vp == 1 )
-	{ if ( verbose ) printf( " vertical: middle " ) ; }
-	else if ( vp == 2 )
-	{ if ( verbose ) printf( " vertical: bottom " ) ; }
-	else
-	{ if ( verbose ) printf( " ERROR: VERTICAL PRESENTATION BITS BOTH SET " ) ; }
-
-	if ( hp == 0 )
-	{ if ( verbose ) printf( " horizontal: left \n" ) ; }
-	else if ( hp == 1 )
-	{ if ( verbose ) printf( " horizontal: center \n" ) ; }
-	else if ( hp == 2 )
-	{ if ( verbose ) printf( " horizontal: right \n" ) ; }
-	else
-	{ if ( verbose ) printf( " ERROR: HORIZONTAL PRESENTATION BITS BOTH SET \n" ); }
-
-
-	current_item->font = font;
-	current_item->mag  = 1.0;
-	current_item->hor_present = hp;
-	current_item->ver_present = vp;
-
-	*ci = current_item;
-
-}  // read_presentation
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 /* Contains the font and orientation of text */
@@ -1953,77 +1113,6 @@ void GdsWriter::gds_write_presentation(      // file descriptor
 
 }  // write_presentation
 
-/*------------------------------------------------------------------------------------------*/
-/* Contains information about transformations */
-#if 0
-	void
-gds_read_strans(                             // input file descriptor
-		int count,                          // number of bytes in this record
-		struct gds_itemtype **ci,
-		BOOL verbose )
-{
-	static short 
-		num,
-		bit0,
-		bit13,
-		bit14;
-
-
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-
-	read( this->out, &num, 2 );
-	gds_swap2bytes( (BYTE *) &num ); 
-
-	if ( verbose ) printf( "             [0x%x] ", num ) ;
-
-	/* bit "0" is really bit 15. It specifies reflection. */
-	bit0  = (num >> 15);
-	/* bit "13" is really bit 2. It specifies absolute magnification. */ 
-	bit13 = (num >> 2) % 2;
-	/* bit "14" is really bit 1. It specifies absolute angle. */
-	bit14 = (num >> 1) % 2;
-
-	current_item->abs_angle = FALSE;
-
-	if ( bit0 )
-	{
-		if ( verbose ) printf( " apply reflection about X before rotation," ) ;
-		current_item->reflect = TRUE;
-	}
-	else
-	{
-		if ( verbose ) printf( " no reflection," ) ;
-		current_item->reflect = FALSE;
-	}       
-
-	if ( bit13 )
-	{
-		if ( verbose ) printf( " absolute magnification," ) ;
-		current_item->abs_mag = TRUE;
-	}
-	else
-	{
-		if ( verbose ) printf( " relative magnification," ) ;
-		current_item->abs_mag = FALSE;
-	}
-
-	if ( bit14 )
-	{
-		if ( verbose ) printf( " absolute angle" ) ;
-		current_item->abs_angle = TRUE;
-	}
-	else
-	{
-		if ( verbose ) printf( " relative angle" ) ;
-		current_item->abs_angle = FALSE;
-	}
-
-	if ( verbose ) printf( "\n" ) ;
-	*ci = current_item;
-
-}  // read_strans
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -2051,120 +1140,6 @@ void GdsWriter::gds_write_strans(            // output file descriptor
 
 }  // write_strans
 
-
-/*------------------------------------------------------------------------------------------*/
-/* Contains X,Y coordinate pairs */
-#if 0
-	void
-gds_read_xy( int count, float dbu_um, struct gds_itemtype **ci, BOOL verbose )
-{
-	/* type 0 = polygon, 1 = path, 2 = aref, 3 = sref, 4 = text  */
-	static int 
-		i, ii,
-		num,
-		x, y,
-		px, py,
-		degenerates;
-	static float
-		angle;
-	static struct gds_itemtype 
-		*current_item;
-
-	current_item = *ci;
-
-	num = (count - 4) / 8;
-
-	current_item->x = (int *) malloc( (num + 1) * sizeof( int ) );
-	current_item->y = (int *) malloc( (num + 1) * sizeof( int ) );
-	if ( ! current_item->x || ! current_item->y ) BAILOUT( "UNABLE TO ALLOCATE MEMORY FOR COORDINATES." );
-
-	degenerates = 0;
-	ii = 0;
-
-	for ( i=0; i < num; i++ )
-	{
-		read( this->out, &x, 4 );
-		gds_swap4bytes( (BYTE *) &x );
-		read( this->out, &y, 4 );
-		gds_swap4bytes( (BYTE *) &y );
-		if ( verbose ) printf( "             (%8d, %8d) = (%9.3f, %9.3f) um \n", x, y, x * dbu_um, y * dbu_um ) ;
-
-		if  ( current_item->type == 3 ||          /* sref */
-				current_item->type == 4     )       /* text */
-		{
-			if ( num != 1 ) BAILOUT( "THERE SHOULD BE ONLY ONE COORDINATE FOR SREF OR TEXT." );
-			current_item->x[0] = x;
-			current_item->y[0] = y;
-		}
-		else if ( current_item->type == 2 )       /* aref */
-		{
-			if ( num != 3 ) BAILOUT( "THERE SHOULD BE THREE COORDINATES FOR AN AREF." );
-			if ( i == 0 ) 
-			{                                 /* aref reference point */
-				current_item->x[0] = x;
-				current_item->y[0] = y;
-			}
-			else if ( i == 1 )                    /* aref column spacing */
-			{
-				if ( current_item->cols <= 0 ) BAILOUT( "NUMBER OF COLUMNS IS <= 0" );
-				angle = current_item->angle;
-				current_item->col_pitch  = (x - current_item->x[0]) / current_item->cols;
-				current_item->col_pitchy = (y - current_item->y[0]) / current_item->cols; // hopefully zero
-				if ( verbose ) printf( "             Column pitch (points): %d, (%d) \n", 
-						current_item->col_pitch, current_item->col_pitchy );
-				if ( current_item->col_pitchy != 0 ) WARNING( "DIAGONAL ARRAY - PROBABLY A MISTAKE" );
-			}
-			else if ( i == 2 )
-			{
-				if ( current_item->rows <= 0 ) BAILOUT( "NUMBER OF ROWS IS <= 0" );
-				angle = current_item->angle;
-				current_item->row_pitch  = (y - current_item->y[0]) / current_item->rows;
-				current_item->row_pitchx = (x - current_item->x[0]) / current_item->rows;
-				if ( verbose ) printf( "             Row pitch (points):    (%d), %d \n", 
-						current_item->row_pitchx, current_item->row_pitch );
-				if ( current_item->row_pitchx != 0 ) WARNING( "DIAGONAL ARRAY - PROBABLY A MISTAKE" );
-			}
-		}	        
-		else if ( current_item->type == 1 ||       // path    
-				current_item->type == 0 ||       // polygon
-				current_item->type == 5    )     // box 
-		{
-			current_item->x[ii] = x;
-			current_item->y[ii] = y;
-			if ( i == 0 )
-			{
-				px = x;
-				py = y;
-			}
-			else     // look for degenerates
-			{
-				if ( x == px && y == py )
-				{
-					ii--;
-					degenerates++;
-					printf( "\nWarning: degenerate vertex  " );
-				}
-				else
-				{
-					px = x;
-					py = y;
-				}
-			}
-		}
-		else
-			BAILOUT( "INVALID ITEM TYPE FOUND IN XY FUNCTION." );
-
-		ii++;
-	}
-
-	current_item->n = num - degenerates;
-
-	if ( current_item->n <= 0 ) printf( "\nWARNING: DEGENERATE POLYGON, PATH, OR BOX. THERE IS ONLY ONE VERTEX.\n" );
-
-	*ci = current_item;
-
-}  // read_xy
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -2203,34 +1178,6 @@ void GdsWriter::gds_write_xy( const int *x, const int *y, int n, bool has_last )
 
 }  // write_xy
 
-/*------------------------------------------------------------------------------------------*/
-/* Contains the number of columns and rows of an array. */
-#if 0
-	void
-gds_read_colrow( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	static int 
-		ncols, 
-		nrows;
-
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-
-	read( this->out, &ncols, 2 );
-	gds_swap2bytes( (BYTE *) &ncols );
-	read( this->out, &nrows, 2 );
-	gds_swap2bytes( (BYTE *) &nrows );
-	if ( verbose ) printf( "             %d  %d\n", ncols, nrows ) ;
-
-	if ( ncols <= 0 ) BAILOUT( "NEGATIVE OR ZERO NUMBER OF COLUMNS" ); 
-	if ( nrows <= 0 ) BAILOUT( "NEGATIVE OR ZERO NUMBER OF ROWS" );
-
-	current_item->cols = ncols;
-	current_item->rows = nrows;    
-	*ci = current_item;
-
-}  // colrow
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -2266,41 +1213,6 @@ void GdsWriter::gds_write_colrow(  int ncols, int nrows )
 
 /*------------------------------------------------------------------------------------------*/
 
-#if 0
-	void
-gds_read_units( float *Pdbu_um, float *Pdbu_uu, float *Pdbu_m, BOOL verbose )
-
-	/* Read the database UNIT in "user units" (typically 0.001), then read the database unit  */
-	/* in units of meters. The first number doesn't really matter, unless you want a CAD      */
-	/* program to display the data in convenient units (such as microns).                     */
-	/* The imporant number is the second one: meters per bit.                                 */
-
-
-{
-	double
-		dbu_uu,        /* database unit in user units, usually 0.001 */
-		dbu_m;         /* database unit in meters, usually 1e-9      */
-
-	dbu_uu = gds_read_double( this->out );
-
-	dbu_m  = gds_read_double( this->out );
-
-	if ( dbu_uu <= 0.0 ) BAILOUT( "INVALID DATABASE USER UNIT, < 0" );
-
-	if ( dbu_m <= 0.0 )  BAILOUT( "INVALID DATABASE UNIT, < 0" );
-
-
-	if ( verbose ) printf( "             Database units in microns: %f\n", dbu_m * 1e6 ) ;
-
-	*Pdbu_um = dbu_m * 1e6;     // microns per database unit 
-	*Pdbu_uu = dbu_uu;          // user units per database unit
-	*Pdbu_m  = dbu_m;           // meters per database unit
-
-}  // read_units
-#endif 
-
-/*------------------------------------------------------------------------------------------*/
-
 void GdsWriter::gds_write_units( double dbu_uu, double dbu_m )
 {
 	short int
@@ -2320,26 +1232,6 @@ void GdsWriter::gds_write_units( double dbu_uu, double dbu_m )
 
 /*------------------------------------------------------------------------------------------*/
 
-#if 0
-	void
-gds_read_mag( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-	double magnification;
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-
-	magnification = gds_read_double( this->out );
-
-	if ( verbose ) printf( "             %g \n", magnification ) ;
-
-	current_item->mag = magnification;      
-	*ci = current_item;
-
-}  // read_mag
-#endif 
-
-/*------------------------------------------------------------------------------------------*/
-
 void GdsWriter::gds_write_mag( double mag )
 {
 	static int
@@ -2355,30 +1247,6 @@ void GdsWriter::gds_write_mag( double mag )
 	gds_write_float( mag );
 
 }  // write_mag
-
-/*------------------------------------------------------------------------------------------*/
-
-#if 0
-	void
-gds_read_angle( int count, struct gds_itemtype **ci, BOOL verbose )
-{
-
-	double
-		a;
-
-	static struct gds_itemtype *current_item;
-	current_item = *ci;
-
-	a = gds_read_double( this->out );
-
-	if ( verbose ) printf( "             %g \n", a ) ;
-
-	current_item->angle = a;       
-
-	*ci = current_item;
-
-}  // read_angle
-#endif 
 
 /*------------------------------------------------------------------------------------------*/
 

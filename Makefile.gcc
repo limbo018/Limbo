@@ -11,7 +11,7 @@
 override CXXSTDLIB := # no such option under g++, always set to empty 
 CXXSTD = -std=c++98
 
-CXXFLAGS_BASIC = -fmax-errors=1 -fPIC -W -Wall -Wextra -Wreturn-type -m64 $(CXXSTDLIB) $(CXXSTD) -Wno-deprecated -Wno-unused-local-typedefs
+CXXFLAGS_BASIC = -fmax-errors=1 -fPIC -W -Wall -Wextra -Wreturn-type -m64 $(CXXSTDLIB) $(CXXSTD) -Wno-deprecated -Wno-unused-local-typedefs -Wno-ignored-qualifiers
 CXXFLAGS_DEBUG = -g $(CXXFLAGS_BASIC) 
 CXXFLAGS_RELEASE = -O3 -fopenmp $(CXXFLAGS_BASIC) 
 

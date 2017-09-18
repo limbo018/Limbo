@@ -41,11 +41,6 @@ namespace GdsParser
 typedef int BOOL;
 /// use unsigned char as byte 
 typedef unsigned char BYTE;
-/// define value of TRUE and FALSE 
-enum GdsWriterBoolConstantEnum {
-	FALSE = 0,
-	TRUE = 1
-};
 
 /// @brief GDSII item type 
 struct gds_itemtype
