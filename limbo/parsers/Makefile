@@ -1,4 +1,4 @@
-all: bookshelf def ebeam gdf gdsii lef lp tf verilog
+all: def lef 
 .PHONY: bookshelf def ebeam gdf gdsii lef lp tf verilog
 
 bookshelf:

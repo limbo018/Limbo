@@ -53,7 +53,7 @@ ifeq ($(OPENBLAS), 1)
 all: $(CSDP_LIB) $(OPENBLAS_LIB) $(CTHREADPOOL_LIB) $(DLX_LIB) $(LEF_LIB) $(DEF_LIB)
 	@echo ">> building default with OPENBLAS on"
 else 
-all: $(CTHREADPOOL_LIB) $(DLX_LIB) $(LEF_LIB) $(DEF_LIB)
+all: $(LEF_LIB) $(DEF_LIB)
 	@echo ">> building default with OPENBLAS off"
 endif 
 

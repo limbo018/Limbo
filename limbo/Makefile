@@ -15,7 +15,7 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 #                         Standard Setting
 # ==========================================================================
 
-all: geometry parsers programoptions thirdparty
+all: parsers thirdparty
 .PHONY: geometry parsers programoptions thirdparty
 
 geometry:
