@@ -66,9 +66,12 @@ $(OBJDIR)/%.o: %.cc
 
 lib$(LIB_PREFIX)parseradapt: $(OBJS) $(LIBDIR)/liblef.a
 	@$(LIBMKDIR)
-	$(AR) $(ARFLAGS) lib$(LIB_PREFIX)wrapper.a $(OBJS)
-	$(LIBTOOL) -static -o $(LIBDIR)/lib$(LIB_PREFIX)parseradapt.a lib$(LIB_PREFIX)wrapper.a $(LIBDIR)/lib$(LIB_PREFIX).a
-	rm -f lib$(LIB_PREFIX)wrapper.a
+	mkdir merge; \
+	cd merge; \
+	$(AR) -x $(LIBDIR)/lib$(LIB_PREFIX).a; \
+	$(AR) $(ARFLAGS) $(LIBDIR)/lib$(LIB_PREFIX)parseradapt.a *.o $(OBJS); \
+	cd ..; \
+	rm -rf merge 
 
 .PHONY: install
 install: 
