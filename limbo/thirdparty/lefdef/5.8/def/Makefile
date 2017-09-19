@@ -15,7 +15,7 @@ all: install release
 
 LIMBO_ROOT_DIR = $(realpath ../../../../..)
 LIBDIR = $(LIMBO_ROOT_DIR)/lib
-LIBMKDIR = if [ ! -d $(@D) ]; then mkdir -p $(@D); fi
+LIBMKDIR = mkdir -p $(LIBDIR)
 
 #==========================================================================
 #                         Compilation Flags
@@ -50,6 +50,7 @@ install:
 	@$(MAKE) $(MFLAGS) installhdrs installlib installbin
 
 release:
+	@$(LIBMKDIR)
 	@$(MAKE) "DEBUG=$(OPTIMIZE_FLAG)" install
 	mv lib/libcdef.a $(LIMBO_ROOT_DIR)/lib
 	mv lib/libcdefzlib.a $(LIMBO_ROOT_DIR)/lib
@@ -57,6 +58,7 @@ release:
 	mv lib/libdefzlib.a $(LIMBO_ROOT_DIR)/lib
 
 myinstall: 
+	@$(LIBMKDIR)
 	mkdir -p $(PREFIX)/include/limbo/thirdparty/lefdef/5.8/def/include
 	cp $(wildcard include/*.h) $(PREFIX)/include/limbo/thirdparty/lefdef/5.8/def/include
 	cp $(wildcard include/*.hpp) $(PREFIX)/include/limbo/thirdparty/lefdef/5.8/def/include
