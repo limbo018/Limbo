@@ -106,6 +106,7 @@ clean:
 	$(MAKE) clean -C $(DLX_SRCS)
 	$(MAKE) clean -C $(LIBDIVIDE_SRCS)
 	$(MAKE) clean -C $(FLEX_SRCS)
+	$(MAKE) clean -C $(LEF_SRCS)
 	$(MAKE) clean -C $(DEF_SRCS)
 
 .PHONY: extraclean
