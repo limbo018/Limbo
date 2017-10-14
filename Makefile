@@ -29,7 +29,7 @@ test:
 
 .PHONY: doc
 doc:
-	$(MAKE) -C doc
+	$(MAKE) -C docs
 
 .PHONY: install
 install:
