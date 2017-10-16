@@ -3,7 +3,7 @@
 # ==========================================================================
 
 LIMBO_ROOT_DIR = $(realpath ..)
-DOCDIR = $(LIMBO_ROOT_DIR)/doc
+DOCDIR = $(LIMBO_ROOT_DIR)/docs
 SRCS = $(LIMBO_ROOT_DIR)/Readme.md \
 		  $(DOCDIR)/algorithms \
 		  $(DOCDIR)/bibtex \
@@ -103,15 +103,15 @@ all: doc
 Doxyfile: $(DOCDIR)/Doxyfile.in $(DOCDIR)/Makefile $(SRCS)
 	echo INCLUDE_PATH           = $(LIMBO_ROOT_DIR) > $(DOCDIR)/Doxyfile
 	echo EXAMPLE_PATH           = $(LIMBO_ROOT_DIR) >> $(DOCDIR)/Doxyfile
-	echo IMAGE_PATH             = $(LIMBO_ROOT_DIR)/doc/geometry >> $(DOCDIR)/Doxyfile
+	echo IMAGE_PATH             = $(LIMBO_ROOT_DIR)/docs/geometry >> $(DOCDIR)/Doxyfile
 	echo INPUT                  = $(SRCS) >> $(DOCDIR)/Doxyfile
 	echo OUTPUT_DIRECTORY       = $(DOCDIR) >> $(DOCDIR)/Doxyfile
 	echo FILE_PATTERNS          = *.c *.cc *.cpp *.md *.py *.mk >> $(DOCDIR)/Doxyfile
 	echo INCLUDE_FILE_PATTERNS  = *.h *.hpp >> $(DOCDIR)/Doxyfile
 	echo ALIASES               += nowarn=\"\\{\" endnowarn=\"\\}\" >> $(DOCDIR)/Doxyfile
 	echo EXTENSION_MAPPING      = mk=C++ >> $(DOCDIR)/Doxyfile 
-	echo FILTER_PATTERNS        = *.mk=$(LIMBO_ROOT_DIR)/doc/MKFilter.sh >> $(DOCDIR)/Doxyfile
-	echo CITE_BIB_FILES         = $(LIMBO_ROOT_DIR)/doc/ref/Top.bib $(wildcard $(LIMBO_ROOT_DIR)/doc/ref/*.bib) >> $(DOCDIR)/Doxyfile 
+	echo FILTER_PATTERNS        = *.mk=$(LIMBO_ROOT_DIR)/docs/MKFilter.sh >> $(DOCDIR)/Doxyfile
+	echo CITE_BIB_FILES         = $(LIMBO_ROOT_DIR)/docs/ref/Top.bib $(wildcard $(LIMBO_ROOT_DIR)/docs/ref/*.bib) >> $(DOCDIR)/Doxyfile 
 
 doc: Doxyfile $(SRCS)
 	$(DOXYGEN) $(DOCDIR)/Doxyfile.in
@@ -119,9 +119,9 @@ doc: Doxyfile $(SRCS)
 .PHONY: install
 install: 
 ifneq ($(realpath $(LIMBO_ROOT_DIR)),$(realpath $(PREFIX)))
-	mkdir -p $(PREFIX)/doc
+	mkdir -p $(PREFIX)/docs
 	if [ -a $(DOCDIR)/html/index.html ]; then \
-		cp -r $(DOCDIR)/html $(PREFIX)/doc; \
+		cp -r $(DOCDIR)/html $(PREFIX)/docs; \
 	fi 
 endif
 
