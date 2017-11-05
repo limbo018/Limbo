@@ -89,6 +89,25 @@ typedef LefDefParser::lefiGeomPolygonIter lefiGeomPolygonIter;
 typedef LefDefParser::lefiGeomVia lefiGeomVia;
 typedef LefDefParser::lefiGeomViaIter lefiGeomViaIter;
 typedef LefDefParser::lefiPoints lefiPoints;
+
+enum lefiGeomEnum {
+  lefiGeomUnknown = LefDefParser::lefiGeomUnknown,
+  lefiGeomLayerE = LefDefParser::lefiGeomLayerE,
+  lefiGeomLayerExceptPgNetE = LefDefParser::lefiGeomLayerExceptPgNetE,
+  lefiGeomLayerMinSpacingE = LefDefParser::lefiGeomLayerMinSpacingE,
+  lefiGeomLayerRuleWidthE = LefDefParser::lefiGeomLayerRuleWidthE,
+  lefiGeomWidthE = LefDefParser::lefiGeomWidthE,
+  lefiGeomPathE = LefDefParser::lefiGeomPathE,
+  lefiGeomPathIterE = LefDefParser::lefiGeomPathIterE,
+  lefiGeomRectE = LefDefParser::lefiGeomRectE,
+  lefiGeomRectIterE = LefDefParser::lefiGeomRectIterE,
+  lefiGeomPolygonE = LefDefParser::lefiGeomPolygonE,
+  lefiGeomPolygonIterE = LefDefParser::lefiGeomPolygonIterE,
+  lefiGeomViaE = LefDefParser::lefiGeomViaE,
+  lefiGeomViaIterE = LefDefParser::lefiGeomViaIterE,
+  lefiGeomClassE = LefDefParser::lefiGeomClassE,
+  lefiGeomEnd = LefDefParser::lefiGeomEnd
+};
 /// @endcond
 
 // forward declaration
