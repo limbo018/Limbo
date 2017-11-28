@@ -10,6 +10,80 @@ It also wraps solvers like semidefinite programming solver [Csdp](https://projec
 
 # Examples {#Solvers_Examples}
 
+## Primal Min-Cost Flow Solvers {#Solvers_Examples_Primal_MCF}
+
+The analysis and background of using primal min-cost flow to solve linear programming problem can be found 
+in the detailed description of class @ref limbo::solvers::MinCostFlow. 
+
+See documented version: [test/solvers/test_MinCostFlow.cpp](@ref test_MinCostFlow.cpp)
+\include test/solvers/test_MinCostFlow.cpp
+
+Compiling and running commands (assuming LIMBO_DIR, BOOST_DIR and LEMON_DIR are well defined). 
+@ref Parsers_LpParser is required for @ref limbo::solvers::MinCostFlow to read input files in .lp format. 
+~~~~~~~~~~~~~~~~
+g++ -o test_MinCostFlow test_MinCostFlow.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -I $LEMON_DIR/include -L $LEMON_DIR/lib -lemon -L $LIMBO_DIR/lib -llpparser
+# test primal min-cost flow for linear programming problem 
+./test_MinCostFlow lpmcf/benchmarks/mcf.lp
+~~~~~~~~~~~~~~~~
+
+Output 
+~~~~~~~~~~~~~~~~
+# debug.lgf 
+@nodes
+label	supply	name	potential	
+0	0	node_constr_0	-4	
+1	0	node_constr_1	-4	
+2	-1	subg_constr_0	-1	
+3	-1	subg_constr_1	0	
+4	1	weight_constr	-4	
+5	1	st	-8	
+@arcs
+		label	name	capacity_lower	capacity_upper	cost	flow	
+0	2	0	x0_0	0	1	5	0	
+0	3	1	x0_1	0	1	4	0	
+1	2	2	x1_0	0	1	3	1	
+1	3	3	x1_1	0	1	7	0	
+5	3	4	xd1	0	1	8	1	
+5	2	5	xd0	0	1	8	0	
+4	0	6	x0	0	1	0	0	
+4	1	7	x1	0	1	0	1	
+~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
+Minimize
+5.437 x0_0 + 4.689 x0_1 + 3.223 x1_0 + 7.654 x1_1
+ + 8.7657 xd1 + 8.32079 xd0
+
+Subject To
+node_constr_0: 1 x0_0 + 1 x0_1 + -1 x0 = 0
+node_constr_1: 1 x1_0 + 1 x1_1 + -1 x1 = 0
+subg_constr_0: 1 x0_0 + 1 x1_0 + 1 xd0 = 1
+subg_constr_1: 1 x0_1 + 1 x1_1 + 1 xd1 = 1
+weight_constr: 1 x0 + 1 x1 = 1
+Bounds
+0 <= x0_0 <= 1
+0 <= x0_1 <= 1
+0 <= x1_0 <= 1
+0 <= x1_1 <= 1
+0 <= xd1 <= 1
+0 <= xd0 <= 1
+0 <= x0 <= 1
+0 <= x1 <= 1
+Generals
+End
+Problem solved OPTIMAL
+# Objective 11.9887
+x0_0 0
+x0_1 0
+x1_0 1
+x1_1 0
+xd1 1
+xd0 0
+x0 0
+x1 1
+~~~~~~~~~~~~~~~~
+Be aware that only Capacity Scaling algorithm supports real value costs, while all other algorithms only support integer costs. 
+All capacity and flow need to be integers. 
+
 ## Dual Min-Cost Flow Solvers {#Solvers_Examples_MCF}
 
 The analysis and background of using dual min-cost flow to solve linear programming problem can be found 
@@ -160,6 +234,7 @@ Possible dependencies:
 - [test/solvers/lpmcf/test_lpmcf.cpp](@ref test_lpmcf.cpp)
 - [test/solvers/test_solvers.cpp](@ref test_solvers.cpp)
 - [test/solvers/test_MultiKnapsackLagRelax.cpp](@ref test_MultiKnapsackLagRelax.cpp)
+- [test/solvers/test_MinCostFlow.cpp](@ref test_MinCostFlow.cpp)
 - [test/solvers/test_DualMinCostFlow.cpp](@ref test_DualMinCostFlow.cpp)
 - [test/solvers/test_GurobiApi.cpp](@ref test_GurobiApi.cpp)
 
@@ -170,4 +245,5 @@ Possible dependencies:
 - [limbo/solvers/api/CsdpEasySdpApi.h](@ref CsdpEasySdpApi.h)
 - [limbo/solvers/api/GurobiApi.h](@ref GurobiApi.h)
 - [limbo/solvers/MultiKnapsackLagRelax.h](@ref MultiKnapsackLagRelax.h)
+- [limbo/solvers/MinCostFlow.h](@ref MinCostFlow.h)
 - [limbo/solvers/DualMinCostFlow.h](@ref DualMinCostFlow.h)

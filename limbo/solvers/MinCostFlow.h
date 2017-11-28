@@ -2,6 +2,7 @@
  * @file   MinCostFlow.h
  * @author Yibo Lin
  * @date   Nov 2017
+ * @brief  Solve a special case of linear programming with primal min-cost flow.
  */
 #ifndef LIMBO_SOLVERS_MINCOSTFLOW_H
 #define LIMBO_SOLVERS_MINCOSTFLOW_H
@@ -50,6 +51,9 @@ class CycleCanceling;
 /// &     & x_{ij} = -x_{ji}, \forall (i, j) \in E. (implicit) 
 /// \f}
 /// \n
+/// Only CapacityScaling algorithm supports real-value costs. 
+/// All other algorithms require integer costs, supply and capacity. 
+/// 
 /// @tparam T coefficient type 
 /// @tparam V variable type 
 template <typename T, typename V>
