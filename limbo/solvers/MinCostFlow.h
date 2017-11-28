@@ -640,7 +640,7 @@ class CostScaling : public MinCostFlowSolver<T, V>
 
             // 2. run 
             typename alg_type::ProblemType status = alg.resetParams()
-                //.lowerMap(d->lowerMap())
+                .lowerMap(d->lowerMap())
                 .upperMap(d->upperMap())
                 .costMap(d->costMap())
                 .supplyMap(d->supplyMap())
@@ -738,7 +738,7 @@ class NetworkSimplex : public MinCostFlowSolver<T, V>
 
             // 2. run 
             typename alg_type::ProblemType status = alg.resetParams()
-                //.lowerMap(d->lowerMap())
+                .lowerMap(d->lowerMap())
                 .upperMap(d->upperMap())
                 .costMap(d->costMap())
                 .supplyMap(d->supplyMap())
@@ -834,7 +834,7 @@ class CycleCanceling : public MinCostFlowSolver<T, V>
 
             // 2. run 
             typename alg_type::ProblemType status = alg.resetParams()
-                //.lowerMap(d->lowerMap())
+                .lowerMap(d->lowerMap())
                 .upperMap(d->upperMap())
                 .costMap(d->costMap())
                 .supplyMap(d->supplyMap())
