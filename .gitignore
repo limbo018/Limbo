@@ -10,3 +10,4 @@ obj/*
 limbo/thirdparty/liblinear/predict
 limbo/thirdparty/liblinear/train
 limbo
+test
