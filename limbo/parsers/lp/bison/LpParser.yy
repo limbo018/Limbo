@@ -135,7 +135,7 @@ string_array : STRING {
 term : STRING {
 		$$ = new Term (1, *$1);
 	 }
-	 | INTEGER STRING {
+	 | number STRING {
 		$$ = new Term ($1, *$2);
 	 }
 	 ;

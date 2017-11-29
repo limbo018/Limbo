@@ -21,7 +21,7 @@ GUROBI = 0
 include $(LIMBO_ROOT_DIR)/Include.mk
 
 ifeq ($(DBG), 1)
-	CXXFLAGS = $(CXXFLAGS_DEBUG) -DDEBUG_GUROBIAPI=1
+	CXXFLAGS = $(CXXFLAGS_DEBUG) -DDEBUG_GUROBIAPI=1 -DDEBUG_DUALMINCOSTFLOW -DDEBUG_MINCOSTFLOW
 else
 	CXXFLAGS = $(CXXFLAGS_RELEASE)
 endif
@@ -57,9 +57,9 @@ OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
 ifeq ($(GUROBI), 0)
-all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow
+all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow test_MinCostFlow
 else
-all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow test_GurobiApi 
+all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow test_MinCostFlow test_GurobiApi 
 endif
 
 .PHONY: lpmcf
@@ -92,6 +92,9 @@ test_MultiKnapsackLagRelax: $(OBJDIR)/test_MultiKnapsackLagRelax.o
 test_DualMinCostFlow: $(OBJDIR)/test_DualMinCostFlow.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_DualMinCostFlow.o $(LIBS) 
 
+test_MinCostFlow: $(OBJDIR)/test_MinCostFlow.o 
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_MinCostFlow.o $(LIBS) 
+
 test_GurobiApi: $(OBJDIR)/test_GurobiApi.o
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_GurobiApi.o $(LIBS) 
 
@@ -101,6 +104,7 @@ clean: cleandep
 	rm -f test_solvers
 	rm -f test_MultiKnapsackLagRelax
 	rm -f test_DualMinCostFlow
+	rm -f test_MinCostFlow
 	rm -f test_GurobiApi
 	rm -f $(OBJS) 
 

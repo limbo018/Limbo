@@ -360,12 +360,11 @@ int nonDefaultCB(lefrCallbackType_e c, lefiNonDefault* def, lefiUserData)
     return 0;
 }
 
-int obstructionCB(lefrCallbackType_e c, lefiObstruction* /*obs*/,
-        lefiUserData)
+int obstructionCB(lefrCallbackType_e c, lefiObstruction* obs, lefiUserData)
 {
     checkType(c);
     
-    //lefDB->lef_obstruction_cbk(*obs); 
+    lefDB->lef_obstruction_cbk(*obs); 
     return 0;
 }
 
