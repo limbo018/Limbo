@@ -116,12 +116,12 @@ Introduction</h1>
 Examples</h1>
 <h2><a class="anchor" id="Parsers_LpParser_Flex_Bison"></a>
 Flex/Bison Parser</h2>
-<p>See documented version: <a class="el" href="a00370.html">test/parsers/lp/test_bison.cpp</a> </p>
+<p>See documented version: <a class="el" href="a00372.html">test/parsers/lp/test_bison.cpp</a> </p>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00336.html" title="Driver for Lp parser.">limbo/parsers/lp/bison/LpDriver.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00337.html" title="Driver for Lp parser.">limbo/parsers/lp/bison/LpDriver.h</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="keyword">using</span> std::cout;</div>
 <div class="line"><span class="keyword">using</span> std::cin;</div>
@@ -140,13 +140,13 @@ Flex/Bison Parser</h2>
 <div class="line">        {</div>
 <div class="line">            cout &lt;&lt; l &lt;&lt; <span class="stringliteral">&quot; &lt;= &quot;</span> &lt;&lt; vname &lt;&lt; <span class="stringliteral">&quot; &lt;= &quot;</span> &lt;&lt; r &lt;&lt; endl;</div>
 <div class="line">        }</div>
-<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00153.html#a32e8d45c236cc95c4b3c25003b68abcb" title="add constraint that terms compare constant.">add_constraint</a>(<a class="code" href="a00411.html#a67607fc847b49cff43493e7390764b13" title="array of terms">LpParser::TermArray</a> <span class="keyword">const</span>&amp; terms, <span class="keywordtype">char</span> compare, <span class="keywordtype">double</span> constant) </div>
+<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00153.html#a32e8d45c236cc95c4b3c25003b68abcb" title="add constraint that terms compare constant.">add_constraint</a>(<a class="code" href="a00414.html#a67607fc847b49cff43493e7390764b13" title="array of terms">LpParser::TermArray</a> <span class="keyword">const</span>&amp; terms, <span class="keywordtype">char</span> compare, <span class="keywordtype">double</span> constant) </div>
 <div class="line">        {</div>
 <div class="line">            <span class="keywordflow">for</span> (LpParser::TermArray::const_iterator it = terms.begin(); it != terms.end(); ++it)</div>
 <div class="line">                cout &lt;&lt; <span class="stringliteral">&quot; + &quot;</span> &lt;&lt; it-&gt;coef &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; it-&gt;var; </div>
 <div class="line">            cout &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; compare &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; constant &lt;&lt; endl; </div>
 <div class="line">        }</div>
-<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00153.html#adb0e919fa73bb0fa07218086a3c56ecb" title="add object terms">add_objective</a>(<span class="keywordtype">bool</span> minimize, <a class="code" href="a00411.html#a67607fc847b49cff43493e7390764b13" title="array of terms">LpParser::TermArray</a> <span class="keyword">const</span>&amp; terms)</div>
+<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00153.html#adb0e919fa73bb0fa07218086a3c56ecb" title="add object terms">add_objective</a>(<span class="keywordtype">bool</span> minimize, <a class="code" href="a00414.html#a67607fc847b49cff43493e7390764b13" title="array of terms">LpParser::TermArray</a> <span class="keyword">const</span>&amp; terms)</div>
 <div class="line">        {</div>
 <div class="line">            <span class="keywordflow">if</span> (minimize)</div>
 <div class="line">                cout &lt;&lt; <span class="stringliteral">&quot;Minimize\n&quot;</span>; </div>
@@ -166,14 +166,14 @@ Flex/Bison Parser</h2>
 <div class="line">        }</div>
 <div class="line">};</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> <a class="code" href="a00367.html#ad346d2cc622126c018bb0954eee9b1fa" title="test 1: use function wrapper BookshelfParser::read">test1</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="a00369.html#ad346d2cc622126c018bb0954eee9b1fa" title="test 1: use function wrapper BookshelfParser::read">test1</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
 <div class="line">{</div>
 <div class="line">    cout &lt;&lt; <span class="stringliteral">&quot;////////////// test1 ////////////////&quot;</span> &lt;&lt; endl;</div>
 <div class="line">    <a class="code" href="a00153.html" title="Custom class that inheritates LpParser::LpDataBase with all the required callbacks defined...">LpDataBase</a> db;</div>
-<div class="line">    <a class="code" href="a00411.html#ae6014b3e226c57759e668b42af27ef9c" title="API for LpParser. Read LP file and initialize database by calling user-defined callback functions...">LpParser::read</a>(db, filename);</div>
+<div class="line">    <a class="code" href="a00414.html#ae6014b3e226c57759e668b42af27ef9c" title="API for LpParser. Read LP file and initialize database by calling user-defined callback functions...">LpParser::read</a>(db, filename);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> <a class="code" href="a00367.html#a44c0461f780572bf02018038dd9423cd" title="test 2: use class wrapper BookshelfParser::Driver">test2</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="a00369.html#a44c0461f780572bf02018038dd9423cd" title="test 2: use class wrapper BookshelfParser::Driver">test2</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
 <div class="line">{</div>
 <div class="line">    cout &lt;&lt; <span class="stringliteral">&quot;////////////// test2 ////////////////&quot;</span> &lt;&lt; endl;</div>
 <div class="line">    <a class="code" href="a00153.html" title="Custom class that inheritates LpParser::LpDataBase with all the required callbacks defined...">LpDataBase</a> db;</div>
@@ -184,12 +184,12 @@ Flex/Bison Parser</h2>
 <div class="line">    driver.parse_file(filename);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00357.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00359.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">if</span> (argc &gt; 1)</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="a00367.html#ad346d2cc622126c018bb0954eee9b1fa" title="test 1: use function wrapper BookshelfParser::read">test1</a>(argv[1]);</div>
-<div class="line">        <a class="code" href="a00367.html#a44c0461f780572bf02018038dd9423cd" title="test 2: use class wrapper BookshelfParser::Driver">test2</a>(argv[1]);</div>
+<div class="line">        <a class="code" href="a00369.html#ad346d2cc622126c018bb0954eee9b1fa" title="test 1: use function wrapper BookshelfParser::read">test1</a>(argv[1]);</div>
+<div class="line">        <a class="code" href="a00369.html#a44c0461f780572bf02018038dd9423cd" title="test 2: use class wrapper BookshelfParser::Driver">test2</a>(argv[1]);</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">else</span> </div>
 <div class="line">        cout &lt;&lt; <span class="stringliteral">&quot;at least 1 argument is required&quot;</span> &lt;&lt; endl;</div>
@@ -202,18 +202,18 @@ Flex/Bison Parser</h2>
 </pre><h2><a class="anchor" id="Parsers_LpParser_Examples_All"></a>
 All Examples</h2>
 <ul>
-<li><a class="el" href="a00370.html">test/parsers/lp/test_bison.cpp</a></li>
+<li><a class="el" href="a00372.html">test/parsers/lp/test_bison.cpp</a></li>
 </ul>
 <h1><a class="anchor" id="Parsers_LpParser_References"></a>
 References</h1>
 <ul>
-<li><a class="el" href="a00335.html">limbo/parsers/lp/bison/LpDataBase.h</a></li>
-<li><a class="el" href="a00336.html">limbo/parsers/lp/bison/LpDriver.h</a> </li>
+<li><a class="el" href="a00336.html">limbo/parsers/lp/bison/LpDataBase.h</a></li>
+<li><a class="el" href="a00337.html">limbo/parsers/lp/bison/LpDriver.h</a> </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

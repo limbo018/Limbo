@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/makeutils/FindGcc.mk File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/makeutils/FindCompiler.mk File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,30 +91,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">FindGcc.mk File Reference</div>  </div>
+<div class="title">FindCompiler.mk File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>find gcc, determine CC  
+<p>find compiler under various platform, determine CXX, CC, FC, AR  
 <a href="#details">More...</a></p>
 
 <p><a href="a00309_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>find gcc, determine CC </p>
-<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
+<div class="textblock"><p>find compiler under various platform, determine CXX, CC, FC, AR </p>
+<p>Use following command in the Makefile to view the results </p>
+<pre class="fragment">$(info Compilers: CC = $(CC), CXX = $(CXX), FC = $(FC), AR = $(AR))
+</pre><dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Jan 2017</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">CC</td><td>set CC as C compiler </td></tr>
+    <tr><td class="paramname">LIMBO_DIR,LIMBO_ROOT_DIR</td><td>given LIMBO_DIR or LIMBO_ROOT_DIR </td></tr>
+    <tr><td class="paramname">CC,CXX,FC,AR</td><td>set CC as c compiler, CXX as c++ compiler, FC as fortran compiler, AR as archiver </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition in file <a class="el" href="a00309_source.html">FindGcc.mk</a>.</p>
+<p>Definition in file <a class="el" href="a00309_source.html">FindCompiler.mk</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/verilog/bison/VerilogDriver.h Source File</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/verilog/bison/VerilogDataBase.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,78 +91,110 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">VerilogDriver.h</div>  </div>
+<div class="title">VerilogDataBase.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00340.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef VERILOGPARSER_DRIVER_H</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define VERILOGPARSER_DRIVER_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef VERILOGPARSER_DATABASE_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define VERILOGPARSER_DATABASE_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00339.html" title="Database for Verilog parser.">VerilogDataBase.h</a>&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>VerilogParser {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">using</span> std::cout;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">using</span> std::endl;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">using</span> std::cerr;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">using</span> std::string; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">using</span> std::vector;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">using</span> std::pair;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">using</span> std::make_pair;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">using</span> std::ostringstream;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="a00065.html">   35</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00065.html">Driver</a></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="a00065.html#ac554897c2784109e0d357440ac5997a2">Driver</a>(<a class="code" href="a00251.html" title="Base class for verilog database. Only pure virtual functions are defined. User needs to inheritate th...">VerilogDataBase</a>&amp; db);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="a00065.html#a28c64395f09c5a63ef2e479026b2c1f9">   43</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00065.html#a28c64395f09c5a63ef2e479026b2c1f9" title="enable debug output in the flex scanner">trace_scanning</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="a00065.html#af8deb8d1b92010e7e6f08ef454472ddd">   46</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00065.html#af8deb8d1b92010e7e6f08ef454472ddd" title="enable debug output in the bison parser">trace_parsing</a>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="a00065.html#a43c1de4cf435f1542893c71eee1c2903">   49</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="a00065.html#a43c1de4cf435f1542893c71eee1c2903" title="stream name (file or input stream) used for error messages.">streamname</a>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00065.html#afc8992ee0297e5e1a3e794a1014368dd">parse_stream</a>(std::istream&amp; in,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sname = <span class="stringliteral">&quot;stream input&quot;</span>);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00065.html#afbcc70d3abc390e3f7ceb497103e9423">parse_string</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; input,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sname = <span class="stringliteral">&quot;string stream&quot;</span>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00065.html#a6b4a2c63f5559776827f25da0c93ad8b">parse_file</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; filename);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">// To demonstrate pure handling of parse errors, instead of</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="comment">// simply dumping them on the standard error output, we will pass</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">// them to the driver using the following two member functions.</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00065.html#affb53df87a37ff67c8239c783a95490c">error</a>(<span class="keyword">const</span> <span class="keyword">class</span> location&amp; l, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; m);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00065.html#affb53df87a37ff67c8239c783a95490c">error</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; m);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="code" href="a00065.html#ade0b1bb8e6d62289d83a0171d72b4925">   88</a></span>&#160;    <span class="keyword">class </span>Scanner* <a class="code" href="a00065.html#ade0b1bb8e6d62289d83a0171d72b4925">lexer</a>;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="code" href="a00065.html#a21604fd12a00f24fb34f4895860de558">   92</a></span>&#160;    <a class="code" href="a00251.html" title="Base class for verilog database. Only pure virtual functions are defined. User needs to inheritate th...">VerilogDataBase</a>&amp; <a class="code" href="a00065.html#a21604fd12a00f24fb34f4895860de558">m_db</a>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">void</span> wire_pin_cbk(std::string&amp;, std::string&amp;, <a class="code" href="a00212.html" title="range with pair of low and high values">Range</a> <span class="keyword">const</span>&amp; = <a class="code" href="a00212.html" title="range with pair of low and high values">Range</a>());</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> wire_declare_cbk(std::vector&lt;GeneralName&gt; <span class="keyword">const</span>&amp;, <a class="code" href="a00212.html" title="range with pair of low and high values">Range</a> <span class="keyword">const</span>&amp;);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">void</span> wire_declare_cbk(std::vector&lt;GeneralName&gt; <span class="keyword">const</span>&amp; vNetName);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">void</span> pin_declare_cbk(std::vector&lt;GeneralName&gt; <span class="keyword">const</span>&amp;, <span class="keywordtype">unsigned</span>, <a class="code" href="a00212.html" title="range with pair of low and high values">Range</a> <span class="keyword">const</span>&amp;);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">void</span> pin_declare_cbk(std::vector&lt;GeneralName&gt; <span class="keyword">const</span>&amp;, <span class="keywordtype">unsigned</span>);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">void</span> module_instance_cbk(std::string <span class="keyword">const</span>&amp;, std::string <span class="keyword">const</span>&amp;);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">void</span> assignment_cbk(std::string <span class="keyword">const</span>&amp;, <a class="code" href="a00212.html" title="range with pair of low and high values">Range</a> <span class="keyword">const</span>&amp;, std::string <span class="keyword">const</span>&amp;, <a class="code" href="a00212.html" title="range with pair of low and high values">Range</a> <span class="keyword">const</span>&amp;); </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00107"></a><span class="lineno"><a class="code" href="a00065.html#ae38c9f8bfb072f042e9d7a7a07b429d2">  107</a></span>&#160;    vector&lt;NetPin&gt; <a class="code" href="a00065.html#ae38c9f8bfb072f042e9d7a7a07b429d2" title="Use as a stack for node and pin pairs in a net, because wire_pin_cbk will be called before module_ins...">m_vNetPin</a>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;};</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a00412.html#ae9bab9eb582085f027e422d3b17f20be" title="API for VerilogParser. Read Verilog file and initialize database by calling user-defined callback fun...">read</a>(<a class="code" href="a00251.html" title="Base class for verilog database. Only pure virtual functions are defined. User needs to inheritate th...">VerilogDataBase</a>&amp; db, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; verilogFile);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;} <span class="comment">// namespace example</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#endif // EXAMPLE_DRIVER_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;limits&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="code" href="a00415.html">   20</a></span>&#160;<span class="keyword">namespace </span>VerilogParser {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="code" href="a00415.html#a98b5f8be4ea6190a3cfe6a36d979b16f">   23</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="a00415.html#a98b5f8be4ea6190a3cfe6a36d979b16f" title="pin type">PinType</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    kINPUT = 0x1, </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    kOUTPUT = 0x2,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    kREG = 0x4</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="code" href="a00213.html">   31</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00213.html" title="range with pair of low and high values">Range</a> </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="code" href="a00213.html#a0d9ed13a0904c51e66958804e7916fed">   33</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="a00213.html#a0d9ed13a0904c51e66958804e7916fed" title="low value, min infinity if not specified">low</a>; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="code" href="a00213.html#a44af3cc8da2d7743823171a24cd070e1">   34</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="a00213.html#a44af3cc8da2d7743823171a24cd070e1">high</a>; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="a00213.html#a3ca31f0fe872da9206deb9b5b5a0ba65">   36</a></span>&#160;    <a class="code" href="a00213.html#a3ca31f0fe872da9206deb9b5b5a0ba65" title="constructor">Range</a>() {<a class="code" href="a00213.html#a0d9ed13a0904c51e66958804e7916fed" title="low value, min infinity if not specified">low</a> = <a class="code" href="a00213.html#a44af3cc8da2d7743823171a24cd070e1">high</a> = <a class="code" href="a00404.html#adbae349757a070ef1af46523c1708891" title="get min of an array">std::numeric_limits&lt;int&gt;::min</a>();}</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="a00213.html#a113db46c458375fb7687f464f5eec916">   40</a></span>&#160;    <a class="code" href="a00213.html#a113db46c458375fb7687f464f5eec916" title="constructor">Range</a>(<span class="keywordtype">int</span> l, <span class="keywordtype">int</span> h) : <a class="code" href="a00213.html#a0d9ed13a0904c51e66958804e7916fed" title="low value, min infinity if not specified">low</a>(l), <a class="code" href="a00213.html#a44af3cc8da2d7743823171a24cd070e1">high</a>(h) {}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="a00119.html">   45</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00119.html" title="name with a range">GeneralName</a></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="code" href="a00119.html#a97603e7eb369993b4987b95c23659119">   47</a></span>&#160;    std::string <a class="code" href="a00119.html#a97603e7eb369993b4987b95c23659119" title="name string, empty if not specified">name</a>; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="a00119.html#ac27d46f13210f6e4013d179050386e61">   48</a></span>&#160;    <a class="code" href="a00213.html" title="range with pair of low and high values">Range</a> <a class="code" href="a00119.html#ac27d46f13210f6e4013d179050386e61" title="min infinity if not specified">range</a>; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="code" href="a00119.html#abc93b432a1875b0224e4335faee2e037">   52</a></span>&#160;    <a class="code" href="a00119.html#abc93b432a1875b0224e4335faee2e037" title="constructor">GeneralName</a>(std::string <span class="keyword">const</span>&amp; n = <span class="stringliteral">&quot;&quot;</span>) {<a class="code" href="a00119.html#a97603e7eb369993b4987b95c23659119" title="name string, empty if not specified">name</a> = n; <a class="code" href="a00119.html#ac27d46f13210f6e4013d179050386e61" title="min infinity if not specified">range</a>.<a class="code" href="a00213.html#a0d9ed13a0904c51e66958804e7916fed" title="low value, min infinity if not specified">low</a> = <a class="code" href="a00119.html#ac27d46f13210f6e4013d179050386e61" title="min infinity if not specified">range</a>.<a class="code" href="a00213.html#a44af3cc8da2d7743823171a24cd070e1">high</a> = <a class="code" href="a00404.html#adbae349757a070ef1af46523c1708891" title="get min of an array">std::numeric_limits&lt;int&gt;::min</a>();}</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="a00119.html#aa7e0df99c28b6df30ea1e04bb7eda522">   57</a></span>&#160;    <a class="code" href="a00119.html#aa7e0df99c28b6df30ea1e04bb7eda522" title="constructor">GeneralName</a>(std::string <span class="keyword">const</span>&amp; n, <span class="keywordtype">int</span> low, <span class="keywordtype">int</span> high) {<a class="code" href="a00119.html#a97603e7eb369993b4987b95c23659119" title="name string, empty if not specified">name</a> = n; <a class="code" href="a00119.html#ac27d46f13210f6e4013d179050386e61" title="min infinity if not specified">range</a>.<a class="code" href="a00213.html#a0d9ed13a0904c51e66958804e7916fed" title="low value, min infinity if not specified">low</a> = low; <a class="code" href="a00119.html#ac27d46f13210f6e4013d179050386e61" title="min infinity if not specified">range</a>.<a class="code" href="a00213.html#a44af3cc8da2d7743823171a24cd070e1">high</a> = high;}</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="code" href="a00170.html">   65</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00170.html" title="Describe the connection of pins to nets.">NetPin</a></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="code" href="a00170.html#a5021371956ae17d9625496581e73c97a">   67</a></span>&#160;    std::string <a class="code" href="a00170.html#a5021371956ae17d9625496581e73c97a" title="net name">net</a>; </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="a00170.html#a426e86c183a1549736ee42354e19bb04">   68</a></span>&#160;    std::string <a class="code" href="a00170.html#a426e86c183a1549736ee42354e19bb04" title="pin name">pin</a>; </div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="code" href="a00170.html#a109ad9ccf7c7d1ff6c53105cde277a66">   69</a></span>&#160;    <a class="code" href="a00213.html" title="range with pair of low and high values">Range</a> <a class="code" href="a00170.html#a109ad9ccf7c7d1ff6c53105cde277a66" title="range of net">range</a>; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="code" href="a00170.html#a9ad74ddefea7cf04cbbbaf319c9985b8">   75</a></span>&#160;    <a class="code" href="a00170.html#a9ad74ddefea7cf04cbbbaf319c9985b8" title="constructor">NetPin</a>(std::string&amp; n, std::string&amp; p, <a class="code" href="a00213.html" title="range with pair of low and high values">Range</a> <span class="keyword">const</span>&amp; r = <a class="code" href="a00213.html" title="range with pair of low and high values">Range</a>())</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="a00170.html#a5021371956ae17d9625496581e73c97a" title="net name">net</a>.swap(n);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="a00170.html#a426e86c183a1549736ee42354e19bb04" title="pin name">pin</a>.swap(p);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <a class="code" href="a00170.html#a109ad9ccf7c7d1ff6c53105cde277a66" title="range of net">range</a> = r;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="code" href="a00230.html">   85</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00230.html" title="bison does not support vector very well, so here create a dummy class for string array.">StringArray</a> : <span class="keyword">public</span> std::vector&lt;std::string&gt;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;{</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">public</span>: </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keyword">typedef</span> std::vector&lt;std::string&gt; base_type;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">using</span> base_type::size_type;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keyword">using</span> base_type::value_type;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keyword">using</span> base_type::allocator_type;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="code" href="a00230.html#a76ea46946f9a3c0994e78e4423e061b0">   97</a></span>&#160;        <a class="code" href="a00230.html#a76ea46946f9a3c0994e78e4423e061b0" title="constructor">StringArray</a>(<span class="keyword">const</span> allocator_type&amp; alloc = allocator_type())</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            : base_type(alloc) {}</div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="code" href="a00230.html#a76125ce32f8971d9c954e984ed3e7a55">  103</a></span>&#160;        <a class="code" href="a00230.html#a76ea46946f9a3c0994e78e4423e061b0" title="constructor">StringArray</a>(size_type n, <span class="keyword">const</span> value_type&amp; val, <span class="keyword">const</span> allocator_type&amp; alloc = allocator_type())</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            : base_type(n, val, alloc) {}</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;};</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="code" href="a00120.html">  109</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00120.html" title="bison does not support vector very well, so here create a dummy class for VerilogParser::GeneralName ...">GeneralNameArray</a> : <span class="keyword">public</span> std::vector&lt;GeneralName&gt;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;{</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">public</span>: </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keyword">typedef</span> std::vector&lt;GeneralName&gt; base_type;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keyword">using</span> base_type::size_type;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keyword">using</span> base_type::value_type;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keyword">using</span> base_type::allocator_type;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00121"></a><span class="lineno"><a class="code" href="a00120.html#a26609645e08ad5d0d1eb01b176767c67">  121</a></span>&#160;        <a class="code" href="a00120.html#a26609645e08ad5d0d1eb01b176767c67" title="constructor">GeneralNameArray</a>(<span class="keyword">const</span> allocator_type&amp; alloc = allocator_type())</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            : base_type(alloc) {}</div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="code" href="a00120.html#af7b6268a662e9039a7169ab5c3eb8d3f">  127</a></span>&#160;        <a class="code" href="a00120.html#a26609645e08ad5d0d1eb01b176767c67" title="constructor">GeneralNameArray</a>(size_type n, <span class="keyword">const</span> value_type&amp; val, <span class="keyword">const</span> allocator_type&amp; alloc = allocator_type())</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            : base_type(n, val, alloc) {}</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;};</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">// forward declaration</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno"><a class="code" href="a00253.html">  136</a></span>&#160;<span class="comment"></span><span class="keyword">class </span><a class="code" href="a00253.html" title="Base class for verilog database. Only pure virtual functions are defined. User needs to inheritate th...">VerilogDataBase</a></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;{</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00253.html#a85d1dff205210c7a46ff1d8341599adf" title="read an instance.">verilog_instance_cbk</a>(std::string <span class="keyword">const</span>&amp; macro_name, std::string <span class="keyword">const</span>&amp; inst_name, std::vector&lt;NetPin&gt; <span class="keyword">const</span>&amp; vNetPin) = 0;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00253.html#aac47e42ce2ae3ffc298cd30cfffae6ab" title="read an net declaration">verilog_net_declare_cbk</a>(std::string <span class="keyword">const</span>&amp; net_name, <a class="code" href="a00213.html" title="range with pair of low and high values">Range</a> <span class="keyword">const</span>&amp; range) = 0;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00253.html#abe2deb86c9faafef608c6bb1b649b8da" title="read an pin declaration">verilog_pin_declare_cbk</a>(std::string <span class="keyword">const</span>&amp; pin_name, <span class="keywordtype">unsigned</span> type, <a class="code" href="a00213.html" title="range with pair of low and high values">Range</a> <span class="keyword">const</span>&amp; range) = 0;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00253.html#a747bab49342db2a3aba49e659a0f75e0" title="read an assignment">verilog_assignment_cbk</a>(std::string <span class="keyword">const</span>&amp; target_name, <a class="code" href="a00213.html" title="range with pair of low and high values">Range</a> <span class="keyword">const</span>&amp; target_range, std::string <span class="keyword">const</span>&amp; source_name, <a class="code" href="a00213.html" title="range with pair of low and high values">Range</a> <span class="keyword">const</span>&amp; source_range); </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a00253.html#aa856e3202cfa0c439136aaf1b3757ff8" title="remind users to define some optional callback functions at runtime">verilog_user_cbk_reminder</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* str) <span class="keyword">const</span>; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;};</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;} <span class="comment">// namespace VerilogParser</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

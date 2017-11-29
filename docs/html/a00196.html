@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: limbo::geometry::point_compare_type Class Reference</title>
+<title>Limbo: GdfParser::Point Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,44 +88,59 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00401.html">limbo</a></li><li class="navelem"><a class="el" href="a00407.html">geometry</a></li><li class="navelem"><a class="el" href="a00196.html">point_compare_type</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00399.html">GdfParser</a></li><li class="navelem"><a class="el" href="a00196.html">Point</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00566.html">List of all members</a>  </div>
+<a href="a00472.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::geometry::point_compare_type Class Reference</div>  </div>
+<div class="title">GdfParser::Point Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>sort helper if orient == HORIZONTAL, sort by left lower if orient == VERTICAL, sort by lower left  
+<p>class for point  
  <a href="a00196.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00302_source.html">Polygon2Rectangle.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00324_source.html">GdfDataBase.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for GdfParser::Point:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00196.png" usemap="#GdfParser::Point_map" alt=""/>
+  <map id="GdfParser::Point_map" name="GdfParser::Point_map">
+<area href="a00137.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures." alt="GdfParser::Item" shape="rect" coords="0,0,104,24"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5cc902c87d78750b69f51239d1222716"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#a5cc902c87d78750b69f51239d1222716">point_compare_type</a> ()</td></tr>
-<tr class="memitem:a5387ba4560652f9e86697bd0981bdbfc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#a5387ba4560652f9e86697bd0981bdbfc">point_compare_type</a> (<a class="el" href="a00176.html">orientation_2d</a> const &amp;ori)</td></tr>
-<tr class="memitem:a020ec75db5ec449b806876f52909017e"><td class="memTemplParams" colspan="2">template&lt;typename PointType &gt; </td></tr>
-<tr class="memitem:a020ec75db5ec449b806876f52909017e"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00196.html#a020ec75db5ec449b806876f52909017e">operator()</a> (PointType const &amp;p1, PointType const &amp;p2) const </td></tr>
-<tr class="memdesc:a020ec75db5ec449b806876f52909017e"><td class="mdescLeft">&#160;</td><td class="mdescRight">compare two points at specific orientation  <a href="#a020ec75db5ec449b806876f52909017e"></a><br/></td></tr>
+<tr class="memitem:a343271545a9739fddf92dca181ea076f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a343271545a9739fddf92dca181ea076f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#a343271545a9739fddf92dca181ea076f">Point</a> ()</td></tr>
+<tr class="memdesc:a343271545a9739fddf92dca181ea076f"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br/></td></tr>
+<tr class="memitem:a67df864a540169421ca6aa4f5cff6da9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67df864a540169421ca6aa4f5cff6da9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#a67df864a540169421ca6aa4f5cff6da9">reset</a> ()</td></tr>
+<tr class="memdesc:a67df864a540169421ca6aa4f5cff6da9"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br/></td></tr>
+<tr class="memitem:adee62d2689126a346e0c5e14c565c5fa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#adee62d2689126a346e0c5e14c565c5fa">print</a> (ostream &amp;ss) const </td></tr>
+<tr class="memdesc:adee62d2689126a346e0c5e14c565c5fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">print data members  <a href="#adee62d2689126a346e0c5e14c565c5fa"></a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:acdc745f53903f983d4297655bc64ed5e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acdc745f53903f983d4297655bc64ed5e"></a>
-<a class="el" href="a00176.html">orientation_2d</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#acdc745f53903f983d4297655bc64ed5e">m_orient</a></td></tr>
-<tr class="memdesc:acdc745f53903f983d4297655bc64ed5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">orientation, HORIZONTAL or VERTICAL <br/></td></tr>
+<tr class="memitem:a26d07ab972191aba2c209a6f82fe56a7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a26d07ab972191aba2c209a6f82fe56a7"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#a26d07ab972191aba2c209a6f82fe56a7">x</a></td></tr>
+<tr class="memdesc:a26d07ab972191aba2c209a6f82fe56a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">x coordinate <br/></td></tr>
+<tr class="memitem:acab2bd7473ccdc2469d5dbee0d10f59a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acab2bd7473ccdc2469d5dbee0d10f59a"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#acab2bd7473ccdc2469d5dbee0d10f59a">y</a></td></tr>
+<tr class="memdesc:acab2bd7473ccdc2469d5dbee0d10f59a"><td class="mdescLeft">&#160;</td><td class="mdescRight">y coordinate <br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>sort helper if orient == HORIZONTAL, sort by left lower if orient == VERTICAL, sort by lower left </p>
+<div class="textblock"><p>class for point </p>
 
-<p>Definition at line <a class="el" href="a00302_source.html#l00050">50</a> of file <a class="el" href="a00302_source.html">Polygon2Rectangle.h</a>.</p>
-</div><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a5cc902c87d78750b69f51239d1222716"></a>
+<p>Definition at line <a class="el" href="a00324_source.html#l00130">130</a> of file <a class="el" href="a00324_source.html">GdfDataBase.h</a>.</p>
+</div><h2>Member Function Documentation</h2>
+<a class="anchor" id="adee62d2689126a346e0c5e14c565c5fa"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -133,119 +148,41 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">limbo::geometry::point_compare_type::point_compare_type </td>
+          <td class="memname">virtual void GdfParser::Point::print </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>ss</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>constructor </p>
 
-<p>Definition at line <a class="el" href="a00302_source.html#l00057">57</a> of file <a class="el" href="a00302_source.html">Polygon2Rectangle.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5387ba4560652f9e86697bd0981bdbfc"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">limbo::geometry::point_compare_type::point_compare_type </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00176.html">orientation_2d</a> const &amp;&#160;</td>
-          <td class="paramname"><em>ori</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>constructor </p>
+<p>print data members </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ori</td><td>orientation </td></tr>
+    <tr><td class="paramname">ss</td><td>output stream </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00302_source.html#l00062">62</a> of file <a class="el" href="a00302_source.html">Polygon2Rectangle.h</a>.</p>
+<p>Reimplemented from <a class="el" href="a00137.html#aeb2483225aca5843a2285910c089bcb4">GdfParser::Item</a>.</p>
+
+<p>Definition at line <a class="el" href="a00324_source.html#l00147">147</a> of file <a class="el" href="a00324_source.html">GdfDataBase.h</a>.</p>
 
 </div>
 </div>
-<h2>Member Function Documentation</h2>
-<a class="anchor" id="a020ec75db5ec449b806876f52909017e"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename PointType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool limbo::geometry::point_compare_type::operator() </td>
-          <td>(</td>
-          <td class="paramtype">PointType const &amp;&#160;</td>
-          <td class="paramname"><em>p1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">PointType const &amp;&#160;</td>
-          <td class="paramname"><em>p2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>compare two points at specific orientation </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">PointType</td><td>point type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p1</td><td>a point </td></tr>
-    <tr><td class="paramname">p2</td><td>a point </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if (orient == HORIZONTAL and p1 is in the left lower of p2) or (orient == VERTICAL and p1 is in the lower left of p2) </dd></dl>
-
-<p>Definition at line <a class="el" href="a00302_source.html#l00072">72</a> of file <a class="el" href="a00302_source.html">Polygon2Rectangle.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/geometry/<a class="el" href="a00302_source.html">Polygon2Rectangle.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/gdf/bison/<a class="el" href="a00324_source.html">GdfDataBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

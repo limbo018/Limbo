@@ -88,24 +88,38 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00395.html">EbeamParser</a></li><li class="navelem"><a class="el" href="a00231.html">StringArray</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00397.html">DefParser</a></li><li class="navelem"><a class="el" href="a00059.html">DefDataBase</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">EbeamParser::StringArray Member List</div>  </div>
+<div class="title">DefParser::DefDataBase Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00231.html">EbeamParser::StringArray</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a00059.html">DefParser::DefDataBase</a>, including all inherited members.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0"class="even"><td class="entry"><b>base_type</b> typedef (defined in <a class="el" href="a00231.html">EbeamParser::StringArray</a>)</td><td class="entry"><a class="el" href="a00231.html">EbeamParser::StringArray</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00231.html#a3de0c7b38d013dbf22719f00c5b1a0f9">StringArray</a>(const allocator_type &amp;alloc=allocator_type())</td><td class="entry"><a class="el" href="a00231.html">EbeamParser::StringArray</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00231.html#af0c250b778382cdf13ab0b5f197a3cf3">StringArray</a>(size_type n, const value_type &amp;val, const allocator_type &amp;alloc=allocator_type())</td><td class="entry"><a class="el" href="a00231.html">EbeamParser::StringArray</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00059.html#a2fd5fcce5e975e308b701f59ebd383e9">add_def_component</a>(Component const &amp;)=0</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00059.html#ac49af9820a5be5edf5fb9c87bb823245">add_def_net</a>(Net const &amp;)=0</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00059.html#a608acb2d42aaafd980273e581529d534">add_def_pin</a>(Pin const &amp;)=0</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00059.html#a711078069a2364970947d218ae53f971">add_def_placement_blockage</a>(std::vector&lt; std::vector&lt; int &gt; &gt; const &amp;)</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00059.html#a39ad163257ff5470593866f7ca66d8da">add_def_row</a>(Row const &amp;)=0</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00059.html#a9e5379287c0217c1a4a849cc9db9f675">def_user_cbk_reminder</a>(const char *str) const </td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00059.html#a696b982b135dc1873717313fd4af3468">end_def_design</a>()</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00059.html#a56247adb6f2a6302410951a7cb453bde">resize_def_blockage</a>(int)</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00059.html#a34698d77bbdd4803940ac79d51f7bd39">resize_def_component</a>(int)=0</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00059.html#a55986c2bdf91ca9ce6405e4e3a25fc44">resize_def_net</a>(int)=0</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00059.html#ad1f57bfa4008e5762bb958f1f764b6ff">resize_def_pin</a>(int)=0</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00059.html#aad3c807a46dcf6c6fef763bbb0f385cc">set_def_busbitchars</a>(string const &amp;)=0</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00059.html#a81448243505b4dc57c502a47846c5447">set_def_design</a>(string const &amp;)=0</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00059.html#a46bcf1fab16e327bbe0e994f38d2d2c4">set_def_diearea</a>(int, int, int, int)=0</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00059.html#a092bfdedda7be61d5cf56e6d0e8aebbf">set_def_dividerchar</a>(string const &amp;)=0</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00059.html#a9961a95e6fa201d658a182bde059d093">set_def_unit</a>(int)=0</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00059.html#a44280fe6b609d9a4d28420a58e8b37f4">set_def_version</a>(string const &amp;)=0</td><td class="entry"><a class="el" href="a00059.html">DefParser::DefDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/tf/spirit/TfParser.h File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/tf/spirit/ErrorHandler.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,58 +91,38 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
-<div class="title">TfParser.h File Reference</div>  </div>
+<div class="title">ErrorHandler.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>tf parser for technology file  
+<p>error handler for Boost.Spirit parser  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
-<code>#include &lt;fstream&gt;</code><br/>
-<code>#include &lt;sstream&gt;</code><br/>
+<code>#include &lt;string&gt;</code><br/>
 <code>#include &lt;vector&gt;</code><br/>
-<code>#include &lt;cassert&gt;</code><br/>
-<code>#include &lt;boost/array.hpp&gt;</code><br/>
-<code>#include &lt;boost/cstdint.hpp&gt;</code><br/>
-<code>#include &lt;boost/algorithm/string.hpp&gt;</code><br/>
-<code>#include &lt;boost/spirit/include/qi.hpp&gt;</code><br/>
-<code>#include &lt;boost/spirit/include/qi_no_case.hpp&gt;</code><br/>
-<code>#include &lt;boost/spirit/include/phoenix.hpp&gt;</code><br/>
-<code>#include &lt;boost/spirit/include/phoenix_bind.hpp&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00337_source.html">limbo/parsers/tf/spirit/ErrorHandler.h</a>&gt;</code><br/>
 </div>
 <p><a href="a00338_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00242.html">TfParser</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tf parser for technology file.  <a href="a00242.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00240.html">TfParser::TfDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for tf database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00240.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00241.html">TfParser::TfGrammar&lt; Iterator, Skipper, DataBaseType &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">define grammar  <a href="a00241.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00227.html">TfParser::SkipperGrammar&lt; Iterator &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">grammar of skipper  <a href="a00227.html#details">More...</a><br/></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a269fc56367e1f9470e20bda8094861b6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a269fc56367e1f9470e20bda8094861b6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00338.html#a269fc56367e1f9470e20bda8094861b6">TF_NO_CASE</a>(X)&#160;&#160;&#160;X</td></tr>
-<tr class="memdesc:a269fc56367e1f9470e20bda8094861b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">an option to control case insensitivity <br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00078.html">ErrorHandler&lt; Iterator &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">error handler  <a href="a00078.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00219.html">ErrorHandler&lt; Iterator &gt;::result&lt; typename, typename, typename &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">probably used as some kind of type traits  <a href="a00219.html#details">More...</a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>tf parser for technology file </p>
+<div class="textblock"><p>error handler for Boost.Spirit parser </p>
+<p>Please refer to $BOOST_DIR/libs/spirit/example/qi/compiler_tutorial/mini_c/error_handler.hpp. Print line number and line content if error is met.</p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Sep 2014 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00338_source.html">TfParser.h</a>.</p>
+<p>Definition in file <a class="el" href="a00338_source.html">ErrorHandler.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

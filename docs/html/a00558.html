@@ -88,26 +88,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00401.html">limbo</a></li><li class="navelem"><a class="el" href="a00407.html">geometry</a></li><li class="navelem"><a class="el" href="a00217.html">rectangle_traits< Rectangle ></a></li>  </ul>
+<li class="navelem"><a class="el" href="a00404.html">limbo</a></li><li class="navelem"><a class="el" href="a00409.html">containers</a></li><li class="navelem"><a class="el" href="a00061.html">DisjointSet</a></li><li class="navelem"><a class="el" href="a00235.html">SubsetHelper</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">limbo::geometry::rectangle_traits&lt; Rectangle &gt; Member List</div>  </div>
+<div class="title">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt; Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00217.html">limbo::geometry::rectangle_traits&lt; Rectangle &gt;</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a00235.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00217.html#ac6091eaaa595bb0d3fcaa0ac751a0ae7">construct</a>(coordinate_type xl, coordinate_type yl, coordinate_type xh, coordinate_type yh)</td><td class="entry"><a class="el" href="a00217.html">limbo::geometry::rectangle_traits&lt; Rectangle &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00217.html#a55949771046924ddd6f0171a3204e8bd">coordinate_type</a> typedef</td><td class="entry"><a class="el" href="a00217.html">limbo::geometry::rectangle_traits&lt; Rectangle &gt;</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00217.html#a8d2453b966cdf9df4e83a8596d7bffa6">get</a>(const rectangle_type &amp;rect, direction_2d dir)</td><td class="entry"><a class="el" href="a00217.html">limbo::geometry::rectangle_traits&lt; Rectangle &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00217.html#ac002027bfc874ae15591db62c7075a90">rectangle_type</a> typedef</td><td class="entry"><a class="el" href="a00217.html">limbo::geometry::rectangle_traits&lt; Rectangle &gt;</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00217.html#ac1d3c33158ce57f61a2bc5799b61fb34">set</a>(rectangle_type &amp;rect, direction_2d dir, coordinate_type value)</td><td class="entry"><a class="el" href="a00217.html">limbo::geometry::rectangle_traits&lt; Rectangle &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
+  <tr bgcolor="#f0f0f0"class="even"><td class="entry"><b>element_type</b> typedef (defined in <a class="el" href="a00235.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a>)</td><td class="entry"><a class="el" href="a00235.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00235.html#aee2beb7bc9bfe384c1714e87ce14687d">get_parent</a>(element_type const &amp;e) const </td><td class="entry"><a class="el" href="a00235.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00235.html#a923b68b560c9bea9409a3929a52d27c8">get_rank</a>(element_type const &amp;e) const </td><td class="entry"><a class="el" href="a00235.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>rank_type</b> typedef (defined in <a class="el" href="a00235.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a>)</td><td class="entry"><a class="el" href="a00235.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00235.html#a3df275969d8b812d70b391fa66a3059f">set_parent</a>(element_type const &amp;e, element_type const &amp;p)</td><td class="entry"><a class="el" href="a00235.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00235.html#a8e549391a1682384ab77d29f022c2174">set_rank</a>(element_type const &amp;e, rank_type const &amp;r)</td><td class="entry"><a class="el" href="a00235.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00235.html#a003ca33fbc1a9ca30b93ba5518c932ca">size</a>() const </td><td class="entry"><a class="el" href="a00235.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00235.html#aa5bf23bffae8612759996738f0c113aa">SubsetHelper</a>(std::vector&lt; element_type &gt; &amp;vp, std::vector&lt; rank_type &gt; &amp;vr)</td><td class="entry"><a class="el" href="a00235.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00235.html#a72c162dc3efb94cc881f2c6f8cec52b2">vParent</a></td><td class="entry"><a class="el" href="a00235.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00235.html#a489f762dac788e6c7de885d0aabeeedc">vRank</a></td><td class="entry"><a class="el" href="a00235.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

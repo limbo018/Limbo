@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: boost::geometry::traits::point_type&lt; GdsParser::GdsDB::GdsPolygon &gt; Struct Template Reference</title>
+<title>Limbo: limbo::geometry::point_traits&lt; Point &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,43 +88,200 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00390.html">boost</a></li><li class="navelem"><b>geometry</b></li><li class="navelem"><b>traits</b></li><li class="navelem"><a class="el" href="a00201.html">point_type< GdsParser::GdsDB::GdsPolygon ></a></li>  </ul>
+<li class="navelem"><a class="el" href="a00404.html">limbo</a></li><li class="navelem"><a class="el" href="a00410.html">geometry</a></li><li class="navelem"><a class="el" href="a00201.html">point_traits< Point ></a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="a00447.html">List of all members</a>  </div>
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="a00560.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">boost::geometry::traits::point_type&lt; GdsParser::GdsDB::GdsPolygon &gt; Struct Template Reference</div>  </div>
+<div class="title">limbo::geometry::point_traits&lt; Point &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>specialization for point_type  
+<p>if your point class setting is different from that in the default <a class="el" href="a00198.html" title="type traits for point">point_traits</a>, please create a specialization  
  <a href="a00201.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="a00328_source.html">GdsObjects.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a21c9e97dd57bc5efc16b8a481b401043"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a21c9e97dd57bc5efc16b8a481b401043"></a>
-typedef <br class="typebreak"/>
-GdsParser::GdsDB::GdsObject::point_type&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
+<tr class="memitem:a513d772f9da68181ea93486e2cbe4152"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a513d772f9da68181ea93486e2cbe4152"></a>
+typedef <a class="el" href="a00195.html">Point</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#a513d772f9da68181ea93486e2cbe4152">point_type</a></td></tr>
+<tr class="memdesc:a513d772f9da68181ea93486e2cbe4152"><td class="mdescLeft">&#160;</td><td class="mdescRight">point type <br/></td></tr>
+<tr class="memitem:ae8a2f29975abc3a1d83e1fb3326411e5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8a2f29975abc3a1d83e1fb3326411e5"></a>
+typedef int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#ae8a2f29975abc3a1d83e1fb3326411e5">coordinate_type</a></td></tr>
+<tr class="memdesc:ae8a2f29975abc3a1d83e1fb3326411e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">coordinate type <br/></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ab70d5bd8213c2dc5c123dfce171b6ffc"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00201.html#ae8a2f29975abc3a1d83e1fb3326411e5">coordinate_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#ab70d5bd8213c2dc5c123dfce171b6ffc">get</a> (const <a class="el" href="a00201.html#a513d772f9da68181ea93486e2cbe4152">point_type</a> &amp;point, <a class="el" href="a00177.html">orientation_2d</a> orient)</td></tr>
+<tr class="memdesc:ab70d5bd8213c2dc5c123dfce171b6ffc"><td class="mdescLeft">&#160;</td><td class="mdescRight">access coordinates  <a href="#ab70d5bd8213c2dc5c123dfce171b6ffc"></a><br/></td></tr>
+<tr class="memitem:afea8a993e3263f570d98659f36db691b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#afea8a993e3263f570d98659f36db691b">set</a> (<a class="el" href="a00201.html#a513d772f9da68181ea93486e2cbe4152">point_type</a> &amp;point, <a class="el" href="a00177.html">orientation_2d</a> orient, <a class="el" href="a00201.html#ae8a2f29975abc3a1d83e1fb3326411e5">coordinate_type</a> value)</td></tr>
+<tr class="memdesc:afea8a993e3263f570d98659f36db691b"><td class="mdescLeft">&#160;</td><td class="mdescRight">set coordinates  <a href="#afea8a993e3263f570d98659f36db691b"></a><br/></td></tr>
+<tr class="memitem:adbfd46075952843831128fb870a1844b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00201.html#a513d772f9da68181ea93486e2cbe4152">point_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#adbfd46075952843831128fb870a1844b">construct</a> (<a class="el" href="a00201.html#ae8a2f29975abc3a1d83e1fb3326411e5">coordinate_type</a> x, <a class="el" href="a00201.html#ae8a2f29975abc3a1d83e1fb3326411e5">coordinate_type</a> y)</td></tr>
+<tr class="memdesc:adbfd46075952843831128fb870a1844b"><td class="mdescLeft">&#160;</td><td class="mdescRight">construct a point object  <a href="#adbfd46075952843831128fb870a1844b"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;&gt;<br/>
-struct boost::geometry::traits::point_type&lt; GdsParser::GdsDB::GdsPolygon &gt;</h3>
+struct limbo::geometry::point_traits&lt; Point &gt;</h3>
 
-<p>specialization for point_type </p>
+<p>if your point class setting is different from that in the default <a class="el" href="a00198.html" title="type traits for point">point_traits</a>, please create a specialization </p>
+<p>The specialization should be in the same scope as the original template struct </p>
 
-<p>Definition at line <a class="el" href="a00328_source.html#l00754">754</a> of file <a class="el" href="a00328_source.html">GdsObjects.h</a>.</p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/<a class="el" href="a00328_source.html">GdsObjects.h</a></li>
+<p>Definition at line <a class="el" href="a00368_source.html#l00060">60</a> of file <a class="el" href="a00368_source.html">test_p2r.cpp</a>.</p>
+</div><h2>Member Function Documentation</h2>
+<a class="anchor" id="adbfd46075952843831128fb870a1844b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="a00201.html#a513d772f9da68181ea93486e2cbe4152">point_type</a> <a class="el" href="a00198.html">limbo::geometry::point_traits</a>&lt; <a class="el" href="a00195.html">Point</a> &gt;::construct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00201.html#ae8a2f29975abc3a1d83e1fb3326411e5">coordinate_type</a>&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00201.html#ae8a2f29975abc3a1d83e1fb3326411e5">coordinate_type</a>&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>construct a point object </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>x coordinate </td></tr>
+    <tr><td class="paramname">y</td><td>y coordinate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the point object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00368_source.html#l00097">97</a> of file <a class="el" href="a00368_source.html">test_p2r.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab70d5bd8213c2dc5c123dfce171b6ffc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="a00201.html#ae8a2f29975abc3a1d83e1fb3326411e5">coordinate_type</a> <a class="el" href="a00198.html">limbo::geometry::point_traits</a>&lt; <a class="el" href="a00195.html">Point</a> &gt;::get </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a00201.html#a513d772f9da68181ea93486e2cbe4152">point_type</a> &amp;&#160;</td>
+          <td class="paramname"><em>point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00177.html">orientation_2d</a>&#160;</td>
+          <td class="paramname"><em>orient</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access coordinates </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>a data point </td></tr>
+    <tr><td class="paramname">orient</td><td>orientation can be HORIZONTAL(x) or VERTICAL(y) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>x or y coordinate </dd></dl>
+
+<p>Definition at line <a class="el" href="a00368_source.html#l00073">73</a> of file <a class="el" href="a00368_source.html">test_p2r.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afea8a993e3263f570d98659f36db691b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="a00198.html">limbo::geometry::point_traits</a>&lt; <a class="el" href="a00195.html">Point</a> &gt;::set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00201.html#a513d772f9da68181ea93486e2cbe4152">point_type</a> &amp;&#160;</td>
+          <td class="paramname"><em>point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00177.html">orientation_2d</a>&#160;</td>
+          <td class="paramname"><em>orient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00201.html#ae8a2f29975abc3a1d83e1fb3326411e5">coordinate_type</a>&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>set coordinates </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>a data point </td></tr>
+    <tr><td class="paramname">orient</td><td>orientation can be HORIZONTAL(x) or VERTICAL(y) </td></tr>
+    <tr><td class="paramname">value</td><td>data value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00368_source.html#l00085">85</a> of file <a class="el" href="a00368_source.html">test_p2r.cpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/home/local/eda03/yibolin/documents/Projects/Limbo/test/geometry/<a class="el" href="a00368_source.html">test_p2r.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

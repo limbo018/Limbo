@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: limbo::programoptions::ValueBase Class Reference</title>
+<title>Limbo: limbo::programoptions::Value&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,121 +88,184 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00401.html">limbo</a></li><li class="navelem"><a class="el" href="a00408.html">programoptions</a></li><li class="navelem"><a class="el" href="a00245.html">ValueBase</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00404.html">limbo</a></li><li class="navelem"><a class="el" href="a00411.html">programoptions</a></li><li class="navelem"><a class="el" href="a00245.html">Value</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="a00597.html">List of all members</a>  </div>
+<a href="a00601.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::programoptions::ValueBase Class Reference</div>  </div>
+<div class="title">limbo::programoptions::Value&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>abstract type of data value which defines various virtual functions  
+<p>a generic class for various data values  
  <a href="a00245.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00345_source.html">ProgramOptions.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00346_source.html">ProgramOptions.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for limbo::programoptions::ValueBase:</div>
+Inheritance diagram for limbo::programoptions::Value&lt; T &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="a00245.png" usemap="#limbo::programoptions::ValueBase_map" alt=""/>
-  <map id="limbo::programoptions::ValueBase_map" name="limbo::programoptions::ValueBase_map">
-<area href="a00244.html" title="a generic class for various data values" alt="limbo::programoptions::Value&lt; T &gt;" shape="rect" coords="0,56,204,80"/>
+  <img src="a00245.png" usemap="#limbo::programoptions::Value&lt; T &gt;_map" alt=""/>
+  <map id="limbo::programoptions::Value&lt; T &gt;_map" name="limbo::programoptions::Value&lt; T &gt;_map">
+<area href="a00246.html" title="abstract type of data value which defines various virtual functions" alt="limbo::programoptions::ValueBase" shape="rect" coords="0,0,204,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a8237ab578187521aa053f918c4399aad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8237ab578187521aa053f918c4399aad"></a>
+typedef T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a8237ab578187521aa053f918c4399aad">value_type</a></td></tr>
+<tr class="memdesc:a8237ab578187521aa053f918c4399aad"><td class="mdescLeft">&#160;</td><td class="mdescRight">data type <br/></td></tr>
+<tr class="memitem:a53ded3b4e7075835e33ab25499dd757f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a53ded3b4e7075835e33ab25499dd757f"></a>
+typedef <a class="el" href="a00246.html">ValueBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a53ded3b4e7075835e33ab25499dd757f">base_type</a></td></tr>
+<tr class="memdesc:a53ded3b4e7075835e33ab25499dd757f"><td class="mdescLeft">&#160;</td><td class="mdescRight">base type <br/></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a292f4808fc4fba23476ecb6eab87b4be"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a292f4808fc4fba23476ecb6eab87b4be">ValueBase</a> (std::string const &amp;cat, std::string const &amp;m)</td></tr>
-<tr class="memdesc:a292f4808fc4fba23476ecb6eab87b4be"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a292f4808fc4fba23476ecb6eab87b4be"></a><br/></td></tr>
-<tr class="memitem:a501091aa63a2a0171a769de3ef4c5365"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a501091aa63a2a0171a769de3ef4c5365">ValueBase</a> (<a class="el" href="a00245.html">ValueBase</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:a501091aa63a2a0171a769de3ef4c5365"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#a501091aa63a2a0171a769de3ef4c5365"></a><br/></td></tr>
-<tr class="memitem:a970de27954c4723c674040dbdd9f724a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00245.html">ValueBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a970de27954c4723c674040dbdd9f724a">operator=</a> (<a class="el" href="a00245.html">ValueBase</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:a970de27954c4723c674040dbdd9f724a"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment  <a href="#a970de27954c4723c674040dbdd9f724a"></a><br/></td></tr>
-<tr class="memitem:afa8d0e6995bd1d10d66605dfbb921d26"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa8d0e6995bd1d10d66605dfbb921d26"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#afa8d0e6995bd1d10d66605dfbb921d26">~ValueBase</a> ()</td></tr>
-<tr class="memdesc:afa8d0e6995bd1d10d66605dfbb921d26"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br/></td></tr>
-<tr class="memitem:aaec57667d4e49387a2914aee68acfcb1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#aaec57667d4e49387a2914aee68acfcb1">parse</a> (const char *)=0</td></tr>
-<tr class="memdesc:aaec57667d4e49387a2914aee68acfcb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">parse command  <a href="#aaec57667d4e49387a2914aee68acfcb1"></a><br/></td></tr>
-<tr class="memitem:a7c4c5f84ac35e5bfd80ab86738f1f14d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a7c4c5f84ac35e5bfd80ab86738f1f14d">print</a> (std::ostream &amp;os) const =0</td></tr>
-<tr class="memdesc:a7c4c5f84ac35e5bfd80ab86738f1f14d"><td class="mdescLeft">&#160;</td><td class="mdescRight">print target value  <a href="#a7c4c5f84ac35e5bfd80ab86738f1f14d"></a><br/></td></tr>
-<tr class="memitem:a32f39dd054077faa9e0c765227b0f7be"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a32f39dd054077faa9e0c765227b0f7be">print_default</a> (std::ostream &amp;os) const =0</td></tr>
-<tr class="memdesc:a32f39dd054077faa9e0c765227b0f7be"><td class="mdescLeft">&#160;</td><td class="mdescRight">print default value  <a href="#a32f39dd054077faa9e0c765227b0f7be"></a><br/></td></tr>
-<tr class="memitem:a26d0880d2b14560cd5b503c882d68be7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a26d0880d2b14560cd5b503c882d68be7"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a26d0880d2b14560cd5b503c882d68be7">apply_default</a> ()=0</td></tr>
-<tr class="memdesc:a26d0880d2b14560cd5b503c882d68be7"><td class="mdescLeft">&#160;</td><td class="mdescRight">apply default value <br/></td></tr>
-<tr class="memitem:af084d3f6f8b5f186f24daed5bb50ec85"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af084d3f6f8b5f186f24daed5bb50ec85"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#af084d3f6f8b5f186f24daed5bb50ec85">apply_toggle</a> ()=0</td></tr>
-<tr class="memdesc:af084d3f6f8b5f186f24daed5bb50ec85"><td class="mdescLeft">&#160;</td><td class="mdescRight">apply toggle value <br/></td></tr>
-<tr class="memitem:a87efed127ecb415905c8eadd4fbff1bf"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a87efed127ecb415905c8eadd4fbff1bf">valid_target</a> () const =0</td></tr>
-<tr class="memdesc:a87efed127ecb415905c8eadd4fbff1bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether target value is valid  <a href="#a87efed127ecb415905c8eadd4fbff1bf"></a><br/></td></tr>
-<tr class="memitem:aa6bd9720ee03a1bf8bd34b1cd8e23942"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#aa6bd9720ee03a1bf8bd34b1cd8e23942">valid_default</a> () const =0</td></tr>
-<tr class="memdesc:aa6bd9720ee03a1bf8bd34b1cd8e23942"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether default value is valid  <a href="#aa6bd9720ee03a1bf8bd34b1cd8e23942"></a><br/></td></tr>
-<tr class="memitem:a10a6efa811a5d21f980b0ea892df8e58"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a10a6efa811a5d21f980b0ea892df8e58">valid_toggle</a> () const =0</td></tr>
-<tr class="memdesc:a10a6efa811a5d21f980b0ea892df8e58"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether toggle value is valid  <a href="#a10a6efa811a5d21f980b0ea892df8e58"></a><br/></td></tr>
-<tr class="memitem:abf013845c026cd200a0f33714f789dba"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#abf013845c026cd200a0f33714f789dba">count_default_chars</a> () const =0</td></tr>
-<tr class="memdesc:abf013845c026cd200a0f33714f789dba"><td class="mdescLeft">&#160;</td><td class="mdescRight">count the length of default value string  <a href="#abf013845c026cd200a0f33714f789dba"></a><br/></td></tr>
-<tr class="memitem:a22782304b2faaa033284fa7de688d7ce"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a22782304b2faaa033284fa7de688d7ce">help_on</a> () const =0</td></tr>
-<tr class="memdesc:a22782304b2faaa033284fa7de688d7ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether help message is turned on  <a href="#a22782304b2faaa033284fa7de688d7ce"></a><br/></td></tr>
-<tr class="memitem:a7d5d9c699788779b516ba547f1f8936b"><td class="memItemLeft" align="right" valign="top">std::string const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a7d5d9c699788779b516ba547f1f8936b">category</a> () const </td></tr>
-<tr class="memitem:a84ab098ac1f15fce4bcead9b46113069"><td class="memItemLeft" align="right" valign="top">std::string const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a84ab098ac1f15fce4bcead9b46113069">msg</a> () const </td></tr>
-<tr class="memitem:ae78a103b5b324205abf9879667c644ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#ae78a103b5b324205abf9879667c644ec">help</a> () const </td></tr>
-<tr class="memitem:ad3a1e17a05a19bdc4fd10b68d10dc76e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#ad3a1e17a05a19bdc4fd10b68d10dc76e">required</a> () const </td></tr>
-<tr class="memitem:a925ecbd6f803b87e7aa6db7330ae5971"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a925ecbd6f803b87e7aa6db7330ae5971">valid</a> () const </td></tr>
-<tr class="memitem:a690203e23f1e0c0d4f2196f8f90fc6a2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a690203e23f1e0c0d4f2196f8f90fc6a2">toggle</a> () const </td></tr>
-<tr class="memitem:a0d7da2f76293ee875a4693caec418c36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a0d7da2f76293ee875a4693caec418c36">print_category</a> (std::ostream &amp;os) const </td></tr>
-<tr class="memdesc:a0d7da2f76293ee875a4693caec418c36"><td class="mdescLeft">&#160;</td><td class="mdescRight">print category  <a href="#a0d7da2f76293ee875a4693caec418c36"></a><br/></td></tr>
-<tr class="memitem:a4cf1b85ca09e88d750b5aa119a79e409"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a4cf1b85ca09e88d750b5aa119a79e409">print_msg</a> (std::ostream &amp;os) const </td></tr>
-<tr class="memdesc:a4cf1b85ca09e88d750b5aa119a79e409"><td class="mdescLeft">&#160;</td><td class="mdescRight">print message  <a href="#a4cf1b85ca09e88d750b5aa119a79e409"></a><br/></td></tr>
+<tr class="memitem:a47d3586030f03ca4dbf1701c8b208e12"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a47d3586030f03ca4dbf1701c8b208e12">Value</a> (std::string const &amp;cat, <a class="el" href="a00245.html#a8237ab578187521aa053f918c4399aad">value_type</a> *target, std::string const &amp;m)</td></tr>
+<tr class="memdesc:a47d3586030f03ca4dbf1701c8b208e12"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a47d3586030f03ca4dbf1701c8b208e12"></a><br/></td></tr>
+<tr class="memitem:a61c55427a99781f72330db9684805567"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a61c55427a99781f72330db9684805567">Value</a> (<a class="el" href="a00245.html">Value</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:a61c55427a99781f72330db9684805567"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#a61c55427a99781f72330db9684805567"></a><br/></td></tr>
+<tr class="memitem:a0505078742ab714e7026dfc8e7e8afa2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00245.html">Value</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a0505078742ab714e7026dfc8e7e8afa2">operator=</a> (<a class="el" href="a00245.html">Value</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:a0505078742ab714e7026dfc8e7e8afa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment  <a href="#a0505078742ab714e7026dfc8e7e8afa2"></a><br/></td></tr>
+<tr class="memitem:a011f06a6daea9ce7597ce7fd75315e58"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a011f06a6daea9ce7597ce7fd75315e58"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a011f06a6daea9ce7597ce7fd75315e58">~Value</a> ()</td></tr>
+<tr class="memdesc:a011f06a6daea9ce7597ce7fd75315e58"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br/></td></tr>
+<tr class="memitem:ad3af55151550cf5c14f4e6127def34dc"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#ad3af55151550cf5c14f4e6127def34dc">parse</a> (const char *v)</td></tr>
+<tr class="memdesc:ad3af55151550cf5c14f4e6127def34dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">parse data from string  <a href="#ad3af55151550cf5c14f4e6127def34dc"></a><br/></td></tr>
+<tr class="memitem:aa8129faac655d45e96a69dc50c2bcbd9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#aa8129faac655d45e96a69dc50c2bcbd9">print</a> (std::ostream &amp;os) const </td></tr>
+<tr class="memdesc:aa8129faac655d45e96a69dc50c2bcbd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">print target value  <a href="#aa8129faac655d45e96a69dc50c2bcbd9"></a><br/></td></tr>
+<tr class="memitem:a20c4c12f613251db38b2abc299578794"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a20c4c12f613251db38b2abc299578794">print_default</a> (std::ostream &amp;os) const </td></tr>
+<tr class="memdesc:a20c4c12f613251db38b2abc299578794"><td class="mdescLeft">&#160;</td><td class="mdescRight">print default value  <a href="#a20c4c12f613251db38b2abc299578794"></a><br/></td></tr>
+<tr class="memitem:ab0d5db410d645a25875476e347aeba80"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab0d5db410d645a25875476e347aeba80"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#ab0d5db410d645a25875476e347aeba80">apply_default</a> ()</td></tr>
+<tr class="memdesc:ab0d5db410d645a25875476e347aeba80"><td class="mdescLeft">&#160;</td><td class="mdescRight">apply default value <br/></td></tr>
+<tr class="memitem:a05ad7b30c69145d6bf01448712cad50e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05ad7b30c69145d6bf01448712cad50e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a05ad7b30c69145d6bf01448712cad50e">apply_toggle</a> ()</td></tr>
+<tr class="memdesc:a05ad7b30c69145d6bf01448712cad50e"><td class="mdescLeft">&#160;</td><td class="mdescRight">apply toggle value <br/></td></tr>
+<tr class="memitem:a41db142b0a1c8ad707fbb46922e5fd86"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a41db142b0a1c8ad707fbb46922e5fd86">valid_target</a> () const </td></tr>
+<tr class="memdesc:a41db142b0a1c8ad707fbb46922e5fd86"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether target value is valid  <a href="#a41db142b0a1c8ad707fbb46922e5fd86"></a><br/></td></tr>
+<tr class="memitem:a069cba8e01670790356f6591507bc4ed"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a069cba8e01670790356f6591507bc4ed">valid_default</a> () const </td></tr>
+<tr class="memdesc:a069cba8e01670790356f6591507bc4ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether default value is valid  <a href="#a069cba8e01670790356f6591507bc4ed"></a><br/></td></tr>
+<tr class="memitem:ace23c4eeece9b3ad2e6a30cf7b77f745"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#ace23c4eeece9b3ad2e6a30cf7b77f745">valid_toggle</a> () const </td></tr>
+<tr class="memdesc:ace23c4eeece9b3ad2e6a30cf7b77f745"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether toggle value is valid  <a href="#ace23c4eeece9b3ad2e6a30cf7b77f745"></a><br/></td></tr>
+<tr class="memitem:a67ee81b6de948588c29bdf9b250c0333"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a67ee81b6de948588c29bdf9b250c0333">count_default_chars</a> () const </td></tr>
+<tr class="memdesc:a67ee81b6de948588c29bdf9b250c0333"><td class="mdescLeft">&#160;</td><td class="mdescRight">count the length of default value string  <a href="#a67ee81b6de948588c29bdf9b250c0333"></a><br/></td></tr>
+<tr class="memitem:af260c65b1ebcc6bbcd92680a205242be"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#af260c65b1ebcc6bbcd92680a205242be">help_on</a> () const </td></tr>
+<tr class="memdesc:af260c65b1ebcc6bbcd92680a205242be"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether help message is turned on  <a href="#af260c65b1ebcc6bbcd92680a205242be"></a><br/></td></tr>
+<tr class="memitem:a1c2fbf163fdbb99d2d05120da5e64d2d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="a00245.html">Value</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a1c2fbf163fdbb99d2d05120da5e64d2d">default_value</a> (<a class="el" href="a00245.html#a8237ab578187521aa053f918c4399aad">value_type</a> const &amp;v, std::string const &amp;d=&quot;&quot;)</td></tr>
+<tr class="memdesc:a1c2fbf163fdbb99d2d05120da5e64d2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">set default value  <a href="#a1c2fbf163fdbb99d2d05120da5e64d2d"></a><br/></td></tr>
+<tr class="memitem:aeff448d678e73dd464d6a5c57c451142"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="a00245.html">Value</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#aeff448d678e73dd464d6a5c57c451142">toggle_value</a> (<a class="el" href="a00245.html#a8237ab578187521aa053f918c4399aad">value_type</a> const &amp;v)</td></tr>
+<tr class="memdesc:aeff448d678e73dd464d6a5c57c451142"><td class="mdescLeft">&#160;</td><td class="mdescRight">set toggle value  <a href="#aeff448d678e73dd464d6a5c57c451142"></a><br/></td></tr>
+<tr class="memitem:ad2b14032542ee0d6527533d773bd6043"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="a00245.html">Value</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#ad2b14032542ee0d6527533d773bd6043">help</a> (bool h)</td></tr>
+<tr class="memdesc:ad2b14032542ee0d6527533d773bd6043"><td class="mdescLeft">&#160;</td><td class="mdescRight">set help flag  <a href="#ad2b14032542ee0d6527533d773bd6043"></a><br/></td></tr>
+<tr class="memitem:ac5460c74eb0a846a4a8526eae326cbca"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="a00245.html">Value</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#ac5460c74eb0a846a4a8526eae326cbca">required</a> (bool r)</td></tr>
+<tr class="memdesc:ac5460c74eb0a846a4a8526eae326cbca"><td class="mdescLeft">&#160;</td><td class="mdescRight">set required flag  <a href="#ac5460c74eb0a846a4a8526eae326cbca"></a><br/></td></tr>
+<tr class="memitem:a053b0cd3546bb85a7fdf473153e27bf1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="a00245.html">Value</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a053b0cd3546bb85a7fdf473153e27bf1">toggle</a> (bool t)</td></tr>
+<tr class="memdesc:a053b0cd3546bb85a7fdf473153e27bf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">set toggle flag  <a href="#a053b0cd3546bb85a7fdf473153e27bf1"></a><br/></td></tr>
+<tr class="inherit_header pub_methods_a00246"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00246')"><img src="closed.png" alt="-"/>&nbsp;Public Member Functions inherited from <a class="el" href="a00246.html">limbo::programoptions::ValueBase</a></td></tr>
+<tr class="memitem:a292f4808fc4fba23476ecb6eab87b4be inherit pub_methods_a00246"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a292f4808fc4fba23476ecb6eab87b4be">ValueBase</a> (std::string const &amp;cat, std::string const &amp;m)</td></tr>
+<tr class="memdesc:a292f4808fc4fba23476ecb6eab87b4be inherit pub_methods_a00246"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a292f4808fc4fba23476ecb6eab87b4be"></a><br/></td></tr>
+<tr class="memitem:a501091aa63a2a0171a769de3ef4c5365 inherit pub_methods_a00246"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a501091aa63a2a0171a769de3ef4c5365">ValueBase</a> (<a class="el" href="a00246.html">ValueBase</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:a501091aa63a2a0171a769de3ef4c5365 inherit pub_methods_a00246"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#a501091aa63a2a0171a769de3ef4c5365"></a><br/></td></tr>
+<tr class="memitem:a970de27954c4723c674040dbdd9f724a inherit pub_methods_a00246"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00246.html">ValueBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a970de27954c4723c674040dbdd9f724a">operator=</a> (<a class="el" href="a00246.html">ValueBase</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:a970de27954c4723c674040dbdd9f724a inherit pub_methods_a00246"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment  <a href="#a970de27954c4723c674040dbdd9f724a"></a><br/></td></tr>
+<tr class="memitem:afa8d0e6995bd1d10d66605dfbb921d26 inherit pub_methods_a00246"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa8d0e6995bd1d10d66605dfbb921d26"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#afa8d0e6995bd1d10d66605dfbb921d26">~ValueBase</a> ()</td></tr>
+<tr class="memdesc:afa8d0e6995bd1d10d66605dfbb921d26 inherit pub_methods_a00246"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br/></td></tr>
+<tr class="memitem:a7d5d9c699788779b516ba547f1f8936b inherit pub_methods_a00246"><td class="memItemLeft" align="right" valign="top">std::string const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a7d5d9c699788779b516ba547f1f8936b">category</a> () const </td></tr>
+<tr class="memitem:a84ab098ac1f15fce4bcead9b46113069 inherit pub_methods_a00246"><td class="memItemLeft" align="right" valign="top">std::string const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a84ab098ac1f15fce4bcead9b46113069">msg</a> () const </td></tr>
+<tr class="memitem:ae78a103b5b324205abf9879667c644ec inherit pub_methods_a00246"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#ae78a103b5b324205abf9879667c644ec">help</a> () const </td></tr>
+<tr class="memitem:ad3a1e17a05a19bdc4fd10b68d10dc76e inherit pub_methods_a00246"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#ad3a1e17a05a19bdc4fd10b68d10dc76e">required</a> () const </td></tr>
+<tr class="memitem:a925ecbd6f803b87e7aa6db7330ae5971 inherit pub_methods_a00246"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a925ecbd6f803b87e7aa6db7330ae5971">valid</a> () const </td></tr>
+<tr class="memitem:a690203e23f1e0c0d4f2196f8f90fc6a2 inherit pub_methods_a00246"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a690203e23f1e0c0d4f2196f8f90fc6a2">toggle</a> () const </td></tr>
+<tr class="memitem:a0d7da2f76293ee875a4693caec418c36 inherit pub_methods_a00246"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a0d7da2f76293ee875a4693caec418c36">print_category</a> (std::ostream &amp;os) const </td></tr>
+<tr class="memdesc:a0d7da2f76293ee875a4693caec418c36 inherit pub_methods_a00246"><td class="mdescLeft">&#160;</td><td class="mdescRight">print category  <a href="#a0d7da2f76293ee875a4693caec418c36"></a><br/></td></tr>
+<tr class="memitem:a4cf1b85ca09e88d750b5aa119a79e409 inherit pub_methods_a00246"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a4cf1b85ca09e88d750b5aa119a79e409">print_msg</a> (std::ostream &amp;os) const </td></tr>
+<tr class="memdesc:a4cf1b85ca09e88d750b5aa119a79e409 inherit pub_methods_a00246"><td class="mdescLeft">&#160;</td><td class="mdescRight">print message  <a href="#a4cf1b85ca09e88d750b5aa119a79e409"></a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a76e7c0d9cabe0d41710d4e4d0e192d14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a76e7c0d9cabe0d41710d4e4d0e192d14">copy</a> (<a class="el" href="a00245.html">ValueBase</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:a76e7c0d9cabe0d41710d4e4d0e192d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy another object  <a href="#a76e7c0d9cabe0d41710d4e4d0e192d14"></a><br/></td></tr>
+<tr class="memitem:acce8305a3a03119502c010547121615a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#acce8305a3a03119502c010547121615a">copy</a> (<a class="el" href="a00245.html">Value</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:acce8305a3a03119502c010547121615a"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy another object  <a href="#acce8305a3a03119502c010547121615a"></a><br/></td></tr>
+<tr class="inherit_header pro_methods_a00246"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_a00246')"><img src="closed.png" alt="-"/>&nbsp;Protected Member Functions inherited from <a class="el" href="a00246.html">limbo::programoptions::ValueBase</a></td></tr>
+<tr class="memitem:a76e7c0d9cabe0d41710d4e4d0e192d14 inherit pro_methods_a00246"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a76e7c0d9cabe0d41710d4e4d0e192d14">copy</a> (<a class="el" href="a00246.html">ValueBase</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:a76e7c0d9cabe0d41710d4e4d0e192d14 inherit pro_methods_a00246"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy another object  <a href="#a76e7c0d9cabe0d41710d4e4d0e192d14"></a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a4b2499ba1e138d7bad2e49f22b9283b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4b2499ba1e138d7bad2e49f22b9283b8"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a4b2499ba1e138d7bad2e49f22b9283b8">m_category</a></td></tr>
-<tr class="memdesc:a4b2499ba1e138d7bad2e49f22b9283b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">category <br/></td></tr>
-<tr class="memitem:a672ce468253721826363a73b6d02df1c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a672ce468253721826363a73b6d02df1c"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a672ce468253721826363a73b6d02df1c">m_msg</a></td></tr>
-<tr class="memdesc:a672ce468253721826363a73b6d02df1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper message <br/></td></tr>
-<tr class="memitem:a3612714854094507095a7ffd8dac450d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3612714854094507095a7ffd8dac450d"></a>
-unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a3612714854094507095a7ffd8dac450d">m_help</a>: 1</td></tr>
-<tr class="memdesc:a3612714854094507095a7ffd8dac450d"><td class="mdescLeft">&#160;</td><td class="mdescRight">whether is help option <br/></td></tr>
-<tr class="memitem:a0af0c808b782d305ccc37b84d024ad22"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0af0c808b782d305ccc37b84d024ad22"></a>
-unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a0af0c808b782d305ccc37b84d024ad22">m_required</a>: 1</td></tr>
-<tr class="memdesc:a0af0c808b782d305ccc37b84d024ad22"><td class="mdescLeft">&#160;</td><td class="mdescRight">whether the value is a required option <br/></td></tr>
-<tr class="memitem:ae4fa0be5f37c46de3a99e32c4586af86"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae4fa0be5f37c46de3a99e32c4586af86"></a>
-unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#ae4fa0be5f37c46de3a99e32c4586af86">m_valid</a>: 1</td></tr>
-<tr class="memdesc:ae4fa0be5f37c46de3a99e32c4586af86"><td class="mdescLeft">&#160;</td><td class="mdescRight">true if target is set, not default <br/></td></tr>
-<tr class="memitem:a88200a73a7a18141f70ad6010a8cbc8d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a88200a73a7a18141f70ad6010a8cbc8d"></a>
-unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a88200a73a7a18141f70ad6010a8cbc8d">m_toggle</a>: 1</td></tr>
-<tr class="memdesc:a88200a73a7a18141f70ad6010a8cbc8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">true if this option is a toggle value <br/></td></tr>
+<tr class="memitem:ab1dadf136a317802f99c52294b917282"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1dadf136a317802f99c52294b917282"></a>
+<a class="el" href="a00245.html#a8237ab578187521aa053f918c4399aad">value_type</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#ab1dadf136a317802f99c52294b917282">m_target</a></td></tr>
+<tr class="memdesc:ab1dadf136a317802f99c52294b917282"><td class="mdescLeft">&#160;</td><td class="mdescRight">NULL for help. <br/></td></tr>
+<tr class="memitem:a3563f4c813be0c1389ca2976a1e6f849"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3563f4c813be0c1389ca2976a1e6f849"></a>
+<a class="el" href="a00245.html#a8237ab578187521aa053f918c4399aad">value_type</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a3563f4c813be0c1389ca2976a1e6f849">m_default_value</a></td></tr>
+<tr class="memdesc:a3563f4c813be0c1389ca2976a1e6f849"><td class="mdescLeft">&#160;</td><td class="mdescRight">default value <br/></td></tr>
+<tr class="memitem:aff11537ee068ce7491927b58b2c9c7b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aff11537ee068ce7491927b58b2c9c7b3"></a>
+<a class="el" href="a00245.html#a8237ab578187521aa053f918c4399aad">value_type</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#aff11537ee068ce7491927b58b2c9c7b3">m_toggle_value</a></td></tr>
+<tr class="memdesc:aff11537ee068ce7491927b58b2c9c7b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">only valid when this option is a toggle value <br/></td></tr>
+<tr class="memitem:af5e3f95d30bf12c76026d14447ff19fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af5e3f95d30bf12c76026d14447ff19fd"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#af5e3f95d30bf12c76026d14447ff19fd">m_default_display</a></td></tr>
+<tr class="memdesc:af5e3f95d30bf12c76026d14447ff19fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">display default value <br/></td></tr>
+<tr class="inherit_header pro_attribs_a00246"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_a00246')"><img src="closed.png" alt="-"/>&nbsp;Protected Attributes inherited from <a class="el" href="a00246.html">limbo::programoptions::ValueBase</a></td></tr>
+<tr class="memitem:a4b2499ba1e138d7bad2e49f22b9283b8 inherit pro_attribs_a00246"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4b2499ba1e138d7bad2e49f22b9283b8"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a4b2499ba1e138d7bad2e49f22b9283b8">m_category</a></td></tr>
+<tr class="memdesc:a4b2499ba1e138d7bad2e49f22b9283b8 inherit pro_attribs_a00246"><td class="mdescLeft">&#160;</td><td class="mdescRight">category <br/></td></tr>
+<tr class="memitem:a672ce468253721826363a73b6d02df1c inherit pro_attribs_a00246"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a672ce468253721826363a73b6d02df1c"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a672ce468253721826363a73b6d02df1c">m_msg</a></td></tr>
+<tr class="memdesc:a672ce468253721826363a73b6d02df1c inherit pro_attribs_a00246"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper message <br/></td></tr>
+<tr class="memitem:a3612714854094507095a7ffd8dac450d inherit pro_attribs_a00246"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3612714854094507095a7ffd8dac450d"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a3612714854094507095a7ffd8dac450d">m_help</a>: 1</td></tr>
+<tr class="memdesc:a3612714854094507095a7ffd8dac450d inherit pro_attribs_a00246"><td class="mdescLeft">&#160;</td><td class="mdescRight">whether is help option <br/></td></tr>
+<tr class="memitem:a0af0c808b782d305ccc37b84d024ad22 inherit pro_attribs_a00246"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0af0c808b782d305ccc37b84d024ad22"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a0af0c808b782d305ccc37b84d024ad22">m_required</a>: 1</td></tr>
+<tr class="memdesc:a0af0c808b782d305ccc37b84d024ad22 inherit pro_attribs_a00246"><td class="mdescLeft">&#160;</td><td class="mdescRight">whether the value is a required option <br/></td></tr>
+<tr class="memitem:ae4fa0be5f37c46de3a99e32c4586af86 inherit pro_attribs_a00246"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae4fa0be5f37c46de3a99e32c4586af86"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#ae4fa0be5f37c46de3a99e32c4586af86">m_valid</a>: 1</td></tr>
+<tr class="memdesc:ae4fa0be5f37c46de3a99e32c4586af86 inherit pro_attribs_a00246"><td class="mdescLeft">&#160;</td><td class="mdescRight">true if target is set, not default <br/></td></tr>
+<tr class="memitem:a88200a73a7a18141f70ad6010a8cbc8d inherit pro_attribs_a00246"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a88200a73a7a18141f70ad6010a8cbc8d"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00246.html#a88200a73a7a18141f70ad6010a8cbc8d">m_toggle</a>: 1</td></tr>
+<tr class="memdesc:a88200a73a7a18141f70ad6010a8cbc8d inherit pro_attribs_a00246"><td class="mdescLeft">&#160;</td><td class="mdescRight">true if this option is a toggle value <br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>abstract type of data value which defines various virtual functions </p>
+<div class="textblock"><h3>template&lt;typename T&gt;<br/>
+class limbo::programoptions::Value&lt; T &gt;</h3>
 
-<p>Definition at line <a class="el" href="a00345_source.html#l00067">67</a> of file <a class="el" href="a00345_source.html">ProgramOptions.h</a>.</p>
+<p>a generic class for various data values </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>data type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00346_source.html#l00217">217</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 </div><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a292f4808fc4fba23476ecb6eab87b4be"></a>
+<a class="anchor" id="a47d3586030f03ca4dbf1701c8b208e12"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">limbo::programoptions::ValueBase::ValueBase </td>
+          <td class="memname"><a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::<a class="el" href="a00245.html">Value</a> </td>
           <td>(</td>
           <td class="paramtype">std::string const &amp;&#160;</td>
           <td class="paramname"><em>cat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00245.html#a8237ab578187521aa053f918c4399aad">value_type</a> *&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -227,26 +290,29 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cat</td><td>category </td></tr>
+    <tr><td class="paramname">target</td><td>a pointer of target </td></tr>
     <tr><td class="paramname">m</td><td>message </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00345_source.html#l00075">75</a> of file <a class="el" href="a00345_source.html">ProgramOptions.h</a>.</p>
+<p>Definition at line <a class="el" href="a00346_source.html#l00231">231</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a501091aa63a2a0171a769de3ef4c5365"></a>
+<a class="anchor" id="a61c55427a99781f72330db9684805567"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">limbo::programoptions::ValueBase::ValueBase </td>
+          <td class="memname"><a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::<a class="el" href="a00245.html">Value</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00245.html">ValueBase</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="a00245.html">Value</a>&lt; T &gt; const &amp;&#160;</td>
           <td class="paramname"><em>rhs</em></td><td>)</td>
           <td></td>
         </tr>
@@ -261,53 +327,29 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <p>copy constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rhs</td><td>the other object to copy </td></tr>
+    <tr><td class="paramname">rhs</td><td>the other object </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00345_source.html#l00087">87</a> of file <a class="el" href="a00345_source.html">ProgramOptions.h</a>.</p>
+<p>Definition at line <a class="el" href="a00346_source.html#l00242">242</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
 <h2>Member Function Documentation</h2>
-<a class="anchor" id="a7d5d9c699788779b516ba547f1f8936b"></a>
+<a class="anchor" id="acce8305a3a03119502c010547121615a"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string const&amp; limbo::programoptions::ValueBase::category </td>
+          <td class="memname">void <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::copy </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>category </dd></dl>
-
-<p>Definition at line <a class="el" href="a00345_source.html#l00157">157</a> of file <a class="el" href="a00345_source.html">ProgramOptions.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a76e7c0d9cabe0d41710d4e4d0e192d14"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void limbo::programoptions::ValueBase::copy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00245.html">ValueBase</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="a00245.html">Value</a>&lt; T &gt; const &amp;&#160;</td>
           <td class="paramname"><em>rhs</em></td><td>)</td>
           <td></td>
         </tr>
@@ -327,19 +369,21 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00345_source.html#l00193">193</a> of file <a class="el" href="a00345_source.html">ProgramOptions.h</a>.</p>
+<p>Definition at line <a class="el" href="a00346_source.html#l00436">436</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="abf013845c026cd200a0f33714f789dba"></a>
+<a class="anchor" id="a67ee81b6de948588c29bdf9b250c0333"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual unsigned limbo::programoptions::ValueBase::count_default_chars </td>
+          <td class="memname">virtual unsigned <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::count_default_chars </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -347,7 +391,7 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -355,45 +399,108 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <p>count the length of default value string </p>
 <dl class="section return"><dt>Returns</dt><dd>the length of string if default value is printed </dd></dl>
 
-<p>Implemented in <a class="el" href="a00244.html#a67ee81b6de948588c29bdf9b250c0333">limbo::programoptions::Value&lt; T &gt;</a>.</p>
+<p>Implements <a class="el" href="a00246.html#abf013845c026cd200a0f33714f789dba">limbo::programoptions::ValueBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00346_source.html#l00357">357</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ae78a103b5b324205abf9879667c644ec"></a>
+<a class="anchor" id="a1c2fbf163fdbb99d2d05120da5e64d2d"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool limbo::programoptions::ValueBase::help </td>
+          <td class="memname">virtual <a class="el" href="a00245.html">Value</a>&amp; <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::default_value </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype"><a class="el" href="a00245.html#a8237ab578187521aa053f918c4399aad">value_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>d</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>help flag </dd></dl>
 
-<p>Definition at line <a class="el" href="a00345_source.html#l00165">165</a> of file <a class="el" href="a00345_source.html">ProgramOptions.h</a>.</p>
+<p>set default value </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>value </td></tr>
+    <tr><td class="paramname">d</td><td>a string to display the value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00346_source.html#l00380">380</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a22782304b2faaa033284fa7de688d7ce"></a>
+<a class="anchor" id="ad2b14032542ee0d6527533d773bd6043"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool limbo::programoptions::ValueBase::help_on </td>
+          <td class="memname">virtual <a class="el" href="a00245.html">Value</a>&amp; <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::help </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>h</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>set help flag </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">h</td><td>value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00346_source.html#l00405">405</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af260c65b1ebcc6bbcd92680a205242be"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::help_on </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -401,7 +508,7 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -409,47 +516,25 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <p>check whether help message is turned on </p>
 <dl class="section return"><dt>Returns</dt><dd>true if this option is a help option and it is on </dd></dl>
 
-<p>Implemented in <a class="el" href="a00244.html#af260c65b1ebcc6bbcd92680a205242be">limbo::programoptions::Value&lt; T &gt;</a>.</p>
+<p>Implements <a class="el" href="a00246.html#a22782304b2faaa033284fa7de688d7ce">limbo::programoptions::ValueBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00346_source.html#l00367">367</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a84ab098ac1f15fce4bcead9b46113069"></a>
+<a class="anchor" id="a0505078742ab714e7026dfc8e7e8afa2"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string const&amp; limbo::programoptions::ValueBase::msg </td>
+          <td class="memname"><a class="el" href="a00245.html">Value</a>&amp; <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::operator= </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>message </dd></dl>
-
-<p>Definition at line <a class="el" href="a00345_source.html#l00161">161</a> of file <a class="el" href="a00345_source.html">ProgramOptions.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a970de27954c4723c674040dbdd9f724a"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00245.html">ValueBase</a>&amp; limbo::programoptions::ValueBase::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00245.html">ValueBase</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="a00245.html">Value</a>&lt; T &gt; const &amp;&#160;</td>
           <td class="paramname"><em>rhs</em></td><td>)</td>
           <td></td>
         </tr>
@@ -464,55 +549,66 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <p>assignment </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rhs</td><td>the other object to copy </td></tr>
+    <tr><td class="paramname">rhs</td><td>the other object </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>reference to current object </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the object </dd></dl>
 
-<p>Definition at line <a class="el" href="a00345_source.html#l00093">93</a> of file <a class="el" href="a00345_source.html">ProgramOptions.h</a>.</p>
+<p>Definition at line <a class="el" href="a00346_source.html#l00252">252</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aaec57667d4e49387a2914aee68acfcb1"></a>
+<a class="anchor" id="ad3af55151550cf5c14f4e6127def34dc"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool limbo::programoptions::ValueBase::parse </td>
+          <td class="memname">virtual bool <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::parse </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>parse command </p>
-<p>pure virtual function to parse string </p>
-<dl class="section return"><dt>Returns</dt><dd>true if succeeded </dd></dl>
+<p>parse data from string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>data value in string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if parsing is succeeded </dd></dl>
 
-<p>Implemented in <a class="el" href="a00244.html#ad3af55151550cf5c14f4e6127def34dc">limbo::programoptions::Value&lt; T &gt;</a>.</p>
+<p>Implements <a class="el" href="a00246.html#aaec57667d4e49387a2914aee68acfcb1">limbo::programoptions::ValueBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00346_source.html#l00277">277</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a7c4c5f84ac35e5bfd80ab86738f1f14d"></a>
+<a class="anchor" id="aa8129faac655d45e96a69dc50c2bcbd9"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void limbo::programoptions::ValueBase::print </td>
+          <td class="memname">virtual void <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::print </td>
           <td>(</td>
           <td class="paramtype">std::ostream &amp;&#160;</td>
           <td class="paramname"><em>os</em></td><td>)</td>
@@ -521,7 +617,7 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -534,19 +630,23 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="a00244.html#aa8129faac655d45e96a69dc50c2bcbd9">limbo::programoptions::Value&lt; T &gt;</a>.</p>
+<p>Implements <a class="el" href="a00246.html#a7c4c5f84ac35e5bfd80ab86738f1f14d">limbo::programoptions::ValueBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00346_source.html#l00292">292</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a0d7da2f76293ee875a4693caec418c36"></a>
+<a class="anchor" id="a20c4c12f613251db38b2abc299578794"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void limbo::programoptions::ValueBase::print_category </td>
+          <td class="memname">virtual void <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::print_default </td>
           <td>(</td>
           <td class="paramtype">std::ostream &amp;&#160;</td>
           <td class="paramname"><em>os</em></td><td>)</td>
@@ -555,41 +655,7 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>print category </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">os</td><td>output stream </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00345_source.html#l00182">182</a> of file <a class="el" href="a00345_source.html">ProgramOptions.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a32f39dd054077faa9e0c765227b0f7be"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void limbo::programoptions::ValueBase::print_default </td>
-          <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>os</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -602,105 +668,134 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="a00244.html#a20c4c12f613251db38b2abc299578794">limbo::programoptions::Value&lt; T &gt;</a>.</p>
+<p>Implements <a class="el" href="a00246.html#a32f39dd054077faa9e0c765227b0f7be">limbo::programoptions::ValueBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00346_source.html#l00301">301</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4cf1b85ca09e88d750b5aa119a79e409"></a>
+<a class="anchor" id="ac5460c74eb0a846a4a8526eae326cbca"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void limbo::programoptions::ValueBase::print_msg </td>
+          <td class="memname">virtual <a class="el" href="a00245.html">Value</a>&amp; <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::required </td>
           <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>os</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>print message </p>
+<p>set required flag </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">os</td><td>output stream </td></tr>
+    <tr><td class="paramname">r</td><td>value </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the object </dd></dl>
 
-<p>Definition at line <a class="el" href="a00345_source.html#l00187">187</a> of file <a class="el" href="a00345_source.html">ProgramOptions.h</a>.</p>
+<p>Definition at line <a class="el" href="a00346_source.html#l00415">415</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad3a1e17a05a19bdc4fd10b68d10dc76e"></a>
+<a class="anchor" id="a053b0cd3546bb85a7fdf473153e27bf1"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool limbo::programoptions::ValueBase::required </td>
+          <td class="memname">virtual <a class="el" href="a00245.html">Value</a>&amp; <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::toggle </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>required flag </dd></dl>
 
-<p>Definition at line <a class="el" href="a00345_source.html#l00169">169</a> of file <a class="el" href="a00345_source.html">ProgramOptions.h</a>.</p>
+<p>set toggle flag </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00346_source.html#l00425">425</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a690203e23f1e0c0d4f2196f8f90fc6a2"></a>
+<a class="anchor" id="aeff448d678e73dd464d6a5c57c451142"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool limbo::programoptions::ValueBase::toggle </td>
+          <td class="memname">virtual <a class="el" href="a00245.html">Value</a>&amp; <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::toggle_value </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype"><a class="el" href="a00245.html#a8237ab578187521aa053f918c4399aad">value_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>toggle flag </dd></dl>
 
-<p>Definition at line <a class="el" href="a00345_source.html#l00177">177</a> of file <a class="el" href="a00345_source.html">ProgramOptions.h</a>.</p>
+<p>set toggle value </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00346_source.html#l00393">393</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a925ecbd6f803b87e7aa6db7330ae5971"></a>
+<a class="anchor" id="a069cba8e01670790356f6591507bc4ed"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool limbo::programoptions::ValueBase::valid </td>
+          <td class="memname">virtual bool <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::valid_default </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -708,53 +803,31 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>category </dd></dl>
-
-<p>Definition at line <a class="el" href="a00345_source.html#l00173">173</a> of file <a class="el" href="a00345_source.html">ProgramOptions.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa6bd9720ee03a1bf8bd34b1cd8e23942"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool limbo::programoptions::ValueBase::valid_default </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>check whether default value is valid </p>
-<dl class="section return"><dt>Returns</dt><dd>true if default value is set </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if default pointer is defined </dd></dl>
 
-<p>Implemented in <a class="el" href="a00244.html#a069cba8e01670790356f6591507bc4ed">limbo::programoptions::Value&lt; T &gt;</a>.</p>
+<p>Implements <a class="el" href="a00246.html#aa6bd9720ee03a1bf8bd34b1cd8e23942">limbo::programoptions::ValueBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00346_source.html#l00341">341</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a87efed127ecb415905c8eadd4fbff1bf"></a>
+<a class="anchor" id="a41db142b0a1c8ad707fbb46922e5fd86"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool limbo::programoptions::ValueBase::valid_target </td>
+          <td class="memname">virtual bool <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::valid_target </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -762,7 +835,7 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -770,19 +843,23 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <p>check whether target value is valid </p>
 <dl class="section return"><dt>Returns</dt><dd>true if target pointer is defined </dd></dl>
 
-<p>Implemented in <a class="el" href="a00244.html#a41db142b0a1c8ad707fbb46922e5fd86">limbo::programoptions::Value&lt; T &gt;</a>.</p>
+<p>Implements <a class="el" href="a00246.html#a87efed127ecb415905c8eadd4fbff1bf">limbo::programoptions::ValueBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00346_source.html#l00333">333</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a10a6efa811a5d21f980b0ea892df8e58"></a>
+<a class="anchor" id="ace23c4eeece9b3ad2e6a30cf7b77f745"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool limbo::programoptions::ValueBase::valid_toggle </td>
+          <td class="memname">virtual bool <a class="el" href="a00245.html">limbo::programoptions::Value</a>&lt; T &gt;::valid_toggle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -790,25 +867,27 @@ unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>check whether toggle value is valid </p>
-<dl class="section return"><dt>Returns</dt><dd>true if toggle value is set </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if toggle pointer is defined </dd></dl>
 
-<p>Implemented in <a class="el" href="a00244.html#ace23c4eeece9b3ad2e6a30cf7b77f745">limbo::programoptions::Value&lt; T &gt;</a>.</p>
+<p>Implements <a class="el" href="a00246.html#a10a6efa811a5d21f980b0ea892df8e58">limbo::programoptions::ValueBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00346_source.html#l00349">349</a> of file <a class="el" href="a00346_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/programoptions/<a class="el" href="a00345_source.html">ProgramOptions.h</a></li>
+<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/programoptions/<a class="el" href="a00346_source.html">ProgramOptions.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

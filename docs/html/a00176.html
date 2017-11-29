@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: limbo::geometry::orientation_2d Class Reference</title>
+<title>Limbo: GdfParser::NumberArray Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,67 +88,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00401.html">limbo</a></li><li class="navelem"><a class="el" href="a00407.html">geometry</a></li><li class="navelem"><a class="el" href="a00176.html">orientation_2d</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00399.html">GdfParser</a></li><li class="navelem"><a class="el" href="a00176.html">NumberArray</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
-<a href="a00559.html">List of all members</a>  </div>
+<a href="a00469.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::geometry::orientation_2d Class Reference</div>  </div>
+<div class="title">GdfParser::NumberArray Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>a class denoting orientation of lines  
+<p>bison does not support vector very well, so here create a dummy class for floating point number array.  
  <a href="a00176.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00301_source.html">Geometry.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00324_source.html">GdfDataBase.h</a>&gt;</code></p>
+
+<p>Inherits vector&lt; double &gt;.</p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a18ed42abbc71d803d20bf66cefb6a9e4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18ed42abbc71d803d20bf66cefb6a9e4"></a>
+typedef vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>base_type</b></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7ca308fa8a10845b69717a6b2e04a779"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7ca308fa8a10845b69717a6b2e04a779"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#a7ca308fa8a10845b69717a6b2e04a779">orientation_2d</a> ()</td></tr>
-<tr class="memdesc:a7ca308fa8a10845b69717a6b2e04a779"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br/></td></tr>
-<tr class="memitem:ac9867601809816a2f89fa10e9ab38243"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#ac9867601809816a2f89fa10e9ab38243">orientation_2d</a> (<a class="el" href="a00407.html#acf1a245b32ddeab2327306933df52ecc">orientation_2d_enum</a> const &amp;ori)</td></tr>
-<tr class="memdesc:ac9867601809816a2f89fa10e9ab38243"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#ac9867601809816a2f89fa10e9ab38243"></a><br/></td></tr>
-<tr class="memitem:a961b54c7b8297ebf58794f7bb35b80a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#a961b54c7b8297ebf58794f7bb35b80a7">orientation_2d</a> (const <a class="el" href="a00176.html">orientation_2d</a> &amp;ori)</td></tr>
-<tr class="memdesc:a961b54c7b8297ebf58794f7bb35b80a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#a961b54c7b8297ebf58794f7bb35b80a7"></a><br/></td></tr>
-<tr class="memitem:a82766092fe9fe26f858379c0b958b693"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00176.html">orientation_2d</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#a82766092fe9fe26f858379c0b958b693">operator=</a> (const <a class="el" href="a00176.html">orientation_2d</a> &amp;ori)</td></tr>
-<tr class="memdesc:a82766092fe9fe26f858379c0b958b693"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment  <a href="#a82766092fe9fe26f858379c0b958b693"></a><br/></td></tr>
-<tr class="memitem:acce54564adb82ad6b9df6488a59c8af4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#acce54564adb82ad6b9df6488a59c8af4">operator==</a> (<a class="el" href="a00176.html">orientation_2d</a> const &amp;rhs) const </td></tr>
-<tr class="memdesc:acce54564adb82ad6b9df6488a59c8af4"><td class="mdescLeft">&#160;</td><td class="mdescRight">equality operator  <a href="#acce54564adb82ad6b9df6488a59c8af4"></a><br/></td></tr>
-<tr class="memitem:aebadecd59133aef68cfbf3504206acb9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#aebadecd59133aef68cfbf3504206acb9">operator!=</a> (<a class="el" href="a00176.html">orientation_2d</a> const &amp;rhs) const </td></tr>
-<tr class="memdesc:aebadecd59133aef68cfbf3504206acb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">inequality operator  <a href="#aebadecd59133aef68cfbf3504206acb9"></a><br/></td></tr>
-<tr class="memitem:a45b88637ff0762755da9b73d8b934405"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#a45b88637ff0762755da9b73d8b934405">to_int</a> () const </td></tr>
-<tr class="memdesc:a45b88637ff0762755da9b73d8b934405"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert orientation to integer  <a href="#a45b88637ff0762755da9b73d8b934405"></a><br/></td></tr>
-<tr class="memitem:a9850045966d6295eb6314a392923356c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9850045966d6295eb6314a392923356c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#a9850045966d6295eb6314a392923356c">turn_90</a> ()</td></tr>
-<tr class="memdesc:a9850045966d6295eb6314a392923356c"><td class="mdescLeft">&#160;</td><td class="mdescRight">turn 90 degree <br/></td></tr>
-<tr class="memitem:abce67845ac61272d58df0f7f85c101f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00176.html">orientation_2d</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#abce67845ac61272d58df0f7f85c101f2">get_perpendicular</a> () const </td></tr>
-<tr class="memdesc:abce67845ac61272d58df0f7f85c101f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">get perpendicular orientation  <a href="#abce67845ac61272d58df0f7f85c101f2"></a><br/></td></tr>
-<tr class="memitem:a13db34162f3f66080a8edde9e9873c3a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#a13db34162f3f66080a8edde9e9873c3a">valid</a> () const </td></tr>
-<tr class="memdesc:a13db34162f3f66080a8edde9e9873c3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether the orientation is valid  <a href="#a13db34162f3f66080a8edde9e9873c3a"></a><br/></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a795b8ac1ba56445b9c67c7f8f742de9f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a795b8ac1ba56445b9c67c7f8f742de9f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#a795b8ac1ba56445b9c67c7f8f742de9f">m_orient</a></td></tr>
-<tr class="memdesc:a795b8ac1ba56445b9c67c7f8f742de9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">enum type of orientation in integer representation <br/></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a39b84328ffafb1404e5bce8dfd52c3a2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#a39b84328ffafb1404e5bce8dfd52c3a2">operator&lt;</a> (<a class="el" href="a00176.html">orientation_2d</a> const &amp;ori1, <a class="el" href="a00176.html">orientation_2d</a> const &amp;ori2)</td></tr>
-<tr class="memdesc:a39b84328ffafb1404e5bce8dfd52c3a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">less than operator  <a href="#a39b84328ffafb1404e5bce8dfd52c3a2"></a><br/></td></tr>
+<tr class="memitem:a00e36e57f6ed4a668dc647b52909937c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#a00e36e57f6ed4a668dc647b52909937c">NumberArray</a> (const allocator_type &amp;alloc=allocator_type())</td></tr>
+<tr class="memitem:af124de059ab209d36fcb4f0474921053"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#af124de059ab209d36fcb4f0474921053">NumberArray</a> (size_type n, const value_type &amp;val, const allocator_type &amp;alloc=allocator_type())</td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>a class denoting orientation of lines </p>
+<div class="textblock"><p>bison does not support vector very well, so here create a dummy class for floating point number array. </p>
 
-<p>Definition at line <a class="el" href="a00301_source.html#l00092">92</a> of file <a class="el" href="a00301_source.html">Geometry.h</a>.</p>
+<p>Definition at line <a class="el" href="a00324_source.html#l00066">66</a> of file <a class="el" href="a00324_source.html">GdfDataBase.h</a>.</p>
 </div><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ac9867601809816a2f89fa10e9ab38243"></a>
+<a class="anchor" id="a00e36e57f6ed4a668dc647b52909937c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -156,10 +131,10 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">limbo::geometry::orientation_2d::orientation_2d </td>
+          <td class="memname">GdfParser::NumberArray::NumberArray </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00407.html#acf1a245b32ddeab2327306933df52ecc">orientation_2d_enum</a> const &amp;&#160;</td>
-          <td class="paramname"><em>ori</em></td><td>)</td>
+          <td class="paramtype">const allocator_type &amp;&#160;</td>
+          <td class="paramname"><em>alloc</em> = <code>allocator_type()</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -169,20 +144,19 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
 <p>constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ori</td><td>enum type of orientation </td></tr>
+    <tr><td class="paramname">alloc</td><td>memory allocator </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00301_source.html#l00099">99</a> of file <a class="el" href="a00301_source.html">Geometry.h</a>.</p>
+<p>Definition at line <a class="el" href="a00324_source.html#l00078">78</a> of file <a class="el" href="a00324_source.html">GdfDataBase.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a961b54c7b8297ebf58794f7bb35b80a7"></a>
+<a class="anchor" id="af124de059ab209d36fcb4f0474921053"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -190,241 +164,22 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">limbo::geometry::orientation_2d::orientation_2d </td>
+          <td class="memname">GdfParser::NumberArray::NumberArray </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="a00176.html">orientation_2d</a> &amp;&#160;</td>
-          <td class="paramname"><em>ori</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>copy constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ori</td><td>an <a class="el" href="a00176.html" title="a class denoting orientation of lines">orientation_2d</a> object </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00301_source.html#l00103">103</a> of file <a class="el" href="a00301_source.html">Geometry.h</a>.</p>
-
-</div>
-</div>
-<h2>Member Function Documentation</h2>
-<a class="anchor" id="abce67845ac61272d58df0f7f85c101f2"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00176.html">orientation_2d</a> limbo::geometry::orientation_2d::get_perpendicular </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>get perpendicular orientation </p>
-<dl class="section return"><dt>Returns</dt><dd>perpendicular orientation </dd></dl>
-
-<p>Definition at line <a class="el" href="a00301_source.html#l00124">124</a> of file <a class="el" href="a00301_source.html">Geometry.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aebadecd59133aef68cfbf3504206acb9"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool limbo::geometry::orientation_2d::operator!= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00176.html">orientation_2d</a> const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>inequality operator </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>object at right hand side </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if they are inequal </dd></dl>
-
-<p>Definition at line <a class="el" href="a00301_source.html#l00116">116</a> of file <a class="el" href="a00301_source.html">Geometry.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a82766092fe9fe26f858379c0b958b693"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00176.html">orientation_2d</a>&amp; limbo::geometry::orientation_2d::operator= </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a00176.html">orientation_2d</a> &amp;&#160;</td>
-          <td class="paramname"><em>ori</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>assignment </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ori</td><td>an <a class="el" href="a00176.html" title="a class denoting orientation of lines">orientation_2d</a> object </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>reference to the object </dd></dl>
-
-<p>Definition at line <a class="el" href="a00301_source.html#l00107">107</a> of file <a class="el" href="a00301_source.html">Geometry.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="acce54564adb82ad6b9df6488a59c8af4"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool limbo::geometry::orientation_2d::operator== </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00176.html">orientation_2d</a> const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>equality operator </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>object at right hand side </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if they are equal </dd></dl>
-
-<p>Definition at line <a class="el" href="a00301_source.html#l00112">112</a> of file <a class="el" href="a00301_source.html">Geometry.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a45b88637ff0762755da9b73d8b934405"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int limbo::geometry::orientation_2d::to_int </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>convert orientation to integer </p>
-<dl class="section return"><dt>Returns</dt><dd>integer representation of the orientation </dd></dl>
-
-<p>Definition at line <a class="el" href="a00301_source.html#l00119">119</a> of file <a class="el" href="a00301_source.html">Geometry.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a13db34162f3f66080a8edde9e9873c3a"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool limbo::geometry::orientation_2d::valid </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>check whether the orientation is valid </p>
-<dl class="section return"><dt>Returns</dt><dd>true if it is valid </dd></dl>
-
-<p>Definition at line <a class="el" href="a00301_source.html#l00132">132</a> of file <a class="el" href="a00301_source.html">Geometry.h</a>.</p>
-
-</div>
-</div>
-<h2>Friends And Related Function Documentation</h2>
-<a class="anchor" id="a39b84328ffafb1404e5bce8dfd52c3a2"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool operator&lt; </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00176.html">orientation_2d</a> const &amp;&#160;</td>
-          <td class="paramname"><em>ori1</em>, </td>
+          <td class="paramtype">size_type&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00176.html">orientation_2d</a> const &amp;&#160;</td>
-          <td class="paramname"><em>ori2</em>&#160;</td>
+          <td class="paramtype">const value_type &amp;&#160;</td>
+          <td class="paramname"><em>val</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const allocator_type &amp;&#160;</td>
+          <td class="paramname"><em>alloc</em> = <code>allocator_type()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -434,32 +189,31 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>less than operator </p>
+<p>constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ori1</td><td>orientation </td></tr>
-    <tr><td class="paramname">ori2</td><td>orientation </td></tr>
+    <tr><td class="paramname">n</td><td>number of values </td></tr>
+    <tr><td class="paramname">val</td><td>data value </td></tr>
+    <tr><td class="paramname">alloc</td><td>memory allocator </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if ori1 is less than ori2 </dd></dl>
 
-<p>Definition at line <a class="el" href="a00301_source.html#l00137">137</a> of file <a class="el" href="a00301_source.html">Geometry.h</a>.</p>
+<p>Definition at line <a class="el" href="a00324_source.html#l00084">84</a> of file <a class="el" href="a00324_source.html">GdfDataBase.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/geometry/<a class="el" href="a00301_source.html">Geometry.h</a></li>
+<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/gdf/bison/<a class="el" href="a00324_source.html">GdfDataBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

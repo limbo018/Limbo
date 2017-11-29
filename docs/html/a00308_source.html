@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/makeutils/FindCompiler.mk Source File</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/makeutils/FindClangxx.mk Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,62 +91,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">FindCompiler.mk</div>  </div>
+<div class="title">FindClangxx.mk</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00308.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">## @file   FindCompiler.mk</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @brief  find compiler under various platform, determine CXX, CC, FC, AR </span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="preprocessor">##</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## Use following command in the Makefile to view the results </span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## </span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor"></span><span class="preprocessor">##     $(info Compilers: CC = $(CC), CXX = $(CXX), FC = $(FC), AR = $(AR))</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"></span><span class="preprocessor">##</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @author Yibo Lin</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @date   Jan 2017</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">##</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @param  LIMBO_DIR, LIMBO_ROOT_DIR given LIMBO_DIR or LIMBO_ROOT_DIR </span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @param  CC, CXX, FC, AR set CC as c compiler, CXX as c++ compiler, FC as fortran compiler, AR as archiver </span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">## @cond </span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor"># detect platform</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span>UNAME_S = $(shell uname -s)</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;# consider two cases, called when building Limbo library or called from other programs </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;ifndef LIMBO_ROOT_DIR</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;ifdef LIMBO_DIR</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    LIMBO_ROOT_DIR = $(LIMBO_DIR)/include</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordflow">else</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    $(error LIMBO_ROOT_DIR = $(LIMBO_ROOT_DIR), LIMBO_DIR = $(LIMBO_DIR))</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;endif</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;endif</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;# ==== search compilers under Linux</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;ifeq ($(UNAME_S), Linux)</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;#FOUNDCC = $(shell find ${PATH<span class="comment">//:/ } -maxdepth 1 -executable -name gcc* -exec basename {} \;)</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindGcc.mk</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindGxx.mk</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindGfortran.mk</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindAR.mk</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;endif </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor"># ==== search for compilers under Darwin</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor"></span>ifeq ($(UNAME_S), Darwin)</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindClang.mk</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindClangxx.mk</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindGfortran.mk</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindAR.mk</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;endif </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">## @endcond </span></div>
+<a href="a00308.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">## @file   FindClangxx.mk</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @brief  find clang++, determine CXX</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @author Yibo Lin</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @date   Jan 2017 </span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor"></span><span class="preprocessor">##</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @param  CXX set CXX as C++ compiler </span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">## @cond </span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;ifneq ($(shell which clang++),)</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    CXX = clang++</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;else </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    CXX = g++</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;endif</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">## @endcond</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

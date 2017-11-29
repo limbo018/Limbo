@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/geometry/Polygon2Rectangle.h File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/geometry/Geometry.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,64 +93,94 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Polygon2Rectangle.h File Reference</div>  </div>
+<div class="title">Geometry.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>a generic implementation of polygon-to-rectangle conversion  
+<p>Contains utilities for geometric types, such as type traits, area calculator. I'm trying to make these setting as similar as Boost.Polygon, which will lead to easier embedding.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
-<code>#include &lt;fstream&gt;</code><br/>
-<code>#include &lt;string&gt;</code><br/>
-<code>#include &lt;vector&gt;</code><br/>
+<div class="textblock"><code>#include &lt;vector&gt;</code><br/>
 <code>#include &lt;list&gt;</code><br/>
-<code>#include &lt;map&gt;</code><br/>
-<code>#include &lt;boost/lexical_cast.hpp&gt;</code><br/>
-<code>#include &lt;boost/algorithm/string/trim.hpp&gt;</code><br/>
-<code>#include &lt;boost/algorithm/string/classification.hpp&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00301_source.html">limbo/geometry/Geometry.h</a>&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00354_source.html">limbo/string/String.h</a>&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00341_source.html">limbo/preprocessor/AssertMsg.h</a>&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00303_source.html">limbo/geometry/Polygon2RectangleVec.h</a>&gt;</code><br/>
+<code>#include &lt;ostream&gt;</code><br/>
 </div>
 <p><a href="a00302_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html">limbo::geometry::point_compare_type</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">sort helper if orient == HORIZONTAL, sort by left lower if orient == VERTICAL, sort by lower left  <a href="a00196.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html">limbo::geometry::Polygon2Rectangle&lt; PointSet, RectSet &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class implement conversion from manhattan polygon to rectangle  <a href="a00203.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00135.html">limbo::geometry::Polygon2Rectangle&lt; PointSet, RectSet &gt;::is_equal_type</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">is equal helper  <a href="a00135.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00177.html">limbo::geometry::orientation_2d</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class denoting orientation of lines  <a href="a00177.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00053.html">limbo::geometry::coordinate_traits&lt; int &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for default integer type  <a href="a00053.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00198.html">limbo::geometry::point_traits&lt; PointType &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">type traits for point  <a href="a00198.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00215.html">limbo::geometry::rectangle_traits&lt; RectType &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">type traits for rectangle  <a href="a00215.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00050.html">limbo::geometry::container_traits&lt; ContainerType &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">type traits for containers such as vector, list, multiset  <a href="a00050.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00052.html">limbo::geometry::container_traits&lt; std::vector&lt; T &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">partial specialization of <a class="el" href="a00050.html">limbo::geometry::container_traits</a> for commonly used data structures like std::vector  <a href="a00052.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00051.html">limbo::geometry::container_traits&lt; std::list&lt; T &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">partial specialization of <a class="el" href="a00050.html">limbo::geometry::container_traits</a> for commonly used data structures like std::list  <a href="a00051.html#details">More...</a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00401"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00401.html">limbo</a></td></tr>
-<tr class="memdesc:a00401"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br/></td></tr>
-<tr class="memitem:a00407"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html">limbo::geometry</a></td></tr>
-<tr class="memdesc:a00407"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Geometry <br/></td></tr>
+<tr class="memitem:a00404"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00404.html">limbo</a></td></tr>
+<tr class="memdesc:a00404"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br/></td></tr>
+<tr class="memitem:a00410"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00410.html">limbo::geometry</a></td></tr>
+<tr class="memdesc:a00410"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Geometry <br/></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:acf1a245b32ddeab2327306933df52ecc"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00410.html#acf1a245b32ddeab2327306933df52ecc">limbo::geometry::orientation_2d_enum</a> { <b>HORIZONTAL</b> =  0, 
+<b>VERTICAL</b> =  1
+ }</td></tr>
+<tr class="memdesc:acf1a245b32ddeab2327306933df52ecc"><td class="mdescLeft">&#160;</td><td class="mdescRight">orientation type for lines <br/></td></tr>
+<tr class="memitem:aafcc811667d0a3554826d9790d824b60"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00410.html#aafcc811667d0a3554826d9790d824b60">limbo::geometry::slicing_orientation_2d</a> { <br/>
+&#160;&#160;<b>HORIZONTAL_SLICING</b> =  1, 
+<b>VERTICAL_SLICING</b> =  2, 
+<a class="el" href="a00410.html#aafcc811667d0a3554826d9790d824b60a3abc4f93a037b819a5fa510728d2340f">limbo::geometry::HOR_VER_SLICING</a> =  3, 
+<a class="el" href="a00410.html#aafcc811667d0a3554826d9790d824b60acc7f1ed5a270ba7953b8a5294e129135">limbo::geometry::HOR_VER_SA_SLICING</a> =  4, 
+<br/>
+&#160;&#160;<a class="el" href="a00410.html#aafcc811667d0a3554826d9790d824b60a57317bc4d45b620bb8daf5756ae23e73">limbo::geometry::HOR_VER_AR_SLICING</a> =  5
+<br/>
+ }</td></tr>
+<tr class="memdesc:aafcc811667d0a3554826d9790d824b60"><td class="mdescLeft">&#160;</td><td class="mdescRight">orientation type for slicing  <a href="a00410.html#aafcc811667d0a3554826d9790d824b60">More...</a><br/></td></tr>
+<tr class="memitem:a4cbc68a48a3effe8b97c1b85b1db8304"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00410.html#a4cbc68a48a3effe8b97c1b85b1db8304">limbo::geometry::direction_2d</a> { <b>LEFT</b> =  0, 
+<b>BOTTOM</b> =  1, 
+<b>RIGHT</b> =  2, 
+<b>TOP</b> =  3
+ }</td></tr>
+<tr class="memdesc:a4cbc68a48a3effe8b97c1b85b1db8304"><td class="mdescLeft">&#160;</td><td class="mdescRight">direction type for rectangles <br/></td></tr>
+<tr class="memitem:a0eee1bcece1f7b113d1998c5382930b9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00410.html#a0eee1bcece1f7b113d1998c5382930b9">limbo::geometry::winding_direction</a> { <b>CLOCKWISE</b> =  0, 
+<b>COUNTERCLOCKWISE</b> =  1, 
+<b>UNKNOWN_WINDING</b> =  2
+ }</td></tr>
+<tr class="memdesc:a0eee1bcece1f7b113d1998c5382930b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">winding direction type CLOCKWISE and COUNTERCLOCKWISE refers to winding direction of a polygon <br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a80de7b7ae4b1c3d5074b45f012f4e177"><td class="memTemplParams" colspan="2">template&lt;typename InputIterator , typename PointSet , typename RectSet &gt; </td></tr>
-<tr class="memitem:a80de7b7ae4b1c3d5074b45f012f4e177"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00407.html#a80de7b7ae4b1c3d5074b45f012f4e177">limbo::geometry::polygon2rectangle</a> (InputIterator input_begin, InputIterator input_end, PointSet const &amp;, RectSet &amp;r, slicing_orientation_2d slicing_orient=HORIZONTAL_SLICING)</td></tr>
-<tr class="memdesc:a80de7b7ae4b1c3d5074b45f012f4e177"><td class="mdescLeft">&#160;</td><td class="mdescRight">standby function for polygon-to-rectangle conversion  <a href="#a80de7b7ae4b1c3d5074b45f012f4e177"></a><br/></td></tr>
+<tr class="memitem:a4e8ca87331ae1cc621457483c78aabc2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00410.html#a4e8ca87331ae1cc621457483c78aabc2">limbo::geometry::to_string</a> (slicing_orientation_2d slicing_orient)</td></tr>
+<tr class="memdesc:a4e8ca87331ae1cc621457483c78aabc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert enum type of slicing orientation to string  <a href="#a4e8ca87331ae1cc621457483c78aabc2"></a><br/></td></tr>
+<tr class="memitem:af7f4b722657b024b5c9fa530158055f6"><td class="memTemplParams" colspan="2">template&lt;typename PointSet &gt; </td></tr>
+<tr class="memitem:af7f4b722657b024b5c9fa530158055f6"><td class="memTemplItemLeft" align="right" valign="top">coordinate_traits&lt; typename <br class="typebreak"/>
+point_traits&lt; typename <br class="typebreak"/>
+container_traits&lt; PointSet &gt;<br class="typebreak"/>
+::value_type &gt;::area_type &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00410.html#af7f4b722657b024b5c9fa530158055f6">limbo::geometry::area</a> (PointSet const &amp;vPoint)</td></tr>
+<tr class="memdesc:af7f4b722657b024b5c9fa530158055f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate signed area of a polygon, the result is positive if its winding is CLOCKWISE  <a href="#af7f4b722657b024b5c9fa530158055f6"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>a generic implementation of polygon-to-rectangle conversion </p>
-<p>K.D.Gourley and D.M. Green, <a href="http://doi.ieeecomputersociety.org/10.1109/MCG.1983.262975">A Polygon-to-Rectangle Conversion Algorithm</a>, IEEE COMP. GRAPHICS &amp; APPLIC. 3.1 (1983): 31-32.</p>
-<p>If a contour polygon has duplicate points, remove all of them and form a polygon with holes</p>
+<div class="textblock"><p>Contains utilities for geometric types, such as type traits, area calculator. I'm trying to make these setting as similar as Boost.Polygon, which will lead to easier embedding. </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00302_source.html">Polygon2Rectangle.h</a>.</p>
+<p>Definition in file <a class="el" href="a00302_source.html">Geometry.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

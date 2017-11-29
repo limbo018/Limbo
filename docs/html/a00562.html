@@ -88,26 +88,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00401.html">limbo</a></li><li class="navelem"><a class="el" href="a00407.html">geometry</a></li><li class="navelem"><a class="el" href="a00214.html">rectangle_traits</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00404.html">limbo</a></li><li class="navelem"><a class="el" href="a00410.html">geometry</a></li><li class="navelem"><a class="el" href="a00177.html">orientation_2d</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">limbo::geometry::rectangle_traits&lt; RectType &gt; Member List</div>  </div>
+<div class="title">limbo::geometry::orientation_2d Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00214.html">limbo::geometry::rectangle_traits&lt; RectType &gt;</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a00177.html">limbo::geometry::orientation_2d</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00214.html#acc2b39409905cfade0aedab3010ba7eb">construct</a>(coordinate_type const &amp;xl, coordinate_type const &amp;yl, coordinate_type const &amp;xh, coordinate_type const &amp;yh)</td><td class="entry"><a class="el" href="a00214.html">limbo::geometry::rectangle_traits&lt; RectType &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>coordinate_type</b> typedef (defined in <a class="el" href="a00214.html">limbo::geometry::rectangle_traits&lt; RectType &gt;</a>)</td><td class="entry"><a class="el" href="a00214.html">limbo::geometry::rectangle_traits&lt; RectType &gt;</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00214.html#a2e8bd649dff82f3a1e2e2005cd804d34">get</a>(rectangle_type const &amp;rectangle, direction_2d const &amp;direct)</td><td class="entry"><a class="el" href="a00214.html">limbo::geometry::rectangle_traits&lt; RectType &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>rectangle_type</b> typedef (defined in <a class="el" href="a00214.html">limbo::geometry::rectangle_traits&lt; RectType &gt;</a>)</td><td class="entry"><a class="el" href="a00214.html">limbo::geometry::rectangle_traits&lt; RectType &gt;</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00214.html#a45a3d048b1399f0389c334aff76cffc1">set</a>(rectangle_type &amp;rectangle, direction_2d const &amp;direct, coordinate_type const &amp;v)</td><td class="entry"><a class="el" href="a00214.html">limbo::geometry::rectangle_traits&lt; RectType &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00177.html#abce67845ac61272d58df0f7f85c101f2">get_perpendicular</a>() const </td><td class="entry"><a class="el" href="a00177.html">limbo::geometry::orientation_2d</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00177.html#a795b8ac1ba56445b9c67c7f8f742de9f">m_orient</a></td><td class="entry"><a class="el" href="a00177.html">limbo::geometry::orientation_2d</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00177.html#aebadecd59133aef68cfbf3504206acb9">operator!=</a>(orientation_2d const &amp;rhs) const </td><td class="entry"><a class="el" href="a00177.html">limbo::geometry::orientation_2d</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00177.html#a39b84328ffafb1404e5bce8dfd52c3a2">operator&lt;</a>(orientation_2d const &amp;ori1, orientation_2d const &amp;ori2)</td><td class="entry"><a class="el" href="a00177.html">limbo::geometry::orientation_2d</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00177.html#a82766092fe9fe26f858379c0b958b693">operator=</a>(const orientation_2d &amp;ori)</td><td class="entry"><a class="el" href="a00177.html">limbo::geometry::orientation_2d</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00177.html#acce54564adb82ad6b9df6488a59c8af4">operator==</a>(orientation_2d const &amp;rhs) const </td><td class="entry"><a class="el" href="a00177.html">limbo::geometry::orientation_2d</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00177.html#a7ca308fa8a10845b69717a6b2e04a779">orientation_2d</a>()</td><td class="entry"><a class="el" href="a00177.html">limbo::geometry::orientation_2d</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00177.html#ac9867601809816a2f89fa10e9ab38243">orientation_2d</a>(orientation_2d_enum const &amp;ori)</td><td class="entry"><a class="el" href="a00177.html">limbo::geometry::orientation_2d</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00177.html#a961b54c7b8297ebf58794f7bb35b80a7">orientation_2d</a>(const orientation_2d &amp;ori)</td><td class="entry"><a class="el" href="a00177.html">limbo::geometry::orientation_2d</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00177.html#a45b88637ff0762755da9b73d8b934405">to_int</a>() const </td><td class="entry"><a class="el" href="a00177.html">limbo::geometry::orientation_2d</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00177.html#a9850045966d6295eb6314a392923356c">turn_90</a>()</td><td class="entry"><a class="el" href="a00177.html">limbo::geometry::orientation_2d</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00177.html#a13db34162f3f66080a8edde9e9873c3a">valid</a>() const </td><td class="entry"><a class="el" href="a00177.html">limbo::geometry::orientation_2d</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: DefParser::Pin Struct Reference</title>
+<title>Limbo: GdfParser::PathObj Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,133 +88,88 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00394.html">DefParser</a></li><li class="navelem"><a class="el" href="a00193.html">Pin</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00399.html">GdfParser</a></li><li class="navelem"><a class="el" href="a00193.html">PathObj</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00453.html">List of all members</a>  </div>
+<a href="a00475.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">DefParser::Pin Struct Reference</div>  </div>
+<div class="title">GdfParser::PathObj Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>pin of node/cell  
+<p>object on a path  
  <a href="a00193.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00319_source.html">DefDataBase.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00324_source.html">GdfDataBase.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for DefParser::Pin:</div>
+Inheritance diagram for GdfParser::PathObj:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="a00193.png" usemap="#DefParser::Pin_map" alt=""/>
-  <map id="DefParser::Pin_map" name="DefParser::Pin_map">
-<area href="a00139.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures." alt="DefParser::Item" shape="rect" coords="0,0,98,24"/>
+  <img src="a00193.png" usemap="#GdfParser::PathObj_map" alt=""/>
+  <map id="GdfParser::PathObj_map" name="GdfParser::PathObj_map">
+<area href="a00137.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures." alt="GdfParser::Item" shape="rect" coords="0,0,121,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a62b44a62f02daa3306d5f231b380c43f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#a62b44a62f02daa3306d5f231b380c43f">PathObjTypeEnum</a> { <b>SEGMENT</b>, 
+<b>VIA</b>, 
+<b>STRING</b>, 
+<b>UNKNOWN</b>
+ }</td></tr>
+<tr class="memdesc:a62b44a62f02daa3306d5f231b380c43f"><td class="mdescLeft">&#160;</td><td class="mdescRight">type of path object <br/></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2a99225dd1aff582cbfba052263d7697"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a99225dd1aff582cbfba052263d7697"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#a2a99225dd1aff582cbfba052263d7697">reset</a> ()</td></tr>
-<tr class="memdesc:a2a99225dd1aff582cbfba052263d7697"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br/></td></tr>
-<tr class="memitem:aa1239df2d84597c3e3bff7aa7b472b1f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#aa1239df2d84597c3e3bff7aa7b472b1f">print</a> (ostringstream &amp;ss) const </td></tr>
-<tr class="memdesc:aa1239df2d84597c3e3bff7aa7b472b1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">print data members  <a href="#aa1239df2d84597c3e3bff7aa7b472b1f"></a><br/></td></tr>
+<tr class="memitem:a0b3c9aafdaa899ba7f1fd974204ff087"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b3c9aafdaa899ba7f1fd974204ff087"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#a0b3c9aafdaa899ba7f1fd974204ff087">PathObj</a> ()</td></tr>
+<tr class="memdesc:a0b3c9aafdaa899ba7f1fd974204ff087"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br/></td></tr>
+<tr class="memitem:a87d79db9be0eae72c8584571e840cc38"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a87d79db9be0eae72c8584571e840cc38"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#a87d79db9be0eae72c8584571e840cc38">reset</a> ()</td></tr>
+<tr class="memdesc:a87d79db9be0eae72c8584571e840cc38"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br/></td></tr>
+<tr class="inherit_header pub_methods_a00137"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00137')"><img src="closed.png" alt="-"/>&nbsp;Public Member Functions inherited from <a class="el" href="a00137.html">GdfParser::Item</a></td></tr>
+<tr class="memitem:aeb2483225aca5843a2285910c089bcb4 inherit pub_methods_a00137"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb2483225aca5843a2285910c089bcb4"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#aeb2483225aca5843a2285910c089bcb4">print</a> (ostream &amp;) const </td></tr>
+<tr class="memdesc:aeb2483225aca5843a2285910c089bcb4 inherit pub_methods_a00137"><td class="mdescLeft">&#160;</td><td class="mdescRight">print data members <br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a8262f65071c8e6baf70bd843b5db37e5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8262f65071c8e6baf70bd843b5db37e5"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#a8262f65071c8e6baf70bd843b5db37e5">pin_name</a></td></tr>
-<tr class="memdesc:a8262f65071c8e6baf70bd843b5db37e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">pin name <br/></td></tr>
-<tr class="memitem:a8834d9fabe0161ee2f3b5874560eb108"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8834d9fabe0161ee2f3b5874560eb108"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#a8834d9fabe0161ee2f3b5874560eb108">net_name</a></td></tr>
-<tr class="memdesc:a8834d9fabe0161ee2f3b5874560eb108"><td class="mdescLeft">&#160;</td><td class="mdescRight">net name <br/></td></tr>
-<tr class="memitem:ac91f4e789d2c264bf50b9ac1fa78ddbf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac91f4e789d2c264bf50b9ac1fa78ddbf"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#ac91f4e789d2c264bf50b9ac1fa78ddbf">direct</a></td></tr>
-<tr class="memdesc:ac91f4e789d2c264bf50b9ac1fa78ddbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">direction <br/></td></tr>
-<tr class="memitem:aed71283407ff6c19df543e89cca7e4f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aed71283407ff6c19df543e89cca7e4f3"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#aed71283407ff6c19df543e89cca7e4f3">status</a></td></tr>
-<tr class="memdesc:aed71283407ff6c19df543e89cca7e4f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">placement status <br/></td></tr>
-<tr class="memitem:ae5a3354b74639a9d6195bccb62698264"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5a3354b74639a9d6195bccb62698264"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#ae5a3354b74639a9d6195bccb62698264">origin</a> [2]</td></tr>
-<tr class="memdesc:ae5a3354b74639a9d6195bccb62698264"><td class="mdescLeft">&#160;</td><td class="mdescRight">offset to node origin <br/></td></tr>
-<tr class="memitem:a8d8ecac394ba21ef77e6588d74044ad8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8d8ecac394ba21ef77e6588d74044ad8"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#a8d8ecac394ba21ef77e6588d74044ad8">orient</a></td></tr>
-<tr class="memdesc:a8d8ecac394ba21ef77e6588d74044ad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">orientation <br/></td></tr>
-<tr class="memitem:a473f236219a03da1297ecb6de4c9be21"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a473f236219a03da1297ecb6de4c9be21"></a>
-vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#a473f236219a03da1297ecb6de4c9be21">vLayer</a></td></tr>
-<tr class="memdesc:a473f236219a03da1297ecb6de4c9be21"><td class="mdescLeft">&#160;</td><td class="mdescRight">layers <br/></td></tr>
-<tr class="memitem:a30b5d1dd45823db28233ecf9e86f9cdb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a30b5d1dd45823db28233ecf9e86f9cdb"></a>
-vector&lt; vector&lt; int32_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#a30b5d1dd45823db28233ecf9e86f9cdb">vBbox</a></td></tr>
-<tr class="memdesc:a30b5d1dd45823db28233ecf9e86f9cdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">bounding box on each layer <br/></td></tr>
-<tr class="memitem:a742cc24b84605c502f8fd35a51d928a6"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#a742cc24b84605c502f8fd35a51d928a6">use</a></td></tr>
+<tr class="memitem:a6fe0452a5c7a8d5f74d22d728574cf5e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6fe0452a5c7a8d5f74d22d728574cf5e"></a>
+<a class="el" href="a00193.html#a62b44a62f02daa3306d5f231b380c43f">PathObjTypeEnum</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#a6fe0452a5c7a8d5f74d22d728574cf5e">pathObjType</a></td></tr>
+<tr class="memdesc:a6fe0452a5c7a8d5f74d22d728574cf5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">path object type <br/></td></tr>
+<tr class="memitem:ac5ba08bad5b86b26a343091f6bac68f8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5ba08bad5b86b26a343091f6bac68f8"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#ac5ba08bad5b86b26a343091f6bac68f8">name</a></td></tr>
+<tr class="memdesc:ac5ba08bad5b86b26a343091f6bac68f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">only valid when pathObjType is STRING <br/></td></tr>
+<tr class="memitem:aa262b837d080e403238fea0403a31056"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa262b837d080e403238fea0403a31056"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#aa262b837d080e403238fea0403a31056">layer</a></td></tr>
+<tr class="memdesc:aa262b837d080e403238fea0403a31056"><td class="mdescLeft">&#160;</td><td class="mdescRight">layer name <br/></td></tr>
+<tr class="memitem:abe4bc14b56aebf83ff7ca65e1c6c9806"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe4bc14b56aebf83ff7ca65e1c6c9806"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#abe4bc14b56aebf83ff7ca65e1c6c9806">width</a></td></tr>
+<tr class="memdesc:abe4bc14b56aebf83ff7ca65e1c6c9806"><td class="mdescLeft">&#160;</td><td class="mdescRight">width <br/></td></tr>
+<tr class="memitem:a15e37fd8d94251141622f03fdcdc6e0a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a15e37fd8d94251141622f03fdcdc6e0a"></a>
+<a class="el" href="a00196.html">Point</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#a15e37fd8d94251141622f03fdcdc6e0a">startPoint</a></td></tr>
+<tr class="memdesc:a15e37fd8d94251141622f03fdcdc6e0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">starting point <br/></td></tr>
+<tr class="memitem:afb0bd8bf6d16d332e84ec768b9fbe360"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb0bd8bf6d16d332e84ec768b9fbe360"></a>
+<a class="el" href="a00196.html">Point</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00193.html#afb0bd8bf6d16d332e84ec768b9fbe360">endPoint</a></td></tr>
+<tr class="memdesc:afb0bd8bf6d16d332e84ec768b9fbe360"><td class="mdescLeft">&#160;</td><td class="mdescRight">not always valid <br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>pin of node/cell </p>
+<div class="textblock"><p>object on a path </p>
 
-<p>Definition at line <a class="el" href="a00319_source.html#l00121">121</a> of file <a class="el" href="a00319_source.html">DefDataBase.h</a>.</p>
-</div><h2>Member Function Documentation</h2>
-<a class="anchor" id="aa1239df2d84597c3e3bff7aa7b472b1f"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void DefParser::Pin::print </td>
-          <td>(</td>
-          <td class="paramtype">ostringstream &amp;&#160;</td>
-          <td class="paramname"><em>ss</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>print data members </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ss</td><td>output stream </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented from <a class="el" href="a00139.html#af12e8991274e6d222ecad5d7284c86f1">DefParser::Item</a>.</p>
-
-<p>Definition at line <a class="el" href="a00319_source.html#l00143">143</a> of file <a class="el" href="a00319_source.html">DefDataBase.h</a>.</p>
-
-</div>
-</div>
-<h2>Member Data Documentation</h2>
-<a class="anchor" id="a742cc24b84605c502f8fd35a51d928a6"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">string DefParser::Pin::use</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>"use" token in DEF file </p>
-
-<p>Definition at line <a class="el" href="a00319_source.html#l00131">131</a> of file <a class="el" href="a00319_source.html">DefDataBase.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/def/adapt/<a class="el" href="a00319_source.html">DefDataBase.h</a></li>
+<p>Definition at line <a class="el" href="a00324_source.html#l00249">249</a> of file <a class="el" href="a00324_source.html">GdfDataBase.h</a>.</p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/gdf/bison/<a class="el" href="a00324_source.html">GdfDataBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

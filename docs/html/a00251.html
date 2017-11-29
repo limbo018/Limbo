@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: VerilogParser::VerilogDataBase Class Reference</title>
+<title>Limbo: limbo::solvers::VariableProperty&lt; V &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,84 +88,117 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00412.html">VerilogParser</a></li><li class="navelem"><a class="el" href="a00251.html">VerilogDataBase</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00404.html">limbo</a></li><li class="navelem"><a class="el" href="a00412.html">solvers</a></li><li class="navelem"><a class="el" href="a00251.html">VariableProperty</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="a00646.html">List of all members</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="a00630.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">VerilogParser::VerilogDataBase Class Reference</div>  </div>
+<div class="title">limbo::solvers::VariableProperty&lt; V &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Base class for verilog database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  
+<p>Describe properties of a variable.  
  <a href="a00251.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00339_source.html">VerilogDataBase.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for VerilogParser::VerilogDataBase:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="a00251.png" usemap="#VerilogParser::VerilogDataBase_map" alt=""/>
-  <map id="VerilogParser::VerilogDataBase_map" name="VerilogParser::VerilogDataBase_map">
-<area href="a00252.html" title="Custom class that inheritates VerilogParser::VerilogDataBase with all the required callbacks defined..." alt="VerilogDataBase" shape="rect" coords="0,56,192,80"/>
-</map>
- </div></div>
+<p><code>#include &lt;<a class="el" href="a00355_source.html">Solvers.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a7cebf9dda2b4e37f7f30a60ce1b7b981"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7cebf9dda2b4e37f7f30a60ce1b7b981"></a>
+typedef V&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a></td></tr>
+<tr class="memdesc:a7cebf9dda2b4e37f7f30a60ce1b7b981"><td class="mdescLeft">&#160;</td><td class="mdescRight">type of bounds <br/></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a85d1dff205210c7a46ff1d8341599adf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a85d1dff205210c7a46ff1d8341599adf">verilog_instance_cbk</a> (std::string const &amp;macro_name, std::string const &amp;inst_name, std::vector&lt; <a class="el" href="a00169.html">NetPin</a> &gt; const &amp;vNetPin)=0</td></tr>
-<tr class="memdesc:a85d1dff205210c7a46ff1d8341599adf"><td class="mdescLeft">&#160;</td><td class="mdescRight">read an instance.  <a href="#a85d1dff205210c7a46ff1d8341599adf"></a><br/></td></tr>
-<tr class="memitem:aac47e42ce2ae3ffc298cd30cfffae6ab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#aac47e42ce2ae3ffc298cd30cfffae6ab">verilog_net_declare_cbk</a> (std::string const &amp;net_name, <a class="el" href="a00212.html">Range</a> const &amp;range)=0</td></tr>
-<tr class="memdesc:aac47e42ce2ae3ffc298cd30cfffae6ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">read an net declaration  <a href="#aac47e42ce2ae3ffc298cd30cfffae6ab"></a><br/></td></tr>
-<tr class="memitem:abe2deb86c9faafef608c6bb1b649b8da"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#abe2deb86c9faafef608c6bb1b649b8da">verilog_pin_declare_cbk</a> (std::string const &amp;pin_name, unsigned type, <a class="el" href="a00212.html">Range</a> const &amp;range)=0</td></tr>
-<tr class="memdesc:abe2deb86c9faafef608c6bb1b649b8da"><td class="mdescLeft">&#160;</td><td class="mdescRight">read an pin declaration  <a href="#abe2deb86c9faafef608c6bb1b649b8da"></a><br/></td></tr>
-<tr class="memitem:a747bab49342db2a3aba49e659a0f75e0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a747bab49342db2a3aba49e659a0f75e0">verilog_assignment_cbk</a> (std::string const &amp;target_name, <a class="el" href="a00212.html">Range</a> const &amp;target_range, std::string const &amp;source_name, <a class="el" href="a00212.html">Range</a> const &amp;source_range)</td></tr>
-<tr class="memdesc:a747bab49342db2a3aba49e659a0f75e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">read an assignment  <a href="#a747bab49342db2a3aba49e659a0f75e0"></a><br/></td></tr>
+<tr class="memitem:a30d4a8048a436475b427ac78a29a4a91"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a30d4a8048a436475b427ac78a29a4a91">VariableProperty</a> (<a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> lb, <a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> ub, <a class="el" href="a00412.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> nt, std::string const &amp;n)</td></tr>
+<tr class="memdesc:a30d4a8048a436475b427ac78a29a4a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a30d4a8048a436475b427ac78a29a4a91"></a><br/></td></tr>
+<tr class="memitem:adea30cb340ef1b7f76b0da0290a1f39c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#adea30cb340ef1b7f76b0da0290a1f39c">VariableProperty</a> (<a class="el" href="a00251.html">VariableProperty</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:adea30cb340ef1b7f76b0da0290a1f39c"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#adea30cb340ef1b7f76b0da0290a1f39c"></a><br/></td></tr>
+<tr class="memitem:a4ae92a5786a72be68b5faca4e360b7a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00251.html">VariableProperty</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a4ae92a5786a72be68b5faca4e360b7a9">operator=</a> (<a class="el" href="a00251.html">VariableProperty</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:a4ae92a5786a72be68b5faca4e360b7a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment  <a href="#a4ae92a5786a72be68b5faca4e360b7a9"></a><br/></td></tr>
+<tr class="memitem:ad39f7adfa92f656110de7d61edfa6dcd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#ad39f7adfa92f656110de7d61edfa6dcd">lowerBound</a> () const </td></tr>
+<tr class="memitem:a0a8ea6e66969772b37e1fad817650223"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a0a8ea6e66969772b37e1fad817650223">setLowerBound</a> (<a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> lb)</td></tr>
+<tr class="memitem:a15245662f00ad20414c3f5252682c142"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a15245662f00ad20414c3f5252682c142">updateLowerBound</a> (<a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> lb)</td></tr>
+<tr class="memitem:a56912fe136d3375370e2440ada6cbf39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a56912fe136d3375370e2440ada6cbf39">upperBound</a> () const </td></tr>
+<tr class="memitem:ad31437fa42f498c977970bbe2a712db3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#ad31437fa42f498c977970bbe2a712db3">setUpperBound</a> (<a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> ub)</td></tr>
+<tr class="memitem:a232100a3ff85c375e27fe942e589a732"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a232100a3ff85c375e27fe942e589a732">updateUpperBound</a> (<a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> ub)</td></tr>
+<tr class="memitem:ab16619dfd3eb700835af1a43b1c685c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00412.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#ab16619dfd3eb700835af1a43b1c685c7">numericType</a> () const </td></tr>
+<tr class="memitem:acda73437599f622e8ca1701ca5eafacf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#acda73437599f622e8ca1701ca5eafacf">setNumericType</a> (<a class="el" href="a00412.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> nt)</td></tr>
+<tr class="memitem:a847aa35bc3b4006834fc22285f84d471"><td class="memItemLeft" align="right" valign="top">std::string const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a847aa35bc3b4006834fc22285f84d471">name</a> () const </td></tr>
+<tr class="memitem:a6fab758ec2b0e6f27da4e82b7d9aa063"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a6fab758ec2b0e6f27da4e82b7d9aa063">setName</a> (std::string const &amp;n)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aa856e3202cfa0c439136aaf1b3757ff8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#aa856e3202cfa0c439136aaf1b3757ff8">verilog_user_cbk_reminder</a> (const char *str) const </td></tr>
-<tr class="memdesc:aa856e3202cfa0c439136aaf1b3757ff8"><td class="mdescLeft">&#160;</td><td class="mdescRight">remind users to define some optional callback functions at runtime  <a href="#aa856e3202cfa0c439136aaf1b3757ff8"></a><br/></td></tr>
+<tr class="memitem:a9a8cfa1f0625a97962c6981e6efc6db4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a9a8cfa1f0625a97962c6981e6efc6db4">copy</a> (<a class="el" href="a00251.html">VariableProperty</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:a9a8cfa1f0625a97962c6981e6efc6db4"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy object  <a href="#a9a8cfa1f0625a97962c6981e6efc6db4"></a><br/></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a91b7b25d3d59782379b479adfd2ea899"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91b7b25d3d59782379b479adfd2ea899"></a>
+<a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a91b7b25d3d59782379b479adfd2ea899">m_lowerBound</a></td></tr>
+<tr class="memdesc:a91b7b25d3d59782379b479adfd2ea899"><td class="mdescLeft">&#160;</td><td class="mdescRight">lower bound <br/></td></tr>
+<tr class="memitem:a81ed00b4fa60eef5ba92cffbb5d8c10f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a81ed00b4fa60eef5ba92cffbb5d8c10f"></a>
+<a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a81ed00b4fa60eef5ba92cffbb5d8c10f">m_upperBound</a></td></tr>
+<tr class="memdesc:a81ed00b4fa60eef5ba92cffbb5d8c10f"><td class="mdescLeft">&#160;</td><td class="mdescRight">upper bound <br/></td></tr>
+<tr class="memitem:af92f863d4c96b048dac7b00821fe46fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af92f863d4c96b048dac7b00821fe46fd"></a>
+<a class="el" href="a00412.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#af92f863d4c96b048dac7b00821fe46fd">m_numericType</a></td></tr>
+<tr class="memdesc:af92f863d4c96b048dac7b00821fe46fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">numeric type, BINARY, INTEGER, CONTINUOUS <br/></td></tr>
+<tr class="memitem:af21752b2a1da23b1a579012e490ed1e0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af21752b2a1da23b1a579012e490ed1e0"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#af21752b2a1da23b1a579012e490ed1e0">m_name</a></td></tr>
+<tr class="memdesc:af21752b2a1da23b1a579012e490ed1e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">name of variable <br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Base class for verilog database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined. </p>
+<div class="textblock"><h3>template&lt;typename V&gt;<br/>
+class limbo::solvers::VariableProperty&lt; V &gt;</h3>
 
-<p>Definition at line <a class="el" href="a00339_source.html#l00136">136</a> of file <a class="el" href="a00339_source.html">VerilogDataBase.h</a>.</p>
-</div><h2>Member Function Documentation</h2>
-<a class="anchor" id="a747bab49342db2a3aba49e659a0f75e0"></a>
+<p>Describe properties of a variable. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">V</td><td>type of variable bound </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00355_source.html#l00234">234</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
+</div><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a30d4a8048a436475b427ac78a29a4a91"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void VerilogParser::VerilogDataBase::verilog_assignment_cbk </td>
+          <td class="memname"><a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::<a class="el" href="a00251.html">VariableProperty</a> </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td>
+          <td class="paramname"><em>lb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td>
+          <td class="paramname"><em>ub</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00412.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td>
+          <td class="paramname"><em>nt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>target_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00212.html">Range</a> const &amp;&#160;</td>
-          <td class="paramname"><em>target_range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>source_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00212.html">Range</a> const &amp;&#160;</td>
-          <td class="paramname"><em>source_range</em>&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -175,218 +208,458 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>read an assignment </p>
-<p>assign exu_mmu_early_va_e[0] = exu_mmu_early_va_e[0];</p>
+<p>constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">target_name</td><td>name of left hand side </td></tr>
-    <tr><td class="paramname">target_range</td><td>range of left hand side, negative infinity if either low or high value of the range is not defined </td></tr>
-    <tr><td class="paramname">source_name</td><td>name of right hand side </td></tr>
-    <tr><td class="paramname">source_range</td><td>range of right hand side, negative infinity if either low or high value of the range is not defined </td></tr>
+    <tr><td class="paramname">lb</td><td>lower bound </td></tr>
+    <tr><td class="paramname">ub</td><td>upper bound </td></tr>
+    <tr><td class="paramname">nt</td><td>numeric type </td></tr>
+    <tr><td class="paramname">n</td><td>name </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="a00252.html#ab45a705d25cad3d68714d5da2823fd3d">VerilogDataBase</a>.</p>
+<p>Definition at line <a class="el" href="a00355_source.html#l00245">245</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a85d1dff205210c7a46ff1d8341599adf"></a>
+<a class="anchor" id="adea30cb340ef1b7f76b0da0290a1f39c"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void VerilogParser::VerilogDataBase::verilog_instance_cbk </td>
+          <td class="memname"><a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::<a class="el" href="a00251.html">VariableProperty</a> </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>macro_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="a00251.html">VariableProperty</a>&lt; V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>inst_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="a00169.html">NetPin</a> &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vNetPin</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>read an instance. </p>
-<p>NOR2_X1 u2 ( .a(n1), .b(n3), .o(n2) );</p>
+<p>copy constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">macro_name</td><td>standard cell type or module name </td></tr>
-    <tr><td class="paramname">inst_name</td><td>instance name </td></tr>
-    <tr><td class="paramname">vNetPin</td><td>array of pairs of net and pin </td></tr>
+    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="a00252.html#a94a49ea6209dfba66cfa23c72489dacb">VerilogDataBase</a>.</p>
+<p>Definition at line <a class="el" href="a00355_source.html#l00254">254</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aac47e42ce2ae3ffc298cd30cfffae6ab"></a>
+<h2>Member Function Documentation</h2>
+<a class="anchor" id="a9a8cfa1f0625a97962c6981e6efc6db4"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void VerilogParser::VerilogDataBase::verilog_net_declare_cbk </td>
+          <td class="memname">void <a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::copy </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>net_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="a00251.html">VariableProperty</a>&lt; V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00212.html">Range</a> const &amp;&#160;</td>
-          <td class="paramname"><em>range</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>read an net declaration </p>
-<p>wire aaa[1];</p>
+<p>copy object </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">net_name</td><td>net name </td></tr>
-    <tr><td class="paramname">range</td><td>net range, negative infinity if either low or high value of the range is not defined </td></tr>
+    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="a00252.html#aee51b8c90fd42b7344449af1fcea55da">VerilogDataBase</a>.</p>
+<p>Definition at line <a class="el" href="a00355_source.html#l00299">299</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="abe2deb86c9faafef608c6bb1b649b8da"></a>
+<a class="anchor" id="ad39f7adfa92f656110de7d61edfa6dcd"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void VerilogParser::VerilogDataBase::verilog_pin_declare_cbk </td>
+          <td class="memname"><a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> <a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::lowerBound </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>pin_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00212.html">Range</a> const &amp;&#160;</td>
-          <td class="paramname"><em>range</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>read an pin declaration </p>
-<p>input inp2;</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pin_name</td><td>pin name </td></tr>
-    <tr><td class="paramname">type</td><td>type of pin, refer to <a class="el" href="a00412.html#a98b5f8be4ea6190a3cfe6a36d979b16f">VerilogParser::PinType</a> </td></tr>
-    <tr><td class="paramname">range</td><td>pin range, negative infinity if either low or high value of the range is not defined </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="a00252.html#ab8a2661bf6fa167a08110171abc0a000">VerilogDataBase</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa856e3202cfa0c439136aaf1b3757ff8"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VerilogParser::VerilogDataBase::verilog_user_cbk_reminder </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>lower bound </dd></dl>
+
+<p>Definition at line <a class="el" href="a00355_source.html#l00268">268</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a847aa35bc3b4006834fc22285f84d471"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string const&amp; <a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>name of variable </dd></dl>
+
+<p>Definition at line <a class="el" href="a00355_source.html#l00292">292</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab16619dfd3eb700835af1a43b1c685c7"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00412.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> <a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::numericType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>numeric type </dd></dl>
+
+<p>Definition at line <a class="el" href="a00355_source.html#l00280">280</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4ae92a5786a72be68b5faca4e360b7a9"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00251.html">VariableProperty</a>&amp; <a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00251.html">VariableProperty</a>&lt; V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>remind users to define some optional callback functions at runtime </p>
+<p>assignment </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">str</td><td>message including the information to the callback function in the reminder </td></tr>
+    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
   </table>
   </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="a00355_source.html#l00260">260</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0a8ea6e66969772b37e1fad817650223"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::setLowerBound </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td>
+          <td class="paramname"><em>lb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lb</td><td>lower bound </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00355_source.html#l00270">270</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6fab758ec2b0e6f27da4e82b7d9aa063"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::setName </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>name </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00355_source.html#l00294">294</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acda73437599f622e8ca1701ca5eafacf"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::setNumericType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00412.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td>
+          <td class="paramname"><em>nt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nt</td><td>numeric type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00355_source.html#l00282">282</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad31437fa42f498c977970bbe2a712db3"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::setUpperBound </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td>
+          <td class="paramname"><em>ub</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ub</td><td>upper bound </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00355_source.html#l00276">276</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a15245662f00ad20414c3f5252682c142"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::updateLowerBound </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td>
+          <td class="paramname"><em>lb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lb</td><td>lower bound </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00355_source.html#l00272">272</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a232100a3ff85c375e27fe942e589a732"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::updateUpperBound </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td>
+          <td class="paramname"><em>ub</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ub</td><td>upper bound </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00355_source.html#l00278">278</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a56912fe136d3375370e2440ada6cbf39"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00251.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> <a class="el" href="a00251.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::upperBound </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>upper bound </dd></dl>
+
+<p>Definition at line <a class="el" href="a00355_source.html#l00274">274</a> of file <a class="el" href="a00355_source.html">Solvers.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/verilog/bison/<a class="el" href="a00339_source.html">VerilogDataBase.h</a></li>
+<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00355_source.html">Solvers.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

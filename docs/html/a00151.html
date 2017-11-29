@@ -88,7 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00401.html">limbo</a></li><li class="navelem"><a class="el" href="a00402.html">algorithms</a></li><li class="navelem"><a class="el" href="a00403.html">coloring</a></li><li class="navelem"><a class="el" href="a00151.html">LPColoring</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00404.html">limbo</a></li><li class="navelem"><a class="el" href="a00405.html">algorithms</a></li><li class="navelem"><a class="el" href="a00406.html">coloring</a></li><li class="navelem"><a class="el" href="a00151.html">LPColoring</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -97,13 +97,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="a00536.html">List of all members</a>  </div>
+<a href="a00539.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">limbo::algorithms::coloring::LPColoring&lt; GraphType &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="a00285_source.html">LPColoring.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00286_source.html">LPColoring.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;:</div>
 <div class="dyncontent">
@@ -118,8 +118,8 @@ Inheritance diagram for limbo::algorithms::coloring::LPColoring&lt; GraphType &g
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00049.html">ConstrVariableInfo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">information for a variable of a constraint  <a href="a00049.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00174.html">NonIntegerInfo</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">records the information of non-integer values  <a href="a00174.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00175.html">NonIntegerInfo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">records the information of non-integer values  <a href="a00175.html#details">More...</a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -233,7 +233,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a001
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00151.html#ac816edf8e6d05219696794e2b82c670c">post_refinement</a> ()</td></tr>
 <tr class="memdesc:ac816edf8e6d05219696794e2b82c670c"><td class="mdescLeft">&#160;</td><td class="mdescRight">greedy final coloring refinement <br/></td></tr>
 <tr class="memitem:a36437a40ff5f50037479c3b850c9f09e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00151.html#a36437a40ff5f50037479c3b850c9f09e">refine_color</a> (graph_edge_type const &amp;e)</td></tr>
-<tr class="memitem:a9b4651ad09b5f3e06fcfaa09d1186289"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00151.html#a9b4651ad09b5f3e06fcfaa09d1186289">non_integer_num</a> (vector&lt; GRBVar &gt; const &amp;vColorBits, vector&lt; GRBVar &gt; const &amp;vEdgeBits, <a class="el" href="a00174.html">NonIntegerInfo</a> &amp;info) const </td></tr>
+<tr class="memitem:a9b4651ad09b5f3e06fcfaa09d1186289"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00151.html#a9b4651ad09b5f3e06fcfaa09d1186289">non_integer_num</a> (vector&lt; GRBVar &gt; const &amp;vColorBits, vector&lt; GRBVar &gt; const &amp;vEdgeBits, <a class="el" href="a00175.html">NonIntegerInfo</a> &amp;info) const </td></tr>
 <tr class="memitem:a659aa3b5386e607a9a8d9dc8fe470cb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00151.html#a659aa3b5386e607a9a8d9dc8fe470cb0">non_integer_num</a> (vector&lt; GRBVar &gt; const &amp;vVariables, uint32_t &amp;nonIntegerNum, uint32_t &amp;halfIntegerNum) const </td></tr>
 <tr class="memitem:a0ead84764071395a2d918f1c59e7df14"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00151.html#a0ead84764071395a2d918f1c59e7df14">is_integer</a> (double value) const </td></tr>
 <tr class="memitem:ab7d3ba7d0610a15caaf46f6fed48ca34"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00151.html#ab7d3ba7d0610a15caaf46f6fed48ca34">check_precolored_num</a> (vector&lt; <a class="el" href="a00151.html">LPColoring</a>&lt; GraphType &gt;::graph_vertex_type &gt; const &amp;vVertex) const </td></tr>
@@ -280,7 +280,7 @@ class limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;</h3>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00067">67</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00067">67</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 </div><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac7b93edfb015c95529c5580492274f76"></a>
 <div class="memitem">
@@ -307,7 +307,7 @@ template&lt;typename GraphType &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00229">229</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00229">229</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -356,7 +356,7 @@ template&lt;typename GraphType &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00511">511</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00511">511</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -404,7 +404,7 @@ template&lt;typename GraphType &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00484">484</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00484">484</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -452,7 +452,7 @@ template&lt;typename GraphType &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00466">466</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00466">466</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -487,7 +487,7 @@ template&lt;typename GraphType &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00675">675</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00675">675</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -523,7 +523,7 @@ template&lt;typename GraphType &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>number of precolored vertices </dd></dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00911">911</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00911">911</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -554,7 +554,7 @@ template&lt;typename GraphType &gt; </div>
 
 <p>Implements <a class="el" href="a00036.html#ade09fcc370a3aa87ed109e1b9e82d00d">limbo::algorithms::coloring::Coloring&lt; GraphType &gt;</a>.</p>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00579">579</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00579">579</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -600,7 +600,7 @@ template&lt;typename GraphType&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00239">239</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00239">239</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -636,7 +636,7 @@ template&lt;typename GraphType&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if value is an integer </dd></dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00214">214</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00214">214</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -664,7 +664,7 @@ template&lt;typename GraphType&gt; </div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>number of LP iterations </dd></dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00138">138</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00138">138</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -692,7 +692,7 @@ template&lt;typename GraphType &gt; </div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the vertex with the largest degree </dd></dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00332">332</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00332">332</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -720,7 +720,7 @@ template&lt;typename GraphType&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00174.html">NonIntegerInfo</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="a00175.html">NonIntegerInfo</a> &amp;&#160;</td>
           <td class="paramname"><em>info</em>&#160;</td>
         </tr>
         <tr>
@@ -821,7 +821,7 @@ template&lt;typename GraphType &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00921">921</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00921">921</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -857,7 +857,7 @@ template&lt;typename GraphType&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if found a coloring solution to resolve conflicts </dd></dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00819">819</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00819">819</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -911,7 +911,7 @@ template&lt;typename GraphType &gt; </div>
 </dl>
 <p>optimal rounding based on the binding analysis but only a part of all vertices can be rounded </p>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00691">691</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00691">691</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -946,7 +946,7 @@ template&lt;typename GraphType &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00451">451</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00451">451</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -1006,7 +1006,7 @@ template&lt;typename GraphType &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00350">350</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00350">350</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -1043,7 +1043,7 @@ template&lt;typename GraphType &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00552">552</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00552">552</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
@@ -1071,17 +1071,17 @@ template&lt;typename GraphType&gt; </div>
 <p>members </p>
 <p>record whether a vertex has already been handled by an odd cycle </p>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00222">222</a> of file <a class="el" href="a00285_source.html">LPColoring.h</a>.</p>
+<p>Definition at line <a class="el" href="a00286_source.html#l00222">222</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/algorithms/coloring/<a class="el" href="a00285_source.html">LPColoring.h</a></li>
+<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/algorithms/coloring/<a class="el" href="a00286_source.html">LPColoring.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

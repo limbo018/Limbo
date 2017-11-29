@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/test/programoptions/test_ProgramOptions_simple.cpp Source File</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/test/parsers/tf/test_spirit.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,70 +86,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_f514db011ff99ebed7755d821826dd44.html">programoptions</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_812c36ca5e7cbe86d4d7cbe0e4b93100.html">parsers</a></li><li class="navelem"><a class="el" href="dir_1198be97546e8cb6c36a5d30db616a1c.html">tf</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">test_ProgramOptions_simple.cpp</div>  </div>
+<div class="title">test_spirit.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00380.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00345.html" title="Top API for Limbo.ProgramOptions.">limbo/programoptions/ProgramOptions.h</a>&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00339.html" title="tf parser for technology file">limbo/parsers/tf/spirit/TfParser.h</a>&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="code" href="a00380.html#a3c04138a5bfe5d72780bb7e82a18e627">   19</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00357.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">using</span> std::cout;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">using</span> std::endl;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">using</span> std::string;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="code" href="a00241.html">   19</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00241.html" title="Custom class that inheritates TfParser::TfDataBase with all the required callbacks defined...">TfDataBase</a> : <span class="keyword">public</span> <a class="code" href="a00240.html" title="Base class for tf database. Only pure virtual functions are defined. User needs to inheritate this cl...">TfParser::TfDataBase</a></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">bool</span> help = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">int</span> i = 0;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">double</span> fp = 0;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    std::vector&lt;int&gt; vInteger;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">typedef</span> <a class="code" href="a00210.html" title="top API to parse program options">limbo::programoptions::ProgramOptions</a> po_type;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">using</span> <a class="code" href="a00244.html" title="a generic class for various data values">limbo::programoptions::Value</a>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    po_type desc (<span class="stringliteral">&quot;My options&quot;</span>);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">// add user-defined options</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    desc.add_option(Value&lt;bool&gt;(<span class="stringliteral">&quot;-help&quot;</span>, &amp;help, <span class="stringliteral">&quot;print help message&quot;</span>).toggle(<span class="keyword">true</span>).default_value(<span class="keyword">false</span>).toggle_value(<span class="keyword">true</span>).help(<span class="keyword">true</span>)) <span class="comment">// specify help option </span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        .add_option(Value&lt;int&gt;(<span class="stringliteral">&quot;-i&quot;</span>, &amp;i, <span class="stringliteral">&quot;an integer&quot;</span>).default_value(100, <span class="stringliteral">&quot;1.0.0&quot;</span>))</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        .add_option(Value&lt;double&gt;(<span class="stringliteral">&quot;-f&quot;</span>, &amp;fp, <span class="stringliteral">&quot;a floating point&quot;</span>).required(<span class="keyword">true</span>)) <span class="comment">// the floating point option is a required option, so user must provide it </span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        .add_option(Value&lt;std::vector&lt;int&gt; &gt;(<span class="stringliteral">&quot;-vi&quot;</span>, &amp;vInteger, <span class="stringliteral">&quot;vector of integers&quot;</span>))</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        ;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">try</span> </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">bool</span> flag = desc.parse(argc, argv);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">if</span> (flag) </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            std::cout &lt;&lt; <span class="stringliteral">&quot;parsing succeeded\n&quot;</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">catch</span> (std::exception&amp; e)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;parsing failed\n&quot;</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        std::cout &lt;&lt; e.what() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// print help message </span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">if</span> (help)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        std::cout &lt;&lt; desc &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">return</span> 1; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;help = &quot;</span> &lt;&lt; ((help)? <span class="stringliteral">&quot;true&quot;</span> : <span class="stringliteral">&quot;false&quot;</span>) &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;i = &quot;</span> &lt;&lt; i &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;fp = &quot;</span> &lt;&lt; fp &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;vInteger = &quot;</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">for</span> (std::vector&lt;int&gt;::const_iterator it = vInteger.begin(); it != vInteger.end(); ++it)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        std::cout &lt;&lt; *it &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    std::cout &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="code" href="a00241.html#a472c2c374d651152f216391a72e6925e">   25</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00241.html#a472c2c374d651152f216391a72e6925e" title="add layer name, layer id, layer abbreviation">add_tf_layer_id</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; s1, int32_t <span class="keyword">const</span>&amp; s2, <span class="keywordtype">string</span> <span class="keyword">const</span>&amp; s3)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        cout &lt;&lt; __func__ &lt;&lt; endl; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        cout &lt;&lt; s1 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; s2 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; s3 &lt;&lt; endl;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="code" href="a00380.html#ad346d2cc622126c018bb0954eee9b1fa">   33</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00369.html#ad346d2cc622126c018bb0954eee9b1fa" title="test 1: use function wrapper BookshelfParser::read">test1</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;////////////// test1 ////////////////&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="a00241.html" title="Custom class that inheritates TfParser::TfDataBase with all the required callbacks defined...">TfDataBase</a> db;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="a00243.html#ac4370257cf00d969472a040aefeb1884" title="API to read tf file.">TfParser::read</a>(db, filename);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="code" href="a00380.html#a3c04138a5bfe5d72780bb7e82a18e627">   44</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00359.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span> (argc &gt; 1)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="a00369.html#ad346d2cc622126c018bb0954eee9b1fa" title="test 1: use function wrapper BookshelfParser::read">test1</a>(argv[1]);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;at least 1 argument is required&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

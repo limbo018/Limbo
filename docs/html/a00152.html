@@ -88,13 +88,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00411.html">LpParser</a></li><li class="navelem"><a class="el" href="a00152.html">LpDataBase</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00414.html">LpParser</a></li><li class="navelem"><a class="el" href="a00152.html">LpDataBase</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00639.html">List of all members</a>  </div>
+<a href="a00643.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">LpParser::LpDataBase Class Reference</div>  </div>
 </div><!--header-->
@@ -103,7 +103,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Base class for lp database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  
  <a href="a00152.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00335_source.html">LpDataBase.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00336_source.html">LpDataBase.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for LpParser::LpDataBase:</div>
 <div class="dyncontent">
@@ -120,9 +120,9 @@ Inheritance diagram for LpParser::LpDataBase:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a59d7089cd4e139a73d7acdf4efd5a6aa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00152.html#a59d7089cd4e139a73d7acdf4efd5a6aa">add_variable</a> (string const &amp;vname, double l=limbo::lowest&lt; double &gt;(), double r=std::numeric_limits&lt; double &gt;::max())=0</td></tr>
 <tr class="memdesc:a59d7089cd4e139a73d7acdf4efd5a6aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">add variable that <em>l</em> &lt;= <em>vname</em> &lt;= <em>r</em>.  <a href="#a59d7089cd4e139a73d7acdf4efd5a6aa"></a><br/></td></tr>
-<tr class="memitem:a06e69b33012729ca43b282b54f0a28d2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00152.html#a06e69b33012729ca43b282b54f0a28d2">add_constraint</a> (string const &amp;cname, <a class="el" href="a00411.html#a67607fc847b49cff43493e7390764b13">TermArray</a> const &amp;terms, char compare, double constant)=0</td></tr>
+<tr class="memitem:a06e69b33012729ca43b282b54f0a28d2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00152.html#a06e69b33012729ca43b282b54f0a28d2">add_constraint</a> (string const &amp;cname, <a class="el" href="a00414.html#a67607fc847b49cff43493e7390764b13">TermArray</a> const &amp;terms, char compare, double constant)=0</td></tr>
 <tr class="memdesc:a06e69b33012729ca43b282b54f0a28d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">add constraint that <em>terms</em> <em>compare</em> <em>constant</em>.  <a href="#a06e69b33012729ca43b282b54f0a28d2"></a><br/></td></tr>
-<tr class="memitem:ac9362bd3c5c0f5611cdb492828583ef5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00152.html#ac9362bd3c5c0f5611cdb492828583ef5">add_objective</a> (bool minimize, <a class="el" href="a00411.html#a67607fc847b49cff43493e7390764b13">TermArray</a> const &amp;terms)=0</td></tr>
+<tr class="memitem:ac9362bd3c5c0f5611cdb492828583ef5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00152.html#ac9362bd3c5c0f5611cdb492828583ef5">add_objective</a> (bool minimize, <a class="el" href="a00414.html#a67607fc847b49cff43493e7390764b13">TermArray</a> const &amp;terms)=0</td></tr>
 <tr class="memdesc:ac9362bd3c5c0f5611cdb492828583ef5"><td class="mdescLeft">&#160;</td><td class="mdescRight">add object terms  <a href="#ac9362bd3c5c0f5611cdb492828583ef5"></a><br/></td></tr>
 <tr class="memitem:ac2869dbe780548dd9dfa67661a51dce3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00152.html#ac2869dbe780548dd9dfa67661a51dce3">set_integer</a> (string const &amp;vname, bool binary)=0</td></tr>
 <tr class="memdesc:ac2869dbe780548dd9dfa67661a51dce3"><td class="mdescLeft">&#160;</td><td class="mdescRight">set integer variables  <a href="#ac2869dbe780548dd9dfa67661a51dce3"></a><br/></td></tr>
@@ -130,7 +130,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Base class for lp database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined. </p>
 
-<p>Definition at line <a class="el" href="a00335_source.html#l00114">114</a> of file <a class="el" href="a00335_source.html">LpDataBase.h</a>.</p>
+<p>Definition at line <a class="el" href="a00336_source.html#l00114">114</a> of file <a class="el" href="a00336_source.html">LpDataBase.h</a>.</p>
 </div><h2>Member Function Documentation</h2>
 <a class="anchor" id="a06e69b33012729ca43b282b54f0a28d2"></a>
 <div class="memitem">
@@ -148,7 +148,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00411.html#a67607fc847b49cff43493e7390764b13">TermArray</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="a00414.html#a67607fc847b49cff43493e7390764b13">TermArray</a> const &amp;&#160;</td>
           <td class="paramname"><em>terms</em>, </td>
         </tr>
         <tr>
@@ -205,7 +205,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00411.html#a67607fc847b49cff43493e7390764b13">TermArray</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="a00414.html#a67607fc847b49cff43493e7390764b13">TermArray</a> const &amp;&#160;</td>
           <td class="paramname"><em>terms</em>&#160;</td>
         </tr>
         <tr>
@@ -332,12 +332,12 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/lp/bison/<a class="el" href="a00335_source.html">LpDataBase.h</a></li>
+<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/lp/bison/<a class="el" href="a00336_source.html">LpDataBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

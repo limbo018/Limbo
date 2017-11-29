@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/lef/adapt/LefDriver.h Source File</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/lef/adapt/LefDataBase.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,67 +91,180 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">LefDriver.h</div>  </div>
+<div class="title">LefDataBase.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00334.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifndef LEFPARSER_DRIVER_H</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LEFPARSER_DRIVER_H</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00333.html" title="Database for Lef parser.">limbo/parsers/lef/adapt/LefDataBase.h</a>&gt;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">namespace </span>LefParser {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">using</span> std::cout;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">using</span> std::endl;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">using</span> std::cerr;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">using</span> std::string; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">using</span> std::vector;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">using</span> std::pair;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">using</span> std::make_pair;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">class </span><a class="code" href="a00144.html" title="Custom class that inheritates LefParser::LefDataBase with all the required callbacks defined...">LefDataBase</a>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="a00063.html">   63</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00063.html">Driver</a></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="a00063.html#ad746575c058c662591dec556fd15fea1">Driver</a>(<a class="code" href="a00145.html" title="Base class for lef database. Only pure virtual functions are defined. User needs to inheritate this c...">LefDataBase</a>&amp; db);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    ~<a class="code" href="a00063.html">Driver</a>();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="code" href="a00063.html#a4d97736b2a73c525c9b7d9b0891f3c67">   72</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00063.html#a4d97736b2a73c525c9b7d9b0891f3c67" title="enable debug output in the flex scanner">trace_scanning</a>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="code" href="a00063.html#a8cd7abc022576c40a390dfc3a356b9b4">   75</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00063.html#a8cd7abc022576c40a390dfc3a356b9b4" title="enable debug output in the bison parser">trace_parsing</a>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="code" href="a00063.html#aef19a9c5eb7d9837be317fc99f7e728b">   78</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="a00063.html#aef19a9c5eb7d9837be317fc99f7e728b" title="stream name (file or input stream) used for error messages.">streamname</a>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00063.html#a02fa98d5c261e366ce91e86914227f20">parse_stream</a>(std::istream&amp; in,</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sname = <span class="stringliteral">&quot;stream input&quot;</span>);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00063.html#aebb355db178631df09754a99d8100984">parse_string</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; input,</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sname = <span class="stringliteral">&quot;string stream&quot;</span>);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00063.html#a581849a0810e8a3631204f1dca1a9146">parse_file</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; filename);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="comment">// To demonstrate pure handling of parse errors, instead of</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="comment">// simply dumping them on the standard error output, we will pass</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="comment">// them to the driver using the following two member functions.</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00110"></a><span class="lineno"><a class="code" href="a00063.html#a7ca7d4d398ef53df3c95685faa5a7eca">  110</a></span>&#160;    <a class="code" href="a00145.html" title="Base class for lef database. Only pure virtual functions are defined. User needs to inheritate this c...">LefDataBase</a>&amp; <a class="code" href="a00063.html#a7ca7d4d398ef53df3c95685faa5a7eca">m_db</a>;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef LEFPARSER_DATABASE_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LEFPARSER_DATABASE_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefrReader.hpp&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefwWriter.hpp&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefiDebug.hpp&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefiEncryptInt.hpp&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefiUtil.hpp&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="code" href="a00403.html">   24</a></span>&#160;<span class="keyword">namespace </span>LefParser {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">using</span> std::cout;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">using</span> std::endl;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">using</span> std::cerr;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">using</span> std::string; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">using</span> std::vector;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">using</span> std::pair;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">using</span> std::make_pair;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">using</span> std::ostringstream;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiArrayFloorPlan lefiArrayFloorPlan;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiArray lefiArray;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiNoiseVictim lefiNoiseVictim;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiNoiseResistance lefiNoiseResistance;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiNoiseEdge lefiNoiseEdge;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiNoiseTable lefiNoiseTable;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiCorrectionVictim lefiCorrectionVictim;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiCorrectionResistance lefiCorrectionResistance;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiCorrectionEdge lefiCorrectionEdge;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiCorrectionTable lefiCorrectionTable;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiAntennaPWL lefiAntennaPWL;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiLayerDensity lefiLayerDensity;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiParallel lefiParallel;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiInfluence lefiInfluence;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiTwoWidths lefiTwoWidths;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiSpacingTable lefiSpacingTable;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiOrthogonal lefiOrthogonal;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiAntennaModel lefiAntennaModel;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiLayer lefiLayer;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiObstruction lefiObstruction;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiPinAntennaModel lefiPinAntennaModel;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiPin lefiPin;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiDensity lefiDensity;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiMacro lefiMacro;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiTiming lefiTiming;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiGeometries lefiGeometries;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiSpacing lefiSpacing;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiIRDrop lefiIRDrop;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiMinFeature lefiMinFeature;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiSite lefiSite;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiSitePattern lefiSitePattern;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiTrackPattern lefiTrackPattern;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiGcellPattern lefiGcellPattern;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiUseMinSpacing lefiUseMinSpacing;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiMaxStackVia lefiMaxStackVia;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiNonDefault lefiNonDefault;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiProp lefiProp;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiPropType lefiPropType;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiUnits lefiUnits;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiViaLayer lefiViaLayer;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiVia lefiVia;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiViaRuleLayer lefiViaRuleLayer;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiViaRule lefiViaRule;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiNoiseMargin lefiNoiseMargin;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiGeomRect lefiGeomRect;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiGeomRectIter lefiGeomRectIter;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiGeomPath lefiGeomPath;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiGeomPathIter lefiGeomPathIter;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiGeomPolygon lefiGeomPolygon;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiGeomPolygonIter lefiGeomPolygonIter;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiGeomVia lefiGeomVia;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiGeomViaIter lefiGeomViaIter;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">typedef</span> LefDefParser::lefiPoints lefiPoints;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">enum</span> lefiGeomEnum {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  lefiGeomUnknown = LefDefParser::lefiGeomUnknown,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  lefiGeomLayerE = LefDefParser::lefiGeomLayerE,</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  lefiGeomLayerExceptPgNetE = LefDefParser::lefiGeomLayerExceptPgNetE,</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  lefiGeomLayerMinSpacingE = LefDefParser::lefiGeomLayerMinSpacingE,</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  lefiGeomLayerRuleWidthE = LefDefParser::lefiGeomLayerRuleWidthE,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  lefiGeomWidthE = LefDefParser::lefiGeomWidthE,</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  lefiGeomPathE = LefDefParser::lefiGeomPathE,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  lefiGeomPathIterE = LefDefParser::lefiGeomPathIterE,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  lefiGeomRectE = LefDefParser::lefiGeomRectE,</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  lefiGeomRectIterE = LefDefParser::lefiGeomRectIterE,</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  lefiGeomPolygonE = LefDefParser::lefiGeomPolygonE,</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  lefiGeomPolygonIterE = LefDefParser::lefiGeomPolygonIterE,</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  lefiGeomViaE = LefDefParser::lefiGeomViaE,</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  lefiGeomViaIterE = LefDefParser::lefiGeomViaIterE,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  lefiGeomClassE = LefDefParser::lefiGeomClassE,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  lefiGeomEnd = LefDefParser::lefiGeomEnd</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;};</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a00400.html#acfb3427509802ca74739d10ca47b2431" title="API for LefParser. Read LEF file and initialize database by calling user-defined callback functions...">read</a>(<a class="code" href="a00145.html" title="Base class for lef database. Only pure virtual functions are defined. User needs to inheritate this c...">LefDataBase</a>&amp; db, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; lefFile);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;} <span class="comment">// namespace example</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#endif // EXAMPLE_DRIVER_H</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">// forward declaration</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="code" href="a00145.html">  123</a></span>&#160;<span class="comment"></span><span class="keyword">class </span><a class="code" href="a00145.html" title="Base class for lef database. Only pure virtual functions are defined. User needs to inheritate this c...">LefDataBase</a></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;{</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <a class="code" href="a00145.html#a5e26b79a1a8fd794d29e760d3574ed91" title="constructor">LefDataBase</a>();</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="a00145.html#a6c1849a2014c8d1cccde286aa716d2db">current_version</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a00145.html#a6c1849a2014c8d1cccde286aa716d2db">current_version</a>(<span class="keywordtype">double</span> cv);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="comment">// Although it is true that I can use pure virtual functions for all callbacks, </span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="comment">// run-time information is better than compile-time errors.</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="comment">// Because most LEF files are so simple that we only need several callbacks.  </span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="comment">// Then user does not need to provide some callbacks.</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#aa0c71bc670b443702c8775ff451e2bd3" title="set LEF version">lef_version_cbk</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#aa0c71bc670b443702c8775ff451e2bd3" title="set LEF version">lef_version_cbk</a>(<span class="keywordtype">double</span> v);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#ad47acd4c8702650bc9d327fd9524d6a1" title="set divider characters">lef_dividerchar_cbk</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a70ba6edf394e6b36514e52530c715be5" title="set case sensitive flag">lef_casesensitive_cbk</a>(<span class="keywordtype">int</span> v);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a5600c20eaf6e4993b1d42734769357b6" title="set no wire extension flag">lef_nowireextension_cbk</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a6d21ed28164ee6e7e85d920a248f9cf6" title="set manufacturing entry">lef_manufacturing_cbk</a>(<span class="keywordtype">double</span> v);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#af7f06993a72f48bc1808997d1fec5ed4" title="set use min space">lef_useminspacing_cbk</a>(lefiUseMinSpacing <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a39005c6e4fe6e151bcf0b6a5ed53548f" title="set clearance measure">lef_clearancemeasure_cbk</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#ad2cdb8844d91387a6f7e84215164f228" title="set unit">lef_units_cbk</a>(lefiUnits <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#ac274853c8bf8844102bab173757785a1" title="set bus bit characters">lef_busbitchars_cbk</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#abd21bbc391f31eda561c080ea2513030" title="add layer">lef_layer_cbk</a>(lefiLayer <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#aba5f5a175ac2b3c740a361ddb50b4688" title="max stack via">lef_maxstackvia_cbk</a>(lefiMaxStackVia <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a5ec3bbaa408f0a13a2eeffac36af08fb" title="add via">lef_via_cbk</a>(lefiVia <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a4e281374b0f48b7886c17f8cbdf29b79" title="add via rule">lef_viarule_cbk</a>(lefiViaRule <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#aab205846fb2cdf046d9cb757ed126c02" title="spacing callback">lef_spacing_cbk</a>(lefiSpacing <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a46e7338ce9d1db5673c80afb4134ef4f" title="IR drop callback.">lef_irdrop_cbk</a>(lefiIRDrop <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#af62e34a6e135d44bac751a01da5c8bc7" title="min feature callback">lef_minfeature_cbk</a>(lefiMinFeature <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#ad85ac3fb614085877d52bba02a9470e2" title="dielectric callback">lef_dielectric_cbk</a>(<span class="keywordtype">double</span> v);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a3e8b28f49c57d633645406c9df8dfc16" title="non-default rule callback">lef_nondefault_cbk</a>(lefiNonDefault <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a63bf63adb0bdf9824e6451fb4e35a340" title="site callback">lef_site_cbk</a>(lefiSite <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#aa4d9707724779d353acfa05a14c45bf8" title="macro begin callback, describe standard cell type">lef_macrobegin_cbk</a>(std::string <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#ab452b5bcb97bf3de3a273f2450fee4cc" title="macro callback, describe standard cell type">lef_macro_cbk</a>(lefiMacro <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a551bd00cf36a451978ba306d7a5b7ef8" title="pin callback, describe pins in a standard cell">lef_pin_cbk</a>(lefiPin <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a219d166204073ece5cc356a1ca55e57a" title="obstruction callback, describe obstructions in a standard cell">lef_obstruction_cbk</a>(lefiObstruction <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a60e260a732e5dc466a2e9d35e2073900" title="density callback">lef_density_cbk</a>(lefiDensity <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a1474404e37df93ab954b5895fffadcfa" title="timing callback">lef_timing_cbk</a>(lefiTiming <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a166c8ed526d5efa2c720a41f265656d8" title="array callback">lef_array_cbk</a>(lefiArray <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a3ac4e79990d4c54d2c395cbdc5a1ab54" title="property callback">lef_prop_cbk</a>(lefiProp <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#ac6caf0e640cf6cef4b7b5355e0eabe36" title="noise margin callback">lef_noisemargin_cbk</a>(lefiNoiseMargin <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#ae16b63dba9abf6154e957cf15c0be607" title="edge rate threshold 1">lef_edgeratethreshold1_cbk</a>(<span class="keywordtype">double</span> v);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#ae5877d7c8f4318cb5fdd071c0b1d9099" title="edge rate threshold 2">lef_edgeratethreshold2_cbk</a>(<span class="keywordtype">double</span> v);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#ac88e2d28f3745f62cf98bec6d13abb28" title="edge rate scale factor">lef_edgeratescalefactor_cbk</a>(<span class="keywordtype">double</span> v);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a82ac941575e72d5be2f566c103051eba" title="noise table callback">lef_noisetable_cbk</a>(lefiNoiseTable <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a0b932b28cddb8ada7a02459e882fb411" title="correction table callback">lef_correctiontable_cbk</a>(lefiCorrectionTable <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#abda13a316c6017ea46c707bbeeb6989c" title="input antenna callback">lef_inputantenna_cbk</a>(<span class="keywordtype">double</span> v);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a2ea773964df3380206814f6f5c11877d" title="output antenna callback">lef_outputantenna_cbk</a>(<span class="keywordtype">double</span> v);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#aaa8d42f41cbfa538f5008ed4403f4099" title="inout antenna callback">lef_inoutantenna_cbk</a>(<span class="keywordtype">double</span> v);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#ac8ed0517ff2dce81cec0ef34d9d6c9da" title="antenna input callback">lef_antennainput_cbk</a>(<span class="keywordtype">double</span> v);</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#af35ae5380ed8a773d7ce9d268fa36228" title="antenna output callback">lef_antennaoutput_cbk</a>(<span class="keywordtype">double</span> v);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#a0b5df0ca831d93e31b5647bbbfe5aae4" title="antenna inout callback">lef_antennainout_cbk</a>(<span class="keywordtype">double</span> v);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00145.html#aca65ab8d2739466483c718397b3708d8" title="extension callback">lef_extension_cbk</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; v);</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00263"></a><span class="lineno"><a class="code" href="a00145.html#abeee943a9a0f2eda15c2f55595f6f28a">  263</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="a00145.html#abeee943a9a0f2eda15c2f55595f6f28a">m_current_version</a>; </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00265"></a><span class="lineno"><a class="code" href="a00145.html#a526bdae7f8e6871f1ff809869ec89501">  265</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="a00145.html#a526bdae7f8e6871f1ff809869ec89501">lefNamesCaseSensitive</a>; </div>
+<div class="line"><a name="l00266"></a><span class="lineno"><a class="code" href="a00145.html#a0cac8005c7f6636bddd3a985ef6f5f54">  266</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="a00145.html#a0cac8005c7f6636bddd3a985ef6f5f54">lefrShiftCase</a>; </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <span class="keywordtype">void</span> lef_user_cbk_reminder(<span class="keyword">const</span> <span class="keywordtype">char</span>* str) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;};</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;} <span class="comment">// namespace LefParser</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

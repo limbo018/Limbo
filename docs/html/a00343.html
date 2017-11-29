@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/preprocessor/PrintMsg.h File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/preprocessor/Msg.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,73 +90,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">PrintMsg.h File Reference</div>  </div>
+<div class="title">Msg.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>functions for printing messages  
+<p>header to include <a class="el" href="a00344.html">PrintMsg.h</a> and <a class="el" href="a00342.html">AssertMsg.h</a>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;cstdarg&gt;</code><br/>
-<code>#include &lt;cassert&gt;</code><br/>
-<code>#include &lt;cstdio&gt;</code><br/>
-<code>#include &lt;cstdlib&gt;</code><br/>
-<code>#include &lt;cstring&gt;</code><br/>
+<div class="textblock"><code>#include &lt;<a class="el" href="a00344_source.html">limbo/preprocessor/PrintMsg.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00342_source.html">limbo/preprocessor/AssertMsg.h</a>&gt;</code><br/>
 </div>
 <p><a href="a00343_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00401"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00401.html">limbo</a></td></tr>
-<tr class="memdesc:a00401"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br/></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:ae5b5369b3c6f0ee1c76812225e8f6736"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00401.html#ae5b5369b3c6f0ee1c76812225e8f6736">limbo::MessageType</a> { <br/>
-&#160;&#160;<b>kNONE</b> =  0, 
-<b>kINFO</b> =  1, 
-<b>kWARN</b> =  2, 
-<b>kERROR</b> =  3, 
-<br/>
-&#160;&#160;<b>kDEBUG</b> =  4, 
-<b>kASSERT</b> =  5
-<br/>
- }</td></tr>
-<tr class="memdesc:ae5b5369b3c6f0ee1c76812225e8f6736"><td class="mdescLeft">&#160;</td><td class="mdescRight">message type for print functions <br/></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a37a146ee04f62c46abfc571e1b4c0f6b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00401.html#a37a146ee04f62c46abfc571e1b4c0f6b">limbo::limboPrint</a> (MessageType m, const char *format,...)</td></tr>
-<tr class="memdesc:a37a146ee04f62c46abfc571e1b4c0f6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">formatted print with prefix  <a href="#a37a146ee04f62c46abfc571e1b4c0f6b"></a><br/></td></tr>
-<tr class="memitem:adb42127a6e26ebeeb6392f285d23f0b6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00401.html#adb42127a6e26ebeeb6392f285d23f0b6">limbo::limboPrintStream</a> (MessageType m, FILE *stream, const char *format,...)</td></tr>
-<tr class="memdesc:adb42127a6e26ebeeb6392f285d23f0b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">formatted print with prefix to stream  <a href="#adb42127a6e26ebeeb6392f285d23f0b6"></a><br/></td></tr>
-<tr class="memitem:ac18ee515b0b256fa914cb790a88aab7f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00401.html#ac18ee515b0b256fa914cb790a88aab7f">limbo::limboVPrintStream</a> (MessageType m, FILE *stream, const char *format, va_list args)</td></tr>
-<tr class="memdesc:ac18ee515b0b256fa914cb790a88aab7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">formatted print with prefix to stream  <a href="#ac18ee515b0b256fa914cb790a88aab7f"></a><br/></td></tr>
-<tr class="memitem:a75ca3e6bc16ef5504e6cb88f43438829"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00401.html#a75ca3e6bc16ef5504e6cb88f43438829">limbo::limboSPrint</a> (MessageType m, char *buf, const char *format,...)</td></tr>
-<tr class="memdesc:a75ca3e6bc16ef5504e6cb88f43438829"><td class="mdescLeft">&#160;</td><td class="mdescRight">formatted print with prefix to buffer  <a href="#a75ca3e6bc16ef5504e6cb88f43438829"></a><br/></td></tr>
-<tr class="memitem:ad2e6c0595981e4a8c0e645ede0d7c64b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00401.html#ad2e6c0595981e4a8c0e645ede0d7c64b">limbo::limboVSPrint</a> (MessageType m, char *buf, const char *format, va_list args)</td></tr>
-<tr class="memdesc:ad2e6c0595981e4a8c0e645ede0d7c64b"><td class="mdescLeft">&#160;</td><td class="mdescRight">formatted print with prefix to buffer  <a href="#ad2e6c0595981e4a8c0e645ede0d7c64b"></a><br/></td></tr>
-<tr class="memitem:aafb29a70d6eee85ebc7ffdfe4222b43e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00401.html#aafb29a70d6eee85ebc7ffdfe4222b43e">limbo::limboSPrintPrefix</a> (MessageType m, char *prefix)</td></tr>
-<tr class="memdesc:aafb29a70d6eee85ebc7ffdfe4222b43e"><td class="mdescLeft">&#160;</td><td class="mdescRight">print prefix message to buffer  <a href="#aafb29a70d6eee85ebc7ffdfe4222b43e"></a><br/></td></tr>
-<tr class="memitem:a88090cd88eafd40cd46c270c779958d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00401.html#a88090cd88eafd40cd46c270c779958d1">limbo::limboPrintAssertMsg</a> (const char *expr, const char *fileName, unsigned lineNum, const char *funcName, const char *format,...)</td></tr>
-<tr class="memdesc:a88090cd88eafd40cd46c270c779958d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">print message for assertion failure with additional message, see <a class="el" href="a00341.html#a5e43d9f746647e2bf1154325caaaa913" title="custom assertion with message">limboAssertMsg</a>(condition, args...)  <a href="#a88090cd88eafd40cd46c270c779958d1"></a><br/></td></tr>
-<tr class="memitem:ab4cf7b3501bd2bd76c7165da6ee7af1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00401.html#ab4cf7b3501bd2bd76c7165da6ee7af1d">limbo::limboPrintAssertMsg</a> (const char *expr, const char *fileName, unsigned lineNum, const char *funcName)</td></tr>
-<tr class="memdesc:ab4cf7b3501bd2bd76c7165da6ee7af1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">print message for assertion failure without additional message, see <a class="el" href="a00341.html#aad1773afc93177ac77cdce82432d81f9" title="custom assertion without message">limboAssert(condition)</a>  <a href="#ab4cf7b3501bd2bd76c7165da6ee7af1d"></a><br/></td></tr>
-</table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>functions for printing messages </p>
+<div class="textblock"><p>header to include <a class="el" href="a00344.html">PrintMsg.h</a> and <a class="el" href="a00342.html">AssertMsg.h</a> </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Jan 2017 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00343_source.html">PrintMsg.h</a>.</p>
+<p>Definition in file <a class="el" href="a00343_source.html">Msg.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

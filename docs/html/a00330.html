@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/gdsii/stream/GdsReader.h File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/gdsii/stream/GdsDriver.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,52 +95,65 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">GdsReader.h File Reference</div>  </div>
+<div class="title">GdsDriver.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>read GDSII file  
+<p>high-level wrapper for GdsReader (deprecated)  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;string&gt;</code><br/>
-<code>#include &lt;vector&gt;</code><br/>
-<code>#include &lt;istream&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00331_source.html">limbo/parsers/gdsii/stream/GdsRecords.h</a>&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00354_source.html">limbo/string/String.h</a>&gt;</code><br/>
+<div class="textblock"><code>#include &lt;sstream&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00331_source.html">limbo/parsers/gdsii/stream/GdsReader.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00342_source.html">limbo/preprocessor/AssertMsg.h</a>&gt;</code><br/>
 </div>
 <p><a href="a00330_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00100.html">GdsParser::GdsDataBaseKernel</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kernel callbacks for <a class="el" href="a00109.html" title="read GDSII">GdsReader</a>. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks.  <a href="a00100.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00099.html">GdsParser::GdsDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><h1><a class="el" href="a00099.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks">GdsDataBase</a> redirects callbacks of <a class="el" href="a00100.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks.">GdsDataBaseKernel</a> to ascii callbacks</h1>
- <a href="a00099.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00109.html">GdsParser::GdsReader</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">read GDSII  <a href="a00109.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00093.html">GdsParser::GdsBoundary</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">internal structure to store gds information  <a href="a00093.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00115.html">GdsParser::GdsText</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII TEXT.  <a href="a00115.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00114.html">GdsParser::GdsSref</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII SREF.  <a href="a00114.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00094.html">GdsParser::GdsCell</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII cell.  <a href="a00094.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00104.html">GdsParser::GdsLib</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Top GDSII library.  <a href="a00104.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html">GdsParser::GdsDriverDataBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">database for the driver  <a href="a00103.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00102.html">GdsParser::GdsDriver</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">High-level wrapper class for <a class="el" href="a00109.html" title="read GDSII">GdsReader</a>. Everything is saved in an internal data structure and users only need to provide simple callbacks.  <a href="a00102.html#details">More...</a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00397"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00397.html">GdsParser</a></td></tr>
-<tr class="memdesc:a00397"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.GdsParser <br/></td></tr>
+<tr class="memitem:a00400"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00400.html">GdsParser</a></td></tr>
+<tr class="memdesc:a00400"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.GdsParser <br/></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a1e0c59cf7a8ce5e993805916b5aade6a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e0c59cf7a8ce5e993805916b5aade6a"></a>
+typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>GdsParser::int32_t</b></td></tr>
+<tr class="memitem:a396fe6ae3d6b36ebb76aa39cab6daf80"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a396fe6ae3d6b36ebb76aa39cab6daf80"></a>
+typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>GdsParser::uint32_t</b></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a1fe9cb2c37eee75fb7d562f367b601c8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00397.html#a1fe9cb2c37eee75fb7d562f367b601c8">GdsParser::read</a> (GdsDataBaseKernel &amp;db, std::istream &amp;fp)</td></tr>
-<tr class="memdesc:a1fe9cb2c37eee75fb7d562f367b601c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">read from stream  <a href="#a1fe9cb2c37eee75fb7d562f367b601c8"></a><br/></td></tr>
-<tr class="memitem:a2af2b04527c8b24ee3eebc3d7e27d503"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00397.html#a2af2b04527c8b24ee3eebc3d7e27d503">GdsParser::read</a> (GdsDataBaseKernel &amp;db, string const &amp;filename)</td></tr>
-<tr class="memdesc:a2af2b04527c8b24ee3eebc3d7e27d503"><td class="mdescLeft">&#160;</td><td class="mdescRight">read from file  <a href="#a2af2b04527c8b24ee3eebc3d7e27d503"></a><br/></td></tr>
+<tr class="memitem:a9eef18021b9c81cdf78f3c9efcd4f366"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00400.html#a9eef18021b9c81cdf78f3c9efcd4f366">GdsParser::read</a> (GdsDriverDataBase &amp;db, string const &amp;filename)</td></tr>
+<tr class="memdesc:a9eef18021b9c81cdf78f3c9efcd4f366"><td class="mdescLeft">&#160;</td><td class="mdescRight">API function for <a class="el" href="a00102.html" title="High-level wrapper class for GdsReader. Everything is saved in an internal data structure and users o...">GdsDriver</a>.  <a href="#a9eef18021b9c81cdf78f3c9efcd4f366"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>read GDSII file </p>
+<div class="textblock"><p>high-level wrapper for GdsReader (deprecated) </p>
+<p>Try to mimic same callback functions in GdsTxtParser. There will be many self-included classes for temporary storage. This class is more convenient but less general.</p>
+<p>See a general wrapper in <a class="el" href="a00326.html">GdsIO.h</a></p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Nov 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00330_source.html">GdsReader.h</a>.</p>
+<p>Definition in file <a class="el" href="a00330_source.html">GdsDriver.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

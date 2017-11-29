@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/algorithms/GraphUtility.h File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/algorithms/coloring/SDPColoringCsdp.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,66 +86,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li><li class="navelem"><a class="el" href="dir_eec373e4006d7befdff7678452c20bc3.html">coloring</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">GraphUtility.h File Reference</div>  </div>
+<div class="title">SDPColoringCsdp.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>some graph utilities such as compute complement graph and graphviz writer.  
+<p>graph coloring algorithm based on semidefinite programming (SDP)  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;fstream&gt;</code><br/>
-<code>#include &lt;string&gt;</code><br/>
-<code>#include &lt;algorithm&gt;</code><br/>
-<code>#include &lt;map&gt;</code><br/>
-<code>#include &lt;boost/graph/graph_concepts.hpp&gt;</code><br/>
-<code>#include &lt;boost/graph/iteration_macros.hpp&gt;</code><br/>
+<div class="textblock"><code>#include &lt;<a class="el" href="a00356_source.html">limbo/string/String.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00282_source.html">limbo/algorithms/coloring/GraphSimplification.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00281_source.html">limbo/algorithms/coloring/Coloring.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00279_source.html">limbo/algorithms/coloring/BacktrackColoring.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00294_source.html">limbo/algorithms/partition/FMMultiWay.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00297_source.html">limbo/containers/DisjointSet.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00347_source.html">limbo/solvers/api/CsdpEasySdpApi.h</a>&gt;</code><br/>
 </div>
 <p><a href="a00289_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00253.html">limbo::algorithms::VertexLabelWriter&lt; GraphType &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">default <a class="el" href="a00253.html" title="default VertexLabelWriter for write_graph">VertexLabelWriter</a> for write_graph  <a href="a00253.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00076.html">limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">default <a class="el" href="a00076.html" title="default EdgeLabelWriter for write_graph">EdgeLabelWriter</a> for write_graph  <a href="a00076.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00224.html">limbo::algorithms::coloring::SDPColoringCsdp&lt; GraphType &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00086.html">limbo::algorithms::coloring::SDPColoringCsdp&lt; GraphType &gt;::FMGainCalcType</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00401"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00401.html">limbo</a></td></tr>
-<tr class="memdesc:a00401"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br/></td></tr>
-<tr class="memitem:a00402"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00402.html">limbo::algorithms</a></td></tr>
-<tr class="memdesc:a00402"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.algorithms <br/></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a2af6b313cfb9ba38dbae88518884f7d6"><td class="memTemplParams" colspan="2">template&lt;typename GraphType &gt; </td></tr>
-<tr class="memitem:a2af6b313cfb9ba38dbae88518884f7d6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00402.html#a2af6b313cfb9ba38dbae88518884f7d6">limbo::algorithms::complement_graph</a> (GraphType const &amp;g, GraphType &amp;gp, std::map&lt; typename boost::graph_traits&lt; GraphType &gt;::vertex_descriptor, typename boost::graph_traits&lt; GraphType &gt;::vertex_descriptor &gt; &amp;mCompG2G)</td></tr>
-<tr class="memdesc:a2af6b313cfb9ba38dbae88518884f7d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the complement graph of original graph  <a href="#a2af6b313cfb9ba38dbae88518884f7d6"></a><br/></td></tr>
-<tr class="memitem:afd0e9377c1211cdbe9ef63a022a9ed71"><td class="memTemplParams" colspan="2">template&lt;typename GraphType , typename VertexLabelType , typename EdgeLabelType &gt; </td></tr>
-<tr class="memitem:afd0e9377c1211cdbe9ef63a022a9ed71"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00402.html#afd0e9377c1211cdbe9ef63a022a9ed71">limbo::algorithms::write_graph</a> (std::ofstream &amp;out, GraphType const &amp;g, VertexLabelType const &amp;vl, EdgeLabelType const &amp;el)</td></tr>
-<tr class="memdesc:afd0e9377c1211cdbe9ef63a022a9ed71"><td class="mdescLeft">&#160;</td><td class="mdescRight">write graph to graphviz format and convert to pdf. Although Boost.Graph has write_graphviz component, it is not easy to use.  <a href="#afd0e9377c1211cdbe9ef63a022a9ed71"></a><br/></td></tr>
-<tr class="memitem:a923c2eae93790c4540ebfbae6c64aef3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00402.html#a923c2eae93790c4540ebfbae6c64aef3">limbo::algorithms::graphviz2pdf</a> (std::string const &amp;filename, const char *suffix=&quot;.gv&quot;)</td></tr>
-<tr class="memdesc:a923c2eae93790c4540ebfbae6c64aef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert graphviz format to pdf. The input filename should be filename+suffix  <a href="#a923c2eae93790c4540ebfbae6c64aef3"></a><br/></td></tr>
+<tr class="memitem:a00404"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00404.html">limbo</a></td></tr>
+<tr class="memdesc:a00404"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br/></td></tr>
+<tr class="memitem:a00405"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00405.html">limbo::algorithms</a></td></tr>
+<tr class="memdesc:a00405"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.algorithms <br/></td></tr>
+<tr class="memitem:a00406"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00406.html">limbo::algorithms::coloring</a></td></tr>
+<tr class="memdesc:a00406"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Algorithms.Coloring <br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>some graph utilities such as compute complement graph and graphviz writer. </p>
-<p>These are add-ons for Boost.Graph library.</p>
+<div class="textblock"><p>graph coloring algorithm based on semidefinite programming (SDP) </p>
+<p>"Layout decomposition for triple patterning lithography", Bei Yu, Kun Yuan, Duo Ding, and David Z. Pan, IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD), 34(3):433–446, March 2015.</p>
+<p>See <a class="el" href="a00224.html">limbo::algorithms::coloring::SDPColoringCsdp</a> for details.</p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Feb 2015 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Sep 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00289_source.html">GraphUtility.h</a>.</p>
+<p>Definition in file <a class="el" href="a00289_source.html">SDPColoringCsdp.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

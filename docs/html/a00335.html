@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/lp/bison/LpDataBase.h File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/lef/adapt/LefDriver.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,73 +86,61 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_eeae076f7cd63d469c142758079f0b87.html">lp</a></li><li class="navelem"><a class="el" href="dir_a79ae30b6fd3c07300a41a43396e5404.html">bison</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_f132a8c89f65d1e48338514f1f94990c.html">lef</a></li><li class="navelem"><a class="el" href="dir_f56dd2cf84117a881ee6162fd08db923.html">adapt</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">LpDataBase.h File Reference</div>  </div>
+<div class="title">LefDriver.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Database for Lp parser.  
+<p>Driver for Lef parser.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;string&gt;</code><br/>
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
 <code>#include &lt;vector&gt;</code><br/>
-<code>#include &lt;iostream&gt;</code><br/>
-<code>#include &lt;fstream&gt;</code><br/>
-<code>#include &lt;sstream&gt;</code><br/>
-<code>#include &lt;cassert&gt;</code><br/>
-<code>#include &lt;limits&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00316_source.html">limbo/math/Math.h</a>&gt;</code><br/>
+<code>#include &lt;string&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00334_source.html">limbo/parsers/lef/adapt/LefDataBase.h</a>&gt;</code><br/>
 </div>
 <p><a href="a00335_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00237.html">LpParser::Term</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a term denotes coefficient times a variable  <a href="a00237.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00152.html">LpParser::LpDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for lp database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00152.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00063.html">LefParser::Driver</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00411"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00411.html">LpParser</a></td></tr>
-<tr class="memdesc:a00411"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for <a class="el" href="a00411.html" title="namespace for LpParser">LpParser</a> <br/></td></tr>
+<tr class="memitem:a00403"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00403.html">LefParser</a></td></tr>
+<tr class="memdesc:a00403"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for <a class="el" href="a00403.html" title="namespace for LefParser">LefParser</a> <br/></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a65421de745d212fd28ef32eb1bb9c805"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65421de745d212fd28ef32eb1bb9c805"></a>
-typedef std::vector&lt; int64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00411.html#a65421de745d212fd28ef32eb1bb9c805">LpParser::IntegerArray</a></td></tr>
-<tr class="memdesc:a65421de745d212fd28ef32eb1bb9c805"><td class="mdescLeft">&#160;</td><td class="mdescRight">integer array <br/></td></tr>
-<tr class="memitem:a2a79afeb43408b31e1901c039217886a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a79afeb43408b31e1901c039217886a"></a>
-typedef std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00411.html#a2a79afeb43408b31e1901c039217886a">LpParser::StringArray</a></td></tr>
-<tr class="memdesc:a2a79afeb43408b31e1901c039217886a"><td class="mdescLeft">&#160;</td><td class="mdescRight">string array <br/></td></tr>
-<tr class="memitem:a67607fc847b49cff43493e7390764b13"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67607fc847b49cff43493e7390764b13"></a>
-typedef std::vector&lt; Term &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00411.html#a67607fc847b49cff43493e7390764b13">LpParser::TermArray</a></td></tr>
-<tr class="memdesc:a67607fc847b49cff43493e7390764b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">array of terms <br/></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a615bc364c7a47c502e5adef3c0155dae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a615bc364c7a47c502e5adef3c0155dae"></a>
-typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>LpParser::int32_t</b></td></tr>
-<tr class="memitem:ad0ebec85c2ea9f94bf704bfc5d658b1e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0ebec85c2ea9f94bf704bfc5d658b1e"></a>
-typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>LpParser::uint32_t</b></td></tr>
-<tr class="memitem:a0d146b7e985ec4ebb7b30987d39ef192"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d146b7e985ec4ebb7b30987d39ef192"></a>
-typedef long&#160;</td><td class="memItemRight" valign="bottom"><b>LpParser::int64_t</b></td></tr>
+<tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:acfb3427509802ca74739d10ca47b2431"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00403.html#acfb3427509802ca74739d10ca47b2431">LefParser::read</a> (<a class="el" href="a00144.html">LefDataBase</a> &amp;db, const string &amp;lefFile)</td></tr>
+<tr class="memdesc:acfb3427509802ca74739d10ca47b2431"><td class="mdescLeft">&#160;</td><td class="mdescRight">API for <a class="el" href="a00403.html" title="namespace for LefParser">LefParser</a>. Read LEF file and initialize database by calling user-defined callback functions.  <a href="#acfb3427509802ca74739d10ca47b2431"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Database for Lp parser. </p>
+<div class="textblock"><p>Driver for Lef parser. </p>
+<ul>
+<li><a class="el" href="a00403.html" title="namespace for LefParser">LefParser</a> is modified from Cadence open source parser. Original version stays in C style and has very poor support to object-oriented programming. <a class="el" href="a00403.html" title="namespace for LefParser">LefParser</a> borrows its data structure and bison grammar, but wrap it in C++ style. Please follow the <a class="el" href="a00012.html#Parsers_LefParser_License">LICENSE</a> agreement from Cadence when use the parser.</li>
+</ul>
+<ul>
+<li>The original data structure abuses malloc and free without proper initialization to pointers, which may lead to memory allocating problems. Although I fixed some of the bugs and it looks good with current benchmarks, there may still contain problems with other benchmarks.</li>
+</ul>
+<ul>
+<li>Another issue is that keywords may have conflicts with STRING in LefParser.yy, so I created a generalized string type GSTRING which includes all string and keywords. I did not replace all STRING with GSTRING, because it may result in performance degradation. If a new benchmark causes syntax error during parsing, then replace STRING of specific grammar with GSTRING. The main idea is to reduce the usage of GSTRING.</li>
+</ul>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00335_source.html">LpDataBase.h</a>.</p>
+<p>Definition in file <a class="el" href="a00335_source.html">LefDriver.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

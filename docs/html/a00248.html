@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;::VariableMoveCost Struct Reference</title>
+<title>Limbo: limbo::solvers::lpmcf::LpDualMcf&lt; T &gt;::variable_type Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,75 +88,99 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00401.html">limbo</a></li><li class="navelem"><a class="el" href="a00409.html">solvers</a></li><li class="navelem"><a class="el" href="a00224.html">SearchByAdjustCoefficient</a></li><li class="navelem"><a class="el" href="a00248.html">VariableMoveCost</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00404.html">limbo</a></li><li class="navelem"><a class="el" href="a00412.html">solvers</a></li><li class="navelem"><a class="el" href="a00413.html">lpmcf</a></li><li class="navelem"><a class="el" href="a00154.html">LpDualMcf</a></li><li class="navelem"><a class="el" href="a00248.html">variable_type</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00619.html">List of all members</a>  </div>
+<a href="a00641.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;::VariableMoveCost Struct Reference</div>  </div>
+<div class="title">limbo::solvers::lpmcf::LpDualMcf&lt; T &gt;::variable_type Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Wrapper for the move cost of an item.  
+<p>variable \(x_i\) in the primal linear programming problem. standard format: \(l_i \le x_i \le u_i\) maps to node \(i\), arcs from node \(i\) to node \(st\).  
  <a href="a00248.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00351_source.html">MultiKnapsackLagRelax.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00351_source.html">LpDualMcf.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9d8cd42f8b757ca7562086384548516d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html#a9d8cd42f8b757ca7562086384548516d">VariableMoveCost</a> (<a class="el" href="a00081.html#a3f0a7bd809c482e1d2d2dcd9a50d9e01">variable_type</a> var, <a class="el" href="a00081.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> mc, <a class="el" href="a00081.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> cap)</td></tr>
-<tr class="memdesc:a9d8cd42f8b757ca7562086384548516d"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a9d8cd42f8b757ca7562086384548516d"></a><br/></td></tr>
+<tr class="memitem:a54272e832b91c0c7b81c32b7679709c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html#a54272e832b91c0c7b81c32b7679709c7">variable_type</a> (string const &amp;n, <a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a> const &amp;l=0, <a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a> const &amp;r=std::numeric_limits&lt; <a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a> &gt;::<a class="el" href="a00404.html#a70f11c16058445049de838e5805c9652">max</a>(), <a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a> const &amp;w=0, <a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a> const &amp;v=0)</td></tr>
+<tr class="memdesc:a54272e832b91c0c7b81c32b7679709c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a54272e832b91c0c7b81c32b7679709c7"></a><br/></td></tr>
+<tr class="memitem:ac5b2689334191ec0ea505ad71c9054ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html#ac5b2689334191ec0ea505ad71c9054ec">is_lower_bounded</a> () const </td></tr>
+<tr class="memdesc:ac5b2689334191ec0ea505ad71c9054ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">check if the variable is lower bounded  <a href="#ac5b2689334191ec0ea505ad71c9054ec"></a><br/></td></tr>
+<tr class="memitem:ac7299fe4a77c52b18cfd3e1ad6af4214"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html#ac7299fe4a77c52b18cfd3e1ad6af4214">is_upper_bounded</a> () const </td></tr>
+<tr class="memdesc:ac7299fe4a77c52b18cfd3e1ad6af4214"><td class="mdescLeft">&#160;</td><td class="mdescRight">check if the variable is upper bounded  <a href="#ac7299fe4a77c52b18cfd3e1ad6af4214"></a><br/></td></tr>
+<tr class="memitem:aea106845deb34a3063c6d3861e00cf87"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html#aea106845deb34a3063c6d3861e00cf87">is_bounded</a> () const </td></tr>
+<tr class="memdesc:aea106845deb34a3063c6d3861e00cf87"><td class="mdescLeft">&#160;</td><td class="mdescRight">check if the variable is bounded  <a href="#aea106845deb34a3063c6d3861e00cf87"></a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ada8d227092a0bab18ea3b195a2850741"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada8d227092a0bab18ea3b195a2850741"></a>
-<a class="el" href="a00081.html#a3f0a7bd809c482e1d2d2dcd9a50d9e01">variable_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html#ada8d227092a0bab18ea3b195a2850741">variable</a></td></tr>
-<tr class="memdesc:ada8d227092a0bab18ea3b195a2850741"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable of the item <br/></td></tr>
-<tr class="memitem:a56474bb374ac23a14d4e46649f28a2b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56474bb374ac23a14d4e46649f28a2b3"></a>
-<a class="el" href="a00081.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html#a56474bb374ac23a14d4e46649f28a2b3">moveCost</a></td></tr>
-<tr class="memdesc:a56474bb374ac23a14d4e46649f28a2b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">move cost <br/></td></tr>
-<tr class="memitem:a2150c22e41c70225bb4b15b1e8fb338d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2150c22e41c70225bb4b15b1e8fb338d"></a>
-<a class="el" href="a00081.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html#a2150c22e41c70225bb4b15b1e8fb338d">capacity</a></td></tr>
-<tr class="memdesc:a2150c22e41c70225bb4b15b1e8fb338d"><td class="mdescLeft">&#160;</td><td class="mdescRight">capacity of the item <br/></td></tr>
+<tr class="memitem:ab22b90b34e5c61952e1a212b929e0d23"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab22b90b34e5c61952e1a212b929e0d23"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html#ab22b90b34e5c61952e1a212b929e0d23">name</a></td></tr>
+<tr class="memdesc:ab22b90b34e5c61952e1a212b929e0d23"><td class="mdescLeft">&#160;</td><td class="mdescRight">name of variable <br/></td></tr>
+<tr class="memitem:a400890eb3fcfc3138fd0d3f784495372"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a400890eb3fcfc3138fd0d3f784495372"></a>
+pair&lt; <a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a>, <a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html#a400890eb3fcfc3138fd0d3f784495372">range</a></td></tr>
+<tr class="memdesc:a400890eb3fcfc3138fd0d3f784495372"><td class="mdescLeft">&#160;</td><td class="mdescRight">pair of \((l_i, u_i)\) <br/></td></tr>
+<tr class="memitem:ad5bab8909ce62900da1b196571d884ae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad5bab8909ce62900da1b196571d884ae"></a>
+<a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html#ad5bab8909ce62900da1b196571d884ae">weight</a></td></tr>
+<tr class="memdesc:ad5bab8909ce62900da1b196571d884ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">weight in the objective, i.e., \(c_i\) <br/></td></tr>
+<tr class="memitem:ac3d400e136997f49599d44f1b18b4a19"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3d400e136997f49599d44f1b18b4a19"></a>
+<a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html#ac3d400e136997f49599d44f1b18b4a19">value</a></td></tr>
+<tr class="memdesc:ac3d400e136997f49599d44f1b18b4a19"><td class="mdescLeft">&#160;</td><td class="mdescRight">solved value <br/></td></tr>
+<tr class="memitem:a78e5a5be2503cf71c2f773d748c1b80d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78e5a5be2503cf71c2f773d748c1b80d"></a>
+node_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html#a78e5a5be2503cf71c2f773d748c1b80d">node</a></td></tr>
+<tr class="memdesc:a78e5a5be2503cf71c2f773d748c1b80d"><td class="mdescLeft">&#160;</td><td class="mdescRight">node \(i\) in the graph <br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename T, typename V&gt;<br/>
-struct limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;::VariableMoveCost</h3>
+<div class="textblock"><h3>template&lt;typename T = int64_t&gt;<br/>
+class limbo::solvers::lpmcf::LpDualMcf&lt; T &gt;::variable_type</h3>
 
-<p>Wrapper for the move cost of an item. </p>
+<p>variable \(x_i\) in the primal linear programming problem. standard format: \(l_i \le x_i \le u_i\) maps to node \(i\), arcs from node \(i\) to node \(st\). </p>
 
-<p>Definition at line <a class="el" href="a00351_source.html#l01338">1338</a> of file <a class="el" href="a00351_source.html">MultiKnapsackLagRelax.h</a>.</p>
+<p>Definition at line <a class="el" href="a00351_source.html#l00172">172</a> of file <a class="el" href="a00351_source.html">LpDualMcf.h</a>.</p>
 </div><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a9d8cd42f8b757ca7562086384548516d"></a>
+<a class="anchor" id="a54272e832b91c0c7b81c32b7679709c7"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, typename V&gt; </div>
+template&lt;typename T = int64_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00224.html">limbo::solvers::SearchByAdjustCoefficient</a>&lt; T, V &gt;::VariableMoveCost::VariableMoveCost </td>
+          <td class="memname"><a class="el" href="a00154.html">limbo::solvers::lpmcf::LpDualMcf</a>&lt; T &gt;::variable_type::variable_type </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00081.html#a3f0a7bd809c482e1d2d2dcd9a50d9e01">variable_type</a>&#160;</td>
-          <td class="paramname"><em>var</em>, </td>
+          <td class="paramtype">string const &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00081.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a>&#160;</td>
-          <td class="paramname"><em>mc</em>, </td>
+          <td class="paramtype"><a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>l</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00081.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a>&#160;</td>
-          <td class="paramname"><em>cap</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>r</em> = <code>std::numeric_limits&lt;<a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a>&gt;::<a class="el" href="a00404.html#a70f11c16058445049de838e5805c9652">max</a>()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>w</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00154.html#a514573ee1479d1d04151f3e67c804d66">value_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>v</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -174,24 +198,117 @@ template&lt;typename T, typename V&gt; </div>
 <p>constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">var</td><td>variable </td></tr>
-    <tr><td class="paramname">mc</td><td>move cost </td></tr>
-    <tr><td class="paramname">cap</td><td>capacity </td></tr>
+    <tr><td class="paramname">n</td><td>name </td></tr>
+    <tr><td class="paramname">l</td><td>lower bound of range, i.e., \(l_i\) </td></tr>
+    <tr><td class="paramname">r</td><td>upper bound of range, i.e., \(u_i\) </td></tr>
+    <tr><td class="paramname">w</td><td>weight in the objective, i.e., \(c_i\) </td></tr>
+    <tr><td class="paramname">v</td><td>solved value </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00351_source.html#l01348">1348</a> of file <a class="el" href="a00351_source.html">MultiKnapsackLagRelax.h</a>.</p>
+<p>Definition at line <a class="el" href="a00351_source.html#l00186">186</a> of file <a class="el" href="a00351_source.html">LpDualMcf.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00351_source.html">MultiKnapsackLagRelax.h</a></li>
+<h2>Member Function Documentation</h2>
+<a class="anchor" id="aea106845deb34a3063c6d3861e00cf87"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T = int64_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="a00154.html">limbo::solvers::lpmcf::LpDualMcf</a>&lt; T &gt;::variable_type::is_bounded </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>check if the variable is bounded </p>
+<dl class="section return"><dt>Returns</dt><dd>true if the variable is eitehr lower bounded or upper bounded </dd></dl>
+
+<p>Definition at line <a class="el" href="a00351_source.html#l00201">201</a> of file <a class="el" href="a00351_source.html">LpDualMcf.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac5b2689334191ec0ea505ad71c9054ec"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T = int64_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="a00154.html">limbo::solvers::lpmcf::LpDualMcf</a>&lt; T &gt;::variable_type::is_lower_bounded </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>check if the variable is lower bounded </p>
+<dl class="section return"><dt>Returns</dt><dd>true if the variable has a lower bound </dd></dl>
+
+<p>Definition at line <a class="el" href="a00351_source.html#l00195">195</a> of file <a class="el" href="a00351_source.html">LpDualMcf.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac7299fe4a77c52b18cfd3e1ad6af4214"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T = int64_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="a00154.html">limbo::solvers::lpmcf::LpDualMcf</a>&lt; T &gt;::variable_type::is_upper_bounded </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>check if the variable is upper bounded </p>
+<dl class="section return"><dt>Returns</dt><dd>true if the variable is an upper bound </dd></dl>
+
+<p>Definition at line <a class="el" href="a00351_source.html#l00198">198</a> of file <a class="el" href="a00351_source.html">LpDualMcf.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/solvers/lpmcf/<a class="el" href="a00351_source.html">LpDualMcf.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

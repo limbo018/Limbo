@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/test/algorithms/test_LPColoring.cpp File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/test/algorithms/test_GraphSimplification.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,26 +93,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">test_LPColoring.cpp File Reference</div>  </div>
+<div class="title">test_GraphSimplification.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>test LP based coloring algorithm <a class="el" href="a00151.html">limbo::algorithms::coloring::LPColoring</a>  
+<p>test graph simplification algorithms <a class="el" href="a00123.html">limbo::algorithms::coloring::GraphSimplification</a>  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
-<code>#include &lt;fstream&gt;</code><br/>
-<code>#include &lt;string&gt;</code><br/>
 <code>#include &lt;boost/graph/graphviz.hpp&gt;</code><br/>
 <code>#include &lt;boost/graph/graph_utility.hpp&gt;</code><br/>
 <code>#include &lt;boost/graph/adjacency_list.hpp&gt;</code><br/>
 <code>#include &lt;boost/graph/undirected_graph.hpp&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00279_source.html">limbo/algorithms/coloring/ChromaticNumber.h</a>&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00282_source.html">limbo/algorithms/coloring/GreedyColoring.h</a>&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00285_source.html">limbo/algorithms/coloring/LPColoring.h</a>&gt;</code><br/>
-<code>#include &lt;boost/graph/erdos_renyi_generator.hpp&gt;</code><br/>
-<code>#include &lt;boost/random/mersenne_twister.hpp&gt;</code><br/>
-<code>#include &lt;boost/graph/random.hpp&gt;</code><br/>
-<code>#include &lt;boost/graph/iteration_macros.hpp&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00282_source.html">limbo/algorithms/coloring/GraphSimplification.h</a>&gt;</code><br/>
 <code>#include &lt;boost/version.hpp&gt;</code><br/>
 <code>#include &lt;boost/graph/detail/is_same.hpp&gt;</code><br/>
 </div>
@@ -158,17 +150,15 @@ typedef property_map<br class="typebreak"/>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a64ecec97bc4469a5414c0cae8ad15c7a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00361.html#a64ecec97bc4469a5414c0cae8ad15c7a">simple_graph</a> ()</td></tr>
-<tr class="memitem:aaef48baf5127c418e61732f2b73ce33a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00361.html#aaef48baf5127c418e61732f2b73ce33a">random_graph</a> ()</td></tr>
-<tr class="memitem:a938db4401587853297b329cb2d7d6237"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00361.html#a938db4401587853297b329cb2d7d6237">real_graph</a> (string const &amp;filename)</td></tr>
+<tr class="memitem:ab4e647f3df88f89c116889c72d7266d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00361.html#ab4e647f3df88f89c116889c72d7266d7">realGraph</a> (string const &amp;filename)</td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00361.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>test LP based coloring algorithm <a class="el" href="a00151.html">limbo::algorithms::coloring::LPColoring</a> </p>
+<div class="textblock"><p>test graph simplification algorithms <a class="el" href="a00123.html">limbo::algorithms::coloring::GraphSimplification</a> </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Feb 2015 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>May 19 01:15:09 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00361_source.html">test_LPColoring.cpp</a>.</p>
+<p>Definition in file <a class="el" href="a00361_source.html">test_GraphSimplification.cpp</a>.</p>
 </div><h2>Function Documentation</h2>
 <a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
 <div class="memitem">
@@ -194,7 +184,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>main function <br/>
- test either on simple_graph, random graph or real graph </p>
+ test either on real graph </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">argc</td><td>number of arguments </td></tr>
@@ -204,35 +194,16 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 </dd></dl>
 
-<p>Definition at line <a class="el" href="a00361_source.html#l00191">191</a> of file <a class="el" href="a00361_source.html">test_LPColoring.cpp</a>.</p>
+<p>Definition at line <a class="el" href="a00361_source.html#l00127">127</a> of file <a class="el" href="a00361_source.html">test_GraphSimplification.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aaef48baf5127c418e61732f2b73ce33a"></a>
+<a class="anchor" id="ab4e647f3df88f89c116889c72d7266d7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double random_graph </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>test 2: a random graph </p>
-<dl class="section return"><dt>Returns</dt><dd>cost </dd></dl>
-
-<p>Definition at line <a class="el" href="a00361_source.html#l00094">94</a> of file <a class="el" href="a00361_source.html">test_LPColoring.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a938db4401587853297b329cb2d7d6237"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double real_graph </td>
+          <td class="memname">void realGraph </td>
           <td>(</td>
           <td class="paramtype">string const &amp;&#160;</td>
           <td class="paramname"><em>filename</em></td><td>)</td>
@@ -240,42 +211,22 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>test 3: a real graph from input </p>
+<p>test 1: a real graph from input </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filename</td><td>input file in graphviz format </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>cost </dd></dl>
 
-<p>Definition at line <a class="el" href="a00361_source.html#l00122">122</a> of file <a class="el" href="a00361_source.html">test_LPColoring.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a64ecec97bc4469a5414c0cae8ad15c7a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double simple_graph </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>test 1: a simple graph </p>
-<dl class="section return"><dt>Returns</dt><dd>cost </dd></dl>
-
-<p>Definition at line <a class="el" href="a00361_source.html#l00058">58</a> of file <a class="el" href="a00361_source.html">test_LPColoring.cpp</a>.</p>
+<p>Definition at line <a class="el" href="a00361_source.html#l00047">47</a> of file <a class="el" href="a00361_source.html">test_GraphSimplification.cpp</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

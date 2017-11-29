@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/test/algorithms/test_SDPColoring.cpp File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/test/algorithms/test_LPColoring.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,11 +93,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">test_SDPColoring.cpp File Reference</div>  </div>
+<div class="title">test_LPColoring.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>test SDP coloring algorithm  
+<p>test LP based coloring algorithm <a class="el" href="a00151.html">limbo::algorithms::coloring::LPColoring</a>  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
 <code>#include &lt;fstream&gt;</code><br/>
@@ -106,7 +106,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;boost/graph/graph_utility.hpp&gt;</code><br/>
 <code>#include &lt;boost/graph/adjacency_list.hpp&gt;</code><br/>
 <code>#include &lt;boost/graph/undirected_graph.hpp&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00288_source.html">limbo/algorithms/coloring/SDPColoringCsdp.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00280_source.html">limbo/algorithms/coloring/ChromaticNumber.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00283_source.html">limbo/algorithms/coloring/GreedyColoring.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00286_source.html">limbo/algorithms/coloring/LPColoring.h</a>&gt;</code><br/>
 <code>#include &lt;boost/graph/erdos_renyi_generator.hpp&gt;</code><br/>
 <code>#include &lt;boost/random/mersenne_twister.hpp&gt;</code><br/>
 <code>#include &lt;boost/graph/random.hpp&gt;</code><br/>
@@ -119,14 +121,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a726eba3e54e4738dbfb7c86b6d4d3cb5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a726eba3e54e4738dbfb7c86b6d4d3cb5"></a>
+<tr class="memitem:a4d194854f2e7f8012798c96fbfc1eebf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d194854f2e7f8012798c96fbfc1eebf"></a>
 typedef adjacency_list&lt; vecS, <br class="typebreak"/>
 vecS, undirectedS, property<br class="typebreak"/>
 &lt; vertex_index_t, std::size_t, <br class="typebreak"/>
 property&lt; vertex_color_t, int &gt;<br class="typebreak"/>
  &gt;, property&lt; edge_index_t, <br class="typebreak"/>
 std::size_t, property<br class="typebreak"/>
-&lt; edge_weight_t, double &gt;<br class="typebreak"/>
+&lt; edge_weight_t, int &gt;<br class="typebreak"/>
  &gt;, property&lt; graph_name_t, <br class="typebreak"/>
 string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>graph_type</b></td></tr>
 <tr class="memitem:aefd3db382039ac673d0069e2ad0d51db"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aefd3db382039ac673d0069e2ad0d51db"></a>
@@ -156,21 +158,17 @@ typedef property_map<br class="typebreak"/>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a64ecec97bc4469a5414c0cae8ad15c7a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64ecec97bc4469a5414c0cae8ad15c7a"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00363.html#a64ecec97bc4469a5414c0cae8ad15c7a">simple_graph</a> ()</td></tr>
-<tr class="memdesc:a64ecec97bc4469a5414c0cae8ad15c7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">test 1: a simple graph <br/></td></tr>
-<tr class="memitem:aaef48baf5127c418e61732f2b73ce33a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaef48baf5127c418e61732f2b73ce33a"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00363.html#aaef48baf5127c418e61732f2b73ce33a">random_graph</a> ()</td></tr>
-<tr class="memdesc:aaef48baf5127c418e61732f2b73ce33a"><td class="mdescLeft">&#160;</td><td class="mdescRight">test 2: a random graph <br/></td></tr>
+<tr class="memitem:a64ecec97bc4469a5414c0cae8ad15c7a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00363.html#a64ecec97bc4469a5414c0cae8ad15c7a">simple_graph</a> ()</td></tr>
+<tr class="memitem:aaef48baf5127c418e61732f2b73ce33a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00363.html#aaef48baf5127c418e61732f2b73ce33a">random_graph</a> ()</td></tr>
 <tr class="memitem:a938db4401587853297b329cb2d7d6237"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00363.html#a938db4401587853297b329cb2d7d6237">real_graph</a> (string const &amp;filename)</td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00363.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>test SDP coloring algorithm </p>
+<div class="textblock"><p>test LP based coloring algorithm <a class="el" href="a00151.html">limbo::algorithms::coloring::LPColoring</a> </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Sep 2015 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Feb 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00363_source.html">test_SDPColoring.cpp</a>.</p>
+<p>Definition in file <a class="el" href="a00363_source.html">test_LPColoring.cpp</a>.</p>
 </div><h2>Function Documentation</h2>
 <a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
 <div class="memitem">
@@ -195,7 +193,8 @@ double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a0
         </tr>
       </table>
 </div><div class="memdoc">
-<p>main function </p>
+<p>main function <br/>
+ test either on simple_graph, random graph or real graph </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">argc</td><td>number of arguments </td></tr>
@@ -205,7 +204,26 @@ double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a0
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 </dd></dl>
 
-<p>Definition at line <a class="el" href="a00363_source.html#l00189">189</a> of file <a class="el" href="a00363_source.html">test_SDPColoring.cpp</a>.</p>
+<p>Definition at line <a class="el" href="a00363_source.html#l00191">191</a> of file <a class="el" href="a00363_source.html">test_LPColoring.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aaef48baf5127c418e61732f2b73ce33a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double random_graph </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>test 2: a random graph </p>
+<dl class="section return"><dt>Returns</dt><dd>cost </dd></dl>
+
+<p>Definition at line <a class="el" href="a00363_source.html#l00094">94</a> of file <a class="el" href="a00363_source.html">test_LPColoring.cpp</a>.</p>
 
 </div>
 </div>
@@ -229,15 +247,35 @@ double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a0
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>cost </dd></dl>
 
-<p>Definition at line <a class="el" href="a00363_source.html#l00122">122</a> of file <a class="el" href="a00363_source.html">test_SDPColoring.cpp</a>.</p>
+<p>Definition at line <a class="el" href="a00363_source.html#l00122">122</a> of file <a class="el" href="a00363_source.html">test_LPColoring.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a64ecec97bc4469a5414c0cae8ad15c7a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double simple_graph </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>test 1: a simple graph </p>
+<dl class="section return"><dt>Returns</dt><dd>cost </dd></dl>
+
+<p>Definition at line <a class="el" href="a00363_source.html#l00058">58</a> of file <a class="el" href="a00363_source.html">test_LPColoring.cpp</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

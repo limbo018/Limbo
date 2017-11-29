@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/algorithms/MaxIndependentSet.h Source File</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/algorithms/MaxClique.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,80 +91,72 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">MaxIndependentSet.h</div>  </div>
+<div class="title">MaxClique.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00291.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifndef LIMBO_ALGORITHMS_MAXINDEPENDENTSET_H</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LIMBO_ALGORITHMS_MAXINDEPENDENTSET_H</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;deque&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;boost/graph/bron_kerbosch_all_cliques.hpp&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00289.html" title="some graph utilities such as compute complement graph and graphviz writer.">limbo/algorithms/GraphUtility.h</a>&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span>limbo { <span class="keyword">namespace </span>algorithms {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef LIMBO_ALGORITHMS_MAXCLIQUE_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LIMBO_ALGORITHMS_MAXCLIQUE_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">using</span> std::cout;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">using</span> std::endl;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">using</span> std::vector;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;deque&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;boost/graph/bron_kerbosch_all_cliques.hpp&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="code" href="a00159.html">   22</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00159.html">MaxIndependentSetByMaxClique</a> </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> GraphType, <span class="keyword">typename</span> MisVisitorType&gt;</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="code" href="a00035.html">   30</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="a00035.html" title="callback for boost::bron_kerbosch_all_cliques">clique_visitor_type</a></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">typedef</span> GraphType graph_type;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keyword">typedef</span> MisVisitorType mis_visitor_type;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> boost::graph_traits&lt;graph_type&gt;::vertex_descriptor vertex_descriptor_type; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keyword">typedef</span> std::map&lt;vertex_descriptor_type, vertex_descriptor_type&gt; map_type;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span>limbo </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{ </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span>algorithms </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> GraphType&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="code" href="a00158.html">   30</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00158.html" title="callback for boost::bron_kerbosch_all_cliques">max_clique_visitor_type</a></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">typedef</span> GraphType graph_type;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> boost::graph_traits&lt;graph_type&gt;::vertex_descriptor vertex_descriptor_type; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">typedef</span> vector&lt;vertex_descriptor_type&gt; clique_type;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">typedef</span> vector&lt;clique_type&gt; clique_container_type;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="a00035.html#a373f725fdd1aed01ae5eb48cdf7b3013">   39</a></span>&#160;        MisVisitorType&amp; <a class="code" href="a00035.html#a373f725fdd1aed01ae5eb48cdf7b3013" title="bind mis visitor">mis_visitor</a>; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="a00035.html#acde5cf73c303c8a2f0f5ba0eebbf640b">   40</a></span>&#160;        map_type&amp; <a class="code" href="a00035.html#acde5cf73c303c8a2f0f5ba0eebbf640b" title="bind vertex mapping from complement graph to original graph">mCompG2G</a>; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="a00035.html#a592096d1f3a242507fddb096a2737d45">   45</a></span>&#160;        <a class="code" href="a00035.html#a592096d1f3a242507fddb096a2737d45">clique_visitor_type</a>(mis_visitor_type&amp; mv, map_type&amp; mCG2G) : <a class="code" href="a00035.html#a373f725fdd1aed01ae5eb48cdf7b3013" title="bind mis visitor">mis_visitor</a>(mv), <a class="code" href="a00035.html#acde5cf73c303c8a2f0f5ba0eebbf640b" title="bind vertex mapping from complement graph to original graph">mCompG2G</a>(mCG2G) {}</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="a00035.html#a539998c85ad48eebc9311a1cf5206d1c">   48</a></span>&#160;        <a class="code" href="a00035.html#a539998c85ad48eebc9311a1cf5206d1c">clique_visitor_type</a>(<a class="code" href="a00035.html" title="callback for boost::bron_kerbosch_all_cliques">clique_visitor_type</a> <span class="keyword">const</span>&amp; rhs) : <a class="code" href="a00035.html#a373f725fdd1aed01ae5eb48cdf7b3013" title="bind mis visitor">mis_visitor</a>(rhs.<a class="code" href="a00035.html#a373f725fdd1aed01ae5eb48cdf7b3013" title="bind mis visitor">mis_visitor</a>), <a class="code" href="a00035.html#acde5cf73c303c8a2f0f5ba0eebbf640b" title="bind vertex mapping from complement graph to original graph">mCompG2G</a>(rhs.<a class="code" href="a00035.html#acde5cf73c303c8a2f0f5ba0eebbf640b" title="bind vertex mapping from complement graph to original graph">mCompG2G</a>) {}</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> CliqueType&gt;</div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="code" href="a00035.html#a16b8c6961ad2870d359c6f087cbba801">   54</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a00035.html#a16b8c6961ad2870d359c6f087cbba801">clique</a>(CliqueType <span class="keyword">const</span>&amp; c, graph_type <span class="keyword">const</span>&amp; cg)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="comment">// convert to vertices in original graph</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keyword">typedef</span> CliqueType clique_type;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            clique_type is;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="a00158.html#aab2c14e0e02d7ccdec9ee52239a0117f">   39</a></span>&#160;    clique_container_type&amp; <a class="code" href="a00158.html#aab2c14e0e02d7ccdec9ee52239a0117f" title="container to store cliques">vClique</a>; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="a00158.html#ac674d41aacbe08175430a0a883a9ecd7">   43</a></span>&#160;    <a class="code" href="a00158.html#ac674d41aacbe08175430a0a883a9ecd7">max_clique_visitor_type</a>(clique_container_type&amp; vc) : <a class="code" href="a00158.html#aab2c14e0e02d7ccdec9ee52239a0117f" title="container to store cliques">vClique</a>(vc) {}</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="a00158.html#ab1e758d23977d07b259eaaa754252109">   46</a></span>&#160;    <a class="code" href="a00158.html#ab1e758d23977d07b259eaaa754252109">max_clique_visitor_type</a>(clique_container_type <span class="keyword">const</span>&amp; rhs) : <a class="code" href="a00158.html#aab2c14e0e02d7ccdec9ee52239a0117f" title="container to store cliques">vClique</a>(rhs.<a class="code" href="a00158.html#aab2c14e0e02d7ccdec9ee52239a0117f" title="container to store cliques">vClique</a>) {}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> CliqueType&gt;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="code" href="a00158.html#ac910eeecf691edb7a560f984be182021">   52</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00158.html#ac910eeecf691edb7a560f984be182021">clique</a>(CliqueType <span class="keyword">const</span>&amp; c, graph_type <span class="keyword">const</span>&amp; cg)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="comment">// convert to vertices in original graph</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="comment">// for debug </span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">if</span> (boost::num_vertices(cg) &gt; 0)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            assert(!c.empty());</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="comment">// for debug </span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordflow">if</span> (boost::num_vertices(cg) &gt; 0)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                assert(!c.empty());</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="a00158.html#aab2c14e0e02d7ccdec9ee52239a0117f" title="container to store cliques">vClique</a>.push_back(clique_type(c.begin(), c.end()));</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">typename</span> clique_type::const_iterator it = c.begin(); </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    it != c.end(); ++it)</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                is.push_back(<a class="code" href="a00035.html#acde5cf73c303c8a2f0f5ba0eebbf640b" title="bind vertex mapping from complement graph to original graph">mCompG2G</a>[*it]);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <a class="code" href="a00035.html#a373f725fdd1aed01ae5eb48cdf7b3013" title="bind mis visitor">mis_visitor</a>.mis(is);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    };</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;};</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> GraphType, <span class="keyword">typename</span> VisitorType, <span class="keyword">typename</span> AlgorithmType&gt;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="a00402.html#adbeddadaaf2896c6cf254dd6b252a282">max_independent_set</a>(GraphType <span class="keyword">const</span>&amp; g, VisitorType vis, AlgorithmType <span class="keyword">const</span>&amp;);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> GraphType, <span class="keyword">typename</span> MisVisitorType&gt;</div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="code" href="a00402.html#a97d118046b971c19c5fcf93d779380d6">   93</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="a00402.html#adbeddadaaf2896c6cf254dd6b252a282">max_independent_set</a>(GraphType <span class="keyword">const</span>&amp; g, MisVisitorType vis, <a class="code" href="a00159.html">MaxIndependentSetByMaxClique</a> <span class="keyword">const</span>&amp;)</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> boost::graph_traits&lt;GraphType&gt;::vertex_descriptor vertex_descriptor_type; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    GraphType cg; <span class="comment">// complement graph</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    std::map&lt;vertex_descriptor_type, vertex_descriptor_type&gt; mCompG2G; <span class="comment">// mapping from vertices in complement graph to original graph </span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="comment">// calculate complement graph </span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <a class="code" href="a00402.html#a2af6b313cfb9ba38dbae88518884f7d6" title="get the complement graph of original graph">limbo::algorithms::complement_graph</a>(g, cg, mCompG2G);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="comment">// search for all cliques with at least 1 vertex </span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    boost::bron_kerbosch_all_cliques(cg, <a class="code" href="a00035.html" title="callback for boost::bron_kerbosch_all_cliques">MaxIndependentSetByMaxClique::clique_visitor_type&lt;GraphType, MisVisitorType&gt;</a>(vis, mCompG2G), 1);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;} <span class="comment">// namespace algorithms</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;} <span class="comment">// namespace limbo</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> GraphType&gt;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">inline</span> vector&lt;vector&lt;typename boost::graph_traits&lt;GraphType&gt;::vertex_descriptor&gt; &gt;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="code" href="a00405.html#adcf6a9b8b8cca4d16076dff19caeb823">   71</a></span>&#160;<a class="code" href="a00405.html#adcf6a9b8b8cca4d16076dff19caeb823" title="use boost::bron_kerbosch_all_cliques to find all cliques and the maximum ones">max_clique</a>(GraphType <span class="keyword">const</span>&amp; g, <span class="keywordtype">size_t</span> clique_num)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    vector&lt;vector&lt;typename boost::graph_traits&lt;GraphType&gt;::vertex_descriptor&gt; &gt; vClique;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">// search for all cliques with at least clique_num vertices</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    boost::bron_kerbosch_all_cliques(g, <a class="code" href="a00158.html" title="callback for boost::bron_kerbosch_all_cliques">max_clique_visitor_type&lt;GraphType&gt;</a>(vClique), clique_num);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">return</span> vClique;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;} <span class="comment">// namespace algorithms</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;} <span class="comment">// namespace limbo</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

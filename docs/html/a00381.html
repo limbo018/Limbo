@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/test/solvers/lpmcf/test_lpmcf.cpp File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/test/programoptions/test_ProgramOptions.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,37 +86,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_39b21b41cf10d9ff223861185498a807.html">solvers</a></li><li class="navelem"><a class="el" href="dir_43e115e3783a627048bc2c2b9e584b00.html">lpmcf</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_f514db011ff99ebed7755d821826dd44.html">programoptions</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">test_lpmcf.cpp File Reference</div>  </div>
+<div class="title">test_ProgramOptions.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>test <a class="el" href="a00146.html">limbo::solvers::lpmcf::Lgf</a> and <a class="el" href="a00154.html">limbo::solvers::lpmcf::LpDualMcf</a>  
+<p>test usage of program options  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
-<code>#include &lt;boost/algorithm/string/predicate.hpp&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00349_source.html">limbo/solvers/lpmcf/Lgf.h</a>&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00350_source.html">limbo/solvers/lpmcf/LpDualMcf.h</a>&gt;</code><br/>
+<code>#include &lt;string&gt;</code><br/>
+<code>#include &lt;vector&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00346_source.html">limbo/programoptions/ProgramOptions.h</a>&gt;</code><br/>
 </div>
 <p><a href="a00381_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00381.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">main function  <a href="#a3c04138a5bfe5d72780bb7e82a18e627"></a><br/></td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">test usage of program options, such as help, boolean, integer, floating point number, and vector  <a href="#a3c04138a5bfe5d72780bb7e82a18e627"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>test <a class="el" href="a00146.html">limbo::solvers::lpmcf::Lgf</a> and <a class="el" href="a00154.html">limbo::solvers::lpmcf::LpDualMcf</a> </p>
+<div class="textblock"><p>test usage of program options </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Jul 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00381_source.html">test_lpmcf.cpp</a>.</p>
+<p>Definition in file <a class="el" href="a00381_source.html">test_ProgramOptions.cpp</a>.</p>
 </div><h2>Function Documentation</h2>
 <a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
 <div class="memitem">
@@ -142,8 +142,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>main function </p>
-<p>If given .lgf file, solve min-cost flow of the graph by <a class="el" href="a00146.html">limbo::solvers::lpmcf::Lgf</a>; If given .lp file, solver linear programming problem with dual min-cost flow by <a class="el" href="a00154.html">limbo::solvers::lpmcf::LpDualMcf</a>. Here we assume .lgf and .lp inputs describe different sets of problems that can be solved by the mathematical solver. .Lgf format is defined by Lemon to describe a network flow graph</p>
+<p>test usage of program options, such as help, boolean, integer, floating point number, and vector </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">argc</td><td>number of arguments </td></tr>
@@ -151,16 +150,16 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if parsing succeeds, 1 if help message is specified </dd></dl>
 
-<p>Definition at line <a class="el" href="a00381_source.html#l00026">26</a> of file <a class="el" href="a00381_source.html">test_lpmcf.cpp</a>.</p>
+<p>Definition at line <a class="el" href="a00381_source.html#l00021">21</a> of file <a class="el" href="a00381_source.html">test_ProgramOptions.cpp</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/lp/bison/LpDataBase.h Source File</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/lef/adapt/LefDriver.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,107 +86,72 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_eeae076f7cd63d469c142758079f0b87.html">lp</a></li><li class="navelem"><a class="el" href="dir_a79ae30b6fd3c07300a41a43396e5404.html">bison</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_f132a8c89f65d1e48338514f1f94990c.html">lef</a></li><li class="navelem"><a class="el" href="dir_f56dd2cf84117a881ee6162fd08db923.html">adapt</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">LpDataBase.h</div>  </div>
+<div class="title">LefDriver.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00335.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef LPPARSER_DATABASE_H</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LPPARSER_DATABASE_H</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;limits&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00316.html" title="mathematical utilities such as abs">limbo/math/Math.h</a>&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="code" href="a00411.html">   21</a></span>&#160;<span class="keyword">namespace </span>LpParser {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">using</span> std::cout;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">using</span> std::endl;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">using</span> std::cerr;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">using</span> std::string; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">using</span> std::vector;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">using</span> std::pair;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">using</span> std::make_pair;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">using</span> std::ostringstream;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">int</span> int32_t;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uint32_t;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">long</span> int64_t;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="code" href="a00411.html#a65421de745d212fd28ef32eb1bb9c805">   38</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;int64_t&gt; <a class="code" href="a00411.html#a65421de745d212fd28ef32eb1bb9c805" title="integer array">IntegerArray</a>; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="a00411.html#a2a79afeb43408b31e1901c039217886a">   40</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;std::string&gt; <a class="code" href="a00411.html#a2a79afeb43408b31e1901c039217886a" title="string array">StringArray</a>; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#if 0</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">class </span><a class="code" href="a00411.html#a65421de745d212fd28ef32eb1bb9c805" title="integer array">IntegerArray</a> : <span class="keyword">public</span> vector&lt;int64_t&gt;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">public</span>: </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">typedef</span> vector&lt;int64_t&gt; base_type;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">using</span> base_type::size_type;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">using</span> base_type::value_type;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">using</span> base_type::allocator_type;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifndef LEFPARSER_DRIVER_H</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LEFPARSER_DRIVER_H</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00334.html" title="Database for Lef parser.">limbo/parsers/lef/adapt/LefDataBase.h</a>&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">namespace </span>LefParser {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">using</span> std::cout;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">using</span> std::endl;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">using</span> std::cerr;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">using</span> std::string; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">using</span> std::vector;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">using</span> std::pair;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">using</span> std::make_pair;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">class </span><a class="code" href="a00144.html" title="Custom class that inheritates LefParser::LefDataBase with all the required callbacks defined...">LefDataBase</a>;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <a class="code" href="a00411.html#a65421de745d212fd28ef32eb1bb9c805" title="integer array">IntegerArray</a>(<span class="keyword">const</span> allocator_type&amp; alloc = allocator_type())</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            : base_type(alloc) {}</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <a class="code" href="a00411.html#a65421de745d212fd28ef32eb1bb9c805" title="integer array">IntegerArray</a>(size_type n, <span class="keyword">const</span> value_type&amp; val, <span class="keyword">const</span> allocator_type&amp; alloc = allocator_type())</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            : base_type(n, val, alloc) {}</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">class </span><a class="code" href="a00411.html#a2a79afeb43408b31e1901c039217886a" title="string array">StringArray</a> : <span class="keyword">public</span> vector&lt;string&gt;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">public</span>: </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keyword">typedef</span> vector&lt;string&gt; base_type;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keyword">using</span> base_type::size_type;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keyword">using</span> base_type::value_type;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keyword">using</span> base_type::allocator_type;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <a class="code" href="a00411.html#a2a79afeb43408b31e1901c039217886a" title="string array">StringArray</a>(<span class="keyword">const</span> allocator_type&amp; alloc = allocator_type())</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            : base_type(alloc) {}</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="a00411.html#a2a79afeb43408b31e1901c039217886a" title="string array">StringArray</a>(size_type n, <span class="keyword">const</span> value_type&amp; val, <span class="keyword">const</span> allocator_type&amp; alloc = allocator_type())</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            : base_type(n, val, alloc) {}</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;};</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="code" href="a00237.html">   93</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00237.html" title="a term denotes coefficient times a variable">Term</a> </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="code" href="a00237.html#a4f579b79a03a15e7c46b303b3be611a4">   95</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="a00237.html#a4f579b79a03a15e7c46b303b3be611a4" title="coefficient">coef</a>; </div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="code" href="a00237.html#a3f080999709341e86e81cace35c873b3">   96</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="a00237.html#a3f080999709341e86e81cace35c873b3" title="variable">var</a>; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno"><a class="code" href="a00237.html#a72a914be19400e0eb914cb2e48483bc4">  101</a></span>&#160;    <a class="code" href="a00237.html#a72a914be19400e0eb914cb2e48483bc4" title="constructor">Term</a>(<span class="keywordtype">double</span> c, <span class="keywordtype">string</span> <span class="keyword">const</span>&amp; v) : <a class="code" href="a00237.html#a4f579b79a03a15e7c46b303b3be611a4" title="coefficient">coef</a>(c), <a class="code" href="a00237.html#a3f080999709341e86e81cace35c873b3" title="variable">var</a>(v) {}</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;};</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="code" href="a00411.html#a67607fc847b49cff43493e7390764b13">  105</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;Term&gt; <a class="code" href="a00411.html#a67607fc847b49cff43493e7390764b13" title="array of terms">TermArray</a>; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="a00063.html">   63</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00063.html">Driver</a></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="a00063.html#ad746575c058c662591dec556fd15fea1">Driver</a>(<a class="code" href="a00145.html" title="Base class for lef database. Only pure virtual functions are defined. User needs to inheritate this c...">LefDataBase</a>&amp; db);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    ~<a class="code" href="a00063.html">Driver</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="code" href="a00063.html#a4d97736b2a73c525c9b7d9b0891f3c67">   72</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00063.html#a4d97736b2a73c525c9b7d9b0891f3c67" title="enable debug output in the flex scanner">trace_scanning</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="code" href="a00063.html#a8cd7abc022576c40a390dfc3a356b9b4">   75</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00063.html#a8cd7abc022576c40a390dfc3a356b9b4" title="enable debug output in the bison parser">trace_parsing</a>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="code" href="a00063.html#aef19a9c5eb7d9837be317fc99f7e728b">   78</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="a00063.html#aef19a9c5eb7d9837be317fc99f7e728b" title="stream name (file or input stream) used for error messages.">streamname</a>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00063.html#a02fa98d5c261e366ce91e86914227f20">parse_stream</a>(std::istream&amp; in,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sname = <span class="stringliteral">&quot;stream input&quot;</span>);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00063.html#aebb355db178631df09754a99d8100984">parse_string</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; input,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sname = <span class="stringliteral">&quot;string stream&quot;</span>);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00063.html#a581849a0810e8a3631204f1dca1a9146">parse_file</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; filename);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="comment">// To demonstrate pure handling of parse errors, instead of</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="comment">// simply dumping them on the standard error output, we will pass</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="comment">// them to the driver using the following two member functions.</span></div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">// temporary data structures to hold parsed data </span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">// forward declaration</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno"><a class="code" href="a00152.html">  114</a></span>&#160;<span class="comment"></span><span class="keyword">class </span><a class="code" href="a00152.html" title="Base class for lp database. Only pure virtual functions are defined. User needs to inheritate this cl...">LpDataBase</a></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00152.html#a59d7089cd4e139a73d7acdf4efd5a6aa" title="add variable that l &lt;= vname &lt;= r.">add_variable</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; vname, </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                <span class="keywordtype">double</span> l = <a class="code" href="a00401.html#a7b74cceebc5dfc4e2913ac4364b3f8d5" title="specialization for floating point types">limbo::lowest&lt;double&gt;</a>(), </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                <span class="keywordtype">double</span> r = <a class="code" href="a00401.html#a70f11c16058445049de838e5805c9652" title="get max of an array">std::numeric_limits&lt;double&gt;::max</a>()) = 0;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00152.html#a06e69b33012729ca43b282b54f0a28d2" title="add constraint that terms compare constant.">add_constraint</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; cname, <a class="code" href="a00411.html#a67607fc847b49cff43493e7390764b13" title="array of terms">TermArray</a> <span class="keyword">const</span>&amp; terms, <span class="keywordtype">char</span> compare, <span class="keywordtype">double</span> constant) = 0; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00152.html#ac9362bd3c5c0f5611cdb492828583ef5" title="add object terms">add_objective</a>(<span class="keywordtype">bool</span> minimize, <a class="code" href="a00411.html#a67607fc847b49cff43493e7390764b13" title="array of terms">TermArray</a> <span class="keyword">const</span>&amp; terms) = 0;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00152.html#ac2869dbe780548dd9dfa67661a51dce3" title="set integer variables">set_integer</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; vname, <span class="keywordtype">bool</span> binary) = 0; </div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;};</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;} <span class="comment">// namespace DefParser</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="code" href="a00063.html#a7ca7d4d398ef53df3c95685faa5a7eca">  110</a></span>&#160;    <a class="code" href="a00145.html" title="Base class for lef database. Only pure virtual functions are defined. User needs to inheritate this c...">LefDataBase</a>&amp; <a class="code" href="a00063.html#a7ca7d4d398ef53df3c95685faa5a7eca">m_db</a>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a00403.html#acfb3427509802ca74739d10ca47b2431" title="API for LefParser. Read LEF file and initialize database by calling user-defined callback functions...">read</a>(<a class="code" href="a00145.html" title="Base class for lef database. Only pure virtual functions are defined. User needs to inheritate this c...">LefDataBase</a>&amp; db, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; lefFile);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;} <span class="comment">// namespace example</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#endif // EXAMPLE_DRIVER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

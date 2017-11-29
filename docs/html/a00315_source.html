@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/makeutils/GCCVersion.mk Source File</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/makeutils/FindZlib.mk Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,44 +91,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">GCCVersion.mk</div>  </div>
+<div class="title">FindZlib.mk</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00315.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">## @file   GCCVersion.mk</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @brief  compute version of CXX, set GCCVERSION, assume CXX is gcc</span></div>
+<a href="a00315.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">## @file   FindZlib.mk</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @brief  find Zlib library given ZLIB_DIR, set ZLIB_LINK_FLAG to either STATIC_LINK_FLAG or DYNAMIC_LINK_FLAG</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="preprocessor">##</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## calculate gcc version without . and save to GCCVERSION</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## It check whether Zlib library is installed as static library. If so, link to static library; otherwise, link to shared library. </span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## Use following command in the Makefile to view the results </span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## </span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"></span><span class="preprocessor">##     $(info GCCVERSION = $(GCCVERSION))</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"></span><span class="preprocessor">##     $(info Zlib: ZLIB_LINK_FLAG = $(ZLIB_LINK_FLAG))</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"></span><span class="preprocessor">##</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @author Yibo Lin</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @date   Aug 2015</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @date   Jan 2017</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor"></span><span class="preprocessor">##</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @param CXX given CXX and assume it is gcc </span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @param GCCVERSION set version of gcc </span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @param  ZLIB_DIR given path to Zlib library </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor"></span><span class="preprocessor">## @param  ZLIB_LINK_FLAG set linking flag to Zlib</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">## @cond</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">## @cond </span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;empty:=</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;space:= $(empty) $(empty)</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;GCCVERSIONSTRING := $(shell expr `$(CXX) -dumpversion`)</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#Create version number without &quot;.&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor"></span>GCCVERSION := $(shell expr `echo $(GCCVERSIONSTRING)` | cut -f1 -d.)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;GCCVERSION += $(shell expr `echo $(GCCVERSIONSTRING)` | cut -f2 -d.)</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;GCCVERSION += $(shell expr `echo $(GCCVERSIONSTRING)` | cut -f3 -d.)</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor"># Make sure the version number has at least 3 decimals</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span>GCCVERSION += 00</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor"># Remove spaces from the version number</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor"></span>GCCVERSION := $(subst $(space),$(empty),$(GCCVERSION))</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor"># Crop the version number to 3 decimals.</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor"></span>GCCVERSION := $(shell expr `echo $(GCCVERSION)` | cut -b1-3)</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">## @endcond</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;ZLIB_LINK_FLAG =</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor"># use libz.a to test whether Zlib has static library</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor"></span>ifeq ($(wildcard $(ZLIB_DIR)/libz.a),) </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    ZLIB_LINK_FLAG = -Wl,-rpath,$(ZLIB_DIR) $(DYNAMIC_LINK_FLAG)</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;else </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    ZLIB_LINK_FLAG = $(STATIC_LINK_FLAG)</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;endif </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">## @endcond</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

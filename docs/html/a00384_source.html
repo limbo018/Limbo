@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/test/solvers/test_MultiKnapsackLagRelax.cpp Source File</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/test/solvers/test_DualMinCostFlow.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,51 +91,74 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">test_MultiKnapsackLagRelax.cpp</div>  </div>
+<div class="title">test_DualMinCostFlow.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00384.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00351.html" title="Solve multiple knapsack problem with lagrangian relaxation.">limbo/solvers/MultiKnapsackLagRelax.h</a>&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00349.html" title="Solve a special case of linear programming with dual min-cost flow. A better implementation of LpDual...">limbo/solvers/DualMinCostFlow.h</a>&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="code" href="a00384.html#a10949854d3fa748645a107588cc24851">   13</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00382.html#a1db05c176455595f4e75e72ac6c8d627" title="test file API">test</a>(std::string <span class="keyword">const</span>&amp; filename)</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">typedef</span> <a class="code" href="a00149.html" title="model to describe an optimization problem">limbo::solvers::LinearModel&lt;float, int&gt;</a> model_type; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    model_type optModel; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    optModel.<a class="code" href="a00149.html#a3c13306727a10e63f45d1fd808c9c0b2" title="read lp format">read</a>(filename); </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">// print problem </span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    optModel.print(std::cout); </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="a00165.html" title="Solve multiple knapsack problem with lagrangian relaxation.">limbo::solvers::MultiKnapsackLagRelax&lt;float, int&gt;</a> solver (&amp;optModel);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">// solve </span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="a00409.html#a500190a99a5762b6aa25aec1230479f0" title="Some enums used in solver.">limbo::solvers::SolverProperty</a> status = solver();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Problem solved &quot;</span> &lt;&lt; <a class="code" href="a00409.html#ae31d5e04adc36b4526e8856acf4ae2cf" title="Convert limbo::solvers::SolverProperty to std::string.">limbo::solvers::toString</a>(status) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">// print solutions </span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    optModel.printSolution(std::cout);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">// print problem </span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    optModel.print(std::cout); </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="code" href="a00384.html#a3c04138a5bfe5d72780bb7e82a18e627">   37</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00357.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">if</span> (argc &gt; 1)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">// test file API </span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="a00382.html#a1db05c176455595f4e75e72ac6c8d627" title="test file API">test</a>(argv[1]);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">else</span> std::cout &lt;&lt; <span class="stringliteral">&quot;at least one argument is required\n&quot;</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> 0; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="code" href="a00384.html#a1db05c176455595f4e75e72ac6c8d627">   14</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00384.html#a1db05c176455595f4e75e72ac6c8d627" title="test file API">test</a>(std::string <span class="keyword">const</span>&amp; filename, <span class="keywordtype">int</span> alg)</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">typedef</span> <a class="code" href="a00149.html" title="model to describe an optimization problem">limbo::solvers::LinearModel&lt;int, int&gt;</a> model_type; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    model_type optModel; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    optModel.<a class="code" href="a00149.html#a3c13306727a10e63f45d1fd808c9c0b2" title="read lp format">read</a>(filename); </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">// print problem </span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    optModel.print(std::cout); </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">// solve </span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="a00162.html" title="A base class of min-cost flow solver.">limbo::solvers::MinCostFlowSolver&lt;int, int&gt;</a>* minCostFlowSolver = NULL; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">switch</span> (alg)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">case</span> 0:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            minCostFlowSolver = <span class="keyword">new</span> <a class="code" href="a00055.html" title="Cost scaling algorithm for min-cost flow.">limbo::solvers::CostScaling&lt;int, int&gt;</a>(); </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            minCostFlowSolver = <span class="keyword">new</span> <a class="code" href="a00031.html" title="Capacity scaling algorithm for min-cost flow.">limbo::solvers::CapacityScaling&lt;int, int&gt;</a>(); </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            minCostFlowSolver = <span class="keyword">new</span> <a class="code" href="a00173.html" title="Network simplex algorithm for min-cost flow.">limbo::solvers::NetworkSimplex&lt;int, int&gt;</a>(); </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">case</span> 3:</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            minCostFlowSolver = <span class="keyword">new</span> <a class="code" href="a00056.html" title="Cycle canceling algorithm for min-cost flow.">limbo::solvers::CycleCanceling&lt;int, int&gt;</a>(); </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordflow">break</span>; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="a00070.html" title="LP solved with min-cost flow. A better implementation of limbo::solvers::lpmcf::LpDualMcf.">limbo::solvers::DualMinCostFlow&lt;int, int&gt;</a> solver (&amp;optModel); </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="a00412.html#a500190a99a5762b6aa25aec1230479f0" title="Some enums used in solver.">limbo::solvers::SolverProperty</a> status = solver(minCostFlowSolver);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">//limbo::solvers::SolverProperty status = solver();</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Problem solved &quot;</span> &lt;&lt; <a class="code" href="a00412.html#ae31d5e04adc36b4526e8856acf4ae2cf" title="Convert limbo::solvers::SolverProperty to std::string.">limbo::solvers::toString</a>(status) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">delete</span> minCostFlowSolver;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">// print solutions </span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    optModel.printSolution(std::cout);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">// print problem </span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    optModel.print(std::cout); </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// print graph with solution information </span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    solver.printGraph(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="a00384.html#a3c04138a5bfe5d72780bb7e82a18e627">   63</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00359.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> (argc &gt; 1)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">int</span> alg = 0; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">if</span> (argc &gt; 2)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            alg = atoi(argv[2]);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="comment">// test file API </span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="a00384.html#a1db05c176455595f4e75e72ac6c8d627" title="test file API">test</a>(argv[1], alg);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;at least 1 argument required\n&quot;</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

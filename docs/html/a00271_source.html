@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: parsers/Tf.md Source File</title>
+<title>Limbo: parsers/Parsers.md Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,45 +87,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">parsers/Tf.md</div>  </div>
+<div class="title">parsers/Parsers.md</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;Limbo.Parsers.TfParser {#Parsers_TfParser}</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;Limbo.Parsers {#Parsers}</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;---------</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;[TOC]</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor"># Introduction {#Parsers_TfParser_Introduction}</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;Technology file (tf) is used as a configuration file in EDA tools for different technology nodes. </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;It defines various properties like the layer mapping.</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;Currently the parser reads mapping of layer name, layer <span class="keywordtype">id</span> and layer abbreviation from the technology file. </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor"># Examples {#Parsers_TfParser_Examples}</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">## Boost.Spirit Parser {#Parsers_TfParser_Spirit}</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;See documented version: [<a class="code" href="a00382.html#a1db05c176455595f4e75e72ac6c8d627" title="test file API">test</a>/parsers/tf/test_spirit.cpp](@ref tf/test_spirit.cpp)</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;\include <a class="code" href="a00382.html#a1db05c176455595f4e75e72ac6c8d627" title="test file API">test</a>/parsers/tf/test_spirit.cpp</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;Compiling and running commands (assuming LIMBO_DIR and BOOST_DIR are exported as the environment variable to the path where limbo library is installed)</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;~~~~~~~~~~~~~~~~</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;g++ -o test_spirit test_spirit.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;./test_spirit benchmarks/technology.tf</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;~~~~~~~~~~~~~~~~</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">## All Examples {#Parsers_TfParser_Examples_All}</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;- [<a class="code" href="a00382.html#a1db05c176455595f4e75e72ac6c8d627" title="test file API">test</a>/parsers/tf/test_spirit.cpp](@ref tf/test_spirit.cpp)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;# References {#Parsers_TfParser_References}</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;- [limbo/parsers/tf/spirit/<a class="code" href="a00242.html" title="Tf parser for technology file.">TfParser</a>.h](@ref <a class="code" href="a00242.html" title="Tf parser for technology file.">TfParser</a>.h)</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;- [limbo/parsers/tf/spirit/<a class="code" href="a00078.html" title="error handler">ErrorHandler</a>.h](@ref <a class="code" href="a00078.html" title="error handler">ErrorHandler</a>.h)</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;This <span class="keyword">package </span>provides parsers for various file formats. </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;In general, a parser provides API for users to read and initialize data easily to their own database. </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;Parsers should not be storage hungry since they only need to store temporary data before render to users&#39; database. </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;Therefore, all the parsers developed in the package follows the same philosophy. </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;That is, users only need to provide a database object with required callback functions well defined, </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;and a parser will read input files and invoke those callback functions with proper data. </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;There is no need for users to know the process of parsing. </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;The only thing they need to do is to initialize their own database in the callback functions with the data from the parser. </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;# Components </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;| Components                                              | Languages &amp; Libraries           | Description                                              |</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;| ------------------------------------------------------- | ------------------------------- | -------------------------------------------------------- |</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;| [Bookshelf Parser](@ref Parsers_BookshelfParser)        | Flex/Bison                      | Placement file format from UCSD                          |</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;| [DEF Parser](@ref Parsers_DefParser)                    | Flex/Bison                      |                                                          |</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;|                                                         | Boost.Spirit                    | Deprecated due to efficiency                             |</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;| [Ebeam Parser](@ref Parsers_EbeamParser)                | Flex/Bison                      |                                                          |</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;|                                                         | Boost.Spirit                    | Deprecated due to efficiency                             |</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;| [LEF Parser](@ref Parsers_LefParser)                    | Flex/Bison                      |                                                          |</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;|                                                         | Boost.Spirit                    | Deprecated due to efficiency                             |</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;| [GDF Parser](@ref Parsers_GdfParser)                    | Flex/Bison                      | Routing file format from Jason Cong&#39;s group at UCLA      |</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;| [GDSII Parser](@ref Parsers_GdsiiParser)                | Stream parser: C/C++            | Support .gds and .gds.gz when Boost and Zlib available   |</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;|                                                         | ASCII parser: Boost.Spirit      | Deprecated due to memory efficiency                      |</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;|                                                         | GdsDB wrapper: C/C++, Boost     | High level wrapper for full layout import/export/flatten |</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;| [Tf Parser](@ref Parsers_TfParser)                      | Boost.Spirit                    | Read technology file for physical design                 |</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;| [Verilog Netlist Parser](@ref Parsers_VerilogParser)    | Flex/Bison                      | Read verilog netlist to initialize nets during placement |</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;| [LP Parser](@ref Parsers_LpParser)                      | Flex/Bison                      | Read linear programming problem, compatible with Gurobi  |</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:25 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

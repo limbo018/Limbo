@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/preprocessor/Msg.h File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/preprocessor/AssertMsg.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,27 +90,185 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">Msg.h File Reference</div>  </div>
+<div class="title">AssertMsg.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>header to include <a class="el" href="a00343.html">PrintMsg.h</a> and <a class="el" href="a00341.html">AssertMsg.h</a>  
+<p>assertion with message  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="a00343_source.html">limbo/preprocessor/PrintMsg.h</a>&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00341_source.html">limbo/preprocessor/AssertMsg.h</a>&gt;</code><br/>
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00343_source.html">limbo/preprocessor/Msg.h</a>&gt;</code><br/>
 </div>
 <p><a href="a00342_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00229.html">limbo::StaticAssert&lt; true &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization  <a href="a00229.html#details">More...</a><br/></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00404"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00404.html">limbo</a></td></tr>
+<tr class="memdesc:a00404"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br/></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aa5d7c58f57e3700b0de23ae54972bbca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00342.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(condition, message)</td></tr>
+<tr class="memdesc:aa5d7c58f57e3700b0de23ae54972bbca"><td class="mdescLeft">&#160;</td><td class="mdescRight">assertion with message  <a href="#aa5d7c58f57e3700b0de23ae54972bbca"></a><br/></td></tr>
+<tr class="memitem:a5e43d9f746647e2bf1154325caaaa913"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00342.html#a5e43d9f746647e2bf1154325caaaa913">limboAssertMsg</a>(condition, args...)</td></tr>
+<tr class="memdesc:a5e43d9f746647e2bf1154325caaaa913"><td class="mdescLeft">&#160;</td><td class="mdescRight">custom assertion with message  <a href="#a5e43d9f746647e2bf1154325caaaa913"></a><br/></td></tr>
+<tr class="memitem:aad1773afc93177ac77cdce82432d81f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00342.html#aad1773afc93177ac77cdce82432d81f9">limboAssert</a>(condition)</td></tr>
+<tr class="memdesc:aad1773afc93177ac77cdce82432d81f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">custom assertion without message  <a href="#aad1773afc93177ac77cdce82432d81f9"></a><br/></td></tr>
+<tr class="memitem:ad9d436854015ed742ad5b45a1a760626"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00342.html#ad9d436854015ed742ad5b45a1a760626">limboStaticAssert</a>(condition)</td></tr>
+<tr class="memdesc:ad9d436854015ed742ad5b45a1a760626"><td class="mdescLeft">&#160;</td><td class="mdescRight">compile time assertion  <a href="#ad9d436854015ed742ad5b45a1a760626"></a><br/></td></tr>
+</table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>header to include <a class="el" href="a00343.html">PrintMsg.h</a> and <a class="el" href="a00341.html">AssertMsg.h</a> </p>
+<div class="textblock"><p>assertion with message </p>
+<p>macro: assert_msg (deprecated)</p>
+<p>attribute: assertion with message. if defined NO_LIMBO_ASSERTION, call assert in STL; else call custom assertion</p>
+<p>macro: limboAssertMsg, limboAssert</p>
+<p>attribute: assertion with or without message. compared with assert in STL, it provides detailed information on the failures and positions</p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Jan 2017 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Nov 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00342_source.html">Msg.h</a>.</p>
-</div></div><!-- contents -->
+<p>Definition in file <a class="el" href="a00342_source.html">AssertMsg.h</a>.</p>
+</div><h2>Macro Definition Documentation</h2>
+<a class="anchor" id="aa5d7c58f57e3700b0de23ae54972bbca"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define assert_msg</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">message&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { \</div>
+<div class="line">        if (! (condition)) { \</div>
+<div class="line">            std::cerr &lt;&lt; __FILE__ &lt;&lt; <span class="stringliteral">&quot;:&quot;</span> &lt;&lt; __LINE__ &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; <span class="stringliteral">&quot;: Assertion `&quot;</span> &lt;&lt; #condition &lt;&lt; <span class="stringliteral">&quot;&#39; failed: &quot;</span> &lt;&lt; message &lt;&lt; std::endl; \</div>
+<div class="line">            abort(); \</div>
+<div class="line">        } \</div>
+<div class="line">    } <span class="keywordflow">while</span> (<span class="keyword">false</span>)</div>
+</div><!-- fragment -->
+<p>assertion with message </p>
+<p>deprecated</p>
+<p>I leave it here for backward compatibility. custom assertion with message. example usage: assert_msg(condition, "this is " &lt;&lt; value &lt;&lt; " for test"); </p>
+
+<p>Definition at line <a class="el" href="a00342_source.html#l00034">34</a> of file <a class="el" href="a00342_source.html">AssertMsg.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aad1773afc93177ac77cdce82432d81f9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define limboAssert</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {\</div>
+<div class="line">    if (!(condition)) \</div>
+<div class="line">    {<a class="code" href="a00404.html#a88090cd88eafd40cd46c270c779958d1" title="print message for assertion failure with additional message, see limboAssertMsg(condition, args...)">\</a></div>
+<div class="line"><a class="code" href="a00404.html#a88090cd88eafd40cd46c270c779958d1" title="print message for assertion failure with additional message, see limboAssertMsg(condition, args...)">        ::limbo::limboPrintAssertMsg</a>(#condition, __FILE__, __LINE__, __PRETTY_FUNCTION__); \</div>
+<div class="line">        abort(); \</div>
+<div class="line">    }\</div>
+<div class="line">} <span class="keywordflow">while</span> (<span class="keyword">false</span>)</div>
+</div><!-- fragment -->
+<p>custom assertion without message </p>
+<p>example usage: limboAssert(a == 1); </p>
+
+<p>Definition at line <a class="el" href="a00342_source.html#l00064">64</a> of file <a class="el" href="a00342_source.html">AssertMsg.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5e43d9f746647e2bf1154325caaaa913"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define limboAssertMsg</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">args...&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {\</div>
+<div class="line">    if (!(condition)) \</div>
+<div class="line">    {<a class="code" href="a00404.html#a88090cd88eafd40cd46c270c779958d1" title="print message for assertion failure with additional message, see limboAssertMsg(condition, args...)">\</a></div>
+<div class="line"><a class="code" href="a00404.html#a88090cd88eafd40cd46c270c779958d1" title="print message for assertion failure with additional message, see limboAssertMsg(condition, args...)">        ::limbo::limboPrintAssertMsg</a>(#condition, __FILE__, __LINE__, __PRETTY_FUNCTION__, args); \</div>
+<div class="line">        abort(); \</div>
+<div class="line">    }\</div>
+<div class="line">} <span class="keywordflow">while</span> (<span class="keyword">false</span>)</div>
+</div><!-- fragment -->
+<p>custom assertion with message </p>
+<p>example usage: limboAssertMsg(a == 1, "this is %s", name); </p>
+
+<p>Definition at line <a class="el" href="a00342_source.html#l00052">52</a> of file <a class="el" href="a00342_source.html">AssertMsg.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad9d436854015ed742ad5b45a1a760626"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define limboStaticAssert</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">{\</div>
+<div class="line">    limbo::StaticAssert&lt;(condition) != 0&gt;(); \</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>compile time assertion </p>
+
+<p>Definition at line <a class="el" href="a00342_source.html#l00087">87</a> of file <a class="el" href="a00342_source.html">AssertMsg.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

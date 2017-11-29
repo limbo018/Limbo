@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: thirdparty/ThirdParty.md Source File</title>
+<title>Limbo: string/String.md Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,25 +87,50 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">thirdparty/ThirdParty.md</div>  </div>
+<div class="title">string/String.md</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;Limbo.ThirdParty {#ThirdParty}</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;Limbo.String {#String}</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;---------</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">## Components </span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor"></span>| Components              | Languages &amp; Libraries | Description                                                                                                                                              |</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;| ----------------------- | ----------------------| -------------------------------------------------------------------------------------------------------------------------------------------------------- |</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;| Third Party Libraries   | C/C++/Fortran         | OpenBLAS, Csdp, CThreadPool, dlx, libdivide                                                                                                   |</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;| OpenBLAS                | C/Fortran             | A numeric library. Refer to [OpenBLAS](http:<span class="comment">//www.openblas.net &quot;OpenBLAS&quot;)                                                                               |</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;| Csdp                    | C                     | A semidefinite programming solver. Refer to [Csdp](https:<span class="comment">//projects.coin-or.org/Csdp &quot;Csdp&quot;)                                                             |</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;| CThreadPool             | C/pthread             | A thread pool library. Refer to [CThreadPool](https:<span class="comment">//github.com/Pithikos/C-Thread-Pool &quot;CThreadPool&quot;)                                                   |</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;| libdivide               | C++                   | A library <span class="keywordflow">for</span> optimizing integer division. Refer to [libdivide](http:<span class="comment">//libdivide.com &quot;libdivide&quot;)                                                        |</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;| LEF/DEF parsers         | C/C++                 | A library <span class="keywordflow">for</span> reading LEF/DEF files. Refer to [LEF](https:<span class="comment">//en.wikipedia.org/wiki/Library_Exchange_Format) and [DEF](https://en.wikipedia.org/wiki/Design_Exchange_Format)    |</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;[TOC]</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor"># Introduction {#String_Introduction}</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;Some useful utilities <span class="keywordflow">for</span> <span class="keywordtype">string</span> processing, such as check whether a <span class="keywordtype">string</span> is integer, floating numbers, etc. </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;It also provides functions to convert numbers to <span class="keywordtype">string</span>. </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor"># Examples {#String_Examples}</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">## Compare two strings case-insensitive {#String_Compare}</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;See documented version: [<a class="code" href="a00384.html#a1db05c176455595f4e75e72ac6c8d627" title="test file API">test</a>/<span class="keywordtype">string</span>/test_compare.cpp](@ref test_compare.cpp)</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;\include <a class="code" href="a00384.html#a1db05c176455595f4e75e72ac6c8d627" title="test file API">test</a>/<span class="keywordtype">string</span>/test_compare.cpp</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;Compiling and running commands (assuming LIMBO_DIR is exported as the environment variable to the path where limbo library is installed)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;g++ -o test_compare compare.cpp -I $LIMBO_DIR/include</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;./test_compare</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;Output </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;string limbo2343slimbo and LiMbo2343SliMbo is not equal <span class="keywordflow">case</span>-sensitive</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">string</span> limbo2343slimbo and LiMbo2343SliMbo is equal <span class="keywordflow">case</span>-insensitive</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">## All Examples {#String_Examples_All}</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;- [<a class="code" href="a00384.html#a1db05c176455595f4e75e72ac6c8d627" title="test file API">test</a>/<span class="keywordtype">string</span>/test_compare.cpp](@ref test_compare.cpp)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;- [<a class="code" href="a00384.html#a1db05c176455595f4e75e72ac6c8d627" title="test file API">test</a>/<span class="keywordtype">string</span>/test_string.cpp](@ref test_string.cpp)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor"># References {#String_References}</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;- [limbo/<span class="keywordtype">string</span>/String.h](@ref String.h)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;- [limbo/<span class="keywordtype">string</span>/ToString.h](@ref ToString.h)</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:25 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

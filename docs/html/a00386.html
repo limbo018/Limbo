@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/test/string/test_compare.cpp File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/test/solvers/test_MinCostFlow.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,61 +86,118 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_1439c9d351dd978c38b2510729161b97.html">string</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_39b21b41cf10d9ff223861185498a807.html">solvers</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">test_compare.cpp File Reference</div>  </div>
+<div class="title">test_MinCostFlow.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>test case-sensitivity of string comparison  
+<p>Test min-cost flow solver <a class="el" href="a00161.html">limbo::solvers::MinCostFlow</a>.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
-<code>#include &lt;string&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00354_source.html">limbo/string/String.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="a00352_source.html">limbo/solvers/MinCostFlow.h</a>&gt;</code><br/>
 </div>
 <p><a href="a00386_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00386.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
-<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">main function  <a href="#ae66f6b31b5ad750f1fe042a706a4e3d4"></a><br/></td></tr>
+<tr class="memitem:a1db05c176455595f4e75e72ac6c8d627"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00386.html#a1db05c176455595f4e75e72ac6c8d627">test</a> (std::string const &amp;filename, int alg)</td></tr>
+<tr class="memdesc:a1db05c176455595f4e75e72ac6c8d627"><td class="mdescLeft">&#160;</td><td class="mdescRight">test file API  <a href="#a1db05c176455595f4e75e72ac6c8d627"></a><br/></td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00386.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">main function  <a href="#a3c04138a5bfe5d72780bb7e82a18e627"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>test case-sensitivity of string comparison </p>
+<div class="textblock"><p>Test min-cost flow solver <a class="el" href="a00161.html">limbo::solvers::MinCostFlow</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Jan 2017 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Nov 2017 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00386_source.html">test_compare.cpp</a>.</p>
+<p>Definition in file <a class="el" href="a00386_source.html">test_MinCostFlow.cpp</a>.</p>
 </div><h2>Function Documentation</h2>
-<a class="anchor" id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">int main </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>main function </p>
+<p>Given .lp file, solver linear programming problem with min-cost flow by <a class="el" href="a00161.html">limbo::solvers::MinCostFlow</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">argc</td><td>number of arguments </td></tr>
+    <tr><td class="paramname">argv</td><td>values of arguments </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>0 </dd></dl>
 
-<p>Definition at line <a class="el" href="a00386_source.html#l00013">13</a> of file <a class="el" href="a00386_source.html">test_compare.cpp</a>.</p>
+<p>Definition at line <a class="el" href="a00386_source.html#l00063">63</a> of file <a class="el" href="a00386_source.html">test_MinCostFlow.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1db05c176455595f4e75e72ac6c8d627"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>alg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>test file API </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>input lp file </td></tr>
+    <tr><td class="paramname">alg</td><td>algorithm type, 0 for cost scaling, 1 for capacity scaling, 2 for network simplex, 3 for cycle canceling </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00386_source.html#l00014">14</a> of file <a class="el" href="a00386_source.html">test_MinCostFlow.cpp</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

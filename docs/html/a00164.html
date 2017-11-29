@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: MisVisitor&lt; GraphType &gt; Struct Template Reference</title>
+<title>Limbo: limbo::algorithms::coloring::MISColoring&lt; GraphType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,35 +86,161 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="a00404.html">limbo</a></li><li class="navelem"><a class="el" href="a00405.html">algorithms</a></li><li class="navelem"><a class="el" href="a00406.html">coloring</a></li><li class="navelem"><a class="el" href="a00164.html">MISColoring</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00428.html">List of all members</a>  </div>
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="a00542.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">MisVisitor&lt; GraphType &gt; Struct Template Reference</div>  </div>
+<div class="title">limbo::algorithms::coloring::MISColoring&lt; GraphType &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="a00288_source.html">MISColoring.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for limbo::algorithms::coloring::MISColoring&lt; GraphType &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00164.png" usemap="#limbo::algorithms::coloring::MISColoring&lt; GraphType &gt;_map" alt=""/>
+  <map id="limbo::algorithms::coloring::MISColoring&lt; GraphType &gt;_map" name="limbo::algorithms::coloring::MISColoring&lt; GraphType &gt;_map">
+<area href="a00036.html" alt="limbo::algorithms::coloring::Coloring&lt; GraphType &gt;" shape="rect" coords="0,0,319,24"/>
+</map>
+ </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a86961002bc281d974eea91f64eae946e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86961002bc281d974eea91f64eae946e"></a>
+typedef <a class="el" href="a00036.html">Coloring</a>&lt; GraphType &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>base_type</b></td></tr>
+<tr class="memitem:a101a93c4d5dd402839bc7b79c86fca43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a101a93c4d5dd402839bc7b79c86fca43"></a>
+typedef <a class="el" href="a00075.html">base_type::EdgeHashType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>edge_hash_type</b></td></tr>
+<tr class="memitem:acd9c2820dca0f0ad02db6d30c1956a3d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd9c2820dca0f0ad02db6d30c1956a3d"></a>
+typedef GraphType&#160;</td><td class="memItemRight" valign="bottom"><b>graph_type</b></td></tr>
+<tr class="memitem:a86fdd5d407310921adeedb13ea0f37c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86fdd5d407310921adeedb13ea0f37c1"></a>
+typedef boost::graph_traits<br class="typebreak"/>
+&lt; graph_type &gt;<br class="typebreak"/>
+::vertex_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>graph_vertex_type</b></td></tr>
+<tr class="memitem:af98b68f9ce67bad320e3c28494c4b8c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af98b68f9ce67bad320e3c28494c4b8c1"></a>
+typedef boost::graph_traits<br class="typebreak"/>
+&lt; graph_type &gt;<br class="typebreak"/>
+::edge_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>graph_edge_type</b></td></tr>
+<tr class="memitem:a4c4d37b18cf516f06e11054f89fb9c35"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c4d37b18cf516f06e11054f89fb9c35"></a>
+typedef boost::graph_traits<br class="typebreak"/>
+&lt; graph_type &gt;<br class="typebreak"/>
+::vertex_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>vertex_iterator_type</b></td></tr>
+<tr class="memitem:ad4690a26121ff06d589a61b1a80c26c3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad4690a26121ff06d589a61b1a80c26c3"></a>
+typedef boost::graph_traits<br class="typebreak"/>
+&lt; graph_type &gt;::edge_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>edge_iterator_type</b></td></tr>
+<tr class="memitem:a700e2f123ed28ad43bbb1ced97b33660"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a700e2f123ed28ad43bbb1ced97b33660"></a>
+typedef boost::property_traits<br class="typebreak"/>
+&lt; typename boost::property_map<br class="typebreak"/>
+&lt; graph_type, <br class="typebreak"/>
+boost::edge_weight_t &gt;<br class="typebreak"/>
+::const_type &gt;::value_type&#160;</td><td class="memItemRight" valign="bottom"><b>edge_weight_type</b></td></tr>
+<tr class="memitem:a7898d4a14f7ed7c4a37c2353e5330de2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#a7898d4a14f7ed7c4a37c2353e5330de2">ColorNumType</a> </td></tr>
+<tr class="memdesc:a7898d4a14f7ed7c4a37c2353e5330de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of colors <br/></td></tr>
+<tr class="inherit_header pub_types_a00036"><td colspan="2" onclick="javascript:toggleInherit('pub_types_a00036')"><img src="closed.png" alt="-"/>&nbsp;Public Types inherited from <a class="el" href="a00036.html">limbo::algorithms::coloring::Coloring< GraphType ></a></td></tr>
+<tr class="memitem:a7898d4a14f7ed7c4a37c2353e5330de2 inherit pub_types_a00036"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a7898d4a14f7ed7c4a37c2353e5330de2">ColorNumType</a> { <b>THREE</b> =  3, 
+<b>FOUR</b> =  4
+ }</td></tr>
+<tr class="memdesc:a7898d4a14f7ed7c4a37c2353e5330de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of colors <br/></td></tr>
+<tr class="memitem:acd9c2820dca0f0ad02db6d30c1956a3d inherit pub_types_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd9c2820dca0f0ad02db6d30c1956a3d"></a>
+typedef GraphType&#160;</td><td class="memItemRight" valign="bottom"><b>graph_type</b></td></tr>
+<tr class="memitem:a86fdd5d407310921adeedb13ea0f37c1 inherit pub_types_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86fdd5d407310921adeedb13ea0f37c1"></a>
+typedef boost::graph_traits<br class="typebreak"/>
+&lt; graph_type &gt;<br class="typebreak"/>
+::vertex_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>graph_vertex_type</b></td></tr>
+<tr class="memitem:af98b68f9ce67bad320e3c28494c4b8c1 inherit pub_types_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af98b68f9ce67bad320e3c28494c4b8c1"></a>
+typedef boost::graph_traits<br class="typebreak"/>
+&lt; graph_type &gt;<br class="typebreak"/>
+::edge_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>graph_edge_type</b></td></tr>
+<tr class="memitem:a4c4d37b18cf516f06e11054f89fb9c35 inherit pub_types_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c4d37b18cf516f06e11054f89fb9c35"></a>
+typedef boost::graph_traits<br class="typebreak"/>
+&lt; graph_type &gt;<br class="typebreak"/>
+::vertex_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>vertex_iterator_type</b></td></tr>
+<tr class="memitem:ad4690a26121ff06d589a61b1a80c26c3 inherit pub_types_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad4690a26121ff06d589a61b1a80c26c3"></a>
+typedef boost::graph_traits<br class="typebreak"/>
+&lt; graph_type &gt;::edge_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>edge_iterator_type</b></td></tr>
+<tr class="memitem:a700e2f123ed28ad43bbb1ced97b33660 inherit pub_types_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a700e2f123ed28ad43bbb1ced97b33660"></a>
+typedef boost::property_traits<br class="typebreak"/>
+&lt; typename boost::property_map<br class="typebreak"/>
+&lt; graph_type, <br class="typebreak"/>
+boost::edge_weight_t &gt;<br class="typebreak"/>
+::const_type &gt;::value_type&#160;</td><td class="memItemRight" valign="bottom"><b>edge_weight_type</b></td></tr>
+<tr class="memitem:a9d46a3ba873893a4d883495e876034f0 inherit pub_types_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d46a3ba873893a4d883495e876034f0"></a>
+typedef boost::property_traits<br class="typebreak"/>
+&lt; typename boost::property_map<br class="typebreak"/>
+&lt; graph_type, <br class="typebreak"/>
+boost::edge_index_t &gt;<br class="typebreak"/>
+::const_type &gt;::value_type&#160;</td><td class="memItemRight" valign="bottom"><b>edge_index_type</b></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae4a0918ddea536f268668ae5a1bed6b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#ae4a0918ddea536f268668ae5a1bed6b6">MisVisitor</a> (GraphType &amp;g_)</td></tr>
-<tr class="memitem:a4cebf9cc4dfbca24a295fef22dc7da74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#a4cebf9cc4dfbca24a295fef22dc7da74">MisVisitor</a> (<a class="el" href="a00164.html">MisVisitor</a> const &amp;rhs)</td></tr>
-<tr class="memitem:adb6dd1afef79392ba44b4704fa06d39d"><td class="memTemplParams" colspan="2">template&lt;typename MisType &gt; </td></tr>
-<tr class="memitem:adb6dd1afef79392ba44b4704fa06d39d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00164.html#adb6dd1afef79392ba44b4704fa06d39d">mis</a> (MisType const &amp;is)</td></tr>
+<tr class="memitem:a741ec736482842f31ff76aaeb1f55704"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#a741ec736482842f31ff76aaeb1f55704">MISColoring</a> (graph_type const &amp;g)</td></tr>
+<tr class="memitem:ac2b6f941a6e5decfa8d6cb50417e5181"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2b6f941a6e5decfa8d6cb50417e5181"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#ac2b6f941a6e5decfa8d6cb50417e5181">~MISColoring</a> ()</td></tr>
+<tr class="memdesc:ac2b6f941a6e5decfa8d6cb50417e5181"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br/></td></tr>
+<tr class="memitem:a9d609d485b2b5effa257a9c75d609eec"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#a9d609d485b2b5effa257a9c75d609eec">precolor</a> (graph_vertex_type, int8_t)</td></tr>
+<tr class="memitem:a5e6aa4926bd76fd85b48817ad835d118"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#a5e6aa4926bd76fd85b48817ad835d118">write_graph_sol</a> (string const &amp;filename, std::vector&lt; int8_t &gt; const &amp;vVertexExcludeMark, std::vector&lt; graph_vertex_type &gt; const &amp;vMISVertex) const </td></tr>
+<tr class="inherit_header pub_methods_a00036"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00036')"><img src="closed.png" alt="-"/>&nbsp;Public Member Functions inherited from <a class="el" href="a00036.html">limbo::algorithms::coloring::Coloring< GraphType ></a></td></tr>
+<tr class="memitem:a108f53676c64280d7820e952820a76ae inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a108f53676c64280d7820e952820a76ae">Coloring</a> (graph_type const &amp;g)</td></tr>
+<tr class="memitem:a18414ce5621f7e66abd0dc3a9c3c3fde inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18414ce5621f7e66abd0dc3a9c3c3fde"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a18414ce5621f7e66abd0dc3a9c3c3fde">~Coloring</a> ()</td></tr>
+<tr class="memdesc:a18414ce5621f7e66abd0dc3a9c3c3fde inherit pub_methods_a00036"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br/></td></tr>
+<tr class="memitem:a13888f7f9b9f94da4ddbd9d78e446ba5 inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a13888f7f9b9f94da4ddbd9d78e446ba5">operator()</a> ()</td></tr>
+<tr class="memitem:af2eedfdac8f6227703266e757f1123b3 inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#af2eedfdac8f6227703266e757f1123b3">color_num</a> (<a class="el" href="a00036.html#a7898d4a14f7ed7c4a37c2353e5330de2">ColorNumType</a> cn)</td></tr>
+<tr class="memitem:a1d778d3e390a96d4fdfe510c24fc4bfb inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a1d778d3e390a96d4fdfe510c24fc4bfb">color_num</a> (int8_t cn)</td></tr>
+<tr class="memitem:a04b882fb49a1bcfa7112e902e73b975a inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="a00036.html#a7898d4a14f7ed7c4a37c2353e5330de2">ColorNumType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a04b882fb49a1bcfa7112e902e73b975a">color_num</a> () const </td></tr>
+<tr class="memitem:a94cac1da57fb3220374c10caa0d20a58 inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a94cac1da57fb3220374c10caa0d20a58">has_precolored</a> () const </td></tr>
+<tr class="memitem:a9fa680a305a9821957a5441e54dacc49 inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a9fa680a305a9821957a5441e54dacc49">stitch_weight</a> () const </td></tr>
+<tr class="memitem:ab3a28343b0e99b22e45f79f7031d9adf inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#ab3a28343b0e99b22e45f79f7031d9adf">stitch_weight</a> (double w)</td></tr>
+<tr class="memitem:aebc7450f044dc1590c6bb4deed177d6b inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#aebc7450f044dc1590c6bb4deed177d6b">threads</a> (int32_t t)</td></tr>
+<tr class="memitem:a9afce1c95bb3a59ce3cf9db76f9bd025 inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">virtual int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a9afce1c95bb3a59ce3cf9db76f9bd025">color</a> (graph_vertex_type v) const </td></tr>
+<tr class="memitem:a068cde2ab7c8c00404b3c07a4d5d6a10 inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">virtual edge_weight_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a068cde2ab7c8c00404b3c07a4d5d6a10">edge_weight</a> (graph_edge_type const &amp;e) const </td></tr>
+<tr class="memitem:adb074fb3b64ce52fb90d3727208f9275 inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">virtual edge_weight_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#adb074fb3b64ce52fb90d3727208f9275">calc_cost</a> (std::vector&lt; int8_t &gt; const &amp;vColor) const </td></tr>
+<tr class="memitem:a89731eef2f1f58e414cde48e4802ca43 inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a89731eef2f1f58e414cde48e4802ca43">check_edge_weight</a> (graph_type const &amp;g, edge_weight_type lb, edge_weight_type ub) const </td></tr>
+<tr class="memitem:aff1a7334de90bf47cc550c37ec5a5fe2 inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#aff1a7334de90bf47cc550c37ec5a5fe2">print_edge_weight</a> (graph_type const &amp;g) const </td></tr>
+<tr class="memitem:a5576132da4677e18f34d0f53b30c4d68 inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a5576132da4677e18f34d0f53b30c4d68">write_graph</a> (std::string const &amp;filename) const </td></tr>
+<tr class="memitem:a9b772b9b48a68060291a2d9bc4baaf0f inherit pub_methods_a00036"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a9b772b9b48a68060291a2d9bc4baaf0f">write_graph</a> (std::string const &amp;filename, graph_type const &amp;g, std::vector&lt; int8_t &gt; const &amp;vColor) const </td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:adf4881e6f459514408fef48ff9eaaa3b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adf4881e6f459514408fef48ff9eaaa3b"></a>
-GraphType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#adf4881e6f459514408fef48ff9eaaa3b">g</a></td></tr>
-<tr class="memdesc:adf4881e6f459514408fef48ff9eaaa3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">graph <br/></td></tr>
+<tr class="heading"><td colspan="2"><h2><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a9c2f0668973ea8a4835c479ea28bc3ff"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#a9c2f0668973ea8a4835c479ea28bc3ff">coloring</a> ()</td></tr>
+<tr class="memitem:a9f6b723627eee8e4aa73a99757b0072a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#a9f6b723627eee8e4aa73a99757b0072a">computeMIS</a> (std::vector&lt; int8_t &gt; const &amp;vVertexExcludeMark, std::vector&lt; graph_vertex_type &gt; &amp;vMISVertex)</td></tr>
+<tr class="memdesc:a9f6b723627eee8e4aa73a99757b0072a"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute maximum independent set, weight is not supported yet  <a href="#a9f6b723627eee8e4aa73a99757b0072a"></a><br/></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_a00036"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_a00036')"><img src="closed.png" alt="-"/>&nbsp;Protected Attributes inherited from <a class="el" href="a00036.html">limbo::algorithms::coloring::Coloring< GraphType ></a></td></tr>
+<tr class="memitem:a5b050f89a40fd2760c4963ad13e9bc7c inherit pro_attribs_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b050f89a40fd2760c4963ad13e9bc7c"></a>
+graph_type const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a5b050f89a40fd2760c4963ad13e9bc7c">m_graph</a></td></tr>
+<tr class="memdesc:a5b050f89a40fd2760c4963ad13e9bc7c inherit pro_attribs_a00036"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial graph <br/></td></tr>
+<tr class="memitem:ab64bd9ee08d43a41ec88e381b56ecc4d inherit pro_attribs_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab64bd9ee08d43a41ec88e381b56ecc4d"></a>
+std::vector&lt; int8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#ab64bd9ee08d43a41ec88e381b56ecc4d">m_vColor</a></td></tr>
+<tr class="memdesc:ab64bd9ee08d43a41ec88e381b56ecc4d inherit pro_attribs_a00036"><td class="mdescLeft">&#160;</td><td class="mdescRight">coloring solutions <br/></td></tr>
+<tr class="memitem:addf50acc064644c5c979e07729a1773a inherit pro_attribs_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="addf50acc064644c5c979e07729a1773a"></a>
+<a class="el" href="a00036.html#a7898d4a14f7ed7c4a37c2353e5330de2">ColorNumType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#addf50acc064644c5c979e07729a1773a">m_color_num</a></td></tr>
+<tr class="memdesc:addf50acc064644c5c979e07729a1773a inherit pro_attribs_a00036"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of colors <br/></td></tr>
+<tr class="memitem:aa722dcf27f022981e144f26a96363d42 inherit pro_attribs_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa722dcf27f022981e144f26a96363d42"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#aa722dcf27f022981e144f26a96363d42">m_stitch_weight</a></td></tr>
+<tr class="memdesc:aa722dcf27f022981e144f26a96363d42 inherit pro_attribs_a00036"><td class="mdescLeft">&#160;</td><td class="mdescRight">stitch weight <br/></td></tr>
+<tr class="memitem:a6e92acc7b004a5d38d7123fd8f24bf3b inherit pro_attribs_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6e92acc7b004a5d38d7123fd8f24bf3b"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a6e92acc7b004a5d38d7123fd8f24bf3b">m_threads</a></td></tr>
+<tr class="memdesc:a6e92acc7b004a5d38d7123fd8f24bf3b inherit pro_attribs_a00036"><td class="mdescLeft">&#160;</td><td class="mdescRight">control number of threads for ILP solver <br/></td></tr>
+<tr class="memitem:a895df6a7eb75a7219d3b47a88c50a6e5 inherit pro_attribs_a00036"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a895df6a7eb75a7219d3b47a88c50a6e5"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00036.html#a895df6a7eb75a7219d3b47a88c50a6e5">m_has_precolored</a></td></tr>
+<tr class="memdesc:a895df6a7eb75a7219d3b47a88c50a6e5 inherit pro_attribs_a00036"><td class="mdescLeft">&#160;</td><td class="mdescRight">whether contain precolored vertices <br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename GraphType&gt;<br/>
-struct MisVisitor&lt; GraphType &gt;</h3>
+class limbo::algorithms::coloring::MISColoring&lt; GraphType &gt;</h3>
 
-<p>maximum independent set visitor </p>
+<p>MIS based graph coloring, which means iteratively search for the maximum independent set. Edge weight is used to differentiate conflict edge and stitch edge. Non-negative weight implies conflict edge, while negative weight implies stitch edge.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">GraphType</td><td>graph type </td></tr>
@@ -122,22 +248,22 @@ struct MisVisitor&lt; GraphType &gt;</h3>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00357_source.html#l00038">38</a> of file <a class="el" href="a00357_source.html">test_ChromaticNumber.cpp</a>.</p>
+<p>Definition at line <a class="el" href="a00288_source.html#l00054">54</a> of file <a class="el" href="a00288_source.html">MISColoring.h</a>.</p>
 </div><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ae4a0918ddea536f268668ae5a1bed6b6"></a>
+<a class="anchor" id="a741ec736482842f31ff76aaeb1f55704"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
+template&lt;typename GraphType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00164.html">MisVisitor</a>&lt; GraphType &gt;::<a class="el" href="a00164.html">MisVisitor</a> </td>
+          <td class="memname"><a class="el" href="a00164.html">limbo::algorithms::coloring::MISColoring</a>&lt; GraphType &gt;::<a class="el" href="a00164.html">MISColoring</a> </td>
           <td>(</td>
-          <td class="paramtype">GraphType &amp;&#160;</td>
-          <td class="paramname"><em>g_</em></td><td>)</td>
+          <td class="paramtype">graph_type const &amp;&#160;</td>
+          <td class="paramname"><em>g</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -150,68 +276,167 @@ template&lt;typename GraphType &gt; </div>
 <p>constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">g_</td><td>graph </td></tr>
+    <tr><td class="paramname">g</td><td>graph </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00357_source.html#l00044">44</a> of file <a class="el" href="a00357_source.html">test_ChromaticNumber.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4cebf9cc4dfbca24a295fef22dc7da74"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00164.html">MisVisitor</a>&lt; GraphType &gt;::<a class="el" href="a00164.html">MisVisitor</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00164.html">MisVisitor</a>&lt; GraphType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>copy constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>a <a class="el" href="a00164.html">MisVisitor</a> object </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00357_source.html#l00047">47</a> of file <a class="el" href="a00357_source.html">test_ChromaticNumber.cpp</a>.</p>
+<p>Definition at line <a class="el" href="a00288_source.html#l00075">75</a> of file <a class="el" href="a00288_source.html">MISColoring.h</a>.</p>
 
 </div>
 </div>
 <h2>Member Function Documentation</h2>
-<a class="anchor" id="adb6dd1afef79392ba44b4704fa06d39d"></a>
+<a class="anchor" id="a9c2f0668973ea8a4835c479ea28bc3ff"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-<div class="memtemplate">
-template&lt;typename MisType &gt; </div>
+template&lt;typename GraphType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="a00164.html">MisVisitor</a>&lt; GraphType &gt;::mis </td>
+          <td class="memname">virtual double <a class="el" href="a00164.html">limbo::algorithms::coloring::MISColoring</a>&lt; GraphType &gt;::coloring </td>
           <td>(</td>
-          <td class="paramtype">MisType const &amp;&#160;</td>
-          <td class="paramname"><em>is</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>kernel coloring algorithm </p>
+<dl class="section return"><dt>Returns</dt><dd>objective value </dd></dl>
+
+<p>Implements <a class="el" href="a00036.html#ade09fcc370a3aa87ed109e1b9e82d00d">limbo::algorithms::coloring::Coloring&lt; GraphType &gt;</a>.</p>
+
+<p>Definition at line <a class="el" href="a00288_source.html#l00140">140</a> of file <a class="el" href="a00288_source.html">MISColoring.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9f6b723627eee8e4aa73a99757b0072a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="a00164.html">limbo::algorithms::coloring::MISColoring</a>&lt; GraphType &gt;::computeMIS </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; int8_t &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>vVertexExcludeMark</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; graph_vertex_type &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vMISVertex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>compute maximum independent set, weight is not supported yet </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vVertexExcludeMark</td><td>marked true for vertices to exclude from graph </td></tr>
+    <tr><td class="paramname">vMISVertex</td><td>store vertices of maximum independent set </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>size of maximum independent set </dd></dl>
+
+<p>Definition at line <a class="el" href="a00288_source.html#l00342">342</a> of file <a class="el" href="a00288_source.html">MISColoring.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9d609d485b2b5effa257a9c75d609eec"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void <a class="el" href="a00164.html">limbo::algorithms::coloring::MISColoring</a>&lt; GraphType &gt;::precolor </td>
+          <td>(</td>
+          <td class="paramtype">graph_vertex_type&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>set precolored vertex, not supported param v vertex param c color </p>
+
+<p>Reimplemented from <a class="el" href="a00036.html#a65aa82fa42a208750520f94f413bd208">limbo::algorithms::coloring::Coloring&lt; GraphType &gt;</a>.</p>
+
+<p>Definition at line <a class="el" href="a00288_source.html#l00084">84</a> of file <a class="el" href="a00288_source.html">MISColoring.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5e6aa4926bd76fd85b48817ad835d118"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00164.html">limbo::algorithms::coloring::MISColoring</a>&lt; GraphType &gt;::write_graph_sol </td>
+          <td>(</td>
+          <td class="paramtype">string const &amp;&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int8_t &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>vVertexExcludeMark</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; graph_vertex_type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>vMISVertex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -220,31 +445,27 @@ template&lt;typename MisType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>required callback for <a class="el" href="a00159.html">limbo::algorithms::MaxIndependentSetByMaxClique</a> </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">MisType</td><td>a container type, default is std::deque </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>write raw solution of MIS </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">is</td><td>independent set </td></tr>
+    <tr><td class="paramname">filename</td><td>output file name </td></tr>
+    <tr><td class="paramname">vVertexExcludeMark</td><td>marked true for vertices to exclude from graph </td></tr>
+    <tr><td class="paramname">vMISVertex</td><td>vertices of maximum independent set </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00357_source.html#l00053">53</a> of file <a class="el" href="a00357_source.html">test_ChromaticNumber.cpp</a>.</p>
+<p>Definition at line <a class="el" href="a00288_source.html#l00090">90</a> of file <a class="el" href="a00288_source.html">MISColoring.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/local/eda03/yibolin/documents/Projects/Limbo/test/algorithms/<a class="el" href="a00357_source.html">test_ChromaticNumber.cpp</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/algorithms/coloring/<a class="el" href="a00288_source.html">MISColoring.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

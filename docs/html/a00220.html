@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: DefParser::Row Struct Reference</title>
+<title>Limbo: GdsParser::GdsDB::ApplyCellReferenceActionDetails::Rotate Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,66 +88,51 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00394.html">DefParser</a></li><li class="navelem"><a class="el" href="a00220.html">Row</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00400.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00401.html">GdsDB</a></li><li class="navelem"><a class="el" href="a00402.html">ApplyCellReferenceActionDetails</a></li><li class="navelem"><a class="el" href="a00220.html">Rotate</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00451.html">List of all members</a>  </div>
+<a href="a00517.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">DefParser::Row Struct Reference</div>  </div>
+<div class="title">GdsParser::GdsDB::ApplyCellReferenceActionDetails::Rotate Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>placement row  
+<p><a class="el" href="a00220.html" title="Rotate operation.">Rotate</a> operation.  
  <a href="a00220.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00319_source.html">DefDataBase.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for DefParser::Row:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="a00220.png" usemap="#DefParser::Row_map" alt=""/>
-  <map id="DefParser::Row_map" name="DefParser::Row_map">
-<area href="a00139.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures." alt="DefParser::Item" shape="rect" coords="0,0,100,24"/>
-</map>
- </div></div>
+<p><code>#include &lt;<a class="el" href="a00327_source.html">GdsObjectHelpers.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a786692bb53eb863da278dab76ce301a1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a786692bb53eb863da278dab76ce301a1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a786692bb53eb863da278dab76ce301a1">reset</a> ()</td></tr>
-<tr class="memdesc:a786692bb53eb863da278dab76ce301a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br/></td></tr>
-<tr class="memitem:a845920f63c168c65d693b18dc96a7465"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a845920f63c168c65d693b18dc96a7465">print</a> (ostringstream &amp;ss) const </td></tr>
-<tr class="memdesc:a845920f63c168c65d693b18dc96a7465"><td class="mdescLeft">&#160;</td><td class="mdescRight">print data members  <a href="#a845920f63c168c65d693b18dc96a7465"></a><br/></td></tr>
+<tr class="memitem:acc9bcd12891da0cd5d39a9b8ec025706"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#acc9bcd12891da0cd5d39a9b8ec025706">Rotate</a> (double a)</td></tr>
+<tr class="memdesc:acc9bcd12891da0cd5d39a9b8ec025706"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#acc9bcd12891da0cd5d39a9b8ec025706"></a><br/></td></tr>
+<tr class="memitem:a7ea8ccc73ea66e4f003d9c32b267d796"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a7ea8ccc73ea66e4f003d9c32b267d796">operator()</a> (GdsCellReference::point_type &amp;p) const </td></tr>
+<tr class="memdesc:a7ea8ccc73ea66e4f003d9c32b267d796"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to run operation. Transformation matrix <br/>
+ cos(theta) -sin(theta) <br/>
+ sin(theta) cos(theta)  <a href="#a7ea8ccc73ea66e4f003d9c32b267d796"></a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ae8aeb824d688283afc462381def7b59d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8aeb824d688283afc462381def7b59d"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#ae8aeb824d688283afc462381def7b59d">row_name</a></td></tr>
-<tr class="memdesc:ae8aeb824d688283afc462381def7b59d"><td class="mdescLeft">&#160;</td><td class="mdescRight">row name <br/></td></tr>
-<tr class="memitem:a10d6d678abf295ca209749cc56547661"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a10d6d678abf295ca209749cc56547661"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a10d6d678abf295ca209749cc56547661">macro_name</a></td></tr>
-<tr class="memdesc:a10d6d678abf295ca209749cc56547661"><td class="mdescLeft">&#160;</td><td class="mdescRight">macro name of row <br/></td></tr>
-<tr class="memitem:a120674e06b2a22e0ee3b2fbcc48550fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a120674e06b2a22e0ee3b2fbcc48550fd"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a120674e06b2a22e0ee3b2fbcc48550fd">origin</a> [2]</td></tr>
-<tr class="memdesc:a120674e06b2a22e0ee3b2fbcc48550fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">x, y of origin <br/></td></tr>
-<tr class="memitem:a61352ab4ef8b1d935d2be6760e364c23"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a61352ab4ef8b1d935d2be6760e364c23"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a61352ab4ef8b1d935d2be6760e364c23">orient</a></td></tr>
-<tr class="memdesc:a61352ab4ef8b1d935d2be6760e364c23"><td class="mdescLeft">&#160;</td><td class="mdescRight">orientation <br/></td></tr>
-<tr class="memitem:a05922c9bb6a83ac3198a67b4860a5865"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05922c9bb6a83ac3198a67b4860a5865"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a05922c9bb6a83ac3198a67b4860a5865">repeat</a> [2]</td></tr>
-<tr class="memdesc:a05922c9bb6a83ac3198a67b4860a5865"><td class="mdescLeft">&#160;</td><td class="mdescRight">do x by y <br/></td></tr>
-<tr class="memitem:a0f7d220154aac8aa6a49d9247a09b404"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a0f7d220154aac8aa6a49d9247a09b404">step</a> [2]</td></tr>
+<tr class="memitem:a6d63645bee61769b598da1863c23d9e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d63645bee61769b598da1863c23d9e3"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a6d63645bee61769b598da1863c23d9e3">angle</a></td></tr>
+<tr class="memdesc:a6d63645bee61769b598da1863c23d9e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">angle <br/></td></tr>
+<tr class="memitem:ab91dbdf3a90dc681d0572e6838cefb9c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab91dbdf3a90dc681d0572e6838cefb9c"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#ab91dbdf3a90dc681d0572e6838cefb9c">cosAngle</a></td></tr>
+<tr class="memdesc:ab91dbdf3a90dc681d0572e6838cefb9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">cosine value of angle <br/></td></tr>
+<tr class="memitem:ac7a045b64258209685cb299979d690d1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7a045b64258209685cb299979d690d1"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#ac7a045b64258209685cb299979d690d1">sinAngle</a></td></tr>
+<tr class="memdesc:ac7a045b64258209685cb299979d690d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">sine value of angle <br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>placement row </p>
+<div class="textblock"><p><a class="el" href="a00220.html" title="Rotate operation.">Rotate</a> operation. </p>
 
-<p>Definition at line <a class="el" href="a00319_source.html#l00065">65</a> of file <a class="el" href="a00319_source.html">DefDataBase.h</a>.</p>
-</div><h2>Member Function Documentation</h2>
-<a class="anchor" id="a845920f63c168c65d693b18dc96a7465"></a>
+<p>Definition at line <a class="el" href="a00327_source.html#l00288">288</a> of file <a class="el" href="a00327_source.html">GdsObjectHelpers.h</a>.</p>
+</div><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="acc9bcd12891da0cd5d39a9b8ec025706"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -155,57 +140,76 @@ int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void DefParser::Row::print </td>
+          <td class="memname">GdsParser::GdsDB::ApplyCellReferenceActionDetails::Rotate::Rotate </td>
           <td>(</td>
-          <td class="paramtype">ostringstream &amp;&#160;</td>
-          <td class="paramname"><em>ss</em></td><td>)</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>angle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00327_source.html#l00296">296</a> of file <a class="el" href="a00327_source.html">GdsObjectHelpers.h</a>.</p>
+
+</div>
+</div>
+<h2>Member Function Documentation</h2>
+<a class="anchor" id="a7ea8ccc73ea66e4f003d9c32b267d796"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsDB::ApplyCellReferenceActionDetails::Rotate::operator() </td>
+          <td>(</td>
+          <td class="paramtype">GdsCellReference::point_type &amp;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>print data members </p>
+<p>API to run operation. Transformation matrix <br/>
+ cos(theta) -sin(theta) <br/>
+ sin(theta) cos(theta) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ss</td><td>output stream </td></tr>
+    <tr><td class="paramname">p</td><td>given position and perform operation on the position </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="a00139.html#af12e8991274e6d222ecad5d7284c86f1">DefParser::Item</a>.</p>
-
-<p>Definition at line <a class="el" href="a00319_source.html#l00083">83</a> of file <a class="el" href="a00319_source.html">DefDataBase.h</a>.</p>
-
-</div>
-</div>
-<h2>Member Data Documentation</h2>
-<a class="anchor" id="a0f7d220154aac8aa6a49d9247a09b404"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int32_t DefParser::Row::step[2]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>x, y </p>
-
-<p>Definition at line <a class="el" href="a00319_source.html#l00072">72</a> of file <a class="el" href="a00319_source.html">DefDataBase.h</a>.</p>
+<p>Definition at line <a class="el" href="a00327_source.html#l00307">307</a> of file <a class="el" href="a00327_source.html">GdsObjectHelpers.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/def/adapt/<a class="el" href="a00319_source.html">DefDataBase.h</a></li>
+<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/<a class="el" href="a00327_source.html">GdsObjectHelpers.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

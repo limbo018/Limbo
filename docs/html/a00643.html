@@ -88,25 +88,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00412.html">VerilogParser</a></li><li class="navelem"><a class="el" href="a00169.html">NetPin</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00414.html">LpParser</a></li><li class="navelem"><a class="el" href="a00152.html">LpDataBase</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">VerilogParser::NetPin Member List</div>  </div>
+<div class="title">LpParser::LpDataBase Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00169.html">VerilogParser::NetPin</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a00152.html">LpParser::LpDataBase</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00169.html#a5021371956ae17d9625496581e73c97a">net</a></td><td class="entry"><a class="el" href="a00169.html">VerilogParser::NetPin</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00169.html#a9ad74ddefea7cf04cbbbaf319c9985b8">NetPin</a>(std::string &amp;n, std::string &amp;p, Range const &amp;r=Range())</td><td class="entry"><a class="el" href="a00169.html">VerilogParser::NetPin</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00169.html#a426e86c183a1549736ee42354e19bb04">pin</a></td><td class="entry"><a class="el" href="a00169.html">VerilogParser::NetPin</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00169.html#a109ad9ccf7c7d1ff6c53105cde277a66">range</a></td><td class="entry"><a class="el" href="a00169.html">VerilogParser::NetPin</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00152.html#a06e69b33012729ca43b282b54f0a28d2">add_constraint</a>(string const &amp;cname, TermArray const &amp;terms, char compare, double constant)=0</td><td class="entry"><a class="el" href="a00152.html">LpParser::LpDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00152.html#ac9362bd3c5c0f5611cdb492828583ef5">add_objective</a>(bool minimize, TermArray const &amp;terms)=0</td><td class="entry"><a class="el" href="a00152.html">LpParser::LpDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00152.html#a59d7089cd4e139a73d7acdf4efd5a6aa">add_variable</a>(string const &amp;vname, double l=limbo::lowest&lt; double &gt;(), double r=std::numeric_limits&lt; double &gt;::max())=0</td><td class="entry"><a class="el" href="a00152.html">LpParser::LpDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00152.html#ac2869dbe780548dd9dfa67661a51dce3">set_integer</a>(string const &amp;vname, bool binary)=0</td><td class="entry"><a class="el" href="a00152.html">LpParser::LpDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

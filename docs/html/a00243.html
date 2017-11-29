@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: GdsParser::GdsDB::ApplyCellReferenceActionDetails::Translate Struct Reference</title>
+<title>Limbo: TfParser Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,120 +86,97 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="a00397.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00398.html">GdsDB</a></li><li class="navelem"><a class="el" href="a00399.html">ApplyCellReferenceActionDetails</a></li><li class="navelem"><a class="el" href="a00243.html">Translate</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00513.html">List of all members</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="a00436.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser::GdsDB::ApplyCellReferenceActionDetails::Translate Struct Reference</div>  </div>
+<div class="title">TfParser Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="a00243.html" title="Translate operation.">Translate</a> operation.  
+<p>Tf parser for technology file.  
  <a href="a00243.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00326_source.html">GdsObjectHelpers.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00339_source.html">TfParser.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a2211f1ebf964f55eaebcbe45fb87526e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00243.html#a2211f1ebf964f55eaebcbe45fb87526e">Translate</a> (GdsCellReference::point_type const &amp;o)</td></tr>
-<tr class="memdesc:a2211f1ebf964f55eaebcbe45fb87526e"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a2211f1ebf964f55eaebcbe45fb87526e"></a><br/></td></tr>
-<tr class="memitem:a454da9a331a49bfb8cc622a9a1c2a6e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00243.html#a454da9a331a49bfb8cc622a9a1c2a6e3">operator()</a> (GdsCellReference::point_type &amp;p) const </td></tr>
-<tr class="memdesc:a454da9a331a49bfb8cc622a9a1c2a6e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to run operation.  <a href="#a454da9a331a49bfb8cc622a9a1c2a6e3"></a><br/></td></tr>
+<tr class="heading"><td colspan="2"><h2><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00228.html">SkipperGrammar</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">grammar of skipper  <a href="a00228.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00240.html">TfDataBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for tf database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00240.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00242.html">TfGrammar</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">define grammar  <a href="a00242.html#details">More...</a><br/></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a759abeee73ed54c81541ac6e9ef62176"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a759abeee73ed54c81541ac6e9ef62176"></a>
-GdsCellReference::point_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00243.html#a759abeee73ed54c81541ac6e9ef62176">offset</a></td></tr>
-<tr class="memdesc:a759abeee73ed54c81541ac6e9ef62176"><td class="mdescLeft">&#160;</td><td class="mdescRight">offset <br/></td></tr>
+<tr class="heading"><td colspan="2"><h2><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ac4370257cf00d969472a040aefeb1884"><td class="memTemplParams" colspan="2">template&lt;typename DataBaseType &gt; </td></tr>
+<tr class="memitem:ac4370257cf00d969472a040aefeb1884"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00243.html#ac4370257cf00d969472a040aefeb1884">read</a> (DataBaseType &amp;db, const string &amp;tfFile)</td></tr>
+<tr class="memdesc:ac4370257cf00d969472a040aefeb1884"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to read tf file.  <a href="#ac4370257cf00d969472a040aefeb1884"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="a00243.html" title="Translate operation.">Translate</a> operation. </p>
+<div class="textblock"><p>Tf parser for technology file. </p>
+<p>Developed with Boost.Spirit </p>
 
-<p>Definition at line <a class="el" href="a00326_source.html#l00272">272</a> of file <a class="el" href="a00326_source.html">GdsObjectHelpers.h</a>.</p>
-</div><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a2211f1ebf964f55eaebcbe45fb87526e"></a>
+<p>Definition at line <a class="el" href="a00339_source.html#l00052">52</a> of file <a class="el" href="a00339_source.html">TfParser.h</a>.</p>
+</div><h2>Member Function Documentation</h2>
+<a class="anchor" id="ac4370257cf00d969472a040aefeb1884"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename DataBaseType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">GdsParser::GdsDB::ApplyCellReferenceActionDetails::Translate::Translate </td>
+          <td class="memname">static bool TfParser::read </td>
           <td>(</td>
-          <td class="paramtype">GdsCellReference::point_type const &amp;&#160;</td>
-          <td class="paramname"><em>o</em></td><td>)</td>
+          <td class="paramtype">DataBaseType &amp;&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>tfFile</em>&#160;</td>
         </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">o</td><td>offset </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00326_source.html#l00278">278</a> of file <a class="el" href="a00326_source.html">GdsObjectHelpers.h</a>.</p>
-
-</div>
-</div>
-<h2>Member Function Documentation</h2>
-<a class="anchor" id="a454da9a331a49bfb8cc622a9a1c2a6e3"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">void GdsParser::GdsDB::ApplyCellReferenceActionDetails::Translate::operator() </td>
-          <td>(</td>
-          <td class="paramtype">GdsCellReference::point_type &amp;&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td> const</td>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>API to run operation. </p>
+<p>API to read tf file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">p</td><td>given position and perform operation on the position </td></tr>
+    <tr><td class="paramname">db</td><td>database </td></tr>
+    <tr><td class="paramname">tfFile</td><td>tf file </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00326_source.html#l00282">282</a> of file <a class="el" href="a00326_source.html">GdsObjectHelpers.h</a>.</p>
+<p>Definition at line <a class="el" href="a00339_source.html#l00199">199</a> of file <a class="el" href="a00339_source.html">TfParser.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/<a class="el" href="a00326_source.html">GdsObjectHelpers.h</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/tf/spirit/<a class="el" href="a00339_source.html">TfParser.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

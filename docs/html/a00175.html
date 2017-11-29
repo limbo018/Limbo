@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: GdfParser::NumberArray Class Reference</title>
+<title>Limbo: limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;::NonIntegerInfo Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,132 +88,59 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00396.html">GdfParser</a></li><li class="navelem"><a class="el" href="a00175.html">NumberArray</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00404.html">limbo</a></li><li class="navelem"><a class="el" href="a00405.html">algorithms</a></li><li class="navelem"><a class="el" href="a00406.html">coloring</a></li><li class="navelem"><a class="el" href="a00151.html">LPColoring</a></li><li class="navelem"><a class="el" href="a00175.html">NonIntegerInfo</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00466.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00541.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdfParser::NumberArray Class Reference</div>  </div>
+<div class="title">limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;::NonIntegerInfo Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>bison does not support vector very well, so here create a dummy class for floating point number array.  
+<p>records the information of non-integer values  
  <a href="a00175.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00323_source.html">GdfDataBase.h</a>&gt;</code></p>
-
-<p>Inherits vector&lt; double &gt;.</p>
+<p><code>#include &lt;<a class="el" href="a00286_source.html">LPColoring.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a18ed42abbc71d803d20bf66cefb6a9e4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18ed42abbc71d803d20bf66cefb6a9e4"></a>
-typedef vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>base_type</b></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a00e36e57f6ed4a668dc647b52909937c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00175.html#a00e36e57f6ed4a668dc647b52909937c">NumberArray</a> (const allocator_type &amp;alloc=allocator_type())</td></tr>
-<tr class="memitem:af124de059ab209d36fcb4f0474921053"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00175.html#af124de059ab209d36fcb4f0474921053">NumberArray</a> (size_type n, const value_type &amp;val, const allocator_type &amp;alloc=allocator_type())</td></tr>
+<tr class="memitem:ae55d38ac3218b0d5900b157df8d3b26d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae55d38ac3218b0d5900b157df8d3b26d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00175.html#ae55d38ac3218b0d5900b157df8d3b26d">NonIntegerInfo</a> ()</td></tr>
+<tr class="memdesc:ae55d38ac3218b0d5900b157df8d3b26d"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br/></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a05d4d81f5efcf225e09e1d3bdd15a972"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05d4d81f5efcf225e09e1d3bdd15a972"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00175.html#a05d4d81f5efcf225e09e1d3bdd15a972">vertex_non_integer_num</a></td></tr>
+<tr class="memdesc:a05d4d81f5efcf225e09e1d3bdd15a972"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of vertices with non-integer solutions <br/></td></tr>
+<tr class="memitem:afa358851e09da8d81f53a1e0c4786ed5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa358851e09da8d81f53a1e0c4786ed5"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00175.html#afa358851e09da8d81f53a1e0c4786ed5">edge_non_integer_num</a></td></tr>
+<tr class="memdesc:afa358851e09da8d81f53a1e0c4786ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of edges with non-integer solutions <br/></td></tr>
+<tr class="memitem:acb901d72b1bea4d9864513df4af20ca1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acb901d72b1bea4d9864513df4af20ca1"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00175.html#acb901d72b1bea4d9864513df4af20ca1">vertex_half_integer_num</a></td></tr>
+<tr class="memdesc:acb901d72b1bea4d9864513df4af20ca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of vertices with half-integer solutions <br/></td></tr>
+<tr class="memitem:afe9d54e2da7e58d04549573c266f76cf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe9d54e2da7e58d04549573c266f76cf"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00175.html#afe9d54e2da7e58d04549573c266f76cf">edge_half_integer_num</a></td></tr>
+<tr class="memdesc:afe9d54e2da7e58d04549573c266f76cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of edges with half-integer solutions <br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>bison does not support vector very well, so here create a dummy class for floating point number array. </p>
+<div class="textblock"><h3>template&lt;typename GraphType&gt;<br/>
+struct limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;::NonIntegerInfo</h3>
 
-<p>Definition at line <a class="el" href="a00323_source.html#l00066">66</a> of file <a class="el" href="a00323_source.html">GdfDataBase.h</a>.</p>
-</div><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a00e36e57f6ed4a668dc647b52909937c"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">GdfParser::NumberArray::NumberArray </td>
-          <td>(</td>
-          <td class="paramtype">const allocator_type &amp;&#160;</td>
-          <td class="paramname"><em>alloc</em> = <code>allocator_type()</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">alloc</td><td>memory allocator </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>records the information of non-integer values </p>
 
-<p>Definition at line <a class="el" href="a00323_source.html#l00078">78</a> of file <a class="el" href="a00323_source.html">GdfDataBase.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="af124de059ab209d36fcb4f0474921053"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">GdfParser::NumberArray::NumberArray </td>
-          <td>(</td>
-          <td class="paramtype">size_type&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const value_type &amp;&#160;</td>
-          <td class="paramname"><em>val</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const allocator_type &amp;&#160;</td>
-          <td class="paramname"><em>alloc</em> = <code>allocator_type()</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n</td><td>number of values </td></tr>
-    <tr><td class="paramname">val</td><td>data value </td></tr>
-    <tr><td class="paramname">alloc</td><td>memory allocator </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00323_source.html#l00084">84</a> of file <a class="el" href="a00323_source.html">GdfDataBase.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/gdf/bison/<a class="el" href="a00323_source.html">GdfDataBase.h</a></li>
+<p>Definition at line <a class="el" href="a00286_source.html#l00082">82</a> of file <a class="el" href="a00286_source.html">LPColoring.h</a>.</p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/home/local/eda03/yibolin/documents/Projects/Limbo/limbo/algorithms/coloring/<a class="el" href="a00286_source.html">LPColoring.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

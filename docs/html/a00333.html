@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/lef/adapt/LefDataBase.h File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/parsers/gdsii/stream/GdsWriter.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,54 +86,89 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_f132a8c89f65d1e48338514f1f94990c.html">lef</a></li><li class="navelem"><a class="el" href="dir_f56dd2cf84117a881ee6162fd08db923.html">adapt</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_91c0dd7fad8f72975de99135227c035c.html">gdsii</a></li><li class="navelem"><a class="el" href="dir_8d18058ccbba2fc95fd5931717233785.html">stream</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
-<div class="title">LefDataBase.h File Reference</div>  </div>
+<div class="title">GdsWriter.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Database for Lef parser.  
+<p>write GDSII file  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;string&gt;</code><br/>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br/>
+<code>#include &lt;math.h&gt;</code><br/>
+<code>#include &lt;stdlib.h&gt;</code><br/>
+<code>#include &lt;string.h&gt;</code><br/>
+<code>#include &lt;sys/stat.h&gt;</code><br/>
+<code>#include &lt;fcntl.h&gt;</code><br/>
+<code>#include &lt;unistd.h&gt;</code><br/>
+<code>#include &lt;time.h&gt;</code><br/>
+<code>#include &lt;assert.h&gt;</code><br/>
 <code>#include &lt;vector&gt;</code><br/>
 <code>#include &lt;iostream&gt;</code><br/>
 <code>#include &lt;fstream&gt;</code><br/>
-<code>#include &lt;sstream&gt;</code><br/>
-<code>#include &lt;cassert&gt;</code><br/>
-<code>#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefrReader.hpp&gt;</code><br/>
-<code>#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefwWriter.hpp&gt;</code><br/>
-<code>#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefiDebug.hpp&gt;</code><br/>
-<code>#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefiEncryptInt.hpp&gt;</code><br/>
-<code>#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefiUtil.hpp&gt;</code><br/>
 </div>
 <p><a href="a00333_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00145.html">LefParser::LefDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for lef database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00145.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html">GdsParser::gds_itemtype</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII item type.  <a href="a00092.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00091.html">GdsParser::gds_celltype</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">cell type  <a href="a00091.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00117.html">GdsParser::GdsWriter</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00400"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00400.html">LefParser</a></td></tr>
-<tr class="memdesc:a00400"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for <a class="el" href="a00400.html" title="namespace for LefParser">LefParser</a> <br/></td></tr>
+<tr class="memitem:a00400"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00400.html">GdsParser</a></td></tr>
+<tr class="memdesc:a00400"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.GdsParser <br/></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a74c8b026fbbd7f34b74d0a39f2309b20"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00333.html#a74c8b026fbbd7f34b74d0a39f2309b20">BYTESWAP</a>&#160;&#160;&#160;1</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a75e159aa62a455aff7e6039fa7c3801c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a75e159aa62a455aff7e6039fa7c3801c"></a>
+typedef int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00400.html#a75e159aa62a455aff7e6039fa7c3801c">GdsParser::BOOL</a></td></tr>
+<tr class="memdesc:a75e159aa62a455aff7e6039fa7c3801c"><td class="mdescLeft">&#160;</td><td class="mdescRight">use integer as bool <br/></td></tr>
+<tr class="memitem:aecd8d5b8951c69ff3cf543e033f304ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aecd8d5b8951c69ff3cf543e033f304ff"></a>
+typedef unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00400.html#aecd8d5b8951c69ff3cf543e033f304ff">GdsParser::BYTE</a></td></tr>
+<tr class="memdesc:aecd8d5b8951c69ff3cf543e033f304ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">use unsigned char as byte <br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Database for Lef parser. </p>
+<div class="textblock"><p>write GDSII file </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Nov 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00333_source.html">LefDataBase.h</a>.</p>
-</div></div><!-- contents -->
+<p>Definition in file <a class="el" href="a00333_source.html">GdsWriter.h</a>.</p>
+</div><h2>Macro Definition Documentation</h2>
+<a class="anchor" id="a74c8b026fbbd7f34b74d0a39f2309b20"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BYTESWAP&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Setting BYTESWAP to 1 is appropriate for big-endian Intel processors. GDS format was originally used on little-endian, older computers. </p>
+
+<p>Definition at line <a class="el" href="a00333_source.html#l00026">26</a> of file <a class="el" href="a00333_source.html">GdsWriter.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

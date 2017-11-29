@@ -101,22 +101,22 @@ Introduction</h1>
 Examples</h1>
 <h2><a class="anchor" id="ProgramOptions_Example1"></a>
 Example 1</h2>
-<p>See documented version: <a class="el" href="a00380.html">test/programoptions/test_ProgramOptions_simple.cpp</a> </p>
+<p>See documented version: <a class="el" href="a00382.html">test/programoptions/test_ProgramOptions_simple.cpp</a> </p>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00345.html" title="Top API for Limbo.ProgramOptions.">limbo/programoptions/ProgramOptions.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00346.html" title="Top API for Limbo.ProgramOptions.">limbo/programoptions/ProgramOptions.h</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00357.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00359.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordtype">bool</span> help = <span class="keyword">false</span>;</div>
 <div class="line">    <span class="keywordtype">int</span> i = 0;</div>
 <div class="line">    <span class="keywordtype">double</span> fp = 0;</div>
 <div class="line">    std::vector&lt;int&gt; vInteger;</div>
 <div class="line"></div>
-<div class="line">    <span class="keyword">typedef</span> <a class="code" href="a00210.html" title="top API to parse program options">limbo::programoptions::ProgramOptions</a> po_type;</div>
-<div class="line">    <span class="keyword">using</span> <a class="code" href="a00244.html" title="a generic class for various data values">limbo::programoptions::Value</a>;</div>
+<div class="line">    <span class="keyword">typedef</span> <a class="code" href="a00211.html" title="top API to parse program options">limbo::programoptions::ProgramOptions</a> po_type;</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="a00245.html" title="a generic class for various data values">limbo::programoptions::Value</a>;</div>
 <div class="line">    po_type desc (<span class="stringliteral">&quot;My options&quot;</span>);</div>
 <div class="line">    <span class="comment">// add user-defined options</span></div>
 <div class="line">    desc.add_option(Value&lt;bool&gt;(<span class="stringliteral">&quot;-help&quot;</span>, &amp;help, <span class="stringliteral">&quot;print help message&quot;</span>).toggle(<span class="keyword">true</span>).default_value(<span class="keyword">false</span>).toggle_value(<span class="keyword">true</span>).help(<span class="keyword">true</span>)) <span class="comment">// specify help option </span></div>
@@ -183,16 +183,16 @@ fp = 1.5
 vInteger = 10 30 50
 </pre><h2><a class="anchor" id="ProgramOptions_Example2"></a>
 Example 2</h2>
-<p>See documented version: <a class="el" href="a00379.html">test/programoptions/test_ProgramOptions.cpp</a> </p>
+<p>See documented version: <a class="el" href="a00381.html">test/programoptions/test_ProgramOptions.cpp</a> </p>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00345.html" title="Top API for Limbo.ProgramOptions.">limbo/programoptions/ProgramOptions.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00346.html" title="Top API for Limbo.ProgramOptions.">limbo/programoptions/ProgramOptions.h</a>&gt;</span></div>
 <div class="line"><span class="keyword">using</span> std::cout;</div>
 <div class="line"><span class="keyword">using</span> std::endl;</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00357.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00359.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">using namespace </span>limbo;</div>
 <div class="line">    <span class="keyword">using namespace </span>limbo::programoptions;</div>
@@ -204,13 +204,13 @@ Example 2</h2>
 <div class="line">    std::vector&lt;int&gt; vInteger;</div>
 <div class="line">    std::vector&lt;std::string&gt; vString;</div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="a00210.html" title="top API to parse program options">ProgramOptions</a> po (<span class="stringliteral">&quot;My options&quot;</span>);</div>
-<div class="line">    po.add_option(<a class="code" href="a00244.html" title="a generic class for various data values">Value&lt;bool&gt;</a>(<span class="stringliteral">&quot;-help&quot;</span>, &amp;help, <span class="stringliteral">&quot;print help message&quot;</span>).toggle(<span class="keyword">true</span>).default_value(<span class="keyword">false</span>).toggle_value(<span class="keyword">true</span>).help(<span class="keyword">true</span>))</div>
-<div class="line">        .add_option(<a class="code" href="a00244.html" title="a generic class for various data values">Value&lt;int&gt;</a>(<span class="stringliteral">&quot;-i&quot;</span>, &amp;i, <span class="stringliteral">&quot;an integer&quot;</span>).default_value(100, <span class="stringliteral">&quot;1.0.0&quot;</span>))</div>
-<div class="line">        .add_option(<a class="code" href="a00244.html" title="a generic class for various data values">Value&lt;double&gt;</a>(<span class="stringliteral">&quot;-f&quot;</span>, &amp;fp, <span class="stringliteral">&quot;a floating point&quot;</span>).required(<span class="keyword">true</span>))</div>
-<div class="line">        .add_option(<a class="code" href="a00244.html" title="a generic class for various data values">Value&lt;std::string&gt;</a>(<span class="stringliteral">&quot;-s&quot;</span>, &amp;str, <span class="stringliteral">&quot;a string&quot;</span>).required(<span class="keyword">true</span>))</div>
-<div class="line">        .add_option(<a class="code" href="a00244.html" title="a generic class for various data values">Value</a>&lt;std::vector&lt;int&gt; &gt;(<span class="stringliteral">&quot;-vi&quot;</span>, &amp;vInteger, <span class="stringliteral">&quot;vector of integers&quot;</span>))</div>
-<div class="line">        .add_option(<a class="code" href="a00244.html" title="a generic class for various data values">Value</a>&lt;std::vector&lt;std::string&gt; &gt;(<span class="stringliteral">&quot;-vs&quot;</span>, &amp;vString, <span class="stringliteral">&quot;vector of string&quot;</span>))</div>
+<div class="line">    <a class="code" href="a00211.html" title="top API to parse program options">ProgramOptions</a> po (<span class="stringliteral">&quot;My options&quot;</span>);</div>
+<div class="line">    po.add_option(<a class="code" href="a00245.html" title="a generic class for various data values">Value&lt;bool&gt;</a>(<span class="stringliteral">&quot;-help&quot;</span>, &amp;help, <span class="stringliteral">&quot;print help message&quot;</span>).toggle(<span class="keyword">true</span>).default_value(<span class="keyword">false</span>).toggle_value(<span class="keyword">true</span>).help(<span class="keyword">true</span>))</div>
+<div class="line">        .add_option(<a class="code" href="a00245.html" title="a generic class for various data values">Value&lt;int&gt;</a>(<span class="stringliteral">&quot;-i&quot;</span>, &amp;i, <span class="stringliteral">&quot;an integer&quot;</span>).default_value(100, <span class="stringliteral">&quot;1.0.0&quot;</span>))</div>
+<div class="line">        .add_option(<a class="code" href="a00245.html" title="a generic class for various data values">Value&lt;double&gt;</a>(<span class="stringliteral">&quot;-f&quot;</span>, &amp;fp, <span class="stringliteral">&quot;a floating point&quot;</span>).required(<span class="keyword">true</span>))</div>
+<div class="line">        .add_option(<a class="code" href="a00245.html" title="a generic class for various data values">Value&lt;std::string&gt;</a>(<span class="stringliteral">&quot;-s&quot;</span>, &amp;str, <span class="stringliteral">&quot;a string&quot;</span>).required(<span class="keyword">true</span>))</div>
+<div class="line">        .add_option(<a class="code" href="a00245.html" title="a generic class for various data values">Value</a>&lt;std::vector&lt;int&gt; &gt;(<span class="stringliteral">&quot;-vi&quot;</span>, &amp;vInteger, <span class="stringliteral">&quot;vector of integers&quot;</span>))</div>
+<div class="line">        .add_option(<a class="code" href="a00245.html" title="a generic class for various data values">Value</a>&lt;std::vector&lt;std::string&gt; &gt;(<span class="stringliteral">&quot;-vs&quot;</span>, &amp;vString, <span class="stringliteral">&quot;vector of string&quot;</span>))</div>
 <div class="line">        ;</div>
 <div class="line"></div>
 <div class="line">    po.print();</div>
@@ -239,26 +239,26 @@ Example 2</h2>
 <div class="line">        cout &lt;&lt; *it &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line">    cout &lt;&lt; endl;</div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="a00341.html#aa5d7c58f57e3700b0de23ae54972bbca" title="assertion with message">assert_msg</a>(help == <span class="keyword">false</span>, <span class="stringliteral">&quot;help turned to true&quot;</span>);</div>
+<div class="line">    <a class="code" href="a00342.html#aa5d7c58f57e3700b0de23ae54972bbca" title="assertion with message">assert_msg</a>(help == <span class="keyword">false</span>, <span class="stringliteral">&quot;help turned to true&quot;</span>);</div>
 <div class="line"></div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 </div><!-- fragment --><h2><a class="anchor" id="ProgramOptions_Examples_All"></a>
 All Examples</h2>
 <ul>
-<li><a class="el" href="a00380.html">test/programoptions/test_ProgramOptions_simple.cpp</a></li>
-<li><a class="el" href="a00379.html">test/programoptions/test_ProgramOptions.cpp</a></li>
+<li><a class="el" href="a00382.html">test/programoptions/test_ProgramOptions_simple.cpp</a></li>
+<li><a class="el" href="a00381.html">test/programoptions/test_ProgramOptions.cpp</a></li>
 </ul>
 <h1><a class="anchor" id="ProgramOptions_References"></a>
 References</h1>
 <ul>
-<li><a class="el" href="a00344.html">limbo/programoptions/ConversionHelpers.h</a></li>
-<li><a class="el" href="a00345.html">limbo/programoptions/ProgramOptions.h</a> </li>
+<li><a class="el" href="a00345.html">limbo/programoptions/ConversionHelpers.h</a></li>
+<li><a class="el" href="a00346.html">limbo/programoptions/ProgramOptions.h</a> </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

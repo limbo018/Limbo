@@ -88,26 +88,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00397.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00398.html">GdsDB</a></li><li class="navelem"><a class="el" href="a00060.html">DeleteCellObjectAction</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00400.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00401.html">GdsDB</a></li><li class="navelem"><a class="el" href="a00118.html">GdsWriter</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">GdsParser::GdsDB::DeleteCellObjectAction Member List</div>  </div>
+<div class="title">GdsParser::GdsDB::GdsWriter Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00060.html">GdsParser::GdsDB::DeleteCellObjectAction</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a00118.html">GdsParser::GdsDB::GdsWriter</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00060.html#a92fa1fb2e8ada453503b31e6d68531fd">DeleteCellObjectAction</a>(std::pair&lt; ::GdsParser::GdsRecords::EnumType, GdsObject * &gt; &amp;t)</td><td class="entry"><a class="el" href="a00060.html">GdsParser::GdsDB::DeleteCellObjectAction</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00060.html#ad0cf4946c8035127c8c39b76c55f1108">DeleteCellObjectAction</a>(DeleteCellObjectAction const &amp;rhs)</td><td class="entry"><a class="el" href="a00060.html">GdsParser::GdsDB::DeleteCellObjectAction</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00060.html#a859485deb82a171c36293ffead880346">message</a>() const </td><td class="entry"><a class="el" href="a00060.html">GdsParser::GdsDB::DeleteCellObjectAction</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00060.html#a7cba04c93ff5f435c666c7f3e2892a62">operator()</a>(::GdsParser::GdsRecords::EnumType, ObjectType *object)</td><td class="entry"><a class="el" href="a00060.html">GdsParser::GdsDB::DeleteCellObjectAction</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00060.html#a0893f2a37e6d738963d01f4ee3788849">target</a></td><td class="entry"><a class="el" href="a00060.html">GdsParser::GdsDB::DeleteCellObjectAction</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"class="even"><td class="entry"><b>gdsdb_type</b> typedef (defined in <a class="el" href="a00118.html">GdsParser::GdsDB::GdsWriter</a>)</td><td class="entry"><a class="el" href="a00118.html">GdsParser::GdsDB::GdsWriter</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00118.html#a21207c177029419b24eed0a00628ff22">GdsWriter</a>(gdsdb_type const &amp;db)</td><td class="entry"><a class="el" href="a00118.html">GdsParser::GdsDB::GdsWriter</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00118.html#aec49f68821ad6acbd236d108dcc3cd78">m_db</a></td><td class="entry"><a class="el" href="a00118.html">GdsParser::GdsDB::GdsWriter</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00118.html#a5fd3c06e80b87238590b768dd7fe389d">operator()</a>(std::string const &amp;filename) const </td><td class="entry"><a class="el" href="a00118.html">GdsParser::GdsDB::GdsWriter</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00118.html#ae4731da2f8173675215f5d68158123e0">write</a>(::GdsParser::GdsWriter &amp;gw, GdsCell const &amp;cell) const </td><td class="entry"><a class="el" href="a00118.html">GdsParser::GdsDB::GdsWriter</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00118.html#a433d47935eec5b4c7d884a366e25beb9">write</a>(::GdsParser::GdsWriter &amp;gw, GdsPolygon const &amp;object) const </td><td class="entry"><a class="el" href="a00118.html">GdsParser::GdsDB::GdsWriter</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00118.html#ab7c3dd231c3a0ee40945b32ec3cd4d4b">write</a>(::GdsParser::GdsWriter &amp;gw, GdsPath const &amp;object) const </td><td class="entry"><a class="el" href="a00118.html">GdsParser::GdsDB::GdsWriter</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00118.html#af7cebd48ff64970ba56d249d0af94874">write</a>(::GdsParser::GdsWriter &amp;gw, GdsText const &amp;object) const </td><td class="entry"><a class="el" href="a00118.html">GdsParser::GdsDB::GdsWriter</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00118.html#a858db7d78110b5a7e10d87e610dfe41d">write</a>(::GdsParser::GdsWriter &amp;gw, GdsCellReference const &amp;object) const </td><td class="entry"><a class="el" href="a00118.html">GdsParser::GdsDB::GdsWriter</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00118.html#a93461020e5ae7bf6734ce7732979a457">write</a>(::GdsParser::GdsWriter &amp;gw, GdsCellArray const &amp;object) const </td><td class="entry"><a class="el" href="a00118.html">GdsParser::GdsDB::GdsWriter</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:50 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

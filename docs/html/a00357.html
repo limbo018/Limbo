@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/test/algorithms/test_ChromaticNumber.cpp File Reference</title>
+<title>Limbo: /home/local/eda03/yibolin/documents/Projects/Limbo/limbo/string/ToString.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,82 +86,62 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_2ab53c040e599682687624208541819b.html">algorithms</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_a4f08339963c9aeb6ba530d5303d7579.html">string</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">test_ChromaticNumber.cpp File Reference</div>  </div>
+<div class="title">ToString.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>test chromatic number algorithm  
+<p>convert metadata type to string  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
-<code>#include &lt;fstream&gt;</code><br/>
-<code>#include &lt;string&gt;</code><br/>
-<code>#include &lt;boost/graph/graphviz.hpp&gt;</code><br/>
-<code>#include &lt;boost/graph/graph_utility.hpp&gt;</code><br/>
-<code>#include &lt;boost/graph/adjacency_list.hpp&gt;</code><br/>
-<code>#include &lt;boost/graph/undirected_graph.hpp&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00279_source.html">limbo/algorithms/coloring/ChromaticNumber.h</a>&gt;</code><br/>
-<code>#include &lt;<a class="el" href="a00282_source.html">limbo/algorithms/coloring/GreedyColoring.h</a>&gt;</code><br/>
-<code>#include &lt;boost/graph/erdos_renyi_generator.hpp&gt;</code><br/>
-<code>#include &lt;boost/random/mersenne_twister.hpp&gt;</code><br/>
-<code>#include &lt;boost/graph/random.hpp&gt;</code><br/>
-<code>#include &lt;boost/graph/iteration_macros.hpp&gt;</code><br/>
-<code>#include &lt;boost/version.hpp&gt;</code><br/>
-<code>#include &lt;boost/graph/detail/is_same.hpp&gt;</code><br/>
+<div class="textblock"><code>#include &lt;string&gt;</code><br/>
+<code>#include &lt;cstdio&gt;</code><br/>
+<code>#include &lt;limits&gt;</code><br/>
 </div>
 <p><a href="a00357_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html">MisVisitor&lt; GraphType &gt;</a></td></tr>
+<tr class="heading"><td colspan="2"><h2><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00404"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00404.html">limbo</a></td></tr>
+<tr class="memdesc:a00404"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00357.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="memitem:a310ac0314ad5ba8619b7a97d3c89d8b2"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00404.html#a310ac0314ad5ba8619b7a97d3c89d8b2">limbo::to_string</a> (int val)</td></tr>
+<tr class="memdesc:a310ac0314ad5ba8619b7a97d3c89d8b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert integer to string  <a href="#a310ac0314ad5ba8619b7a97d3c89d8b2"></a><br/></td></tr>
+<tr class="memitem:a73b9a0fdd855dca6292290d63de19a7b"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00404.html#a73b9a0fdd855dca6292290d63de19a7b">limbo::to_string</a> (long val)</td></tr>
+<tr class="memdesc:a73b9a0fdd855dca6292290d63de19a7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert long integer to string  <a href="#a73b9a0fdd855dca6292290d63de19a7b"></a><br/></td></tr>
+<tr class="memitem:ac942548404521f2dc9b5eb91c1db2224"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00404.html#ac942548404521f2dc9b5eb91c1db2224">limbo::to_string</a> (long long val)</td></tr>
+<tr class="memdesc:ac942548404521f2dc9b5eb91c1db2224"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert long long integer to string  <a href="#ac942548404521f2dc9b5eb91c1db2224"></a><br/></td></tr>
+<tr class="memitem:a7802e8fa1a151cc57ffb5c8301021937"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00404.html#a7802e8fa1a151cc57ffb5c8301021937">limbo::to_string</a> (unsigned int val)</td></tr>
+<tr class="memdesc:a7802e8fa1a151cc57ffb5c8301021937"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert unsigned integer to string  <a href="#a7802e8fa1a151cc57ffb5c8301021937"></a><br/></td></tr>
+<tr class="memitem:a49310acdd4e3253f9647e3a9a39c1ed7"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00404.html#a49310acdd4e3253f9647e3a9a39c1ed7">limbo::to_string</a> (unsigned long val)</td></tr>
+<tr class="memdesc:a49310acdd4e3253f9647e3a9a39c1ed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert unsigned long integer to string  <a href="#a49310acdd4e3253f9647e3a9a39c1ed7"></a><br/></td></tr>
+<tr class="memitem:ac89e6a26aa364709df6ded28d388a1d1"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00404.html#ac89e6a26aa364709df6ded28d388a1d1">limbo::to_string</a> (unsigned long long val)</td></tr>
+<tr class="memdesc:ac89e6a26aa364709df6ded28d388a1d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert unsigned long long integer to string  <a href="#ac89e6a26aa364709df6ded28d388a1d1"></a><br/></td></tr>
+<tr class="memitem:acac2a0ebe33d62cdcad05f8267cfa1e1"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00404.html#acac2a0ebe33d62cdcad05f8267cfa1e1">limbo::to_string</a> (float val)</td></tr>
+<tr class="memdesc:acac2a0ebe33d62cdcad05f8267cfa1e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert float to string  <a href="#acac2a0ebe33d62cdcad05f8267cfa1e1"></a><br/></td></tr>
+<tr class="memitem:a96b39c62f79eb7f8ec4125691bdf39b4"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00404.html#a96b39c62f79eb7f8ec4125691bdf39b4">limbo::to_string</a> (double val)</td></tr>
+<tr class="memdesc:a96b39c62f79eb7f8ec4125691bdf39b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert double to string  <a href="#a96b39c62f79eb7f8ec4125691bdf39b4"></a><br/></td></tr>
+<tr class="memitem:a02fdf94db3da0c5606af3f590e0b86bc"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00404.html#a02fdf94db3da0c5606af3f590e0b86bc">limbo::to_string</a> (long double val)</td></tr>
+<tr class="memdesc:a02fdf94db3da0c5606af3f590e0b86bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert long double to string  <a href="#a02fdf94db3da0c5606af3f590e0b86bc"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>test chromatic number algorithm </p>
+<div class="textblock"><p>convert metadata type to string </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Feb 2015 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Apr 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00357_source.html">test_ChromaticNumber.cpp</a>.</p>
-</div><h2>Function Documentation</h2>
-<a class="anchor" id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>main function <br/>
- generate a random graph, then <br/>
-</p>
-<ul>
-<li>test 1: find maximum independent set by <a class="el" href="a00159.html">limbo::algorithms::MaxIndependentSetByMaxClique</a></li>
-<li>test 2: compute chromatic number by <a class="el" href="a00143.html">limbo::algorithms::coloring::LawlerChromaticNumber</a></li>
-<li>test 3: greedy coloring by <a class="el" href="a00069.html">limbo::algorithms::coloring::DsatColoring</a> </li>
-</ul>
-
-<p>Definition at line <a class="el" href="a00357_source.html#l00077">77</a> of file <a class="el" href="a00357_source.html">test_ChromaticNumber.cpp</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>Definition in file <a class="el" href="a00357_source.html">ToString.h</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 16:28:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 19:00:26 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
