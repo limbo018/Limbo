@@ -117,6 +117,9 @@ class MinCostFlow
         /// @return total cost of the original LP problem 
         value_type totalCost() const; 
 
+        /// @brief set objective, support incremental set 
+        void setObjective(expression_type const& obj); 
+
         /// @name print functions to debug.lgf 
         ///@{
         /// @brief print graph 
@@ -421,7 +424,12 @@ void MinCostFlow<T, V>::buildGraph()
     }
 
     // construct cost map 
-    for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
+    setObjective(m_model->objective()); 
+}
+template <typename T, typename V>
+void MinCostFlow<T, V>::setObjective(typename MinCostFlow<T, V>::expression_type const& obj)
+{
+    for (typename std::vector<term_type>::const_iterator it = obj.terms().begin(), ite = obj.terms().end(); it != ite; ++it)
     {
         term_type const& term = *it; 
         switch (m_model->optimizeType())
