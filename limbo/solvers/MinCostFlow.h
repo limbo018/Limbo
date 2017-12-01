@@ -271,7 +271,7 @@ SolverProperty MinCostFlow<T, V>::solve(typename MinCostFlow<T, V>::solver_type*
 
     // build graph if no nodes, I know in corner cases it may be called repeatedly 
     // but this seems to be the best way 
-    if (m_graph.numNodes() == 0)
+    if (m_graph.nodeNum() == 0)
         buildGraph(); 
     setObjective(m_model->objective());
 #ifdef DEBUG_MINCOSTFLOW
