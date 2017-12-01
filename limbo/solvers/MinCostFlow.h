@@ -117,9 +117,6 @@ class MinCostFlow
         /// @return total cost of the original LP problem 
         value_type totalCost() const; 
 
-        /// @brief set objective, support incremental set 
-        void setObjective(expression_type const& obj); 
-
         /// @name print functions to debug.lgf 
         ///@{
         /// @brief print graph 
@@ -139,6 +136,8 @@ class MinCostFlow
         SolverProperty solve(solver_type* solver);
         /// @brief build min-cost flow graph 
         void buildGraph(); 
+        /// @brief set objective, support incremental set 
+        void setObjective(expression_type const& obj); 
         /// @brief apply solutions to model 
         void applySolution(); 
 
@@ -270,8 +269,11 @@ SolverProperty MinCostFlow<T, V>::solve(typename MinCostFlow<T, V>::solver_type*
     if (m_model->numVariables() == 0)
         return OPTIMAL; 
 
-    // build graph 
-    buildGraph();
+    // build graph if no nodes, I know in corner cases it may be called repeatedly 
+    // but this seems to be the best way 
+    if (m_graph.numNodes() == 0)
+        buildGraph(); 
+    setObjective(m_model->objective());
 #ifdef DEBUG_MINCOSTFLOW
     printGraph(false);
     // total supply must be zero 
@@ -424,7 +426,7 @@ void MinCostFlow<T, V>::buildGraph()
     }
 
     // construct cost map 
-    setObjective(m_model->objective()); 
+    // everytime solver is called 
 }
 template <typename T, typename V>
 void MinCostFlow<T, V>::setObjective(typename MinCostFlow<T, V>::expression_type const& obj)
