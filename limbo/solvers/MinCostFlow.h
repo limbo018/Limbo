@@ -136,6 +136,8 @@ class MinCostFlow
         SolverProperty solve(solver_type* solver);
         /// @brief build min-cost flow graph 
         void buildGraph(); 
+        /// @brief set objective, support incremental set 
+        void setObjective(expression_type const& obj); 
         /// @brief apply solutions to model 
         void applySolution(); 
 
@@ -267,8 +269,11 @@ SolverProperty MinCostFlow<T, V>::solve(typename MinCostFlow<T, V>::solver_type*
     if (m_model->numVariables() == 0)
         return OPTIMAL; 
 
-    // build graph 
-    buildGraph();
+    // build graph if no nodes, I know in corner cases it may be called repeatedly 
+    // but this seems to be the best way 
+    if (m_graph.nodeNum() == 0)
+        buildGraph(); 
+    setObjective(m_model->objective());
 #ifdef DEBUG_MINCOSTFLOW
     printGraph(false);
     // total supply must be zero 
@@ -316,8 +321,8 @@ void MinCostFlow<T, V>::buildGraph()
     // a map record arc to its two nodes 
     // arc id, source node id, target node id 
     // variable id, constraint id positive, constraint id negative 
-    // I assume mVar2Constr sorts according to variable id 
-    std::map<unsigned int, std::pair<unsigned int, unsigned int> > mVar2Constr; 
+    // I assume vVar2Constr sorts according to variable id 
+    std::vector<std::pair<unsigned int, unsigned int> > vVar2Constr (m_model->numVariables(), std::make_pair(std::numeric_limits<unsigned int>::max(), std::numeric_limits<unsigned int>::max())); 
     unsigned int constrIndex = 0; 
     for (typename std::vector<constraint_type>::const_iterator it = m_model->constraints().begin(), ite = m_model->constraints().end(); it != ite; ++it)
     {
@@ -330,25 +335,30 @@ void MinCostFlow<T, V>::buildGraph()
             for (typename std::vector<term_type>::const_iterator itt = constr.expression().terms().begin(), itte = constr.expression().terms().end(); itt != itte; ++itt)
             {
                 term_type const& term = *itt; 
+                std::pair<unsigned int, unsigned int> const& value = vVar2Constr[term.variable().id()];
                 if (term.coefficient() == 1)
                 {
-                    if (mVar2Constr.count(term.variable().id()))
+                    // I want value.first is not set 
+                    if (value.first != std::numeric_limits<unsigned int>::max())
                     {
-                        std::pair<unsigned int, unsigned int> const& value = mVar2Constr.at(term.variable().id());
-                        // I want value.first is not set 
-                        if (value.first != std::numeric_limits<unsigned int>::max())
-                            constr.scale(-1); 
+                        constr.scale(-1); 
+                        break; 
+                    }
+                    else if (value.second != std::numeric_limits<unsigned int>::max())
+                    {
                         break; 
                     }
                 }
                 else if (term.coefficient() == -1)
                 {
-                    if (mVar2Constr.count(term.variable().id()))
+                    // I want value.first is not set 
+                    if (value.second != std::numeric_limits<unsigned int>::max())
                     {
-                        std::pair<unsigned int, unsigned int>& value = mVar2Constr[term.variable().id()];
-                        // I want value.second is not set 
-                        if (value.second != std::numeric_limits<unsigned int>::max())
-                            constr.scale(-1); 
+                        constr.scale(-1); 
+                        break; 
+                    }
+                    else if (value.first != std::numeric_limits<unsigned int>::max())
+                    {
                         break; 
                     }
                 }
@@ -361,33 +371,18 @@ void MinCostFlow<T, V>::buildGraph()
             for (typename std::vector<term_type>::const_iterator itt = constr.expression().terms().begin(), itte = constr.expression().terms().end(); itt != itte; ++itt)
             {
                 term_type const& term = *itt; 
+                std::pair<unsigned int, unsigned int>& value = vVar2Constr[term.variable().id()];
                 if (term.coefficient() == 1)
                 {
-                    if (mVar2Constr.count(term.variable().id()))
-                    {
-                        std::pair<unsigned int, unsigned int>& value = mVar2Constr[term.variable().id()];
-                        limboAssertMsg(value.first == std::numeric_limits<unsigned int>::max(), 
-                                "variable %s appears in more than 1 constraint with coefficient 1", m_model->variableName(term.variable()).c_str());
-                        value.first = constrIndex; 
-                    }
-                    else 
-                    {
-                        mVar2Constr.insert(std::make_pair(term.variable().id(), std::make_pair(constrIndex, std::numeric_limits<unsigned int>::max())));
-                    }
+                    limboAssertMsg(value.first == std::numeric_limits<unsigned int>::max(), 
+                            "variable %s appears in more than 1 constraint with coefficient 1", m_model->variableName(term.variable()).c_str());
+                    value.first = constrIndex; 
                 }
                 else if (term.coefficient() == -1)
                 {
-                    if (mVar2Constr.count(term.variable().id()))
-                    {
-                        std::pair<unsigned int, unsigned int>& value = mVar2Constr[term.variable().id()];
-                        limboAssertMsg(value.second == std::numeric_limits<unsigned int>::max(), 
-                                "variable %s appears in more than 1 constraint with coefficient -1", m_model->variableName(term.variable()).c_str());
-                        value.second = constrIndex; 
-                    }
-                    else 
-                    {
-                        mVar2Constr.insert(std::make_pair(term.variable().id(), std::make_pair(std::numeric_limits<unsigned int>::max(), constrIndex)));
-                    }
+                    limboAssertMsg(value.second == std::numeric_limits<unsigned int>::max(), 
+                            "variable %s appears in more than 1 constraint with coefficient -1", m_model->variableName(term.variable()).c_str());
+                    value.second = constrIndex; 
                 }
             }
             // compute supply 
@@ -402,13 +397,13 @@ void MinCostFlow<T, V>::buildGraph()
     m_mSupply[st] = -totalSupply; 
 
     // construct arcs 
-    m_graph.reserveArc(mVar2Constr.size()); 
-    // I assume mVar2Constr sorts according to variable id 
-    for (std::map<unsigned int, std::pair<unsigned int, unsigned int> >::const_iterator it = mVar2Constr.begin(), ite = mVar2Constr.end(); it != ite; ++it)
+    m_graph.reserveArc(vVar2Constr.size()); 
+    // I assume vVar2Constr sorts according to variable id 
+    unsigned int var = 0; 
+    for (std::vector<std::pair<unsigned int, unsigned int> >::const_iterator it = vVar2Constr.begin(), ite = vVar2Constr.end(); it != ite; ++it, ++var)
     {
-        unsigned int var = it->first; 
-        unsigned int constrSrc = it->second.first;
-        unsigned int constrTgt = it->second.second;
+        unsigned int constrSrc = it->first;
+        unsigned int constrTgt = it->second;
 
         arc_type arc; 
         if (constrSrc == std::numeric_limits<unsigned int>::max()) // from s 
@@ -431,7 +426,12 @@ void MinCostFlow<T, V>::buildGraph()
     }
 
     // construct cost map 
-    for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
+    // everytime solver is called 
+}
+template <typename T, typename V>
+void MinCostFlow<T, V>::setObjective(typename MinCostFlow<T, V>::expression_type const& obj)
+{
+    for (typename std::vector<term_type>::const_iterator it = obj.terms().begin(), ite = obj.terms().end(); it != ite; ++it)
     {
         term_type const& term = *it; 
         switch (m_model->optimizeType())
