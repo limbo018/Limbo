@@ -88,7 +88,7 @@ class DefDataBase : public DefParser::DefDataBase
         /// @param n net 
 		virtual void add_def_net(DefParser::Net const& n) 
 		{
-			cout << __func__ << ": " << n.net_name << ": " << n.net_weight << endl;
+			cout << __func__ << ": " << n.net_name << ": weight " << n.net_weight << endl;
 		}
         /// @brief set number of nets 
         /// @param token number of nets 
