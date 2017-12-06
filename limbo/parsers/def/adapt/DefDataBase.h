@@ -158,11 +158,13 @@ struct Pin : public Item
 struct Net : public Item
 {
 	string net_name; ///< net name 
+    int32_t net_weight; ///< net weight
 	vector< std::pair<string, string> > vNetPin; ///< array of (node, pin) pair 
     /// @brief reset all data members 
 	void reset()
 	{
 		net_name = "";
+        net_weight = 1;
 		vNetPin.clear();
 	}
     /// @brief print data members 
@@ -170,7 +172,8 @@ struct Net : public Item
 	virtual void print(ostringstream& ss) const
 	{
 		ss << "//////// Net ////////" << endl
-			<< "net_name = " << net_name << endl; 
+			<< "net_name = " << net_name << endl
+            << "net_weight = " << net_weight << endl;
 		for (uint32_t i = 0; i < vNetPin.size(); ++i)
 			ss << "(" << vNetPin[i].first << ", " << vNetPin[i].second << ") ";
 		ss << endl;
