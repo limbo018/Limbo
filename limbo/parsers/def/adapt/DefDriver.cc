@@ -183,6 +183,8 @@ int netf(defrCallbackType_e c, defiNet* net, defiUserData ud)
 
     //  net->changeNetName("newNetName");
     //  limboPrint(limbo::kNONE, "%s ", net->name());
+    // weight
+    defDriver->net().net_weight = net->hasWeight() ? net->weight() : 1;
     defDriver->net().vNetPin.resize(net->numConnections()); 
     // compName & pinName
     for (int i = 0; i < net->numConnections(); i++)
