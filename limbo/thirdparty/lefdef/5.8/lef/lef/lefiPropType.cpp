@@ -123,7 +123,7 @@ lefiPropType::bumpProps()
     propTypes_ = newt;
 }
 
-const char
+char
 lefiPropType::propType(char *name) const
 {
     int i;

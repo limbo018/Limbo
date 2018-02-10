@@ -2637,7 +2637,7 @@ lefiPin::propNum(int index) const
     return propNums_[index];
 }
 
-const char
+char
 lefiPin::propType(int index) const
 {
     char msg[160];
@@ -3372,7 +3372,7 @@ lefiMacro::propNum(int index) const
     return propNums_[index];
 }
 
-const char
+char
 lefiMacro::propType(int index) const
 {
     char msg[160];

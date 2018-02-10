@@ -44,9 +44,9 @@ INCLUDE = -I $(LIMBO_ROOT_DIR)
 
 ifdef ZLIB_DIR
 ifdef BOOST_DIR
-	INCLUDE += -I $(BOOST_DIR)/include
+	INCLUDE += -I $(BOOST_DIR)/include -I $(ZLIB_DIR)/include
 	LIB += -L $(BOOST_DIR)/lib -lboost_iostreams \
-		   -L $(ZLIB_DIR) -lz
+		   -L $(ZLIB_DIR)/lib -lz
 endif
 endif
 

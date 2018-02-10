@@ -1081,7 +1081,7 @@ lefiNonDefault::propNumber(int index) const
     return dvalues_[index];
 }
 
-const char
+char
 lefiNonDefault::propType(int index) const
 {
     char msg[160];

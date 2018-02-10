@@ -59,8 +59,8 @@ lefiViaRuleLayer::lefiViaRuleLayer()
   spacingStepX_(0.0),
   spacingStepY_(0.0),
   xl_(0.0),
-  xh_(0.0),
   yl_(0.0),
+  xh_(0.0),
   yh_(0.0)
 {
     Init();
@@ -807,7 +807,7 @@ lefiViaRule::propNumber(int i) const
     return dvalues_[i];
 }
 
-const char
+char
 lefiViaRule::propType(int i) const
 {
     char msg[160];
