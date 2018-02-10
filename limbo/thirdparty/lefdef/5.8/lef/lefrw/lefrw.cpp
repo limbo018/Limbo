@@ -2175,11 +2175,11 @@ int doneCB(lefrCallbackType_e c, void*, lefiUserData) {
 }
  
 void errorCB(const char* msg) {
-  printf ("%s : %s\n", lefrGetUserData(), msg);
+  printf ("%s : %s\n", (const char*)lefrGetUserData(), msg);
 }
 
 void warningCB(const char* msg) {
-  printf ("%s : %s\n", lefrGetUserData(), msg);
+  printf ("%s : %s\n", (const char*)lefrGetUserData(), msg);
 }
 
 void* mallocCB(int size) {
@@ -2467,7 +2467,7 @@ main(int argc, char** argv) {
       res = lefrRead(f, inFile[fileCt], (void*)userData);
 
       if (res)
-         fprintf(stderr, "Reader returns bad status.\n", inFile[fileCt]);
+         fprintf(stderr, "Reader returns bad status. '%s'\n", inFile[fileCt]);
 
       (void)lefrPrintUnusedCallbacks(fout);
       (void)lefrReleaseNResetMemory();
@@ -2530,7 +2530,7 @@ main(int argc, char** argv) {
       res = lefrRead(f, inFile[fileCt], (void*)userData);
 
       if (res)
-         fprintf(stderr, "Reader returns bad status.\n", inFile[fileCt]);
+         fprintf(stderr, "Reader returns bad status. '%s'\n", inFile[fileCt]);
 
       (void)lefrPrintUnusedCallbacks(fout);
       (void)lefrReleaseNResetMemory();
@@ -2559,7 +2559,7 @@ main(int argc, char** argv) {
       res = lefrRead(f, inFile[fileCt], (void*)userData);
 
       if (res)
-         fprintf(stderr, "Reader returns bad status.\n", inFile[fileCt]);
+         fprintf(stderr, "Reader returns bad status. '%s'\n", inFile[fileCt]);
 
       (void)lefrPrintUnusedCallbacks(fout);
       (void)lefrReleaseNResetMemory();

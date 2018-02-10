@@ -202,14 +202,14 @@ int compf(defrCallbackType_e c, defiComponent* co, defiUserData ud) {
 // Net
 int netf(defrCallbackType_e c, defiNet* net, defiUserData ud) {
   // For net and special net.
-  int         i, j, k, w, x, y, z, px, py, pz;
+  int         i=0, j=0, k=0, w=0, x=0, y=0, z=0, px=0, py=0, pz=0;
   defiPath*   p;
   defiSubnet* s;
   int         path;
   defiVpin   *vpin;
   defiShield* noShield;
   defiWire*   wire;
-  int         nline;
+  int         nline = 0;
   const char* layerName = "N/A";
 
   checkType(c);
@@ -630,7 +630,7 @@ int snetf(defrCallbackType_e c, defiNet* net, defiUserData ud) {
   int        path;
   defiShield* shield;
   defiWire   *wire;
-  int        nline;
+  int        nline = 0;
   const char* sNLayerName = "N/A";
   int        numX, numY, stepX, stepY;
 
@@ -691,7 +691,7 @@ int snetf(defrCallbackType_e c, defiNet* net, defiUserData ud) {
          }
       }
       if (net->polyMask(i)) {
-	  fprintf(fout, "MASK %d POLYGON % s ", 
+	  fprintf(fout, "MASK %d POLYGON %s ", 
 		  net->polyMask(i),
 		  net->polygonName(i));
       } else {
@@ -1228,9 +1228,9 @@ int casesens(defrCallbackType_e c, int d, defiUserData ud) {
   checkType(c);
   if (ud != userData) dataError();
   if (d == 1)
-     fprintf(fout, "NAMESCASESENSITIVE OFF\n", d);
+     fprintf(fout, "NAMESCASESENSITIVE OFF\n"/*, d*/);
   else
-     fprintf(fout, "NAMESCASESENSITIVE ON\n", d);
+     fprintf(fout, "NAMESCASESENSITIVE ON\n"/*, d*/);
   return 0;
 }
 
@@ -1787,15 +1787,15 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud) {
          fprintf(fout, "SCANCHAINS %s", sc->name());
          if (sc->hasStart()) {
              sc->start(&a1, &b1);
-             fprintf(fout, " START %s %s", sc->name(), a1, b1);
+             fprintf(fout, " START %s %s", /*sc->name(),*/ a1, b1);
          }
          if (sc->hasStop()) {
              sc->stop(&a1, &b1);
-             fprintf(fout, " STOP %s %s", sc->name(), a1, b1);
+             fprintf(fout, " STOP %s %s", /*sc->name(),*/ a1, b1);
          }
          if (sc->hasCommonInPin() ||
              sc->hasCommonOutPin()) {
-             fprintf(fout, " COMMONSCANPINS ", sc->name());
+             fprintf(fout, " COMMONSCANPINS "/*, sc->name()*/);
              if (sc->hasCommonInPin())
                 fprintf(fout, " ( IN %s )", sc->commonInPin());
              if (sc->hasCommonOutPin())
@@ -1910,14 +1910,14 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud) {
          break;
   case defrTimingDisableCbkType :
          td = (defiTimingDisable*)cl;
-         if (td->hasFromTo()) fprintf(fout, "TIMINGDISABLE FROMPIN %s %s ", td->fromInst(), td->fromPin(), td->toInst(), td->toPin()); if (td->hasThru())
+         if (td->hasFromTo()) fprintf(fout, "TIMINGDISABLE FROMPIN %s %s %s %s ", td->fromInst(), td->fromPin(), td->toInst(), td->toPin()); if (td->hasThru())
              fprintf(fout, " THRUPIN %s %s ", td->thruInst(), td->thruPin());
          if (td->hasMacroFromTo())
              fprintf(fout, " MACRO %s FROMPIN %s %s ", td->macroName(),
                      td->fromPin(), td->toPin());
          if (td->hasMacroThru())
              fprintf(fout, " MACRO %s THRUPIN %s %s ", td->macroName(),
-                     td->fromPin());
+                     td->fromPin(), td->toPin());
          fprintf(fout, "\n");
          break;
   case defrPartitionCbkType :
@@ -2057,7 +2057,7 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud) {
                     slot->xh(i), slot->yh(i));
          }
          for (i = 0; i < slot->numPolygons(); i++) {
-            fprintf(fout, "SLOT LAYER %s POLYGON");
+            fprintf(fout, "SLOT LAYER %s POLYGON", slot->layerName());
             points = slot->getPolygon(i);
             for (j = 0; j < points.numPoints; j++)
               fprintf(fout, " %d %d", points.x[j], points.y[j]);
@@ -2159,7 +2159,7 @@ int ext(defrCallbackType_e t, const char* c, defiUserData ud) {
 int diffDefReadFile(char* inFile, char* outFile, char* ignorePinExtra,
                  char* ignoreRowName, char* ignoreViaName, char* netSegComp) {
   FILE* f;
-  int   res;
+  int   res = 0;
 
   userData = (void*)0x01020304;
   defrInit();
@@ -2249,5 +2249,5 @@ int diffDefReadFile(char* inFile, char* outFile, char* ignorePinExtra,
   fclose(f);
   fclose(fout);
 
-  return 0;
+  return res;
 }

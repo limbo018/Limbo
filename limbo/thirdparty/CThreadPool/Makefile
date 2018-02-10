@@ -30,7 +30,7 @@ else
 	CFLAGS = $(CFLAGS_RELEASE)
 endif
 
-CFLAGS += -D_POSIX_C_SOURCE=199506 -D_XOPEN_SOURCE=500
+CFLAGS += -D_POSIX_C_SOURCE=199506 -D_XOPEN_SOURCE=500 -Wno-unused-parameter
 
 #==========================================================================
 #                         Special Library

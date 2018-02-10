@@ -1220,7 +1220,7 @@ int snetf(defrCallbackType_e c, defiNet* net, defiUserData ud) {
          }
       }
       if (net->polyMask(i)) {
-	  fprintf(fout, "\n  + MASK %d + POLYGON % s ", net->polyMask(i),
+	  fprintf(fout, "\n  + MASK %d + POLYGON %s ", net->polyMask(i),
 		  net->polygonName(i));
       } else {
           fprintf(fout, "\n  + POLYGON %s ", net->polygonName(i));
@@ -1792,9 +1792,9 @@ int casesens(defrCallbackType_e c, int d, defiUserData ud) {
   checkType(c);
   if (ud != userData) dataError();
   if (d == 1)
-     fprintf(fout, "NAMESCASESENSITIVE ON ;\n", d);
+     fprintf(fout, "NAMESCASESENSITIVE ON ;\n"/*, d*/);
   else
-     fprintf(fout, "NAMESCASESENSITIVE OFF ;\n", d);
+     fprintf(fout, "NAMESCASESENSITIVE OFF ;\n"/*, d*/);
   return 0;
 }
 
@@ -2535,9 +2535,9 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud) {
          td = (defiTimingDisable*)cl;
          if (td->hasFromTo())
              fprintf(fout, "- FROMPIN %s %s ",
-                     td->fromInst(),
+                     /*td->fromInst(),*/
                      td->fromPin(),
-                     td->toInst(),
+                     /*td->toInst(),*/
                      td->toPin());
          if (td->hasThru())
              fprintf(fout, "- THRUPIN %s %s ",
@@ -2551,6 +2551,7 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud) {
          if (td->hasMacroThru())
              fprintf(fout, "- MACRO %s THRUPIN %s %s ",
                      td->macroName(),
+                     td->fromInst(),
                      td->fromPin());
          fprintf(fout, ";\n");
          break;
@@ -2897,7 +2898,7 @@ int main(int argc, char** argv) {
   char* inFile[6];
   char* outFile;
   FILE* f;
-  int res;
+  int res = 0;
   int noCalls = 0;
 //  long start_mem;
   int retStr = 0;
@@ -3192,7 +3193,7 @@ int main(int argc, char** argv) {
        res = defrRead(f, inFile[fileCt], userData, 1);
 
        if (res)
-          fprintf(stderr, "Reader returns bad status.\n", inFile[fileCt]);
+          fprintf(stderr, "Reader returns bad status. '%s'\n", inFile[fileCt]);
 
        (void)defrPrintUnusedCallbacks(fout);
        (void)defrReleaseNResetMemory();
@@ -3231,7 +3232,7 @@ int main(int argc, char** argv) {
        res = defrRead(f, inFile[fileCt], userData, 1);
  
        if (res)
-          fprintf(stderr, "Reader returns bad status.\n", inFile[fileCt]);
+          fprintf(stderr, "Reader returns bad status. '%s'\n", inFile[fileCt]);
  
        (void)defrPrintUnusedCallbacks(fout);
        (void)defrReleaseNResetMemory();
@@ -3253,7 +3254,7 @@ int main(int argc, char** argv) {
        res = defrRead(f, inFile[fileCt], userData, 1);
 
        if (res)
-           fprintf(stderr, "Reader returns bad status.\n", inFile[fileCt]);
+           fprintf(stderr, "Reader returns bad status. '%s'\n", inFile[fileCt]);
 
        // Testing the aliases API.
        defrAddAlias ("alias1", "aliasValue1", 1);

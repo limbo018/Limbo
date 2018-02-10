@@ -470,7 +470,7 @@ int arrayCB(lefrCallbackType_e c, lefiArray* a, lefiUserData ud) {
         for (j = 0; j < a->numSites(i); j++) {
            pattern = a->site(i, j);
            fprintf(fout,
-               "ARRAY %s FLOORPLAN %s %s %s %g %g %s DO %d BY %d STEP %g %g\n",
+               "ARRAY %s FLOORPLAN %s %s %s %g %g %s DO %g BY %g STEP %g %g\n",
                a->name(), a->floorPlanName(i), a->siteType(i, j),
                pattern->name(), chkNum(pattern->x()), chkNum(pattern->y()),
                lefiOrientStr(pattern->orient()), pattern->xStart(),
@@ -2097,5 +2097,5 @@ int diffLefReadFile(char* inFile, char* outFile) {
   fclose(f);
   fclose(fout);
 
-  return 0;
+  return res;
 }

@@ -49,14 +49,14 @@ LIMBO_ROOT_DIR = $(realpath ../../../../../..)
 # include environmental configurations 
 include $(LIMBO_ROOT_DIR)/Include.mk
 
-CXX_OPTIMIZE_FLAG += $(OPTIMIZE_FLAG) $(CXXFLAGS_BASIC) 
+CXX_OPTIMIZE_FLAG += $(OPTIMIZE_FLAG) $(CXXFLAGS_BASIC) -Wno-reorder -Wno-unused-variable -Wno-strict-aliasing
 C_OPTIMIZE_FLAG += $(OPTIMIZE_FLAG) $(CFLAGS_BASIC) 
 BIN_LINK_FLAGS += $(CXX_OPTIMIZE_FLAG) 
 
 ifdef ZLIB_DIR
-	CXX_OPTIMIZE_FLAG += -I $(ZLIB_DIR)/include
-	C_OPTIMIZE_FLAG += -I $(ZLIB_DIR)/include
-	BIN_LINK_FLAGS += -L $(ZLIB_DIR)/lib -lz
+	CXX_OPTIMIZE_FLAG += $(ZLIB_INCLUDE_FLAG)
+	C_OPTIMIZE_FLAG += $(ZLIB_INCLUDE_FLAG)
+	BIN_LINK_FLAGS += $(ZLIB_LINK_FLAG) -lz
 endif
 
 .SUFFIXES: $(SUFFIXES) .cpp
