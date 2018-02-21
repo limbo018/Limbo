@@ -4517,7 +4517,7 @@ lefwViaLayerPolygon(int     num_polys,
                     int     mask)
 {
     int i;
-    int polyCount;
+    /*int polyCount;*/
 
     if (!lefwFile)
         return LEFW_UNINITIALIZED;
@@ -4542,7 +4542,7 @@ lefwViaLayerPolygon(int     num_polys,
         } else {
             encPrint(lefwFile, (char*) "      POLYGON ");
         }
-        polyCount = 0;
+        /*polyCount = 0;*/
         for (i = 0; i < num_polys; i++) {
             if (i == 0)
                 encPrint(lefwFile, (char*) "%.11g %.11g ", *xl++, *yl++);
@@ -4562,7 +4562,7 @@ lefwViaLayerPolygon(int     num_polys,
         } else {
             fprintf(lefwFile, "      POLYGON ");
         }
-        polyCount = 0;
+        /*polyCount = 0;*/
         for (i = 0; i < num_polys; i++) {
             if (i == 0)
                 fprintf(lefwFile, "%.11g %.11g", *xl++, *yl++);

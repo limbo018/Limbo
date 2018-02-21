@@ -49,7 +49,7 @@ LIMBO_ROOT_DIR = $(realpath ../../../../../..)
 # include environmental configurations 
 include $(LIMBO_ROOT_DIR)/Include.mk
 
-CXX_OPTIMIZE_FLAG += $(OPTIMIZE_FLAG) $(CXXFLAGS_BASIC)
+CXX_OPTIMIZE_FLAG += $(OPTIMIZE_FLAG) $(CXXFLAGS_BASIC) -Wno-reorder -Wno-unused-variable -Wno-strict-aliasing
 C_OPTIMIZE_FLAG += $(OPTIMIZE_FLAG) $(CFLAGS_BASIC)
 BIN_LINK_FLAGS += $(CXX_OPTIMIZE_FLAG)
 

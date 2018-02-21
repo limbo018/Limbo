@@ -308,7 +308,7 @@ lefrRead(FILE           *f,
 
     lefData->versionNum = (lefSettings->VersionNum == 0.0) ?
         CURRENT_VERSION :
-        lefData->versionNum = lefSettings->VersionNum;
+        /*lefData->versionNum =*/ lefSettings->VersionNum;
 
     if (lefSettings->CaseSensitiveSet) {
         lefData->namesCaseSensitive = lefSettings->CaseSensitive;

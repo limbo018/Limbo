@@ -55,7 +55,7 @@ encOpenFileForRead(char *filename)
 
 FILE *
 encOpenFileForWrite(char    *filename,
-                    int     encrypt_f)
+                    int     /*encrypt_f*/)
 {
     return fopen(filename, "w");
 }
@@ -67,7 +67,7 @@ encCloseFile(FILE *fp)
 }
 
 void
-encClearBuf(FILE *fp)
+encClearBuf(FILE * /*fp*/)
 {
 }
 
@@ -82,7 +82,7 @@ encWritingEncrypted()
 }
 
 int
-encIsEncrypted(unsigned char *buf)
+encIsEncrypted(unsigned char * /*buf*/)
 {
     return false;
 }

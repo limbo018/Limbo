@@ -95,8 +95,10 @@ test_DualMinCostFlow: $(OBJDIR)/test_DualMinCostFlow.o
 test_MinCostFlow: $(OBJDIR)/test_MinCostFlow.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_MinCostFlow.o $(LIBS) 
 
+ifeq ($(GUROBI), 1)
 test_GurobiApi: $(OBJDIR)/test_GurobiApi.o
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_GurobiApi.o $(LIBS) 
+endif 
 
 .PHONY: clean
 clean: cleandep

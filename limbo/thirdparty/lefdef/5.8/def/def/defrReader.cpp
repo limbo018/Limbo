@@ -371,7 +371,7 @@ defrInitSession(int startSession)
             defContext.settings = new defrSettings();
         }
 
-        if (defContext.session = NULL) {
+        if (defContext.session == NULL) {
             defContext.session = new defrSession();
         } else {
             memset(defContext.settings->UnusedCallbacks, 0, CBMAX * sizeof(int));

@@ -46,6 +46,8 @@ OPTIMIZE_FLAG = -O
 endif
 endif
 
+OPTIMIZE_FLAG += -Wno-reorder
+
 install:
 	@$(MAKE) $(MFLAGS) installhdrs installlib installbin
 

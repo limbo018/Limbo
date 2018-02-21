@@ -16,8 +16,8 @@ CXXFLAGS_DEBUG = -g $(CXXFLAGS_BASIC)
 CXXFLAGS_RELEASE = -O3 -fopenmp $(CXXFLAGS_BASIC) 
 
 CFLAGS_BASIC = -fmax-errors=1 -fPIC -W -Wall -Wextra -Wreturn-type -ansi -m64 -Wno-deprecated -Wno-unused-local-typedefs
-CFLAGS_DEBUG = -g $(CXXFLAGS_BASIC) 
-CFLAGS_RELEASE = -O3 -fopenmp $(CXXFLAGS_BASIC) 
+CFLAGS_DEBUG = -g $(CFLAGS_BASIC) 
+CFLAGS_RELEASE = -O3 -fopenmp $(CFLAGS_BASIC) 
 
 ARFLAGS = rvs
 
