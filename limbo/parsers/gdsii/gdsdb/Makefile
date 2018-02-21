@@ -50,8 +50,9 @@ endif
 # boost iostreams is needed for compression
 ifdef ZLIB_DIR
 ifdef BOOST_DIR
+	INCLUDE += -I $(ZLIB_DIR)/include
 	LIB += -L $(BOOST_DIR)/lib -lboost_iostreams \
-		   -L $(ZLIB_DIR) -lz
+		   -L $(ZLIB_DIR)/lib -lz
 endif
 endif
 

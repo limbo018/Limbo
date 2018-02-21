@@ -79,11 +79,11 @@ Please report bugs to [yibolin at utexas dot edu](mailto:yibolin@utexas.edu).
 
 Some components depend on external libraries, such as 
 
-* [Boost](www.boost.org): require BOOST_DIR environment variable to the path where Boost is installed. Limbo library is tested through Boost 1.55.0 to 1.57.0.
+* [Boost](www.boost.org): require BOOST_DIR environment variable to the path where Boost is installed. Limbo library is tested through Boost 1.55.0 to 1.57.0. BOOST_DIR should defined in a way that BOOST_DIR/include contains the headers to include and BOOST_DIR/lib contains the libraries to link. 
 * [Lemon](https://lemon.cs.elte.hu): require LEMON_DIR environment variable to the path where Lemon is installed. 
 * [Gurobi](www.gurobi.com): require GUROBI_HOME environment variable to the path where Gurobi is installed. 
 * [Flex](http://flex.sourceforge.net): require FLEX_DIR or LEX_INCLUDE_DIR environment variable if the flex version is not 2.5.37. See FAQ for details. 
-* [Zlib](http://www.zlib.net) (optional): require ZLIB_DIR environment variable to enable zlib features. If both zlib and boost are available, Gds parser supports reading/writing .gds.gz files. 
+* [Zlib](http://www.zlib.net) (optional): require ZLIB_DIR environment variable to enable zlib features. If both zlib and boost are available, Gds parser supports reading/writing .gds.gz files. ZLIB_DIR should defined in a way that ZLIB_DIR/include contains the headers to include and ZLIB_DIR/lib contains the libraries to link. 
 
 Users need to make sure they are properly installed and the corresponding settings are configured. 
 

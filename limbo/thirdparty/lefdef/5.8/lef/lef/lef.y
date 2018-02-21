@@ -6396,7 +6396,7 @@ prop_define:
   K_INTEGER  opt_def_range opt_def_dvalue 
     { 
       if (lefCallbacks->PropCbk) lefData->lefrProp.setPropInteger();
-      lefData->lefPropDefType = 'I'
+      lefData->lefPropDefType = 'I';
     }
   | K_REAL opt_def_range opt_def_value
     { 
@@ -6406,17 +6406,17 @@ prop_define:
   | K_STRING
     {
       if (lefCallbacks->PropCbk) lefData->lefrProp.setPropString();
-      lefData->lefPropDefType = 'S'
+      lefData->lefPropDefType = 'S';
     }
   | K_STRING QSTRING
     {
       if (lefCallbacks->PropCbk) lefData->lefrProp.setPropQString($2);
-      lefData->lefPropDefType = 'Q'
+      lefData->lefPropDefType = 'Q';
     }
   | K_NAMEMAPSTRING T_STRING
     {
       if (lefCallbacks->PropCbk) lefData->lefrProp.setPropNameMapString($2);
-      lefData->lefPropDefType = 'S'
+      lefData->lefPropDefType = 'S';
     }
 
 opt_range_second:
