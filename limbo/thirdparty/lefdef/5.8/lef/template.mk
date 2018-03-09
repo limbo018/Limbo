@@ -110,10 +110,10 @@ $(INSTALLED_HDRS):	../include/%:	%
 installhdrs: $(INSTALLED_HDRS)
 
 .cpp.o:
-	$(COMPILE.cc) $(CXX_OPTIMIZE_FLAG) -I../include $<
+	$(COMPILE.cc) $(CXX_OPTIMIZE_FLAG) -I../include $(ZLIB_INCLUDE_FLAG) $<
 
 .c.o:
-	$(COMPILE.c) $(C_OPTIMIZE_FLAG) -I../include $<
+	$(COMPILE.c) $(C_OPTIMIZE_FLAG) -I../include $(ZLIB_INCLUDE_FLAG) $<
 
 $(LIBTARGET): $(LIBOBJS)
 	rm -f $(LIBTARGET)
