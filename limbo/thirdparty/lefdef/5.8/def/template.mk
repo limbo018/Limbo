@@ -104,10 +104,10 @@ $(INSTALLED_HDRS):	../include/%:	%
 installhdrs: $(INSTALLED_HDRS)
 
 .cpp.o:
-	$(COMPILE.cc) $(CXX_OPTIMIZE_FLAG) -I../include $<
+	$(COMPILE.cc) $(CXX_OPTIMIZE_FLAG) -I../include $(ZLIB_INCLUDE_FLAG) $<
 
 .c.o:
-	$(COMPILE.c) $(C_OPTIMIZE_FLAG) -I../include $<
+	$(COMPILE.c) $(C_OPTIMIZE_FLAG) -I../include $(ZLIB_INCLUDE_FLAG) $<
 
 $(LIBTARGET): $(LIBOBJS)
 	rm -f $(LIBTARGET)
@@ -115,7 +115,7 @@ $(LIBTARGET): $(LIBOBJS)
 
 $(BINTARGET): $(BINOBJS) $(LIBTARGET) $(LDLIBS)
 	rm -f $(BINTARGET)
-	$(LINK.cc) -o $(BINTARGET) $(BINOBJS) $(LIBTARGET) $(LDLIBS) $(BIN_LINK_FLAGS)
+	$(LINK.cc) -o $(BINTARGET) $(BINOBJS) $(LIBTARGET) $(LDLIBS) $(BIN_LINK_FLAGS) 
 
 clean doclean:
 	rm -f $(LIBTARGET) $(LIBOBJS) $(BINTARGET) $(BINOBJS) $(INSTALLED_LIB) \
