@@ -85,6 +85,7 @@ typedef BookshelfParser::Parser::token_type token_type;
 (?i:wts) {return token::KWD_WTS;}
 (?i:aux) {return token::KWD_AUX;}
 (?i:[\/]?FIXED) {return token::KWD_FIXED;}
+(?i:[\/]?FIXED_NI) {return token::KWD_FIXED_NI;}
 (?i:[\/]?PLACED) {return token::KWD_PLACED;}
 (?i:[\/]?UNPLACED) {return token::KWD_UNPLACED;}
 (?i:O) {return token::KWD_O;}
