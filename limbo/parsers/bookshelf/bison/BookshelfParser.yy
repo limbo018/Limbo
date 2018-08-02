@@ -101,6 +101,7 @@
 %token          KWD_WTS         "wts"
 %token          KWD_AUX         "aux"
 %token          KWD_FIXED       "FIXED"
+%token          KWD_FIXED_NI       "FIXED_NI"
 %token          KWD_PLACED      "PLACED"
 %token          KWD_UNPLACED    "UNPLACED"
 %token          KWD_O     "O"
@@ -319,6 +320,7 @@ pl_orient : KWD_N {$$ = new std::string ("N");}
           ;
 
 pl_status : KWD_FIXED {$$ = new std::string("FIXED");}
+          | KWD_FIXED_NI {$$ = new std::string("FIXED");}
           | KWD_PLACED {$$ = new std::string("PLACED");}
           | KWD_UNPLACED {$$ = new std::string("UNPLACED");}
           ;
