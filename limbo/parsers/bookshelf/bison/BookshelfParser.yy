@@ -106,6 +106,7 @@
 %token          KWD_UNPLACED    "UNPLACED"
 %token          KWD_O     "O"
 %token          KWD_I     "I"
+%token          KWD_B     "B"
 %token          KWD_N     "N"
 %token          KWD_S     "S"
 %token          KWD_W     "W"
@@ -264,6 +265,7 @@ nets_numbers : nets_number
 
 nets_pin_direct : KWD_O {$$='O';} 
                 | KWD_I {$$='I';}
+                | KWD_B {$$='B';}
                 ;
 
 nets_pin_entry : STRING nets_pin_direct ':' NUMBER NUMBER ':' NUMBER NUMBER STRING EOL {
