@@ -14,7 +14,7 @@
 
 ## @cond 
 
-ZLIB_LINK_FLAG =
+#ZLIB_LINK_FLAG =
 
 # use libz.a to test whether Zlib has static library
 ifeq ($(ZLIB_LINK_FLAG),)
