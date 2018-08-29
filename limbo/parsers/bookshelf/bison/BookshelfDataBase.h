@@ -144,6 +144,17 @@ struct NetPin : public Item
     double size[2]; ///< sizes (x, y) of pin 
 
     /// constructor 
+    NetPin()
+    {
+        node_name = "";
+        pin_name = ""; 
+        direct = '\0';
+        offset[0] = 0; 
+        offset[1] = 0; 
+        size[0] = 0;
+        size[1] = 0;
+    }
+    /// constructor 
     /// @param nn node name 
     /// @param d direction 
     /// @param x, y offset of pin to node origin 

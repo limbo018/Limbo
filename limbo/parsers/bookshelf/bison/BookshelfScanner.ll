@@ -90,6 +90,7 @@ typedef BookshelfParser::Parser::token_type token_type;
 (?i:[\/]?UNPLACED) {return token::KWD_UNPLACED;}
 (?i:O) {return token::KWD_O;}
 (?i:I) {return token::KWD_I;}
+(?i:B) {return token::KWD_B;}
 (?i:N) {return token::KWD_N;}
 (?i:S) {return token::KWD_S;}
 (?i:W) {return token::KWD_W;}

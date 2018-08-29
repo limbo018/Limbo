@@ -7,6 +7,9 @@
 
 ## @cond 
 
+ifneq ($(shell which gcc),)
+	CC = gcc
+else
 ifneq ($(shell which gcc48),)
 	CC = gcc48
 else
@@ -31,6 +34,7 @@ endif
 endif
 endif
 endif
+endif 
 endif 
 
 ## @endcond
