@@ -101,10 +101,12 @@
 %token          KWD_WTS         "wts"
 %token          KWD_AUX         "aux"
 %token          KWD_FIXED       "FIXED"
+%token          KWD_FIXED_NI       "FIXED_NI"
 %token          KWD_PLACED      "PLACED"
 %token          KWD_UNPLACED    "UNPLACED"
 %token          KWD_O     "O"
 %token          KWD_I     "I"
+%token          KWD_B     "B"
 %token          KWD_N     "N"
 %token          KWD_S     "S"
 %token          KWD_W     "W"
@@ -263,6 +265,7 @@ nets_numbers : nets_number
 
 nets_pin_direct : KWD_O {$$='O';} 
                 | KWD_I {$$='I';}
+                | KWD_B {$$='B';}
                 ;
 
 nets_pin_entry : STRING nets_pin_direct ':' NUMBER NUMBER ':' NUMBER NUMBER STRING EOL {
@@ -319,6 +322,7 @@ pl_orient : KWD_N {$$ = new std::string ("N");}
           ;
 
 pl_status : KWD_FIXED {$$ = new std::string("FIXED");}
+          | KWD_FIXED_NI {$$ = new std::string("FIXED");}
           | KWD_PLACED {$$ = new std::string("PLACED");}
           | KWD_UNPLACED {$$ = new std::string("UNPLACED");}
           ;

@@ -19,7 +19,7 @@
 #
 # The default settings for gcc:
 #
-CFLAGS=-O3 -Wall -DNOSHORTS -I../include 
+CFLAGS=-O3 -fPIC -Wall -DNOSHORTS -I../include 
 #
 # Notes on CFLAGS.
 #
@@ -90,11 +90,12 @@ CFLAGS=-O3 -Wall -DNOSHORTS -I../include
 #
 #LIBS=-L../lib -lsdp -llapack -lblas -lgfortran -lm
 LIMBO_ROOT_DIR = ../../../..
-LIBS=-L$(LIMBO_ROOT_DIR)/lib -L../lib -lsdp -lopenblas-st -lm -lpthread
+LIBS=-L $(LIMBO_ROOT_DIR)/lib -L ../lib -lsdp -lopenblas-st -lm -lpthread
 UNAME_S = $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
 	CFLAGS+= -ansi 
-	LIBS+= -static -lrt -lgfortran
+	LIBS+= -lrt -lgfortran
+	# -static is removed because some machines may not have statically linked libraries.
 endif 
 #
 # 1. Warning about debian systems.  For some absurb reason, the BLAS

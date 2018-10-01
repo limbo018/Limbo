@@ -4,7 +4,7 @@
 
 LIMBO_ROOT_DIR = $(realpath ..)
 DOCDIR = $(LIMBO_ROOT_DIR)/docs
-SRCS = $(LIMBO_ROOT_DIR)/Readme.md \
+SRCS = $(DOCDIR)/Readme.md \
 		  $(DOCDIR)/algorithms \
 		  $(DOCDIR)/bibtex \
 		  $(DOCDIR)/containers \

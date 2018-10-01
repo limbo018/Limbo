@@ -1,4 +1,4 @@
-Limbo Library for VLSI CAD Design 
+Limbo Library for VLSI CAD Design {#mainpage}
 ---------
 
 All components are written with C/C++ and API is designed for easy usage and simple embedding. 
@@ -9,27 +9,29 @@ Please read this **Readme** file carefully for proper instructions to **install*
 
 ---------
 
-# Packages 
+[TOC]
+
+# Packages {#Packages}
 | Packages                                | Languages                       | Description                                                                |
 | --------------------------------------- | ------------------------------- | -------------------------------------------------------------------------- |
-| Algorithms                              | C++                             | Useful algorithms including partitioning, coloring, etc.                   |
-| Bibtex                                  | Python                          | Scripts convert bibtex into various formats                                |
-| Containers                              | C++                             | Extension of contains from STL                                             |
-| Geometry                                | C++                             | Geometric utilities and algorithms such as polygon-to-rectangle conversion |
-| MakeUtils                               | Makefile                        | Makefile utilities that help find dependencies                             |
-| Math                                    | C++                             | Extension of math functions from STL                                       |
-| Parsers                                 | C++, Flex/Bison                 | Parsers to various formats, such as LEF/DEF, verilog, GDSII, etc.          |
-| Preprocessor                            | C++                             | Macros such as assertion with message                                      |
-| ProgramOptions                          | C++                             | Easy API to parser command line options                                    |
-| Solvers                                 | C++                             | Solver wrap-ups such as SDP, LP solver with min-cost flow, etc.            |
-| String                                  | C++                             | Utilities to char and string                                               |
-| ThirdParty                              | C/C++, Fortran                  | Third party packages required                                              |
+| [Algorithms](@ref Algorithms)           | C++                             | Useful algorithms including partitioning, coloring, etc.                   |
+| [Bibtex](@ref Bibtex)                   | Python                          | Scripts convert bibtex into various formats                                |
+| [Containers](@ref Containers)           | C++                             | Extension of contains from STL                                             |
+| [Geometry](@ref Geometry)               | C++                             | Geometric utilities and algorithms such as polygon-to-rectangle conversion |
+| [MakeUtils](@ref MakeUtils)             | Makefile                        | Makefile utilities that help find dependencies                             |
+| [Math](@ref Math)                       | C++                             | Extension of math functions from STL                                       |
+| [Parsers](@ref Parsers)                 | C++, Flex/Bison                 | Parsers to various formats, such as LEF/DEF, verilog, GDSII, etc.          |
+| [Preprocessor](@ref Preprocessor)       | C++                             | Macros such as assertion with message                                      |
+| [ProgramOptions](@ref ProgramOptions)   | C++                             | Easy API to parser command line options                                    |
+| [Solvers](@ref Solvers)                 | C++                             | Solver wrap-ups such as SDP, LP solver with min-cost flow, etc.            |
+| [String](@ref String)                   | C++                             | Utilities to char and string                                               |
+| [ThirdParty](@ref ThirdParty)           | C/C++, Fortran                  | Third party packages required                                              |
 
-# Developers 
+# Developers {#Developers}
 
 - [Yibo Lin](http://www.yibolin.com), ECE Department, UT Austin 
 
-# Introduction 
+# Introduction {#Introduction}
 
 ## 1. Flex
 
@@ -70,11 +72,11 @@ In this library, an API for lemon (MFC solver) is implemented to solve LP and du
 The API supports reading files with both LGF (lemon graph format) and LP (linear program format) and then dump out solutions. 
 Thus, it will be easier to verify results with general LP solvers such as Gurobi or CBC.
 
-# Bug Report 
+# Bug Report {#BugReport}
 
 Please report bugs to [yibolin at utexas dot edu](mailto:yibolin@utexas.edu). 
 
-# Installation 
+# Installation {#Installation}
 
 Some components depend on external libraries, such as 
 
@@ -143,7 +145,7 @@ The default version of OpenBLAS is not very stable for cross platforms, which of
 OpenBLAS is integrated as a submodule which fetch source code from remote repository, so it is always up-to-date version. 
 If you already have OpenBLAS in the directory, simply run "git submodule update" to fetch the latest version in the submodule directory. 
 
-# FAQ 
+# FAQ {#FAQ}
 
 ##1. (*Deprecated*) Compiling errors like
 ~~~~~~~~~~~~~~~~
@@ -185,7 +187,7 @@ Therefore, it is necessary to make sure the same STL ABI is used for compiling L
 In other words, set consistent _GLIBCXX_USE_CXX11_ABI values. 
 A safe way is to leave it to the default value. 
 
-# Copyright 
+# Copyright {#Copyright}
 The software is released under MIT license except third party packages. Please see the @ref OverallLicense file for details. 
 
 Third party package **c-thread-pool** is released under MIT license. 
@@ -194,13 +196,13 @@ Third party package **csdp** is released under CPL v1.0 license.
 
 Third party package **OpenBLAS** has its copyright reserved; please check its license. 
 
-# Tutorial 
+# Tutorial {#Tutorial}
 
 Some components in limbo library do not need linkage, so they can be used directly by including the headers, while some components require linkage to the corresponding static libraries.  
 Here are some simple example to show the basic usage and compiling commands with gcc under Linux. 
 For clang, the compiling commands are slightly different as users need to specify the same **-stdlib** as that in **CXXSTDLIB** flag used to install the library. 
 See pages of each package for examples. 
 
-# LICENSE 
+# LICENSE {#OverallLicense}
 
-See LICENSE
+\include LICENSE
