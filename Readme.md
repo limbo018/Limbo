@@ -203,4 +203,4 @@ See pages of each package for examples.
 
 # LICENSE 
 
-\include LICENSE
+See LICENSE
