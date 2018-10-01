@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/test/parsers/ebeam/test_bison.cpp Source File</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/containers/FastMultiSet.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,96 +87,175 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_812c36ca5e7cbe86d4d7cbe0e4b93100.html">parsers</a></li><li class="navelem"><a class="el" href="dir_7af0e8d62f2d0f1e61b06f03d6bd408d.html">ebeam</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_67961cc7bc7695996924d6bf198dc652.html">containers</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">test_bison.cpp</div>  </div>
+<div class="title">FastMultiSet.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00330.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00284.html">limbo/parsers/ebeam/bison/EbeamDriver.h</a>&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">using</span> std::cout;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">using</span> std::cin;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">using</span> std::endl;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">using</span> std::string;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="a00053.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00053.html">EbeamDataBase</a> : <span class="keyword">public</span> <a class="code" href="a00052.html">EbeamParser::EbeamDataBase</a></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="a00053.html#a2071174e0fac48e0fa43fb9e7b2a4ef4">   24</a></span>&#160;        <a class="code" href="a00053.html#a2071174e0fac48e0fa43fb9e7b2a4ef4">EbeamDataBase</a>()</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;constructing EbeamDataBase&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        }</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="a00053.html#aa648c32607e9e8358de800e30e2368dc">   30</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00053.html#aa648c32607e9e8358de800e30e2368dc">set_ebeam_unit</a>(<span class="keywordtype">int</span> token) </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; token &lt;&lt; endl;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a00053.html#aa2c5cc8066df66b6c7bf3c80737843a5">   35</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00053.html#aa2c5cc8066df66b6c7bf3c80737843a5">set_ebeam_boundary</a>(<a class="code" href="a00051.html">EbeamParser::EbeamBoundary</a> <span class="keyword">const</span>&amp;) </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            cout &lt;&lt; __func__ &lt;&lt; endl;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        }</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="a00053.html#aade53d0e1a9876c25619c4902d68d510">   40</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00053.html#aade53d0e1a9876c25619c4902d68d510">add_ebeam_macro</a>(<a class="code" href="a00135.html">EbeamParser::Macro</a> <span class="keyword">const</span>&amp;) </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            cout &lt;&lt; __func__ &lt;&lt; endl;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#ifndef LIMBO_CONTAINERS_FASTMULTISET_H</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define LIMBO_CONTAINERS_FASTMULTISET_H</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;multiset&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;boost/typeof.hpp&gt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00435.html">limbo</a> </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{ </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">namespace </span>containers </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">using</span> std::map;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">using</span> std::less;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">using</span> std::multiset;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="a00330.html#ad346d2cc622126c018bb0954eee9b1fa">   47</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00329.html#ad346d2cc622126c018bb0954eee9b1fa">test1</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;////////////// test1 ////////////////&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="a00053.html">EbeamDataBase</a> db;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="a00358.html#a78efc3ba1885bb9a6bef4ca6e0a9ee9b">EbeamParser::read</a>(db, filename);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="a00330.html#a44c0461f780572bf02018038dd9423cd">   55</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00329.html#a44c0461f780572bf02018038dd9423cd">test2</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;////////////// test2 ////////////////&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="a00053.html">EbeamDataBase</a> db;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="a00042.html">EbeamParser::Driver</a> driver (db);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">//driver.trace_scanning = true;</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">//driver.trace_parsing = true;</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    driver.<a class="code" href="a00042.html#a28eae291d68b67a2ae78d1c27539150f">parse_file</a>(filename);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="a00330.html#a3c04138a5bfe5d72780bb7e82a18e627">   70</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00329.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">if</span> (argc &gt; 1)</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <a class="code" href="a00329.html#ad346d2cc622126c018bb0954eee9b1fa">test1</a>(argv[1]);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <a class="code" href="a00329.html#a44c0461f780572bf02018038dd9423cd">test2</a>(argv[1]);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    }</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">else</span> </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;at least 1 argument is required&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
-<div class="ttc" id="a00329_html_ad346d2cc622126c018bb0954eee9b1fa"><div class="ttname"><a href="a00329.html#ad346d2cc622126c018bb0954eee9b1fa">test1</a></div><div class="ttdeci">void test1(string const &amp;filename)</div><div class="ttdoc">test 1: use function wrapper BookshelfParser::read </div><div class="ttdef"><b>Definition:</b> <a href="a00329_source.html#l00096">test_bison.cpp:96</a></div></div>
-<div class="ttc" id="a00042_html"><div class="ttname"><a href="a00042.html">EbeamParser::Driver</a></div><div class="ttdef"><b>Definition:</b> <a href="a00284_source.html#l00035">EbeamDriver.h:35</a></div></div>
-<div class="ttc" id="a00358_html_a78efc3ba1885bb9a6bef4ca6e0a9ee9b"><div class="ttname"><a href="a00358.html#a78efc3ba1885bb9a6bef4ca6e0a9ee9b">EbeamParser::read</a></div><div class="ttdeci">bool read(EbeamDataBase &amp;db, const string &amp;ebeamFile)</div><div class="ttdoc">API for EbeamParser. Read Ebeam file and initialize database by calling user-defined callback functio...</div></div>
-<div class="ttc" id="a00135_html"><div class="ttname"><a href="a00135.html">EbeamParser::Macro</a></div><div class="ttdoc">describe conflict sites for each standard cell type </div><div class="ttdef"><b>Definition:</b> <a href="a00283_source.html#l00181">EbeamDataBase.h:181</a></div></div>
-<div class="ttc" id="a00284_html"><div class="ttname"><a href="a00284.html">EbeamDriver.h</a></div><div class="ttdoc">Driver for Ebeam parser. </div></div>
-<div class="ttc" id="a00053_html_aa648c32607e9e8358de800e30e2368dc"><div class="ttname"><a href="a00053.html#aa648c32607e9e8358de800e30e2368dc">EbeamDataBase::set_ebeam_unit</a></div><div class="ttdeci">virtual void set_ebeam_unit(int token)</div><div class="ttdoc">set database unit </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00030">test_bison.cpp:30</a></div></div>
-<div class="ttc" id="a00329_html_a44c0461f780572bf02018038dd9423cd"><div class="ttname"><a href="a00329.html#a44c0461f780572bf02018038dd9423cd">test2</a></div><div class="ttdeci">void test2(string const &amp;filename)</div><div class="ttdoc">test 2: use class wrapper BookshelfParser::Driver </div><div class="ttdef"><b>Definition:</b> <a href="a00329_source.html#l00104">test_bison.cpp:104</a></div></div>
-<div class="ttc" id="a00053_html_a2071174e0fac48e0fa43fb9e7b2a4ef4"><div class="ttname"><a href="a00053.html#a2071174e0fac48e0fa43fb9e7b2a4ef4">EbeamDataBase::EbeamDataBase</a></div><div class="ttdeci">EbeamDataBase()</div><div class="ttdoc">constructor </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00024">test_bison.cpp:24</a></div></div>
-<div class="ttc" id="a00053_html_aa2c5cc8066df66b6c7bf3c80737843a5"><div class="ttname"><a href="a00053.html#aa2c5cc8066df66b6c7bf3c80737843a5">EbeamDataBase::set_ebeam_boundary</a></div><div class="ttdeci">virtual void set_ebeam_boundary(EbeamParser::EbeamBoundary const &amp;)</div><div class="ttdoc">set ebeam boundary </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00035">test_bison.cpp:35</a></div></div>
-<div class="ttc" id="a00052_html"><div class="ttname"><a href="a00052.html">EbeamParser::EbeamDataBase</a></div><div class="ttdoc">Base class for ebeam database. Only pure virtual functions are defined. User needs to inheritate this...</div><div class="ttdef"><b>Definition:</b> <a href="a00283_source.html#l00206">EbeamDataBase.h:206</a></div></div>
-<div class="ttc" id="a00053_html_aade53d0e1a9876c25619c4902d68d510"><div class="ttname"><a href="a00053.html#aade53d0e1a9876c25619c4902d68d510">EbeamDataBase::add_ebeam_macro</a></div><div class="ttdeci">virtual void add_ebeam_macro(EbeamParser::Macro const &amp;)</div><div class="ttdoc">set ebeam macro </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00040">test_bison.cpp:40</a></div></div>
-<div class="ttc" id="a00042_html_a28eae291d68b67a2ae78d1c27539150f"><div class="ttname"><a href="a00042.html#a28eae291d68b67a2ae78d1c27539150f">EbeamParser::Driver::parse_file</a></div><div class="ttdeci">bool parse_file(const string &amp;filename)</div></div>
-<div class="ttc" id="a00053_html"><div class="ttname"><a href="a00053.html">EbeamDataBase</a></div><div class="ttdoc">Custom class that inheritates EbeamParser::EbeamDataBase with all the required callbacks defined...</div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00020">test_bison.cpp:20</a></div></div>
-<div class="ttc" id="a00051_html"><div class="ttname"><a href="a00051.html">EbeamParser::EbeamBoundary</a></div><div class="ttdoc">describe ebeam boundary </div><div class="ttdef"><b>Definition:</b> <a href="a00283_source.html#l00112">EbeamDataBase.h:112</a></div></div>
-<div class="ttc" id="a00329_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="a00329.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">main function </div><div class="ttdef"><b>Definition:</b> <a href="a00329_source.html#l00119">test_bison.cpp:119</a></div></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyType, </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;         <span class="keyword">typename</span> Compare1 = less&lt;KeyType&gt;, </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;         <span class="keyword">typename</span> Compare2 = less&lt;KeyType&gt; &gt;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="a00102.html">   53</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00102.html">FastMultiSet</a> : <span class="keyword">public</span> multiset&lt;KeyType, Compare1&gt;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="a00102.html#a4cdf9a2c0d1d5b08874ec1eb824b7236">   57</a></span>&#160;        <span class="keyword">typedef</span> KeyType <a class="code" href="a00102.html#a4cdf9a2c0d1d5b08874ec1eb824b7236">key_type</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="a00102.html#af5421c628865a6572ea04bdea999331f">   59</a></span>&#160;        <span class="keyword">typedef</span> KeyType <a class="code" href="a00102.html#af5421c628865a6572ea04bdea999331f">value_type</a>; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keyword">typedef</span> Compare1 key_compare1;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keyword">typedef</span> Compare2 key_compare2;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keyword">typedef</span> multiset&lt;key_type, key_compare1&gt; base_type;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">typedef</span> map&lt;key_type, typename base_type::iterator, key_compare2&gt; map_type;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> map_type::value_type map_value_type;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> base_type::reference reference;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> base_type::const_reference const_reference;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> base_type::pointer pointer;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> base_type::const_pointer const_pointer;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> base_type::iterator iterator;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> base_type::const_iterator const_iterator;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> base_type::reverse_iterator reverse_iterator;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> base_type::const_reverse_iterator const_reverse_iterator;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> base_type::difference_type difference_type;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> base_type::size_type size_type;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="a00102.html#a3ec926abdc6d890328338acd07035ec0">   82</a></span>&#160;        <span class="keyword">explicit</span> <a class="code" href="a00102.html#a3ec926abdc6d890328338acd07035ec0">FastMultiSet</a>(key_compare1 <span class="keyword">const</span>&amp; comp1 = key_compare1(), </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                key_compare2 <span class="keyword">const</span>&amp; comp2 = key_compare2())</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            : base_type(comp1), <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>(comp2) {}</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="a00102.html#a3dc0ef9d6a6fd8345fea1f3b70714008">   87</a></span>&#160;        <a class="code" href="a00102.html#a3dc0ef9d6a6fd8345fea1f3b70714008">FastMultiSet</a>(<a class="code" href="a00102.html">FastMultiSet</a> <span class="keyword">const</span>&amp; rhs)</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            : base_type(rhs) </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="comment">// O(2NlogN)</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="comment">// rhs may be in bad order </span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="comment">// so we have to reconstruct m_map</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.clear();</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordflow">for</span> (iterator it = this-&gt;begin();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    it != this-&gt;end(); ++it)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.insert(std::make_pair(*it, it));</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="a00102.html#a8fcb0f14acb37cc8397ddef563555f36">  102</a></span>&#160;        <span class="keyword">virtual</span> iterator <a class="code" href="a00102.html#a8fcb0f14acb37cc8397ddef563555f36">insert</a>(key_type <span class="keyword">const</span>&amp; val)</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="comment">// for safty, take O(logN)</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            BOOST_AUTO(found, <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.find(val));</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            assert(found == <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.end());</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            iterator it = this-&gt;base_type::insert(val); <span class="comment">// no hint </span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>[val] = it;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keywordflow">return</span> it;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        }</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="a00102.html#a335b273b8e9d1d986061e689ae3539b8">  115</a></span>&#160;        <span class="keyword">virtual</span> iterator <a class="code" href="a00102.html#a335b273b8e9d1d986061e689ae3539b8">insert</a>(iterator position, key_type <span class="keyword">const</span>&amp; val)</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="comment">// for safty, take O(logN)</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            BOOST_AUTO(found, <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.find(val));</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            assert(found == <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.end());</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            iterator it = this-&gt;base_type::insert(position, val); <span class="comment">// with hint </span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>[val] = it;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keywordflow">return</span> it;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> InputIterator&gt; <span class="keywordtype">void</span> <a class="code" href="a00102.html#a8fcb0f14acb37cc8397ddef563555f36">insert</a>(InputIterator first, InputIterator last);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="a00102.html#afb19e463f737b9a27a5345e02e5cd307">  132</a></span>&#160;        <span class="keyword">virtual</span> size_type <a class="code" href="a00102.html#afb19e463f737b9a27a5345e02e5cd307">erase</a>(key_type <span class="keyword">const</span>&amp; val)</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        {</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            BOOST_AUTO(found, <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.find(val));</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <span class="keywordflow">if</span> (found == <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.end()) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            this-&gt;base_type::erase(found-&gt;second);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.erase(found);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        }</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a00102.html#afb19e463f737b9a27a5345e02e5cd307">erase</a>(iterator position);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a00102.html#afb19e463f737b9a27a5345e02e5cd307">erase</a>(iterator first, iterator last);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="a00102.html#a838ef92f1179d5a632686313151e51cc">  150</a></span>&#160;        <span class="keyword">virtual</span> iterator <a class="code" href="a00102.html#a838ef92f1179d5a632686313151e51cc">update</a>(key_type <span class="keyword">const</span>&amp; val)</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        {</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            BOOST_AUTO(found, <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.find(val)); <span class="comment">// O(logN)</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="comment">//  it is possible in some applications  </span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <span class="keywordflow">if</span> (found == <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.end()) <span class="keywordflow">return</span> this-&gt;end();</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <span class="comment">// update multiset </span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            this-&gt;base_type::erase(found-&gt;second); <span class="comment">// O(1)</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            iterator it = this-&gt;base_type::insert(val); <span class="comment">// O(logN)</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <span class="comment">// update map </span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            found-&gt;second = it; <span class="comment">// O(1)</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            <span class="keywordflow">return</span> found-&gt;second;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        }</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
+<div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="a00102.html#a70aa0f4d9ebda240158142f4bcbfea0b">  166</a></span>&#160;        <span class="keyword">virtual</span> size_type <a class="code" href="a00102.html#a70aa0f4d9ebda240158142f4bcbfea0b">count</a>(key_type <span class="keyword">const</span>&amp; val)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.count(val); <span class="comment">// O(logN)</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        }</div>
+<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="a00102.html#a12f750e5e0a23ab6188bad48d1ee1207">  173</a></span>&#160;        <span class="keyword">virtual</span> iterator <a class="code" href="a00102.html#a12f750e5e0a23ab6188bad48d1ee1207">find</a>(key_type <span class="keyword">const</span>&amp; val)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            BOOST_AUTO(found, <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.find(val)); <span class="comment">// O(logN)</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            <span class="keywordflow">if</span> (found == <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.end()) <span class="comment">// not found</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                <span class="keywordflow">return</span> this-&gt;end();</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <span class="keywordflow">else</span> <span class="comment">// found</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                <span class="keywordflow">return</span> found-&gt;second;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        }</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div>
+<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="a00102.html#adf5e5f5a6659fc2f3d45f70bb144c9e3">  184</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a00102.html#adf5e5f5a6659fc2f3d45f70bb144c9e3">print</a>(std::ostream&amp; os)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            os &lt;&lt; <span class="stringliteral">&quot;/////////// FastMultiSet ////////////\n&quot;</span>;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            os &lt;&lt; <span class="stringliteral">&quot;&lt;&lt; set &gt;&gt;\n&quot;</span>;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            <span class="keywordflow">for</span> (const_iterator it = this-&gt;begin(); </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                    it != this-&gt;end(); ++it)</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                os &lt;&lt; *it &lt;&lt; endl;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            os &lt;&lt; <span class="stringliteral">&quot;&lt;&lt; map &gt;&gt;\n&quot;</span>;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <span class="keywordflow">for</span> (BOOST_AUTO(it, <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.begin()); </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                    it != <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>.end(); ++it)</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                os &lt;&lt; it-&gt;first &lt;&lt; <span class="stringliteral">&quot; --&gt; &quot;</span> &lt;&lt; *(it-&gt;second) &lt;&lt; endl;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        }</div>
+<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="a00102.html#ae2d01a967419fcc813569b3fd8a5b0a6">  200</a></span>&#160;        <span class="keyword">friend</span> std::ostream&amp; <a class="code" href="a00102.html#ae2d01a967419fcc813569b3fd8a5b0a6">operator&lt;&lt;</a>(std::ostream&amp; os, <a class="code" href="a00102.html">FastMultiSet</a> <span class="keyword">const</span>&amp; rhs)</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        {</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            rhs.<a class="code" href="a00102.html#adf5e5f5a6659fc2f3d45f70bb144c9e3">print</a>(os);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            <span class="keywordflow">return</span> os;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        }</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="a00102.html#a322033a4a5984805035624387b1ac9d9">  207</a></span>&#160;        map_type <a class="code" href="a00102.html#a322033a4a5984805035624387b1ac9d9">m_map</a>; </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;};</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;} <span class="comment">// namespace containers</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;} <span class="comment">// namespace limbo</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a00102_html_ae2d01a967419fcc813569b3fd8a5b0a6"><div class="ttname"><a href="a00102.html#ae2d01a967419fcc813569b3fd8a5b0a6">limbo::containers::FastMultiSet::operator&lt;&lt;</a></div><div class="ttdeci">friend std::ostream &amp; operator&lt;&lt;(std::ostream &amp;os, FastMultiSet const &amp;rhs)</div><div class="ttdoc">print object </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00200">FastMultiSet.h:200</a></div></div>
+<div class="ttc" id="a00102_html_a70aa0f4d9ebda240158142f4bcbfea0b"><div class="ttname"><a href="a00102.html#a70aa0f4d9ebda240158142f4bcbfea0b">limbo::containers::FastMultiSet::count</a></div><div class="ttdeci">virtual size_type count(key_type const &amp;val) const </div><div class="ttdoc">use m_map.count rather than multiset::count to have faster access </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00166">FastMultiSet.h:166</a></div></div>
+<div class="ttc" id="a00435_html"><div class="ttname"><a href="a00435.html">limbo</a></div><div class="ttdoc">namespace for Limbo </div><div class="ttdef"><b>Definition:</b> <a href="a00322_source.html#l00022">GraphUtility.h:22</a></div></div>
+<div class="ttc" id="a00102_html_a838ef92f1179d5a632686313151e51cc"><div class="ttname"><a href="a00102.html#a838ef92f1179d5a632686313151e51cc">limbo::containers::FastMultiSet::update</a></div><div class="ttdeci">virtual iterator update(key_type const &amp;val)</div><div class="ttdoc">update value, the value is changed which means its position is not correct in the container ...</div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00150">FastMultiSet.h:150</a></div></div>
+<div class="ttc" id="a00102_html_a322033a4a5984805035624387b1ac9d9"><div class="ttname"><a href="a00102.html#a322033a4a5984805035624387b1ac9d9">limbo::containers::FastMultiSet::m_map</a></div><div class="ttdeci">map_type m_map</div><div class="ttdoc">internal map </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00207">FastMultiSet.h:207</a></div></div>
+<div class="ttc" id="a00102_html_a3ec926abdc6d890328338acd07035ec0"><div class="ttname"><a href="a00102.html#a3ec926abdc6d890328338acd07035ec0">limbo::containers::FastMultiSet::FastMultiSet</a></div><div class="ttdeci">FastMultiSet(key_compare1 const &amp;comp1=key_compare1(), key_compare2 const &amp;comp2=key_compare2())</div><div class="ttdoc">constructor </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00082">FastMultiSet.h:82</a></div></div>
+<div class="ttc" id="a00102_html_afb19e463f737b9a27a5345e02e5cd307"><div class="ttname"><a href="a00102.html#afb19e463f737b9a27a5345e02e5cd307">limbo::containers::FastMultiSet::erase</a></div><div class="ttdeci">virtual size_type erase(key_type const &amp;val)</div><div class="ttdoc">erase value </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00132">FastMultiSet.h:132</a></div></div>
+<div class="ttc" id="a00102_html_a3dc0ef9d6a6fd8345fea1f3b70714008"><div class="ttname"><a href="a00102.html#a3dc0ef9d6a6fd8345fea1f3b70714008">limbo::containers::FastMultiSet::FastMultiSet</a></div><div class="ttdeci">FastMultiSet(FastMultiSet const &amp;rhs)</div><div class="ttdoc">copy constructor </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00087">FastMultiSet.h:87</a></div></div>
+<div class="ttc" id="a00102_html_adf5e5f5a6659fc2f3d45f70bb144c9e3"><div class="ttname"><a href="a00102.html#adf5e5f5a6659fc2f3d45f70bb144c9e3">limbo::containers::FastMultiSet::print</a></div><div class="ttdeci">void print(std::ostream &amp;os) const </div><div class="ttdoc">print object </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00184">FastMultiSet.h:184</a></div></div>
+<div class="ttc" id="a00102_html_a335b273b8e9d1d986061e689ae3539b8"><div class="ttname"><a href="a00102.html#a335b273b8e9d1d986061e689ae3539b8">limbo::containers::FastMultiSet::insert</a></div><div class="ttdeci">virtual iterator insert(iterator position, key_type const &amp;val)</div><div class="ttdoc">insert value with hint of position </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00115">FastMultiSet.h:115</a></div></div>
+<div class="ttc" id="a00102_html_a8fcb0f14acb37cc8397ddef563555f36"><div class="ttname"><a href="a00102.html#a8fcb0f14acb37cc8397ddef563555f36">limbo::containers::FastMultiSet::insert</a></div><div class="ttdeci">virtual iterator insert(key_type const &amp;val)</div><div class="ttdoc">insert value </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00102">FastMultiSet.h:102</a></div></div>
+<div class="ttc" id="a00102_html_a12f750e5e0a23ab6188bad48d1ee1207"><div class="ttname"><a href="a00102.html#a12f750e5e0a23ab6188bad48d1ee1207">limbo::containers::FastMultiSet::find</a></div><div class="ttdeci">virtual iterator find(key_type const &amp;val) const </div><div class="ttdoc">use m_map.find rather than std::multiset::find to have faster access </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00173">FastMultiSet.h:173</a></div></div>
+<div class="ttc" id="a00102_html_af5421c628865a6572ea04bdea999331f"><div class="ttname"><a href="a00102.html#af5421c628865a6572ea04bdea999331f">limbo::containers::FastMultiSet::value_type</a></div><div class="ttdeci">KeyType value_type</div><div class="ttdoc">for set concept, key_type is also value_type </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00059">FastMultiSet.h:59</a></div></div>
+<div class="ttc" id="a00102_html_a4cdf9a2c0d1d5b08874ec1eb824b7236"><div class="ttname"><a href="a00102.html#a4cdf9a2c0d1d5b08874ec1eb824b7236">limbo::containers::FastMultiSet::key_type</a></div><div class="ttdeci">KeyType key_type</div><div class="ttdoc">for set concept, value_type is also key_type </div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00057">FastMultiSet.h:57</a></div></div>
+<div class="ttc" id="a00102_html"><div class="ttname"><a href="a00102.html">limbo::containers::FastMultiSet</a></div><div class="ttdef"><b>Definition:</b> <a href="a00330_source.html#l00053">FastMultiSet.h:53</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:11 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

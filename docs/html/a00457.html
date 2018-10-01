@@ -87,32 +87,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="a00360.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00095.html">GdsText</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">GdsParser::GdsText Member List</div>  </div>
+<div class="title">EnumDataBase Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00095.html">GdsParser::GdsText</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a00099.html">EnumDataBase</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00095.html#a7c3f8643e8a0bfb50b9ea600d9d302a1">content</a></td><td class="entry"><a class="el" href="a00095.html">GdsParser::GdsText</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00095.html#a2830345fb19f6edca048f9295744c752">GdsText</a>()</td><td class="entry"><a class="el" href="a00095.html">GdsParser::GdsText</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00095.html#a3ac4cb898fbd07937f9798d0f69a659d">layer</a></td><td class="entry"><a class="el" href="a00095.html">GdsParser::GdsText</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00095.html#ac93594c5576e1ee3ba5c05d41905037b">mag</a></td><td class="entry"><a class="el" href="a00095.html">GdsParser::GdsText</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00095.html#ac619e72439ceea0a9165b5a876c592ce">position</a></td><td class="entry"><a class="el" href="a00095.html">GdsParser::GdsText</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00095.html#a1f611a9588c219cca5836a02b82351b4">presentation</a></td><td class="entry"><a class="el" href="a00095.html">GdsParser::GdsText</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00095.html#a26cd5ce2315d65a5a990c8dce559bfc0">reset</a>()</td><td class="entry"><a class="el" href="a00095.html">GdsParser::GdsText</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00095.html#af7be47c307ef8cebfba4717975ed2edf">strans</a></td><td class="entry"><a class="el" href="a00095.html">GdsParser::GdsText</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00095.html#a9dcf1069574107a7b0d1d0e4e9388714">texttype</a></td><td class="entry"><a class="el" href="a00095.html">GdsParser::GdsText</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00099.html#a4dce5b24298dee1140396af7a7952618">begin_end_cbk</a>(GdsParser::GdsRecords::EnumType record_type)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00099.html#aa930c78b39d107fd1794a0740ce50379">bit_array_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector&lt; int &gt; const &amp;vBitArray)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00099.html#afa07fc8779d99e7f06737c57bd52904c">EnumDataBase</a>()</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00099.html#a85646491c12b05d796f0cfcfb4903927">general_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, ContainerType const &amp;data)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00099.html#a913aa3804259e1d91fc0138d0f409248">integer_2_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector&lt; int &gt; const &amp;vInteger)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00099.html#a1b7a7ca543da943c44b30885726ddf0a">integer_4_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector&lt; int &gt; const &amp;vInteger)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00099.html#a76405dd0a7ae24137269683475afdb42">real_4_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector&lt; double &gt; const &amp;vFloat)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00099.html#a2b2424a53c40a15c615bc849ebc87185">real_8_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector&lt; double &gt; const &amp;vFloat)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00099.html#a6807a31ed7971929f91c7fa406729370">string_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, string const &amp;str)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: BookshelfParser Namespace Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/def/adapt/DefDataBase.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -44,9 +44,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
-      <li class="current"><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="namespaces.html"><span>Namespace&#160;List</span></a></li>
-      <li><a href="namespacemembers.html"><span>Namespace&#160;Members</span></a></li>
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -85,145 +85,83 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_6da01f0db49e8756756be8cb53463254.html">def</a></li><li class="navelem"><a class="el" href="dir_0095ba019e233d7aed14fa17b600f858.html">adapt</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">BookshelfParser Namespace Reference</div>  </div>
+<div class="title">DefDataBase.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>namespace for <a class="el" href="a00352.html" title="namespace for BookshelfParser ">BookshelfParser</a>  
+<p>Database for Def parser.  
 <a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;limbo/thirdparty/lefdef/5.8/def/include/defrReader.hpp&gt;</code><br />
+<code>#include &lt;limbo/thirdparty/lefdef/5.8/def/include/defiAlias.hpp&gt;</code><br />
+</div>
+<p><a href="a00352_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00006.html">BookshelfDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for bookshelf database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00006.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00161.html">DefParser::Item</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temporary data structures to hold parsed data. Base class for all temporary data structures.  <a href="a00161.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00047.html">Driver</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00243.html">DefParser::Row</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">placement row  <a href="a00243.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00113.html">IntegerArray</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">bison does not support vector very well, so here create a dummy class for integer array.  <a href="a00113.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html">DefParser::Component</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">cell in placement  <a href="a00067.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00118.html">Item</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temporary data structures to hold parsed data. Base class for all temporary data structures.  <a href="a00118.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00216.html">DefParser::Pin</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">pin of node/cell  <a href="a00216.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00148.html">Net</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">net to describe interconnection of netlist  <a href="a00148.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00191.html">DefParser::Net</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">net to describe interconnection of netlist  <a href="a00191.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00151.html">NetPin</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">describe a pin of a net  <a href="a00151.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00081.html">DefParser::DefDataBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for def database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00081.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00202.html">Row</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">placement row  <a href="a00202.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00213.html">StringArray</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">bison does not support vector very well, so here create a dummy class for string array.  <a href="a00213.html#details">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00428"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00428.html">DefParser</a></td></tr>
+<tr class="memdesc:a00428"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for <a class="el" href="a00428.html" title="namespace for DefParser ">DefParser</a> <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a896ef00224254c920641c782fe18f94f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a896ef00224254c920641c782fe18f94f"></a>
-typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>int32_t</b></td></tr>
-<tr class="separator:a896ef00224254c920641c782fe18f94f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23ba2ff42a634da9696b91407f0814f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a23ba2ff42a634da9696b91407f0814f4"></a>
-typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>uint32_t</b></td></tr>
-<tr class="separator:a23ba2ff42a634da9696b91407f0814f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2d03e6aa8f3eccb8c4b2706352d6df6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae2d03e6aa8f3eccb8c4b2706352d6df6"></a>
-typedef long&#160;</td><td class="memItemRight" valign="bottom"><b>int64_t</b></td></tr>
-<tr class="separator:ae2d03e6aa8f3eccb8c4b2706352d6df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:af764f80c5e0928a975057a71b33dbe1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00352.html#af764f80c5e0928a975057a71b33dbe1d">read</a> (<a class="el" href="a00006.html">BookshelfDataBase</a> &amp;db, const string &amp;auxFile)</td></tr>
-<tr class="memdesc:af764f80c5e0928a975057a71b33dbe1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">API for <a class="el" href="a00352.html" title="namespace for BookshelfParser ">BookshelfParser</a>. Read .aux file and parse all other files.  <a href="#af764f80c5e0928a975057a71b33dbe1d">More...</a><br /></td></tr>
-<tr class="separator:af764f80c5e0928a975057a71b33dbe1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33a39624b706e1065c259ca3110e64df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00352.html#a33a39624b706e1065c259ca3110e64df">readPl</a> (<a class="el" href="a00006.html">BookshelfDataBase</a> &amp;db, const string &amp;plFile)</td></tr>
-<tr class="memdesc:a33a39624b706e1065c259ca3110e64df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read .pl file only, the callback only provide positions and orientation.  <a href="#a33a39624b706e1065c259ca3110e64df">More...</a><br /></td></tr>
-<tr class="separator:a33a39624b706e1065c259ca3110e64df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa02e3a2ea12b4698269a89dcf38dce65"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa02e3a2ea12b4698269a89dcf38dce65"></a>
+typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>DefParser::int32_t</b></td></tr>
+<tr class="separator:aa02e3a2ea12b4698269a89dcf38dce65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaa2e368f86a83a9c990161b713acc0c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afaa2e368f86a83a9c990161b713acc0c"></a>
+typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>DefParser::uint32_t</b></td></tr>
+<tr class="separator:afaa2e368f86a83a9c990161b713acc0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac48f476728468a6d36154827e7b2981a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac48f476728468a6d36154827e7b2981a"></a>
+typedef long&#160;</td><td class="memItemRight" valign="bottom"><b>DefParser::int64_t</b></td></tr>
+<tr class="separator:ac48f476728468a6d36154827e7b2981a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>namespace for <a class="el" href="a00352.html" title="namespace for BookshelfParser ">BookshelfParser</a> </p>
-<p>The example namespace is used to encapsulate the three parser classes example::Parser, example::Scanner and example::Driver </p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="af764f80c5e0928a975057a71b33dbe1d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool BookshelfParser::read </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00005.html">BookshelfDataBase</a> &amp;&#160;</td>
-          <td class="paramname"><em>db</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>auxFile</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<div class="textblock"><p>Database for Def parser. </p>
+<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>API for <a class="el" href="a00352.html" title="namespace for BookshelfParser ">BookshelfParser</a>. Read .aux file and parse all other files. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">db</td><td>database which is derived from <a class="el" href="a00006.html">BookshelfParser::BookshelfDataBase</a> </td></tr>
-    <tr><td class="paramname">auxFile</td><td>.aux file </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a33a39624b706e1065c259ca3110e64df"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool BookshelfParser::readPl </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00005.html">BookshelfDataBase</a> &amp;&#160;</td>
-          <td class="paramname"><em>db</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>plFile</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read .pl file only, the callback only provide positions and orientation. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">db</td><td>database which is derived from <a class="el" href="a00006.html">BookshelfParser::BookshelfDataBase</a> </td></tr>
-    <tr><td class="paramname">plFile</td><td>.pl file </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>Definition in file <a class="el" href="a00352_source.html">DefDataBase.h</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

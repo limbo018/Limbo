@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/test/geometry/test_blibapi.cpp File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/partition/FMMultiWay.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,114 +87,54 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_d49d4fe2bb593f3112f8bcbe6fb5f73b.html">geometry</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li><li class="navelem"><a class="el" href="dir_79637abb8b132f5967c5d0bdbe97424d.html">partition</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">test_blibapi.cpp File Reference</div>  </div>
+<div class="title">FMMultiWay.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;list&gt;</code><br />
-<code>#include &lt;set&gt;</code><br />
-<code>#include &quot;bLibPoint.h&quot;</code><br />
-<code>#include &quot;bLibShape.h&quot;</code><br />
-<code>#include &lt;<a class="el" href="a00264_source.html">limbo/geometry/Polygon2Rectangle.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00260_source.html">limbo/geometry/api/bLibApi.h</a>&gt;</code><br />
-</div>
+
+<p>Implementation of the Multi-way FM partitioning algorithm.  
+<a href="#details">More...</a></p>
+
 <p><a href="a00326_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ad346d2cc622126c018bb0954eee9b1fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00326.html#ad346d2cc622126c018bb0954eee9b1fa">test1</a> (string const &amp;filename)</td></tr>
-<tr class="memdesc:ad346d2cc622126c018bb0954eee9b1fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">test bLib API  <a href="#ad346d2cc622126c018bb0954eee9b1fa">More...</a><br /></td></tr>
-<tr class="separator:ad346d2cc622126c018bb0954eee9b1fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44c0461f780572bf02018038dd9423cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a44c0461f780572bf02018038dd9423cd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00326.html#a44c0461f780572bf02018038dd9423cd">test2</a> (string const &amp;filename)</td></tr>
-<tr class="memdesc:a44c0461f780572bf02018038dd9423cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">test std::list <br /></td></tr>
-<tr class="separator:a44c0461f780572bf02018038dd9423cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab067cb5ed5d7678f6d8dc3d316092380"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab067cb5ed5d7678f6d8dc3d316092380"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00326.html#ab067cb5ed5d7678f6d8dc3d316092380">test3</a> (string const &amp;filename)</td></tr>
-<tr class="memdesc:ab067cb5ed5d7678f6d8dc3d316092380"><td class="mdescLeft">&#160;</td><td class="mdescRight">test std::set <br /></td></tr>
-<tr class="separator:ab067cb5ed5d7678f6d8dc3d316092380"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00326.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">main function requires an input benchmark in gnuplot format  <a href="#a3c04138a5bfe5d72780bb7e82a18e627">More...</a><br /></td></tr>
-<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00109.html">limbo::algorithms::partition::FMMultiWay&lt; GainCalcType &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html">limbo::algorithms::partition::FMMultiWay&lt; GainCalcType &gt;::VertexMove</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class denotes movement of vertex  <a href="a00278.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
+<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00436"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html">limbo::algorithms</a></td></tr>
+<tr class="memdesc:a00436"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.algorithms <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00438"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00438.html">limbo::algorithms::partition</a></td></tr>
+<tr class="memdesc:a00438"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Algorithms.Partition <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
+<div class="textblock"><p>Implementation of the Multi-way FM partitioning algorithm. </p>
+<p>Refer to Fiduccia and Mattheyses, "A Linear-time Heuristics for Improving Network Partitions", DAC 1982</p>
+<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Sep 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00326_source.html">test_blibapi.cpp</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char **&#160;</td>
-          <td class="paramname"><em>argv</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>main function requires an input benchmark in gnuplot format </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">argc</td><td>number of arguments </td></tr>
-    <tr><td class="paramname">argv</td><td>values of arguments </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 </dd></dl>
-
-<p>Definition at line <a class="el" href="a00326_source.html#l00073">73</a> of file <a class="el" href="a00326_source.html">test_blibapi.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad346d2cc622126c018bb0954eee9b1fa"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void test1 </td>
-          <td>(</td>
-          <td class="paramtype">string const &amp;&#160;</td>
-          <td class="paramname"><em>filename</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>test bLib API </p>
-<p>use bLib::bPoint and bLib::bBox as data type for polygon-to-rectangle conversion test std::vector </p>
-
-<p>Definition at line <a class="el" href="a00326_source.html#l00034">34</a> of file <a class="el" href="a00326_source.html">test_blibapi.cpp</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>Definition in file <a class="el" href="a00326_source.html">FMMultiWay.h</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

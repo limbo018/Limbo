@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/def/adapt/DefDriver.h Source File</title>
+<title>Limbo: bibtex/Bibtex.md Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,6 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -85,99 +86,107 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_6da01f0db49e8756756be8cb53463254.html">def</a></li><li class="navelem"><a class="el" href="dir_0095ba019e233d7aed14fa17b600f858.html">adapt</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">DefDriver.h</div>  </div>
+<div class="title">bibtex/Bibtex.md</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00282.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef DEFPARSER_DRIVER_H</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define DEFPARSER_DRIVER_H</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;Limbo.Bibtex {#Bibtex}</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;---------</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;[TOC]</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;# Introduction {#Bibtex_Introduction}</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;Scripts to convert bibtex format to jemdoc and latex formats. </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;It also supports custom information in each bibentry. </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00281.html">limbo/parsers/def/adapt/DefDataBase.h</a>&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;# Examples {#Bibtex_Examples}</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00357.html">DefParser</a> {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;Use simple.bib as input </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;\include test/bibtex/benchmarks/simple.bib</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;## Jemdoc format for Webpages {#Bibtex_Jemdoc}</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">using</span> std::cout;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">using</span> std::endl;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">using</span> std::cerr;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">using</span> std::string; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">using</span> std::vector;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">using</span> std::pair;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">using</span> std::make_pair;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">using</span> std::ostringstream;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;Run with python </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;python $LIMBO_DIR/include/limbo/bibtex/bibconvert.py --suffix web --highlight &quot;Yibo Lin&quot; --highlight &quot;Lin, Yibo&quot; --input simple.bib</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;Output </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;= Publications</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a00048.html">   35</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00048.html">Driver</a></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="a00048.html#abfe14b962b72dfc3a810b25893fc06e3">Driver</a>(<a class="code" href="a00039.html">DefDataBase</a>&amp; db);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a00048.html#a7357867d374c4d8f2f9295ff11256370">   43</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00048.html#a7357867d374c4d8f2f9295ff11256370">trace_scanning</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a00048.html#a0705b48316d8a073ee195bddfd7ff7a3">   46</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00048.html#a0705b48316d8a073ee195bddfd7ff7a3">trace_parsing</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;=== Journal Papers</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;=== Conference Papers</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;==== 2015</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;- \[C1\] David Z. Pan, Lars Liebmann, Bei Yu, Xiaoqing Xu and *Yibo Lin*, </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  &quot;[http://dl.acm.org/citation.cfm?id=2744769.2747940 Pushing multiple patterning in sub-10nm: are we ready?]&quot;, </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  ACM/IEEE Design Automation Conference (DAC), San Francisco, CA, Jun 7-11, 2015. </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  ([yibolin_homepage/papers/C2_paper.pdf pdf])*(Invited Paper)*</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;User can also specify multiple bibtex files as follows </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;--input file1.bib --input file2.bib</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;## Latex format for Resume {#Bibtex_Latex}</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="a00048.html#a4c464da7bbf75a99cd2ec9143743aee0">   49</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="a00048.html#a4c464da7bbf75a99cd2ec9143743aee0">streamname</a>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00048.html#a7acb31d15c67e7878a426cd9c9f9713f">parse_stream</a>(std::istream&amp; in,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sname = <span class="stringliteral">&quot;stream input&quot;</span>);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00048.html#a2625eb7be7ab09c9e823c87cac07250c">parse_string</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; input,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sname = <span class="stringliteral">&quot;string stream&quot;</span>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00048.html#a40a2b9c506897bf7d47870c10c535dab">parse_file</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; filename);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="a00201.html">Row</a> <span class="keyword">const</span>&amp; row()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="a00048.html#a571836ff6aecc0c4af856cf089d38b8b">m_row</a>;}</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="a00201.html">Row</a>&amp; row() {<span class="keywordflow">return</span> <a class="code" href="a00048.html#a571836ff6aecc0c4af856cf089d38b8b">m_row</a>;}</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    Component <span class="keyword">const</span>&amp; component()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="a00048.html#adeda39cc253c463f26c5ee24a252090a">m_comp</a>;}</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    Component&amp; component() {<span class="keywordflow">return</span> <a class="code" href="a00048.html#adeda39cc253c463f26c5ee24a252090a">m_comp</a>;}</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    Pin <span class="keyword">const</span>&amp; pin()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="a00048.html#a632fc43d108759ffda062d6f5032b274">m_pin</a>;}</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    Pin&amp; pin() {<span class="keywordflow">return</span> <a class="code" href="a00048.html#a632fc43d108759ffda062d6f5032b274">m_pin</a>;}</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    Net <span class="keyword">const</span>&amp; net()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="a00048.html#ab95477e3aeb9ed6820793525125d081b">m_net</a>;}</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    Net&amp; net() {<span class="keywordflow">return</span> <a class="code" href="a00048.html#ab95477e3aeb9ed6820793525125d081b">m_net</a>;}</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="a00048.html#acce2268ff8e9836e6c06fd72a5cbb905">   88</a></span>&#160;    <a class="code" href="a00039.html">DefDataBase</a>&amp; <a class="code" href="a00048.html#acce2268ff8e9836e6c06fd72a5cbb905">m_db</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;Run with python </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;python $LIMBO_DIR/include/limbo/bibtex/bibconvert.py --suffix cv --highlight &quot;Yibo Lin&quot; --highlight &quot;Lin, Yibo&quot; --input simple.bib</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;Output </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;\textbf{Journal Papers}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;\begin{description}[font=\normalfont]</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;%{{{</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;%}}}</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;\end{description}</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;\textbf{Conference Papers}</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;\begin{description}[font=\normalfont]</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;%{{{</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;\item[{[C1]}]{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        David Z. Pan, Lars Liebmann, Bei Yu, Xiaoqing Xu and \textbf{Yibo Lin}, </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    ``\href{http://dl.acm.org/citation.cfm?id=2744769.2747940}{Pushing multiple patterning in sub-10nm: are we ready?}&#39;&#39;, </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    ACM/IEEE Design Automation Conference (DAC), San Francisco, CA, Jun 7-11, 2015.</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    (\textbf{Invited Paper})</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;%}}}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;\end{description}</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;\end{rSection}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="a00048.html#a571836ff6aecc0c4af856cf089d38b8b">   91</a></span>&#160;    <a class="code" href="a00201.html">Row</a> <a class="code" href="a00048.html#a571836ff6aecc0c4af856cf089d38b8b">m_row</a>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="a00048.html#adeda39cc253c463f26c5ee24a252090a">   93</a></span>&#160;    <a class="code" href="a00025.html">Component</a> <a class="code" href="a00048.html#adeda39cc253c463f26c5ee24a252090a">m_comp</a>;</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="a00048.html#a632fc43d108759ffda062d6f5032b274">   95</a></span>&#160;    <a class="code" href="a00174.html">Pin</a> <a class="code" href="a00048.html#a632fc43d108759ffda062d6f5032b274">m_pin</a>;</div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="a00048.html#ab95477e3aeb9ed6820793525125d081b">   97</a></span>&#160;    <a class="code" href="a00149.html">Net</a> <a class="code" href="a00048.html#ab95477e3aeb9ed6820793525125d081b">m_net</a>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;};</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a00357.html#a741aebc4d6cfb7a9f17fca2c028445e4">read</a>(<a class="code" href="a00039.html">DefDataBase</a>&amp; db, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; defFile);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;} <span class="comment">// namespace example</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#endif // EXAMPLE_DRIVER_H</span></div>
-<div class="ttc" id="a00039_html"><div class="ttname"><a href="a00039.html">DefParser::DefDataBase</a></div><div class="ttdoc">Base class for def database. Only pure virtual functions are defined. User needs to inheritate this c...</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00187">DefDataBase.h:187</a></div></div>
-<div class="ttc" id="a00357_html_a741aebc4d6cfb7a9f17fca2c028445e4"><div class="ttname"><a href="a00357.html#a741aebc4d6cfb7a9f17fca2c028445e4">DefParser::read</a></div><div class="ttdeci">bool read(DefDataBase &amp;db, const string &amp;defFile)</div><div class="ttdoc">API for DefParser. Read DEF file and initialize database by calling user-defined callback functions...</div></div>
-<div class="ttc" id="a00201_html"><div class="ttname"><a href="a00201.html">DefParser::Row</a></div><div class="ttdoc">placement row </div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00065">DefDataBase.h:65</a></div></div>
-<div class="ttc" id="a00048_html_a7acb31d15c67e7878a426cd9c9f9713f"><div class="ttname"><a href="a00048.html#a7acb31d15c67e7878a426cd9c9f9713f">DefParser::Driver::parse_stream</a></div><div class="ttdeci">bool parse_stream(std::istream &amp;in, const string &amp;sname=&quot;stream input&quot;)</div></div>
-<div class="ttc" id="a00048_html_a571836ff6aecc0c4af856cf089d38b8b"><div class="ttname"><a href="a00048.html#a571836ff6aecc0c4af856cf089d38b8b">DefParser::Driver::m_row</a></div><div class="ttdeci">Row m_row</div><div class="ttdoc">temporary row </div><div class="ttdef"><b>Definition:</b> <a href="a00282_source.html#l00091">DefDriver.h:91</a></div></div>
-<div class="ttc" id="a00048_html_a632fc43d108759ffda062d6f5032b274"><div class="ttname"><a href="a00048.html#a632fc43d108759ffda062d6f5032b274">DefParser::Driver::m_pin</a></div><div class="ttdeci">Pin m_pin</div><div class="ttdoc">temporary pin </div><div class="ttdef"><b>Definition:</b> <a href="a00282_source.html#l00095">DefDriver.h:95</a></div></div>
-<div class="ttc" id="a00048_html_a2625eb7be7ab09c9e823c87cac07250c"><div class="ttname"><a href="a00048.html#a2625eb7be7ab09c9e823c87cac07250c">DefParser::Driver::parse_string</a></div><div class="ttdeci">bool parse_string(const string &amp;input, const string &amp;sname=&quot;string stream&quot;)</div></div>
-<div class="ttc" id="a00048_html_a40a2b9c506897bf7d47870c10c535dab"><div class="ttname"><a href="a00048.html#a40a2b9c506897bf7d47870c10c535dab">DefParser::Driver::parse_file</a></div><div class="ttdeci">bool parse_file(const string &amp;filename)</div></div>
-<div class="ttc" id="a00048_html_a4c464da7bbf75a99cd2ec9143743aee0"><div class="ttname"><a href="a00048.html#a4c464da7bbf75a99cd2ec9143743aee0">DefParser::Driver::streamname</a></div><div class="ttdeci">string streamname</div><div class="ttdoc">stream name (file or input stream) used for error messages. </div><div class="ttdef"><b>Definition:</b> <a href="a00282_source.html#l00049">DefDriver.h:49</a></div></div>
-<div class="ttc" id="a00281_html"><div class="ttname"><a href="a00281.html">DefDataBase.h</a></div><div class="ttdoc">Database for Def parser. </div></div>
-<div class="ttc" id="a00048_html_adeda39cc253c463f26c5ee24a252090a"><div class="ttname"><a href="a00048.html#adeda39cc253c463f26c5ee24a252090a">DefParser::Driver::m_comp</a></div><div class="ttdeci">Component m_comp</div><div class="ttdoc">temporary component </div><div class="ttdef"><b>Definition:</b> <a href="a00282_source.html#l00093">DefDriver.h:93</a></div></div>
-<div class="ttc" id="a00149_html"><div class="ttname"><a href="a00149.html">DefParser::Net</a></div><div class="ttdoc">net to describe interconnection of netlist </div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00158">DefDataBase.h:158</a></div></div>
-<div class="ttc" id="a00025_html"><div class="ttname"><a href="a00025.html">DefParser::Component</a></div><div class="ttdoc">cell in placement </div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00095">DefDataBase.h:95</a></div></div>
-<div class="ttc" id="a00048_html_acce2268ff8e9836e6c06fd72a5cbb905"><div class="ttname"><a href="a00048.html#acce2268ff8e9836e6c06fd72a5cbb905">DefParser::Driver::m_db</a></div><div class="ttdeci">DefDataBase &amp; m_db</div><div class="ttdef"><b>Definition:</b> <a href="a00282_source.html#l00088">DefDriver.h:88</a></div></div>
-<div class="ttc" id="a00357_html"><div class="ttname"><a href="a00357.html">DefParser</a></div><div class="ttdoc">namespace for DefParser </div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00021">DefDataBase.h:21</a></div></div>
-<div class="ttc" id="a00174_html"><div class="ttname"><a href="a00174.html">DefParser::Pin</a></div><div class="ttdoc">pin of node/cell </div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00121">DefDataBase.h:121</a></div></div>
-<div class="ttc" id="a00048_html_ab95477e3aeb9ed6820793525125d081b"><div class="ttname"><a href="a00048.html#ab95477e3aeb9ed6820793525125d081b">DefParser::Driver::m_net</a></div><div class="ttdeci">Net m_net</div><div class="ttdoc">temporary net </div><div class="ttdef"><b>Definition:</b> <a href="a00282_source.html#l00097">DefDriver.h:97</a></div></div>
-<div class="ttc" id="a00048_html_abfe14b962b72dfc3a810b25893fc06e3"><div class="ttname"><a href="a00048.html#abfe14b962b72dfc3a810b25893fc06e3">DefParser::Driver::Driver</a></div><div class="ttdeci">Driver(DefDataBase &amp;db)</div></div>
-<div class="ttc" id="a00048_html_a7357867d374c4d8f2f9295ff11256370"><div class="ttname"><a href="a00048.html#a7357867d374c4d8f2f9295ff11256370">DefParser::Driver::trace_scanning</a></div><div class="ttdeci">bool trace_scanning</div><div class="ttdoc">enable debug output in the flex scanner </div><div class="ttdef"><b>Definition:</b> <a href="a00282_source.html#l00043">DefDriver.h:43</a></div></div>
-<div class="ttc" id="a00048_html"><div class="ttname"><a href="a00048.html">DefParser::Driver</a></div><div class="ttdef"><b>Definition:</b> <a href="a00282_source.html#l00035">DefDriver.h:35</a></div></div>
-<div class="ttc" id="a00048_html_a0705b48316d8a073ee195bddfd7ff7a3"><div class="ttname"><a href="a00048.html#a0705b48316d8a073ee195bddfd7ff7a3">DefParser::Driver::trace_parsing</a></div><div class="ttdeci">bool trace_parsing</div><div class="ttdoc">enable debug output in the bison parser </div><div class="ttdef"><b>Definition:</b> <a href="a00282_source.html#l00046">DefDriver.h:46</a></div></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;# References {#Bibtex_References}</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;- [limbo/bibtex/bibconvert.py](@ref bibconvert)</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:19 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:10 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

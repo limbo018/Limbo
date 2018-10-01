@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::programoptions::print_helper&lt; bool &gt; Struct Template Reference</title>
+<title>Limbo: MisVisitor&lt; GraphType &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,62 +87,62 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00371.html">programoptions</a></li><li class="navelem"><a class="el" href="a00187.html">print_helper< bool ></a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00557.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00463.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::programoptions::print_helper&lt; bool &gt; Struct Template Reference</div>  </div>
+<div class="title">MisVisitor&lt; GraphType &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>template specialization for boolean type to struct <a class="el" href="a00186.html">limbo::programoptions::print_helper</a>  
- <a href="a00187.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="a00306_source.html">ConversionHelpers.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab1563e0f2cc198ba500352aafb5d252d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00187.html#ab1563e0f2cc198ba500352aafb5d252d">operator()</a> (std::ostream &amp;os, bool const &amp;target) const </td></tr>
-<tr class="memdesc:ab1563e0f2cc198ba500352aafb5d252d"><td class="mdescLeft">&#160;</td><td class="mdescRight">printing target  <a href="#ab1563e0f2cc198ba500352aafb5d252d">More...</a><br /></td></tr>
-<tr class="separator:ab1563e0f2cc198ba500352aafb5d252d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4a0918ddea536f268668ae5a1bed6b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00187.html#ae4a0918ddea536f268668ae5a1bed6b6">MisVisitor</a> (GraphType &amp;g_)</td></tr>
+<tr class="separator:ae4a0918ddea536f268668ae5a1bed6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cebf9cc4dfbca24a295fef22dc7da74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00187.html#a4cebf9cc4dfbca24a295fef22dc7da74">MisVisitor</a> (<a class="el" href="a00187.html">MisVisitor</a> const &amp;rhs)</td></tr>
+<tr class="separator:a4cebf9cc4dfbca24a295fef22dc7da74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb6dd1afef79392ba44b4704fa06d39d"><td class="memTemplParams" colspan="2">template&lt;typename MisType &gt; </td></tr>
+<tr class="memitem:adb6dd1afef79392ba44b4704fa06d39d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00187.html#adb6dd1afef79392ba44b4704fa06d39d">mis</a> (MisType const &amp;is)</td></tr>
+<tr class="separator:adb6dd1afef79392ba44b4704fa06d39d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:adf4881e6f459514408fef48ff9eaaa3b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adf4881e6f459514408fef48ff9eaaa3b"></a>
+GraphType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00187.html#adf4881e6f459514408fef48ff9eaaa3b">g</a></td></tr>
+<tr class="memdesc:adf4881e6f459514408fef48ff9eaaa3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">graph <br /></td></tr>
+<tr class="separator:adf4881e6f459514408fef48ff9eaaa3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;&gt;<br />
-struct limbo::programoptions::print_helper&lt; bool &gt;</h3>
+<div class="textblock"><h3>template&lt;typename GraphType&gt;<br />
+struct MisVisitor&lt; GraphType &gt;</h3>
 
-<p>template specialization for boolean type to struct <a class="el" href="a00186.html">limbo::programoptions::print_helper</a> </p>
+<p>maximum independent set visitor </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">GraphType</td><td>graph type </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="a00306_source.html#l00309">309</a> of file <a class="el" href="a00306_source.html">ConversionHelpers.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ab1563e0f2cc198ba500352aafb5d252d"></a>
+<p>Definition at line <a class="el" href="a00390_source.html#l00038">38</a> of file <a class="el" href="a00390_source.html">test_ChromaticNumber.cpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ae4a0918ddea536f268668ae5a1bed6b6"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="a00186.html">limbo::programoptions::print_helper</a>&lt; bool &gt;::operator() </td>
+          <td class="memname"><a class="el" href="a00187.html">MisVisitor</a>&lt; GraphType &gt;::<a class="el" href="a00187.html">MisVisitor</a> </td>
           <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>os</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">GraphType &amp;&#160;</td>
+          <td class="paramname"><em>g_</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">bool const &amp;&#160;</td>
-          <td class="paramname"><em>target</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -151,27 +151,101 @@ struct limbo::programoptions::print_helper&lt; bool &gt;</h3>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>printing target </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">os</td><td>output stream </td></tr>
-    <tr><td class="paramname">target</td><td>target data </td></tr>
+    <tr><td class="paramname">g_</td><td>graph </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00306_source.html#l00314">314</a> of file <a class="el" href="a00306_source.html">ConversionHelpers.h</a>.</p>
+<p>Definition at line <a class="el" href="a00390_source.html#l00044">44</a> of file <a class="el" href="a00390_source.html">test_ChromaticNumber.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4cebf9cc4dfbca24a295fef22dc7da74"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00187.html">MisVisitor</a>&lt; GraphType &gt;::<a class="el" href="a00187.html">MisVisitor</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00187.html">MisVisitor</a>&lt; GraphType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>copy constructor </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>a <a class="el" href="a00187.html">MisVisitor</a> object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00390_source.html#l00047">47</a> of file <a class="el" href="a00390_source.html">test_ChromaticNumber.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="adb6dd1afef79392ba44b4704fa06d39d"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType &gt; </div>
+<div class="memtemplate">
+template&lt;typename MisType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00187.html">MisVisitor</a>&lt; GraphType &gt;::mis </td>
+          <td>(</td>
+          <td class="paramtype">MisType const &amp;&#160;</td>
+          <td class="paramname"><em>is</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>required callback for <a class="el" href="a00181.html">limbo::algorithms::MaxIndependentSetByMaxClique</a> </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">MisType</td><td>a container type, default is std::deque </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">is</td><td>independent set </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00390_source.html#l00053">53</a> of file <a class="el" href="a00390_source.html">test_ChromaticNumber.cpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/programoptions/<a class="el" href="a00306_source.html">ConversionHelpers.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/test/algorithms/<a class="el" href="a00390_source.html">test_ChromaticNumber.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

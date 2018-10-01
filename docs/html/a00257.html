@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/partition/FMMultiWay.h File Reference</title>
+<title>Limbo: limbo::solvers::SubGradientDescent&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,8 +45,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -67,8 +67,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -87,54 +89,435 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li><li class="navelem"><a class="el" href="dir_79637abb8b132f5967c5d0bdbe97424d.html">partition</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00443.html">solvers</a></li><li class="navelem"><a class="el" href="a00257.html">SubGradientDescent</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="a00666.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">FMMultiWay.h File Reference</div>  </div>
+<div class="title">limbo::solvers::SubGradientDescent&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the Multi-way FM partitioning algorithm.  
-<a href="#details">More...</a></p>
+<p>Update lagrangian multiplier with subgradient descent.  
+ <a href="a00257.html#details">More...</a></p>
 
-<p><a href="a00257_source.html">Go to the source code of this file.</a></p>
+<p><code>#include &lt;<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for limbo::solvers::SubGradientDescent&lt; T &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00257.png" usemap="#limbo::solvers::SubGradientDescent&lt; T &gt;_map" alt=""/>
+  <map id="limbo::solvers::SubGradientDescent&lt; T &gt;_map" name="limbo::solvers::SubGradientDescent&lt; T &gt;_map">
+<area href="a00164.html" title="A base helper function object to update lagrangian multipliers using subgradient descent. All other schemes can be derived from this class. " alt="limbo::solvers::LagMultiplierUpdater&lt; T &gt;" shape="rect" coords="0,0,242,24"/>
+</map>
+ </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html">limbo::algorithms::partition::FMMultiWay&lt; GainCalcType &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00236.html">limbo::algorithms::partition::FMMultiWay&lt; GainCalcType &gt;::VertexMove</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class denotes movement of vertex  <a href="a00236.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:adbeda85cf4aa79444a365c2490fd6829"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adbeda85cf4aa79444a365c2490fd6829"></a>
+typedef <a class="el" href="a00164.html">LagMultiplierUpdater</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#adbeda85cf4aa79444a365c2490fd6829">base_type</a></td></tr>
+<tr class="memdesc:adbeda85cf4aa79444a365c2490fd6829"><td class="mdescLeft">&#160;</td><td class="mdescRight">base type <br /></td></tr>
+<tr class="separator:adbeda85cf4aa79444a365c2490fd6829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4849aa9e0a73033e4343ecf3cf8afeb4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4849aa9e0a73033e4343ecf3cf8afeb4"></a>
+typedef <a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">base_type::value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#a4849aa9e0a73033e4343ecf3cf8afeb4">value_type</a></td></tr>
+<tr class="memdesc:a4849aa9e0a73033e4343ecf3cf8afeb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">value type <br /></td></tr>
+<tr class="separator:a4849aa9e0a73033e4343ecf3cf8afeb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_a00164"><td colspan="2" onclick="javascript:toggleInherit('pub_types_a00164')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="a00164.html">limbo::solvers::LagMultiplierUpdater&lt; T &gt;</a></td></tr>
+<tr class="memitem:a2f7a636e2426b9c8e161335b910a7a97 inherit pub_types_a00164"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f7a636e2426b9c8e161335b910a7a97"></a>
+typedef T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a></td></tr>
+<tr class="memdesc:a2f7a636e2426b9c8e161335b910a7a97 inherit pub_types_a00164"><td class="mdescLeft">&#160;</td><td class="mdescRight">value type <br /></td></tr>
+<tr class="separator:a2f7a636e2426b9c8e161335b910a7a97 inherit pub_types_a00164"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00366"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00366.html">limbo</a></td></tr>
-<tr class="memdesc:a00366"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00367"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00367.html">limbo::algorithms</a></td></tr>
-<tr class="memdesc:a00367"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.algorithms <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00369"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00369.html">limbo::algorithms::partition</a></td></tr>
-<tr class="memdesc:a00369"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Algorithms.Partition <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a9a8e14c2bc14f38f64a12b8841d53737"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#a9a8e14c2bc14f38f64a12b8841d53737">SubGradientDescent</a> (<a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a> alpha=1, <a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a> beta=1)</td></tr>
+<tr class="memdesc:a9a8e14c2bc14f38f64a12b8841d53737"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a9a8e14c2bc14f38f64a12b8841d53737">More...</a><br /></td></tr>
+<tr class="separator:a9a8e14c2bc14f38f64a12b8841d53737"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea3267a18b9a5f4e532e9080fb77f798"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#aea3267a18b9a5f4e532e9080fb77f798">SubGradientDescent</a> (<a class="el" href="a00257.html">SubGradientDescent</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:aea3267a18b9a5f4e532e9080fb77f798"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#aea3267a18b9a5f4e532e9080fb77f798">More...</a><br /></td></tr>
+<tr class="separator:aea3267a18b9a5f4e532e9080fb77f798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa896e5a5fe7aec41cb1092a865bf54ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html">SubGradientDescent</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#aa896e5a5fe7aec41cb1092a865bf54ad">operator=</a> (<a class="el" href="a00257.html">SubGradientDescent</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:aa896e5a5fe7aec41cb1092a865bf54ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment  <a href="#aa896e5a5fe7aec41cb1092a865bf54ad">More...</a><br /></td></tr>
+<tr class="separator:aa896e5a5fe7aec41cb1092a865bf54ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa567d359d861808b352db1535889e9e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa567d359d861808b352db1535889e9e6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#aa567d359d861808b352db1535889e9e6">~SubGradientDescent</a> ()</td></tr>
+<tr class="memdesc:aa567d359d861808b352db1535889e9e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
+<tr class="separator:aa567d359d861808b352db1535889e9e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3329f05e7c8cb16ccd25da3dc9438fd4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#a3329f05e7c8cb16ccd25da3dc9438fd4">operator()</a> (unsigned int iter, <a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a> multiplier, <a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a> slackness)</td></tr>
+<tr class="memdesc:a3329f05e7c8cb16ccd25da3dc9438fd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to update lagrangian multiplier using subgradient descent.  <a href="#a3329f05e7c8cb16ccd25da3dc9438fd4">More...</a><br /></td></tr>
+<tr class="separator:a3329f05e7c8cb16ccd25da3dc9438fd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd3b0cb4b19b1f8fc5eb34ceac61fe78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#acd3b0cb4b19b1f8fc5eb34ceac61fe78">operator()</a> (unsigned int iter, unsigned int n, <a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a> const *vSlackness, <a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a> const *vLagMultiplier, <a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a> *vNewLagMultiplier)</td></tr>
+<tr class="memdesc:acd3b0cb4b19b1f8fc5eb34ceac61fe78"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to update lagrangian multiplier using subgradient descent.  <a href="#acd3b0cb4b19b1f8fc5eb34ceac61fe78">More...</a><br /></td></tr>
+<tr class="separator:acd3b0cb4b19b1f8fc5eb34ceac61fe78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_a00164"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00164')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="a00164.html">limbo::solvers::LagMultiplierUpdater&lt; T &gt;</a></td></tr>
+<tr class="memitem:abbe09a76d52c7f701e9f4ac5ff520f61 inherit pub_methods_a00164"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abbe09a76d52c7f701e9f4ac5ff520f61"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#abbe09a76d52c7f701e9f4ac5ff520f61">LagMultiplierUpdater</a> ()</td></tr>
+<tr class="memdesc:abbe09a76d52c7f701e9f4ac5ff520f61 inherit pub_methods_a00164"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
+<tr class="separator:abbe09a76d52c7f701e9f4ac5ff520f61 inherit pub_methods_a00164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e01891a5a3b95ad54532a541173faf5 inherit pub_methods_a00164"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6e01891a5a3b95ad54532a541173faf5"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#a6e01891a5a3b95ad54532a541173faf5">~LagMultiplierUpdater</a> ()</td></tr>
+<tr class="memdesc:a6e01891a5a3b95ad54532a541173faf5 inherit pub_methods_a00164"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
+<tr class="separator:a6e01891a5a3b95ad54532a541173faf5 inherit pub_methods_a00164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a813ded04e8700dd5215e53d88c0e910f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#a813ded04e8700dd5215e53d88c0e910f">copy</a> (<a class="el" href="a00257.html">SubGradientDescent</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:a813ded04e8700dd5215e53d88c0e910f"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy object  <a href="#a813ded04e8700dd5215e53d88c0e910f">More...</a><br /></td></tr>
+<tr class="separator:a813ded04e8700dd5215e53d88c0e910f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa89a4cf11ae4749e4801c30a546d675a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#aa89a4cf11ae4749e4801c30a546d675a">computeScalingFactor</a> (unsigned int iter)</td></tr>
+<tr class="memdesc:aa89a4cf11ae4749e4801c30a546d675a"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute scaling factor  <a href="#aa89a4cf11ae4749e4801c30a546d675a">More...</a><br /></td></tr>
+<tr class="separator:aa89a4cf11ae4749e4801c30a546d675a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a3e65e7b48a359ecaae4a537684f79b8e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e65e7b48a359ecaae4a537684f79b8e"></a>
+<a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#a3e65e7b48a359ecaae4a537684f79b8e">m_alpha</a></td></tr>
+<tr class="memdesc:a3e65e7b48a359ecaae4a537684f79b8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">power <br /></td></tr>
+<tr class="separator:a3e65e7b48a359ecaae4a537684f79b8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0d2a7c693c16f3ac74fb681ea769fc5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab0d2a7c693c16f3ac74fb681ea769fc5"></a>
+<a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#ab0d2a7c693c16f3ac74fb681ea769fc5">m_beta</a></td></tr>
+<tr class="memdesc:ab0d2a7c693c16f3ac74fb681ea769fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">constant <br /></td></tr>
+<tr class="separator:ab0d2a7c693c16f3ac74fb681ea769fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe0ac8cc25cbb7d2b309c38e7ab5dc3f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe0ac8cc25cbb7d2b309c38e7ab5dc3f"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#abe0ac8cc25cbb7d2b309c38e7ab5dc3f">m_iter</a></td></tr>
+<tr class="memdesc:abe0ac8cc25cbb7d2b309c38e7ab5dc3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">current iteration <br /></td></tr>
+<tr class="separator:abe0ac8cc25cbb7d2b309c38e7ab5dc3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a24b59bfe003cdea28cacc491906fa9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6a24b59bfe003cdea28cacc491906fa9"></a>
+<a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00257.html#a6a24b59bfe003cdea28cacc491906fa9">m_scalingFactor</a></td></tr>
+<tr class="memdesc:a6a24b59bfe003cdea28cacc491906fa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">scaling factor \( t_k = \beta \cdot k^{-\alpha} \) <br /></td></tr>
+<tr class="separator:a6a24b59bfe003cdea28cacc491906fa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the Multi-way FM partitioning algorithm. </p>
-<p>Refer to Fiduccia and Mattheyses, "A Linear-time Heuristics for Improving Network Partitions", DAC 1982</p>
-<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Sep 2015 </dd></dl>
+<div class="textblock"><h3>template&lt;typename T&gt;<br />
+class limbo::solvers::SubGradientDescent&lt; T &gt;</h3>
 
-<p>Definition in file <a class="el" href="a00257_source.html">FMMultiWay.h</a>.</p>
-</div></div><!-- contents -->
+<p>Update lagrangian multiplier with subgradient descent. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>coefficient value type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00385_source.html#l00025">25</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a9a8e14c2bc14f38f64a12b8841d53737"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00257.html">limbo::solvers::SubGradientDescent</a>&lt; T &gt;::<a class="el" href="a00257.html">SubGradientDescent</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a>&#160;</td>
+          <td class="paramname"><em>alpha</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a>&#160;</td>
+          <td class="paramname"><em>beta</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">alpha</td><td>the power term for scaling factor \( t_k = \beta \cdot k^{-\alpha} \) </td></tr>
+    <tr><td class="paramname">beta</td><td>the constant </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00385_source.html#l00983">983</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aea3267a18b9a5f4e532e9080fb77f798"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00257.html">limbo::solvers::SubGradientDescent</a>&lt; T &gt;::<a class="el" href="a00257.html">SubGradientDescent</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00257.html">SubGradientDescent</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>copy constructor </p>
+<p>right hand side </p>
+
+<p>Definition at line <a class="el" href="a00385_source.html#l00993">993</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aa89a4cf11ae4749e4801c30a546d675a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00257.html">limbo::solvers::SubGradientDescent</a>&lt; T &gt;::computeScalingFactor </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>iter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>compute scaling factor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iter</td><td>current iteration </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00385_source.html#l01058">1058</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a813ded04e8700dd5215e53d88c0e910f"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00257.html">limbo::solvers::SubGradientDescent</a>&lt; T &gt;::copy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00257.html">SubGradientDescent</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>copy object </p>
+<p>right hand side </p>
+
+<p>Definition at line <a class="el" href="a00385_source.html#l01049">1049</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3329f05e7c8cb16ccd25da3dc9438fd4"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a> <a class="el" href="a00257.html">limbo::solvers::SubGradientDescent</a>&lt; T &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>iter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a>&#160;</td>
+          <td class="paramname"><em>multiplier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a>&#160;</td>
+          <td class="paramname"><em>slackness</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>API to update lagrangian multiplier using subgradient descent. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iter</td><td>current iteration </td></tr>
+    <tr><td class="paramname">multiplier</td><td>current multiplier value </td></tr>
+    <tr><td class="paramname">slackness</td><td>current slackness value assuming the constraint is in \( Ax \le b \) and compute \( b-Ax \) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>updated multiplier value </dd></dl>
+
+<p>Implements <a class="el" href="a00164.html#a32a2752701ed55870805f3bb50cf8ac7">limbo::solvers::LagMultiplierUpdater&lt; T &gt;</a>.</p>
+
+<p>Definition at line <a class="el" href="a00385_source.html#l01018">1018</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acd3b0cb4b19b1f8fc5eb34ceac61fe78"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00257.html">limbo::solvers::SubGradientDescent</a>&lt; T &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>iter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a> const *&#160;</td>
+          <td class="paramname"><em>vSlackness</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a> const *&#160;</td>
+          <td class="paramname"><em>vLagMultiplier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00164.html#a2f7a636e2426b9c8e161335b910a7a97">value_type</a> *&#160;</td>
+          <td class="paramname"><em>vNewLagMultiplier</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>API to update lagrangian multiplier using subgradient descent. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iter</td><td>current iteration </td></tr>
+    <tr><td class="paramname">n</td><td>dimension </td></tr>
+    <tr><td class="paramname">vSlackness</td><td>array of slackness </td></tr>
+    <tr><td class="paramname">vLagMultiplier</td><td>array of lagrangian multipliers </td></tr>
+    <tr><td class="paramname">vNewLagMultiplier</td><td>array of new lagrangian multipliers </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="a00164.html#a9184720cb0bac4ece32a346adfc0a351">limbo::solvers::LagMultiplierUpdater&lt; T &gt;</a>.</p>
+
+<p>Definition at line <a class="el" href="a00385_source.html#l01031">1031</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa896e5a5fe7aec41cb1092a865bf54ad"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00257.html">SubGradientDescent</a>&amp; <a class="el" href="a00257.html">limbo::solvers::SubGradientDescent</a>&lt; T &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00257.html">SubGradientDescent</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>assignment </p>
+<p>right hand side </p>
+
+<p>Definition at line <a class="el" href="a00385_source.html#l00999">999</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:52:47 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

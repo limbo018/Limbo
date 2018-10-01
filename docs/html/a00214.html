@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: EbeamParser::StringArray Class Reference</title>
+<title>Limbo: GdfParser::Path Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,51 +89,64 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00358.html">EbeamParser</a></li><li class="navelem"><a class="el" href="a00214.html">StringArray</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00430.html">GdfParser</a></li><li class="navelem"><a class="el" href="a00214.html">Path</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00428.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00510.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">EbeamParser::StringArray Class Reference</div>  </div>
+<div class="title">GdfParser::Path Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>bison does not support vector very well, so here create a dummy class for string array.  
+<p>routing path  
  <a href="a00214.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00283_source.html">EbeamDataBase.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00356_source.html">GdfDataBase.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for EbeamParser::StringArray:</div>
+Inheritance diagram for GdfParser::Path:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="a00214.png" usemap="#EbeamParser::StringArray_map" alt=""/>
-  <map id="EbeamParser::StringArray_map" name="EbeamParser::StringArray_map">
+  <img src="a00214.png" usemap="#GdfParser::Path_map" alt=""/>
+  <map id="GdfParser::Path_map" name="GdfParser::Path_map">
+<area href="a00159.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures. " alt="GdfParser::Item" shape="rect" coords="0,0,101,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a5e21290ecdb45577565f96084f7b4e7b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e21290ecdb45577565f96084f7b4e7b"></a>
-typedef vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>base_type</b></td></tr>
-<tr class="separator:a5e21290ecdb45577565f96084f7b4e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3de0c7b38d013dbf22719f00c5b1a0f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00214.html#a3de0c7b38d013dbf22719f00c5b1a0f9">StringArray</a> (const allocator_type &amp;alloc=allocator_type())</td></tr>
-<tr class="separator:a3de0c7b38d013dbf22719f00c5b1a0f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0c250b778382cdf13ab0b5f197a3cf3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00214.html#af0c250b778382cdf13ab0b5f197a3cf3">StringArray</a> (size_type n, const value_type &amp;val, const allocator_type &amp;alloc=allocator_type())</td></tr>
-<tr class="separator:af0c250b778382cdf13ab0b5f197a3cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eb952f49660d5496689a83eea70a369"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4eb952f49660d5496689a83eea70a369"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00214.html#a4eb952f49660d5496689a83eea70a369">Path</a> ()</td></tr>
+<tr class="memdesc:a4eb952f49660d5496689a83eea70a369"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
+<tr class="separator:a4eb952f49660d5496689a83eea70a369"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22dca41ccc45561349c54cfb9caf64b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22dca41ccc45561349c54cfb9caf64b2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00214.html#a22dca41ccc45561349c54cfb9caf64b2">reset</a> ()</td></tr>
+<tr class="memdesc:a22dca41ccc45561349c54cfb9caf64b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br /></td></tr>
+<tr class="separator:a22dca41ccc45561349c54cfb9caf64b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d823e487f2e1ac503c2782e4c605534"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00214.html#a2d823e487f2e1ac503c2782e4c605534">print</a> (ostream &amp;ss) const </td></tr>
+<tr class="memdesc:a2d823e487f2e1ac503c2782e4c605534"><td class="mdescLeft">&#160;</td><td class="mdescRight">print data members  <a href="#a2d823e487f2e1ac503c2782e4c605534">More...</a><br /></td></tr>
+<tr class="separator:a2d823e487f2e1ac503c2782e4c605534"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:aa07ee40d9061a4e99692af7c2831b026"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa07ee40d9061a4e99692af7c2831b026"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00214.html#aa07ee40d9061a4e99692af7c2831b026">name</a></td></tr>
+<tr class="memdesc:aa07ee40d9061a4e99692af7c2831b026"><td class="mdescLeft">&#160;</td><td class="mdescRight">path name <br /></td></tr>
+<tr class="separator:aa07ee40d9061a4e99692af7c2831b026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0215d03f68347e50bde68e82bd04b16"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0215d03f68347e50bde68e82bd04b16"></a>
+std::vector&lt; <a class="el" href="a00215.html">PathObj</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00214.html#ad0215d03f68347e50bde68e82bd04b16">vPathObj</a></td></tr>
+<tr class="memdesc:ad0215d03f68347e50bde68e82bd04b16"><td class="mdescLeft">&#160;</td><td class="mdescRight">objects on the path <br /></td></tr>
+<tr class="separator:ad0215d03f68347e50bde68e82bd04b16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>bison does not support vector very well, so here create a dummy class for string array. </p>
+<div class="textblock"><p>routing path </p>
 
-<p>Definition at line <a class="el" href="a00283_source.html#l00062">62</a> of file <a class="el" href="a00283_source.html">EbeamDataBase.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a3de0c7b38d013dbf22719f00c5b1a0f9"></a>
+<p>Definition at line <a class="el" href="a00356_source.html#l00284">284</a> of file <a class="el" href="a00356_source.html">GdfDataBase.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a2d823e487f2e1ac503c2782e4c605534"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -141,87 +154,41 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">EbeamParser::StringArray::StringArray </td>
+          <td class="memname">virtual void GdfParser::Path::print </td>
           <td>(</td>
-          <td class="paramtype">const allocator_type &amp;&#160;</td>
-          <td class="paramname"><em>alloc</em> = <code>allocator_type()</code></td><td>)</td>
-          <td></td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>ss</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>print data members </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">alloc</td><td>memory allocator </td></tr>
+    <tr><td class="paramname">ss</td><td>output stream </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00283_source.html#l00074">74</a> of file <a class="el" href="a00283_source.html">EbeamDataBase.h</a>.</p>
+<p>Reimplemented from <a class="el" href="a00159.html#aeb2483225aca5843a2285910c089bcb4">GdfParser::Item</a>.</p>
+
+<p>Definition at line <a class="el" href="a00356_source.html#l00302">302</a> of file <a class="el" href="a00356_source.html">GdfDataBase.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af0c250b778382cdf13ab0b5f197a3cf3"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">EbeamParser::StringArray::StringArray </td>
-          <td>(</td>
-          <td class="paramtype">size_type&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const value_type &amp;&#160;</td>
-          <td class="paramname"><em>val</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const allocator_type &amp;&#160;</td>
-          <td class="paramname"><em>alloc</em> = <code>allocator_type()</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n</td><td>number of values </td></tr>
-    <tr><td class="paramname">val</td><td>data value </td></tr>
-    <tr><td class="paramname">alloc</td><td>memory allocator </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00283_source.html#l00080">80</a> of file <a class="el" href="a00283_source.html">EbeamDataBase.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/ebeam/bison/<a class="el" href="a00283_source.html">EbeamDataBase.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdf/bison/<a class="el" href="a00356_source.html">GdfDataBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

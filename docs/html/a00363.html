@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: LefParser Namespace Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/GdsReader.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -44,9 +44,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
-      <li class="current"><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="namespaces.html"><span>Namespace&#160;List</span></a></li>
-      <li><a href="namespacemembers.html"><span>Namespace&#160;Members</span></a></li>
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -85,76 +85,69 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_91c0dd7fad8f72975de99135227c035c.html">gdsii</a></li><li class="navelem"><a class="el" href="dir_8d18058ccbba2fc95fd5931717233785.html">stream</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">LefParser Namespace Reference</div>  </div>
+<div class="title">GdsReader.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>namespace for <a class="el" href="a00363.html" title="namespace for LefParser ">LefParser</a>  
+<p>read GDSII file  
 <a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;istream&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00364_source.html">limbo/parsers/gdsii/stream/GdsRecords.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00388_source.html">limbo/string/String.h</a>&gt;</code><br />
+</div>
+<p><a href="a00363_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00043.html">Driver</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00122.html">GdsParser::GdsDataBaseKernel</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kernel callbacks for <a class="el" href="a00131.html" title="read GDSII ">GdsReader</a>. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks.  <a href="a00122.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00125.html">LefDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for lef database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00125.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html">GdsParser::GdsDataBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><h1><a class="el" href="a00121.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks ">GdsDataBase</a> redirects callbacks of <a class="el" href="a00122.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. ">GdsDataBaseKernel</a> to ascii callbacks </h1>
+ <a href="a00121.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00131.html">GdsParser::GdsReader</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">read GDSII  <a href="a00131.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00431"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00431.html">GdsParser</a></td></tr>
+<tr class="memdesc:a00431"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.GdsParser <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:acfb3427509802ca74739d10ca47b2431"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00363.html#acfb3427509802ca74739d10ca47b2431">read</a> (<a class="el" href="a00125.html">LefDataBase</a> &amp;db, const string &amp;lefFile)</td></tr>
-<tr class="memdesc:acfb3427509802ca74739d10ca47b2431"><td class="mdescLeft">&#160;</td><td class="mdescRight">API for <a class="el" href="a00363.html" title="namespace for LefParser ">LefParser</a>. Read LEF file and initialize database by calling user-defined callback functions.  <a href="#acfb3427509802ca74739d10ca47b2431">More...</a><br /></td></tr>
-<tr class="separator:acfb3427509802ca74739d10ca47b2431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fe9cb2c37eee75fb7d562f367b601c8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00431.html#a1fe9cb2c37eee75fb7d562f367b601c8">GdsParser::read</a> (GdsDataBaseKernel &amp;db, std::istream &amp;fp)</td></tr>
+<tr class="memdesc:a1fe9cb2c37eee75fb7d562f367b601c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">read from stream  <a href="#a1fe9cb2c37eee75fb7d562f367b601c8">More...</a><br /></td></tr>
+<tr class="separator:a1fe9cb2c37eee75fb7d562f367b601c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2af2b04527c8b24ee3eebc3d7e27d503"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00431.html#a2af2b04527c8b24ee3eebc3d7e27d503">GdsParser::read</a> (GdsDataBaseKernel &amp;db, string const &amp;filename)</td></tr>
+<tr class="memdesc:a2af2b04527c8b24ee3eebc3d7e27d503"><td class="mdescLeft">&#160;</td><td class="mdescRight">read from file  <a href="#a2af2b04527c8b24ee3eebc3d7e27d503">More...</a><br /></td></tr>
+<tr class="separator:a2af2b04527c8b24ee3eebc3d7e27d503"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>namespace for <a class="el" href="a00363.html" title="namespace for LefParser ">LefParser</a> </p>
-<p>The example namespace is used to encapsulate the three parser classes example::Parser, example::Scanner and example::Driver </p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="acfb3427509802ca74739d10ca47b2431"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool LefParser::read </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00124.html">LefDataBase</a> &amp;&#160;</td>
-          <td class="paramname"><em>db</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>lefFile</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<div class="textblock"><p>read GDSII file </p>
+<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>API for <a class="el" href="a00363.html" title="namespace for LefParser ">LefParser</a>. Read LEF file and initialize database by calling user-defined callback functions. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">db</td><td>database which is derived from <a class="el" href="a00125.html">LefParser::LefDataBase</a> </td></tr>
-    <tr><td class="paramname">lefFile</td><td>LEF file </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>Definition in file <a class="el" href="a00363_source.html">GdsReader.h</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

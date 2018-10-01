@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: VerilogParser::VerilogDataBase Class Reference</title>
+<title>Limbo: limbo::programoptions::ProgramOptionsException Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,60 +89,69 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00375.html">VerilogParser</a></li><li class="navelem"><a class="el" href="a00234.html">VerilogDataBase</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00442.html">programoptions</a></li><li class="navelem"><a class="el" href="a00234.html">ProgramOptionsException</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="a00612.html">List of all members</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="a00632.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">VerilogParser::VerilogDataBase Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">limbo::programoptions::ProgramOptionsException Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Base class for verilog database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  
+<p>an exception class for <a class="el" href="a00233.html">limbo::programoptions::ProgramOptions</a>  
  <a href="a00234.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00301_source.html">VerilogDataBase.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00378_source.html">ProgramOptions.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for VerilogParser::VerilogDataBase:</div>
+Inheritance diagram for limbo::programoptions::ProgramOptionsException:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="a00234.png" usemap="#VerilogParser::VerilogDataBase_map" alt=""/>
-  <map id="VerilogParser::VerilogDataBase_map" name="VerilogParser::VerilogDataBase_map">
-<area href="a00233.html" title="Custom class that inheritates VerilogParser::VerilogDataBase with all the required callbacks defined..." alt="VerilogDataBase" shape="rect" coords="0,56,192,80"/>
+  <img src="a00234.png" usemap="#limbo::programoptions::ProgramOptionsException_map" alt=""/>
+  <map id="limbo::programoptions::ProgramOptionsException_map" name="limbo::programoptions::ProgramOptionsException_map">
 </map>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a1e59af4cd8f7c716df340cc5afbb2644"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e59af4cd8f7c716df340cc5afbb2644"></a>
+typedef std::exception&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00234.html#a1e59af4cd8f7c716df340cc5afbb2644">base_type</a></td></tr>
+<tr class="memdesc:a1e59af4cd8f7c716df340cc5afbb2644"><td class="mdescLeft">&#160;</td><td class="mdescRight">base type <br /></td></tr>
+<tr class="separator:a1e59af4cd8f7c716df340cc5afbb2644"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a85d1dff205210c7a46ff1d8341599adf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00234.html#a85d1dff205210c7a46ff1d8341599adf">verilog_instance_cbk</a> (std::string const &amp;macro_name, std::string const &amp;inst_name, std::vector&lt; <a class="el" href="a00150.html">NetPin</a> &gt; const &amp;vNetPin)=0</td></tr>
-<tr class="memdesc:a85d1dff205210c7a46ff1d8341599adf"><td class="mdescLeft">&#160;</td><td class="mdescRight">read an instance.  <a href="#a85d1dff205210c7a46ff1d8341599adf">More...</a><br /></td></tr>
-<tr class="separator:a85d1dff205210c7a46ff1d8341599adf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac47e42ce2ae3ffc298cd30cfffae6ab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00234.html#aac47e42ce2ae3ffc298cd30cfffae6ab">verilog_net_declare_cbk</a> (std::string const &amp;net_name, <a class="el" href="a00193.html">Range</a> const &amp;range)=0</td></tr>
-<tr class="memdesc:aac47e42ce2ae3ffc298cd30cfffae6ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">read an net declaration  <a href="#aac47e42ce2ae3ffc298cd30cfffae6ab">More...</a><br /></td></tr>
-<tr class="separator:aac47e42ce2ae3ffc298cd30cfffae6ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe2deb86c9faafef608c6bb1b649b8da"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00234.html#abe2deb86c9faafef608c6bb1b649b8da">verilog_pin_declare_cbk</a> (std::string const &amp;pin_name, unsigned type, <a class="el" href="a00193.html">Range</a> const &amp;range)=0</td></tr>
-<tr class="memdesc:abe2deb86c9faafef608c6bb1b649b8da"><td class="mdescLeft">&#160;</td><td class="mdescRight">read an pin declaration  <a href="#abe2deb86c9faafef608c6bb1b649b8da">More...</a><br /></td></tr>
-<tr class="separator:abe2deb86c9faafef608c6bb1b649b8da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a747bab49342db2a3aba49e659a0f75e0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00234.html#a747bab49342db2a3aba49e659a0f75e0">verilog_assignment_cbk</a> (std::string const &amp;target_name, <a class="el" href="a00193.html">Range</a> const &amp;target_range, std::string const &amp;source_name, <a class="el" href="a00193.html">Range</a> const &amp;source_range)</td></tr>
-<tr class="memdesc:a747bab49342db2a3aba49e659a0f75e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">read an assignment  <a href="#a747bab49342db2a3aba49e659a0f75e0">More...</a><br /></td></tr>
-<tr class="separator:a747bab49342db2a3aba49e659a0f75e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4e501527f5de95e641cef6eb389082f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00234.html#aa4e501527f5de95e641cef6eb389082f">ProgramOptionsException</a> (std::string const &amp;msg)</td></tr>
+<tr class="memdesc:aa4e501527f5de95e641cef6eb389082f"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#aa4e501527f5de95e641cef6eb389082f">More...</a><br /></td></tr>
+<tr class="separator:aa4e501527f5de95e641cef6eb389082f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd60a8111242ac20d994afaccf426f33"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00234.html#acd60a8111242ac20d994afaccf426f33">ProgramOptionsException</a> (<a class="el" href="a00234.html">ProgramOptionsException</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:acd60a8111242ac20d994afaccf426f33"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#acd60a8111242ac20d994afaccf426f33">More...</a><br /></td></tr>
+<tr class="separator:acd60a8111242ac20d994afaccf426f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3875031af14abe15b5cd564badbb6080"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3875031af14abe15b5cd564badbb6080"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00234.html#a3875031af14abe15b5cd564badbb6080">~ProgramOptionsException</a> ()  throw ()</td></tr>
+<tr class="memdesc:a3875031af14abe15b5cd564badbb6080"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
+<tr class="separator:a3875031af14abe15b5cd564badbb6080"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e81df573a12e5e65a01e423ac52ff50"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00234.html#a8e81df573a12e5e65a01e423ac52ff50">what</a> () const   throw ()</td></tr>
+<tr class="memdesc:a8e81df573a12e5e65a01e423ac52ff50"><td class="mdescLeft">&#160;</td><td class="mdescRight">access message  <a href="#a8e81df573a12e5e65a01e423ac52ff50">More...</a><br /></td></tr>
+<tr class="separator:a8e81df573a12e5e65a01e423ac52ff50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:aa856e3202cfa0c439136aaf1b3757ff8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00234.html#aa856e3202cfa0c439136aaf1b3757ff8">verilog_user_cbk_reminder</a> (const char *str) const </td></tr>
-<tr class="memdesc:aa856e3202cfa0c439136aaf1b3757ff8"><td class="mdescLeft">&#160;</td><td class="mdescRight">remind users to define some optional callback functions at runtime  <a href="#aa856e3202cfa0c439136aaf1b3757ff8">More...</a><br /></td></tr>
-<tr class="separator:aa856e3202cfa0c439136aaf1b3757ff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a5e8be3a6f1a1f3f490612bd319702a6b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e8be3a6f1a1f3f490612bd319702a6b"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00234.html#a5e8be3a6f1a1f3f490612bd319702a6b">m_msg</a></td></tr>
+<tr class="memdesc:a5e8be3a6f1a1f3f490612bd319702a6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">message of the exception <br /></td></tr>
+<tr class="separator:a5e8be3a6f1a1f3f490612bd319702a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Base class for verilog database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined. </p>
+<div class="textblock"><p>an exception class for <a class="el" href="a00233.html">limbo::programoptions::ProgramOptions</a> </p>
 
-<p>Definition at line <a class="el" href="a00301_source.html#l00136">136</a> of file <a class="el" href="a00301_source.html">VerilogDataBase.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a747bab49342db2a3aba49e659a0f75e0"></a>
+<p>Definition at line <a class="el" href="a00378_source.html#l00035">35</a> of file <a class="el" href="a00378_source.html">ProgramOptions.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="aa4e501527f5de95e641cef6eb389082f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -150,59 +159,33 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void VerilogParser::VerilogDataBase::verilog_assignment_cbk </td>
+          <td class="memname">limbo::programoptions::ProgramOptionsException::ProgramOptionsException </td>
           <td>(</td>
           <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>target_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00193.html">Range</a> const &amp;&#160;</td>
-          <td class="paramname"><em>target_range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>source_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00193.html">Range</a> const &amp;&#160;</td>
-          <td class="paramname"><em>source_range</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>read an assignment </p>
-<p>assign exu_mmu_early_va_e[0] = exu_mmu_early_va_e[0];</p>
+<p>constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">target_name</td><td>name of left hand side </td></tr>
-    <tr><td class="paramname">target_range</td><td>range of left hand side, negative infinity if either low or high value of the range is not defined </td></tr>
-    <tr><td class="paramname">source_name</td><td>name of right hand side </td></tr>
-    <tr><td class="paramname">source_range</td><td>range of right hand side, negative infinity if either low or high value of the range is not defined </td></tr>
+    <tr><td class="paramname">msg</td><td>message </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="a00233.html#ab45a705d25cad3d68714d5da2823fd3d">VerilogDataBase</a>.</p>
+<p>Definition at line <a class="el" href="a00378_source.html#l00044">44</a> of file <a class="el" href="a00378_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a85d1dff205210c7a46ff1d8341599adf"></a>
+<a class="anchor" id="acd60a8111242ac20d994afaccf426f33"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -210,52 +193,34 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void VerilogParser::VerilogDataBase::verilog_instance_cbk </td>
+          <td class="memname">limbo::programoptions::ProgramOptionsException::ProgramOptionsException </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>macro_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="a00234.html">ProgramOptionsException</a> const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>inst_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="a00150.html">NetPin</a> &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vNetPin</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>read an instance. </p>
-<p>NOR2_X1 u2 ( .a(n1), .b(n3), .o(n2) );</p>
+<p>copy constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">macro_name</td><td>standard cell type or module name </td></tr>
-    <tr><td class="paramname">inst_name</td><td>instance name </td></tr>
-    <tr><td class="paramname">vNetPin</td><td>array of pairs of net and pin </td></tr>
+    <tr><td class="paramname">rhs</td><td>the other object to copy </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="a00233.html#a94a49ea6209dfba66cfa23c72489dacb">VerilogDataBase</a>.</p>
+<p>Definition at line <a class="el" href="a00378_source.html#l00049">49</a> of file <a class="el" href="a00378_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aac47e42ce2ae3ffc298cd30cfffae6ab"></a>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a8e81df573a12e5e65a01e423ac52ff50"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -263,136 +228,39 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void VerilogParser::VerilogDataBase::verilog_net_declare_cbk </td>
+          <td class="memname">virtual const char* limbo::programoptions::ProgramOptionsException::what </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>net_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00193.html">Range</a> const &amp;&#160;</td>
-          <td class="paramname"><em>range</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>read an net declaration </p>
-<p>wire aaa[1];</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">net_name</td><td>net name </td></tr>
-    <tr><td class="paramname">range</td><td>net range, negative infinity if either low or high value of the range is not defined </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="a00233.html#aee51b8c90fd42b7344449af1fcea55da">VerilogDataBase</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="abe2deb86c9faafef608c6bb1b649b8da"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void VerilogParser::VerilogDataBase::verilog_pin_declare_cbk </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>pin_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00193.html">Range</a> const &amp;&#160;</td>
-          <td class="paramname"><em>range</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>read an pin declaration </p>
-<p>input inp2;</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pin_name</td><td>pin name </td></tr>
-    <tr><td class="paramname">type</td><td>type of pin, refer to <a class="el" href="a00375.html#a98b5f8be4ea6190a3cfe6a36d979b16f">VerilogParser::PinType</a> </td></tr>
-    <tr><td class="paramname">range</td><td>pin range, negative infinity if either low or high value of the range is not defined </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="a00233.html#ab8a2661bf6fa167a08110171abc0a000">VerilogDataBase</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa856e3202cfa0c439136aaf1b3757ff8"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VerilogParser::VerilogDataBase::verilog_user_cbk_reminder </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
+        <tr>
+          <td align="right">throw </td><td>(</td><td colspan="2"></td>
+        </tr>
+        <tr>
+          <td align="right"></td><td>)</td><td></td><td></td>
+        </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>remind users to define some optional callback functions at runtime </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">str</td><td>message including the information to the callback function in the reminder </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>access message </p>
+<dl class="section return"><dt>Returns</dt><dd>message of the exception </dd></dl>
+
+<p>Definition at line <a class="el" href="a00378_source.html#l00058">58</a> of file <a class="el" href="a00378_source.html">ProgramOptions.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/verilog/bison/<a class="el" href="a00301_source.html">VerilogDataBase.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/programoptions/<a class="el" href="a00378_source.html">ProgramOptions.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:22 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

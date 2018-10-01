@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdsParser Namespace Reference</title>
+<title>Limbo: GdsParser::GdsDB::ExtractCellObjectActionDetails Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -85,377 +85,75 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="a00431.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00432.html">GdsDB</a></li><li class="navelem"><a class="el" href="a00360.html">ExtractCellObjectActionDetails</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser Namespace Reference</div>  </div>
+<div class="title">GdsParser::GdsDB::ExtractCellObjectActionDetails Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>namespace for Limbo.GdsParser  
+<p>Detailed action functions for extract objects of a cell.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00361"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00361.html">GdsDB</a></td></tr>
-<tr class="memdesc:a00361"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.GdsParser.GdsDB <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00071.html">gds_celltype</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">cell type  <a href="a00071.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00072.html">gds_itemtype</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII item type.  <a href="a00072.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00073.html">GdsBoundary</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">internal structure to store gds information  <a href="a00073.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html">GdsCell</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII cell.  <a href="a00074.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00078.html">GdsData</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">data type  <a href="a00078.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00079.html">GdsDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><h1><a class="el" href="a00079.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks ">GdsDataBase</a> redirects callbacks of <a class="el" href="a00080.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. ">GdsDataBaseKernel</a> to ascii callbacks </h1>
- <a href="a00079.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html">GdsDataBaseKernel</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kernel callbacks for <a class="el" href="a00089.html" title="read GDSII ">GdsReader</a>. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks.  <a href="a00080.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00082.html">GdsDriver</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">High-level wrapper class for <a class="el" href="a00089.html" title="read GDSII ">GdsReader</a>. Everything is saved in an internal data structure and users only need to provide simple callbacks.  <a href="a00082.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00083.html">GdsDriverDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">database for the driver  <a href="a00083.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00084.html">GdsLib</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Top GDSII library.  <a href="a00084.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html">GdsReader</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">read GDSII  <a href="a00089.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00091.html">GdsRecords</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII records. The records are numbered with consecutive integers, so we can use simple array to save all the data.  <a href="a00091.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00094.html">GdsSref</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII SREF.  <a href="a00094.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html">GdsText</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII TEXT.  <a href="a00095.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00097.html">GdsWriter</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a75e159aa62a455aff7e6039fa7c3801c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a75e159aa62a455aff7e6039fa7c3801c"></a>
-typedef int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00360.html#a75e159aa62a455aff7e6039fa7c3801c">BOOL</a></td></tr>
-<tr class="memdesc:a75e159aa62a455aff7e6039fa7c3801c"><td class="mdescLeft">&#160;</td><td class="mdescRight">use integer as bool <br /></td></tr>
-<tr class="separator:a75e159aa62a455aff7e6039fa7c3801c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecd8d5b8951c69ff3cf543e033f304ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aecd8d5b8951c69ff3cf543e033f304ff"></a>
-typedef unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00360.html#aecd8d5b8951c69ff3cf543e033f304ff">BYTE</a></td></tr>
-<tr class="memdesc:aecd8d5b8951c69ff3cf543e033f304ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">use unsigned char as byte <br /></td></tr>
-<tr class="separator:aecd8d5b8951c69ff3cf543e033f304ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a1e0c59cf7a8ce5e993805916b5aade6a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e0c59cf7a8ce5e993805916b5aade6a"></a>
-typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>int32_t</b></td></tr>
-<tr class="separator:a1e0c59cf7a8ce5e993805916b5aade6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a396fe6ae3d6b36ebb76aa39cab6daf80"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a396fe6ae3d6b36ebb76aa39cab6daf80"></a>
-typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>uint32_t</b></td></tr>
-<tr class="separator:a396fe6ae3d6b36ebb76aa39cab6daf80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9eef18021b9c81cdf78f3c9efcd4f366"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00360.html#a9eef18021b9c81cdf78f3c9efcd4f366">read</a> (<a class="el" href="a00083.html">GdsDriverDataBase</a> &amp;db, string const &amp;filename)</td></tr>
-<tr class="memdesc:a9eef18021b9c81cdf78f3c9efcd4f366"><td class="mdescLeft">&#160;</td><td class="mdescRight">API function for <a class="el" href="a00082.html" title="High-level wrapper class for GdsReader. Everything is saved in an internal data structure and users o...">GdsDriver</a>.  <a href="#a9eef18021b9c81cdf78f3c9efcd4f366">More...</a><br /></td></tr>
-<tr class="separator:a9eef18021b9c81cdf78f3c9efcd4f366"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fe9cb2c37eee75fb7d562f367b601c8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00360.html#a1fe9cb2c37eee75fb7d562f367b601c8">read</a> (<a class="el" href="a00080.html">GdsDataBaseKernel</a> &amp;db, std::istream &amp;fp)</td></tr>
-<tr class="memdesc:a1fe9cb2c37eee75fb7d562f367b601c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">read from stream  <a href="#a1fe9cb2c37eee75fb7d562f367b601c8">More...</a><br /></td></tr>
-<tr class="separator:a1fe9cb2c37eee75fb7d562f367b601c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2af2b04527c8b24ee3eebc3d7e27d503"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00360.html#a2af2b04527c8b24ee3eebc3d7e27d503">read</a> (<a class="el" href="a00080.html">GdsDataBaseKernel</a> &amp;db, string const &amp;filename)</td></tr>
-<tr class="memdesc:a2af2b04527c8b24ee3eebc3d7e27d503"><td class="mdescLeft">&#160;</td><td class="mdescRight">read from file  <a href="#a2af2b04527c8b24ee3eebc3d7e27d503">More...</a><br /></td></tr>
-<tr class="separator:a2af2b04527c8b24ee3eebc3d7e27d503"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">accessors</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>accessors to enum types and mapping arrays </p>
-</div></td></tr>
-<tr class="memitem:a7534469cea95bb7c254ece11c3cefdec"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00360.html#a7534469cea95bb7c254ece11c3cefdec">gds_record_ascii</a> (int record_type)</td></tr>
-<tr class="separator:a7534469cea95bb7c254ece11c3cefdec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ea7fd606ca5735b8549d575c0410bb7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00360.html#a7ea7fd606ca5735b8549d575c0410bb7">gds_record_description</a> (int record_type)</td></tr>
-<tr class="separator:a7ea7fd606ca5735b8549d575c0410bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc73bc6fb3dddaa824f215cc3a5cc23d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00360.html#acc73bc6fb3dddaa824f215cc3a5cc23d">gds_record_expected_data</a> (int record_type)</td></tr>
-<tr class="separator:acc73bc6fb3dddaa824f215cc3a5cc23d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5b1344671c56cf36e5d3677e3182cd4"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00360.html#ad5b1344671c56cf36e5d3677e3182cd4">gds_data_ascii</a> (int data_type)</td></tr>
-<tr class="separator:ad5b1344671c56cf36e5d3677e3182cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c237c039cce6ee2ef51b74d8f683328"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00360.html#a8c237c039cce6ee2ef51b74d8f683328">gds_data_description</a> (int data_type)</td></tr>
-<tr class="separator:a8c237c039cce6ee2ef51b74d8f683328"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22bf39e98e6bc85bdf12db13629f45ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00360.html#a22bf39e98e6bc85bdf12db13629f45ea">gds_record_type</a> (int numeric)</td></tr>
-<tr class="memdesc:a22bf39e98e6bc85bdf12db13629f45ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert integer to enum  <a href="#a22bf39e98e6bc85bdf12db13629f45ea">More...</a><br /></td></tr>
-<tr class="separator:a22bf39e98e6bc85bdf12db13629f45ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae68d9b1c25df75c0f0c4d51d11adea2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00360.html#ae68d9b1c25df75c0f0c4d51d11adea2c">gds_data_type</a> (int numeric)</td></tr>
-<tr class="memdesc:ae68d9b1c25df75c0f0c4d51d11adea2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert integer to enum  <a href="#ae68d9b1c25df75c0f0c4d51d11adea2c">More...</a><br /></td></tr>
-<tr class="separator:ae68d9b1c25df75c0f0c4d51d11adea2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1a136dfb58502c357bb6e6a5a16031d"><td class="memTemplParams" colspan="2">template&lt;typename ObjectType &gt; </td></tr>
+<tr class="memitem:ad1a136dfb58502c357bb6e6a5a16031d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00360.html#ad1a136dfb58502c357bb6e6a5a16031d">extract</a> (<a class="el" href="a00123.html">GdsDB</a> const &amp;, <a class="el" href="a00117.html">GdsCell</a> const &amp;, <a class="el" href="a00117.html">GdsCell</a> &amp;targetCell,::<a class="el" href="a00133.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a> type, ObjectType *object)</td></tr>
+<tr class="separator:ad1a136dfb58502c357bb6e6a5a16031d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bfd7dc7d398957f8fcfee89210fd352"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
+<tr class="memitem:a3bfd7dc7d398957f8fcfee89210fd352"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00360.html#a3bfd7dc7d398957f8fcfee89210fd352">extract&lt; GdsCellReference &gt;</a> (<a class="el" href="a00123.html">GdsDB</a> const &amp;gdsDB, <a class="el" href="a00117.html">GdsCell</a> const &amp;srcCell, <a class="el" href="a00117.html">GdsCell</a> &amp;targetCell,::<a class="el" href="a00133.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a> type, <a class="el" href="a00119.html">GdsCellReference</a> *object)</td></tr>
+<tr class="separator:a3bfd7dc7d398957f8fcfee89210fd352"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae885193c783d1eef216d88a574ca5e9e"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
+<tr class="memitem:ae885193c783d1eef216d88a574ca5e9e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00360.html#ae885193c783d1eef216d88a574ca5e9e">extract&lt; GdsCellArray &gt;</a> (<a class="el" href="a00123.html">GdsDB</a> const &amp;, <a class="el" href="a00117.html">GdsCell</a> const &amp;, <a class="el" href="a00117.html">GdsCell</a> &amp;,::<a class="el" href="a00133.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a> type, <a class="el" href="a00118.html">GdsCellArray</a> *)</td></tr>
+<tr class="separator:ae885193c783d1eef216d88a574ca5e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>namespace for Limbo.GdsParser </p>
+<div class="textblock"><p>Detailed action functions for extract objects of a cell. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="ad5b1344671c56cf36e5d3677e3182cd4"></a>
+<a class="anchor" id="ad1a136dfb58502c357bb6e6a5a16031d"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ObjectType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char* GdsParser::gds_data_ascii </td>
+          <td class="memname">void GdsParser::GdsDB::ExtractCellObjectActionDetails::extract </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>data_type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">data_type</td><td>data type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ASCII </dd></dl>
-
-<p>Definition at line <a class="el" href="a00293_source.html#l00347">347</a> of file <a class="el" href="a00293_source.html">GdsRecords.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8c237c039cce6ee2ef51b74d8f683328"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* GdsParser::gds_data_description </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>data_type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">data_type</td><td>data type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>description </dd></dl>
-
-<p>Definition at line <a class="el" href="a00293_source.html#l00353">353</a> of file <a class="el" href="a00293_source.html">GdsRecords.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae68d9b1c25df75c0f0c4d51d11adea2c"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a> GdsParser::gds_data_type </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numeric</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>convert integer to enum </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">numeric</td><td>integer number of GDSII data type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>enum type of GDSII data type </dd></dl>
-
-<p>Definition at line <a class="el" href="a00293_source.html#l00369">369</a> of file <a class="el" href="a00293_source.html">GdsRecords.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7534469cea95bb7c254ece11c3cefdec"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* GdsParser::gds_record_ascii </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>record_type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">record_type</td><td>GDSII record </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ASCII </dd></dl>
-
-<p>Definition at line <a class="el" href="a00293_source.html#l00329">329</a> of file <a class="el" href="a00293_source.html">GdsRecords.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7ea7fd606ca5735b8549d575c0410bb7"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* GdsParser::gds_record_description </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>record_type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">record_type</td><td>GDSII record </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>description </dd></dl>
-
-<p>Definition at line <a class="el" href="a00293_source.html#l00335">335</a> of file <a class="el" href="a00293_source.html">GdsRecords.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="acc73bc6fb3dddaa824f215cc3a5cc23d"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int GdsParser::gds_record_expected_data </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>record_type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">record_type</td><td>GDSII record </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>expected data </dd></dl>
-
-<p>Definition at line <a class="el" href="a00293_source.html#l00341">341</a> of file <a class="el" href="a00293_source.html">GdsRecords.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a22bf39e98e6bc85bdf12db13629f45ea"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a> GdsParser::gds_record_type </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numeric</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>convert integer to enum </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">numeric</td><td>integer number for GDSII record </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>enum type of GDSII record </dd></dl>
-
-<p>Definition at line <a class="el" href="a00293_source.html#l00360">360</a> of file <a class="el" href="a00293_source.html">GdsRecords.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1fe9cb2c37eee75fb7d562f367b601c8"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool GdsParser::read </td>
-          <td>(</td>
-          <td class="paramtype">GdsDataBaseKernel &amp;&#160;</td>
-          <td class="paramname"><em>db</em>, </td>
+          <td class="paramtype">GdsDB const &amp;&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::istream &amp;&#160;</td>
-          <td class="paramname"><em>fp</em>&#160;</td>
+          <td class="paramtype">GdsCell const &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdsCell &amp;&#160;</td>
+          <td class="paramname"><em>targetCell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">::<a class="el" href="a00133.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ObjectType *&#160;</td>
+          <td class="paramname"><em>object</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -463,34 +161,69 @@ Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p>read from stream </p>
+<p>default action is to copy objects </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ObjectType</td><td>GDSII object type </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">db</td><td>GDSII database </td></tr>
-    <tr><td class="paramname">fp</td><td>input stream </td></tr>
+    <tr><td class="paramname">targetCell</td><td>target cell </td></tr>
+    <tr><td class="paramname">type</td><td>GDSII record </td></tr>
+    <tr><td class="paramname">object</td><td>GDSII object in the cell </td></tr>
   </table>
   </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="a00359_source.html#l00188">188</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="a2af2b04527c8b24ee3eebc3d7e27d503"></a>
+<a class="anchor" id="ae885193c783d1eef216d88a574ca5e9e"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool GdsParser::read </td>
+          <td class="memname">void <a class="el" href="a00360.html#ad1a136dfb58502c357bb6e6a5a16031d">GdsParser::GdsDB::ExtractCellObjectActionDetails::extract</a>&lt; <a class="el" href="a00118.html">GdsCellArray</a> &gt; </td>
           <td>(</td>
-          <td class="paramtype">GdsDataBaseKernel &amp;&#160;</td>
-          <td class="paramname"><em>db</em>, </td>
+          <td class="paramtype">GdsDB const &amp;&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">string const &amp;&#160;</td>
-          <td class="paramname"><em>filename</em>&#160;</td>
+          <td class="paramtype">GdsCell const &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdsCell &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">::<a class="el" href="a00133.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdsCellArray *&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -498,34 +231,62 @@ Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p>read from file </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>specialization for AREF </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">db</td><td>GDSII database </td></tr>
-    <tr><td class="paramname">filename</td><td>GDSII file </td></tr>
+    <tr><td class="paramname">type</td><td>GDSII record </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="todo"><dt><b><a class="el" href="a00447.html#_todo000001">Todo:</a></b></dt><dd>finish extraction of GDSII AREF </dd></dl>
+
+<p>Definition at line <a class="el" href="a00359_source.html#l00219">219</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9eef18021b9c81cdf78f3c9efcd4f366"></a>
+<a class="anchor" id="a3bfd7dc7d398957f8fcfee89210fd352"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool GdsParser::read </td>
+          <td class="memname">void <a class="el" href="a00360.html#ad1a136dfb58502c357bb6e6a5a16031d">GdsParser::GdsDB::ExtractCellObjectActionDetails::extract</a>&lt; <a class="el" href="a00119.html">GdsCellReference</a> &gt; </td>
           <td>(</td>
-          <td class="paramtype">GdsDriverDataBase &amp;&#160;</td>
-          <td class="paramname"><em>db</em>, </td>
+          <td class="paramtype">GdsDB const &amp;&#160;</td>
+          <td class="paramname"><em>gdsDB</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">string const &amp;&#160;</td>
-          <td class="paramname"><em>filename</em>&#160;</td>
+          <td class="paramtype">GdsCell const &amp;&#160;</td>
+          <td class="paramname"><em>srcCell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdsCell &amp;&#160;</td>
+          <td class="paramname"><em>targetCell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">::<a class="el" href="a00133.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdsCellReference *&#160;</td>
+          <td class="paramname"><em>object</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -533,23 +294,31 @@ Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p>API function for <a class="el" href="a00082.html" title="High-level wrapper class for GdsReader. Everything is saved in an internal data structure and users o...">GdsDriver</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>specialization for SREF </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">db</td><td>database </td></tr>
-    <tr><td class="paramname">filename</td><td>GDSII file </td></tr>
+    <tr><td class="paramname">gdsDB</td><td>GDSII database </td></tr>
+    <tr><td class="paramname">srcCell</td><td>source cell with the SREF object </td></tr>
+    <tr><td class="paramname">targetCell</td><td>target cell </td></tr>
+    <tr><td class="paramname">type</td><td>GDSII record </td></tr>
+    <tr><td class="paramname">object</td><td>the GDSII SREF object in the cell </td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Definition at line <a class="el" href="a00359_source.html#l00201">201</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

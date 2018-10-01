@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/ILPColoring.h File Reference</title>
+<title>Limbo: limbo::algorithms::coloring::DsatColoring&lt; GraphType &gt;::saturation_degree_type Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,8 +45,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -67,8 +67,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -87,70 +89,168 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li><li class="navelem"><a class="el" href="dir_eec373e4006d7befdff7678452c20bc3.html">coloring</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00436.html">algorithms</a></li><li class="navelem"><a class="el" href="a00437.html">coloring</a></li><li class="navelem"><a class="el" href="a00091.html">DsatColoring</a></li><li class="navelem"><a class="el" href="a00245.html">saturation_degree_type</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="a00564.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ILPColoring.h File Reference</div>  </div>
+<div class="title">limbo::algorithms::coloring::DsatColoring&lt; GraphType &gt;::saturation_degree_type Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>coloring algorithm based on integer linear programming (ILP) with Gurobi as ILP solver.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;queue&gt;</code><br />
-<code>#include &lt;set&gt;</code><br />
-<code>#include &lt;limits&gt;</code><br />
-<code>#include &lt;cassert&gt;</code><br />
-<code>#include &lt;cmath&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
-<code>#include &lt;sstream&gt;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
-<code>#include &lt;boost/cstdint.hpp&gt;</code><br />
-<code>#include &lt;boost/unordered_map.hpp&gt;</code><br />
-<code>#include &lt;boost/graph/graph_concepts.hpp&gt;</code><br />
-<code>#include &lt;boost/graph/subgraph.hpp&gt;</code><br />
-<code>#include &lt;boost/property_map/property_map.hpp&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00317_source.html">limbo/string/String.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00242_source.html">limbo/algorithms/coloring/Coloring.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00316_source.html">limbo/solvers/Solvers.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00309_source.html">limbo/solvers/api/GurobiApi.h</a>&gt;</code><br />
-</div>
-<p><a href="a00245_source.html">Go to the source code of this file.</a></p>
+<p><code>#include &lt;<a class="el" href="a00315_source.html">GreedyColoring.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00110.html">limbo::algorithms::coloring::ILPColoring&lt; GraphType &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a9e7efa60095dba2c55d5bde9b745f604"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a9e7efa60095dba2c55d5bde9b745f604">saturation_degree_type</a> (<a class="el" href="a00091.html">DsatColoring</a> const &amp;dc)</td></tr>
+<tr class="separator:a9e7efa60095dba2c55d5bde9b745f604"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc2642bad91f7d37019af63ec6e1bad7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#acc2642bad91f7d37019af63ec6e1bad7">saturation_degree</a> (graph_vertex_type const &amp;v) const </td></tr>
+<tr class="separator:acc2642bad91f7d37019af63ec6e1bad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afccce02dad39f1d99a469dafb9f0db7f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#afccce02dad39f1d99a469dafb9f0db7f">operator()</a> (graph_vertex_type const &amp;v1, graph_vertex_type const &amp;v2) const </td></tr>
+<tr class="separator:afccce02dad39f1d99a469dafb9f0db7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00364"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html">limbo</a></td></tr>
-<tr class="memdesc:a00364"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00365"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00365.html">limbo::algorithms</a></td></tr>
-<tr class="memdesc:a00365"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.algorithms <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00366"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00366.html">limbo::algorithms::coloring</a></td></tr>
-<tr class="memdesc:a00366"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Algorithms.Coloring <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a197da197bb57ac85add35a539e1a5d14"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a197da197bb57ac85add35a539e1a5d14"></a>
+<a class="el" href="a00091.html">DsatColoring</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html#a197da197bb57ac85add35a539e1a5d14">m_dc</a></td></tr>
+<tr class="memdesc:a197da197bb57ac85add35a539e1a5d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">bind <a class="el" href="a00091.html">DsatColoring</a> class <br /></td></tr>
+<tr class="separator:a197da197bb57ac85add35a539e1a5d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>coloring algorithm based on integer linear programming (ILP) with Gurobi as ILP solver. </p>
-<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>May 2015 </dd></dl>
+<div class="textblock"><h3>template&lt;typename GraphType&gt;<br />
+class limbo::algorithms::coloring::DsatColoring&lt; GraphType &gt;::saturation_degree_type</h3>
 
-<p>Definition in file <a class="el" href="a00245_source.html">ILPColoring.h</a>.</p>
-</div></div><!-- contents -->
+<p>for sorting and comparison; calculate saturation degree </p>
+
+<p>Definition at line <a class="el" href="a00315_source.html#l00052">52</a> of file <a class="el" href="a00315_source.html">GreedyColoring.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a9e7efa60095dba2c55d5bde9b745f604"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00091.html">limbo::algorithms::coloring::DsatColoring</a>&lt; GraphType &gt;::saturation_degree_type::saturation_degree_type </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00091.html">DsatColoring</a> const &amp;&#160;</td>
+          <td class="paramname"><em>dc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dc</td><td>bind <a class="el" href="a00091.html">limbo::algorithms::coloring::DsatColoring</a> object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00315_source.html#l00057">57</a> of file <a class="el" href="a00315_source.html">GreedyColoring.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="afccce02dad39f1d99a469dafb9f0db7f"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="a00091.html">limbo::algorithms::coloring::DsatColoring</a>&lt; GraphType &gt;::saturation_degree_type::operator() </td>
+          <td>(</td>
+          <td class="paramtype">graph_vertex_type const &amp;&#160;</td>
+          <td class="paramname"><em>v1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">graph_vertex_type const &amp;&#160;</td>
+          <td class="paramname"><em>v2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>sort by saturation_degree degree first and then by degree </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v1</td><td>vertex </td></tr>
+    <tr><td class="paramname">v2</td><td>vertex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>comparison result </dd></dl>
+
+<p>Definition at line <a class="el" href="a00315_source.html#l00082">82</a> of file <a class="el" href="a00315_source.html">GreedyColoring.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acc2642bad91f7d37019af63ec6e1bad7"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="a00091.html">limbo::algorithms::coloring::DsatColoring</a>&lt; GraphType &gt;::saturation_degree_type::saturation_degree </td>
+          <td>(</td>
+          <td class="paramtype">graph_vertex_type const &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>calculate saturation degree </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>vertex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>saturation degree </dd></dl>
+
+<p>Definition at line <a class="el" href="a00315_source.html#l00062">62</a> of file <a class="el" href="a00315_source.html">GreedyColoring.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/<a class="el" href="a00315_source.html">GreedyColoring.h</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

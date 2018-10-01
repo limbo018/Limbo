@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/test/algorithms/test_ChromaticNumber.cpp File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/LPColoringOld.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,83 +87,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_2ab53c040e599682687624208541819b.html">algorithms</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li><li class="navelem"><a class="el" href="dir_eec373e4006d7befdff7678452c20bc3.html">coloring</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">test_ChromaticNumber.cpp File Reference</div>  </div>
+<div class="title">LPColoringOld.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>test chromatic number algorithm  
+<p>coloring algorithm based on iterative linear programming (LP) and rounding  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;fstream&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;boost/graph/graphviz.hpp&gt;</code><br />
-<code>#include &lt;boost/graph/graph_utility.hpp&gt;</code><br />
-<code>#include &lt;boost/graph/adjacency_list.hpp&gt;</code><br />
-<code>#include &lt;boost/graph/undirected_graph.hpp&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00241_source.html">limbo/algorithms/coloring/ChromaticNumber.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00244_source.html">limbo/algorithms/coloring/GreedyColoring.h</a>&gt;</code><br />
-<code>#include &lt;boost/graph/erdos_renyi_generator.hpp&gt;</code><br />
-<code>#include &lt;boost/random/mersenne_twister.hpp&gt;</code><br />
-<code>#include &lt;boost/graph/random.hpp&gt;</code><br />
-<code>#include &lt;boost/graph/iteration_macros.hpp&gt;</code><br />
-<code>#include &lt;boost/version.hpp&gt;</code><br />
-<code>#include &lt;boost/graph/detail/is_same.hpp&gt;</code><br />
-</div>
+
 <p><a href="a00319_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00145.html">MisVisitor&lt; GraphType &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00319.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
-<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>test chromatic number algorithm </p>
-<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Feb 2015 </dd></dl>
+<div class="textblock"><p>coloring algorithm based on iterative linear programming (LP) and rounding </p>
+<p>Implementation algorithm in "Triple/quadruple patterning layout decomposition via novel linear programming and iterative rounding", Yibo Lin, Xiaoqing Xu, Bei Yu, Ross Baldick, and David Z. Pan, SPIE Advanced Lithography, volume 9781, 2016.</p>
+<dl class="section author"><dt>Author</dt><dd>Yibo Lin, Xiaoqing Xu </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Sep 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00319_source.html">test_ChromaticNumber.cpp</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>main function <br />
-generate a random graph, then <br />
-</p><ul>
-<li>test 1: find maximum independent set by <a class="el" href="a00139.html">limbo::algorithms::MaxIndependentSetByMaxClique</a></li>
-<li>test 2: compute chromatic number by <a class="el" href="a00123.html">limbo::algorithms::coloring::LawlerChromaticNumber</a></li>
-<li>test 3: greedy coloring by <a class="el" href="a00049.html">limbo::algorithms::coloring::DsatColoring</a> </li>
-</ul>
-
-<p>Definition at line <a class="el" href="a00319_source.html#l00077">77</a> of file <a class="el" href="a00319_source.html">test_ChromaticNumber.cpp</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>Definition in file <a class="el" href="a00319_source.html">LPColoringOld.h</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

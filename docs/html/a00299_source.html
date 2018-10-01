@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/tf/spirit/ErrorHandler.h Source File</title>
+<title>Limbo: parsers/Gdsii.md Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,6 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -85,113 +86,105 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_3bf9879ea48ac95c036901db79d1c653.html">tf</a></li><li class="navelem"><a class="el" href="dir_0585dfc80a33447ef050979e4db09323.html">spirit</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">ErrorHandler.h</div>  </div>
+<div class="title">parsers/Gdsii.md</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00299.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#ifndef _ERRORHANDLER_H</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define _ERRORHANDLER_H</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="a00058.html">   23</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00058.html">ErrorHandler</a></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>, <span class="keyword">typename</span>, <span class="keyword">typename</span>&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a00199.html">   27</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="a00199.html">result</a> </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    { </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">typedef</span> <span class="keywordtype">void</span> type; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    };</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a00058.html#a175a0107ac11d6ad4f60f32aeae1cc52">   36</a></span>&#160;    <a class="code" href="a00058.html#a175a0107ac11d6ad4f60f32aeae1cc52">ErrorHandler</a>(Iterator <a class="code" href="a00058.html#aee756aa839373c3b6748b51c78df5a78">first</a>, Iterator <a class="code" href="a00058.html#a2997c25d20fd93886d7a80cdadde4cb8">last</a>)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      : first(first), last(last) {}</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Message, <span class="keyword">typename</span> What&gt;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a00058.html#ac71431a97777b6f0b997fd378e2c136c">   46</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00058.html#ac71431a97777b6f0b997fd378e2c136c">operator()</a>(</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        Message <span class="keyword">const</span>&amp; message,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        What <span class="keyword">const</span>&amp; what,</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        Iterator err_pos)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">int</span> line;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        Iterator line_start = <a class="code" href="a00058.html#af13d71e6875a28e9fbb9ca457d4b8f79">get_pos</a>(err_pos, line);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">if</span> (err_pos != <a class="code" href="a00058.html#a2997c25d20fd93886d7a80cdadde4cb8">last</a>)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            std::cout &lt;&lt; message &lt;&lt; what &lt;&lt; <span class="stringliteral">&quot; line &quot;</span> &lt;&lt; line &lt;&lt; <span class="charliteral">&#39;:&#39;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            std::cout &lt;&lt; <a class="code" href="a00058.html#a4f7b4389cdfcbbe3cae8a4ca4fc06cd1">get_line</a>(line_start) &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">for</span> (; line_start != err_pos; ++line_start)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                std::cout &lt;&lt; <span class="charliteral">&#39; &#39;</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            std::cout &lt;&lt; <span class="charliteral">&#39;^&#39;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            std::cout &lt;&lt; <span class="stringliteral">&quot;Unexpected end of file. &quot;</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            std::cout &lt;&lt; message &lt;&lt; what &lt;&lt; <span class="stringliteral">&quot; line &quot;</span> &lt;&lt; line &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a00058.html#af13d71e6875a28e9fbb9ca457d4b8f79">   72</a></span>&#160;    Iterator <a class="code" href="a00058.html#af13d71e6875a28e9fbb9ca457d4b8f79">get_pos</a>(Iterator err_pos, <span class="keywordtype">int</span>&amp; line)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        line = 1;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        Iterator i = <a class="code" href="a00058.html#aee756aa839373c3b6748b51c78df5a78">first</a>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        Iterator line_start = <a class="code" href="a00058.html#aee756aa839373c3b6748b51c78df5a78">first</a>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">while</span> (i != err_pos)</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keywordtype">bool</span> eol = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">if</span> (i != err_pos &amp;&amp; *i == <span class="charliteral">&#39;\r&#39;</span>) <span class="comment">// CR</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                eol = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                line_start = ++i;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">if</span> (i != err_pos &amp;&amp; *i == <span class="charliteral">&#39;\n&#39;</span>) <span class="comment">// LF</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                eol = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                line_start = ++i;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordflow">if</span> (eol)</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                ++line;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                ++i;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        }</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">return</span> line_start;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="a00058.html#a4f7b4389cdfcbbe3cae8a4ca4fc06cd1">  101</a></span>&#160;    std::string <a class="code" href="a00058.html#a4f7b4389cdfcbbe3cae8a4ca4fc06cd1">get_line</a>(Iterator err_pos)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        Iterator i = err_pos;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="comment">// position i to the next EOL</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordflow">while</span> (i != <a class="code" href="a00058.html#a2997c25d20fd93886d7a80cdadde4cb8">last</a> &amp;&amp; (*i != <span class="charliteral">&#39;\r&#39;</span> &amp;&amp; *i != <span class="charliteral">&#39;\n&#39;</span>))</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            ++i;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">return</span> std::string(err_pos, i);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="a00058.html#aee756aa839373c3b6748b51c78df5a78">  110</a></span>&#160;    Iterator <a class="code" href="a00058.html#aee756aa839373c3b6748b51c78df5a78">first</a>; </div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="a00058.html#a2997c25d20fd93886d7a80cdadde4cb8">  111</a></span>&#160;    Iterator <a class="code" href="a00058.html#a2997c25d20fd93886d7a80cdadde4cb8">last</a>; </div>
-<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="a00058.html#aa34d5db4e6204f3438e1f46b6f35bbf2">  112</a></span>&#160;    std::vector&lt;Iterator&gt; <a class="code" href="a00058.html#aa34d5db4e6204f3438e1f46b6f35bbf2">iters</a>; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;};</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#endif </span></div>
-<div class="ttc" id="a00199_html"><div class="ttname"><a href="a00199.html">ErrorHandler::result</a></div><div class="ttdoc">probably used as some kind of type traits </div><div class="ttdef"><b>Definition:</b> <a href="a00299_source.html#l00027">ErrorHandler.h:27</a></div></div>
-<div class="ttc" id="a00058_html_af13d71e6875a28e9fbb9ca457d4b8f79"><div class="ttname"><a href="a00058.html#af13d71e6875a28e9fbb9ca457d4b8f79">ErrorHandler::get_pos</a></div><div class="ttdeci">Iterator get_pos(Iterator err_pos, int &amp;line) const </div><div class="ttdoc">get position of error </div><div class="ttdef"><b>Definition:</b> <a href="a00299_source.html#l00072">ErrorHandler.h:72</a></div></div>
-<div class="ttc" id="a00058_html_ac71431a97777b6f0b997fd378e2c136c"><div class="ttname"><a href="a00058.html#ac71431a97777b6f0b997fd378e2c136c">ErrorHandler::operator()</a></div><div class="ttdeci">void operator()(Message const &amp;message, What const &amp;what, Iterator err_pos) const </div><div class="ttdoc">API to invoke the error handler. </div><div class="ttdef"><b>Definition:</b> <a href="a00299_source.html#l00046">ErrorHandler.h:46</a></div></div>
-<div class="ttc" id="a00058_html"><div class="ttname"><a href="a00058.html">ErrorHandler</a></div><div class="ttdoc">error handler </div><div class="ttdef"><b>Definition:</b> <a href="a00299_source.html#l00023">ErrorHandler.h:23</a></div></div>
-<div class="ttc" id="a00058_html_a4f7b4389cdfcbbe3cae8a4ca4fc06cd1"><div class="ttname"><a href="a00058.html#a4f7b4389cdfcbbe3cae8a4ca4fc06cd1">ErrorHandler::get_line</a></div><div class="ttdeci">std::string get_line(Iterator err_pos) const </div><div class="ttdoc">get line from iterator </div><div class="ttdef"><b>Definition:</b> <a href="a00299_source.html#l00101">ErrorHandler.h:101</a></div></div>
-<div class="ttc" id="a00058_html_a2997c25d20fd93886d7a80cdadde4cb8"><div class="ttname"><a href="a00058.html#a2997c25d20fd93886d7a80cdadde4cb8">ErrorHandler::last</a></div><div class="ttdeci">Iterator last</div><div class="ttdoc">end iterator </div><div class="ttdef"><b>Definition:</b> <a href="a00299_source.html#l00111">ErrorHandler.h:111</a></div></div>
-<div class="ttc" id="a00058_html_a175a0107ac11d6ad4f60f32aeae1cc52"><div class="ttname"><a href="a00058.html#a175a0107ac11d6ad4f60f32aeae1cc52">ErrorHandler::ErrorHandler</a></div><div class="ttdeci">ErrorHandler(Iterator first, Iterator last)</div><div class="ttdoc">constructor </div><div class="ttdef"><b>Definition:</b> <a href="a00299_source.html#l00036">ErrorHandler.h:36</a></div></div>
-<div class="ttc" id="a00058_html_aee756aa839373c3b6748b51c78df5a78"><div class="ttname"><a href="a00058.html#aee756aa839373c3b6748b51c78df5a78">ErrorHandler::first</a></div><div class="ttdeci">Iterator first</div><div class="ttdoc">begin iterator </div><div class="ttdef"><b>Definition:</b> <a href="a00299_source.html#l00110">ErrorHandler.h:110</a></div></div>
-<div class="ttc" id="a00058_html_aa34d5db4e6204f3438e1f46b6f35bbf2"><div class="ttname"><a href="a00058.html#aa34d5db4e6204f3438e1f46b6f35bbf2">ErrorHandler::iters</a></div><div class="ttdeci">std::vector&lt; Iterator &gt; iters</div><div class="ttdoc">not sure what it is used and why it is here </div><div class="ttdef"><b>Definition:</b> <a href="a00299_source.html#l00112">ErrorHandler.h:112</a></div></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;Limbo.Parsers.GdsiiParser {#Parsers_GdsiiParser}</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;---------</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;[TOC]</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;# Introduction {#Parsers_GdsiiParser_Introduction}</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;[GDSII](https://en.wikipedia.org/wiki/GDSII) is an industry standard for data exchange of integrated circuits (IC) layout artwork. </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;It is a binary file format representing planar geometric shapes, text labels, and other information about the layout in hierarchical form. </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;The manual can be found in [here](http://www.buchanan1.net/stream_description.html). </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;The parser consists of three parts, reader, writer and database for full chip parsing. </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;@ref GdsParser::GdsReader provides API to read GDSII files (.gds or .gds.gz with Boost and Zlib support). </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;@ref GdsParser::GdsWriter provides API to write GDSII files (.gds or .gds.gz with Boost and Zlib support). </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;These two parts are basic functionalities for read and write in GDSII format. </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;@ref GdsParser::GdsDB is a database to store layout elements and provides easy API to read, write and flatten full layouts. </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;# Examples {#Parsers_GdsiiParser_Examples}</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;## Stream Reader {#Parsers_GdsiiParser_StreamReader}</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;See documented version: [test/parsers/gdsii/test_reader.cpp](@ref gdsii/test_reader.cpp)</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;\include test/parsers/gdsii/test_reader.cpp</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;Compiling and running commands (assuming LIMBO_DIR is exported as the environment variable to the path where limbo library is installed)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;g++ -o test_reader test_reader.cpp -I $LIMBO_DIR/include -L $LIMBO_DIR/lib -lgdsparser</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;# read a file </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;./test_reader benchmarks/test_reader.gds</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;If BOOST_DIR and ZLIB_DIR have been defined as environment variables when building Limbo library, one can compile with support to compression files. </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;g++ -o test_reader test_reader.cpp -I $LIMBO_DIR/include -L $LIMBO_DIR/lib -lgdsparser -L $BOOST_DIR/lib -lboost_iostreams -L $ZLIB_DIR -lz</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;# read a compressed file </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;./test_reader benchmarks/test_reader_gz.gds.gz</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;## Stream Writer {#Parsers_GdsiiParser_StreamWriter}</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;See documented version: [test/parsers/gdsii/test_writer.cpp](@ref gdsii/test_writer.cpp)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;\include test/parsers/gdsii/test_writer.cpp</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;Compiling and running commands (assuming LIMBO_DIR is exported as the environment variable to the path where limbo library is installed)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;g++ -o test_writer test_writer.cpp -I $LIMBO_DIR/include -L $LIMBO_DIR/lib -lgdsparser</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;# write to a file </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;./test_writer test_writer.gds</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;If BOOST_DIR and ZLIB_DIR have been defined as environment variables when building Limbo library, one can compile with support to compression files. </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;g++ -o test_writer test_writer.cpp -I $LIMBO_DIR/include -L $LIMBO_DIR/lib -lgdsparser -L $BOOST_DIR/lib -lboost_iostreams -L $ZLIB_DIR -lz</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;# write to a compressed file </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;./test_writer test_writer_gz.gds.gz</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;## Stream GDSII Database {#Parsers_GdsiiParser_StreamGdsDB}</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;See documented version: [test/parsers/gdsii/test_gdsdb.cpp](@ref gdsii/test_gdsdb.cpp)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;\include test/parsers/gdsii/test_gdsdb.cpp</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;Compiling and running commands (assuming LIMBO_DIR is exported as the environment variable to the path where limbo library is installed)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;g++ -o test_gdsdb test_gdsdb.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -L $LIMBO_DIR/lib -lgdsparser -lgdsdb</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;# read a file and test flatten </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;./test_gdsdb benchmarks/test_reader.gds test_gdsdb.gds test_gdsdb_flat.gds TOPCELL</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;If BOOST_DIR and ZLIB_DIR have been defined as environment variables when building Limbo library, one can compile with support to compression files. </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;g++ -o test_gdsdb test_gdsdb.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -L $LIMBO_DIR/lib -lgdsparser -lgdsdb -L $BOOST_DIR/lib -lboost_iostreams -L $ZLIB_DIR -lz</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;# read a compressed file and test flatten  </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;./test_gdsdb benchmarks/test_reader_gz.gds.gz test_gdsdb_gz.gds.gz test_gdsdb_gz_flat.gds.gz TOPCELL</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;## All Examples {#Parsers_GdsiiParser_Examples_All}</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;- [test/parsers/gdsii/test_reader.cpp](@ref gdsii/test_reader.cpp)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;- [test/parsers/gdsii/test_writer.cpp](@ref gdsii/test_writer.cpp)</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;- [test/parsers/gdsii/test_gdsdb.cpp](@ref gdsii/test_gdsdb.cpp)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;# References {#Parsers_GdsiiParser_References}</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;- [limbo/parsers/gdsii/stream/GdsRecords.h](@ref GdsRecords.h)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;- [limbo/parsers/gdsii/stream/GdsReader.h](@ref GdsReader.h)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;- [limbo/parsers/gdsii/stream/GdsWriter.h](@ref GdsWriter.h)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;- [limbo/parsers/gdsii/stream/GdsDriver.h](@ref GdsDriver.h)</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;- [limbo/parsers/gdsii/gdsdb/GdsIO.h](@ref GdsIO.h)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;- [limbo/parsers/gdsii/gdsdb/GdsObjects.h](@ref GdsObjects.h)</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;- [limbo/parsers/gdsii/gdsdb/GdsObjectHelpers.h](@ref GdsObjectHelpers.h)</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:19 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:10 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

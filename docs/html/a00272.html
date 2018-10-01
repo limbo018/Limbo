@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/makeutils/FindGfortran.mk File Reference</title>
+<title>Limbo: limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;::VariableMoveCost Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,8 +45,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -67,8 +67,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -87,35 +89,114 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_1fc182626e7eef33c760a3801c695bc4.html">makeutils</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00443.html">solvers</a></li><li class="navelem"><a class="el" href="a00247.html">SearchByAdjustCoefficient</a></li><li class="navelem"><a class="el" href="a00272.html">VariableMoveCost</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00660.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">FindGfortran.mk File Reference</div>  </div>
+<div class="title">limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;::VariableMoveCost Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>find gfortran, determine FC  
-<a href="#details">More...</a></p>
+<p>Wrapper for the move cost of an item.  
+ <a href="a00272.html#details">More...</a></p>
 
-<p><a href="a00272_source.html">Go to the source code of this file.</a></p>
+<p><code>#include &lt;<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a9d8cd42f8b757ca7562086384548516d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00272.html#a9d8cd42f8b757ca7562086384548516d">VariableMoveCost</a> (<a class="el" href="a00103.html#a3f0a7bd809c482e1d2d2dcd9a50d9e01">variable_type</a> var, <a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> mc, <a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> cap)</td></tr>
+<tr class="memdesc:a9d8cd42f8b757ca7562086384548516d"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a9d8cd42f8b757ca7562086384548516d">More...</a><br /></td></tr>
+<tr class="separator:a9d8cd42f8b757ca7562086384548516d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ada8d227092a0bab18ea3b195a2850741"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada8d227092a0bab18ea3b195a2850741"></a>
+<a class="el" href="a00103.html#a3f0a7bd809c482e1d2d2dcd9a50d9e01">variable_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00272.html#ada8d227092a0bab18ea3b195a2850741">variable</a></td></tr>
+<tr class="memdesc:ada8d227092a0bab18ea3b195a2850741"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable of the item <br /></td></tr>
+<tr class="separator:ada8d227092a0bab18ea3b195a2850741"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56474bb374ac23a14d4e46649f28a2b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56474bb374ac23a14d4e46649f28a2b3"></a>
+<a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00272.html#a56474bb374ac23a14d4e46649f28a2b3">moveCost</a></td></tr>
+<tr class="memdesc:a56474bb374ac23a14d4e46649f28a2b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">move cost <br /></td></tr>
+<tr class="separator:a56474bb374ac23a14d4e46649f28a2b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2150c22e41c70225bb4b15b1e8fb338d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2150c22e41c70225bb4b15b1e8fb338d"></a>
+<a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00272.html#a2150c22e41c70225bb4b15b1e8fb338d">capacity</a></td></tr>
+<tr class="memdesc:a2150c22e41c70225bb4b15b1e8fb338d"><td class="mdescLeft">&#160;</td><td class="mdescRight">capacity of the item <br /></td></tr>
+<tr class="separator:a2150c22e41c70225bb4b15b1e8fb338d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>find gfortran, determine FC </p>
-<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Jan 2017</dd></dl>
+<div class="textblock"><h3>template&lt;typename T, typename V&gt;<br />
+struct limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;::VariableMoveCost</h3>
+
+<p>Wrapper for the move cost of an item. </p>
+
+<p>Definition at line <a class="el" href="a00385_source.html#l01338">1338</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a9d8cd42f8b757ca7562086384548516d"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename V&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00247.html">limbo::solvers::SearchByAdjustCoefficient</a>&lt; T, V &gt;::VariableMoveCost::VariableMoveCost </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00103.html#a3f0a7bd809c482e1d2d2dcd9a50d9e01">variable_type</a>&#160;</td>
+          <td class="paramname"><em>var</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>mc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>cap</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">FC</td><td>set FC as fortran compiler </td></tr>
+    <tr><td class="paramname">var</td><td>variable </td></tr>
+    <tr><td class="paramname">mc</td><td>move cost </td></tr>
+    <tr><td class="paramname">cap</td><td>capacity </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition in file <a class="el" href="a00272_source.html">FindGfortran.mk</a>.</p>
-</div></div><!-- contents -->
+<p>Definition at line <a class="el" href="a00385_source.html#l01348">1348</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

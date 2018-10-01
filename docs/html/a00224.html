@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: TfParser Class Reference</title>
+<title>Limbo: boost::geometry::traits::point_type&lt; GdsParser::GdsDB::GdsPolygon &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,101 +87,46 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="a00424.html">boost</a></li><li class="navelem"><b>geometry</b></li><li class="navelem"><b>traits</b></li><li class="navelem"><a class="el" href="a00224.html">point_type< GdsParser::GdsDB::GdsPolygon ></a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="a00397.html">List of all members</a>  </div>
+<a href="a00481.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">TfParser Class Reference</div>  </div>
+<div class="title">boost::geometry::traits::point_type&lt; GdsParser::GdsDB::GdsPolygon &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Tf parser for technology file.  
+<p>specialization for point_type  
  <a href="a00224.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00300_source.html">TfParser.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00361_source.html">GdsObjects.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00208.html">SkipperGrammar</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">grammar of skipper  <a href="a00208.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00221.html">TfDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for tf database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00221.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00223.html">TfGrammar</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">define grammar  <a href="a00223.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ac4370257cf00d969472a040aefeb1884"><td class="memTemplParams" colspan="2">template&lt;typename DataBaseType &gt; </td></tr>
-<tr class="memitem:ac4370257cf00d969472a040aefeb1884"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00224.html#ac4370257cf00d969472a040aefeb1884">read</a> (DataBaseType &amp;db, const string &amp;tfFile)</td></tr>
-<tr class="memdesc:ac4370257cf00d969472a040aefeb1884"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to read tf file.  <a href="#ac4370257cf00d969472a040aefeb1884">More...</a><br /></td></tr>
-<tr class="separator:ac4370257cf00d969472a040aefeb1884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a21c9e97dd57bc5efc16b8a481b401043"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a21c9e97dd57bc5efc16b8a481b401043"></a>
+typedef <br class="typebreak" />
+GdsParser::GdsDB::GdsObject::point_type&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
+<tr class="separator:a21c9e97dd57bc5efc16b8a481b401043"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Tf parser for technology file. </p>
-<p>Developed with Boost.Spirit </p>
+<div class="textblock"><h3>template&lt;&gt;<br />
+struct boost::geometry::traits::point_type&lt; GdsParser::GdsDB::GdsPolygon &gt;</h3>
 
-<p>Definition at line <a class="el" href="a00300_source.html#l00052">52</a> of file <a class="el" href="a00300_source.html">TfParser.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ac4370257cf00d969472a040aefeb1884"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename DataBaseType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TfParser::read </td>
-          <td>(</td>
-          <td class="paramtype">DataBaseType &amp;&#160;</td>
-          <td class="paramname"><em>db</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>tfFile</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>specialization for point_type </p>
 
-<p>API to read tf file. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">db</td><td>database </td></tr>
-    <tr><td class="paramname">tfFile</td><td>tf file </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00300_source.html#l00199">199</a> of file <a class="el" href="a00300_source.html">TfParser.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/tf/spirit/<a class="el" href="a00300_source.html">TfParser.h</a></li>
+<p>Definition at line <a class="el" href="a00361_source.html#l00754">754</a> of file <a class="el" href="a00361_source.html">GdsObjects.h</a>.</p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/<a class="el" href="a00361_source.html">GdsObjects.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

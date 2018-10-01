@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::geometry::container_traits&lt; std::list&lt; T &gt; &gt; Struct Template Reference</title>
+<title>Limbo: Limbo.Parsers.TfParser</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,9 +43,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li class="current"><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -65,14 +65,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </li>
     </ul>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
-      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
-      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
-    </ul>
-  </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -87,153 +79,83 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00370.html">geometry</a></li><li class="navelem"><a class="el" href="a00030.html">container_traits< std::list< T > ></a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="a00522.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::geometry::container_traits&lt; std::list&lt; T &gt; &gt; Struct Template Reference</div>  </div>
+<div class="title">Limbo.Parsers.TfParser </div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>partial specialization of <a class="el" href="a00029.html">limbo::geometry::container_traits</a> for commonly used data structures like std::list  
- <a href="a00030.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="a00263_source.html">Geometry.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="memitem:aa3e2f61154ef9be3945d09c65265294a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3e2f61154ef9be3945d09c65265294a"></a>
-typedef std::list&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>container_type</b></td></tr>
-<tr class="separator:aa3e2f61154ef9be3945d09c65265294a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2696935c641a350768d869a710f0b0b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2696935c641a350768d869a710f0b0b"></a>
-typedef container_type::value_type&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b></td></tr>
-<tr class="separator:ab2696935c641a350768d869a710f0b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49bcad6c7aa9a1da68501aae5790c15b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49bcad6c7aa9a1da68501aae5790c15b"></a>
-typedef <br class="typebreak" />
-container_type::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator_type</b></td></tr>
-<tr class="separator:a49bcad6c7aa9a1da68501aae5790c15b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0185ed0018f766d5ecfdabbd7e8852ac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0185ed0018f766d5ecfdabbd7e8852ac"></a>
-typedef container_type::iterator&#160;</td><td class="memItemRight" valign="bottom"><b>iterator_type</b></td></tr>
-<tr class="separator:a0185ed0018f766d5ecfdabbd7e8852ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a807d7dae45fca0ca3157270b6608facc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00030.html#a807d7dae45fca0ca3157270b6608facc">insert</a> (container_type &amp;container, value_type const &amp;v)</td></tr>
-<tr class="memdesc:a807d7dae45fca0ca3157270b6608facc"><td class="mdescLeft">&#160;</td><td class="mdescRight">endnowarn  <a href="#a807d7dae45fca0ca3157270b6608facc">More...</a><br /></td></tr>
-<tr class="separator:a807d7dae45fca0ca3157270b6608facc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21f5eb2d9f387a9921591e6e06d75e43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a21f5eb2d9f387a9921591e6e06d75e43"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00030.html#a21f5eb2d9f387a9921591e6e06d75e43">insert</a> (container_type &amp;container, iterator_type it, value_type const &amp;v)</td></tr>
-<tr class="memdesc:a21f5eb2d9f387a9921591e6e06d75e43"><td class="mdescLeft">&#160;</td><td class="mdescRight">insert value to container with hint of iterator <br /></td></tr>
-<tr class="separator:a21f5eb2d9f387a9921591e6e06d75e43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab42fb4dd28aa49396fbc1bcf7b545540"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab42fb4dd28aa49396fbc1bcf7b545540"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00030.html#ab42fb4dd28aa49396fbc1bcf7b545540">erase</a> (container_type &amp;container, iterator_type it)</td></tr>
-<tr class="memdesc:ab42fb4dd28aa49396fbc1bcf7b545540"><td class="mdescLeft">&#160;</td><td class="mdescRight">erase an element from container with iterator <br /></td></tr>
-<tr class="separator:ab42fb4dd28aa49396fbc1bcf7b545540"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a781bbde755112e0380be1bc9dd2cdade"><td class="memTemplParams" colspan="2">template&lt;typename PointCompareType &gt; </td></tr>
-<tr class="memitem:a781bbde755112e0380be1bc9dd2cdade"><td class="memTemplItemLeft" align="right" valign="top">static container_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00030.html#a781bbde755112e0380be1bc9dd2cdade">construct</a> (PointCompareType const &amp;)</td></tr>
-<tr class="memdesc:a781bbde755112e0380be1bc9dd2cdade"><td class="mdescLeft">&#160;</td><td class="mdescRight">a default construct function  <a href="#a781bbde755112e0380be1bc9dd2cdade">More...</a><br /></td></tr>
-<tr class="separator:a781bbde755112e0380be1bc9dd2cdade"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename T&gt;<br />
-struct limbo::geometry::container_traits&lt; std::list&lt; T &gt; &gt;</h3>
-
-<p>partial specialization of <a class="el" href="a00029.html">limbo::geometry::container_traits</a> for commonly used data structures like std::list </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>data type </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00263_source.html#l00304">304</a> of file <a class="el" href="a00263_source.html">Geometry.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a781bbde755112e0380be1bc9dd2cdade"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<div class="memtemplate">
-template&lt;typename PointCompareType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static container_type <a class="el" href="a00029.html">limbo::geometry::container_traits</a>&lt; std::list&lt; T &gt; &gt;::construct </td>
-          <td>(</td>
-          <td class="paramtype">PointCompareType const &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>a default construct function </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">PointCompareType</td><td>comparison type for point, not used here </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00263_source.html#l00322">322</a> of file <a class="el" href="a00263_source.html">Geometry.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a807d7dae45fca0ca3157270b6608facc"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void <a class="el" href="a00029.html">limbo::geometry::container_traits</a>&lt; std::list&lt; T &gt; &gt;::insert </td>
-          <td>(</td>
-          <td class="paramtype">container_type &amp;&#160;</td>
-          <td class="paramname"><em>container</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">value_type const &amp;&#160;</td>
-          <td class="paramname"><em>v</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>endnowarn </p>
-<p>insert value to container </p>
-
-<p>Definition at line <a class="el" href="a00263_source.html#l00314">314</a> of file <a class="el" href="a00263_source.html">Geometry.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/geometry/<a class="el" href="a00263_source.html">Geometry.h</a></li>
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="#Parsers_TfParser_Introduction">Introduction</a></li>
+<li class="level1"><a href="#Parsers_TfParser_Examples">Examples</a><ul><li class="level2"><a href="#Parsers_TfParser_Spirit">Boost.Spirit Parser</a></li>
+<li class="level2"><a href="#Parsers_TfParser_Examples_All">All Examples</a></li>
 </ul>
-</div><!-- contents -->
+</li>
+<li class="level1"><a href="#Parsers_TfParser_References">References</a></li>
+</ul>
+</div>
+<div class="textblock"><h1><a class="anchor" id="Parsers_TfParser_Introduction"></a>
+Introduction</h1>
+<p>Technology file (tf) is used as a configuration file in EDA tools for different technology nodes. It defines various properties like the layer mapping. Currently the parser reads mapping of layer name, layer id and layer abbreviation from the technology file.</p>
+<h1><a class="anchor" id="Parsers_TfParser_Examples"></a>
+Examples</h1>
+<h2><a class="anchor" id="Parsers_TfParser_Spirit"></a>
+Boost.Spirit Parser</h2>
+<p>See documented version: <a class="el" href="a00411.html">test/parsers/tf/test_spirit.cpp</a> </p><div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00371.html">limbo/parsers/tf/spirit/TfParser.h</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">using</span> std::cout;</div>
+<div class="line"><span class="keyword">using</span> std::endl;</div>
+<div class="line"><span class="keyword">using</span> std::string;</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">struct </span><a class="code" href="a00264.html">TfDataBase</a> : <span class="keyword">public</span> <a class="code" href="a00263.html">TfParser::TfDataBase</a></div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">void</span> <a class="code" href="a00264.html#a472c2c374d651152f216391a72e6925e">add_tf_layer_id</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; s1, int32_t <span class="keyword">const</span>&amp; s2, <span class="keywordtype">string</span> <span class="keyword">const</span>&amp; s3)</div>
+<div class="line">    {</div>
+<div class="line">        cout &lt;&lt; __func__ &lt;&lt; endl; </div>
+<div class="line">        cout &lt;&lt; s1 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; s2 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; s3 &lt;&lt; endl;</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="a00400.html#ad346d2cc622126c018bb0954eee9b1fa">test1</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
+<div class="line">{</div>
+<div class="line">    cout &lt;&lt; <span class="stringliteral">&quot;////////////// test1 ////////////////&quot;</span> &lt;&lt; endl;</div>
+<div class="line">    <a class="code" href="a00264.html">TfDataBase</a> db;</div>
+<div class="line">    <a class="code" href="a00266.html#ac4370257cf00d969472a040aefeb1884">TfParser::read</a>(db, filename);</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00390.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">    <span class="keywordflow">if</span> (argc &gt; 1)</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="a00400.html#ad346d2cc622126c018bb0954eee9b1fa">test1</a>(argv[1]);</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">else</span> </div>
+<div class="line">        cout &lt;&lt; <span class="stringliteral">&quot;at least 1 argument is required&quot;</span> &lt;&lt; endl;</div>
+<div class="line"></div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Compiling and running commands (assuming LIMBO_DIR and BOOST_DIR are exported as the environment variable to the path where limbo library is installed) </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;g++ -o test_spirit test_spirit.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include </div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;./test_spirit benchmarks/technology.tf</div>
+</div><!-- fragment --><h2><a class="anchor" id="Parsers_TfParser_Examples_All"></a>
+All Examples</h2>
+<ul>
+<li><a class="el" href="a00411.html">test/parsers/tf/test_spirit.cpp</a></li>
+</ul>
+<h1><a class="anchor" id="Parsers_TfParser_References"></a>
+References</h1>
+<ul>
+<li><a class="el" href="a00371.html">limbo/parsers/tf/spirit/TfParser.h</a></li>
+<li><a class="el" href="a00370.html">limbo/parsers/tf/spirit/ErrorHandler.h</a> </li>
+</ul>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

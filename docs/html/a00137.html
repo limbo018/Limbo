@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::solvers::MatrixCSR&lt; T, I, StartingIndex &gt; Struct Template Reference</title>
+<title>Limbo: GdsParser::GdsText Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,321 +89,91 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00372.html">solvers</a></li><li class="navelem"><a class="el" href="a00137.html">MatrixCSR</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00431.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00137.html">GdsText</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
-<a href="a00578.html">List of all members</a>  </div>
+<a href="a00528.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::solvers::MatrixCSR&lt; T, I, StartingIndex &gt; Struct Template Reference</div>  </div>
+<div class="title">GdsParser::GdsText Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Compressed sparse row (CSR) matrix.  
+<p>GDSII TEXT.  
  <a href="a00137.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00316_source.html">Solvers.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00362_source.html">GdsDriver.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:af84a6ee576def0d0c7c98b20734a7fac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af84a6ee576def0d0c7c98b20734a7fac"></a>
-typedef T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#af84a6ee576def0d0c7c98b20734a7fac">value_type</a></td></tr>
-<tr class="memdesc:af84a6ee576def0d0c7c98b20734a7fac"><td class="mdescLeft">&#160;</td><td class="mdescRight">value type <br /></td></tr>
-<tr class="separator:af84a6ee576def0d0c7c98b20734a7fac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c35e9ccede4f839c5d5262e6832e293"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c35e9ccede4f839c5d5262e6832e293"></a>
-typedef I&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a></td></tr>
-<tr class="memdesc:a6c35e9ccede4f839c5d5262e6832e293"><td class="mdescLeft">&#160;</td><td class="mdescRight">index type <br /></td></tr>
-<tr class="separator:a6c35e9ccede4f839c5d5262e6832e293"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a16e59d1cb3d6a53a9f72481071f5766a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16e59d1cb3d6a53a9f72481071f5766a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a16e59d1cb3d6a53a9f72481071f5766a">MatrixCSR</a> ()</td></tr>
-<tr class="memdesc:a16e59d1cb3d6a53a9f72481071f5766a"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:a16e59d1cb3d6a53a9f72481071f5766a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ca8d786144e460cfd11b5869cb449fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ca8d786144e460cfd11b5869cb449fd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a8ca8d786144e460cfd11b5869cb449fd">MatrixCSR</a> (<a class="el" href="a00137.html">MatrixCSR</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:a8ca8d786144e460cfd11b5869cb449fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor <br /></td></tr>
-<tr class="separator:a8ca8d786144e460cfd11b5869cb449fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56ff12448ce7a7d805a76580b42ae91a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56ff12448ce7a7d805a76580b42ae91a"></a>
-<a class="el" href="a00137.html">MatrixCSR</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a56ff12448ce7a7d805a76580b42ae91a">operator=</a> (<a class="el" href="a00137.html">MatrixCSR</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:a56ff12448ce7a7d805a76580b42ae91a"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment <br /></td></tr>
-<tr class="separator:a56ff12448ce7a7d805a76580b42ae91a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac98ecee46ab4675b5d18b95f0d4d6c38"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac98ecee46ab4675b5d18b95f0d4d6c38"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#ac98ecee46ab4675b5d18b95f0d4d6c38">~MatrixCSR</a> ()</td></tr>
-<tr class="memdesc:ac98ecee46ab4675b5d18b95f0d4d6c38"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
-<tr class="separator:ac98ecee46ab4675b5d18b95f0d4d6c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a604cce71d1eb7cdb2db7011866016911"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a604cce71d1eb7cdb2db7011866016911">initialize</a> (<a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a> nr, <a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a> nc, <a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a> nv)</td></tr>
-<tr class="memdesc:a604cce71d1eb7cdb2db7011866016911"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize matrix.  <a href="#a604cce71d1eb7cdb2db7011866016911">More...</a><br /></td></tr>
-<tr class="separator:a604cce71d1eb7cdb2db7011866016911"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33d927d08b245e0b04a32b0e5fa28003"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a33d927d08b245e0b04a32b0e5fa28003"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a33d927d08b245e0b04a32b0e5fa28003">reset</a> ()</td></tr>
-<tr class="memdesc:a33d927d08b245e0b04a32b0e5fa28003"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy matrix and recycle memory. <br /></td></tr>
-<tr class="separator:a33d927d08b245e0b04a32b0e5fa28003"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9e6739b2d81b71f8753d9f097d660b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#ac9e6739b2d81b71f8753d9f097d660b9">copy</a> (<a class="el" href="a00137.html">MatrixCSR</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:ac9e6739b2d81b71f8753d9f097d660b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy object  <a href="#ac9e6739b2d81b71f8753d9f097d660b9">More...</a><br /></td></tr>
-<tr class="separator:ac9e6739b2d81b71f8753d9f097d660b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab38f4b6603e6744da05988b699928d49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00137.html#af84a6ee576def0d0c7c98b20734a7fac">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#ab38f4b6603e6744da05988b699928d49">at</a> (<a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a> i, <a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a> j) const </td></tr>
-<tr class="memdesc:ab38f4b6603e6744da05988b699928d49"><td class="mdescLeft">&#160;</td><td class="mdescRight">get element  <a href="#ab38f4b6603e6744da05988b699928d49">More...</a><br /></td></tr>
-<tr class="separator:ab38f4b6603e6744da05988b699928d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad80a27dc8e8435353acc027622d23134"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#ad80a27dc8e8435353acc027622d23134">set</a> (<a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a> nr, <a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a> nc, <a class="el" href="a00127.html">LinearConstraint</a>&lt; <a class="el" href="a00137.html#af84a6ee576def0d0c7c98b20734a7fac">value_type</a> &gt; const *vConstraint)</td></tr>
-<tr class="memdesc:ad80a27dc8e8435353acc027622d23134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set from array of constraints.  <a href="#ad80a27dc8e8435353acc027622d23134">More...</a><br /></td></tr>
-<tr class="separator:ad80a27dc8e8435353acc027622d23134"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2830345fb19f6edca048f9295744c752"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2830345fb19f6edca048f9295744c752"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a2830345fb19f6edca048f9295744c752">GdsText</a> ()</td></tr>
+<tr class="memdesc:a2830345fb19f6edca048f9295744c752"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
+<tr class="separator:a2830345fb19f6edca048f9295744c752"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26cd5ce2315d65a5a990c8dce559bfc0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a26cd5ce2315d65a5a990c8dce559bfc0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a26cd5ce2315d65a5a990c8dce559bfc0">reset</a> ()</td></tr>
+<tr class="memdesc:a26cd5ce2315d65a5a990c8dce559bfc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br /></td></tr>
+<tr class="separator:a26cd5ce2315d65a5a990c8dce559bfc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aa2bf6d72f86de3d68cfb28667ab93b77"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2bf6d72f86de3d68cfb28667ab93b77"></a>
-<a class="el" href="a00137.html#af84a6ee576def0d0c7c98b20734a7fac">value_type</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#aa2bf6d72f86de3d68cfb28667ab93b77">vElement</a></td></tr>
-<tr class="memdesc:aa2bf6d72f86de3d68cfb28667ab93b77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flatten data values. A real or complex array that contains the non-zero elements of A. Values of the non-zero elements of A are mapped into the values array using the row-major storage mapping described above. <br /></td></tr>
-<tr class="separator:aa2bf6d72f86de3d68cfb28667ab93b77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8df07f378ca13914590ccd96cb1b011"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8df07f378ca13914590ccd96cb1b011"></a>
-<a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#ac8df07f378ca13914590ccd96cb1b011">vColumn</a></td></tr>
-<tr class="memdesc:ac8df07f378ca13914590ccd96cb1b011"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element i of the integer array columns is the number of the column in A that contains the i-th value in the values array. <br /></td></tr>
-<tr class="separator:ac8df07f378ca13914590ccd96cb1b011"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6622a7ed04c3fe8a5dbc708a7775609e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6622a7ed04c3fe8a5dbc708a7775609e"></a>
-<a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a6622a7ed04c3fe8a5dbc708a7775609e">vRowBeginIndex</a></td></tr>
-<tr class="memdesc:a6622a7ed04c3fe8a5dbc708a7775609e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element j of this integer array gives the index of the element in the values array that is first non-zero element in a row j of A. Note that this index is equal to vRowBeginIndex(j) - vRowBeginIndex(1)+StartingIndex. <br /></td></tr>
-<tr class="separator:a6622a7ed04c3fe8a5dbc708a7775609e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a902a3756889d05bb6d2015f74a3b96b7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a902a3756889d05bb6d2015f74a3b96b7"></a>
-<a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a902a3756889d05bb6d2015f74a3b96b7">numRows</a></td></tr>
-<tr class="memdesc:a902a3756889d05bb6d2015f74a3b96b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of rows, not in the CSR format <br /></td></tr>
-<tr class="separator:a902a3756889d05bb6d2015f74a3b96b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8a0937dd43cce9a42e4fc0ab133e2f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8a0937dd43cce9a42e4fc0ab133e2f0"></a>
-<a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#ac8a0937dd43cce9a42e4fc0ab133e2f0">numColumns</a></td></tr>
-<tr class="memdesc:ac8a0937dd43cce9a42e4fc0ab133e2f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of columns, not in the CSR format <br /></td></tr>
-<tr class="separator:ac8a0937dd43cce9a42e4fc0ab133e2f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76030cb5b0d8b7b3dea5775f19f7c11d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a76030cb5b0d8b7b3dea5775f19f7c11d"></a>
-<a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a76030cb5b0d8b7b3dea5775f19f7c11d">numElements</a></td></tr>
-<tr class="memdesc:a76030cb5b0d8b7b3dea5775f19f7c11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of non-zero elements <br /></td></tr>
-<tr class="separator:a76030cb5b0d8b7b3dea5775f19f7c11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:a48154d22f59600ab609b94ab79624f6a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a48154d22f59600ab609b94ab79624f6a"></a>
-static <a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a48154d22f59600ab609b94ab79624f6a">s_startingIndex</a> = StartingIndex</td></tr>
-<tr class="memdesc:a48154d22f59600ab609b94ab79624f6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">starting index, like zero-based indexing or one-based indexing <br /></td></tr>
-<tr class="separator:a48154d22f59600ab609b94ab79624f6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ac4cb898fbd07937f9798d0f69a659d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ac4cb898fbd07937f9798d0f69a659d"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a3ac4cb898fbd07937f9798d0f69a659d">layer</a></td></tr>
+<tr class="memdesc:a3ac4cb898fbd07937f9798d0f69a659d"><td class="mdescLeft">&#160;</td><td class="mdescRight">layer <br /></td></tr>
+<tr class="separator:a3ac4cb898fbd07937f9798d0f69a659d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dcf1069574107a7b0d1d0e4e9388714"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9dcf1069574107a7b0d1d0e4e9388714"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a9dcf1069574107a7b0d1d0e4e9388714">texttype</a></td></tr>
+<tr class="memdesc:a9dcf1069574107a7b0d1d0e4e9388714"><td class="mdescLeft">&#160;</td><td class="mdescRight">text type <br /></td></tr>
+<tr class="separator:a9dcf1069574107a7b0d1d0e4e9388714"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f611a9588c219cca5836a02b82351b4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f611a9588c219cca5836a02b82351b4"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a1f611a9588c219cca5836a02b82351b4">presentation</a></td></tr>
+<tr class="memdesc:a1f611a9588c219cca5836a02b82351b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">presentation <br /></td></tr>
+<tr class="separator:a1f611a9588c219cca5836a02b82351b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7be47c307ef8cebfba4717975ed2edf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7be47c307ef8cebfba4717975ed2edf"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#af7be47c307ef8cebfba4717975ed2edf">strans</a></td></tr>
+<tr class="memdesc:af7be47c307ef8cebfba4717975ed2edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">strans <br /></td></tr>
+<tr class="separator:af7be47c307ef8cebfba4717975ed2edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac93594c5576e1ee3ba5c05d41905037b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac93594c5576e1ee3ba5c05d41905037b"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#ac93594c5576e1ee3ba5c05d41905037b">mag</a></td></tr>
+<tr class="memdesc:ac93594c5576e1ee3ba5c05d41905037b"><td class="mdescLeft">&#160;</td><td class="mdescRight">magnitude <br /></td></tr>
+<tr class="separator:ac93594c5576e1ee3ba5c05d41905037b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac619e72439ceea0a9165b5a876c592ce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac619e72439ceea0a9165b5a876c592ce"></a>
+vector&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#ac619e72439ceea0a9165b5a876c592ce">position</a></td></tr>
+<tr class="memdesc:ac619e72439ceea0a9165b5a876c592ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">position <br /></td></tr>
+<tr class="separator:ac619e72439ceea0a9165b5a876c592ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c3f8643e8a0bfb50b9ea600d9d302a1"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html#a7c3f8643e8a0bfb50b9ea600d9d302a1">content</a></td></tr>
+<tr class="separator:a7c3f8643e8a0bfb50b9ea600d9d302a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename T, typename I, int StartingIndex = 1&gt;<br />
-struct limbo::solvers::MatrixCSR&lt; T, I, StartingIndex &gt;</h3>
+<div class="textblock"><p>GDSII TEXT. </p>
 
-<p>Compressed sparse row (CSR) matrix. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>value type </td></tr>
-    <tr><td class="paramname">I</td><td>index type </td></tr>
-    <tr><td class="paramname">StartingIndex</td><td>zero-based indexing or one-based indexing </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00082">82</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ab38f4b6603e6744da05988b699928d49"></a>
+<p>Definition at line <a class="el" href="a00362_source.html#l00048">48</a> of file <a class="el" href="a00362_source.html">GdsDriver.h</a>.</p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a7c3f8643e8a0bfb50b9ea600d9d302a1"></a>
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename I, int StartingIndex = 1&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00137.html#af84a6ee576def0d0c7c98b20734a7fac">value_type</a> <a class="el" href="a00137.html">limbo::solvers::MatrixCSR</a>&lt; T, I, StartingIndex &gt;::at </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a>&#160;</td>
-          <td class="paramname"><em>i</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a>&#160;</td>
-          <td class="paramname"><em>j</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="memname">string GdsParser::GdsText::content</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+<p>content </p>
 
-<p>get element </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">i</td><td>row index, starting from 0 </td></tr>
-    <tr><td class="paramname">j</td><td>column index, starting from 0 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>element found </dd></dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l01642">1642</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac9e6739b2d81b71f8753d9f097d660b9"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename I, int StartingIndex = 1&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00137.html">limbo::solvers::MatrixCSR</a>&lt; T, I, StartingIndex &gt;::copy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00137.html">MatrixCSR</a>&lt; T, I, StartingIndex &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>copy object </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l01621">1621</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a604cce71d1eb7cdb2db7011866016911"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename I, int StartingIndex = 1&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00137.html">limbo::solvers::MatrixCSR</a>&lt; T, I, StartingIndex &gt;::initialize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a>&#160;</td>
-          <td class="paramname"><em>nr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a>&#160;</td>
-          <td class="paramname"><em>nc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a>&#160;</td>
-          <td class="paramname"><em>nv</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Initialize matrix. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nr</td><td>number of rows </td></tr>
-    <tr><td class="paramname">nc</td><td>number of columns </td></tr>
-    <tr><td class="paramname">nv</td><td>number of non-zero values </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l01591">1591</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad80a27dc8e8435353acc027622d23134"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename I, int StartingIndex = 1&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00137.html">limbo::solvers::MatrixCSR</a>&lt; T, I, StartingIndex &gt;::set </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a>&#160;</td>
-          <td class="paramname"><em>nr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00137.html#a6c35e9ccede4f839c5d5262e6832e293">index_type</a>&#160;</td>
-          <td class="paramname"><em>nc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00127.html">LinearConstraint</a>&lt; <a class="el" href="a00137.html#af84a6ee576def0d0c7c98b20734a7fac">value_type</a> &gt; const *&#160;</td>
-          <td class="paramname"><em>vConstraint</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set from array of constraints. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nr</td><td>number of rows, i.e, number of constraints </td></tr>
-    <tr><td class="paramname">nc</td><td>number of columns, i.e., number of variables </td></tr>
-    <tr><td class="paramname">vConstraint</td><td>array of constraints </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l01667">1667</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
+<p>Definition at line <a class="el" href="a00362_source.html#l00056">56</a> of file <a class="el" href="a00362_source.html">GdsDriver.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00316_source.html">Solvers.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00362_source.html">GdsDriver.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

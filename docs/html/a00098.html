@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdsParser::GdsDB::GdsWriter Class Reference</title>
+<title>Limbo: limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,77 +89,98 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00360.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00361.html">GdsDB</a></li><li class="navelem"><a class="el" href="a00098.html">GdsWriter</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00436.html">algorithms</a></li><li class="navelem"><a class="el" href="a00098.html">EdgeLabelWriter</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="a00475.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00554.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser::GdsDB::GdsWriter Class Reference</div>  </div>
+<div class="title">limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>write GDSII file with GDSII database <a class="el" href="a00081.html">GdsParser::GdsDB::GdsDB</a>  
+<p>default <a class="el" href="a00098.html" title="default EdgeLabelWriter for write_graph ">EdgeLabelWriter</a> for write_graph  
  <a href="a00098.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00287_source.html">GdsIO.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00322_source.html">GraphUtility.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00098.png" usemap="#limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;_map" alt=""/>
+  <map id="limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;_map" name="limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;_map">
+<area href="a00058.html" alt="limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt;" shape="rect" coords="0,56,391,80"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:ae5bb7cd30329a868e5d4f54ed25767fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5bb7cd30329a868e5d4f54ed25767fe"></a>
-typedef <a class="el" href="a00081.html">GdsDB</a>&#160;</td><td class="memItemRight" valign="bottom"><b>gdsdb_type</b></td></tr>
-<tr class="separator:ae5bb7cd30329a868e5d4f54ed25767fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad54e2c8c79d3c69a3e14ab0a3911c4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adad54e2c8c79d3c69a3e14ab0a3911c4"></a>
+typedef GraphType&#160;</td><td class="memItemRight" valign="bottom"><b>graph_type</b></td></tr>
+<tr class="separator:adad54e2c8c79d3c69a3e14ab0a3911c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac049cae48dc3be43d9beec3cd6c4a7b9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac049cae48dc3be43d9beec3cd6c4a7b9"></a>
+typedef boost::graph_traits<br class="typebreak" />
+&lt; graph_type &gt;<br class="typebreak" />
+::edge_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>edge_descriptor</b></td></tr>
+<tr class="separator:ac049cae48dc3be43d9beec3cd6c4a7b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64895c900f7a369edbc4471173c13494"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64895c900f7a369edbc4471173c13494"></a>
+typedef boost::property_traits<br class="typebreak" />
+&lt; typename boost::property_map<br class="typebreak" />
+&lt; graph_type, <br class="typebreak" />
+boost::edge_weight_t &gt;<br class="typebreak" />
+::const_type &gt;::value_type&#160;</td><td class="memItemRight" valign="bottom"><b>edge_weight_type</b></td></tr>
+<tr class="separator:a64895c900f7a369edbc4471173c13494"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a21207c177029419b24eed0a00628ff22"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#a21207c177029419b24eed0a00628ff22">GdsWriter</a> (<a class="el" href="a00081.html">gdsdb_type</a> const &amp;db)</td></tr>
-<tr class="memdesc:a21207c177029419b24eed0a00628ff22"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a21207c177029419b24eed0a00628ff22">More...</a><br /></td></tr>
-<tr class="separator:a21207c177029419b24eed0a00628ff22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fd3c06e80b87238590b768dd7fe389d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#a5fd3c06e80b87238590b768dd7fe389d">operator()</a> (std::string const &amp;filename) const </td></tr>
-<tr class="memdesc:a5fd3c06e80b87238590b768dd7fe389d"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to write GDSII file.  <a href="#a5fd3c06e80b87238590b768dd7fe389d">More...</a><br /></td></tr>
-<tr class="separator:a5fd3c06e80b87238590b768dd7fe389d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">helper functions to write gdsii objects</div></td></tr>
-<tr class="memitem:ae4731da2f8173675215f5d68158123e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#ae4731da2f8173675215f5d68158123e0">write</a> (::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;gw, <a class="el" href="a00075.html">GdsCell</a> const &amp;cell) const </td></tr>
-<tr class="separator:ae4731da2f8173675215f5d68158123e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a433d47935eec5b4c7d884a366e25beb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#a433d47935eec5b4c7d884a366e25beb9">write</a> (::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;gw, <a class="el" href="a00088.html">GdsPolygon</a> const &amp;object) const </td></tr>
-<tr class="separator:a433d47935eec5b4c7d884a366e25beb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7c3dd231c3a0ee40945b32ec3cd4d4b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#ab7c3dd231c3a0ee40945b32ec3cd4d4b">write</a> (::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;gw, <a class="el" href="a00087.html">GdsPath</a> const &amp;object) const </td></tr>
-<tr class="separator:ab7c3dd231c3a0ee40945b32ec3cd4d4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7cebd48ff64970ba56d249d0af94874"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#af7cebd48ff64970ba56d249d0af94874">write</a> (::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;gw, <a class="el" href="a00096.html">GdsText</a> const &amp;object) const </td></tr>
-<tr class="separator:af7cebd48ff64970ba56d249d0af94874"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a858db7d78110b5a7e10d87e610dfe41d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#a858db7d78110b5a7e10d87e610dfe41d">write</a> (::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;gw, <a class="el" href="a00077.html">GdsCellReference</a> const &amp;object) const </td></tr>
-<tr class="separator:a858db7d78110b5a7e10d87e610dfe41d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93461020e5ae7bf6734ce7732979a457"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#a93461020e5ae7bf6734ce7732979a457">write</a> (::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;gw, <a class="el" href="a00076.html">GdsCellArray</a> const &amp;object) const </td></tr>
-<tr class="separator:a93461020e5ae7bf6734ce7732979a457"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf9377b519aee8ae51cc384a8de1067d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#abf9377b519aee8ae51cc384a8de1067d">EdgeLabelWriter</a> (graph_type const &amp;_g)</td></tr>
+<tr class="separator:abf9377b519aee8ae51cc384a8de1067d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91adec92335eeb259447796bb00a3f4f"><td class="memItemLeft" align="right" valign="top">edge_weight_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#a91adec92335eeb259447796bb00a3f4f">label</a> (edge_descriptor e) const </td></tr>
+<tr class="separator:a91adec92335eeb259447796bb00a3f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a267098161680f05d95b19841da24b6ba"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#a267098161680f05d95b19841da24b6ba">color</a> (edge_descriptor) const </td></tr>
+<tr class="separator:a267098161680f05d95b19841da24b6ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16a4d37ab57c09684de5bc5a526e9742"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#a16a4d37ab57c09684de5bc5a526e9742">style</a> (edge_descriptor) const </td></tr>
+<tr class="separator:a16a4d37ab57c09684de5bc5a526e9742"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:aec49f68821ad6acbd236d108dcc3cd78"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec49f68821ad6acbd236d108dcc3cd78"></a>
-<a class="el" href="a00081.html">gdsdb_type</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#aec49f68821ad6acbd236d108dcc3cd78">m_db</a></td></tr>
-<tr class="memdesc:aec49f68821ad6acbd236d108dcc3cd78"><td class="mdescLeft">&#160;</td><td class="mdescRight">reference to GDSII database <br /></td></tr>
-<tr class="separator:aec49f68821ad6acbd236d108dcc3cd78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a05275ad1d7efeeb90fb76e05d77b2c50"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05275ad1d7efeeb90fb76e05d77b2c50"></a>
+graph_type const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#a05275ad1d7efeeb90fb76e05d77b2c50">g</a></td></tr>
+<tr class="memdesc:a05275ad1d7efeeb90fb76e05d77b2c50"><td class="mdescLeft">&#160;</td><td class="mdescRight">bind graph object <br /></td></tr>
+<tr class="separator:a05275ad1d7efeeb90fb76e05d77b2c50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>write GDSII file with GDSII database <a class="el" href="a00081.html">GdsParser::GdsDB::GdsDB</a> </p>
+<div class="textblock"><h3>template&lt;typename GraphType&gt;<br />
+struct limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;</h3>
 
-<p>Definition at line <a class="el" href="a00287_source.html#l00118">118</a> of file <a class="el" href="a00287_source.html">GdsIO.h</a>.</p>
+<p>default <a class="el" href="a00098.html" title="default EdgeLabelWriter for write_graph ">EdgeLabelWriter</a> for write_graph </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">GraphType</td><td>graph type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00322_source.html#l00087">87</a> of file <a class="el" href="a00322_source.html">GraphUtility.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a21207c177029419b24eed0a00628ff22"></a>
+<a class="anchor" id="abf9377b519aee8ae51cc384a8de1067d"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">GdsParser::GdsDB::GdsWriter::GdsWriter </td>
+          <td class="memname"><a class="el" href="a00098.html">limbo::algorithms::EdgeLabelWriter</a>&lt; GraphType &gt;::<a class="el" href="a00098.html">EdgeLabelWriter</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00081.html">gdsdb_type</a> const &amp;&#160;</td>
-          <td class="paramname"><em>db</em></td><td>)</td>
+          <td class="paramtype">graph_type const &amp;&#160;</td>
+          <td class="paramname"><em>_g</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -169,249 +190,118 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">db</td><td>GDSII database </td></tr>
+    <tr><td class="paramname">_g</td><td>graph </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00287_source.html#l00127">127</a> of file <a class="el" href="a00287_source.html">GdsIO.h</a>.</p>
+<p>Definition at line <a class="el" href="a00322_source.html#l00099">99</a> of file <a class="el" href="a00322_source.html">GraphUtility.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a5fd3c06e80b87238590b768dd7fe389d"></a>
+<a class="anchor" id="a267098161680f05d95b19841da24b6ba"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void GdsParser::GdsDB::GdsWriter::operator() </td>
+          <td class="memname">std::string <a class="el" href="a00098.html">limbo::algorithms::EdgeLabelWriter</a>&lt; GraphType &gt;::color </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td class="paramtype">edge_descriptor&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>color </dd></dl>
 
-<p>API to write GDSII file. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>GDSII file </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Definition at line <a class="el" href="a00322_source.html#l00104">104</a> of file <a class="el" href="a00322_source.html">GraphUtility.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ae4731da2f8173675215f5d68158123e0"></a>
+<a class="anchor" id="a91adec92335eeb259447796bb00a3f4f"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void GdsParser::GdsDB::GdsWriter::write </td>
+          <td class="memname">edge_weight_type <a class="el" href="a00098.html">limbo::algorithms::EdgeLabelWriter</a>&lt; GraphType &gt;::label </td>
           <td>(</td>
-          <td class="paramtype">::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;&#160;</td>
-          <td class="paramname"><em>gw</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00075.html">GdsCell</a> const &amp;&#160;</td>
-          <td class="paramname"><em>cell</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="paramtype">edge_descriptor&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">gw</td><td>GDSII writer handler </td></tr>
-    <tr><td class="paramname">cell</td><td>GDSII cell object </td></tr>
+    <tr><td class="paramname">e</td><td>edge </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>label of edge </dd></dl>
+
+<p>Definition at line <a class="el" href="a00322_source.html#l00102">102</a> of file <a class="el" href="a00322_source.html">GraphUtility.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a433d47935eec5b4c7d884a366e25beb9"></a>
+<a class="anchor" id="a16a4d37ab57c09684de5bc5a526e9742"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void GdsParser::GdsDB::GdsWriter::write </td>
+          <td class="memname">std::string <a class="el" href="a00098.html">limbo::algorithms::EdgeLabelWriter</a>&lt; GraphType &gt;::style </td>
           <td>(</td>
-          <td class="paramtype">::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;&#160;</td>
-          <td class="paramname"><em>gw</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00088.html">GdsPolygon</a> const &amp;&#160;</td>
-          <td class="paramname"><em>object</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="paramtype">edge_descriptor&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">gw</td><td>GDSII writer handler </td></tr>
-    <tr><td class="paramname">object</td><td>GDSII polygon object </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>style </dd></dl>
+
+<p>Definition at line <a class="el" href="a00322_source.html#l00106">106</a> of file <a class="el" href="a00322_source.html">GraphUtility.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ab7c3dd231c3a0ee40945b32ec3cd4d4b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void GdsParser::GdsDB::GdsWriter::write </td>
-          <td>(</td>
-          <td class="paramtype">::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;&#160;</td>
-          <td class="paramname"><em>gw</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00087.html">GdsPath</a> const &amp;&#160;</td>
-          <td class="paramname"><em>object</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">gw</td><td>GDSII writer handler </td></tr>
-    <tr><td class="paramname">object</td><td>GDSII path object </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="af7cebd48ff64970ba56d249d0af94874"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void GdsParser::GdsDB::GdsWriter::write </td>
-          <td>(</td>
-          <td class="paramtype">::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;&#160;</td>
-          <td class="paramname"><em>gw</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00096.html">GdsText</a> const &amp;&#160;</td>
-          <td class="paramname"><em>object</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">gw</td><td>GDSII writer handler </td></tr>
-    <tr><td class="paramname">object</td><td>GDSII text object </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a858db7d78110b5a7e10d87e610dfe41d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void GdsParser::GdsDB::GdsWriter::write </td>
-          <td>(</td>
-          <td class="paramtype">::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;&#160;</td>
-          <td class="paramname"><em>gw</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00077.html">GdsCellReference</a> const &amp;&#160;</td>
-          <td class="paramname"><em>object</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">gw</td><td>GDSII writer handler </td></tr>
-    <tr><td class="paramname">object</td><td>GDSII cell reference object </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a93461020e5ae7bf6734ce7732979a457"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void GdsParser::GdsDB::GdsWriter::write </td>
-          <td>(</td>
-          <td class="paramtype">::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;&#160;</td>
-          <td class="paramname"><em>gw</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00076.html">GdsCellArray</a> const &amp;&#160;</td>
-          <td class="paramname"><em>object</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">gw</td><td>GDSII writer handler </td></tr>
-    <tr><td class="paramname">object</td><td>GDSII cell array object </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/<a class="el" href="a00287_source.html">GdsIO.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/<a class="el" href="a00322_source.html">GraphUtility.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

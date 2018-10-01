@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/MaxIndependentSet.h File Reference</title>
+<title>Limbo: GdfParser::StringArray Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,8 +45,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -67,8 +67,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -87,64 +89,139 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00430.html">GdfParser</a></li><li class="navelem"><a class="el" href="a00253.html">StringArray</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="a00513.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">MaxIndependentSet.h File Reference</div>  </div>
+<div class="title">GdfParser::StringArray Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>solve maximum independent sets with maximum cliques  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;deque&gt;</code><br />
-<code>#include &lt;boost/graph/bron_kerbosch_all_cliques.hpp&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00251_source.html">limbo/algorithms/GraphUtility.h</a>&gt;</code><br />
-</div>
-<p><a href="a00253_source.html">Go to the source code of this file.</a></p>
+<p>bison does not support vector very well, so here create a dummy class for string array.  
+ <a href="a00253.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00356_source.html">GdfDataBase.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for GdfParser::StringArray:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00253.png" usemap="#GdfParser::StringArray_map" alt=""/>
+  <map id="GdfParser::StringArray_map" name="GdfParser::StringArray_map">
+</map>
+ </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html">limbo::algorithms::MaxIndependentSetByMaxClique</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html">limbo::algorithms::MaxIndependentSetByMaxClique::clique_visitor_type&lt; GraphType, MisVisitorType &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for boost::bron_kerbosch_all_cliques  <a href="a00014.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:ad25ecb574e935967eb1df01324e1eb7e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad25ecb574e935967eb1df01324e1eb7e"></a>
+typedef vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>base_type</b></td></tr>
+<tr class="separator:ad25ecb574e935967eb1df01324e1eb7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00364"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html">limbo</a></td></tr>
-<tr class="memdesc:a00364"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00365"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00365.html">limbo::algorithms</a></td></tr>
-<tr class="memdesc:a00365"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.algorithms <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:adbeddadaaf2896c6cf254dd6b252a282"><td class="memTemplParams" colspan="2">template&lt;typename GraphType , typename VisitorType , typename AlgorithmType &gt; </td></tr>
-<tr class="memitem:adbeddadaaf2896c6cf254dd6b252a282"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00365.html#adbeddadaaf2896c6cf254dd6b252a282">limbo::algorithms::max_independent_set</a> (GraphType const &amp;g, VisitorType vis, AlgorithmType const &amp;)</td></tr>
-<tr class="separator:adbeddadaaf2896c6cf254dd6b252a282"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97d118046b971c19c5fcf93d779380d6"><td class="memTemplParams" colspan="2">template&lt;typename GraphType , typename MisVisitorType &gt; </td></tr>
-<tr class="memitem:a97d118046b971c19c5fcf93d779380d6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00365.html#a97d118046b971c19c5fcf93d779380d6">limbo::algorithms::max_independent_set</a> (GraphType const &amp;g, MisVisitorType vis, MaxIndependentSetByMaxClique const &amp;)</td></tr>
-<tr class="separator:a97d118046b971c19c5fcf93d779380d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6b6453076747a41f1ae79f799a1cc7fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00253.html#a6b6453076747a41f1ae79f799a1cc7fa">StringArray</a> (const allocator_type &amp;alloc=allocator_type())</td></tr>
+<tr class="separator:a6b6453076747a41f1ae79f799a1cc7fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc531de7d26017e5196a5806ab6463b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00253.html#abc531de7d26017e5196a5806ab6463b1">StringArray</a> (size_type n, const value_type &amp;val, const allocator_type &amp;alloc=allocator_type())</td></tr>
+<tr class="separator:abc531de7d26017e5196a5806ab6463b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>solve maximum independent sets with maximum cliques </p>
-<p>The maximum independent set of a graph is the maximum clique of its complement graph.</p>
-<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Feb 2015 </dd></dl>
+<div class="textblock"><p>bison does not support vector very well, so here create a dummy class for string array. </p>
 
-<p>Definition in file <a class="el" href="a00253_source.html">MaxIndependentSet.h</a>.</p>
-</div></div><!-- contents -->
+<p>Definition at line <a class="el" href="a00356_source.html#l00090">90</a> of file <a class="el" href="a00356_source.html">GdfDataBase.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a6b6453076747a41f1ae79f799a1cc7fa"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GdfParser::StringArray::StringArray </td>
+          <td>(</td>
+          <td class="paramtype">const allocator_type &amp;&#160;</td>
+          <td class="paramname"><em>alloc</em> = <code>allocator_type()</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">alloc</td><td>memory allocator </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00356_source.html#l00102">102</a> of file <a class="el" href="a00356_source.html">GdfDataBase.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abc531de7d26017e5196a5806ab6463b1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GdfParser::StringArray::StringArray </td>
+          <td>(</td>
+          <td class="paramtype">size_type&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const value_type &amp;&#160;</td>
+          <td class="paramname"><em>val</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const allocator_type &amp;&#160;</td>
+          <td class="paramname"><em>alloc</em> = <code>allocator_type()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>number of values </td></tr>
+    <tr><td class="paramname">val</td><td>data value </td></tr>
+    <tr><td class="paramname">alloc</td><td>memory allocator </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00356_source.html#l00108">108</a> of file <a class="el" href="a00356_source.html">GdfDataBase.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdf/bison/<a class="el" href="a00356_source.html">GdfDataBase.h</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

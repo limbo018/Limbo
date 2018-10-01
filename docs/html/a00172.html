@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdfParser::Path Struct Reference</title>
+<title>Limbo: limbo::solvers::LinearTerm&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,106 +89,1246 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00359.html">GdfParser</a></li><li class="navelem"><a class="el" href="a00172.html">Path</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00443.html">solvers</a></li><li class="navelem"><a class="el" href="a00172.html">LinearTerm</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00439.html">List of all members</a>  </div>
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="a00648.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdfParser::Path Struct Reference</div>  </div>
+<div class="title">limbo::solvers::LinearTerm&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>routing path  
+<p>Linear term.  
  <a href="a00172.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00285_source.html">GdfDataBase.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for GdfParser::Path:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="a00172.png" usemap="#GdfParser::Path_map" alt=""/>
-  <map id="GdfParser::Path_map" name="GdfParser::Path_map">
-<area href="a00117.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures. " alt="GdfParser::Item" shape="rect" coords="0,0,101,24"/>
-</map>
- </div></div>
+<p><code>#include &lt;<a class="el" href="a00387_source.html">Solvers.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:af57bf66e06263a21d1818561e91e027b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af57bf66e06263a21d1818561e91e027b"></a>
+typedef T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a></td></tr>
+<tr class="memdesc:af57bf66e06263a21d1818561e91e027b"><td class="mdescLeft">&#160;</td><td class="mdescRight">coefficient type <br /></td></tr>
+<tr class="separator:af57bf66e06263a21d1818561e91e027b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a322e070f6a169484530c5405c51bbb36"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a322e070f6a169484530c5405c51bbb36"></a>
+typedef <a class="el" href="a00270.html">Variable</a><br class="typebreak" />
+&lt; <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a></td></tr>
+<tr class="memdesc:a322e070f6a169484530c5405c51bbb36"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable type <br /></td></tr>
+<tr class="separator:a322e070f6a169484530c5405c51bbb36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4eb952f49660d5496689a83eea70a369"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4eb952f49660d5496689a83eea70a369"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a4eb952f49660d5496689a83eea70a369">Path</a> ()</td></tr>
-<tr class="memdesc:a4eb952f49660d5496689a83eea70a369"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:a4eb952f49660d5496689a83eea70a369"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22dca41ccc45561349c54cfb9caf64b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22dca41ccc45561349c54cfb9caf64b2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a22dca41ccc45561349c54cfb9caf64b2">reset</a> ()</td></tr>
-<tr class="memdesc:a22dca41ccc45561349c54cfb9caf64b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br /></td></tr>
-<tr class="separator:a22dca41ccc45561349c54cfb9caf64b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d823e487f2e1ac503c2782e4c605534"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a2d823e487f2e1ac503c2782e4c605534">print</a> (ostream &amp;ss) const </td></tr>
-<tr class="memdesc:a2d823e487f2e1ac503c2782e4c605534"><td class="mdescLeft">&#160;</td><td class="mdescRight">print data members  <a href="#a2d823e487f2e1ac503c2782e4c605534">More...</a><br /></td></tr>
-<tr class="separator:a2d823e487f2e1ac503c2782e4c605534"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a536b7ede59f1de5af1db674670165f67"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a536b7ede59f1de5af1db674670165f67">LinearTerm</a> (<a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a> var=<a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a>(), <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> coef=1)</td></tr>
+<tr class="memdesc:a536b7ede59f1de5af1db674670165f67"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a536b7ede59f1de5af1db674670165f67">More...</a><br /></td></tr>
+<tr class="separator:a536b7ede59f1de5af1db674670165f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7619883d80157f84270e9519bb323537"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a7619883d80157f84270e9519bb323537">LinearTerm</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:a7619883d80157f84270e9519bb323537"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#a7619883d80157f84270e9519bb323537">More...</a><br /></td></tr>
+<tr class="separator:a7619883d80157f84270e9519bb323537"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3eae7b5256f000d7eea4eb9d7ae6e9a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00172.html">LinearTerm</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#af3eae7b5256f000d7eea4eb9d7ae6e9a">operator=</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:af3eae7b5256f000d7eea4eb9d7ae6e9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment  <a href="#af3eae7b5256f000d7eea4eb9d7ae6e9a">More...</a><br /></td></tr>
+<tr class="separator:af3eae7b5256f000d7eea4eb9d7ae6e9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe37346423bd234a29b96486d0743a2f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe37346423bd234a29b96486d0743a2f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#afe37346423bd234a29b96486d0743a2f">~LinearTerm</a> ()</td></tr>
+<tr class="memdesc:afe37346423bd234a29b96486d0743a2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
+<tr class="separator:afe37346423bd234a29b96486d0743a2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3254499a56dceea3a76e5558bcd6127a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a3254499a56dceea3a76e5558bcd6127a">variable</a> () const </td></tr>
+<tr class="separator:a3254499a56dceea3a76e5558bcd6127a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dd1e56fc009c4570859f6b258e72364"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a0dd1e56fc009c4570859f6b258e72364">setVariable</a> (<a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a> const &amp;var)</td></tr>
+<tr class="separator:a0dd1e56fc009c4570859f6b258e72364"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6ba3fb10f76bcad4e18da926697affa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#af6ba3fb10f76bcad4e18da926697affa">coefficient</a> () const </td></tr>
+<tr class="separator:af6ba3fb10f76bcad4e18da926697affa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae12e674a36b423e3108299f959706b7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#ae12e674a36b423e3108299f959706b7f">setCoefficient</a> (<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> coef)</td></tr>
+<tr class="separator:ae12e674a36b423e3108299f959706b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0ba975672bef4f82f8b43eb959b373f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00172.html">LinearTerm</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#ad0ba975672bef4f82f8b43eb959b373f">operator-</a> () const </td></tr>
+<tr class="separator:ad0ba975672bef4f82f8b43eb959b373f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa167b4d1afabc112f0322a18842d9bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00172.html">LinearTerm</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#aaa167b4d1afabc112f0322a18842d9bd">negate</a> ()</td></tr>
+<tr class="separator:aaa167b4d1afabc112f0322a18842d9bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06ce1349c3ed2250dd8295cc8a22f457"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00172.html">LinearTerm</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a06ce1349c3ed2250dd8295cc8a22f457">operator*=</a> (<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> coef)</td></tr>
+<tr class="separator:a06ce1349c3ed2250dd8295cc8a22f457"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5cc2e7121604477ecd54cc4d9ab735e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00172.html">LinearTerm</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#aa5cc2e7121604477ecd54cc4d9ab735e">operator/=</a> (<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> coef)</td></tr>
+<tr class="separator:aa5cc2e7121604477ecd54cc4d9ab735e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45e65c65fd1a4a0254613885f8ec0735"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a45e65c65fd1a4a0254613885f8ec0735">operator==</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;rhs) const </td></tr>
+<tr class="separator:a45e65c65fd1a4a0254613885f8ec0735"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:aa07ee40d9061a4e99692af7c2831b026"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa07ee40d9061a4e99692af7c2831b026"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#aa07ee40d9061a4e99692af7c2831b026">name</a></td></tr>
-<tr class="memdesc:aa07ee40d9061a4e99692af7c2831b026"><td class="mdescLeft">&#160;</td><td class="mdescRight">path name <br /></td></tr>
-<tr class="separator:aa07ee40d9061a4e99692af7c2831b026"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0215d03f68347e50bde68e82bd04b16"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0215d03f68347e50bde68e82bd04b16"></a>
-std::vector&lt; <a class="el" href="a00173.html">PathObj</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#ad0215d03f68347e50bde68e82bd04b16">vPathObj</a></td></tr>
-<tr class="memdesc:ad0215d03f68347e50bde68e82bd04b16"><td class="mdescLeft">&#160;</td><td class="mdescRight">objects on the path <br /></td></tr>
-<tr class="separator:ad0215d03f68347e50bde68e82bd04b16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a6733338ad53a0d7e12ff51ecb27dd7fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a6733338ad53a0d7e12ff51ecb27dd7fa">copy</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:a6733338ad53a0d7e12ff51ecb27dd7fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy object  <a href="#a6733338ad53a0d7e12ff51ecb27dd7fa">More...</a><br /></td></tr>
+<tr class="separator:a6733338ad53a0d7e12ff51ecb27dd7fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a10a3149c085cdbb37f0edeae74c245c7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a10a3149c085cdbb37f0edeae74c245c7"></a>
+<a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a10a3149c085cdbb37f0edeae74c245c7">m_var</a></td></tr>
+<tr class="memdesc:a10a3149c085cdbb37f0edeae74c245c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable <br /></td></tr>
+<tr class="separator:a10a3149c085cdbb37f0edeae74c245c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8098ce7f847a44b25782295b48123e5f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8098ce7f847a44b25782295b48123e5f"></a>
+<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a8098ce7f847a44b25782295b48123e5f">m_coef</a></td></tr>
+<tr class="memdesc:a8098ce7f847a44b25782295b48123e5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">coefficient <br /></td></tr>
+<tr class="separator:a8098ce7f847a44b25782295b48123e5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ae22055eae79d308798f576fa227021e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00172.html">LinearTerm</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#ae22055eae79d308798f576fa227021e3">operator*</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;term, <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> coef)</td></tr>
+<tr class="separator:ae22055eae79d308798f576fa227021e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d1a12c508b85e8c22789857d7758af3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00172.html">LinearTerm</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a3d1a12c508b85e8c22789857d7758af3">operator*</a> (<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> coef, <a class="el" href="a00172.html">LinearTerm</a> const &amp;term)</td></tr>
+<tr class="separator:a3d1a12c508b85e8c22789857d7758af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88baac8c46d8937188f4f1bc0675148b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00172.html">LinearTerm</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a88baac8c46d8937188f4f1bc0675148b">operator/</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;term, <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> coef)</td></tr>
+<tr class="separator:a88baac8c46d8937188f4f1bc0675148b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7acc266e8dcf18b2eac8e482496f0d5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00170.html">LinearExpression</a><br class="typebreak" />
+&lt; <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a7acc266e8dcf18b2eac8e482496f0d5c">operator+</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;term, <a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a> const &amp;var)</td></tr>
+<tr class="separator:a7acc266e8dcf18b2eac8e482496f0d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d3b95fea33636488faa35044175f99d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00170.html">LinearExpression</a><br class="typebreak" />
+&lt; <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a9d3b95fea33636488faa35044175f99d">operator+</a> (<a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a> const &amp;var, <a class="el" href="a00172.html">LinearTerm</a> const &amp;term)</td></tr>
+<tr class="separator:a9d3b95fea33636488faa35044175f99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e6028f83d0f4bcb637c6bf190b62155"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00170.html">LinearExpression</a><br class="typebreak" />
+&lt; <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a0e6028f83d0f4bcb637c6bf190b62155">operator+</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;term1, <a class="el" href="a00172.html">LinearTerm</a> const &amp;term2)</td></tr>
+<tr class="separator:a0e6028f83d0f4bcb637c6bf190b62155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf813d56069a11ea35a8618706f065a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00170.html">LinearExpression</a><br class="typebreak" />
+&lt; <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#aaf813d56069a11ea35a8618706f065a2">operator-</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;term, <a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a> const &amp;var)</td></tr>
+<tr class="separator:aaf813d56069a11ea35a8618706f065a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a372f36c68b52aa24d3afdb2fac1fefba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00170.html">LinearExpression</a><br class="typebreak" />
+&lt; <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a372f36c68b52aa24d3afdb2fac1fefba">operator-</a> (<a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a> const &amp;var, <a class="el" href="a00172.html">LinearTerm</a> const &amp;term)</td></tr>
+<tr class="separator:a372f36c68b52aa24d3afdb2fac1fefba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae99c6d212263da41656ad7e4bd58951e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00170.html">LinearExpression</a><br class="typebreak" />
+&lt; <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#ae99c6d212263da41656ad7e4bd58951e">operator-</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;term1, <a class="el" href="a00172.html">LinearTerm</a> const &amp;term2)</td></tr>
+<tr class="separator:ae99c6d212263da41656ad7e4bd58951e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9090a41ffe5fcb95fd147ec5d72037e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00169.html">LinearConstraint</a><br class="typebreak" />
+&lt; <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#ae9090a41ffe5fcb95fd147ec5d72037e">operator&lt;</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;term, <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> rhs)</td></tr>
+<tr class="memdesc:ae9090a41ffe5fcb95fd147ec5d72037e"><td class="mdescLeft">&#160;</td><td class="mdescRight">overload &lt;  <a href="#ae9090a41ffe5fcb95fd147ec5d72037e">More...</a><br /></td></tr>
+<tr class="separator:ae9090a41ffe5fcb95fd147ec5d72037e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c58db60e0efd15262863206b7e7bd57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00169.html">LinearConstraint</a><br class="typebreak" />
+&lt; <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a2c58db60e0efd15262863206b7e7bd57">operator&lt;=</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;term, <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> rhs)</td></tr>
+<tr class="memdesc:a2c58db60e0efd15262863206b7e7bd57"><td class="mdescLeft">&#160;</td><td class="mdescRight">overload &lt;=, same as &lt;  <a href="#a2c58db60e0efd15262863206b7e7bd57">More...</a><br /></td></tr>
+<tr class="separator:a2c58db60e0efd15262863206b7e7bd57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67b20f834bbf95e727b948fce3abe3bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00169.html">LinearConstraint</a><br class="typebreak" />
+&lt; <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a67b20f834bbf95e727b948fce3abe3bd">operator&gt;</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;term, <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> rhs)</td></tr>
+<tr class="memdesc:a67b20f834bbf95e727b948fce3abe3bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">overload &gt;  <a href="#a67b20f834bbf95e727b948fce3abe3bd">More...</a><br /></td></tr>
+<tr class="separator:a67b20f834bbf95e727b948fce3abe3bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a050c5b12b15d0de4e9ba45a298a3c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00169.html">LinearConstraint</a><br class="typebreak" />
+&lt; <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#a7a050c5b12b15d0de4e9ba45a298a3c4">operator&gt;=</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;term, <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> rhs)</td></tr>
+<tr class="memdesc:a7a050c5b12b15d0de4e9ba45a298a3c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">overload &gt;=, same as &gt;  <a href="#a7a050c5b12b15d0de4e9ba45a298a3c4">More...</a><br /></td></tr>
+<tr class="separator:a7a050c5b12b15d0de4e9ba45a298a3c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea0940d82fb41953200d903c98df55e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00169.html">LinearConstraint</a><br class="typebreak" />
+&lt; <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html#aea0940d82fb41953200d903c98df55e7">operator==</a> (<a class="el" href="a00172.html">LinearTerm</a> const &amp;term, <a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> rhs)</td></tr>
+<tr class="separator:aea0940d82fb41953200d903c98df55e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>routing path </p>
+<div class="textblock"><h3>template&lt;typename T&gt;<br />
+class limbo::solvers::LinearTerm&lt; T &gt;</h3>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00284">284</a> of file <a class="el" href="a00285_source.html">GdfDataBase.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a2d823e487f2e1ac503c2782e4c605534"></a>
+<p>Linear term. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>coefficient type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00074">74</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a536b7ede59f1de5af1db674670165f67"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void GdfParser::Path::print </td>
+          <td class="memname"><a class="el" href="a00172.html">limbo::solvers::LinearTerm</a>&lt; T &gt;::<a class="el" href="a00172.html">LinearTerm</a> </td>
           <td>(</td>
-          <td class="paramtype">ostream &amp;&#160;</td>
-          <td class="paramname"><em>ss</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a>&#160;</td>
+          <td class="paramname"><em>var</em> = <code><a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a>()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>coef</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">var</td><td>variable </td></tr>
+    <tr><td class="paramname">coef</td><td>coefficient </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00327">327</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7619883d80157f84270e9519bb323537"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00172.html">limbo::solvers::LinearTerm</a>&lt; T &gt;::<a class="el" href="a00172.html">LinearTerm</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>copy constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00334">334</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="af6ba3fb10f76bcad4e18da926697affa"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a> <a class="el" href="a00172.html">limbo::solvers::LinearTerm</a>&lt; T &gt;::coefficient </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>coefficient </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00356">356</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6733338ad53a0d7e12ff51ecb27dd7fa"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00172.html">limbo::solvers::LinearTerm</a>&lt; T &gt;::copy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>print data members </p>
+<p>copy object </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ss</td><td>output stream </td></tr>
+    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="a00117.html#aeb2483225aca5843a2285910c089bcb4">GdfParser::Item</a>.</p>
-
-<p>Definition at line <a class="el" href="a00285_source.html#l00302">302</a> of file <a class="el" href="a00285_source.html">GdfDataBase.h</a>.</p>
+<p>Definition at line <a class="el" href="a00387_source.html#l00515">515</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdf/bison/<a class="el" href="a00285_source.html">GdfDataBase.h</a></li>
+<a class="anchor" id="aaa167b4d1afabc112f0322a18842d9bd"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00172.html">LinearTerm</a>&amp; <a class="el" href="a00172.html">limbo::solvers::LinearTerm</a>&lt; T &gt;::negate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>self-negation </p><dl class="section return"><dt>Returns</dt><dd>the object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00369">369</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a06ce1349c3ed2250dd8295cc8a22f457"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00172.html">LinearTerm</a>&amp; <a class="el" href="a00172.html">limbo::solvers::LinearTerm</a>&lt; T &gt;::operator*= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>coef</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload multiply and assignment </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">coef</td><td>coefficient </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00395">395</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad0ba975672bef4f82f8b43eb959b373f"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00172.html">LinearTerm</a> <a class="el" href="a00172.html">limbo::solvers::LinearTerm</a>&lt; T &gt;::operator- </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload negation </p><dl class="section return"><dt>Returns</dt><dd>a copy of new object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00362">362</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa5cc2e7121604477ecd54cc4d9ab735e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00172.html">LinearTerm</a>&amp; <a class="el" href="a00172.html">limbo::solvers::LinearTerm</a>&lt; T &gt;::operator/= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>coef</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload divide and assignment </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">coef</td><td>coefficient </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00413">413</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af3eae7b5256f000d7eea4eb9d7ae6e9a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00172.html">LinearTerm</a>&amp; <a class="el" href="a00172.html">limbo::solvers::LinearTerm</a>&lt; T &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>assignment </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00340">340</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a45e65c65fd1a4a0254613885f8ec0735"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="a00172.html">limbo::solvers::LinearTerm</a>&lt; T &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload equal </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if two terms are equal </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00508">508</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae12e674a36b423e3108299f959706b7f"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00172.html">limbo::solvers::LinearTerm</a>&lt; T &gt;::setCoefficient </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>coef</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">coef</td><td>coefficient </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00358">358</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0dd1e56fc009c4570859f6b258e72364"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00172.html">limbo::solvers::LinearTerm</a>&lt; T &gt;::setVariable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>var</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">var</td><td>variable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00354">354</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3254499a56dceea3a76e5558bcd6127a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a> const&amp; <a class="el" href="a00172.html">limbo::solvers::LinearTerm</a>&lt; T &gt;::variable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>variable </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00352">352</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a class="anchor" id="ae22055eae79d308798f576fa227021e3"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00172.html">LinearTerm</a> operator* </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>coef</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload multiply by a value </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">term</td><td>term </td></tr>
+    <tr><td class="paramname">coef</td><td>coefficient </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>result object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00378">378</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3d1a12c508b85e8c22789857d7758af3"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00172.html">LinearTerm</a> operator* </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>coef</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload a value multiply a term </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">coef</td><td>coefficient </td></tr>
+    <tr><td class="paramname">term</td><td>term </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>result object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00388">388</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7acc266e8dcf18b2eac8e482496f0d5c"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00170.html">LinearExpression</a>&lt;<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&gt; operator+ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>var</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload plus term+var </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">term</td><td>term </td></tr>
+    <tr><td class="paramname">var</td><td>variable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>expression </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00422">422</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9d3b95fea33636488faa35044175f99d"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00170.html">LinearExpression</a>&lt;<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&gt; operator+ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>var</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload plus term+var </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">term</td><td>term </td></tr>
+    <tr><td class="paramname">var</td><td>variable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>expression </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00430">430</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0e6028f83d0f4bcb637c6bf190b62155"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00170.html">LinearExpression</a>&lt;<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&gt; operator+ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload plus for two terms </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">term1</td><td>term </td></tr>
+    <tr><td class="paramname">term2</td><td>term </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>result expression </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00438">438</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aaf813d56069a11ea35a8618706f065a2"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00170.html">LinearExpression</a>&lt;<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&gt; operator- </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>var</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload minus term-var </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">term</td><td>term </td></tr>
+    <tr><td class="paramname">var</td><td>variable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>expression </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00448">448</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a372f36c68b52aa24d3afdb2fac1fefba"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00170.html">LinearExpression</a>&lt;<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&gt; operator- </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html#a322e070f6a169484530c5405c51bbb36">variable_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>var</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload minus term-var </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">term</td><td>term </td></tr>
+    <tr><td class="paramname">var</td><td>variable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>expression </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00456">456</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae99c6d212263da41656ad7e4bd58951e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00170.html">LinearExpression</a>&lt;<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&gt; operator- </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload minus for two terms </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">term1</td><td>term </td></tr>
+    <tr><td class="paramname">term2</td><td>term </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>result expression </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00464">464</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a88baac8c46d8937188f4f1bc0675148b"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00172.html">LinearTerm</a> operator/ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>coef</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload divide by a value </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">term</td><td>term </td></tr>
+    <tr><td class="paramname">coef</td><td>coefficient </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00404">404</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae9090a41ffe5fcb95fd147ec5d72037e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00169.html">LinearConstraint</a>&lt;<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&gt; operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>overload &lt; </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">term</td><td>linear term </td></tr>
+    <tr><td class="paramname">rhs</td><td>right hand side constant </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00473">473</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2c58db60e0efd15262863206b7e7bd57"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00169.html">LinearConstraint</a>&lt;<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&gt; operator&lt;= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>overload &lt;=, same as &lt; </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">term</td><td>linear term </td></tr>
+    <tr><td class="paramname">rhs</td><td>right hand side constant </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00480">480</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aea0940d82fb41953200d903c98df55e7"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00169.html">LinearConstraint</a>&lt;<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&gt; operator== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>overload == </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">term</td><td>linear term </td></tr>
+    <tr><td class="paramname">rhs</td><td>right hand side constant </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00501">501</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a67b20f834bbf95e727b948fce3abe3bd"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00169.html">LinearConstraint</a>&lt;<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&gt; operator&gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>overload &gt; </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">term</td><td>linear term </td></tr>
+    <tr><td class="paramname">rhs</td><td>right hand side constant </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00487">487</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7a050c5b12b15d0de4e9ba45a298a3c4"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00169.html">LinearConstraint</a>&lt;<a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&gt; operator&gt;= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00172.html">LinearTerm</a>&lt; T &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>term</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00172.html#af57bf66e06263a21d1818561e91e027b">coefficient_value_type</a>&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>overload &gt;=, same as &gt; </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">term</td><td>linear term </td></tr>
+    <tr><td class="paramname">rhs</td><td>right hand side constant </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00387_source.html#l00494">494</a> of file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00387_source.html">Solvers.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

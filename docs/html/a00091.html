@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdsParser::GdsRecords Struct Reference</title>
+<title>Limbo: limbo::algorithms::coloring::DsatColoring&lt; GraphType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,118 +89,242 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00360.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00091.html">GdsRecords</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00436.html">algorithms</a></li><li class="navelem"><a class="el" href="a00437.html">coloring</a></li><li class="navelem"><a class="el" href="a00091.html">DsatColoring</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="a00455.html">List of all members</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="a00563.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser::GdsRecords Struct Reference</div>  </div>
+<div class="title">limbo::algorithms::coloring::DsatColoring&lt; GraphType &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>GDSII records. The records are numbered with consecutive integers, so we can use simple array to save all the data.  
- <a href="a00091.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="a00293_source.html">GdsRecords.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00315_source.html">GreedyColoring.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00245.html">saturation_degree_type</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a5860f61e73f4209c565a594f3cedc63c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5860f61e73f4209c565a594f3cedc63c"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">EnumType</a> { <br />
-&#160;&#160;<b>HEADER</b> = 0x00, 
-<b>BGNLIB</b> = 0x01, 
-<b>LIBNAME</b> = 0x02, 
-<b>UNITS</b> = 0x03, 
-<br />
-&#160;&#160;<b>ENDLIB</b> = 0x04, 
-<b>BGNSTR</b> = 0x05, 
-<b>STRNAME</b> = 0x06, 
-<b>ENDSTR</b> = 0x07, 
-<br />
-&#160;&#160;<b>BOUNDARY</b> = 0x08, 
-<b>PATH</b> = 0x09, 
-<b>SREF</b> = 0x0a, 
-<b>AREF</b> = 0x0b, 
-<br />
-&#160;&#160;<b>TEXT</b> = 0x0c, 
-<b>LAYER</b> = 0x0d, 
-<b>DATATYPE</b> = 0x0e, 
-<b>WIDTH</b> = 0x0f, 
-<br />
-&#160;&#160;<b>XY</b> = 0x10, 
-<b>ENDEL</b> = 0x11, 
-<b>SNAME</b> = 0x12, 
-<b>COLROW</b> = 0x13, 
-<br />
-&#160;&#160;<b>TEXTNODE</b> = 0x14, 
-<b>NODE</b> = 0x15, 
-<b>TEXTTYPE</b> = 0x16, 
-<b>PRESENTATION</b> = 0x17, 
-<br />
-&#160;&#160;<b>SPACING</b> = 0x18, 
-<b>STRING</b> = 0x19, 
-<b>STRANS</b> = 0x1a, 
-<b>MAG</b> = 0x1b, 
-<br />
-&#160;&#160;<b>ANGLE</b> = 0x1c, 
-<b>UINTEGER</b> = 0x1d, 
-<b>USTRING</b> = 0x1e, 
-<b>REFLIBS</b> = 0x1f, 
-<br />
-&#160;&#160;<b>FONTS</b> = 0x20, 
-<b>PATHTYPE</b> = 0x21, 
-<b>GENERATIONS</b> = 0x22, 
-<b>ATTRTABLE</b> = 0x23, 
-<br />
-&#160;&#160;<b>STYPTABLE</b> = 0x24, 
-<b>STRTYPE</b> = 0x25, 
-<b>ELFLAGS</b> = 0x26, 
-<b>ELKEY</b> = 0x27, 
-<br />
-&#160;&#160;<b>LINKTYPE</b> = 0x28, 
-<b>LINKKEYS</b> = 0x29, 
-<b>NODETYPE</b> = 0x2a, 
-<b>PROPATTR</b> = 0x2b, 
-<br />
-&#160;&#160;<b>PROPVALUE</b> = 0x2c, 
-<b>BOX</b> = 0x2d, 
-<b>BOXTYPE</b> = 0x2e, 
-<b>PLEX</b> = 0x2f, 
-<br />
-&#160;&#160;<b>BGNEXTN</b> = 0x30, 
-<b>ENDTEXTN</b> = 0x31, 
-<b>TAPENUM</b> = 0x32, 
-<b>TAPECODE</b> = 0x33, 
-<br />
-&#160;&#160;<b>STRCLASS</b> = 0x34, 
-<b>RESERVED</b> = 0x35, 
-<b>FORMAT</b> = 0x36, 
-<b>MASK</b> = 0x37, 
-<br />
-&#160;&#160;<b>ENDMASKS</b> = 0x38, 
-<b>LIBDIRSIZE</b> = 0x39, 
-<b>SRFNAME</b> = 0x3a, 
-<b>LIBSECUR</b> = 0x3b, 
-<br />
-&#160;&#160;<b>UNKNOWN</b> = 0x3c
-<br />
- }</td></tr>
-<tr class="memdesc:a5860f61e73f4209c565a594f3cedc63c"><td class="mdescLeft">&#160;</td><td class="mdescRight">enum type of GDSII records <br /></td></tr>
-<tr class="separator:a5860f61e73f4209c565a594f3cedc63c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a53e0d65cc6168b08e009ea35e05821b9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a53e0d65cc6168b08e009ea35e05821b9"></a>
+typedef GraphType&#160;</td><td class="memItemRight" valign="bottom"><b>graph_type</b></td></tr>
+<tr class="separator:a53e0d65cc6168b08e009ea35e05821b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91dbae94a2f7992b1f39024cb8696a7a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91dbae94a2f7992b1f39024cb8696a7a"></a>
+typedef boost::graph_traits<br class="typebreak" />
+&lt; graph_type &gt;<br class="typebreak" />
+::vertex_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>graph_vertex_type</b></td></tr>
+<tr class="separator:a91dbae94a2f7992b1f39024cb8696a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af486df4e41d4486efb624653616c52c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00091.html#af486df4e41d4486efb624653616c52c3">DsatColoring</a> (graph_type const &amp;g)</td></tr>
+<tr class="separator:af486df4e41d4486efb624653616c52c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace49fef86f375ee52b2b9f460998d3ca"><td class="memItemLeft" align="right" valign="top">map&lt; graph_vertex_type, int &gt;<br class="typebreak" />
+ const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00091.html#ace49fef86f375ee52b2b9f460998d3ca">color_map</a> () const </td></tr>
+<tr class="separator:ace49fef86f375ee52b2b9f460998d3ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bfee9e456a5e924290e3b8b2eb0f8e7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00091.html#a4bfee9e456a5e924290e3b8b2eb0f8e7">color</a> (graph_vertex_type v) const </td></tr>
+<tr class="separator:a4bfee9e456a5e924290e3b8b2eb0f8e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dcc0a03d89708bcac2724359688c9a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00091.html#a0dcc0a03d89708bcac2724359688c9a0">operator()</a> ()</td></tr>
+<tr class="separator:a0dcc0a03d89708bcac2724359688c9a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a76aa971f03889cd0ade3dd196fe57d23"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00091.html#a76aa971f03889cd0ade3dd196fe57d23">run</a> ()</td></tr>
+<tr class="separator:a76aa971f03889cd0ade3dd196fe57d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ab8f19f64c4ef53f051559c7eb4075e49"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab8f19f64c4ef53f051559c7eb4075e49"></a>
+graph_type const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00091.html#ab8f19f64c4ef53f051559c7eb4075e49">m_graph</a></td></tr>
+<tr class="memdesc:ab8f19f64c4ef53f051559c7eb4075e49"><td class="mdescLeft">&#160;</td><td class="mdescRight">graph <br /></td></tr>
+<tr class="separator:ab8f19f64c4ef53f051559c7eb4075e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4c7a98f0fa42e394d0c0f898bf38776"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4c7a98f0fa42e394d0c0f898bf38776"></a>
+map&lt; graph_vertex_type, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00091.html#ac4c7a98f0fa42e394d0c0f898bf38776">m_mColor</a></td></tr>
+<tr class="memdesc:ac4c7a98f0fa42e394d0c0f898bf38776"><td class="mdescLeft">&#160;</td><td class="mdescRight">color map <br /></td></tr>
+<tr class="separator:ac4c7a98f0fa42e394d0c0f898bf38776"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>GDSII records. The records are numbered with consecutive integers, so we can use simple array to save all the data. </p>
+<div class="textblock"><h3>template&lt;typename GraphType&gt;<br />
+class limbo::algorithms::coloring::DsatColoring&lt; GraphType &gt;</h3>
 
-<p>Definition at line <a class="el" href="a00293_source.html#l00020">20</a> of file <a class="el" href="a00293_source.html">GdsRecords.h</a>.</p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00293_source.html">GdsRecords.h</a></li>
+<p><a class="el" href="a00057.html">Coloring</a> a graph with saturation degree based heuristics </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">GraphType</td><td>graph type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00315_source.html#l00042">42</a> of file <a class="el" href="a00315_source.html">GreedyColoring.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="af486df4e41d4486efb624653616c52c3"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00091.html">limbo::algorithms::coloring::DsatColoring</a>&lt; GraphType &gt;::<a class="el" href="a00091.html">DsatColoring</a> </td>
+          <td>(</td>
+          <td class="paramtype">graph_type const &amp;&#160;</td>
+          <td class="paramname"><em>g</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">g</td><td>graph </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00315_source.html#l00093">93</a> of file <a class="el" href="a00315_source.html">GreedyColoring.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a4bfee9e456a5e924290e3b8b2eb0f8e7"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="a00091.html">limbo::algorithms::coloring::DsatColoring</a>&lt; GraphType &gt;::color </td>
+          <td>(</td>
+          <td class="paramtype">graph_vertex_type&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>get color of vertex </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>vertex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>color </dd></dl>
+
+<p>Definition at line <a class="el" href="a00315_source.html#l00107">107</a> of file <a class="el" href="a00315_source.html">GreedyColoring.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ace49fef86f375ee52b2b9f460998d3ca"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">map&lt;graph_vertex_type, int&gt; const&amp; <a class="el" href="a00091.html">limbo::algorithms::coloring::DsatColoring</a>&lt; GraphType &gt;::color_map </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>access to color map </p><dl class="section return"><dt>Returns</dt><dd>reference to color map </dd></dl>
+
+<p>Definition at line <a class="el" href="a00315_source.html#l00103">103</a> of file <a class="el" href="a00315_source.html">GreedyColoring.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0dcc0a03d89708bcac2724359688c9a0"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="a00091.html">limbo::algorithms::coloring::DsatColoring</a>&lt; GraphType &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>API to run the algorithm </p><dl class="section return"><dt>Returns</dt><dd>objective </dd></dl>
+
+<p>Definition at line <a class="el" href="a00315_source.html#l00116">116</a> of file <a class="el" href="a00315_source.html">GreedyColoring.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a76aa971f03889cd0ade3dd196fe57d23"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="a00091.html">limbo::algorithms::coloring::DsatColoring</a>&lt; GraphType &gt;::run </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>kernel function to run the algorithm </p><dl class="section return"><dt>Returns</dt><dd>objective </dd></dl>
+
+<p>Definition at line <a class="el" href="a00315_source.html#l00123">123</a> of file <a class="el" href="a00315_source.html">GreedyColoring.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/<a class="el" href="a00315_source.html">GreedyColoring.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdsParser::GdsDB::WriteCellObjectAction&lt; GdsWriterType &gt; Struct Template Reference</title>
+<title>Limbo: limbo::geometry::rectangle_traits&lt; RectType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,246 +89,228 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00360.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00361.html">GdsDB</a></li><li class="navelem"><a class="el" href="a00237.html">WriteCellObjectAction</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00441.html">geometry</a></li><li class="navelem"><a class="el" href="a00237.html">rectangle_traits</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00476.html">List of all members</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="a00606.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser::GdsDB::WriteCellObjectAction&lt; GdsWriterType &gt; Struct Template Reference</div>  </div>
+<div class="title">limbo::geometry::rectangle_traits&lt; RectType &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="a00288_source.html">GdsObjectHelpers.h</a>&gt;</code></p>
+<p>type traits for rectangle  
+ <a href="a00237.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00334_source.html">Geometry.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a723431f41c787ae0adce228a034b9010"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00237.html#a723431f41c787ae0adce228a034b9010">WriteCellObjectAction</a> (GdsWriterType const &amp;w,::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;gw, std::pair&lt; ::<a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a>, <a class="el" href="a00085.html">GdsObject</a> * &gt; const &amp;t)</td></tr>
-<tr class="memdesc:a723431f41c787ae0adce228a034b9010"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a723431f41c787ae0adce228a034b9010">More...</a><br /></td></tr>
-<tr class="separator:a723431f41c787ae0adce228a034b9010"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8f1b6646d97b452266e6381d57a4545"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00237.html#ae8f1b6646d97b452266e6381d57a4545">WriteCellObjectAction</a> (<a class="el" href="a00237.html">WriteCellObjectAction</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:ae8f1b6646d97b452266e6381d57a4545"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#ae8f1b6646d97b452266e6381d57a4545">More...</a><br /></td></tr>
-<tr class="separator:ae8f1b6646d97b452266e6381d57a4545"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad424ca1d19575009c0d5a3dfffd009c3"><td class="memTemplParams" colspan="2">template&lt;typename ObjectType &gt; </td></tr>
-<tr class="memitem:ad424ca1d19575009c0d5a3dfffd009c3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00237.html#ad424ca1d19575009c0d5a3dfffd009c3">operator()</a> (::<a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a>, ObjectType *object)</td></tr>
-<tr class="memdesc:ad424ca1d19575009c0d5a3dfffd009c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to run the writing action.  <a href="#ad424ca1d19575009c0d5a3dfffd009c3">More...</a><br /></td></tr>
-<tr class="separator:ad424ca1d19575009c0d5a3dfffd009c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37bad4e82e95809587666e7929ab4bea"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00237.html#a37bad4e82e95809587666e7929ab4bea">message</a> () const </td></tr>
-<tr class="separator:a37bad4e82e95809587666e7929ab4bea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a7344908208e4c58dd576921356f10ead"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7344908208e4c58dd576921356f10ead"></a>
+typedef RectType&#160;</td><td class="memItemRight" valign="bottom"><b>rectangle_type</b></td></tr>
+<tr class="separator:a7344908208e4c58dd576921356f10ead"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeed1ce99f31c2e0f9159a787151cbe21"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeed1ce99f31c2e0f9159a787151cbe21"></a>
+typedef <br class="typebreak" />
+rectangle_type::coordinate_type&#160;</td><td class="memItemRight" valign="bottom"><b>coordinate_type</b></td></tr>
+<tr class="separator:aeed1ce99f31c2e0f9159a787151cbe21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a4f28c20fb42aa4fd798ee84cf92a5dbb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f28c20fb42aa4fd798ee84cf92a5dbb"></a>
-GdsWriterType const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00237.html#a4f28c20fb42aa4fd798ee84cf92a5dbb">writer</a></td></tr>
-<tr class="memdesc:a4f28c20fb42aa4fd798ee84cf92a5dbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">wrapper of GDSII writer which will invoke <a class="el" href="a00097.html">GdsParser::GdsWriter</a> to write <br /></td></tr>
-<tr class="separator:a4f28c20fb42aa4fd798ee84cf92a5dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e9a91643ee5edcd69d34adf94d96fbd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e9a91643ee5edcd69d34adf94d96fbd"></a>
-::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00237.html#a1e9a91643ee5edcd69d34adf94d96fbd">gdsWriter</a></td></tr>
-<tr class="memdesc:a1e9a91643ee5edcd69d34adf94d96fbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII writer. <br /></td></tr>
-<tr class="separator:a1e9a91643ee5edcd69d34adf94d96fbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c7df55f57aaaec1faaf7a095b91a0ea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9c7df55f57aaaec1faaf7a095b91a0ea"></a>
-std::pair<br class="typebreak" />
-&lt; ::<a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a>, <br class="typebreak" />
-<a class="el" href="a00085.html">GdsObject</a> * &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00237.html#a9c7df55f57aaaec1faaf7a095b91a0ea">target</a></td></tr>
-<tr class="memdesc:a9c7df55f57aaaec1faaf7a095b91a0ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">target object <br /></td></tr>
-<tr class="separator:a9c7df55f57aaaec1faaf7a095b91a0ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a2e8bd649dff82f3a1e2e2005cd804d34"><td class="memItemLeft" align="right" valign="top">static coordinate_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00237.html#a2e8bd649dff82f3a1e2e2005cd804d34">get</a> (rectangle_type const &amp;rectangle, <a class="el" href="a00441.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> const &amp;direct)</td></tr>
+<tr class="memdesc:a2e8bd649dff82f3a1e2e2005cd804d34"><td class="mdescLeft">&#160;</td><td class="mdescRight">get coordinate from rectangle  <a href="#a2e8bd649dff82f3a1e2e2005cd804d34">More...</a><br /></td></tr>
+<tr class="separator:a2e8bd649dff82f3a1e2e2005cd804d34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45a3d048b1399f0389c334aff76cffc1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00237.html#a45a3d048b1399f0389c334aff76cffc1">set</a> (rectangle_type &amp;rectangle, <a class="el" href="a00441.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> const &amp;direct, coordinate_type const &amp;v)</td></tr>
+<tr class="memdesc:a45a3d048b1399f0389c334aff76cffc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">set coordinate for rectangle  <a href="#a45a3d048b1399f0389c334aff76cffc1">More...</a><br /></td></tr>
+<tr class="separator:a45a3d048b1399f0389c334aff76cffc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc2b39409905cfade0aedab3010ba7eb"><td class="memItemLeft" align="right" valign="top">static rectangle_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00237.html#acc2b39409905cfade0aedab3010ba7eb">construct</a> (coordinate_type const &amp;xl, coordinate_type const &amp;yl, coordinate_type const &amp;xh, coordinate_type const &amp;yh)</td></tr>
+<tr class="memdesc:acc2b39409905cfade0aedab3010ba7eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">construct rectangle from coordinates  <a href="#acc2b39409905cfade0aedab3010ba7eb">More...</a><br /></td></tr>
+<tr class="separator:acc2b39409905cfade0aedab3010ba7eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename GdsWriterType&gt;<br />
-struct GdsParser::GdsDB::WriteCellObjectAction&lt; GdsWriterType &gt;</h3>
+<div class="textblock"><h3>template&lt;typename RectType&gt;<br />
+class limbo::geometry::rectangle_traits&lt; RectType &gt;</h3>
 
-<p>an action function for write a cell </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">GdsWriterType</td><td>object writer type </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00288_source.html#l00146">146</a> of file <a class="el" href="a00288_source.html">GdsObjectHelpers.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a723431f41c787ae0adce228a034b9010"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GdsWriterType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00237.html">GdsParser::GdsDB::WriteCellObjectAction</a>&lt; GdsWriterType &gt;::<a class="el" href="a00237.html">WriteCellObjectAction</a> </td>
-          <td>(</td>
-          <td class="paramtype">GdsWriterType const &amp;&#160;</td>
-          <td class="paramname"><em>w</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">::<a class="el" href="a00097.html">GdsParser::GdsWriter</a> &amp;&#160;</td>
-          <td class="paramname"><em>gw</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::pair&lt; ::<a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a>, <a class="el" href="a00085.html">GdsObject</a> * &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>t</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">w</td><td>GDSII object writer </td></tr>
-    <tr><td class="paramname">gw</td><td>GDSII writer </td></tr>
-    <tr><td class="paramname">t</td><td>target object </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00288_source.html#l00156">156</a> of file <a class="el" href="a00288_source.html">GdsObjectHelpers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae8f1b6646d97b452266e6381d57a4545"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GdsWriterType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00237.html">GdsParser::GdsDB::WriteCellObjectAction</a>&lt; GdsWriterType &gt;::<a class="el" href="a00237.html">WriteCellObjectAction</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00237.html">WriteCellObjectAction</a>&lt; GdsWriterType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>copy constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>a <a class="el" href="a00237.html">WriteCellObjectAction</a> object </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00288_source.html#l00159">159</a> of file <a class="el" href="a00288_source.html">GdsObjectHelpers.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a37bad4e82e95809587666e7929ab4bea"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GdsWriterType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string <a class="el" href="a00237.html">GdsParser::GdsDB::WriteCellObjectAction</a>&lt; GdsWriterType &gt;::message </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>a message of action for debug </dd></dl>
-
-<p>Definition at line <a class="el" href="a00288_source.html#l00171">171</a> of file <a class="el" href="a00288_source.html">GdsObjectHelpers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad424ca1d19575009c0d5a3dfffd009c3"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GdsWriterType &gt; </div>
-<div class="memtemplate">
-template&lt;typename ObjectType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00237.html">GdsParser::GdsDB::WriteCellObjectAction</a>&lt; GdsWriterType &gt;::operator() </td>
-          <td>(</td>
-          <td class="paramtype">::<a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a>&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ObjectType *&#160;</td>
-          <td class="paramname"><em>object</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>API to run the writing action. </p>
+<p>type traits for rectangle </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">ObjectType</td><td>object type </td></tr>
+    <tr><td class="paramname">RectType</td><td>rectangle type </td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Definition at line <a class="el" href="a00334_source.html#l00199">199</a> of file <a class="el" href="a00334_source.html">Geometry.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="acc2b39409905cfade0aedab3010ba7eb"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RectType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static rectangle_type <a class="el" href="a00237.html">limbo::geometry::rectangle_traits</a>&lt; RectType &gt;::construct </td>
+          <td>(</td>
+          <td class="paramtype">coordinate_type const &amp;&#160;</td>
+          <td class="paramname"><em>xl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">coordinate_type const &amp;&#160;</td>
+          <td class="paramname"><em>yl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">coordinate_type const &amp;&#160;</td>
+          <td class="paramname"><em>xh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">coordinate_type const &amp;&#160;</td>
+          <td class="paramname"><em>yh</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>construct rectangle from coordinates </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">object</td><td>GDSII object </td></tr>
+    <tr><td class="paramname">xl,yl,xh,yh</td><td>coordinates </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>rectangle object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00334_source.html#l00221">221</a> of file <a class="el" href="a00334_source.html">Geometry.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2e8bd649dff82f3a1e2e2005cd804d34"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RectType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static coordinate_type <a class="el" href="a00237.html">limbo::geometry::rectangle_traits</a>&lt; RectType &gt;::get </td>
+          <td>(</td>
+          <td class="paramtype">rectangle_type const &amp;&#160;</td>
+          <td class="paramname"><em>rectangle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00441.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> const &amp;&#160;</td>
+          <td class="paramname"><em>direct</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>get coordinate from rectangle </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rectangle</td><td>a rectangle object </td></tr>
+    <tr><td class="paramname">direct</td><td>direction </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>coordinate </dd></dl>
+
+<p>Definition at line <a class="el" href="a00334_source.html#l00210">210</a> of file <a class="el" href="a00334_source.html">Geometry.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a45a3d048b1399f0389c334aff76cffc1"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RectType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="a00237.html">limbo::geometry::rectangle_traits</a>&lt; RectType &gt;::set </td>
+          <td>(</td>
+          <td class="paramtype">rectangle_type &amp;&#160;</td>
+          <td class="paramname"><em>rectangle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00441.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> const &amp;&#160;</td>
+          <td class="paramname"><em>direct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">coordinate_type const &amp;&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>set coordinate for rectangle </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rectangle</td><td>a rectangle object </td></tr>
+    <tr><td class="paramname">direct</td><td>direction </td></tr>
+    <tr><td class="paramname">v</td><td>coordinate </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00288_source.html#l00165">165</a> of file <a class="el" href="a00288_source.html">GdsObjectHelpers.h</a>.</p>
+<p>Definition at line <a class="el" href="a00334_source.html#l00216">216</a> of file <a class="el" href="a00334_source.html">Geometry.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/<a class="el" href="a00288_source.html">GdsObjectHelpers.h</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/geometry/<a class="el" href="a00334_source.html">Geometry.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

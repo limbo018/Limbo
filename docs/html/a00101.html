@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: boost::polygon::geometry_concept&lt; GdsParser::GdsDB::GdsPolygon &gt; Struct Template Reference</title>
+<title>Limbo: GdsParser::GdsDB::ExtractCellObjectAction Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,43 +89,228 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00353.html">boost</a></li><li class="navelem"><b>polygon</b></li><li class="navelem"><a class="el" href="a00101.html">geometry_concept< GdsParser::GdsDB::GdsPolygon ></a></li>  </ul>
+<li class="navelem"><a class="el" href="a00431.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00432.html">GdsDB</a></li><li class="navelem"><a class="el" href="a00101.html">ExtractCellObjectAction</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="a00412.html">List of all members</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00533.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">boost::polygon::geometry_concept&lt; GdsParser::GdsDB::GdsPolygon &gt; Struct Template Reference</div>  </div>
+<div class="title">GdsParser::GdsDB::ExtractCellObjectAction Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>specialization for Boost.Polygon traits for <a class="el" href="a00088.html">GdsParser::GdsDB::GdsPolygon</a>  
+<p>Action function object to extract cell.  
  <a href="a00101.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00290_source.html">GdsObjects.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:adab93e1ad868f44c1cf034d657ff1a03"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adab93e1ad868f44c1cf034d657ff1a03"></a>
-typedef polygon_concept&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
-<tr class="separator:adab93e1ad868f44c1cf034d657ff1a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a46a5fc835c8a00b6a1bd84114d1fb241"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00101.html#a46a5fc835c8a00b6a1bd84114d1fb241">ExtractCellObjectAction</a> (<a class="el" href="a00123.html">GdsDB</a> const &amp;db, <a class="el" href="a00117.html">GdsCell</a> const &amp;sc, <a class="el" href="a00117.html">GdsCell</a> &amp;tc)</td></tr>
+<tr class="memdesc:a46a5fc835c8a00b6a1bd84114d1fb241"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a46a5fc835c8a00b6a1bd84114d1fb241">More...</a><br /></td></tr>
+<tr class="separator:a46a5fc835c8a00b6a1bd84114d1fb241"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02f56ab0ba684fddb511792e23d1e338"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00101.html#a02f56ab0ba684fddb511792e23d1e338">ExtractCellObjectAction</a> (<a class="el" href="a00101.html">ExtractCellObjectAction</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:a02f56ab0ba684fddb511792e23d1e338"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#a02f56ab0ba684fddb511792e23d1e338">More...</a><br /></td></tr>
+<tr class="separator:a02f56ab0ba684fddb511792e23d1e338"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a3b2754030fa983205c669fb2a3b7e2"><td class="memTemplParams" colspan="2">template&lt;typename ObjectType &gt; </td></tr>
+<tr class="memitem:a0a3b2754030fa983205c669fb2a3b7e2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00101.html#a0a3b2754030fa983205c669fb2a3b7e2">operator()</a> (::<a class="el" href="a00133.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a> type, ObjectType *object)</td></tr>
+<tr class="memdesc:a0a3b2754030fa983205c669fb2a3b7e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to run the extraction.  <a href="#a0a3b2754030fa983205c669fb2a3b7e2">More...</a><br /></td></tr>
+<tr class="separator:a0a3b2754030fa983205c669fb2a3b7e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af55fea2e13f8883b7b251a6528eba928"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00101.html#af55fea2e13f8883b7b251a6528eba928">message</a> () const </td></tr>
+<tr class="separator:af55fea2e13f8883b7b251a6528eba928"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:af7f93e399d4883d708c7b32b69d0eace"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7f93e399d4883d708c7b32b69d0eace"></a>
+<a class="el" href="a00123.html">GdsDB</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00101.html#af7f93e399d4883d708c7b32b69d0eace">gdsDB</a></td></tr>
+<tr class="memdesc:af7f93e399d4883d708c7b32b69d0eace"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII database. <br /></td></tr>
+<tr class="separator:af7f93e399d4883d708c7b32b69d0eace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7c4dc4cb5dd6d9998cdf738705b4b53"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad7c4dc4cb5dd6d9998cdf738705b4b53"></a>
+<a class="el" href="a00117.html">GdsCell</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00101.html#ad7c4dc4cb5dd6d9998cdf738705b4b53">srcCell</a></td></tr>
+<tr class="memdesc:ad7c4dc4cb5dd6d9998cdf738705b4b53"><td class="mdescLeft">&#160;</td><td class="mdescRight">source cell <br /></td></tr>
+<tr class="separator:ad7c4dc4cb5dd6d9998cdf738705b4b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8982ad5bd745129595655d82b4b36434"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8982ad5bd745129595655d82b4b36434"></a>
+<a class="el" href="a00117.html">GdsCell</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00101.html#a8982ad5bd745129595655d82b4b36434">targetCell</a></td></tr>
+<tr class="memdesc:a8982ad5bd745129595655d82b4b36434"><td class="mdescLeft">&#160;</td><td class="mdescRight">target cell <br /></td></tr>
+<tr class="separator:a8982ad5bd745129595655d82b4b36434"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;&gt;<br />
-struct boost::polygon::geometry_concept&lt; GdsParser::GdsDB::GdsPolygon &gt;</h3>
+<div class="textblock"><p>Action function object to extract cell. </p>
+<p>Given GDSII database and source cell, construct a target cell with all the SREF and AREF replaced as copies </p>
 
-<p>specialization for Boost.Polygon traits for <a class="el" href="a00088.html">GdsParser::GdsDB::GdsPolygon</a> </p>
+<p>Definition at line <a class="el" href="a00359_source.html#l00230">230</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a46a5fc835c8a00b6a1bd84114d1fb241"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GdsParser::GdsDB::ExtractCellObjectAction::ExtractCellObjectAction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00123.html">GdsDB</a> const &amp;&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00117.html">GdsCell</a> const &amp;&#160;</td>
+          <td class="paramname"><em>sc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00117.html">GdsCell</a> &amp;&#160;</td>
+          <td class="paramname"><em>tc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="a00290_source.html#l00778">778</a> of file <a class="el" href="a00290_source.html">GdsObjects.h</a>.</p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/<a class="el" href="a00290_source.html">GdsObjects.h</a></li>
+<p>constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>GDSII database </td></tr>
+    <tr><td class="paramname">sc</td><td>source cell </td></tr>
+    <tr><td class="paramname">tc</td><td>target cell </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00359_source.html#l00240">240</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a02f56ab0ba684fddb511792e23d1e338"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GdsParser::GdsDB::ExtractCellObjectAction::ExtractCellObjectAction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00101.html">ExtractCellObjectAction</a> const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>copy constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>an object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00359_source.html#l00243">243</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="af55fea2e13f8883b7b251a6528eba928"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string GdsParser::GdsDB::ExtractCellObjectAction::message </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>a message of action for debug </dd></dl>
+
+<p>Definition at line <a class="el" href="a00359_source.html#l00259">259</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0a3b2754030fa983205c669fb2a3b7e2"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ObjectType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsDB::ExtractCellObjectAction::operator() </td>
+          <td>(</td>
+          <td class="paramtype">::<a class="el" href="a00133.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ObjectType *&#160;</td>
+          <td class="paramname"><em>object</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>API to run the extraction. </p>
+<p>Since template specialization for member function is not supported I have to use external function within a namespace <a class="el" href="a00360.html">GdsParser::GdsDB::ExtractCellObjectActionDetails</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>GDSII record </td></tr>
+    <tr><td class="paramname">object</td><td>GDSII object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00359_source.html#l00253">253</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/<a class="el" href="a00359_source.html">GdsObjectHelpers.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

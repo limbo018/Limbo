@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::solvers::VariableProperty&lt; V &gt; Class Template Reference</title>
+<title>Limbo: limbo::solvers::ProblemScaler&lt; T, V &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,597 +89,169 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00372.html">solvers</a></li><li class="navelem"><a class="el" href="a00232.html">VariableProperty</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00443.html">solvers</a></li><li class="navelem"><a class="el" href="a00232.html">ProblemScaler</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="a00597.html">List of all members</a>  </div>
+<a href="a00657.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::solvers::VariableProperty&lt; V &gt; Class Template Reference</div>  </div>
+<div class="title">limbo::solvers::ProblemScaler&lt; T, V &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Describe properties of a variable.  
+<p>Base class for scaling scheme with default no scaling.  
  <a href="a00232.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00316_source.html">Solvers.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for limbo::solvers::ProblemScaler&lt; T, V &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00232.png" usemap="#limbo::solvers::ProblemScaler&lt; T, V &gt;_map" alt=""/>
+  <map id="limbo::solvers::ProblemScaler&lt; T, V &gt;_map" name="limbo::solvers::ProblemScaler&lt; T, V &gt;_map">
+<area href="a00163.html" title="Scaling scheme with default L2 norm scaling. " alt="limbo::solvers::L2NormScaler&lt; T, V &gt;" shape="rect" coords="0,56,262,80"/>
+<area href="a00182.html" title="Scaling scheme with minimum coefficient in an expression. " alt="limbo::solvers::MinCoefficientScaler&lt; T, V &gt;" shape="rect" coords="272,56,534,80"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a7cebf9dda2b4e37f7f30a60ce1b7b981"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7cebf9dda2b4e37f7f30a60ce1b7b981"></a>
-typedef V&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a></td></tr>
-<tr class="memdesc:a7cebf9dda2b4e37f7f30a60ce1b7b981"><td class="mdescLeft">&#160;</td><td class="mdescRight">type of bounds <br /></td></tr>
-<tr class="separator:a7cebf9dda2b4e37f7f30a60ce1b7b981"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d6c55c973b4895cbda6f486f1810574"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d6c55c973b4895cbda6f486f1810574"></a>
+typedef <a class="el" href="a00171.html">LinearModel</a>&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a1d6c55c973b4895cbda6f486f1810574">model_type</a></td></tr>
+<tr class="memdesc:a1d6c55c973b4895cbda6f486f1810574"><td class="mdescLeft">&#160;</td><td class="mdescRight">model type <br /></td></tr>
+<tr class="separator:a1d6c55c973b4895cbda6f486f1810574"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d11af66827d1b4dac788c668344840e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d11af66827d1b4dac788c668344840e"></a>
+typedef <br class="typebreak" />
+<a class="el" href="a00171.html#a6d83996e8205090fd1150a2393314e23">model_type::coefficient_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">value_type</a></td></tr>
+<tr class="memdesc:a1d11af66827d1b4dac788c668344840e"><td class="mdescLeft">&#160;</td><td class="mdescRight">value type <br /></td></tr>
+<tr class="separator:a1d11af66827d1b4dac788c668344840e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cdcb857d8d23ef01b77d2a539584a79"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4cdcb857d8d23ef01b77d2a539584a79"></a>
+typedef <a class="el" href="a00171.html#ae34a87308edce3f094e3445ba2d711a4">model_type::expression_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a4cdcb857d8d23ef01b77d2a539584a79">expression_type</a></td></tr>
+<tr class="memdesc:a4cdcb857d8d23ef01b77d2a539584a79"><td class="mdescLeft">&#160;</td><td class="mdescRight">expression type <br /></td></tr>
+<tr class="separator:a4cdcb857d8d23ef01b77d2a539584a79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0765a03c30b7d3476f7828264a7931c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0765a03c30b7d3476f7828264a7931c1"></a>
+typedef <a class="el" href="a00171.html#a7c57e635bbf5f7f296bffd67be900a32">model_type::constraint_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a0765a03c30b7d3476f7828264a7931c1">constraint_type</a></td></tr>
+<tr class="memdesc:a0765a03c30b7d3476f7828264a7931c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">constraint type <br /></td></tr>
+<tr class="separator:a0765a03c30b7d3476f7828264a7931c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a296cc653c0e89f1278ac18d2e86af5cb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a296cc653c0e89f1278ac18d2e86af5cb"></a>
+typedef <a class="el" href="a00171.html#ae57d4cb612f57ca66353dc2844943cce">model_type::term_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a296cc653c0e89f1278ac18d2e86af5cb">term_type</a></td></tr>
+<tr class="memdesc:a296cc653c0e89f1278ac18d2e86af5cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">term type <br /></td></tr>
+<tr class="separator:a296cc653c0e89f1278ac18d2e86af5cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a30d4a8048a436475b427ac78a29a4a91"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a30d4a8048a436475b427ac78a29a4a91">VariableProperty</a> (<a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> lb, <a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> ub, <a class="el" href="a00372.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> nt, std::string const &amp;n)</td></tr>
-<tr class="memdesc:a30d4a8048a436475b427ac78a29a4a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a30d4a8048a436475b427ac78a29a4a91">More...</a><br /></td></tr>
-<tr class="separator:a30d4a8048a436475b427ac78a29a4a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adea30cb340ef1b7f76b0da0290a1f39c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#adea30cb340ef1b7f76b0da0290a1f39c">VariableProperty</a> (<a class="el" href="a00232.html">VariableProperty</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:adea30cb340ef1b7f76b0da0290a1f39c"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#adea30cb340ef1b7f76b0da0290a1f39c">More...</a><br /></td></tr>
-<tr class="separator:adea30cb340ef1b7f76b0da0290a1f39c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ae92a5786a72be68b5faca4e360b7a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00232.html">VariableProperty</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a4ae92a5786a72be68b5faca4e360b7a9">operator=</a> (<a class="el" href="a00232.html">VariableProperty</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:a4ae92a5786a72be68b5faca4e360b7a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment  <a href="#a4ae92a5786a72be68b5faca4e360b7a9">More...</a><br /></td></tr>
-<tr class="separator:a4ae92a5786a72be68b5faca4e360b7a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad39f7adfa92f656110de7d61edfa6dcd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#ad39f7adfa92f656110de7d61edfa6dcd">lowerBound</a> () const </td></tr>
-<tr class="separator:ad39f7adfa92f656110de7d61edfa6dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a8ea6e66969772b37e1fad817650223"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a0a8ea6e66969772b37e1fad817650223">setLowerBound</a> (<a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> lb)</td></tr>
-<tr class="separator:a0a8ea6e66969772b37e1fad817650223"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15245662f00ad20414c3f5252682c142"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a15245662f00ad20414c3f5252682c142">updateLowerBound</a> (<a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> lb)</td></tr>
-<tr class="separator:a15245662f00ad20414c3f5252682c142"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56912fe136d3375370e2440ada6cbf39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a56912fe136d3375370e2440ada6cbf39">upperBound</a> () const </td></tr>
-<tr class="separator:a56912fe136d3375370e2440ada6cbf39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad31437fa42f498c977970bbe2a712db3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#ad31437fa42f498c977970bbe2a712db3">setUpperBound</a> (<a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> ub)</td></tr>
-<tr class="separator:ad31437fa42f498c977970bbe2a712db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a232100a3ff85c375e27fe942e589a732"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a232100a3ff85c375e27fe942e589a732">updateUpperBound</a> (<a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> ub)</td></tr>
-<tr class="separator:a232100a3ff85c375e27fe942e589a732"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab16619dfd3eb700835af1a43b1c685c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00372.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#ab16619dfd3eb700835af1a43b1c685c7">numericType</a> () const </td></tr>
-<tr class="separator:ab16619dfd3eb700835af1a43b1c685c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acda73437599f622e8ca1701ca5eafacf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#acda73437599f622e8ca1701ca5eafacf">setNumericType</a> (<a class="el" href="a00372.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> nt)</td></tr>
-<tr class="separator:acda73437599f622e8ca1701ca5eafacf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a847aa35bc3b4006834fc22285f84d471"><td class="memItemLeft" align="right" valign="top">std::string const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a847aa35bc3b4006834fc22285f84d471">name</a> () const </td></tr>
-<tr class="separator:a847aa35bc3b4006834fc22285f84d471"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fab758ec2b0e6f27da4e82b7d9aa063"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a6fab758ec2b0e6f27da4e82b7d9aa063">setName</a> (std::string const &amp;n)</td></tr>
-<tr class="separator:a6fab758ec2b0e6f27da4e82b7d9aa063"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a9a8cfa1f0625a97962c6981e6efc6db4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a9a8cfa1f0625a97962c6981e6efc6db4">copy</a> (<a class="el" href="a00232.html">VariableProperty</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:a9a8cfa1f0625a97962c6981e6efc6db4"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy object  <a href="#a9a8cfa1f0625a97962c6981e6efc6db4">More...</a><br /></td></tr>
-<tr class="separator:a9a8cfa1f0625a97962c6981e6efc6db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a91b7b25d3d59782379b479adfd2ea899"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91b7b25d3d59782379b479adfd2ea899"></a>
-<a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a91b7b25d3d59782379b479adfd2ea899">m_lowerBound</a></td></tr>
-<tr class="memdesc:a91b7b25d3d59782379b479adfd2ea899"><td class="mdescLeft">&#160;</td><td class="mdescRight">lower bound <br /></td></tr>
-<tr class="separator:a91b7b25d3d59782379b479adfd2ea899"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81ed00b4fa60eef5ba92cffbb5d8c10f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a81ed00b4fa60eef5ba92cffbb5d8c10f"></a>
-<a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a81ed00b4fa60eef5ba92cffbb5d8c10f">m_upperBound</a></td></tr>
-<tr class="memdesc:a81ed00b4fa60eef5ba92cffbb5d8c10f"><td class="mdescLeft">&#160;</td><td class="mdescRight">upper bound <br /></td></tr>
-<tr class="separator:a81ed00b4fa60eef5ba92cffbb5d8c10f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af92f863d4c96b048dac7b00821fe46fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af92f863d4c96b048dac7b00821fe46fd"></a>
-<a class="el" href="a00372.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#af92f863d4c96b048dac7b00821fe46fd">m_numericType</a></td></tr>
-<tr class="memdesc:af92f863d4c96b048dac7b00821fe46fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">numeric type, BINARY, INTEGER, CONTINUOUS <br /></td></tr>
-<tr class="separator:af92f863d4c96b048dac7b00821fe46fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af21752b2a1da23b1a579012e490ed1e0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af21752b2a1da23b1a579012e490ed1e0"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#af21752b2a1da23b1a579012e490ed1e0">m_name</a></td></tr>
-<tr class="memdesc:af21752b2a1da23b1a579012e490ed1e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">name of variable <br /></td></tr>
-<tr class="separator:af21752b2a1da23b1a579012e490ed1e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b38ee9771b6e61d7c8ffa4abc4b6d84"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b38ee9771b6e61d7c8ffa4abc4b6d84"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a2b38ee9771b6e61d7c8ffa4abc4b6d84">ProblemScaler</a> ()</td></tr>
+<tr class="memdesc:a2b38ee9771b6e61d7c8ffa4abc4b6d84"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
+<tr class="separator:a2b38ee9771b6e61d7c8ffa4abc4b6d84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9de9f19482d08e2fdd763acd767b5e24"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9de9f19482d08e2fdd763acd767b5e24"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a9de9f19482d08e2fdd763acd767b5e24">~ProblemScaler</a> ()</td></tr>
+<tr class="memdesc:a9de9f19482d08e2fdd763acd767b5e24"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
+<tr class="separator:a9de9f19482d08e2fdd763acd767b5e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c1839f11e6a8ac48456f3e51af2e46f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a8c1839f11e6a8ac48456f3e51af2e46f">operator()</a> (<a class="el" href="a00232.html#a4cdcb857d8d23ef01b77d2a539584a79">expression_type</a> const &amp;) const </td></tr>
+<tr class="memdesc:a8c1839f11e6a8ac48456f3e51af2e46f"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to compute scaling factor for expression using L2 norm.  <a href="#a8c1839f11e6a8ac48456f3e51af2e46f">More...</a><br /></td></tr>
+<tr class="separator:a8c1839f11e6a8ac48456f3e51af2e46f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c61c0449713187ed81a4a1926011483"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a8c61c0449713187ed81a4a1926011483">operator()</a> (<a class="el" href="a00232.html#a0765a03c30b7d3476f7828264a7931c1">constraint_type</a> const &amp;constr) const </td></tr>
+<tr class="memdesc:a8c61c0449713187ed81a4a1926011483"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to compute scaling factor for constraints using L2 norm.  <a href="#a8c61c0449713187ed81a4a1926011483">More...</a><br /></td></tr>
+<tr class="separator:a8c61c0449713187ed81a4a1926011483"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename V&gt;<br />
-class limbo::solvers::VariableProperty&lt; V &gt;</h3>
+<div class="textblock"><h3>template&lt;typename T, typename V&gt;<br />
+class limbo::solvers::ProblemScaler&lt; T, V &gt;</h3>
 
-<p>Describe properties of a variable. </p>
+<p>Base class for scaling scheme with default no scaling. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">V</td><td>type of variable bound </td></tr>
+    <tr><td class="paramname">T</td><td>coefficient value type </td></tr>
+    <tr><td class="paramname">V</td><td>variable value type </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00316_source.html#l00072">72</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a30d4a8048a436475b427ac78a29a4a91"></a>
+<p>Definition at line <a class="el" href="a00385_source.html#l00027">27</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a8c1839f11e6a8ac48456f3e51af2e46f"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename V &gt; </div>
+template&lt;typename T , typename V &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::<a class="el" href="a00232.html">VariableProperty</a> </td>
+          <td class="memname">virtual <a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">value_type</a> <a class="el" href="a00232.html">limbo::solvers::ProblemScaler</a>&lt; T, V &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td>
-          <td class="paramname"><em>lb</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td>
-          <td class="paramname"><em>ub</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00372.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td>
-          <td class="paramname"><em>nt</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>n</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">lb</td><td>lower bound </td></tr>
-    <tr><td class="paramname">ub</td><td>upper bound </td></tr>
-    <tr><td class="paramname">nt</td><td>numeric type </td></tr>
-    <tr><td class="paramname">n</td><td>name </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00245">245</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="adea30cb340ef1b7f76b0da0290a1f39c"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::<a class="el" href="a00232.html">VariableProperty</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00232.html">VariableProperty</a>&lt; V &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>copy constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00254">254</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a9a8cfa1f0625a97962c6981e6efc6db4"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::copy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00232.html">VariableProperty</a>&lt; V &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>copy object </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00299">299</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad39f7adfa92f656110de7d61edfa6dcd"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> <a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::lowerBound </td>
-          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00232.html#a4cdcb857d8d23ef01b77d2a539584a79">expression_type</a> const &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>lower bound </dd></dl>
 
-<p>Definition at line <a class="el" href="a00316_source.html#l00268">268</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
+<p>API to compute scaling factor for expression using L2 norm. </p>
+<p>param expr expression </p><dl class="section return"><dt>Returns</dt><dd>scaling factor </dd></dl>
+
+<p>Reimplemented in <a class="el" href="a00163.html#a01b8bf7f06fe458d6d79f72ac71dea4e">limbo::solvers::L2NormScaler&lt; T, V &gt;</a>, and <a class="el" href="a00182.html#acb68e6b5ca3461027b8cd1e9d71c1169">limbo::solvers::MinCoefficientScaler&lt; T, V &gt;</a>.</p>
+
+<p>Definition at line <a class="el" href="a00385_source.html#l01101">1101</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a847aa35bc3b4006834fc22285f84d471"></a>
+<a class="anchor" id="a8c61c0449713187ed81a4a1926011483"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename V &gt; </div>
+template&lt;typename T , typename V &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string const&amp; <a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::name </td>
+          <td class="memname">virtual <a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">value_type</a> <a class="el" href="a00232.html">limbo::solvers::ProblemScaler</a>&lt; T, V &gt;::operator() </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="a00232.html#a0765a03c30b7d3476f7828264a7931c1">constraint_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>constr</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>name of variable </dd></dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00292">292</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab16619dfd3eb700835af1a43b1c685c7"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00372.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> <a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::numericType </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>numeric type </dd></dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00280">280</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4ae92a5786a72be68b5faca4e360b7a9"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00232.html">VariableProperty</a>&amp; <a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00232.html">VariableProperty</a>&lt; V &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>assignment </p>
+<p>API to compute scaling factor for constraints using L2 norm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
+    <tr><td class="paramname">constr</td><td>constraint </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>scaling factor </dd></dl>
 
-<p>Definition at line <a class="el" href="a00316_source.html#l00260">260</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
+<p>Reimplemented in <a class="el" href="a00163.html#ab17c852a03ab98d707d2126b86b3eabf">limbo::solvers::L2NormScaler&lt; T, V &gt;</a>, and <a class="el" href="a00182.html#a37a03afc961c4afd772c3096590fc5e9">limbo::solvers::MinCoefficientScaler&lt; T, V &gt;</a>.</p>
 
-</div>
-</div>
-<a class="anchor" id="a0a8ea6e66969772b37e1fad817650223"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::setLowerBound </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td>
-          <td class="paramname"><em>lb</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">lb</td><td>lower bound </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00270">270</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a6fab758ec2b0e6f27da4e82b7d9aa063"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::setName </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>n</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n</td><td>name </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00294">294</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="acda73437599f622e8ca1701ca5eafacf"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::setNumericType </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00372.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td>
-          <td class="paramname"><em>nt</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nt</td><td>numeric type </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00282">282</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad31437fa42f498c977970bbe2a712db3"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::setUpperBound </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td>
-          <td class="paramname"><em>ub</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ub</td><td>upper bound </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00276">276</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a15245662f00ad20414c3f5252682c142"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::updateLowerBound </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td>
-          <td class="paramname"><em>lb</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">lb</td><td>lower bound </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00272">272</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a232100a3ff85c375e27fe942e589a732"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::updateUpperBound </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a>&#160;</td>
-          <td class="paramname"><em>ub</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ub</td><td>upper bound </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00278">278</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a56912fe136d3375370e2440ada6cbf39"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00232.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> <a class="el" href="a00232.html">limbo::solvers::VariableProperty</a>&lt; V &gt;::upperBound </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>upper bound </dd></dl>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00274">274</a> of file <a class="el" href="a00316_source.html">Solvers.h</a>.</p>
+<p>Definition at line <a class="el" href="a00385_source.html#l01108">1108</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00316_source.html">Solvers.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:22 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

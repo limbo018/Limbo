@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: ErrorHandler&lt; Iterator &gt; Struct Template Reference</title>
+<title>Limbo: limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,94 +87,135 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00436.html">algorithms</a></li><li class="navelem"><a class="el" href="a00437.html">coloring</a></li><li class="navelem"><a class="el" href="a00058.html">ColoringEdgeLabelWriter</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00387.html">List of all members</a>  </div>
+<a href="a00561.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ErrorHandler&lt; Iterator &gt; Struct Template Reference</div>  </div>
+<div class="title">limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>error handler  
- <a href="a00058.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="a00299_source.html">ErrorHandler.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00313_source.html">Coloring.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00058.png" usemap="#limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt;_map" alt=""/>
+  <map id="limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt;_map" name="limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt;_map">
+<area href="a00098.html" title="default EdgeLabelWriter for write_graph " alt="limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;" shape="rect" coords="0,0,391,24"/>
+</map>
+ </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00199.html">result</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">probably used as some kind of type traits  <a href="a00199.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a89aaa721df0bdaf680594a7b91a6bd12"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a89aaa721df0bdaf680594a7b91a6bd12"></a>
+typedef GraphType&#160;</td><td class="memItemRight" valign="bottom"><b>graph_type</b></td></tr>
+<tr class="separator:a89aaa721df0bdaf680594a7b91a6bd12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2113d8280eb32cb00abe0f9cef825580"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2113d8280eb32cb00abe0f9cef825580"></a>
+typedef <a class="el" href="a00098.html">la::EdgeLabelWriter</a><br class="typebreak" />
+&lt; graph_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>base_type</b></td></tr>
+<tr class="separator:a2113d8280eb32cb00abe0f9cef825580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3e1b08a4a467a1fbd2b4ed3bb175ba5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3e1b08a4a467a1fbd2b4ed3bb175ba5"></a>
+typedef base_type::edge_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>edge_descriptor</b></td></tr>
+<tr class="separator:aa3e1b08a4a467a1fbd2b4ed3bb175ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43c758db9995bb53e342e951801c860a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a43c758db9995bb53e342e951801c860a"></a>
+typedef base_type::edge_weight_type&#160;</td><td class="memItemRight" valign="bottom"><b>edge_weight_type</b></td></tr>
+<tr class="separator:a43c758db9995bb53e342e951801c860a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3583ff8749c86138578bd84c488ddd47"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3583ff8749c86138578bd84c488ddd47"></a>
+typedef boost::graph_traits<br class="typebreak" />
+&lt; graph_type &gt;<br class="typebreak" />
+::vertex_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>vertex_descriptor</b></td></tr>
+<tr class="separator:a3583ff8749c86138578bd84c488ddd47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_a00098"><td colspan="2" onclick="javascript:toggleInherit('pub_types_a00098')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="a00098.html">limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;</a></td></tr>
+<tr class="memitem:adad54e2c8c79d3c69a3e14ab0a3911c4 inherit pub_types_a00098"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adad54e2c8c79d3c69a3e14ab0a3911c4"></a>
+typedef GraphType&#160;</td><td class="memItemRight" valign="bottom"><b>graph_type</b></td></tr>
+<tr class="separator:adad54e2c8c79d3c69a3e14ab0a3911c4 inherit pub_types_a00098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac049cae48dc3be43d9beec3cd6c4a7b9 inherit pub_types_a00098"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac049cae48dc3be43d9beec3cd6c4a7b9"></a>
+typedef boost::graph_traits<br class="typebreak" />
+&lt; graph_type &gt;<br class="typebreak" />
+::edge_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>edge_descriptor</b></td></tr>
+<tr class="separator:ac049cae48dc3be43d9beec3cd6c4a7b9 inherit pub_types_a00098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64895c900f7a369edbc4471173c13494 inherit pub_types_a00098"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64895c900f7a369edbc4471173c13494"></a>
+typedef boost::property_traits<br class="typebreak" />
+&lt; typename boost::property_map<br class="typebreak" />
+&lt; graph_type, <br class="typebreak" />
+boost::edge_weight_t &gt;<br class="typebreak" />
+::const_type &gt;::value_type&#160;</td><td class="memItemRight" valign="bottom"><b>edge_weight_type</b></td></tr>
+<tr class="separator:a64895c900f7a369edbc4471173c13494 inherit pub_types_a00098"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a175a0107ac11d6ad4f60f32aeae1cc52"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00058.html#a175a0107ac11d6ad4f60f32aeae1cc52">ErrorHandler</a> (Iterator <a class="el" href="a00058.html#aee756aa839373c3b6748b51c78df5a78">first</a>, Iterator <a class="el" href="a00058.html#a2997c25d20fd93886d7a80cdadde4cb8">last</a>)</td></tr>
-<tr class="memdesc:a175a0107ac11d6ad4f60f32aeae1cc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a175a0107ac11d6ad4f60f32aeae1cc52">More...</a><br /></td></tr>
-<tr class="separator:a175a0107ac11d6ad4f60f32aeae1cc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac71431a97777b6f0b997fd378e2c136c"><td class="memTemplParams" colspan="2">template&lt;typename Message , typename What &gt; </td></tr>
-<tr class="memitem:ac71431a97777b6f0b997fd378e2c136c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00058.html#ac71431a97777b6f0b997fd378e2c136c">operator()</a> (Message const &amp;message, What const &amp;what, Iterator err_pos) const </td></tr>
-<tr class="memdesc:ac71431a97777b6f0b997fd378e2c136c"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to invoke the error handler.  <a href="#ac71431a97777b6f0b997fd378e2c136c">More...</a><br /></td></tr>
-<tr class="separator:ac71431a97777b6f0b997fd378e2c136c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af13d71e6875a28e9fbb9ca457d4b8f79"><td class="memItemLeft" align="right" valign="top">Iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00058.html#af13d71e6875a28e9fbb9ca457d4b8f79">get_pos</a> (Iterator err_pos, int &amp;line) const </td></tr>
-<tr class="memdesc:af13d71e6875a28e9fbb9ca457d4b8f79"><td class="mdescLeft">&#160;</td><td class="mdescRight">get position of error  <a href="#af13d71e6875a28e9fbb9ca457d4b8f79">More...</a><br /></td></tr>
-<tr class="separator:af13d71e6875a28e9fbb9ca457d4b8f79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f7b4389cdfcbbe3cae8a4ca4fc06cd1"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00058.html#a4f7b4389cdfcbbe3cae8a4ca4fc06cd1">get_line</a> (Iterator err_pos) const </td></tr>
-<tr class="memdesc:a4f7b4389cdfcbbe3cae8a4ca4fc06cd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">get line from iterator  <a href="#a4f7b4389cdfcbbe3cae8a4ca4fc06cd1">More...</a><br /></td></tr>
-<tr class="separator:a4f7b4389cdfcbbe3cae8a4ca4fc06cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25c25d4f64468a8de874300a9af336ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00058.html#a25c25d4f64468a8de874300a9af336ef">ColoringEdgeLabelWriter</a> (graph_type const &amp;<a class="el" href="a00098.html#a05275ad1d7efeeb90fb76e05d77b2c50">g</a>, std::vector&lt; int8_t &gt; const &amp;vc)</td></tr>
+<tr class="separator:a25c25d4f64468a8de874300a9af336ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e6b774c953c7b84c0e832f07578053e"><td class="memItemLeft" align="right" valign="top">edge_weight_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00058.html#a4e6b774c953c7b84c0e832f07578053e">label</a> (edge_descriptor e) const </td></tr>
+<tr class="separator:a4e6b774c953c7b84c0e832f07578053e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afee41a1346015848ff480a3848193341"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00058.html#afee41a1346015848ff480a3848193341">color</a> (edge_descriptor e) const </td></tr>
+<tr class="separator:afee41a1346015848ff480a3848193341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37275c2c485c657414acc587f4aa11a9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00058.html#a37275c2c485c657414acc587f4aa11a9">style</a> (edge_descriptor e) const </td></tr>
+<tr class="separator:a37275c2c485c657414acc587f4aa11a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_a00098"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00098')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="a00098.html">limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;</a></td></tr>
+<tr class="memitem:abf9377b519aee8ae51cc384a8de1067d inherit pub_methods_a00098"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#abf9377b519aee8ae51cc384a8de1067d">EdgeLabelWriter</a> (graph_type const &amp;_g)</td></tr>
+<tr class="separator:abf9377b519aee8ae51cc384a8de1067d inherit pub_methods_a00098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91adec92335eeb259447796bb00a3f4f inherit pub_methods_a00098"><td class="memItemLeft" align="right" valign="top">edge_weight_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#a91adec92335eeb259447796bb00a3f4f">label</a> (edge_descriptor e) const </td></tr>
+<tr class="separator:a91adec92335eeb259447796bb00a3f4f inherit pub_methods_a00098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a267098161680f05d95b19841da24b6ba inherit pub_methods_a00098"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#a267098161680f05d95b19841da24b6ba">color</a> (edge_descriptor) const </td></tr>
+<tr class="separator:a267098161680f05d95b19841da24b6ba inherit pub_methods_a00098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16a4d37ab57c09684de5bc5a526e9742 inherit pub_methods_a00098"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#a16a4d37ab57c09684de5bc5a526e9742">style</a> (edge_descriptor) const </td></tr>
+<tr class="separator:a16a4d37ab57c09684de5bc5a526e9742 inherit pub_methods_a00098"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aee756aa839373c3b6748b51c78df5a78"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aee756aa839373c3b6748b51c78df5a78"></a>
-Iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00058.html#aee756aa839373c3b6748b51c78df5a78">first</a></td></tr>
-<tr class="memdesc:aee756aa839373c3b6748b51c78df5a78"><td class="mdescLeft">&#160;</td><td class="mdescRight">begin iterator <br /></td></tr>
-<tr class="separator:aee756aa839373c3b6748b51c78df5a78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2997c25d20fd93886d7a80cdadde4cb8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2997c25d20fd93886d7a80cdadde4cb8"></a>
-Iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00058.html#a2997c25d20fd93886d7a80cdadde4cb8">last</a></td></tr>
-<tr class="memdesc:a2997c25d20fd93886d7a80cdadde4cb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">end iterator <br /></td></tr>
-<tr class="separator:a2997c25d20fd93886d7a80cdadde4cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa34d5db4e6204f3438e1f46b6f35bbf2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa34d5db4e6204f3438e1f46b6f35bbf2"></a>
-std::vector&lt; Iterator &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00058.html#aa34d5db4e6204f3438e1f46b6f35bbf2">iters</a></td></tr>
-<tr class="memdesc:aa34d5db4e6204f3438e1f46b6f35bbf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">not sure what it is used and why it is here <br /></td></tr>
-<tr class="separator:aa34d5db4e6204f3438e1f46b6f35bbf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6ad7d9c60ef958103e4262b7787f66c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac6ad7d9c60ef958103e4262b7787f66c"></a>
+std::vector&lt; int8_t &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00058.html#ac6ad7d9c60ef958103e4262b7787f66c">vColor</a></td></tr>
+<tr class="memdesc:ac6ad7d9c60ef958103e4262b7787f66c"><td class="mdescLeft">&#160;</td><td class="mdescRight">coloring solutions <br /></td></tr>
+<tr class="separator:ac6ad7d9c60ef958103e4262b7787f66c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_a00098"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_a00098')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="a00098.html">limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;</a></td></tr>
+<tr class="memitem:a05275ad1d7efeeb90fb76e05d77b2c50 inherit pub_attribs_a00098"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05275ad1d7efeeb90fb76e05d77b2c50"></a>
+graph_type const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#a05275ad1d7efeeb90fb76e05d77b2c50">g</a></td></tr>
+<tr class="memdesc:a05275ad1d7efeeb90fb76e05d77b2c50 inherit pub_attribs_a00098"><td class="mdescLeft">&#160;</td><td class="mdescRight">bind graph object <br /></td></tr>
+<tr class="separator:a05275ad1d7efeeb90fb76e05d77b2c50 inherit pub_attribs_a00098"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename Iterator&gt;<br />
-struct ErrorHandler&lt; Iterator &gt;</h3>
+<div class="textblock"><h3>template&lt;typename GraphType&gt;<br />
+struct limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt;</h3>
 
-<p>error handler </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>function object to write edge label </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Iterator</td><td>iterator of text </td></tr>
+    <tr><td class="paramname">GraphType</td><td>graph type </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00299_source.html#l00023">23</a> of file <a class="el" href="a00299_source.html">ErrorHandler.h</a>.</p>
+<p>Definition at line <a class="el" href="a00313_source.html#l00069">69</a> of file <a class="el" href="a00313_source.html">Coloring.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a175a0107ac11d6ad4f60f32aeae1cc52"></a>
+<a class="anchor" id="a25c25d4f64468a8de874300a9af336ef"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator&gt; </div>
+template&lt;typename GraphType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00058.html">ErrorHandler</a>&lt; Iterator &gt;::<a class="el" href="a00058.html">ErrorHandler</a> </td>
+          <td class="memname"><a class="el" href="a00058.html">limbo::algorithms::coloring::ColoringEdgeLabelWriter</a>&lt; GraphType &gt;::<a class="el" href="a00058.html">ColoringEdgeLabelWriter</a> </td>
           <td>(</td>
-          <td class="paramtype">Iterator&#160;</td>
-          <td class="paramname"><em>first</em>, </td>
+          <td class="paramtype">graph_type const &amp;&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Iterator&#160;</td>
-          <td class="paramname"><em>last</em>&#160;</td>
+          <td class="paramtype">std::vector&lt; int8_t &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>vc</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -188,34 +229,33 @@ template&lt;typename Iterator&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">first,last</td><td>begin and end iterators to text </td></tr>
+    <tr><td class="paramname">g</td><td>graph </td></tr>
+    <tr><td class="paramname">vc</td><td>coloring solutions </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00299_source.html#l00036">36</a> of file <a class="el" href="a00299_source.html">ErrorHandler.h</a>.</p>
+<p>Definition at line <a class="el" href="a00313_source.html#l00084">84</a> of file <a class="el" href="a00313_source.html">Coloring.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a4f7b4389cdfcbbe3cae8a4ca4fc06cd1"></a>
+<a class="anchor" id="afee41a1346015848ff480a3848193341"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator&gt; </div>
+template&lt;typename GraphType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string <a class="el" href="a00058.html">ErrorHandler</a>&lt; Iterator &gt;::get_line </td>
+          <td class="memname">std::string <a class="el" href="a00058.html">limbo::algorithms::coloring::ColoringEdgeLabelWriter</a>&lt; GraphType &gt;::color </td>
           <td>(</td>
-          <td class="paramtype">Iterator&#160;</td>
-          <td class="paramname"><em>err_pos</em></td><td>)</td>
+          <td class="paramtype">edge_descriptor&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -225,45 +265,33 @@ template&lt;typename Iterator&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>get line from iterator </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>get color of edge </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">err_pos</td><td>iterator to error position </td></tr>
+    <tr><td class="paramname">e</td><td>edge </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>line string </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>color of edge </dd></dl>
 
-<p>Definition at line <a class="el" href="a00299_source.html#l00101">101</a> of file <a class="el" href="a00299_source.html">ErrorHandler.h</a>.</p>
+<p>Definition at line <a class="el" href="a00313_source.html#l00093">93</a> of file <a class="el" href="a00313_source.html">Coloring.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af13d71e6875a28e9fbb9ca457d4b8f79"></a>
+<a class="anchor" id="a4e6b774c953c7b84c0e832f07578053e"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator&gt; </div>
+template&lt;typename GraphType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Iterator <a class="el" href="a00058.html">ErrorHandler</a>&lt; Iterator &gt;::get_pos </td>
+          <td class="memname">edge_weight_type <a class="el" href="a00058.html">limbo::algorithms::coloring::ColoringEdgeLabelWriter</a>&lt; GraphType &gt;::label </td>
           <td>(</td>
-          <td class="paramtype">Iterator&#160;</td>
-          <td class="paramname"><em>err_pos</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>line</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="paramtype">edge_descriptor&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -272,54 +300,33 @@ template&lt;typename Iterator&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>get position of error </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>get label of edge </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">err_pos</td><td>iterator of error position </td></tr>
-    <tr><td class="paramname">line</td><td>line number </td></tr>
+    <tr><td class="paramname">e</td><td>edge </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>iterator to the starting line of the error </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>label of edge </dd></dl>
 
-<p>Definition at line <a class="el" href="a00299_source.html#l00072">72</a> of file <a class="el" href="a00299_source.html">ErrorHandler.h</a>.</p>
+<p>Definition at line <a class="el" href="a00313_source.html#l00089">89</a> of file <a class="el" href="a00313_source.html">Coloring.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac71431a97777b6f0b997fd378e2c136c"></a>
+<a class="anchor" id="a37275c2c485c657414acc587f4aa11a9"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator&gt; </div>
-<div class="memtemplate">
-template&lt;typename Message , typename What &gt; </div>
+template&lt;typename GraphType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="a00058.html">ErrorHandler</a>&lt; Iterator &gt;::operator() </td>
+          <td class="memname">std::string <a class="el" href="a00058.html">limbo::algorithms::coloring::ColoringEdgeLabelWriter</a>&lt; GraphType &gt;::style </td>
           <td>(</td>
-          <td class="paramtype">Message const &amp;&#160;</td>
-          <td class="paramname"><em>message</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">What const &amp;&#160;</td>
-          <td class="paramname"><em>what</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Iterator&#160;</td>
-          <td class="paramname"><em>err_pos</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="paramtype">edge_descriptor&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -328,35 +335,25 @@ template&lt;typename Message , typename What &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>API to invoke the error handler. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Message</td><td>message </td></tr>
-    <tr><td class="paramname">What</td><td>what error it is </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>get style of edge </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">message</td><td>message to print </td></tr>
-    <tr><td class="paramname">what</td><td>what error to print </td></tr>
-    <tr><td class="paramname">err_pos</td><td>position of error occurred </td></tr>
+    <tr><td class="paramname">e</td><td>edge </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>style of edge </dd></dl>
 
-<p>Definition at line <a class="el" href="a00299_source.html#l00046">46</a> of file <a class="el" href="a00299_source.html">ErrorHandler.h</a>.</p>
+<p>Definition at line <a class="el" href="a00313_source.html#l00106">106</a> of file <a class="el" href="a00313_source.html">Coloring.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/tf/spirit/<a class="el" href="a00299_source.html">ErrorHandler.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/<a class="el" href="a00313_source.html">Coloring.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

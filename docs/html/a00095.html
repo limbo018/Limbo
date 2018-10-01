@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdsParser::GdsText Struct Reference</title>
+<title>Limbo: EbeamDataBase Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,93 +87,94 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="a00360.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00095.html">GdsText</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00457.html">List of all members</a>  </div>
+<a href="a00456.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser::GdsText Struct Reference</div>  </div>
+<div class="title">EbeamDataBase Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>GDSII TEXT.  
+<p>Custom class that inheritates <a class="el" href="a00094.html">EbeamParser::EbeamDataBase</a> with all the required callbacks defined.  
  <a href="a00095.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="a00291_source.html">GdsDriver.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for EbeamDataBase:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00095.png" usemap="#EbeamDataBase_map" alt=""/>
+  <map id="EbeamDataBase_map" name="EbeamDataBase_map">
+<area href="a00094.html" title="Base class for ebeam database. Only pure virtual functions are defined. User needs to inheritate this..." alt="EbeamParser::EbeamDataBase" shape="rect" coords="0,0,186,24"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2830345fb19f6edca048f9295744c752"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2830345fb19f6edca048f9295744c752"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html#a2830345fb19f6edca048f9295744c752">GdsText</a> ()</td></tr>
-<tr class="memdesc:a2830345fb19f6edca048f9295744c752"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:a2830345fb19f6edca048f9295744c752"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26cd5ce2315d65a5a990c8dce559bfc0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a26cd5ce2315d65a5a990c8dce559bfc0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html#a26cd5ce2315d65a5a990c8dce559bfc0">reset</a> ()</td></tr>
-<tr class="memdesc:a26cd5ce2315d65a5a990c8dce559bfc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br /></td></tr>
-<tr class="separator:a26cd5ce2315d65a5a990c8dce559bfc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a3ac4cb898fbd07937f9798d0f69a659d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ac4cb898fbd07937f9798d0f69a659d"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html#a3ac4cb898fbd07937f9798d0f69a659d">layer</a></td></tr>
-<tr class="memdesc:a3ac4cb898fbd07937f9798d0f69a659d"><td class="mdescLeft">&#160;</td><td class="mdescRight">layer <br /></td></tr>
-<tr class="separator:a3ac4cb898fbd07937f9798d0f69a659d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dcf1069574107a7b0d1d0e4e9388714"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9dcf1069574107a7b0d1d0e4e9388714"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html#a9dcf1069574107a7b0d1d0e4e9388714">texttype</a></td></tr>
-<tr class="memdesc:a9dcf1069574107a7b0d1d0e4e9388714"><td class="mdescLeft">&#160;</td><td class="mdescRight">text type <br /></td></tr>
-<tr class="separator:a9dcf1069574107a7b0d1d0e4e9388714"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f611a9588c219cca5836a02b82351b4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f611a9588c219cca5836a02b82351b4"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html#a1f611a9588c219cca5836a02b82351b4">presentation</a></td></tr>
-<tr class="memdesc:a1f611a9588c219cca5836a02b82351b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">presentation <br /></td></tr>
-<tr class="separator:a1f611a9588c219cca5836a02b82351b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7be47c307ef8cebfba4717975ed2edf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7be47c307ef8cebfba4717975ed2edf"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html#af7be47c307ef8cebfba4717975ed2edf">strans</a></td></tr>
-<tr class="memdesc:af7be47c307ef8cebfba4717975ed2edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">strans <br /></td></tr>
-<tr class="separator:af7be47c307ef8cebfba4717975ed2edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac93594c5576e1ee3ba5c05d41905037b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac93594c5576e1ee3ba5c05d41905037b"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html#ac93594c5576e1ee3ba5c05d41905037b">mag</a></td></tr>
-<tr class="memdesc:ac93594c5576e1ee3ba5c05d41905037b"><td class="mdescLeft">&#160;</td><td class="mdescRight">magnitude <br /></td></tr>
-<tr class="separator:ac93594c5576e1ee3ba5c05d41905037b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac619e72439ceea0a9165b5a876c592ce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac619e72439ceea0a9165b5a876c592ce"></a>
-vector&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html#ac619e72439ceea0a9165b5a876c592ce">position</a></td></tr>
-<tr class="memdesc:ac619e72439ceea0a9165b5a876c592ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">position <br /></td></tr>
-<tr class="separator:ac619e72439ceea0a9165b5a876c592ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c3f8643e8a0bfb50b9ea600d9d302a1"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html#a7c3f8643e8a0bfb50b9ea600d9d302a1">content</a></td></tr>
-<tr class="separator:a7c3f8643e8a0bfb50b9ea600d9d302a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2071174e0fac48e0fa43fb9e7b2a4ef4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2071174e0fac48e0fa43fb9e7b2a4ef4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html#a2071174e0fac48e0fa43fb9e7b2a4ef4">EbeamDataBase</a> ()</td></tr>
+<tr class="memdesc:a2071174e0fac48e0fa43fb9e7b2a4ef4"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
+<tr class="separator:a2071174e0fac48e0fa43fb9e7b2a4ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa648c32607e9e8358de800e30e2368dc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html#aa648c32607e9e8358de800e30e2368dc">set_ebeam_unit</a> (int token)</td></tr>
+<tr class="memdesc:aa648c32607e9e8358de800e30e2368dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">set database unit  <a href="#aa648c32607e9e8358de800e30e2368dc">More...</a><br /></td></tr>
+<tr class="separator:aa648c32607e9e8358de800e30e2368dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2c5cc8066df66b6c7bf3c80737843a5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2c5cc8066df66b6c7bf3c80737843a5"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html#aa2c5cc8066df66b6c7bf3c80737843a5">set_ebeam_boundary</a> (<a class="el" href="a00093.html">EbeamParser::EbeamBoundary</a> const &amp;)</td></tr>
+<tr class="memdesc:aa2c5cc8066df66b6c7bf3c80737843a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">set ebeam boundary <br /></td></tr>
+<tr class="separator:aa2c5cc8066df66b6c7bf3c80737843a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aade53d0e1a9876c25619c4902d68d510"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aade53d0e1a9876c25619c4902d68d510"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00095.html#aade53d0e1a9876c25619c4902d68d510">add_ebeam_macro</a> (<a class="el" href="a00177.html">EbeamParser::Macro</a> const &amp;)</td></tr>
+<tr class="memdesc:aade53d0e1a9876c25619c4902d68d510"><td class="mdescLeft">&#160;</td><td class="mdescRight">set ebeam macro <br /></td></tr>
+<tr class="separator:aade53d0e1a9876c25619c4902d68d510"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>GDSII TEXT. </p>
+<div class="textblock"><p>Custom class that inheritates <a class="el" href="a00094.html">EbeamParser::EbeamDataBase</a> with all the required callbacks defined. </p>
 
-<p>Definition at line <a class="el" href="a00291_source.html#l00048">48</a> of file <a class="el" href="a00291_source.html">GdsDriver.h</a>.</p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a7c3f8643e8a0bfb50b9ea600d9d302a1"></a>
+<p>Definition at line <a class="el" href="a00401_source.html#l00020">20</a> of file <a class="el" href="a00401_source.html">test_bison.cpp</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aa648c32607e9e8358de800e30e2368dc"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string GdsParser::GdsText::content</td>
+          <td class="memname">virtual void EbeamDataBase::set_ebeam_unit </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>token</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-<p>content </p>
 
-<p>Definition at line <a class="el" href="a00291_source.html#l00056">56</a> of file <a class="el" href="a00291_source.html">GdsDriver.h</a>.</p>
+<p>set database unit </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>unit </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="a00094.html#a799ad156d2378bf9a6a3c6950f2b5617">EbeamParser::EbeamDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00401_source.html#l00030">30</a> of file <a class="el" href="a00401_source.html">test_bison.cpp</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00291_source.html">GdsDriver.h</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/test/parsers/ebeam/<a class="el" href="a00401_source.html">test_bison.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

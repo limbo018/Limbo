@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdfParser::GdfDataBase Class Reference</title>
+<title>Limbo: limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;::ConstrVariableInfo Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,50 +89,141 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00359.html">GdfParser</a></li><li class="navelem"><a class="el" href="a00070.html">GdfDataBase</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00436.html">algorithms</a></li><li class="navelem"><a class="el" href="a00437.html">coloring</a></li><li class="navelem"><a class="el" href="a00173.html">LPColoring</a></li><li class="navelem"><a class="el" href="a00070.html">ConstrVariableInfo</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00433.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00572.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdfParser::GdfDataBase Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;::ConstrVariableInfo Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Base class for def database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  
+<p>information for a variable of a constraint  
  <a href="a00070.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00285_source.html">GdfDataBase.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for GdfParser::GdfDataBase:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="a00070.png" usemap="#GdfParser::GdfDataBase_map" alt=""/>
-  <map id="GdfParser::GdfDataBase_map" name="GdfParser::GdfDataBase_map">
-<area href="a00069.html" title="Custom class that inheritates GdfParser::GdfDataBase with all the required callbacks gdfined..." alt="GdfDataBase" shape="rect" coords="0,56,150,80"/>
-</map>
- </div></div>
+<p><code>#include &lt;<a class="el" href="a00318_source.html">LPColoring.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a41c323529f69e6ee9108c295f57b0b1c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a41c323529f69e6ee9108c295f57b0b1c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00070.html#a41c323529f69e6ee9108c295f57b0b1c">add_gdf_cell</a> (<a class="el" href="a00011.html">Cell</a> &amp;)=0</td></tr>
-<tr class="memdesc:a41c323529f69e6ee9108c295f57b0b1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add routing cell. It is safe to directly swap the contents in the cell for efficiency. <br /></td></tr>
-<tr class="separator:a41c323529f69e6ee9108c295f57b0b1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48ba8e8f169e1b902c424caad1df04bf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a48ba8e8f169e1b902c424caad1df04bf"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00070.html#a48ba8e8f169e1b902c424caad1df04bf">ConstrVariableInfo</a> ()</td></tr>
+<tr class="memdesc:a48ba8e8f169e1b902c424caad1df04bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
+<tr class="separator:a48ba8e8f169e1b902c424caad1df04bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f544d65e7e953798bfcfc654a55817a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00070.html#a8f544d65e7e953798bfcfc654a55817a">set</a> (double c, char s)</td></tr>
+<tr class="separator:a8f544d65e7e953798bfcfc654a55817a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adda4b3035771ffad71511abb1c42d069"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00070.html#adda4b3035771ffad71511abb1c42d069">same_direction</a> (<a class="el" href="a00070.html">ConstrVariableInfo</a> const &amp;rhs) const </td></tr>
+<tr class="separator:adda4b3035771ffad71511abb1c42d069"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a2981d3a09c5531421c2c3b32bb2c814d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2981d3a09c5531421c2c3b32bb2c814d"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00070.html#a2981d3a09c5531421c2c3b32bb2c814d">coeff</a></td></tr>
+<tr class="memdesc:a2981d3a09c5531421c2c3b32bb2c814d"><td class="mdescLeft">&#160;</td><td class="mdescRight">coefficient <br /></td></tr>
+<tr class="separator:a2981d3a09c5531421c2c3b32bb2c814d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38079064ea18e37b1fa9445797b4087d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a38079064ea18e37b1fa9445797b4087d"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00070.html#a38079064ea18e37b1fa9445797b4087d">sense</a></td></tr>
+<tr class="memdesc:a38079064ea18e37b1fa9445797b4087d"><td class="mdescLeft">&#160;</td><td class="mdescRight">'&gt;' or '&lt;' <br /></td></tr>
+<tr class="separator:a38079064ea18e37b1fa9445797b4087d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Base class for def database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined. </p>
+<div class="textblock"><h3>template&lt;typename GraphType&gt;<br />
+struct limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;::ConstrVariableInfo</h3>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00456">456</a> of file <a class="el" href="a00285_source.html">GdfDataBase.h</a>.</p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdf/bison/<a class="el" href="a00285_source.html">GdfDataBase.h</a></li>
+<p>information for a variable of a constraint </p>
+
+<p>Definition at line <a class="el" href="a00318_source.html#l00098">98</a> of file <a class="el" href="a00318_source.html">LPColoring.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="adda4b3035771ffad71511abb1c42d069"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="a00173.html">limbo::algorithms::coloring::LPColoring</a>&lt; GraphType &gt;::ConstrVariableInfo::same_direction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00070.html">ConstrVariableInfo</a> const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>check whether two constraints have the same direction </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>constraint </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if two constraints have the same direction </dd></dl>
+
+<p>Definition at line <a class="el" href="a00318_source.html#l00119">119</a> of file <a class="el" href="a00318_source.html">LPColoring.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8f544d65e7e953798bfcfc654a55817a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00173.html">limbo::algorithms::coloring::LPColoring</a>&lt; GraphType &gt;::ConstrVariableInfo::set </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>set data </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>coefficient </td></tr>
+    <tr><td class="paramname">s</td><td>sense </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00318_source.html#l00111">111</a> of file <a class="el" href="a00318_source.html">LPColoring.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/<a class="el" href="a00318_source.html">LPColoring.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

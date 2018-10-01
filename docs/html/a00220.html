@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdfParser::Text Struct Reference</title>
+<title>Limbo: limbo::geometry::point_traits&lt; PointType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,131 +89,216 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00359.html">GdfParser</a></li><li class="navelem"><a class="el" href="a00220.html">Text</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00441.html">geometry</a></li><li class="navelem"><a class="el" href="a00220.html">point_traits</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00443.html">List of all members</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="a00598.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdfParser::Text Struct Reference</div>  </div>
+<div class="title">limbo::geometry::point_traits&lt; PointType &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>text  
+<p>type traits for point  
  <a href="a00220.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00285_source.html">GdfDataBase.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for GdfParser::Text:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="a00220.png" usemap="#GdfParser::Text_map" alt=""/>
-  <map id="GdfParser::Text_map" name="GdfParser::Text_map">
-<area href="a00117.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures. " alt="GdfParser::Item" shape="rect" coords="0,0,99,24"/>
-</map>
- </div></div>
+<p><code>#include &lt;<a class="el" href="a00334_source.html">Geometry.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ac9b50dc800d5e4732a0557a281120f2c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac9b50dc800d5e4732a0557a281120f2c"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#ac9b50dc800d5e4732a0557a281120f2c">TextTypeEnum</a> { <br />
-&#160;&#160;<b>NUMBER_OF_LAYERS</b>, 
-<b>WIRE_SPACINGS</b>, 
-<b>VIA_SPACINGS</b>, 
-<b>WIRE_WIDTHS</b>, 
-<br />
-&#160;&#160;<b>VIA_WIDTHS</b>, 
-<b>VERTICAL_WIRE_COSTS</b>, 
-<b>HORIZONTAL_WIRE_COSTS</b>, 
-<b>VIA_COSTS</b>, 
-<br />
-&#160;&#160;<b>STRING</b>, 
-<b>UNKNOWN</b>
-<br />
- }</td></tr>
-<tr class="memdesc:ac9b50dc800d5e4732a0557a281120f2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">type of text <br /></td></tr>
-<tr class="separator:ac9b50dc800d5e4732a0557a281120f2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a72e276ae8fb678a2e16f5e16ce8a8608"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72e276ae8fb678a2e16f5e16ce8a8608"></a>
+typedef PointType&#160;</td><td class="memItemRight" valign="bottom"><b>point_type</b></td></tr>
+<tr class="separator:a72e276ae8fb678a2e16f5e16ce8a8608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb6f810a8ea63d797b4e78cd2f6760de"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb6f810a8ea63d797b4e78cd2f6760de"></a>
+typedef point_type::coordinate_type&#160;</td><td class="memItemRight" valign="bottom"><b>coordinate_type</b></td></tr>
+<tr class="separator:aeb6f810a8ea63d797b4e78cd2f6760de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a981bf91b8f31bdcc3090a91c0a78b699"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a981bf91b8f31bdcc3090a91c0a78b699"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a981bf91b8f31bdcc3090a91c0a78b699">Text</a> ()</td></tr>
-<tr class="memdesc:a981bf91b8f31bdcc3090a91c0a78b699"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:a981bf91b8f31bdcc3090a91c0a78b699"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe8831a868aab21956b12724cd455d82"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe8831a868aab21956b12724cd455d82"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#afe8831a868aab21956b12724cd455d82">reset</a> ()</td></tr>
-<tr class="memdesc:afe8831a868aab21956b12724cd455d82"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br /></td></tr>
-<tr class="separator:afe8831a868aab21956b12724cd455d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43295c01929c06180f8405273faa9fdd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a43295c01929c06180f8405273faa9fdd">print</a> (ostream &amp;ss) const </td></tr>
-<tr class="memdesc:a43295c01929c06180f8405273faa9fdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">print data members  <a href="#a43295c01929c06180f8405273faa9fdd">More...</a><br /></td></tr>
-<tr class="separator:a43295c01929c06180f8405273faa9fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:ac407b6707d03b16332514c8c5313b343"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac407b6707d03b16332514c8c5313b343"></a>
-<a class="el" href="a00220.html#ac9b50dc800d5e4732a0557a281120f2c">TextTypeEnum</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#ac407b6707d03b16332514c8c5313b343">textType</a></td></tr>
-<tr class="memdesc:ac407b6707d03b16332514c8c5313b343"><td class="mdescLeft">&#160;</td><td class="mdescRight">test type <br /></td></tr>
-<tr class="separator:ac407b6707d03b16332514c8c5313b343"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1813b005986e31ce74388a2b4396e3f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1813b005986e31ce74388a2b4396e3f0"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a1813b005986e31ce74388a2b4396e3f0">name</a></td></tr>
-<tr class="memdesc:a1813b005986e31ce74388a2b4396e3f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">more information for textType <br /></td></tr>
-<tr class="separator:a1813b005986e31ce74388a2b4396e3f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e4c183f8ac0abfbdae4e5509694a895"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e4c183f8ac0abfbdae4e5509694a895"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a3e4c183f8ac0abfbdae4e5509694a895">content</a></td></tr>
-<tr class="memdesc:a3e4c183f8ac0abfbdae4e5509694a895"><td class="mdescLeft">&#160;</td><td class="mdescRight">content of text <br /></td></tr>
-<tr class="separator:a3e4c183f8ac0abfbdae4e5509694a895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a1a43d0979315eac921412f0ab78996fd"><td class="memItemLeft" align="right" valign="top">static coordinate_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a1a43d0979315eac921412f0ab78996fd">get</a> (const point_type &amp;point, <a class="el" href="a00199.html">orientation_2d</a> const &amp;orient)</td></tr>
+<tr class="memdesc:a1a43d0979315eac921412f0ab78996fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">get coordinate from point  <a href="#a1a43d0979315eac921412f0ab78996fd">More...</a><br /></td></tr>
+<tr class="separator:a1a43d0979315eac921412f0ab78996fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae94fda8be9511df9ea46c9e2e1c26fce"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#ae94fda8be9511df9ea46c9e2e1c26fce">set</a> (point_type &amp;point, <a class="el" href="a00199.html">orientation_2d</a> const &amp;orient, coordinate_type const &amp;value)</td></tr>
+<tr class="memdesc:ae94fda8be9511df9ea46c9e2e1c26fce"><td class="mdescLeft">&#160;</td><td class="mdescRight">set coordinate for point  <a href="#ae94fda8be9511df9ea46c9e2e1c26fce">More...</a><br /></td></tr>
+<tr class="separator:ae94fda8be9511df9ea46c9e2e1c26fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90ca81220fd1f753bf2777c79eaeb061"><td class="memItemLeft" align="right" valign="top">static point_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00220.html#a90ca81220fd1f753bf2777c79eaeb061">construct</a> (coordinate_type const &amp;x, coordinate_type const &amp;y)</td></tr>
+<tr class="memdesc:a90ca81220fd1f753bf2777c79eaeb061"><td class="mdescLeft">&#160;</td><td class="mdescRight">construct point from coordinates  <a href="#a90ca81220fd1f753bf2777c79eaeb061">More...</a><br /></td></tr>
+<tr class="separator:a90ca81220fd1f753bf2777c79eaeb061"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>text </p>
+<div class="textblock"><h3>template&lt;typename PointType&gt;<br />
+class limbo::geometry::point_traits&lt; PointType &gt;</h3>
 
-<p>Definition at line <a class="el" href="a00285_source.html#l00318">318</a> of file <a class="el" href="a00285_source.html">GdfDataBase.h</a>.</p>
+<p>type traits for point </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">PointType</td><td>point type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00334_source.html#l00168">168</a> of file <a class="el" href="a00334_source.html">Geometry.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a43295c01929c06180f8405273faa9fdd"></a>
+<a class="anchor" id="a90ca81220fd1f753bf2777c79eaeb061"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename PointType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void GdfParser::Text::print </td>
+          <td class="memname">static point_type <a class="el" href="a00220.html">limbo::geometry::point_traits</a>&lt; PointType &gt;::construct </td>
           <td>(</td>
-          <td class="paramtype">ostream &amp;&#160;</td>
-          <td class="paramname"><em>ss</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">coordinate_type const &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">coordinate_type const &amp;&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>print data members </p>
+<p>construct point from coordinates </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ss</td><td>output stream </td></tr>
+    <tr><td class="paramname">x</td><td>coordinate </td></tr>
+    <tr><td class="paramname">y</td><td>coordinate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>point object </dd></dl>
+
+<p>Definition at line <a class="el" href="a00334_source.html#l00191">191</a> of file <a class="el" href="a00334_source.html">Geometry.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1a43d0979315eac921412f0ab78996fd"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename PointType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static coordinate_type <a class="el" href="a00220.html">limbo::geometry::point_traits</a>&lt; PointType &gt;::get </td>
+          <td>(</td>
+          <td class="paramtype">const point_type &amp;&#160;</td>
+          <td class="paramname"><em>point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00199.html">orientation_2d</a> const &amp;&#160;</td>
+          <td class="paramname"><em>orient</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>get coordinate from point </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>a point object </td></tr>
+    <tr><td class="paramname">orient</td><td>orientation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>coordinate </dd></dl>
+
+<p>Definition at line <a class="el" href="a00334_source.html#l00179">179</a> of file <a class="el" href="a00334_source.html">Geometry.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae94fda8be9511df9ea46c9e2e1c26fce"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename PointType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="a00220.html">limbo::geometry::point_traits</a>&lt; PointType &gt;::set </td>
+          <td>(</td>
+          <td class="paramtype">point_type &amp;&#160;</td>
+          <td class="paramname"><em>point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00199.html">orientation_2d</a> const &amp;&#160;</td>
+          <td class="paramname"><em>orient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">coordinate_type const &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>set coordinate for point </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>a point object </td></tr>
+    <tr><td class="paramname">orient</td><td>orientation </td></tr>
+    <tr><td class="paramname">value</td><td>coordinate value </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="a00117.html#aeb2483225aca5843a2285910c089bcb4">GdfParser::Item</a>.</p>
-
-<p>Definition at line <a class="el" href="a00285_source.html#l00352">352</a> of file <a class="el" href="a00285_source.html">GdfDataBase.h</a>.</p>
+<p>Definition at line <a class="el" href="a00334_source.html#l00185">185</a> of file <a class="el" href="a00334_source.html">Geometry.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdf/bison/<a class="el" href="a00285_source.html">GdfDataBase.h</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/geometry/<a class="el" href="a00334_source.html">Geometry.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

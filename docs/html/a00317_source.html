@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/string/String.h Source File</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/ILPColoringLemonCbc.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,162 +87,303 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_a4f08339963c9aeb6ba530d5303d7579.html">string</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li><li class="navelem"><a class="el" href="dir_eec373e4006d7befdff7678452c20bc3.html">coloring</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">String.h</div>  </div>
+<div class="title">ILPColoringLemonCbc.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00317.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef _LIMBO_STRING_STRING</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define _LIMBO_STRING_STRING</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;cctype&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00318.html">limbo/string/ToString.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00364.html">limbo</a> </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{ </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">using</span> std::cout;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">using</span> std::endl;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">using</span> std::string;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="a00364.html#ad28905911fb4acbd97a031fe8e64c8a2">   28</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="a00364.html#ad28905911fb4acbd97a031fe8e64c8a2">is_integer</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; s)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">if</span> (s.empty()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">for</span> (string::const_iterator it = s.begin(); it != s.end(); ++it)</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">if</span> (!isdigit(*it)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="a00364.html#ac94a9f8ab47da7a5e8eed918f46c6950">   41</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="a00364.html#ac94a9f8ab47da7a5e8eed918f46c6950">is_float</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; s)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">if</span> (s.empty()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">short</span> dp_cnt = 0; <span class="comment">// count how many times the decimal point appears </span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                    <span class="comment">// if it appears more than 1, then s is not a floating point number </span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">for</span> (string::const_iterator it = s.begin(); it != s.end(); ++it)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">if</span> (!isdigit(*it))</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">if</span> (*it == <span class="charliteral">&#39;.&#39;</span> &amp;&amp; dp_cnt &lt; 1) <span class="comment">// dp_cnt should be &lt;= 1 </span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                ++dp_cnt;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">// for floating point we assume decimal point should be there </span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> dp_cnt == 1;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="a00364.html#a653ed551b6caf3d19c55d5290a09c584">   62</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="a00364.html#a653ed551b6caf3d19c55d5290a09c584">is_number</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; s)</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">if</span> (s.empty()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">short</span> dp_cnt = 0; <span class="comment">// count how many times the decimal point appears </span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    <span class="comment">// if it appears more than 1, then s is not a floating point number </span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">for</span> (string::const_iterator it = s.begin(); it != s.end(); ++it)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">if</span> (!isdigit(*it))</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordflow">if</span> (*it == <span class="charliteral">&#39;.&#39;</span> &amp;&amp; dp_cnt &lt; 1) <span class="comment">// dp_cnt should be &lt;= 1 </span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                ++dp_cnt;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">// no requirement for floating point here </span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="a00364.html#a66eb59b91fd8e2a1d69b6c5705acc3eb">   83</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="a00364.html#a66eb59b91fd8e2a1d69b6c5705acc3eb">toupper</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; s)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;{</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">string</span> s_up;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    s_up.reserve(s.size());</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">for</span> (string::const_iterator it = s.begin(); it != s.end(); ++it)</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        s_up.push_back(::<a class="code" href="a00364.html#a66eb59b91fd8e2a1d69b6c5705acc3eb">toupper</a>(*it));</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">return</span> s_up;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="a00364.html#ad6e50a2521a25b1deb9c87312c31b104">   95</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="a00364.html#ad6e50a2521a25b1deb9c87312c31b104">tolower</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; s)</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;{</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">string</span> s_low;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    s_low.reserve(s.size());</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">for</span> (string::const_iterator it = s.begin(); it != s.end(); ++it)</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        s_low.push_back(::<a class="code" href="a00364.html#ad6e50a2521a25b1deb9c87312c31b104">tolower</a>(*it));</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">return</span> s_low;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="a00364.html#ab7355468e379b0ed4f5b8425d7a35d02">  108</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="a00364.html#ab7355468e379b0ed4f5b8425d7a35d02">iequals</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; s1, <span class="keywordtype">string</span> <span class="keyword">const</span>&amp; s2)</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#ifndef LIMBO_ALGORITHMS_COLORING_ILPCOLORINGLEMONCBC</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define LIMBO_ALGORITHMS_COLORING_ILPCOLORINGLEMONCBC</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;queue&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;set&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;limits&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;boost/cstdint.hpp&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;boost/unordered_map.hpp&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;boost/graph/graph_concepts.hpp&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;boost/graph/subgraph.hpp&gt;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;boost/property_map/property_map.hpp&gt;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//#include &lt;boost/graph/bipartite.hpp&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">//#include &lt;boost/graph/kruskal_min_spanning_tree.hpp&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//#include &lt;boost/graph/prim_minimum_spanning_tree.hpp&gt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">//#include &lt;boost/graph/dijkstra_shortest_paths.hpp&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00388.html">limbo/string/String.h</a>&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00313.html">limbo/algorithms/coloring/Coloring.h</a>&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;lemon/cbc.h&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;lemon/lp.h&gt;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00435.html">limbo</a> </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{ </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">namespace </span>algorithms </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{ </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">namespace </span>coloring </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">using</span> std::ostringstream;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">using</span> boost::unordered_map;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> GraphType&gt;</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="a00153.html">   65</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00153.html">ILPColoringLemonCbc</a> : <span class="keyword">public</span> <a class="code" href="a00057.html">Coloring</a>&lt;GraphType&gt;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keyword">typedef</span> <a class="code" href="a00057.html">Coloring&lt;GraphType&gt;</a> <a class="code" href="a00057.html">base_type</a>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">using</span> <span class="keyword">typename</span> base_type::graph_type;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">using</span> <span class="keyword">typename</span> base_type::graph_vertex_type;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">using</span> <span class="keyword">typename</span> base_type::graph_edge_type;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keyword">using</span> <span class="keyword">typename</span> base_type::vertex_iterator_type;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keyword">using</span> <span class="keyword">typename</span> base_type::edge_iterator_type;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keyword">using</span> <span class="keyword">typename</span> base_type::edge_weight_type;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keyword">using</span> <span class="keyword">typename</span> <a class="code" href="a00057.html#a7898d4a14f7ed7c4a37c2353e5330de2">base_type::ColorNumType</a>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="a00096.html">   80</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="a00096.html">edge_hash_type</a> : std::unary_function&lt;graph_edge_type, std::size_t&gt;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        {</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="a00096.html#a970a217003c538a3062520818c65094c">   85</a></span>&#160;            std::size_t <a class="code" href="a00096.html#a970a217003c538a3062520818c65094c">operator()</a>(graph_edge_type <span class="keyword">const</span>&amp; e)<span class="keyword"> const </span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                std::size_t seed = 0;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                boost::hash_combine(seed, e.m_source);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                boost::hash_combine(seed, e.m_target);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                <span class="keywordflow">return</span> seed;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        };</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="a00153.html#a464953a293671660561602c9ae0187ad">   96</a></span>&#160;        <a class="code" href="a00153.html#a464953a293671660561602c9ae0187ad">ILPColoringLemonCbc</a>(graph_type <span class="keyword">const</span>&amp; g) </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            : base_type(g)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        {}</div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="a00153.html#a1c30ab6247d9cb27ab5c8e71587c0a20">  100</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="a00153.html#a1c30ab6247d9cb27ab5c8e71587c0a20">~ILPColoringLemonCbc</a>() {}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="a00153.html#a87e6f58a3f2f8f7069c9f4c3773dfe3a">coloring</a>();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;};</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> GraphType&gt;</div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="a00153.html#a87e6f58a3f2f8f7069c9f4c3773dfe3a">  108</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="a00153.html#a87e6f58a3f2f8f7069c9f4c3773dfe3a">ILPColoringLemonCbc&lt;GraphType&gt;::coloring</a>()</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;{</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">string</span> s1_up = <a class="code" href="a00364.html#a66eb59b91fd8e2a1d69b6c5705acc3eb">toupper</a>(s1);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">string</span> s2_up = <a class="code" href="a00364.html#a66eb59b91fd8e2a1d69b6c5705acc3eb">toupper</a>(s2);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">return</span> s1_up == s2_up;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
-<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="a00364.html#a2c4c5598fefa12f03a057df7a5506a44">  118</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="a00364.html#a2c4c5598fefa12f03a057df7a5506a44">get_file_path</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; s)</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;{</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">size_t</span> found = s.rfind(<span class="charliteral">&#39;/&#39;</span>);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">if</span> (found != string::npos) <span class="keywordflow">return</span> s.substr(0, found);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="stringliteral">&quot;.&quot;</span>;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
-<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="a00364.html#a7df852268c8a2f86dc06582d80dfa5ad">  127</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="a00364.html#a7df852268c8a2f86dc06582d80dfa5ad">get_file_name</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; s)</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;{</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordtype">size_t</span> found = s.rfind(<span class="charliteral">&#39;/&#39;</span>);</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">if</span> (found != string::npos) <span class="keywordflow">return</span> s.substr(found+1);</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">return</span> s;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;}</div>
-<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="a00364.html#a33f4201bab9b2d54232f1ff9c59c8fd8">  136</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="a00364.html#a33f4201bab9b2d54232f1ff9c59c8fd8">get_file_suffix</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; s)</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;{</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordtype">size_t</span> found = s.rfind(<span class="charliteral">&#39;.&#39;</span>);</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordflow">if</span> (found != string::npos) <span class="keywordflow">return</span> s.substr(found+1);</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">return</span> string(<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;}</div>
-<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="a00364.html#a6d70f4b0d6726392b371ed1470d1a96c">  145</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="a00364.html#a6d70f4b0d6726392b371ed1470d1a96c">trim_file_suffix</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; s)</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;{</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordtype">size_t</span> found = s.rfind(<span class="charliteral">&#39;.&#39;</span>);</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordflow">if</span> (found != string::npos) <span class="keywordflow">return</span> s.substr(0, found);</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">return</span> s;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
-<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="a00364.html#a7f24ba1f3a0ce8a2d333f17f91efbd11">  154</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="a00364.html#a7f24ba1f3a0ce8a2d333f17f91efbd11">get_first_word</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; str)</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;{</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordtype">size_t</span> pos1 = std::string::npos;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordtype">size_t</span> pos2 = std::string::npos;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; str.size(); i++)</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    {</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="keywordflow">if</span> (pos1 == std::string::npos &amp;&amp; str[i] != <span class="charliteral">&#39; &#39;</span> &amp;&amp; str[i] != <span class="charliteral">&#39;\t&#39;</span>)</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            pos1 = i;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pos1 != std::string::npos &amp;&amp; (str[i] == <span class="charliteral">&#39; &#39;</span> || str[i] == <span class="charliteral">&#39;\t&#39;</span>))</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        {</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            pos2 = i;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        }</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    }</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordflow">return</span> str.substr(pos1, pos2 - pos1);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;}</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;} <span class="comment">// namespace limbo </span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="preprocessor">#endif </span></div>
-<div class="ttc" id="a00364_html_ab7355468e379b0ed4f5b8425d7a35d02"><div class="ttname"><a href="a00364.html#ab7355468e379b0ed4f5b8425d7a35d02">limbo::iequals</a></div><div class="ttdeci">bool iequals(string const &amp;s1, string const &amp;s2)</div><div class="ttdoc">check two strings equal, case-insensitive </div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00108">String.h:108</a></div></div>
-<div class="ttc" id="a00364_html_a653ed551b6caf3d19c55d5290a09c584"><div class="ttname"><a href="a00364.html#a653ed551b6caf3d19c55d5290a09c584">limbo::is_number</a></div><div class="ttdeci">bool is_number(string const &amp;s)</div><div class="ttdoc">check whether string represents a number, either integer or floating point number ...</div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00062">String.h:62</a></div></div>
-<div class="ttc" id="a00364_html_ad6e50a2521a25b1deb9c87312c31b104"><div class="ttname"><a href="a00364.html#ad6e50a2521a25b1deb9c87312c31b104">limbo::tolower</a></div><div class="ttdeci">string tolower(string const &amp;s)</div><div class="ttdoc">convert string to lower case </div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00095">String.h:95</a></div></div>
-<div class="ttc" id="a00364_html"><div class="ttname"><a href="a00364.html">limbo</a></div><div class="ttdoc">namespace for Limbo </div><div class="ttdef"><b>Definition:</b> <a href="a00251_source.html#l00022">GraphUtility.h:22</a></div></div>
-<div class="ttc" id="a00364_html_a66eb59b91fd8e2a1d69b6c5705acc3eb"><div class="ttname"><a href="a00364.html#a66eb59b91fd8e2a1d69b6c5705acc3eb">limbo::toupper</a></div><div class="ttdeci">string toupper(string const &amp;s)</div><div class="ttdoc">convert string to upper case </div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00083">String.h:83</a></div></div>
-<div class="ttc" id="a00318_html"><div class="ttname"><a href="a00318.html">ToString.h</a></div><div class="ttdoc">convert metadata type to string </div></div>
-<div class="ttc" id="a00364_html_a2c4c5598fefa12f03a057df7a5506a44"><div class="ttname"><a href="a00364.html#a2c4c5598fefa12f03a057df7a5506a44">limbo::get_file_path</a></div><div class="ttdeci">string get_file_path(const string &amp;s)</div><div class="ttdoc">get relative path of a file </div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00118">String.h:118</a></div></div>
-<div class="ttc" id="a00364_html_a7df852268c8a2f86dc06582d80dfa5ad"><div class="ttname"><a href="a00364.html#a7df852268c8a2f86dc06582d80dfa5ad">limbo::get_file_name</a></div><div class="ttdeci">string get_file_name(const string &amp;s)</div><div class="ttdoc">get pure name of a file (no path) </div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00127">String.h:127</a></div></div>
-<div class="ttc" id="a00364_html_ac94a9f8ab47da7a5e8eed918f46c6950"><div class="ttname"><a href="a00364.html#ac94a9f8ab47da7a5e8eed918f46c6950">limbo::is_float</a></div><div class="ttdeci">bool is_float(string const &amp;s)</div><div class="ttdoc">check whether string represents an float </div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00041">String.h:41</a></div></div>
-<div class="ttc" id="a00364_html_a33f4201bab9b2d54232f1ff9c59c8fd8"><div class="ttname"><a href="a00364.html#a33f4201bab9b2d54232f1ff9c59c8fd8">limbo::get_file_suffix</a></div><div class="ttdeci">string get_file_suffix(const string &amp;s)</div><div class="ttdoc">get suffix of a file </div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00136">String.h:136</a></div></div>
-<div class="ttc" id="a00364_html_a6d70f4b0d6726392b371ed1470d1a96c"><div class="ttname"><a href="a00364.html#a6d70f4b0d6726392b371ed1470d1a96c">limbo::trim_file_suffix</a></div><div class="ttdeci">string trim_file_suffix(string const &amp;s)</div><div class="ttdoc">trim the suffix of a file </div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00145">String.h:145</a></div></div>
-<div class="ttc" id="a00364_html_a7f24ba1f3a0ce8a2d333f17f91efbd11"><div class="ttname"><a href="a00364.html#a7f24ba1f3a0ce8a2d333f17f91efbd11">limbo::get_first_word</a></div><div class="ttdeci">string get_first_word(string const &amp;str)</div><div class="ttdoc">fetch the first word of a string, assume delimiter is space or tab </div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00154">String.h:154</a></div></div>
-<div class="ttc" id="a00364_html_ad28905911fb4acbd97a031fe8e64c8a2"><div class="ttname"><a href="a00364.html#ad28905911fb4acbd97a031fe8e64c8a2">limbo::is_integer</a></div><div class="ttdeci">bool is_integer(string const &amp;s)</div><div class="ttdoc">check whether string represents an integer </div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00028">String.h:28</a></div></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    uint32_t vertex_num = boost::num_vertices(this-&gt;m_graph);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    uint32_t edge_num = boost::num_edges(this-&gt;m_graph);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    uint32_t vertex_variable_num = vertex_num&lt;&lt;1;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    unordered_map&lt;graph_vertex_type, uint32_t&gt; hVertexIdx; <span class="comment">// vertex index </span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    unordered_map&lt;graph_edge_type, uint32_t, edge_hash_type&gt; hEdgeIdx; <span class="comment">// edge index </span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    vertex_iterator_type vi, vie;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    uint32_t cnt = 0;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">for</span> (boost::tie(vi, vie) = boost::vertices(this-&gt;m_graph); vi != vie; ++vi, ++cnt)</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        hVertexIdx[*vi] = cnt;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    edge_iterator_type ei, eie;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    cnt = 0; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">for</span> (boost::tie(ei, eie) = boost::edges(this-&gt;m_graph); ei != eie; ++ei, ++cnt)</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        hEdgeIdx[*ei] = cnt;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keyword">typedef</span> lemon::MipSolver::Row Row; <span class="comment">// constraints dimension</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keyword">typedef</span> lemon::MipSolver::Col Col; <span class="comment">// variable dimension </span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keyword">typedef</span> lemon::MipSolver::Expr Expr; <span class="comment">// expression </span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="comment">// ILP environment</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    lemon::CbcMip opt_model;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="comment">//mute the log from the LP solver</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="comment">// set threads </span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="comment">//set up the ILP variables</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    vector&lt;Col&gt; vVertexBit;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    vector&lt;Col&gt; vEdgeBit;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="comment">// vertex variables </span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    vVertexBit.reserve(vertex_variable_num); </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordflow">for</span> (uint32_t i = 0; i != vertex_variable_num; ++i)</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    {</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        uint32_t vertex_idx = (i&gt;&gt;1);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        ostringstream oss; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        oss &lt;&lt; <span class="stringliteral">&quot;v&quot;</span> &lt;&lt; i;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keywordflow">if</span> (this-&gt;m_vColor[vertex_idx] &gt;= 0 &amp;&amp; this-&gt;m_vColor[vertex_idx] &lt; this-&gt;m_color_num) <span class="comment">// precolored </span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        {</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            int8_t color_bit;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <span class="keywordflow">if</span> ((i&amp;1) == 0) color_bit = (this-&gt;m_vColor[vertex_idx]&gt;&gt;1)&amp;1;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            <span class="keywordflow">else</span> color_bit = this-&gt;m_vColor[vertex_idx]&amp;1;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            vVertexBit.push_back(opt_model.addCol());</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            Col <span class="keyword">const</span>&amp; x = vVertexBit.back();</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            opt_model.colBounds(x, color_bit, color_bit);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            opt_model.colType(x, <a class="code" href="a00443.html#a500190a99a5762b6aa25aec1230479f0ae0e2246eae040cad8ac1c342fe1b9d9d">lemon::MipSolver::INTEGER</a>);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            opt_model.colName(x, oss.str());</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <span class="keywordflow">else</span> <span class="comment">// uncolored </span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            vVertexBit.push_back(opt_model.addCol());</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            Col <span class="keyword">const</span>&amp; x = vVertexBit.back();</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            opt_model.colBounds(x, 0, 1);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            opt_model.colType(x, <a class="code" href="a00443.html#a500190a99a5762b6aa25aec1230479f0ae0e2246eae040cad8ac1c342fe1b9d9d">lemon::MipSolver::INTEGER</a>);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            opt_model.colName(x, oss.str());</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        }</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    }</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="comment">// edge variables </span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    vEdgeBit.reserve(edge_num);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordflow">for</span> (uint32_t i = 0; i != edge_num; ++i)</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    {</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        ostringstream oss;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        oss &lt;&lt; <span class="stringliteral">&quot;e&quot;</span> &lt;&lt; i;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        vEdgeBit.push_back(opt_model.addCol());</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        Col <span class="keyword">const</span>&amp; x = vEdgeBit.back();</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        opt_model.colBounds(x, 0, 1);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        opt_model.colType(x, lemon::MipSolver::REAL);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        opt_model.colName(x, oss.str());</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    }</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="comment">// update model </span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="comment">// set up the objective </span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    Expr obj;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordflow">for</span> (boost::tie(ei, eie) = edges(this-&gt;m_graph); ei != eie; ++ei)</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    {</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        edge_weight_type w = boost::get(boost::edge_weight, this-&gt;m_graph, *ei);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="keywordflow">if</span> (w &gt; 0) <span class="comment">// weighted conflict </span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            obj += w*vEdgeBit[hEdgeIdx[*ei]];</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (w &lt; 0) <span class="comment">// weighted stitch </span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            obj += this-&gt;m_stitch_weight*(-w)*vEdgeBit[hEdgeIdx[*ei]];</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    }</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    opt_model.obj(obj);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    opt_model.min();</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="comment">// set up the constraints</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="comment">//uint32_t constr_num = 0;</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">for</span> (boost::tie(ei, eie) = boost::edges(this-&gt;m_graph); ei != eie; ++ei)</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    {</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        graph_vertex_type s = boost::source(*ei, this-&gt;m_graph);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        graph_vertex_type t = boost::target(*ei, this-&gt;m_graph);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        uint32_t sIdx = hVertexIdx[s];</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        uint32_t tIdx = hVertexIdx[t];</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        uint32_t vertex_idx1 = sIdx&lt;&lt;1;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        uint32_t vertex_idx2 = tIdx&lt;&lt;1;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        edge_weight_type w = boost::get(boost::edge_weight, this-&gt;m_graph, *ei);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        uint32_t edge_idx = hEdgeIdx[*ei];</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <span class="comment">//char buf[100];</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="keywordflow">if</span> (w &gt;= 0) <span class="comment">// constraints for conflict edges </span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        {</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            <span class="comment">//sprintf(buf, &quot;R%u&quot;, constr_num++);  </span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            opt_model.addRow(</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                    vVertexBit[vertex_idx1] + vVertexBit[vertex_idx1+1] </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                    + vVertexBit[vertex_idx2] + vVertexBit[vertex_idx2+1] </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;                    + vEdgeBit[edge_idx] &gt;= 1</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;                    );</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            <span class="comment">//sprintf(buf, &quot;R%u&quot;, constr_num++);  </span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;            opt_model.addRow(</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                    1 - vVertexBit[vertex_idx1] + vVertexBit[vertex_idx1+1] </div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                    + 1 - vVertexBit[vertex_idx2] + vVertexBit[vertex_idx2+1] </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                    + vEdgeBit[edge_idx] &gt;= 1</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                    );</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="comment">//sprintf(buf, &quot;R%u&quot;, constr_num++);  </span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            opt_model.addRow(</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                    vVertexBit[vertex_idx1] + 1 - vVertexBit[vertex_idx1+1] </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                    + vVertexBit[vertex_idx2] + 1 - vVertexBit[vertex_idx2+1] </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                    + vEdgeBit[edge_idx] &gt;= 1</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                    );</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            <span class="comment">//sprintf(buf, &quot;R%u&quot;, constr_num++);  </span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            opt_model.addRow(</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                    1 - vVertexBit[vertex_idx1] + 1 - vVertexBit[vertex_idx1+1] </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                    + 1 - vVertexBit[vertex_idx2] + 1 - vVertexBit[vertex_idx2+1] </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                    + vEdgeBit[edge_idx] &gt;= 1</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                    );</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        }</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="keywordflow">else</span> <span class="comment">// constraints for stitch edges </span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        {</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <span class="comment">//sprintf(buf, &quot;R%u&quot;, constr_num++);  </span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            opt_model.addRow(</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                    vVertexBit[vertex_idx1] - vVertexBit[vertex_idx2] - vEdgeBit[edge_idx] &lt;= 0</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                    );</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            <span class="comment">//sprintf(buf, &quot;R%u&quot;, constr_num++);  </span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            opt_model.addRow(</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                    vVertexBit[vertex_idx2] - vVertexBit[vertex_idx1] - vEdgeBit[edge_idx] &lt;= 0</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                    );</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            <span class="comment">//sprintf(buf, &quot;R%u&quot;, constr_num++);  </span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            opt_model.addRow(</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                    vVertexBit[vertex_idx1+1] - vVertexBit[vertex_idx2+1] - vEdgeBit[edge_idx] &lt;= 0</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                    );      </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            <span class="comment">//sprintf(buf, &quot;R%u&quot;, constr_num++);  </span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            opt_model.addRow(</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                    vVertexBit[vertex_idx2+1] - vVertexBit[vertex_idx1+1] - vEdgeBit[edge_idx] &lt;= 0</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                    );</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        }</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    }</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="comment">// additional constraints for 3-coloring </span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordflow">if</span> (this-&gt;m_color_num == base_type::THREE)</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    {</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="comment">//char buf[100];</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="keywordflow">for</span>(uint32_t k = 0; k != vertex_variable_num; k += 2) </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        {</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            <span class="comment">//sprintf(buf, &quot;R%u&quot;, constr_num++);  </span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            opt_model.addRow(vVertexBit[k] + vVertexBit[k+1] &lt;= 1);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        }</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="comment">//optimize model </span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    opt_model.solve();</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    int32_t opt_status = opt_model.type();</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keywordflow">if</span> (opt_status == <a class="code" href="a00443.html#a500190a99a5762b6aa25aec1230479f0ac6bee077889c70886c6fa16792f12d2c">lemon::MipSolver::INFEASIBLE</a>) </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    {</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;ERROR: The model is infeasible... EXIT&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        exit(1);</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    }</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="comment">// collect coloring solution </span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordflow">for</span> (uint32_t k = 0; k != vertex_variable_num; k += 2)</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    {</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        int8_t color = (opt_model.sol(vVertexBit[k])*2) + opt_model.sol(vVertexBit[k+1]);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        uint32_t vertex_idx = (k&gt;&gt;1);</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        assert(color &gt;= 0 &amp;&amp; color &lt; this-&gt;m_color_num);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <span class="keywordflow">if</span> (this-&gt;m_vColor[vertex_idx] &gt;= 0 &amp;&amp; this-&gt;m_vColor[vertex_idx] &lt; this-&gt;m_color_num) <span class="comment">// check precolored vertex </span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            assert(this-&gt;m_vColor[vertex_idx] == color);</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="keywordflow">else</span> <span class="comment">// assign color to uncolored vertex </span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            this-&gt;m_vColor[vertex_idx] = color;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    }</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="comment">// return objective value </span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keywordflow">return</span> opt_model.solValue();</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;}</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;} <span class="comment">// namespace coloring</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;} <span class="comment">// namespace algorithms</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;} <span class="comment">// namespace limbo</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a00443_html_a500190a99a5762b6aa25aec1230479f0ae0e2246eae040cad8ac1c342fe1b9d9d"><div class="ttname"><a href="a00443.html#a500190a99a5762b6aa25aec1230479f0ae0e2246eae040cad8ac1c342fe1b9d9d">limbo::solvers::INTEGER</a></div><div class="ttdoc">integer number </div><div class="ttdef"><b>Definition:</b> <a href="a00387_source.html#l00034">Solvers.h:34</a></div></div>
+<div class="ttc" id="a00153_html_a1c30ab6247d9cb27ab5c8e71587c0a20"><div class="ttname"><a href="a00153.html#a1c30ab6247d9cb27ab5c8e71587c0a20">limbo::algorithms::coloring::ILPColoringLemonCbc::~ILPColoringLemonCbc</a></div><div class="ttdeci">virtual ~ILPColoringLemonCbc()</div><div class="ttdoc">destructor </div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00100">ILPColoringLemonCbc.h:100</a></div></div>
+<div class="ttc" id="a00388_html"><div class="ttname"><a href="a00388.html">String.h</a></div><div class="ttdoc">Check string is integer, floating point, number... Convert string to upper/lower cases. </div></div>
+<div class="ttc" id="a00096_html_a970a217003c538a3062520818c65094c"><div class="ttname"><a href="a00096.html#a970a217003c538a3062520818c65094c">limbo::algorithms::coloring::ILPColoringLemonCbc::edge_hash_type::operator()</a></div><div class="ttdeci">std::size_t operator()(graph_edge_type const &amp;e) const </div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00085">ILPColoringLemonCbc.h:85</a></div></div>
+<div class="ttc" id="a00435_html"><div class="ttname"><a href="a00435.html">limbo</a></div><div class="ttdoc">namespace for Limbo </div><div class="ttdef"><b>Definition:</b> <a href="a00322_source.html#l00022">GraphUtility.h:22</a></div></div>
+<div class="ttc" id="a00096_html"><div class="ttname"><a href="a00096.html">limbo::algorithms::coloring::ILPColoringLemonCbc::edge_hash_type</a></div><div class="ttdoc">hasher class for graph_edge_type </div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00080">ILPColoringLemonCbc.h:80</a></div></div>
+<div class="ttc" id="a00057_html_a7898d4a14f7ed7c4a37c2353e5330de2"><div class="ttname"><a href="a00057.html#a7898d4a14f7ed7c4a37c2353e5330de2">limbo::algorithms::coloring::Coloring::ColorNumType</a></div><div class="ttdeci">ColorNumType</div><div class="ttdoc">number of colors </div><div class="ttdef"><b>Definition:</b> <a href="a00313_source.html#l00132">Coloring.h:132</a></div></div>
+<div class="ttc" id="a00443_html_a500190a99a5762b6aa25aec1230479f0ac6bee077889c70886c6fa16792f12d2c"><div class="ttname"><a href="a00443.html#a500190a99a5762b6aa25aec1230479f0ac6bee077889c70886c6fa16792f12d2c">limbo::solvers::INFEASIBLE</a></div><div class="ttdoc">the model is infeasible </div><div class="ttdef"><b>Definition:</b> <a href="a00387_source.html#l00037">Solvers.h:37</a></div></div>
+<div class="ttc" id="a00153_html_a87e6f58a3f2f8f7069c9f4c3773dfe3a"><div class="ttname"><a href="a00153.html#a87e6f58a3f2f8f7069c9f4c3773dfe3a">limbo::algorithms::coloring::ILPColoringLemonCbc::coloring</a></div><div class="ttdeci">virtual double coloring()</div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00108">ILPColoringLemonCbc.h:108</a></div></div>
+<div class="ttc" id="a00313_html"><div class="ttname"><a href="a00313.html">Coloring.h</a></div><div class="ttdoc">base class for all graph coloring algorithms </div></div>
+<div class="ttc" id="a00057_html"><div class="ttname"><a href="a00057.html">limbo::algorithms::coloring::Coloring</a></div><div class="ttdef"><b>Definition:</b> <a href="a00313_source.html#l00114">Coloring.h:114</a></div></div>
+<div class="ttc" id="a00153_html_a464953a293671660561602c9ae0187ad"><div class="ttname"><a href="a00153.html#a464953a293671660561602c9ae0187ad">limbo::algorithms::coloring::ILPColoringLemonCbc::ILPColoringLemonCbc</a></div><div class="ttdeci">ILPColoringLemonCbc(graph_type const &amp;g)</div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00096">ILPColoringLemonCbc.h:96</a></div></div>
+<div class="ttc" id="a00153_html"><div class="ttname"><a href="a00153.html">limbo::algorithms::coloring::ILPColoringLemonCbc</a></div><div class="ttdef"><b>Definition:</b> <a href="a00317_source.html#l00065">ILPColoringLemonCbc.h:65</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:11 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

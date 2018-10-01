@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/containers/FastMultiSet.h File Reference</title>
+<title>Limbo: boost::geometry::traits::tag&lt; GdsParser::GdsDB::GdsPolygon &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,8 +45,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -67,8 +67,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -87,55 +89,41 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_67961cc7bc7695996924d6bf198dc652.html">containers</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00424.html">boost</a></li><li class="navelem"><b>geometry</b></li><li class="navelem"><b>traits</b></li><li class="navelem"><a class="el" href="a00259.html">tag< GdsParser::GdsDB::GdsPolygon ></a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">FastMultiSet.h File Reference</div>  </div>
+<div class="title">boost::geometry::traits::tag&lt; GdsParser::GdsDB::GdsPolygon &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>a container of multiple-level set  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;map&gt;</code><br />
-<code>#include &lt;multiset&gt;</code><br />
-<code>#include &lt;cassert&gt;</code><br />
-<code>#include &lt;boost/typeof.hpp&gt;</code><br />
-</div>
-<p><a href="a00259_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00060.html">limbo::containers::FastMultiSet&lt; KeyType, Compare1, Compare2 &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00364"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html">limbo</a></td></tr>
-<tr class="memdesc:a00364"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00369"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00369.html">limbo::containers</a></td></tr>
-<tr class="memdesc:a00369"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Containers <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>a container of multiple-level set </p>
-<p>Description : Use 2 level comparison Compare1 is for main multiset, it allows duplicate keys. Compare2 is for secondary map, it must have unique keys. In other words, keys to Compare1 can have duplicated compare results, while to Compare2, the compare results must be unique. The data structure is as follows multiset keeps the correct order that user wants for duplicate keys, map can ensure fast access because map saves &lt;key, iterator in multiset&gt;</p>
-<p>This data structure can provide O(logN) in insert, erase and update for even duplicate keys</p>
-<p>It is suitable to use pointers as key_type or value_type, which will not change during the operations. But the data the pointers point to can change, so that no data race between the order of update data and update multiset.</p>
-<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Feb 2015 </dd></dl>
+<p>specialization for tag  
+ <a href="a00259.html#details">More...</a></p>
 
-<p>Definition in file <a class="el" href="a00259_source.html">FastMultiSet.h</a>.</p>
-</div></div><!-- contents -->
+<p><code>#include &lt;<a class="el" href="a00361_source.html">GdsObjects.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for boost::geometry::traits::tag&lt; GdsParser::GdsDB::GdsPolygon &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00259.png" usemap="#boost::geometry::traits::tag&lt; GdsParser::GdsDB::GdsPolygon &gt;_map" alt=""/>
+  <map id="boost::geometry::traits::tag&lt; GdsParser::GdsDB::GdsPolygon &gt;_map" name="boost::geometry::traits::tag&lt; GdsParser::GdsDB::GdsPolygon &gt;_map">
+</map>
+ </div></div>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;&gt;<br />
+struct boost::geometry::traits::tag&lt; GdsParser::GdsDB::GdsPolygon &gt;</h3>
+
+<p>specialization for tag </p>
+
+<p>Definition at line <a class="el" href="a00361_source.html#l00749">749</a> of file <a class="el" href="a00361_source.html">GdsObjects.h</a>.</p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/<a class="el" href="a00361_source.html">GdsObjects.h</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

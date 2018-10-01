@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: LefParser::Driver Class Reference</title>
+<title>Limbo: GdsParser::GdsDB::ApplyCellReferenceAction Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,174 +89,51 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00363.html">LefParser</a></li><li class="navelem"><a class="el" href="a00043.html">Driver</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00431.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00432.html">GdsDB</a></li><li class="navelem"><a class="el" href="a00043.html">ApplyCellReferenceAction</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="a00481.html">List of all members</a>  </div>
+<a href="a00530.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">LefParser::Driver Class Reference</div>  </div>
+<div class="title">GdsParser::GdsDB::ApplyCellReferenceAction Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="a00296_source.html">LefDriver.h</a>&gt;</code></p>
+<p>Apply cell reference action. It needs to call functions in <a class="el" href="a00433.html">GdsParser::GdsDB::ApplyCellReferenceActionDetails</a>.  
+ <a href="a00043.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad746575c058c662591dec556fd15fea1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00043.html#ad746575c058c662591dec556fd15fea1">Driver</a> (<a class="el" href="a00125.html">LefDataBase</a> &amp;db)</td></tr>
-<tr class="separator:ad746575c058c662591dec556fd15fea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02fa98d5c261e366ce91e86914227f20"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00043.html#a02fa98d5c261e366ce91e86914227f20">parse_stream</a> (std::istream &amp;in, const string &amp;sname=&quot;stream input&quot;)</td></tr>
-<tr class="separator:a02fa98d5c261e366ce91e86914227f20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebb355db178631df09754a99d8100984"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00043.html#aebb355db178631df09754a99d8100984">parse_string</a> (const string &amp;input, const string &amp;sname=&quot;string stream&quot;)</td></tr>
-<tr class="separator:aebb355db178631df09754a99d8100984"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a581849a0810e8a3631204f1dca1a9146"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00043.html#a581849a0810e8a3631204f1dca1a9146">parse_file</a> (const string &amp;filename)</td></tr>
-<tr class="separator:a581849a0810e8a3631204f1dca1a9146"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaf1251e4247e7d1bd25945a0daca394"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00043.html#aeaf1251e4247e7d1bd25945a0daca394">ApplyCellReferenceAction</a> (<a class="el" href="a00119.html">GdsCellReference</a> const &amp;cr)</td></tr>
+<tr class="memdesc:aeaf1251e4247e7d1bd25945a0daca394"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#aeaf1251e4247e7d1bd25945a0daca394">More...</a><br /></td></tr>
+<tr class="separator:aeaf1251e4247e7d1bd25945a0daca394"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef9d1113fe61468028778b29fbd2f2eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00043.html#aef9d1113fe61468028778b29fbd2f2eb">ApplyCellReferenceAction</a> (<a class="el" href="a00043.html">ApplyCellReferenceAction</a> const &amp;rhs)</td></tr>
+<tr class="separator:aef9d1113fe61468028778b29fbd2f2eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72c06252ecfd10354066116cbf4e92be"><td class="memTemplParams" colspan="2">template&lt;typename ObjectType &gt; </td></tr>
+<tr class="memitem:a72c06252ecfd10354066116cbf4e92be"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00043.html#a72c06252ecfd10354066116cbf4e92be">operator()</a> (::<a class="el" href="a00133.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a>, ObjectType *object)</td></tr>
+<tr class="memdesc:a72c06252ecfd10354066116cbf4e92be"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to run the action.  <a href="#a72c06252ecfd10354066116cbf4e92be">More...</a><br /></td></tr>
+<tr class="separator:a72c06252ecfd10354066116cbf4e92be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5df3444d8d6af6c6de2c617cdcf39a45"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00043.html#a5df3444d8d6af6c6de2c617cdcf39a45">message</a> () const </td></tr>
+<tr class="separator:a5df3444d8d6af6c6de2c617cdcf39a45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a4d97736b2a73c525c9b7d9b0891f3c67"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d97736b2a73c525c9b7d9b0891f3c67"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00043.html#a4d97736b2a73c525c9b7d9b0891f3c67">trace_scanning</a></td></tr>
-<tr class="memdesc:a4d97736b2a73c525c9b7d9b0891f3c67"><td class="mdescLeft">&#160;</td><td class="mdescRight">enable debug output in the flex scanner <br /></td></tr>
-<tr class="separator:a4d97736b2a73c525c9b7d9b0891f3c67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cd7abc022576c40a390dfc3a356b9b4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8cd7abc022576c40a390dfc3a356b9b4"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00043.html#a8cd7abc022576c40a390dfc3a356b9b4">trace_parsing</a></td></tr>
-<tr class="memdesc:a8cd7abc022576c40a390dfc3a356b9b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">enable debug output in the bison parser <br /></td></tr>
-<tr class="separator:a8cd7abc022576c40a390dfc3a356b9b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef19a9c5eb7d9837be317fc99f7e728b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef19a9c5eb7d9837be317fc99f7e728b"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00043.html#aef19a9c5eb7d9837be317fc99f7e728b">streamname</a></td></tr>
-<tr class="memdesc:aef19a9c5eb7d9837be317fc99f7e728b"><td class="mdescLeft">&#160;</td><td class="mdescRight">stream name (file or input stream) used for error messages. <br /></td></tr>
-<tr class="separator:aef19a9c5eb7d9837be317fc99f7e728b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a7ca7d4d398ef53df3c95685faa5a7eca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00125.html">LefDataBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00043.html#a7ca7d4d398ef53df3c95685faa5a7eca">m_db</a></td></tr>
-<tr class="separator:a7ca7d4d398ef53df3c95685faa5a7eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeabccb929b1d869a54c396eb2b98c789"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeabccb929b1d869a54c396eb2b98c789"></a>
+<a class="el" href="a00119.html">GdsCellReference</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00043.html#aeabccb929b1d869a54c396eb2b98c789">cellRef</a></td></tr>
+<tr class="memdesc:aeabccb929b1d869a54c396eb2b98c789"><td class="mdescLeft">&#160;</td><td class="mdescRight">CREF object. <br /></td></tr>
+<tr class="separator:aeabccb929b1d869a54c396eb2b98c789"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="a00043.html">Driver</a> class brings together all components. It creates an instance of the Parser and Scanner classes and connects them. Then the input stream is fed into the scanner object and the parser gets it's token sequence. Furthermore the driver object is available in the grammar rules as a parameter. Therefore the driver class contains a reference to the structure into which the parsed data is saved. </p>
+<div class="textblock"><p>Apply cell reference action. It needs to call functions in <a class="el" href="a00433.html">GdsParser::GdsDB::ApplyCellReferenceActionDetails</a>. </p>
 
-<p>Definition at line <a class="el" href="a00296_source.html#l00063">63</a> of file <a class="el" href="a00296_source.html">LefDriver.h</a>.</p>
+<p>Definition at line <a class="el" href="a00359_source.html#l00442">442</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ad746575c058c662591dec556fd15fea1"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">LefParser::Driver::Driver </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00125.html">LefDataBase</a> &amp;&#160;</td>
-          <td class="paramname"><em>db</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>construct a new parser driver context </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">db</td><td>reference to database </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a581849a0810e8a3631204f1dca1a9146"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool LefParser::Driver::parse_file </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>filename</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Invoke the scanner and parser on a file. Use parse_stream with a std::ifstream if detection of file reading errors is required. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>input file name </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if successfully parsed </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a02fa98d5c261e366ce91e86914227f20"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool LefParser::Driver::parse_stream </td>
-          <td>(</td>
-          <td class="paramtype">std::istream &amp;&#160;</td>
-          <td class="paramname"><em>in</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>sname</em> = <code>&quot;stream&#160;input&quot;</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Invoke the scanner and parser for a stream. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">in</td><td>input stream </td></tr>
-    <tr><td class="paramname">sname</td><td>stream name for error messages </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if successfully parsed </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="aebb355db178631df09754a99d8100984"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool LefParser::Driver::parse_string </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>input</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>sname</em> = <code>&quot;string&#160;stream&quot;</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Invoke the scanner and parser on an input string. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">input</td><td>input string </td></tr>
-    <tr><td class="paramname">sname</td><td>stream name for error messages </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if successfully parsed </dd></dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a7ca7d4d398ef53df3c95685faa5a7eca"></a>
+<a class="anchor" id="aeaf1251e4247e7d1bd25945a0daca394"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -264,28 +141,150 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00125.html">LefDataBase</a>&amp; LefParser::Driver::m_db</td>
+          <td class="memname">GdsParser::GdsDB::ApplyCellReferenceAction::ApplyCellReferenceAction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00119.html">GdsCellReference</a> const &amp;&#160;</td>
+          <td class="paramname"><em>cr</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Reference to the database filled during parsing of the expressions. </p>
 
-<p>Definition at line <a class="el" href="a00296_source.html#l00110">110</a> of file <a class="el" href="a00296_source.html">LefDriver.h</a>.</p>
+<p>constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cr</td><td>CREF object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00359_source.html#l00448">448</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/lef/adapt/<a class="el" href="a00296_source.html">LefDriver.h</a></li>
+<a class="anchor" id="aef9d1113fe61468028778b29fbd2f2eb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GdsParser::GdsDB::ApplyCellReferenceAction::ApplyCellReferenceAction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00043.html">ApplyCellReferenceAction</a> const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>copy constructor </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>an <a class="el" href="a00043.html" title="Apply cell reference action. It needs to call functions in GdsParser::GdsDB::ApplyCellReferenceAction...">ApplyCellReferenceAction</a> object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00359_source.html#l00451">451</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a5df3444d8d6af6c6de2c617cdcf39a45"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string GdsParser::GdsDB::ApplyCellReferenceAction::message </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>a message of action for debug </dd></dl>
+
+<p>Definition at line <a class="el" href="a00359_source.html#l00463">463</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a72c06252ecfd10354066116cbf4e92be"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ObjectType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsDB::ApplyCellReferenceAction::operator() </td>
+          <td>(</td>
+          <td class="paramtype">::<a class="el" href="a00133.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ObjectType *&#160;</td>
+          <td class="paramname"><em>object</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>API to run the action. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ObjectType</td><td>GDSII object type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">object</td><td>GDSII object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00359_source.html#l00457">457</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/<a class="el" href="a00359_source.html">GdsObjectHelpers.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdsParser::gds_celltype Struct Reference</title>
+<title>Limbo: limbo::geometry::container_traits&lt; ContainerType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,90 +89,84 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00360.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00071.html">gds_celltype</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00441.html">geometry</a></li><li class="navelem"><a class="el" href="a00071.html">container_traits</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00444.html">List of all members</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="a00592.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser::gds_celltype Struct Reference</div>  </div>
+<div class="title">limbo::geometry::container_traits&lt; ContainerType &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>cell type  
+<p>type traits for containers such as vector, list, multiset  
  <a href="a00071.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00294_source.html">GdsWriter.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00334_source.html">Geometry.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a03dc1f3ad42772200fd32c5d335abdb3"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00071.html#a03dc1f3ad42772200fd32c5d335abdb3">name</a></td></tr>
-<tr class="separator:a03dc1f3ad42772200fd32c5d335abdb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cb5c26449fb23bfd838a851e7010725"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="a00072.html">gds_itemtype</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00071.html#a1cb5c26449fb23bfd838a851e7010725">item</a></td></tr>
-<tr class="separator:a1cb5c26449fb23bfd838a851e7010725"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed2ebadeda3defd69b03d324b8ee26b4"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="a00071.html">gds_celltype</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00071.html#aed2ebadeda3defd69b03d324b8ee26b4">nextcell</a></td></tr>
-<tr class="separator:aed2ebadeda3defd69b03d324b8ee26b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:af985c99dec0e9b422da1633735bd3ce6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af985c99dec0e9b422da1633735bd3ce6"></a>
+typedef ContainerType&#160;</td><td class="memItemRight" valign="bottom"><b>container_type</b></td></tr>
+<tr class="separator:af985c99dec0e9b422da1633735bd3ce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51331c78d5a0619387e13761d8d2536b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a51331c78d5a0619387e13761d8d2536b"></a>
+typedef container_type::value_type&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b></td></tr>
+<tr class="separator:a51331c78d5a0619387e13761d8d2536b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72991b3e657fbd88a0da8ca4b50ac572"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72991b3e657fbd88a0da8ca4b50ac572"></a>
+typedef <br class="typebreak" />
+container_type::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator_type</b></td></tr>
+<tr class="separator:a72991b3e657fbd88a0da8ca4b50ac572"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0165594612172279ec0bc33759d68f7c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0165594612172279ec0bc33759d68f7c"></a>
+typedef container_type::iterator&#160;</td><td class="memItemRight" valign="bottom"><b>iterator_type</b></td></tr>
+<tr class="separator:a0165594612172279ec0bc33759d68f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a06ca326c49df471644d4fe5897a71a36"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a06ca326c49df471644d4fe5897a71a36"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00071.html#a06ca326c49df471644d4fe5897a71a36">insert</a> (container_type &amp;container, value_type const &amp;v)</td></tr>
+<tr class="memdesc:a06ca326c49df471644d4fe5897a71a36"><td class="mdescLeft">&#160;</td><td class="mdescRight">insert value to container <br /></td></tr>
+<tr class="separator:a06ca326c49df471644d4fe5897a71a36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a385d30a67a7e25e8b353c12fcc43c821"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a385d30a67a7e25e8b353c12fcc43c821"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00071.html#a385d30a67a7e25e8b353c12fcc43c821">insert</a> (container_type &amp;container, iterator_type it, value_type const &amp;v)</td></tr>
+<tr class="memdesc:a385d30a67a7e25e8b353c12fcc43c821"><td class="mdescLeft">&#160;</td><td class="mdescRight">insert value to container with hint of iterator <br /></td></tr>
+<tr class="separator:a385d30a67a7e25e8b353c12fcc43c821"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba0e52282920454de3d6665785bf420"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4ba0e52282920454de3d6665785bf420"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00071.html#a4ba0e52282920454de3d6665785bf420">erase</a> (container_type &amp;container, value_type const &amp;v)</td></tr>
+<tr class="memdesc:a4ba0e52282920454de3d6665785bf420"><td class="mdescLeft">&#160;</td><td class="mdescRight">erase value from iterator <br /></td></tr>
+<tr class="separator:a4ba0e52282920454de3d6665785bf420"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b51b1b3a45a5c5923753b2d1e9d5038"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b51b1b3a45a5c5923753b2d1e9d5038"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00071.html#a5b51b1b3a45a5c5923753b2d1e9d5038">erase</a> (container_type &amp;container, iterator_type it)</td></tr>
+<tr class="memdesc:a5b51b1b3a45a5c5923753b2d1e9d5038"><td class="mdescLeft">&#160;</td><td class="mdescRight">erase an element from container with iterator <br /></td></tr>
+<tr class="separator:a5b51b1b3a45a5c5923753b2d1e9d5038"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a187dca7692085adcf531f68d9c95862d"><td class="memTemplParams" colspan="2"><a class="anchor" id="a187dca7692085adcf531f68d9c95862d"></a>
+template&lt;typename PointCompareType &gt; </td></tr>
+<tr class="memitem:a187dca7692085adcf531f68d9c95862d"><td class="memTemplItemLeft" align="right" valign="top">static container_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00071.html#a187dca7692085adcf531f68d9c95862d">construct</a> (PointCompareType const &amp;comp)</td></tr>
+<tr class="memdesc:a187dca7692085adcf531f68d9c95862d"><td class="mdescLeft">&#160;</td><td class="mdescRight">a default construct function is necessary, because std::set needs a compare function, but vector does not <br /></td></tr>
+<tr class="separator:a187dca7692085adcf531f68d9c95862d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>cell type </p>
-<p>&lt; A GDS library is a linked list of cells. </p>
+<div class="textblock"><h3>template&lt;typename ContainerType&gt;<br />
+class limbo::geometry::container_traits&lt; ContainerType &gt;</h3>
 
-<p>Definition at line <a class="el" href="a00294_source.html#l00077">77</a> of file <a class="el" href="a00294_source.html">GdsWriter.h</a>.</p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a1cb5c26449fb23bfd838a851e7010725"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct <a class="el" href="a00072.html">gds_itemtype</a>* GdsParser::gds_celltype::item</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>one element of the cell </p>
+<p>type traits for containers such as vector, list, multiset </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ContainerType</td><td>container type </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="a00294_source.html#l00080">80</a> of file <a class="el" href="a00294_source.html">GdsWriter.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a03dc1f3ad42772200fd32c5d335abdb3"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char* GdsParser::gds_celltype::name</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>&lt; A cell is a linked list of items. name of the cell </p>
-
-<p>Definition at line <a class="el" href="a00294_source.html#l00079">79</a> of file <a class="el" href="a00294_source.html">GdsWriter.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aed2ebadeda3defd69b03d324b8ee26b4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct <a class="el" href="a00071.html">gds_celltype</a>* GdsParser::gds_celltype::nextcell</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>pointer to the next cell, forming a linked list </p>
-
-<p>Definition at line <a class="el" href="a00294_source.html#l00081">81</a> of file <a class="el" href="a00294_source.html">GdsWriter.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00294_source.html">GdsWriter.h</a></li>
+<p>Definition at line <a class="el" href="a00334_source.html#l00254">254</a> of file <a class="el" href="a00334_source.html">Geometry.h</a>.</p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/geometry/<a class="el" href="a00334_source.html">Geometry.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

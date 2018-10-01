@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/string/String.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/ILPColoringLemonCbc.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,79 +87,74 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_a4f08339963c9aeb6ba530d5303d7579.html">string</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li><li class="navelem"><a class="el" href="dir_eec373e4006d7befdff7678452c20bc3.html">coloring</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">String.h File Reference</div>  </div>
+<div class="title">ILPColoringLemonCbc.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Check string is integer, floating point, number... Convert string to upper/lower cases.  
+<p>coloring algorithm based on integer linear programming (ILP) with Cbc as ILP solver.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;cctype&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00318_source.html">limbo/string/ToString.h</a>&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;queue&gt;</code><br />
+<code>#include &lt;set&gt;</code><br />
+<code>#include &lt;limits&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;boost/cstdint.hpp&gt;</code><br />
+<code>#include &lt;boost/unordered_map.hpp&gt;</code><br />
+<code>#include &lt;boost/graph/graph_concepts.hpp&gt;</code><br />
+<code>#include &lt;boost/graph/subgraph.hpp&gt;</code><br />
+<code>#include &lt;boost/property_map/property_map.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00388_source.html">limbo/string/String.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00313_source.html">limbo/algorithms/coloring/Coloring.h</a>&gt;</code><br />
+<code>#include &lt;lemon/cbc.h&gt;</code><br />
+<code>#include &lt;lemon/lp.h&gt;</code><br />
 </div>
 <p><a href="a00317_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00364"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html">limbo</a></td></tr>
-<tr class="memdesc:a00364"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00153.html">limbo::algorithms::coloring::ILPColoringLemonCbc&lt; GraphType &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00096.html">limbo::algorithms::coloring::ILPColoringLemonCbc&lt; GraphType &gt;::edge_hash_type</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">hasher class for graph_edge_type  <a href="a00096.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ad28905911fb4acbd97a031fe8e64c8a2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#ad28905911fb4acbd97a031fe8e64c8a2">limbo::is_integer</a> (string const &amp;s)</td></tr>
-<tr class="memdesc:ad28905911fb4acbd97a031fe8e64c8a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether string represents an integer  <a href="#ad28905911fb4acbd97a031fe8e64c8a2">More...</a><br /></td></tr>
-<tr class="separator:ad28905911fb4acbd97a031fe8e64c8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac94a9f8ab47da7a5e8eed918f46c6950"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#ac94a9f8ab47da7a5e8eed918f46c6950">limbo::is_float</a> (string const &amp;s)</td></tr>
-<tr class="memdesc:ac94a9f8ab47da7a5e8eed918f46c6950"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether string represents an float  <a href="#ac94a9f8ab47da7a5e8eed918f46c6950">More...</a><br /></td></tr>
-<tr class="separator:ac94a9f8ab47da7a5e8eed918f46c6950"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a653ed551b6caf3d19c55d5290a09c584"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#a653ed551b6caf3d19c55d5290a09c584">limbo::is_number</a> (string const &amp;s)</td></tr>
-<tr class="memdesc:a653ed551b6caf3d19c55d5290a09c584"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether string represents a number, either integer or floating point number  <a href="#a653ed551b6caf3d19c55d5290a09c584">More...</a><br /></td></tr>
-<tr class="separator:a653ed551b6caf3d19c55d5290a09c584"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66eb59b91fd8e2a1d69b6c5705acc3eb"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#a66eb59b91fd8e2a1d69b6c5705acc3eb">limbo::toupper</a> (string const &amp;s)</td></tr>
-<tr class="memdesc:a66eb59b91fd8e2a1d69b6c5705acc3eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert string to upper case  <a href="#a66eb59b91fd8e2a1d69b6c5705acc3eb">More...</a><br /></td></tr>
-<tr class="separator:a66eb59b91fd8e2a1d69b6c5705acc3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6e50a2521a25b1deb9c87312c31b104"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#ad6e50a2521a25b1deb9c87312c31b104">limbo::tolower</a> (string const &amp;s)</td></tr>
-<tr class="memdesc:ad6e50a2521a25b1deb9c87312c31b104"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert string to lower case  <a href="#ad6e50a2521a25b1deb9c87312c31b104">More...</a><br /></td></tr>
-<tr class="separator:ad6e50a2521a25b1deb9c87312c31b104"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7355468e379b0ed4f5b8425d7a35d02"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#ab7355468e379b0ed4f5b8425d7a35d02">limbo::iequals</a> (string const &amp;s1, string const &amp;s2)</td></tr>
-<tr class="memdesc:ab7355468e379b0ed4f5b8425d7a35d02"><td class="mdescLeft">&#160;</td><td class="mdescRight">check two strings equal, case-insensitive  <a href="#ab7355468e379b0ed4f5b8425d7a35d02">More...</a><br /></td></tr>
-<tr class="separator:ab7355468e379b0ed4f5b8425d7a35d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c4c5598fefa12f03a057df7a5506a44"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#a2c4c5598fefa12f03a057df7a5506a44">limbo::get_file_path</a> (const string &amp;s)</td></tr>
-<tr class="memdesc:a2c4c5598fefa12f03a057df7a5506a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">get relative path of a file  <a href="#a2c4c5598fefa12f03a057df7a5506a44">More...</a><br /></td></tr>
-<tr class="separator:a2c4c5598fefa12f03a057df7a5506a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7df852268c8a2f86dc06582d80dfa5ad"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#a7df852268c8a2f86dc06582d80dfa5ad">limbo::get_file_name</a> (const string &amp;s)</td></tr>
-<tr class="memdesc:a7df852268c8a2f86dc06582d80dfa5ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">get pure name of a file (no path)  <a href="#a7df852268c8a2f86dc06582d80dfa5ad">More...</a><br /></td></tr>
-<tr class="separator:a7df852268c8a2f86dc06582d80dfa5ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33f4201bab9b2d54232f1ff9c59c8fd8"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#a33f4201bab9b2d54232f1ff9c59c8fd8">limbo::get_file_suffix</a> (const string &amp;s)</td></tr>
-<tr class="memdesc:a33f4201bab9b2d54232f1ff9c59c8fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">get suffix of a file  <a href="#a33f4201bab9b2d54232f1ff9c59c8fd8">More...</a><br /></td></tr>
-<tr class="separator:a33f4201bab9b2d54232f1ff9c59c8fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d70f4b0d6726392b371ed1470d1a96c"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#a6d70f4b0d6726392b371ed1470d1a96c">limbo::trim_file_suffix</a> (string const &amp;s)</td></tr>
-<tr class="memdesc:a6d70f4b0d6726392b371ed1470d1a96c"><td class="mdescLeft">&#160;</td><td class="mdescRight">trim the suffix of a file  <a href="#a6d70f4b0d6726392b371ed1470d1a96c">More...</a><br /></td></tr>
-<tr class="separator:a6d70f4b0d6726392b371ed1470d1a96c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f24ba1f3a0ce8a2d333f17f91efbd11"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#a7f24ba1f3a0ce8a2d333f17f91efbd11">limbo::get_first_word</a> (string const &amp;str)</td></tr>
-<tr class="memdesc:a7f24ba1f3a0ce8a2d333f17f91efbd11"><td class="mdescLeft">&#160;</td><td class="mdescRight">fetch the first word of a string, assume delimiter is space or tab  <a href="#a7f24ba1f3a0ce8a2d333f17f91efbd11">More...</a><br /></td></tr>
-<tr class="separator:a7f24ba1f3a0ce8a2d333f17f91efbd11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
+<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00436"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html">limbo::algorithms</a></td></tr>
+<tr class="memdesc:a00436"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.algorithms <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00437"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00437.html">limbo::algorithms::coloring</a></td></tr>
+<tr class="memdesc:a00437"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Algorithms.Coloring <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Check string is integer, floating point, number... Convert string to upper/lower cases. </p>
+<div class="textblock"><p>coloring algorithm based on integer linear programming (ILP) with Cbc as ILP solver. </p>
+<p>Cbc is accessed with the API provided by Lemon, so both Cbc and Lemon should be installed properly. It is necessary for Lemon to bind CBC when installing.</p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Jun 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00317_source.html">String.h</a>.</p>
+<p>Definition in file <a class="el" href="a00317_source.html">ILPColoringLemonCbc.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

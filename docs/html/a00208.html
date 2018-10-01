@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: TfParser::SkipperGrammar&lt; Iterator &gt; Struct Template Reference</title>
+<title>Limbo: limbo::programoptions::parse_helper&lt; std::set&lt; T &gt; &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,66 +89,97 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00224.html">TfParser</a></li><li class="navelem"><a class="el" href="a00208.html">SkipperGrammar</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00442.html">programoptions</a></li><li class="navelem"><a class="el" href="a00208.html">parse_helper< std::set< T > ></a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00398.html">List of all members</a>  </div>
+<a href="a00621.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">TfParser::SkipperGrammar&lt; Iterator &gt; Struct Template Reference</div>  </div>
+<div class="title">limbo::programoptions::parse_helper&lt; std::set&lt; T &gt; &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>grammar of skipper  
+<p>template specialization for std::set&lt;T&gt; type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  
  <a href="a00208.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00300_source.html">TfParser.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for TfParser::SkipperGrammar&lt; Iterator &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="a00208.png" usemap="#TfParser::SkipperGrammar&lt; Iterator &gt;_map" alt=""/>
-  <map id="TfParser::SkipperGrammar&lt; Iterator &gt;_map" name="TfParser::SkipperGrammar&lt; Iterator &gt;_map">
-</map>
- </div></div>
+<p><code>#include &lt;<a class="el" href="a00377_source.html">ConversionHelpers.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa496c597a3a6ef61d6822c5b37df9863"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa496c597a3a6ef61d6822c5b37df9863"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00208.html#aa496c597a3a6ef61d6822c5b37df9863">SkipperGrammar</a> ()</td></tr>
-<tr class="memdesc:aa496c597a3a6ef61d6822c5b37df9863"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:aa496c597a3a6ef61d6822c5b37df9863"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:ae09f3266699180fb051a2f544a702994"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae09f3266699180fb051a2f544a702994"></a>
-qi::rule&lt; Iterator &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00208.html#ae09f3266699180fb051a2f544a702994">skip</a></td></tr>
-<tr class="memdesc:ae09f3266699180fb051a2f544a702994"><td class="mdescLeft">&#160;</td><td class="mdescRight">grammar to skip text <br /></td></tr>
-<tr class="separator:ae09f3266699180fb051a2f544a702994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ea7386a89b8c1c3f1c2df0715a0e1ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00208.html#a9ea7386a89b8c1c3f1c2df0715a0e1ce">operator()</a> (std::set&lt; T &gt; &amp;target, const char *value) const </td></tr>
+<tr class="memdesc:a9ea7386a89b8c1c3f1c2df0715a0e1ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">parse a char-based string to target  <a href="#a9ea7386a89b8c1c3f1c2df0715a0e1ce">More...</a><br /></td></tr>
+<tr class="separator:a9ea7386a89b8c1c3f1c2df0715a0e1ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename Iterator&gt;<br />
-struct TfParser::SkipperGrammar&lt; Iterator &gt;</h3>
+<div class="textblock"><h3>template&lt;typename T&gt;<br />
+struct limbo::programoptions::parse_helper&lt; std::set&lt; T &gt; &gt;</h3>
 
-<p>grammar of skipper </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Iterator</td><td>iterator of text </td></tr>
+<p>template specialization for std::set&lt;T&gt; type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a> </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>data type </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00300_source.html#l00179">179</a> of file <a class="el" href="a00300_source.html">TfParser.h</a>.</p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/tf/spirit/<a class="el" href="a00300_source.html">TfParser.h</a></li>
+<p>Definition at line <a class="el" href="a00377_source.html#l00290">290</a> of file <a class="el" href="a00377_source.html">ConversionHelpers.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a9ea7386a89b8c1c3f1c2df0715a0e1ce"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>&lt; std::set&lt; T &gt; &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">std::set&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>parse a char-based string to target </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>target data </td></tr>
+    <tr><td class="paramname">value</td><td>char-based string </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00377_source.html#l00295">295</a> of file <a class="el" href="a00377_source.html">ConversionHelpers.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/programoptions/<a class="el" href="a00377_source.html">ConversionHelpers.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

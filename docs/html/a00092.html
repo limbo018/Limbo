@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdsParser::GdsDB::GdsRectangle Class Reference</title>
+<title>Limbo: limbo::solvers::DualMinCostFlow&lt; T, V &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,177 +89,337 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00360.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00361.html">GdsDB</a></li><li class="navelem"><a class="el" href="a00092.html">GdsRectangle</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00443.html">solvers</a></li><li class="navelem"><a class="el" href="a00092.html">DualMinCostFlow</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00472.html">List of all members</a>  </div>
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="a00639.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser::GdsDB::GdsRectangle Class Reference</div>  </div>
+<div class="title">limbo::solvers::DualMinCostFlow&lt; T, V &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="a00290_source.html">GdsObjects.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for GdsParser::GdsDB::GdsRectangle:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="a00092.png" usemap="#GdsParser::GdsDB::GdsRectangle_map" alt=""/>
-  <map id="GdsParser::GdsDB::GdsRectangle_map" name="GdsParser::GdsDB::GdsRectangle_map">
-<area href="a00093.html" alt="GdsParser::GdsDB::GdsShape" shape="rect" coords="0,56,220,80"/>
-<area href="a00085.html" alt="GdsParser::GdsDB::GdsObject" shape="rect" coords="0,0,220,24"/>
-</map>
- </div></div>
+<p>LP solved with min-cost flow. A better implementation of <a class="el" href="a00176.html">limbo::solvers::lpmcf::LpDualMcf</a>.  
+ <a href="a00092.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00381_source.html">DualMinCostFlow.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a91ff44f4523e593514a8c2483f5f6d17"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91ff44f4523e593514a8c2483f5f6d17"></a>
-typedef <a class="el" href="a00093.html">GdsShape</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a91ff44f4523e593514a8c2483f5f6d17">base_type</a></td></tr>
-<tr class="memdesc:a91ff44f4523e593514a8c2483f5f6d17"><td class="mdescLeft">&#160;</td><td class="mdescRight">base type <br /></td></tr>
-<tr class="separator:a91ff44f4523e593514a8c2483f5f6d17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2cf6fed7de19b2bffda4602bcfb693f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2cf6fed7de19b2bffda4602bcfb693f"></a>
-typedef gtl::rectangle_data&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#ac2cf6fed7de19b2bffda4602bcfb693f">base_ext_type</a></td></tr>
-<tr class="memdesc:ac2cf6fed7de19b2bffda4602bcfb693f"><td class="mdescLeft">&#160;</td><td class="mdescRight">rectangle type <br /></td></tr>
-<tr class="separator:ac2cf6fed7de19b2bffda4602bcfb693f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_a00093"><td colspan="2" onclick="javascript:toggleInherit('pub_types_a00093')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="a00093.html">GdsParser::GdsDB::GdsShape</a></td></tr>
-<tr class="memitem:abc7a86090a761ad9ee4ae3a3567d3008 inherit pub_types_a00093"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc7a86090a761ad9ee4ae3a3567d3008"></a>
-typedef <a class="el" href="a00085.html">GdsObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00093.html#abc7a86090a761ad9ee4ae3a3567d3008">base_type</a></td></tr>
-<tr class="memdesc:abc7a86090a761ad9ee4ae3a3567d3008 inherit pub_types_a00093"><td class="mdescLeft">&#160;</td><td class="mdescRight">base type <br /></td></tr>
-<tr class="separator:abc7a86090a761ad9ee4ae3a3567d3008 inherit pub_types_a00093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_a00085"><td colspan="2" onclick="javascript:toggleInherit('pub_types_a00085')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="a00085.html">GdsParser::GdsDB::GdsObject</a></td></tr>
-<tr class="memitem:a182ba74d0e891eba04a81d06a9af664d inherit pub_types_a00085"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a182ba74d0e891eba04a81d06a9af664d"></a>
-typedef int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00085.html#a182ba74d0e891eba04a81d06a9af664d">coordinate_type</a></td></tr>
-<tr class="memdesc:a182ba74d0e891eba04a81d06a9af664d inherit pub_types_a00085"><td class="mdescLeft">&#160;</td><td class="mdescRight">coordinate types <br /></td></tr>
-<tr class="separator:a182ba74d0e891eba04a81d06a9af664d inherit pub_types_a00085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada40e80cf1607378dd376361d35da927 inherit pub_types_a00085"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada40e80cf1607378dd376361d35da927"></a>
-typedef gtl::point_data<br class="typebreak" />
-&lt; <a class="el" href="a00085.html#a182ba74d0e891eba04a81d06a9af664d">coordinate_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>point_type</b></td></tr>
-<tr class="separator:ada40e80cf1607378dd376361d35da927 inherit pub_types_a00085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38c62e68988c743d3b7587e197bb1294 inherit pub_types_a00085"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a38c62e68988c743d3b7587e197bb1294"></a>
-typedef gtl::interval_data<br class="typebreak" />
-&lt; <a class="el" href="a00085.html#a182ba74d0e891eba04a81d06a9af664d">coordinate_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00085.html#a38c62e68988c743d3b7587e197bb1294">interval_type</a></td></tr>
-<tr class="memdesc:a38c62e68988c743d3b7587e197bb1294 inherit pub_types_a00085"><td class="mdescLeft">&#160;</td><td class="mdescRight">interval type <br /></td></tr>
-<tr class="separator:a38c62e68988c743d3b7587e197bb1294 inherit pub_types_a00085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afac847dc3bd906be684b652808ef3cb4 inherit pub_types_a00085"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afac847dc3bd906be684b652808ef3cb4"></a>
-typedef gtl::rectangle_data<br class="typebreak" />
-&lt; <a class="el" href="a00085.html#a182ba74d0e891eba04a81d06a9af664d">coordinate_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00085.html#afac847dc3bd906be684b652808ef3cb4">rectangle_type</a></td></tr>
-<tr class="memdesc:afac847dc3bd906be684b652808ef3cb4 inherit pub_types_a00085"><td class="mdescLeft">&#160;</td><td class="mdescRight">rectangle type <br /></td></tr>
-<tr class="separator:afac847dc3bd906be684b652808ef3cb4 inherit pub_types_a00085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeba3d1f2bc76e8e0fc63ff8af00c9b37 inherit pub_types_a00085"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeba3d1f2bc76e8e0fc63ff8af00c9b37"></a>
-typedef gtl::polygon_data<br class="typebreak" />
-&lt; <a class="el" href="a00085.html#a182ba74d0e891eba04a81d06a9af664d">coordinate_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00085.html#aeba3d1f2bc76e8e0fc63ff8af00c9b37">polygon_type</a></td></tr>
-<tr class="memdesc:aeba3d1f2bc76e8e0fc63ff8af00c9b37 inherit pub_types_a00085"><td class="mdescLeft">&#160;</td><td class="mdescRight">polygon type <br /></td></tr>
-<tr class="separator:aeba3d1f2bc76e8e0fc63ff8af00c9b37 inherit pub_types_a00085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96daac3bf56ae9c0843797cd8b52e215 inherit pub_types_a00085"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a96daac3bf56ae9c0843797cd8b52e215"></a>
+<tr class="memitem:a0c97b4c8cecdb2296e5ec0b6fa3eabb6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c97b4c8cecdb2296e5ec0b6fa3eabb6"></a>
+typedef <a class="el" href="a00171.html">LinearModel</a>&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a0c97b4c8cecdb2296e5ec0b6fa3eabb6">model_type</a></td></tr>
+<tr class="memdesc:a0c97b4c8cecdb2296e5ec0b6fa3eabb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">linear model type for the problem <br /></td></tr>
+<tr class="separator:a0c97b4c8cecdb2296e5ec0b6fa3eabb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a42cb04762b3c160a88a56f39449fe07b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42cb04762b3c160a88a56f39449fe07b"></a>
 typedef <br class="typebreak" />
-gtl::polygon_90_set_data<br class="typebreak" />
-&lt; <a class="el" href="a00085.html#a182ba74d0e891eba04a81d06a9af664d">coordinate_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00085.html#a96daac3bf56ae9c0843797cd8b52e215">polygon_set_type</a></td></tr>
-<tr class="memdesc:a96daac3bf56ae9c0843797cd8b52e215 inherit pub_types_a00085"><td class="mdescLeft">&#160;</td><td class="mdescRight">polygon set type <br /></td></tr>
-<tr class="separator:a96daac3bf56ae9c0843797cd8b52e215 inherit pub_types_a00085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<a class="el" href="a00171.html#a6d83996e8205090fd1150a2393314e23">model_type::coefficient_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><b>coefficient_value_type</b></td></tr>
+<tr class="separator:a42cb04762b3c160a88a56f39449fe07b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a161b2b85a2e5bcdc42ec6cf267392631"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a161b2b85a2e5bcdc42ec6cf267392631"></a>
+typedef <br class="typebreak" />
+<a class="el" href="a00171.html#a0b183484bcda7fe68e4c92367d38681f">model_type::variable_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><b>variable_value_type</b></td></tr>
+<tr class="separator:a161b2b85a2e5bcdc42ec6cf267392631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0edff069bc8ab3f4c797e22131ba353"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0edff069bc8ab3f4c797e22131ba353"></a>
+typedef variable_value_type&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b></td></tr>
+<tr class="separator:ae0edff069bc8ab3f4c797e22131ba353"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9efeeae2e9885fd4e8bb2bf3b952813"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac9efeeae2e9885fd4e8bb2bf3b952813"></a>
+typedef <a class="el" href="a00171.html#a3fec27a7f57c34ad1353abf78783bae1">model_type::variable_type</a>&#160;</td><td class="memItemRight" valign="bottom"><b>variable_type</b></td></tr>
+<tr class="separator:ac9efeeae2e9885fd4e8bb2bf3b952813"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0127891c7d61f36c57ec254bb3f77329"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0127891c7d61f36c57ec254bb3f77329"></a>
+typedef <a class="el" href="a00171.html#a7c57e635bbf5f7f296bffd67be900a32">model_type::constraint_type</a>&#160;</td><td class="memItemRight" valign="bottom"><b>constraint_type</b></td></tr>
+<tr class="separator:a0127891c7d61f36c57ec254bb3f77329"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac63c75d8653b05278dc5cd3c0cc760bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac63c75d8653b05278dc5cd3c0cc760bc"></a>
+typedef <a class="el" href="a00171.html#ae34a87308edce3f094e3445ba2d711a4">model_type::expression_type</a>&#160;</td><td class="memItemRight" valign="bottom"><b>expression_type</b></td></tr>
+<tr class="separator:ac63c75d8653b05278dc5cd3c0cc760bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae91d274d206421f2dc1205b10334e7eb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae91d274d206421f2dc1205b10334e7eb"></a>
+typedef <a class="el" href="a00171.html#ae57d4cb612f57ca66353dc2844943cce">model_type::term_type</a>&#160;</td><td class="memItemRight" valign="bottom"><b>term_type</b></td></tr>
+<tr class="separator:ae91d274d206421f2dc1205b10334e7eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf3af3a42c0ed047e07101fa2aa00389"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acf3af3a42c0ed047e07101fa2aa00389"></a>
+typedef <a class="el" href="a00171.html#a3eabe5fec046210137d1e94dc81c9d04">model_type::property_type</a>&#160;</td><td class="memItemRight" valign="bottom"><b>property_type</b></td></tr>
+<tr class="separator:acf3af3a42c0ed047e07101fa2aa00389"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a356f151fd3564bd52048bded57e67002"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a356f151fd3564bd52048bded57e67002"></a>
+typedef lemon::SmartDigraph&#160;</td><td class="memItemRight" valign="bottom"><b>graph_type</b></td></tr>
+<tr class="separator:a356f151fd3564bd52048bded57e67002"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a637f252bcfdf3aa608cf79b0dd51e2f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a637f252bcfdf3aa608cf79b0dd51e2f6"></a>
+typedef graph_type::Node&#160;</td><td class="memItemRight" valign="bottom"><b>node_type</b></td></tr>
+<tr class="separator:a637f252bcfdf3aa608cf79b0dd51e2f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae027389c146a82f980ba62a215f09de9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae027389c146a82f980ba62a215f09de9"></a>
+typedef graph_type::Arc&#160;</td><td class="memItemRight" valign="bottom"><b>arc_type</b></td></tr>
+<tr class="separator:ae027389c146a82f980ba62a215f09de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b0052fa863af71107ce8ff9f1469719"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b0052fa863af71107ce8ff9f1469719"></a>
+typedef graph_type::NodeMap<br class="typebreak" />
+&lt; value_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>node_value_map_type</b></td></tr>
+<tr class="separator:a8b0052fa863af71107ce8ff9f1469719"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13a521966e080e14b3cef9e4fda38717"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a13a521966e080e14b3cef9e4fda38717"></a>
+typedef graph_type::NodeMap<br class="typebreak" />
+&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>node_name_map_type</b></td></tr>
+<tr class="separator:a13a521966e080e14b3cef9e4fda38717"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65ac9cb50acd2a2f7692ef060bd400e4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65ac9cb50acd2a2f7692ef060bd400e4"></a>
+typedef graph_type::ArcMap<br class="typebreak" />
+&lt; value_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>arc_value_map_type</b></td></tr>
+<tr class="separator:a65ac9cb50acd2a2f7692ef060bd400e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ce724454a3934c0e8dd5abdda6f6b89"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7ce724454a3934c0e8dd5abdda6f6b89"></a>
+typedef graph_type::ArcMap<br class="typebreak" />
+&lt; value_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>arc_cost_map_type</b></td></tr>
+<tr class="separator:a7ce724454a3934c0e8dd5abdda6f6b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1442b16b57955257d7d88f7170c6cb78"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1442b16b57955257d7d88f7170c6cb78"></a>
+typedef graph_type::ArcMap<br class="typebreak" />
+&lt; value_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>arc_flow_map_type</b></td></tr>
+<tr class="separator:a1442b16b57955257d7d88f7170c6cb78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11b0c86267fdf5cbf6dcee7b1cf1da66"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a11b0c86267fdf5cbf6dcee7b1cf1da66"></a>
+typedef graph_type::NodeMap<br class="typebreak" />
+&lt; value_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>node_pot_map_type</b></td></tr>
+<tr class="separator:a11b0c86267fdf5cbf6dcee7b1cf1da66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a363ed92f68969852653d2e71b02f0300"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a363ed92f68969852653d2e71b02f0300"></a>
+typedef <a class="el" href="a00184.html">MinCostFlowSolver</a><br class="typebreak" />
+&lt; coefficient_value_type, <br class="typebreak" />
+variable_value_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>solver_type</b></td></tr>
+<tr class="separator:a363ed92f68969852653d2e71b02f0300"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a647ac494785efb999084a98f9fc2d103"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a647ac494785efb999084a98f9fc2d103"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a647ac494785efb999084a98f9fc2d103">GdsRectangle</a> ()</td></tr>
-<tr class="memdesc:a647ac494785efb999084a98f9fc2d103"><td class="mdescLeft">&#160;</td><td class="mdescRight">default constructor <br /></td></tr>
-<tr class="separator:a647ac494785efb999084a98f9fc2d103"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b3ace4b6949af5db26c229d152554c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a2b3ace4b6949af5db26c229d152554c4">GdsRectangle</a> (<a class="el" href="a00092.html">GdsRectangle</a> const &amp;rhs)</td></tr>
-<tr class="separator:a2b3ace4b6949af5db26c229d152554c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4489cf8c1b59bc8db2a7053182ba404"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00092.html">GdsRectangle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#ac4489cf8c1b59bc8db2a7053182ba404">operator=</a> (<a class="el" href="a00092.html">GdsRectangle</a> const &amp;rhs)</td></tr>
-<tr class="separator:ac4489cf8c1b59bc8db2a7053182ba404"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab215ded32b9ae6b1f47f1cdf8d75436e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab215ded32b9ae6b1f47f1cdf8d75436e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#ab215ded32b9ae6b1f47f1cdf8d75436e">~GdsRectangle</a> ()</td></tr>
-<tr class="memdesc:ab215ded32b9ae6b1f47f1cdf8d75436e"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
-<tr class="separator:ab215ded32b9ae6b1f47f1cdf8d75436e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_a00093"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00093')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="a00093.html">GdsParser::GdsDB::GdsShape</a></td></tr>
-<tr class="memitem:ac39b98b1a4d993b342f6dc0072b56a6c inherit pub_methods_a00093"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac39b98b1a4d993b342f6dc0072b56a6c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00093.html#ac39b98b1a4d993b342f6dc0072b56a6c">GdsShape</a> ()</td></tr>
-<tr class="memdesc:ac39b98b1a4d993b342f6dc0072b56a6c inherit pub_methods_a00093"><td class="mdescLeft">&#160;</td><td class="mdescRight">default constructor <br /></td></tr>
-<tr class="separator:ac39b98b1a4d993b342f6dc0072b56a6c inherit pub_methods_a00093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad95873515c0bba7a288856ef64e8a243 inherit pub_methods_a00093"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00093.html#ad95873515c0bba7a288856ef64e8a243">GdsShape</a> (<a class="el" href="a00093.html">GdsShape</a> const &amp;rhs)</td></tr>
-<tr class="separator:ad95873515c0bba7a288856ef64e8a243 inherit pub_methods_a00093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bd0fcf2a802856c301e1328f4432128 inherit pub_methods_a00093"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00093.html">GdsShape</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00093.html#a3bd0fcf2a802856c301e1328f4432128">operator=</a> (<a class="el" href="a00093.html">GdsShape</a> const &amp;rhs)</td></tr>
-<tr class="separator:a3bd0fcf2a802856c301e1328f4432128 inherit pub_methods_a00093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb54575f7cfbb4fda2cb83640ad47114 inherit pub_methods_a00093"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acb54575f7cfbb4fda2cb83640ad47114"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00093.html#acb54575f7cfbb4fda2cb83640ad47114">~GdsShape</a> ()</td></tr>
-<tr class="memdesc:acb54575f7cfbb4fda2cb83640ad47114 inherit pub_methods_a00093"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
-<tr class="separator:acb54575f7cfbb4fda2cb83640ad47114 inherit pub_methods_a00093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7395b48aa7576ce4d798347f1c34208 inherit pub_methods_a00093"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00093.html#ad7395b48aa7576ce4d798347f1c34208">layer</a> () const </td></tr>
-<tr class="separator:ad7395b48aa7576ce4d798347f1c34208 inherit pub_methods_a00093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0e9f145aa7d0ffe5cfba586e850cd5d inherit pub_methods_a00093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00093.html#ad0e9f145aa7d0ffe5cfba586e850cd5d">setLayer</a> (int l)</td></tr>
-<tr class="separator:ad0e9f145aa7d0ffe5cfba586e850cd5d inherit pub_methods_a00093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5469f10970f0bbc396d6ac5c365b8538 inherit pub_methods_a00093"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00093.html#a5469f10970f0bbc396d6ac5c365b8538">datatype</a> () const </td></tr>
-<tr class="separator:a5469f10970f0bbc396d6ac5c365b8538 inherit pub_methods_a00093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1267ede88df1231e6571a3a8d7e98dd inherit pub_methods_a00093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00093.html#ae1267ede88df1231e6571a3a8d7e98dd">setDatatype</a> (int d)</td></tr>
-<tr class="separator:ae1267ede88df1231e6571a3a8d7e98dd inherit pub_methods_a00093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_a00085"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00085')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="a00085.html">GdsParser::GdsDB::GdsObject</a></td></tr>
-<tr class="memitem:af0f447e376f1c705cc62e3f792207348 inherit pub_methods_a00085"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af0f447e376f1c705cc62e3f792207348"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00085.html#af0f447e376f1c705cc62e3f792207348">GdsObject</a> ()</td></tr>
-<tr class="memdesc:af0f447e376f1c705cc62e3f792207348 inherit pub_methods_a00085"><td class="mdescLeft">&#160;</td><td class="mdescRight">default constructor <br /></td></tr>
-<tr class="separator:af0f447e376f1c705cc62e3f792207348 inherit pub_methods_a00085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7702196d38a3fd473536276ee5ab71b inherit pub_methods_a00085"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00085.html#aa7702196d38a3fd473536276ee5ab71b">GdsObject</a> (<a class="el" href="a00085.html">GdsObject</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:aa7702196d38a3fd473536276ee5ab71b inherit pub_methods_a00085"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#aa7702196d38a3fd473536276ee5ab71b">More...</a><br /></td></tr>
-<tr class="separator:aa7702196d38a3fd473536276ee5ab71b inherit pub_methods_a00085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23b24502a628ee4dd526a01b508568d1 inherit pub_methods_a00085"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00085.html">GdsObject</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00085.html#a23b24502a628ee4dd526a01b508568d1">operator=</a> (<a class="el" href="a00085.html">GdsObject</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:a23b24502a628ee4dd526a01b508568d1 inherit pub_methods_a00085"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment  <a href="#a23b24502a628ee4dd526a01b508568d1">More...</a><br /></td></tr>
-<tr class="separator:a23b24502a628ee4dd526a01b508568d1 inherit pub_methods_a00085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9ca347557d47771517a4af7dcfd13d8 inherit pub_methods_a00085"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00085.html#ad9ca347557d47771517a4af7dcfd13d8">~GdsObject</a> ()</td></tr>
-<tr class="memdesc:ad9ca347557d47771517a4af7dcfd13d8 inherit pub_methods_a00085"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor  <a href="#ad9ca347557d47771517a4af7dcfd13d8">More...</a><br /></td></tr>
-<tr class="separator:ad9ca347557d47771517a4af7dcfd13d8 inherit pub_methods_a00085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcf9ecdefa23744e8598e14e58aba925"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#adcf9ecdefa23744e8598e14e58aba925">DualMinCostFlow</a> (<a class="el" href="a00092.html#a0c97b4c8cecdb2296e5ec0b6fa3eabb6">model_type</a> *model)</td></tr>
+<tr class="memdesc:adcf9ecdefa23744e8598e14e58aba925"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#adcf9ecdefa23744e8598e14e58aba925">More...</a><br /></td></tr>
+<tr class="separator:adcf9ecdefa23744e8598e14e58aba925"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bbf26ecad21b88053996fdb792d43bb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2bbf26ecad21b88053996fdb792d43bb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a2bbf26ecad21b88053996fdb792d43bb">~DualMinCostFlow</a> ()</td></tr>
+<tr class="memdesc:a2bbf26ecad21b88053996fdb792d43bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
+<tr class="separator:a2bbf26ecad21b88053996fdb792d43bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2563197a8cb6a5cfb6454f2c657f1e34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a2563197a8cb6a5cfb6454f2c657f1e34">operator()</a> (<a class="el" href="a00184.html">solver_type</a> *solver=NULL)</td></tr>
+<tr class="memdesc:a2563197a8cb6a5cfb6454f2c657f1e34"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to run the algorithm.  <a href="#a2563197a8cb6a5cfb6454f2c657f1e34">More...</a><br /></td></tr>
+<tr class="separator:a2563197a8cb6a5cfb6454f2c657f1e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb585810ca006d1a08a787e99255f16e"><td class="memItemLeft" align="right" valign="top">value_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#aeb585810ca006d1a08a787e99255f16e">diffBigM</a> () const </td></tr>
+<tr class="separator:aeb585810ca006d1a08a787e99255f16e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3d4360248f4b8ebe214045742a12b3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#af3d4360248f4b8ebe214045742a12b3d">setDiffBigM</a> (value_type v)</td></tr>
+<tr class="memdesc:af3d4360248f4b8ebe214045742a12b3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">set big M as a large number for differential constraints  <a href="#af3d4360248f4b8ebe214045742a12b3d">More...</a><br /></td></tr>
+<tr class="separator:af3d4360248f4b8ebe214045742a12b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47e89b2123419a811a75f45eae60b249"><td class="memItemLeft" align="right" valign="top">value_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a47e89b2123419a811a75f45eae60b249">boundBigM</a> () const </td></tr>
+<tr class="separator:a47e89b2123419a811a75f45eae60b249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb986c8e38a6c46cb3dad07a2f94a39e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#abb986c8e38a6c46cb3dad07a2f94a39e">setBoundBigM</a> (value_type v)</td></tr>
+<tr class="memdesc:abb986c8e38a6c46cb3dad07a2f94a39e"><td class="mdescLeft">&#160;</td><td class="mdescRight">set big M as a large number for bound constraints  <a href="#abb986c8e38a6c46cb3dad07a2f94a39e">More...</a><br /></td></tr>
+<tr class="separator:abb986c8e38a6c46cb3dad07a2f94a39e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81f46d302bed31fe602631d540f40519"><td class="memItemLeft" align="right" valign="top">graph_type const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a81f46d302bed31fe602631d540f40519">graph</a> () const </td></tr>
+<tr class="separator:a81f46d302bed31fe602631d540f40519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8251175f4a3462f8ae2ebe201e13c6dd"><td class="memItemLeft" align="right" valign="top">arc_value_map_type const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a8251175f4a3462f8ae2ebe201e13c6dd">upperMap</a> () const </td></tr>
+<tr class="separator:a8251175f4a3462f8ae2ebe201e13c6dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9d61e4c2f709ea6439d2f0acb4f3b6d"><td class="memItemLeft" align="right" valign="top">arc_cost_map_type const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#ac9d61e4c2f709ea6439d2f0acb4f3b6d">costMap</a> () const </td></tr>
+<tr class="separator:ac9d61e4c2f709ea6439d2f0acb4f3b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae672e7ebcef1873df4bd515580e997a3"><td class="memItemLeft" align="right" valign="top">node_value_map_type const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#ae672e7ebcef1873df4bd515580e997a3">supplyMap</a> () const </td></tr>
+<tr class="separator:ae672e7ebcef1873df4bd515580e997a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7227af362a81319c93bdec11a6197d1"><td class="memItemLeft" align="right" valign="top">arc_flow_map_type &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#ac7227af362a81319c93bdec11a6197d1">flowMap</a> ()</td></tr>
+<tr class="separator:ac7227af362a81319c93bdec11a6197d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa233520b25a5f60bb0affe7283575bc5"><td class="memItemLeft" align="right" valign="top">node_pot_map_type &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#aa233520b25a5f60bb0affe7283575bc5">potentialMap</a> ()</td></tr>
+<tr class="separator:aa233520b25a5f60bb0affe7283575bc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e29033e55413fe18fec41725efc72f6"><td class="memItemLeft" align="right" valign="top">value_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a5e29033e55413fe18fec41725efc72f6">totalFlowCost</a> () const </td></tr>
+<tr class="separator:a5e29033e55413fe18fec41725efc72f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa32403dafff5889fe11ec1c30fa8d426"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#aa32403dafff5889fe11ec1c30fa8d426">setTotalFlowCost</a> (value_type cost)</td></tr>
+<tr class="separator:aa32403dafff5889fe11ec1c30fa8d426"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7180b8fc481c826fb959315c4b771da"><td class="memItemLeft" align="right" valign="top">value_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#ab7180b8fc481c826fb959315c4b771da">totalCost</a> () const </td></tr>
+<tr class="separator:ab7180b8fc481c826fb959315c4b771da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">print functions to debug.lgf</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>print graph</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">writeSol</td><td>if true write flow and potential as well </td></tr>
+  </table>
+  </dd>
+</dl>
+</div></td></tr>
+<tr class="memitem:a0cf78744ead4e066375b70318f8a98fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0cf78744ead4e066375b70318f8a98fd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>printGraph</b> (bool writeSol) const </td></tr>
+<tr class="separator:a0cf78744ead4e066375b70318f8a98fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pro_attribs_a00093"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_a00093')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="a00093.html">GdsParser::GdsDB::GdsShape</a></td></tr>
-<tr class="memitem:a823217f1d31a34fab6ac1475b24a85ec inherit pro_attribs_a00093"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a823217f1d31a34fab6ac1475b24a85ec"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00093.html#a823217f1d31a34fab6ac1475b24a85ec">m_layer</a></td></tr>
-<tr class="memdesc:a823217f1d31a34fab6ac1475b24a85ec inherit pro_attribs_a00093"><td class="mdescLeft">&#160;</td><td class="mdescRight">layer <br /></td></tr>
-<tr class="separator:a823217f1d31a34fab6ac1475b24a85ec inherit pro_attribs_a00093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa798ec07cfdd04233aa5370f506eb2a0 inherit pro_attribs_a00093"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa798ec07cfdd04233aa5370f506eb2a0"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00093.html#aa798ec07cfdd04233aa5370f506eb2a0">m_datatype</a></td></tr>
-<tr class="memdesc:aa798ec07cfdd04233aa5370f506eb2a0 inherit pro_attribs_a00093"><td class="mdescLeft">&#160;</td><td class="mdescRight">data type <br /></td></tr>
-<tr class="separator:aa798ec07cfdd04233aa5370f506eb2a0 inherit pro_attribs_a00093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:aae0d3170cee1bd24f751fa215cb0fc82"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#aae0d3170cee1bd24f751fa215cb0fc82">DualMinCostFlow</a> (<a class="el" href="a00092.html">DualMinCostFlow</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:aae0d3170cee1bd24f751fa215cb0fc82"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor, forbidden  <a href="#aae0d3170cee1bd24f751fa215cb0fc82">More...</a><br /></td></tr>
+<tr class="separator:aae0d3170cee1bd24f751fa215cb0fc82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add10ab7f4933f86f7e5496093231026e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00092.html">DualMinCostFlow</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#add10ab7f4933f86f7e5496093231026e">operator=</a> (<a class="el" href="a00092.html">DualMinCostFlow</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:add10ab7f4933f86f7e5496093231026e"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment, forbidden  <a href="#add10ab7f4933f86f7e5496093231026e">More...</a><br /></td></tr>
+<tr class="separator:add10ab7f4933f86f7e5496093231026e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89276439442b2c007ec396f8658e0a1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a89276439442b2c007ec396f8658e0a1b">solve</a> (<a class="el" href="a00184.html">solver_type</a> *solver)</td></tr>
+<tr class="memdesc:a89276439442b2c007ec396f8658e0a1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">kernel function to solve the problem  <a href="#a89276439442b2c007ec396f8658e0a1b">More...</a><br /></td></tr>
+<tr class="separator:a89276439442b2c007ec396f8658e0a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfacf45f44cffc8dc5e00bb4cbbf4347"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adfacf45f44cffc8dc5e00bb4cbbf4347"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#adfacf45f44cffc8dc5e00bb4cbbf4347">prepare</a> ()</td></tr>
+<tr class="memdesc:adfacf45f44cffc8dc5e00bb4cbbf4347"><td class="mdescLeft">&#160;</td><td class="mdescRight">prepare data like big M <br /></td></tr>
+<tr class="separator:adfacf45f44cffc8dc5e00bb4cbbf4347"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a026f2163483b2ce4d84b35ca29366395"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a026f2163483b2ce4d84b35ca29366395"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a026f2163483b2ce4d84b35ca29366395">buildGraph</a> ()</td></tr>
+<tr class="memdesc:a026f2163483b2ce4d84b35ca29366395"><td class="mdescLeft">&#160;</td><td class="mdescRight">build dual min-cost flow graph <br /></td></tr>
+<tr class="separator:a026f2163483b2ce4d84b35ca29366395"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c31ed121a1917bccbb809c920bc5f2c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c31ed121a1917bccbb809c920bc5f2c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a6c31ed121a1917bccbb809c920bc5f2c">mapObjective2Graph</a> ()</td></tr>
+<tr class="memdesc:a6c31ed121a1917bccbb809c920bc5f2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">map variables and the objective to graph nodes <br /></td></tr>
+<tr class="separator:a6c31ed121a1917bccbb809c920bc5f2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bb1458c83ab46ceeaed828813f93ede"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a9bb1458c83ab46ceeaed828813f93ede">mapDiffConstraint2Graph</a> (bool countArcs)</td></tr>
+<tr class="memdesc:a9bb1458c83ab46ceeaed828813f93ede"><td class="mdescLeft">&#160;</td><td class="mdescRight">map differential constraints to graph arcs  <a href="#a9bb1458c83ab46ceeaed828813f93ede">More...</a><br /></td></tr>
+<tr class="separator:a9bb1458c83ab46ceeaed828813f93ede"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9f4506df32dc6fc9270af6adc960eda"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#ab9f4506df32dc6fc9270af6adc960eda">mapBoundConstraint2Graph</a> (bool countArcs)</td></tr>
+<tr class="memdesc:ab9f4506df32dc6fc9270af6adc960eda"><td class="mdescLeft">&#160;</td><td class="mdescRight">map bound constraints to graph arcs  <a href="#ab9f4506df32dc6fc9270af6adc960eda">More...</a><br /></td></tr>
+<tr class="separator:ab9f4506df32dc6fc9270af6adc960eda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81dc9dbcecaccca1c2cebb485613d6ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a81dc9dbcecaccca1c2cebb485613d6ca">addArcForDiffConstraint</a> (node_type xi, node_type xj, value_type cij, value_type bigM)</td></tr>
+<tr class="memdesc:a81dc9dbcecaccca1c2cebb485613d6ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">generalized method to add an arc for differential constraint \( x_i - x_j \ge c_{ij} \), resolve negative arc costs by arc reversal  <a href="#a81dc9dbcecaccca1c2cebb485613d6ca">More...</a><br /></td></tr>
+<tr class="separator:a81dc9dbcecaccca1c2cebb485613d6ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e79fa9c625a484cb6db712cf894f195"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7e79fa9c625a484cb6db712cf894f195"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a7e79fa9c625a484cb6db712cf894f195">applySolution</a> ()</td></tr>
+<tr class="memdesc:a7e79fa9c625a484cb6db712cf894f195"><td class="mdescLeft">&#160;</td><td class="mdescRight">apply solutions to model <br /></td></tr>
+<tr class="separator:a7e79fa9c625a484cb6db712cf894f195"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a4cdf2fd47b0ff13e0b8741f2d2a08280"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4cdf2fd47b0ff13e0b8741f2d2a08280"></a>
+<a class="el" href="a00092.html#a0c97b4c8cecdb2296e5ec0b6fa3eabb6">model_type</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a4cdf2fd47b0ff13e0b8741f2d2a08280">m_model</a></td></tr>
+<tr class="memdesc:a4cdf2fd47b0ff13e0b8741f2d2a08280"><td class="mdescLeft">&#160;</td><td class="mdescRight">model for the problem <br /></td></tr>
+<tr class="separator:a4cdf2fd47b0ff13e0b8741f2d2a08280"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca64b3cb2721040d9899b1daa5c33ade"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca64b3cb2721040d9899b1daa5c33ade"></a>
+graph_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#aca64b3cb2721040d9899b1daa5c33ade">m_graph</a></td></tr>
+<tr class="memdesc:aca64b3cb2721040d9899b1daa5c33ade"><td class="mdescLeft">&#160;</td><td class="mdescRight">input graph <br /></td></tr>
+<tr class="separator:aca64b3cb2721040d9899b1daa5c33ade"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ed50c75d62cad5258a95a723b6ef89c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ed50c75d62cad5258a95a723b6ef89c"></a>
+arc_value_map_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a0ed50c75d62cad5258a95a723b6ef89c">m_mUpper</a></td></tr>
+<tr class="memdesc:a0ed50c75d62cad5258a95a723b6ef89c"><td class="mdescLeft">&#160;</td><td class="mdescRight">upper bound of flow, arc capacity in min-cost flow <br /></td></tr>
+<tr class="separator:a0ed50c75d62cad5258a95a723b6ef89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef6f7b7c775d0ba50219120f4185fbcb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef6f7b7c775d0ba50219120f4185fbcb"></a>
+arc_cost_map_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#aef6f7b7c775d0ba50219120f4185fbcb">m_mCost</a></td></tr>
+<tr class="memdesc:aef6f7b7c775d0ba50219120f4185fbcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">arc cost in min-cost flow <br /></td></tr>
+<tr class="separator:aef6f7b7c775d0ba50219120f4185fbcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b17f83f616db6cda04716ac848c95fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b17f83f616db6cda04716ac848c95fc"></a>
+node_value_map_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a9b17f83f616db6cda04716ac848c95fc">m_mSupply</a></td></tr>
+<tr class="memdesc:a9b17f83f616db6cda04716ac848c95fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">node supply in min-cost flow <br /></td></tr>
+<tr class="separator:a9b17f83f616db6cda04716ac848c95fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c02354587acaed17ef1213165f1069f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2c02354587acaed17ef1213165f1069f"></a>
+value_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a2c02354587acaed17ef1213165f1069f">m_totalFlowCost</a></td></tr>
+<tr class="memdesc:a2c02354587acaed17ef1213165f1069f"><td class="mdescLeft">&#160;</td><td class="mdescRight">total cost after solving <br /></td></tr>
+<tr class="separator:a2c02354587acaed17ef1213165f1069f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0720eb91c8742c387b741af5a3ab78cf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0720eb91c8742c387b741af5a3ab78cf"></a>
+value_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a0720eb91c8742c387b741af5a3ab78cf">m_diffBigM</a></td></tr>
+<tr class="memdesc:a0720eb91c8742c387b741af5a3ab78cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">a big number for infinity for differential constraints <br /></td></tr>
+<tr class="separator:a0720eb91c8742c387b741af5a3ab78cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa137c18c92be306763df13338bc5f50c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa137c18c92be306763df13338bc5f50c"></a>
+value_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#aa137c18c92be306763df13338bc5f50c">m_boundBigM</a></td></tr>
+<tr class="memdesc:aa137c18c92be306763df13338bc5f50c"><td class="mdescLeft">&#160;</td><td class="mdescRight">a big number for infinity for bound constraints <br /></td></tr>
+<tr class="separator:aa137c18c92be306763df13338bc5f50c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0af24da42a7f76d3992dff4247cba7f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0af24da42a7f76d3992dff4247cba7f"></a>
+value_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#ad0af24da42a7f76d3992dff4247cba7f">m_reversedArcFlowCost</a></td></tr>
+<tr class="memdesc:ad0af24da42a7f76d3992dff4247cba7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">normalized flow cost of overall reversed arcs to resolve negative arc cost, to get total flow cost of reversed arcs, it needs to times with big M <br /></td></tr>
+<tr class="separator:ad0af24da42a7f76d3992dff4247cba7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a459ce3046b4906b5553b5db31c01148c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a459ce3046b4906b5553b5db31c01148c"></a>
+arc_flow_map_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a459ce3046b4906b5553b5db31c01148c">m_mFlow</a></td></tr>
+<tr class="memdesc:a459ce3046b4906b5553b5db31c01148c"><td class="mdescLeft">&#160;</td><td class="mdescRight">solution of min-cost flow, which is the dual solution of LP <br /></td></tr>
+<tr class="separator:a459ce3046b4906b5553b5db31c01148c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2368edca4feab4b304d2ba1eea12c6dc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2368edca4feab4b304d2ba1eea12c6dc"></a>
+node_pot_map_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a2368edca4feab4b304d2ba1eea12c6dc">m_mPotential</a></td></tr>
+<tr class="memdesc:a2368edca4feab4b304d2ba1eea12c6dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">dual solution of min-cost flow, which is the solution of LP <br /></td></tr>
+<tr class="separator:a2368edca4feab4b304d2ba1eea12c6dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Rectangular geometric object.<br />
-<br />
- Parameters<br />
- -------&mdash;<br />
- point1 : array-like[2]<br />
- Coordinates of a corner of the rectangle.<br />
- point2 : array-like[2]<br />
- Coordinates of the corner of the rectangle opposite to <code>point1</code>.<br />
- layer : integer<br />
- The GDSII layer number for this element.<br />
- datatype : integer<br />
- The GDSII datatype for this element (between 0 and 255).<br />
-<br />
- Examples<br />
- -----&mdash;<br />
- &gt;&gt;&gt; rectangle = gdspy.Rectangle((0, 0), (10, 20))<br />
- &gt;&gt;&gt; myCell.add(rectangle)<br />
-</p>
+<div class="textblock"><h3>template&lt;typename T, typename V&gt;<br />
+class limbo::solvers::DualMinCostFlow&lt; T, V &gt;</h3>
 
-<p>Definition at line <a class="el" href="a00290_source.html#l00124">124</a> of file <a class="el" href="a00290_source.html">GdsObjects.h</a>.</p>
+<p>LP solved with min-cost flow. A better implementation of <a class="el" href="a00176.html">limbo::solvers::lpmcf::LpDualMcf</a>. </p>
+<p>The dual problem of this LP is a min-cost flow problem, so we can solve the graph problem and then call shortest path algrithm to calculate optimum of primal problem.</p>
+<ol type="1">
+<li>Primal problem <br />
+ <p class="formulaDsp">
+\begin{eqnarray*} &amp; min. &amp; \sum_{i=1}^{n} c_i \cdot x_i - \sum_{i,j} u_{ij} \alpha_{ij}, \\ &amp; s.t. &amp; x_i - x_j - \alpha_{ij} \ge b_{ij}, \forall (i, j) \in E, \\ &amp; &amp; d_i \le x_i \le u_i, \forall i \in [1, n], \\ &amp; &amp; \alpha_{ij} \ge 0, \forall (i, j) \in A. \end{eqnarray*}
+</p>
+ <br />
+</li>
+<li>Introduce new variables \(y_i\) in \([0, n]\), set \(x_i = y_i - y_0\), <br />
+ <p class="formulaDsp">
+\begin{eqnarray*} &amp; min. &amp; \sum_{i=1}^{n} c_i \cdot (y_i-y_0) - \sum_{i,j} u_{ij} \alpha_{ij}, \\ &amp; s.t. &amp; y_i - y_j -\alpha_{ij} \ge b_{ij}, \forall (i, j) \in E \\ &amp; &amp; d_i \le y_i - y_0 - \alpha_{ij} \le u_i, \forall i \in [1, n], \\ &amp; &amp; y_i \textrm{ is unbounded integer}, \forall i \in [0, n], \\ &amp; &amp; \alpha_{ij} \ge 0, \forall (i, j) \in A. \end{eqnarray*}
+</p>
+ <br />
+</li>
+<li>Re-write the problem <br />
+ <p class="formulaDsp">
+\begin{eqnarray*} &amp; min. &amp; \sum_{i=0}^{n} c_i \cdot y_i - \sum_{i,j} u_{ij} \alpha_{ij}, \textrm{ where } \ c_i = \begin{cases} c_i, &amp; \forall i \in [1, n], \\ - \sum_{j=1}^{n} c_i, &amp; i = 0, \\ \end{cases} \\ &amp; s.t. &amp; y_i - y_j \ge \ \begin{cases} b_{ij}, &amp; \forall (i, j) \in E, \\ d_i, &amp; \forall j = 0, i \in [1, n], \\ -u_i, &amp; \forall i = 0, j \in [1, n], \\ \end{cases} \\ &amp; &amp; y_i \textrm{ is unbounded integer}, \forall i \in [0, n], \\ &amp; &amp; \alpha_{ij} \ge 0, \forall (i, j) \in A. \end{eqnarray*}
+</p>
+ <br />
+</li>
+<li><p class="startli">Map to dual min-cost flow problem. <br />
+ Let's use \(c&#39;_i\) for generalized \(c_i\) and \(b&#39;_{ij}\) for generalized \(b_{ij}\). <br />
+ Then \(c&#39;_i\) is node supply. For each \((i, j) \in E&#39;\), an arc from i to j with cost \(-b&#39;_{ij}\) and flow range \([0, u_{ij}]\). The variable \(\alpha_{ij}\) denotes the slackness in the primal problem, but the capacity constraint in the dual problem. We can set the edge capacity as \(u_{ij}\). We can also leave the edge uncapacited ( \(\infty\)) if there are no such variables. <br />
+ Some concolusions from <a class="el" href="a00449.html#CITEREF_FLOW_B2005_Ahuja">[1]</a> where \(f_{ij}^*\) denotes the optimal flow on edge \((i, j)\) and \(c_{ij}^\pi\) denotes the reduced cost in the residual network. <br />
+</p><ul>
+<li>If \(c_{ij}^\pi &gt; 0\), then \(f_{ij}^* = 0\).</li>
+<li>If \( 0 &lt; f_{ij}^* &lt; u_{ij} \), then \( c_{ij}^\pi = 0 \).</li>
+<li>If \(c_{ij}^\pi &lt; 0\), then \(f_{ij}^* = u_{ij}\).</li>
+</ul>
+<p class="startli">These conclusions might be useful to check optimality for the primal problem. <br />
+Caution: this mapping of LP to dual min-cost flow results may result in negative arc cost which is not supported by all the algorithms (only capacity scaling algorithm supports). Therefore, graph transformation is introduced to convert arcs with negative costs to positive costs with arc inversal.</p>
+</li>
+</ol>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>coefficient type </td></tr>
+    <tr><td class="paramname">V</td><td>variable type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00102">102</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a2b3ace4b6949af5db26c229d152554c4"></a>
+<a class="anchor" id="adcf9ecdefa23744e8598e14e58aba925"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename V&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">GdsParser::GdsDB::GdsRectangle::GdsRectangle </td>
+          <td class="memname"><a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::<a class="el" href="a00092.html">DualMinCostFlow</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00092.html">GdsRectangle</a> const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="a00092.html#a0c97b4c8cecdb2296e5ec0b6fa3eabb6">model_type</a> *&#160;</td>
+          <td class="paramname"><em>model</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>copy constructor </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rhs</td><td>an object </td></tr>
+    <tr><td class="paramname">model</td><td>pointer to the model of problem </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aae0d3170cee1bd24f751fa215cb0fc82"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename V&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::<a class="el" href="a00092.html">DualMinCostFlow</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00092.html">DualMinCostFlow</a>&lt; T, V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>copy constructor, forbidden </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
   </table>
   </dd>
 </dl>
@@ -267,35 +427,530 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a0009
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ac4489cf8c1b59bc8db2a7053182ba404"></a>
+<a class="anchor" id="a81dc9dbcecaccca1c2cebb485613d6ca"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename V&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00092.html">GdsRectangle</a>&amp; GdsParser::GdsDB::GdsRectangle::operator= </td>
+          <td class="memname">void <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::addArcForDiffConstraint </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00092.html">GdsRectangle</a> const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td class="paramtype">node_type&#160;</td>
+          <td class="paramname"><em>xi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">node_type&#160;</td>
+          <td class="paramname"><em>xj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">value_type&#160;</td>
+          <td class="paramname"><em>cij</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">value_type&#160;</td>
+          <td class="paramname"><em>bigM</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>generalized method to add an arc for differential constraint \( x_i - x_j \ge c_{ij} \), resolve negative arc costs by arc reversal </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xi</td><td>node corresponding to variable \( x_i \) </td></tr>
+    <tr><td class="paramname">xj</td><td>node corresponding to variable \( x_j \) </td></tr>
+    <tr><td class="paramname">cij</td><td>constant at right hand side </td></tr>
+    <tr><td class="paramname">bigM</td><td>large number for upper bound of capacity </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00514">514</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a47e89b2123419a811a75f45eae60b249"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00092.html">DualMinCostFlow</a>&lt; T, V &gt;::value_type <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::boundBigM </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>big M for bound constraints </dd></dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00263">263</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac9d61e4c2f709ea6439d2f0acb4f3b6d"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00092.html">DualMinCostFlow</a>&lt; T, V &gt;::arc_cost_map_type const &amp; <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::costMap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>arc cost map </dd></dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00288">288</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aeb585810ca006d1a08a787e99255f16e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00092.html">DualMinCostFlow</a>&lt; T, V &gt;::value_type <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::diffBigM </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>big M for differential constraints </dd></dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00253">253</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac7227af362a81319c93bdec11a6197d1"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00092.html">DualMinCostFlow</a>&lt; T, V &gt;::arc_flow_map_type &amp; <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::flowMap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>assignment </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="section return"><dt>Returns</dt><dd>arc flow map </dd></dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00298">298</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a81f46d302bed31fe602631d540f40519"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00092.html">DualMinCostFlow</a>&lt; T, V &gt;::graph_type const &amp; <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::graph </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>graph </dd></dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00273">273</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab9f4506df32dc6fc9270af6adc960eda"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::mapBoundConstraint2Graph </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>countArcs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>map bound constraints to graph arcs </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rhs</td><td>an object </td></tr>
+    <tr><td class="paramname">countArcs</td><td>flag for counting arcs mode, if true, only count arcs and no actual arcs are added; otherwise, add arcs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>number of arcs added </dd></dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00469">469</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9bb1458c83ab46ceeaed828813f93ede"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::mapDiffConstraint2Graph </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>countArcs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>map differential constraints to graph arcs </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">countArcs</td><td>flag for counting arcs mode, if true, only count arcs and no actual arcs are added; otherwise, add arcs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>number of arcs added </dd></dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00440">440</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2563197a8cb6a5cfb6454f2c657f1e34"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename V&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00184.html">solver_type</a> *&#160;</td>
+          <td class="paramname"><em>solver</em> = <code>NULL</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>API to run the algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">solver</td><td>an object to solve min cost flow, use default updater if NULL </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00248">248</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="add10ab7f4933f86f7e5496093231026e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename V&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00092.html">DualMinCostFlow</a>&amp; <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00092.html">DualMinCostFlow</a>&lt; T, V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>assignment, forbidden </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
+<a class="anchor" id="aa233520b25a5f60bb0affe7283575bc5"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00092.html">DualMinCostFlow</a>&lt; T, V &gt;::node_pot_map_type &amp; <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::potentialMap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>node potential map </dd></dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00303">303</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abb986c8e38a6c46cb3dad07a2f94a39e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename V&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::setBoundBigM </td>
+          <td>(</td>
+          <td class="paramtype">value_type&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set big M as a large number for bound constraints </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00268">268</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af3d4360248f4b8ebe214045742a12b3d"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename V&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::setDiffBigM </td>
+          <td>(</td>
+          <td class="paramtype">value_type&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set big M as a large number for differential constraints </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00258">258</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa32403dafff5889fe11ec1c30fa8d426"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename V&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::setTotalFlowCost </td>
+          <td>(</td>
+          <td class="paramtype">value_type&#160;</td>
+          <td class="paramname"><em>cost</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cost</td><td>total cost of min-cost flow graph </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00313">313</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a89276439442b2c007ec396f8658e0a1b"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename V&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::solve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00184.html">solver_type</a> *&#160;</td>
+          <td class="paramname"><em>solver</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>kernel function to solve the problem </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">solver</td><td>an object to solve min cost flow, use default updater if NULL </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00348">348</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae672e7ebcef1873df4bd515580e997a3"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00092.html">DualMinCostFlow</a>&lt; T, V &gt;::node_value_map_type const &amp; <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::supplyMap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>node supply map </dd></dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00293">293</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab7180b8fc481c826fb959315c4b771da"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00092.html">DualMinCostFlow</a>&lt; T, V &gt;::value_type <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::totalCost </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>total cost of the original LP problem </dd></dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00318">318</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5e29033e55413fe18fec41725efc72f6"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00092.html">DualMinCostFlow</a>&lt; T, V &gt;::value_type <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::totalFlowCost </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>total flow cost </dd></dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00308">308</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8251175f4a3462f8ae2ebe201e13c6dd"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00092.html">DualMinCostFlow</a>&lt; T, V &gt;::arc_value_map_type const &amp; <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a>&lt; T, V &gt;::upperMap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>arc lower bound map</dd>
+<dd>
+arc upper bound map </dd></dl>
+
+<p>Definition at line <a class="el" href="a00381_source.html#l00283">283</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/<a class="el" href="a00290_source.html">GdsObjects.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00381_source.html">DualMinCostFlow.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

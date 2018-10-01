@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/test/parsers/lef/test_adapt.cpp File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/geometry/Polygon2Rectangle.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,92 +87,77 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_812c36ca5e7cbe86d4d7cbe0e4b93100.html">parsers</a></li><li class="navelem"><a class="el" href="dir_1af7764101a1ff435c3218bb02dec852.html">lef</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_07e544b58feaf5e1ebe10360eb3a1613.html">geometry</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">test_adapt.cpp File Reference</div>  </div>
+<div class="title">Polygon2Rectangle.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>test lef parser, see <a class="el" href="a00043.html">LefParser::Driver</a> and <a class="el" href="a00125.html">LefParser::LefDataBase</a>  
+<p>a generic implementation of polygon-to-rectangle conversion  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;fstream&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00296_source.html">limbo/parsers/lef/adapt/LefDriver.h</a>&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;list&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &lt;boost/lexical_cast.hpp&gt;</code><br />
+<code>#include &lt;boost/algorithm/string/trim.hpp&gt;</code><br />
+<code>#include &lt;boost/algorithm/string/classification.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00334_source.html">limbo/geometry/Geometry.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00388_source.html">limbo/string/String.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00374_source.html">limbo/preprocessor/AssertMsg.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00336_source.html">limbo/geometry/Polygon2RectangleVec.h</a>&gt;</code><br />
 </div>
 <p><a href="a00335_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00124.html">LefDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom class that inheritates <a class="el" href="a00125.html">LefParser::LefDataBase</a> with all the required callbacks defined. This is an recommended API for <a class="el" href="a00363.html" title="namespace for LefParser ">LefParser</a>, which also matches to potential bison version in the future. Actually spirit version of parser is based on template, so user does not necessarily need to inherit <a class="el" href="a00124.html" title="Custom class that inheritates LefParser::LefDataBase with all the required callbacks defined...">LefDataBase</a>.  <a href="a00124.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00219.html">limbo::geometry::point_compare_type</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">sort helper if orient == HORIZONTAL, sort by left lower if orient == VERTICAL, sort by lower left  <a href="a00219.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00226.html">limbo::geometry::Polygon2Rectangle&lt; PointSet, RectSet &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class implement conversion from manhattan polygon to rectangle  <a href="a00226.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00157.html">limbo::geometry::Polygon2Rectangle&lt; PointSet, RectSet &gt;::is_equal_type</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">is equal helper  <a href="a00157.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
+<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00441"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00441.html">limbo::geometry</a></td></tr>
+<tr class="memdesc:a00441"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Geometry <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a091b30ceafde8da436a35188eafdea78"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a091b30ceafde8da436a35188eafdea78"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00335.html#a091b30ceafde8da436a35188eafdea78">test1</a> (std::string const &amp;filename)</td></tr>
-<tr class="memdesc:a091b30ceafde8da436a35188eafdea78"><td class="mdescLeft">&#160;</td><td class="mdescRight">test 1: use function wrapper <a class="el" href="a00363.html#acfb3427509802ca74739d10ca47b2431">LefParser::read</a> <br /></td></tr>
-<tr class="separator:a091b30ceafde8da436a35188eafdea78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00335.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">main function  <a href="#a3c04138a5bfe5d72780bb7e82a18e627">More...</a><br /></td></tr>
-<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80de7b7ae4b1c3d5074b45f012f4e177"><td class="memTemplParams" colspan="2">template&lt;typename InputIterator , typename PointSet , typename RectSet &gt; </td></tr>
+<tr class="memitem:a80de7b7ae4b1c3d5074b45f012f4e177"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00441.html#a80de7b7ae4b1c3d5074b45f012f4e177">limbo::geometry::polygon2rectangle</a> (InputIterator input_begin, InputIterator input_end, PointSet const &amp;, RectSet &amp;r, slicing_orientation_2d slicing_orient=HORIZONTAL_SLICING)</td></tr>
+<tr class="memdesc:a80de7b7ae4b1c3d5074b45f012f4e177"><td class="mdescLeft">&#160;</td><td class="mdescRight">standby function for polygon-to-rectangle conversion  <a href="#a80de7b7ae4b1c3d5074b45f012f4e177">More...</a><br /></td></tr>
+<tr class="separator:a80de7b7ae4b1c3d5074b45f012f4e177"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>test lef parser, see <a class="el" href="a00043.html">LefParser::Driver</a> and <a class="el" href="a00125.html">LefParser::LefDataBase</a> </p>
+<div class="textblock"><p>a generic implementation of polygon-to-rectangle conversion </p>
+<p>K.D.Gourley and D.M. Green, <a href="http://doi.ieeecomputersociety.org/10.1109/MCG.1983.262975">A Polygon-to-Rectangle Conversion Algorithm</a>, IEEE COMP. GRAPHICS &amp; APPLIC. 3.1 (1983): 31-32.</p>
+<p>If a contour polygon has duplicate points, remove all of them and form a polygon with holes</p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Dec 2014 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00335_source.html">test_adapt.cpp</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char **&#160;</td>
-          <td class="paramname"><em>argv</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>main function </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">argc</td><td>number of arguments </td></tr>
-    <tr><td class="paramname">argv</td><td>values of arguments </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 </dd></dl>
-
-<p>Definition at line <a class="el" href="a00335_source.html#l00155">155</a> of file <a class="el" href="a00335_source.html">test_adapt.cpp</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>Definition in file <a class="el" href="a00335_source.html">Polygon2Rectangle.h</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

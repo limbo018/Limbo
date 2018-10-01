@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::algorithms::coloring::SDPColoringCsdp&lt; GraphType &gt;::FMGainCalcType Class Reference</title>
+<title>Limbo: limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;::CompareVariableMoveCost Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,118 +89,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00365.html">algorithms</a></li><li class="navelem"><a class="el" href="a00366.html">coloring</a></li><li class="navelem"><a class="el" href="a00204.html">SDPColoringCsdp</a></li><li class="navelem"><a class="el" href="a00066.html">FMGainCalcType</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00443.html">solvers</a></li><li class="navelem"><a class="el" href="a00248.html">SearchByBinSmoothing</a></li><li class="navelem"><a class="el" href="a00066.html">CompareVariableMoveCost</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00505.html">List of all members</a>  </div>
+<a href="a00663.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::algorithms::coloring::SDPColoringCsdp&lt; GraphType &gt;::FMGainCalcType Class Reference</div>  </div>
+<div class="title">limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;::CompareVariableMoveCost Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="a00250_source.html">SDPColoringCsdp.h</a>&gt;</code></p>
+<p>Compare variables by its move cost.  
+ <a href="a00066.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a5379e20a7b1351f3ae3c3f784bbe4acc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5379e20a7b1351f3ae3c3f784bbe4acc"></a>
-typedef edge_weight_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00066.html#a5379e20a7b1351f3ae3c3f784bbe4acc">value_type</a></td></tr>
-<tr class="memdesc:a5379e20a7b1351f3ae3c3f784bbe4acc"><td class="mdescLeft">&#160;</td><td class="mdescRight">define edge_weight_type as value_type <br /></td></tr>
-<tr class="separator:a5379e20a7b1351f3ae3c3f784bbe4acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9b2e88b7062c72382ec20498574640da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00066.html#a9b2e88b7062c72382ec20498574640da">FMGainCalcType</a> (graph_type const &amp;g)</td></tr>
-<tr class="separator:a9b2e88b7062c72382ec20498574640da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bd09914804624d8115fa64a86862bee"><td class="memItemLeft" align="right" valign="top">edge_weight_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00066.html#a3bd09914804624d8115fa64a86862bee">operator()</a> (int32_t v, int8_t origp, int8_t newp, std::vector&lt; int8_t &gt; const &amp;vPartition) const </td></tr>
-<tr class="separator:a3bd09914804624d8115fa64a86862bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a09b37946c9eb7b3a766a6290477129df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a09b37946c9eb7b3a766a6290477129df"></a>
-graph_type const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00066.html#a09b37946c9eb7b3a766a6290477129df">graph</a></td></tr>
-<tr class="memdesc:a09b37946c9eb7b3a766a6290477129df"><td class="mdescLeft">&#160;</td><td class="mdescRight">graph <br /></td></tr>
-<tr class="separator:a09b37946c9eb7b3a766a6290477129df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3017dcb55d4f1ff297c98f08682f765"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00066.html#ab3017dcb55d4f1ff297c98f08682f765">operator()</a> (<a class="el" href="a00273.html">VariableMoveCost</a> const &amp;c1, <a class="el" href="a00273.html">VariableMoveCost</a> const &amp;c2) const </td></tr>
+<tr class="separator:ab3017dcb55d4f1ff297c98f08682f765"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename GraphType&gt;<br />
-class limbo::algorithms::coloring::SDPColoringCsdp&lt; GraphType &gt;::FMGainCalcType</h3>
+<div class="textblock"><h3>template&lt;typename T, typename V&gt;<br />
+struct limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;::CompareVariableMoveCost</h3>
 
-<p>compute the gain when moving a vertex from one partition to another </p>
+<p>Compare variables by its move cost. </p>
 
-<p>Definition at line <a class="el" href="a00250_source.html#l00081">81</a> of file <a class="el" href="a00250_source.html">SDPColoringCsdp.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a9b2e88b7062c72382ec20498574640da"></a>
+<p>Definition at line <a class="el" href="a00385_source.html#l01541">1541</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ab3017dcb55d4f1ff297c98f08682f765"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
+template&lt;typename T, typename V&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00204.html">limbo::algorithms::coloring::SDPColoringCsdp</a>&lt; GraphType &gt;::FMGainCalcType::FMGainCalcType </td>
+          <td class="memname">bool <a class="el" href="a00248.html">limbo::solvers::SearchByBinSmoothing</a>&lt; T, V &gt;::CompareVariableMoveCost::operator() </td>
           <td>(</td>
-          <td class="paramtype">graph_type const &amp;&#160;</td>
-          <td class="paramname"><em>g</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>graph </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00250_source.html#l00089">89</a> of file <a class="el" href="a00250_source.html">SDPColoringCsdp.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a3bd09914804624d8115fa64a86862bee"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">edge_weight_type <a class="el" href="a00204.html">limbo::algorithms::coloring::SDPColoringCsdp</a>&lt; GraphType &gt;::FMGainCalcType::operator() </td>
-          <td>(</td>
-          <td class="paramtype">int32_t&#160;</td>
-          <td class="paramname"><em>v</em>, </td>
+          <td class="paramtype"><a class="el" href="a00273.html">VariableMoveCost</a> const &amp;&#160;</td>
+          <td class="paramname"><em>c1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int8_t&#160;</td>
-          <td class="paramname"><em>origp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int8_t&#160;</td>
-          <td class="paramname"><em>newp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; int8_t &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vPartition</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="a00273.html">VariableMoveCost</a> const &amp;&#160;</td>
+          <td class="paramname"><em>c2</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -214,28 +152,26 @@ template&lt;typename GraphType&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>compute the gain when moving a vertex from one partition to another </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>vertex </td></tr>
-    <tr><td class="paramname">origp</td><td>original partition </td></tr>
-    <tr><td class="paramname">newp</td><td>new partition </td></tr>
-    <tr><td class="paramname">vPartition</td><td>array of partition for each vertex </td></tr>
+    <tr><td class="paramname">c1</td><td>pair of variable and cost </td></tr>
+    <tr><td class="paramname">c2</td><td>pair of variable and cost </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>gain </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if <em>c1</em> has smaller cost ratio than <em>c2</em> </dd></dl>
 
-<p>Definition at line <a class="el" href="a00250_source.html#l00096">96</a> of file <a class="el" href="a00250_source.html">SDPColoringCsdp.h</a>.</p>
+<p>Definition at line <a class="el" href="a00385_source.html#l01546">1546</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/<a class="el" href="a00250_source.html">SDPColoringCsdp.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

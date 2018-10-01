@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::algorithms::partition::FMMultiWay&lt; GainCalcType &gt; Class Template Reference</title>
+<title>Limbo: DefParser::Component Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,447 +89,128 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00365.html">algorithms</a></li><li class="navelem"><a class="el" href="a00367.html">partition</a></li><li class="navelem"><a class="el" href="a00067.html">FMMultiWay</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00428.html">DefParser</a></li><li class="navelem"><a class="el" href="a00067.html">Component</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="a00513.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00485.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::algorithms::partition::FMMultiWay&lt; GainCalcType &gt; Class Template Reference</div>  </div>
+<div class="title">DefParser::Component Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="a00255_source.html">FMMultiWay.h</a>&gt;</code></p>
+<p>cell in placement  
+ <a href="a00067.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00352_source.html">DefDataBase.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for DefParser::Component:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00067.png" usemap="#DefParser::Component_map" alt=""/>
+  <map id="DefParser::Component_map" name="DefParser::Component_map">
+<area href="a00161.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures. " alt="DefParser::Item" shape="rect" coords="0,0,139,24"/>
+</map>
+ </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00236.html">VertexMove</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class denotes movement of vertex  <a href="a00236.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a307988b2b6e69b3c2a745d05bc2fa728"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a307988b2b6e69b3c2a745d05bc2fa728"></a>
-typedef GainCalcType&#160;</td><td class="memItemRight" valign="bottom"><b>gain_calc_type</b></td></tr>
-<tr class="separator:a307988b2b6e69b3c2a745d05bc2fa728"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a828f8809a82930b1b9eeaf12ff24da5f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a828f8809a82930b1b9eeaf12ff24da5f"></a>
-typedef gain_calc_type::value_type&#160;</td><td class="memItemRight" valign="bottom"><b>gain_value_type</b></td></tr>
-<tr class="separator:a828f8809a82930b1b9eeaf12ff24da5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa92b3dc489fe6bf8af137eec9031b272"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#aa92b3dc489fe6bf8af137eec9031b272">FMMultiWay</a> (gain_calc_type const &amp;gc, int tn, signed char tp)</td></tr>
-<tr class="memdesc:aa92b3dc489fe6bf8af137eec9031b272"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#aa92b3dc489fe6bf8af137eec9031b272">More...</a><br /></td></tr>
-<tr class="separator:aa92b3dc489fe6bf8af137eec9031b272"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c1744841bd90724041f4f9c9ecb7cd5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a1c1744841bd90724041f4f9c9ecb7cd5">set_partition</a> (int v, signed char p)</td></tr>
-<tr class="memdesc:a1c1744841bd90724041f4f9c9ecb7cd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">set vertex <em>v</em> to partition <em>p</em>  <a href="#a1c1744841bd90724041f4f9c9ecb7cd5">More...</a><br /></td></tr>
-<tr class="separator:a1c1744841bd90724041f4f9c9ecb7cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b4dbf88709f4bce2597f7397300f22e"><td class="memTemplParams" colspan="2">template&lt;typename Iterator &gt; </td></tr>
-<tr class="memitem:a3b4dbf88709f4bce2597f7397300f22e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00067.html#a3b4dbf88709f4bce2597f7397300f22e">set_partitions</a> (Iterator first, Iterator last)</td></tr>
-<tr class="memdesc:a3b4dbf88709f4bce2597f7397300f22e"><td class="mdescLeft">&#160;</td><td class="mdescRight">set partitions  <a href="#a3b4dbf88709f4bce2597f7397300f22e">More...</a><br /></td></tr>
-<tr class="separator:a3b4dbf88709f4bce2597f7397300f22e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84548f967ebaac419059fb52d9d84a8e"><td class="memItemLeft" align="right" valign="top">signed char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a84548f967ebaac419059fb52d9d84a8e">partition</a> (int v) const </td></tr>
-<tr class="memdesc:a84548f967ebaac419059fb52d9d84a8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">get partition of a vertex  <a href="#a84548f967ebaac419059fb52d9d84a8e">More...</a><br /></td></tr>
-<tr class="separator:a84548f967ebaac419059fb52d9d84a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0314525a3ac1ca51e77efd4ba122f697"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0314525a3ac1ca51e77efd4ba122f697"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a0314525a3ac1ca51e77efd4ba122f697">operator()</a> ()</td></tr>
-<tr class="memdesc:a0314525a3ac1ca51e77efd4ba122f697"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to run the algorithm. <br /></td></tr>
-<tr class="separator:a0314525a3ac1ca51e77efd4ba122f697"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a745d9c9ef2ca2e914dea6f30c9291718"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a745d9c9ef2ca2e914dea6f30c9291718"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a745d9c9ef2ca2e914dea6f30c9291718">reset</a> ()</td></tr>
+<tr class="memdesc:a745d9c9ef2ca2e914dea6f30c9291718"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br /></td></tr>
+<tr class="separator:a745d9c9ef2ca2e914dea6f30c9291718"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dde4dae06eeb93e2b4d005db86b5fa0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a8dde4dae06eeb93e2b4d005db86b5fa0">print</a> (ostringstream &amp;ss) const </td></tr>
+<tr class="memdesc:a8dde4dae06eeb93e2b4d005db86b5fa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">print data members  <a href="#a8dde4dae06eeb93e2b4d005db86b5fa0">More...</a><br /></td></tr>
+<tr class="separator:a8dde4dae06eeb93e2b4d005db86b5fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a2bcd2badc720fdf215f35377c53a3dca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2bcd2badc720fdf215f35377c53a3dca"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a2bcd2badc720fdf215f35377c53a3dca">run</a> ()</td></tr>
-<tr class="memdesc:a2bcd2badc720fdf215f35377c53a3dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">kernel function to run the algorithm <br /></td></tr>
-<tr class="separator:a2bcd2badc720fdf215f35377c53a3dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ab2a2567a38b3af5a5015a677907a3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a2ab2a2567a38b3af5a5015a677907a3e">find_candidate</a> (int &amp;cv, signed char &amp;cp, gain_value_type &amp;max_gain) const </td></tr>
-<tr class="separator:a2ab2a2567a38b3af5a5015a677907a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc1038f7aa8d385b81e279dcafd3fe16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#afc1038f7aa8d385b81e279dcafd3fe16">best_kth_move</a> (int &amp;k, gain_value_type &amp;improve) const </td></tr>
-<tr class="separator:afc1038f7aa8d385b81e279dcafd3fe16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab22040112e85a64a35b8d5194a0ab7f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#ab22040112e85a64a35b8d5194a0ab7f3">revert_to_kth_move</a> (int k)</td></tr>
-<tr class="separator:ab22040112e85a64a35b8d5194a0ab7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d37c35d092f10984caa07cb93576ed3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d37c35d092f10984caa07cb93576ed3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a9d37c35d092f10984caa07cb93576ed3">reset</a> ()</td></tr>
-<tr class="memdesc:a9d37c35d092f10984caa07cb93576ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset movements and fixed flags <br /></td></tr>
-<tr class="separator:a9d37c35d092f10984caa07cb93576ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a8d8050c15c6d50c758763dd5419ee1e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8d8050c15c6d50c758763dd5419ee1e6"></a>
-gain_calc_type const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a8d8050c15c6d50c758763dd5419ee1e6">m_gain_calc</a></td></tr>
-<tr class="memdesc:a8d8050c15c6d50c758763dd5419ee1e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">function object to calculate gains <br /></td></tr>
-<tr class="separator:a8d8050c15c6d50c758763dd5419ee1e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae25478f07833f5cf14a7660dc3cb59aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae25478f07833f5cf14a7660dc3cb59aa"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#ae25478f07833f5cf14a7660dc3cb59aa">m_num_vertice</a></td></tr>
-<tr class="memdesc:ae25478f07833f5cf14a7660dc3cb59aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">total number of vertices <br /></td></tr>
-<tr class="separator:ae25478f07833f5cf14a7660dc3cb59aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4027890d1606edc40d0acf348c0b88b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4027890d1606edc40d0acf348c0b88b0"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a4027890d1606edc40d0acf348c0b88b0">m_num_partitions</a></td></tr>
-<tr class="memdesc:a4027890d1606edc40d0acf348c0b88b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">total number of partitions <br /></td></tr>
-<tr class="separator:a4027890d1606edc40d0acf348c0b88b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0acda6217b411229ee659f0376a56e35"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0acda6217b411229ee659f0376a56e35"></a>
-std::vector&lt; signed char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a0acda6217b411229ee659f0376a56e35">m_vPartition</a></td></tr>
-<tr class="memdesc:a0acda6217b411229ee659f0376a56e35"><td class="mdescLeft">&#160;</td><td class="mdescRight">an array storing partition of each vertex <br /></td></tr>
-<tr class="separator:a0acda6217b411229ee659f0376a56e35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2c57b2a208f2f6f2bb1ce69043527b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2c57b2a208f2f6f2bb1ce69043527b8"></a>
-std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#ab2c57b2a208f2f6f2bb1ce69043527b8">m_vFixed</a></td></tr>
-<tr class="memdesc:ab2c57b2a208f2f6f2bb1ce69043527b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">whehter fixed during current iteration <br /></td></tr>
-<tr class="separator:ab2c57b2a208f2f6f2bb1ce69043527b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9639b017c852e4e2e088da0f1fe9adc8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9639b017c852e4e2e088da0f1fe9adc8"></a>
-std::vector&lt; <a class="el" href="a00236.html">VertexMove</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a9639b017c852e4e2e088da0f1fe9adc8">m_vVertexMove</a></td></tr>
-<tr class="memdesc:a9639b017c852e4e2e088da0f1fe9adc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">record vertex movement during each iteration <br /></td></tr>
-<tr class="separator:a9639b017c852e4e2e088da0f1fe9adc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ad26497f9e85aed18d68077651e671f35"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad26497f9e85aed18d68077651e671f35"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#ad26497f9e85aed18d68077651e671f35">comp_name</a></td></tr>
+<tr class="memdesc:ad26497f9e85aed18d68077651e671f35"><td class="mdescLeft">&#160;</td><td class="mdescRight">component name <br /></td></tr>
+<tr class="separator:ad26497f9e85aed18d68077651e671f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5b6f356f002cef8569eee35429d06fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5b6f356f002cef8569eee35429d06fe"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#ac5b6f356f002cef8569eee35429d06fe">macro_name</a></td></tr>
+<tr class="memdesc:ac5b6f356f002cef8569eee35429d06fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">macro name of component, standard cell type <br /></td></tr>
+<tr class="separator:ac5b6f356f002cef8569eee35429d06fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42950995a250555f06f721fdcb247b2d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42950995a250555f06f721fdcb247b2d"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a42950995a250555f06f721fdcb247b2d">status</a></td></tr>
+<tr class="memdesc:a42950995a250555f06f721fdcb247b2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">placement status <br /></td></tr>
+<tr class="separator:a42950995a250555f06f721fdcb247b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad077fc19f1d1a1bc0013c71b5138d0e9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad077fc19f1d1a1bc0013c71b5138d0e9"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#ad077fc19f1d1a1bc0013c71b5138d0e9">origin</a> [2]</td></tr>
+<tr class="memdesc:ad077fc19f1d1a1bc0013c71b5138d0e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">x, y of origin <br /></td></tr>
+<tr class="separator:ad077fc19f1d1a1bc0013c71b5138d0e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2650acc0de5e4f4cd97ff9c3b18338e5"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00067.html#a2650acc0de5e4f4cd97ff9c3b18338e5">orient</a></td></tr>
+<tr class="separator:a2650acc0de5e4f4cd97ff9c3b18338e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename GainCalcType&gt;<br />
-class limbo::algorithms::partition::FMMultiWay&lt; GainCalcType &gt;</h3>
+<div class="textblock"><p>cell in placement </p>
 
-<p>Assume vertices are represented by 0, 1, ... N array. Partitions are 0, 1, ... P array. Negative partition id denotes no partition assigned. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">GainCalcType</td><td>a function object that calculate gains, refer to <a class="el" href="a00066.html">limbo::algorithms::coloring::SDPColoringCsdp::FMGainCalcType</a> for example. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00255_source.html#l00031">31</a> of file <a class="el" href="a00255_source.html">FMMultiWay.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aa92b3dc489fe6bf8af137eec9031b272"></a>
+<p>Definition at line <a class="el" href="a00352_source.html#l00095">95</a> of file <a class="el" href="a00352_source.html">DefDataBase.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a8dde4dae06eeb93e2b4d005db86b5fa0"></a>
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename GainCalcType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00067.html">limbo::algorithms::partition::FMMultiWay</a>&lt; GainCalcType &gt;::<a class="el" href="a00067.html">FMMultiWay</a> </td>
+          <td class="memname">virtual void DefParser::Component::print </td>
           <td>(</td>
-          <td class="paramtype">gain_calc_type const &amp;&#160;</td>
-          <td class="paramname"><em>gc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>tn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">signed char&#160;</td>
-          <td class="paramname"><em>tp</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">gc</td><td>function object of gain calculator </td></tr>
-    <tr><td class="paramname">tn</td><td>number of vertices </td></tr>
-    <tr><td class="paramname">tp</td><td>number of partitions </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00255_source.html#l00057">57</a> of file <a class="el" href="a00255_source.html">FMMultiWay.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="afc1038f7aa8d385b81e279dcafd3fe16"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GainCalcType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00067.html">limbo::algorithms::partition::FMMultiWay</a>&lt; GainCalcType &gt;::best_kth_move </td>
-          <td>(</td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>k</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">gain_value_type &amp;&#160;</td>
-          <td class="paramname"><em>improve</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>find best kth movement </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">k</td><td>index of movement </td></tr>
-    <tr><td class="paramname">improve</td><td>cumulative improvement at kth movement </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00255_source.html#l00133">133</a> of file <a class="el" href="a00255_source.html">FMMultiWay.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a2ab2a2567a38b3af5a5015a677907a3e"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GainCalcType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00067.html">limbo::algorithms::partition::FMMultiWay</a>&lt; GainCalcType &gt;::find_candidate </td>
-          <td>(</td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>cv</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">signed char &amp;&#160;</td>
-          <td class="paramname"><em>cp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">gain_value_type &amp;&#160;</td>
-          <td class="paramname"><em>max_gain</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>traverse all vertices and partitions for the candidate with best gain </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cv</td><td>find vertex to move </td></tr>
-    <tr><td class="paramname">cp</td><td>target partition </td></tr>
-    <tr><td class="paramname">max_gain</td><td>best gain of the movement </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00255_source.html#l00109">109</a> of file <a class="el" href="a00255_source.html">FMMultiWay.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a84548f967ebaac419059fb52d9d84a8e"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GainCalcType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">signed char <a class="el" href="a00067.html">limbo::algorithms::partition::FMMultiWay</a>&lt; GainCalcType &gt;::partition </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>v</em></td><td>)</td>
+          <td class="paramtype">ostringstream &amp;&#160;</td>
+          <td class="paramname"><em>ss</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>get partition of a vertex </p>
+<p>print data members </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>vertex </td></tr>
+    <tr><td class="paramname">ss</td><td>output stream </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>partition </dd></dl>
 
-<p>Definition at line <a class="el" href="a00255_source.html#l00078">78</a> of file <a class="el" href="a00255_source.html">FMMultiWay.h</a>.</p>
+<p>Reimplemented from <a class="el" href="a00161.html#af12e8991274e6d222ecad5d7284c86f1">DefParser::Item</a>.</p>
+
+<p>Definition at line <a class="el" href="a00352_source.html#l00110">110</a> of file <a class="el" href="a00352_source.html">DefDataBase.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ab22040112e85a64a35b8d5194a0ab7f3"></a>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a2650acc0de5e4f4cd97ff9c3b18338e5"></a>
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename GainCalcType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="a00067.html">limbo::algorithms::partition::FMMultiWay</a>&lt; GainCalcType &gt;::revert_to_kth_move </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>k</em></td><td>)</td>
-          <td></td>
+          <td class="memname">string DefParser::Component::orient</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-<p>revert to kth movement </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">k</td><td>index of movement </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>orientation </p>
 
-<p>Definition at line <a class="el" href="a00255_source.html#l00150">150</a> of file <a class="el" href="a00255_source.html">FMMultiWay.h</a>.</p>
+<p>Definition at line <a class="el" href="a00352_source.html#l00101">101</a> of file <a class="el" href="a00352_source.html">DefDataBase.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a1c1744841bd90724041f4f9c9ecb7cd5"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GainCalcType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00067.html">limbo::algorithms::partition::FMMultiWay</a>&lt; GainCalcType &gt;::set_partition </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>v</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">signed char&#160;</td>
-          <td class="paramname"><em>p</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>set vertex <em>v</em> to partition <em>p</em> </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v</td><td>vertex </td></tr>
-    <tr><td class="paramname">p</td><td>partition </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00255_source.html#l00069">69</a> of file <a class="el" href="a00255_source.html">FMMultiWay.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3b4dbf88709f4bce2597f7397300f22e"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GainCalcType&gt; </div>
-<div class="memtemplate">
-template&lt;typename Iterator &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00067.html">limbo::algorithms::partition::FMMultiWay</a>&lt; GainCalcType &gt;::set_partitions </td>
-          <td>(</td>
-          <td class="paramtype">Iterator&#160;</td>
-          <td class="paramname"><em>first</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Iterator&#160;</td>
-          <td class="paramname"><em>last</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>set partitions </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Iterator</td><td>iterator to the array of partitions </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">first,last</td><td>begin and end iterator to the array of partitions </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00255_source.html#l00074">74</a> of file <a class="el" href="a00255_source.html">FMMultiWay.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/partition/<a class="el" href="a00255_source.html">FMMultiWay.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/def/adapt/<a class="el" href="a00352_source.html">DefDataBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

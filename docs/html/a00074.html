@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdsParser::GdsCell Struct Reference</title>
+<title>Limbo: limbo::geometry::coordinate_traits&lt; T &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,75 +89,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00360.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00074.html">GdsCell</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00441.html">geometry</a></li><li class="navelem"><a class="el" href="a00074.html">coordinate_traits</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00447.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser::GdsCell Struct Reference</div>  </div>
+<div class="title">limbo::geometry::coordinate_traits&lt; T &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>GDSII cell.  
+<p>type traits for coordinates  
  <a href="a00074.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00291_source.html">GdsDriver.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:af4f249d54f715a954442118966d79abd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4f249d54f715a954442118966d79abd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#af4f249d54f715a954442118966d79abd">reset</a> ()</td></tr>
-<tr class="memdesc:af4f249d54f715a954442118966d79abd"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br /></td></tr>
-<tr class="separator:af4f249d54f715a954442118966d79abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:ac0f53f64973060958729193ed7f12ce7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac0f53f64973060958729193ed7f12ce7"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#ac0f53f64973060958729193ed7f12ce7">cell_name</a></td></tr>
-<tr class="memdesc:ac0f53f64973060958729193ed7f12ce7"><td class="mdescLeft">&#160;</td><td class="mdescRight">cell name <br /></td></tr>
-<tr class="separator:ac0f53f64973060958729193ed7f12ce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac54762dbc4b96393b6ad94f5791756df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac54762dbc4b96393b6ad94f5791756df"></a>
-vector&lt; <a class="el" href="a00073.html">GdsBoundary</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#ac54762dbc4b96393b6ad94f5791756df">vBoundary</a></td></tr>
-<tr class="memdesc:ac54762dbc4b96393b6ad94f5791756df"><td class="mdescLeft">&#160;</td><td class="mdescRight">array of boundaries <br /></td></tr>
-<tr class="separator:ac54762dbc4b96393b6ad94f5791756df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abafbf62fa5a8dec19687e01aad23c42d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abafbf62fa5a8dec19687e01aad23c42d"></a>
-vector&lt; <a class="el" href="a00095.html">GdsText</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#abafbf62fa5a8dec19687e01aad23c42d">vText</a></td></tr>
-<tr class="memdesc:abafbf62fa5a8dec19687e01aad23c42d"><td class="mdescLeft">&#160;</td><td class="mdescRight">array of texts <br /></td></tr>
-<tr class="separator:abafbf62fa5a8dec19687e01aad23c42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d14b3f06497a0fb82b9fb09b1fac7c4"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="a00094.html">GdsSref</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a6d14b3f06497a0fb82b9fb09b1fac7c4">vSref</a></td></tr>
-<tr class="separator:a6d14b3f06497a0fb82b9fb09b1fac7c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
+<p><code>#include &lt;<a class="el" href="a00334_source.html">Geometry.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>GDSII cell. </p>
+<div class="textblock"><h3>template&lt;typename T&gt;<br />
+struct limbo::geometry::coordinate_traits&lt; T &gt;</h3>
 
-<p>Definition at line <a class="el" href="a00291_source.html#l00091">91</a> of file <a class="el" href="a00291_source.html">GdsDriver.h</a>.</p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a6d14b3f06497a0fb82b9fb09b1fac7c4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">vector&lt;<a class="el" href="a00094.html">GdsSref</a>&gt; GdsParser::GdsCell::vSref</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>array of SREF </p>
+<p>type traits for coordinates </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>coordinate type </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="a00291_source.html#l00096">96</a> of file <a class="el" href="a00291_source.html">GdsDriver.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00291_source.html">GdsDriver.h</a></li>
+<p>Definition at line <a class="el" href="a00334_source.html#l00146">146</a> of file <a class="el" href="a00334_source.html">Geometry.h</a>.</p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/geometry/<a class="el" href="a00334_source.html">Geometry.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

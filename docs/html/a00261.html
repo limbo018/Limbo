@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/geometry/api/BoostPolygonApi.h File Reference</title>
+<title>Limbo: LpParser::Term Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,8 +45,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -67,8 +67,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -87,52 +89,98 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_07e544b58feaf5e1ebe10360eb3a1613.html">geometry</a></li><li class="navelem"><a class="el" href="dir_fc5098a7dee8c311c6fadc7f621cfa43.html">api</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00445.html">LpParser</a></li><li class="navelem"><a class="el" href="a00261.html">Term</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00676.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">BoostPolygonApi.h File Reference</div>  </div>
+<div class="title">LpParser::Term Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Geometry traits for Boost.Polygon, include this file when you use Boost.Polygon geometric types.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="a00263_source.html">limbo/geometry/Geometry.h</a>&gt;</code><br />
-</div>
-<p><a href="a00261_source.html">Go to the source code of this file.</a></p>
+<p>a term denotes coefficient times a variable  
+ <a href="a00261.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00368_source.html">LpDataBase.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00180.html">limbo::geometry::point_traits&lt; boost::polygon::point_data&lt; T &gt; &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="a00178.html">limbo::geometry::point_traits</a> for boost::polygon::point_data  <a href="a00180.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html">limbo::geometry::rectangle_traits&lt; boost::polygon::rectangle_data&lt; T &gt; &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="a00195.html">limbo::geometry::rectangle_traits</a> for boost::polygon::rectangle_data  <a href="a00197.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a72a914be19400e0eb914cb2e48483bc4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00261.html#a72a914be19400e0eb914cb2e48483bc4">Term</a> (double c, string const &amp;v)</td></tr>
+<tr class="memdesc:a72a914be19400e0eb914cb2e48483bc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a72a914be19400e0eb914cb2e48483bc4">More...</a><br /></td></tr>
+<tr class="separator:a72a914be19400e0eb914cb2e48483bc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00364"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html">limbo</a></td></tr>
-<tr class="memdesc:a00364"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00370"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00370.html">limbo::geometry</a></td></tr>
-<tr class="memdesc:a00370"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Geometry <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a4f579b79a03a15e7c46b303b3be611a4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f579b79a03a15e7c46b303b3be611a4"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00261.html#a4f579b79a03a15e7c46b303b3be611a4">coef</a></td></tr>
+<tr class="memdesc:a4f579b79a03a15e7c46b303b3be611a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">coefficient <br /></td></tr>
+<tr class="separator:a4f579b79a03a15e7c46b303b3be611a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f080999709341e86e81cace35c873b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f080999709341e86e81cace35c873b3"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00261.html#a3f080999709341e86e81cace35c873b3">var</a></td></tr>
+<tr class="memdesc:a3f080999709341e86e81cace35c873b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable <br /></td></tr>
+<tr class="separator:a3f080999709341e86e81cace35c873b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Geometry traits for Boost.Polygon, include this file when you use Boost.Polygon geometric types. </p>
-<p>if your point class setting is different from that in the default point_traits, please create a specialization </p><dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
+<div class="textblock"><p>a term denotes coefficient times a variable </p>
 
-<p>Definition in file <a class="el" href="a00261_source.html">BoostPolygonApi.h</a>.</p>
-</div></div><!-- contents -->
+<p>Definition at line <a class="el" href="a00368_source.html#l00093">93</a> of file <a class="el" href="a00368_source.html">LpDataBase.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a72a914be19400e0eb914cb2e48483bc4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">LpParser::Term::Term </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string const &amp;&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>coefficient </td></tr>
+    <tr><td class="paramname">v</td><td>variable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00368_source.html#l00101">101</a> of file <a class="el" href="a00368_source.html">LpDataBase.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/lp/bison/<a class="el" href="a00368_source.html">LpDataBase.h</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::solvers::FeasibleSearcher&lt; T, V &gt; Class Template Reference</title>
+<title>Limbo: limbo::algorithms::partition::FM&lt; NodeType, NetWeightType &gt;::compare_type2 Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,218 +89,63 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00372.html">solvers</a></li><li class="navelem"><a class="el" href="a00061.html">FeasibleSearcher</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00436.html">algorithms</a></li><li class="navelem"><a class="el" href="a00438.html">partition</a></li><li class="navelem"><a class="el" href="a00104.html">FM</a></li><li class="navelem"><a class="el" href="a00061.html">compare_type2</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="a00569.html">List of all members</a>  </div>
+<a href="a00579.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::solvers::FeasibleSearcher&lt; T, V &gt; Class Template Reference</div>  </div>
+<div class="title">limbo::algorithms::partition::FM&lt; NodeType, NetWeightType &gt;::compare_type2 Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Base heuristic to search for feasible solutions.  
+<p>compare function object  
  <a href="a00061.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00314_source.html">MultiKnapsackLagRelax.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for limbo::solvers::FeasibleSearcher&lt; T, V &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="a00061.png" usemap="#limbo::solvers::FeasibleSearcher&lt; T, V &gt;_map" alt=""/>
-  <map id="limbo::solvers::FeasibleSearcher&lt; T, V &gt;_map" name="limbo::solvers::FeasibleSearcher&lt; T, V &gt;_map">
-<area href="a00205.html" title="Heuristic to search for feasible solutions by adjusting coefficients so that some items will not be a..." alt="limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;" shape="rect" coords="0,56,302,80"/>
-<area href="a00207.html" title="Heuristic to search for feasible solutions by combined strategies. " alt="limbo::solvers::SearchByCombinedStrategy&lt; T, V &gt;" shape="rect" coords="312,56,614,80"/>
-<area href="a00206.html" title="Heuristic to search for feasible solutions by smoothing dense bins. " alt="limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;" shape="rect" coords="0,112,302,136"/>
-</map>
- </div></div>
+<p><code>#include &lt;<a class="el" href="a00325_source.html">FM.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:aee8235fdcefae5dd2c2c3ae0a7af8129"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aee8235fdcefae5dd2c2c3ae0a7af8129"></a>
-typedef <a class="el" href="a00129.html">LinearModel</a>&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#aee8235fdcefae5dd2c2c3ae0a7af8129">model_type</a></td></tr>
-<tr class="memdesc:aee8235fdcefae5dd2c2c3ae0a7af8129"><td class="mdescLeft">&#160;</td><td class="mdescRight">model type <br /></td></tr>
-<tr class="separator:aee8235fdcefae5dd2c2c3ae0a7af8129"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae85b7baebed588aff43905ed21871cd9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae85b7baebed588aff43905ed21871cd9"></a>
-typedef <a class="el" href="a00146.html">MultiKnapsackLagRelax</a><br class="typebreak" />
-&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#ae85b7baebed588aff43905ed21871cd9">solver_type</a></td></tr>
-<tr class="memdesc:ae85b7baebed588aff43905ed21871cd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">solver type <br /></td></tr>
-<tr class="separator:ae85b7baebed588aff43905ed21871cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4da821eb8ac1306533174439e3dcdffb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4da821eb8ac1306533174439e3dcdffb"></a>
-typedef <a class="el" href="a00122.html">solver_type::updater_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a4da821eb8ac1306533174439e3dcdffb">updater_type</a></td></tr>
-<tr class="memdesc:a4da821eb8ac1306533174439e3dcdffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">updater type for lagrangian multipliers <br /></td></tr>
-<tr class="separator:a4da821eb8ac1306533174439e3dcdffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57e08c44ce837595f0fe8e10e48560ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57e08c44ce837595f0fe8e10e48560ec"></a>
-typedef <br class="typebreak" />
-<a class="el" href="a00129.html#a6d83996e8205090fd1150a2393314e23">model_type::coefficient_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a></td></tr>
-<tr class="memdesc:a57e08c44ce837595f0fe8e10e48560ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">coefficient value type <br /></td></tr>
-<tr class="separator:a57e08c44ce837595f0fe8e10e48560ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a29f145a48d2b90a8a5524a1444b9d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a29f145a48d2b90a8a5524a1444b9d8"></a>
-typedef <br class="typebreak" />
-<a class="el" href="a00129.html#a0b183484bcda7fe68e4c92367d38681f">model_type::variable_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a9a29f145a48d2b90a8a5524a1444b9d8">variable_value_type</a></td></tr>
-<tr class="memdesc:a9a29f145a48d2b90a8a5524a1444b9d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable value type <br /></td></tr>
-<tr class="separator:a9a29f145a48d2b90a8a5524a1444b9d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f0a7bd809c482e1d2d2dcd9a50d9e01"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f0a7bd809c482e1d2d2dcd9a50d9e01"></a>
-typedef <a class="el" href="a00129.html#a3fec27a7f57c34ad1353abf78783bae1">model_type::variable_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a3f0a7bd809c482e1d2d2dcd9a50d9e01">variable_type</a></td></tr>
-<tr class="memdesc:a3f0a7bd809c482e1d2d2dcd9a50d9e01"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable type <br /></td></tr>
-<tr class="separator:a3f0a7bd809c482e1d2d2dcd9a50d9e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a347f04295fd700a91d812b8e3ed8786f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a347f04295fd700a91d812b8e3ed8786f"></a>
-typedef <a class="el" href="a00129.html#ae34a87308edce3f094e3445ba2d711a4">model_type::expression_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a347f04295fd700a91d812b8e3ed8786f">expression_type</a></td></tr>
-<tr class="memdesc:a347f04295fd700a91d812b8e3ed8786f"><td class="mdescLeft">&#160;</td><td class="mdescRight">expression type <br /></td></tr>
-<tr class="separator:a347f04295fd700a91d812b8e3ed8786f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfb0cb623ba0b6961bb4cc32a63039c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acfb0cb623ba0b6961bb4cc32a63039c9"></a>
-typedef <a class="el" href="a00129.html#a7c57e635bbf5f7f296bffd67be900a32">model_type::constraint_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#acfb0cb623ba0b6961bb4cc32a63039c9">constraint_type</a></td></tr>
-<tr class="memdesc:acfb0cb623ba0b6961bb4cc32a63039c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">constraint type <br /></td></tr>
-<tr class="separator:acfb0cb623ba0b6961bb4cc32a63039c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca630d29eca5e2d5e49a2047ca8f5eba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca630d29eca5e2d5e49a2047ca8f5eba"></a>
-typedef <a class="el" href="a00129.html#ae57d4cb612f57ca66353dc2844943cce">model_type::term_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#aca630d29eca5e2d5e49a2047ca8f5eba">term_type</a></td></tr>
-<tr class="memdesc:aca630d29eca5e2d5e49a2047ca8f5eba"><td class="mdescLeft">&#160;</td><td class="mdescRight">term type <br /></td></tr>
-<tr class="separator:aca630d29eca5e2d5e49a2047ca8f5eba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd49576ae2b692e346776d7691b38162"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd49576ae2b692e346776d7691b38162"></a>
-typedef <a class="el" href="a00137.html">solver_type::matrix_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#acd49576ae2b692e346776d7691b38162">matrix_type</a></td></tr>
-<tr class="memdesc:acd49576ae2b692e346776d7691b38162"><td class="mdescLeft">&#160;</td><td class="mdescRight">matrix type <br /></td></tr>
-<tr class="separator:acd49576ae2b692e346776d7691b38162"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1881ec56a22c416bceb4a19ed67835b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a1881ec56a22c416bceb4a19ed67835b7">FeasibleSearcher</a> (<a class="el" href="a00061.html#ae85b7baebed588aff43905ed21871cd9">solver_type</a> *solver)</td></tr>
-<tr class="memdesc:a1881ec56a22c416bceb4a19ed67835b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a1881ec56a22c416bceb4a19ed67835b7">More...</a><br /></td></tr>
-<tr class="separator:a1881ec56a22c416bceb4a19ed67835b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a770e1abd939372c773ae0e8a29aaf25b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a770e1abd939372c773ae0e8a29aaf25b"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a770e1abd939372c773ae0e8a29aaf25b">~FeasibleSearcher</a> ()</td></tr>
-<tr class="memdesc:a770e1abd939372c773ae0e8a29aaf25b"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
-<tr class="separator:a770e1abd939372c773ae0e8a29aaf25b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f00cc945f830c2ec6eea3b813010675"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="a00372.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a6f00cc945f830c2ec6eea3b813010675">operator()</a> (<a class="el" href="a00061.html#a4da821eb8ac1306533174439e3dcdffb">updater_type</a> *)</td></tr>
-<tr class="memdesc:a6f00cc945f830c2ec6eea3b813010675"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to search for feasible solutions.  <a href="#a6f00cc945f830c2ec6eea3b813010675">More...</a><br /></td></tr>
-<tr class="separator:a6f00cc945f830c2ec6eea3b813010675"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:acd30c13dabe12fb2c34eaad5265f06cc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd30c13dabe12fb2c34eaad5265f06cc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#acd30c13dabe12fb2c34eaad5265f06cc">computeSlackness</a> ()</td></tr>
-<tr class="memdesc:acd30c13dabe12fb2c34eaad5265f06cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute slackness in an iteration <br /></td></tr>
-<tr class="separator:acd30c13dabe12fb2c34eaad5265f06cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45957386868f04bfa5defd78990ba9d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00372.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a45957386868f04bfa5defd78990ba9d7">solveSubproblems</a> (<a class="el" href="a00061.html#a4da821eb8ac1306533174439e3dcdffb">updater_type</a> *updater, unsigned int beginIter, unsigned int endIter)</td></tr>
-<tr class="memdesc:a45957386868f04bfa5defd78990ba9d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">kernel lagrangian iterations  <a href="#a45957386868f04bfa5defd78990ba9d7">More...</a><br /></td></tr>
-<tr class="separator:a45957386868f04bfa5defd78990ba9d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:afada362be28de588ffc87ceb833ac6da"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afada362be28de588ffc87ceb833ac6da"></a>
-<a class="el" href="a00061.html#ae85b7baebed588aff43905ed21871cd9">solver_type</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#afada362be28de588ffc87ceb833ac6da">m_solver</a></td></tr>
-<tr class="memdesc:afada362be28de588ffc87ceb833ac6da"><td class="mdescLeft">&#160;</td><td class="mdescRight">problem solver <br /></td></tr>
-<tr class="separator:afada362be28de588ffc87ceb833ac6da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2377cdf22948ba5f4b11747b34e67a34"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2377cdf22948ba5f4b11747b34e67a34"></a>
-<a class="el" href="a00061.html#aee8235fdcefae5dd2c2c3ae0a7af8129">model_type</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a2377cdf22948ba5f4b11747b34e67a34">m_model</a></td></tr>
-<tr class="memdesc:a2377cdf22948ba5f4b11747b34e67a34"><td class="mdescLeft">&#160;</td><td class="mdescRight">model for the problem <br /></td></tr>
-<tr class="separator:a2377cdf22948ba5f4b11747b34e67a34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7221de94d9b03312b9ec107ebc2e6829"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7221de94d9b03312b9ec107ebc2e6829"></a>
-<a class="el" href="a00061.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a7221de94d9b03312b9ec107ebc2e6829">m_vObjCoef</a></td></tr>
-<tr class="memdesc:a7221de94d9b03312b9ec107ebc2e6829"><td class="mdescLeft">&#160;</td><td class="mdescRight">coefficients variables in objective <br /></td></tr>
-<tr class="separator:a7221de94d9b03312b9ec107ebc2e6829"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a225acff781b915bc44ad2d91a7329e63"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a225acff781b915bc44ad2d91a7329e63"></a>
-<a class="el" href="a00061.html#acd49576ae2b692e346776d7691b38162">matrix_type</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a225acff781b915bc44ad2d91a7329e63">m_constrMatrix</a></td></tr>
-<tr class="memdesc:a225acff781b915bc44ad2d91a7329e63"><td class="mdescLeft">&#160;</td><td class="mdescRight">constraint matrix \(A\) <br /></td></tr>
-<tr class="separator:a225acff781b915bc44ad2d91a7329e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa80163a17b8b7f384d2d3f38672858ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa80163a17b8b7f384d2d3f38672858ef"></a>
-<a class="el" href="a00061.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#aa80163a17b8b7f384d2d3f38672858ef">m_vConstrRhs</a></td></tr>
-<tr class="memdesc:aa80163a17b8b7f384d2d3f38672858ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">constraint right hand side \(b\) <br /></td></tr>
-<tr class="separator:aa80163a17b8b7f384d2d3f38672858ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f85684afcbf085a6e9b64290fef59ba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5f85684afcbf085a6e9b64290fef59ba"></a>
-<a class="el" href="a00061.html#a3f0a7bd809c482e1d2d2dcd9a50d9e01">variable_type</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a5f85684afcbf085a6e9b64290fef59ba">m_vGroupedVariable</a></td></tr>
-<tr class="memdesc:a5f85684afcbf085a6e9b64290fef59ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">array of grouped variables according to item <br /></td></tr>
-<tr class="separator:a5f85684afcbf085a6e9b64290fef59ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0184cf40316acc754abe6003a74139fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0184cf40316acc754abe6003a74139fd"></a>
-unsigned int *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a0184cf40316acc754abe6003a74139fd">m_vVariableGroupBeginIndex</a></td></tr>
-<tr class="memdesc:a0184cf40316acc754abe6003a74139fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">begin index of grouped variable <br /></td></tr>
-<tr class="separator:a0184cf40316acc754abe6003a74139fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70f4722c10a7d4896c1ffcd9fa989559"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a70f4722c10a7d4896c1ffcd9fa989559"></a>
-unsigned int const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a70f4722c10a7d4896c1ffcd9fa989559">m_numGroups</a></td></tr>
-<tr class="memdesc:a70f4722c10a7d4896c1ffcd9fa989559"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of groups <br /></td></tr>
-<tr class="separator:a70f4722c10a7d4896c1ffcd9fa989559"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0fdc768012865b3a01da54f097a9fd36"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0fdc768012865b3a01da54f097a9fd36"></a>
-std::vector&lt; unsigned int &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a0fdc768012865b3a01da54f097a9fd36">m_vConstraintPartition</a></td></tr>
-<tr class="memdesc:a0fdc768012865b3a01da54f097a9fd36"><td class="mdescLeft">&#160;</td><td class="mdescRight">indices of constraints, the first partition is capacity constraints <br /></td></tr>
-<tr class="separator:a0fdc768012865b3a01da54f097a9fd36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15d355c9ab202dbf5252b8b675bce9d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a15d355c9ab202dbf5252b8b675bce9d3"></a>
-<a class="el" href="a00061.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a15d355c9ab202dbf5252b8b675bce9d3">m_vLagMultiplier</a></td></tr>
-<tr class="memdesc:a15d355c9ab202dbf5252b8b675bce9d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">array of lagrangian multipliers <br /></td></tr>
-<tr class="separator:a15d355c9ab202dbf5252b8b675bce9d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab62c271376a7b57746ee9b8104899bb2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab62c271376a7b57746ee9b8104899bb2"></a>
-<a class="el" href="a00061.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#ab62c271376a7b57746ee9b8104899bb2">m_vSlackness</a></td></tr>
-<tr class="memdesc:ab62c271376a7b57746ee9b8104899bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">array of slackness values in each iteration, \( b-Ax \) <br /></td></tr>
-<tr class="separator:ab62c271376a7b57746ee9b8104899bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a850a40be8905e6b10478c304339e1c92"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a850a40be8905e6b10478c304339e1c92"></a>
-std::vector<br class="typebreak" />
-&lt; <a class="el" href="a00061.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> &gt;<br class="typebreak" />
- const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a850a40be8905e6b10478c304339e1c92">m_vScalingFactor</a></td></tr>
-<tr class="memdesc:a850a40be8905e6b10478c304339e1c92"><td class="mdescLeft">&#160;</td><td class="mdescRight">scaling factor for constraints and objective, last entry is for objective <br /></td></tr>
-<tr class="separator:a850a40be8905e6b10478c304339e1c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33567b13228a68b3a542c4228462c3d5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a33567b13228a68b3a542c4228462c3d5"></a>
-<a class="el" href="a00061.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a33567b13228a68b3a542c4228462c3d5">m_objConstant</a></td></tr>
-<tr class="memdesc:a33567b13228a68b3a542c4228462c3d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">constant value in objective from lagrangian relaxation <br /></td></tr>
-<tr class="separator:a33567b13228a68b3a542c4228462c3d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a501aee0cceeb7c878ec4a938b1c92007"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a501aee0cceeb7c878ec4a938b1c92007"></a>
-<a class="el" href="a00061.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a501aee0cceeb7c878ec4a938b1c92007">m_lagObj</a></td></tr>
-<tr class="memdesc:a501aee0cceeb7c878ec4a938b1c92007"><td class="mdescLeft">&#160;</td><td class="mdescRight">current objective of the lagrangian subproblem <br /></td></tr>
-<tr class="separator:a501aee0cceeb7c878ec4a938b1c92007"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedc955b3565462656a8e934ce5739beb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aedc955b3565462656a8e934ce5739beb"></a>
-unsigned int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#aedc955b3565462656a8e934ce5739beb">m_iter</a></td></tr>
-<tr class="memdesc:aedc955b3565462656a8e934ce5739beb"><td class="mdescLeft">&#160;</td><td class="mdescRight">current iteration <br /></td></tr>
-<tr class="separator:aedc955b3565462656a8e934ce5739beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cc2e90c43732abba4a51f471b8a88e9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3cc2e90c43732abba4a51f471b8a88e9"></a>
-unsigned int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a3cc2e90c43732abba4a51f471b8a88e9">m_maxIters</a></td></tr>
-<tr class="memdesc:a3cc2e90c43732abba4a51f471b8a88e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">maximum number of iterations <br /></td></tr>
-<tr class="separator:a3cc2e90c43732abba4a51f471b8a88e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af34376dc300911527e4130dbead55dc7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af34376dc300911527e4130dbead55dc7"></a>
-bool &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#af34376dc300911527e4130dbead55dc7">m_useInitialSol</a></td></tr>
-<tr class="memdesc:af34376dc300911527e4130dbead55dc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">whether use initial solutions or not <br /></td></tr>
-<tr class="separator:af34376dc300911527e4130dbead55dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b8b72ed8a16b40f36a925e57c3590a1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b8b72ed8a16b40f36a925e57c3590a1"></a>
-std::vector<br class="typebreak" />
-&lt; <a class="el" href="a00061.html#a9a29f145a48d2b90a8a5524a1444b9d8">variable_value_type</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a9b8b72ed8a16b40f36a925e57c3590a1">m_vBestVariableSol</a></td></tr>
-<tr class="memdesc:a9b8b72ed8a16b40f36a925e57c3590a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">best feasible solution found so far <br /></td></tr>
-<tr class="separator:a9b8b72ed8a16b40f36a925e57c3590a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe8e0394e23a8f847b252d9ba4dd19e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe8e0394e23a8f847b252d9ba4dd19e6"></a>
-<a class="el" href="a00061.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#abe8e0394e23a8f847b252d9ba4dd19e6">m_bestObj</a></td></tr>
-<tr class="memdesc:abe8e0394e23a8f847b252d9ba4dd19e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">best objective found so far <br /></td></tr>
-<tr class="separator:abe8e0394e23a8f847b252d9ba4dd19e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af917845254af6836b303ab733a6b431a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#af917845254af6836b303ab733a6b431a">operator()</a> (<a class="el" href="a00107.html">FM_node_type</a> *pFMNode1, <a class="el" href="a00107.html">FM_node_type</a> *pFMNode2) const </td></tr>
+<tr class="memdesc:af917845254af6836b303ab733a6b431a"><td class="mdescLeft">&#160;</td><td class="mdescRight">API for comparison.  <a href="#af917845254af6836b303ab733a6b431a">More...</a><br /></td></tr>
+<tr class="separator:af917845254af6836b303ab733a6b431a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename T, typename V&gt;<br />
-class limbo::solvers::FeasibleSearcher&lt; T, V &gt;</h3>
+<div class="textblock"><h3>template&lt;typename NodeType, typename NetWeightType = double&gt;<br />
+struct limbo::algorithms::partition::FM&lt; NodeType, NetWeightType &gt;::compare_type2</h3>
 
-<p>Base heuristic to search for feasible solutions. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>coefficient value type </td></tr>
-    <tr><td class="paramname">V</td><td>variable value type </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>compare function object </p>
+<p>smallest tie_id comes first </p>
 
-<p>Definition at line <a class="el" href="a00314_source.html#l00031">31</a> of file <a class="el" href="a00314_source.html">MultiKnapsackLagRelax.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a1881ec56a22c416bceb4a19ed67835b7"></a>
+<p>Definition at line <a class="el" href="a00325_source.html#l00229">229</a> of file <a class="el" href="a00325_source.html">FM.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="af917845254af6836b303ab733a6b431a"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, typename V&gt; </div>
+template&lt;typename NodeType, typename NetWeightType = double&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00061.html">limbo::solvers::FeasibleSearcher</a>&lt; T, V &gt;::<a class="el" href="a00061.html">FeasibleSearcher</a> </td>
+          <td class="memname">bool <a class="el" href="a00104.html">limbo::algorithms::partition::FM</a>&lt; NodeType, NetWeightType &gt;::compare_type2::operator() </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00061.html#ae85b7baebed588aff43905ed21871cd9">solver_type</a> *&#160;</td>
-          <td class="paramname"><em>solver</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="a00107.html">FM_node_type</a> *&#160;</td>
+          <td class="paramname"><em>pFMNode1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="a00107.html">FM_node_type</a> *&#160;</td>
+          <td class="paramname"><em>pFMNode2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -310,113 +155,27 @@ template&lt;typename T, typename V&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>constructor </p>
+<p>API for comparison. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">solver</td><td>problem solver </td></tr>
+    <tr><td class="paramname">pFMNode1</td><td>a node </td></tr>
+    <tr><td class="paramname">pFMNode2</td><td>a node </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>compare result </dd></dl>
 
-<p>Definition at line <a class="el" href="a00314_source.html#l01236">1236</a> of file <a class="el" href="a00314_source.html">MultiKnapsackLagRelax.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a6f00cc945f830c2ec6eea3b813010675"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename V&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="a00372.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> <a class="el" href="a00061.html">limbo::solvers::FeasibleSearcher</a>&lt; T, V &gt;::operator() </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00061.html#a4da821eb8ac1306533174439e3dcdffb">updater_type</a> *&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>API to search for feasible solutions. </p>
-<p>param updater updater for lagrangian multipliers </p><dl class="section return"><dt>Returns</dt><dd>solving status </dd></dl>
-
-<p>Reimplemented in <a class="el" href="a00207.html#ae3304c49782ed42bc9442ec1edd1d6d2">limbo::solvers::SearchByCombinedStrategy&lt; T, V &gt;</a>, <a class="el" href="a00206.html#a10278a235c415275d32e081442e00187">limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;</a>, <a class="el" href="a00206.html#a10278a235c415275d32e081442e00187">limbo::solvers::SearchByBinSmoothing&lt; coefficient_value_type, variable_value_type &gt;</a>, <a class="el" href="a00205.html#a52061c68bf51f8ca80fc0a87ae88570c">limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;</a>, and <a class="el" href="a00205.html#a52061c68bf51f8ca80fc0a87ae88570c">limbo::solvers::SearchByAdjustCoefficient&lt; coefficient_value_type, variable_value_type &gt;</a>.</p>
-
-<p>Definition at line <a class="el" href="a00314_source.html#l01265">1265</a> of file <a class="el" href="a00314_source.html">MultiKnapsackLagRelax.h</a>.</p>
+<p>Definition at line <a class="el" href="a00325_source.html#l00235">235</a> of file <a class="el" href="a00325_source.html">FM.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a45957386868f04bfa5defd78990ba9d7"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename V&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00372.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> <a class="el" href="a00061.html">limbo::solvers::FeasibleSearcher</a>&lt; T, V &gt;::solveSubproblems </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00061.html#a4da821eb8ac1306533174439e3dcdffb">updater_type</a> *&#160;</td>
-          <td class="paramname"><em>updater</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>beginIter</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>endIter</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>kernel lagrangian iterations </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">updater</td><td>an object to update lagrangian multipliers </td></tr>
-    <tr><td class="paramname">beginIter</td><td>begin iteration number </td></tr>
-    <tr><td class="paramname">endIter</td><td>end iteration number </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00314_source.html#l01277">1277</a> of file <a class="el" href="a00314_source.html">MultiKnapsackLagRelax.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00314_source.html">MultiKnapsackLagRelax.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/partition/<a class="el" href="a00325_source.html">FM.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

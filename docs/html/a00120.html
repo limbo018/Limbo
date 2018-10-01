@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: EbeamParser::Item Struct Reference</title>
+<title>Limbo: GdsParser::GdsData Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,149 +89,51 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00358.html">EbeamParser</a></li><li class="navelem"><a class="el" href="a00120.html">Item</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00431.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00120.html">GdsData</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#friends">Friends</a> &#124;
-<a href="a00426.html">List of all members</a>  </div>
+<a href="#pub-types">Public Types</a> &#124;
+<a href="a00519.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">EbeamParser::Item Struct Reference</div>  </div>
+<div class="title">GdsParser::GdsData Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Temporary data structures to hold parsed data. Base class for all temporary data structures.  
+<p>data type  
  <a href="a00120.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00283_source.html">EbeamDataBase.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for EbeamParser::Item:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="a00120.png" usemap="#EbeamParser::Item_map" alt=""/>
-  <map id="EbeamParser::Item_map" name="EbeamParser::Item_map">
-<area href="a00026.html" title="describe conflict sites " alt="EbeamParser::ConfSite" shape="rect" coords="0,56,187,80"/>
-<area href="a00051.html" title="describe ebeam boundary " alt="EbeamParser::EbeamBoundary" shape="rect" coords="197,56,384,80"/>
-<area href="a00135.html" title="describe conflict sites for each standard cell type " alt="EbeamParser::Macro" shape="rect" coords="394,56,581,80"/>
-</map>
- </div></div>
+<p><code>#include &lt;<a class="el" href="a00364_source.html">GdsRecords.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a2d923f61f7d230f2c65bf08d300d3408"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d923f61f7d230f2c65bf08d300d3408"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00120.html#a2d923f61f7d230f2c65bf08d300d3408">print</a> (ostringstream &amp;) const </td></tr>
-<tr class="memdesc:a2d923f61f7d230f2c65bf08d300d3408"><td class="mdescLeft">&#160;</td><td class="mdescRight">print data members <br /></td></tr>
-<tr class="separator:a2d923f61f7d230f2c65bf08d300d3408"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a1b26729bff76e6665bab0c8c6ba7edba"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00120.html#a1b26729bff76e6665bab0c8c6ba7edba">operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="a00120.html">Item</a> const &amp;rhs)</td></tr>
-<tr class="separator:a1b26729bff76e6665bab0c8c6ba7edba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0897426e24786f742420f39186081133"><td class="memItemLeft" align="right" valign="top">ostringstream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00120.html#a0897426e24786f742420f39186081133">operator&lt;&lt;</a> (ostringstream &amp;ss, <a class="el" href="a00120.html">Item</a> const &amp;rhs)</td></tr>
-<tr class="separator:a0897426e24786f742420f39186081133"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:af4a63aca395e14181b0738656051469f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4a63aca395e14181b0738656051469f"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00120.html#af4a63aca395e14181b0738656051469f">EnumType</a> { <br />
+&#160;&#160;<b>NO_DATA</b> = 0x00, 
+<b>BIT_ARRAY</b> = 0x01, 
+<b>INTEGER_2</b> = 0x02, 
+<b>INTEGER_4</b> = 0x03, 
+<br />
+&#160;&#160;<b>REAL_4</b> = 0x04, 
+<b>REAL_8</b> = 0x05, 
+<b>STRING</b> = 0x06, 
+<b>UNKNOWN</b> = 0x07
+<br />
+ }</td></tr>
+<tr class="memdesc:af4a63aca395e14181b0738656051469f"><td class="mdescLeft">&#160;</td><td class="mdescRight">enum type of data type <br /></td></tr>
+<tr class="separator:af4a63aca395e14181b0738656051469f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Temporary data structures to hold parsed data. Base class for all temporary data structures. </p>
+<div class="textblock"><p>data type </p>
 
-<p>Definition at line <a class="el" href="a00283_source.html#l00086">86</a> of file <a class="el" href="a00283_source.html">EbeamDataBase.h</a>.</p>
-</div><h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a class="anchor" id="a1b26729bff76e6665bab0c8c6ba7edba"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
-          <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>os</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00120.html">Item</a> const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>print data members with stream operator </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">os</td><td>output stream </td></tr>
-    <tr><td class="paramname">rhs</td><td>target object </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>output stream </dd></dl>
-
-<p>Definition at line <a class="el" href="a00283_source.html#l00094">94</a> of file <a class="el" href="a00283_source.html">EbeamDataBase.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a0897426e24786f742420f39186081133"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">ostringstream&amp; operator&lt;&lt; </td>
-          <td>(</td>
-          <td class="paramtype">ostringstream &amp;&#160;</td>
-          <td class="paramname"><em>ss</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00120.html">Item</a> const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>print data members with stream operator </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ss</td><td>output stream </td></tr>
-    <tr><td class="paramname">rhs</td><td>target object </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>output stream </dd></dl>
-
-<p>Definition at line <a class="el" href="a00283_source.html#l00105">105</a> of file <a class="el" href="a00283_source.html">EbeamDataBase.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/ebeam/bison/<a class="el" href="a00283_source.html">EbeamDataBase.h</a></li>
+<p>Definition at line <a class="el" href="a00364_source.html#l00219">219</a> of file <a class="el" href="a00364_source.html">GdsRecords.h</a>.</p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00364_source.html">GdsRecords.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

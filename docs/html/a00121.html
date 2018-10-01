@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::solvers::L2NormScaler&lt; T, V &gt; Class Template Reference</title>
+<title>Limbo: GdsParser::GdsDataBase Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,208 +89,418 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00372.html">solvers</a></li><li class="navelem"><a class="el" href="a00121.html">L2NormScaler</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00431.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00121.html">GdsDataBase</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00572.html">List of all members</a>  </div>
+<a href="a00520.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::solvers::L2NormScaler&lt; T, V &gt; Class Template Reference</div>  </div>
+<div class="title">GdsParser::GdsDataBase Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Scaling scheme with default L2 norm scaling.  
+<p><h1><a class="el" href="a00121.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks ">GdsDataBase</a> redirects callbacks of <a class="el" href="a00122.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. ">GdsDataBaseKernel</a> to ascii callbacks </h1>
+ 
  <a href="a00121.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00314_source.html">MultiKnapsackLagRelax.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00363_source.html">GdsReader.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for limbo::solvers::L2NormScaler&lt; T, V &gt;:</div>
+Inheritance diagram for GdsParser::GdsDataBase:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="a00121.png" usemap="#limbo::solvers::L2NormScaler&lt; T, V &gt;_map" alt=""/>
-  <map id="limbo::solvers::L2NormScaler&lt; T, V &gt;_map" name="limbo::solvers::L2NormScaler&lt; T, V &gt;_map">
-<area href="a00190.html" title="Base class for scaling scheme with default no scaling. " alt="limbo::solvers::ProblemScaler&lt; T, V &gt;" shape="rect" coords="0,0,226,24"/>
+  <img src="a00121.png" usemap="#GdsParser::GdsDataBase_map" alt=""/>
+  <map id="GdsParser::GdsDataBase_map" name="GdsParser::GdsDataBase_map">
+<area href="a00122.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. " alt="GdsParser::GdsDataBaseKernel" shape="rect" coords="100,0,291,24"/>
+<area href="a00044.html" title="test ascii callbacks " alt="AsciiDataBase" shape="rect" coords="0,112,191,136"/>
+<area href="a00124.html" title="High-level wrapper class for GdsReader. Everything is saved in an internal data structure and users o..." alt="GdsParser::GdsDriver" shape="rect" coords="201,112,392,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:aaf4a3e9b7f21eaab979fce3d70f56df2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf4a3e9b7f21eaab979fce3d70f56df2"></a>
-typedef <a class="el" href="a00190.html">ProblemScaler</a>&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#aaf4a3e9b7f21eaab979fce3d70f56df2">base_type</a></td></tr>
-<tr class="memdesc:aaf4a3e9b7f21eaab979fce3d70f56df2"><td class="mdescLeft">&#160;</td><td class="mdescRight">base type <br /></td></tr>
-<tr class="separator:aaf4a3e9b7f21eaab979fce3d70f56df2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a097fb3fc73b3bca7f7f9655a0be67e82"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a097fb3fc73b3bca7f7f9655a0be67e82"></a>
-typedef <a class="el" href="a00190.html#a1d6c55c973b4895cbda6f486f1810574">base_type::model_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#a097fb3fc73b3bca7f7f9655a0be67e82">model_type</a></td></tr>
-<tr class="memdesc:a097fb3fc73b3bca7f7f9655a0be67e82"><td class="mdescLeft">&#160;</td><td class="mdescRight">model type <br /></td></tr>
-<tr class="separator:a097fb3fc73b3bca7f7f9655a0be67e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a305b6b8645ba00d6ee9205b10ec22d10"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a305b6b8645ba00d6ee9205b10ec22d10"></a>
-typedef <a class="el" href="a00190.html#a1d11af66827d1b4dac788c668344840e">base_type::value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#a305b6b8645ba00d6ee9205b10ec22d10">value_type</a></td></tr>
-<tr class="memdesc:a305b6b8645ba00d6ee9205b10ec22d10"><td class="mdescLeft">&#160;</td><td class="mdescRight">value type <br /></td></tr>
-<tr class="separator:a305b6b8645ba00d6ee9205b10ec22d10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab63a57523a00c93adc2dba975a8fdf4c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab63a57523a00c93adc2dba975a8fdf4c"></a>
-typedef <a class="el" href="a00190.html#a4cdcb857d8d23ef01b77d2a539584a79">base_type::expression_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#ab63a57523a00c93adc2dba975a8fdf4c">expression_type</a></td></tr>
-<tr class="memdesc:ab63a57523a00c93adc2dba975a8fdf4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">expression type <br /></td></tr>
-<tr class="separator:ab63a57523a00c93adc2dba975a8fdf4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af258642573d7dd55e3c875c4f73f0bfb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af258642573d7dd55e3c875c4f73f0bfb"></a>
-typedef <a class="el" href="a00190.html#a0765a03c30b7d3476f7828264a7931c1">base_type::constraint_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#af258642573d7dd55e3c875c4f73f0bfb">constraint_type</a></td></tr>
-<tr class="memdesc:af258642573d7dd55e3c875c4f73f0bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">constraint type <br /></td></tr>
-<tr class="separator:af258642573d7dd55e3c875c4f73f0bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d748ea88d958836d19d913a0cd3ada9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d748ea88d958836d19d913a0cd3ada9"></a>
-typedef <a class="el" href="a00190.html#a296cc653c0e89f1278ac18d2e86af5cb">base_type::term_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#a0d748ea88d958836d19d913a0cd3ada9">term_type</a></td></tr>
-<tr class="memdesc:a0d748ea88d958836d19d913a0cd3ada9"><td class="mdescLeft">&#160;</td><td class="mdescRight">term type <br /></td></tr>
-<tr class="separator:a0d748ea88d958836d19d913a0cd3ada9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_a00190"><td colspan="2" onclick="javascript:toggleInherit('pub_types_a00190')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="a00190.html">limbo::solvers::ProblemScaler&lt; T, V &gt;</a></td></tr>
-<tr class="memitem:a1d6c55c973b4895cbda6f486f1810574 inherit pub_types_a00190"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d6c55c973b4895cbda6f486f1810574"></a>
-typedef <a class="el" href="a00129.html">LinearModel</a>&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00190.html#a1d6c55c973b4895cbda6f486f1810574">model_type</a></td></tr>
-<tr class="memdesc:a1d6c55c973b4895cbda6f486f1810574 inherit pub_types_a00190"><td class="mdescLeft">&#160;</td><td class="mdescRight">model type <br /></td></tr>
-<tr class="separator:a1d6c55c973b4895cbda6f486f1810574 inherit pub_types_a00190"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d11af66827d1b4dac788c668344840e inherit pub_types_a00190"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d11af66827d1b4dac788c668344840e"></a>
-typedef <br class="typebreak" />
-<a class="el" href="a00129.html#a6d83996e8205090fd1150a2393314e23">model_type::coefficient_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00190.html#a1d11af66827d1b4dac788c668344840e">value_type</a></td></tr>
-<tr class="memdesc:a1d11af66827d1b4dac788c668344840e inherit pub_types_a00190"><td class="mdescLeft">&#160;</td><td class="mdescRight">value type <br /></td></tr>
-<tr class="separator:a1d11af66827d1b4dac788c668344840e inherit pub_types_a00190"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cdcb857d8d23ef01b77d2a539584a79 inherit pub_types_a00190"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4cdcb857d8d23ef01b77d2a539584a79"></a>
-typedef <a class="el" href="a00129.html#ae34a87308edce3f094e3445ba2d711a4">model_type::expression_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00190.html#a4cdcb857d8d23ef01b77d2a539584a79">expression_type</a></td></tr>
-<tr class="memdesc:a4cdcb857d8d23ef01b77d2a539584a79 inherit pub_types_a00190"><td class="mdescLeft">&#160;</td><td class="mdescRight">expression type <br /></td></tr>
-<tr class="separator:a4cdcb857d8d23ef01b77d2a539584a79 inherit pub_types_a00190"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0765a03c30b7d3476f7828264a7931c1 inherit pub_types_a00190"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0765a03c30b7d3476f7828264a7931c1"></a>
-typedef <a class="el" href="a00129.html#a7c57e635bbf5f7f296bffd67be900a32">model_type::constraint_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00190.html#a0765a03c30b7d3476f7828264a7931c1">constraint_type</a></td></tr>
-<tr class="memdesc:a0765a03c30b7d3476f7828264a7931c1 inherit pub_types_a00190"><td class="mdescLeft">&#160;</td><td class="mdescRight">constraint type <br /></td></tr>
-<tr class="separator:a0765a03c30b7d3476f7828264a7931c1 inherit pub_types_a00190"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a296cc653c0e89f1278ac18d2e86af5cb inherit pub_types_a00190"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a296cc653c0e89f1278ac18d2e86af5cb"></a>
-typedef <a class="el" href="a00129.html#ae57d4cb612f57ca66353dc2844943cce">model_type::term_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00190.html#a296cc653c0e89f1278ac18d2e86af5cb">term_type</a></td></tr>
-<tr class="memdesc:a296cc653c0e89f1278ac18d2e86af5cb inherit pub_types_a00190"><td class="mdescLeft">&#160;</td><td class="mdescRight">term type <br /></td></tr>
-<tr class="separator:a296cc653c0e89f1278ac18d2e86af5cb inherit pub_types_a00190"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7aad6951fd3de42b89df5e12efe2a145"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7aad6951fd3de42b89df5e12efe2a145"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#a7aad6951fd3de42b89df5e12efe2a145">L2NormScaler</a> ()</td></tr>
-<tr class="memdesc:a7aad6951fd3de42b89df5e12efe2a145"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:a7aad6951fd3de42b89df5e12efe2a145"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fc7a80ef1ca060ce63ded40ee1a87b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9fc7a80ef1ca060ce63ded40ee1a87b8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#a9fc7a80ef1ca060ce63ded40ee1a87b8">~L2NormScaler</a> ()</td></tr>
-<tr class="memdesc:a9fc7a80ef1ca060ce63ded40ee1a87b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
-<tr class="separator:a9fc7a80ef1ca060ce63ded40ee1a87b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01b8bf7f06fe458d6d79f72ac71dea4e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00190.html#a1d11af66827d1b4dac788c668344840e">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#a01b8bf7f06fe458d6d79f72ac71dea4e">operator()</a> (<a class="el" href="a00190.html#a4cdcb857d8d23ef01b77d2a539584a79">expression_type</a> const &amp;expr) const </td></tr>
-<tr class="memdesc:a01b8bf7f06fe458d6d79f72ac71dea4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to compute scaling factor for expression using L2 norm.  <a href="#a01b8bf7f06fe458d6d79f72ac71dea4e">More...</a><br /></td></tr>
-<tr class="separator:a01b8bf7f06fe458d6d79f72ac71dea4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab17c852a03ab98d707d2126b86b3eabf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00190.html#a1d11af66827d1b4dac788c668344840e">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#ab17c852a03ab98d707d2126b86b3eabf">operator()</a> (<a class="el" href="a00190.html#a0765a03c30b7d3476f7828264a7931c1">constraint_type</a> const &amp;constr) const </td></tr>
-<tr class="memdesc:ab17c852a03ab98d707d2126b86b3eabf"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to compute scaling factor for constraints using L2 norm.  <a href="#ab17c852a03ab98d707d2126b86b3eabf">More...</a><br /></td></tr>
-<tr class="separator:ab17c852a03ab98d707d2126b86b3eabf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_a00190"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00190')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="a00190.html">limbo::solvers::ProblemScaler&lt; T, V &gt;</a></td></tr>
-<tr class="memitem:a2b38ee9771b6e61d7c8ffa4abc4b6d84 inherit pub_methods_a00190"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b38ee9771b6e61d7c8ffa4abc4b6d84"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00190.html#a2b38ee9771b6e61d7c8ffa4abc4b6d84">ProblemScaler</a> ()</td></tr>
-<tr class="memdesc:a2b38ee9771b6e61d7c8ffa4abc4b6d84 inherit pub_methods_a00190"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:a2b38ee9771b6e61d7c8ffa4abc4b6d84 inherit pub_methods_a00190"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9de9f19482d08e2fdd763acd767b5e24 inherit pub_methods_a00190"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9de9f19482d08e2fdd763acd767b5e24"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00190.html#a9de9f19482d08e2fdd763acd767b5e24">~ProblemScaler</a> ()</td></tr>
-<tr class="memdesc:a9de9f19482d08e2fdd763acd767b5e24 inherit pub_methods_a00190"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
-<tr class="separator:a9de9f19482d08e2fdd763acd767b5e24 inherit pub_methods_a00190"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6517da08a692c7378b94391782fbca5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#ab6517da08a692c7378b94391782fbca5">bit_array_cbk</a> (const char *ascii_record_type, const char *ascii_data_type, vector&lt; int &gt; const &amp;vBitArray)=0</td></tr>
+<tr class="memdesc:ab6517da08a692c7378b94391782fbca5"><td class="mdescLeft">&#160;</td><td class="mdescRight">bit array callback  <a href="#ab6517da08a692c7378b94391782fbca5">More...</a><br /></td></tr>
+<tr class="separator:ab6517da08a692c7378b94391782fbca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9e80c52a8736dc0bc914de69f972455"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#aa9e80c52a8736dc0bc914de69f972455">integer_2_cbk</a> (const char *ascii_record_type, const char *ascii_data_type, vector&lt; int &gt; const &amp;vInteger)=0</td></tr>
+<tr class="memdesc:aa9e80c52a8736dc0bc914de69f972455"><td class="mdescLeft">&#160;</td><td class="mdescRight">2-byte integer callback  <a href="#aa9e80c52a8736dc0bc914de69f972455">More...</a><br /></td></tr>
+<tr class="separator:aa9e80c52a8736dc0bc914de69f972455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1535afc43e42158515ff7ba1d2021b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#ad1535afc43e42158515ff7ba1d2021b1">integer_4_cbk</a> (const char *ascii_record_type, const char *ascii_data_type, vector&lt; int &gt; const &amp;vInteger)=0</td></tr>
+<tr class="memdesc:ad1535afc43e42158515ff7ba1d2021b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">4-byte integer callback  <a href="#ad1535afc43e42158515ff7ba1d2021b1">More...</a><br /></td></tr>
+<tr class="separator:ad1535afc43e42158515ff7ba1d2021b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1921450e0ba8da996dd4df028c6c9b7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#aa1921450e0ba8da996dd4df028c6c9b7">real_4_cbk</a> (const char *ascii_record_type, const char *ascii_data_type, vector&lt; double &gt; const &amp;vFloat)=0</td></tr>
+<tr class="memdesc:aa1921450e0ba8da996dd4df028c6c9b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">4-byte floating point number callback  <a href="#aa1921450e0ba8da996dd4df028c6c9b7">More...</a><br /></td></tr>
+<tr class="separator:aa1921450e0ba8da996dd4df028c6c9b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5334f9c585914b93efba962bb85b04f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#aa5334f9c585914b93efba962bb85b04f">real_8_cbk</a> (const char *ascii_record_type, const char *ascii_data_type, vector&lt; double &gt; const &amp;vFloat)=0</td></tr>
+<tr class="memdesc:aa5334f9c585914b93efba962bb85b04f"><td class="mdescLeft">&#160;</td><td class="mdescRight">8-byte floating point number callback  <a href="#aa5334f9c585914b93efba962bb85b04f">More...</a><br /></td></tr>
+<tr class="separator:aa5334f9c585914b93efba962bb85b04f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3ab7b80bdefac42a6e9f8c1b63d9029"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#aa3ab7b80bdefac42a6e9f8c1b63d9029">string_cbk</a> (const char *ascii_record_type, const char *ascii_data_type, string const &amp;str)=0</td></tr>
+<tr class="memdesc:aa3ab7b80bdefac42a6e9f8c1b63d9029"><td class="mdescLeft">&#160;</td><td class="mdescRight">string callback  <a href="#aa3ab7b80bdefac42a6e9f8c1b63d9029">More...</a><br /></td></tr>
+<tr class="separator:aa3ab7b80bdefac42a6e9f8c1b63d9029"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b05a2ea6c87835319c39412291e3bad"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00121.html#a4b05a2ea6c87835319c39412291e3bad">begin_end_cbk</a> (const char *ascii_record_type)=0</td></tr>
+<tr class="memdesc:a4b05a2ea6c87835319c39412291e3bad"><td class="mdescLeft">&#160;</td><td class="mdescRight">begin or end indicator of a block  <a href="#a4b05a2ea6c87835319c39412291e3bad">More...</a><br /></td></tr>
+<tr class="separator:a4b05a2ea6c87835319c39412291e3bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename T, typename V&gt;<br />
-class limbo::solvers::L2NormScaler&lt; T, V &gt;</h3>
+<div class="textblock"><h1><a class="el" href="a00121.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks ">GdsDataBase</a> redirects callbacks of <a class="el" href="a00122.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. ">GdsDataBaseKernel</a> to ascii callbacks </h1>
+<p>============================================================= </p>
 
-<p>Scaling scheme with default L2 norm scaling. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>coefficient value type </td></tr>
-    <tr><td class="paramname">V</td><td>variable value type </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00314_source.html#l00029">29</a> of file <a class="el" href="a00314_source.html">MultiKnapsackLagRelax.h</a>.</p>
+<p>Definition at line <a class="el" href="a00363_source.html#l00081">81</a> of file <a class="el" href="a00363_source.html">GdsReader.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a01b8bf7f06fe458d6d79f72ac71dea4e"></a>
+<a class="anchor" id="a4b05a2ea6c87835319c39412291e3bad"></a>
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename V&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00190.html#a1d11af66827d1b4dac788c668344840e">value_type</a> <a class="el" href="a00121.html">limbo::solvers::L2NormScaler</a>&lt; T, V &gt;::operator() </td>
+          <td class="memname">virtual void GdsParser::GdsDataBase::begin_end_cbk </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00190.html#a4cdcb857d8d23ef01b77d2a539584a79">expression_type</a> const &amp;&#160;</td>
-          <td class="paramname"><em>expr</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ascii_record_type</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>API to compute scaling factor for expression using L2 norm. </p>
+<p>begin or end indicator of a block </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">expr</td><td>expression </td></tr>
+    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>scaling factor </dd></dl>
 
-<p>Reimplemented from <a class="el" href="a00190.html#a8c1839f11e6a8ac48456f3e51af2e46f">limbo::solvers::ProblemScaler&lt; T, V &gt;</a>.</p>
-
-<p>Definition at line <a class="el" href="a00314_source.html#l01190">1190</a> of file <a class="el" href="a00314_source.html">MultiKnapsackLagRelax.h</a>.</p>
+<p>Implemented in <a class="el" href="a00124.html#a61e209826d72f02a6e84b62d0cf535b4">GdsParser::GdsDriver</a>, and <a class="el" href="a00044.html#a3c024e66ac2aa8b4ef6b6285b4936380">AsciiDataBase</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ab17c852a03ab98d707d2126b86b3eabf"></a>
+<a class="anchor" id="ab6517da08a692c7378b94391782fbca5"></a>
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename V&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00190.html#a1d11af66827d1b4dac788c668344840e">value_type</a> <a class="el" href="a00121.html">limbo::solvers::L2NormScaler</a>&lt; T, V &gt;::operator() </td>
+          <td class="memname">virtual void GdsParser::GdsDataBase::bit_array_cbk </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00190.html#a0765a03c30b7d3476f7828264a7931c1">constraint_type</a> const &amp;&#160;</td>
-          <td class="paramname"><em>constr</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ascii_record_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ascii_data_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; int &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>vBitArray</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>API to compute scaling factor for constraints using L2 norm. </p>
+<p>bit array callback </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">constr</td><td>constraint </td></tr>
+    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
+    <tr><td class="paramname">ascii_data_type</td><td>data type </td></tr>
+    <tr><td class="paramname">vBitArray</td><td>data array </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>scaling factor </dd></dl>
 
-<p>Reimplemented from <a class="el" href="a00190.html#a8c61c0449713187ed81a4a1926011483">limbo::solvers::ProblemScaler&lt; T, V &gt;</a>.</p>
+<p>Implemented in <a class="el" href="a00124.html#a8b9cb04a90edc1d26ea815e5478f7b85">GdsParser::GdsDriver</a>, and <a class="el" href="a00044.html#a75487dc6cf564d3bab959933dad45fbe">AsciiDataBase</a>.</p>
 
-<p>Definition at line <a class="el" href="a00314_source.html#l01200">1200</a> of file <a class="el" href="a00314_source.html">MultiKnapsackLagRelax.h</a>.</p>
+</div>
+</div>
+<a class="anchor" id="aa9e80c52a8736dc0bc914de69f972455"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void GdsParser::GdsDataBase::integer_2_cbk </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ascii_record_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ascii_data_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; int &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>vInteger</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>2-byte integer callback </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
+    <tr><td class="paramname">ascii_data_type</td><td>data type </td></tr>
+    <tr><td class="paramname">vInteger</td><td>data array </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="a00124.html#afe53b28e05c5f8143b2be577077fc23a">GdsParser::GdsDriver</a>, and <a class="el" href="a00044.html#ad7049b38a9e7bab32b380227303db2e1">AsciiDataBase</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad1535afc43e42158515ff7ba1d2021b1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void GdsParser::GdsDataBase::integer_4_cbk </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ascii_record_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ascii_data_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; int &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>vInteger</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>4-byte integer callback </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
+    <tr><td class="paramname">ascii_data_type</td><td>data type </td></tr>
+    <tr><td class="paramname">vInteger</td><td>data array </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="a00124.html#acfcc63b0a19c49ffad6a57a6c07552b8">GdsParser::GdsDriver</a>, and <a class="el" href="a00044.html#ae4c614d5cd6183bcb21f7c94b7a06e52">AsciiDataBase</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa1921450e0ba8da996dd4df028c6c9b7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void GdsParser::GdsDataBase::real_4_cbk </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ascii_record_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ascii_data_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>vFloat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>4-byte floating point number callback </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
+    <tr><td class="paramname">ascii_data_type</td><td>data type </td></tr>
+    <tr><td class="paramname">vFloat</td><td>data array </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="a00124.html#abd86a3744ad7da3e447fac9ed1717f39">GdsParser::GdsDriver</a>, and <a class="el" href="a00044.html#a56dd6954127d65140065e8ebe78e11d5">AsciiDataBase</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa5334f9c585914b93efba962bb85b04f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void GdsParser::GdsDataBase::real_8_cbk </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ascii_record_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ascii_data_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>vFloat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>8-byte floating point number callback </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
+    <tr><td class="paramname">ascii_data_type</td><td>data type </td></tr>
+    <tr><td class="paramname">vFloat</td><td>data array </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="a00124.html#a12978b347bc54ee0d8edf5305debfd53">GdsParser::GdsDriver</a>, and <a class="el" href="a00044.html#ac683a04eb9c07242a90e26190ccf0279">AsciiDataBase</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa3ab7b80bdefac42a6e9f8c1b63d9029"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void GdsParser::GdsDataBase::string_cbk </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ascii_record_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ascii_data_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string const &amp;&#160;</td>
+          <td class="paramname"><em>str</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>string callback </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
+    <tr><td class="paramname">ascii_data_type</td><td>data type </td></tr>
+    <tr><td class="paramname">str</td><td>data </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="a00124.html#ad88bb5d3a60b1b631549fc9f61a53df3">GdsParser::GdsDriver</a>, and <a class="el" href="a00044.html#ab3b734b2bc3b4903e7a489ad5ab64fd0">AsciiDataBase</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00314_source.html">MultiKnapsackLagRelax.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00363_source.html">GdsReader.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

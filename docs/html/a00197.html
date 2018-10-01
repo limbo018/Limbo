@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::geometry::rectangle_traits&lt; boost::polygon::rectangle_data&lt; T &gt; &gt; Struct Template Reference</title>
+<title>Limbo: limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;::NonIntegerInfo Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,223 +89,64 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00370.html">geometry</a></li><li class="navelem"><a class="el" href="a00197.html">rectangle_traits< boost::polygon::rectangle_data< T > ></a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00436.html">algorithms</a></li><li class="navelem"><a class="el" href="a00437.html">coloring</a></li><li class="navelem"><a class="el" href="a00173.html">LPColoring</a></li><li class="navelem"><a class="el" href="a00197.html">NonIntegerInfo</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="a00537.html">List of all members</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00573.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::geometry::rectangle_traits&lt; boost::polygon::rectangle_data&lt; T &gt; &gt; Struct Template Reference</div>  </div>
+<div class="title">limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;::NonIntegerInfo Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>specialization of <a class="el" href="a00195.html">limbo::geometry::rectangle_traits</a> for boost::polygon::rectangle_data  
+<p>records the information of non-integer values  
  <a href="a00197.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00261_source.html">BoostPolygonApi.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00318_source.html">LPColoring.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:ac9bb78a1ba05b70754ad05c9f64dbc6b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac9bb78a1ba05b70754ad05c9f64dbc6b"></a>
-typedef T&#160;</td><td class="memItemRight" valign="bottom"><b>coordinate_type</b></td></tr>
-<tr class="separator:ac9bb78a1ba05b70754ad05c9f64dbc6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc468f51cbe892d4691e2d0b8edcac23"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc468f51cbe892d4691e2d0b8edcac23"></a>
-typedef <br class="typebreak" />
-boost::polygon::rectangle_data<br class="typebreak" />
-&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rectangle_type</b></td></tr>
-<tr class="separator:abc468f51cbe892d4691e2d0b8edcac23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ae55d38ac3218b0d5900b157df8d3b26d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae55d38ac3218b0d5900b157df8d3b26d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#ae55d38ac3218b0d5900b157df8d3b26d">NonIntegerInfo</a> ()</td></tr>
+<tr class="memdesc:ae55d38ac3218b0d5900b157df8d3b26d"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
+<tr class="separator:ae55d38ac3218b0d5900b157df8d3b26d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a3c3af888f0969bdc8d83a93eb0f44346"><td class="memItemLeft" align="right" valign="top">static coordinate_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a3c3af888f0969bdc8d83a93eb0f44346">get</a> (const rectangle_type &amp;rect, <a class="el" href="a00370.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> const &amp;dir)</td></tr>
-<tr class="memdesc:a3c3af888f0969bdc8d83a93eb0f44346"><td class="mdescLeft">&#160;</td><td class="mdescRight">get coordinate from rectangle  <a href="#a3c3af888f0969bdc8d83a93eb0f44346">More...</a><br /></td></tr>
-<tr class="separator:a3c3af888f0969bdc8d83a93eb0f44346"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a518046aa25866b854ea210a990d9a8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a6a518046aa25866b854ea210a990d9a8">set</a> (rectangle_type &amp;rect, <a class="el" href="a00370.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> const &amp;dir, coordinate_type const &amp;value)</td></tr>
-<tr class="memdesc:a6a518046aa25866b854ea210a990d9a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">set coordinate for rectangle  <a href="#a6a518046aa25866b854ea210a990d9a8">More...</a><br /></td></tr>
-<tr class="separator:a6a518046aa25866b854ea210a990d9a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ef8f6b79a4f81ab15bc589952768ca5"><td class="memItemLeft" align="right" valign="top">static rectangle_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a1ef8f6b79a4f81ab15bc589952768ca5">construct</a> (coordinate_type const &amp;xl, coordinate_type const &amp;yl, coordinate_type const &amp;xh, coordinate_type const &amp;yh)</td></tr>
-<tr class="memdesc:a1ef8f6b79a4f81ab15bc589952768ca5"><td class="mdescLeft">&#160;</td><td class="mdescRight">construct rectangle from coordinates  <a href="#a1ef8f6b79a4f81ab15bc589952768ca5">More...</a><br /></td></tr>
-<tr class="separator:a1ef8f6b79a4f81ab15bc589952768ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a05d4d81f5efcf225e09e1d3bdd15a972"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05d4d81f5efcf225e09e1d3bdd15a972"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a05d4d81f5efcf225e09e1d3bdd15a972">vertex_non_integer_num</a></td></tr>
+<tr class="memdesc:a05d4d81f5efcf225e09e1d3bdd15a972"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of vertices with non-integer solutions <br /></td></tr>
+<tr class="separator:a05d4d81f5efcf225e09e1d3bdd15a972"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa358851e09da8d81f53a1e0c4786ed5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa358851e09da8d81f53a1e0c4786ed5"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#afa358851e09da8d81f53a1e0c4786ed5">edge_non_integer_num</a></td></tr>
+<tr class="memdesc:afa358851e09da8d81f53a1e0c4786ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of edges with non-integer solutions <br /></td></tr>
+<tr class="separator:afa358851e09da8d81f53a1e0c4786ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb901d72b1bea4d9864513df4af20ca1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acb901d72b1bea4d9864513df4af20ca1"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#acb901d72b1bea4d9864513df4af20ca1">vertex_half_integer_num</a></td></tr>
+<tr class="memdesc:acb901d72b1bea4d9864513df4af20ca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of vertices with half-integer solutions <br /></td></tr>
+<tr class="separator:acb901d72b1bea4d9864513df4af20ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe9d54e2da7e58d04549573c266f76cf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe9d54e2da7e58d04549573c266f76cf"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#afe9d54e2da7e58d04549573c266f76cf">edge_half_integer_num</a></td></tr>
+<tr class="memdesc:afe9d54e2da7e58d04549573c266f76cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of edges with half-integer solutions <br /></td></tr>
+<tr class="separator:afe9d54e2da7e58d04549573c266f76cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename T&gt;<br />
-struct limbo::geometry::rectangle_traits&lt; boost::polygon::rectangle_data&lt; T &gt; &gt;</h3>
+<div class="textblock"><h3>template&lt;typename GraphType&gt;<br />
+struct limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;::NonIntegerInfo</h3>
 
-<p>specialization of <a class="el" href="a00195.html">limbo::geometry::rectangle_traits</a> for boost::polygon::rectangle_data </p>
+<p>records the information of non-integer values </p>
 
-<p>Definition at line <a class="el" href="a00261_source.html#l00063">63</a> of file <a class="el" href="a00261_source.html">BoostPolygonApi.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a1ef8f6b79a4f81ab15bc589952768ca5"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static rectangle_type <a class="el" href="a00195.html">limbo::geometry::rectangle_traits</a>&lt; boost::polygon::rectangle_data&lt; T &gt; &gt;::construct </td>
-          <td>(</td>
-          <td class="paramtype">coordinate_type const &amp;&#160;</td>
-          <td class="paramname"><em>xl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">coordinate_type const &amp;&#160;</td>
-          <td class="paramname"><em>yl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">coordinate_type const &amp;&#160;</td>
-          <td class="paramname"><em>xh</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">coordinate_type const &amp;&#160;</td>
-          <td class="paramname"><em>yh</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>construct rectangle from coordinates </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">xl,yl,xh,yh</td><td>coordinates </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>rectangle object </dd></dl>
-
-<p>Definition at line <a class="el" href="a00261_source.html#l00103">103</a> of file <a class="el" href="a00261_source.html">BoostPolygonApi.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3c3af888f0969bdc8d83a93eb0f44346"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static coordinate_type <a class="el" href="a00195.html">limbo::geometry::rectangle_traits</a>&lt; boost::polygon::rectangle_data&lt; T &gt; &gt;::get </td>
-          <td>(</td>
-          <td class="paramtype">const rectangle_type &amp;&#160;</td>
-          <td class="paramname"><em>rect</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00370.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> const &amp;&#160;</td>
-          <td class="paramname"><em>dir</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>get coordinate from rectangle </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rect</td><td>a rectangle object </td></tr>
-    <tr><td class="paramname">dir</td><td>direction </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>coordinate </dd></dl>
-
-<p>Definition at line <a class="el" href="a00261_source.html#l00074">74</a> of file <a class="el" href="a00261_source.html">BoostPolygonApi.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a6a518046aa25866b854ea210a990d9a8"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void <a class="el" href="a00195.html">limbo::geometry::rectangle_traits</a>&lt; boost::polygon::rectangle_data&lt; T &gt; &gt;::set </td>
-          <td>(</td>
-          <td class="paramtype">rectangle_type &amp;&#160;</td>
-          <td class="paramname"><em>rect</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00370.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> const &amp;&#160;</td>
-          <td class="paramname"><em>dir</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">coordinate_type const &amp;&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>set coordinate for rectangle </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rect</td><td>a rectangle object </td></tr>
-    <tr><td class="paramname">dir</td><td>direction </td></tr>
-    <tr><td class="paramname">value</td><td>coordinate </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00261_source.html#l00089">89</a> of file <a class="el" href="a00261_source.html">BoostPolygonApi.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/geometry/api/<a class="el" href="a00261_source.html">BoostPolygonApi.h</a></li>
+<p>Definition at line <a class="el" href="a00318_source.html#l00082">82</a> of file <a class="el" href="a00318_source.html">LPColoring.h</a>.</p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/<a class="el" href="a00318_source.html">LPColoring.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

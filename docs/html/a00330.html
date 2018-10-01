@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/test/parsers/ebeam/test_bison.cpp File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/containers/FastMultiSet.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,95 +87,55 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_812c36ca5e7cbe86d4d7cbe0e4b93100.html">parsers</a></li><li class="navelem"><a class="el" href="dir_7af0e8d62f2d0f1e61b06f03d6bd408d.html">ebeam</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_67961cc7bc7695996924d6bf198dc652.html">containers</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">test_bison.cpp File Reference</div>  </div>
+<div class="title">FastMultiSet.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>test ebeam parser, see <a class="el" href="a00042.html">EbeamParser::Driver</a> and <a class="el" href="a00052.html">EbeamParser::EbeamDataBase</a>  
+<p>a container of multiple-level set  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;fstream&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00284_source.html">limbo/parsers/ebeam/bison/EbeamDriver.h</a>&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &lt;multiset&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;boost/typeof.hpp&gt;</code><br />
 </div>
 <p><a href="a00330_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00053.html">EbeamDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom class that inheritates <a class="el" href="a00052.html">EbeamParser::EbeamDataBase</a> with all the required callbacks defined.  <a href="a00053.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00102.html">limbo::containers::FastMultiSet&lt; KeyType, Compare1, Compare2 &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ad346d2cc622126c018bb0954eee9b1fa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad346d2cc622126c018bb0954eee9b1fa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00330.html#ad346d2cc622126c018bb0954eee9b1fa">test1</a> (string const &amp;filename)</td></tr>
-<tr class="memdesc:ad346d2cc622126c018bb0954eee9b1fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">test 1: use function wrapper <a class="el" href="a00358.html#a78efc3ba1885bb9a6bef4ca6e0a9ee9b">EbeamParser::read</a> <br /></td></tr>
-<tr class="separator:ad346d2cc622126c018bb0954eee9b1fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44c0461f780572bf02018038dd9423cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a44c0461f780572bf02018038dd9423cd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00330.html#a44c0461f780572bf02018038dd9423cd">test2</a> (string const &amp;filename)</td></tr>
-<tr class="memdesc:a44c0461f780572bf02018038dd9423cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">test 2: use class wrapper <a class="el" href="a00042.html">EbeamParser::Driver</a> <br /></td></tr>
-<tr class="separator:a44c0461f780572bf02018038dd9423cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00330.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">main function  <a href="#a3c04138a5bfe5d72780bb7e82a18e627">More...</a><br /></td></tr>
-<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
+<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo::containers</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Containers <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>test ebeam parser, see <a class="el" href="a00042.html">EbeamParser::Driver</a> and <a class="el" href="a00052.html">EbeamParser::EbeamDataBase</a> </p>
+<div class="textblock"><p>a container of multiple-level set </p>
+<p>Description : Use 2 level comparison Compare1 is for main multiset, it allows duplicate keys. Compare2 is for secondary map, it must have unique keys. In other words, keys to Compare1 can have duplicated compare results, while to Compare2, the compare results must be unique. The data structure is as follows multiset keeps the correct order that user wants for duplicate keys, map can ensure fast access because map saves &lt;key, iterator in multiset&gt;</p>
+<p>This data structure can provide O(logN) in insert, erase and update for even duplicate keys</p>
+<p>It is suitable to use pointers as key_type or value_type, which will not change during the operations. But the data the pointers point to can change, so that no data race between the order of update data and update multiset.</p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Feb 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00330_source.html">test_bison.cpp</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char **&#160;</td>
-          <td class="paramname"><em>argv</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>main function </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">argc</td><td>number of arguments </td></tr>
-    <tr><td class="paramname">argv</td><td>values of arguments </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 </dd></dl>
-
-<p>Definition at line <a class="el" href="a00330_source.html#l00070">70</a> of file <a class="el" href="a00330_source.html">test_bison.cpp</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>Definition in file <a class="el" href="a00330_source.html">FastMultiSet.h</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

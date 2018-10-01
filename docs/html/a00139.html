@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::algorithms::MaxIndependentSetByMaxClique Class Reference</title>
+<title>Limbo: GdsParser::GdsWriter Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,36 +89,1122 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00365.html">algorithms</a></li><li class="navelem"><a class="el" href="a00139.html">MaxIndependentSetByMaxClique</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00431.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00139.html">GdsWriter</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="a00529.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::algorithms::MaxIndependentSetByMaxClique Class Reference</div>  </div>
+<div class="title">GdsParser::GdsWriter Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="a00253_source.html">MaxIndependentSet.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00365_source.html">GdsWriter.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html">clique_visitor_type</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for boost::bron_kerbosch_all_cliques  <a href="a00014.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:acbf44506b66da5a91bdeadfedcc047e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#acbf44506b66da5a91bdeadfedcc047e7">GdsWriter</a> (const char *filename)</td></tr>
+<tr class="memdesc:acbf44506b66da5a91bdeadfedcc047e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#acbf44506b66da5a91bdeadfedcc047e7">More...</a><br /></td></tr>
+<tr class="separator:acbf44506b66da5a91bdeadfedcc047e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a955e2d4f974b5503dd4913fd84f1ff75"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a955e2d4f974b5503dd4913fd84f1ff75"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a955e2d4f974b5503dd4913fd84f1ff75">~GdsWriter</a> ()</td></tr>
+<tr class="memdesc:a955e2d4f974b5503dd4913fd84f1ff75"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
+<tr class="separator:a955e2d4f974b5503dd4913fd84f1ff75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a006fa67407f231163946bdb44eec96c8"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a006fa67407f231163946bdb44eec96c8">gds_adjust_string</a> (const char *input, int *output_length)</td></tr>
+<tr class="separator:a006fa67407f231163946bdb44eec96c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">high level interfaces</div></td></tr>
+<tr class="memitem:aa3e77bffac23ccbd1015ca8f06275ef2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#aa3e77bffac23ccbd1015ca8f06275ef2">write_boundary</a> (int layer, int datatype, std::vector&lt; int &gt; const &amp;vx, std::vector&lt; int &gt; const &amp;vy, bool has_last=true)</td></tr>
+<tr class="memdesc:aa3e77bffac23ccbd1015ca8f06275ef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">write a boundary object  <a href="#aa3e77bffac23ccbd1015ca8f06275ef2">More...</a><br /></td></tr>
+<tr class="separator:aa3e77bffac23ccbd1015ca8f06275ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2dd9763f0a293efb435bb7f58831e8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#aa2dd9763f0a293efb435bb7f58831e8f">write_box</a> (int layer, int datatype, int xl, int yl, int xh, int yh)</td></tr>
+<tr class="memdesc:aa2dd9763f0a293efb435bb7f58831e8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">write a box object  <a href="#aa2dd9763f0a293efb435bb7f58831e8f">More...</a><br /></td></tr>
+<tr class="separator:aa2dd9763f0a293efb435bb7f58831e8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89be450427811e4005b67ef8694ed6ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a89be450427811e4005b67ef8694ed6ad">create_lib</a> (const char *libname, double dbu_uu, double dbu_m)</td></tr>
+<tr class="memdesc:a89be450427811e4005b67ef8694ed6ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">create GDSII library  <a href="#a89be450427811e4005b67ef8694ed6ad">More...</a><br /></td></tr>
+<tr class="separator:a89be450427811e4005b67ef8694ed6ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">low level interfaces</div></td></tr>
+<tr class="memitem:a5dd6449a5cbbd26f784e0ec7607f5d40"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5dd6449a5cbbd26f784e0ec7607f5d40"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gds_make_next_item</b> (struct <a class="el" href="a00114.html">gds_itemtype</a> **ci)</td></tr>
+<tr class="separator:a5dd6449a5cbbd26f784e0ec7607f5d40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec464c36437cfc5ac74538b284f82f6e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec464c36437cfc5ac74538b284f82f6e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gds_bindump</b> (<a class="el" href="a00431.html#aecd8d5b8951c69ff3cf543e033f304ff">BYTE</a> x)</td></tr>
+<tr class="separator:aec464c36437cfc5ac74538b284f82f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11f4625e3072e4f880ec884bc0510f10"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a11f4625e3072e4f880ec884bc0510f10"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gds_write_float</b> (double x)</td></tr>
+<tr class="separator:a11f4625e3072e4f880ec884bc0510f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a995afe614637fb05c05534f797a9efad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a995afe614637fb05c05534f797a9efad">gds_swap4bytes</a> (<a class="el" href="a00431.html#aecd8d5b8951c69ff3cf543e033f304ff">BYTE</a> *four)</td></tr>
+<tr class="memdesc:a995afe614637fb05c05534f797a9efad"><td class="mdescLeft">&#160;</td><td class="mdescRight">swap bytes  <a href="#a995afe614637fb05c05534f797a9efad">More...</a><br /></td></tr>
+<tr class="separator:a995afe614637fb05c05534f797a9efad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17241dc2ef3fadb8b5199c884a5b336b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a17241dc2ef3fadb8b5199c884a5b336b">gds_swap2bytes</a> (<a class="el" href="a00431.html#aecd8d5b8951c69ff3cf543e033f304ff">BYTE</a> *two)</td></tr>
+<tr class="memdesc:a17241dc2ef3fadb8b5199c884a5b336b"><td class="mdescLeft">&#160;</td><td class="mdescRight">swap bytes  <a href="#a17241dc2ef3fadb8b5199c884a5b336b">More...</a><br /></td></tr>
+<tr class="separator:a17241dc2ef3fadb8b5199c884a5b336b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec96dbc20c3852f92f15135318909d3c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec96dbc20c3852f92f15135318909d3c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#aec96dbc20c3852f92f15135318909d3c">gds_write_header</a> ()</td></tr>
+<tr class="memdesc:aec96dbc20c3852f92f15135318909d3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">write HEADER <br /></td></tr>
+<tr class="separator:aec96dbc20c3852f92f15135318909d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cbdeaebbd56b9cbf16c89b1c707cb8f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6cbdeaebbd56b9cbf16c89b1c707cb8f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a6cbdeaebbd56b9cbf16c89b1c707cb8f">gds_write_bgnlib</a> ()</td></tr>
+<tr class="memdesc:a6cbdeaebbd56b9cbf16c89b1c707cb8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">write BGNLIB <br /></td></tr>
+<tr class="separator:a6cbdeaebbd56b9cbf16c89b1c707cb8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a405cc07f30c0d9be396c8f0402d5542a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a405cc07f30c0d9be396c8f0402d5542a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a405cc07f30c0d9be396c8f0402d5542a">gds_write_bgnstr</a> ()</td></tr>
+<tr class="memdesc:a405cc07f30c0d9be396c8f0402d5542a"><td class="mdescLeft">&#160;</td><td class="mdescRight">write BGNSTR <br /></td></tr>
+<tr class="separator:a405cc07f30c0d9be396c8f0402d5542a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a446600004a92f9619f975020e03db23c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a446600004a92f9619f975020e03db23c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a446600004a92f9619f975020e03db23c">gds_write_endlib</a> ()</td></tr>
+<tr class="memdesc:a446600004a92f9619f975020e03db23c"><td class="mdescLeft">&#160;</td><td class="mdescRight">write ENDLIB <br /></td></tr>
+<tr class="separator:a446600004a92f9619f975020e03db23c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a929ff7b0f4932322a4b6edd522c85df1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a929ff7b0f4932322a4b6edd522c85df1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a929ff7b0f4932322a4b6edd522c85df1">gds_write_endstr</a> ()</td></tr>
+<tr class="memdesc:a929ff7b0f4932322a4b6edd522c85df1"><td class="mdescLeft">&#160;</td><td class="mdescRight">write ENDSTR <br /></td></tr>
+<tr class="separator:a929ff7b0f4932322a4b6edd522c85df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a113035ec853140fe8b74c1fbc92cb475"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a113035ec853140fe8b74c1fbc92cb475">gds_write_libname</a> (const char *name)</td></tr>
+<tr class="memdesc:a113035ec853140fe8b74c1fbc92cb475"><td class="mdescLeft">&#160;</td><td class="mdescRight">write LIBNAME  <a href="#a113035ec853140fe8b74c1fbc92cb475">More...</a><br /></td></tr>
+<tr class="separator:a113035ec853140fe8b74c1fbc92cb475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73fa5534b1458ced09491c4172b5730b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a73fa5534b1458ced09491c4172b5730b">gds_write_strname</a> (const char *name)</td></tr>
+<tr class="memdesc:a73fa5534b1458ced09491c4172b5730b"><td class="mdescLeft">&#160;</td><td class="mdescRight">write STRNAME  <a href="#a73fa5534b1458ced09491c4172b5730b">More...</a><br /></td></tr>
+<tr class="separator:a73fa5534b1458ced09491c4172b5730b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a895e6b3121515c0afc983833d1ad1dea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a895e6b3121515c0afc983833d1ad1dea">gds_write_string</a> (const char *s)</td></tr>
+<tr class="memdesc:a895e6b3121515c0afc983833d1ad1dea"><td class="mdescLeft">&#160;</td><td class="mdescRight">write STRING  <a href="#a895e6b3121515c0afc983833d1ad1dea">More...</a><br /></td></tr>
+<tr class="separator:a895e6b3121515c0afc983833d1ad1dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53eef24f1b97b5ea29707191000dc915"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a53eef24f1b97b5ea29707191000dc915">gds_write_sname</a> (const char *s)</td></tr>
+<tr class="memdesc:a53eef24f1b97b5ea29707191000dc915"><td class="mdescLeft">&#160;</td><td class="mdescRight">write SNAME  <a href="#a53eef24f1b97b5ea29707191000dc915">More...</a><br /></td></tr>
+<tr class="separator:a53eef24f1b97b5ea29707191000dc915"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd47d40adef004a8e29118ca151ba410"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afd47d40adef004a8e29118ca151ba410"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#afd47d40adef004a8e29118ca151ba410">gds_write_boundary</a> ()</td></tr>
+<tr class="memdesc:afd47d40adef004a8e29118ca151ba410"><td class="mdescLeft">&#160;</td><td class="mdescRight">write BOUNDARY <br /></td></tr>
+<tr class="separator:afd47d40adef004a8e29118ca151ba410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a808bfb959d0a3d6a4bbfb8fa053947be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a808bfb959d0a3d6a4bbfb8fa053947be"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a808bfb959d0a3d6a4bbfb8fa053947be">gds_write_box</a> ()</td></tr>
+<tr class="memdesc:a808bfb959d0a3d6a4bbfb8fa053947be"><td class="mdescLeft">&#160;</td><td class="mdescRight">write BOX <br /></td></tr>
+<tr class="separator:a808bfb959d0a3d6a4bbfb8fa053947be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5de3311c8e4a2aa66f0dce90327ac8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#aa5de3311c8e4a2aa66f0dce90327ac8d">gds_write_boxtype</a> (short int dt)</td></tr>
+<tr class="memdesc:aa5de3311c8e4a2aa66f0dce90327ac8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">write BOXTYPE  <a href="#aa5de3311c8e4a2aa66f0dce90327ac8d">More...</a><br /></td></tr>
+<tr class="separator:aa5de3311c8e4a2aa66f0dce90327ac8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeedbf54e326bdc90915a25e246c5e42"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abeedbf54e326bdc90915a25e246c5e42"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#abeedbf54e326bdc90915a25e246c5e42">gds_write_path</a> ()</td></tr>
+<tr class="memdesc:abeedbf54e326bdc90915a25e246c5e42"><td class="mdescLeft">&#160;</td><td class="mdescRight">write PATH <br /></td></tr>
+<tr class="separator:abeedbf54e326bdc90915a25e246c5e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf162ace3ff07120c827664b4c47fcd6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf162ace3ff07120c827664b4c47fcd6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#aaf162ace3ff07120c827664b4c47fcd6">gds_write_sref</a> ()</td></tr>
+<tr class="memdesc:aaf162ace3ff07120c827664b4c47fcd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">write SREF <br /></td></tr>
+<tr class="separator:aaf162ace3ff07120c827664b4c47fcd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7bdc03f7e22fb16e548014904fe3476"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa7bdc03f7e22fb16e548014904fe3476"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#aa7bdc03f7e22fb16e548014904fe3476">gds_write_aref</a> ()</td></tr>
+<tr class="memdesc:aa7bdc03f7e22fb16e548014904fe3476"><td class="mdescLeft">&#160;</td><td class="mdescRight">write AREF <br /></td></tr>
+<tr class="separator:aa7bdc03f7e22fb16e548014904fe3476"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa34ed880df8280a04d37f44c618f6ebe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa34ed880df8280a04d37f44c618f6ebe"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#aa34ed880df8280a04d37f44c618f6ebe">gds_write_text</a> ()</td></tr>
+<tr class="memdesc:aa34ed880df8280a04d37f44c618f6ebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">write TEXT <br /></td></tr>
+<tr class="separator:aa34ed880df8280a04d37f44c618f6ebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf47575ae2cab25aa94ed08b649ff7c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf47575ae2cab25aa94ed08b649ff7c1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#abf47575ae2cab25aa94ed08b649ff7c1">gds_write_endel</a> ()</td></tr>
+<tr class="memdesc:abf47575ae2cab25aa94ed08b649ff7c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">write ENDEL <br /></td></tr>
+<tr class="separator:abf47575ae2cab25aa94ed08b649ff7c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cf36cecf88af013a43206b014fb35ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a0cf36cecf88af013a43206b014fb35ee">gds_write_layer</a> (short int layer)</td></tr>
+<tr class="memdesc:a0cf36cecf88af013a43206b014fb35ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">write LAYER  <a href="#a0cf36cecf88af013a43206b014fb35ee">More...</a><br /></td></tr>
+<tr class="separator:a0cf36cecf88af013a43206b014fb35ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a53bad97dbe6b82cf1efafa30a1c98c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a3a53bad97dbe6b82cf1efafa30a1c98c">gds_write_width</a> (int width)</td></tr>
+<tr class="memdesc:a3a53bad97dbe6b82cf1efafa30a1c98c"><td class="mdescLeft">&#160;</td><td class="mdescRight">write WIDTH  <a href="#a3a53bad97dbe6b82cf1efafa30a1c98c">More...</a><br /></td></tr>
+<tr class="separator:a3a53bad97dbe6b82cf1efafa30a1c98c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84f8d961e8ae031ffbfbbac9b1a5b650"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a84f8d961e8ae031ffbfbbac9b1a5b650">gds_write_datatype</a> (short int dt)</td></tr>
+<tr class="memdesc:a84f8d961e8ae031ffbfbbac9b1a5b650"><td class="mdescLeft">&#160;</td><td class="mdescRight">write DATATYPE  <a href="#a84f8d961e8ae031ffbfbbac9b1a5b650">More...</a><br /></td></tr>
+<tr class="separator:a84f8d961e8ae031ffbfbbac9b1a5b650"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d314a40ce2a94add7c02fb3eff1066b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a2d314a40ce2a94add7c02fb3eff1066b">gds_write_texttype</a> (short int dt)</td></tr>
+<tr class="memdesc:a2d314a40ce2a94add7c02fb3eff1066b"><td class="mdescLeft">&#160;</td><td class="mdescRight">write TEXTTYPE  <a href="#a2d314a40ce2a94add7c02fb3eff1066b">More...</a><br /></td></tr>
+<tr class="separator:a2d314a40ce2a94add7c02fb3eff1066b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a697decded4759e37d912f4d394962fda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a697decded4759e37d912f4d394962fda">gds_write_generations</a> (short int gens)</td></tr>
+<tr class="memdesc:a697decded4759e37d912f4d394962fda"><td class="mdescLeft">&#160;</td><td class="mdescRight">write GENERATIONS  <a href="#a697decded4759e37d912f4d394962fda">More...</a><br /></td></tr>
+<tr class="separator:a697decded4759e37d912f4d394962fda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4a544fed171eaa3eda8911903be4a83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#ac4a544fed171eaa3eda8911903be4a83">gds_write_pathtype</a> (short int pt)</td></tr>
+<tr class="memdesc:ac4a544fed171eaa3eda8911903be4a83"><td class="mdescLeft">&#160;</td><td class="mdescRight">write PATHTYPE  <a href="#ac4a544fed171eaa3eda8911903be4a83">More...</a><br /></td></tr>
+<tr class="separator:ac4a544fed171eaa3eda8911903be4a83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae51839aab5a01e4db9c00501c2495673"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#ae51839aab5a01e4db9c00501c2495673">gds_write_presentation</a> (int font, int vp, int hp)</td></tr>
+<tr class="memdesc:ae51839aab5a01e4db9c00501c2495673"><td class="mdescLeft">&#160;</td><td class="mdescRight">write PRESENTATION  <a href="#ae51839aab5a01e4db9c00501c2495673">More...</a><br /></td></tr>
+<tr class="separator:ae51839aab5a01e4db9c00501c2495673"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a392fcb39e55fb195c706ca39ad6b5e40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a392fcb39e55fb195c706ca39ad6b5e40">gds_write_strans</a> (<a class="el" href="a00431.html#a75e159aa62a455aff7e6039fa7c3801c">BOOL</a> reflect, <a class="el" href="a00431.html#a75e159aa62a455aff7e6039fa7c3801c">BOOL</a> abs_angle, <a class="el" href="a00431.html#a75e159aa62a455aff7e6039fa7c3801c">BOOL</a> abs_mag)</td></tr>
+<tr class="memdesc:a392fcb39e55fb195c706ca39ad6b5e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">write STRANS  <a href="#a392fcb39e55fb195c706ca39ad6b5e40">More...</a><br /></td></tr>
+<tr class="separator:a392fcb39e55fb195c706ca39ad6b5e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3c5160c97eee1f5e30f5919e4e7ab98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#af3c5160c97eee1f5e30f5919e4e7ab98">gds_write_xy</a> (const int *x, const int *y, int n, bool has_last=true)</td></tr>
+<tr class="memdesc:af3c5160c97eee1f5e30f5919e4e7ab98"><td class="mdescLeft">&#160;</td><td class="mdescRight">write XY  <a href="#af3c5160c97eee1f5e30f5919e4e7ab98">More...</a><br /></td></tr>
+<tr class="separator:af3c5160c97eee1f5e30f5919e4e7ab98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4211915ff6d616daa27fb5648e9789b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a4211915ff6d616daa27fb5648e9789b7">gds_write_colrow</a> (int ncols, int nrows)</td></tr>
+<tr class="memdesc:a4211915ff6d616daa27fb5648e9789b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">write COLROW  <a href="#a4211915ff6d616daa27fb5648e9789b7">More...</a><br /></td></tr>
+<tr class="separator:a4211915ff6d616daa27fb5648e9789b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a359c628780726b980f8cb04a6e389dc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a359c628780726b980f8cb04a6e389dc9">gds_write_units</a> (double dbu_uu, double dbu_m)</td></tr>
+<tr class="memdesc:a359c628780726b980f8cb04a6e389dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">write UNITS  <a href="#a359c628780726b980f8cb04a6e389dc9">More...</a><br /></td></tr>
+<tr class="separator:a359c628780726b980f8cb04a6e389dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd9b3222cf2698bac9ce249829d492cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#afd9b3222cf2698bac9ce249829d492cd">gds_write_mag</a> (double mag)</td></tr>
+<tr class="memdesc:afd9b3222cf2698bac9ce249829d492cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">write MAG  <a href="#afd9b3222cf2698bac9ce249829d492cd">More...</a><br /></td></tr>
+<tr class="separator:afd9b3222cf2698bac9ce249829d492cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22f04c8dcfb1658c255b563370138981"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a22f04c8dcfb1658c255b563370138981">gds_write_angle</a> (double angle)</td></tr>
+<tr class="memdesc:a22f04c8dcfb1658c255b563370138981"><td class="mdescLeft">&#160;</td><td class="mdescRight">write ANGLE  <a href="#a22f04c8dcfb1658c255b563370138981">More...</a><br /></td></tr>
+<tr class="separator:a22f04c8dcfb1658c255b563370138981"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5025de04e42631ad1622aeda17a7555e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a5025de04e42631ad1622aeda17a7555e">gds_create_lib</a> (const char *libname, double dbu_um)</td></tr>
+<tr class="memdesc:a5025de04e42631ad1622aeda17a7555e"><td class="mdescLeft">&#160;</td><td class="mdescRight">create library with name and unit  <a href="#a5025de04e42631ad1622aeda17a7555e">More...</a><br /></td></tr>
+<tr class="separator:a5025de04e42631ad1622aeda17a7555e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0be9e5dbce35f864f372cf170e7a1639"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a0be9e5dbce35f864f372cf170e7a1639">gds_create_text</a> (const char *str, int x, int y, int layer, int size)</td></tr>
+<tr class="memdesc:a0be9e5dbce35f864f372cf170e7a1639"><td class="mdescLeft">&#160;</td><td class="mdescRight">wrapper to create text  <a href="#a0be9e5dbce35f864f372cf170e7a1639">More...</a><br /></td></tr>
+<tr class="separator:a0be9e5dbce35f864f372cf170e7a1639"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a985934b2aa446d409d66e1ab825f61a9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a985934b2aa446d409d66e1ab825f61a9">gds_write</a> (const char *b, std::size_t n)</td></tr>
+<tr class="separator:a985934b2aa446d409d66e1ab825f61a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab464b86e1715334add2003cff549f521"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab464b86e1715334add2003cff549f521"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#ab464b86e1715334add2003cff549f521">gds_flush</a> ()</td></tr>
+<tr class="memdesc:ab464b86e1715334add2003cff549f521"><td class="mdescLeft">&#160;</td><td class="mdescRight">flush all contents in the buffer <br /></td></tr>
+<tr class="separator:ab464b86e1715334add2003cff549f521"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a6c976509adcaa721e1506aef3b462ce2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c976509adcaa721e1506aef3b462ce2"></a>
+GdsStream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a6c976509adcaa721e1506aef3b462ce2">m_os</a></td></tr>
+<tr class="memdesc:a6c976509adcaa721e1506aef3b462ce2"><td class="mdescLeft">&#160;</td><td class="mdescRight">output stream <br /></td></tr>
+<tr class="separator:a6c976509adcaa721e1506aef3b462ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a245096d064ef5947e51e9c6d18266c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a245096d064ef5947e51e9c6d18266c"></a>
+<a class="el" href="a00431.html#aecd8d5b8951c69ff3cf543e033f304ff">BYTE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a9a245096d064ef5947e51e9c6d18266c">gdsswap</a></td></tr>
+<tr class="memdesc:a9a245096d064ef5947e51e9c6d18266c"><td class="mdescLeft">&#160;</td><td class="mdescRight">moved from global variables <br /></td></tr>
+<tr class="separator:a9a245096d064ef5947e51e9c6d18266c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaf421e7bc4f474233dfb08f70eb5b8a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adaf421e7bc4f474233dfb08f70eb5b8a"></a>
+short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#adaf421e7bc4f474233dfb08f70eb5b8a">gdsword</a></td></tr>
+<tr class="memdesc:adaf421e7bc4f474233dfb08f70eb5b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">move from global variables <br /></td></tr>
+<tr class="separator:adaf421e7bc4f474233dfb08f70eb5b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dd89bf7fe895507148b3824e8f81278"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9dd89bf7fe895507148b3824e8f81278"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a9dd89bf7fe895507148b3824e8f81278">m_capacity</a></td></tr>
+<tr class="memdesc:a9dd89bf7fe895507148b3824e8f81278"><td class="mdescLeft">&#160;</td><td class="mdescRight">output buffer capacity <br /></td></tr>
+<tr class="separator:a9dd89bf7fe895507148b3824e8f81278"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66fd8028285277c4c172d4f738c55b7e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a66fd8028285277c4c172d4f738c55b7e"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#a66fd8028285277c4c172d4f738c55b7e">m_size</a></td></tr>
+<tr class="memdesc:a66fd8028285277c4c172d4f738c55b7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">output buffer size <br /></td></tr>
+<tr class="separator:a66fd8028285277c4c172d4f738c55b7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa7d37887a293871a3e6d22a627ef464"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaa7d37887a293871a3e6d22a627ef464"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html#aaa7d37887a293871a3e6d22a627ef464">m_buffer</a></td></tr>
+<tr class="memdesc:aaa7d37887a293871a3e6d22a627ef464"><td class="mdescLeft">&#160;</td><td class="mdescRight">output buffer <br /></td></tr>
+<tr class="separator:aaa7d37887a293871a3e6d22a627ef464"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>a tag for solving maximum independent sets with maximum cliques </p>
+<div class="textblock"><p>write GDSII </p>
 
-<p>Definition at line <a class="el" href="a00253_source.html#l00022">22</a> of file <a class="el" href="a00253_source.html">MaxIndependentSet.h</a>.</p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/<a class="el" href="a00253_source.html">MaxIndependentSet.h</a></li>
+<p>Definition at line <a class="el" href="a00365_source.html#l00090">90</a> of file <a class="el" href="a00365_source.html">GdsWriter.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="acbf44506b66da5a91bdeadfedcc047e7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GdsParser::GdsWriter::GdsWriter </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>output file name </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a89be450427811e4005b67ef8694ed6ad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::create_lib </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>libname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dbu_uu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dbu_m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>create GDSII library </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">libname</td><td>name of the library </td></tr>
+    <tr><td class="paramname">dbu_uu</td><td>is user unit, 1nm per bit </td></tr>
+    <tr><td class="paramname">dbu_m</td><td>is database unit in meter, usually 1e-9 this wrapper is different from gds_create_lib in terms of units </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a006fa67407f231163946bdb44eec96c8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* GdsParser::GdsWriter::gds_adjust_string </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>output_length</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>handle string with odd length; generate new string output and return its length </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>a string </td></tr>
+    <tr><td class="paramname">output_length</td><td>result length </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a new string </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5025de04e42631ad1622aeda17a7555e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_create_lib </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>libname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dbu_um</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>create library with name and unit </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">libname</td><td>name of library </td></tr>
+    <tr><td class="paramname">dbu_um</td><td>database unit in microns, usually 1e-6 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a0be9e5dbce35f864f372cf170e7a1639"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_create_text </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>layer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>wrapper to create text </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>text </td></tr>
+    <tr><td class="paramname">x</td><td>x position </td></tr>
+    <tr><td class="paramname">y</td><td>y position </td></tr>
+    <tr><td class="paramname">layer</td><td>layer </td></tr>
+    <tr><td class="paramname">size</td><td>text size </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a17241dc2ef3fadb8b5199c884a5b336b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_swap2bytes </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00431.html#aecd8d5b8951c69ff3cf543e033f304ff">BYTE</a> *&#160;</td>
+          <td class="paramname"><em>two</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>swap bytes </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">two</td><td>2-byte of data </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a995afe614637fb05c05534f797a9efad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_swap4bytes </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00431.html#aecd8d5b8951c69ff3cf543e033f304ff">BYTE</a> *&#160;</td>
+          <td class="paramname"><em>four</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>swap bytes </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">four</td><td>4-byte of data </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a985934b2aa446d409d66e1ab825f61a9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GdsParser::GdsWriter::gds_write </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>a buffered putting scheme to speedup writing </p><dl class="section return"><dt>Returns</dt><dd>negative value if error by Yibo Lin </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a22f04c8dcfb1658c255b563370138981"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_angle </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>angle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write ANGLE </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">angle</td><td>angle in degree </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa5de3311c8e4a2aa66f0dce90327ac8d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_boxtype </td>
+          <td>(</td>
+          <td class="paramtype">short int&#160;</td>
+          <td class="paramname"><em>dt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write BOXTYPE </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dt</td><td>data type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a4211915ff6d616daa27fb5648e9789b7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_colrow </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ncols</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nrows</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write COLROW </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ncols</td><td>number of columns </td></tr>
+    <tr><td class="paramname">nrows</td><td>number of rows </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a84f8d961e8ae031ffbfbbac9b1a5b650"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_datatype </td>
+          <td>(</td>
+          <td class="paramtype">short int&#160;</td>
+          <td class="paramname"><em>dt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write DATATYPE </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dt</td><td>data type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a697decded4759e37d912f4d394962fda"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_generations </td>
+          <td>(</td>
+          <td class="paramtype">short int&#160;</td>
+          <td class="paramname"><em>gens</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write GENERATIONS </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gens</td><td>generations </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a0cf36cecf88af013a43206b014fb35ee"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_layer </td>
+          <td>(</td>
+          <td class="paramtype">short int&#160;</td>
+          <td class="paramname"><em>layer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write LAYER </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">layer</td><td>layer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a113035ec853140fe8b74c1fbc92cb475"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_libname </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write LIBNAME </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of library </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="afd9b3222cf2698bac9ce249829d492cd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_mag </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>mag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write MAG </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mag</td><td>magnification </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ac4a544fed171eaa3eda8911903be4a83"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_pathtype </td>
+          <td>(</td>
+          <td class="paramtype">short int&#160;</td>
+          <td class="paramname"><em>pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write PATHTYPE </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pt</td><td>path type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae51839aab5a01e4db9c00501c2495673"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_presentation </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>font</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>hp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write PRESENTATION </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">font</td><td>font number 0, 1, 2, 3 </td></tr>
+    <tr><td class="paramname">vp</td><td>vertical presentation 0 = top 1 = middle 2 = bottom </td></tr>
+    <tr><td class="paramname">hp</td><td>horizontal presentation 0 = left 1 = center 2 = right </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a53eef24f1b97b5ea29707191000dc915"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_sname </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write SNAME </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>string </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a392fcb39e55fb195c706ca39ad6b5e40"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_strans </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00431.html#a75e159aa62a455aff7e6039fa7c3801c">BOOL</a>&#160;</td>
+          <td class="paramname"><em>reflect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00431.html#a75e159aa62a455aff7e6039fa7c3801c">BOOL</a>&#160;</td>
+          <td class="paramname"><em>abs_angle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00431.html#a75e159aa62a455aff7e6039fa7c3801c">BOOL</a>&#160;</td>
+          <td class="paramname"><em>abs_mag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write STRANS </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">reflect</td><td>reflect about X axis before rotation (normally false) </td></tr>
+    <tr><td class="paramname">abs_angle</td><td>angles are absolute (normally false) </td></tr>
+    <tr><td class="paramname">abs_mag</td><td>magnification (scale) is absolute (normally false) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a895e6b3121515c0afc983833d1ad1dea"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_string </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write STRING </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>string </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a73fa5534b1458ced09491c4172b5730b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_strname </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write STRNAME </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a2d314a40ce2a94add7c02fb3eff1066b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_texttype </td>
+          <td>(</td>
+          <td class="paramtype">short int&#160;</td>
+          <td class="paramname"><em>dt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write TEXTTYPE </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dt</td><td>text type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a359c628780726b980f8cb04a6e389dc9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_units </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dbu_uu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dbu_m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write UNITS </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dbu_uu</td><td>database unit in user units, usually 0.001 </td></tr>
+    <tr><td class="paramname">dbu_m</td><td>database unit in meters, usually 1e-9 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a3a53bad97dbe6b82cf1efafa30a1c98c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_width </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write WIDTH </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">width</td><td>width </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="af3c5160c97eee1f5e30f5919e4e7ab98"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::gds_write_xy </td>
+          <td>(</td>
+          <td class="paramtype">const int *&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int *&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>has_last</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write XY </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>array of x coordinates </td></tr>
+    <tr><td class="paramname">y</td><td>array of y coordinates </td></tr>
+    <tr><td class="paramname">n</td><td>length of array </td></tr>
+    <tr><td class="paramname">has_last</td><td>if true, it means the last point is the same as the first point; otherwise, we need to add one point to the end. Default value is true. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa3e77bffac23ccbd1015ca8f06275ef2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::write_boundary </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>layer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>datatype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>vx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>vy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>has_last</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write a boundary object </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">layer</td><td>layer </td></tr>
+    <tr><td class="paramname">datatype</td><td>data type </td></tr>
+    <tr><td class="paramname">vx</td><td>array of x coordinates </td></tr>
+    <tr><td class="paramname">vy</td><td>array of y coordinates </td></tr>
+    <tr><td class="paramname">has_last</td><td>if true, it means the last point is the same as the first point; otherwise, we need to add one point to the end. Default value is true </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa2dd9763f0a293efb435bb7f58831e8f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GdsParser::GdsWriter::write_box </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>layer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>datatype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>xl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>yl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>xh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>yh</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write a box object </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">layer</td><td>layer </td></tr>
+    <tr><td class="paramname">datatype</td><td>data type </td></tr>
+    <tr><td class="paramname">xl,yl,xh,yh</td><td>coordinates of the box </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00365_source.html">GdsWriter.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

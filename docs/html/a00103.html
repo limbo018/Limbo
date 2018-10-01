@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::algorithms::coloring::GraphSimplification&lt; GraphType &gt; Class Template Reference</title>
+<title>Limbo: limbo::solvers::FeasibleSearcher&lt; T, V &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,7 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00365.html">algorithms</a></li><li class="navelem"><a class="el" href="a00366.html">coloring</a></li><li class="navelem"><a class="el" href="a00103.html">GraphSimplification</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00443.html">solvers</a></li><li class="navelem"><a class="el" href="a00103.html">FeasibleSearcher</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -98,298 +98,209 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="a00494.html">List of all members</a>  </div>
+<a href="a00640.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::algorithms::coloring::GraphSimplification&lt; GraphType &gt; Class Template Reference</div>  </div>
+<div class="title">limbo::solvers::FeasibleSearcher&lt; T, V &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="a00243_source.html">GraphSimplification.h</a>&gt;</code></p>
+<p>Base heuristic to search for feasible solutions.  
+ <a href="a00103.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for limbo::solvers::FeasibleSearcher&lt; T, V &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00103.png" usemap="#limbo::solvers::FeasibleSearcher&lt; T, V &gt;_map" alt=""/>
+  <map id="limbo::solvers::FeasibleSearcher&lt; T, V &gt;_map" name="limbo::solvers::FeasibleSearcher&lt; T, V &gt;_map">
+<area href="a00247.html" title="Heuristic to search for feasible solutions by adjusting coefficients so that some items will not be a..." alt="limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;" shape="rect" coords="0,56,302,80"/>
+<area href="a00249.html" title="Heuristic to search for feasible solutions by combined strategies. " alt="limbo::solvers::SearchByCombinedStrategy&lt; T, V &gt;" shape="rect" coords="312,56,614,80"/>
+<area href="a00248.html" title="Heuristic to search for feasible solutions by smoothing dense bins. " alt="limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;" shape="rect" coords="0,112,302,136"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a9785acf47d1d65803ecb7f2a4d15ad98"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a9785acf47d1d65803ecb7f2a4d15ad98">vertex_status_type</a> { <a class="el" href="a00103.html#a9785acf47d1d65803ecb7f2a4d15ad98a3a0c437b576f9eb5ee3d893b93fb23c7">GOOD</a>, 
-<a class="el" href="a00103.html#a9785acf47d1d65803ecb7f2a4d15ad98a2bd0840d5cdc6b6e9a86d2f1ab6507f1">HIDDEN</a>, 
-<a class="el" href="a00103.html#a9785acf47d1d65803ecb7f2a4d15ad98aedcffb386da8678436a9bed476375a5a">MERGED</a>
- }</td></tr>
-<tr class="memdesc:a9785acf47d1d65803ecb7f2a4d15ad98"><td class="mdescLeft">&#160;</td><td class="mdescRight">status of vertex.  <a href="a00103.html#a9785acf47d1d65803ecb7f2a4d15ad98">More...</a><br /></td></tr>
-<tr class="separator:a9785acf47d1d65803ecb7f2a4d15ad98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d19cdbce4e235a18e416913fba80bb6"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a4d19cdbce4e235a18e416913fba80bb6">strategy_type</a> { <a class="el" href="a00103.html#a4d19cdbce4e235a18e416913fba80bb6aa85a27cd259132a3e52d53087a58384a">NONE</a> = 0, 
-<a class="el" href="a00103.html#a4d19cdbce4e235a18e416913fba80bb6ae072366897555d58a34cf55bcf115119">HIDE_SMALL_DEGREE</a> = 1, 
-<a class="el" href="a00103.html#a4d19cdbce4e235a18e416913fba80bb6ab24723deaae39fc7cecde43acb945ac8">MERGE_SUBK4</a> = 2, 
-<a class="el" href="a00103.html#a4d19cdbce4e235a18e416913fba80bb6ab952332dcf0659809be1d58a62f67caa">BICONNECTED_COMPONENT</a> = 4
- }</td></tr>
-<tr class="memdesc:a4d19cdbce4e235a18e416913fba80bb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">simplification strategies available. These strategies are order-sensitive. It is recommended to call <a class="el" href="a00103.html#aefd700e2e78420d789cb23da83e65f48">simplify()</a>, e.g. simplify(HIDE_SMALL_DEGREE | BICONNECTED_COMPONENT)  <a href="a00103.html#a4d19cdbce4e235a18e416913fba80bb6">More...</a><br /></td></tr>
-<tr class="separator:a4d19cdbce4e235a18e416913fba80bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a82df403e5a7de7d5bdd374bcf43ede02"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82df403e5a7de7d5bdd374bcf43ede02"></a>
-typedef GraphType&#160;</td><td class="memItemRight" valign="bottom"><b>graph_type</b></td></tr>
-<tr class="separator:a82df403e5a7de7d5bdd374bcf43ede02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2b9c2440f09fe62af8048df7d32c8f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad2b9c2440f09fe62af8048df7d32c8f7"></a>
-typedef boost::graph_traits<br class="typebreak" />
-&lt; graph_type &gt;<br class="typebreak" />
-::vertex_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>graph_vertex_type</b></td></tr>
-<tr class="separator:ad2b9c2440f09fe62af8048df7d32c8f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a714cb5b380285dcfe967e696d5e2ffdc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a714cb5b380285dcfe967e696d5e2ffdc"></a>
-typedef boost::graph_traits<br class="typebreak" />
-&lt; graph_type &gt;<br class="typebreak" />
-::edge_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>graph_edge_type</b></td></tr>
-<tr class="separator:a714cb5b380285dcfe967e696d5e2ffdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a279f5d8246c3a2a2b961f88470e13f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7a279f5d8246c3a2a2b961f88470e13f"></a>
-typedef boost::graph_traits<br class="typebreak" />
-&lt; graph_type &gt;<br class="typebreak" />
-::vertex_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>vertex_iterator</b></td></tr>
-<tr class="separator:a7a279f5d8246c3a2a2b961f88470e13f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec9bbd110251aa78384e1bf321d877ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec9bbd110251aa78384e1bf321d877ec"></a>
-typedef boost::graph_traits<br class="typebreak" />
-&lt; graph_type &gt;<br class="typebreak" />
-::adjacency_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>adjacency_iterator</b></td></tr>
-<tr class="separator:aec9bbd110251aa78384e1bf321d877ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28eef967db4e33b18b1b29af76d47763"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28eef967db4e33b18b1b29af76d47763"></a>
-typedef boost::graph_traits<br class="typebreak" />
-&lt; graph_type &gt;::edge_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>edge_iterator</b></td></tr>
-<tr class="separator:a28eef967db4e33b18b1b29af76d47763"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee8235fdcefae5dd2c2c3ae0a7af8129"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aee8235fdcefae5dd2c2c3ae0a7af8129"></a>
+typedef <a class="el" href="a00171.html">LinearModel</a>&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#aee8235fdcefae5dd2c2c3ae0a7af8129">model_type</a></td></tr>
+<tr class="memdesc:aee8235fdcefae5dd2c2c3ae0a7af8129"><td class="mdescLeft">&#160;</td><td class="mdescRight">model type <br /></td></tr>
+<tr class="separator:aee8235fdcefae5dd2c2c3ae0a7af8129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae85b7baebed588aff43905ed21871cd9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae85b7baebed588aff43905ed21871cd9"></a>
+typedef <a class="el" href="a00188.html">MultiKnapsackLagRelax</a><br class="typebreak" />
+&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#ae85b7baebed588aff43905ed21871cd9">solver_type</a></td></tr>
+<tr class="memdesc:ae85b7baebed588aff43905ed21871cd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">solver type <br /></td></tr>
+<tr class="separator:ae85b7baebed588aff43905ed21871cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4da821eb8ac1306533174439e3dcdffb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4da821eb8ac1306533174439e3dcdffb"></a>
+typedef <a class="el" href="a00164.html">solver_type::updater_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a4da821eb8ac1306533174439e3dcdffb">updater_type</a></td></tr>
+<tr class="memdesc:a4da821eb8ac1306533174439e3dcdffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">updater type for lagrangian multipliers <br /></td></tr>
+<tr class="separator:a4da821eb8ac1306533174439e3dcdffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57e08c44ce837595f0fe8e10e48560ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57e08c44ce837595f0fe8e10e48560ec"></a>
+typedef <br class="typebreak" />
+<a class="el" href="a00171.html#a6d83996e8205090fd1150a2393314e23">model_type::coefficient_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a></td></tr>
+<tr class="memdesc:a57e08c44ce837595f0fe8e10e48560ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">coefficient value type <br /></td></tr>
+<tr class="separator:a57e08c44ce837595f0fe8e10e48560ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a29f145a48d2b90a8a5524a1444b9d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a29f145a48d2b90a8a5524a1444b9d8"></a>
+typedef <br class="typebreak" />
+<a class="el" href="a00171.html#a0b183484bcda7fe68e4c92367d38681f">model_type::variable_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a9a29f145a48d2b90a8a5524a1444b9d8">variable_value_type</a></td></tr>
+<tr class="memdesc:a9a29f145a48d2b90a8a5524a1444b9d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable value type <br /></td></tr>
+<tr class="separator:a9a29f145a48d2b90a8a5524a1444b9d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f0a7bd809c482e1d2d2dcd9a50d9e01"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f0a7bd809c482e1d2d2dcd9a50d9e01"></a>
+typedef <a class="el" href="a00171.html#a3fec27a7f57c34ad1353abf78783bae1">model_type::variable_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a3f0a7bd809c482e1d2d2dcd9a50d9e01">variable_type</a></td></tr>
+<tr class="memdesc:a3f0a7bd809c482e1d2d2dcd9a50d9e01"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable type <br /></td></tr>
+<tr class="separator:a3f0a7bd809c482e1d2d2dcd9a50d9e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a347f04295fd700a91d812b8e3ed8786f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a347f04295fd700a91d812b8e3ed8786f"></a>
+typedef <a class="el" href="a00171.html#ae34a87308edce3f094e3445ba2d711a4">model_type::expression_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a347f04295fd700a91d812b8e3ed8786f">expression_type</a></td></tr>
+<tr class="memdesc:a347f04295fd700a91d812b8e3ed8786f"><td class="mdescLeft">&#160;</td><td class="mdescRight">expression type <br /></td></tr>
+<tr class="separator:a347f04295fd700a91d812b8e3ed8786f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfb0cb623ba0b6961bb4cc32a63039c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acfb0cb623ba0b6961bb4cc32a63039c9"></a>
+typedef <a class="el" href="a00171.html#a7c57e635bbf5f7f296bffd67be900a32">model_type::constraint_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#acfb0cb623ba0b6961bb4cc32a63039c9">constraint_type</a></td></tr>
+<tr class="memdesc:acfb0cb623ba0b6961bb4cc32a63039c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">constraint type <br /></td></tr>
+<tr class="separator:acfb0cb623ba0b6961bb4cc32a63039c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca630d29eca5e2d5e49a2047ca8f5eba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca630d29eca5e2d5e49a2047ca8f5eba"></a>
+typedef <a class="el" href="a00171.html#ae57d4cb612f57ca66353dc2844943cce">model_type::term_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#aca630d29eca5e2d5e49a2047ca8f5eba">term_type</a></td></tr>
+<tr class="memdesc:aca630d29eca5e2d5e49a2047ca8f5eba"><td class="mdescLeft">&#160;</td><td class="mdescRight">term type <br /></td></tr>
+<tr class="separator:aca630d29eca5e2d5e49a2047ca8f5eba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd49576ae2b692e346776d7691b38162"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd49576ae2b692e346776d7691b38162"></a>
+typedef <a class="el" href="a00179.html">solver_type::matrix_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#acd49576ae2b692e346776d7691b38162">matrix_type</a></td></tr>
+<tr class="memdesc:acd49576ae2b692e346776d7691b38162"><td class="mdescLeft">&#160;</td><td class="mdescRight">matrix type <br /></td></tr>
+<tr class="separator:acd49576ae2b692e346776d7691b38162"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a536c009359b9362cbc07a9bf50b4467c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a536c009359b9362cbc07a9bf50b4467c">GraphSimplification</a> (graph_type const &amp;g, uint32_t color_num)</td></tr>
-<tr class="separator:a536c009359b9362cbc07a9bf50b4467c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5560081df929670bdd604c085a1b391"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#ae5560081df929670bdd604c085a1b391">GraphSimplification</a> (<a class="el" href="a00103.html">GraphSimplification</a> const &amp;rhs)</td></tr>
-<tr class="separator:ae5560081df929670bdd604c085a1b391"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f9876178bd5cc097b0caf60621ae624"><td class="memTemplParams" colspan="2">template&lt;typename Iterator &gt; </td></tr>
-<tr class="memitem:a6f9876178bd5cc097b0caf60621ae624"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00103.html#a6f9876178bd5cc097b0caf60621ae624">precolor</a> (Iterator first, Iterator last)</td></tr>
-<tr class="separator:a6f9876178bd5cc097b0caf60621ae624"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adef47ee180519ba3902a0aa4932e6b28"><td class="memItemLeft" align="right" valign="top">std::vector<br class="typebreak" />
-&lt; <a class="el" href="a00103.html#a9785acf47d1d65803ecb7f2a4d15ad98">vertex_status_type</a> &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#adef47ee180519ba3902a0aa4932e6b28">status</a> () const </td></tr>
-<tr class="separator:adef47ee180519ba3902a0aa4932e6b28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79dd0d55a9677f00ba6ed2da498c64fd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; graph_vertex_type &gt;<br class="typebreak" />
- const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a79dd0d55a9677f00ba6ed2da498c64fd">parents</a> () const </td></tr>
-<tr class="separator:a79dd0d55a9677f00ba6ed2da498c64fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb016b6eeb84bffbae0a49d41143b33f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector<br class="typebreak" />
-&lt; graph_vertex_type &gt; &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#acb016b6eeb84bffbae0a49d41143b33f">children</a> () const </td></tr>
-<tr class="separator:acb016b6eeb84bffbae0a49d41143b33f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7598adde39196a7b6040949e8f26822"><td class="memItemLeft" align="right" valign="top">std::stack&lt; graph_vertex_type &gt;<br class="typebreak" />
- const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#ab7598adde39196a7b6040949e8f26822">hidden_vertices</a> () const </td></tr>
-<tr class="separator:ab7598adde39196a7b6040949e8f26822"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73ad124a4b22eb263a33ac355ba078b1"><td class="memItemLeft" align="right" valign="top">std::pair&lt; graph_type, <br class="typebreak" />
-std::map&lt; graph_vertex_type, <br class="typebreak" />
-graph_vertex_type &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a73ad124a4b22eb263a33ac355ba078b1">simplified_graph</a> () const </td></tr>
-<tr class="separator:a73ad124a4b22eb263a33ac355ba078b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af53994cb6db05364f9d065abd9f9b548"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#af53994cb6db05364f9d065abd9f9b548">simplified_graph_component</a> (uint32_t comp_id, graph_type &amp;sg, std::vector&lt; graph_vertex_type &gt; &amp;vSimpl2Orig) const </td></tr>
-<tr class="separator:af53994cb6db05364f9d065abd9f9b548"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0548f87fe7797bb4ce66a98e5c70a51c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a0548f87fe7797bb4ce66a98e5c70a51c">num_component</a> () const </td></tr>
-<tr class="separator:a0548f87fe7797bb4ce66a98e5c70a51c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1507bee9961e34d543f369ef6188ba1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#ad1507bee9961e34d543f369ef6188ba1">max_merge_level</a> (int32_t l)</td></tr>
-<tr class="separator:ad1507bee9961e34d543f369ef6188ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefd700e2e78420d789cb23da83e65f48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#aefd700e2e78420d789cb23da83e65f48">simplify</a> (uint32_t level)</td></tr>
-<tr class="separator:aefd700e2e78420d789cb23da83e65f48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a155c984182284c4092815a655d81bcf7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a155c984182284c4092815a655d81bcf7">recover</a> (std::vector&lt; int8_t &gt; &amp;vColorFlat, std::vector&lt; std::vector&lt; int8_t &gt; &gt; &amp;mColor, std::vector&lt; std::vector&lt; graph_vertex_type &gt; &gt; const &amp;mSimpl2Orig) const </td></tr>
-<tr class="separator:a155c984182284c4092815a655d81bcf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a365c453098b68a935fd1df08e9c77c54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a365c453098b68a935fd1df08e9c77c54">merge_subK4</a> ()</td></tr>
-<tr class="separator:a365c453098b68a935fd1df08e9c77c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b98c3cb5a1bc8bd4ac43406f88dc297"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a8b98c3cb5a1bc8bd4ac43406f88dc297">hide_small_degree</a> ()</td></tr>
-<tr class="memdesc:a8b98c3cb5a1bc8bd4ac43406f88dc297"><td class="mdescLeft">&#160;</td><td class="mdescRight">hide vertices whose degree is no larger than number of colors - 1  <a href="#a8b98c3cb5a1bc8bd4ac43406f88dc297">More...</a><br /></td></tr>
-<tr class="separator:a8b98c3cb5a1bc8bd4ac43406f88dc297"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac99028162550ebd494bd8f3c90193a89"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac99028162550ebd494bd8f3c90193a89"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#ac99028162550ebd494bd8f3c90193a89">biconnected_component</a> ()</td></tr>
-<tr class="memdesc:ac99028162550ebd494bd8f3c90193a89"><td class="mdescLeft">&#160;</td><td class="mdescRight">find all articulation points and biconnected components <br /></td></tr>
-<tr class="separator:ac99028162550ebd494bd8f3c90193a89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f42bff97a0f5884e34b11bd3f54e3fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a7f42bff97a0f5884e34b11bd3f54e3fe">recover_merge_subK4</a> (std::vector&lt; int8_t &gt; &amp;vColor) const </td></tr>
-<tr class="separator:a7f42bff97a0f5884e34b11bd3f54e3fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3064f377e43fdbca4cd182fd5966819b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a3064f377e43fdbca4cd182fd5966819b">recover_biconnected_component</a> (std::vector&lt; std::vector&lt; int8_t &gt; &gt; &amp;mColor, std::vector&lt; std::vector&lt; graph_vertex_type &gt; &gt; const &amp;mSimpl2Orig) const </td></tr>
-<tr class="memdesc:a3064f377e43fdbca4cd182fd5966819b"><td class="mdescLeft">&#160;</td><td class="mdescRight">recover color for biconnected components  <a href="#a3064f377e43fdbca4cd182fd5966819b">More...</a><br /></td></tr>
-<tr class="separator:a3064f377e43fdbca4cd182fd5966819b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1de273a7c3780ef6cff22f137eeef790"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a1de273a7c3780ef6cff22f137eeef790">recover_hide_small_degree</a> (std::vector&lt; int8_t &gt; &amp;vColor)</td></tr>
-<tr class="separator:a1de273a7c3780ef6cff22f137eeef790"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a977264398b06bff8af575edf5e8ed259"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a977264398b06bff8af575edf5e8ed259">write_graph_dot</a> (std::string const &amp;filename) const </td></tr>
-<tr class="separator:a977264398b06bff8af575edf5e8ed259"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac77f1492dade5d894ed9adcc8b913534"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#ac77f1492dade5d894ed9adcc8b913534">write_simplified_graph_dot</a> (std::string const &amp;filename) const </td></tr>
-<tr class="separator:ac77f1492dade5d894ed9adcc8b913534"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1881ec56a22c416bceb4a19ed67835b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a1881ec56a22c416bceb4a19ed67835b7">FeasibleSearcher</a> (<a class="el" href="a00103.html#ae85b7baebed588aff43905ed21871cd9">solver_type</a> *solver)</td></tr>
+<tr class="memdesc:a1881ec56a22c416bceb4a19ed67835b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a1881ec56a22c416bceb4a19ed67835b7">More...</a><br /></td></tr>
+<tr class="separator:a1881ec56a22c416bceb4a19ed67835b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a770e1abd939372c773ae0e8a29aaf25b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a770e1abd939372c773ae0e8a29aaf25b"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a770e1abd939372c773ae0e8a29aaf25b">~FeasibleSearcher</a> ()</td></tr>
+<tr class="memdesc:a770e1abd939372c773ae0e8a29aaf25b"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
+<tr class="separator:a770e1abd939372c773ae0e8a29aaf25b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f00cc945f830c2ec6eea3b813010675"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a6f00cc945f830c2ec6eea3b813010675">operator()</a> (<a class="el" href="a00103.html#a4da821eb8ac1306533174439e3dcdffb">updater_type</a> *)</td></tr>
+<tr class="memdesc:a6f00cc945f830c2ec6eea3b813010675"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to search for feasible solutions.  <a href="#a6f00cc945f830c2ec6eea3b813010675">More...</a><br /></td></tr>
+<tr class="separator:a6f00cc945f830c2ec6eea3b813010675"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a9d54b35c49f73014a37fee87daa66f6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a9d54b35c49f73014a37fee87daa66f6e">biconnected_component_recursion</a> (graph_vertex_type v, std::deque&lt; bool &gt; &amp;vVisited, std::vector&lt; uint32_t &gt; &amp;vDisc, std::vector&lt; uint32_t &gt; &amp;vLow, std::vector&lt; graph_vertex_type &gt; &amp;vParent, uint32_t &amp;visit_time, std::stack&lt; std::pair&lt; graph_vertex_type, graph_vertex_type &gt; &gt; &amp;vEdge, std::list&lt; std::pair&lt; graph_vertex_type, std::set&lt; graph_vertex_type &gt; &gt; &gt; &amp;mCompVertex) const </td></tr>
-<tr class="separator:a9d54b35c49f73014a37fee87daa66f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e3e19aaa49b0f9e9240aa298a017fe9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e3e19aaa49b0f9e9240aa298a017fe9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a5e3e19aaa49b0f9e9240aa298a017fe9">connected_component</a> ()</td></tr>
-<tr class="memdesc:a5e3e19aaa49b0f9e9240aa298a017fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute connected components <br /></td></tr>
-<tr class="separator:a5e3e19aaa49b0f9e9240aa298a017fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f0f7ad1fba25414d7ad4f15758636bc"><td class="memItemLeft" align="right" valign="top">graph_vertex_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a6f0f7ad1fba25414d7ad4f15758636bc">parent</a> (graph_vertex_type v) const </td></tr>
-<tr class="separator:a6f0f7ad1fba25414d7ad4f15758636bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae44b143343cec7b3453861e7264b0330"><td class="memItemLeft" align="right" valign="top">graph_vertex_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#ae44b143343cec7b3453861e7264b0330">parent</a> (uint32_t v, std::vector&lt; uint32_t &gt; const &amp;vParent) const </td></tr>
-<tr class="separator:ae44b143343cec7b3453861e7264b0330"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ac746aed3451100052b0e26210640cc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a6ac746aed3451100052b0e26210640cc">connected_conflict</a> (graph_vertex_type v1, graph_vertex_type v2) const </td></tr>
-<tr class="separator:a6ac746aed3451100052b0e26210640cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3445f0533c1cc30cc68c6681145b86e7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a3445f0533c1cc30cc68c6681145b86e7">connected_stitch</a> (graph_vertex_type v1, graph_vertex_type v2) const </td></tr>
-<tr class="separator:a3445f0533c1cc30cc68c6681145b86e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a964abd63a40af0535d9d82b1f70caa22"><td class="memItemLeft" align="right" valign="top">std::pair&lt; graph_edge_type, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a964abd63a40af0535d9d82b1f70caa22">connected_edge</a> (graph_vertex_type v1, graph_vertex_type v2) const </td></tr>
-<tr class="separator:a964abd63a40af0535d9d82b1f70caa22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ab528c6c1e3094bf171f791f77d3238"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a1ab528c6c1e3094bf171f791f77d3238">merged</a> (graph_vertex_type v1) const </td></tr>
-<tr class="separator:a1ab528c6c1e3094bf171f791f77d3238"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65d165e67110b6a2ba89f7d448b96553"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a65d165e67110b6a2ba89f7d448b96553">good</a> (graph_vertex_type v1) const </td></tr>
-<tr class="separator:a65d165e67110b6a2ba89f7d448b96553"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e861bed1f89784f82bc98c114cbbabd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a2e861bed1f89784f82bc98c114cbbabd">hidden</a> (graph_vertex_type v1) const </td></tr>
-<tr class="separator:a2e861bed1f89784f82bc98c114cbbabd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2502c564dc2188716cd5074fb007fc8c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a2502c564dc2188716cd5074fb007fc8c">precolored</a> (graph_vertex_type v1) const </td></tr>
-<tr class="separator:a2502c564dc2188716cd5074fb007fc8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a96983d01d51c428737db6f41b72db3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a0a96983d01d51c428737db6f41b72db3">articulation_point</a> (graph_vertex_type v) const </td></tr>
-<tr class="separator:a0a96983d01d51c428737db6f41b72db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46df0fb22c79226dd223ec4d3e54ee88"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a46df0fb22c79226dd223ec4d3e54ee88">has_precolored</a> () const </td></tr>
-<tr class="separator:a46df0fb22c79226dd223ec4d3e54ee88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22f88f8e87fa890f562e07e9891740fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a22f88f8e87fa890f562e07e9891740fc">check_max_merge_level</a> (uint32_t l) const </td></tr>
-<tr class="separator:a22f88f8e87fa890f562e07e9891740fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd30c13dabe12fb2c34eaad5265f06cc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd30c13dabe12fb2c34eaad5265f06cc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#acd30c13dabe12fb2c34eaad5265f06cc">computeSlackness</a> ()</td></tr>
+<tr class="memdesc:acd30c13dabe12fb2c34eaad5265f06cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute slackness in an iteration <br /></td></tr>
+<tr class="separator:acd30c13dabe12fb2c34eaad5265f06cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45957386868f04bfa5defd78990ba9d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a45957386868f04bfa5defd78990ba9d7">solveSubproblems</a> (<a class="el" href="a00103.html#a4da821eb8ac1306533174439e3dcdffb">updater_type</a> *updater, unsigned int beginIter, unsigned int endIter)</td></tr>
+<tr class="memdesc:a45957386868f04bfa5defd78990ba9d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">kernel lagrangian iterations  <a href="#a45957386868f04bfa5defd78990ba9d7">More...</a><br /></td></tr>
+<tr class="separator:a45957386868f04bfa5defd78990ba9d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ada27cb9eb627ac69cb7115a03bd73f07"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada27cb9eb627ac69cb7115a03bd73f07"></a>
-graph_type const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#ada27cb9eb627ac69cb7115a03bd73f07">m_graph</a></td></tr>
-<tr class="memdesc:ada27cb9eb627ac69cb7115a03bd73f07"><td class="mdescLeft">&#160;</td><td class="mdescRight">original graph <br /></td></tr>
-<tr class="separator:ada27cb9eb627ac69cb7115a03bd73f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae977968f2bf88e026787a877705f6c97"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae977968f2bf88e026787a877705f6c97"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#ae977968f2bf88e026787a877705f6c97">m_color_num</a></td></tr>
-<tr class="memdesc:ae977968f2bf88e026787a877705f6c97"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of colors <br /></td></tr>
-<tr class="separator:ae977968f2bf88e026787a877705f6c97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b24e31b64bd92226181650ecc770dcf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b24e31b64bd92226181650ecc770dcf"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a7b24e31b64bd92226181650ecc770dcf">m_level</a></td></tr>
-<tr class="memdesc:a7b24e31b64bd92226181650ecc770dcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">simplification level <br /></td></tr>
-<tr class="separator:a7b24e31b64bd92226181650ecc770dcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9d238e0e1469857e23f14041589a17a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae9d238e0e1469857e23f14041589a17a"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#ae9d238e0e1469857e23f14041589a17a">m_max_merge_level</a></td></tr>
-<tr class="memdesc:ae9d238e0e1469857e23f14041589a17a"><td class="mdescLeft">&#160;</td><td class="mdescRight">in MERGE_SUBK4, any merge that results in the children number of a vertex larger than m_max_merge_level is disallowed <br /></td></tr>
-<tr class="separator:ae9d238e0e1469857e23f14041589a17a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42c5f32af6eddd86a67fd8e3168b1831"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42c5f32af6eddd86a67fd8e3168b1831"></a>
-std::vector&lt; <a class="el" href="a00103.html#a9785acf47d1d65803ecb7f2a4d15ad98">vertex_status_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a42c5f32af6eddd86a67fd8e3168b1831">m_vStatus</a></td></tr>
-<tr class="memdesc:a42c5f32af6eddd86a67fd8e3168b1831"><td class="mdescLeft">&#160;</td><td class="mdescRight">status of each vertex <br /></td></tr>
-<tr class="separator:a42c5f32af6eddd86a67fd8e3168b1831"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad724c9aaaf574dbe56fd7f96936fb8ae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad724c9aaaf574dbe56fd7f96936fb8ae"></a>
-std::vector&lt; graph_vertex_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#ad724c9aaaf574dbe56fd7f96936fb8ae">m_vParent</a></td></tr>
-<tr class="memdesc:ad724c9aaaf574dbe56fd7f96936fb8ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">parent vertex of current vertex <br /></td></tr>
-<tr class="separator:ad724c9aaaf574dbe56fd7f96936fb8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6664a87182d5b61cbc51670824c240e1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6664a87182d5b61cbc51670824c240e1"></a>
-std::vector&lt; std::vector<br class="typebreak" />
-&lt; graph_vertex_type &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a6664a87182d5b61cbc51670824c240e1">m_vChildren</a></td></tr>
-<tr class="memdesc:a6664a87182d5b61cbc51670824c240e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">children verices of current vertex, a vertex is the child of itself if it is not merged <br /></td></tr>
-<tr class="separator:a6664a87182d5b61cbc51670824c240e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3fbb2d5f10c6878d2973dfa5811deeb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af3fbb2d5f10c6878d2973dfa5811deeb"></a>
-std::stack&lt; graph_vertex_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#af3fbb2d5f10c6878d2973dfa5811deeb">m_vHiddenVertex</a></td></tr>
-<tr class="memdesc:af3fbb2d5f10c6878d2973dfa5811deeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">a std::stack that keeps a reverse order of vertices hidden, useful for color recovery <br /></td></tr>
-<tr class="separator:af3fbb2d5f10c6878d2973dfa5811deeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af171492722b977f2cb5a4ea9b1238a02"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af171492722b977f2cb5a4ea9b1238a02"></a>
-std::vector&lt; std::vector<br class="typebreak" />
-&lt; graph_vertex_type &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#af171492722b977f2cb5a4ea9b1238a02">m_mCompVertex</a></td></tr>
-<tr class="memdesc:af171492722b977f2cb5a4ea9b1238a02"><td class="mdescLeft">&#160;</td><td class="mdescRight">group vertices by components <br /></td></tr>
-<tr class="separator:af171492722b977f2cb5a4ea9b1238a02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e4551676298bcf837ca22e1c64da3d7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4e4551676298bcf837ca22e1c64da3d7"></a>
-std::map&lt; graph_vertex_type, <br class="typebreak" />
-std::set&lt; uint32_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a4e4551676298bcf837ca22e1c64da3d7">m_mArtiPoint</a></td></tr>
-<tr class="memdesc:a4e4551676298bcf837ca22e1c64da3d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">map of (vertex of articulation point, set of components split by the vertex) <br /></td></tr>
-<tr class="separator:a4e4551676298bcf837ca22e1c64da3d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4a98daf1715c407d3981ba2cb660a0b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4a98daf1715c407d3981ba2cb660a0b"></a>
-std::vector&lt; int8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#ac4a98daf1715c407d3981ba2cb660a0b">m_vPrecolor</a></td></tr>
-<tr class="memdesc:ac4a98daf1715c407d3981ba2cb660a0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">precolor information, if uncolored, std::set to -1 <br /></td></tr>
-<tr class="separator:ac4a98daf1715c407d3981ba2cb660a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afada362be28de588ffc87ceb833ac6da"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afada362be28de588ffc87ceb833ac6da"></a>
+<a class="el" href="a00103.html#ae85b7baebed588aff43905ed21871cd9">solver_type</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#afada362be28de588ffc87ceb833ac6da">m_solver</a></td></tr>
+<tr class="memdesc:afada362be28de588ffc87ceb833ac6da"><td class="mdescLeft">&#160;</td><td class="mdescRight">problem solver <br /></td></tr>
+<tr class="separator:afada362be28de588ffc87ceb833ac6da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2377cdf22948ba5f4b11747b34e67a34"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2377cdf22948ba5f4b11747b34e67a34"></a>
+<a class="el" href="a00103.html#aee8235fdcefae5dd2c2c3ae0a7af8129">model_type</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a2377cdf22948ba5f4b11747b34e67a34">m_model</a></td></tr>
+<tr class="memdesc:a2377cdf22948ba5f4b11747b34e67a34"><td class="mdescLeft">&#160;</td><td class="mdescRight">model for the problem <br /></td></tr>
+<tr class="separator:a2377cdf22948ba5f4b11747b34e67a34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7221de94d9b03312b9ec107ebc2e6829"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7221de94d9b03312b9ec107ebc2e6829"></a>
+<a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a7221de94d9b03312b9ec107ebc2e6829">m_vObjCoef</a></td></tr>
+<tr class="memdesc:a7221de94d9b03312b9ec107ebc2e6829"><td class="mdescLeft">&#160;</td><td class="mdescRight">coefficients variables in objective <br /></td></tr>
+<tr class="separator:a7221de94d9b03312b9ec107ebc2e6829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a225acff781b915bc44ad2d91a7329e63"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a225acff781b915bc44ad2d91a7329e63"></a>
+<a class="el" href="a00103.html#acd49576ae2b692e346776d7691b38162">matrix_type</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a225acff781b915bc44ad2d91a7329e63">m_constrMatrix</a></td></tr>
+<tr class="memdesc:a225acff781b915bc44ad2d91a7329e63"><td class="mdescLeft">&#160;</td><td class="mdescRight">constraint matrix \(A\) <br /></td></tr>
+<tr class="separator:a225acff781b915bc44ad2d91a7329e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa80163a17b8b7f384d2d3f38672858ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa80163a17b8b7f384d2d3f38672858ef"></a>
+<a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#aa80163a17b8b7f384d2d3f38672858ef">m_vConstrRhs</a></td></tr>
+<tr class="memdesc:aa80163a17b8b7f384d2d3f38672858ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">constraint right hand side \(b\) <br /></td></tr>
+<tr class="separator:aa80163a17b8b7f384d2d3f38672858ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f85684afcbf085a6e9b64290fef59ba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5f85684afcbf085a6e9b64290fef59ba"></a>
+<a class="el" href="a00103.html#a3f0a7bd809c482e1d2d2dcd9a50d9e01">variable_type</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a5f85684afcbf085a6e9b64290fef59ba">m_vGroupedVariable</a></td></tr>
+<tr class="memdesc:a5f85684afcbf085a6e9b64290fef59ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">array of grouped variables according to item <br /></td></tr>
+<tr class="separator:a5f85684afcbf085a6e9b64290fef59ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0184cf40316acc754abe6003a74139fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0184cf40316acc754abe6003a74139fd"></a>
+unsigned int *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a0184cf40316acc754abe6003a74139fd">m_vVariableGroupBeginIndex</a></td></tr>
+<tr class="memdesc:a0184cf40316acc754abe6003a74139fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">begin index of grouped variable <br /></td></tr>
+<tr class="separator:a0184cf40316acc754abe6003a74139fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70f4722c10a7d4896c1ffcd9fa989559"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a70f4722c10a7d4896c1ffcd9fa989559"></a>
+unsigned int const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a70f4722c10a7d4896c1ffcd9fa989559">m_numGroups</a></td></tr>
+<tr class="memdesc:a70f4722c10a7d4896c1ffcd9fa989559"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of groups <br /></td></tr>
+<tr class="separator:a70f4722c10a7d4896c1ffcd9fa989559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fdc768012865b3a01da54f097a9fd36"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0fdc768012865b3a01da54f097a9fd36"></a>
+std::vector&lt; unsigned int &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a0fdc768012865b3a01da54f097a9fd36">m_vConstraintPartition</a></td></tr>
+<tr class="memdesc:a0fdc768012865b3a01da54f097a9fd36"><td class="mdescLeft">&#160;</td><td class="mdescRight">indices of constraints, the first partition is capacity constraints <br /></td></tr>
+<tr class="separator:a0fdc768012865b3a01da54f097a9fd36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15d355c9ab202dbf5252b8b675bce9d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a15d355c9ab202dbf5252b8b675bce9d3"></a>
+<a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a15d355c9ab202dbf5252b8b675bce9d3">m_vLagMultiplier</a></td></tr>
+<tr class="memdesc:a15d355c9ab202dbf5252b8b675bce9d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">array of lagrangian multipliers <br /></td></tr>
+<tr class="separator:a15d355c9ab202dbf5252b8b675bce9d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab62c271376a7b57746ee9b8104899bb2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab62c271376a7b57746ee9b8104899bb2"></a>
+<a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#ab62c271376a7b57746ee9b8104899bb2">m_vSlackness</a></td></tr>
+<tr class="memdesc:ab62c271376a7b57746ee9b8104899bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">array of slackness values in each iteration, \( b-Ax \) <br /></td></tr>
+<tr class="separator:ab62c271376a7b57746ee9b8104899bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a850a40be8905e6b10478c304339e1c92"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a850a40be8905e6b10478c304339e1c92"></a>
+std::vector<br class="typebreak" />
+&lt; <a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> &gt;<br class="typebreak" />
+ const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a850a40be8905e6b10478c304339e1c92">m_vScalingFactor</a></td></tr>
+<tr class="memdesc:a850a40be8905e6b10478c304339e1c92"><td class="mdescLeft">&#160;</td><td class="mdescRight">scaling factor for constraints and objective, last entry is for objective <br /></td></tr>
+<tr class="separator:a850a40be8905e6b10478c304339e1c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33567b13228a68b3a542c4228462c3d5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a33567b13228a68b3a542c4228462c3d5"></a>
+<a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a33567b13228a68b3a542c4228462c3d5">m_objConstant</a></td></tr>
+<tr class="memdesc:a33567b13228a68b3a542c4228462c3d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">constant value in objective from lagrangian relaxation <br /></td></tr>
+<tr class="separator:a33567b13228a68b3a542c4228462c3d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a501aee0cceeb7c878ec4a938b1c92007"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a501aee0cceeb7c878ec4a938b1c92007"></a>
+<a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a501aee0cceeb7c878ec4a938b1c92007">m_lagObj</a></td></tr>
+<tr class="memdesc:a501aee0cceeb7c878ec4a938b1c92007"><td class="mdescLeft">&#160;</td><td class="mdescRight">current objective of the lagrangian subproblem <br /></td></tr>
+<tr class="separator:a501aee0cceeb7c878ec4a938b1c92007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedc955b3565462656a8e934ce5739beb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aedc955b3565462656a8e934ce5739beb"></a>
+unsigned int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#aedc955b3565462656a8e934ce5739beb">m_iter</a></td></tr>
+<tr class="memdesc:aedc955b3565462656a8e934ce5739beb"><td class="mdescLeft">&#160;</td><td class="mdescRight">current iteration <br /></td></tr>
+<tr class="separator:aedc955b3565462656a8e934ce5739beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cc2e90c43732abba4a51f471b8a88e9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3cc2e90c43732abba4a51f471b8a88e9"></a>
+unsigned int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a3cc2e90c43732abba4a51f471b8a88e9">m_maxIters</a></td></tr>
+<tr class="memdesc:a3cc2e90c43732abba4a51f471b8a88e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">maximum number of iterations <br /></td></tr>
+<tr class="separator:a3cc2e90c43732abba4a51f471b8a88e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af34376dc300911527e4130dbead55dc7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af34376dc300911527e4130dbead55dc7"></a>
+bool &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#af34376dc300911527e4130dbead55dc7">m_useInitialSol</a></td></tr>
+<tr class="memdesc:af34376dc300911527e4130dbead55dc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">whether use initial solutions or not <br /></td></tr>
+<tr class="separator:af34376dc300911527e4130dbead55dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b8b72ed8a16b40f36a925e57c3590a1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b8b72ed8a16b40f36a925e57c3590a1"></a>
+std::vector<br class="typebreak" />
+&lt; <a class="el" href="a00103.html#a9a29f145a48d2b90a8a5524a1444b9d8">variable_value_type</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#a9b8b72ed8a16b40f36a925e57c3590a1">m_vBestVariableSol</a></td></tr>
+<tr class="memdesc:a9b8b72ed8a16b40f36a925e57c3590a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">best feasible solution found so far <br /></td></tr>
+<tr class="separator:a9b8b72ed8a16b40f36a925e57c3590a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe8e0394e23a8f847b252d9ba4dd19e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe8e0394e23a8f847b252d9ba4dd19e6"></a>
+<a class="el" href="a00103.html#a57e08c44ce837595f0fe8e10e48560ec">coefficient_value_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html#abe8e0394e23a8f847b252d9ba4dd19e6">m_bestObj</a></td></tr>
+<tr class="memdesc:abe8e0394e23a8f847b252d9ba4dd19e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">best objective found so far <br /></td></tr>
+<tr class="separator:abe8e0394e23a8f847b252d9ba4dd19e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename GraphType&gt;<br />
-class limbo::algorithms::coloring::GraphSimplification&lt; GraphType &gt;</h3>
+<div class="textblock"><h3>template&lt;typename T, typename V&gt;<br />
+class limbo::solvers::FeasibleSearcher&lt; T, V &gt;</h3>
 
-<p>Various graph simplification techniques for graph coloring.</p>
+<p>Base heuristic to search for feasible solutions. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">GraphType</td><td>graph type </td></tr>
+    <tr><td class="paramname">T</td><td>coefficient value type </td></tr>
+    <tr><td class="paramname">V</td><td>variable value type </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00243_source.html#l00051">51</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-</div><h2 class="groupheader">Member Enumeration Documentation</h2>
-<a class="anchor" id="a4d19cdbce4e235a18e416913fba80bb6"></a>
+<p>Definition at line <a class="el" href="a00385_source.html#l00031">31</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a1881ec56a22c416bceb4a19ed67835b7"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="a00103.html#a4d19cdbce4e235a18e416913fba80bb6">limbo::algorithms::coloring::GraphSimplification::strategy_type</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>simplification strategies available. These strategies are order-sensitive. It is recommended to call <a class="el" href="a00103.html#aefd700e2e78420d789cb23da83e65f48">simplify()</a>, e.g. simplify(HIDE_SMALL_DEGREE | BICONNECTED_COMPONENT) </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a4d19cdbce4e235a18e416913fba80bb6aa85a27cd259132a3e52d53087a58384a"></a>NONE&#160;</td><td class="fielddoc">
-<p>no simplification </p>
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a4d19cdbce4e235a18e416913fba80bb6ae072366897555d58a34cf55bcf115119"></a>HIDE_SMALL_DEGREE&#160;</td><td class="fielddoc">
-<p>hide vertices whose degree is smaller than number of colors available </p>
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a4d19cdbce4e235a18e416913fba80bb6ab24723deaae39fc7cecde43acb945ac8"></a>MERGE_SUBK4&#160;</td><td class="fielddoc">
-<p>merge 4-clique structures, no longer optimal </p>
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a4d19cdbce4e235a18e416913fba80bb6ab952332dcf0659809be1d58a62f67caa"></a>BICONNECTED_COMPONENT&#160;</td><td class="fielddoc">
-<p>divide graph by biconnected components </p>
-</td></tr>
-</table>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00073">73</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9785acf47d1d65803ecb7f2a4d15ad98"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="a00103.html#a9785acf47d1d65803ecb7f2a4d15ad98">limbo::algorithms::coloring::GraphSimplification::vertex_status_type</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>status of vertex. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a9785acf47d1d65803ecb7f2a4d15ad98a3a0c437b576f9eb5ee3d893b93fb23c7"></a>GOOD&#160;</td><td class="fielddoc">
-<p>still in graph </p>
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a9785acf47d1d65803ecb7f2a4d15ad98a2bd0840d5cdc6b6e9a86d2f1ab6507f1"></a>HIDDEN&#160;</td><td class="fielddoc">
-<p>vertex is hidden by simplification </p>
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a9785acf47d1d65803ecb7f2a4d15ad98aedcffb386da8678436a9bed476375a5a"></a>MERGED&#160;</td><td class="fielddoc">
-<p>vertex is merged to other vertex </p>
-</td></tr>
-</table>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00064">64</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a536c009359b9362cbc07a9bf50b4467c"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
+template&lt;typename T, typename V&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::<a class="el" href="a00103.html">GraphSimplification</a> </td>
+          <td class="memname"><a class="el" href="a00103.html">limbo::solvers::FeasibleSearcher</a>&lt; T, V &gt;::<a class="el" href="a00103.html">FeasibleSearcher</a> </td>
           <td>(</td>
-          <td class="paramtype">graph_type const &amp;&#160;</td>
-          <td class="paramname"><em>g</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="a00103.html#ae85b7baebed588aff43905ed21871cd9">solver_type</a> *&#160;</td>
+          <td class="paramname"><em>solver</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>color_num</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -398,763 +309,79 @@ template&lt;typename GraphType&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">g</td><td>graph </td></tr>
-    <tr><td class="paramname">color_num</td><td>number of colors </td></tr>
+    <tr><td class="paramname">solver</td><td>problem solver </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00243_source.html#l00082">82</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae5560081df929670bdd604c085a1b391"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::<a class="el" href="a00103.html">GraphSimplification</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00103.html">GraphSimplification</a>&lt; GraphType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>copy constructor is not allowed </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>a <a class="el" href="a00103.html">GraphSimplification</a> object </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Definition at line <a class="el" href="a00385_source.html#l01236">1236</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a0a96983d01d51c428737db6f41b72db3"></a>
+<a class="anchor" id="a6f00cc945f830c2ec6eea3b813010675"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
+template&lt;typename T, typename V&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::articulation_point </td>
+          <td class="memname">virtual <a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> <a class="el" href="a00103.html">limbo::solvers::FeasibleSearcher</a>&lt; T, V &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">graph_vertex_type&#160;</td>
-          <td class="paramname"><em>v</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v</td><td>vertex </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the point is a articulation point </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00320">320</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9d54b35c49f73014a37fee87daa66f6e"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::biconnected_component_recursion </td>
-          <td>(</td>
-          <td class="paramtype">graph_vertex_type&#160;</td>
-          <td class="paramname"><em>v</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::deque&lt; bool &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vVisited</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; uint32_t &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vDisc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; uint32_t &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vLow</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; graph_vertex_type &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vParent</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t &amp;&#160;</td>
-          <td class="paramname"><em>visit_time</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::stack&lt; std::pair&lt; graph_vertex_type, graph_vertex_type &gt; &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vEdge</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::list&lt; std::pair&lt; graph_vertex_type, std::set&lt; graph_vertex_type &gt; &gt; &gt; &amp;&#160;</td>
-          <td class="paramname"><em>mCompVertex</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>recursive implementation of computing biconnected components </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v</td><td>current vertex </td></tr>
-    <tr><td class="paramname">vVisited</td><td>an array records whether a vertex has been visited </td></tr>
-    <tr><td class="paramname">vDisc</td><td>discovery time of vertices </td></tr>
-    <tr><td class="paramname">vLow</td><td>low values of vertices </td></tr>
-    <tr><td class="paramname">vParent</td><td>parents of vertices </td></tr>
-    <tr><td class="paramname">visit_time</td><td>records current visiting time </td></tr>
-    <tr><td class="paramname">vEdge</td><td>a stack of edges for DFS </td></tr>
-    <tr><td class="paramname">mCompVertex</td><td>vertices arranged by independent components </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00832">832</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a22f88f8e87fa890f562e07e9891740fc"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::check_max_merge_level </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>l</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">l</td><td>merge level </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the vertex satisfies maximum merge level constraint </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00336">336</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="acb016b6eeb84bffbae0a49d41143b33f"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;std::vector&lt;graph_vertex_type&gt; &gt; const&amp; <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::children </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>children map of vertices </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00129">129</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a6ac746aed3451100052b0e26210640cc"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::connected_conflict </td>
-          <td>(</td>
-          <td class="paramtype">graph_vertex_type&#160;</td>
-          <td class="paramname"><em>v1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">graph_vertex_type&#160;</td>
-          <td class="paramname"><em>v2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v1</td><td>vertex </td></tr>
-    <tr><td class="paramname">v2</td><td>vertex </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if two vertices (parents) are connected by conflict edges </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00238">238</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a964abd63a40af0535d9d82b1f70caa22"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::pair&lt;graph_edge_type, bool&gt; <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::connected_edge </td>
-          <td>(</td>
-          <td class="paramtype">graph_vertex_type&#160;</td>
-          <td class="paramname"><em>v1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">graph_vertex_type&#160;</td>
-          <td class="paramname"><em>v2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v1</td><td>vertex </td></tr>
-    <tr><td class="paramname">v2</td><td>vertex </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the edge of two vertices (parents) </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00274">274</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3445f0533c1cc30cc68c6681145b86e7"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::connected_stitch </td>
-          <td>(</td>
-          <td class="paramtype">graph_vertex_type&#160;</td>
-          <td class="paramname"><em>v1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">graph_vertex_type&#160;</td>
-          <td class="paramname"><em>v2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v1</td><td>vertex </td></tr>
-    <tr><td class="paramname">v2</td><td>vertex </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if two vertices (parents) are connected by stitch edges </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00256">256</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a65d165e67110b6a2ba89f7d448b96553"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::good </td>
-          <td>(</td>
-          <td class="paramtype">graph_vertex_type&#160;</td>
-          <td class="paramname"><em>v1</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v1</td><td>vertex </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if current vertex is still in graph </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00302">302</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a46df0fb22c79226dd223ec4d3e54ee88"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::has_precolored </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>true if there exist precolored vertices </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00325">325</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a2e861bed1f89784f82bc98c114cbbabd"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::hidden </td>
-          <td>(</td>
-          <td class="paramtype">graph_vertex_type&#160;</td>
-          <td class="paramname"><em>v1</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v1</td><td>vertex </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if current vertex is hidden </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00308">308</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab7598adde39196a7b6040949e8f26822"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::stack&lt;graph_vertex_type&gt; const&amp; <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::hidden_vertices </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>hidden vertex array of vertices </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00131">131</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8b98c3cb5a1bc8bd4ac43406f88dc297"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::hide_small_degree </td>
-          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00103.html#a4da821eb8ac1306533174439e3dcdffb">updater_type</a> *&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-</div><div class="memdoc">
-
-<p>hide vertices whose degree is no larger than number of colors - 1 </p>
-<p>hide vertices whose degree is no larger than color_num-1 </p>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00678">678</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad1507bee9961e34d543f369ef6188ba1"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::max_merge_level </td>
-          <td>(</td>
-          <td class="paramtype">int32_t&#160;</td>
-          <td class="paramname"><em>l</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>set maximum merge level </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">l</td><td>level </td></tr>
-  </table>
-  </dd>
-</dl>
 
-<p>Definition at line <a class="el" href="a00243_source.html#l00146">146</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
+<p>API to search for feasible solutions. </p>
+<p>param updater updater for lagrangian multipliers </p><dl class="section return"><dt>Returns</dt><dd>solving status </dd></dl>
+
+<p>Reimplemented in <a class="el" href="a00249.html#ae3304c49782ed42bc9442ec1edd1d6d2">limbo::solvers::SearchByCombinedStrategy&lt; T, V &gt;</a>, <a class="el" href="a00248.html#a10278a235c415275d32e081442e00187">limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;</a>, <a class="el" href="a00248.html#a10278a235c415275d32e081442e00187">limbo::solvers::SearchByBinSmoothing&lt; coefficient_value_type, variable_value_type &gt;</a>, <a class="el" href="a00247.html#a52061c68bf51f8ca80fc0a87ae88570c">limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;</a>, and <a class="el" href="a00247.html#a52061c68bf51f8ca80fc0a87ae88570c">limbo::solvers::SearchByAdjustCoefficient&lt; coefficient_value_type, variable_value_type &gt;</a>.</p>
+
+<p>Definition at line <a class="el" href="a00385_source.html#l01265">1265</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a365c453098b68a935fd1df08e9c77c54"></a>
+<a class="anchor" id="a45957386868f04bfa5defd78990ba9d7"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::merge_subK4 </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>For a structure of K4 with one fewer edge, suppose we have 4 vertices 1, 2, 3, 4, edges 1&ndash;2, 1&ndash;3, 2&ndash;3, 2&ndash;4, 3&ndash;4. Vertex 4 is merged to 1. This strategy only works for 3-coloring. It cannot guarantee minimal conflicts, but it can be used in a native conflict checker.</p>
-<p>for a structure of K4 with one fewer edge suppose we have 4 vertices 1, 2, 3, 4 1&ndash;2, 1&ndash;3, 2&ndash;3, 2&ndash;4, 3&ndash;4, vertex 4 is merged to 1 this strategy only works for 3-coloring it cannot guarantee minimal conflicts but it can be used in a native conflict checker </p>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00569">569</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1ab528c6c1e3094bf171f791f77d3238"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
+template&lt;typename T, typename V&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::merged </td>
+          <td class="memname"><a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> <a class="el" href="a00103.html">limbo::solvers::FeasibleSearcher</a>&lt; T, V &gt;::solveSubproblems </td>
           <td>(</td>
-          <td class="paramtype">graph_vertex_type&#160;</td>
-          <td class="paramname"><em>v1</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v1</td><td>vertex </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if current vertex is merged </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00290">290</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a0548f87fe7797bb4ce66a98e5c70a51c"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::num_component </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>number of components </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00142">142</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a6f0f7ad1fba25414d7ad4f15758636bc"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">graph_vertex_type <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::parent </td>
-          <td>(</td>
-          <td class="paramtype">graph_vertex_type&#160;</td>
-          <td class="paramname"><em>v</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v</td><td>vertex </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the root parent i.e. the vertex that is not merged </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00216">216</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae44b143343cec7b3453861e7264b0330"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">graph_vertex_type <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::parent </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>v</em>, </td>
+          <td class="paramtype"><a class="el" href="a00103.html#a4da821eb8ac1306533174439e3dcdffb">updater_type</a> *&#160;</td>
+          <td class="paramname"><em>updater</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; uint32_t &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vParent</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v</td><td>vertex </td></tr>
-    <tr><td class="paramname">vParent</td><td>parent array of vertices </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the root parent generalized version </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00229">229</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a79dd0d55a9677f00ba6ed2da498c64fd"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;graph_vertex_type&gt; const&amp; <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::parents </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>parent array of vertices </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00127">127</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a6f9876178bd5cc097b0caf60621ae624"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<div class="memtemplate">
-template&lt;typename Iterator &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::precolor </td>
-          <td>(</td>
-          <td class="paramtype">Iterator&#160;</td>
-          <td class="paramname"><em>first</em>, </td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>beginIter</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Iterator&#160;</td>
-          <td class="paramname"><em>last</em>&#160;</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>endIter</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1164,375 +391,32 @@ template&lt;typename Iterator &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>set precolored vertices </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Iterator</td><td>iterator type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">first,last</td><td>begin and end of the precolored vertex array </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00116">116</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a2502c564dc2188716cd5074fb007fc8c"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::precolored </td>
-          <td>(</td>
-          <td class="paramtype">graph_vertex_type&#160;</td>
-          <td class="paramname"><em>v1</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>kernel lagrangian iterations </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v1</td><td>vertex </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if current vertex is precolored </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00314">314</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a155c984182284c4092815a655d81bcf7"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::recover </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; int8_t &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vColorFlat</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; std::vector&lt; int8_t &gt; &gt; &amp;&#160;</td>
-          <td class="paramname"><em>mColor</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; std::vector&lt; graph_vertex_type &gt; &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>mSimpl2Orig</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>API to recover coloring solutions from color assignment of simplified graph </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vColorFlat</td><td>flatten coloring solutions for original graph </td></tr>
-    <tr><td class="paramname">mColor</td><td>coloring solutions arranged by components </td></tr>
-    <tr><td class="paramname">mSimpl2Orig</td><td>mapping from simplified graph components to original graph </td></tr>
+    <tr><td class="paramname">updater</td><td>an object to update lagrangian multipliers </td></tr>
+    <tr><td class="paramname">beginIter</td><td>begin iteration number </td></tr>
+    <tr><td class="paramname">endIter</td><td>end iteration number </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00243_source.html#l00530">530</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3064f377e43fdbca4cd182fd5966819b"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::recover_biconnected_component </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; std::vector&lt; int8_t &gt; &gt; &amp;&#160;</td>
-          <td class="paramname"><em>mColor</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; std::vector&lt; graph_vertex_type &gt; &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>mSimpl2Orig</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>recover color for biconnected components </p>
-<p>recover color for biconnected components </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">mColor</td><td>coloring solutions arranged by components </td></tr>
-    <tr><td class="paramname">mSimpl2Orig</td><td>mapping from simplified graph components to original graph </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l01054">1054</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1de273a7c3780ef6cff22f137eeef790"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::recover_hide_small_degree </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; int8_t &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vColor</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>recover color for hidden vertices need to be called manually, no density balance considered this function is mutable because it pops out elements in m_vHiddenVertex </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vColor</td><td>coloring solutions, it must be partially assigned colors except simplified vertices </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l01163">1163</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7f42bff97a0f5884e34b11bd3f54e3fe"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::recover_merge_subK4 </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; int8_t &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vColor</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>recover merged vertices </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vColor</td><td>must be partially assigned colors except simplified vertices </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l01033">1033</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a73ad124a4b22eb263a33ac355ba078b1"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">std::pair&lt; typename <a class="el" href="a00103.html">GraphSimplification</a>&lt; GraphType &gt;::graph_type, std::map&lt; typename <a class="el" href="a00103.html">GraphSimplification</a>&lt; GraphType &gt;::graph_vertex_type, typename <a class="el" href="a00103.html">GraphSimplification</a>&lt; GraphType &gt;::graph_vertex_type &gt; &gt; <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::simplified_graph </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>simplified graph and a std::map from merged graph vertices to original graph vertices </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00363">363</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="af53994cb6db05364f9d065abd9f9b548"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::simplified_graph_component </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>comp_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">graph_type &amp;&#160;</td>
-          <td class="paramname"><em>sg</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; graph_vertex_type &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vSimpl2Orig</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>extract a component from simplified graph </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">comp_id</td><td>component id </td></tr>
-    <tr><td class="paramname">sg</td><td>component of simplified graph </td></tr>
-    <tr><td class="paramname">vSimpl2Orig</td><td>mapping from simplified graph to original graph </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if succeed </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00422">422</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aefd700e2e78420d789cb23da83e65f48"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::simplify </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>level</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>API to run the simplification algorithm </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">level</td><td>simplification level, can be combination of items in <a class="el" href="a00103.html#a4d19cdbce4e235a18e416913fba80bb6">limbo::algorithms::coloring::GraphSimplification::strategy_type</a> </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00497">497</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="adef47ee180519ba3902a0aa4932e6b28"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="a00103.html#a9785acf47d1d65803ecb7f2a4d15ad98">vertex_status_type</a>&gt; const&amp; <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::status </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>status array of vertices </dd></dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l00125">125</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a977264398b06bff8af575edf5e8ed259"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::write_graph_dot </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>filename</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>write graph in graphviz format </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>output file name </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l01194">1194</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac77f1492dade5d894ed9adcc8b913534"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="a00103.html">limbo::algorithms::coloring::GraphSimplification</a>&lt; GraphType &gt;::write_simplified_graph_dot </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>filename</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>write simplified graph in graphviz format </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>output file name </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00243_source.html#l01256">1256</a> of file <a class="el" href="a00243_source.html">GraphSimplification.h</a>.</p>
+<p>Definition at line <a class="el" href="a00385_source.html#l01277">1277</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/<a class="el" href="a00243_source.html">GraphSimplification.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

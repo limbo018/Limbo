@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdfDataBase Class Reference</title>
+<title>Limbo: limbo::solvers::lpmcf::LpDualMcf&lt; T &gt;::constraint_type Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,86 +87,116 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00443.html">solvers</a></li><li class="navelem"><a class="el" href="a00444.html">lpmcf</a></li><li class="navelem"><a class="el" href="a00176.html">LpDualMcf</a></li><li class="navelem"><a class="el" href="a00069.html">constraint_type</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00389.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00672.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdfDataBase Class Reference</div>  </div>
+<div class="title">limbo::solvers::lpmcf::LpDualMcf&lt; T &gt;::constraint_type Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Custom class that inheritates <a class="el" href="a00070.html">GdfParser::GdfDataBase</a> with all the required callbacks gdfined.  
+<p>constraint object in the primal linear programming problem. standard format: \(x_i - x_j \ge c_{ij}\) maps to arc \(x_i \rightarrow x_j, \textrm{cost} = -c_{ij}\).  
  <a href="a00069.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for GdfDataBase:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="a00069.png" usemap="#GdfDataBase_map" alt=""/>
-  <map id="GdfDataBase_map" name="GdfDataBase_map">
-<area href="a00070.html" title="Base class for def database. Only pure virtual functions are defined. User needs to inheritate this c..." alt="GdfParser::GdfDataBase" shape="rect" coords="0,0,150,24"/>
-</map>
- </div></div>
+
+<p><code>#include &lt;<a class="el" href="a00383_source.html">LpDualMcf.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7d7ec238451068de3ce7488c7c07c127"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7d7ec238451068de3ce7488c7c07c127"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00069.html#a7d7ec238451068de3ce7488c7c07c127">GdfDataBase</a> ()</td></tr>
-<tr class="memdesc:a7d7ec238451068de3ce7488c7c07c127"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:a7d7ec238451068de3ce7488c7c07c127"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f1b2f284edc8f85158d7bfe247694bd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00069.html#a2f1b2f284edc8f85158d7bfe247694bd">add_gdf_cell</a> (<a class="el" href="a00011.html">GdfParser::Cell</a> &amp;cell)</td></tr>
-<tr class="memdesc:a2f1b2f284edc8f85158d7bfe247694bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">add routing cell  <a href="#a2f1b2f284edc8f85158d7bfe247694bd">More...</a><br /></td></tr>
-<tr class="separator:a2f1b2f284edc8f85158d7bfe247694bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d95514bed55ef419cf713e37b5c9a6b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00069.html#a0d95514bed55ef419cf713e37b5c9a6b">constraint_type</a> (string const &amp;xi, string const &amp;xj, <a class="el" href="a00176.html#a514573ee1479d1d04151f3e67c804d66">value_type</a> const &amp;c)</td></tr>
+<tr class="memdesc:a0d95514bed55ef419cf713e37b5c9a6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a0d95514bed55ef419cf713e37b5c9a6b">More...</a><br /></td></tr>
+<tr class="separator:a0d95514bed55ef419cf713e37b5c9a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a618adb78f3c30fc58ac618703d10e5f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a618adb78f3c30fc58ac618703d10e5f1"></a>
+pair&lt; string, string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00069.html#a618adb78f3c30fc58ac618703d10e5f1">variable</a></td></tr>
+<tr class="memdesc:a618adb78f3c30fc58ac618703d10e5f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable \(x_i\) and \(x_j\) <br /></td></tr>
+<tr class="separator:a618adb78f3c30fc58ac618703d10e5f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82c55a27fe7d7253d6d49dda9a281ce4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82c55a27fe7d7253d6d49dda9a281ce4"></a>
+<a class="el" href="a00176.html#a514573ee1479d1d04151f3e67c804d66">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00069.html#a82c55a27fe7d7253d6d49dda9a281ce4">constant</a></td></tr>
+<tr class="memdesc:a82c55a27fe7d7253d6d49dda9a281ce4"><td class="mdescLeft">&#160;</td><td class="mdescRight">constant in the right hand side, i.e., \(c_{ij}\) <br /></td></tr>
+<tr class="separator:a82c55a27fe7d7253d6d49dda9a281ce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad10d8cbf54817be742a37dbe7a4fb510"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad10d8cbf54817be742a37dbe7a4fb510"></a>
+arc_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00069.html#ad10d8cbf54817be742a37dbe7a4fb510">arc</a></td></tr>
+<tr class="memdesc:ad10d8cbf54817be742a37dbe7a4fb510"><td class="mdescLeft">&#160;</td><td class="mdescRight">arc \(x_i \rightarrow x_j\) in the graph <br /></td></tr>
+<tr class="separator:ad10d8cbf54817be742a37dbe7a4fb510"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Custom class that inheritates <a class="el" href="a00070.html">GdfParser::GdfDataBase</a> with all the required callbacks gdfined. </p>
+<div class="textblock"><h3>template&lt;typename T = int64_t&gt;<br />
+class limbo::solvers::lpmcf::LpDualMcf&lt; T &gt;::constraint_type</h3>
 
-<p>Definition at line <a class="el" href="a00331_source.html#l00020">20</a> of file <a class="el" href="a00331_source.html">test_bison.cpp</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a2f1b2f284edc8f85158d7bfe247694bd"></a>
+<p>constraint object in the primal linear programming problem. standard format: \(x_i - x_j \ge c_{ij}\) maps to arc \(x_i \rightarrow x_j, \textrm{cost} = -c_{ij}\). </p>
+
+<p>Definition at line <a class="el" href="a00383_source.html#l00209">209</a> of file <a class="el" href="a00383_source.html">LpDualMcf.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a0d95514bed55ef419cf713e37b5c9a6b"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T = int64_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void GdfDataBase::add_gdf_cell </td>
+          <td class="memname"><a class="el" href="a00176.html">limbo::solvers::lpmcf::LpDualMcf</a>&lt; T &gt;::constraint_type::constraint_type </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00011.html">GdfParser::Cell</a> &amp;&#160;</td>
-          <td class="paramname"><em>cell</em></td><td>)</td>
+          <td class="paramtype">string const &amp;&#160;</td>
+          <td class="paramname"><em>xi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">string const &amp;&#160;</td>
+          <td class="paramname"><em>xj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00176.html#a514573ee1479d1d04151f3e67c804d66">value_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>add routing cell </p>
-<p>required callbacks from abstract <a class="el" href="a00070.html" title="Base class for def database. Only pure virtual functions are defined. User needs to inheritate this c...">GdfParser::GdfDataBase</a> /////////////////// </p><dl class="params"><dt>Parameters</dt><dd>
+<p>constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cell</td><td>describes the whole layout for routing </td></tr>
+    <tr><td class="paramname">xi</td><td>\(x_i\) </td></tr>
+    <tr><td class="paramname">xj</td><td>\(x_j\) </td></tr>
+    <tr><td class="paramname">c</td><td>\(c_{ij}\) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="a00070.html#a41c323529f69e6ee9108c295f57b0b1c">GdfParser::GdfDataBase</a>.</p>
-
-<p>Definition at line <a class="el" href="a00331_source.html#l00031">31</a> of file <a class="el" href="a00331_source.html">test_bison.cpp</a>.</p>
+<p>Definition at line <a class="el" href="a00383_source.html#l00219">219</a> of file <a class="el" href="a00383_source.html">LpDualMcf.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/test/parsers/gdf/<a class="el" href="a00331_source.html">test_bison.cpp</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/lpmcf/<a class="el" href="a00383_source.html">LpDualMcf.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

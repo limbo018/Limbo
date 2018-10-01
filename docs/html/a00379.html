@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: Bibliography</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/solvers/api/CsdpEasySdpApi.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,10 +43,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li class="current"><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -65,6 +65,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </li>
     </ul>
   </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+    </ul>
+  </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -79,26 +85,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_bf387cd841d140e51bbf6ba57d00cc45.html">solvers</a></li><li class="navelem"><a class="el" href="dir_8bc412fedb5eea69bf8f8b3210d993e9.html">api</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Bibliography </div>  </div>
+<div class="title">CsdpEasySdpApi.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><dl class="citelist">
-<dt><a class="anchor" id="CITEREF_FLOW_B2005_Ahuja"></a>[1]</dt>
-<dd><p class="startdd">R.&#160;K. Ahuja, T.&#160;L. Magnanti, and J.&#160;B. Orlin. <em>Network Flows: Theory, Algorithms, and Applications</em>. Prentice Hall/Pearson, 2005.</p>
-<p class="enddd"></p>
-</dd>
-<dt><a class="anchor" id="CITEREF_TPL_TCAD2015_Yu"></a>[2]</dt>
-<dd><p class="startdd">Bei Yu, Kun Yuan, Duo Ding, and David&#160;Z. Pan. Layout decomposition for triple patterning lithography. <em>IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD)</em>, 34(3):433&ndash;446, March 2015.</p>
-<p class="enddd"></p>
-</dd>
-</dl>
+
+<p>this file is a modified version of easysdp.c in Csdp package. Original version does not provide control over parameters and print level. The function <a class="el" href="a00443.html#aa750e4038e98a15a46f84781218d50ba" title="API to call Csdp solver. ">limbo::solvers::easy_sdp_ext</a> passes two additional parameters for better flexibility.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00349_source.html">math.h</a>&gt;</code><br />
+<code>#include &lt;limbo/thirdparty/Csdp/include/declarations.h&gt;</code><br />
+</div>
+<p><a href="a00379_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
+<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00443"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html">limbo::solvers</a></td></tr>
+<tr class="memdesc:a00443"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace Limbo.Solvers <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aa750e4038e98a15a46f84781218d50ba"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aa750e4038e98a15a46f84781218d50ba"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00443.html#aa750e4038e98a15a46f84781218d50ba">limbo::solvers::easy_sdp_ext</a> (int n, int k, struct blockmatrix C, double *a, struct constraintmatrix *constraints, double constant_offset, struct blockmatrix *pX, double **py, struct blockmatrix *pZ, double *ppobj, double *pdobj, struct paramstruc const &amp;params, int const &amp;printlevel)</td></tr>
+<tr class="memdesc:aa750e4038e98a15a46f84781218d50ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to call Csdp solver.  <a href="#aa750e4038e98a15a46f84781218d50ba">More...</a><br /></td></tr>
+<tr class="separator:aa750e4038e98a15a46f84781218d50ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>this file is a modified version of easysdp.c in Csdp package. Original version does not provide control over parameters and print level. The function <a class="el" href="a00443.html#aa750e4038e98a15a46f84781218d50ba" title="API to call Csdp solver. ">limbo::solvers::easy_sdp_ext</a> passes two additional parameters for better flexibility. </p>
+<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
+
+<p>Definition in file <a class="el" href="a00379_source.html">CsdpEasySdpApi.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

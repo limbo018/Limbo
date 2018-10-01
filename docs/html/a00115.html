@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::geometry::Polygon2Rectangle&lt; PointSet, RectSet &gt;::is_equal_type Struct Reference</title>
+<title>Limbo: GdsParser::GdsBoundary Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,92 +89,71 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00370.html">geometry</a></li><li class="navelem"><a class="el" href="a00184.html">Polygon2Rectangle</a></li><li class="navelem"><a class="el" href="a00115.html">is_equal_type</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00431.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00115.html">GdsBoundary</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00532.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00517.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::geometry::Polygon2Rectangle&lt; PointSet, RectSet &gt;::is_equal_type Struct Reference</div>  </div>
+<div class="title">GdsParser::GdsBoundary Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>is equal helper  
+<p>internal structure to store gds information  
  <a href="a00115.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00264_source.html">Polygon2Rectangle.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00362_source.html">GdsDriver.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a68fe54c9b12c89eb4288081cf1fb81ad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00115.html#a68fe54c9b12c89eb4288081cf1fb81ad">operator()</a> (<a class="el" href="a00184.html#aac2e5ed66d374093c84f3a465ca81170">point_type</a> const &amp;p1, <a class="el" href="a00184.html#aac2e5ed66d374093c84f3a465ca81170">point_type</a> const &amp;p2) const </td></tr>
-<tr class="memdesc:a68fe54c9b12c89eb4288081cf1fb81ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">is equal helper  <a href="#a68fe54c9b12c89eb4288081cf1fb81ad">More...</a><br /></td></tr>
-<tr class="separator:a68fe54c9b12c89eb4288081cf1fb81ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a609eea1ff204fcfa1aea80c117a28a8d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a609eea1ff204fcfa1aea80c117a28a8d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00115.html#a609eea1ff204fcfa1aea80c117a28a8d">reset</a> ()</td></tr>
+<tr class="memdesc:a609eea1ff204fcfa1aea80c117a28a8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br /></td></tr>
+<tr class="separator:a609eea1ff204fcfa1aea80c117a28a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a792d9bbe394144cf57d551d89aee58c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a792d9bbe394144cf57d551d89aee58c9"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00115.html#a792d9bbe394144cf57d551d89aee58c9">layer</a></td></tr>
+<tr class="memdesc:a792d9bbe394144cf57d551d89aee58c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">layer <br /></td></tr>
+<tr class="separator:a792d9bbe394144cf57d551d89aee58c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2541e3a11f5951e11377213b817d92ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2541e3a11f5951e11377213b817d92ef"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00115.html#a2541e3a11f5951e11377213b817d92ef">datatype</a></td></tr>
+<tr class="memdesc:a2541e3a11f5951e11377213b817d92ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">data type <br /></td></tr>
+<tr class="separator:a2541e3a11f5951e11377213b817d92ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eb0552b06009cce61ecce60e985287a"><td class="memItemLeft" align="right" valign="top">vector&lt; vector&lt; int32_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00115.html#a2eb0552b06009cce61ecce60e985287a">vPoint</a></td></tr>
+<tr class="separator:a2eb0552b06009cce61ecce60e985287a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename PointSet, typename RectSet&gt;<br />
-struct limbo::geometry::Polygon2Rectangle&lt; PointSet, RectSet &gt;::is_equal_type</h3>
+<div class="textblock"><p>internal structure to store gds information </p>
 
-<p>is equal helper </p>
-
-<p>Definition at line <a class="el" href="a00264_source.html#l00515">515</a> of file <a class="el" href="a00264_source.html">Polygon2Rectangle.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a68fe54c9b12c89eb4288081cf1fb81ad"></a>
+<p>Definition at line <a class="el" href="a00362_source.html#l00034">34</a> of file <a class="el" href="a00362_source.html">GdsDriver.h</a>.</p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a2eb0552b06009cce61ecce60e985287a"></a>
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename PointSet, typename RectSet&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="a00184.html">limbo::geometry::Polygon2Rectangle</a>&lt; PointSet, RectSet &gt;::is_equal_type::operator() </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00184.html#aac2e5ed66d374093c84f3a465ca81170">point_type</a> const &amp;&#160;</td>
-          <td class="paramname"><em>p1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00184.html#aac2e5ed66d374093c84f3a465ca81170">point_type</a> const &amp;&#160;</td>
-          <td class="paramname"><em>p2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="memname">vector&lt;vector&lt;int32_t&gt; &gt; GdsParser::GdsBoundary::vPoint</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+<p>points </p>
 
-<p>is equal helper </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p1</td><td>point </td></tr>
-    <tr><td class="paramname">p2</td><td>point </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if two points are equal </dd></dl>
-
-<p>Definition at line <a class="el" href="a00264_source.html#l00523">523</a> of file <a class="el" href="a00264_source.html">Polygon2Rectangle.h</a>.</p>
+<p>Definition at line <a class="el" href="a00362_source.html#l00038">38</a> of file <a class="el" href="a00362_source.html">GdsDriver.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/geometry/<a class="el" href="a00264_source.html">Polygon2Rectangle.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00362_source.html">GdsDriver.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

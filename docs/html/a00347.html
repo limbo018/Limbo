@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/test/solvers/test_MultiKnapsackLagRelax.cpp File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/makeutils/FindZlib.mk File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,107 +87,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_39b21b41cf10d9ff223861185498a807.html">solvers</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_1fc182626e7eef33c760a3801c695bc4.html">makeutils</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">test_MultiKnapsackLagRelax.cpp File Reference</div>  </div>
+<div class="title">FindZlib.mk File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>test <a class="el" href="a00146.html">limbo::solvers::MultiKnapsackLagRelax</a> algorithm  
+<p>find Zlib library given ZLIB_DIR, set ZLIB_LINK_FLAG to either STATIC_LINK_FLAG or DYNAMIC_LINK_FLAG  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00314_source.html">limbo/solvers/MultiKnapsackLagRelax.h</a>&gt;</code><br />
-</div>
+
 <p><a href="a00347_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a10949854d3fa748645a107588cc24851"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00347.html#a10949854d3fa748645a107588cc24851">test</a> (std::string const &amp;filename)</td></tr>
-<tr class="memdesc:a10949854d3fa748645a107588cc24851"><td class="mdescLeft">&#160;</td><td class="mdescRight">test file API  <a href="#a10949854d3fa748645a107588cc24851">More...</a><br /></td></tr>
-<tr class="separator:a10949854d3fa748645a107588cc24851"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00347.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">main function  <a href="#a3c04138a5bfe5d72780bb7e82a18e627">More...</a><br /></td></tr>
-<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>test <a class="el" href="a00146.html">limbo::solvers::MultiKnapsackLagRelax</a> algorithm </p>
-<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Feb 2017 </dd></dl>
-
-<p>Definition in file <a class="el" href="a00347_source.html">test_MultiKnapsackLagRelax.cpp</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char **&#160;</td>
-          <td class="paramname"><em>argv</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>main function </p>
+<div class="textblock"><p>find Zlib library given ZLIB_DIR, set ZLIB_LINK_FLAG to either STATIC_LINK_FLAG or DYNAMIC_LINK_FLAG </p>
+<p>It check whether Zlib library is installed as static library. If so, link to static library; otherwise, link to shared library. Use following command in the Makefile to view the results </p><pre class="fragment">$(info Zlib: ZLIB_LINK_FLAG = $(ZLIB_LINK_FLAG))
+</pre><dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Jan 2017</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">argc</td><td>number of arguments </td></tr>
-    <tr><td class="paramname">argv</td><td>values of arguments </td></tr>
+    <tr><td class="paramname">ZLIB_DIR</td><td>given path to Zlib library </td></tr>
+    <tr><td class="paramname">ZLIB_LINK_FLAG</td><td>set linking flag to Zlib </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00347_source.html#l00037">37</a> of file <a class="el" href="a00347_source.html">test_MultiKnapsackLagRelax.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a10949854d3fa748645a107588cc24851"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void test </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>filename</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>test file API </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>input lp file </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00347_source.html#l00013">13</a> of file <a class="el" href="a00347_source.html">test_MultiKnapsackLagRelax.cpp</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>Definition in file <a class="el" href="a00347_source.html">FindZlib.mk</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

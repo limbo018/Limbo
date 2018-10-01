@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: AsciiDataBase Struct Reference</title>
+<title>Limbo: Limbo.Algorithms</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,9 +43,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li class="current"><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -65,14 +65,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </li>
     </ul>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
-      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
-      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
-    </ul>
-  </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -89,491 +81,239 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00381.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">AsciiDataBase Struct Reference</div>  </div>
+<div class="title">Limbo.Algorithms </div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>test ascii callbacks  
- <a href="a00002.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for AsciiDataBase:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="a00002.png" usemap="#AsciiDataBase_map" alt=""/>
-  <map id="AsciiDataBase_map" name="AsciiDataBase_map">
-<area href="a00079.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks " alt="GdsParser::GdsDataBase" shape="rect" coords="0,56,191,80"/>
-<area href="a00080.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. " alt="GdsParser::GdsDataBaseKernel" shape="rect" coords="0,0,191,24"/>
-</map>
- </div></div>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:ae011be56c5c49881f7b72488a852ba6f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae011be56c5c49881f7b72488a852ba6f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#ae011be56c5c49881f7b72488a852ba6f">AsciiDataBase</a> ()</td></tr>
-<tr class="memdesc:ae011be56c5c49881f7b72488a852ba6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:ae011be56c5c49881f7b72488a852ba6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75487dc6cf564d3bab959933dad45fbe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a75487dc6cf564d3bab959933dad45fbe">bit_array_cbk</a> (const char *ascii_record_type, const char *ascii_data_type, vector&lt; int &gt; const &amp;vBitArray)</td></tr>
-<tr class="memdesc:a75487dc6cf564d3bab959933dad45fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">bit array callback  <a href="#a75487dc6cf564d3bab959933dad45fbe">More...</a><br /></td></tr>
-<tr class="separator:a75487dc6cf564d3bab959933dad45fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7049b38a9e7bab32b380227303db2e1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#ad7049b38a9e7bab32b380227303db2e1">integer_2_cbk</a> (const char *ascii_record_type, const char *ascii_data_type, vector&lt; int &gt; const &amp;vInteger)</td></tr>
-<tr class="memdesc:ad7049b38a9e7bab32b380227303db2e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">2-byte integer callback  <a href="#ad7049b38a9e7bab32b380227303db2e1">More...</a><br /></td></tr>
-<tr class="separator:ad7049b38a9e7bab32b380227303db2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4c614d5cd6183bcb21f7c94b7a06e52"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#ae4c614d5cd6183bcb21f7c94b7a06e52">integer_4_cbk</a> (const char *ascii_record_type, const char *ascii_data_type, vector&lt; int &gt; const &amp;vInteger)</td></tr>
-<tr class="memdesc:ae4c614d5cd6183bcb21f7c94b7a06e52"><td class="mdescLeft">&#160;</td><td class="mdescRight">4-byte integer callback  <a href="#ae4c614d5cd6183bcb21f7c94b7a06e52">More...</a><br /></td></tr>
-<tr class="separator:ae4c614d5cd6183bcb21f7c94b7a06e52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56dd6954127d65140065e8ebe78e11d5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a56dd6954127d65140065e8ebe78e11d5">real_4_cbk</a> (const char *ascii_record_type, const char *ascii_data_type, vector&lt; double &gt; const &amp;vFloat)</td></tr>
-<tr class="memdesc:a56dd6954127d65140065e8ebe78e11d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">4-byte floating point number callback  <a href="#a56dd6954127d65140065e8ebe78e11d5">More...</a><br /></td></tr>
-<tr class="separator:a56dd6954127d65140065e8ebe78e11d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac683a04eb9c07242a90e26190ccf0279"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#ac683a04eb9c07242a90e26190ccf0279">real_8_cbk</a> (const char *ascii_record_type, const char *ascii_data_type, vector&lt; double &gt; const &amp;vFloat)</td></tr>
-<tr class="memdesc:ac683a04eb9c07242a90e26190ccf0279"><td class="mdescLeft">&#160;</td><td class="mdescRight">8-byte floating point number callback  <a href="#ac683a04eb9c07242a90e26190ccf0279">More...</a><br /></td></tr>
-<tr class="separator:ac683a04eb9c07242a90e26190ccf0279"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3b734b2bc3b4903e7a489ad5ab64fd0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#ab3b734b2bc3b4903e7a489ad5ab64fd0">string_cbk</a> (const char *ascii_record_type, const char *ascii_data_type, string const &amp;str)</td></tr>
-<tr class="memdesc:ab3b734b2bc3b4903e7a489ad5ab64fd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">string callback  <a href="#ab3b734b2bc3b4903e7a489ad5ab64fd0">More...</a><br /></td></tr>
-<tr class="separator:ab3b734b2bc3b4903e7a489ad5ab64fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c024e66ac2aa8b4ef6b6285b4936380"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a3c024e66ac2aa8b4ef6b6285b4936380">begin_end_cbk</a> (const char *ascii_record_type)</td></tr>
-<tr class="memdesc:a3c024e66ac2aa8b4ef6b6285b4936380"><td class="mdescLeft">&#160;</td><td class="mdescRight">begin or end indicator of a block  <a href="#a3c024e66ac2aa8b4ef6b6285b4936380">More...</a><br /></td></tr>
-<tr class="separator:a3c024e66ac2aa8b4ef6b6285b4936380"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade68f521f26c0f7259f29c36370edace"><td class="memTemplParams" colspan="2">template&lt;typename ContainerType &gt; </td></tr>
-<tr class="memitem:ade68f521f26c0f7259f29c36370edace"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00002.html#ade68f521f26c0f7259f29c36370edace">general_cbk</a> (string const &amp;ascii_record_type, string const &amp;ascii_data_type, ContainerType const &amp;data)</td></tr>
-<tr class="memdesc:ade68f521f26c0f7259f29c36370edace"><td class="mdescLeft">&#160;</td><td class="mdescRight">A generic callback function handles all other callback functions. It is not efficient but concise as a demo.  <a href="#ade68f521f26c0f7259f29c36370edace">More...</a><br /></td></tr>
-<tr class="separator:ade68f521f26c0f7259f29c36370edace"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>test ascii callbacks </p>
-
-<p>Definition at line <a class="el" href="a00338_source.html#l00014">14</a> of file <a class="el" href="a00338_source.html">test_reader.cpp</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a3c024e66ac2aa8b4ef6b6285b4936380"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void AsciiDataBase::begin_end_cbk </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ascii_record_type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>begin or end indicator of a block </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="a00079.html#a4b05a2ea6c87835319c39412291e3bad">GdsParser::GdsDataBase</a>.</p>
-
-<p>Definition at line <a class="el" href="a00338_source.html#l00078">78</a> of file <a class="el" href="a00338_source.html">test_reader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a75487dc6cf564d3bab959933dad45fbe"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void AsciiDataBase::bit_array_cbk </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ascii_record_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ascii_data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; int &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vBitArray</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>bit array callback </p>
-<p>required callbacks ///////////////////// </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
-    <tr><td class="paramname">ascii_data_type</td><td>data type </td></tr>
-    <tr><td class="paramname">vBitArray</td><td>data array </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="a00079.html#ab6517da08a692c7378b94391782fbca5">GdsParser::GdsDataBase</a>.</p>
-
-<p>Definition at line <a class="el" href="a00338_source.html#l00026">26</a> of file <a class="el" href="a00338_source.html">test_reader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ade68f521f26c0f7259f29c36370edace"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ContainerType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void AsciiDataBase::general_cbk </td>
-          <td>(</td>
-          <td class="paramtype">string const &amp;&#160;</td>
-          <td class="paramname"><em>ascii_record_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string const &amp;&#160;</td>
-          <td class="paramname"><em>ascii_data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ContainerType const &amp;&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>A generic callback function handles all other callback functions. It is not efficient but concise as a demo. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">ContainerType</td><td>container type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
-    <tr><td class="paramname">ascii_data_type</td><td>data type </td></tr>
-    <tr><td class="paramname">data</td><td>data values </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00338_source.html#l00091">91</a> of file <a class="el" href="a00338_source.html">test_reader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad7049b38a9e7bab32b380227303db2e1"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void AsciiDataBase::integer_2_cbk </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ascii_record_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ascii_data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; int &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vInteger</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>2-byte integer callback </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
-    <tr><td class="paramname">ascii_data_type</td><td>data type </td></tr>
-    <tr><td class="paramname">vInteger</td><td>data array </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="a00079.html#aa9e80c52a8736dc0bc914de69f972455">GdsParser::GdsDataBase</a>.</p>
-
-<p>Definition at line <a class="el" href="a00338_source.html#l00035">35</a> of file <a class="el" href="a00338_source.html">test_reader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae4c614d5cd6183bcb21f7c94b7a06e52"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void AsciiDataBase::integer_4_cbk </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ascii_record_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ascii_data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; int &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vInteger</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>4-byte integer callback </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
-    <tr><td class="paramname">ascii_data_type</td><td>data type </td></tr>
-    <tr><td class="paramname">vInteger</td><td>data array </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="a00079.html#ad1535afc43e42158515ff7ba1d2021b1">GdsParser::GdsDataBase</a>.</p>
-
-<p>Definition at line <a class="el" href="a00338_source.html#l00044">44</a> of file <a class="el" href="a00338_source.html">test_reader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a56dd6954127d65140065e8ebe78e11d5"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void AsciiDataBase::real_4_cbk </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ascii_record_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ascii_data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; double &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vFloat</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>4-byte floating point number callback </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
-    <tr><td class="paramname">ascii_data_type</td><td>data type </td></tr>
-    <tr><td class="paramname">vFloat</td><td>data array </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="a00079.html#aa1921450e0ba8da996dd4df028c6c9b7">GdsParser::GdsDataBase</a>.</p>
-
-<p>Definition at line <a class="el" href="a00338_source.html#l00053">53</a> of file <a class="el" href="a00338_source.html">test_reader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac683a04eb9c07242a90e26190ccf0279"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void AsciiDataBase::real_8_cbk </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ascii_record_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ascii_data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; double &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vFloat</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>8-byte floating point number callback </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
-    <tr><td class="paramname">ascii_data_type</td><td>data type </td></tr>
-    <tr><td class="paramname">vFloat</td><td>data array </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="a00079.html#aa5334f9c585914b93efba962bb85b04f">GdsParser::GdsDataBase</a>.</p>
-
-<p>Definition at line <a class="el" href="a00338_source.html#l00062">62</a> of file <a class="el" href="a00338_source.html">test_reader.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab3b734b2bc3b4903e7a489ad5ab64fd0"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void AsciiDataBase::string_cbk </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ascii_record_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ascii_data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string const &amp;&#160;</td>
-          <td class="paramname"><em>str</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>string callback </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ascii_record_type</td><td>record </td></tr>
-    <tr><td class="paramname">ascii_data_type</td><td>data type </td></tr>
-    <tr><td class="paramname">str</td><td>data </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="a00079.html#aa3ab7b80bdefac42a6e9f8c1b63d9029">GdsParser::GdsDataBase</a>.</p>
-
-<p>Definition at line <a class="el" href="a00338_source.html#l00071">71</a> of file <a class="el" href="a00338_source.html">test_reader.cpp</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/test/parsers/gdsii/<a class="el" href="a00338_source.html">test_reader.cpp</a></li>
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="#Algorithms_Introduction">Introduction</a><ul><li class="level2"><a href="#Algorithms_Introduction_Partition">Graph Partition</a></li>
+<li class="level2"><a href="#Algorithms_Introduction_Coloring">Graph Coloring</a></li>
+<li class="level2"><a href="#Algorithms_Introduction_Misc">Graph Misc</a></li>
+<li class="level2"><a href="#Algorithms_Introduction_Placement">Placement</a></li>
 </ul>
-</div><!-- contents -->
+</li>
+<li class="level1"><a href="#Algorithms_Examples">Examples</a><ul><li class="level2"><a href="#Algorithms_Examples_FM">FM Partition</a></li>
+<li class="level2"><a href="#Algorithms_Examples_All">All Examples</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#Algorithms_References">References</a><ul><li class="level2"><a href="#Algorithms_References_Partition">Graph Partition</a></li>
+<li class="level2"><a href="#Algorithms_References_Coloring">Graph Coloring</a></li>
+<li class="level2"><a href="#Algorithms_References_Misc">Graph Misc</a></li>
+<li class="level2"><a href="#Algorithms_Reference_Placement">Placement</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="textblock"><h1><a class="anchor" id="Algorithms_Introduction"></a>
+Introduction</h1>
+<p>This package provides various algorithms that are often used in optimization.</p>
+<h2><a class="anchor" id="Algorithms_Introduction_Partition"></a>
+Graph Partition</h2>
+<p>Partitioning algorithms are included such as FM partitioning <a class="el" href="a00449.html#CITEREF_PAR_DAC1982_FM">[3]</a> and its multiway extensions.</p>
+<h2><a class="anchor" id="Algorithms_Introduction_Coloring"></a>
+Graph Coloring</h2>
+<p>Various graph coloring algorithms are included such as integer linear programming (ILP) based coloring <a class="el" href="a00449.html#CITEREF_TPL_TCAD2015_Yu">[6]</a>, semidefinite programming (SDP) based coloring <a class="el" href="a00449.html#CITEREF_TPL_TCAD2015_Yu">[6]</a>, iterative linear programming (LP) based coloring <a class="el" href="a00449.html#CITEREF_TPL_SPIE2016_Lin">[4]</a> , greedy approach <a class="el" href="a00449.html#CITEREF_MPL_CACM1979_Brelaz">[2]</a>, etc. It also provides graph simplification algorithms for the coloring problem, which can also be applied to other graph algorithms.</p>
+<h2><a class="anchor" id="Algorithms_Introduction_Misc"></a>
+Graph Misc</h2>
+<p>Implementation of graph utilities and some other graph algorithms such as maximum clique and maximum independent set.</p>
+<h2><a class="anchor" id="Algorithms_Introduction_Placement"></a>
+Placement</h2>
+<p>Useful VLSI placement strategies.</p>
+<h1><a class="anchor" id="Algorithms_Examples"></a>
+Examples</h1>
+<h2><a class="anchor" id="Algorithms_Examples_FM"></a>
+FM Partition</h2>
+<p>See documented version: <a class="el" href="a00391.html">test/algorithms/test_FM.cpp</a> </p><div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00325.html">limbo/algorithms/partition/FM.h</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">using</span> std::cout;</div>
+<div class="line"><span class="keyword">using</span> std::endl;</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="a00196.html">Node</a> </div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">public</span>:</div>
+<div class="line">        <span class="keyword">typedef</span> <span class="keywordtype">char</span> tie_id_type;</div>
+<div class="line">        <span class="keyword">typedef</span> <span class="keywordtype">int</span> weight_type;</div>
+<div class="line"></div>
+<div class="line">        <a class="code" href="a00196.html#a07ad92bb43ae8964c847dabfd2544a93">Node</a>(weight_type <span class="keyword">const</span>&amp; w, tie_id_type <span class="keyword">const</span>&amp; <span class="keywordtype">id</span>) </div>
+<div class="line">        {</div>
+<div class="line">            <a class="code" href="a00196.html#a23b9d463aa48dda2fbda0d91b93e6f1a">m_weight</a> = w;</div>
+<div class="line">            <a class="code" href="a00196.html#a32bc91d17b7621aa87728e9445d67451">m_id</a> = id;</div>
+<div class="line">        }</div>
+<div class="line"></div>
+<div class="line">        tie_id_type <a class="code" href="a00196.html#a324e3755c2598c6cd50cf14d98ea7a6f">tie_id</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="a00196.html#a32bc91d17b7621aa87728e9445d67451">m_id</a>;}</div>
+<div class="line">        weight_type <a class="code" href="a00196.html#a3c00b2daf6ed3954ff47b14e0d0eb4eb">weight</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="a00196.html#a23b9d463aa48dda2fbda0d91b93e6f1a">m_weight</a>;}</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">protected</span>:</div>
+<div class="line">        tie_id_type <a class="code" href="a00196.html#a32bc91d17b7621aa87728e9445d67451">m_id</a>; </div>
+<div class="line">        weight_type <a class="code" href="a00196.html#a23b9d463aa48dda2fbda0d91b93e6f1a">m_weight</a>; </div>
+<div class="line">};</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00390.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line">    array&lt;Node*, 8&gt; vNode;</div>
+<div class="line">    vNode[0] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;a&#39;</span>);</div>
+<div class="line">    vNode[1] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;b&#39;</span>);</div>
+<div class="line">    vNode[2] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;c&#39;</span>);</div>
+<div class="line">    vNode[3] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;d&#39;</span>);</div>
+<div class="line">    vNode[4] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;e&#39;</span>);</div>
+<div class="line">    vNode[5] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;f&#39;</span>);</div>
+<div class="line">    vNode[6] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;g&#39;</span>);</div>
+<div class="line">    vNode[7] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;h&#39;</span>);</div>
+<div class="line"></div>
+<div class="line">    <a class="code" href="a00104.html">limbo::algorithms::partition::FM&lt;Node, double&gt;</a> fm; </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; vNode.size(); ++i)</div>
+<div class="line">    {</div>
+<div class="line"><span class="preprocessor">#if 1</span></div>
+<div class="line">        <span class="keywordflow">if</span> (i &lt; 4)</div>
+<div class="line">            fm.<a class="code" href="a00104.html#a2d1c4a313cc2a30d2dc783c70029fc5c">add_node</a>(vNode[i], 0);</div>
+<div class="line">        <span class="keywordflow">else</span> </div>
+<div class="line">            fm.<a class="code" href="a00104.html#a2d1c4a313cc2a30d2dc783c70029fc5c">add_node</a>(vNode[i], 1);</div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line">        <span class="keywordflow">if</span> (i &lt; 4)</div>
+<div class="line">            fm.<a class="code" href="a00104.html#a2d1c4a313cc2a30d2dc783c70029fc5c">add_node</a>(vNode[i], i%2);</div>
+<div class="line">        <span class="keywordflow">else</span> </div>
+<div class="line">            fm.<a class="code" href="a00104.html#a2d1c4a313cc2a30d2dc783c70029fc5c">add_node</a>(vNode[i], i%2);</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line">    }</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// net n1</span></div>
+<div class="line">    {</div>
+<div class="line">        vector&lt;Node*&gt; vNodeNet;</div>
+<div class="line">        vNodeNet.push_back(vNode[0]);</div>
+<div class="line">        vNodeNet.push_back(vNode[1]);</div>
+<div class="line">        vNodeNet.push_back(vNode[2]);</div>
+<div class="line">        fm.<a class="code" href="a00104.html#a0a98f5b844b58b5e1426e0c446c09dab">add_net</a>(1, vNodeNet.begin(), vNodeNet.end());</div>
+<div class="line">        <span class="comment">//fm.add_net(1.0/(vNodeNet.size()-1), vNodeNet.begin(), vNodeNet.end());</span></div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// net n2</span></div>
+<div class="line">    {</div>
+<div class="line">        vector&lt;Node*&gt; vNodeNet;</div>
+<div class="line">        vNodeNet.push_back(vNode[1]);</div>
+<div class="line">        vNodeNet.push_back(vNode[3]);</div>
+<div class="line">        vNodeNet.push_back(vNode[4]);</div>
+<div class="line">        vNodeNet.push_back(vNode[5]);</div>
+<div class="line">        fm.<a class="code" href="a00104.html#a0a98f5b844b58b5e1426e0c446c09dab">add_net</a>(1, vNodeNet.begin(), vNodeNet.end());</div>
+<div class="line">        <span class="comment">//fm.add_net(1.0/(vNodeNet.size()-1), vNodeNet.begin(), vNodeNet.end());</span></div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// net n3</span></div>
+<div class="line">    {</div>
+<div class="line">        vector&lt;Node*&gt; vNodeNet;</div>
+<div class="line">        vNodeNet.push_back(vNode[2]);</div>
+<div class="line">        vNodeNet.push_back(vNode[5]);</div>
+<div class="line">        vNodeNet.push_back(vNode[6]);</div>
+<div class="line">        fm.<a class="code" href="a00104.html#a0a98f5b844b58b5e1426e0c446c09dab">add_net</a>(1, vNodeNet.begin(), vNodeNet.end());</div>
+<div class="line">        <span class="comment">//fm.add_net(1.0/(vNodeNet.size()-1), vNodeNet.begin(), vNodeNet.end());</span></div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// net n4</span></div>
+<div class="line">    {</div>
+<div class="line">        vector&lt;Node*&gt; vNodeNet;</div>
+<div class="line">        vNodeNet.push_back(vNode[0]);</div>
+<div class="line">        vNodeNet.push_back(vNode[6]);</div>
+<div class="line">        fm.<a class="code" href="a00104.html#a0a98f5b844b58b5e1426e0c446c09dab">add_net</a>(1, vNodeNet.begin(), vNodeNet.end());</div>
+<div class="line">        <span class="comment">//fm.add_net(1.0/(vNodeNet.size()-1), vNodeNet.begin(), vNodeNet.end());</span></div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// net n5</span></div>
+<div class="line">    {</div>
+<div class="line">        vector&lt;Node*&gt; vNodeNet;</div>
+<div class="line">        vNodeNet.push_back(vNode[3]);</div>
+<div class="line">        vNodeNet.push_back(vNode[4]);</div>
+<div class="line">        vNodeNet.push_back(vNode[7]);</div>
+<div class="line">        fm.<a class="code" href="a00104.html#a0a98f5b844b58b5e1426e0c446c09dab">add_net</a>(1, vNodeNet.begin(), vNodeNet.end());</div>
+<div class="line">        <span class="comment">//fm.add_net(1.0/(vNodeNet.size()-1), vNodeNet.begin(), vNodeNet.end());</span></div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// net n6</span></div>
+<div class="line">    {</div>
+<div class="line">        vector&lt;Node*&gt; vNodeNet;</div>
+<div class="line">        vNodeNet.push_back(vNode[5]);</div>
+<div class="line">        vNodeNet.push_back(vNode[7]);</div>
+<div class="line">        fm.<a class="code" href="a00104.html#a0a98f5b844b58b5e1426e0c446c09dab">add_net</a>(1, vNodeNet.begin(), vNodeNet.end());</div>
+<div class="line">        <span class="comment">//fm.add_net(1.0/(vNodeNet.size()-1), vNodeNet.begin(), vNodeNet.end());</span></div>
+<div class="line">    }</div>
+<div class="line">    fm.<a class="code" href="a00104.html#abc02950404c72043ec5cf861738873ef">print</a>();</div>
+<div class="line">    fm.<a class="code" href="a00104.html#a25bb3468674836a227ccc4b095c3ac59">print_connection</a>();</div>
+<div class="line">    fm(3.0/5, 5.0/3);</div>
+<div class="line">    fm.<a class="code" href="a00104.html#abc02950404c72043ec5cf861738873ef">print</a>();</div>
+<div class="line">    fm.<a class="code" href="a00104.html#a25bb3468674836a227ccc4b095c3ac59">print_connection</a>();</div>
+<div class="line"></div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Compiling and running commands (assuming LIMBO_DIR and BOOST_DIR are well defined). </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;g++ -o test_FM test_FM.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -L $BOOST_DIR/lib -lboost_regex</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;# test FM algorithm with a simple graph </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;./test_FM </div>
+</div><!-- fragment --><p>Output </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;------- partitions -------</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;{d c b a | h g f e }</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;------- connections -------</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;a - b - c</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;b - d - e - f</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;c - f - g</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;a - g</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;d - e - h</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;f - h</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;######### iteration #0 #########</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;======= trial phase =======</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;======= actual phase w. target_cnt = 2 =======</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;######### iteration #1 #########</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;======= trial phase =======</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;======= actual phase w. target_cnt = 0 =======</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;------- partitions -------</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{g c b a | h f e d }</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;------- connections -------</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;a - b - c</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;b - d - e - f</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;c - f - g</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;a - g</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;d - e - h</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;f - h</div>
+</div><!-- fragment --><h2><a class="anchor" id="Algorithms_Examples_All"></a>
+All Examples</h2>
+<p>Possible dependencies: <a href="http://www.boost.org">Boost</a>, <a href="https://www.gurobi.com">Gurobi</a>, <a href="https://projects.coin-or.org/Cbc">Cbc</a>, <a href="https://lemon.cs.elte.hu">Lemon</a>, <a class="el" href="a00042.html">Csdp</a>, <a class="el" href="a00042.html">OpenBLAS</a>.</p>
+<ul>
+<li><a class="el" href="a00391.html">test/algorithms/test_FM.cpp</a></li>
+<li><a class="el" href="a00390.html">test/algorithms/test_ChromaticNumber.cpp</a></li>
+<li><a class="el" href="a00392.html">test/algorithms/test_GraphSimplification.cpp</a></li>
+<li><a class="el" href="a00393.html">test/algorithms/test_ILPColoring.cpp</a></li>
+<li><a class="el" href="a00396.html">test/algorithms/test_SDPColoring.cpp</a></li>
+<li><a class="el" href="a00394.html">test/algorithms/test_LPColoring.cpp</a></li>
+</ul>
+<h1><a class="anchor" id="Algorithms_References"></a>
+References</h1>
+<h2><a class="anchor" id="Algorithms_References_Partition"></a>
+Graph Partition</h2>
+<ul>
+<li><a class="el" href="a00325.html">limbo/algorithms/partition/FM.h</a></li>
+<li><a class="el" href="a00326.html">limbo/algorithms/partition/FMMultiWay.h</a></li>
+</ul>
+<h2><a class="anchor" id="Algorithms_References_Coloring"></a>
+Graph Coloring</h2>
+<ul>
+<li><a class="el" href="a00313.html">limbo/algorithms/coloring/Coloring.h</a></li>
+<li><a class="el" href="a00311.html">limbo/algorithms/coloring/BacktrackColoring.h</a></li>
+<li><a class="el" href="a00312.html">limbo/algorithms/coloring/ChromaticNumber.h</a></li>
+<li><a class="el" href="a00314.html">limbo/algorithms/coloring/GraphSimplification.h</a></li>
+<li><a class="el" href="a00315.html">limbo/algorithms/coloring/GreedyColoring.h</a></li>
+<li><a class="el" href="a00316.html">limbo/algorithms/coloring/ILPColoring.h</a></li>
+<li><a class="el" href="a00317.html">limbo/algorithms/coloring/ILPColoringLemonCbc.h</a></li>
+<li><a class="el" href="a00318.html">limbo/algorithms/coloring/LPColoring.h</a></li>
+<li><a class="el" href="a00321.html">limbo/algorithms/coloring/SDPColoringCsdp.h</a></li>
+</ul>
+<h2><a class="anchor" id="Algorithms_References_Misc"></a>
+Graph Misc</h2>
+<ul>
+<li><a class="el" href="a00322.html">limbo/algorithms/GraphUtility.h</a></li>
+<li><a class="el" href="a00323.html">limbo/algorithms/MaxClique.h</a></li>
+<li><a class="el" href="a00324.html">limbo/algorithms/MaxIndependentSet.h</a></li>
+</ul>
+<h2><a class="anchor" id="Algorithms_Reference_Placement"></a>
+Placement</h2>
+<ul>
+<li><a class="el" href="a00327.html">limbo/algorithms/placement/GreedySearch.h</a> </li>
+</ul>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt; Struct Template Reference</title>
+<title>Limbo: Limbo.Parsers.DefParser</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,9 +43,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li class="current"><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -65,14 +65,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </li>
     </ul>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
-      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
-      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
-    </ul>
-  </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -87,273 +79,179 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00365.html">algorithms</a></li><li class="navelem"><a class="el" href="a00366.html">coloring</a></li><li class="navelem"><a class="el" href="a00016.html">ColoringEdgeLabelWriter</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00490.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt; Struct Template Reference</div>  </div>
+<div class="title">Limbo.Parsers.DefParser </div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p><code>#include &lt;<a class="el" href="a00242_source.html">Coloring.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="a00016.png" usemap="#limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt;_map" alt=""/>
-  <map id="limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt;_map" name="limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt;_map">
-<area href="a00056.html" title="default EdgeLabelWriter for write_graph " alt="limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;" shape="rect" coords="0,0,391,24"/>
-</map>
- </div></div>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a89aaa721df0bdaf680594a7b91a6bd12"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a89aaa721df0bdaf680594a7b91a6bd12"></a>
-typedef GraphType&#160;</td><td class="memItemRight" valign="bottom"><b>graph_type</b></td></tr>
-<tr class="separator:a89aaa721df0bdaf680594a7b91a6bd12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2113d8280eb32cb00abe0f9cef825580"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2113d8280eb32cb00abe0f9cef825580"></a>
-typedef <a class="el" href="a00056.html">la::EdgeLabelWriter</a><br class="typebreak" />
-&lt; graph_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>base_type</b></td></tr>
-<tr class="separator:a2113d8280eb32cb00abe0f9cef825580"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3e1b08a4a467a1fbd2b4ed3bb175ba5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3e1b08a4a467a1fbd2b4ed3bb175ba5"></a>
-typedef base_type::edge_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>edge_descriptor</b></td></tr>
-<tr class="separator:aa3e1b08a4a467a1fbd2b4ed3bb175ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43c758db9995bb53e342e951801c860a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a43c758db9995bb53e342e951801c860a"></a>
-typedef base_type::edge_weight_type&#160;</td><td class="memItemRight" valign="bottom"><b>edge_weight_type</b></td></tr>
-<tr class="separator:a43c758db9995bb53e342e951801c860a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3583ff8749c86138578bd84c488ddd47"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3583ff8749c86138578bd84c488ddd47"></a>
-typedef boost::graph_traits<br class="typebreak" />
-&lt; graph_type &gt;<br class="typebreak" />
-::vertex_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>vertex_descriptor</b></td></tr>
-<tr class="separator:a3583ff8749c86138578bd84c488ddd47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_a00056"><td colspan="2" onclick="javascript:toggleInherit('pub_types_a00056')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="a00056.html">limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;</a></td></tr>
-<tr class="memitem:adad54e2c8c79d3c69a3e14ab0a3911c4 inherit pub_types_a00056"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adad54e2c8c79d3c69a3e14ab0a3911c4"></a>
-typedef GraphType&#160;</td><td class="memItemRight" valign="bottom"><b>graph_type</b></td></tr>
-<tr class="separator:adad54e2c8c79d3c69a3e14ab0a3911c4 inherit pub_types_a00056"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac049cae48dc3be43d9beec3cd6c4a7b9 inherit pub_types_a00056"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac049cae48dc3be43d9beec3cd6c4a7b9"></a>
-typedef boost::graph_traits<br class="typebreak" />
-&lt; graph_type &gt;<br class="typebreak" />
-::edge_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>edge_descriptor</b></td></tr>
-<tr class="separator:ac049cae48dc3be43d9beec3cd6c4a7b9 inherit pub_types_a00056"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64895c900f7a369edbc4471173c13494 inherit pub_types_a00056"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64895c900f7a369edbc4471173c13494"></a>
-typedef boost::property_traits<br class="typebreak" />
-&lt; typename boost::property_map<br class="typebreak" />
-&lt; graph_type, <br class="typebreak" />
-boost::edge_weight_t &gt;<br class="typebreak" />
-::const_type &gt;::value_type&#160;</td><td class="memItemRight" valign="bottom"><b>edge_weight_type</b></td></tr>
-<tr class="separator:a64895c900f7a369edbc4471173c13494 inherit pub_types_a00056"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a25c25d4f64468a8de874300a9af336ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00016.html#a25c25d4f64468a8de874300a9af336ef">ColoringEdgeLabelWriter</a> (graph_type const &amp;<a class="el" href="a00056.html#a05275ad1d7efeeb90fb76e05d77b2c50">g</a>, std::vector&lt; int8_t &gt; const &amp;vc)</td></tr>
-<tr class="separator:a25c25d4f64468a8de874300a9af336ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e6b774c953c7b84c0e832f07578053e"><td class="memItemLeft" align="right" valign="top">edge_weight_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00016.html#a4e6b774c953c7b84c0e832f07578053e">label</a> (edge_descriptor e) const </td></tr>
-<tr class="separator:a4e6b774c953c7b84c0e832f07578053e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afee41a1346015848ff480a3848193341"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00016.html#afee41a1346015848ff480a3848193341">color</a> (edge_descriptor e) const </td></tr>
-<tr class="separator:afee41a1346015848ff480a3848193341"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37275c2c485c657414acc587f4aa11a9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00016.html#a37275c2c485c657414acc587f4aa11a9">style</a> (edge_descriptor e) const </td></tr>
-<tr class="separator:a37275c2c485c657414acc587f4aa11a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_a00056"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00056')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="a00056.html">limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;</a></td></tr>
-<tr class="memitem:abf9377b519aee8ae51cc384a8de1067d inherit pub_methods_a00056"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00056.html#abf9377b519aee8ae51cc384a8de1067d">EdgeLabelWriter</a> (graph_type const &amp;_g)</td></tr>
-<tr class="separator:abf9377b519aee8ae51cc384a8de1067d inherit pub_methods_a00056"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91adec92335eeb259447796bb00a3f4f inherit pub_methods_a00056"><td class="memItemLeft" align="right" valign="top">edge_weight_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00056.html#a91adec92335eeb259447796bb00a3f4f">label</a> (edge_descriptor e) const </td></tr>
-<tr class="separator:a91adec92335eeb259447796bb00a3f4f inherit pub_methods_a00056"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a267098161680f05d95b19841da24b6ba inherit pub_methods_a00056"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00056.html#a267098161680f05d95b19841da24b6ba">color</a> (edge_descriptor) const </td></tr>
-<tr class="separator:a267098161680f05d95b19841da24b6ba inherit pub_methods_a00056"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16a4d37ab57c09684de5bc5a526e9742 inherit pub_methods_a00056"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00056.html#a16a4d37ab57c09684de5bc5a526e9742">style</a> (edge_descriptor) const </td></tr>
-<tr class="separator:a16a4d37ab57c09684de5bc5a526e9742 inherit pub_methods_a00056"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:ac6ad7d9c60ef958103e4262b7787f66c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac6ad7d9c60ef958103e4262b7787f66c"></a>
-std::vector&lt; int8_t &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00016.html#ac6ad7d9c60ef958103e4262b7787f66c">vColor</a></td></tr>
-<tr class="memdesc:ac6ad7d9c60ef958103e4262b7787f66c"><td class="mdescLeft">&#160;</td><td class="mdescRight">coloring solutions <br /></td></tr>
-<tr class="separator:ac6ad7d9c60ef958103e4262b7787f66c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_a00056"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_a00056')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="a00056.html">limbo::algorithms::EdgeLabelWriter&lt; GraphType &gt;</a></td></tr>
-<tr class="memitem:a05275ad1d7efeeb90fb76e05d77b2c50 inherit pub_attribs_a00056"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05275ad1d7efeeb90fb76e05d77b2c50"></a>
-graph_type const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00056.html#a05275ad1d7efeeb90fb76e05d77b2c50">g</a></td></tr>
-<tr class="memdesc:a05275ad1d7efeeb90fb76e05d77b2c50 inherit pub_attribs_a00056"><td class="mdescLeft">&#160;</td><td class="mdescRight">bind graph object <br /></td></tr>
-<tr class="separator:a05275ad1d7efeeb90fb76e05d77b2c50 inherit pub_attribs_a00056"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename GraphType&gt;<br />
-struct limbo::algorithms::coloring::ColoringEdgeLabelWriter&lt; GraphType &gt;</h3>
-
-<p>function object to write edge label </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">GraphType</td><td>graph type </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00242_source.html#l00069">69</a> of file <a class="el" href="a00242_source.html">Coloring.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a25c25d4f64468a8de874300a9af336ef"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00016.html">limbo::algorithms::coloring::ColoringEdgeLabelWriter</a>&lt; GraphType &gt;::<a class="el" href="a00016.html">ColoringEdgeLabelWriter</a> </td>
-          <td>(</td>
-          <td class="paramtype">graph_type const &amp;&#160;</td>
-          <td class="paramname"><em>g</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; int8_t &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vc</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>graph </td></tr>
-    <tr><td class="paramname">vc</td><td>coloring solutions </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00242_source.html#l00084">84</a> of file <a class="el" href="a00242_source.html">Coloring.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="afee41a1346015848ff480a3848193341"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string <a class="el" href="a00016.html">limbo::algorithms::coloring::ColoringEdgeLabelWriter</a>&lt; GraphType &gt;::color </td>
-          <td>(</td>
-          <td class="paramtype">edge_descriptor&#160;</td>
-          <td class="paramname"><em>e</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>get color of edge </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">e</td><td>edge </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>color of edge </dd></dl>
-
-<p>Definition at line <a class="el" href="a00242_source.html#l00093">93</a> of file <a class="el" href="a00242_source.html">Coloring.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4e6b774c953c7b84c0e832f07578053e"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">edge_weight_type <a class="el" href="a00016.html">limbo::algorithms::coloring::ColoringEdgeLabelWriter</a>&lt; GraphType &gt;::label </td>
-          <td>(</td>
-          <td class="paramtype">edge_descriptor&#160;</td>
-          <td class="paramname"><em>e</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>get label of edge </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">e</td><td>edge </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>label of edge </dd></dl>
-
-<p>Definition at line <a class="el" href="a00242_source.html#l00089">89</a> of file <a class="el" href="a00242_source.html">Coloring.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a37275c2c485c657414acc587f4aa11a9"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename GraphType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string <a class="el" href="a00016.html">limbo::algorithms::coloring::ColoringEdgeLabelWriter</a>&lt; GraphType &gt;::style </td>
-          <td>(</td>
-          <td class="paramtype">edge_descriptor&#160;</td>
-          <td class="paramname"><em>e</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>get style of edge </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">e</td><td>edge </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>style of edge </dd></dl>
-
-<p>Definition at line <a class="el" href="a00242_source.html#l00106">106</a> of file <a class="el" href="a00242_source.html">Coloring.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/<a class="el" href="a00242_source.html">Coloring.h</a></li>
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="#Parsers_DefParser_Introduction">Introduction</a></li>
+<li class="level1"><a href="#Parsers_DefParser_Examples">Examples</a><ul><li class="level2"><a href="#Parsers_DefParser_Flex_Bison">Flex/Bison Parser</a></li>
+<li class="level2"><a href="#Parsers_DefParser_Examples_All">All Examples</a></li>
 </ul>
-</div><!-- contents -->
+</li>
+<li class="level1"><a href="#Parsers_DefParser_References">References</a></li>
+<li class="level1"><a href="#Parsers_DefParser_License">LICENSE</a></li>
+</ul>
+</div>
+<div class="textblock"><h1><a class="anchor" id="Parsers_DefParser_Introduction"></a>
+Introduction</h1>
+<p><a href="https://en.wikipedia.org/wiki/Design_Exchange_Format">DEF</a> together with <a href="https://en.wikipedia.org/wiki/Library_Exchange_Format">LEF</a> is a common file format in VLSI physical design. Generally LEF/DEF formats are quit complicated due to the complex cases in chip design. This parser is adjusted from the open source LEF parser released by <a href="https://www.cadence.com">Cadence Design Systems</a> with C++ wrappers. The original parsers lie in the Thirdparty package. Users have to follow the <a class="el" href="a00016.html#Parsers_DefParser_License">LICENSE</a> agreement from the original release. The parser does not contain full API of the original LEF/DEF parsers, but it is tested under various academic benchmarks for VLSI placement.</p>
+<h1><a class="anchor" id="Parsers_DefParser_Examples"></a>
+Examples</h1>
+<h2><a class="anchor" id="Parsers_DefParser_Flex_Bison"></a>
+Flex/Bison Parser</h2>
+<p>See documented version: <a class="el" href="a00405.html">test/parsers/def/test_adapt.cpp</a> </p><div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00353.html">limbo/parsers/def/adapt/DefDriver.h</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">using</span> std::cout;</div>
+<div class="line"><span class="keyword">using</span> std::cin;</div>
+<div class="line"><span class="keyword">using</span> std::endl;</div>
+<div class="line"><span class="keyword">using</span> std::string;</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="a00080.html">DefDataBase</a> : <span class="keyword">public</span> <a class="code" href="a00081.html">DefParser::DefDataBase</a></div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">public</span>:</div>
+<div class="line">        <a class="code" href="a00080.html#aa6d104b38cbbefe657ee2d19f4f20f1a">DefDataBase</a>()</div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; <span class="stringliteral">&quot;DefDataBase::&quot;</span> &lt;&lt; __func__ &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#a67b98fc8818d3a7152109e4c75ec9ee4">set_def_dividerchar</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; token) </div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; token &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#acdf50455cab5486c70ecb167edf412cf">set_def_busbitchars</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; token)</div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; token &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#a94c8e07e7eea9b1c9d51e01b529c5e55">set_def_version</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; token) </div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; token &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#aacfdba055836306cbeccc67dc919fa24">set_def_design</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; token) </div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; token &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#a4c88ac6f022e7d211dad2a604329aea0">set_def_unit</a>(<span class="keywordtype">int</span> token) </div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; token &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#ad03c9d8b0e1f0a40f9a4fb4640869b26">set_def_diearea</a>(<span class="keywordtype">int</span> t1, <span class="keywordtype">int</span> t2, <span class="keywordtype">int</span> t3, <span class="keywordtype">int</span> t4) </div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; t1 &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; t2 &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; t3 &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; t4 &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#aafc3a2801303885000bc4324ea48a0a0">add_def_row</a>(<a class="code" href="a00243.html">DefParser::Row</a> <span class="keyword">const</span>&amp;) </div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#ac8efd74e443db4f009a8e992b7da95ac">add_def_component</a>(<a class="code" href="a00067.html">DefParser::Component</a> <span class="keyword">const</span>&amp; c) </div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; c.<a class="code" href="a00067.html#ad26497f9e85aed18d68077651e671f35">comp_name</a> &lt;&lt; <span class="stringliteral">&quot;: status = &quot;</span> &lt;&lt; c.<a class="code" href="a00067.html#a42950995a250555f06f721fdcb247b2d">status</a> &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#a9867bf7a6c8ef08b632d866f5231082e">resize_def_component</a>(<span class="keywordtype">int</span> token) </div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; token &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#a13a6775f313d08704a317eabad1ed069">add_def_pin</a>(<a class="code" href="a00216.html">DefParser::Pin</a> <span class="keyword">const</span>&amp; p) </div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; p.<a class="code" href="a00216.html#a8262f65071c8e6baf70bd843b5db37e5">pin_name</a> &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#a518131789a2659bf4a33ecd52d0bba5a">resize_def_pin</a>(<span class="keywordtype">int</span> token)  </div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; token &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#a60363dd30012e4d06ef935f5362bd9fe">add_def_net</a>(<a class="code" href="a00191.html">DefParser::Net</a> <span class="keyword">const</span>&amp; n) </div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; n.<a class="code" href="a00191.html#aa5a3c0bffd6ef7a283aab908b678a423">net_name</a> &lt;&lt; <span class="stringliteral">&quot;: weight &quot;</span> &lt;&lt; n.<a class="code" href="a00191.html#a87567fd98527589ae5dca9a934a1915d">net_weight</a> &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#a412ba8b870193d3ff27e8bb3414168f3">resize_def_net</a>(<span class="keywordtype">int</span> token) </div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; token &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#a0300b83c64efcf11bdb186e0925be941">resize_def_blockage</a>(<span class="keywordtype">int</span> n)</div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; n &lt;&lt; endl;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#aa155bd42ffa02abfead00334a8e2395a">add_def_placement_blockage</a>(std::vector&lt;std::vector&lt;int&gt; &gt; <span class="keyword">const</span>&amp; vBbox)</div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span>;</div>
+<div class="line">            <span class="keywordflow">for</span> (std::vector&lt;std::vector&lt;int&gt; &gt;::const_iterator it = vBbox.begin(); it != vBbox.end(); ++it)</div>
+<div class="line">                cout &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; (*it)[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; (*it)[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; (*it)[2] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; (*it)[3] &lt;&lt; <span class="stringliteral">&quot;) &quot;</span>;</div>
+<div class="line">            cout &lt;&lt; endl; </div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00080.html#a7b1b22fb85f88b9b1f3662923085ad9f">end_def_design</a>()</div>
+<div class="line">        {</div>
+<div class="line">            cout &lt;&lt; __func__ &lt;&lt; endl; </div>
+<div class="line">        }</div>
+<div class="line">};</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="a00400.html#ad346d2cc622126c018bb0954eee9b1fa">test1</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
+<div class="line">{</div>
+<div class="line">    cout &lt;&lt; <span class="stringliteral">&quot;////////////// test1 ////////////////&quot;</span> &lt;&lt; endl;</div>
+<div class="line">    <a class="code" href="a00080.html">DefDataBase</a> db;</div>
+<div class="line">    <a class="code" href="a00428.html#a741aebc4d6cfb7a9f17fca2c028445e4">DefParser::read</a>(db, filename);</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="a00400.html#a44c0461f780572bf02018038dd9423cd">test2</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
+<div class="line">{</div>
+<div class="line">    cout &lt;&lt; <span class="stringliteral">&quot;////////////// test2 ////////////////&quot;</span> &lt;&lt; endl;</div>
+<div class="line">    <a class="code" href="a00080.html">DefDataBase</a> db;</div>
+<div class="line">    <a class="code" href="a00090.html">DefParser::Driver</a> driver (db);</div>
+<div class="line">    <span class="comment">//driver.trace_scanning = true;</span></div>
+<div class="line">    <span class="comment">//driver.trace_parsing = true;</span></div>
+<div class="line"></div>
+<div class="line">    driver.parse_file(filename);</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00390.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">    <span class="keywordflow">if</span> (argc &gt; 1)</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="a00400.html#ad346d2cc622126c018bb0954eee9b1fa">test1</a>(argv[1]);</div>
+<div class="line">        <a class="code" href="a00400.html#a44c0461f780572bf02018038dd9423cd">test2</a>(argv[1]);</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">else</span> </div>
+<div class="line">        cout &lt;&lt; <span class="stringliteral">&quot;at least 1 argument is required&quot;</span> &lt;&lt; endl;</div>
+<div class="line"></div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Compiling and running commands (assuming LIMBO_DIR is exported as the environment variable to the path where limbo library is installed) </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;g++ -o test_adapt test_adapt.cpp -I $LIMBO_DIR/include -L $LIMBO_DIR/lib -ldefparseradapt</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;./test_adapt benchmarks/simple.def</div>
+</div><!-- fragment --><h2><a class="anchor" id="Parsers_DefParser_Examples_All"></a>
+All Examples</h2>
+<ul>
+<li><a class="el" href="a00405.html">test/parsers/def/test_adapt.cpp</a></li>
+</ul>
+<h1><a class="anchor" id="Parsers_DefParser_References"></a>
+References</h1>
+<ul>
+<li><a class="el" href="a00352.html">limbo/parsers/def/adapt/DefDataBase.h</a></li>
+<li><a class="el" href="a00353.html">limbo/parsers/def/adapt/DefDriver.h</a></li>
+</ul>
+<h1><a class="anchor" id="Parsers_DefParser_License"></a>
+LICENSE</h1>
+<div class="fragment"><div class="line">Copyright 2012 - 2016, Cadence Design Systems</div>
+<div class="line"> </div>
+<div class="line">Licensed under the Apache License, Version 2.0 (the <span class="stringliteral">&quot;License&quot;</span>);</div>
+<div class="line">you may not use <span class="keyword">this</span> file except in compliance with the License.</div>
+<div class="line">You may obtain a copy of the License at</div>
+<div class="line"> </div>
+<div class="line">    http:<span class="comment">//www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"> </div>
+<div class="line">Unless required by applicable law or agreed to in writing, software</div>
+<div class="line">distributed under the License is distributed on an <span class="stringliteral">&quot;AS IS&quot;</span> BASIS,</div>
+<div class="line">WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. </div>
+<div class="line">See the License <span class="keywordflow">for</span> the specific language governing permissions and </div>
+<div class="line">limitations under the License.</div>
+</div><!-- fragment --> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

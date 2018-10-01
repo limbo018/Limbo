@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::StaticAssert&lt; bool &gt; Struct Template Reference</title>
+<title>Limbo: limbo::programoptions::parse_helper&lt; std::vector&lt; T &gt; &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,33 +89,97 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00209.html">StaticAssert</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00442.html">programoptions</a></li><li class="navelem"><a class="el" href="a00209.html">parse_helper< std::vector< T > ></a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="a00622.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::StaticAssert&lt; bool &gt; Struct Template Reference</div>  </div>
+<div class="title">limbo::programoptions::parse_helper&lt; std::vector&lt; T &gt; &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>static assertion  
+<p>template specialization for std::vector&lt;T&gt; type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  
  <a href="a00209.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00303_source.html">AssertMsg.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00377_source.html">ConversionHelpers.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7314de7c725ce0cc4f732c9fe38f623e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00209.html#a7314de7c725ce0cc4f732c9fe38f623e">operator()</a> (std::vector&lt; T &gt; &amp;target, const char *value) const </td></tr>
+<tr class="memdesc:a7314de7c725ce0cc4f732c9fe38f623e"><td class="mdescLeft">&#160;</td><td class="mdescRight">parse a char-based string to target  <a href="#a7314de7c725ce0cc4f732c9fe38f623e">More...</a><br /></td></tr>
+<tr class="separator:a7314de7c725ce0cc4f732c9fe38f623e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;bool&gt;<br />
-struct limbo::StaticAssert&lt; bool &gt;</h3>
+<div class="textblock"><h3>template&lt;typename T&gt;<br />
+struct limbo::programoptions::parse_helper&lt; std::vector&lt; T &gt; &gt;</h3>
 
-<p>static assertion </p>
+<p>template specialization for std::vector&lt;T&gt; type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a> </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>data type </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="a00303_source.html#l00078">78</a> of file <a class="el" href="a00303_source.html">AssertMsg.h</a>.</p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/preprocessor/<a class="el" href="a00303_source.html">AssertMsg.h</a></li>
+<p>Definition at line <a class="el" href="a00377_source.html#l00272">272</a> of file <a class="el" href="a00377_source.html">ConversionHelpers.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a7314de7c725ce0cc4f732c9fe38f623e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>&lt; std::vector&lt; T &gt; &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>parse a char-based string to target </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>target data </td></tr>
+    <tr><td class="paramname">value</td><td>char-based string </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00377_source.html#l00277">277</a> of file <a class="el" href="a00377_source.html">ConversionHelpers.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/programoptions/<a class="el" href="a00377_source.html">ConversionHelpers.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

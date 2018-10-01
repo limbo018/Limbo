@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::algorithms::partition::FM_node_traits&lt; NodeType &gt; Class Template Reference</title>
+<title>Limbo: limbo::solvers::MultiKnapsackLagRelax&lt; T, V &gt;::CompareVariableByCoefficient Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,130 +89,137 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00365.html">algorithms</a></li><li class="navelem"><a class="el" href="a00367.html">partition</a></li><li class="navelem"><a class="el" href="a00064.html">FM_node_traits</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00443.html">solvers</a></li><li class="navelem"><a class="el" href="a00188.html">MultiKnapsackLagRelax</a></li><li class="navelem"><a class="el" href="a00064.html">CompareVariableByCoefficient</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="a00512.html">List of all members</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00655.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::algorithms::partition::FM_node_traits&lt; NodeType &gt; Class Template Reference</div>  </div>
+<div class="title">limbo::solvers::MultiKnapsackLagRelax&lt; T, V &gt;::CompareVariableByCoefficient Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="a00254_source.html">FM.h</a>&gt;</code></p>
+<p>Predicate to sort variables according to their coefficient from small to large.  
+ <a href="a00064.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:ae588f4b28ffe4612f44c5faaea0a4425"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae588f4b28ffe4612f44c5faaea0a4425"></a>
-typedef NodeType&#160;</td><td class="memItemRight" valign="bottom"><b>node_type</b></td></tr>
-<tr class="separator:ae588f4b28ffe4612f44c5faaea0a4425"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75a4a0a486d2728eef8eac403ba22209"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a75a4a0a486d2728eef8eac403ba22209"></a>
-typedef node_type::tie_id_type&#160;</td><td class="memItemRight" valign="bottom"><b>tie_id_type</b></td></tr>
-<tr class="separator:a75a4a0a486d2728eef8eac403ba22209"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7517f7435bc41cda57b24b8baff12cce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7517f7435bc41cda57b24b8baff12cce"></a>
-typedef node_type::weight_type&#160;</td><td class="memItemRight" valign="bottom"><b>node_weight_type</b></td></tr>
-<tr class="separator:a7517f7435bc41cda57b24b8baff12cce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:acc4c9d377461fb05996ae16de17370fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00064.html#acc4c9d377461fb05996ae16de17370fa">CompareVariableByCoefficient</a> (coefficient_value_type const *v)</td></tr>
+<tr class="memdesc:acc4c9d377461fb05996ae16de17370fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#acc4c9d377461fb05996ae16de17370fa">More...</a><br /></td></tr>
+<tr class="separator:acc4c9d377461fb05996ae16de17370fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeacf548829fd006f421cd4ce2775fd9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00064.html#abeacf548829fd006f421cd4ce2775fd9">operator()</a> (<a class="el" href="a00270.html">variable_type</a> const &amp;v1, <a class="el" href="a00270.html">variable_type</a> const &amp;v2) const </td></tr>
+<tr class="separator:abeacf548829fd006f421cd4ce2775fd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a7e0977720dc20ea71a35c182abe8ee7e"><td class="memItemLeft" align="right" valign="top">static tie_id_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00064.html#a7e0977720dc20ea71a35c182abe8ee7e">tie_id</a> (node_type const &amp;n)</td></tr>
-<tr class="separator:a7e0977720dc20ea71a35c182abe8ee7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40193f7dd465b1b008806aef770427d3"><td class="memItemLeft" align="right" valign="top">static node_weight_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00064.html#a40193f7dd465b1b008806aef770427d3">weight</a> (node_type const &amp;n)</td></tr>
-<tr class="separator:a40193f7dd465b1b008806aef770427d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ae6322b50005af0d2e3084bfc6e5abd54"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae6322b50005af0d2e3084bfc6e5abd54"></a>
+coefficient_value_type const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00064.html#ae6322b50005af0d2e3084bfc6e5abd54">vObjCoef</a></td></tr>
+<tr class="memdesc:ae6322b50005af0d2e3084bfc6e5abd54"><td class="mdescLeft">&#160;</td><td class="mdescRight">coefficients in objective for comparison <br /></td></tr>
+<tr class="separator:ae6322b50005af0d2e3084bfc6e5abd54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename NodeType&gt;<br />
-class limbo::algorithms::partition::FM_node_traits&lt; NodeType &gt;</h3>
+<div class="textblock"><h3>template&lt;typename T, typename V&gt;<br />
+struct limbo::solvers::MultiKnapsackLagRelax&lt; T, V &gt;::CompareVariableByCoefficient</h3>
 
-<p><a class="el" href="a00154.html" title="a class to describe graph vertex ">Node</a> traits in graph </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">NodeType,type</td><td>of nodes in the graph </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Predicate to sort variables according to their coefficient from small to large. </p>
 
-<p>Definition at line <a class="el" href="a00254_source.html#l00047">47</a> of file <a class="el" href="a00254_source.html">FM.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a7e0977720dc20ea71a35c182abe8ee7e"></a>
+<p>Definition at line <a class="el" href="a00385_source.html#l00186">186</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="acc4c9d377461fb05996ae16de17370fa"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename NodeType&gt; </div>
+template&lt;typename T, typename V&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static tie_id_type <a class="el" href="a00064.html">limbo::algorithms::partition::FM_node_traits</a>&lt; NodeType &gt;::tie_id </td>
+          <td class="memname"><a class="el" href="a00188.html">limbo::solvers::MultiKnapsackLagRelax</a>&lt; T, V &gt;::CompareVariableByCoefficient::CompareVariableByCoefficient </td>
           <td>(</td>
-          <td class="paramtype">node_type const &amp;&#160;</td>
-          <td class="paramname"><em>n</em></td><td>)</td>
+          <td class="paramtype">coefficient_value_type const *&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">n</td><td>node </td></tr>
+    <tr><td class="paramname">v</td><td>array of coefficients in objective </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>id of a node to sort nodes in each bucket </dd></dl>
 
-<p>Definition at line <a class="el" href="a00254_source.html#l00057">57</a> of file <a class="el" href="a00254_source.html">FM.h</a>.</p>
+<p>Definition at line <a class="el" href="a00385_source.html#l00192">192</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a40193f7dd465b1b008806aef770427d3"></a>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="abeacf548829fd006f421cd4ce2775fd9"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename NodeType&gt; </div>
+template&lt;typename T, typename V&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static node_weight_type <a class="el" href="a00064.html">limbo::algorithms::partition::FM_node_traits</a>&lt; NodeType &gt;::weight </td>
+          <td class="memname">bool <a class="el" href="a00188.html">limbo::solvers::MultiKnapsackLagRelax</a>&lt; T, V &gt;::CompareVariableByCoefficient::operator() </td>
           <td>(</td>
-          <td class="paramtype">node_type const &amp;&#160;</td>
-          <td class="paramname"><em>n</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="a00270.html">variable_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>v1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="a00270.html">variable_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>v2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">n</td><td>node </td></tr>
+    <tr><td class="paramname">v1</td><td>variable </td></tr>
+    <tr><td class="paramname">v2</td><td>variable </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>weight of a node for balancing constraint, e.g. area </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if <em>v1</em> has smaller coefficient than <em>v2</em> </dd></dl>
 
-<p>Definition at line <a class="el" href="a00254_source.html#l00061">61</a> of file <a class="el" href="a00254_source.html">FM.h</a>.</p>
+<p>Definition at line <a class="el" href="a00385_source.html#l00200">200</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/partition/<a class="el" href="a00254_source.html">FM.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/string/ToString.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/LPColoring.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,72 +87,74 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_a4f08339963c9aeb6ba530d5303d7579.html">string</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li><li class="navelem"><a class="el" href="dir_eec373e4006d7befdff7678452c20bc3.html">coloring</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">ToString.h File Reference</div>  </div>
+<div class="title">LPColoring.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>convert metadata type to string  
+<p>coloring algorithm based on iterative linear programming (LP) and rounding  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;queue&gt;</code><br />
+<code>#include &lt;set&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;cstdio&gt;</code><br />
-<code>#include &lt;limits&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;boost/cstdint.hpp&gt;</code><br />
+<code>#include &lt;boost/graph/graph_concepts.hpp&gt;</code><br />
+<code>#include &lt;boost/property_map/property_map.hpp&gt;</code><br />
+<code>#include &lt;boost/dynamic_bitset.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00388_source.html">limbo/string/String.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00313_source.html">limbo/algorithms/coloring/Coloring.h</a>&gt;</code><br />
+<code>#include &quot;gurobi_c++.h&quot;</code><br />
 </div>
 <p><a href="a00318_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00364"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html">limbo</a></td></tr>
-<tr class="memdesc:a00364"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00173.html">limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html">limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;::NonIntegerInfo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">records the information of non-integer values  <a href="a00197.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00070.html">limbo::algorithms::coloring::LPColoring&lt; GraphType &gt;::ConstrVariableInfo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">information for a variable of a constraint  <a href="a00070.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a310ac0314ad5ba8619b7a97d3c89d8b2"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#a310ac0314ad5ba8619b7a97d3c89d8b2">limbo::to_string</a> (int val)</td></tr>
-<tr class="memdesc:a310ac0314ad5ba8619b7a97d3c89d8b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert integer to string  <a href="#a310ac0314ad5ba8619b7a97d3c89d8b2">More...</a><br /></td></tr>
-<tr class="separator:a310ac0314ad5ba8619b7a97d3c89d8b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73b9a0fdd855dca6292290d63de19a7b"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#a73b9a0fdd855dca6292290d63de19a7b">limbo::to_string</a> (long val)</td></tr>
-<tr class="memdesc:a73b9a0fdd855dca6292290d63de19a7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert long integer to string  <a href="#a73b9a0fdd855dca6292290d63de19a7b">More...</a><br /></td></tr>
-<tr class="separator:a73b9a0fdd855dca6292290d63de19a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac942548404521f2dc9b5eb91c1db2224"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#ac942548404521f2dc9b5eb91c1db2224">limbo::to_string</a> (long long val)</td></tr>
-<tr class="memdesc:ac942548404521f2dc9b5eb91c1db2224"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert long long integer to string  <a href="#ac942548404521f2dc9b5eb91c1db2224">More...</a><br /></td></tr>
-<tr class="separator:ac942548404521f2dc9b5eb91c1db2224"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7802e8fa1a151cc57ffb5c8301021937"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#a7802e8fa1a151cc57ffb5c8301021937">limbo::to_string</a> (unsigned int val)</td></tr>
-<tr class="memdesc:a7802e8fa1a151cc57ffb5c8301021937"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert unsigned integer to string  <a href="#a7802e8fa1a151cc57ffb5c8301021937">More...</a><br /></td></tr>
-<tr class="separator:a7802e8fa1a151cc57ffb5c8301021937"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49310acdd4e3253f9647e3a9a39c1ed7"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#a49310acdd4e3253f9647e3a9a39c1ed7">limbo::to_string</a> (unsigned long val)</td></tr>
-<tr class="memdesc:a49310acdd4e3253f9647e3a9a39c1ed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert unsigned long integer to string  <a href="#a49310acdd4e3253f9647e3a9a39c1ed7">More...</a><br /></td></tr>
-<tr class="separator:a49310acdd4e3253f9647e3a9a39c1ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac89e6a26aa364709df6ded28d388a1d1"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#ac89e6a26aa364709df6ded28d388a1d1">limbo::to_string</a> (unsigned long long val)</td></tr>
-<tr class="memdesc:ac89e6a26aa364709df6ded28d388a1d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert unsigned long long integer to string  <a href="#ac89e6a26aa364709df6ded28d388a1d1">More...</a><br /></td></tr>
-<tr class="separator:ac89e6a26aa364709df6ded28d388a1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acac2a0ebe33d62cdcad05f8267cfa1e1"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#acac2a0ebe33d62cdcad05f8267cfa1e1">limbo::to_string</a> (float val)</td></tr>
-<tr class="memdesc:acac2a0ebe33d62cdcad05f8267cfa1e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert float to string  <a href="#acac2a0ebe33d62cdcad05f8267cfa1e1">More...</a><br /></td></tr>
-<tr class="separator:acac2a0ebe33d62cdcad05f8267cfa1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96b39c62f79eb7f8ec4125691bdf39b4"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#a96b39c62f79eb7f8ec4125691bdf39b4">limbo::to_string</a> (double val)</td></tr>
-<tr class="memdesc:a96b39c62f79eb7f8ec4125691bdf39b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert double to string  <a href="#a96b39c62f79eb7f8ec4125691bdf39b4">More...</a><br /></td></tr>
-<tr class="separator:a96b39c62f79eb7f8ec4125691bdf39b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02fdf94db3da0c5606af3f590e0b86bc"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00364.html#a02fdf94db3da0c5606af3f590e0b86bc">limbo::to_string</a> (long double val)</td></tr>
-<tr class="memdesc:a02fdf94db3da0c5606af3f590e0b86bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert long double to string  <a href="#a02fdf94db3da0c5606af3f590e0b86bc">More...</a><br /></td></tr>
-<tr class="separator:a02fdf94db3da0c5606af3f590e0b86bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
+<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00436"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html">limbo::algorithms</a></td></tr>
+<tr class="memdesc:a00436"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.algorithms <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00437"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00437.html">limbo::algorithms::coloring</a></td></tr>
+<tr class="memdesc:a00437"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Algorithms.Coloring <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>convert metadata type to string </p>
-<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Apr 2015 </dd></dl>
+<div class="textblock"><p>coloring algorithm based on iterative linear programming (LP) and rounding </p>
+<p>Implementation algorithm in "Triple/quadruple patterning layout decomposition via novel linear programming and iterative rounding", Yibo Lin, Xiaoqing Xu, Bei Yu, Ross Baldick, and David Z. Pan, SPIE Advanced Lithography, volume 9781, 2016.</p>
+<dl class="section author"><dt>Author</dt><dd>Yibo Lin, Xiaoqing Xu </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Sep 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00318_source.html">ToString.h</a>.</p>
+<p>Definition in file <a class="el" href="a00318_source.html">LPColoring.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

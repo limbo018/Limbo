@@ -87,24 +87,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="a00360.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00083.html">GdsDriverDataBase</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">GdsParser::GdsDriverDataBase Member List</div>  </div>
+<div class="title">AsciiDataBase Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00083.html">GdsParser::GdsDriverDataBase</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a00044.html">AsciiDataBase</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00083.html#a618cf1bf427f1e79053e82c7b4e438ba">add_gds_lib</a>(GdsLib const &amp;)=0</td><td class="entry"><a class="el" href="a00083.html">GdsParser::GdsDriverDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00044.html#ae011be56c5c49881f7b72488a852ba6f">AsciiDataBase</a>()</td><td class="entry"><a class="el" href="a00044.html">AsciiDataBase</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00044.html#a3c024e66ac2aa8b4ef6b6285b4936380">begin_end_cbk</a>(const char *ascii_record_type)</td><td class="entry"><a class="el" href="a00044.html">AsciiDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00044.html#a75487dc6cf564d3bab959933dad45fbe">bit_array_cbk</a>(const char *ascii_record_type, const char *ascii_data_type, vector&lt; int &gt; const &amp;vBitArray)</td><td class="entry"><a class="el" href="a00044.html">AsciiDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00044.html#ade68f521f26c0f7259f29c36370edace">general_cbk</a>(string const &amp;ascii_record_type, string const &amp;ascii_data_type, ContainerType const &amp;data)</td><td class="entry"><a class="el" href="a00044.html">AsciiDataBase</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00044.html#ad7049b38a9e7bab32b380227303db2e1">integer_2_cbk</a>(const char *ascii_record_type, const char *ascii_data_type, vector&lt; int &gt; const &amp;vInteger)</td><td class="entry"><a class="el" href="a00044.html">AsciiDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00044.html#ae4c614d5cd6183bcb21f7c94b7a06e52">integer_4_cbk</a>(const char *ascii_record_type, const char *ascii_data_type, vector&lt; int &gt; const &amp;vInteger)</td><td class="entry"><a class="el" href="a00044.html">AsciiDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00044.html#a56dd6954127d65140065e8ebe78e11d5">real_4_cbk</a>(const char *ascii_record_type, const char *ascii_data_type, vector&lt; double &gt; const &amp;vFloat)</td><td class="entry"><a class="el" href="a00044.html">AsciiDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00044.html#ac683a04eb9c07242a90e26190ccf0279">real_8_cbk</a>(const char *ascii_record_type, const char *ascii_data_type, vector&lt; double &gt; const &amp;vFloat)</td><td class="entry"><a class="el" href="a00044.html">AsciiDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00044.html#ab3b734b2bc3b4903e7a489ad5ab64fd0">string_cbk</a>(const char *ascii_record_type, const char *ascii_data_type, string const &amp;str)</td><td class="entry"><a class="el" href="a00044.html">AsciiDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

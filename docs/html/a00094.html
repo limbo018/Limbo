@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdsParser::GdsSref Struct Reference</title>
+<title>Limbo: EbeamParser::EbeamDataBase Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,72 +89,58 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00360.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00094.html">GdsSref</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00429.html">EbeamParser</a></li><li class="navelem"><a class="el" href="a00094.html">EbeamDataBase</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00456.html">List of all members</a>  </div>
+<a href="a00495.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser::GdsSref Struct Reference</div>  </div>
+<div class="title">EbeamParser::EbeamDataBase Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>GDSII SREF.  
+<p>Base class for ebeam database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  
  <a href="a00094.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00291_source.html">GdsDriver.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00354_source.html">EbeamDataBase.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for EbeamParser::EbeamDataBase:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00094.png" usemap="#EbeamParser::EbeamDataBase_map" alt=""/>
+  <map id="EbeamParser::EbeamDataBase_map" name="EbeamParser::EbeamDataBase_map">
+<area href="a00095.html" title="Custom class that inheritates EbeamParser::EbeamDataBase with all the required callbacks defined..." alt="EbeamDataBase" shape="rect" coords="0,56,186,80"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6ac15fc93f506e5ad20ff86fa931219c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ac15fc93f506e5ad20ff86fa931219c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00094.html#a6ac15fc93f506e5ad20ff86fa931219c">GdsSref</a> ()</td></tr>
-<tr class="memdesc:a6ac15fc93f506e5ad20ff86fa931219c"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:a6ac15fc93f506e5ad20ff86fa931219c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a142b9f2a476d2f857ae2163aed1cf489"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a142b9f2a476d2f857ae2163aed1cf489"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00094.html#a142b9f2a476d2f857ae2163aed1cf489">reset</a> ()</td></tr>
-<tr class="memdesc:a142b9f2a476d2f857ae2163aed1cf489"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br /></td></tr>
-<tr class="separator:a142b9f2a476d2f857ae2163aed1cf489"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a7603f7ede0c4953ee47ce00e2c1ecd2e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7603f7ede0c4953ee47ce00e2c1ecd2e"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00094.html#a7603f7ede0c4953ee47ce00e2c1ecd2e">sname</a></td></tr>
-<tr class="memdesc:a7603f7ede0c4953ee47ce00e2c1ecd2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">reference name <br /></td></tr>
-<tr class="separator:a7603f7ede0c4953ee47ce00e2c1ecd2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab66a7c8cb92833abbb0146dc1e48f454"><td class="memItemLeft" align="right" valign="top">vector&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00094.html#ab66a7c8cb92833abbb0146dc1e48f454">position</a></td></tr>
-<tr class="separator:ab66a7c8cb92833abbb0146dc1e48f454"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a799ad156d2378bf9a6a3c6950f2b5617"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a799ad156d2378bf9a6a3c6950f2b5617"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00094.html#a799ad156d2378bf9a6a3c6950f2b5617">set_ebeam_unit</a> (int)=0</td></tr>
+<tr class="memdesc:a799ad156d2378bf9a6a3c6950f2b5617"><td class="mdescLeft">&#160;</td><td class="mdescRight">set unit of micron in database, e.g., unit 1000 denotes 1000 in database unit is equal to 1 micron <br /></td></tr>
+<tr class="separator:a799ad156d2378bf9a6a3c6950f2b5617"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a0609f9e22b9b2b6a2e43b6ea9f15b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a0609f9e22b9b2b6a2e43b6ea9f15b8"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00094.html#a9a0609f9e22b9b2b6a2e43b6ea9f15b8">set_ebeam_boundary</a> (<a class="el" href="a00093.html">EbeamBoundary</a> const &amp;)=0</td></tr>
+<tr class="memdesc:a9a0609f9e22b9b2b6a2e43b6ea9f15b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">set ebeam boundary <br /></td></tr>
+<tr class="separator:a9a0609f9e22b9b2b6a2e43b6ea9f15b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef8d0f74f611f04715afc0ff25cdcac6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef8d0f74f611f04715afc0ff25cdcac6"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00094.html#aef8d0f74f611f04715afc0ff25cdcac6">add_ebeam_macro</a> (<a class="el" href="a00177.html">Macro</a> const &amp;)=0</td></tr>
+<tr class="memdesc:aef8d0f74f611f04715afc0ff25cdcac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">add ebeam macro for each standard cell <br /></td></tr>
+<tr class="separator:aef8d0f74f611f04715afc0ff25cdcac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>GDSII SREF. </p>
-<p>Thanks to Biying Xu for the benchmarks and sample code </p>
+<div class="textblock"><p>Base class for ebeam database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined. </p>
 
-<p>Definition at line <a class="el" href="a00291_source.html#l00074">74</a> of file <a class="el" href="a00291_source.html">GdsDriver.h</a>.</p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="ab66a7c8cb92833abbb0146dc1e48f454"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">vector&lt;int32_t&gt; GdsParser::GdsSref::position</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>position </p>
-
-<p>Definition at line <a class="el" href="a00291_source.html#l00077">77</a> of file <a class="el" href="a00291_source.html">GdsDriver.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00291_source.html">GdsDriver.h</a></li>
+<p>Definition at line <a class="el" href="a00354_source.html#l00206">206</a> of file <a class="el" href="a00354_source.html">EbeamDataBase.h</a>.</p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/ebeam/bison/<a class="el" href="a00354_source.html">EbeamDataBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

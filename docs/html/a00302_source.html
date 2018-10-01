@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/verilog/bison/VerilogDriver.h Source File</title>
+<title>Limbo: parsers/Parsers.md Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,6 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -85,102 +86,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_da4ca95cda9f419f6a5b3223be9b082d.html">verilog</a></li><li class="navelem"><a class="el" href="dir_acd908ba32ef0bfe8d812a7072df89d3.html">bison</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">VerilogDriver.h</div>  </div>
+<div class="title">parsers/Parsers.md</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00302.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef VERILOGPARSER_DRIVER_H</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define VERILOGPARSER_DRIVER_H</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00301.html">VerilogDataBase.h</a>&quot;</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;Limbo.Parsers {#Parsers}</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;---------</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;This package provides parsers for various file formats. </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;In general, a parser provides API for users to read and initialize data easily to their own database. </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;Parsers should not be storage hungry since they only need to store temporary data before render to users&#39; database. </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;Therefore, all the parsers developed in the package follows the same philosophy. </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;That is, users only need to provide a database object with required callback functions well defined, </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;and a parser will read input files and invoke those callback functions with proper data. </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;There is no need for users to know the process of parsing. </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;The only thing they need to do is to initialize their own database in the callback functions with the data from the parser. </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00375.html">VerilogParser</a> {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">using</span> std::cout;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">using</span> std::endl;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">using</span> std::cerr;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">using</span> std::string; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">using</span> std::vector;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">using</span> std::pair;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">using</span> std::make_pair;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">using</span> std::ostringstream;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a00045.html">   35</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00045.html">Driver</a></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="a00045.html#ac554897c2784109e0d357440ac5997a2">Driver</a>(<a class="code" href="a00234.html">VerilogDataBase</a>&amp; db);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a00045.html#a28c64395f09c5a63ef2e479026b2c1f9">   43</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00045.html#a28c64395f09c5a63ef2e479026b2c1f9">trace_scanning</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a00045.html#af8deb8d1b92010e7e6f08ef454472ddd">   46</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00045.html#af8deb8d1b92010e7e6f08ef454472ddd">trace_parsing</a>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="a00045.html#a43c1de4cf435f1542893c71eee1c2903">   49</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="a00045.html#a43c1de4cf435f1542893c71eee1c2903">streamname</a>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00045.html#afc8992ee0297e5e1a3e794a1014368dd">parse_stream</a>(std::istream&amp; in,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sname = <span class="stringliteral">&quot;stream input&quot;</span>);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00045.html#afbcc70d3abc390e3f7ceb497103e9423">parse_string</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; input,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sname = <span class="stringliteral">&quot;string stream&quot;</span>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00045.html#a6b4a2c63f5559776827f25da0c93ad8b">parse_file</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; filename);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">// To demonstrate pure handling of parse errors, instead of</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="comment">// simply dumping them on the standard error output, we will pass</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">// them to the driver using the following two member functions.</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00045.html#affb53df87a37ff67c8239c783a95490c">error</a>(<span class="keyword">const</span> <span class="keyword">class</span> location&amp; l, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; m);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00045.html#affb53df87a37ff67c8239c783a95490c">error</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; m);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="a00045.html#ade0b1bb8e6d62289d83a0171d72b4925">   88</a></span>&#160;    <span class="keyword">class </span>Scanner* <a class="code" href="a00045.html#ade0b1bb8e6d62289d83a0171d72b4925">lexer</a>;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="a00045.html#a21604fd12a00f24fb34f4895860de558">   92</a></span>&#160;    <a class="code" href="a00234.html">VerilogDataBase</a>&amp; <a class="code" href="a00045.html#a21604fd12a00f24fb34f4895860de558">m_db</a>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">void</span> wire_pin_cbk(std::string&amp;, std::string&amp;, <a class="code" href="a00193.html">Range</a> <span class="keyword">const</span>&amp; = <a class="code" href="a00193.html">Range</a>());</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> wire_declare_cbk(std::vector&lt;GeneralName&gt; <span class="keyword">const</span>&amp;, <a class="code" href="a00193.html">Range</a> <span class="keyword">const</span>&amp;);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">void</span> wire_declare_cbk(std::vector&lt;GeneralName&gt; <span class="keyword">const</span>&amp; vNetName);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">void</span> pin_declare_cbk(std::vector&lt;GeneralName&gt; <span class="keyword">const</span>&amp;, <span class="keywordtype">unsigned</span>, <a class="code" href="a00193.html">Range</a> <span class="keyword">const</span>&amp;);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">void</span> pin_declare_cbk(std::vector&lt;GeneralName&gt; <span class="keyword">const</span>&amp;, <span class="keywordtype">unsigned</span>);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">void</span> module_instance_cbk(std::string <span class="keyword">const</span>&amp;, std::string <span class="keyword">const</span>&amp;);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">void</span> assignment_cbk(std::string <span class="keyword">const</span>&amp;, <a class="code" href="a00193.html">Range</a> <span class="keyword">const</span>&amp;, std::string <span class="keyword">const</span>&amp;, <a class="code" href="a00193.html">Range</a> <span class="keyword">const</span>&amp;); </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="a00045.html#ae38c9f8bfb072f042e9d7a7a07b429d2">  107</a></span>&#160;    vector&lt;NetPin&gt; <a class="code" href="a00045.html#ae38c9f8bfb072f042e9d7a7a07b429d2">m_vNetPin</a>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;};</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a00375.html#ae9bab9eb582085f027e422d3b17f20be">read</a>(<a class="code" href="a00234.html">VerilogDataBase</a>&amp; db, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; verilogFile);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;} <span class="comment">// namespace example</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#endif // EXAMPLE_DRIVER_H</span></div>
-<div class="ttc" id="a00045_html_a28c64395f09c5a63ef2e479026b2c1f9"><div class="ttname"><a href="a00045.html#a28c64395f09c5a63ef2e479026b2c1f9">VerilogParser::Driver::trace_scanning</a></div><div class="ttdeci">bool trace_scanning</div><div class="ttdoc">enable debug output in the flex scanner </div><div class="ttdef"><b>Definition:</b> <a href="a00302_source.html#l00043">VerilogDriver.h:43</a></div></div>
-<div class="ttc" id="a00193_html"><div class="ttname"><a href="a00193.html">VerilogParser::Range</a></div><div class="ttdoc">range with pair of low and high values </div><div class="ttdef"><b>Definition:</b> <a href="a00301_source.html#l00031">VerilogDataBase.h:31</a></div></div>
-<div class="ttc" id="a00045_html_afbcc70d3abc390e3f7ceb497103e9423"><div class="ttname"><a href="a00045.html#afbcc70d3abc390e3f7ceb497103e9423">VerilogParser::Driver::parse_string</a></div><div class="ttdeci">bool parse_string(const string &amp;input, const string &amp;sname=&quot;string stream&quot;)</div></div>
-<div class="ttc" id="a00301_html"><div class="ttname"><a href="a00301.html">VerilogDataBase.h</a></div><div class="ttdoc">Database for Verilog parser. </div></div>
-<div class="ttc" id="a00045_html_a21604fd12a00f24fb34f4895860de558"><div class="ttname"><a href="a00045.html#a21604fd12a00f24fb34f4895860de558">VerilogParser::Driver::m_db</a></div><div class="ttdeci">VerilogDataBase &amp; m_db</div><div class="ttdef"><b>Definition:</b> <a href="a00302_source.html#l00092">VerilogDriver.h:92</a></div></div>
-<div class="ttc" id="a00045_html_affb53df87a37ff67c8239c783a95490c"><div class="ttname"><a href="a00045.html#affb53df87a37ff67c8239c783a95490c">VerilogParser::Driver::error</a></div><div class="ttdeci">void error(const class location &amp;l, const string &amp;m)</div></div>
-<div class="ttc" id="a00375_html_ae9bab9eb582085f027e422d3b17f20be"><div class="ttname"><a href="a00375.html#ae9bab9eb582085f027e422d3b17f20be">VerilogParser::read</a></div><div class="ttdeci">bool read(VerilogDataBase &amp;db, const string &amp;verilogFile)</div><div class="ttdoc">API for VerilogParser. Read Verilog file and initialize database by calling user-defined callback fun...</div></div>
-<div class="ttc" id="a00375_html"><div class="ttname"><a href="a00375.html">VerilogParser</a></div><div class="ttdoc">namespace for VerilogParser </div><div class="ttdef"><b>Definition:</b> <a href="a00301_source.html#l00020">VerilogDataBase.h:20</a></div></div>
-<div class="ttc" id="a00045_html_a6b4a2c63f5559776827f25da0c93ad8b"><div class="ttname"><a href="a00045.html#a6b4a2c63f5559776827f25da0c93ad8b">VerilogParser::Driver::parse_file</a></div><div class="ttdeci">bool parse_file(const string &amp;filename)</div></div>
-<div class="ttc" id="a00045_html_afc8992ee0297e5e1a3e794a1014368dd"><div class="ttname"><a href="a00045.html#afc8992ee0297e5e1a3e794a1014368dd">VerilogParser::Driver::parse_stream</a></div><div class="ttdeci">bool parse_stream(std::istream &amp;in, const string &amp;sname=&quot;stream input&quot;)</div></div>
-<div class="ttc" id="a00234_html"><div class="ttname"><a href="a00234.html">VerilogParser::VerilogDataBase</a></div><div class="ttdoc">Base class for verilog database. Only pure virtual functions are defined. User needs to inheritate th...</div><div class="ttdef"><b>Definition:</b> <a href="a00301_source.html#l00136">VerilogDataBase.h:136</a></div></div>
-<div class="ttc" id="a00045_html_af8deb8d1b92010e7e6f08ef454472ddd"><div class="ttname"><a href="a00045.html#af8deb8d1b92010e7e6f08ef454472ddd">VerilogParser::Driver::trace_parsing</a></div><div class="ttdeci">bool trace_parsing</div><div class="ttdoc">enable debug output in the bison parser </div><div class="ttdef"><b>Definition:</b> <a href="a00302_source.html#l00046">VerilogDriver.h:46</a></div></div>
-<div class="ttc" id="a00045_html_ade0b1bb8e6d62289d83a0171d72b4925"><div class="ttname"><a href="a00045.html#ade0b1bb8e6d62289d83a0171d72b4925">VerilogParser::Driver::lexer</a></div><div class="ttdeci">class Scanner * lexer</div><div class="ttdef"><b>Definition:</b> <a href="a00302_source.html#l00088">VerilogDriver.h:88</a></div></div>
-<div class="ttc" id="a00045_html_ac554897c2784109e0d357440ac5997a2"><div class="ttname"><a href="a00045.html#ac554897c2784109e0d357440ac5997a2">VerilogParser::Driver::Driver</a></div><div class="ttdeci">Driver(VerilogDataBase &amp;db)</div></div>
-<div class="ttc" id="a00045_html"><div class="ttname"><a href="a00045.html">VerilogParser::Driver</a></div><div class="ttdef"><b>Definition:</b> <a href="a00302_source.html#l00035">VerilogDriver.h:35</a></div></div>
-<div class="ttc" id="a00045_html_a43c1de4cf435f1542893c71eee1c2903"><div class="ttname"><a href="a00045.html#a43c1de4cf435f1542893c71eee1c2903">VerilogParser::Driver::streamname</a></div><div class="ttdeci">string streamname</div><div class="ttdoc">stream name (file or input stream) used for error messages. </div><div class="ttdef"><b>Definition:</b> <a href="a00302_source.html#l00049">VerilogDriver.h:49</a></div></div>
-<div class="ttc" id="a00045_html_ae38c9f8bfb072f042e9d7a7a07b429d2"><div class="ttname"><a href="a00045.html#ae38c9f8bfb072f042e9d7a7a07b429d2">VerilogParser::Driver::m_vNetPin</a></div><div class="ttdeci">vector&lt; NetPin &gt; m_vNetPin</div><div class="ttdoc">Use as a stack for node and pin pairs in a net, because wire_pin_cbk will be called before module_ins...</div><div class="ttdef"><b>Definition:</b> <a href="a00302_source.html#l00107">VerilogDriver.h:107</a></div></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;# Components </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;| Components                                              | Languages &amp; Libraries           | Description                                              |</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;| ------------------------------------------------------- | ------------------------------- | -------------------------------------------------------- |</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;| [Bookshelf Parser](@ref Parsers_BookshelfParser)        | Flex/Bison                      | Placement file format from UCSD                          |</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;| [DEF Parser](@ref Parsers_DefParser)                    | Flex/Bison                      |                                                          |</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;|                                                         | Boost.Spirit                    | Deprecated due to efficiency                             |</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;| [Ebeam Parser](@ref Parsers_EbeamParser)                | Flex/Bison                      |                                                          |</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;|                                                         | Boost.Spirit                    | Deprecated due to efficiency                             |</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;| [LEF Parser](@ref Parsers_LefParser)                    | Flex/Bison                      |                                                          |</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;|                                                         | Boost.Spirit                    | Deprecated due to efficiency                             |</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;| [GDF Parser](@ref Parsers_GdfParser)                    | Flex/Bison                      | Routing file format from Jason Cong&#39;s group at UCLA      |</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;| [GDSII Parser](@ref Parsers_GdsiiParser)                | Stream parser: C/C++            | Support .gds and .gds.gz when Boost and Zlib available   |</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;|                                                         | ASCII parser: Boost.Spirit      | Deprecated due to memory efficiency                      |</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;|                                                         | GdsDB wrapper: C/C++, Boost     | High level wrapper for full layout import/export/flatten |</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;| [Tf Parser](@ref Parsers_TfParser)                      | Boost.Spirit                    | Read technology file for physical design                 |</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;| [Verilog Netlist Parser](@ref Parsers_VerilogParser)    | Flex/Bison                      | Read verilog netlist to initialize nets during placement |</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;| [LP Parser](@ref Parsers_LpParser)                      | Flex/Bison                      | Read linear programming problem, compatible with Gurobi  |</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:19 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:10 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

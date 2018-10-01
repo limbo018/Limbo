@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::geometry::rectangle_traits&lt; bLib::bBox &gt; Struct Template Reference</title>
+<title>Limbo: Node Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,56 +87,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="a00364.html">limbo</a></li><li class="navelem"><a class="el" href="a00370.html">geometry</a></li><li class="navelem"><a class="el" href="a00196.html">rectangle_traits< bLib::bBox ></a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="a00536.html">List of all members</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="a00464.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::geometry::rectangle_traits&lt; bLib::bBox &gt; Struct Template Reference</div>  </div>
+<div class="title">Node Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>specialization of <a class="el" href="a00195.html">limbo::geometry::rectangle_traits</a> for bLib::bBox  
+<p>a class to describe graph vertex  
  <a href="a00196.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="a00260_source.html">bLibApi.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a01a93a853aded354a52c4ad747fc123f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a01a93a853aded354a52c4ad747fc123f"></a>
-typedef bLib::bBox&#160;</td><td class="memItemRight" valign="bottom"><b>rectangle_type</b></td></tr>
-<tr class="separator:a01a93a853aded354a52c4ad747fc123f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10fbccf2aa4f27d4887b614c18711cd8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a10fbccf2aa4f27d4887b614c18711cd8"></a>
-typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>coordinate_type</b></td></tr>
-<tr class="separator:a10fbccf2aa4f27d4887b614c18711cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0d6bdd66f15dbf966734ae3ec727c7d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af0d6bdd66f15dbf966734ae3ec727c7d"></a>
+typedef char&#160;</td><td class="memItemRight" valign="bottom"><b>tie_id_type</b></td></tr>
+<tr class="separator:af0d6bdd66f15dbf966734ae3ec727c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc3e8c62921164f38bbac1a2246d9320"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc3e8c62921164f38bbac1a2246d9320"></a>
+typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>weight_type</b></td></tr>
+<tr class="separator:abc3e8c62921164f38bbac1a2246d9320"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:abcc1c3ae344072a39ecfef971b8aa6ee"><td class="memItemLeft" align="right" valign="top">static coordinate_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#abcc1c3ae344072a39ecfef971b8aa6ee">get</a> (const rectangle_type &amp;rect, <a class="el" href="a00370.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> const &amp;dir)</td></tr>
-<tr class="memdesc:abcc1c3ae344072a39ecfef971b8aa6ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">get coordinate from rectangle  <a href="#abcc1c3ae344072a39ecfef971b8aa6ee">More...</a><br /></td></tr>
-<tr class="separator:abcc1c3ae344072a39ecfef971b8aa6ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e89a3d8914ac9adae29c9a22fdcc1cd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#a1e89a3d8914ac9adae29c9a22fdcc1cd">set</a> (rectangle_type &amp;rect, <a class="el" href="a00370.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> const &amp;dir, coordinate_type const &amp;value)</td></tr>
-<tr class="memdesc:a1e89a3d8914ac9adae29c9a22fdcc1cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">set coordinate for rectangle  <a href="#a1e89a3d8914ac9adae29c9a22fdcc1cd">More...</a><br /></td></tr>
-<tr class="separator:a1e89a3d8914ac9adae29c9a22fdcc1cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea62b079184b83df2019100a00ddb938"><td class="memItemLeft" align="right" valign="top">static rectangle_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#aea62b079184b83df2019100a00ddb938">construct</a> (coordinate_type const &amp;xl, coordinate_type const &amp;yl, coordinate_type const &amp;xh, coordinate_type const &amp;yh)</td></tr>
-<tr class="memdesc:aea62b079184b83df2019100a00ddb938"><td class="mdescLeft">&#160;</td><td class="mdescRight">construct rectangle from coordinates  <a href="#aea62b079184b83df2019100a00ddb938">More...</a><br /></td></tr>
-<tr class="separator:aea62b079184b83df2019100a00ddb938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a07ad92bb43ae8964c847dabfd2544a93"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#a07ad92bb43ae8964c847dabfd2544a93">Node</a> (weight_type const &amp;w, tie_id_type const &amp;id)</td></tr>
+<tr class="separator:a07ad92bb43ae8964c847dabfd2544a93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a324e3755c2598c6cd50cf14d98ea7a6f"><td class="memItemLeft" align="right" valign="top">tie_id_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#a324e3755c2598c6cd50cf14d98ea7a6f">tie_id</a> () const </td></tr>
+<tr class="separator:a324e3755c2598c6cd50cf14d98ea7a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c00b2daf6ed3954ff47b14e0d0eb4eb"><td class="memItemLeft" align="right" valign="top">weight_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#a3c00b2daf6ed3954ff47b14e0d0eb4eb">weight</a> () const </td></tr>
+<tr class="separator:a3c00b2daf6ed3954ff47b14e0d0eb4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a32bc91d17b7621aa87728e9445d67451"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a32bc91d17b7621aa87728e9445d67451"></a>
+tie_id_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#a32bc91d17b7621aa87728e9445d67451">m_id</a></td></tr>
+<tr class="memdesc:a32bc91d17b7621aa87728e9445d67451"><td class="mdescLeft">&#160;</td><td class="mdescRight">node label <br /></td></tr>
+<tr class="separator:a32bc91d17b7621aa87728e9445d67451"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23b9d463aa48dda2fbda0d91b93e6f1a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a23b9d463aa48dda2fbda0d91b93e6f1a"></a>
+weight_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html#a23b9d463aa48dda2fbda0d91b93e6f1a">m_weight</a></td></tr>
+<tr class="memdesc:a23b9d463aa48dda2fbda0d91b93e6f1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">node weight <br /></td></tr>
+<tr class="separator:a23b9d463aa48dda2fbda0d91b93e6f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;&gt;<br />
-struct limbo::geometry::rectangle_traits&lt; bLib::bBox &gt;</h3>
+<div class="textblock"><p>a class to describe graph vertex </p>
 
-<p>specialization of <a class="el" href="a00195.html">limbo::geometry::rectangle_traits</a> for bLib::bBox </p>
-
-<p>Definition at line <a class="el" href="a00260_source.html#l00064">64</a> of file <a class="el" href="a00260_source.html">bLibApi.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="aea62b079184b83df2019100a00ddb938"></a>
+<p>Definition at line <a class="el" href="a00391_source.html#l00015">15</a> of file <a class="el" href="a00391_source.html">test_FM.cpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a07ad92bb43ae8964c847dabfd2544a93"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -144,28 +144,16 @@ struct limbo::geometry::rectangle_traits&lt; bLib::bBox &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static rectangle_type <a class="el" href="a00195.html">limbo::geometry::rectangle_traits</a>&lt; bLib::bBox &gt;::construct </td>
+          <td class="memname">Node::Node </td>
           <td>(</td>
-          <td class="paramtype">coordinate_type const &amp;&#160;</td>
-          <td class="paramname"><em>xl</em>, </td>
+          <td class="paramtype">weight_type const &amp;&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">coordinate_type const &amp;&#160;</td>
-          <td class="paramname"><em>yl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">coordinate_type const &amp;&#160;</td>
-          <td class="paramname"><em>xh</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">coordinate_type const &amp;&#160;</td>
-          <td class="paramname"><em>yh</em>&#160;</td>
+          <td class="paramtype">tie_id_type const &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -175,25 +163,24 @@ struct limbo::geometry::rectangle_traits&lt; bLib::bBox &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>construct rectangle from coordinates </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">xl,yl,xh,yh</td><td>coordinates </td></tr>
+    <tr><td class="paramname">w</td><td>node weight </td></tr>
+    <tr><td class="paramname">id</td><td>node label </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>rectangle object </dd></dl>
 
-<p>Definition at line <a class="el" href="a00260_source.html#l00104">104</a> of file <a class="el" href="a00260_source.html">bLibApi.h</a>.</p>
+<p>Definition at line <a class="el" href="a00391_source.html#l00026">26</a> of file <a class="el" href="a00391_source.html">test_FM.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="abcc1c3ae344072a39ecfef971b8aa6ee"></a>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a324e3755c2598c6cd50cf14d98ea7a6f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -201,45 +188,25 @@ struct limbo::geometry::rectangle_traits&lt; bLib::bBox &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static coordinate_type <a class="el" href="a00195.html">limbo::geometry::rectangle_traits</a>&lt; bLib::bBox &gt;::get </td>
+          <td class="memname">tie_id_type Node::tie_id </td>
           <td>(</td>
-          <td class="paramtype">const rectangle_type &amp;&#160;</td>
-          <td class="paramname"><em>rect</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00370.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> const &amp;&#160;</td>
-          <td class="paramname"><em>dir</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>node label </dd></dl>
 
-<p>get coordinate from rectangle </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rect</td><td>a rectangle object </td></tr>
-    <tr><td class="paramname">dir</td><td>direction </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>coordinate </dd></dl>
-
-<p>Definition at line <a class="el" href="a00260_source.html#l00075">75</a> of file <a class="el" href="a00260_source.html">bLibApi.h</a>.</p>
+<p>Definition at line <a class="el" href="a00391_source.html#l00033">33</a> of file <a class="el" href="a00391_source.html">test_FM.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a1e89a3d8914ac9adae29c9a22fdcc1cd"></a>
+<a class="anchor" id="a3c00b2daf6ed3954ff47b14e0d0eb4eb"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -247,57 +214,31 @@ struct limbo::geometry::rectangle_traits&lt; bLib::bBox &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void <a class="el" href="a00195.html">limbo::geometry::rectangle_traits</a>&lt; bLib::bBox &gt;::set </td>
+          <td class="memname">weight_type Node::weight </td>
           <td>(</td>
-          <td class="paramtype">rectangle_type &amp;&#160;</td>
-          <td class="paramname"><em>rect</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00370.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> const &amp;&#160;</td>
-          <td class="paramname"><em>dir</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">coordinate_type const &amp;&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>node weight </dd></dl>
 
-<p>set coordinate for rectangle </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rect</td><td>a rectangle object </td></tr>
-    <tr><td class="paramname">dir</td><td>direction </td></tr>
-    <tr><td class="paramname">value</td><td>coordinate </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00260_source.html#l00090">90</a> of file <a class="el" href="a00260_source.html">bLibApi.h</a>.</p>
+<p>Definition at line <a class="el" href="a00391_source.html#l00035">35</a> of file <a class="el" href="a00391_source.html">test_FM.cpp</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/geometry/api/<a class="el" href="a00260_source.html">bLibApi.h</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/test/algorithms/<a class="el" href="a00391_source.html">test_FM.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

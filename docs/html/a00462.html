@@ -87,30 +87,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="a00360.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00361.html">GdsDB</a></li><li class="navelem"><a class="el" href="a00059.html">ExtractCellObjectAction</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">GdsParser::GdsDB::ExtractCellObjectAction Member List</div>  </div>
+<div class="title">LpDataBase Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00059.html">GdsParser::GdsDB::ExtractCellObjectAction</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a00175.html">LpDataBase</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00059.html#a46a5fc835c8a00b6a1bd84114d1fb241">ExtractCellObjectAction</a>(GdsDB const &amp;db, GdsCell const &amp;sc, GdsCell &amp;tc)</td><td class="entry"><a class="el" href="a00059.html">GdsParser::GdsDB::ExtractCellObjectAction</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00059.html#a02f56ab0ba684fddb511792e23d1e338">ExtractCellObjectAction</a>(ExtractCellObjectAction const &amp;rhs)</td><td class="entry"><a class="el" href="a00059.html">GdsParser::GdsDB::ExtractCellObjectAction</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00059.html#af7f93e399d4883d708c7b32b69d0eace">gdsDB</a></td><td class="entry"><a class="el" href="a00059.html">GdsParser::GdsDB::ExtractCellObjectAction</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00059.html#af55fea2e13f8883b7b251a6528eba928">message</a>() const </td><td class="entry"><a class="el" href="a00059.html">GdsParser::GdsDB::ExtractCellObjectAction</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00059.html#a0a3b2754030fa983205c669fb2a3b7e2">operator()</a>(::GdsParser::GdsRecords::EnumType type, ObjectType *object)</td><td class="entry"><a class="el" href="a00059.html">GdsParser::GdsDB::ExtractCellObjectAction</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00059.html#ad7c4dc4cb5dd6d9998cdf738705b4b53">srcCell</a></td><td class="entry"><a class="el" href="a00059.html">GdsParser::GdsDB::ExtractCellObjectAction</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00059.html#a8982ad5bd745129595655d82b4b36434">targetCell</a></td><td class="entry"><a class="el" href="a00059.html">GdsParser::GdsDB::ExtractCellObjectAction</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00175.html#a32e8d45c236cc95c4b3c25003b68abcb">add_constraint</a>(LpParser::TermArray const &amp;terms, char compare, double constant)</td><td class="entry"><a class="el" href="a00175.html">LpDataBase</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00174.html#a06e69b33012729ca43b282b54f0a28d2">LpParser::LpDataBase::add_constraint</a>(string const &amp;cname, TermArray const &amp;terms, char compare, double constant)=0</td><td class="entry"><a class="el" href="a00174.html">LpParser::LpDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00175.html#adb0e919fa73bb0fa07218086a3c56ecb">add_objective</a>(bool minimize, LpParser::TermArray const &amp;terms)</td><td class="entry"><a class="el" href="a00175.html">LpDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00175.html#a73322416aa09e80c3a804f4250285f33">add_variable</a>(string const &amp;vname, double l, double r)</td><td class="entry"><a class="el" href="a00175.html">LpDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00175.html#a350a7112f99883cdab1bbd21b63fff41">int64_t</a> typedef</td><td class="entry"><a class="el" href="a00175.html">LpDataBase</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00175.html#a2847fff9bdc6a16ddacced1c589cf901">LpDataBase</a>()</td><td class="entry"><a class="el" href="a00175.html">LpDataBase</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00175.html#a7f454516dc32a06e56ea813705659aa7">set_integer</a>(string const &amp;vname, bool binary)</td><td class="entry"><a class="el" href="a00175.html">LpDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

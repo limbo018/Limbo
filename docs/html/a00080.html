@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdsParser::GdsDataBaseKernel Class Reference</title>
+<title>Limbo: DefDataBase Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,69 +87,91 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="a00360.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00080.html">GdsDataBaseKernel</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00450.html">List of all members</a>  </div>
+<a href="a00455.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser::GdsDataBaseKernel Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">DefDataBase Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Kernel callbacks for <a class="el" href="a00089.html" title="read GDSII ">GdsReader</a>. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks.  
+<p>Custom class that inheritates <a class="el" href="a00081.html">DefParser::DefDataBase</a> with all the required callbacks defined.  
  <a href="a00080.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="a00292_source.html">GdsReader.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for GdsParser::GdsDataBaseKernel:</div>
+Inheritance diagram for DefDataBase:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="a00080.png" usemap="#GdsParser::GdsDataBaseKernel_map" alt=""/>
-  <map id="GdsParser::GdsDataBaseKernel_map" name="GdsParser::GdsDataBaseKernel_map">
-<area href="a00057.html" title="test enum callbacks " alt="EnumDataBase" shape="rect" coords="0,56,191,80"/>
-<area href="a00079.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks " alt="GdsParser::GdsDataBase" shape="rect" coords="201,56,392,80"/>
-<area href="a00090.html" title="read GDSII file with GDSII database GdsParser::GdsDB::GdsDB " alt="GdsParser::GdsDB::GdsReader" shape="rect" coords="402,56,593,80"/>
-<area href="a00002.html" title="test ascii callbacks " alt="AsciiDataBase" shape="rect" coords="100,112,291,136"/>
-<area href="a00082.html" title="High-level wrapper class for GdsReader. Everything is saved in an internal data structure and users o..." alt="GdsParser::GdsDriver" shape="rect" coords="301,112,492,136"/>
+  <img src="a00080.png" usemap="#DefDataBase_map" alt=""/>
+  <map id="DefDataBase_map" name="DefDataBase_map">
+<area href="a00081.html" title="Base class for def database. Only pure virtual functions are defined. User needs to inheritate this c..." alt="DefParser::DefDataBase" shape="rect" coords="0,0,150,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae46f98a1f98145b9e6a4424a9235582f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#ae46f98a1f98145b9e6a4424a9235582f">bit_array_cbk</a> (<a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a> record_type, <a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a> data_type, vector&lt; int &gt; const &amp;vBitArray)=0</td></tr>
-<tr class="memdesc:ae46f98a1f98145b9e6a4424a9235582f"><td class="mdescLeft">&#160;</td><td class="mdescRight">bit array callback  <a href="#ae46f98a1f98145b9e6a4424a9235582f">More...</a><br /></td></tr>
-<tr class="separator:ae46f98a1f98145b9e6a4424a9235582f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24fc285d4574385609e08ce32750df81"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a24fc285d4574385609e08ce32750df81">integer_2_cbk</a> (<a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a> record_type, <a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a> data_type, vector&lt; int &gt; const &amp;vInteger)=0</td></tr>
-<tr class="memdesc:a24fc285d4574385609e08ce32750df81"><td class="mdescLeft">&#160;</td><td class="mdescRight">2-byte integer callback  <a href="#a24fc285d4574385609e08ce32750df81">More...</a><br /></td></tr>
-<tr class="separator:a24fc285d4574385609e08ce32750df81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2812258252ad8d839ac1866fd9ace60e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a2812258252ad8d839ac1866fd9ace60e">integer_4_cbk</a> (<a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a> record_type, <a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a> data_type, vector&lt; int &gt; const &amp;vInteger)=0</td></tr>
-<tr class="memdesc:a2812258252ad8d839ac1866fd9ace60e"><td class="mdescLeft">&#160;</td><td class="mdescRight">4-byte integer callback  <a href="#a2812258252ad8d839ac1866fd9ace60e">More...</a><br /></td></tr>
-<tr class="separator:a2812258252ad8d839ac1866fd9ace60e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5eb13177bf1becd33703afd23af2891c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a5eb13177bf1becd33703afd23af2891c">real_4_cbk</a> (<a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a> record_type, <a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a> data_type, vector&lt; double &gt; const &amp;vFloat)=0</td></tr>
-<tr class="memdesc:a5eb13177bf1becd33703afd23af2891c"><td class="mdescLeft">&#160;</td><td class="mdescRight">4-byte floating point number callback  <a href="#a5eb13177bf1becd33703afd23af2891c">More...</a><br /></td></tr>
-<tr class="separator:a5eb13177bf1becd33703afd23af2891c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93a8002317dff87a3610a3109e2f9b82"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a93a8002317dff87a3610a3109e2f9b82">real_8_cbk</a> (<a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a> record_type, <a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a> data_type, vector&lt; double &gt; const &amp;vFloat)=0</td></tr>
-<tr class="memdesc:a93a8002317dff87a3610a3109e2f9b82"><td class="mdescLeft">&#160;</td><td class="mdescRight">8-byte floating point number callback  <a href="#a93a8002317dff87a3610a3109e2f9b82">More...</a><br /></td></tr>
-<tr class="separator:a93a8002317dff87a3610a3109e2f9b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2f454cfbc4851b9713fc7183cd785a3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#ad2f454cfbc4851b9713fc7183cd785a3">string_cbk</a> (<a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a> record_type, <a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a> data_type, string const &amp;str)=0</td></tr>
-<tr class="memdesc:ad2f454cfbc4851b9713fc7183cd785a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">string callback  <a href="#ad2f454cfbc4851b9713fc7183cd785a3">More...</a><br /></td></tr>
-<tr class="separator:ad2f454cfbc4851b9713fc7183cd785a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0843b245a9720ec43a28ac30ae35b4cd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a0843b245a9720ec43a28ac30ae35b4cd">begin_end_cbk</a> (<a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a> record_type)=0</td></tr>
-<tr class="memdesc:a0843b245a9720ec43a28ac30ae35b4cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">begin or end indicator of a block  <a href="#a0843b245a9720ec43a28ac30ae35b4cd">More...</a><br /></td></tr>
-<tr class="separator:a0843b245a9720ec43a28ac30ae35b4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6d104b38cbbefe657ee2d19f4f20f1a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6d104b38cbbefe657ee2d19f4f20f1a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#aa6d104b38cbbefe657ee2d19f4f20f1a">DefDataBase</a> ()</td></tr>
+<tr class="memdesc:aa6d104b38cbbefe657ee2d19f4f20f1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
+<tr class="separator:aa6d104b38cbbefe657ee2d19f4f20f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67b98fc8818d3a7152109e4c75ec9ee4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a67b98fc8818d3a7152109e4c75ec9ee4">set_def_dividerchar</a> (string const &amp;token)</td></tr>
+<tr class="separator:a67b98fc8818d3a7152109e4c75ec9ee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdf50455cab5486c70ecb167edf412cf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#acdf50455cab5486c70ecb167edf412cf">set_def_busbitchars</a> (string const &amp;token)</td></tr>
+<tr class="separator:acdf50455cab5486c70ecb167edf412cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94c8e07e7eea9b1c9d51e01b529c5e55"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a94c8e07e7eea9b1c9d51e01b529c5e55">set_def_version</a> (string const &amp;token)</td></tr>
+<tr class="separator:a94c8e07e7eea9b1c9d51e01b529c5e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacfdba055836306cbeccc67dc919fa24"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#aacfdba055836306cbeccc67dc919fa24">set_def_design</a> (string const &amp;token)</td></tr>
+<tr class="separator:aacfdba055836306cbeccc67dc919fa24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c88ac6f022e7d211dad2a604329aea0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a4c88ac6f022e7d211dad2a604329aea0">set_def_unit</a> (int token)</td></tr>
+<tr class="separator:a4c88ac6f022e7d211dad2a604329aea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad03c9d8b0e1f0a40f9a4fb4640869b26"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#ad03c9d8b0e1f0a40f9a4fb4640869b26">set_def_diearea</a> (int t1, int t2, int t3, int t4)</td></tr>
+<tr class="separator:ad03c9d8b0e1f0a40f9a4fb4640869b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafc3a2801303885000bc4324ea48a0a0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aafc3a2801303885000bc4324ea48a0a0"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#aafc3a2801303885000bc4324ea48a0a0">add_def_row</a> (<a class="el" href="a00243.html">DefParser::Row</a> const &amp;)</td></tr>
+<tr class="memdesc:aafc3a2801303885000bc4324ea48a0a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">add row <br /></td></tr>
+<tr class="separator:aafc3a2801303885000bc4324ea48a0a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8efd74e443db4f009a8e992b7da95ac"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#ac8efd74e443db4f009a8e992b7da95ac">add_def_component</a> (<a class="el" href="a00067.html">DefParser::Component</a> const &amp;c)</td></tr>
+<tr class="memdesc:ac8efd74e443db4f009a8e992b7da95ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">add component  <a href="#ac8efd74e443db4f009a8e992b7da95ac">More...</a><br /></td></tr>
+<tr class="separator:ac8efd74e443db4f009a8e992b7da95ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9867bf7a6c8ef08b632d866f5231082e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a9867bf7a6c8ef08b632d866f5231082e">resize_def_component</a> (int token)</td></tr>
+<tr class="separator:a9867bf7a6c8ef08b632d866f5231082e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13a6775f313d08704a317eabad1ed069"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a13a6775f313d08704a317eabad1ed069">add_def_pin</a> (<a class="el" href="a00216.html">DefParser::Pin</a> const &amp;p)</td></tr>
+<tr class="memdesc:a13a6775f313d08704a317eabad1ed069"><td class="mdescLeft">&#160;</td><td class="mdescRight">add pin  <a href="#a13a6775f313d08704a317eabad1ed069">More...</a><br /></td></tr>
+<tr class="separator:a13a6775f313d08704a317eabad1ed069"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a518131789a2659bf4a33ecd52d0bba5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a518131789a2659bf4a33ecd52d0bba5a">resize_def_pin</a> (int token)</td></tr>
+<tr class="memdesc:a518131789a2659bf4a33ecd52d0bba5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">set number of pins  <a href="#a518131789a2659bf4a33ecd52d0bba5a">More...</a><br /></td></tr>
+<tr class="separator:a518131789a2659bf4a33ecd52d0bba5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60363dd30012e4d06ef935f5362bd9fe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a60363dd30012e4d06ef935f5362bd9fe">add_def_net</a> (<a class="el" href="a00191.html">DefParser::Net</a> const &amp;n)</td></tr>
+<tr class="memdesc:a60363dd30012e4d06ef935f5362bd9fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">add net  <a href="#a60363dd30012e4d06ef935f5362bd9fe">More...</a><br /></td></tr>
+<tr class="separator:a60363dd30012e4d06ef935f5362bd9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a412ba8b870193d3ff27e8bb3414168f3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a412ba8b870193d3ff27e8bb3414168f3">resize_def_net</a> (int token)</td></tr>
+<tr class="memdesc:a412ba8b870193d3ff27e8bb3414168f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">set number of nets  <a href="#a412ba8b870193d3ff27e8bb3414168f3">More...</a><br /></td></tr>
+<tr class="separator:a412ba8b870193d3ff27e8bb3414168f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0300b83c64efcf11bdb186e0925be941"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a0300b83c64efcf11bdb186e0925be941">resize_def_blockage</a> (int n)</td></tr>
+<tr class="memdesc:a0300b83c64efcf11bdb186e0925be941"><td class="mdescLeft">&#160;</td><td class="mdescRight">set number of blockages  <a href="#a0300b83c64efcf11bdb186e0925be941">More...</a><br /></td></tr>
+<tr class="separator:a0300b83c64efcf11bdb186e0925be941"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa155bd42ffa02abfead00334a8e2395a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#aa155bd42ffa02abfead00334a8e2395a">add_def_placement_blockage</a> (std::vector&lt; std::vector&lt; int &gt; &gt; const &amp;vBbox)</td></tr>
+<tr class="memdesc:aa155bd42ffa02abfead00334a8e2395a"><td class="mdescLeft">&#160;</td><td class="mdescRight">add placement blockages  <a href="#aa155bd42ffa02abfead00334a8e2395a">More...</a><br /></td></tr>
+<tr class="separator:aa155bd42ffa02abfead00334a8e2395a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b1b22fb85f88b9b1f3662923085ad9f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b1b22fb85f88b9b1f3662923085ad9f"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a7b1b22fb85f88b9b1f3662923085ad9f">end_def_design</a> ()</td></tr>
+<tr class="memdesc:a7b1b22fb85f88b9b1f3662923085ad9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">end of design <br /></td></tr>
+<tr class="separator:a7b1b22fb85f88b9b1f3662923085ad9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_a00081"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_a00081')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="a00081.html">DefParser::DefDataBase</a></td></tr>
+<tr class="memitem:a9e5379287c0217c1a4a849cc9db9f675 inherit pro_methods_a00081"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00081.html#a9e5379287c0217c1a4a849cc9db9f675">def_user_cbk_reminder</a> (const char *str) const </td></tr>
+<tr class="memdesc:a9e5379287c0217c1a4a849cc9db9f675 inherit pro_methods_a00081"><td class="mdescLeft">&#160;</td><td class="mdescRight">remind users to define some optional callback functions at runtime  <a href="#a9e5379287c0217c1a4a849cc9db9f675">More...</a><br /></td></tr>
+<tr class="separator:a9e5379287c0217c1a4a849cc9db9f675 inherit pro_methods_a00081"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Kernel callbacks for <a class="el" href="a00089.html" title="read GDSII ">GdsReader</a>. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. </p>
-<p>============================================================= Why do I need to wrap <a class="el" href="a00080.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. ">GdsDataBaseKernel</a> into <a class="el" href="a00079.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks ">GdsDataBase</a>? This is mainly for backward compatibility reasons. In old version limbo library, user only needs to implement child database class for <a class="el" href="a00079.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks ">GdsDataBase</a> and use those ascii callbacks. I hope user does not need to change their code in the new version, so the old api must still be available. By adding new base class <a class="el" href="a00080.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. ">GdsDataBaseKernel</a>, it is possible to achieve both. If user want to use old api, they can write child class for <a class="el" href="a00079.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks ">GdsDataBase</a>, </p><h1>while if they want to use new api, please inheritate <a class="el" href="a00080.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. ">GdsDataBaseKernel</a>. </h1>
+<div class="textblock"><p>Custom class that inheritates <a class="el" href="a00081.html">DefParser::DefDataBase</a> with all the required callbacks defined. </p>
 
-<p>Definition at line <a class="el" href="a00292_source.html#l00039">39</a> of file <a class="el" href="a00292_source.html">GdsReader.h</a>.</p>
+<p>Definition at line <a class="el" href="a00405_source.html#l00020">20</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a0843b245a9720ec43a28ac30ae35b4cd"></a>
+<a class="anchor" id="ac8efd74e443db4f009a8e992b7da95ac"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -157,33 +179,35 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void GdsParser::GdsDataBaseKernel::begin_end_cbk </td>
+          <td class="memname">virtual void DefDataBase::add_def_component </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a>&#160;</td>
-          <td class="paramname"><em>record_type</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="a00067.html">DefParser::Component</a> const &amp;&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>begin or end indicator of a block </p>
+<p>add component </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">record_type</td><td>record </td></tr>
+    <tr><td class="paramname">c</td><td>component </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="a00057.html#a4dce5b24298dee1140396af7a7952618">EnumDataBase</a>.</p>
+<p>Implements <a class="el" href="a00081.html#a2fd5fcce5e975e308b701f59ebd383e9">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00066">66</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ae46f98a1f98145b9e6a4424a9235582f"></a>
+<a class="anchor" id="a60363dd30012e4d06ef935f5362bd9fe"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -191,51 +215,35 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void GdsParser::GdsDataBaseKernel::bit_array_cbk </td>
+          <td class="memname">virtual void DefDataBase::add_def_net </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a>&#160;</td>
-          <td class="paramname"><em>record_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="a00191.html">DefParser::Net</a> const &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a>&#160;</td>
-          <td class="paramname"><em>data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; int &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vBitArray</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>bit array callback </p>
+<p>add net </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">record_type</td><td>record </td></tr>
-    <tr><td class="paramname">data_type</td><td>data type </td></tr>
-    <tr><td class="paramname">vBitArray</td><td>data array </td></tr>
+    <tr><td class="paramname">n</td><td>net </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="a00057.html#aa930c78b39d107fd1794a0740ce50379">EnumDataBase</a>.</p>
+<p>Implements <a class="el" href="a00081.html#ac49af9820a5be5edf5fb9c87bb823245">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00089">89</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a24fc285d4574385609e08ce32750df81"></a>
+<a class="anchor" id="a13a6775f313d08704a317eabad1ed069"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -243,51 +251,35 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void GdsParser::GdsDataBaseKernel::integer_2_cbk </td>
+          <td class="memname">virtual void DefDataBase::add_def_pin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a>&#160;</td>
-          <td class="paramname"><em>record_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="a00216.html">DefParser::Pin</a> const &amp;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a>&#160;</td>
-          <td class="paramname"><em>data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; int &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vInteger</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>2-byte integer callback </p>
+<p>add pin </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">record_type</td><td>record </td></tr>
-    <tr><td class="paramname">data_type</td><td>data type </td></tr>
-    <tr><td class="paramname">vInteger</td><td>data array </td></tr>
+    <tr><td class="paramname">p</td><td>pin </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="a00057.html#a913aa3804259e1d91fc0138d0f409248">EnumDataBase</a>.</p>
+<p>Implements <a class="el" href="a00081.html#a608acb2d42aaafd980273e581529d534">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00077">77</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2812258252ad8d839ac1866fd9ace60e"></a>
+<a class="anchor" id="aa155bd42ffa02abfead00334a8e2395a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -295,51 +287,35 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void GdsParser::GdsDataBaseKernel::integer_4_cbk </td>
+          <td class="memname">virtual void DefDataBase::add_def_placement_blockage </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a>&#160;</td>
-          <td class="paramname"><em>record_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">std::vector&lt; std::vector&lt; int &gt; &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>vBbox</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a>&#160;</td>
-          <td class="paramname"><em>data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; int &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vInteger</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>4-byte integer callback </p>
+<p>add placement blockages </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">record_type</td><td>record </td></tr>
-    <tr><td class="paramname">data_type</td><td>data type </td></tr>
-    <tr><td class="paramname">vInteger</td><td>data array </td></tr>
+    <tr><td class="paramname">vBbox</td><td>array of boxes with xl, yl, xh, yh </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="a00057.html#a1b7a7ca543da943c44b30885726ddf0a">EnumDataBase</a>.</p>
+<p>Reimplemented from <a class="el" href="a00081.html#a711078069a2364970947d218ae53f971">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00107">107</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a5eb13177bf1becd33703afd23af2891c"></a>
+<a class="anchor" id="a0300b83c64efcf11bdb186e0925be941"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -347,51 +323,35 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void GdsParser::GdsDataBaseKernel::real_4_cbk </td>
+          <td class="memname">virtual void DefDataBase::resize_def_blockage </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a>&#160;</td>
-          <td class="paramname"><em>record_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a>&#160;</td>
-          <td class="paramname"><em>data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; double &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vFloat</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>4-byte floating point number callback </p>
+<p>set number of blockages </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">record_type</td><td>record </td></tr>
-    <tr><td class="paramname">data_type</td><td>data type </td></tr>
-    <tr><td class="paramname">vFloat</td><td>data array </td></tr>
+    <tr><td class="paramname">n</td><td>number of blockages </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="a00057.html#a76405dd0a7ae24137269683475afdb42">EnumDataBase</a>.</p>
+<p>Reimplemented from <a class="el" href="a00081.html#a56247adb6f2a6302410951a7cb453bde">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00101">101</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a93a8002317dff87a3610a3109e2f9b82"></a>
+<a class="anchor" id="a9867bf7a6c8ef08b632d866f5231082e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -399,51 +359,33 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void GdsParser::GdsDataBaseKernel::real_8_cbk </td>
+          <td class="memname">virtual void DefDataBase::resize_def_component </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a>&#160;</td>
-          <td class="paramname"><em>record_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>token</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a>&#160;</td>
-          <td class="paramname"><em>data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; double &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>vFloat</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>8-byte floating point number callback </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">record_type</td><td>record </td></tr>
-    <tr><td class="paramname">data_type</td><td>data type </td></tr>
-    <tr><td class="paramname">vFloat</td><td>data array </td></tr>
+    <tr><td class="paramname">token</td><td>number of components </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="a00057.html#a2b2424a53c40a15c615bc849ebc87185">EnumDataBase</a>.</p>
+<p>Implements <a class="el" href="a00081.html#a34698d77bbdd4803940ac79d51f7bd39">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00071">71</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad2f454cfbc4851b9713fc7183cd785a3"></a>
+<a class="anchor" id="a412ba8b870193d3ff27e8bb3414168f3"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -451,22 +393,168 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void GdsParser::GdsDataBaseKernel::string_cbk </td>
+          <td class="memname">virtual void DefDataBase::resize_def_net </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a>&#160;</td>
-          <td class="paramname"><em>record_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>token</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a>&#160;</td>
-          <td class="paramname"><em>data_type</em>, </td>
         </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>set number of nets </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>number of nets </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="a00081.html#a55986c2bdf91ca9ce6405e4e3a25fc44">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00095">95</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a518131789a2659bf4a33ecd52d0bba5a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
         <tr>
-          <td class="paramkey"></td>
+          <td class="memname">virtual void DefDataBase::resize_def_pin </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>token</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>set number of pins </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>number of pins </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="a00081.html#ad1f57bfa4008e5762bb958f1f764b6ff">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00083">83</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acdf50455cab5486c70ecb167edf412cf"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void DefDataBase::set_def_busbitchars </td>
+          <td>(</td>
           <td class="paramtype">string const &amp;&#160;</td>
-          <td class="paramname"><em>str</em>&#160;</td>
+          <td class="paramname"><em>token</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>BUS bit characters </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="a00081.html#aad3c807a46dcf6c6fef763bbb0f385cc">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00035">35</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aacfdba055836306cbeccc67dc919fa24"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void DefDataBase::set_def_design </td>
+          <td>(</td>
+          <td class="paramtype">string const &amp;&#160;</td>
+          <td class="paramname"><em>token</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>design name </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="a00081.html#a81448243505b4dc57c502a47846c5447">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00045">45</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad03c9d8b0e1f0a40f9a4fb4640869b26"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void DefDataBase::set_def_diearea </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>t1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>t2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>t3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>t4</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -476,32 +564,132 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>string callback </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">record_type</td><td>record </td></tr>
-    <tr><td class="paramname">data_type</td><td>data type </td></tr>
-    <tr><td class="paramname">str</td><td>data </td></tr>
+    <tr><td class="paramname">t1,t2,t3,t4</td><td>die area (xl, yl, xh, yh) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="a00057.html#a6807a31ed7971929f91c7fa406729370">EnumDataBase</a>.</p>
+<p>Implements <a class="el" href="a00081.html#a46bcf1fab16e327bbe0e994f38d2d2c4">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00055">55</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a67b98fc8818d3a7152109e4c75ec9ee4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void DefDataBase::set_def_dividerchar </td>
+          <td>(</td>
+          <td class="paramtype">string const &amp;&#160;</td>
+          <td class="paramname"><em>token</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>required callbacks from abstract <a class="el" href="a00081.html" title="Base class for def database. Only pure virtual functions are defined. User needs to inheritate this c...">DefParser::DefDataBase</a> /////////////////// </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>divider characters </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="a00081.html#a092bfdedda7be61d5cf56e6d0e8aebbf">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00030">30</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4c88ac6f022e7d211dad2a604329aea0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void DefDataBase::set_def_unit </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>token</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>DEF unit </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="a00081.html#a9961a95e6fa201d658a182bde059d093">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00050">50</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a94c8e07e7eea9b1c9d51e01b529c5e55"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void DefDataBase::set_def_version </td>
+          <td>(</td>
+          <td class="paramtype">string const &amp;&#160;</td>
+          <td class="paramname"><em>token</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>DEF version </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="a00081.html#a44280fe6b609d9a4d28420a58e8b37f4">DefParser::DefDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00405_source.html#l00040">40</a> of file <a class="el" href="a00405_source.html">test_adapt.cpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00292_source.html">GdsReader.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/test/parsers/def/<a class="el" href="a00405_source.html">test_adapt.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

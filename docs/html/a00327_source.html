@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/test/geometry/test_boostpolygonapi.cpp Source File</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/placement/GreedySearch.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,116 +87,290 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_d49d4fe2bb593f3112f8bcbe6fb5f73b.html">geometry</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li><li class="navelem"><a class="el" href="dir_43fbab52cf6dbc9f1c95c911c9b044e5.html">placement</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">test_boostpolygonapi.cpp</div>  </div>
+<div class="title">GreedySearch.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00327.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;set&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;boost/polygon/polygon.hpp&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00264.html">limbo/geometry/Polygon2Rectangle.h</a>&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00261.html">limbo/geometry/api/BoostPolygonApi.h</a>&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00262.html">limbo/geometry/api/GeoBoostPolygonApi.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">using</span> std::cout;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">using</span> std::endl;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">using</span> std::string;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">using</span> std::vector;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">using</span> std::list;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">using</span> std::set;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00356.html">gtl</a> = <a class="code" href="a00356.html">boost::polygon</a>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00370.html">lg</a> = <a class="code" href="a00370.html">limbo::geometry</a>; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a00327.html#ad346d2cc622126c018bb0954eee9b1fa">   36</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00327.html#ad346d2cc622126c018bb0954eee9b1fa">test1</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    std::vector&lt;gtl::rectangle_data&lt;int&gt; &gt; vRect; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="a00184.html">lg::Polygon2Rectangle&lt;vector&lt;gtl::point_data&lt;int&gt;</a> &gt;, vector&lt;gtl::rectangle_data&lt;int&gt; &gt; &gt; p2r (vRect, <a class="code" href="a00370.html#aafcc811667d0a3554826d9790d824b60a3abc4f93a037b819a5fa510728d2340f">lg::HOR_VER_SLICING</a>);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    assert(p2r.<a class="code" href="a00184.html#a6c8d22987f11969d4746a1b2a655dc61">read</a>(filename));</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    assert(p2r());</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    p2r.<a class="code" href="a00184.html#a6a7045ee336a92a1fe01d21939d15eab">print</a>(<span class="stringliteral">&quot;p2r1.gp&quot;</span>);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="a00327.html#a44c0461f780572bf02018038dd9423cd">   49</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00327.html#a44c0461f780572bf02018038dd9423cd">test2</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;{</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    std::vector&lt;gtl::rectangle_data&lt;int&gt; &gt; vRect; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="a00184.html">lg::Polygon2Rectangle&lt;list&lt;gtl::point_data&lt;int&gt;</a> &gt;, vector&lt;gtl::rectangle_data&lt;int&gt; &gt; &gt; p2r (vRect, <a class="code" href="a00370.html#aafcc811667d0a3554826d9790d824b60a3abc4f93a037b819a5fa510728d2340f">lg::HOR_VER_SLICING</a>);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    assert(p2r.<a class="code" href="a00184.html#a6c8d22987f11969d4746a1b2a655dc61">read</a>(filename));</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    assert(p2r());</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    p2r.<a class="code" href="a00184.html#a6a7045ee336a92a1fe01d21939d15eab">print</a>(<span class="stringliteral">&quot;p2r2.gp&quot;</span>);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="a00327.html#ab067cb5ed5d7678f6d8dc3d316092380">   62</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00327.html#ab067cb5ed5d7678f6d8dc3d316092380">test3</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    std::vector&lt;gtl::rectangle_data&lt;int&gt; &gt; vRect; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="a00184.html">lg::Polygon2Rectangle&lt;set&lt;gtl::point_data&lt;int&gt;</a> , <a class="code" href="a00177.html">lg::point_compare_type</a>&gt;, vector&lt;gtl::rectangle_data&lt;int&gt; &gt; &gt; p2r (vRect, <a class="code" href="a00370.html#aafcc811667d0a3554826d9790d824b60a3abc4f93a037b819a5fa510728d2340f">lg::HOR_VER_SLICING</a>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    assert(p2r.<a class="code" href="a00184.html#a6c8d22987f11969d4746a1b2a655dc61">read</a>(filename));</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    assert(p2r());</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    p2r.<a class="code" href="a00184.html#a6a7045ee336a92a1fe01d21939d15eab">print</a>(<span class="stringliteral">&quot;p2r3.gp&quot;</span>);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="a00327.html#a327d8cef466a7560ead5eb3995c0cbae">   74</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00327.html#a327d8cef466a7560ead5eb3995c0cbae">test4</a>()</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;{</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    vector&lt;gtl::point_data&lt;int&gt; &gt; vPoint (8);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    vPoint[0] = gtl::construct&lt;gtl::point_data&lt;int&gt; &gt;(0, 0);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    vPoint[1] = gtl::construct&lt;gtl::point_data&lt;int&gt; &gt;(0, 10);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    vPoint[2] = gtl::construct&lt;gtl::point_data&lt;int&gt; &gt;(10, 10);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    vPoint[3] = gtl::construct&lt;gtl::point_data&lt;int&gt; &gt;(10, 20);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    vPoint[4] = gtl::construct&lt;gtl::point_data&lt;int&gt; &gt;(20, 20);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    vPoint[5] = gtl::construct&lt;gtl::point_data&lt;int&gt; &gt;(20, 10);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    vPoint[6] = gtl::construct&lt;gtl::point_data&lt;int&gt; &gt;(30, 10);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    vPoint[7] = gtl::construct&lt;gtl::point_data&lt;int&gt; &gt;(30, 0);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="comment">//vPoint.push_back(gtl::construct&lt;gtl::point_data&lt;int&gt; &gt;(0, 0));</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    vector&lt;gtl::rectangle_data&lt;int&gt; &gt; vRectangle;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    assert(<a class="code" href="a00370.html#a9159c8df3405f1cbd52fe1b8b219e0a4">lg::polygon2RectangleBoost</a>(vPoint, vRectangle));</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">for</span> (std::size_t i = 0; i != vRectangle.size(); ++i)</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        gtl::rectangle_data&lt;int&gt; <span class="keyword">const</span>&amp; rect = vRectangle[i];</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; gtl::xl(rect) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; gtl::yl(rect) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; gtl::xh(rect) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; gtl::yh(rect) &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;test 4 passed\n&quot;</span>;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="a00327.html#a3c04138a5bfe5d72780bb7e82a18e627">  102</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00327.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="a00327.html#a327d8cef466a7560ead5eb3995c0cbae">test4</a>();</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordflow">if</span> (argc &gt; 1)</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    {</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <a class="code" href="a00327.html#ad346d2cc622126c018bb0954eee9b1fa">test1</a>(argv[1]);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <a class="code" href="a00327.html#a44c0461f780572bf02018038dd9423cd">test2</a>(argv[1]);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <a class="code" href="a00327.html#ab067cb5ed5d7678f6d8dc3d316092380">test3</a>(argv[1]);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    }</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">else</span> cout &lt;&lt; <span class="stringliteral">&quot;at least 1 argument is required&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
-<div class="ttc" id="a00370_html_a9159c8df3405f1cbd52fe1b8b219e0a4"><div class="ttname"><a href="a00370.html#a9159c8df3405f1cbd52fe1b8b219e0a4">limbo::geometry::polygon2RectangleBoost</a></div><div class="ttdeci">bool polygon2RectangleBoost(std::vector&lt; gtl::point_data&lt; int &gt; &gt; const &amp;vPoint, std::vector&lt; gtl::rectangle_data&lt; int &gt; &gt; &amp;vRectangle)</div><div class="ttdoc">this function takes a set of points describing a rectilinear polygon and decomposes it into rectangle...</div></div>
-<div class="ttc" id="a00356_html"><div class="ttname"><a href="a00356.html">boost::polygon</a></div><div class="ttdef"><b>Definition:</b> <a href="a00290_source.html#l00765">GdsObjects.h:765</a></div></div>
-<div class="ttc" id="a00327_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="a00327.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">main function requires an input benchmark in gnuplot format </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00102">test_boostpolygonapi.cpp:102</a></div></div>
-<div class="ttc" id="a00327_html_ad346d2cc622126c018bb0954eee9b1fa"><div class="ttname"><a href="a00327.html#ad346d2cc622126c018bb0954eee9b1fa">test1</a></div><div class="ttdeci">void test1(string const &amp;filename)</div><div class="ttdoc">test Boost.Polygon API </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00036">test_boostpolygonapi.cpp:36</a></div></div>
-<div class="ttc" id="a00327_html_a327d8cef466a7560ead5eb3995c0cbae"><div class="ttname"><a href="a00327.html#a327d8cef466a7560ead5eb3995c0cbae">test4</a></div><div class="ttdeci">void test4()</div><div class="ttdoc">test polygon-to-rectangle for array of points </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00074">test_boostpolygonapi.cpp:74</a></div></div>
-<div class="ttc" id="a00264_html"><div class="ttname"><a href="a00264.html">Polygon2Rectangle.h</a></div><div class="ttdoc">a generic implementation of polygon-to-rectangle conversion </div></div>
-<div class="ttc" id="a00262_html"><div class="ttname"><a href="a00262.html">GeoBoostPolygonApi.h</a></div><div class="ttdoc">this file extracts polygon-to-rectangle conversion for Boost.Polygon API. </div></div>
-<div class="ttc" id="a00184_html_a6c8d22987f11969d4746a1b2a655dc61"><div class="ttname"><a href="a00184.html#a6c8d22987f11969d4746a1b2a655dc61">limbo::geometry::Polygon2Rectangle::read</a></div><div class="ttdeci">bool read(string const &amp;filename)</div><div class="ttdoc">read polygon from file try to be compatible to gnuplot format </div><div class="ttdef"><b>Definition:</b> <a href="a00264_source.html#l00380">Polygon2Rectangle.h:380</a></div></div>
-<div class="ttc" id="a00327_html_a44c0461f780572bf02018038dd9423cd"><div class="ttname"><a href="a00327.html#a44c0461f780572bf02018038dd9423cd">test2</a></div><div class="ttdeci">void test2(string const &amp;filename)</div><div class="ttdoc">test polygon-to-rectangle for std::list </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00049">test_boostpolygonapi.cpp:49</a></div></div>
-<div class="ttc" id="a00184_html"><div class="ttname"><a href="a00184.html">limbo::geometry::Polygon2Rectangle</a></div><div class="ttdoc">a class implement conversion from manhattan polygon to rectangle </div><div class="ttdef"><b>Definition:</b> <a href="a00264_source.html#l00090">Polygon2Rectangle.h:90</a></div></div>
-<div class="ttc" id="a00370_html"><div class="ttname"><a href="a00370.html">limbo::geometry</a></div><div class="ttdoc">namespace for Limbo.Geometry </div><div class="ttdef"><b>Definition:</b> <a href="a00328_source.html#l00052">test_p2r.cpp:52</a></div></div>
-<div class="ttc" id="a00261_html"><div class="ttname"><a href="a00261.html">BoostPolygonApi.h</a></div><div class="ttdoc">Geometry traits for Boost.Polygon, include this file when you use Boost.Polygon geometric types...</div></div>
-<div class="ttc" id="a00327_html_ab067cb5ed5d7678f6d8dc3d316092380"><div class="ttname"><a href="a00327.html#ab067cb5ed5d7678f6d8dc3d316092380">test3</a></div><div class="ttdeci">void test3(string const &amp;filename)</div><div class="ttdoc">test polygon-to-rectangle for std::set </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00062">test_boostpolygonapi.cpp:62</a></div></div>
-<div class="ttc" id="a00370_html_aafcc811667d0a3554826d9790d824b60a3abc4f93a037b819a5fa510728d2340f"><div class="ttname"><a href="a00370.html#aafcc811667d0a3554826d9790d824b60a3abc4f93a037b819a5fa510728d2340f">limbo::geometry::HOR_VER_SLICING</a></div><div class="ttdoc">horizontal/vertical slicing and choose rectangle with larger area every time </div><div class="ttdef"><b>Definition:</b> <a href="a00263_source.html#l00043">Geometry.h:43</a></div></div>
-<div class="ttc" id="a00177_html"><div class="ttname"><a href="a00177.html">limbo::geometry::point_compare_type</a></div><div class="ttdoc">sort helper if orient == HORIZONTAL, sort by left lower if orient == VERTICAL, sort by lower left ...</div><div class="ttdef"><b>Definition:</b> <a href="a00264_source.html#l00050">Polygon2Rectangle.h:50</a></div></div>
-<div class="ttc" id="a00184_html_a6a7045ee336a92a1fe01d21939d15eab"><div class="ttname"><a href="a00184.html#a6a7045ee336a92a1fe01d21939d15eab">limbo::geometry::Polygon2Rectangle::print</a></div><div class="ttdeci">void print(string const &amp;filename) const </div><div class="ttdoc">print polygon to file in gnuplot format </div><div class="ttdef"><b>Definition:</b> <a href="a00264_source.html#l00441">Polygon2Rectangle.h:441</a></div></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifndef _LIMBO_ALGORITHMS_PLACEMENT_GREEDYSEARCH_H</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define _LIMBO_ALGORITHMS_PLACEMENT_GREEDYSEARCH_H</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;iterator&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00435.html">limbo</a> </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{ </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">namespace </span>algorithms </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{ </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="a00439.html">   29</a></span>&#160;<span class="keyword">namespace </span>placement </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">using</span> std::cout;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">using</span> std::endl;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">using</span> std::pair;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#if 0</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">struct </span>GSCallback</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">typedef</span> Component node_type;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">typedef</span> Segment row_type;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">typedef</span> <span class="keywordtype">int</span> site_coordinate_type;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">typedef</span> list&lt;node_type*&gt; node_vector_type;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">typedef</span> list&lt;node_type*&gt; node_fail_vector_type;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">typedef</span> vector&lt;row_type*&gt; row_vector_type;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">struct </span>cost_type</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">long</span> cost;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">int</span> seg_id;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">int</span> site_id;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">int</span> color_id;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        vector&lt;list&lt;node_type*&gt;::iterator&gt; vItNode; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        cost_type()</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            cost = <a class="code" href="a00435.html#a70f11c16058445049de838e5805c9652">numeric_limits&lt;long&gt;::max</a>();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            seg_id = -1;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            site_id = -1;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            color_id = -1;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        cost_type(cost_type <span class="keyword">const</span>&amp; rhs)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            cost = rhs.cost;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            seg_id = rhs.seg_id;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            site_id = rhs.site_id;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            color_id = rhs.color_id;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            vItNode = rhs.vItNode;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keyword">friend</span> <span class="keywordtype">bool</span> operator&lt;(cost_type <span class="keyword">const</span>&amp; c1, cost_type <span class="keyword">const</span>&amp; c2) {<span class="keywordflow">return</span> c1.cost &lt; c2.cost;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    };</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    SegLegalizerCF* pslmr;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    GSCallback(SegLegalizerCF* psl) : pslmr(psl) {}</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    GSCallback(GSCallback <span class="keyword">const</span>&amp; rhs) : pslmr(rhs.pslmr) {}</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    site_coordinate_type site_xl(<span class="keyword">const</span> node_type* pn)<span class="keyword"> const </span>{}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    site_coordinate_type site_xh(<span class="keyword">const</span> node_type* pn)<span class="keyword"> const </span>{}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    pair&lt;size_t, size_t&gt; row_range(<span class="keyword">const</span> node_type* pn)<span class="keyword"> const </span>{}</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    node_vector_type&amp; nodes_in_row(<span class="keywordtype">size_t</span> row_idx)<span class="keyword"> const </span>{}</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">bool</span> check_displace(<span class="keyword">const</span> node_type* pn, site_coordinate_type x, site_coordinate_type y)<span class="keyword"> const </span>{}</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    cost_type calc_cost(<span class="keyword">const</span> node_type* pcomp2, site_coordinate_type seg_id2, </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            site_coordinate_type site_id2, vector&lt;list&lt;node_type*&gt;::iterator&gt; <span class="keyword">const</span>&amp; vItNode, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> swap_cnt)<span class="keyword"> const</span>{}</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">bool</span> check_valid(cost_type <span class="keyword">const</span>&amp; c)<span class="keyword"> const </span>{}</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00433.html#a76acbfa609308aaa57a44306a30e9338">apply</a>(node_type* pcomp, cost_type <span class="keyword">const</span>&amp; c, node_fail_vector_type&amp; vFailNode, <span class="keywordtype">int</span> swap_cnt)<span class="keyword"> const </span>{}</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    row_type* row(<span class="keywordtype">size_t</span> row_idx)<span class="keyword"> const </span>{}</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    site_coordinate_type site_xl(<span class="keyword">const</span> row_type* pr)<span class="keyword"> const </span>{}</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    site_coordinate_type site_xh(<span class="keyword">const</span> row_type* pr)<span class="keyword"> const </span>{}</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;};</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="a00147.html">  122</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00147.html">gs_choose_type</a></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;{</div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="a00147.html#a3eccb08383f6bbac2e17a53ce99f6d6f">  124</a></span>&#160;    <span class="keyword">typedef</span> T&amp; <a class="code" href="a00147.html#a3eccb08383f6bbac2e17a53ce99f6d6f">value_type</a>; </div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="a00147.html#afd46be87e0d580bc74b628e1da4b89b5">  125</a></span>&#160;    <span class="keyword">typedef</span> T <span class="keyword">const</span>&amp; <a class="code" href="a00147.html#afd46be87e0d580bc74b628e1da4b89b5">const_value_type</a>; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;};</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="a00148.html">  130</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00147.html">gs_choose_type</a>&lt;T*&gt;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;{</div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="a00148.html#a530268eb56f91945f1549b8447d5f92b">  132</a></span>&#160;    <span class="keyword">typedef</span> T* <a class="code" href="a00148.html#a530268eb56f91945f1549b8447d5f92b">value_type</a>; </div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="a00148.html#a77f88dbeb49034184fe68b694fcf6a3a">  133</a></span>&#160;    <span class="keyword">typedef</span> <span class="keyword">const</span> T* <a class="code" href="a00148.html#a77f88dbeb49034184fe68b694fcf6a3a">const_value_type</a>; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;};</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> CallbackType&gt;</div>
+<div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="a00146.html">  139</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00146.html">GreedySearch</a></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;{</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keyword">typedef</span> CallbackType callback_type;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> callback_type::node_type node_type;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> callback_type::cost_type cost_type;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> callback_type::row_type row_type;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> callback_type::site_coordinate_type site_coordinate_type;</div>
+<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="a00146.html#adf68de336531ddf731f876f40178df41">  148</a></span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> callback_type::node_vector_type <a class="code" href="a00146.html#adf68de336531ddf731f876f40178df41">node_vector_type</a>; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> callback_type::node_fail_vector_type node_fail_vector_type;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> callback_type::row_vector_type row_vector_type;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <span class="comment">// it can be row_type&amp; or row_type*</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="a00147.html#a3eccb08383f6bbac2e17a53ce99f6d6f">gs_choose_type&lt;typename row_vector_type::value_type&gt;::value_type</a> row_value_type;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="a00147.html#afd46be87e0d580bc74b628e1da4b89b5">gs_choose_type&lt;typename row_vector_type::value_type&gt;::const_value_type</a> row_const_value_type;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="comment">// it can be node_type&amp; or node_type*</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="a00147.html#a3eccb08383f6bbac2e17a53ce99f6d6f">gs_choose_type&lt;typename node_vector_type::value_type&gt;::value_type</a> node_value_type;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="a00147.html#afd46be87e0d580bc74b628e1da4b89b5">gs_choose_type&lt;typename node_vector_type::value_type&gt;::const_value_type</a> node_const_value_type;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;</div>
+<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="a00146.html#af950e9e18f9337871943493b7fec63ec">  162</a></span>&#160;        <a class="code" href="a00146.html#af950e9e18f9337871943493b7fec63ec">GreedySearch</a>(callback_type cbk = callback_type()) : <a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>(cbk) {}</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;</div>
+<div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="a00146.html#af4486e8f9408fbb614055e011b742e7e">  167</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a00146.html#af4486e8f9408fbb614055e011b742e7e">operator()</a>(node_fail_vector_type&amp; vFailNode, <span class="keywordtype">int</span> max_swap_cnt) {this-&gt;<a class="code" href="a00146.html#a8ffaccb4c05d5979be1d24e5eed865d5">run</a>(vFailNode, max_swap_cnt);}</div>
+<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="a00146.html#a8ffaccb4c05d5979be1d24e5eed865d5">  171</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a00146.html#a8ffaccb4c05d5979be1d24e5eed865d5">run</a>(node_fail_vector_type&amp; vFailNode, <span class="keywordtype">int</span> max_swap_cnt)</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">typename</span> node_fail_vector_type::iterator it = vFailNode.begin();</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                    it != vFailNode.end(); )</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            {</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                node_value_type n = *it;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                <span class="keywordtype">bool</span> success_flag = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt;= max_swap_cnt; ++i)</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                {</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                    <span class="keywordflow">if</span> (<a class="code" href="a00146.html#a4bafc03c5ed181988c75c5aa7172a320">search_swap</a>(n, vFailNode, i)) </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                    {</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                        success_flag = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                    }</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                }</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                <span class="keywordflow">if</span> (success_flag)</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                {</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                    <span class="keyword">typename</span> node_fail_vector_type::iterator itPrev = it;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                    ++it;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                    vFailNode.erase(itPrev);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                <span class="keywordflow">else</span> ++it;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            }</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        }</div>
+<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="a00146.html#a4bafc03c5ed181988c75c5aa7172a320">  200</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="a00146.html#a4bafc03c5ed181988c75c5aa7172a320">search_swap</a>(node_value_type n, node_fail_vector_type&amp; vFailNode, <span class="keywordtype">int</span> swap_cnt) </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        {</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            <span class="keyword">typedef</span> <span class="keyword">typename</span> node_vector_type::iterator node_iterator_type;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            pair&lt;size_t, size_t&gt; row_range = <a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.row_range(n);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            <span class="keywordtype">size_t</span> row_idx1 = row_range.first;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            <span class="keywordtype">size_t</span> row_idx2 = row_range.second;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            assert(row_idx1 &lt; row_idx2);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="comment">// it should be initialized to invalid </span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            cost_type best_cost;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            assert(!<a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.check_valid(best_cost));</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> row_idx = row_idx1; row_idx != row_idx2; ++row_idx)</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            {</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                node_vector_type&amp; vNode = <a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.nodes_in_row(row_idx);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                <span class="comment">// row can be T&amp; or T*</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;                row_const_value_type row = <a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.row(row_idx);</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;                <span class="comment">// prepare a set of consecutive iterator2 </span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                vector&lt;node_iterator_type&gt; vIt2 (swap_cnt+1, vNode.begin());</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                <span class="keywordtype">bool</span> next_flag1 = <span class="keyword">false</span>; <span class="comment">// if true, perform continue </span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; swap_cnt; ++i)</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                {</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                    <span class="keywordflow">if</span> (vIt2.back() == vNode.end())</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                    {</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                        next_flag1 = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                    }</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                    ++(vIt2.back());</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                }</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                <span class="keywordflow">if</span> (next_flag1) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                <span class="keywordflow">for</span> (; vIt2.back() != vNode.end(); ++vIt2.back())</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                {</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                    <span class="comment">// prepare the set of consecutive iterator2 </span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = vIt2.size()-1; i &gt; 0; --i)</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                    {</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                        vIt2[i-1] = vIt2[i];</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                        --vIt2[i-1];</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                    }</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                    site_coordinate_type site_size_x = this-&gt;<a class="code" href="a00146.html#a3213ddf6c02038136db9b9893483e20a">node_site_size_x</a>(n);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                    <span class="keywordtype">bool</span> next_flag2 = <span class="keyword">false</span>; <span class="comment">// if true, perform continue </span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                    <span class="comment">// check node size </span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; vIt2.size()-1; ++i)</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                    {</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                        <span class="comment">// n should not be included in the node map </span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                        assert(n != *vIt2[i]);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                        <span class="keywordflow">if</span> (this-&gt;<a class="code" href="a00146.html#a3213ddf6c02038136db9b9893483e20a">node_site_size_x</a>(*vIt2[i]) &gt;= site_size_x) </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                        {</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                            next_flag2 = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                        }</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                    }</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                    <span class="keywordflow">if</span> (next_flag2) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                    <span class="comment">// check whitespace size </span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                    site_coordinate_type ws_site_xl;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                    site_coordinate_type ws_site_xh = <a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.site_xl(*vIt2.back());</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                    <span class="keywordflow">if</span> (vIt2.front() != vNode.begin())</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                    {</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                        node_iterator_type it2_0 = vIt2.front();</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                        --it2_0;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                        ws_site_xl = this-&gt;<a class="code" href="a00146.html#a983912b597c0b18575006c7e2dc2b0b5">site_xh</a>(*it2_0);</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                    }</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                    <span class="keywordflow">else</span> ws_site_xl = <a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.site_xl(row);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                    <span class="comment">// if whitespace is too small </span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                    <span class="keywordflow">if</span> (ws_site_xh-ws_site_xl &lt; site_size_x) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                    <span class="comment">// enumerate all possible positions in the whitespace </span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                    <span class="keywordflow">for</span> (site_coordinate_type tgt_site = ws_site_xl; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                            tgt_site &lt;= ws_site_xh-site_size_x; ++tgt_site)</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                    {</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                        <span class="comment">// check displacment constraint </span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                        <span class="keywordflow">if</span> (!<a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.check_displace(n, tgt_site, row_idx)) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                        cost_type cur_cost = <a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.calc_cost(n, row_idx, tgt_site, vIt2, swap_cnt);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                        <span class="keywordflow">if</span> (!<a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.check_valid(best_cost) || cur_cost &lt; best_cost)</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                        {</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                            best_cost = cur_cost;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                        }</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                    }</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                }</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            }</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.check_valid(best_cost))</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            {</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                <span class="comment">// I assume apply() will remove replaced nodes and insert current node </span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                <a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.apply(n, best_cost, vFailNode, swap_cnt);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            }</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        }</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00292"></a><span class="lineno"><a class="line" href="a00146.html#a3213ddf6c02038136db9b9893483e20a">  292</a></span>&#160;        site_coordinate_type <a class="code" href="a00146.html#a3213ddf6c02038136db9b9893483e20a">node_site_size_x</a>(node_const_value_type n)<span class="keyword"> const </span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.site_xh(n)-<a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.site_xl(n);</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        }</div>
+<div class="line"><a name="l00299"></a><span class="lineno"><a class="line" href="a00146.html#abb9ef33ed3ba1836f8b5c6e35b1e9a91">  299</a></span>&#160;        site_coordinate_type <a class="code" href="a00146.html#abb9ef33ed3ba1836f8b5c6e35b1e9a91">node_site_gap_x</a>(node_const_value_type n1, node_const_value_type n2)<span class="keyword"> const </span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.site_xl(n2)-<a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.site_xh(n1);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        }</div>
+<div class="line"><a name="l00305"></a><span class="lineno"><a class="line" href="a00146.html#a105daa5fcdd0a1fac8bfd778c8eee223">  305</a></span>&#160;        site_coordinate_type <a class="code" href="a00146.html#a105daa5fcdd0a1fac8bfd778c8eee223">site_xl</a>(node_const_value_type n)<span class="keyword"> const </span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.site_xl(n);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        }</div>
+<div class="line"><a name="l00311"></a><span class="lineno"><a class="line" href="a00146.html#a983912b597c0b18575006c7e2dc2b0b5">  311</a></span>&#160;        site_coordinate_type <a class="code" href="a00146.html#a983912b597c0b18575006c7e2dc2b0b5">site_xh</a>(node_const_value_type n)<span class="keyword"> const </span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>.site_xh(n);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        }</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;</div>
+<div class="line"><a name="l00316"></a><span class="lineno"><a class="line" href="a00146.html#a7915953c825547453e1ba950515d86eb">  316</a></span>&#160;        callback_type <a class="code" href="a00146.html#a7915953c825547453e1ba950515d86eb">m_cbk</a>; </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;};</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;} <span class="comment">// namespace placement</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;} <span class="comment">// namespace algorithms</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;} <span class="comment">// namespace limbo </span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a00146_html_abb9ef33ed3ba1836f8b5c6e35b1e9a91"><div class="ttname"><a href="a00146.html#abb9ef33ed3ba1836f8b5c6e35b1e9a91">limbo::algorithms::placement::GreedySearch::node_site_gap_x</a></div><div class="ttdeci">site_coordinate_type node_site_gap_x(node_const_value_type n1, node_const_value_type n2) const </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00299">GreedySearch.h:299</a></div></div>
+<div class="ttc" id="a00435_html_a70f11c16058445049de838e5805c9652"><div class="ttname"><a href="a00435.html#a70f11c16058445049de838e5805c9652">limbo::max</a></div><div class="ttdeci">std::iterator_traits&lt; Iterator &gt;::value_type max(Iterator first, Iterator last)</div><div class="ttdoc">get max of an array </div><div class="ttdef"><b>Definition:</b> <a href="a00349_source.html#l00061">Math.h:61</a></div></div>
+<div class="ttc" id="a00146_html_a7915953c825547453e1ba950515d86eb"><div class="ttname"><a href="a00146.html#a7915953c825547453e1ba950515d86eb">limbo::algorithms::placement::GreedySearch::m_cbk</a></div><div class="ttdeci">callback_type m_cbk</div><div class="ttdoc">a copiable callback_type is required </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00316">GreedySearch.h:316</a></div></div>
+<div class="ttc" id="a00147_html"><div class="ttname"><a href="a00147.html">limbo::algorithms::placement::gs_choose_type</a></div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00122">GreedySearch.h:122</a></div></div>
+<div class="ttc" id="a00435_html"><div class="ttname"><a href="a00435.html">limbo</a></div><div class="ttdoc">namespace for Limbo </div><div class="ttdef"><b>Definition:</b> <a href="a00322_source.html#l00022">GraphUtility.h:22</a></div></div>
+<div class="ttc" id="a00146_html_a983912b597c0b18575006c7e2dc2b0b5"><div class="ttname"><a href="a00146.html#a983912b597c0b18575006c7e2dc2b0b5">limbo::algorithms::placement::GreedySearch::site_xh</a></div><div class="ttdeci">site_coordinate_type site_xh(node_const_value_type n) const </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00311">GreedySearch.h:311</a></div></div>
+<div class="ttc" id="a00147_html_afd46be87e0d580bc74b628e1da4b89b5"><div class="ttname"><a href="a00147.html#afd46be87e0d580bc74b628e1da4b89b5">limbo::algorithms::placement::gs_choose_type::const_value_type</a></div><div class="ttdeci">T const &amp; const_value_type</div><div class="ttdoc">constant value type </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00125">GreedySearch.h:125</a></div></div>
+<div class="ttc" id="a00146_html_af950e9e18f9337871943493b7fec63ec"><div class="ttname"><a href="a00146.html#af950e9e18f9337871943493b7fec63ec">limbo::algorithms::placement::GreedySearch::GreedySearch</a></div><div class="ttdeci">GreedySearch(callback_type cbk=callback_type())</div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00162">GreedySearch.h:162</a></div></div>
+<div class="ttc" id="a00146_html"><div class="ttname"><a href="a00146.html">limbo::algorithms::placement::GreedySearch</a></div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00139">GreedySearch.h:139</a></div></div>
+<div class="ttc" id="a00146_html_adf68de336531ddf731f876f40178df41"><div class="ttname"><a href="a00146.html#adf68de336531ddf731f876f40178df41">limbo::algorithms::placement::GreedySearch::node_vector_type</a></div><div class="ttdeci">callback_type::node_vector_type node_vector_type</div><div class="ttdoc">node container for a single row </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00148">GreedySearch.h:148</a></div></div>
+<div class="ttc" id="a00146_html_a3213ddf6c02038136db9b9893483e20a"><div class="ttname"><a href="a00146.html#a3213ddf6c02038136db9b9893483e20a">limbo::algorithms::placement::GreedySearch::node_site_size_x</a></div><div class="ttdeci">site_coordinate_type node_site_size_x(node_const_value_type n) const </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00292">GreedySearch.h:292</a></div></div>
+<div class="ttc" id="a00148_html_a77f88dbeb49034184fe68b694fcf6a3a"><div class="ttname"><a href="a00148.html#a77f88dbeb49034184fe68b694fcf6a3a">limbo::algorithms::placement::gs_choose_type&lt; T * &gt;::const_value_type</a></div><div class="ttdeci">const T * const_value_type</div><div class="ttdoc">constant value type </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00133">GreedySearch.h:133</a></div></div>
+<div class="ttc" id="a00146_html_a105daa5fcdd0a1fac8bfd778c8eee223"><div class="ttname"><a href="a00146.html#a105daa5fcdd0a1fac8bfd778c8eee223">limbo::algorithms::placement::GreedySearch::site_xl</a></div><div class="ttdeci">site_coordinate_type site_xl(node_const_value_type n) const </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00305">GreedySearch.h:305</a></div></div>
+<div class="ttc" id="a00146_html_a8ffaccb4c05d5979be1d24e5eed865d5"><div class="ttname"><a href="a00146.html#a8ffaccb4c05d5979be1d24e5eed865d5">limbo::algorithms::placement::GreedySearch::run</a></div><div class="ttdeci">void run(node_fail_vector_type &amp;vFailNode, int max_swap_cnt)</div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00171">GreedySearch.h:171</a></div></div>
+<div class="ttc" id="a00148_html_a530268eb56f91945f1549b8447d5f92b"><div class="ttname"><a href="a00148.html#a530268eb56f91945f1549b8447d5f92b">limbo::algorithms::placement::gs_choose_type&lt; T * &gt;::value_type</a></div><div class="ttdeci">T * value_type</div><div class="ttdoc">value type </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00132">GreedySearch.h:132</a></div></div>
+<div class="ttc" id="a00146_html_a4bafc03c5ed181988c75c5aa7172a320"><div class="ttname"><a href="a00146.html#a4bafc03c5ed181988c75c5aa7172a320">limbo::algorithms::placement::GreedySearch::search_swap</a></div><div class="ttdeci">bool search_swap(node_value_type n, node_fail_vector_type &amp;vFailNode, int swap_cnt)</div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00200">GreedySearch.h:200</a></div></div>
+<div class="ttc" id="a00147_html_a3eccb08383f6bbac2e17a53ce99f6d6f"><div class="ttname"><a href="a00147.html#a3eccb08383f6bbac2e17a53ce99f6d6f">limbo::algorithms::placement::gs_choose_type::value_type</a></div><div class="ttdeci">T &amp; value_type</div><div class="ttdoc">value type </div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00124">GreedySearch.h:124</a></div></div>
+<div class="ttc" id="a00433_html_a76acbfa609308aaa57a44306a30e9338"><div class="ttname"><a href="a00433.html#a76acbfa609308aaa57a44306a30e9338">GdsParser::GdsDB::ApplyCellReferenceActionDetails::apply</a></div><div class="ttdeci">void apply(GdsCellReference const &amp;cellRef, ObjectType *object)</div><div class="ttdoc">apply cell reference </div><div class="ttdef"><b>Definition:</b> <a href="a00359_source.html#l00396">GdsObjectHelpers.h:396</a></div></div>
+<div class="ttc" id="a00146_html_af4486e8f9408fbb614055e011b742e7e"><div class="ttname"><a href="a00146.html#af4486e8f9408fbb614055e011b742e7e">limbo::algorithms::placement::GreedySearch::operator()</a></div><div class="ttdeci">void operator()(node_fail_vector_type &amp;vFailNode, int max_swap_cnt)</div><div class="ttdef"><b>Definition:</b> <a href="a00327_source.html#l00167">GreedySearch.h:167</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:11 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

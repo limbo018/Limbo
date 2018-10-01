@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdsParser::GdsReader Class Reference</title>
+<title>Limbo: BookshelfParser::Driver Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,101 +89,197 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00360.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00089.html">GdsReader</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00423.html">BookshelfParser</a></li><li class="navelem"><a class="el" href="a00089.html">Driver</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="a00454.html">List of all members</a>  </div>
+<a href="a00474.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser::GdsReader Class Reference</div>  </div>
+<div class="title">BookshelfParser::Driver Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>read GDSII  
- <a href="a00089.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="a00292_source.html">GdsReader.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00351_source.html">BookshelfDriver.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a79062e53ff97738088055b1dce5488a2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a79062e53ff97738088055b1dce5488a2">GdsReader</a> (<a class="el" href="a00080.html">GdsDataBaseKernel</a> &amp;db)</td></tr>
-<tr class="memdesc:a79062e53ff97738088055b1dce5488a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a79062e53ff97738088055b1dce5488a2">More...</a><br /></td></tr>
-<tr class="separator:a79062e53ff97738088055b1dce5488a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaacde13af96655595febcbacb52fd9d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaacde13af96655595febcbacb52fd9d6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#aaacde13af96655595febcbacb52fd9d6">~GdsReader</a> ()</td></tr>
-<tr class="memdesc:aaacde13af96655595febcbacb52fd9d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
-<tr class="separator:aaacde13af96655595febcbacb52fd9d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bc59e082c96a456ea302a707609ce07"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a2bc59e082c96a456ea302a707609ce07">operator()</a> (const char *filename)</td></tr>
-<tr class="memdesc:a2bc59e082c96a456ea302a707609ce07"><td class="mdescLeft">&#160;</td><td class="mdescRight">read from file  <a href="#a2bc59e082c96a456ea302a707609ce07">More...</a><br /></td></tr>
-<tr class="separator:a2bc59e082c96a456ea302a707609ce07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3523ec85c382ee3b7ecf8a11690d75dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a3523ec85c382ee3b7ecf8a11690d75dc">operator()</a> (std::istream &amp;fp)</td></tr>
-<tr class="memdesc:a3523ec85c382ee3b7ecf8a11690d75dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">read from stream  <a href="#a3523ec85c382ee3b7ecf8a11690d75dc">More...</a><br /></td></tr>
-<tr class="separator:a3523ec85c382ee3b7ecf8a11690d75dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a485e36ca544f9ecd3344204484c49b6d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a485e36ca544f9ecd3344204484c49b6d">Driver</a> (<a class="el" href="a00048.html">BookshelfDataBase</a> &amp;db)</td></tr>
+<tr class="separator:a485e36ca544f9ecd3344204484c49b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6e80cfc968d275c71c2db647a3ce4d8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#aa6e80cfc968d275c71c2db647a3ce4d8">parse_stream</a> (std::istream &amp;in, const string &amp;sname=&quot;stream input&quot;)</td></tr>
+<tr class="separator:aa6e80cfc968d275c71c2db647a3ce4d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c4a56ddaffb6fdf2f39ef232736e926"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a2c4a56ddaffb6fdf2f39ef232736e926">parse_string</a> (const string &amp;input, const string &amp;sname=&quot;string stream&quot;)</td></tr>
+<tr class="separator:a2c4a56ddaffb6fdf2f39ef232736e926"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab234b050f673bcee199672676f6429ae"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#ab234b050f673bcee199672676f6429ae">parse_file</a> (const string &amp;filename)</td></tr>
+<tr class="separator:ab234b050f673bcee199672676f6429ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b8bb724df8fd6232a3b56f99f2e01c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a9b8bb724df8fd6232a3b56f99f2e01c8">error</a> (const class location &amp;l, const string &amp;m)</td></tr>
+<tr class="separator:a9b8bb724df8fd6232a3b56f99f2e01c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a405c0d509617bb7ffd380c65a9bc2683"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a405c0d509617bb7ffd380c65a9bc2683">error</a> (const string &amp;m)</td></tr>
+<tr class="separator:a405c0d509617bb7ffd380c65a9bc2683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0303a9967eb9edf57c239825763608c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a0303a9967eb9edf57c239825763608c3">setPlFlag</a> (bool flag)</td></tr>
+<tr class="memdesc:a0303a9967eb9edf57c239825763608c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">control m_plFlag  <a href="#a0303a9967eb9edf57c239825763608c3">More...</a><br /></td></tr>
+<tr class="separator:a0303a9967eb9edf57c239825763608c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebb7547b9a9522b283fefbaaef3c9804"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aebb7547b9a9522b283fefbaaef3c9804"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#aebb7547b9a9522b283fefbaaef3c9804">numNodeTerminalsCbk</a> (int, int)</td></tr>
+<tr class="memdesc:aebb7547b9a9522b283fefbaaef3c9804"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .nodes file, number of node and terminals <br /></td></tr>
+<tr class="separator:aebb7547b9a9522b283fefbaaef3c9804"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e7a7f917f2c87176913f57fa275d38a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0e7a7f917f2c87176913f57fa275d38a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a0e7a7f917f2c87176913f57fa275d38a">terminalEntryCbk</a> (string &amp;, int, int)</td></tr>
+<tr class="memdesc:a0e7a7f917f2c87176913f57fa275d38a"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .nodes file, terminal entry <br /></td></tr>
+<tr class="separator:a0e7a7f917f2c87176913f57fa275d38a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ed0ca323707aa719eea486a82ad1954"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9ed0ca323707aa719eea486a82ad1954"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a9ed0ca323707aa719eea486a82ad1954">nodeEntryCbk</a> (string &amp;, int, int, string &amp;)</td></tr>
+<tr class="memdesc:a9ed0ca323707aa719eea486a82ad1954"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .nodes file, node entry <br /></td></tr>
+<tr class="separator:a9ed0ca323707aa719eea486a82ad1954"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa186353c89c542776c2f6e58a3d6adb5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa186353c89c542776c2f6e58a3d6adb5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#aa186353c89c542776c2f6e58a3d6adb5">nodeEntryCbk</a> (string &amp;, int, int)</td></tr>
+<tr class="memdesc:aa186353c89c542776c2f6e58a3d6adb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .nodes file, node entry <br /></td></tr>
+<tr class="separator:aa186353c89c542776c2f6e58a3d6adb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4f9d594d66e011b9b7139b5e7dfc9c3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae4f9d594d66e011b9b7139b5e7dfc9c3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#ae4f9d594d66e011b9b7139b5e7dfc9c3">numNetCbk</a> (int)</td></tr>
+<tr class="memdesc:ae4f9d594d66e011b9b7139b5e7dfc9c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .nets file, number of nets <br /></td></tr>
+<tr class="separator:ae4f9d594d66e011b9b7139b5e7dfc9c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45a976e98ea2c2e424926a5ef15b7d39"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a45a976e98ea2c2e424926a5ef15b7d39"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a45a976e98ea2c2e424926a5ef15b7d39">numPinCbk</a> (int)</td></tr>
+<tr class="memdesc:a45a976e98ea2c2e424926a5ef15b7d39"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .nets file, number of pins <br /></td></tr>
+<tr class="separator:a45a976e98ea2c2e424926a5ef15b7d39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1111d3f387a5e3955d7d0c3dbc907f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af1111d3f387a5e3955d7d0c3dbc907f6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#af1111d3f387a5e3955d7d0c3dbc907f6">netPinEntryCbk</a> (string &amp;, char, double, double, double, double, string &amp;)</td></tr>
+<tr class="memdesc:af1111d3f387a5e3955d7d0c3dbc907f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .nets file, entry of net and pin <br /></td></tr>
+<tr class="separator:af1111d3f387a5e3955d7d0c3dbc907f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a346cbeb69990eff3def2a1ad05b2fa97"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a346cbeb69990eff3def2a1ad05b2fa97"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a346cbeb69990eff3def2a1ad05b2fa97">netPinEntryCbk</a> (string &amp;, char, double, double, double=0.0, double=0.0)</td></tr>
+<tr class="memdesc:a346cbeb69990eff3def2a1ad05b2fa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .nets file, entry of net and pin <br /></td></tr>
+<tr class="separator:a346cbeb69990eff3def2a1ad05b2fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acecf06cef9aa49454a76723d0ca2d37e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acecf06cef9aa49454a76723d0ca2d37e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#acecf06cef9aa49454a76723d0ca2d37e">netNameAndDegreeCbk</a> (string &amp;, int)</td></tr>
+<tr class="memdesc:acecf06cef9aa49454a76723d0ca2d37e"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .nets file, net name and degree <br /></td></tr>
+<tr class="separator:acecf06cef9aa49454a76723d0ca2d37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33d024775a0c9b0cd954fabbb63190b5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a33d024775a0c9b0cd954fabbb63190b5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a33d024775a0c9b0cd954fabbb63190b5">netEntryCbk</a> ()</td></tr>
+<tr class="memdesc:a33d024775a0c9b0cd954fabbb63190b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .nets file, net entry <br /></td></tr>
+<tr class="separator:a33d024775a0c9b0cd954fabbb63190b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7621e6dc132850ecb7d61e8ff381d75"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7621e6dc132850ecb7d61e8ff381d75"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#af7621e6dc132850ecb7d61e8ff381d75">plNodeEntryCbk</a> (string &amp;, double, double, string &amp;, string &amp;)</td></tr>
+<tr class="memdesc:af7621e6dc132850ecb7d61e8ff381d75"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .pl file, node entry in placement <br /></td></tr>
+<tr class="separator:af7621e6dc132850ecb7d61e8ff381d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2039c259e501facd28e86dad59eb3b70"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2039c259e501facd28e86dad59eb3b70"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a2039c259e501facd28e86dad59eb3b70">plNodeEntryCbk</a> (string &amp;, double, double, string &amp;)</td></tr>
+<tr class="memdesc:a2039c259e501facd28e86dad59eb3b70"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .pl file, node entry in placement <br /></td></tr>
+<tr class="separator:a2039c259e501facd28e86dad59eb3b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa5c864f650e25bfd3e99037256043d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaa5c864f650e25bfd3e99037256043d8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#aaa5c864f650e25bfd3e99037256043d8">sclNumRows</a> (int)</td></tr>
+<tr class="memdesc:aaa5c864f650e25bfd3e99037256043d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .scl file, number of rows <br /></td></tr>
+<tr class="separator:aaa5c864f650e25bfd3e99037256043d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af33b552d703d801e749baadcca35ede5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af33b552d703d801e749baadcca35ede5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#af33b552d703d801e749baadcca35ede5">sclCoreRowStart</a> (string const &amp;)</td></tr>
+<tr class="memdesc:af33b552d703d801e749baadcca35ede5"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .scl file, core row start <br /></td></tr>
+<tr class="separator:af33b552d703d801e749baadcca35ede5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad48b62219babc4ecae57a112e0b37971"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad48b62219babc4ecae57a112e0b37971"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#ad48b62219babc4ecae57a112e0b37971">sclCoreRowCoordinate</a> (int)</td></tr>
+<tr class="memdesc:ad48b62219babc4ecae57a112e0b37971"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .scl file, core row coordinate <br /></td></tr>
+<tr class="separator:ad48b62219babc4ecae57a112e0b37971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d175594141233645d4c9650b38f1e1e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d175594141233645d4c9650b38f1e1e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a6d175594141233645d4c9650b38f1e1e">sclCoreRowHeight</a> (int)</td></tr>
+<tr class="memdesc:a6d175594141233645d4c9650b38f1e1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .scl file, core row height <br /></td></tr>
+<tr class="separator:a6d175594141233645d4c9650b38f1e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8872418af8bc5bc2bc2b37725bf9f03c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8872418af8bc5bc2bc2b37725bf9f03c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a8872418af8bc5bc2bc2b37725bf9f03c">sclCoreRowSitewidth</a> (int)</td></tr>
+<tr class="memdesc:a8872418af8bc5bc2bc2b37725bf9f03c"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .scl file, site width <br /></td></tr>
+<tr class="separator:a8872418af8bc5bc2bc2b37725bf9f03c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f53ee51cc70cdda30fc3a26367c8b48"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f53ee51cc70cdda30fc3a26367c8b48"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a1f53ee51cc70cdda30fc3a26367c8b48">sclCoreRowSitespacing</a> (int)</td></tr>
+<tr class="memdesc:a1f53ee51cc70cdda30fc3a26367c8b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .scl file, site spacing <br /></td></tr>
+<tr class="separator:a1f53ee51cc70cdda30fc3a26367c8b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2b39804dcde86495de595e57aefabb4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2b39804dcde86495de595e57aefabb4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#ac2b39804dcde86495de595e57aefabb4">sclCoreRowSiteorient</a> (int)</td></tr>
+<tr class="memdesc:ac2b39804dcde86495de595e57aefabb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .scl file, site orientation <br /></td></tr>
+<tr class="separator:ac2b39804dcde86495de595e57aefabb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35a2a8d4f01e546ed920578fbd94e8a2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35a2a8d4f01e546ed920578fbd94e8a2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a35a2a8d4f01e546ed920578fbd94e8a2">sclCoreRowSitesymmetry</a> (int)</td></tr>
+<tr class="memdesc:a35a2a8d4f01e546ed920578fbd94e8a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .scl file, site symmetry <br /></td></tr>
+<tr class="separator:a35a2a8d4f01e546ed920578fbd94e8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae44b18860577eb6a8402fbe327c99fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aae44b18860577eb6a8402fbe327c99fc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#aae44b18860577eb6a8402fbe327c99fc">sclCoreRowSubRowOrigin</a> (int)</td></tr>
+<tr class="memdesc:aae44b18860577eb6a8402fbe327c99fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .scl file, subrow origin <br /></td></tr>
+<tr class="separator:aae44b18860577eb6a8402fbe327c99fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dc08c79b89b6fc733776b7467b9f720"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8dc08c79b89b6fc733776b7467b9f720"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a8dc08c79b89b6fc733776b7467b9f720">sclCoreRowNumSites</a> (int)</td></tr>
+<tr class="memdesc:a8dc08c79b89b6fc733776b7467b9f720"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .scl file, number of sites <br /></td></tr>
+<tr class="separator:a8dc08c79b89b6fc733776b7467b9f720"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69d6a19d918d3d77fee104790909c956"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a69d6a19d918d3d77fee104790909c956"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a69d6a19d918d3d77fee104790909c956">sclCoreRowEnd</a> ()</td></tr>
+<tr class="memdesc:a69d6a19d918d3d77fee104790909c956"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .scl file, end of core row <br /></td></tr>
+<tr class="separator:a69d6a19d918d3d77fee104790909c956"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb86d8cfb438a725f0273d37cd9cd858"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abb86d8cfb438a725f0273d37cd9cd858"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#abb86d8cfb438a725f0273d37cd9cd858">auxCbk</a> (string &amp;, vector&lt; string &gt; &amp;)</td></tr>
+<tr class="memdesc:abb86d8cfb438a725f0273d37cd9cd858"><td class="mdescLeft">&#160;</td><td class="mdescRight">from .aux file, other bookshelf files <br /></td></tr>
+<tr class="separator:abb86d8cfb438a725f0273d37cd9cd858"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0f50b4c53bb07ff76d4f32b7b956f56"><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#ab0f50b4c53bb07ff76d4f32b7b956f56">bookshelfFiles</a> () const </td></tr>
+<tr class="separator:ab0f50b4c53bb07ff76d4f32b7b956f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:aea5b5c6a82a6f15b49c488cf90382e38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#aea5b5c6a82a6f15b49c488cf90382e38">find_record_type</a> (int numeric, <a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a> &amp;record_name, int &amp;expected_data_type)</td></tr>
-<tr class="memdesc:aea5b5c6a82a6f15b49c488cf90382e38"><td class="mdescLeft">&#160;</td><td class="mdescRight">find record  <a href="#aea5b5c6a82a6f15b49c488cf90382e38">More...</a><br /></td></tr>
-<tr class="separator:aea5b5c6a82a6f15b49c488cf90382e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2270e588742806dced270a5093313d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#ac2270e588742806dced270a5093313d2">find_data_type</a> (int numeric, <a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a> &amp;data_name)</td></tr>
-<tr class="memdesc:ac2270e588742806dced270a5093313d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">find data type  <a href="#ac2270e588742806dced270a5093313d2">More...</a><br /></td></tr>
-<tr class="separator:ac2270e588742806dced270a5093313d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a828bb5834628d69324f5c24f431b4623"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a828bb5834628d69324f5c24f431b4623">print_bit_array_comments</a> (<a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a> enum_record_type, int bit_array, int indent_amount)</td></tr>
-<tr class="memdesc:a828bb5834628d69324f5c24f431b4623"><td class="mdescLeft">&#160;</td><td class="mdescRight">print comments  <a href="#a828bb5834628d69324f5c24f431b4623">More...</a><br /></td></tr>
-<tr class="separator:a828bb5834628d69324f5c24f431b4623"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fc3cf61747c59fa734e5aad735fcc09"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a2fc3cf61747c59fa734e5aad735fcc09">gds_read</a> (std::istream &amp;fp, int &amp;no_read, std::size_t n)</td></tr>
-<tr class="separator:a2fc3cf61747c59fa734e5aad735fcc09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a16ee444174fc0b7bb5c68e30680cd94d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16ee444174fc0b7bb5c68e30680cd94d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a16ee444174fc0b7bb5c68e30680cd94d">trace_scanning</a></td></tr>
+<tr class="memdesc:a16ee444174fc0b7bb5c68e30680cd94d"><td class="mdescLeft">&#160;</td><td class="mdescRight">enable debug output in the flex scanner <br /></td></tr>
+<tr class="separator:a16ee444174fc0b7bb5c68e30680cd94d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac48f0483f679b36fd79ac86fa1d66ee9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac48f0483f679b36fd79ac86fa1d66ee9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#ac48f0483f679b36fd79ac86fa1d66ee9">trace_parsing</a></td></tr>
+<tr class="memdesc:ac48f0483f679b36fd79ac86fa1d66ee9"><td class="mdescLeft">&#160;</td><td class="mdescRight">enable debug output in the bison parser <br /></td></tr>
+<tr class="separator:ac48f0483f679b36fd79ac86fa1d66ee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac266087b77261d05a6e8d260a6d9305d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac266087b77261d05a6e8d260a6d9305d"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#ac266087b77261d05a6e8d260a6d9305d">streamname</a></td></tr>
+<tr class="memdesc:ac266087b77261d05a6e8d260a6d9305d"><td class="mdescLeft">&#160;</td><td class="mdescRight">stream name (file or input stream) used for error messages. <br /></td></tr>
+<tr class="separator:ac266087b77261d05a6e8d260a6d9305d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b02f2040eaf5be214c41c2167eaeaf3"><td class="memItemLeft" align="right" valign="top">class Scanner *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a7b02f2040eaf5be214c41c2167eaeaf3">lexer</a></td></tr>
+<tr class="separator:a7b02f2040eaf5be214c41c2167eaeaf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adee8fcba54c3f8a1427ca79301b2d0c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00048.html">BookshelfDataBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#adee8fcba54c3f8a1427ca79301b2d0c0">m_db</a></td></tr>
+<tr class="separator:adee8fcba54c3f8a1427ca79301b2d0c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a83e81e8414d4ae93b0b0b0c835948990"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a83e81e8414d4ae93b0b0b0c835948990"></a>
-<a class="el" href="a00080.html">GdsDataBaseKernel</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a83e81e8414d4ae93b0b0b0c835948990">m_db</a></td></tr>
-<tr class="memdesc:a83e81e8414d4ae93b0b0b0c835948990"><td class="mdescLeft">&#160;</td><td class="mdescRight">database <br /></td></tr>
-<tr class="separator:a83e81e8414d4ae93b0b0b0c835948990"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0d69d4c0eb5bb32ac10da666f9bc96c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac0d69d4c0eb5bb32ac10da666f9bc96c"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#ac0d69d4c0eb5bb32ac10da666f9bc96c">m_buffer</a></td></tr>
-<tr class="memdesc:ac0d69d4c0eb5bb32ac10da666f9bc96c"><td class="mdescLeft">&#160;</td><td class="mdescRight">buffer for reading file <br /></td></tr>
-<tr class="separator:ac0d69d4c0eb5bb32ac10da666f9bc96c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32de1ef701525146320a345db60ea88e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a32de1ef701525146320a345db60ea88e"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a32de1ef701525146320a345db60ea88e">m_bptr</a></td></tr>
-<tr class="memdesc:a32de1ef701525146320a345db60ea88e"><td class="mdescLeft">&#160;</td><td class="mdescRight">start position in buffer <br /></td></tr>
-<tr class="separator:a32de1ef701525146320a345db60ea88e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d0c6dfeab7b7115ce0c29cc1f9e7deb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d0c6dfeab7b7115ce0c29cc1f9e7deb"></a>
-std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a5d0c6dfeab7b7115ce0c29cc1f9e7deb">m_bcap</a></td></tr>
-<tr class="memdesc:a5d0c6dfeab7b7115ce0c29cc1f9e7deb"><td class="mdescLeft">&#160;</td><td class="mdescRight">buffer capacity <br /></td></tr>
-<tr class="separator:a5d0c6dfeab7b7115ce0c29cc1f9e7deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1cfc8fdb8a3804b0d2bf76e9cb4033e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af1cfc8fdb8a3804b0d2bf76e9cb4033e"></a>
-std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#af1cfc8fdb8a3804b0d2bf76e9cb4033e">m_blen</a></td></tr>
-<tr class="memdesc:af1cfc8fdb8a3804b0d2bf76e9cb4033e"><td class="mdescLeft">&#160;</td><td class="mdescRight">current buffer size, from m_bptr to m_buffer+m_bcap <br /></td></tr>
-<tr class="separator:af1cfc8fdb8a3804b0d2bf76e9cb4033e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28c7a8893c390fa689c532a9d8d244b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28c7a8893c390fa689c532a9d8d244b3"></a>
+<a class="el" href="a00244.html">Row</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a28c7a8893c390fa689c532a9d8d244b3">m_row</a></td></tr>
+<tr class="memdesc:a28c7a8893c390fa689c532a9d8d244b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">temporary storage of row <br /></td></tr>
+<tr class="separator:a28c7a8893c390fa689c532a9d8d244b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e63a14dfc0812e5e6ec3b9229b76184"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7e63a14dfc0812e5e6ec3b9229b76184"></a>
+<a class="el" href="a00190.html">Net</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a7e63a14dfc0812e5e6ec3b9229b76184">m_net</a></td></tr>
+<tr class="memdesc:a7e63a14dfc0812e5e6ec3b9229b76184"><td class="mdescLeft">&#160;</td><td class="mdescRight">temporary storage of net <br /></td></tr>
+<tr class="separator:a7e63a14dfc0812e5e6ec3b9229b76184"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcc05c7596c7b7ba72b52c4df32435cc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abcc05c7596c7b7ba72b52c4df32435cc"></a>
+vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#abcc05c7596c7b7ba72b52c4df32435cc">m_vBookshelfFiles</a></td></tr>
+<tr class="memdesc:abcc05c7596c7b7ba72b52c4df32435cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">store bookshelf files except .aux <br /></td></tr>
+<tr class="separator:abcc05c7596c7b7ba72b52c4df32435cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f1ddb7be68ce9907417beef2875f6a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f1ddb7be68ce9907417beef2875f6a6"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html#a0f1ddb7be68ce9907417beef2875f6a6">m_plFlag</a></td></tr>
+<tr class="memdesc:a0f1ddb7be68ce9907417beef2875f6a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">if true, indicate that only reads .pl file, this will result in different callbacks in the database <br /></td></tr>
+<tr class="separator:a0f1ddb7be68ce9907417beef2875f6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>read GDSII </p>
+<div class="textblock"><p>The <a class="el" href="a00089.html">Driver</a> class brings together all components. It creates an instance of the Parser and Scanner classes and connects them. Then the input stream is fed into the scanner object and the parser gets it's token sequence. Furthermore the driver object is available in the grammar rules as a parameter. Therefore the driver class contains a reference to the structure into which the parsed data is saved. </p>
 
-<p>Definition at line <a class="el" href="a00292_source.html#l00149">149</a> of file <a class="el" href="a00292_source.html">GdsReader.h</a>.</p>
+<p>Definition at line <a class="el" href="a00351_source.html#l00036">36</a> of file <a class="el" href="a00351_source.html">BookshelfDriver.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a79062e53ff97738088055b1dce5488a2"></a>
+<a class="anchor" id="a485e36ca544f9ecd3344204484c49b6d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GdsParser::GdsReader::GdsReader </td>
+          <td class="memname">BookshelfParser::Driver::Driver </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00080.html">GdsDataBaseKernel</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="a00048.html">BookshelfDataBase</a> &amp;&#160;</td>
           <td class="paramname"><em>db</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>construct a new parser driver context </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">db</td><td>database </td></tr>
+    <tr><td class="paramname">db</td><td>reference to database </td></tr>
   </table>
   </dd>
 </dl>
@@ -191,7 +287,7 @@ std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ac2270e588742806dced270a5093313d2"></a>
+<a class="anchor" id="ab0f50b4c53bb07ff76d4f32b7b956f56"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -199,16 +295,39 @@ std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void GdsParser::GdsReader::find_data_type </td>
+          <td class="memname">vector&lt;string&gt; const&amp; BookshelfParser::Driver::bookshelfFiles </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numeric</em>, </td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>get all bookshelf files except .aux </p><dl class="section return"><dt>Returns</dt><dd>bookshelf files except .aux </dd></dl>
+
+<p>Definition at line <a class="el" href="a00351_source.html#l00155">155</a> of file <a class="el" href="a00351_source.html">BookshelfDriver.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9b8bb724df8fd6232a3b56f99f2e01c8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BookshelfParser::Driver::error </td>
+          <td>(</td>
+          <td class="paramtype">const class location &amp;&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00078.html#af4a63aca395e14181b0738656051469f">GdsData::EnumType</a> &amp;&#160;</td>
-          <td class="paramname"><em>data_name</em>&#160;</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -216,194 +335,66 @@ std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-
-<p>find data type </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">numeric</td><td>record </td></tr>
-    <tr><td class="paramname">data_name</td><td>enum type of data type </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Error handling with associated line number. This can be modified to output the error e.g. to a dialog box. </p>
 
 </div>
 </div>
-<a class="anchor" id="aea5b5c6a82a6f15b49c488cf90382e38"></a>
+<a class="anchor" id="a405c0d509617bb7ffd380c65a9bc2683"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void GdsParser::GdsReader::find_record_type </td>
+          <td class="memname">void BookshelfParser::Driver::error </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numeric</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a> &amp;&#160;</td>
-          <td class="paramname"><em>record_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>expected_data_type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-
-<p>find record </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">numeric</td><td>record </td></tr>
-    <tr><td class="paramname">record_name</td><td>enum type of record </td></tr>
-    <tr><td class="paramname">expected_data_type</td><td>expected data </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>General error handling. This can be modified to output the error e.g. to a dialog box. </p>
 
 </div>
 </div>
-<a class="anchor" id="a2fc3cf61747c59fa734e5aad735fcc09"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* GdsParser::GdsReader::gds_read </td>
-          <td>(</td>
-          <td class="paramtype">std::istream &amp;&#160;</td>
-          <td class="paramname"><em>fp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>no_read</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::size_t&#160;</td>
-          <td class="paramname"><em>n</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>read n bytes </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fp</td><td>file handler </td></tr>
-    <tr><td class="paramname">no_read</td><td>number of bytes read </td></tr>
-    <tr><td class="paramname">n</td><td>number of bytes to read </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a2bc59e082c96a456ea302a707609ce07"></a>
+<a class="anchor" id="ab234b050f673bcee199672676f6429ae"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool GdsParser::GdsReader::operator() </td>
+          <td class="memname">bool BookshelfParser::Driver::parse_file </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>filename</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>read from file </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Invoke the scanner and parser on a file. Use parse_stream with a std::ifstream if detection of file reading errors is required. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filename</td><td>file name </td></tr>
+    <tr><td class="paramname">filename</td><td>input file name </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successfully parsed </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a3523ec85c382ee3b7ecf8a11690d75dc"></a>
+<a class="anchor" id="aa6e80cfc968d275c71c2db647a3ce4d8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool GdsParser::GdsReader::operator() </td>
+          <td class="memname">bool BookshelfParser::Driver::parse_stream </td>
           <td>(</td>
           <td class="paramtype">std::istream &amp;&#160;</td>
-          <td class="paramname"><em>fp</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>read from stream </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fp</td><td>input stream </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a828bb5834628d69324f5c24f431b4623"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void GdsParser::GdsReader::print_bit_array_comments </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00091.html#a5860f61e73f4209c565a594f3cedc63c">GdsRecords::EnumType</a>&#160;</td>
-          <td class="paramname"><em>enum_record_type</em>, </td>
+          <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>bit_array</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>indent_amount</em>&#160;</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>sname</em> = <code>&quot;stream&#160;input&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -411,32 +402,114 @@ std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
+</div><div class="memdoc">
+<p>Invoke the scanner and parser for a stream. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>input stream </td></tr>
+    <tr><td class="paramname">sname</td><td>stream name for error messages </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successfully parsed </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2c4a56ddaffb6fdf2f39ef232736e926"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BookshelfParser::Driver::parse_string </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>sname</em> = <code>&quot;string&#160;stream&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Invoke the scanner and parser on an input string. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>input string </td></tr>
+    <tr><td class="paramname">sname</td><td>stream name for error messages </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successfully parsed </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0303a9967eb9edf57c239825763608c3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BookshelfParser::Driver::setPlFlag </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
 </div><div class="memdoc">
 
-<p>print comments </p>
+<p>control m_plFlag </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">enum_record_type</td><td>enum type of record </td></tr>
-    <tr><td class="paramname">bit_array</td><td>bit array </td></tr>
-    <tr><td class="paramname">indent_amount</td><td>amount of indent </td></tr>
+    <tr><td class="paramname">flag</td><td>control flag </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a7b02f2040eaf5be214c41c2167eaeaf3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">class Scanner* BookshelfParser::Driver::lexer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to the current lexer instance, this is used to connect the parser to the scanner. It is used in the yylex macro. </p>
+
+<p>Definition at line <a class="el" href="a00351_source.html#l00089">89</a> of file <a class="el" href="a00351_source.html">BookshelfDriver.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adee8fcba54c3f8a1427ca79301b2d0c0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00048.html">BookshelfDataBase</a>&amp; BookshelfParser::Driver::m_db</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Reference to the database filled during parsing of the expressions. </p>
+
+<p>Definition at line <a class="el" href="a00351_source.html#l00093">93</a> of file <a class="el" href="a00351_source.html">BookshelfDriver.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00292_source.html">GdsReader.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/bookshelf/bison/<a class="el" href="a00351_source.html">BookshelfDriver.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 21:54:20 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
