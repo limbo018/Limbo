@@ -5,18 +5,18 @@
 LIMBO_ROOT_DIR = $(realpath ..)
 DOCDIR = $(LIMBO_ROOT_DIR)/docs
 SRCS = $(DOCDIR)/Readme.md \
-		  $(DOCDIR)/algorithms \
-		  $(DOCDIR)/bibtex \
-		  $(DOCDIR)/containers \
-		  $(DOCDIR)/geometry \
-		  $(DOCDIR)/makeutils \
-		  $(DOCDIR)/math \
-		  $(DOCDIR)/parsers \
-		  $(DOCDIR)/preprocessor \
-		  $(DOCDIR)/programoptions \
-		  $(DOCDIR)/solvers \
-		  $(DOCDIR)/string \
-		  $(DOCDIR)/thirdparty \
+		  $(wildcard $(DOCDIR)/algorithms/*) \
+		  $(wildcard $(DOCDIR)/bibtex/*) \
+		  $(wildcard $(DOCDIR)/containers/*) \
+		  $(wildcard $(DOCDIR)/geometry/*) \
+		  $(wildcard $(DOCDIR)/makeutils/*) \
+		  $(wildcard $(DOCDIR)/math/*) \
+		  $(wildcard $(DOCDIR)/parsers/*) \
+		  $(wildcard $(DOCDIR)/preprocessor/*) \
+		  $(wildcard $(DOCDIR)/programoptions/*) \
+		  $(wildcard $(DOCDIR)/solvers/*) \
+		  $(wildcard $(DOCDIR)/string/*) \
+		  $(wildcard $(DOCDIR)/thirdparty/*) \
 		  \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/*.h) \
 		  $(wildcard $(LIMBO_ROOT_DIR)/limbo/algorithms/coloring/*.h) \
