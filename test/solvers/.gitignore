@@ -2,6 +2,7 @@ test_solvers
 test_MultiKnapsackLagRelax
 test_DualMinCostFlow
 test_GurobiApi
+test_LPSolveApi
 test_MinCostFlow
 debug.*
 benchmarks/problem.sol

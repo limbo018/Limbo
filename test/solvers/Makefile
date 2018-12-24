@@ -17,6 +17,7 @@ DBG = 0
 # default GUROBI is off 
 GUROBI = 0
 # default LPSolve is off
+LPSOLVE = 0
 
 # include environmental configurations 
 include $(LIMBO_ROOT_DIR)/Include.mk
@@ -30,6 +31,11 @@ endif
 # dependency to GUROBI and get GUROBI_LINK_LIB
 ifdef GUROBI_HOME
 include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindGurobi.mk
+endif
+
+# dependency to LPSOLVE and get LPSOLVE_LINK_LIB
+ifdef LPSOLVE_DIR
+include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindLPSolve.mk
 endif
 
 #==========================================================================
@@ -52,7 +58,7 @@ endif
 # LPSOLVE 
 ifeq ($(LPSOLVE), 1)
 INCLUDE += -I $(LPSOLVE_DIR)
-LIBS += $(STATIC_LINK_FLAG) -L $(LPSOLVE_DIR) -llpsolve55
+LIBS += $(DYNAMIC_LINK_FLAG) $(LPSOLVE_LINK_LIB)
 endif 
 
 # ==========================================================================
@@ -64,17 +70,9 @@ OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
 ifeq ($(GUROBI), 0)
-ifeq ($(LPSOLVE), 0)
-all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow test_MinCostFlow
-else 
 all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow test_MinCostFlow test_LPSolveApi 
-endif 
 else
-ifeq ($(LPSOLVE), 0)
-all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow test_MinCostFlow test_GurobiApi
-else 
 all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow test_MinCostFlow test_GurobiApi test_LPSolveApi 
-endif 
 endif
 
 .PHONY: lpmcf
@@ -110,13 +108,13 @@ test_DualMinCostFlow: $(OBJDIR)/test_DualMinCostFlow.o
 test_MinCostFlow: $(OBJDIR)/test_MinCostFlow.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_MinCostFlow.o $(LIBS) 
 
-ifeq ($(GUROBI), 1)
 test_GurobiApi: $(OBJDIR)/test_GurobiApi.o
+ifeq ($(GUROBI), 1)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_GurobiApi.o $(LIBS) 
 endif 
 
-ifeq ($(LPSOLVE), 1)
 test_LPSolveApi: $(OBJDIR)/test_LPSolveApi.o
+ifeq ($(LPSOLVE), 1)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_LPSolveApi.o $(LIBS) 
 endif 
 
