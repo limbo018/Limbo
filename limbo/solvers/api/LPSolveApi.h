@@ -46,10 +46,6 @@ inline limbo::solvers::SolverProperty getSolveStatus(int status)
             limboAssertMsg(0, "unknown status %d", status);
     }
 }
-#define OPTIMAL                  0
-#define SUBOPTIMAL               1
-#define INFEASIBLE               2
-#define UNBOUNDED                3
 
 /// namespace for Limbo
 namespace limbo 
