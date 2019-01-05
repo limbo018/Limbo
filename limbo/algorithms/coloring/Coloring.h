@@ -248,6 +248,8 @@ Coloring<GraphType>::Coloring(Coloring<GraphType>::graph_type const& g)
 template <typename GraphType>
 double Coloring<GraphType>::operator()()
 {
+    double cost ;
+    // clock_t sub_comp_start = clock();
     if (boost::num_vertices(m_graph) <= color_num()) // if vertex number is no larger than color number, directly assign color
     {
         // need to consider precolored vertices
@@ -269,10 +271,12 @@ double Coloring<GraphType>::operator()()
             assert(m_vColor[i] >= 0);
             unusedColors[m_vColor[i]] = false;
         }
-        return calc_cost(m_vColor);
+        cost = calc_cost(m_vColor);
     }
     else // perform coloring algorithm 
-        return this->coloring();
+        cost = this->coloring();
+    // clock_t sub_comp_end = clock();
+    return cost;
 }
 
 template <typename GraphType>
@@ -289,10 +293,17 @@ typename Coloring<GraphType>::edge_weight_type Coloring<GraphType>::calc_cost(st
         if (s == t) // skip self edges 
             continue; 
 		if (w >= 0) // conflict edge 
-			cost += (vColor[s] == vColor[t])*w;
+        {
+            // std::cout << "conflict : " << w << std::endl;
+            cost += (vColor[s] == vColor[t])*w;
+        }
 		else // stitch edge 
-			cost += (vColor[s] != vColor[t])*w;
+        {
+            // std::cout << "stitch : " << w << std::endl;
+			cost -= (vColor[s] != vColor[t])*w;
+        }
 	}
+    // std::cout << "cost : " << cost << std::endl;
 	return cost;
 }
 
@@ -331,6 +342,7 @@ template <typename GraphType>
 void Coloring<GraphType>::write_graph(std::string const& filename, Coloring<GraphType>::graph_type const& g, std::vector<int8_t> const& vColor) const
 {
     std::ofstream out ((filename+".gv").c_str());
+    std::cout << "write_graph : " << filename << std::endl;
     la::write_graph(out, g, ColoringVertexLabelWriter<graph_type>(g, vColor), ColoringEdgeLabelWriter<graph_type>(g, vColor));
     out.close();
     la::graphviz2pdf(filename);
