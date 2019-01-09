@@ -92,7 +92,7 @@ class Variable
 
         /// @brief constructor 
         /// @param id variable index 
-        Variable(unsigned int id = std::numeric_limits<unsigned int>::max()) 
+        explicit Variable(unsigned int id = std::numeric_limits<unsigned int>::max()) 
             : m_id(id) 
         {
         }
