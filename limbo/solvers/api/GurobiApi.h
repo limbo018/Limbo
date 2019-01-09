@@ -144,7 +144,7 @@ SolverProperty GurobiLinearApi<T, V>::operator()(GurobiLinearApi<T, V>::paramete
     errorHandler(env, error);
     param->operator()(env); 
     // Create an empty model 
-    error = GRBnewmodel(env, &m_grbModel, "LP", m_model->numVariables(), NULL, NULL, NULL, NULL, NULL);
+    error = GRBnewmodel(env, &m_grbModel, "GurobiLinearApi", m_model->numVariables(), NULL, NULL, NULL, NULL, NULL);
     errorHandler(env, error);
 
     // create variables 
