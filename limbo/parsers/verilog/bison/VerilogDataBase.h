@@ -60,6 +60,7 @@ struct GeneralName
 /// @brief Describe the connection of pins to nets. 
 /// 
 /// NOR2_X1 u2 ( .a(n1), .b(n3), .o(n2) );
+/// NOR2_X1 u2 ( .a(1'b1), .b(n3), .o(n2) ); // constant net 
 ///
 /// Each of .a(n1), .b(n3) and .o(n2) generates an object of net and pin. 
 struct NetPin
@@ -67,16 +68,19 @@ struct NetPin
     std::string net; ///< net name 
     std::string pin; ///< pin name 
     Range range; ///< range of net 
+    int constant; ///< constant value if the net is a constant 
 
     /// @brief constructor 
-    /// @param n net name 
+    /// @param n net name; it will be CONSTANT if the net is actually a value 
     /// @param p pin name 
     /// @param r net range 
-    NetPin(std::string& n, std::string& p, Range const& r = Range())
+    /// @param c constant value only valid if the net is a CONSTANT 
+    NetPin(std::string& n, std::string& p, Range const& r = Range(), int c = std::numeric_limits<int>::min())
     {
         net.swap(n);
         pin.swap(p);
         range = r;
+        constant = c;
     }
 };
 
@@ -136,6 +140,13 @@ class GeneralNameArray : public std::vector<GeneralName>
 class VerilogDataBase
 {
 	public:
+        /// @brief read a module declaration 
+        ///
+        /// module NOR2_X1 ( a, b, c );
+        ///
+        /// @param module_name name of a module 
+        /// @param vPinName array of pins 
+        virtual void verilog_module_declaration_cbk(std::string const& module_name, std::vector<GeneralName> const& vPinName); 
         /// @brief read an instance. 
         /// 
         /// NOR2_X1 u2 ( .a(n1), .b(n3), .o(n2) );

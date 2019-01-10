@@ -76,10 +76,30 @@ reg             return token::REG;
 wire            return token::WIRE;
 integer         return token::INTEGER;
 assign          return token::ASSIGN; 
-[0-1]+[']b[0-9]+    return token::BIT_MASK;
-[0-7]+[']o[0-9]+    return token::OCT_MASK;
-[0-9]+[']d[0-9]+    return token::DEC_MASK;
-[0-9a-fA-F]+[']h[0-9]+  return token::HEX_MASK;
+[0-1]+[']b[0-9]+    {
+                    char* end;
+                    yylval->mask.bits  = strtol(yytext,&end,10);
+                    yylval->mask.value = strtol(end+2*sizeof(char),NULL,2); 
+    return token::BIT_MASK;
+}
+[0-7]+[']o[0-9]+    {
+                    char* end;
+                    yylval->mask.bits  = strtol(yytext,&end,10);
+                    yylval->mask.value = strtol(end+2*sizeof(char),NULL,8); 
+    return token::OCT_MASK;
+}
+[0-9]+[']d[0-9]+    {
+                    char* end;
+                    yylval->mask.bits  = strtol(yytext,&end,10);
+                    yylval->mask.value = strtol(end+2*sizeof(char),NULL,10); 
+    return token::DEC_MASK;
+}
+[0-9a-fA-F]+[']h[0-9]+  {
+                    char* end;
+                    yylval->mask.bits  = strtol(yytext,&end,10);
+                    yylval->mask.value = strtol(end+2*sizeof(char),NULL,16); 
+    return token::HEX_MASK;
+}
 
 ([a-zA-Z_\/]|[\\][\.])[a-zA-Z0-9_\/\.]*  { 
     yylval->stringVal = new std::string(yytext, yyleng);

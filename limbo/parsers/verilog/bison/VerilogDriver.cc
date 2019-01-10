@@ -54,6 +54,11 @@ void Driver::error(const std::string& m)
     std::cerr << m << std::endl;
 }
 
+void Driver::module_name_cbk(std::string const& module_name, std::vector<GeneralName> const& vPinName)
+{
+    m_db.verilog_module_declaration_cbk(module_name, vPinName);
+}
+
 void Driver::module_instance_cbk(std::string const& macro_name, std::string const& inst_name) 
 {
 	// due to the feature of LL 
@@ -71,6 +76,11 @@ void Driver::assignment_cbk(std::string const& target_name, Range const& target_
 void Driver::wire_pin_cbk(std::string& net_name, std::string& pin_name, Range const& range)
 {
 	m_vNetPin.push_back(NetPin(net_name, pin_name, range));
+}
+void Driver::wire_pin_cbk(int bits, int value, std::string& pin_name)
+{
+    std::string net_name = "CONSTANT";
+	m_vNetPin.push_back(NetPin(net_name, pin_name, Range(0, bits), value));
 }
 void Driver::wire_declare_cbk(std::vector<GeneralName> const& vNetName, Range const& range)
 {
