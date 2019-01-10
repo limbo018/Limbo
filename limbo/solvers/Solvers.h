@@ -167,6 +167,22 @@ class Variable
         {
             return LinearTerm<coefficient_value_type>(var)/coef; 
         }
+        /// overload plus var+constant
+        /// @param var variable 
+        /// @param constant constant
+        /// @return result object 
+        friend LinearExpression<coefficient_value_type> operator+(Variable const& var, coefficient_value_type constant)
+        {
+            return LinearTerm<coefficient_value_type>(var)+constant; 
+        }
+        /// overload plus constant+var
+        /// @param constant coefficient
+        /// @param var variable 
+        /// @return result object 
+        friend LinearExpression<coefficient_value_type> operator+(coefficient_value_type constant, Variable const& var)
+        {
+            return var+constant;
+        }
         /// overload plus var+var
         /// @param var1 variable 
         /// @param var2 variable 
@@ -174,6 +190,22 @@ class Variable
         friend LinearExpression<coefficient_value_type> operator+(Variable const& var1, Variable const& var2)
         {
             return LinearTerm<coefficient_value_type>(var1)+var2; 
+        }
+        /// overload minus var-constant
+        /// @param var variable 
+        /// @param constant coefficient
+        /// @return result object 
+        friend LinearExpression<coefficient_value_type> operator-(Variable const& var, coefficient_value_type constant)
+        {
+            return LinearTerm<coefficient_value_type>(var)-constant; 
+        }
+        /// overload minus constant-var
+        /// @param constant coefficient
+        /// @param var variable 
+        /// @return result object 
+        friend LinearExpression<coefficient_value_type> operator-(coefficient_value_type constant, Variable const& var)
+        {
+            return LinearTerm<coefficient_value_type>(var, -1)+constant; 
         }
         /// overload minus var-var
         /// @param var1 variable 
@@ -415,6 +447,14 @@ class LinearTerm
             m_coef /= coef; 
             return *this; 
         }
+        /// overload plus term+constant 
+        /// @param term term 
+        /// @param constant constant 
+        /// @return expression 
+        friend LinearExpression<coefficient_value_type> operator+(LinearTerm const& term, coefficient_value_type constant)
+        {
+            return LinearExpression<coefficient_value_type>(term, constant);
+        }
         /// overload plus term+var 
         /// @param term term 
         /// @param var variable 
@@ -422,6 +462,14 @@ class LinearTerm
         friend LinearExpression<coefficient_value_type> operator+(LinearTerm const& term, variable_type const& var)
         {
             return term+LinearTerm(var);
+        }
+        /// overload plus constant+term 
+        /// @param constant constant 
+        /// @param term term 
+        /// @return expression 
+        friend LinearExpression<coefficient_value_type> operator+(coefficient_value_type constant, LinearTerm const& term)
+        {
+            return LinearExpression<coefficient_value_type>(term, constant);
         }
         /// overload plus term+var 
         /// @param term term 
@@ -441,6 +489,14 @@ class LinearTerm
             expr += term2; 
             return expr; 
         }
+        /// overload minus term-constant 
+        /// @param term term 
+        /// @param constant constant 
+        /// @return expression 
+        friend LinearExpression<coefficient_value_type> operator-(LinearTerm const& term, coefficient_value_type constant)
+        {
+            return LinearExpression<coefficient_value_type>(term, -constant);
+        }
         /// overload minus term-var 
         /// @param term term 
         /// @param var variable 
@@ -449,13 +505,21 @@ class LinearTerm
         {
             return term-LinearTerm(var);
         }
-        /// overload minus term-var 
-        /// @param term term 
+        /// overload minus var-term 
         /// @param var variable 
+        /// @param term term 
         /// @return expression 
         friend LinearExpression<coefficient_value_type> operator-(variable_type const& var, LinearTerm const& term)
         {
             return LinearTerm(var)-term;
+        }
+        /// overload minus constant-term 
+        /// @param constant constant
+        /// @param term term 
+        /// @return expression 
+        friend LinearExpression<coefficient_value_type> operator-(coefficient_value_type constant, LinearTerm const& term)
+        {
+            return LinearExpression<coefficient_value_type>(-term, constant);
         }
         /// overload minus for two terms 
         /// @param term1 term 
@@ -551,12 +615,15 @@ class LinearExpression
 
         /// @brief constructor
         LinearExpression()
+            : m_vTerm()
+            , m_constant(0)
         {
         }
         /// @brief constructor 
-        LinearExpression(term_type const& term)
+        LinearExpression(term_type const& term, coefficient_value_type constant = 0)
         {
             m_vTerm.push_back(term);
+            m_constant = constant; 
         }
         /// @brief copy constructor 
         /// @param rhs right hand side 
@@ -582,15 +649,48 @@ class LinearExpression
         void swap(LinearExpression& rhs)
         {
             m_vTerm.swap(rhs.m_vTerm); 
+            std::swap(m_constant, rhs.m_constant);
         }
         /// @return terms 
         std::vector<term_type> const& terms() const {return m_vTerm;}
         /// @brief clear expression 
-        void clear() {m_vTerm.clear();}
+        void clear() 
+        {
+            m_vTerm.clear();
+            m_constant = 0; 
+        }
         /// @brief reserve space for terms 
         /// @param n number of terms 
         void reserve(unsigned int n) {m_vTerm.reserve(n);}
+        /// @return constant term 
+        coefficient_value_type constant() const {return m_constant;}
+        /// @brief set constant term 
+        /// @param constant constant 
+        /// @return result object 
+        LinearExpression& setConstant(coefficient_value_type constant) 
+        {
+            m_constant = constant; 
+            return *this; 
+        }
+        /// @brief increment constant term 
+        /// @param constant constant 
+        /// @return result object 
+        LinearExpression& incrementConstant(coefficient_value_type constant) 
+        {
+            m_constant += constant; 
+            return *this; 
+        }
 
+        /// overload plus 
+        /// @param expr expression 
+        /// @param constant right hand side is a constant 
+        /// @return result object 
+        friend LinearExpression operator+(LinearExpression const& expr, coefficient_value_type constant)
+        {
+            LinearExpression other (expr); 
+            other += constant; 
+            return other; 
+        }
         /// overload plus 
         /// @param expr expression 
         /// @param term right hand side is a term 
@@ -601,9 +701,17 @@ class LinearExpression
             other += term; 
             return other; 
         }
-        /// overload plus term+expr 
+        /// overload plus constant+expr
+        /// @param constant constant
         /// @param expr expression 
+        /// @return result object 
+        friend LinearExpression operator+(coefficient_value_type constant, LinearExpression const& expr)
+        {
+            return expr+constant; 
+        }
+        /// overload plus term+expr 
         /// @param term a term 
+        /// @param expr expression 
         /// @return result object 
         friend LinearExpression operator+(term_type const& term, LinearExpression const& expr)
         {
@@ -620,6 +728,14 @@ class LinearExpression
             return other; 
         }
         /// overload plus assignment  
+        /// @param constant right hand side is a constant
+        /// @return the object 
+        LinearExpression& operator+=(coefficient_value_type constant)
+        {
+            this->incrementConstant(constant);
+            return *this; 
+        }
+        /// overload plus assignment  
         /// @param term right hand side is a term 
         /// @return the object 
         LinearExpression& operator+=(term_type const& term)
@@ -633,7 +749,18 @@ class LinearExpression
         LinearExpression& operator+=(LinearExpression const& expr)
         {
             m_vTerm.insert(m_vTerm.end(), expr.terms().begin(), expr.terms().end()); 
+            this->incrementConstant(expr.constant());
             return *this; 
+        }
+        /// overload minus 
+        /// @param expr expression 
+        /// @param constant right hand side is a constant 
+        /// @return the object 
+        friend LinearExpression operator-(LinearExpression const& expr, coefficient_value_type constant)
+        {
+            LinearExpression other (expr); 
+            other -= constant; 
+            return other; 
         }
         /// overload minus 
         /// @param expr expression 
@@ -644,6 +771,14 @@ class LinearExpression
             LinearExpression other (expr); 
             other -= term; 
             return other; 
+        }
+        /// overload minus constant-expr
+        /// @param constant constant 
+        /// @param expr expression 
+        /// @return the object 
+        friend LinearExpression operator-(coefficient_value_type constant, LinearExpression const& expr)
+        {
+            return (-expr)+constant; 
         }
         /// overload minus term-expr
         /// @param term term 
@@ -664,6 +799,14 @@ class LinearExpression
             return other; 
         }
         /// overload minus assignment  
+        /// @param constant right hand side is a constant
+        /// @return the object 
+        LinearExpression& operator-=(coefficient_value_type constant)
+        {
+            this->incrementConstant(-constant);
+            return *this;
+        }
+        /// overload minus assignment  
         /// @param term right hand side is a term 
         /// @return the object 
         LinearExpression& operator-=(term_type term)
@@ -678,6 +821,7 @@ class LinearExpression
         {
             for (typename std::vector<term_type>::const_iterator it = expr.terms().begin(), ite = expr.terms().end(); it != ite; ++it)
                 this->operator-=(*it);
+            this->incrementConstant(-expr.constant());
             return *this;
         }
         /// overload multiply 
@@ -705,6 +849,7 @@ class LinearExpression
         {
             for (typename std::vector<term_type>::iterator it = m_vTerm.begin(); it != m_vTerm.end(); ++it)
                 it->setCoefficient(c*it->coefficient());
+            m_constant *= c; 
             return *this; 
         }
         /// overload divide  
@@ -724,6 +869,7 @@ class LinearExpression
         {
             for (typename std::vector<term_type>::iterator it = m_vTerm.begin(); it != m_vTerm.end(); ++it)
                 it->setCoefficient(it->coefficient()/c);
+            m_constant /= c; 
             return *this; 
         }
         /// overload negation 
@@ -739,6 +885,7 @@ class LinearExpression
         {
             for (typename std::vector<term_type>::iterator it = m_vTerm.begin(); it != m_vTerm.end(); ++it)
                 it->setCoefficient(-it->coefficient());
+            m_constant = -m_constant; 
             return *this; 
         }
         /// @brief overload < 
@@ -822,9 +969,11 @@ class LinearExpression
         void copy(LinearExpression const& rhs)
         {
             m_vTerm = rhs.m_vTerm;
+            m_constant = rhs.m_constant; 
         }
 
         std::vector<term_type> m_vTerm; ///< linear expression with terms 
+        coefficient_value_type m_constant; ///< constant term for the linear expression 
 };
 
 /// @brief Describe linear constraint 
@@ -852,6 +1001,7 @@ class LinearConstraint
             , m_rhs(rhs)
             , m_sense(s)
         {
+            clearConstant();
         }
         /// @brief copy constructor 
         LinearConstraint(LinearConstraint const& rhs)
@@ -896,10 +1046,16 @@ class LinearConstraint
             m_expr.swap(rhs.m_expr); 
             std::swap(m_rhs, rhs.m_rhs);
             std::swap(m_sense, rhs.m_sense); 
+#ifdef DEBUG_SOLVERS
+            limboAssertMsg(m_expr.constant() == 0, "expression constant should always be zero in constraint");
+#endif
         }
         /// @brief simplify expression by merge terms of the same variables 
         void simplify()
         {
+#ifdef DEBUG_SOLVERS
+            limboAssertMsg(m_expr.constant() == 0, "expression constant should always be zero in constraint");
+#endif
             m_expr.simplify();
         }
         /// @brief normalize sense 
@@ -919,6 +1075,9 @@ class LinearConstraint
         /// @param factor scaling factor 
         void scale(coefficient_value_type factor)
         {
+#ifdef DEBUG_SOLVERS
+            limboAssertMsg(m_expr.constant() == 0, "expression constant should always be zero in constraint");
+#endif
             // in case factor is negative 
             if (factor < 0)
             {
@@ -929,6 +1088,14 @@ class LinearConstraint
             }
             m_expr *= factor; 
             m_rhs *= factor; 
+        }
+        /// @brief move the constant in the expression to rhs 
+        /// For example, x + 5 < 10 will become x < 5
+        void clearConstant()
+        {
+            // make sure the constant is zero in expression 
+            m_rhs -= m_expr.constant();
+            m_expr.setConstant(0);
         }
         /// @brief reserve space for expression terms 
         /// @param n number of terms in expression 
@@ -948,6 +1115,7 @@ class LinearConstraint
         LinearConstraint& operator+=(expression_type const& expr)
         {
             m_expr += expr; 
+            clearConstant();
             return *this; 
         }
         /// overload minus assignment  
@@ -964,6 +1132,7 @@ class LinearConstraint
         LinearConstraint& operator-=(expression_type const& expr)
         {
             m_expr -= expr; 
+            clearConstant();
             return *this;
         }
     protected:
@@ -975,6 +1144,7 @@ class LinearConstraint
             m_expr = rhs.m_expr;
             m_rhs = rhs.m_rhs;
             m_sense = rhs.m_sense;
+            clearConstant();
         }
 
         unsigned int m_id; ///< constraint index 
@@ -1246,6 +1416,7 @@ class LinearModel : public LpParser::LpDataBase
             coefficient_value_type result = 0; 
             for (typename std::vector<term_type>::const_iterator it = expr.terms().begin(), ite = expr.terms().end(); it != ite; ++it)
                 result += it->coefficient()*vVariableSol.at(it->variable().id());
+            result += expr.constant();
             return result;
         }
         /// @brief evaluate objective 

@@ -65,15 +65,17 @@ endif
 #                         Standard Setting
 # ==========================================================================
 
-SRCS = $(wildcard *.cpp)
+SRCS = test_DualMinCostFlow.cpp test_MinCostFlow.cpp test_MultiKnapsackLagRelax.cpp test_solvers.cpp
+ifeq ($(GUROBI), 1)
+	SRCS += test_GurobiApi.cpp
+endif 
+ifeq ($(LPSOLVE), 1)
+	SRCS += test_LPSolveApi.cpp
+endif 
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-ifeq ($(GUROBI), 0)
-all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow test_MinCostFlow test_LPSolveApi 
-else
 all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow test_MinCostFlow test_GurobiApi test_LPSolveApi 
-endif
 
 .PHONY: lpmcf
 
@@ -108,14 +110,20 @@ test_DualMinCostFlow: $(OBJDIR)/test_DualMinCostFlow.o
 test_MinCostFlow: $(OBJDIR)/test_MinCostFlow.o 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_MinCostFlow.o $(LIBS) 
 
-test_GurobiApi: $(OBJDIR)/test_GurobiApi.o
 ifeq ($(GUROBI), 1)
+test_GurobiApi: $(OBJDIR)/test_GurobiApi.o
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_GurobiApi.o $(LIBS) 
+else 
+test_GurobiApi: 
+	@echo "test_GurobiApi skipped"
 endif 
 
-test_LPSolveApi: $(OBJDIR)/test_LPSolveApi.o
 ifeq ($(LPSOLVE), 1)
+test_LPSolveApi: $(OBJDIR)/test_LPSolveApi.o
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_LPSolveApi.o $(LIBS) 
+else 
+test_LPSolveApi: 
+	@echo "test_LPSolveApi skipped"
 endif 
 
 .PHONY: clean

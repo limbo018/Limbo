@@ -18,15 +18,15 @@ void test1()
     for (int i = 0; i < 5; ++i)
         vVar.push_back(optModel.addVariable(0, 5, limbo::solvers::INTEGER, "")); 
     // create constraints 
-    limboAssertMsg(optModel.addConstraint(vVar[0]+2*vVar[1]-vVar[2]*10 <= 10), "fail to add constraint");
-    limboAssertMsg(optModel.addConstraint(-3*vVar[0]-vVar[1]+vVar[3] >= 5), "fail to add constraint");
-    limboAssertMsg(optModel.addConstraint(-vVar[0]-2*(vVar[1]+vVar[3]) == 5), "fail to add constraint");
+    limboAssertMsg(optModel.addConstraint(vVar[0]+1+2*vVar[1]-vVar[2]*10 <= 10), "fail to add constraint");
+    limboAssertMsg(optModel.addConstraint(-3*vVar[0]-1.5-vVar[1]+1.5+vVar[3] >= 5), "fail to add constraint");
+    limboAssertMsg(optModel.addConstraint(1-vVar[0]-2*(vVar[1]+vVar[3]) == 5), "fail to add constraint");
     expr = (vVar[4]*4-vVar[2]*3)/2; 
     expr = vVar[1]*2 + expr; 
     expr /= 2; 
     expr *= 4; 
     limboAssertMsg(optModel.addConstraint(expr >= 1), "fail to add constraint");
-    limboAssertMsg(optModel.addConstraint(vVar[1]-vVar[0]-vVar[1] <= -1), "fail to add constraint");
+    limboAssertMsg(optModel.addConstraint(vVar[1]-vVar[0]-(1-vVar[1]) <= -1), "fail to add constraint");
     // create objective 
     expr.clear();
     expr = vVar[0]*4 + vVar[1]*2 + vVar[2]/2 + (vVar[3]/4 - (-vVar[4])*5); 
