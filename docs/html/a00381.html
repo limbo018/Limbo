@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/solvers/DualMinCostFlow.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/programoptions/ProgramOptions.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_bf387cd841d140e51bbf6ba57d00cc45.html">solvers</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_c75df7594a00be6e5a1721d621994c02.html">programoptions</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -95,77 +95,59 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">DualMinCostFlow.h File Reference</div>  </div>
+<div class="title">ProgramOptions.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Solve a special case of linear programming with dual min-cost flow. A better implementation of <a class="el" href="a00383.html">LpDualMcf.h</a>.  
+<p>Top API for Limbo.ProgramOptions.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;lemon/smart_graph.h&gt;</code><br />
-<code>#include &lt;lemon/network_simplex.h&gt;</code><br />
-<code>#include &lt;lemon/cost_scaling.h&gt;</code><br />
-<code>#include &lt;lemon/capacity_scaling.h&gt;</code><br />
-<code>#include &lt;lemon/cycle_canceling.h&gt;</code><br />
-<code>#include &lt;lemon/lgf_writer.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00387_source.html">limbo/solvers/Solvers.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &lt;exception&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00392_source.html">limbo/string/String.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00377_source.html">limbo/preprocessor/AssertMsg.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00380_source.html">limbo/programoptions/ConversionHelpers.h</a>&gt;</code><br />
 </div>
 <p><a href="a00381_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html">limbo::solvers::MinCostFlowSolver&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A base class of min-cost flow solver.  <a href="a00184.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00236.html">limbo::programoptions::ProgramOptionsException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">an exception class for <a class="el" href="a00235.html">limbo::programoptions::ProgramOptions</a>  <a href="a00236.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00052.html">limbo::solvers::CapacityScaling&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capacity scaling algorithm for min-cost flow.  <a href="a00052.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00271.html">limbo::programoptions::ValueBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">abstract type of data value which defines various virtual functions  <a href="a00271.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00077.html">limbo::solvers::CostScaling&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cost scaling algorithm for min-cost flow.  <a href="a00077.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html">limbo::programoptions::Value&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a generic class for various data values  <a href="a00270.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html">limbo::solvers::NetworkSimplex&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Network simplex algorithm for min-cost flow.  <a href="a00195.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00078.html">limbo::solvers::CycleCanceling&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cycle canceling algorithm for min-cost flow.  <a href="a00078.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">LP solved with min-cost flow. A better implementation of <a class="el" href="a00176.html">limbo::solvers::lpmcf::LpDualMcf</a>.  <a href="a00092.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html">limbo::solvers::MinCostFlowSolver&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A base class of min-cost flow solver.  <a href="a00184.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00052.html">limbo::solvers::CapacityScaling&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capacity scaling algorithm for min-cost flow.  <a href="a00052.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00077.html">limbo::solvers::CostScaling&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cost scaling algorithm for min-cost flow.  <a href="a00077.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html">limbo::solvers::NetworkSimplex&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Network simplex algorithm for min-cost flow.  <a href="a00195.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00078.html">limbo::solvers::CycleCanceling&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cycle canceling algorithm for min-cost flow.  <a href="a00078.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00235.html">limbo::programoptions::ProgramOptions</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">top API to parse program options  <a href="a00235.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00443"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html">limbo::solvers</a></td></tr>
-<tr class="memdesc:a00443"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace Limbo.Solvers <br /></td></tr>
+<tr class="memitem:a00447"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00447.html">limbo::programoptions</a></td></tr>
+<tr class="memdesc:a00447"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.ProgramOptions <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Solve a special case of linear programming with dual min-cost flow. A better implementation of <a class="el" href="a00383.html">LpDualMcf.h</a>. </p>
+<div class="textblock"><p>Top API for Limbo.ProgramOptions. </p>
+<p>Mimic Boost.ProgramOptions with easy wrapper for program to parser command line options</p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Feb 2017 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Jul 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+<p>Definition in file <a class="el" href="a00381_source.html">ProgramOptions.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

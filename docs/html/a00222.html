@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::geometry::point_traits&lt; boost::polygon::point_data&lt; T &gt; &gt; Struct Template Reference</title>
+<title>Limbo: limbo::geometry::point_traits&lt; PointType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,65 +89,70 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00441.html">geometry</a></li><li class="navelem"><a class="el" href="a00222.html">point_traits< boost::polygon::point_data< T > ></a></li>  </ul>
+<li class="navelem"><a class="el" href="a00440.html">limbo</a></li><li class="navelem"><a class="el" href="a00446.html">geometry</a></li><li class="navelem"><a class="el" href="a00222.html">point_traits</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="a00600.html">List of all members</a>  </div>
+<a href="a00603.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::geometry::point_traits&lt; boost::polygon::point_data&lt; T &gt; &gt; Struct Template Reference</div>  </div>
+<div class="title">limbo::geometry::point_traits&lt; PointType &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>specialization of <a class="el" href="a00220.html">limbo::geometry::point_traits</a> for boost::polygon::point_data  
+<p>type traits for point  
  <a href="a00222.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00332_source.html">BoostPolygonApi.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00336_source.html">Geometry.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a16763dacd6f35faf7c56284226298d58"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16763dacd6f35faf7c56284226298d58"></a>
-typedef T&#160;</td><td class="memItemRight" valign="bottom"><b>coordinate_type</b></td></tr>
-<tr class="separator:a16763dacd6f35faf7c56284226298d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e45a2eb2dca121c6d159de3412084f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7e45a2eb2dca121c6d159de3412084f1"></a>
-typedef <br class="typebreak" />
-boost::polygon::point_data&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>point_type</b></td></tr>
-<tr class="separator:a7e45a2eb2dca121c6d159de3412084f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72e276ae8fb678a2e16f5e16ce8a8608"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72e276ae8fb678a2e16f5e16ce8a8608"></a>
+typedef PointType&#160;</td><td class="memItemRight" valign="bottom"><b>point_type</b></td></tr>
+<tr class="separator:a72e276ae8fb678a2e16f5e16ce8a8608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb6f810a8ea63d797b4e78cd2f6760de"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb6f810a8ea63d797b4e78cd2f6760de"></a>
+typedef point_type::coordinate_type&#160;</td><td class="memItemRight" valign="bottom"><b>coordinate_type</b></td></tr>
+<tr class="separator:aeb6f810a8ea63d797b4e78cd2f6760de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a6a342c8345a47db7f80884485a8666da"><td class="memItemLeft" align="right" valign="top">static coordinate_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00222.html#a6a342c8345a47db7f80884485a8666da">get</a> (const point_type &amp;point, <a class="el" href="a00199.html">orientation_2d</a> const &amp;orient)</td></tr>
-<tr class="memdesc:a6a342c8345a47db7f80884485a8666da"><td class="mdescLeft">&#160;</td><td class="mdescRight">get coordinate from point  <a href="#a6a342c8345a47db7f80884485a8666da">More...</a><br /></td></tr>
-<tr class="separator:a6a342c8345a47db7f80884485a8666da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a276d5ec441fd991a8a33333ccf2fb01b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00222.html#a276d5ec441fd991a8a33333ccf2fb01b">set</a> (point_type &amp;point, <a class="el" href="a00199.html">orientation_2d</a> const &amp;orient, coordinate_type const &amp;value)</td></tr>
-<tr class="memdesc:a276d5ec441fd991a8a33333ccf2fb01b"><td class="mdescLeft">&#160;</td><td class="mdescRight">set coordinate for point  <a href="#a276d5ec441fd991a8a33333ccf2fb01b">More...</a><br /></td></tr>
-<tr class="separator:a276d5ec441fd991a8a33333ccf2fb01b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb2fcab07141b8bd7497f67fb2d32ecf"><td class="memItemLeft" align="right" valign="top">static point_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00222.html#acb2fcab07141b8bd7497f67fb2d32ecf">construct</a> (coordinate_type const &amp;x, coordinate_type const &amp;y)</td></tr>
-<tr class="memdesc:acb2fcab07141b8bd7497f67fb2d32ecf"><td class="mdescLeft">&#160;</td><td class="mdescRight">construct point from coordinates  <a href="#acb2fcab07141b8bd7497f67fb2d32ecf">More...</a><br /></td></tr>
-<tr class="separator:acb2fcab07141b8bd7497f67fb2d32ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a43d0979315eac921412f0ab78996fd"><td class="memItemLeft" align="right" valign="top">static coordinate_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00222.html#a1a43d0979315eac921412f0ab78996fd">get</a> (const point_type &amp;point, <a class="el" href="a00201.html">orientation_2d</a> const &amp;orient)</td></tr>
+<tr class="memdesc:a1a43d0979315eac921412f0ab78996fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">get coordinate from point  <a href="#a1a43d0979315eac921412f0ab78996fd">More...</a><br /></td></tr>
+<tr class="separator:a1a43d0979315eac921412f0ab78996fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae94fda8be9511df9ea46c9e2e1c26fce"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00222.html#ae94fda8be9511df9ea46c9e2e1c26fce">set</a> (point_type &amp;point, <a class="el" href="a00201.html">orientation_2d</a> const &amp;orient, coordinate_type const &amp;value)</td></tr>
+<tr class="memdesc:ae94fda8be9511df9ea46c9e2e1c26fce"><td class="mdescLeft">&#160;</td><td class="mdescRight">set coordinate for point  <a href="#ae94fda8be9511df9ea46c9e2e1c26fce">More...</a><br /></td></tr>
+<tr class="separator:ae94fda8be9511df9ea46c9e2e1c26fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90ca81220fd1f753bf2777c79eaeb061"><td class="memItemLeft" align="right" valign="top">static point_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00222.html#a90ca81220fd1f753bf2777c79eaeb061">construct</a> (coordinate_type const &amp;x, coordinate_type const &amp;y)</td></tr>
+<tr class="memdesc:a90ca81220fd1f753bf2777c79eaeb061"><td class="mdescLeft">&#160;</td><td class="mdescRight">construct point from coordinates  <a href="#a90ca81220fd1f753bf2777c79eaeb061">More...</a><br /></td></tr>
+<tr class="separator:a90ca81220fd1f753bf2777c79eaeb061"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename T&gt;<br />
-struct limbo::geometry::point_traits&lt; boost::polygon::point_data&lt; T &gt; &gt;</h3>
+<div class="textblock"><h3>template&lt;typename PointType&gt;<br />
+class limbo::geometry::point_traits&lt; PointType &gt;</h3>
 
-<p>specialization of <a class="el" href="a00220.html">limbo::geometry::point_traits</a> for boost::polygon::point_data </p>
+<p>type traits for point </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">PointType</td><td>point type </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="a00332_source.html#l00024">24</a> of file <a class="el" href="a00332_source.html">BoostPolygonApi.h</a>.</p>
+<p>Definition at line <a class="el" href="a00336_source.html#l00168">168</a> of file <a class="el" href="a00336_source.html">Geometry.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="acb2fcab07141b8bd7497f67fb2d32ecf"></a>
+<a class="anchor" id="a90ca81220fd1f753bf2777c79eaeb061"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename PointType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static point_type <a class="el" href="a00220.html">limbo::geometry::point_traits</a>&lt; boost::polygon::point_data&lt; T &gt; &gt;::construct </td>
+          <td class="memname">static point_type <a class="el" href="a00222.html">limbo::geometry::point_traits</a>&lt; PointType &gt;::construct </td>
           <td>(</td>
           <td class="paramtype">coordinate_type const &amp;&#160;</td>
           <td class="paramname"><em>x</em>, </td>
@@ -181,21 +186,21 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>point object </dd></dl>
 
-<p>Definition at line <a class="el" href="a00332_source.html#l00055">55</a> of file <a class="el" href="a00332_source.html">BoostPolygonApi.h</a>.</p>
+<p>Definition at line <a class="el" href="a00336_source.html#l00191">191</a> of file <a class="el" href="a00336_source.html">Geometry.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a6a342c8345a47db7f80884485a8666da"></a>
+<a class="anchor" id="a1a43d0979315eac921412f0ab78996fd"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename PointType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static coordinate_type <a class="el" href="a00220.html">limbo::geometry::point_traits</a>&lt; boost::polygon::point_data&lt; T &gt; &gt;::get </td>
+          <td class="memname">static coordinate_type <a class="el" href="a00222.html">limbo::geometry::point_traits</a>&lt; PointType &gt;::get </td>
           <td>(</td>
           <td class="paramtype">const point_type &amp;&#160;</td>
           <td class="paramname"><em>point</em>, </td>
@@ -203,7 +208,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00199.html">orientation_2d</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="a00201.html">orientation_2d</a> const &amp;&#160;</td>
           <td class="paramname"><em>orient</em>&#160;</td>
         </tr>
         <tr>
@@ -229,21 +234,21 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>coordinate </dd></dl>
 
-<p>Definition at line <a class="el" href="a00332_source.html#l00035">35</a> of file <a class="el" href="a00332_source.html">BoostPolygonApi.h</a>.</p>
+<p>Definition at line <a class="el" href="a00336_source.html#l00179">179</a> of file <a class="el" href="a00336_source.html">Geometry.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a276d5ec441fd991a8a33333ccf2fb01b"></a>
+<a class="anchor" id="ae94fda8be9511df9ea46c9e2e1c26fce"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename PointType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void <a class="el" href="a00220.html">limbo::geometry::point_traits</a>&lt; boost::polygon::point_data&lt; T &gt; &gt;::set </td>
+          <td class="memname">static void <a class="el" href="a00222.html">limbo::geometry::point_traits</a>&lt; PointType &gt;::set </td>
           <td>(</td>
           <td class="paramtype">point_type &amp;&#160;</td>
           <td class="paramname"><em>point</em>, </td>
@@ -251,7 +256,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00199.html">orientation_2d</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="a00201.html">orientation_2d</a> const &amp;&#160;</td>
           <td class="paramname"><em>orient</em>, </td>
         </tr>
         <tr>
@@ -283,17 +288,17 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00332_source.html#l00045">45</a> of file <a class="el" href="a00332_source.html">BoostPolygonApi.h</a>.</p>
+<p>Definition at line <a class="el" href="a00336_source.html#l00185">185</a> of file <a class="el" href="a00336_source.html">Geometry.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/geometry/api/<a class="el" href="a00332_source.html">BoostPolygonApi.h</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/geometry/<a class="el" href="a00336_source.html">Geometry.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:41 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

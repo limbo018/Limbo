@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/geometry/api/bLibApi.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/containers/DisjointSet.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_07e544b58feaf5e1ebe10360eb3a1613.html">geometry</a></li><li class="navelem"><a class="el" href="dir_fc5098a7dee8c311c6fadc7f621cfa43.html">api</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_67961cc7bc7695996924d6bf198dc652.html">containers</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -95,44 +95,46 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">bLibApi.h File Reference</div>  </div>
+<div class="title">DisjointSet.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Geometry traits for bLib, include this file when bLib is used if your point class setting is different from that in the default point_traits, please create a specialization.  
+<p>A disjoint set structure and union-find utilities.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="a00334_source.html">limbo/geometry/Geometry.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
 </div>
 <p><a href="a00331_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00221.html">limbo::geometry::point_traits&lt; bLib::bPoint &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="a00220.html">limbo::geometry::point_traits</a> for bLib::bPoint  <a href="a00221.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00083.html">limbo::containers::DisjointSet</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">simply used for scope control  <a href="a00083.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00238.html">limbo::geometry::rectangle_traits&lt; bLib::bBox &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="a00237.html">limbo::geometry::rectangle_traits</a> for bLib::bBox  <a href="a00238.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00260.html">limbo::containers::DisjointSet::SubsetHelper&lt; ElementType, RankType &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a sample implementation of <a class="el" href="a00260.html" title="a sample implementation of SubsetHelper that uses std::vector as the container. It needs to store par...">SubsetHelper</a> that uses std::vector as the container. It needs to store parent elements and ranks.  <a href="a00260.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00441"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00441.html">limbo::geometry</a></td></tr>
-<tr class="memdesc:a00441"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Geometry <br /></td></tr>
+<tr class="memitem:a00445"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00445.html">limbo::containers</a></td></tr>
+<tr class="memdesc:a00445"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Containers <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Geometry traits for bLib, include this file when bLib is used if your point class setting is different from that in the default point_traits, please create a specialization. </p>
+<div class="textblock"><p>A disjoint set structure and union-find utilities. </p>
+<p>Please refer to <a href="http://www.geeksforgeeks.org/union-find-algorithm-set-2-union-by-rank/">GeeksforGeeks implementation</a> and Boost.DisjointSets for details the union_set() and find_set() function can be used independently</p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Sep 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00331_source.html">bLibApi.h</a>.</p>
+<p>Definition in file <a class="el" href="a00331_source.html">DisjointSet.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

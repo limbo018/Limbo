@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/GdsWriter.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/GdsDriver.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -94,89 +94,78 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">GdsWriter.h File Reference</div>  </div>
+<div class="title">GdsDriver.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>write GDSII file  
+<p>high-level wrapper for GdsReader (deprecated)  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00349_source.html">math.h</a>&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00388_source.html">string.h</a>&gt;</code><br />
-<code>#include &lt;sys/stat.h&gt;</code><br />
-<code>#include &lt;fcntl.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &lt;time.h&gt;</code><br />
-<code>#include &lt;assert.h&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;fstream&gt;</code><br />
+<div class="textblock"><code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00366_source.html">limbo/parsers/gdsii/stream/GdsReader.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00377_source.html">limbo/preprocessor/AssertMsg.h</a>&gt;</code><br />
 </div>
 <p><a href="a00365_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00114.html">GdsParser::gds_itemtype</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII item type.  <a href="a00114.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00115.html">GdsParser::GdsBoundary</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">internal structure to store gds information  <a href="a00115.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00113.html">GdsParser::gds_celltype</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">cell type  <a href="a00113.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00137.html">GdsParser::GdsText</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII TEXT.  <a href="a00137.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00139.html">GdsParser::GdsWriter</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00136.html">GdsParser::GdsSref</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII SREF.  <a href="a00136.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00116.html">GdsParser::GdsCell</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII cell.  <a href="a00116.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00126.html">GdsParser::GdsLib</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Top GDSII library.  <a href="a00126.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00125.html">GdsParser::GdsDriverDataBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">database for the driver  <a href="a00125.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00124.html">GdsParser::GdsDriver</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">High-level wrapper class for <a class="el" href="a00131.html" title="read GDSII ">GdsReader</a>. Everything is saved in an internal data structure and users only need to provide simple callbacks.  <a href="a00124.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00431"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00431.html">GdsParser</a></td></tr>
-<tr class="memdesc:a00431"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.GdsParser <br /></td></tr>
+<tr class="memitem:a00436"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html">GdsParser</a></td></tr>
+<tr class="memdesc:a00436"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.GdsParser <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a74c8b026fbbd7f34b74d0a39f2309b20"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00365.html#a74c8b026fbbd7f34b74d0a39f2309b20">BYTESWAP</a>&#160;&#160;&#160;1</td></tr>
-<tr class="separator:a74c8b026fbbd7f34b74d0a39f2309b20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a75e159aa62a455aff7e6039fa7c3801c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a75e159aa62a455aff7e6039fa7c3801c"></a>
-typedef int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00431.html#a75e159aa62a455aff7e6039fa7c3801c">GdsParser::BOOL</a></td></tr>
-<tr class="memdesc:a75e159aa62a455aff7e6039fa7c3801c"><td class="mdescLeft">&#160;</td><td class="mdescRight">use integer as bool <br /></td></tr>
-<tr class="separator:a75e159aa62a455aff7e6039fa7c3801c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecd8d5b8951c69ff3cf543e033f304ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aecd8d5b8951c69ff3cf543e033f304ff"></a>
-typedef unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00431.html#aecd8d5b8951c69ff3cf543e033f304ff">GdsParser::BYTE</a></td></tr>
-<tr class="memdesc:aecd8d5b8951c69ff3cf543e033f304ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">use unsigned char as byte <br /></td></tr>
-<tr class="separator:aecd8d5b8951c69ff3cf543e033f304ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a1e0c59cf7a8ce5e993805916b5aade6a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e0c59cf7a8ce5e993805916b5aade6a"></a>
+typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>GdsParser::int32_t</b></td></tr>
+<tr class="separator:a1e0c59cf7a8ce5e993805916b5aade6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a396fe6ae3d6b36ebb76aa39cab6daf80"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a396fe6ae3d6b36ebb76aa39cab6daf80"></a>
+typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>GdsParser::uint32_t</b></td></tr>
+<tr class="separator:a396fe6ae3d6b36ebb76aa39cab6daf80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a9eef18021b9c81cdf78f3c9efcd4f366"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html#a9eef18021b9c81cdf78f3c9efcd4f366">GdsParser::read</a> (GdsDriverDataBase &amp;db, string const &amp;filename)</td></tr>
+<tr class="memdesc:a9eef18021b9c81cdf78f3c9efcd4f366"><td class="mdescLeft">&#160;</td><td class="mdescRight">API function for <a class="el" href="a00124.html" title="High-level wrapper class for GdsReader. Everything is saved in an internal data structure and users o...">GdsDriver</a>.  <a href="#a9eef18021b9c81cdf78f3c9efcd4f366">More...</a><br /></td></tr>
+<tr class="separator:a9eef18021b9c81cdf78f3c9efcd4f366"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>write GDSII file </p>
+<div class="textblock"><p>high-level wrapper for GdsReader (deprecated) </p>
+<p>Try to mimic same callback functions in GdsTxtParser. There will be many self-included classes for temporary storage. This class is more convenient but less general.</p>
+<p>See a general wrapper in <a class="el" href="a00361.html">GdsIO.h</a></p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Nov 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00365_source.html">GdsWriter.h</a>.</p>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a class="anchor" id="a74c8b026fbbd7f34b74d0a39f2309b20"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define BYTESWAP&#160;&#160;&#160;1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Setting BYTESWAP to 1 is appropriate for big-endian Intel processors. GDS format was originally used on little-endian, older computers. </p>
-
-<p>Definition at line <a class="el" href="a00365_source.html#l00026">26</a> of file <a class="el" href="a00365_source.html">GdsWriter.h</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>Definition in file <a class="el" href="a00365_source.html">GdsDriver.h</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/solvers/Solvers.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/solvers/lpmcf/LpDualMcf.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,126 +87,75 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_bf387cd841d140e51bbf6ba57d00cc45.html">solvers</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_bf387cd841d140e51bbf6ba57d00cc45.html">solvers</a></li><li class="navelem"><a class="el" href="dir_bc8e812147eefdca8c1463002ca91056.html">lpmcf</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">Solvers.h File Reference</div>  </div>
+<div class="title">LpDualMcf.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Basic utilities such as variables and linear expressions in solvers.  
+<p>solve linear programming problem with dual min-cost flow  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;limits&gt;</code><br />
+<div class="textblock"><code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;map&gt;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00375_source.html">limbo/preprocessor/Msg.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00349_source.html">limbo/math/Math.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00369_source.html">limbo/parsers/lp/bison/LpDriver.h</a>&gt;</code><br />
+<code>#include &lt;cctype&gt;</code><br />
+<code>#include &lt;ctime&gt;</code><br />
+<code>#include &lt;boost/cstdint.hpp&gt;</code><br />
+<code>#include &lt;boost/unordered_map.hpp&gt;</code><br />
+<code>#include &lt;boost/foreach.hpp&gt;</code><br />
+<code>#include &lt;boost/typeof/typeof.hpp&gt;</code><br />
+<code>#include &lt;boost/algorithm/string/predicate.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00386_source.html">limbo/solvers/lpmcf/Lgf.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00372_source.html">limbo/parsers/lp/bison/LpDriver.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00352_source.html">limbo/math/Math.h</a>&gt;</code><br />
 </div>
 <p><a href="a00387_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html">limbo::solvers::Variable&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describe variables in optimization problem.  <a href="a00270.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00151.html">limbo::solvers::lpmcf::hash_pair&lt; T1, T2 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">hash calculator for pairs  <a href="a00151.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describe properties of a variable.  <a href="a00274.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html">limbo::solvers::lpmcf::LpDualMcf&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">LP solved with min-cost flow.  <a href="a00176.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html">limbo::solvers::LinearTerm&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear term.  <a href="a00172.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00273.html">limbo::solvers::lpmcf::LpDualMcf&lt; T &gt;::variable_type</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable \(x_i\) in the primal linear programming problem. standard format: \(l_i \le x_i \le u_i\) maps to node \(i\), arcs from node \(i\) to node \(st\).  <a href="a00273.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00170.html">limbo::solvers::LinearExpression&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describe linear expressions in optimization problem.  <a href="a00170.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00169.html">limbo::solvers::LinearConstraint&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describe linear constraint.  <a href="a00169.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00171.html">limbo::solvers::LinearModel&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">model to describe an optimization problem  <a href="a00171.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00179.html">limbo::solvers::MatrixCSR&lt; T, I, StartingIndex &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compressed sparse row (CSR) matrix.  <a href="a00179.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html">limbo::solvers::Variable&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describe variables in optimization problem.  <a href="a00270.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describe properties of a variable.  <a href="a00274.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html">limbo::solvers::LinearTerm&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear term.  <a href="a00172.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00063.html">limbo::solvers::CompareTermByVariable</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Comapre term by variable.  <a href="a00063.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00170.html">limbo::solvers::LinearExpression&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describe linear expressions in optimization problem.  <a href="a00170.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00169.html">limbo::solvers::LinearConstraint&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describe linear constraint.  <a href="a00169.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00171.html">limbo::solvers::LinearModel&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">model to describe an optimization problem  <a href="a00171.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00179.html">limbo::solvers::MatrixCSR&lt; T, I, StartingIndex &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compressed sparse row (CSR) matrix.  <a href="a00179.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00069.html">limbo::solvers::lpmcf::LpDualMcf&lt; T &gt;::constraint_type</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">constraint object in the primal linear programming problem. standard format: \(x_i - x_j \ge c_{ij}\) maps to arc \(x_i \rightarrow x_j, \textrm{cost} = -c_{ij}\).  <a href="a00069.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00443"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html">limbo::solvers</a></td></tr>
-<tr class="memdesc:a00443"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace Limbo.Solvers <br /></td></tr>
+<tr class="memitem:a00448"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00448.html">limbo::solvers</a></td></tr>
+<tr class="memdesc:a00448"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace Limbo.Solvers <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a500190a99a5762b6aa25aec1230479f0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">limbo::solvers::SolverProperty</a> { <br />
-&#160;&#160;<a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0a79885399adf94fecd8e9ade4985dd2d7">limbo::solvers::MIN</a>, 
-<a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0a7d1c90f6148065215e9af26063544adb">limbo::solvers::MAX</a>, 
-<a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0a5c293605d1be174e0ee975218a633579">limbo::solvers::BINARY</a>, 
-<a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0ae0e2246eae040cad8ac1c342fe1b9d9d">limbo::solvers::INTEGER</a>, 
-<br />
-&#160;&#160;<a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, 
-<a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0a0f0123e64e1e1b5d997d23f5c39b58eb">limbo::solvers::OPTIMAL</a>, 
-<a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0ac6bee077889c70886c6fa16792f12d2c">limbo::solvers::INFEASIBLE</a>, 
-<a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0a94a756b7abed1e794e09c77a4da245e8">limbo::solvers::SUBOPTIMAL</a>, 
-<br />
-&#160;&#160;<a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0acfd9ea99dd688cfcac7a90f357b94263">limbo::solvers::UNBOUNDED</a>
-<br />
- }</td></tr>
-<tr class="memdesc:a500190a99a5762b6aa25aec1230479f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some enums used in solver.  <a href="a00443.html#a500190a99a5762b6aa25aec1230479f0">More...</a><br /></td></tr>
-<tr class="separator:a500190a99a5762b6aa25aec1230479f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ae31d5e04adc36b4526e8856acf4ae2cf"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html#ae31d5e04adc36b4526e8856acf4ae2cf">limbo::solvers::toString</a> (SolverProperty sp)</td></tr>
-<tr class="memdesc:ae31d5e04adc36b4526e8856acf4ae2cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert <a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">limbo::solvers::SolverProperty</a> to std::string.  <a href="#ae31d5e04adc36b4526e8856acf4ae2cf">More...</a><br /></td></tr>
-<tr class="separator:ae31d5e04adc36b4526e8856acf4ae2cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00449"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00449.html">limbo::solvers::lpmcf</a></td></tr>
+<tr class="memdesc:a00449"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Solvers.lpmcf <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Basic utilities such as variables and linear expressions in solvers. </p>
+<div class="textblock"><p>solve linear programming problem with dual min-cost flow </p>
+<p><a href="https://lemon.cs.elte.hu">Lemon</a> is used as min-cost flow solver</p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Feb 2017 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00387_source.html">Solvers.h</a>.</p>
+<p>Definition in file <a class="el" href="a00387_source.html">LpDualMcf.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

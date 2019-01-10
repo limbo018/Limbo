@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/string/ToString.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/solvers/MultiKnapsackLagRelax.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,72 +87,117 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_a4f08339963c9aeb6ba530d5303d7579.html">string</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_bf387cd841d140e51bbf6ba57d00cc45.html">solvers</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">ToString.h File Reference</div>  </div>
+<div class="title">MultiKnapsackLagRelax.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>convert metadata type to string  
+<p>Solve multiple knapsack problem with lagrangian relaxation.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;string&gt;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
-<code>#include &lt;limits&gt;</code><br />
+<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00391_source.html">limbo/solvers/Solvers.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00390_source.html">limbo/solvers/Numerical.h</a>&gt;</code><br />
 </div>
 <p><a href="a00389_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html">limbo::solvers::LagMultiplierUpdater&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A base helper function object to update lagrangian multipliers using subgradient descent. All other schemes can be derived from this class.  <a href="a00164.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00259.html">limbo::solvers::SubGradientDescent&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update lagrangian multiplier with subgradient descent.  <a href="a00259.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00234.html">limbo::solvers::ProblemScaler&lt; T, V &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for scaling scheme with default no scaling.  <a href="a00234.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00163.html">limbo::solvers::L2NormScaler&lt; T, V &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scaling scheme with default L2 norm scaling.  <a href="a00163.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html">limbo::solvers::FeasibleSearcher&lt; T, V &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base heuristic to search for feasible solutions.  <a href="a00103.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00249.html">limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heuristic to search for feasible solutions by adjusting coefficients so that some items will not be assigned to some bins.  <a href="a00249.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00190.html">limbo::solvers::MultiKnapsackLagRelax&lt; T, V &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve multiple knapsack problem with lagrangian relaxation.  <a href="a00190.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00051.html">limbo::solvers::MultiKnapsackLagRelax&lt; T, V &gt;::CapacityConstraintPred</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Predicate whether a constraint is a capacity constraint.  <a href="a00051.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00064.html">limbo::solvers::MultiKnapsackLagRelax&lt; T, V &gt;::CompareVariableByCoefficient</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Predicate to sort variables according to their coefficient from small to large.  <a href="a00064.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html">limbo::solvers::LagMultiplierUpdater&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A base helper function object to update lagrangian multipliers using subgradient descent. All other schemes can be derived from this class.  <a href="a00164.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00259.html">limbo::solvers::SubGradientDescent&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update lagrangian multiplier with subgradient descent.  <a href="a00259.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00234.html">limbo::solvers::ProblemScaler&lt; T, V &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for scaling scheme with default no scaling.  <a href="a00234.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html">limbo::solvers::MinCoefficientScaler&lt; T, V &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scaling scheme with minimum coefficient in an expression.  <a href="a00184.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00163.html">limbo::solvers::L2NormScaler&lt; T, V &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scaling scheme with default L2 norm scaling.  <a href="a00163.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html">limbo::solvers::FeasibleSearcher&lt; T, V &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base heuristic to search for feasible solutions.  <a href="a00103.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00249.html">limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heuristic to search for feasible solutions by adjusting coefficients so that some items will not be assigned to some bins.  <a href="a00249.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html">limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;::VariableMoveCost</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for the move cost of an item.  <a href="a00274.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00065.html">limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;::CompareVariableMoveCost</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare variables by its move cost.  <a href="a00065.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00250.html">limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heuristic to search for feasible solutions by smoothing dense bins.  <a href="a00250.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00275.html">limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;::VariableMoveCost</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for the move cost of an item.  <a href="a00275.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00066.html">limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;::CompareVariableMoveCost</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare variables by its move cost.  <a href="a00066.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html">limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;::CompareConstraintSlack</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare constraints by their slackness.  <a href="a00062.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html">limbo::solvers::SearchByCombinedStrategy&lt; T, V &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heuristic to search for feasible solutions by combined strategies.  <a href="a00251.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a310ac0314ad5ba8619b7a97d3c89d8b2"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#a310ac0314ad5ba8619b7a97d3c89d8b2">limbo::to_string</a> (int val)</td></tr>
-<tr class="memdesc:a310ac0314ad5ba8619b7a97d3c89d8b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert integer to string  <a href="#a310ac0314ad5ba8619b7a97d3c89d8b2">More...</a><br /></td></tr>
-<tr class="separator:a310ac0314ad5ba8619b7a97d3c89d8b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73b9a0fdd855dca6292290d63de19a7b"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#a73b9a0fdd855dca6292290d63de19a7b">limbo::to_string</a> (long val)</td></tr>
-<tr class="memdesc:a73b9a0fdd855dca6292290d63de19a7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert long integer to string  <a href="#a73b9a0fdd855dca6292290d63de19a7b">More...</a><br /></td></tr>
-<tr class="separator:a73b9a0fdd855dca6292290d63de19a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac942548404521f2dc9b5eb91c1db2224"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#ac942548404521f2dc9b5eb91c1db2224">limbo::to_string</a> (long long val)</td></tr>
-<tr class="memdesc:ac942548404521f2dc9b5eb91c1db2224"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert long long integer to string  <a href="#ac942548404521f2dc9b5eb91c1db2224">More...</a><br /></td></tr>
-<tr class="separator:ac942548404521f2dc9b5eb91c1db2224"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7802e8fa1a151cc57ffb5c8301021937"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#a7802e8fa1a151cc57ffb5c8301021937">limbo::to_string</a> (unsigned int val)</td></tr>
-<tr class="memdesc:a7802e8fa1a151cc57ffb5c8301021937"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert unsigned integer to string  <a href="#a7802e8fa1a151cc57ffb5c8301021937">More...</a><br /></td></tr>
-<tr class="separator:a7802e8fa1a151cc57ffb5c8301021937"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49310acdd4e3253f9647e3a9a39c1ed7"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#a49310acdd4e3253f9647e3a9a39c1ed7">limbo::to_string</a> (unsigned long val)</td></tr>
-<tr class="memdesc:a49310acdd4e3253f9647e3a9a39c1ed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert unsigned long integer to string  <a href="#a49310acdd4e3253f9647e3a9a39c1ed7">More...</a><br /></td></tr>
-<tr class="separator:a49310acdd4e3253f9647e3a9a39c1ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac89e6a26aa364709df6ded28d388a1d1"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#ac89e6a26aa364709df6ded28d388a1d1">limbo::to_string</a> (unsigned long long val)</td></tr>
-<tr class="memdesc:ac89e6a26aa364709df6ded28d388a1d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert unsigned long long integer to string  <a href="#ac89e6a26aa364709df6ded28d388a1d1">More...</a><br /></td></tr>
-<tr class="separator:ac89e6a26aa364709df6ded28d388a1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acac2a0ebe33d62cdcad05f8267cfa1e1"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#acac2a0ebe33d62cdcad05f8267cfa1e1">limbo::to_string</a> (float val)</td></tr>
-<tr class="memdesc:acac2a0ebe33d62cdcad05f8267cfa1e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert float to string  <a href="#acac2a0ebe33d62cdcad05f8267cfa1e1">More...</a><br /></td></tr>
-<tr class="separator:acac2a0ebe33d62cdcad05f8267cfa1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96b39c62f79eb7f8ec4125691bdf39b4"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#a96b39c62f79eb7f8ec4125691bdf39b4">limbo::to_string</a> (double val)</td></tr>
-<tr class="memdesc:a96b39c62f79eb7f8ec4125691bdf39b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert double to string  <a href="#a96b39c62f79eb7f8ec4125691bdf39b4">More...</a><br /></td></tr>
-<tr class="separator:a96b39c62f79eb7f8ec4125691bdf39b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02fdf94db3da0c5606af3f590e0b86bc"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#a02fdf94db3da0c5606af3f590e0b86bc">limbo::to_string</a> (long double val)</td></tr>
-<tr class="memdesc:a02fdf94db3da0c5606af3f590e0b86bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert long double to string  <a href="#a02fdf94db3da0c5606af3f590e0b86bc">More...</a><br /></td></tr>
-<tr class="separator:a02fdf94db3da0c5606af3f590e0b86bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00448"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00448.html">limbo::solvers</a></td></tr>
+<tr class="memdesc:a00448"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace Limbo.Solvers <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>convert metadata type to string </p>
+<div class="textblock"><p>Solve multiple knapsack problem with lagrangian relaxation. </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Apr 2015 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Feb 2017 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00389_source.html">ToString.h</a>.</p>
+<p>Definition in file <a class="el" href="a00389_source.html">MultiKnapsackLagRelax.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

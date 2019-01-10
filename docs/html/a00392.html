@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/test/algorithms/test_GraphSimplification.cpp File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/string/String.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,155 +87,79 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_2ab53c040e599682687624208541819b.html">algorithms</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_a4f08339963c9aeb6ba530d5303d7579.html">string</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">test_GraphSimplification.cpp File Reference</div>  </div>
+<div class="title">String.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>test graph simplification algorithms <a class="el" href="a00145.html">limbo::algorithms::coloring::GraphSimplification</a>  
+<p>Check string is integer, floating point, number... Convert string to upper/lower cases.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;boost/graph/graphviz.hpp&gt;</code><br />
-<code>#include &lt;boost/graph/graph_utility.hpp&gt;</code><br />
-<code>#include &lt;boost/graph/adjacency_list.hpp&gt;</code><br />
-<code>#include &lt;boost/graph/undirected_graph.hpp&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00314_source.html">limbo/algorithms/coloring/GraphSimplification.h</a>&gt;</code><br />
-<code>#include &lt;boost/version.hpp&gt;</code><br />
-<code>#include &lt;boost/graph/detail/is_same.hpp&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;cctype&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00393_source.html">limbo/string/ToString.h</a>&gt;</code><br />
 </div>
 <p><a href="a00392_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a4d194854f2e7f8012798c96fbfc1eebf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d194854f2e7f8012798c96fbfc1eebf"></a>
-typedef adjacency_list&lt; vecS, <br class="typebreak" />
-vecS, undirectedS, property<br class="typebreak" />
-&lt; vertex_index_t, std::size_t, <br class="typebreak" />
-property&lt; vertex_color_t, int &gt;<br class="typebreak" />
- &gt;, property&lt; edge_index_t, <br class="typebreak" />
-std::size_t, property<br class="typebreak" />
-&lt; edge_weight_t, int &gt;<br class="typebreak" />
- &gt;, property&lt; graph_name_t, <br class="typebreak" />
-string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>graph_type</b></td></tr>
-<tr class="separator:a4d194854f2e7f8012798c96fbfc1eebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefd3db382039ac673d0069e2ad0d51db"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aefd3db382039ac673d0069e2ad0d51db"></a>
-typedef subgraph&lt; graph_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>subgraph_type</b></td></tr>
-<tr class="separator:aefd3db382039ac673d0069e2ad0d51db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c75c51ecdc61d86ae8784431e13c47c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8c75c51ecdc61d86ae8784431e13c47c"></a>
-typedef property<br class="typebreak" />
-&lt; vertex_index_t, std::size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>VertexId</b></td></tr>
-<tr class="separator:a8c75c51ecdc61d86ae8784431e13c47c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59db129f22d6c2d8e6bfb7f4d4c3459a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a59db129f22d6c2d8e6bfb7f4d4c3459a"></a>
-typedef property&lt; edge_index_t, <br class="typebreak" />
-std::size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>EdgeID</b></td></tr>
-<tr class="separator:a59db129f22d6c2d8e6bfb7f4d4c3459a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6550a7f9de831ef8846dcef0478fbeed"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6550a7f9de831ef8846dcef0478fbeed"></a>
-typedef graph_traits<br class="typebreak" />
-&lt; graph_type &gt;<br class="typebreak" />
-::vertex_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>vertex_descriptor</b></td></tr>
-<tr class="separator:a6550a7f9de831ef8846dcef0478fbeed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6aa79a8b06ebe103acc58cb48e6ae3a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad6aa79a8b06ebe103acc58cb48e6ae3a"></a>
-typedef graph_traits<br class="typebreak" />
-&lt; graph_type &gt;<br class="typebreak" />
-::edge_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>edge_descriptor</b></td></tr>
-<tr class="separator:ad6aa79a8b06ebe103acc58cb48e6ae3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa534c2672972e7d1cc8a9653458b819c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa534c2672972e7d1cc8a9653458b819c"></a>
-typedef property_map<br class="typebreak" />
-&lt; graph_type, edge_weight_t &gt;<br class="typebreak" />
-::type&#160;</td><td class="memItemRight" valign="bottom"><b>edge_weight_map_type</b></td></tr>
-<tr class="separator:aa534c2672972e7d1cc8a9653458b819c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af608f166d8d17767171549f156492984"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af608f166d8d17767171549f156492984"></a>
-typedef property_map<br class="typebreak" />
-&lt; graph_type, vertex_color_t &gt;<br class="typebreak" />
-::type&#160;</td><td class="memItemRight" valign="bottom"><b>vertex_color_map_type</b></td></tr>
-<tr class="separator:af608f166d8d17767171549f156492984"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab4e647f3df88f89c116889c72d7266d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#ab4e647f3df88f89c116889c72d7266d7">realGraph</a> (string const &amp;filename)</td></tr>
-<tr class="separator:ab4e647f3df88f89c116889c72d7266d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad28905911fb4acbd97a031fe8e64c8a2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html#ad28905911fb4acbd97a031fe8e64c8a2">limbo::is_integer</a> (string const &amp;s)</td></tr>
+<tr class="memdesc:ad28905911fb4acbd97a031fe8e64c8a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether string represents an integer  <a href="#ad28905911fb4acbd97a031fe8e64c8a2">More...</a><br /></td></tr>
+<tr class="separator:ad28905911fb4acbd97a031fe8e64c8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac94a9f8ab47da7a5e8eed918f46c6950"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html#ac94a9f8ab47da7a5e8eed918f46c6950">limbo::is_float</a> (string const &amp;s)</td></tr>
+<tr class="memdesc:ac94a9f8ab47da7a5e8eed918f46c6950"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether string represents an float  <a href="#ac94a9f8ab47da7a5e8eed918f46c6950">More...</a><br /></td></tr>
+<tr class="separator:ac94a9f8ab47da7a5e8eed918f46c6950"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a653ed551b6caf3d19c55d5290a09c584"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html#a653ed551b6caf3d19c55d5290a09c584">limbo::is_number</a> (string const &amp;s)</td></tr>
+<tr class="memdesc:a653ed551b6caf3d19c55d5290a09c584"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether string represents a number, either integer or floating point number  <a href="#a653ed551b6caf3d19c55d5290a09c584">More...</a><br /></td></tr>
+<tr class="separator:a653ed551b6caf3d19c55d5290a09c584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66eb59b91fd8e2a1d69b6c5705acc3eb"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html#a66eb59b91fd8e2a1d69b6c5705acc3eb">limbo::toupper</a> (string const &amp;s)</td></tr>
+<tr class="memdesc:a66eb59b91fd8e2a1d69b6c5705acc3eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert string to upper case  <a href="#a66eb59b91fd8e2a1d69b6c5705acc3eb">More...</a><br /></td></tr>
+<tr class="separator:a66eb59b91fd8e2a1d69b6c5705acc3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6e50a2521a25b1deb9c87312c31b104"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html#ad6e50a2521a25b1deb9c87312c31b104">limbo::tolower</a> (string const &amp;s)</td></tr>
+<tr class="memdesc:ad6e50a2521a25b1deb9c87312c31b104"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert string to lower case  <a href="#ad6e50a2521a25b1deb9c87312c31b104">More...</a><br /></td></tr>
+<tr class="separator:ad6e50a2521a25b1deb9c87312c31b104"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7355468e379b0ed4f5b8425d7a35d02"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html#ab7355468e379b0ed4f5b8425d7a35d02">limbo::iequals</a> (string const &amp;s1, string const &amp;s2)</td></tr>
+<tr class="memdesc:ab7355468e379b0ed4f5b8425d7a35d02"><td class="mdescLeft">&#160;</td><td class="mdescRight">check two strings equal, case-insensitive  <a href="#ab7355468e379b0ed4f5b8425d7a35d02">More...</a><br /></td></tr>
+<tr class="separator:ab7355468e379b0ed4f5b8425d7a35d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c4c5598fefa12f03a057df7a5506a44"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html#a2c4c5598fefa12f03a057df7a5506a44">limbo::get_file_path</a> (const string &amp;s)</td></tr>
+<tr class="memdesc:a2c4c5598fefa12f03a057df7a5506a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">get relative path of a file  <a href="#a2c4c5598fefa12f03a057df7a5506a44">More...</a><br /></td></tr>
+<tr class="separator:a2c4c5598fefa12f03a057df7a5506a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7df852268c8a2f86dc06582d80dfa5ad"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html#a7df852268c8a2f86dc06582d80dfa5ad">limbo::get_file_name</a> (const string &amp;s)</td></tr>
+<tr class="memdesc:a7df852268c8a2f86dc06582d80dfa5ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">get pure name of a file (no path)  <a href="#a7df852268c8a2f86dc06582d80dfa5ad">More...</a><br /></td></tr>
+<tr class="separator:a7df852268c8a2f86dc06582d80dfa5ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33f4201bab9b2d54232f1ff9c59c8fd8"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html#a33f4201bab9b2d54232f1ff9c59c8fd8">limbo::get_file_suffix</a> (const string &amp;s)</td></tr>
+<tr class="memdesc:a33f4201bab9b2d54232f1ff9c59c8fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">get suffix of a file  <a href="#a33f4201bab9b2d54232f1ff9c59c8fd8">More...</a><br /></td></tr>
+<tr class="separator:a33f4201bab9b2d54232f1ff9c59c8fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d70f4b0d6726392b371ed1470d1a96c"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html#a6d70f4b0d6726392b371ed1470d1a96c">limbo::trim_file_suffix</a> (string const &amp;s)</td></tr>
+<tr class="memdesc:a6d70f4b0d6726392b371ed1470d1a96c"><td class="mdescLeft">&#160;</td><td class="mdescRight">trim the suffix of a file  <a href="#a6d70f4b0d6726392b371ed1470d1a96c">More...</a><br /></td></tr>
+<tr class="separator:a6d70f4b0d6726392b371ed1470d1a96c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f24ba1f3a0ce8a2d333f17f91efbd11"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html#a7f24ba1f3a0ce8a2d333f17f91efbd11">limbo::get_first_word</a> (string const &amp;str)</td></tr>
+<tr class="memdesc:a7f24ba1f3a0ce8a2d333f17f91efbd11"><td class="mdescLeft">&#160;</td><td class="mdescRight">fetch the first word of a string, assume delimiter is space or tab  <a href="#a7f24ba1f3a0ce8a2d333f17f91efbd11">More...</a><br /></td></tr>
+<tr class="separator:a7f24ba1f3a0ce8a2d333f17f91efbd11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>test graph simplification algorithms <a class="el" href="a00145.html">limbo::algorithms::coloring::GraphSimplification</a> </p>
+<div class="textblock"><p>Check string is integer, floating point, number... Convert string to upper/lower cases. </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>May 19 01:15:09 2015 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00392_source.html">test_GraphSimplification.cpp</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char **&#160;</td>
-          <td class="paramname"><em>argv</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>main function <br />
-test either on real graph </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">argc</td><td>number of arguments </td></tr>
-    <tr><td class="paramname">argv</td><td>values of arguments </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 </dd></dl>
-
-<p>Definition at line <a class="el" href="a00392_source.html#l00127">127</a> of file <a class="el" href="a00392_source.html">test_GraphSimplification.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab4e647f3df88f89c116889c72d7266d7"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void realGraph </td>
-          <td>(</td>
-          <td class="paramtype">string const &amp;&#160;</td>
-          <td class="paramname"><em>filename</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>test 1: a real graph from input </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>input file in graphviz format </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00392_source.html#l00047">47</a> of file <a class="el" href="a00392_source.html">test_GraphSimplification.cpp</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>Definition in file <a class="el" href="a00392_source.html">String.h</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

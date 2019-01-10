@@ -98,14 +98,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="textblock"><h1><a class="anchor" id="Parsers_GdsiiParser_Introduction"></a>
 Introduction</h1>
-<p><a href="https://en.wikipedia.org/wiki/GDSII">GDSII</a> is an industry standard for data exchange of integrated circuits (IC) layout artwork. It is a binary file format representing planar geometric shapes, text labels, and other information about the layout in hierarchical form. The manual can be found in <a href="http://www.buchanan1.net/stream_description.html">here</a>. The parser consists of three parts, reader, writer and database for full chip parsing. <a class="el" href="a00131.html">GdsParser::GdsReader</a> provides API to read GDSII files (.gds or .gds.gz with Boost and Zlib support). <a class="el" href="a00139.html">GdsParser::GdsWriter</a> provides API to write GDSII files (.gds or .gds.gz with Boost and Zlib support). These two parts are basic functionalities for read and write in GDSII format. <a class="el" href="a00432.html">GdsParser::GdsDB</a> is a database to store layout elements and provides easy API to read, write and flatten full layouts.</p>
+<p><a href="https://en.wikipedia.org/wiki/GDSII">GDSII</a> is an industry standard for data exchange of integrated circuits (IC) layout artwork. It is a binary file format representing planar geometric shapes, text labels, and other information about the layout in hierarchical form. The manual can be found in <a href="http://www.buchanan1.net/stream_description.html">here</a>. The parser consists of three parts, reader, writer and database for full chip parsing. <a class="el" href="a00131.html">GdsParser::GdsReader</a> provides API to read GDSII files (.gds or .gds.gz with Boost and Zlib support). <a class="el" href="a00139.html">GdsParser::GdsWriter</a> provides API to write GDSII files (.gds or .gds.gz with Boost and Zlib support). These two parts are basic functionalities for read and write in GDSII format. <a class="el" href="a00437.html">GdsParser::GdsDB</a> is a database to store layout elements and provides easy API to read, write and flatten full layouts.</p>
 <h1><a class="anchor" id="Parsers_GdsiiParser_Examples"></a>
 Examples</h1>
 <h2><a class="anchor" id="Parsers_GdsiiParser_StreamReader"></a>
 Stream Reader</h2>
-<p>See documented version: <a class="el" href="a00409.html">test/parsers/gdsii/test_reader.cpp</a> </p><div class="fragment"><div class="line"></div>
+<p>See documented version: <a class="el" href="a00413.html">test/parsers/gdsii/test_reader.cpp</a> </p><div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00363.html">limbo/parsers/gdsii/stream/GdsReader.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00366.html">limbo/parsers/gdsii/stream/GdsReader.h</a>&gt;</span></div>
 <div class="line"><span class="keyword">using</span> std::cout;</div>
 <div class="line"><span class="keyword">using</span> std::endl;</div>
 <div class="line"></div>
@@ -221,8 +221,8 @@ Stream Reader</h2>
 <div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ContainerType&gt;</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="a00099.html#a85646491c12b05d796f0cfcfb4903927">general_cbk</a>(<a class="code" href="a00133.html#a5860f61e73f4209c565a594f3cedc63c">GdsParser::GdsRecords::EnumType</a> record_type, <a class="code" href="a00120.html#af4a63aca395e14181b0738656051469f">GdsParser::GdsData::EnumType</a> data_type, ContainerType <span class="keyword">const</span>&amp; data)</div>
 <div class="line">    {</div>
-<div class="line">        cout &lt;&lt; <span class="stringliteral">&quot;ascii_record_type: &quot;</span> &lt;&lt; <a class="code" href="a00431.html#a7534469cea95bb7c254ece11c3cefdec">GdsParser::gds_record_ascii</a>(record_type) &lt;&lt; endl</div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;ascii_data_type: &quot;</span> &lt;&lt; <a class="code" href="a00431.html#ad5b1344671c56cf36e5d3677e3182cd4">GdsParser::gds_data_ascii</a>(data_type) &lt;&lt; endl </div>
+<div class="line">        cout &lt;&lt; <span class="stringliteral">&quot;ascii_record_type: &quot;</span> &lt;&lt; <a class="code" href="a00436.html#a7534469cea95bb7c254ece11c3cefdec">GdsParser::gds_record_ascii</a>(record_type) &lt;&lt; endl</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;ascii_data_type: &quot;</span> &lt;&lt; <a class="code" href="a00436.html#ad5b1344671c56cf36e5d3677e3182cd4">GdsParser::gds_data_ascii</a>(data_type) &lt;&lt; endl </div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;data size: &quot;</span> &lt;&lt; data.size() &lt;&lt; endl;</div>
 <div class="line">        <span class="keywordflow">switch</span> (record_type)</div>
 <div class="line">        {</div>
@@ -261,14 +261,14 @@ Stream Reader</h2>
 <div class="line"><span class="comment">cout &lt;&lt; &quot;test enum api\n&quot; &lt;&lt; GdsParser::read(edb, in) &lt;&lt; endl;</span></div>
 <div class="line"><span class="comment">=========================================== */</span></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00390.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00394.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">if</span> (argc &gt; 1)</div>
 <div class="line">    {</div>
 <div class="line">        <a class="code" href="a00044.html">AsciiDataBase</a> adb;</div>
-<div class="line">        cout &lt;&lt; <span class="stringliteral">&quot;test ascii api\n&quot;</span> &lt;&lt; <a class="code" href="a00431.html#a9eef18021b9c81cdf78f3c9efcd4f366">GdsParser::read</a>(adb, argv[1]) &lt;&lt; endl;</div>
+<div class="line">        cout &lt;&lt; <span class="stringliteral">&quot;test ascii api\n&quot;</span> &lt;&lt; <a class="code" href="a00436.html#a9eef18021b9c81cdf78f3c9efcd4f366">GdsParser::read</a>(adb, argv[1]) &lt;&lt; endl;</div>
 <div class="line">        <a class="code" href="a00099.html">EnumDataBase</a> edb;</div>
-<div class="line">        cout &lt;&lt; <span class="stringliteral">&quot;test enum api\n&quot;</span> &lt;&lt; <a class="code" href="a00431.html#a9eef18021b9c81cdf78f3c9efcd4f366">GdsParser::read</a>(edb, argv[1]) &lt;&lt; endl;</div>
+<div class="line">        cout &lt;&lt; <span class="stringliteral">&quot;test enum api\n&quot;</span> &lt;&lt; <a class="code" href="a00436.html#a9eef18021b9c81cdf78f3c9efcd4f366">GdsParser::read</a>(edb, argv[1]) &lt;&lt; endl;</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">else</span> cout &lt;&lt; <span class="stringliteral">&quot;at least 1 argument is required&quot;</span> &lt;&lt; endl;</div>
 <div class="line"></div>
@@ -282,11 +282,11 @@ Stream Reader</h2>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;./test_reader benchmarks/test_reader_gz.gds.gz</div>
 </div><!-- fragment --><h2><a class="anchor" id="Parsers_GdsiiParser_StreamWriter"></a>
 Stream Writer</h2>
-<p>See documented version: <a class="el" href="a00410.html">test/parsers/gdsii/test_writer.cpp</a> </p><div class="fragment"><div class="line"></div>
+<p>See documented version: <a class="el" href="a00414.html">test/parsers/gdsii/test_writer.cpp</a> </p><div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00365.html">limbo/parsers/gdsii/stream/GdsWriter.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00368.html">limbo/parsers/gdsii/stream/GdsWriter.h</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00390.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[] )</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00394.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[] )</div>
 <div class="line">{</div>
 <div class="line">    </div>
 <div class="line">    <span class="keywordtype">int</span> </div>
@@ -453,19 +453,19 @@ Stream Writer</h2>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;./test_writer test_writer_gz.gds.gz</div>
 </div><!-- fragment --><h2><a class="anchor" id="Parsers_GdsiiParser_StreamGdsDB"></a>
 Stream GDSII Database</h2>
-<p>See documented version: <a class="el" href="a00408.html">test/parsers/gdsii/test_gdsdb.cpp</a> </p><div class="fragment"><div class="line"></div>
+<p>See documented version: <a class="el" href="a00412.html">test/parsers/gdsii/test_gdsdb.cpp</a> </p><div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00358.html">limbo/parsers/gdsii/gdsdb/GdsIO.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00375.html">limbo/preprocessor/Msg.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00361.html">limbo/parsers/gdsii/gdsdb/GdsIO.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00378.html">limbo/preprocessor/Msg.h</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00390.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00394.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
 <div class="line">{</div>
 <div class="line">    <a class="code" href="a00123.html">GdsParser::GdsDB::GdsDB</a> db; </div>
 <div class="line">    <span class="keywordflow">if</span> (argc &gt; 2 &amp;&amp; argc &lt;= 4)</div>
 <div class="line">    {</div>
 <div class="line">        <span class="comment">// test simple read and write</span></div>
 <div class="line">        <a class="code" href="a00132.html">GdsParser::GdsDB::GdsReader</a> reader (db); </div>
-<div class="line">        <a class="code" href="a00374.html#aad1773afc93177ac77cdce82432d81f9">limboAssert</a>(reader(argv[1]));</div>
+<div class="line">        <a class="code" href="a00377.html#aad1773afc93177ac77cdce82432d81f9">limboAssert</a>(reader(argv[1]));</div>
 <div class="line"></div>
 <div class="line">        <span class="keywordflow">for</span> (std::vector&lt;GdsParser::GdsDB::GdsCell&gt;::const_iterator it = db.<a class="code" href="a00123.html#a9b250f363136a8ab636606130194d24c">cells</a>().begin(); it != db.<a class="code" href="a00123.html#a9b250f363136a8ab636606130194d24c">cells</a>().end(); ++it)</div>
 <div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;cell: &quot;</span> &lt;&lt; it-&gt;name() &lt;&lt; std::endl; </div>
@@ -501,25 +501,25 @@ Stream GDSII Database</h2>
 </div><!-- fragment --><h2><a class="anchor" id="Parsers_GdsiiParser_Examples_All"></a>
 All Examples</h2>
 <ul>
-<li><a class="el" href="a00409.html">test/parsers/gdsii/test_reader.cpp</a></li>
-<li><a class="el" href="a00410.html">test/parsers/gdsii/test_writer.cpp</a></li>
-<li><a class="el" href="a00408.html">test/parsers/gdsii/test_gdsdb.cpp</a></li>
+<li><a class="el" href="a00413.html">test/parsers/gdsii/test_reader.cpp</a></li>
+<li><a class="el" href="a00414.html">test/parsers/gdsii/test_writer.cpp</a></li>
+<li><a class="el" href="a00412.html">test/parsers/gdsii/test_gdsdb.cpp</a></li>
 </ul>
 <h1><a class="anchor" id="Parsers_GdsiiParser_References"></a>
 References</h1>
 <ul>
-<li><a class="el" href="a00364.html">limbo/parsers/gdsii/stream/GdsRecords.h</a></li>
-<li><a class="el" href="a00363.html">limbo/parsers/gdsii/stream/GdsReader.h</a></li>
-<li><a class="el" href="a00365.html">limbo/parsers/gdsii/stream/GdsWriter.h</a></li>
-<li><a class="el" href="a00362.html">limbo/parsers/gdsii/stream/GdsDriver.h</a></li>
-<li><a class="el" href="a00358.html">limbo/parsers/gdsii/gdsdb/GdsIO.h</a></li>
-<li><a class="el" href="a00361.html">limbo/parsers/gdsii/gdsdb/GdsObjects.h</a></li>
-<li><a class="el" href="a00359.html">limbo/parsers/gdsii/gdsdb/GdsObjectHelpers.h</a> </li>
+<li><a class="el" href="a00367.html">limbo/parsers/gdsii/stream/GdsRecords.h</a></li>
+<li><a class="el" href="a00366.html">limbo/parsers/gdsii/stream/GdsReader.h</a></li>
+<li><a class="el" href="a00368.html">limbo/parsers/gdsii/stream/GdsWriter.h</a></li>
+<li><a class="el" href="a00365.html">limbo/parsers/gdsii/stream/GdsDriver.h</a></li>
+<li><a class="el" href="a00361.html">limbo/parsers/gdsii/gdsdb/GdsIO.h</a></li>
+<li><a class="el" href="a00364.html">limbo/parsers/gdsii/gdsdb/GdsObjects.h</a></li>
+<li><a class="el" href="a00362.html">limbo/parsers/gdsii/gdsdb/GdsObjectHelpers.h</a> </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

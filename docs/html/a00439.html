@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::algorithms::placement Namespace Reference</title>
+<title>Limbo: LefParser Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -85,37 +85,76 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00436.html">algorithms</a></li><li class="navelem"><a class="el" href="a00439.html">placement</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::algorithms::placement Namespace Reference</div>  </div>
+<div class="title">LefParser Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>namespace for Limbo.Algorithms.Placement  
+<p>namespace for <a class="el" href="a00439.html" title="namespace for LefParser ">LefParser</a>  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00146.html">GreedySearch</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00085.html">Driver</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00147.html">gs_choose_type</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00167.html">LefDataBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for lef database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00167.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00148.html">gs_choose_type&lt; T * &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:acfb3427509802ca74739d10ca47b2431"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00439.html#acfb3427509802ca74739d10ca47b2431">read</a> (<a class="el" href="a00167.html">LefDataBase</a> &amp;db, const string &amp;lefFile)</td></tr>
+<tr class="memdesc:acfb3427509802ca74739d10ca47b2431"><td class="mdescLeft">&#160;</td><td class="mdescRight">API for <a class="el" href="a00439.html" title="namespace for LefParser ">LefParser</a>. Read LEF file and initialize database by calling user-defined callback functions.  <a href="#acfb3427509802ca74739d10ca47b2431">More...</a><br /></td></tr>
+<tr class="separator:acfb3427509802ca74739d10ca47b2431"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>namespace for Limbo.Algorithms.Placement </p>
-</div></div><!-- contents -->
+<div class="textblock"><p>namespace for <a class="el" href="a00439.html" title="namespace for LefParser ">LefParser</a> </p>
+<p>The example namespace is used to encapsulate the three parser classes example::Parser, example::Scanner and example::Driver </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="acfb3427509802ca74739d10ca47b2431"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LefParser::read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00166.html">LefDataBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>lefFile</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>API for <a class="el" href="a00439.html" title="namespace for LefParser ">LefParser</a>. Read LEF file and initialize database by calling user-defined callback functions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>database which is derived from <a class="el" href="a00167.html">LefParser::LefDataBase</a> </td></tr>
+    <tr><td class="paramname">lefFile</td><td>LEF file </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:41 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

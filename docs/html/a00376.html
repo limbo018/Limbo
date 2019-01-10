@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/preprocessor/PrintMsg.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/verilog/bison/VerilogDriver.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,87 +87,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_8ef96d9cdca9d7208e91b7a234d37f34.html">preprocessor</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_da4ca95cda9f419f6a5b3223be9b082d.html">verilog</a></li><li class="navelem"><a class="el" href="dir_acd908ba32ef0bfe8d812a7072df89d3.html">bison</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">PrintMsg.h File Reference</div>  </div>
+<div class="title">VerilogDriver.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>functions for printing messages  
+<p>Driver for Verilog parser.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;cstdarg&gt;</code><br />
-<code>#include &lt;cassert&gt;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
-<code>#include &lt;cstdlib&gt;</code><br />
-<code>#include &lt;cstring&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00375_source.html">VerilogDataBase.h</a>&quot;</code><br />
 </div>
 <p><a href="a00376_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00087.html">VerilogParser::Driver</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:ae5b5369b3c6f0ee1c76812225e8f6736"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5b5369b3c6f0ee1c76812225e8f6736"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#ae5b5369b3c6f0ee1c76812225e8f6736">limbo::MessageType</a> { <br />
-&#160;&#160;<b>kNONE</b> = 0, 
-<b>kINFO</b> = 1, 
-<b>kWARN</b> = 2, 
-<b>kERROR</b> = 3, 
-<br />
-&#160;&#160;<b>kDEBUG</b> = 4, 
-<b>kASSERT</b> = 5
-<br />
- }</td></tr>
-<tr class="memdesc:ae5b5369b3c6f0ee1c76812225e8f6736"><td class="mdescLeft">&#160;</td><td class="mdescRight">message type for print functions <br /></td></tr>
-<tr class="separator:ae5b5369b3c6f0ee1c76812225e8f6736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00451"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00451.html">VerilogParser</a></td></tr>
+<tr class="memdesc:a00451"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for <a class="el" href="a00451.html" title="namespace for VerilogParser ">VerilogParser</a> <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a37a146ee04f62c46abfc571e1b4c0f6b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#a37a146ee04f62c46abfc571e1b4c0f6b">limbo::limboPrint</a> (MessageType m, const char *format,...)</td></tr>
-<tr class="memdesc:a37a146ee04f62c46abfc571e1b4c0f6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">formatted print with prefix  <a href="#a37a146ee04f62c46abfc571e1b4c0f6b">More...</a><br /></td></tr>
-<tr class="separator:a37a146ee04f62c46abfc571e1b4c0f6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb42127a6e26ebeeb6392f285d23f0b6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#adb42127a6e26ebeeb6392f285d23f0b6">limbo::limboPrintStream</a> (MessageType m, FILE *stream, const char *format,...)</td></tr>
-<tr class="memdesc:adb42127a6e26ebeeb6392f285d23f0b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">formatted print with prefix to stream  <a href="#adb42127a6e26ebeeb6392f285d23f0b6">More...</a><br /></td></tr>
-<tr class="separator:adb42127a6e26ebeeb6392f285d23f0b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac18ee515b0b256fa914cb790a88aab7f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#ac18ee515b0b256fa914cb790a88aab7f">limbo::limboVPrintStream</a> (MessageType m, FILE *stream, const char *format, va_list args)</td></tr>
-<tr class="memdesc:ac18ee515b0b256fa914cb790a88aab7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">formatted print with prefix to stream  <a href="#ac18ee515b0b256fa914cb790a88aab7f">More...</a><br /></td></tr>
-<tr class="separator:ac18ee515b0b256fa914cb790a88aab7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75ca3e6bc16ef5504e6cb88f43438829"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#a75ca3e6bc16ef5504e6cb88f43438829">limbo::limboSPrint</a> (MessageType m, char *buf, const char *format,...)</td></tr>
-<tr class="memdesc:a75ca3e6bc16ef5504e6cb88f43438829"><td class="mdescLeft">&#160;</td><td class="mdescRight">formatted print with prefix to buffer  <a href="#a75ca3e6bc16ef5504e6cb88f43438829">More...</a><br /></td></tr>
-<tr class="separator:a75ca3e6bc16ef5504e6cb88f43438829"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2e6c0595981e4a8c0e645ede0d7c64b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#ad2e6c0595981e4a8c0e645ede0d7c64b">limbo::limboVSPrint</a> (MessageType m, char *buf, const char *format, va_list args)</td></tr>
-<tr class="memdesc:ad2e6c0595981e4a8c0e645ede0d7c64b"><td class="mdescLeft">&#160;</td><td class="mdescRight">formatted print with prefix to buffer  <a href="#ad2e6c0595981e4a8c0e645ede0d7c64b">More...</a><br /></td></tr>
-<tr class="separator:ad2e6c0595981e4a8c0e645ede0d7c64b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafb29a70d6eee85ebc7ffdfe4222b43e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#aafb29a70d6eee85ebc7ffdfe4222b43e">limbo::limboSPrintPrefix</a> (MessageType m, char *prefix)</td></tr>
-<tr class="memdesc:aafb29a70d6eee85ebc7ffdfe4222b43e"><td class="mdescLeft">&#160;</td><td class="mdescRight">print prefix message to buffer  <a href="#aafb29a70d6eee85ebc7ffdfe4222b43e">More...</a><br /></td></tr>
-<tr class="separator:aafb29a70d6eee85ebc7ffdfe4222b43e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88090cd88eafd40cd46c270c779958d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#a88090cd88eafd40cd46c270c779958d1">limbo::limboPrintAssertMsg</a> (const char *expr, const char *fileName, unsigned lineNum, const char *funcName, const char *format,...)</td></tr>
-<tr class="memdesc:a88090cd88eafd40cd46c270c779958d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">print message for assertion failure with additional message, see <a class="el" href="a00374.html#a5e43d9f746647e2bf1154325caaaa913" title="custom assertion with message ">limboAssertMsg</a>(condition, args...)  <a href="#a88090cd88eafd40cd46c270c779958d1">More...</a><br /></td></tr>
-<tr class="separator:a88090cd88eafd40cd46c270c779958d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4cf7b3501bd2bd76c7165da6ee7af1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html#ab4cf7b3501bd2bd76c7165da6ee7af1d">limbo::limboPrintAssertMsg</a> (const char *expr, const char *fileName, unsigned lineNum, const char *funcName)</td></tr>
-<tr class="memdesc:ab4cf7b3501bd2bd76c7165da6ee7af1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">print message for assertion failure without additional message, see <a class="el" href="a00374.html#aad1773afc93177ac77cdce82432d81f9" title="custom assertion without message ">limboAssert(condition)</a>  <a href="#ab4cf7b3501bd2bd76c7165da6ee7af1d">More...</a><br /></td></tr>
-<tr class="separator:ab4cf7b3501bd2bd76c7165da6ee7af1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9bab9eb582085f027e422d3b17f20be"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00451.html#ae9bab9eb582085f027e422d3b17f20be">VerilogParser::read</a> (<a class="el" href="a00278.html">VerilogDataBase</a> &amp;db, const string &amp;verilogFile)</td></tr>
+<tr class="memdesc:ae9bab9eb582085f027e422d3b17f20be"><td class="mdescLeft">&#160;</td><td class="mdescRight">API for <a class="el" href="a00451.html" title="namespace for VerilogParser ">VerilogParser</a>. Read Verilog file and initialize database by calling user-defined callback functions.  <a href="#ae9bab9eb582085f027e422d3b17f20be">More...</a><br /></td></tr>
+<tr class="separator:ae9bab9eb582085f027e422d3b17f20be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>functions for printing messages </p>
+<div class="textblock"><p>Driver for Verilog parser. </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Jan 2017 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00376_source.html">PrintMsg.h</a>.</p>
+<p>Definition in file <a class="el" href="a00376_source.html">VerilogDriver.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/programoptions/ConversionHelpers.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/preprocessor/AssertMsg.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,113 +87,200 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_c75df7594a00be6e5a1721d621994c02.html">programoptions</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_8ef96d9cdca9d7208e91b7a234d37f34.html">preprocessor</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">ConversionHelpers.h File Reference</div>  </div>
+<div class="title">AssertMsg.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>helper function objects for various data types  
+<p>assertion with message  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;set&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00388_source.html">limbo/string/String.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00378_source.html">limbo/preprocessor/Msg.h</a>&gt;</code><br />
 </div>
 <p><a href="a00377_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00200.html">limbo::programoptions::parse_helper&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">metafunction for parsing a char-based string to a target data type  <a href="a00200.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00253.html">limbo::StaticAssert&lt; bool &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">static assertion  <a href="a00253.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00228.html">limbo::programoptions::print_helper&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">metafunction for printing a target data type  <a href="a00228.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00045.html">limbo::programoptions::assign_helper&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">metafunction for assign a source data type to a target data type  <a href="a00045.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00049.html">limbo::programoptions::boolean_helper&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">metafunction for boolean operation  <a href="a00049.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html">limbo::programoptions::parse_helper&lt; bool &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for boolean type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  <a href="a00201.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00202.html">limbo::programoptions::parse_helper&lt; char &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for char type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  <a href="a00202.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00210.html">limbo::programoptions::parse_helper&lt; unsigned char &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for unsigned char type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  <a href="a00210.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00205.html">limbo::programoptions::parse_helper&lt; int &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for int type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  <a href="a00205.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00211.html">limbo::programoptions::parse_helper&lt; unsigned int &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for unsigned int type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  <a href="a00211.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00206.html">limbo::programoptions::parse_helper&lt; long &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for long type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  <a href="a00206.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00212.html">limbo::programoptions::parse_helper&lt; unsigned long &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for unsigned long type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  <a href="a00212.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00207.html">limbo::programoptions::parse_helper&lt; long long &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for long long type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  <a href="a00207.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00213.html">limbo::programoptions::parse_helper&lt; unsigned long long &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for unsigned long long type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  <a href="a00213.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00204.html">limbo::programoptions::parse_helper&lt; float &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for float type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  <a href="a00204.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html">limbo::programoptions::parse_helper&lt; double &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for double type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  <a href="a00203.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00209.html">limbo::programoptions::parse_helper&lt; std::vector&lt; T &gt; &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for std::vector&lt;T&gt; type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  <a href="a00209.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00208.html">limbo::programoptions::parse_helper&lt; std::set&lt; T &gt; &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for std::set&lt;T&gt; type to struct <a class="el" href="a00200.html">limbo::programoptions::parse_helper</a>  <a href="a00208.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00229.html">limbo::programoptions::print_helper&lt; bool &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for boolean type to struct <a class="el" href="a00228.html">limbo::programoptions::print_helper</a>  <a href="a00229.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00231.html">limbo::programoptions::print_helper&lt; std::vector&lt; T &gt; &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for std::vector&lt;T&gt; type to struct <a class="el" href="a00228.html">limbo::programoptions::print_helper</a>  <a href="a00231.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00230.html">limbo::programoptions::print_helper&lt; std::set&lt; T &gt; &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for std::set&lt;T&gt; type to struct <a class="el" href="a00228.html">limbo::programoptions::print_helper</a>  <a href="a00230.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00050.html">limbo::programoptions::boolean_helper&lt; bool &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization for boolean type to struct <a class="el" href="a00049.html">limbo::programoptions::boolean_helper</a>  <a href="a00050.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00254.html">limbo::StaticAssert&lt; true &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization  <a href="a00254.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00442"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00442.html">limbo::programoptions</a></td></tr>
-<tr class="memdesc:a00442"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.ProgramOptions <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aa5d7c58f57e3700b0de23ae54972bbca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(condition, message)</td></tr>
+<tr class="memdesc:aa5d7c58f57e3700b0de23ae54972bbca"><td class="mdescLeft">&#160;</td><td class="mdescRight">assertion with message  <a href="#aa5d7c58f57e3700b0de23ae54972bbca">More...</a><br /></td></tr>
+<tr class="separator:aa5d7c58f57e3700b0de23ae54972bbca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e43d9f746647e2bf1154325caaaa913"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00377.html#a5e43d9f746647e2bf1154325caaaa913">limboAssertMsg</a>(condition, args...)</td></tr>
+<tr class="memdesc:a5e43d9f746647e2bf1154325caaaa913"><td class="mdescLeft">&#160;</td><td class="mdescRight">custom assertion with message  <a href="#a5e43d9f746647e2bf1154325caaaa913">More...</a><br /></td></tr>
+<tr class="separator:a5e43d9f746647e2bf1154325caaaa913"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad1773afc93177ac77cdce82432d81f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00377.html#aad1773afc93177ac77cdce82432d81f9">limboAssert</a>(condition)</td></tr>
+<tr class="memdesc:aad1773afc93177ac77cdce82432d81f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">custom assertion without message  <a href="#aad1773afc93177ac77cdce82432d81f9">More...</a><br /></td></tr>
+<tr class="separator:aad1773afc93177ac77cdce82432d81f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9d436854015ed742ad5b45a1a760626"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00377.html#ad9d436854015ed742ad5b45a1a760626">limboStaticAssert</a>(condition)</td></tr>
+<tr class="memdesc:ad9d436854015ed742ad5b45a1a760626"><td class="mdescLeft">&#160;</td><td class="mdescRight">compile time assertion  <a href="#ad9d436854015ed742ad5b45a1a760626">More...</a><br /></td></tr>
+<tr class="separator:ad9d436854015ed742ad5b45a1a760626"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>helper function objects for various data types </p>
-<p>Utilize template specialization to handle generic operations on different data types</p>
+<div class="textblock"><p>assertion with message </p>
+<p>macro: assert_msg (deprecated)</p>
+<p>attribute: assertion with message. if defined NO_LIMBO_ASSERTION, call assert in STL; else call custom assertion</p>
+<p>macro: limboAssertMsg, limboAssert</p>
+<p>attribute: assertion with or without message. compared with assert in STL, it provides detailed information on the failures and positions</p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Jul 2015 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Nov 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00377_source.html">ConversionHelpers.h</a>.</p>
-</div></div><!-- contents -->
+<p>Definition in file <a class="el" href="a00377_source.html">AssertMsg.h</a>.</p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="aa5d7c58f57e3700b0de23ae54972bbca"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define assert_msg</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">message&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { \</div>
+<div class="line">        if (! (condition)) { \</div>
+<div class="line">            std::cerr &lt;&lt; __FILE__ &lt;&lt; <span class="stringliteral">&quot;:&quot;</span> &lt;&lt; __LINE__ &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; <span class="stringliteral">&quot;: Assertion `&quot;</span> &lt;&lt; #condition &lt;&lt; <span class="stringliteral">&quot;&#39; failed: &quot;</span> &lt;&lt; message &lt;&lt; std::endl; \</div>
+<div class="line">            abort(); \</div>
+<div class="line">        } \</div>
+<div class="line">    } <span class="keywordflow">while</span> (<span class="keyword">false</span>)</div>
+</div><!-- fragment -->
+<p>assertion with message </p>
+<p>deprecated</p>
+<p>I leave it here for backward compatibility. custom assertion with message. example usage: assert_msg(condition, "this is " &lt;&lt; value &lt;&lt; " for test"); </p>
+
+<p>Definition at line <a class="el" href="a00377_source.html#l00034">34</a> of file <a class="el" href="a00377_source.html">AssertMsg.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aad1773afc93177ac77cdce82432d81f9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define limboAssert</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {\</div>
+<div class="line">    if (!(condition)) \</div>
+<div class="line">    {<a class="code" href="a00440.html#a88090cd88eafd40cd46c270c779958d1">\</a></div>
+<div class="line"><a class="code" href="a00440.html#a88090cd88eafd40cd46c270c779958d1">        ::limbo::limboPrintAssertMsg</a>(#condition, __FILE__, __LINE__, __PRETTY_FUNCTION__); \</div>
+<div class="line">        abort(); \</div>
+<div class="line">    }\</div>
+<div class="line">} <span class="keywordflow">while</span> (<span class="keyword">false</span>)</div>
+<div class="ttc" id="a00440_html_a88090cd88eafd40cd46c270c779958d1"><div class="ttname"><a href="a00440.html#a88090cd88eafd40cd46c270c779958d1">limbo::limboPrintAssertMsg</a></div><div class="ttdeci">void limboPrintAssertMsg(const char *expr, const char *fileName, unsigned lineNum, const char *funcName, const char *format,...)</div><div class="ttdoc">print message for assertion failure with additional message, see limboAssertMsg(condition, args...) </div><div class="ttdef"><b>Definition:</b> <a href="a00379_source.html#l00163">PrintMsg.h:163</a></div></div>
+</div><!-- fragment -->
+<p>custom assertion without message </p>
+<p>example usage: limboAssert(a == 1); </p>
+
+<p>Definition at line <a class="el" href="a00377_source.html#l00064">64</a> of file <a class="el" href="a00377_source.html">AssertMsg.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5e43d9f746647e2bf1154325caaaa913"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define limboAssertMsg</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">args...&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {\</div>
+<div class="line">    if (!(condition)) \</div>
+<div class="line">    {<a class="code" href="a00440.html#a88090cd88eafd40cd46c270c779958d1">\</a></div>
+<div class="line"><a class="code" href="a00440.html#a88090cd88eafd40cd46c270c779958d1">        ::limbo::limboPrintAssertMsg</a>(#condition, __FILE__, __LINE__, __PRETTY_FUNCTION__, args); \</div>
+<div class="line">        abort(); \</div>
+<div class="line">    }\</div>
+<div class="line">} <span class="keywordflow">while</span> (<span class="keyword">false</span>)</div>
+<div class="ttc" id="a00440_html_a88090cd88eafd40cd46c270c779958d1"><div class="ttname"><a href="a00440.html#a88090cd88eafd40cd46c270c779958d1">limbo::limboPrintAssertMsg</a></div><div class="ttdeci">void limboPrintAssertMsg(const char *expr, const char *fileName, unsigned lineNum, const char *funcName, const char *format,...)</div><div class="ttdoc">print message for assertion failure with additional message, see limboAssertMsg(condition, args...) </div><div class="ttdef"><b>Definition:</b> <a href="a00379_source.html#l00163">PrintMsg.h:163</a></div></div>
+</div><!-- fragment -->
+<p>custom assertion with message </p>
+<p>example usage: limboAssertMsg(a == 1, "this is %s", name); </p>
+
+<p>Definition at line <a class="el" href="a00377_source.html#l00052">52</a> of file <a class="el" href="a00377_source.html">AssertMsg.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad9d436854015ed742ad5b45a1a760626"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define limboStaticAssert</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">{\</div>
+<div class="line">    limbo::StaticAssert&lt;(condition) != 0&gt;(); \</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>compile time assertion </p>
+
+<p>Definition at line <a class="el" href="a00377_source.html#l00087">87</a> of file <a class="el" href="a00377_source.html">AssertMsg.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

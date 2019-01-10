@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/lp/bison/LpDriver.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/lef/adapt/LefDataBase.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,52 +87,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_eeae076f7cd63d469c142758079f0b87.html">lp</a></li><li class="navelem"><a class="el" href="dir_a79ae30b6fd3c07300a41a43396e5404.html">bison</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_f132a8c89f65d1e48338514f1f94990c.html">lef</a></li><li class="navelem"><a class="el" href="dir_f56dd2cf84117a881ee6162fd08db923.html">adapt</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">LpDriver.h File Reference</div>  </div>
+<div class="title">LefDataBase.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Driver for Lp parser.  
+<p>Database for Lef parser.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00368_source.html">LpDataBase.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefrReader.hpp&gt;</code><br />
+<code>#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefwWriter.hpp&gt;</code><br />
+<code>#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefiDebug.hpp&gt;</code><br />
+<code>#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefiEncryptInt.hpp&gt;</code><br />
+<code>#include &lt;limbo/thirdparty/lefdef/5.8/lef/include/lefiUtil.hpp&gt;</code><br />
 </div>
 <p><a href="a00369_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00086.html">LpParser::Driver</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00167.html">LefParser::LefDataBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for lef database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00167.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00445"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00445.html">LpParser</a></td></tr>
-<tr class="memdesc:a00445"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for <a class="el" href="a00445.html" title="namespace for LpParser ">LpParser</a> <br /></td></tr>
+<tr class="memitem:a00439"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00439.html">LefParser</a></td></tr>
+<tr class="memdesc:a00439"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for <a class="el" href="a00439.html" title="namespace for LefParser ">LefParser</a> <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ae6014b3e226c57759e668b42af27ef9c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00445.html#ae6014b3e226c57759e668b42af27ef9c">LpParser::read</a> (<a class="el" href="a00175.html">LpDataBase</a> &amp;db, const string &amp;lpFile)</td></tr>
-<tr class="memdesc:ae6014b3e226c57759e668b42af27ef9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">API for <a class="el" href="a00445.html" title="namespace for LpParser ">LpParser</a>. Read LP file and initialize database by calling user-defined callback functions.  <a href="#ae6014b3e226c57759e668b42af27ef9c">More...</a><br /></td></tr>
-<tr class="separator:ae6014b3e226c57759e668b42af27ef9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Driver for Lp parser. </p>
+<div class="textblock"><p>Database for Lef parser. </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00369_source.html">LpDriver.h</a>.</p>
+<p>Definition in file <a class="el" href="a00369_source.html">LefDataBase.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

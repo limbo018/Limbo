@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/tf/spirit/ErrorHandler.h Source File</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/lef/adapt/LefDriver.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,111 +87,86 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_3bf9879ea48ac95c036901db79d1c653.html">tf</a></li><li class="navelem"><a class="el" href="dir_0585dfc80a33447ef050979e4db09323.html">spirit</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_f132a8c89f65d1e48338514f1f94990c.html">lef</a></li><li class="navelem"><a class="el" href="dir_f56dd2cf84117a881ee6162fd08db923.html">adapt</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">ErrorHandler.h</div>  </div>
+<div class="title">LefDriver.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00370.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#ifndef _ERRORHANDLER_H</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define _ERRORHANDLER_H</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="a00100.html">   23</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00100.html">ErrorHandler</a></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>, <span class="keyword">typename</span>, <span class="keyword">typename</span>&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a00241.html">   27</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="a00241.html">result</a> </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    { </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">typedef</span> <span class="keywordtype">void</span> type; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    };</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifndef LEFPARSER_DRIVER_H</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define LEFPARSER_DRIVER_H</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a00100.html#a175a0107ac11d6ad4f60f32aeae1cc52">   36</a></span>&#160;    <a class="code" href="a00100.html#a175a0107ac11d6ad4f60f32aeae1cc52">ErrorHandler</a>(Iterator <a class="code" href="a00100.html#aee756aa839373c3b6748b51c78df5a78">first</a>, Iterator <a class="code" href="a00100.html#a2997c25d20fd93886d7a80cdadde4cb8">last</a>)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      : first(first), last(last) {}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00369.html">limbo/parsers/lef/adapt/LefDataBase.h</a>&gt;</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Message, <span class="keyword">typename</span> What&gt;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a00100.html#ac71431a97777b6f0b997fd378e2c136c">   46</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00100.html#ac71431a97777b6f0b997fd378e2c136c">operator()</a>(</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        Message <span class="keyword">const</span>&amp; message,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        What <span class="keyword">const</span>&amp; what,</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        Iterator err_pos)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">int</span> line;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        Iterator line_start = <a class="code" href="a00100.html#af13d71e6875a28e9fbb9ca457d4b8f79">get_pos</a>(err_pos, line);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">if</span> (err_pos != <a class="code" href="a00100.html#a2997c25d20fd93886d7a80cdadde4cb8">last</a>)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            std::cout &lt;&lt; message &lt;&lt; what &lt;&lt; <span class="stringliteral">&quot; line &quot;</span> &lt;&lt; line &lt;&lt; <span class="charliteral">&#39;:&#39;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            std::cout &lt;&lt; <a class="code" href="a00100.html#a4f7b4389cdfcbbe3cae8a4ca4fc06cd1">get_line</a>(line_start) &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">for</span> (; line_start != err_pos; ++line_start)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                std::cout &lt;&lt; <span class="charliteral">&#39; &#39;</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            std::cout &lt;&lt; <span class="charliteral">&#39;^&#39;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            std::cout &lt;&lt; <span class="stringliteral">&quot;Unexpected end of file. &quot;</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            std::cout &lt;&lt; message &lt;&lt; what &lt;&lt; <span class="stringliteral">&quot; line &quot;</span> &lt;&lt; line &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a00100.html#af13d71e6875a28e9fbb9ca457d4b8f79">   72</a></span>&#160;    Iterator <a class="code" href="a00100.html#af13d71e6875a28e9fbb9ca457d4b8f79">get_pos</a>(Iterator err_pos, <span class="keywordtype">int</span>&amp; line)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        line = 1;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        Iterator i = <a class="code" href="a00100.html#aee756aa839373c3b6748b51c78df5a78">first</a>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        Iterator line_start = <a class="code" href="a00100.html#aee756aa839373c3b6748b51c78df5a78">first</a>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">while</span> (i != err_pos)</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keywordtype">bool</span> eol = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">if</span> (i != err_pos &amp;&amp; *i == <span class="charliteral">&#39;\r&#39;</span>) <span class="comment">// CR</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                eol = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                line_start = ++i;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">if</span> (i != err_pos &amp;&amp; *i == <span class="charliteral">&#39;\n&#39;</span>) <span class="comment">// LF</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                eol = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                line_start = ++i;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordflow">if</span> (eol)</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                ++line;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                ++i;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        }</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">return</span> line_start;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="a00100.html#a4f7b4389cdfcbbe3cae8a4ca4fc06cd1">  101</a></span>&#160;    std::string <a class="code" href="a00100.html#a4f7b4389cdfcbbe3cae8a4ca4fc06cd1">get_line</a>(Iterator err_pos)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        Iterator i = err_pos;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="comment">// position i to the next EOL</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordflow">while</span> (i != <a class="code" href="a00100.html#a2997c25d20fd93886d7a80cdadde4cb8">last</a> &amp;&amp; (*i != <span class="charliteral">&#39;\r&#39;</span> &amp;&amp; *i != <span class="charliteral">&#39;\n&#39;</span>))</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            ++i;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">return</span> std::string(err_pos, i);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="a00100.html#aee756aa839373c3b6748b51c78df5a78">  110</a></span>&#160;    Iterator <a class="code" href="a00100.html#aee756aa839373c3b6748b51c78df5a78">first</a>; </div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="a00100.html#a2997c25d20fd93886d7a80cdadde4cb8">  111</a></span>&#160;    Iterator <a class="code" href="a00100.html#a2997c25d20fd93886d7a80cdadde4cb8">last</a>; </div>
-<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="a00100.html#aa34d5db4e6204f3438e1f46b6f35bbf2">  112</a></span>&#160;    std::vector&lt;Iterator&gt; <a class="code" href="a00100.html#aa34d5db4e6204f3438e1f46b6f35bbf2">iters</a>; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;};</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#endif </span></div>
-<div class="ttc" id="a00100_html_a4f7b4389cdfcbbe3cae8a4ca4fc06cd1"><div class="ttname"><a href="a00100.html#a4f7b4389cdfcbbe3cae8a4ca4fc06cd1">ErrorHandler::get_line</a></div><div class="ttdeci">std::string get_line(Iterator err_pos) const </div><div class="ttdoc">get line from iterator </div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00101">ErrorHandler.h:101</a></div></div>
-<div class="ttc" id="a00100_html_a175a0107ac11d6ad4f60f32aeae1cc52"><div class="ttname"><a href="a00100.html#a175a0107ac11d6ad4f60f32aeae1cc52">ErrorHandler::ErrorHandler</a></div><div class="ttdeci">ErrorHandler(Iterator first, Iterator last)</div><div class="ttdoc">constructor </div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00036">ErrorHandler.h:36</a></div></div>
-<div class="ttc" id="a00100_html_aee756aa839373c3b6748b51c78df5a78"><div class="ttname"><a href="a00100.html#aee756aa839373c3b6748b51c78df5a78">ErrorHandler::first</a></div><div class="ttdeci">Iterator first</div><div class="ttdoc">begin iterator </div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00110">ErrorHandler.h:110</a></div></div>
-<div class="ttc" id="a00241_html"><div class="ttname"><a href="a00241.html">ErrorHandler::result</a></div><div class="ttdoc">probably used as some kind of type traits </div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00027">ErrorHandler.h:27</a></div></div>
-<div class="ttc" id="a00100_html_a2997c25d20fd93886d7a80cdadde4cb8"><div class="ttname"><a href="a00100.html#a2997c25d20fd93886d7a80cdadde4cb8">ErrorHandler::last</a></div><div class="ttdeci">Iterator last</div><div class="ttdoc">end iterator </div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00111">ErrorHandler.h:111</a></div></div>
-<div class="ttc" id="a00100_html"><div class="ttname"><a href="a00100.html">ErrorHandler</a></div><div class="ttdoc">error handler </div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00023">ErrorHandler.h:23</a></div></div>
-<div class="ttc" id="a00100_html_af13d71e6875a28e9fbb9ca457d4b8f79"><div class="ttname"><a href="a00100.html#af13d71e6875a28e9fbb9ca457d4b8f79">ErrorHandler::get_pos</a></div><div class="ttdeci">Iterator get_pos(Iterator err_pos, int &amp;line) const </div><div class="ttdoc">get position of error </div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00072">ErrorHandler.h:72</a></div></div>
-<div class="ttc" id="a00100_html_ac71431a97777b6f0b997fd378e2c136c"><div class="ttname"><a href="a00100.html#ac71431a97777b6f0b997fd378e2c136c">ErrorHandler::operator()</a></div><div class="ttdeci">void operator()(Message const &amp;message, What const &amp;what, Iterator err_pos) const </div><div class="ttdoc">API to invoke the error handler. </div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00046">ErrorHandler.h:46</a></div></div>
-<div class="ttc" id="a00100_html_aa34d5db4e6204f3438e1f46b6f35bbf2"><div class="ttname"><a href="a00100.html#aa34d5db4e6204f3438e1f46b6f35bbf2">ErrorHandler::iters</a></div><div class="ttdeci">std::vector&lt; Iterator &gt; iters</div><div class="ttdoc">not sure what it is used and why it is here </div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00112">ErrorHandler.h:112</a></div></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00439.html">LefParser</a> {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">using</span> std::cout;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">using</span> std::endl;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">using</span> std::cerr;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">using</span> std::string; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">using</span> std::vector;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">using</span> std::pair;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">using</span> std::make_pair;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">class </span><a class="code" href="a00166.html">LefDataBase</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="a00085.html">   63</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00085.html">Driver</a></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="a00085.html#ad746575c058c662591dec556fd15fea1">Driver</a>(<a class="code" href="a00167.html">LefDataBase</a>&amp; db);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    ~<a class="code" href="a00085.html">Driver</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a00085.html#a4d97736b2a73c525c9b7d9b0891f3c67">   72</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00085.html#a4d97736b2a73c525c9b7d9b0891f3c67">trace_scanning</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="a00085.html#a8cd7abc022576c40a390dfc3a356b9b4">   75</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00085.html#a8cd7abc022576c40a390dfc3a356b9b4">trace_parsing</a>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="a00085.html#aef19a9c5eb7d9837be317fc99f7e728b">   78</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="a00085.html#aef19a9c5eb7d9837be317fc99f7e728b">streamname</a>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00085.html#a02fa98d5c261e366ce91e86914227f20">parse_stream</a>(std::istream&amp; in,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sname = <span class="stringliteral">&quot;stream input&quot;</span>);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00085.html#aebb355db178631df09754a99d8100984">parse_string</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; input,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; sname = <span class="stringliteral">&quot;string stream&quot;</span>);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00085.html#a581849a0810e8a3631204f1dca1a9146">parse_file</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; filename);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="comment">// To demonstrate pure handling of parse errors, instead of</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="comment">// simply dumping them on the standard error output, we will pass</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="comment">// them to the driver using the following two member functions.</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="a00085.html#a7ca7d4d398ef53df3c95685faa5a7eca">  110</a></span>&#160;    <a class="code" href="a00167.html">LefDataBase</a>&amp; <a class="code" href="a00085.html#a7ca7d4d398ef53df3c95685faa5a7eca">m_db</a>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a00439.html#acfb3427509802ca74739d10ca47b2431">read</a>(<a class="code" href="a00167.html">LefDataBase</a>&amp; db, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; lefFile);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;} <span class="comment">// namespace example</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#endif // EXAMPLE_DRIVER_H</span></div>
+<div class="ttc" id="a00439_html"><div class="ttname"><a href="a00439.html">LefParser</a></div><div class="ttdoc">namespace for LefParser </div><div class="ttdef"><b>Definition:</b> <a href="a00369_source.html#l00024">LefDataBase.h:24</a></div></div>
+<div class="ttc" id="a00439_html_acfb3427509802ca74739d10ca47b2431"><div class="ttname"><a href="a00439.html#acfb3427509802ca74739d10ca47b2431">LefParser::read</a></div><div class="ttdeci">bool read(LefDataBase &amp;db, const string &amp;lefFile)</div><div class="ttdoc">API for LefParser. Read LEF file and initialize database by calling user-defined callback functions...</div></div>
+<div class="ttc" id="a00085_html_a7ca7d4d398ef53df3c95685faa5a7eca"><div class="ttname"><a href="a00085.html#a7ca7d4d398ef53df3c95685faa5a7eca">LefParser::Driver::m_db</a></div><div class="ttdeci">LefDataBase &amp; m_db</div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00110">LefDriver.h:110</a></div></div>
+<div class="ttc" id="a00167_html"><div class="ttname"><a href="a00167.html">LefParser::LefDataBase</a></div><div class="ttdoc">Base class for lef database. Only pure virtual functions are defined. User needs to inheritate this c...</div><div class="ttdef"><b>Definition:</b> <a href="a00369_source.html#l00123">LefDataBase.h:123</a></div></div>
+<div class="ttc" id="a00085_html_a581849a0810e8a3631204f1dca1a9146"><div class="ttname"><a href="a00085.html#a581849a0810e8a3631204f1dca1a9146">LefParser::Driver::parse_file</a></div><div class="ttdeci">bool parse_file(const string &amp;filename)</div></div>
+<div class="ttc" id="a00085_html_a02fa98d5c261e366ce91e86914227f20"><div class="ttname"><a href="a00085.html#a02fa98d5c261e366ce91e86914227f20">LefParser::Driver::parse_stream</a></div><div class="ttdeci">bool parse_stream(std::istream &amp;in, const string &amp;sname=&quot;stream input&quot;)</div></div>
+<div class="ttc" id="a00085_html_ad746575c058c662591dec556fd15fea1"><div class="ttname"><a href="a00085.html#ad746575c058c662591dec556fd15fea1">LefParser::Driver::Driver</a></div><div class="ttdeci">Driver(LefDataBase &amp;db)</div></div>
+<div class="ttc" id="a00166_html"><div class="ttname"><a href="a00166.html">LefDataBase</a></div><div class="ttdoc">Custom class that inheritates LefParser::LefDataBase with all the required callbacks defined...</div><div class="ttdef"><b>Definition:</b> <a href="a00410_source.html#l00025">test_adapt.cpp:25</a></div></div>
+<div class="ttc" id="a00369_html"><div class="ttname"><a href="a00369.html">LefDataBase.h</a></div><div class="ttdoc">Database for Lef parser. </div></div>
+<div class="ttc" id="a00085_html_a4d97736b2a73c525c9b7d9b0891f3c67"><div class="ttname"><a href="a00085.html#a4d97736b2a73c525c9b7d9b0891f3c67">LefParser::Driver::trace_scanning</a></div><div class="ttdeci">bool trace_scanning</div><div class="ttdoc">enable debug output in the flex scanner </div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00072">LefDriver.h:72</a></div></div>
+<div class="ttc" id="a00085_html_aef19a9c5eb7d9837be317fc99f7e728b"><div class="ttname"><a href="a00085.html#aef19a9c5eb7d9837be317fc99f7e728b">LefParser::Driver::streamname</a></div><div class="ttdeci">string streamname</div><div class="ttdoc">stream name (file or input stream) used for error messages. </div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00078">LefDriver.h:78</a></div></div>
+<div class="ttc" id="a00085_html_aebb355db178631df09754a99d8100984"><div class="ttname"><a href="a00085.html#aebb355db178631df09754a99d8100984">LefParser::Driver::parse_string</a></div><div class="ttdeci">bool parse_string(const string &amp;input, const string &amp;sname=&quot;string stream&quot;)</div></div>
+<div class="ttc" id="a00085_html_a8cd7abc022576c40a390dfc3a356b9b4"><div class="ttname"><a href="a00085.html#a8cd7abc022576c40a390dfc3a356b9b4">LefParser::Driver::trace_parsing</a></div><div class="ttdeci">bool trace_parsing</div><div class="ttdoc">enable debug output in the bison parser </div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00075">LefDriver.h:75</a></div></div>
+<div class="ttc" id="a00085_html"><div class="ttname"><a href="a00085.html">LefParser::Driver</a></div><div class="ttdef"><b>Definition:</b> <a href="a00370_source.html#l00063">LefDriver.h:63</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:11 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:39 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

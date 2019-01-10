@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/test/string/test_string.cpp Source File</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/test/solvers/test_LPSolveApi.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,61 +87,65 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_1439c9d351dd978c38b2510729161b97.html">string</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_39b21b41cf10d9ff223861185498a807.html">solvers</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">test_string.cpp</div>  </div>
+<div class="title">test_LPSolveApi.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00421.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00388.html">limbo/string/String.h</a>&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00374.html">limbo/preprocessor/AssertMsg.h</a>&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00349.html">limbo/math/Math.h</a>&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">using</span> std::cout;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">using</span> std::endl;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">using</span> std::string;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="a00421.html#ae66f6b31b5ad750f1fe042a706a4e3d4">   19</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00421.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">string</span> s1 = <span class="stringliteral">&quot;limbo2343slimbo&quot;</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">string</span> s2 = <span class="stringliteral">&quot;LiMbo2343SliMbo&quot;</span>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(<a class="code" href="a00435.html#a66eb59b91fd8e2a1d69b6c5705acc3eb">limbo::toupper</a>(s1) == <span class="stringliteral">&quot;LIMBO2343SLIMBO&quot;</span>, <span class="stringliteral">&quot;limbo::toupper failed&quot;</span>);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(<a class="code" href="a00435.html#ad6e50a2521a25b1deb9c87312c31b104">limbo::tolower</a>(s2) == <span class="stringliteral">&quot;limbo2343slimbo&quot;</span>, <span class="stringliteral">&quot;limbo::tolower failed&quot;</span>);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(<a class="code" href="a00435.html#ab7355468e379b0ed4f5b8425d7a35d02">limbo::iequals</a>(s1, s2), <span class="stringliteral">&quot;limbo::iequals failed&quot;</span>);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">string</span> tmp;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    tmp = <a class="code" href="a00435.html#a310ac0314ad5ba8619b7a97d3c89d8b2">limbo::to_string</a>(<a class="code" href="a00435.html#a73d79cda2600f0c26f66985488a41c6c">limbo::lowest&lt;int&gt;</a>());</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    cout &lt;&lt; tmp &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; tmp.size() &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; <span class="stringliteral">&quot; == &quot;</span> &lt;&lt; <a class="code" href="a00435.html#a73d79cda2600f0c26f66985488a41c6c">limbo::lowest&lt;int&gt;</a>() &lt;&lt; endl;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    tmp = <a class="code" href="a00435.html#a310ac0314ad5ba8619b7a97d3c89d8b2">limbo::to_string</a>(<a class="code" href="a00435.html#a70f11c16058445049de838e5805c9652">std::numeric_limits&lt;int&gt;::max</a>());</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    cout &lt;&lt; tmp &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; tmp.size() &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; <span class="stringliteral">&quot; == &quot;</span> &lt;&lt; <a class="code" href="a00435.html#a70f11c16058445049de838e5805c9652">std::numeric_limits&lt;int&gt;::max</a>() &lt;&lt; endl;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    tmp = <a class="code" href="a00435.html#a310ac0314ad5ba8619b7a97d3c89d8b2">limbo::to_string</a>(<a class="code" href="a00435.html#a808417dee7fb5d6f6d84d26aa811f337">limbo::lowest&lt;float&gt;</a>());</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    cout &lt;&lt; tmp &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; tmp.size() &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; <span class="stringliteral">&quot; == &quot;</span> &lt;&lt; <a class="code" href="a00435.html#a808417dee7fb5d6f6d84d26aa811f337">limbo::lowest&lt;float&gt;</a>() &lt;&lt; endl;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    tmp = <a class="code" href="a00435.html#a310ac0314ad5ba8619b7a97d3c89d8b2">limbo::to_string</a>(<a class="code" href="a00435.html#a70f11c16058445049de838e5805c9652">std::numeric_limits&lt;float&gt;::max</a>());</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    cout &lt;&lt; tmp &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; tmp.size() &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; <span class="stringliteral">&quot; == &quot;</span> &lt;&lt; <a class="code" href="a00435.html#a70f11c16058445049de838e5805c9652">std::numeric_limits&lt;float&gt;::max</a>() &lt;&lt; endl;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
-<div class="ttc" id="a00435_html_a70f11c16058445049de838e5805c9652"><div class="ttname"><a href="a00435.html#a70f11c16058445049de838e5805c9652">limbo::max</a></div><div class="ttdeci">std::iterator_traits&lt; Iterator &gt;::value_type max(Iterator first, Iterator last)</div><div class="ttdoc">get max of an array </div><div class="ttdef"><b>Definition:</b> <a href="a00349_source.html#l00061">Math.h:61</a></div></div>
-<div class="ttc" id="a00388_html"><div class="ttname"><a href="a00388.html">String.h</a></div><div class="ttdoc">Check string is integer, floating point, number... Convert string to upper/lower cases. </div></div>
-<div class="ttc" id="a00435_html_a808417dee7fb5d6f6d84d26aa811f337"><div class="ttname"><a href="a00435.html#a808417dee7fb5d6f6d84d26aa811f337">limbo::lowest&lt; float &gt;</a></div><div class="ttdeci">float lowest&lt; float &gt;()</div><div class="ttdoc">specialization for floating point types </div><div class="ttdef"><b>Definition:</b> <a href="a00349_source.html#l00157">Math.h:157</a></div></div>
-<div class="ttc" id="a00435_html_a310ac0314ad5ba8619b7a97d3c89d8b2"><div class="ttname"><a href="a00435.html#a310ac0314ad5ba8619b7a97d3c89d8b2">limbo::to_string</a></div><div class="ttdeci">string to_string(int val)</div><div class="ttdoc">convert integer to string </div><div class="ttdef"><b>Definition:</b> <a href="a00389_source.html#l00024">ToString.h:24</a></div></div>
-<div class="ttc" id="a00421_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="a00421.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">main function </div><div class="ttdef"><b>Definition:</b> <a href="a00421_source.html#l00019">test_string.cpp:19</a></div></div>
-<div class="ttc" id="a00435_html_a66eb59b91fd8e2a1d69b6c5705acc3eb"><div class="ttname"><a href="a00435.html#a66eb59b91fd8e2a1d69b6c5705acc3eb">limbo::toupper</a></div><div class="ttdeci">string toupper(string const &amp;s)</div><div class="ttdoc">convert string to upper case </div><div class="ttdef"><b>Definition:</b> <a href="a00388_source.html#l00083">String.h:83</a></div></div>
-<div class="ttc" id="a00435_html_a73d79cda2600f0c26f66985488a41c6c"><div class="ttname"><a href="a00435.html#a73d79cda2600f0c26f66985488a41c6c">limbo::lowest&lt; int &gt;</a></div><div class="ttdeci">int lowest&lt; int &gt;()</div><div class="ttdoc">specialization for integer types </div><div class="ttdef"><b>Definition:</b> <a href="a00349_source.html#l00121">Math.h:121</a></div></div>
-<div class="ttc" id="a00374_html_aa5d7c58f57e3700b0de23ae54972bbca"><div class="ttname"><a href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a></div><div class="ttdeci">#define assert_msg(condition, message)</div><div class="ttdoc">assertion with message </div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00034">AssertMsg.h:34</a></div></div>
-<div class="ttc" id="a00435_html_ad6e50a2521a25b1deb9c87312c31b104"><div class="ttname"><a href="a00435.html#ad6e50a2521a25b1deb9c87312c31b104">limbo::tolower</a></div><div class="ttdeci">string tolower(string const &amp;s)</div><div class="ttdoc">convert string to lower case </div><div class="ttdef"><b>Definition:</b> <a href="a00388_source.html#l00095">String.h:95</a></div></div>
-<div class="ttc" id="a00349_html"><div class="ttname"><a href="a00349.html">Math.h</a></div><div class="ttdoc">mathematical utilities such as abs </div></div>
-<div class="ttc" id="a00374_html"><div class="ttname"><a href="a00374.html">AssertMsg.h</a></div><div class="ttdoc">assertion with message </div></div>
-<div class="ttc" id="a00435_html_ab7355468e379b0ed4f5b8425d7a35d02"><div class="ttname"><a href="a00435.html#ab7355468e379b0ed4f5b8425d7a35d02">limbo::iequals</a></div><div class="ttdeci">bool iequals(string const &amp;s1, string const &amp;s2)</div><div class="ttdoc">check two strings equal, case-insensitive </div><div class="ttdef"><b>Definition:</b> <a href="a00388_source.html#l00108">String.h:108</a></div></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00384.html">limbo/solvers/api/LPSolveApi.h</a>&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="a00421.html#ae66f6b31b5ad750f1fe042a706a4e3d4">   21</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00421.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">// ILP model </span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">typedef</span> <a class="code" href="a00171.html">limbo::solvers::LinearModel&lt;double, long&gt;</a> model_type; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    model_type optModel; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="comment">// create variables </span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    model_type::variable_type var1 = optModel.<a class="code" href="a00171.html#a77f761932ea800a66075c1df656535e8">addVariable</a>(0, 1, <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x1&quot;</span>);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    model_type::variable_type var2 = optModel.addVariable(0, 1, <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x2&quot;</span>);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    model_type::variable_type var3 = optModel.addVariable(0, 1, <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x3&quot;</span>);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    model_type::variable_type var4 = optModel.addVariable(0, 1, <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x4&quot;</span>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">// create objective</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    optModel.setObjective(var1+var2+var3+var4); </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    optModel.setOptimizeType(<a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a79885399adf94fecd8e9ade4985dd2d7">limbo::solvers::MIN</a>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">// create constraints </span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    optModel.addConstraint(var1 - var2 &gt;= 0.5, <span class="stringliteral">&quot;c1&quot;</span>); </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    optModel.addConstraint(var4 - var3 &gt;= 0.1, <span class="stringliteral">&quot;c2&quot;</span>); </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    optModel.addConstraint(var2 - var3 &gt;= 0.2, <span class="stringliteral">&quot;c3&quot;</span>); </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// solve by LPSolve </span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">typedef</span> <a class="code" href="a00177.html">limbo::solvers::LPSolveLinearApi&lt;model_type::coefficient_value_type, model_type::variable_value_type&gt;</a> solver_type; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    solver_type solver (&amp;optModel); </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="a00178.html">limbo::solvers::LPSolveParameters</a> lpsolveParams; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    lpsolveParams.<a class="code" href="a00178.html#acf70e51dea5751f4ff6be568ef1cdb00">setVerbose</a>(FULL); </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0">limbo::solvers::SolverProperty</a> optStatus = solver(&amp;lpsolveParams); </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;optStatus = &quot;</span> &lt;&lt; optStatus &lt;&lt; std::endl; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">return</span> 0; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="ttc" id="a00448_html_a500190a99a5762b6aa25aec1230479f0a79885399adf94fecd8e9ade4985dd2d7"><div class="ttname"><a href="a00448.html#a500190a99a5762b6aa25aec1230479f0a79885399adf94fecd8e9ade4985dd2d7">limbo::solvers::MIN</a></div><div class="ttdoc">minimize objective </div><div class="ttdef"><b>Definition:</b> <a href="a00391_source.html#l00031">Solvers.h:31</a></div></div>
+<div class="ttc" id="a00421_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="a00421.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">main function </div><div class="ttdef"><b>Definition:</b> <a href="a00421_source.html#l00021">test_LPSolveApi.cpp:21</a></div></div>
+<div class="ttc" id="a00384_html"><div class="ttname"><a href="a00384.html">LPSolveApi.h</a></div><div class="ttdoc">lpsolve API wrapper using its C API. </div></div>
+<div class="ttc" id="a00178_html_acf70e51dea5751f4ff6be568ef1cdb00"><div class="ttname"><a href="a00178.html#acf70e51dea5751f4ff6be568ef1cdb00">limbo::solvers::LPSolveParameters::setVerbose</a></div><div class="ttdeci">void setVerbose(int v)</div><div class="ttdoc">set verbose level </div><div class="ttdef"><b>Definition:</b> <a href="a00384_source.html#l00092">LPSolveApi.h:92</a></div></div>
+<div class="ttc" id="a00178_html"><div class="ttname"><a href="a00178.html">limbo::solvers::LPSolveParameters</a></div><div class="ttdoc">Base class for custom LPSolve parameters. </div><div class="ttdef"><b>Definition:</b> <a href="a00384_source.html#l00062">LPSolveApi.h:62</a></div></div>
+<div class="ttc" id="a00448_html_a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931"><div class="ttname"><a href="a00448.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a></div><div class="ttdoc">floating point number </div><div class="ttdef"><b>Definition:</b> <a href="a00391_source.html#l00035">Solvers.h:35</a></div></div>
+<div class="ttc" id="a00448_html_a500190a99a5762b6aa25aec1230479f0"><div class="ttname"><a href="a00448.html#a500190a99a5762b6aa25aec1230479f0">limbo::solvers::SolverProperty</a></div><div class="ttdeci">SolverProperty</div><div class="ttdoc">Some enums used in solver. </div><div class="ttdef"><b>Definition:</b> <a href="a00391_source.html#l00029">Solvers.h:29</a></div></div>
+<div class="ttc" id="a00177_html"><div class="ttname"><a href="a00177.html">limbo::solvers::LPSolveLinearApi</a></div><div class="ttdoc">LPSolve API with limbo::solvers::LinearModel. </div><div class="ttdef"><b>Definition:</b> <a href="a00384_source.html#l00109">LPSolveApi.h:109</a></div></div>
+<div class="ttc" id="a00171_html"><div class="ttname"><a href="a00171.html">limbo::solvers::LinearModel</a></div><div class="ttdoc">model to describe an optimization problem </div><div class="ttdef"><b>Definition:</b> <a href="a00391_source.html#l00080">Solvers.h:80</a></div></div>
+<div class="ttc" id="a00171_html_a77f761932ea800a66075c1df656535e8"><div class="ttname"><a href="a00171.html#a77f761932ea800a66075c1df656535e8">limbo::solvers::LinearModel::addVariable</a></div><div class="ttdeci">variable_type addVariable(variable_value_type lb, variable_value_type ub, SolverProperty nt, std::string name=&quot;&quot;)</div><div class="ttdoc">add one variable </div><div class="ttdef"><b>Definition:</b> <a href="a00391_source.html#l01365">Solvers.h:1365</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

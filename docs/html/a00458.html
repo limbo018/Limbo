@@ -90,23 +90,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">ErrorHandler&lt; Iterator &gt; Member List</div>  </div>
+<div class="title">BookshelfDataBase Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00100.html">ErrorHandler&lt; Iterator &gt;</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a00047.html">BookshelfDataBase</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00100.html#a175a0107ac11d6ad4f60f32aeae1cc52">ErrorHandler</a>(Iterator first, Iterator last)</td><td class="entry"><a class="el" href="a00100.html">ErrorHandler&lt; Iterator &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00100.html#aee756aa839373c3b6748b51c78df5a78">first</a></td><td class="entry"><a class="el" href="a00100.html">ErrorHandler&lt; Iterator &gt;</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00100.html#a4f7b4389cdfcbbe3cae8a4ca4fc06cd1">get_line</a>(Iterator err_pos) const </td><td class="entry"><a class="el" href="a00100.html">ErrorHandler&lt; Iterator &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00100.html#af13d71e6875a28e9fbb9ca457d4b8f79">get_pos</a>(Iterator err_pos, int &amp;line) const </td><td class="entry"><a class="el" href="a00100.html">ErrorHandler&lt; Iterator &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00100.html#aa34d5db4e6204f3438e1f46b6f35bbf2">iters</a></td><td class="entry"><a class="el" href="a00100.html">ErrorHandler&lt; Iterator &gt;</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00100.html#a2997c25d20fd93886d7a80cdadde4cb8">last</a></td><td class="entry"><a class="el" href="a00100.html">ErrorHandler&lt; Iterator &gt;</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00100.html#ac71431a97777b6f0b997fd378e2c136c">operator()</a>(Message const &amp;message, What const &amp;what, Iterator err_pos) const </td><td class="entry"><a class="el" href="a00100.html">ErrorHandler&lt; Iterator &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00047.html#a1568f466cc5197779b73ced74b2f694f">add_bookshelf_net</a>(BookshelfParser::Net const &amp;net)</td><td class="entry"><a class="el" href="a00047.html">BookshelfDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00047.html#ac797c0fb2aad60bff65bb477ee14643d">add_bookshelf_node</a>(string &amp;name, int w, int h)</td><td class="entry"><a class="el" href="a00047.html">BookshelfDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00047.html#a568d2132d72f7d77769dd03c5024aaf9">add_bookshelf_row</a>(BookshelfParser::Row const &amp;row)</td><td class="entry"><a class="el" href="a00047.html">BookshelfDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00047.html#a71ff13c3a6dd75fd9b77df979f71cfc6">add_bookshelf_terminal</a>(string &amp;name, int w, int h)</td><td class="entry"><a class="el" href="a00047.html">BookshelfDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00047.html#a85e293c73855aee0152b71688188a1b0">bookshelf_end</a>()</td><td class="entry"><a class="el" href="a00047.html">BookshelfDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00047.html#a23343bd2f3111f66fb8dc96561a95207">BookshelfDataBase</a>()</td><td class="entry"><a class="el" href="a00047.html">BookshelfDataBase</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00047.html#abb453f377b05cf8937923bd840d5c94c">resize_bookshelf_net</a>(int n)</td><td class="entry"><a class="el" href="a00047.html">BookshelfDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00047.html#a527bdb59d0ee0eb4b8064f81c34403bd">resize_bookshelf_node_terminals</a>(int nn, int nt)</td><td class="entry"><a class="el" href="a00047.html">BookshelfDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00047.html#a32c95608b7991487ab7c93cf65c524d8">resize_bookshelf_pin</a>(int n)</td><td class="entry"><a class="el" href="a00047.html">BookshelfDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00047.html#a9e55537878b307011158b0eab884974b">resize_bookshelf_row</a>(int n)</td><td class="entry"><a class="el" href="a00047.html">BookshelfDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00047.html#a1ad6226d84507620d6f2e7071ff64fdc">set_bookshelf_design</a>(string &amp;name)</td><td class="entry"><a class="el" href="a00047.html">BookshelfDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00047.html#a8a092a69d1a68689437b89683c9e1abd">set_bookshelf_node_position</a>(string const &amp;name, double x, double y, string const &amp;orient, string const &amp;status, bool plFlag)</td><td class="entry"><a class="el" href="a00047.html">BookshelfDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

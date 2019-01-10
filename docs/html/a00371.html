@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/tf/spirit/TfParser.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/lp/bison/LpDataBase.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,68 +87,82 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_3bf9879ea48ac95c036901db79d1c653.html">tf</a></li><li class="navelem"><a class="el" href="dir_0585dfc80a33447ef050979e4db09323.html">spirit</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_eeae076f7cd63d469c142758079f0b87.html">lp</a></li><li class="navelem"><a class="el" href="dir_a79ae30b6fd3c07300a41a43396e5404.html">bison</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
-<div class="title">TfParser.h File Reference</div>  </div>
+<div class="title">LpDataBase.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>tf parser for technology file  
+<p>Database for Lp parser.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;fstream&gt;</code><br />
 <code>#include &lt;sstream&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;cassert&gt;</code><br />
-<code>#include &lt;boost/array.hpp&gt;</code><br />
-<code>#include &lt;boost/cstdint.hpp&gt;</code><br />
-<code>#include &lt;boost/algorithm/string.hpp&gt;</code><br />
-<code>#include &lt;boost/spirit/include/qi.hpp&gt;</code><br />
-<code>#include &lt;boost/spirit/include/qi_no_case.hpp&gt;</code><br />
-<code>#include &lt;boost/spirit/include/phoenix.hpp&gt;</code><br />
-<code>#include &lt;boost/spirit/include/phoenix_bind.hpp&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00370_source.html">limbo/parsers/tf/spirit/ErrorHandler.h</a>&gt;</code><br />
+<code>#include &lt;limits&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00352_source.html">limbo/math/Math.h</a>&gt;</code><br />
 </div>
 <p><a href="a00371_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00266.html">TfParser</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tf parser for technology file.  <a href="a00266.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00263.html">LpParser::Term</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a term denotes coefficient times a variable  <a href="a00263.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00263.html">TfParser::TfDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for tf database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00263.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00265.html">TfParser::TfGrammar&lt; Iterator, Skipper, DataBaseType &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">define grammar  <a href="a00265.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00250.html">TfParser::SkipperGrammar&lt; Iterator &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">grammar of skipper  <a href="a00250.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00175.html">LpParser::LpDataBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for lp database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00175.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a269fc56367e1f9470e20bda8094861b6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a269fc56367e1f9470e20bda8094861b6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00371.html#a269fc56367e1f9470e20bda8094861b6">TF_NO_CASE</a>(X)&#160;&#160;&#160;X</td></tr>
-<tr class="memdesc:a269fc56367e1f9470e20bda8094861b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">an option to control case insensitivity <br /></td></tr>
-<tr class="separator:a269fc56367e1f9470e20bda8094861b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00450"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00450.html">LpParser</a></td></tr>
+<tr class="memdesc:a00450"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for <a class="el" href="a00450.html" title="namespace for LpParser ">LpParser</a> <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a65421de745d212fd28ef32eb1bb9c805"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65421de745d212fd28ef32eb1bb9c805"></a>
+typedef std::vector&lt; int64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00450.html#a65421de745d212fd28ef32eb1bb9c805">LpParser::IntegerArray</a></td></tr>
+<tr class="memdesc:a65421de745d212fd28ef32eb1bb9c805"><td class="mdescLeft">&#160;</td><td class="mdescRight">integer array <br /></td></tr>
+<tr class="separator:a65421de745d212fd28ef32eb1bb9c805"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a79afeb43408b31e1901c039217886a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a79afeb43408b31e1901c039217886a"></a>
+typedef std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00450.html#a2a79afeb43408b31e1901c039217886a">LpParser::StringArray</a></td></tr>
+<tr class="memdesc:a2a79afeb43408b31e1901c039217886a"><td class="mdescLeft">&#160;</td><td class="mdescRight">string array <br /></td></tr>
+<tr class="separator:a2a79afeb43408b31e1901c039217886a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67607fc847b49cff43493e7390764b13"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67607fc847b49cff43493e7390764b13"></a>
+typedef std::vector&lt; Term &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00450.html#a67607fc847b49cff43493e7390764b13">LpParser::TermArray</a></td></tr>
+<tr class="memdesc:a67607fc847b49cff43493e7390764b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">array of terms <br /></td></tr>
+<tr class="separator:a67607fc847b49cff43493e7390764b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a615bc364c7a47c502e5adef3c0155dae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a615bc364c7a47c502e5adef3c0155dae"></a>
+typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>LpParser::int32_t</b></td></tr>
+<tr class="separator:a615bc364c7a47c502e5adef3c0155dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0ebec85c2ea9f94bf704bfc5d658b1e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0ebec85c2ea9f94bf704bfc5d658b1e"></a>
+typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>LpParser::uint32_t</b></td></tr>
+<tr class="separator:ad0ebec85c2ea9f94bf704bfc5d658b1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d146b7e985ec4ebb7b30987d39ef192"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d146b7e985ec4ebb7b30987d39ef192"></a>
+typedef long&#160;</td><td class="memItemRight" valign="bottom"><b>LpParser::int64_t</b></td></tr>
+<tr class="separator:a0d146b7e985ec4ebb7b30987d39ef192"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>tf parser for technology file </p>
+<div class="textblock"><p>Database for Lp parser. </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Sep 2014 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00371_source.html">TfParser.h</a>.</p>
+<p>Definition in file <a class="el" href="a00371_source.html">LpDataBase.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

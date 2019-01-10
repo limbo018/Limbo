@@ -89,13 +89,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00431.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00122.html">GdsDataBaseKernel</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00436.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00122.html">GdsDataBaseKernel</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00521.html">List of all members</a>  </div>
+<a href="a00526.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">GdsParser::GdsDataBaseKernel Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
@@ -104,7 +104,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Kernel callbacks for <a class="el" href="a00131.html" title="read GDSII ">GdsReader</a>. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks.  
  <a href="a00122.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00363_source.html">GdsReader.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00366_source.html">GdsReader.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GdsParser::GdsDataBaseKernel:</div>
 <div class="dyncontent">
@@ -147,7 +147,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Kernel callbacks for <a class="el" href="a00131.html" title="read GDSII ">GdsReader</a>. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. </p>
 <p>============================================================= Why do I need to wrap <a class="el" href="a00122.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. ">GdsDataBaseKernel</a> into <a class="el" href="a00121.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks ">GdsDataBase</a>? This is mainly for backward compatibility reasons. In old version limbo library, user only needs to implement child database class for <a class="el" href="a00121.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks ">GdsDataBase</a> and use those ascii callbacks. I hope user does not need to change their code in the new version, so the old api must still be available. By adding new base class <a class="el" href="a00122.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. ">GdsDataBaseKernel</a>, it is possible to achieve both. If user want to use old api, they can write child class for <a class="el" href="a00121.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks ">GdsDataBase</a>, </p><h1>while if they want to use new api, please inheritate <a class="el" href="a00122.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. ">GdsDataBaseKernel</a>. </h1>
 
-<p>Definition at line <a class="el" href="a00363_source.html#l00039">39</a> of file <a class="el" href="a00363_source.html">GdsReader.h</a>.</p>
+<p>Definition at line <a class="el" href="a00366_source.html#l00039">39</a> of file <a class="el" href="a00366_source.html">GdsReader.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a0843b245a9720ec43a28ac30ae35b4cd"></a>
 <div class="memitem">
@@ -496,12 +496,12 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00363_source.html">GdsReader.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/<a class="el" href="a00366_source.html">GdsReader.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

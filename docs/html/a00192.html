@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: VerilogParser::NetPin Struct Reference</title>
+<title>Limbo: BookshelfParser::Net Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,53 +89,57 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00446.html">VerilogParser</a></li><li class="navelem"><a class="el" href="a00192.html">NetPin</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00428.html">BookshelfParser</a></li><li class="navelem"><a class="el" href="a00192.html">Net</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00680.html">List of all members</a>  </div>
+<a href="a00482.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">VerilogParser::NetPin Struct Reference</div>  </div>
+<div class="title">BookshelfParser::Net Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Describe the connection of pins to nets.  
+<p>net to describe interconnection of netlist  
  <a href="a00192.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00372_source.html">VerilogDataBase.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00353_source.html">BookshelfDataBase.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for BookshelfParser::Net:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00192.png" usemap="#BookshelfParser::Net_map" alt=""/>
+  <map id="BookshelfParser::Net_map" name="BookshelfParser::Net_map">
+<area href="a00160.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures. " alt="BookshelfParser::Item" shape="rect" coords="0,0,133,24"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9ad74ddefea7cf04cbbbaf319c9985b8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00192.html#a9ad74ddefea7cf04cbbbaf319c9985b8">NetPin</a> (std::string &amp;n, std::string &amp;p, <a class="el" href="a00235.html">Range</a> const &amp;r=<a class="el" href="a00235.html">Range</a>())</td></tr>
-<tr class="memdesc:a9ad74ddefea7cf04cbbbaf319c9985b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a9ad74ddefea7cf04cbbbaf319c9985b8">More...</a><br /></td></tr>
-<tr class="separator:a9ad74ddefea7cf04cbbbaf319c9985b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51a4a8574352ea25845e7fa1d7c6ad3d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a51a4a8574352ea25845e7fa1d7c6ad3d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00192.html#a51a4a8574352ea25845e7fa1d7c6ad3d">reset</a> ()</td></tr>
+<tr class="memdesc:a51a4a8574352ea25845e7fa1d7c6ad3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br /></td></tr>
+<tr class="separator:a51a4a8574352ea25845e7fa1d7c6ad3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a980e8a8cab8eb229f6cf34d9e6737a1f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00192.html#a980e8a8cab8eb229f6cf34d9e6737a1f">print</a> (ostream &amp;ss) const </td></tr>
+<tr class="separator:a980e8a8cab8eb229f6cf34d9e6737a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a5021371956ae17d9625496581e73c97a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5021371956ae17d9625496581e73c97a"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00192.html#a5021371956ae17d9625496581e73c97a">net</a></td></tr>
-<tr class="memdesc:a5021371956ae17d9625496581e73c97a"><td class="mdescLeft">&#160;</td><td class="mdescRight">net name <br /></td></tr>
-<tr class="separator:a5021371956ae17d9625496581e73c97a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a426e86c183a1549736ee42354e19bb04"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a426e86c183a1549736ee42354e19bb04"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00192.html#a426e86c183a1549736ee42354e19bb04">pin</a></td></tr>
-<tr class="memdesc:a426e86c183a1549736ee42354e19bb04"><td class="mdescLeft">&#160;</td><td class="mdescRight">pin name <br /></td></tr>
-<tr class="separator:a426e86c183a1549736ee42354e19bb04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a109ad9ccf7c7d1ff6c53105cde277a66"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a109ad9ccf7c7d1ff6c53105cde277a66"></a>
-<a class="el" href="a00235.html">Range</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00192.html#a109ad9ccf7c7d1ff6c53105cde277a66">range</a></td></tr>
-<tr class="memdesc:a109ad9ccf7c7d1ff6c53105cde277a66"><td class="mdescLeft">&#160;</td><td class="mdescRight">range of net <br /></td></tr>
-<tr class="separator:a109ad9ccf7c7d1ff6c53105cde277a66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5b882dc1ba3c3620dd75ab0ab8e60d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa5b882dc1ba3c3620dd75ab0ab8e60d4"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00192.html#aa5b882dc1ba3c3620dd75ab0ab8e60d4">net_name</a></td></tr>
+<tr class="memdesc:aa5b882dc1ba3c3620dd75ab0ab8e60d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">net name <br /></td></tr>
+<tr class="separator:aa5b882dc1ba3c3620dd75ab0ab8e60d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a371c12e4792db1f5273445f5e03bbe43"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="a00195.html">NetPin</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00192.html#a371c12e4792db1f5273445f5e03bbe43">vNetPin</a></td></tr>
+<tr class="separator:a371c12e4792db1f5273445f5e03bbe43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Describe the connection of pins to nets. </p>
-<p>NOR2_X1 u2 ( .a(n1), .b(n3), .o(n2) );</p>
-<p>Each of .a(n1), .b(n3) and .o(n2) generates an object of net and pin. </p>
+<div class="textblock"><p>net to describe interconnection of netlist </p>
 
-<p>Definition at line <a class="el" href="a00372_source.html#l00065">65</a> of file <a class="el" href="a00372_source.html">VerilogDataBase.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a9ad74ddefea7cf04cbbbaf319c9985b8"></a>
+<p>Definition at line <a class="el" href="a00353_source.html#l00199">199</a> of file <a class="el" href="a00353_source.html">BookshelfDataBase.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a980e8a8cab8eb229f6cf34d9e6737a1f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -143,57 +147,55 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">VerilogParser::NetPin::NetPin </td>
+          <td class="memname">virtual void BookshelfParser::Net::print </td>
           <td>(</td>
-          <td class="paramtype">std::string &amp;&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string &amp;&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00235.html">Range</a> const &amp;&#160;</td>
-          <td class="paramname"><em>r</em> = <code><a class="el" href="a00235.html">Range</a>()</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>ss</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>print data members </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">n</td><td>net name </td></tr>
-    <tr><td class="paramname">p</td><td>pin name </td></tr>
-    <tr><td class="paramname">r</td><td>net range </td></tr>
+    <tr><td class="paramname">ss</td><td>output stream </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00372_source.html#l00075">75</a> of file <a class="el" href="a00372_source.html">VerilogDataBase.h</a>.</p>
+<p>Reimplemented from <a class="el" href="a00160.html#a42b0fbfb28af2289bae5581414a71a3c">BookshelfParser::Item</a>.</p>
+
+<p>Definition at line <a class="el" href="a00353_source.html#l00211">211</a> of file <a class="el" href="a00353_source.html">BookshelfDataBase.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a371c12e4792db1f5273445f5e03bbe43"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;<a class="el" href="a00195.html">NetPin</a>&gt; BookshelfParser::Net::vNetPin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>array of pins in the net </p>
+
+<p>Definition at line <a class="el" href="a00353_source.html#l00202">202</a> of file <a class="el" href="a00353_source.html">BookshelfDataBase.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/verilog/bison/<a class="el" href="a00372_source.html">VerilogDataBase.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/bookshelf/bison/<a class="el" href="a00353_source.html">BookshelfDataBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

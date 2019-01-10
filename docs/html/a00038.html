@@ -90,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li class="level1"><a href="#Solvers_Examples">Examples</a><ul><li class="level2"><a href="#Solvers_Examples_Primal_MCF">Primal Min-Cost Flow Solvers</a></li>
 <li class="level2"><a href="#Solvers_Examples_MCF">Dual Min-Cost Flow Solvers</a></li>
 <li class="level2"><a href="#Solvers_Csdp">Csdp Solver</a></li>
-<li class="level2"><a href="#Solvers_Examples_GurobiApi">Gurobi API</a></li>
+<li class="level2"><a href="#Solvers_Examples_GurobiApi">Generalized Linear Programming API</a></li>
 <li class="level2"><a href="#Solvers_Examples_All">All Examples</a></li>
 </ul>
 </li>
@@ -99,17 +99,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="textblock"><h1><a class="anchor" id="Solvers_Introduction"></a>
 Introduction</h1>
-<p>Solvers and API for specialized problems, such as solving special linear programming problems with min-cost flow algorithms. It also wraps solvers like semidefinite programming solver <a href="https://projects.coin-or.org/Csdp" title="Csdp">Csdp</a> and convex optimization solver <a href="https://www.gurobi.com" title="Gurobi">Gurobi</a>.</p>
+<p>Solvers and API for specialized problems, such as solving special linear programming problems with min-cost flow algorithms. It also wraps solvers like semidefinite programming solver <a href="https://projects.coin-or.org/Csdp" title="Csdp">Csdp</a> and convex optimization solver <a href="https://www.gurobi.com" title="Gurobi">Gurobi</a> and <a href="http://lpsolve.sourceforge.net" title="lpsolve">lpsolve</a>.</p>
 <h1><a class="anchor" id="Solvers_Examples"></a>
 Examples</h1>
 <h2><a class="anchor" id="Solvers_Examples_Primal_MCF"></a>
 Primal Min-Cost Flow Solvers</h2>
-<p>The analysis and background of using primal min-cost flow to solve linear programming problem can be found in the detailed description of class <a class="el" href="a00183.html">limbo::solvers::MinCostFlow</a>.</p>
-<p>See documented version: <a class="el" href="a00417.html">test/solvers/test_MinCostFlow.cpp</a> </p><div class="fragment"><div class="line"></div>
+<p>The analysis and background of using primal min-cost flow to solve linear programming problem can be found in the detailed description of class <a class="el" href="a00185.html">limbo::solvers::MinCostFlow</a>.</p>
+<p>See documented version: <a class="el" href="a00422.html">test/solvers/test_MinCostFlow.cpp</a> </p><div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00384.html">limbo/solvers/MinCostFlow.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00388.html">limbo/solvers/MinCostFlow.h</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> <a class="code" href="a00415.html#a1db05c176455595f4e75e72ac6c8d627">test</a>(std::string <span class="keyword">const</span>&amp; filename, <span class="keywordtype">int</span> alg)</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="a00419.html#a1db05c176455595f4e75e72ac6c8d627">test</a>(std::string <span class="keyword">const</span>&amp; filename, <span class="keywordtype">int</span> alg)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">typedef</span> <a class="code" href="a00171.html">limbo::solvers::LinearModel&lt;double, int&gt;</a> model_type; </div>
 <div class="line">    model_type optModel; </div>
@@ -119,7 +119,7 @@ Primal Min-Cost Flow Solvers</h2>
 <div class="line">    optModel.print(std::cout); </div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// solve </span></div>
-<div class="line">    <a class="code" href="a00184.html">limbo::solvers::MinCostFlowSolver&lt;double, int&gt;</a>* minCostFlowSolver = NULL; </div>
+<div class="line">    <a class="code" href="a00186.html">limbo::solvers::MinCostFlowSolver&lt;double, int&gt;</a>* minCostFlowSolver = NULL; </div>
 <div class="line">    <span class="keywordflow">switch</span> (alg)</div>
 <div class="line">    {</div>
 <div class="line">        <span class="keywordflow">case</span> 0:</div>
@@ -129,17 +129,17 @@ Primal Min-Cost Flow Solvers</h2>
 <div class="line">            minCostFlowSolver = <span class="keyword">new</span> <a class="code" href="a00052.html">limbo::solvers::CapacityScaling&lt;double, int&gt;</a>(); </div>
 <div class="line">            <span class="keywordflow">break</span>;</div>
 <div class="line">        <span class="keywordflow">case</span> 2:</div>
-<div class="line">            minCostFlowSolver = <span class="keyword">new</span> <a class="code" href="a00195.html">limbo::solvers::NetworkSimplex&lt;double, int&gt;</a>(); </div>
+<div class="line">            minCostFlowSolver = <span class="keyword">new</span> <a class="code" href="a00197.html">limbo::solvers::NetworkSimplex&lt;double, int&gt;</a>(); </div>
 <div class="line">            <span class="keywordflow">break</span>;</div>
 <div class="line">        <span class="keywordflow">case</span> 3:</div>
 <div class="line">        <span class="keywordflow">default</span>:</div>
 <div class="line">            minCostFlowSolver = <span class="keyword">new</span> <a class="code" href="a00078.html">limbo::solvers::CycleCanceling&lt;double, int&gt;</a>(); </div>
 <div class="line">            <span class="keywordflow">break</span>; </div>
 <div class="line">    }</div>
-<div class="line">    <a class="code" href="a00183.html">limbo::solvers::MinCostFlow&lt;double, int&gt;</a> solver (&amp;optModel); </div>
-<div class="line">    <a class="code" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">limbo::solvers::SolverProperty</a> status = solver(minCostFlowSolver);</div>
+<div class="line">    <a class="code" href="a00185.html">limbo::solvers::MinCostFlow&lt;double, int&gt;</a> solver (&amp;optModel); </div>
+<div class="line">    <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0">limbo::solvers::SolverProperty</a> status = solver(minCostFlowSolver);</div>
 <div class="line">    <span class="comment">//limbo::solvers::SolverProperty status = solver();</span></div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Problem solved &quot;</span> &lt;&lt; <a class="code" href="a00443.html#ae31d5e04adc36b4526e8856acf4ae2cf">limbo::solvers::toString</a>(status) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Problem solved &quot;</span> &lt;&lt; <a class="code" href="a00448.html#ae31d5e04adc36b4526e8856acf4ae2cf">limbo::solvers::toString</a>(status) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">    <span class="keyword">delete</span> minCostFlowSolver;</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// print solutions </span></div>
@@ -151,7 +151,7 @@ Primal Min-Cost Flow Solvers</h2>
 <div class="line">    solver.printGraph(<span class="keyword">true</span>);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00390.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00394.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">if</span> (argc &gt; 1)</div>
 <div class="line">    {</div>
@@ -159,14 +159,14 @@ Primal Min-Cost Flow Solvers</h2>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt; 2)</div>
 <div class="line">            alg = atoi(argv[2]);</div>
 <div class="line">        <span class="comment">// test file API </span></div>
-<div class="line">        <a class="code" href="a00415.html#a1db05c176455595f4e75e72ac6c8d627">test</a>(argv[1], alg);</div>
+<div class="line">        <a class="code" href="a00419.html#a1db05c176455595f4e75e72ac6c8d627">test</a>(argv[1], alg);</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">else</span> </div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;at least 1 argument required\n&quot;</span>;</div>
 <div class="line"></div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Compiling and running commands (assuming LIMBO_DIR, BOOST_DIR and LEMON_DIR are well defined). <a class="el" href="a00026.html">Limbo.Parsers.LpParser</a> is required for <a class="el" href="a00183.html">limbo::solvers::MinCostFlow</a> to read input files in .lp format. </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;g++ -o test_MinCostFlow test_MinCostFlow.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -I $LEMON_DIR/include -L $LEMON_DIR/lib -lemon -L $LIMBO_DIR/lib -llpparser</div>
+</div><!-- fragment --><p>Compiling and running commands (assuming LIMBO_DIR, BOOST_DIR and LEMON_DIR are well defined). <a class="el" href="a00026.html">Limbo.Parsers.LpParser</a> is required for <a class="el" href="a00185.html">limbo::solvers::MinCostFlow</a> to read input files in .lp format. </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;g++ -o test_MinCostFlow test_MinCostFlow.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -I $LEMON_DIR/include -L $LEMON_DIR/lib -lemon -L $LIMBO_DIR/lib -llpparser</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;# test primal min-cost flow for linear programming problem </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;./test_MinCostFlow lpmcf/benchmarks/mcf.lp</div>
 </div><!-- fragment --><p>Output </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;# debug.lgf </div>
@@ -223,11 +223,11 @@ Primal Min-Cost Flow Solvers</h2>
 <h2><a class="anchor" id="Solvers_Examples_MCF"></a>
 Dual Min-Cost Flow Solvers</h2>
 <p>The analysis and background of using dual min-cost flow to solve linear programming problem can be found in the detailed description of class <a class="el" href="a00092.html">limbo::solvers::DualMinCostFlow</a> and <a class="el" href="a00176.html">limbo::solvers::lpmcf::LpDualMcf</a>.</p>
-<p>See documented version: <a class="el" href="a00415.html">test/solvers/test_DualMinCostFlow.cpp</a> </p><div class="fragment"><div class="line"></div>
+<p>See documented version: <a class="el" href="a00419.html">test/solvers/test_DualMinCostFlow.cpp</a> </p><div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00381.html">limbo/solvers/DualMinCostFlow.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00385.html">limbo/solvers/DualMinCostFlow.h</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> <a class="code" href="a00415.html#a1db05c176455595f4e75e72ac6c8d627">test</a>(std::string <span class="keyword">const</span>&amp; filename, <span class="keywordtype">int</span> alg)</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="a00419.html#a1db05c176455595f4e75e72ac6c8d627">test</a>(std::string <span class="keyword">const</span>&amp; filename, <span class="keywordtype">int</span> alg)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">typedef</span> <a class="code" href="a00171.html">limbo::solvers::LinearModel&lt;int, int&gt;</a> model_type; </div>
 <div class="line">    model_type optModel; </div>
@@ -237,7 +237,7 @@ Dual Min-Cost Flow Solvers</h2>
 <div class="line">    optModel.print(std::cout); </div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// solve </span></div>
-<div class="line">    <a class="code" href="a00184.html">limbo::solvers::MinCostFlowSolver&lt;int, int&gt;</a>* minCostFlowSolver = NULL; </div>
+<div class="line">    <a class="code" href="a00186.html">limbo::solvers::MinCostFlowSolver&lt;int, int&gt;</a>* minCostFlowSolver = NULL; </div>
 <div class="line">    <span class="keywordflow">switch</span> (alg)</div>
 <div class="line">    {</div>
 <div class="line">        <span class="keywordflow">case</span> 0:</div>
@@ -247,7 +247,7 @@ Dual Min-Cost Flow Solvers</h2>
 <div class="line">            minCostFlowSolver = <span class="keyword">new</span> <a class="code" href="a00052.html">limbo::solvers::CapacityScaling&lt;int, int&gt;</a>(); </div>
 <div class="line">            <span class="keywordflow">break</span>;</div>
 <div class="line">        <span class="keywordflow">case</span> 2:</div>
-<div class="line">            minCostFlowSolver = <span class="keyword">new</span> <a class="code" href="a00195.html">limbo::solvers::NetworkSimplex&lt;int, int&gt;</a>(); </div>
+<div class="line">            minCostFlowSolver = <span class="keyword">new</span> <a class="code" href="a00197.html">limbo::solvers::NetworkSimplex&lt;int, int&gt;</a>(); </div>
 <div class="line">            <span class="keywordflow">break</span>;</div>
 <div class="line">        <span class="keywordflow">case</span> 3:</div>
 <div class="line">        <span class="keywordflow">default</span>:</div>
@@ -255,9 +255,9 @@ Dual Min-Cost Flow Solvers</h2>
 <div class="line">            <span class="keywordflow">break</span>; </div>
 <div class="line">    }</div>
 <div class="line">    <a class="code" href="a00092.html">limbo::solvers::DualMinCostFlow&lt;int, int&gt;</a> solver (&amp;optModel); </div>
-<div class="line">    <a class="code" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">limbo::solvers::SolverProperty</a> status = solver(minCostFlowSolver);</div>
+<div class="line">    <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0">limbo::solvers::SolverProperty</a> status = solver(minCostFlowSolver);</div>
 <div class="line">    <span class="comment">//limbo::solvers::SolverProperty status = solver();</span></div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Problem solved &quot;</span> &lt;&lt; <a class="code" href="a00443.html#ae31d5e04adc36b4526e8856acf4ae2cf">limbo::solvers::toString</a>(status) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Problem solved &quot;</span> &lt;&lt; <a class="code" href="a00448.html#ae31d5e04adc36b4526e8856acf4ae2cf">limbo::solvers::toString</a>(status) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">    <span class="keyword">delete</span> minCostFlowSolver;</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// print solutions </span></div>
@@ -269,7 +269,7 @@ Dual Min-Cost Flow Solvers</h2>
 <div class="line">    solver.printGraph(<span class="keyword">true</span>);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00390.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00394.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">if</span> (argc &gt; 1)</div>
 <div class="line">    {</div>
@@ -277,7 +277,7 @@ Dual Min-Cost Flow Solvers</h2>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt; 2)</div>
 <div class="line">            alg = atoi(argv[2]);</div>
 <div class="line">        <span class="comment">// test file API </span></div>
-<div class="line">        <a class="code" href="a00415.html#a1db05c176455595f4e75e72ac6c8d627">test</a>(argv[1], alg);</div>
+<div class="line">        <a class="code" href="a00419.html#a1db05c176455595f4e75e72ac6c8d627">test</a>(argv[1], alg);</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">else</span> </div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;at least 1 argument required\n&quot;</span>;</div>
@@ -360,22 +360,22 @@ Dual Min-Cost Flow Solvers</h2>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;x3 3</div>
 </div><!-- fragment --><h2><a class="anchor" id="Solvers_Csdp"></a>
 Csdp Solver</h2>
-<p>See documented version: <a class="el" href="a00321.html">limbo/algorithms/coloring/SDPColoringCsdp.h</a> </p><div class="fragment"><div class="line"></div>
+<p>See documented version: <a class="el" href="a00323.html">limbo/algorithms/coloring/SDPColoringCsdp.h</a> </p><div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#ifndef LIMBO_ALGORITHMS_COLORING_SDPCOLORINGCSDP</span></div>
 <div class="line"><span class="preprocessor">#define LIMBO_ALGORITHMS_COLORING_SDPCOLORINGCSDP</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00388.html">limbo/string/String.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00314.html">limbo/algorithms/coloring/GraphSimplification.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00313.html">limbo/algorithms/coloring/Coloring.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00311.html">limbo/algorithms/coloring/BacktrackColoring.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00326.html">limbo/algorithms/partition/FMMultiWay.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00329.html">limbo/containers/DisjointSet.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00392.html">limbo/string/String.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00316.html">limbo/algorithms/coloring/GraphSimplification.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00315.html">limbo/algorithms/coloring/Coloring.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00313.html">limbo/algorithms/coloring/BacktrackColoring.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00328.html">limbo/algorithms/partition/FMMultiWay.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00331.html">limbo/containers/DisjointSet.h</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="comment">// as the original csdp easy_sdp api is not very flexible to printlevel</span></div>
 <div class="line"><span class="comment">// I made small modification to support that </span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00379.html">limbo/solvers/api/CsdpEasySdpApi.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00382.html">limbo/solvers/api/CsdpEasySdpApi.h</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="keyword">namespace </span><a class="code" href="a00435.html">limbo</a> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="a00440.html">limbo</a> </div>
 <div class="line">{ </div>
 <div class="line"><span class="keyword">namespace </span>algorithms </div>
 <div class="line">{ </div>
@@ -425,30 +425,30 @@ Csdp Solver</h2>
 <div class="line">                <span class="keywordflow">return</span> gain;</div>
 <div class="line">            }</div>
 <div class="line">        };</div>
-<div class="line">        <a class="code" href="a00246.html#a40ce32d73c7ca625571485f7ac599ebd">SDPColoringCsdp</a>(graph_type <span class="keyword">const</span>&amp; g); </div>
-<div class="line">        <span class="keyword">virtual</span> <a class="code" href="a00246.html#a8e736075fb63b3c66e54479fc0c9051d">~SDPColoringCsdp</a>() {}</div>
+<div class="line">        <a class="code" href="a00248.html#a40ce32d73c7ca625571485f7ac599ebd">SDPColoringCsdp</a>(graph_type <span class="keyword">const</span>&amp; g); </div>
+<div class="line">        <span class="keyword">virtual</span> <a class="code" href="a00248.html#a8e736075fb63b3c66e54479fc0c9051d">~SDPColoringCsdp</a>() {}</div>
 <div class="line"></div>
-<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00246.html#a7d40dbcbc4f154c29e83da036a16f7c8">write_sdp_sol</a>(std::string <span class="keyword">const</span>&amp; filename, <span class="keyword">struct</span> blockmatrix <span class="keyword">const</span>&amp; X) <span class="keyword">const</span>; </div>
-<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00246.html#a0f936c84a5891ba2e484b658467c52d4">print_blockrec</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* label, blockrec <span class="keyword">const</span>&amp; block) <span class="keyword">const</span>; </div>
+<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00248.html#a7d40dbcbc4f154c29e83da036a16f7c8">write_sdp_sol</a>(std::string <span class="keyword">const</span>&amp; filename, <span class="keyword">struct</span> blockmatrix <span class="keyword">const</span>&amp; X) <span class="keyword">const</span>; </div>
+<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00248.html#a0f936c84a5891ba2e484b658467c52d4">print_blockrec</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* label, blockrec <span class="keyword">const</span>&amp; block) <span class="keyword">const</span>; </div>
 <div class="line">    <span class="keyword">protected</span>:</div>
-<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="a00246.html#abf08702f30817fd991e6d72c42f9bf35">coloring</a>();</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="a00248.html#abf08702f30817fd991e6d72c42f9bf35">coloring</a>();</div>
 <div class="line"></div>
-<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00246.html#a1eaa9c0f465fcb7286283949b032825a">construct_objectve_blockrec</a>(blockmatrix&amp; C, int32_t blocknum, int32_t blocksize, blockcat blockcategory) <span class="keyword">const</span>; </div>
-<div class="line">        <span class="keyword">struct </span>sparseblock* <a class="code" href="a00246.html#a0497a0792e24f019f0046465e01b26ca">construct_constraint_sparseblock</a>(int32_t blocknum, int32_t blocksize, int32_t constraintnum, int32_t entrynum) <span class="keyword">const</span>; </div>
-<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00246.html#a710d00b7c64c6569092efd279c0db8a3">set_sparseblock_entry</a>(<span class="keyword">struct</span> sparseblock&amp; block, int32_t entryid, int32_t i, int32_t j, <span class="keywordtype">double</span> value) <span class="keyword">const</span>; </div>
-<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00246.html#a5f6e469a374511665de91ddf6189b407">round_sol</a>(<span class="keyword">struct</span> blockmatrix <span class="keyword">const</span>&amp; X);</div>
-<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00246.html#a65478f75c8e81a68f9144921def30f6d">coloring_merged_graph</a>(graph_type <span class="keyword">const</span>&amp; mg, std::vector&lt;int8_t&gt;&amp; vMColor) <span class="keyword">const</span>;</div>
-<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00246.html#a9abaaacaab0c9228e6bf600f19d1f50a">coloring_algos</a>(graph_type <span class="keyword">const</span>&amp; g, std::vector&lt;int8_t&gt;&amp; vColor) <span class="keyword">const</span>;</div>
-<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00246.html#af4e0e23c6f43bd6be46957477678c0a9">coloring_by_backtrack</a>(graph_type <span class="keyword">const</span>&amp; mg, std::vector&lt;int8_t&gt;&amp; vColor) <span class="keyword">const</span>;</div>
-<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00246.html#ac3b82d503b968648fc16713a758ea782">coloring_by_FM</a>(graph_type <span class="keyword">const</span>&amp; mg, std::vector&lt;int8_t&gt;&amp; vColor) <span class="keyword">const</span>;</div>
+<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00248.html#a1eaa9c0f465fcb7286283949b032825a">construct_objectve_blockrec</a>(blockmatrix&amp; C, int32_t blocknum, int32_t blocksize, blockcat blockcategory) <span class="keyword">const</span>; </div>
+<div class="line">        <span class="keyword">struct </span>sparseblock* <a class="code" href="a00248.html#a0497a0792e24f019f0046465e01b26ca">construct_constraint_sparseblock</a>(int32_t blocknum, int32_t blocksize, int32_t constraintnum, int32_t entrynum) <span class="keyword">const</span>; </div>
+<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00248.html#a710d00b7c64c6569092efd279c0db8a3">set_sparseblock_entry</a>(<span class="keyword">struct</span> sparseblock&amp; block, int32_t entryid, int32_t i, int32_t j, <span class="keywordtype">double</span> value) <span class="keyword">const</span>; </div>
+<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00248.html#a5f6e469a374511665de91ddf6189b407">round_sol</a>(<span class="keyword">struct</span> blockmatrix <span class="keyword">const</span>&amp; X);</div>
+<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00248.html#a65478f75c8e81a68f9144921def30f6d">coloring_merged_graph</a>(graph_type <span class="keyword">const</span>&amp; mg, std::vector&lt;int8_t&gt;&amp; vMColor) <span class="keyword">const</span>;</div>
+<div class="line">        <span class="keywordtype">void</span> <a class="code" href="a00248.html#a9abaaacaab0c9228e6bf600f19d1f50a">coloring_algos</a>(graph_type <span class="keyword">const</span>&amp; g, std::vector&lt;int8_t&gt;&amp; vColor) <span class="keyword">const</span>;</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00248.html#af4e0e23c6f43bd6be46957477678c0a9">coloring_by_backtrack</a>(graph_type <span class="keyword">const</span>&amp; mg, std::vector&lt;int8_t&gt;&amp; vColor) <span class="keyword">const</span>;</div>
+<div class="line">        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="a00248.html#ac3b82d503b968648fc16713a758ea782">coloring_by_FM</a>(graph_type <span class="keyword">const</span>&amp; mg, std::vector&lt;int8_t&gt;&amp; vColor) <span class="keyword">const</span>;</div>
 <div class="line"></div>
-<div class="line">        <span class="keywordtype">double</span> <a class="code" href="a00246.html#a463f43457f934433a47fcc2515dde961">m_rounding_lb</a>; </div>
-<div class="line">        <span class="keywordtype">double</span> <a class="code" href="a00246.html#a58093dac5b4e8b5dea34d2c5b9931587">m_rounding_ub</a>; </div>
-<div class="line">        <span class="keyword">const</span> <span class="keyword">static</span> uint32_t <a class="code" href="a00246.html#a7adbd946dc628ad653df7d319416729b">max_backtrack_num_vertices</a> = 7; </div>
+<div class="line">        <span class="keywordtype">double</span> <a class="code" href="a00248.html#a463f43457f934433a47fcc2515dde961">m_rounding_lb</a>; </div>
+<div class="line">        <span class="keywordtype">double</span> <a class="code" href="a00248.html#a58093dac5b4e8b5dea34d2c5b9931587">m_rounding_ub</a>; </div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">static</span> uint32_t <a class="code" href="a00248.html#a7adbd946dc628ad653df7d319416729b">max_backtrack_num_vertices</a> = 7; </div>
 <div class="line">};</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> GraphType&gt;</div>
-<div class="line"><a class="code" href="a00246.html#a40ce32d73c7ca625571485f7ac599ebd">SDPColoringCsdp&lt;GraphType&gt;::SDPColoringCsdp</a>(SDPColoringCsdp&lt;GraphType&gt;::graph_type <span class="keyword">const</span>&amp; g) </div>
+<div class="line"><a class="code" href="a00248.html#a40ce32d73c7ca625571485f7ac599ebd">SDPColoringCsdp&lt;GraphType&gt;::SDPColoringCsdp</a>(SDPColoringCsdp&lt;GraphType&gt;::graph_type <span class="keyword">const</span>&amp; g) </div>
 <div class="line">    : base_type(g)</div>
 <div class="line">{</div>
 <div class="line">    m_rounding_lb = -0.4;</div>
@@ -468,7 +468,7 @@ Csdp Solver</h2>
 <div class="line">    <span class="comment">// with some reverse engineering, for the coloring problem here, matrices in C, b, and constraints mainly consists of 2 blocks </span></div>
 <div class="line">    <span class="comment">// the first block is for vertex variables, and the second block is for slack variables introduced to resolve &#39;&gt;=&#39; operators in the constraints</span></div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(!this-&gt;has_precolored(), <span class="stringliteral">&quot;SDP coloring does not support precolored layout yet&quot;</span>);</div>
+<div class="line">    <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(!this-&gt;has_precolored(), <span class="stringliteral">&quot;SDP coloring does not support precolored layout yet&quot;</span>);</div>
 <div class="line">    <span class="comment">// The problem and solution data.</span></div>
 <div class="line">    <span class="keyword">struct </span>blockmatrix C; <span class="comment">// objective matrix </span></div>
 <div class="line">    <span class="keywordtype">double</span> *b; <span class="comment">// right hand side of constraints</span></div>
@@ -494,7 +494,7 @@ Csdp Solver</h2>
 <div class="line">        <span class="keywordflow">else</span> <span class="comment">// stitch edge </span></div>
 <div class="line">            num_stitch_edges += 1;</div>
 <div class="line">    }</div>
-<div class="line">    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(num_edges &gt; 0 &amp;&amp; num_conflict_edges &gt; 0, <span class="stringliteral">&quot;no edges or conflict edges found, no need to solve SDP&quot;</span>);</div>
+<div class="line">    <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(num_edges &gt; 0 &amp;&amp; num_conflict_edges &gt; 0, <span class="stringliteral">&quot;no edges or conflict edges found, no need to solve SDP&quot;</span>);</div>
 <div class="line">    <span class="comment">// compute total number of variables and constraints</span></div>
 <div class="line">    uint32_t num_variables = num_vertices+num_conflict_edges;</div>
 <div class="line">    uint32_t num_constraints = num_conflict_edges+num_vertices;</div>
@@ -502,7 +502,7 @@ Csdp Solver</h2>
 <div class="line">    <span class="comment">// setup blockmatrix C </span></div>
 <div class="line">    C.nblocks = 2;</div>
 <div class="line">    C.blocks = (<span class="keyword">struct </span>blockrec *)malloc((C.nblocks+1)*<span class="keyword">sizeof</span>(<span class="keyword">struct </span>blockrec));</div>
-<div class="line">    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(C.blocks, <span class="stringliteral">&quot;Couldn&#39;t allocate storage for C&quot;</span>);</div>
+<div class="line">    <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(C.blocks, <span class="stringliteral">&quot;Couldn&#39;t allocate storage for C&quot;</span>);</div>
 <div class="line">    <span class="comment">// C.blocks[0] is not used according to the example of Csdp</span></div>
 <div class="line">    <span class="comment">// block 1 for vertex variables </span></div>
 <div class="line">    construct_objectve_blockrec(C, 1, num_vertices, MATRIX);</div>
@@ -533,7 +533,7 @@ Csdp Solver</h2>
 <div class="line">    <span class="comment">// the order is first for conflict edges and then for vertices  </span></div>
 <div class="line">    <span class="comment">// the order matters for constraint matrices </span></div>
 <div class="line">    b = (<span class="keywordtype">double</span> *)malloc((num_constraints+1)*<span class="keyword">sizeof</span>(double));</div>
-<div class="line">    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(b, <span class="stringliteral">&quot;Failed to allocate storage for right hand side of constraints b&quot;</span>);</div>
+<div class="line">    <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(b, <span class="stringliteral">&quot;Failed to allocate storage for right hand side of constraints b&quot;</span>);</div>
 <div class="line">    <span class="comment">// -1/(k-1) according to Bei Yu&#39;s DAC2014 paper</span></div>
 <div class="line">    <span class="comment">// consider in the constraints, xij+xji &gt;= beta, so beta should be -2/(k-1)</span></div>
 <div class="line">    <span class="keywordtype">double</span> beta = -2.0/(this-&gt;color_num()-1.0); <span class="comment">// right hand side of constraints for conflict edges </span></div>
@@ -548,7 +548,7 @@ Csdp Solver</h2>
 <div class="line">    <span class="comment">// setup constraint matrix constraints</span></div>
 <div class="line">    <span class="comment">// the order should be the same as right hand side b </span></div>
 <div class="line">    constraints=(<span class="keyword">struct </span>constraintmatrix *)malloc((num_constraints+1)*<span class="keyword">sizeof</span>(<span class="keyword">struct </span>constraintmatrix));</div>
-<div class="line">    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(constraints, <span class="stringliteral">&quot;Failed to allocate storage for constraints&quot;</span>);</div>
+<div class="line">    <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(constraints, <span class="stringliteral">&quot;Failed to allocate storage for constraints&quot;</span>);</div>
 <div class="line">    <span class="comment">// for conflict edges, xij </span></div>
 <div class="line">    uint32_t cnt = 1;</div>
 <div class="line">    <span class="keywordflow">for</span> (boost::tie(ei, eie) = boost::edges(this-&gt;m_graph); ei != eie; ++ei)</div>
@@ -623,7 +623,7 @@ Csdp Solver</h2>
 <div class="line">    <span class="comment">// objective value is (dobj+pobj)/2</span></div>
 <div class="line">    <span class="comment">//int ret = easy_sdp(num_variables, num_constraints, C, b, constraints, 0.0, &amp;X, &amp;y, &amp;Z, &amp;pobj, &amp;dobj);</span></div>
 <div class="line">    <span class="keywordtype">int</span> ret = limbo::solvers::easy_sdp_ext&lt;int&gt;(num_variables, num_constraints, C, b, constraints, 0.0, &amp;X, &amp;y, &amp;Z, &amp;pobj, &amp;dobj, params, printlevel);</div>
-<div class="line">    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(ret == 0, <span class="stringliteral">&quot;SDP failed&quot;</span>);</div>
+<div class="line">    <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(ret == 0, <span class="stringliteral">&quot;SDP failed&quot;</span>);</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// round result to get colors </span></div>
 <div class="line">    round_sol(X);</div>
@@ -632,7 +632,7 @@ Csdp Solver</h2>
 <div class="line">    free_prob(num_variables, num_constraints, C, b, constraints, X, y, Z);</div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#ifdef DEBUG_LPCOLORING</span></div>
-<div class="line">    this-&gt;<a class="code" href="a00436.html#afd0e9377c1211cdbe9ef63a022a9ed71">write_graph</a>(<span class="stringliteral">&quot;final_output&quot;</span>);</div>
+<div class="line">    this-&gt;<a class="code" href="a00441.html#afd0e9377c1211cdbe9ef63a022a9ed71">write_graph</a>(<span class="stringliteral">&quot;final_output&quot;</span>);</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line">    <span class="comment">// return objective value </span></div>
 <div class="line">    <span class="comment">//return (dobj+pobj)/2;</span></div>
@@ -648,14 +648,14 @@ Csdp Solver</h2>
 <div class="line">    <span class="keywordflow">if</span> (blockcategory == MATRIX)</div>
 <div class="line">    {</div>
 <div class="line">        cblock.data.mat = (<span class="keywordtype">double</span> *)malloc(blocksize*blocksize*<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>));</div>
-<div class="line">        <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(cblock.data.mat, <span class="stringliteral">&quot;Couldn&#39;t allocate storage for cblock.data.mat&quot;</span>);</div>
+<div class="line">        <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(cblock.data.mat, <span class="stringliteral">&quot;Couldn&#39;t allocate storage for cblock.data.mat&quot;</span>);</div>
 <div class="line">        <span class="comment">// initialize to all 0s</span></div>
 <div class="line">        std::fill(cblock.data.mat, cblock.data.mat+blocksize*blocksize, 0); </div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (blockcategory == DIAG)</div>
 <div class="line">    {</div>
 <div class="line">        cblock.data.vec = (<span class="keywordtype">double</span> *)malloc((blocksize+1)*<span class="keyword">sizeof</span>(double));</div>
-<div class="line">        <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(cblock.data.vec, <span class="stringliteral">&quot;Couldn&#39;t allocate storage for cblock.data.vec&quot;</span>);</div>
+<div class="line">        <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(cblock.data.vec, <span class="stringliteral">&quot;Couldn&#39;t allocate storage for cblock.data.vec&quot;</span>);</div>
 <div class="line">        <span class="comment">// initialize to all 0s</span></div>
 <div class="line">        std::fill(cblock.data.vec, cblock.data.vec+blocksize+1, 0); </div>
 <div class="line">    }</div>
@@ -665,18 +665,18 @@ Csdp Solver</h2>
 <div class="line"><span class="keyword">struct </span>sparseblock* SDPColoringCsdp&lt;GraphType&gt;::construct_constraint_sparseblock(int32_t blocknum, int32_t blocksize, int32_t constraintnum, int32_t entrynum)<span class="keyword"> const </span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">    <span class="keyword">struct </span>sparseblock* blockptr = (<span class="keyword">struct </span>sparseblock *)malloc(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> sparseblock));</div>
-<div class="line">    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(blockptr, <span class="stringliteral">&quot;Allocation of constraint block failed for blockptr&quot;</span>);</div>
+<div class="line">    <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(blockptr, <span class="stringliteral">&quot;Allocation of constraint block failed for blockptr&quot;</span>);</div>
 <div class="line">    blockptr-&gt;blocknum = blocknum;</div>
 <div class="line">    blockptr-&gt;blocksize = blocksize;</div>
 <div class="line">    blockptr-&gt;constraintnum = constraintnum;</div>
 <div class="line">    blockptr-&gt;next = NULL;</div>
 <div class="line">    blockptr-&gt;nextbyblock = NULL;</div>
 <div class="line">    blockptr-&gt;entries = (<span class="keywordtype">double</span> *) malloc((entrynum+1)*<span class="keyword">sizeof</span>(double));</div>
-<div class="line">    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(blockptr-&gt;entries, <span class="stringliteral">&quot;Allocation of constraint block failed for blockptr-&gt;entries&quot;</span>);</div>
+<div class="line">    <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(blockptr-&gt;entries, <span class="stringliteral">&quot;Allocation of constraint block failed for blockptr-&gt;entries&quot;</span>);</div>
 <div class="line">    blockptr-&gt;iindices = (<span class="keywordtype">int</span> *) malloc((entrynum+1)*<span class="keyword">sizeof</span>(int));</div>
-<div class="line">    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(blockptr-&gt;iindices, <span class="stringliteral">&quot;Allocation of constraint block failed for blockptr-&gt;iindices&quot;</span>);</div>
+<div class="line">    <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(blockptr-&gt;iindices, <span class="stringliteral">&quot;Allocation of constraint block failed for blockptr-&gt;iindices&quot;</span>);</div>
 <div class="line">    blockptr-&gt;jindices = (<span class="keywordtype">int</span> *) malloc((entrynum+1)*<span class="keyword">sizeof</span>(int));</div>
-<div class="line">    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(blockptr-&gt;jindices, <span class="stringliteral">&quot;Allocation of constraint block failed for blockptr-&gt;jindices&quot;</span>);</div>
+<div class="line">    <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(blockptr-&gt;jindices, <span class="stringliteral">&quot;Allocation of constraint block failed for blockptr-&gt;jindices&quot;</span>);</div>
 <div class="line">    blockptr-&gt;numentries = entrynum;</div>
 <div class="line"></div>
 <div class="line">    <span class="keywordflow">return</span> blockptr;</div>
@@ -704,7 +704,7 @@ Csdp Solver</h2>
 <div class="line">    <span class="comment">// check SDP solution in X </span></div>
 <div class="line">    <span class="comment">// we are only interested in block 1 </span></div>
 <div class="line">    <span class="keyword">struct </span>blockrec const&amp; block = X.blocks[1];</div>
-<div class="line">    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(block.blockcategory == MATRIX, <span class="stringliteral">&quot;mismatch of block category&quot;</span>);</div>
+<div class="line">    <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(block.blockcategory == MATRIX, <span class="stringliteral">&quot;mismatch of block category&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">for</span> (int32_t i = 1; i &lt;= block.blocksize; ++i)</div>
 <div class="line">        <span class="keywordflow">for</span> (int32_t j = i+1; j &lt;= block.blocksize; ++j)</div>
 <div class="line">        {</div>
@@ -714,7 +714,7 @@ Csdp Solver</h2>
 <div class="line">        }</div>
 <div class="line">    <span class="comment">// construct merged graph </span></div>
 <div class="line">    <span class="comment">// for vertices in merged graph </span></div>
-<div class="line">    std::vector&lt;graph_vertex_type&gt; vG2MG (vParent.size(), <a class="code" href="a00435.html#a70f11c16058445049de838e5805c9652">std::numeric_limits&lt;graph_vertex_type&gt;::max</a>()); <span class="comment">// mapping from graph to merged graph</span></div>
+<div class="line">    std::vector&lt;graph_vertex_type&gt; vG2MG (vParent.size(), <a class="code" href="a00440.html#a70f11c16058445049de838e5805c9652">std::numeric_limits&lt;graph_vertex_type&gt;::max</a>()); <span class="comment">// mapping from graph to merged graph</span></div>
 <div class="line">    uint32_t mg_count = 0; <span class="comment">// count number of vertices in merged graph </span></div>
 <div class="line">    <span class="keywordflow">for</span> (uint32_t i = 0, ie = vParent.size(); i != ie; ++i) <span class="comment">// check subset elements and compute mg_count</span></div>
 <div class="line">        <span class="keywordflow">if</span> (vParent[i] == i)</div>
@@ -799,12 +799,12 @@ Csdp Solver</h2>
 <div class="line">            vSubColor.assign(boost::num_vertices(sg), -1);</div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#ifdef DEBUG_SDPCOLORING</span></div>
-<div class="line">            this-&gt;<a class="code" href="a00436.html#afd0e9377c1211cdbe9ef63a022a9ed71">write_graph</a>(<span class="stringliteral">&quot;initial_merged_graph&quot;</span>, sg, vSubColor);</div>
+<div class="line">            this-&gt;<a class="code" href="a00441.html#afd0e9377c1211cdbe9ef63a022a9ed71">write_graph</a>(<span class="stringliteral">&quot;initial_merged_graph&quot;</span>, sg, vSubColor);</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line">            <span class="comment">// solve coloring </span></div>
 <div class="line">            coloring_algos(sg, vSubColor);</div>
 <div class="line"><span class="preprocessor">#ifdef DEBUG_SDPCOLORING</span></div>
-<div class="line">            this-&gt;<a class="code" href="a00436.html#afd0e9377c1211cdbe9ef63a022a9ed71">write_graph</a>(<span class="stringliteral">&quot;final_merged_graph&quot;</span>, sg, vSubColor);</div>
+<div class="line">            this-&gt;<a class="code" href="a00441.html#afd0e9377c1211cdbe9ef63a022a9ed71">write_graph</a>(<span class="stringliteral">&quot;final_merged_graph&quot;</span>, sg, vSubColor);</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line">        }</div>
 <div class="line"></div>
@@ -883,14 +883,14 @@ Csdp Solver</h2>
 <div class="line">                    };</div>
 <div class="line">                <span class="keywordflow">break</span>;</div>
 <div class="line">            <span class="keywordflow">case</span> PACKEDMATRIX:</div>
-<div class="line">            <span class="keywordflow">default</span>: <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(0, <span class="stringliteral">&quot;Invalid Block Type&quot;</span>);</div>
+<div class="line">            <span class="keywordflow">default</span>: <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(0, <span class="stringliteral">&quot;Invalid Block Type&quot;</span>);</div>
 <div class="line">        }</div>
 <div class="line">        index_offset += X.blocks[blk].blocksize; </div>
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// write to file </span></div>
 <div class="line">    std::ofstream out (filename.c_str());</div>
-<div class="line">    <a class="code" href="a00374.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(out.good(), <span class="stringliteral">&quot;failed to open file &quot;</span> &lt;&lt; filename &lt;&lt; <span class="stringliteral">&quot; for write&quot;</span>);</div>
+<div class="line">    <a class="code" href="a00377.html#aa5d7c58f57e3700b0de23ae54972bbca">assert_msg</a>(out.good(), <span class="stringliteral">&quot;failed to open file &quot;</span> &lt;&lt; filename &lt;&lt; <span class="stringliteral">&quot; for write&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">for</span> (std::vector&lt;std::vector&lt;double&gt; &gt;::const_iterator it1 = mSol.begin(), it1e = mSol.end(); it1 != it1e; ++it1)</div>
 <div class="line">    {</div>
 <div class="line">        <span class="keyword">const</span> <span class="keywordtype">char</span>* prefix = <span class="stringliteral">&quot;&quot;</span>;</div>
@@ -928,7 +928,7 @@ Csdp Solver</h2>
 <div class="line">} <span class="comment">// namespace limbo</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#endif</span></div>
-</div><!-- fragment --><p> See documented version: <a class="el" href="a00396.html">test/algorithms/test_SDPColoring.cpp</a> </p><div class="fragment"><div class="line"></div>
+</div><!-- fragment --><p> See documented version: <a class="el" href="a00400.html">test/algorithms/test_SDPColoring.cpp</a> </p><div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
@@ -936,7 +936,7 @@ Csdp Solver</h2>
 <div class="line"><span class="preprocessor">#include &lt;boost/graph/graph_utility.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;boost/graph/adjacency_list.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;boost/graph/undirected_graph.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00321.html">limbo/algorithms/coloring/SDPColoringCsdp.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00323.html">limbo/algorithms/coloring/SDPColoringCsdp.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;boost/graph/erdos_renyi_generator.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;boost/random/mersenne_twister.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;boost/graph/random.hpp&gt;</span></div>
@@ -955,7 +955,7 @@ Csdp Solver</h2>
 <div class="line"><span class="keyword">using</span> std::ofstream;</div>
 <div class="line"><span class="keyword">using</span> std::string;</div>
 <div class="line"><span class="keyword">using</span> std::pair;</div>
-<div class="line"><span class="keyword">using namespace </span><a class="code" href="a00424.html">boost</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code" href="a00429.html">boost</a>;</div>
 <div class="line"></div>
 <div class="line"><span class="comment">// do not use setS, it does not compile for subgraph</span></div>
 <div class="line"><span class="comment">// do not use custom property tags, it does not compile for most utilities</span></div>
@@ -971,7 +971,7 @@ Csdp Solver</h2>
 <div class="line"><span class="keyword">typedef</span> property_map&lt;graph_type, edge_weight_t&gt;::type edge_weight_map_type;</div>
 <div class="line"><span class="keyword">typedef</span> property_map&lt;graph_type, vertex_color_t&gt;::type vertex_color_map_type;</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">double</span> <a class="code" href="a00394.html#a64ecec97bc4469a5414c0cae8ad15c7a">simple_graph</a>() </div>
+<div class="line"><span class="keywordtype">double</span> <a class="code" href="a00398.html#a64ecec97bc4469a5414c0cae8ad15c7a">simple_graph</a>() </div>
 <div class="line">{</div>
 <div class="line">    graph_type g;</div>
 <div class="line">    vertex_descriptor a = boost::add_vertex(g);</div>
@@ -999,14 +999,14 @@ Csdp Solver</h2>
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">//test relaxed LP based coloring</span></div>
-<div class="line">    <a class="code" href="a00246.html">limbo::algorithms::coloring::SDPColoringCsdp&lt;graph_type&gt;</a> lc (g); </div>
+<div class="line">    <a class="code" href="a00248.html">limbo::algorithms::coloring::SDPColoringCsdp&lt;graph_type&gt;</a> lc (g); </div>
 <div class="line">    lc.stitch_weight(0.1);</div>
 <div class="line">    <span class="comment">// THREE or FOUR </span></div>
-<div class="line">    lc.color_num(<a class="code" href="a00246.html">limbo::algorithms::coloring::SDPColoringCsdp&lt;graph_type&gt;::THREE</a>);</div>
+<div class="line">    lc.color_num(<a class="code" href="a00248.html">limbo::algorithms::coloring::SDPColoringCsdp&lt;graph_type&gt;::THREE</a>);</div>
 <div class="line">    <span class="keywordflow">return</span> lc();</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">double</span> <a class="code" href="a00394.html#aaef48baf5127c418e61732f2b73ce33a">random_graph</a>() </div>
+<div class="line"><span class="keywordtype">double</span> <a class="code" href="a00398.html#aaef48baf5127c418e61732f2b73ce33a">random_graph</a>() </div>
 <div class="line">{</div>
 <div class="line">    mt19937 gen;</div>
 <div class="line">    graph_type g;</div>
@@ -1030,14 +1030,14 @@ Csdp Solver</h2>
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">//test relaxed LP based coloring</span></div>
-<div class="line">    <a class="code" href="a00246.html">limbo::algorithms::coloring::SDPColoringCsdp&lt;graph_type&gt;</a> lc (g); </div>
+<div class="line">    <a class="code" href="a00248.html">limbo::algorithms::coloring::SDPColoringCsdp&lt;graph_type&gt;</a> lc (g); </div>
 <div class="line">    lc.stitch_weight(0.1);</div>
 <div class="line">    <span class="comment">// THREE or FOUR </span></div>
-<div class="line">    lc.color_num(<a class="code" href="a00246.html">limbo::algorithms::coloring::SDPColoringCsdp&lt;graph_type&gt;::THREE</a>);</div>
+<div class="line">    lc.color_num(<a class="code" href="a00248.html">limbo::algorithms::coloring::SDPColoringCsdp&lt;graph_type&gt;::THREE</a>);</div>
 <div class="line">    <span class="keywordflow">return</span> lc();</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">double</span> <a class="code" href="a00394.html#a938db4401587853297b329cb2d7d6237">real_graph</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
+<div class="line"><span class="keywordtype">double</span> <a class="code" href="a00398.html#a938db4401587853297b329cb2d7d6237">real_graph</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename)</div>
 <div class="line">{</div>
 <div class="line">    ifstream in (filename.c_str());</div>
 <div class="line"></div>
@@ -1090,25 +1090,25 @@ Csdp Solver</h2>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line"></div>
 <div class="line">    <span class="comment">//test relaxed LP based coloring</span></div>
-<div class="line">    <a class="code" href="a00246.html">limbo::algorithms::coloring::SDPColoringCsdp&lt;graph_type&gt;</a> lc (g); </div>
+<div class="line">    <a class="code" href="a00248.html">limbo::algorithms::coloring::SDPColoringCsdp&lt;graph_type&gt;</a> lc (g); </div>
 <div class="line">    lc.stitch_weight(0.1);</div>
 <div class="line">    <span class="comment">// THREE or FOUR </span></div>
-<div class="line">    lc.color_num(<a class="code" href="a00246.html">limbo::algorithms::coloring::SDPColoringCsdp&lt;graph_type&gt;::THREE</a>);</div>
+<div class="line">    lc.color_num(<a class="code" href="a00248.html">limbo::algorithms::coloring::SDPColoringCsdp&lt;graph_type&gt;::THREE</a>);</div>
 <div class="line">    <span class="keywordtype">double</span> cost = lc();</div>
 <div class="line"></div>
 <div class="line">    in.close();</div>
 <div class="line">    <span class="keywordflow">return</span> cost;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00390.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00394.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordtype">double</span> cost;</div>
 <div class="line">    <span class="keywordflow">if</span> (argc &lt; 2)</div>
 <div class="line">    {</div>
-<div class="line">        cost = <a class="code" href="a00394.html#a64ecec97bc4469a5414c0cae8ad15c7a">simple_graph</a>();</div>
+<div class="line">        cost = <a class="code" href="a00398.html#a64ecec97bc4469a5414c0cae8ad15c7a">simple_graph</a>();</div>
 <div class="line">        <span class="comment">//cost = random_graph();</span></div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">else</span> cost = <a class="code" href="a00394.html#a938db4401587853297b329cb2d7d6237">real_graph</a>(argv[1]);</div>
+<div class="line">    <span class="keywordflow">else</span> cost = <a class="code" href="a00398.html#a938db4401587853297b329cb2d7d6237">real_graph</a>(argv[1]);</div>
 <div class="line"></div>
 <div class="line">    cout &lt;&lt; <span class="stringliteral">&quot;cost = &quot;</span> &lt;&lt; cost &lt;&lt; endl;</div>
 <div class="line"></div>
@@ -1118,27 +1118,28 @@ Csdp Solver</h2>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;# test: min-cost flow for network graph </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;./test_lpmcf benchmarks/graph.lgf </div>
 </div><!-- fragment --><h2><a class="anchor" id="Solvers_Examples_GurobiApi"></a>
-Gurobi API</h2>
-<p>A generalized API to solve problem described by <a class="el" href="a00171.html">limbo::solvers::LinearModel</a> with <a href="https://www.gurobi.com" title="Gurobi">Gurobi</a> solver.</p>
-<p>See documented version: <a class="el" href="a00416.html">test/solvers/test_GurobiApi.cpp</a> </p><div class="fragment"><div class="line"></div>
+Generalized Linear Programming API</h2>
+<p>A generalized API to solve problem described by <a class="el" href="a00171.html">limbo::solvers::LinearModel</a> with <a href="https://www.gurobi.com" title="Gurobi">Gurobi</a> and <a href="http://lpsolve.sourceforge.net" title="lpsolve">lpsolve</a> solvers.</p>
+<p>See documented version: <a class="el" href="a00420.html">test/solvers/test_GurobiApi.cpp</a> and <a class="el" href="a00421.html">test/solvers/test_LPSolveApi.cpp</a></p>
+<p>For Gurobi </p><div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00380.html">limbo/solvers/api/GurobiApi.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00383.html">limbo/solvers/api/GurobiApi.h</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00390.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00394.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
 <div class="line">{</div>
 <div class="line">    <span class="comment">// ILP model </span></div>
 <div class="line">    <span class="keyword">typedef</span> <a class="code" href="a00171.html">limbo::solvers::LinearModel&lt;double, long&gt;</a> model_type; </div>
 <div class="line">    model_type optModel; </div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// create variables </span></div>
-<div class="line">    model_type::variable_type var1 = optModel.<a class="code" href="a00171.html#a77f761932ea800a66075c1df656535e8">addVariable</a>(0, 1, <a class="code" href="a00443.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x1&quot;</span>);</div>
-<div class="line">    model_type::variable_type var2 = optModel.addVariable(0, 1, <a class="code" href="a00443.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x2&quot;</span>);</div>
-<div class="line">    model_type::variable_type var3 = optModel.addVariable(0, 1, <a class="code" href="a00443.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x3&quot;</span>);</div>
-<div class="line">    model_type::variable_type var4 = optModel.addVariable(0, 1, <a class="code" href="a00443.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x4&quot;</span>);</div>
+<div class="line">    model_type::variable_type var1 = optModel.<a class="code" href="a00171.html#a77f761932ea800a66075c1df656535e8">addVariable</a>(0, 1, <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x1&quot;</span>);</div>
+<div class="line">    model_type::variable_type var2 = optModel.addVariable(0, 1, <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x2&quot;</span>);</div>
+<div class="line">    model_type::variable_type var3 = optModel.addVariable(0, 1, <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x3&quot;</span>);</div>
+<div class="line">    model_type::variable_type var4 = optModel.addVariable(0, 1, <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x4&quot;</span>);</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// create objective</span></div>
 <div class="line">    optModel.setObjective(var1+var2+var3+var4); </div>
-<div class="line">    optModel.setOptimizeType(<a class="code" href="a00443.html#a500190a99a5762b6aa25aec1230479f0a79885399adf94fecd8e9ade4985dd2d7">limbo::solvers::MIN</a>);</div>
+<div class="line">    optModel.setOptimizeType(<a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a79885399adf94fecd8e9ade4985dd2d7">limbo::solvers::MIN</a>);</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// create constraints </span></div>
 <div class="line">    optModel.addConstraint(var1 - var2 &gt;= 0.5, <span class="stringliteral">&quot;c1&quot;</span>); </div>
@@ -1152,13 +1153,13 @@ Gurobi API</h2>
 <div class="line">    gurobiParams.<a class="code" href="a00150.html#a8e06cfed9fd9a5a22a01c75f86192c10">setNumThreads</a>(1);</div>
 <div class="line">    gurobiParams.<a class="code" href="a00150.html#aad7e339df9aacdbddcfd55127b184902">setOutputFlag</a>(1); </div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">limbo::solvers::SolverProperty</a> optStatus = solver(&amp;gurobiParams); </div>
+<div class="line">    <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0">limbo::solvers::SolverProperty</a> optStatus = solver(&amp;gurobiParams); </div>
 <div class="line"></div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;optStatus = &quot;</span> &lt;&lt; optStatus &lt;&lt; std::endl; </div>
 <div class="line"></div>
 <div class="line">    <span class="keywordflow">return</span> 0; </div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Compiling and running commands (assuming LIMBO_DIR, and GUROBI_HOME are well defined). </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;g++ -o test_GurobiApi test_GurobiApi.cpp -I $LIMBO_DIR/include -I $GUROBI_HOME/include -L $GUROBI_HOME/lib -lgurobi_c++ -lgurobi60 </div>
+</div><!-- fragment --><p>Compiling and running commands (assuming LIMBO_DIR, and GUROBI_HOME are well defined). </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;g++ -o test_GurobiApi test_GurobiApi.cpp -I $LIMBO_DIR/include -I $GUROBI_HOME/include -L $GUROBI_HOME/lib -lgurobi60 </div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;# test Gurobi API for linear programming problem </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;./test_GurobiApi</div>
 </div><!-- fragment --><p>Output </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;Optimize a model with 3 rows, 4 columns and 6 nonzeros</div>
@@ -1176,32 +1177,140 @@ Gurobi API</h2>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;Solved in 0 iterations and 0.00 seconds</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;Optimal objective  1.000000000e+00</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;optStatus = 5</div>
+</div><!-- fragment --><p>For lpsolve (same model construction as Gurobi) </p><div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00384.html">limbo/solvers/api/LPSolveApi.h</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00394.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// ILP model </span></div>
+<div class="line">    <span class="keyword">typedef</span> <a class="code" href="a00171.html">limbo::solvers::LinearModel&lt;double, long&gt;</a> model_type; </div>
+<div class="line">    model_type optModel; </div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// create variables </span></div>
+<div class="line">    model_type::variable_type var1 = optModel.<a class="code" href="a00171.html#a77f761932ea800a66075c1df656535e8">addVariable</a>(0, 1, <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x1&quot;</span>);</div>
+<div class="line">    model_type::variable_type var2 = optModel.addVariable(0, 1, <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x2&quot;</span>);</div>
+<div class="line">    model_type::variable_type var3 = optModel.addVariable(0, 1, <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x3&quot;</span>);</div>
+<div class="line">    model_type::variable_type var4 = optModel.addVariable(0, 1, <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a1bce99917ec61f5352e27e0ec986d931">limbo::solvers::CONTINUOUS</a>, <span class="stringliteral">&quot;x4&quot;</span>);</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// create objective</span></div>
+<div class="line">    optModel.setObjective(var1+var2+var3+var4); </div>
+<div class="line">    optModel.setOptimizeType(<a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0a79885399adf94fecd8e9ade4985dd2d7">limbo::solvers::MIN</a>);</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// create constraints </span></div>
+<div class="line">    optModel.addConstraint(var1 - var2 &gt;= 0.5, <span class="stringliteral">&quot;c1&quot;</span>); </div>
+<div class="line">    optModel.addConstraint(var4 - var3 &gt;= 0.1, <span class="stringliteral">&quot;c2&quot;</span>); </div>
+<div class="line">    optModel.addConstraint(var2 - var3 &gt;= 0.2, <span class="stringliteral">&quot;c3&quot;</span>); </div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// solve by LPSolve </span></div>
+<div class="line">    <span class="keyword">typedef</span> <a class="code" href="a00177.html">limbo::solvers::LPSolveLinearApi&lt;model_type::coefficient_value_type, model_type::variable_value_type&gt;</a> solver_type; </div>
+<div class="line">    solver_type solver (&amp;optModel); </div>
+<div class="line">    <a class="code" href="a00178.html">limbo::solvers::LPSolveParameters</a> lpsolveParams; </div>
+<div class="line">    lpsolveParams.<a class="code" href="a00178.html#acf70e51dea5751f4ff6be568ef1cdb00">setVerbose</a>(FULL); </div>
+<div class="line"></div>
+<div class="line">    <a class="code" href="a00448.html#a500190a99a5762b6aa25aec1230479f0">limbo::solvers::SolverProperty</a> optStatus = solver(&amp;lpsolveParams); </div>
+<div class="line"></div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;optStatus = &quot;</span> &lt;&lt; optStatus &lt;&lt; std::endl; </div>
+<div class="line"></div>
+<div class="line">    <span class="keywordflow">return</span> 0; </div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Compiling and running commands (assuming LIMBO_DIR, and LPSOLVE_DIR are well defined). </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;g++ -o test_LPSolveApi test_LPSolveApi.cpp -I $LIMBO_DIR/include -I $LPSOLVE_DIR -L $LPSOLVE_DIR -llpsolve55 </div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;# test lpsolve API for linear programming problem </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;./test_LPSolveApi</div>
+</div><!-- fragment --><p>Output </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;Model name:  &#39;LPSolveLinearApi&#39; - run #1</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;Objective:   Minimize(R0)</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;SUBMITTED</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;Model size:        3 constraints,       4 variables,            6 non-zeros.</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;Sets:                                   0 GUB,                  0 SOS.</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;PRESOLVE             Elimination loops performed.......... O2:M2:I2</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;                   3 bounds............................... TIGHTENED.</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;                     [           +0 &lt; Z &lt; +4           ]</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;REDUCED</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;Model size:        3 constraints,       4 variables,            6 non-zeros.</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;Sets:                                   0 GUB,                  0 SOS.</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;Row-types:         0 LE,                3 GE,                   0 EQ.</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;CONSTRAINT CLASSES</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;General REAL       3</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;Using DUAL simplex for phase 1 and PRIMAL simplex for phase 2.</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;The primal and dual simplex pricing strategy set to &#39;Devex&#39;.</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;Objective value               -0.9 at iter          2.</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;Optimal solution with dual simplex at iter            3.</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;Primal objective:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  Column name                      Value   Objective         Min         Max</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  --------------------------------------------------------------------------</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  x1                                   1         0.7           0       1e+30</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  x2                                   1         0.2          -1       1e+30</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  x3                                   1           0          -3       1e+30</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  x4                                   1         0.1           0       1e+30</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;Primal variables:</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  Column name                      Value       Slack         Min         Max</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  --------------------------------------------------------------------------</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  x1                                 0.7           0      -1e+30       1e+30</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  x2                                 0.2           0      -1e+30       1e+30</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  x3                                   0           4        -0.1         0.3</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  x4                                 0.1           0      -1e+30       1e+30</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;Dual variables:</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  Row name                         Value       Slack         Min         Max</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  --------------------------------------------------------------------------</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  c1                                   1         0.5        -0.2         0.8</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  c2                                   1         0.1           0           1</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  c3                                   2         0.2           0         0.5</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;Optimal solution                   1 after          3 iter.</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;Relative numeric accuracy ||*|| = 3.70074e-17</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; MEMO: lp_solve version 5.5.2.5 for 64 bit OS, with 64 bit REAL variables.</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      In the total iteration count 3, 0 (0.0%) were bound flips.</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      There were 0 refactorizations, 0 triggered by time and 0 by density.</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;       ... on average 3.0 major pivots per refactorization.</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      The largest [LUSOL v2.2.1.0] fact(B) had 4 NZ entries, 1.0x largest basis.</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      The constraint matrix inf-norm is 1, with a dynamic range of 1.</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      Time to load data was 0.000 seconds, presolve used 0.000 seconds,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;       ... 0.001 seconds in simplex solver, in total 0.001 seconds.</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;optStatus = 5</div>
 </div><!-- fragment --><h2><a class="anchor" id="Solvers_Examples_All"></a>
 All Examples</h2>
 <p>Possible dependencies: <a href="http://www.boost.org">Boost</a>, <a href="https://lemon.cs.elte.hu">Lemon</a>.</p>
 <ul>
-<li><a class="el" href="a00414.html">test/solvers/lpmcf/test_lpmcf.cpp</a></li>
-<li><a class="el" href="a00419.html">test/solvers/test_solvers.cpp</a></li>
-<li><a class="el" href="a00418.html">test/solvers/test_MultiKnapsackLagRelax.cpp</a></li>
-<li><a class="el" href="a00417.html">test/solvers/test_MinCostFlow.cpp</a></li>
-<li><a class="el" href="a00415.html">test/solvers/test_DualMinCostFlow.cpp</a></li>
-<li><a class="el" href="a00416.html">test/solvers/test_GurobiApi.cpp</a></li>
+<li><a class="el" href="a00418.html">test/solvers/lpmcf/test_lpmcf.cpp</a></li>
+<li><a class="el" href="a00424.html">test/solvers/test_solvers.cpp</a></li>
+<li><a class="el" href="a00423.html">test/solvers/test_MultiKnapsackLagRelax.cpp</a></li>
+<li><a class="el" href="a00422.html">test/solvers/test_MinCostFlow.cpp</a></li>
+<li><a class="el" href="a00419.html">test/solvers/test_DualMinCostFlow.cpp</a></li>
+<li><a class="el" href="a00420.html">test/solvers/test_GurobiApi.cpp</a></li>
+<li><a class="el" href="a00421.html">test/solvers/test_LPSolveApi.cpp</a></li>
 </ul>
 <h1><a class="anchor" id="Solvers_References"></a>
 References</h1>
 <ul>
-<li><a class="el" href="a00382.html">limbo/solvers/lpmcf/Lgf.h</a></li>
-<li><a class="el" href="a00383.html">limbo/solvers/lpmcf/LpDualMcf.h</a></li>
-<li><a class="el" href="a00379.html">limbo/solvers/api/CsdpEasySdpApi.h</a></li>
-<li><a class="el" href="a00380.html">limbo/solvers/api/GurobiApi.h</a></li>
-<li><a class="el" href="a00385.html">limbo/solvers/MultiKnapsackLagRelax.h</a></li>
-<li><a class="el" href="a00384.html">limbo/solvers/MinCostFlow.h</a></li>
-<li><a class="el" href="a00381.html">limbo/solvers/DualMinCostFlow.h</a> </li>
+<li><a class="el" href="a00386.html">limbo/solvers/lpmcf/Lgf.h</a></li>
+<li><a class="el" href="a00387.html">limbo/solvers/lpmcf/LpDualMcf.h</a></li>
+<li><a class="el" href="a00382.html">limbo/solvers/api/CsdpEasySdpApi.h</a></li>
+<li><a class="el" href="a00383.html">limbo/solvers/api/GurobiApi.h</a></li>
+<li><a class="el" href="a00384.html">limbo/solvers/api/LPSolveApi.h</a></li>
+<li><a class="el" href="a00389.html">limbo/solvers/MultiKnapsackLagRelax.h</a></li>
+<li><a class="el" href="a00388.html">limbo/solvers/MinCostFlow.h</a></li>
+<li><a class="el" href="a00385.html">limbo/solvers/DualMinCostFlow.h</a> </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

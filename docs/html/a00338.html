@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/makeutils/FindBoost.mk File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/geometry/Polygon2RectangleVec.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,37 +87,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_1fc182626e7eef33c760a3801c695bc4.html">makeutils</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_07e544b58feaf5e1ebe10360eb3a1613.html">geometry</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">FindBoost.mk File Reference</div>  </div>
+<div class="title">Polygon2RectangleVec.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>find Boost library given BOOST_DIR, set BOOST_LINK_FLAG to either STATIC_LINK_FLAG or DYNAMIC_LINK_FLAG  
+<p>a template specialization for std::vector. It is more efficient than generic version  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;limits&gt;</code><br />
+</div>
 <p><a href="a00338_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00228.html">limbo::geometry::Polygon2Rectangle&lt; PointSet, RectSet &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class implement conversion from manhattan polygon to rectangle  <a href="a00228.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00229.html">limbo::geometry::Polygon2Rectangle&lt; std::vector&lt; PointType &gt;, std::vector&lt; RectangleType &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class implement conversion from manhattan polygon to rectangle  <a href="a00229.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00158.html">limbo::geometry::Polygon2Rectangle&lt; std::vector&lt; PointType &gt;, std::vector&lt; RectangleType &gt; &gt;::is_equal_type</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">is equal helper  <a href="a00158.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00446"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00446.html">limbo::geometry</a></td></tr>
+<tr class="memdesc:a00446"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Geometry <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>find Boost library given BOOST_DIR, set BOOST_LINK_FLAG to either STATIC_LINK_FLAG or DYNAMIC_LINK_FLAG </p>
-<p>It check whether Boost library is installed as static library. If so, link to static library; otherwise, link to shared library. Use following command in the Makefile to view the results </p><pre class="fragment">$(info Boost: BOOST_LINK_FLAG = $(BOOST_LINK_FLAG))
-</pre><dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Jan 2017</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">BOOST_DIR</td><td>given path to Boost library </td></tr>
-    <tr><td class="paramname">BOOST_LINK_FLAG</td><td>set linking flag to Boost </td></tr>
-  </table>
-  </dd>
-</dl>
+<div class="textblock"><p>a template specialization for std::vector. It is more efficient than generic version </p>
+<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>May 2016 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00338_source.html">FindBoost.mk</a>.</p>
+<p>Definition in file <a class="el" href="a00338_source.html">Polygon2RectangleVec.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdsParser::GdsDB::ApplyCellReferenceActionDetails::XReflection Struct Reference</title>
+<title>Limbo: limbo::algorithms::partition::FMMultiWay&lt; GainCalcType &gt;::VertexMove Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,47 +89,82 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00431.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00432.html">GdsDB</a></li><li class="navelem"><a class="el" href="a00433.html">ApplyCellReferenceActionDetails</a></li><li class="navelem"><a class="el" href="a00280.html">XReflection</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00440.html">limbo</a></li><li class="navelem"><a class="el" href="a00441.html">algorithms</a></li><li class="navelem"><a class="el" href="a00443.html">partition</a></li><li class="navelem"><a class="el" href="a00109.html">FMMultiWay</a></li><li class="navelem"><a class="el" href="a00280.html">VertexMove</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00551.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00590.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser::GdsDB::ApplyCellReferenceActionDetails::XReflection Struct Reference</div>  </div>
+<div class="title">limbo::algorithms::partition::FMMultiWay&lt; GainCalcType &gt;::VertexMove Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>X reflection.  
+<p>a class denotes movement of vertex  
  <a href="a00280.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00328_source.html">FMMultiWay.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a96490352adf9936a2da566adc71d414f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html#a96490352adf9936a2da566adc71d414f">operator()</a> (GdsCellReference::point_type &amp;p) const </td></tr>
-<tr class="memdesc:a96490352adf9936a2da566adc71d414f"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to run operation.  <a href="#a96490352adf9936a2da566adc71d414f">More...</a><br /></td></tr>
-<tr class="separator:a96490352adf9936a2da566adc71d414f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab874e79318c3a2f564582fb933a4c0ec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html#ab874e79318c3a2f564582fb933a4c0ec">VertexMove</a> (int v, int op, gain_value_type g)</td></tr>
+<tr class="memdesc:ab874e79318c3a2f564582fb933a4c0ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#ab874e79318c3a2f564582fb933a4c0ec">More...</a><br /></td></tr>
+<tr class="separator:ab874e79318c3a2f564582fb933a4c0ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a8d85d53224ee2cb25edfdb00a2e05b82"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8d85d53224ee2cb25edfdb00a2e05b82"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html#a8d85d53224ee2cb25edfdb00a2e05b82">vertex</a></td></tr>
+<tr class="memdesc:a8d85d53224ee2cb25edfdb00a2e05b82"><td class="mdescLeft">&#160;</td><td class="mdescRight">vertex id <br /></td></tr>
+<tr class="separator:a8d85d53224ee2cb25edfdb00a2e05b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74bd7f272056bc393043ad6bc18941ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a74bd7f272056bc393043ad6bc18941ef"></a>
+signed char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html#a74bd7f272056bc393043ad6bc18941ef">orig_partition</a></td></tr>
+<tr class="memdesc:a74bd7f272056bc393043ad6bc18941ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">original partition <br /></td></tr>
+<tr class="separator:a74bd7f272056bc393043ad6bc18941ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61a99e08cf3f7b575ddf5777dbf8ee1d"><td class="memItemLeft" align="right" valign="top">gain_value_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html#a61a99e08cf3f7b575ddf5777dbf8ee1d">gain</a></td></tr>
+<tr class="separator:a61a99e08cf3f7b575ddf5777dbf8ee1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>X reflection. </p>
+<div class="textblock"><h3>template&lt;typename GainCalcType&gt;<br />
+class limbo::algorithms::partition::FMMultiWay&lt; GainCalcType &gt;::VertexMove</h3>
 
-<p>Definition at line <a class="el" href="a00359_source.html#l00334">334</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a96490352adf9936a2da566adc71d414f"></a>
+<p>a class denotes movement of vertex </p>
+
+<p>Definition at line <a class="el" href="a00328_source.html#l00041">41</a> of file <a class="el" href="a00328_source.html">FMMultiWay.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ab874e79318c3a2f564582fb933a4c0ec"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename GainCalcType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void GdsParser::GdsDB::ApplyCellReferenceActionDetails::XReflection::operator() </td>
+          <td class="memname"><a class="el" href="a00109.html">limbo::algorithms::partition::FMMultiWay</a>&lt; GainCalcType &gt;::VertexMove::VertexMove </td>
           <td>(</td>
-          <td class="paramtype">GdsCellReference::point_type &amp;&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>op</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gain_value_type&#160;</td>
+          <td class="paramname"><em>g</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -139,25 +174,45 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>API to run operation. </p>
+<p>constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">p</td><td>given position and perform operation on the position </td></tr>
+    <tr><td class="paramname">v</td><td>vertex </td></tr>
+    <tr><td class="paramname">op</td><td>original partition </td></tr>
+    <tr><td class="paramname">g</td><td>gain value </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00359_source.html#l00338">338</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
+<p>Definition at line <a class="el" href="a00328_source.html#l00050">50</a> of file <a class="el" href="a00328_source.html">FMMultiWay.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/<a class="el" href="a00359_source.html">GdsObjectHelpers.h</a></li>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a61a99e08cf3f7b575ddf5777dbf8ee1d"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GainCalcType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">gain_value_type <a class="el" href="a00109.html">limbo::algorithms::partition::FMMultiWay</a>&lt; GainCalcType &gt;::VertexMove::gain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>gain </p>
+
+<p>Definition at line <a class="el" href="a00328_source.html#l00045">45</a> of file <a class="el" href="a00328_source.html">FMMultiWay.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/partition/<a class="el" href="a00328_source.html">FMMultiWay.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:41 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

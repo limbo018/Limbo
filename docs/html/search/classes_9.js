@@ -12,7 +12,9 @@ var searchData=
   ['linearmodel',['LinearModel',['../a00171.html',1,'limbo::solvers']]],
   ['linearterm',['LinearTerm',['../a00172.html',1,'limbo::solvers']]],
   ['lpcoloring',['LPColoring',['../a00173.html',1,'limbo::algorithms::coloring']]],
-  ['lpdatabase',['LpDataBase',['../a00175.html',1,'']]],
-  ['lpdatabase',['LpDataBase',['../a00174.html',1,'LpParser']]],
-  ['lpdualmcf',['LpDualMcf',['../a00176.html',1,'limbo::solvers::lpmcf']]]
+  ['lpdatabase',['LpDataBase',['../a00175.html',1,'LpParser']]],
+  ['lpdatabase',['LpDataBase',['../a00174.html',1,'']]],
+  ['lpdualmcf',['LpDualMcf',['../a00176.html',1,'limbo::solvers::lpmcf']]],
+  ['lpsolvelinearapi',['LPSolveLinearApi',['../a00177.html',1,'limbo::solvers']]],
+  ['lpsolveparameters',['LPSolveParameters',['../a00178.html',1,'limbo::solvers']]]
 ];

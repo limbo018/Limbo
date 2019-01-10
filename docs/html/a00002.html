@@ -109,10 +109,10 @@ Introduction</h1>
 <p>This package provides various algorithms that are often used in optimization.</p>
 <h2><a class="anchor" id="Algorithms_Introduction_Partition"></a>
 Graph Partition</h2>
-<p>Partitioning algorithms are included such as FM partitioning <a class="el" href="a00449.html#CITEREF_PAR_DAC1982_FM">[3]</a> and its multiway extensions.</p>
+<p>Partitioning algorithms are included such as FM partitioning <a class="el" href="a00454.html#CITEREF_PAR_DAC1982_FM">[3]</a> and its multiway extensions.</p>
 <h2><a class="anchor" id="Algorithms_Introduction_Coloring"></a>
 Graph Coloring</h2>
-<p>Various graph coloring algorithms are included such as integer linear programming (ILP) based coloring <a class="el" href="a00449.html#CITEREF_TPL_TCAD2015_Yu">[6]</a>, semidefinite programming (SDP) based coloring <a class="el" href="a00449.html#CITEREF_TPL_TCAD2015_Yu">[6]</a>, iterative linear programming (LP) based coloring <a class="el" href="a00449.html#CITEREF_TPL_SPIE2016_Lin">[4]</a> , greedy approach <a class="el" href="a00449.html#CITEREF_MPL_CACM1979_Brelaz">[2]</a>, etc. It also provides graph simplification algorithms for the coloring problem, which can also be applied to other graph algorithms.</p>
+<p>Various graph coloring algorithms are included such as integer linear programming (ILP) based coloring <a class="el" href="a00454.html#CITEREF_TPL_TCAD2015_Yu">[6]</a>, semidefinite programming (SDP) based coloring <a class="el" href="a00454.html#CITEREF_TPL_TCAD2015_Yu">[6]</a>, iterative linear programming (LP) based coloring <a class="el" href="a00454.html#CITEREF_TPL_SPIE2016_Lin">[4]</a> , greedy approach <a class="el" href="a00454.html#CITEREF_MPL_CACM1979_Brelaz">[2]</a>, etc. It also provides graph simplification algorithms for the coloring problem, which can also be applied to other graph algorithms.</p>
 <h2><a class="anchor" id="Algorithms_Introduction_Misc"></a>
 Graph Misc</h2>
 <p>Implementation of graph utilities and some other graph algorithms such as maximum clique and maximum independent set.</p>
@@ -123,44 +123,44 @@ Placement</h2>
 Examples</h1>
 <h2><a class="anchor" id="Algorithms_Examples_FM"></a>
 FM Partition</h2>
-<p>See documented version: <a class="el" href="a00391.html">test/algorithms/test_FM.cpp</a> </p><div class="fragment"><div class="line"></div>
+<p>See documented version: <a class="el" href="a00395.html">test/algorithms/test_FM.cpp</a> </p><div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00325.html">limbo/algorithms/partition/FM.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="a00327.html">limbo/algorithms/partition/FM.h</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="keyword">using</span> std::cout;</div>
 <div class="line"><span class="keyword">using</span> std::endl;</div>
 <div class="line"></div>
-<div class="line"><span class="keyword">class </span><a class="code" href="a00196.html">Node</a> </div>
+<div class="line"><span class="keyword">class </span><a class="code" href="a00198.html">Node</a> </div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">public</span>:</div>
 <div class="line">        <span class="keyword">typedef</span> <span class="keywordtype">char</span> tie_id_type;</div>
 <div class="line">        <span class="keyword">typedef</span> <span class="keywordtype">int</span> weight_type;</div>
 <div class="line"></div>
-<div class="line">        <a class="code" href="a00196.html#a07ad92bb43ae8964c847dabfd2544a93">Node</a>(weight_type <span class="keyword">const</span>&amp; w, tie_id_type <span class="keyword">const</span>&amp; <span class="keywordtype">id</span>) </div>
+<div class="line">        <a class="code" href="a00198.html#a07ad92bb43ae8964c847dabfd2544a93">Node</a>(weight_type <span class="keyword">const</span>&amp; w, tie_id_type <span class="keyword">const</span>&amp; <span class="keywordtype">id</span>) </div>
 <div class="line">        {</div>
-<div class="line">            <a class="code" href="a00196.html#a23b9d463aa48dda2fbda0d91b93e6f1a">m_weight</a> = w;</div>
-<div class="line">            <a class="code" href="a00196.html#a32bc91d17b7621aa87728e9445d67451">m_id</a> = id;</div>
+<div class="line">            <a class="code" href="a00198.html#a23b9d463aa48dda2fbda0d91b93e6f1a">m_weight</a> = w;</div>
+<div class="line">            <a class="code" href="a00198.html#a32bc91d17b7621aa87728e9445d67451">m_id</a> = id;</div>
 <div class="line">        }</div>
 <div class="line"></div>
-<div class="line">        tie_id_type <a class="code" href="a00196.html#a324e3755c2598c6cd50cf14d98ea7a6f">tie_id</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="a00196.html#a32bc91d17b7621aa87728e9445d67451">m_id</a>;}</div>
-<div class="line">        weight_type <a class="code" href="a00196.html#a3c00b2daf6ed3954ff47b14e0d0eb4eb">weight</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="a00196.html#a23b9d463aa48dda2fbda0d91b93e6f1a">m_weight</a>;}</div>
+<div class="line">        tie_id_type <a class="code" href="a00198.html#a324e3755c2598c6cd50cf14d98ea7a6f">tie_id</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="a00198.html#a32bc91d17b7621aa87728e9445d67451">m_id</a>;}</div>
+<div class="line">        weight_type <a class="code" href="a00198.html#a3c00b2daf6ed3954ff47b14e0d0eb4eb">weight</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="a00198.html#a23b9d463aa48dda2fbda0d91b93e6f1a">m_weight</a>;}</div>
 <div class="line"></div>
 <div class="line">    <span class="keyword">protected</span>:</div>
-<div class="line">        tie_id_type <a class="code" href="a00196.html#a32bc91d17b7621aa87728e9445d67451">m_id</a>; </div>
-<div class="line">        weight_type <a class="code" href="a00196.html#a23b9d463aa48dda2fbda0d91b93e6f1a">m_weight</a>; </div>
+<div class="line">        tie_id_type <a class="code" href="a00198.html#a32bc91d17b7621aa87728e9445d67451">m_id</a>; </div>
+<div class="line">        weight_type <a class="code" href="a00198.html#a23b9d463aa48dda2fbda0d91b93e6f1a">m_weight</a>; </div>
 <div class="line">};</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00390.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a00394.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
 <div class="line">{</div>
 <div class="line">    array&lt;Node*, 8&gt; vNode;</div>
-<div class="line">    vNode[0] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;a&#39;</span>);</div>
-<div class="line">    vNode[1] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;b&#39;</span>);</div>
-<div class="line">    vNode[2] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;c&#39;</span>);</div>
-<div class="line">    vNode[3] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;d&#39;</span>);</div>
-<div class="line">    vNode[4] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;e&#39;</span>);</div>
-<div class="line">    vNode[5] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;f&#39;</span>);</div>
-<div class="line">    vNode[6] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;g&#39;</span>);</div>
-<div class="line">    vNode[7] = <span class="keyword">new</span> <a class="code" href="a00196.html">Node</a> (1, <span class="charliteral">&#39;h&#39;</span>);</div>
+<div class="line">    vNode[0] = <span class="keyword">new</span> <a class="code" href="a00198.html">Node</a> (1, <span class="charliteral">&#39;a&#39;</span>);</div>
+<div class="line">    vNode[1] = <span class="keyword">new</span> <a class="code" href="a00198.html">Node</a> (1, <span class="charliteral">&#39;b&#39;</span>);</div>
+<div class="line">    vNode[2] = <span class="keyword">new</span> <a class="code" href="a00198.html">Node</a> (1, <span class="charliteral">&#39;c&#39;</span>);</div>
+<div class="line">    vNode[3] = <span class="keyword">new</span> <a class="code" href="a00198.html">Node</a> (1, <span class="charliteral">&#39;d&#39;</span>);</div>
+<div class="line">    vNode[4] = <span class="keyword">new</span> <a class="code" href="a00198.html">Node</a> (1, <span class="charliteral">&#39;e&#39;</span>);</div>
+<div class="line">    vNode[5] = <span class="keyword">new</span> <a class="code" href="a00198.html">Node</a> (1, <span class="charliteral">&#39;f&#39;</span>);</div>
+<div class="line">    vNode[6] = <span class="keyword">new</span> <a class="code" href="a00198.html">Node</a> (1, <span class="charliteral">&#39;g&#39;</span>);</div>
+<div class="line">    vNode[7] = <span class="keyword">new</span> <a class="code" href="a00198.html">Node</a> (1, <span class="charliteral">&#39;h&#39;</span>);</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="a00104.html">limbo::algorithms::partition::FM&lt;Node, double&gt;</a> fm; </div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; vNode.size(); ++i)</div>
@@ -270,50 +270,50 @@ FM Partition</h2>
 All Examples</h2>
 <p>Possible dependencies: <a href="http://www.boost.org">Boost</a>, <a href="https://www.gurobi.com">Gurobi</a>, <a href="https://projects.coin-or.org/Cbc">Cbc</a>, <a href="https://lemon.cs.elte.hu">Lemon</a>, <a class="el" href="a00042.html">Csdp</a>, <a class="el" href="a00042.html">OpenBLAS</a>.</p>
 <ul>
-<li><a class="el" href="a00391.html">test/algorithms/test_FM.cpp</a></li>
-<li><a class="el" href="a00390.html">test/algorithms/test_ChromaticNumber.cpp</a></li>
-<li><a class="el" href="a00392.html">test/algorithms/test_GraphSimplification.cpp</a></li>
-<li><a class="el" href="a00393.html">test/algorithms/test_ILPColoring.cpp</a></li>
-<li><a class="el" href="a00396.html">test/algorithms/test_SDPColoring.cpp</a></li>
-<li><a class="el" href="a00394.html">test/algorithms/test_LPColoring.cpp</a></li>
+<li><a class="el" href="a00395.html">test/algorithms/test_FM.cpp</a></li>
+<li><a class="el" href="a00394.html">test/algorithms/test_ChromaticNumber.cpp</a></li>
+<li><a class="el" href="a00396.html">test/algorithms/test_GraphSimplification.cpp</a></li>
+<li><a class="el" href="a00397.html">test/algorithms/test_ILPColoring.cpp</a></li>
+<li><a class="el" href="a00400.html">test/algorithms/test_SDPColoring.cpp</a></li>
+<li><a class="el" href="a00398.html">test/algorithms/test_LPColoring.cpp</a></li>
 </ul>
 <h1><a class="anchor" id="Algorithms_References"></a>
 References</h1>
 <h2><a class="anchor" id="Algorithms_References_Partition"></a>
 Graph Partition</h2>
 <ul>
-<li><a class="el" href="a00325.html">limbo/algorithms/partition/FM.h</a></li>
-<li><a class="el" href="a00326.html">limbo/algorithms/partition/FMMultiWay.h</a></li>
+<li><a class="el" href="a00327.html">limbo/algorithms/partition/FM.h</a></li>
+<li><a class="el" href="a00328.html">limbo/algorithms/partition/FMMultiWay.h</a></li>
 </ul>
 <h2><a class="anchor" id="Algorithms_References_Coloring"></a>
 Graph Coloring</h2>
 <ul>
-<li><a class="el" href="a00313.html">limbo/algorithms/coloring/Coloring.h</a></li>
-<li><a class="el" href="a00311.html">limbo/algorithms/coloring/BacktrackColoring.h</a></li>
-<li><a class="el" href="a00312.html">limbo/algorithms/coloring/ChromaticNumber.h</a></li>
-<li><a class="el" href="a00314.html">limbo/algorithms/coloring/GraphSimplification.h</a></li>
-<li><a class="el" href="a00315.html">limbo/algorithms/coloring/GreedyColoring.h</a></li>
-<li><a class="el" href="a00316.html">limbo/algorithms/coloring/ILPColoring.h</a></li>
-<li><a class="el" href="a00317.html">limbo/algorithms/coloring/ILPColoringLemonCbc.h</a></li>
-<li><a class="el" href="a00318.html">limbo/algorithms/coloring/LPColoring.h</a></li>
-<li><a class="el" href="a00321.html">limbo/algorithms/coloring/SDPColoringCsdp.h</a></li>
+<li><a class="el" href="a00315.html">limbo/algorithms/coloring/Coloring.h</a></li>
+<li><a class="el" href="a00313.html">limbo/algorithms/coloring/BacktrackColoring.h</a></li>
+<li><a class="el" href="a00314.html">limbo/algorithms/coloring/ChromaticNumber.h</a></li>
+<li><a class="el" href="a00316.html">limbo/algorithms/coloring/GraphSimplification.h</a></li>
+<li><a class="el" href="a00317.html">limbo/algorithms/coloring/GreedyColoring.h</a></li>
+<li><a class="el" href="a00318.html">limbo/algorithms/coloring/ILPColoring.h</a></li>
+<li><a class="el" href="a00319.html">limbo/algorithms/coloring/ILPColoringLemonCbc.h</a></li>
+<li><a class="el" href="a00320.html">limbo/algorithms/coloring/LPColoring.h</a></li>
+<li><a class="el" href="a00323.html">limbo/algorithms/coloring/SDPColoringCsdp.h</a></li>
 </ul>
 <h2><a class="anchor" id="Algorithms_References_Misc"></a>
 Graph Misc</h2>
 <ul>
-<li><a class="el" href="a00322.html">limbo/algorithms/GraphUtility.h</a></li>
-<li><a class="el" href="a00323.html">limbo/algorithms/MaxClique.h</a></li>
-<li><a class="el" href="a00324.html">limbo/algorithms/MaxIndependentSet.h</a></li>
+<li><a class="el" href="a00324.html">limbo/algorithms/GraphUtility.h</a></li>
+<li><a class="el" href="a00325.html">limbo/algorithms/MaxClique.h</a></li>
+<li><a class="el" href="a00326.html">limbo/algorithms/MaxIndependentSet.h</a></li>
 </ul>
 <h2><a class="anchor" id="Algorithms_Reference_Placement"></a>
 Placement</h2>
 <ul>
-<li><a class="el" href="a00327.html">limbo/algorithms/placement/GreedySearch.h</a> </li>
+<li><a class="el" href="a00329.html">limbo/algorithms/placement/GreedySearch.h</a> </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

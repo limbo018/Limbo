@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/MaxClique.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/SDPColoringCsdp.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,62 +87,61 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li><li class="navelem"><a class="el" href="dir_eec373e4006d7befdff7678452c20bc3.html">coloring</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">MaxClique.h File Reference</div>  </div>
+<div class="title">SDPColoringCsdp.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>use boost::bron_kerbosch_all_cliques to find all cliques and the maximum ones  
+<p>graph coloring algorithm based on semidefinite programming (SDP)  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;deque&gt;</code><br />
-<code>#include &lt;boost/graph/bron_kerbosch_all_cliques.hpp&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00392_source.html">limbo/string/String.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00316_source.html">limbo/algorithms/coloring/GraphSimplification.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00315_source.html">limbo/algorithms/coloring/Coloring.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00313_source.html">limbo/algorithms/coloring/BacktrackColoring.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00328_source.html">limbo/algorithms/partition/FMMultiWay.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00331_source.html">limbo/containers/DisjointSet.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00382_source.html">limbo/solvers/api/CsdpEasySdpApi.h</a>&gt;</code><br />
 </div>
 <p><a href="a00323_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00180.html">limbo::algorithms::max_clique_visitor_type&lt; GraphType &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for boost::bron_kerbosch_all_cliques  <a href="a00180.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00248.html">limbo::algorithms::coloring::SDPColoringCsdp&lt; GraphType &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00108.html">limbo::algorithms::coloring::SDPColoringCsdp&lt; GraphType &gt;::FMGainCalcType</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00436"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html">limbo::algorithms</a></td></tr>
-<tr class="memdesc:a00436"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.algorithms <br /></td></tr>
+<tr class="memitem:a00441"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00441.html">limbo::algorithms</a></td></tr>
+<tr class="memdesc:a00441"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.algorithms <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:adcf6a9b8b8cca4d16076dff19caeb823"><td class="memTemplParams" colspan="2">template&lt;typename GraphType &gt; </td></tr>
-<tr class="memitem:adcf6a9b8b8cca4d16076dff19caeb823"><td class="memTemplItemLeft" align="right" valign="top">vector&lt; vector&lt; typename <br class="typebreak" />
-boost::graph_traits&lt; GraphType &gt;<br class="typebreak" />
-::vertex_descriptor &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00436.html#adcf6a9b8b8cca4d16076dff19caeb823">limbo::algorithms::max_clique</a> (GraphType const &amp;g, size_t clique_num)</td></tr>
-<tr class="memdesc:adcf6a9b8b8cca4d16076dff19caeb823"><td class="mdescLeft">&#160;</td><td class="mdescRight">use boost::bron_kerbosch_all_cliques to find all cliques and the maximum ones  <a href="#adcf6a9b8b8cca4d16076dff19caeb823">More...</a><br /></td></tr>
-<tr class="separator:adcf6a9b8b8cca4d16076dff19caeb823"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00442"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00442.html">limbo::algorithms::coloring</a></td></tr>
+<tr class="memdesc:a00442"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Algorithms.Coloring <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>use boost::bron_kerbosch_all_cliques to find all cliques and the maximum ones </p>
+<div class="textblock"><p>graph coloring algorithm based on semidefinite programming (SDP) </p>
+<p>"Layout decomposition for triple patterning lithography", Bei Yu, Kun Yuan, Duo Ding, and David Z. Pan, IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD), 34(3):433–446, March 2015.</p>
+<p>See <a class="el" href="a00248.html">limbo::algorithms::coloring::SDPColoringCsdp</a> for details.</p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>May 2015 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Sep 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00323_source.html">MaxClique.h</a>.</p>
+<p>Definition in file <a class="el" href="a00323_source.html">SDPColoringCsdp.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

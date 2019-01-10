@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/coloring/BacktrackColoring.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/test/string/test_compare.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,52 +87,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li><li class="navelem"><a class="el" href="dir_eec373e4006d7befdff7678452c20bc3.html">coloring</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_1439c9d351dd978c38b2510729161b97.html">string</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">BacktrackColoring.h File Reference</div>  </div>
+<div class="title">test_compare.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>graph coloring by backtracking  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="a00313_source.html">limbo/algorithms/coloring/Coloring.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00315_source.html">limbo/algorithms/coloring/GreedyColoring.h</a>&gt;</code><br />
-</div>
-<p><a href="a00311_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00046.html">limbo::algorithms::coloring::BacktrackColoring&lt; GraphType &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00436"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html">limbo::algorithms</a></td></tr>
-<tr class="memdesc:a00436"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.algorithms <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00437"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00437.html">limbo::algorithms::coloring</a></td></tr>
-<tr class="memdesc:a00437"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Algorithms.Coloring <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>graph coloring by backtracking </p>
-<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Jun 2015 </dd></dl>
-
-<p>Definition in file <a class="el" href="a00311_source.html">BacktrackColoring.h</a>.</p>
-</div></div><!-- contents -->
+<a href="a00425.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00392.html">limbo/string/String.h</a>&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="a00425.html#ae66f6b31b5ad750f1fe042a706a4e3d4">   13</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00425.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    std::string s1 = <span class="stringliteral">&quot;limbo2343slimbo&quot;</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    std::string s2 = <span class="stringliteral">&quot;LiMbo2343SliMbo&quot;</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordflow">if</span> (s1 == s2)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;string &quot;</span> &lt;&lt; s1 &lt;&lt; <span class="stringliteral">&quot; and &quot;</span> &lt;&lt; s2 &lt;&lt; <span class="stringliteral">&quot; is equal case-sensitive\n&quot;</span>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;string &quot;</span> &lt;&lt; s1 &lt;&lt; <span class="stringliteral">&quot; and &quot;</span> &lt;&lt; s2 &lt;&lt; <span class="stringliteral">&quot; is not equal case-sensitive\n&quot;</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="a00440.html#ab7355468e379b0ed4f5b8425d7a35d02">limbo::iequals</a>(s1, s2))</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;string &quot;</span> &lt;&lt; s1 &lt;&lt; <span class="stringliteral">&quot; and &quot;</span> &lt;&lt; s2 &lt;&lt; <span class="stringliteral">&quot; is equal case-insensitive\n&quot;</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;string &quot;</span> &lt;&lt; s1 &lt;&lt; <span class="stringliteral">&quot; and &quot;</span> &lt;&lt; s2 &lt;&lt; <span class="stringliteral">&quot; is not equal case-insensitive\n&quot;</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="ttc" id="a00440_html_ab7355468e379b0ed4f5b8425d7a35d02"><div class="ttname"><a href="a00440.html#ab7355468e379b0ed4f5b8425d7a35d02">limbo::iequals</a></div><div class="ttdeci">bool iequals(string const &amp;s1, string const &amp;s2)</div><div class="ttdoc">check two strings equal, case-insensitive </div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00108">String.h:108</a></div></div>
+<div class="ttc" id="a00425_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="a00425.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">main function </div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00013">test_compare.cpp:13</a></div></div>
+<div class="ttc" id="a00392_html"><div class="ttname"><a href="a00392.html">String.h</a></div><div class="ttdoc">Check string is integer, floating point, number... Convert string to upper/lower cases. </div></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

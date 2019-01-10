@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/solvers/MinCostFlow.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/solvers/api/LPSolveApi.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,85 +87,100 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_bf387cd841d140e51bbf6ba57d00cc45.html">solvers</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_bf387cd841d140e51bbf6ba57d00cc45.html">solvers</a></li><li class="navelem"><a class="el" href="dir_8bc412fedb5eea69bf8f8b3210d993e9.html">api</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">MinCostFlow.h File Reference</div>  </div>
+<div class="title">LPSolveApi.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Solve a special case of linear programming with primal min-cost flow.  
+<p>lpsolve API wrapper using its C API.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;lemon/smart_graph.h&gt;</code><br />
-<code>#include &lt;lemon/network_simplex.h&gt;</code><br />
-<code>#include &lt;lemon/cost_scaling.h&gt;</code><br />
-<code>#include &lt;lemon/capacity_scaling.h&gt;</code><br />
-<code>#include &lt;lemon/cycle_canceling.h&gt;</code><br />
-<code>#include &lt;lemon/lgf_writer.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00387_source.html">limbo/solvers/Solvers.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;list&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00391_source.html">limbo/solvers/Solvers.h</a>&gt;</code><br />
+<code>#include &quot;lp_lib.h&quot;</code><br />
 </div>
 <p><a href="a00384_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html">limbo::solvers::MinCostFlowSolver&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A base class of min-cost flow solver.  <a href="a00184.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00178.html">limbo::solvers::LPSolveParameters</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for custom LPSolve parameters.  <a href="a00178.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00052.html">limbo::solvers::CapacityScaling&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capacity scaling algorithm for min-cost flow.  <a href="a00052.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00077.html">limbo::solvers::CostScaling&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cost scaling algorithm for min-cost flow.  <a href="a00077.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html">limbo::solvers::NetworkSimplex&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Network simplex algorithm for min-cost flow.  <a href="a00195.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00078.html">limbo::solvers::CycleCanceling&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cycle canceling algorithm for min-cost flow.  <a href="a00078.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00183.html">limbo::solvers::MinCostFlow&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">LP solved with min-cost flow.  <a href="a00183.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html">limbo::solvers::MinCostFlowSolver&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A base class of min-cost flow solver.  <a href="a00184.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00052.html">limbo::solvers::CapacityScaling&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capacity scaling algorithm for min-cost flow.  <a href="a00052.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00077.html">limbo::solvers::CostScaling&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cost scaling algorithm for min-cost flow.  <a href="a00077.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html">limbo::solvers::NetworkSimplex&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Network simplex algorithm for min-cost flow.  <a href="a00195.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00078.html">limbo::solvers::CycleCanceling&lt; T, V &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cycle canceling algorithm for min-cost flow.  <a href="a00078.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00177.html">limbo::solvers::LPSolveLinearApi&lt; T, V &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">LPSolve API with <a class="el" href="a00171.html">limbo::solvers::LinearModel</a>.  <a href="a00177.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00443"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html">limbo::solvers</a></td></tr>
-<tr class="memdesc:a00443"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace Limbo.Solvers <br /></td></tr>
+<tr class="memitem:a00448"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00448.html">limbo::solvers</a></td></tr>
+<tr class="memdesc:a00448"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace Limbo.Solvers <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:af632a9c255f2339920b9ce4e7b95d79b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00448.html#a500190a99a5762b6aa25aec1230479f0">limbo::solvers::SolverProperty</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00384.html#af632a9c255f2339920b9ce4e7b95d79b">getSolveStatus</a> (int status)</td></tr>
+<tr class="memdesc:af632a9c255f2339920b9ce4e7b95d79b"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert lpsolve status to <a class="el" href="a00448.html" title="namespace Limbo.Solvers ">limbo::solvers</a> status  <a href="#af632a9c255f2339920b9ce4e7b95d79b">More...</a><br /></td></tr>
+<tr class="separator:af632a9c255f2339920b9ce4e7b95d79b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Solve a special case of linear programming with primal min-cost flow. </p>
+<div class="textblock"><p>lpsolve API wrapper using its C API. </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Nov 2017 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Dec 2018 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00384_source.html">MinCostFlow.h</a>.</p>
-</div></div><!-- contents -->
+<p>Definition in file <a class="el" href="a00384_source.html">LPSolveApi.h</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="af632a9c255f2339920b9ce4e7b95d79b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00448.html#a500190a99a5762b6aa25aec1230479f0">limbo::solvers::SolverProperty</a> getSolveStatus </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>status</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>convert lpsolve status to <a class="el" href="a00448.html" title="namespace Limbo.Solvers ">limbo::solvers</a> status </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">status</td><td>solving status from lpsolve </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>solving status in <a class="el" href="a00448.html" title="namespace Limbo.Solvers ">limbo::solvers</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="a00384_source.html#l00031">31</a> of file <a class="el" href="a00384_source.html">LPSolveApi.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/lef/adapt/LefDriver.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/stream/GdsRecords.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,60 +87,70 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_f132a8c89f65d1e48338514f1f94990c.html">lef</a></li><li class="navelem"><a class="el" href="dir_f56dd2cf84117a881ee6162fd08db923.html">adapt</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_91c0dd7fad8f72975de99135227c035c.html">gdsii</a></li><li class="navelem"><a class="el" href="dir_8d18058ccbba2fc95fd5931717233785.html">stream</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">LefDriver.h File Reference</div>  </div>
+<div class="title">GdsRecords.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Driver for Lef parser.  
+<p>enum of GDSII records and data types  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00366_source.html">limbo/parsers/lef/adapt/LefDataBase.h</a>&gt;</code><br />
-</div>
+
 <p><a href="a00367_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00085.html">LefParser::Driver</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00133.html">GdsParser::GdsRecords</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GDSII records. The records are numbered with consecutive integers, so we can use simple array to save all the data.  <a href="a00133.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00120.html">GdsParser::GdsData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">data type  <a href="a00120.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00434"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00434.html">LefParser</a></td></tr>
-<tr class="memdesc:a00434"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for <a class="el" href="a00434.html" title="namespace for LefParser ">LefParser</a> <br /></td></tr>
+<tr class="memitem:a00436"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html">GdsParser</a></td></tr>
+<tr class="memdesc:a00436"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.GdsParser <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:acfb3427509802ca74739d10ca47b2431"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00434.html#acfb3427509802ca74739d10ca47b2431">LefParser::read</a> (<a class="el" href="a00166.html">LefDataBase</a> &amp;db, const string &amp;lefFile)</td></tr>
-<tr class="memdesc:acfb3427509802ca74739d10ca47b2431"><td class="mdescLeft">&#160;</td><td class="mdescRight">API for <a class="el" href="a00434.html" title="namespace for LefParser ">LefParser</a>. Read LEF file and initialize database by calling user-defined callback functions.  <a href="#acfb3427509802ca74739d10ca47b2431">More...</a><br /></td></tr>
-<tr class="separator:acfb3427509802ca74739d10ca47b2431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">accessors</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>accessors to enum types and mapping arrays </p>
+</div></td></tr>
+<tr class="memitem:a7534469cea95bb7c254ece11c3cefdec"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html#a7534469cea95bb7c254ece11c3cefdec">GdsParser::gds_record_ascii</a> (int record_type)</td></tr>
+<tr class="separator:a7534469cea95bb7c254ece11c3cefdec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ea7fd606ca5735b8549d575c0410bb7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html#a7ea7fd606ca5735b8549d575c0410bb7">GdsParser::gds_record_description</a> (int record_type)</td></tr>
+<tr class="separator:a7ea7fd606ca5735b8549d575c0410bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc73bc6fb3dddaa824f215cc3a5cc23d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html#acc73bc6fb3dddaa824f215cc3a5cc23d">GdsParser::gds_record_expected_data</a> (int record_type)</td></tr>
+<tr class="separator:acc73bc6fb3dddaa824f215cc3a5cc23d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5b1344671c56cf36e5d3677e3182cd4"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html#ad5b1344671c56cf36e5d3677e3182cd4">GdsParser::gds_data_ascii</a> (int data_type)</td></tr>
+<tr class="separator:ad5b1344671c56cf36e5d3677e3182cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c237c039cce6ee2ef51b74d8f683328"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html#a8c237c039cce6ee2ef51b74d8f683328">GdsParser::gds_data_description</a> (int data_type)</td></tr>
+<tr class="separator:a8c237c039cce6ee2ef51b74d8f683328"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22bf39e98e6bc85bdf12db13629f45ea"><td class="memItemLeft" align="right" valign="top">GdsRecords::EnumType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html#a22bf39e98e6bc85bdf12db13629f45ea">GdsParser::gds_record_type</a> (int numeric)</td></tr>
+<tr class="memdesc:a22bf39e98e6bc85bdf12db13629f45ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert integer to enum  <a href="#a22bf39e98e6bc85bdf12db13629f45ea">More...</a><br /></td></tr>
+<tr class="separator:a22bf39e98e6bc85bdf12db13629f45ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae68d9b1c25df75c0f0c4d51d11adea2c"><td class="memItemLeft" align="right" valign="top">GdsData::EnumType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html#ae68d9b1c25df75c0f0c4d51d11adea2c">GdsParser::gds_data_type</a> (int numeric)</td></tr>
+<tr class="memdesc:ae68d9b1c25df75c0f0c4d51d11adea2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert integer to enum  <a href="#ae68d9b1c25df75c0f0c4d51d11adea2c">More...</a><br /></td></tr>
+<tr class="separator:ae68d9b1c25df75c0f0c4d51d11adea2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Driver for Lef parser. </p>
-<ul>
-<li><a class="el" href="a00434.html" title="namespace for LefParser ">LefParser</a> is modified from Cadence open source parser. Original version stays in C style and has very poor support to object-oriented programming. <a class="el" href="a00434.html" title="namespace for LefParser ">LefParser</a> borrows its data structure and bison grammar, but wrap it in C++ style. Please follow the <a class="el" href="a00024.html#Parsers_LefParser_License">LICENSE</a> agreement from Cadence when use the parser.</li>
-<li>The original data structure abuses malloc and free without proper initialization to pointers, which may lead to memory allocating problems. Although I fixed some of the bugs and it looks good with current benchmarks, there may still contain problems with other benchmarks.</li>
-<li>Another issue is that keywords may have conflicts with STRING in LefParser.yy, so I created a generalized string type GSTRING which includes all string and keywords. I did not replace all STRING with GSTRING, because it may result in performance degradation. If a new benchmark causes syntax error during parsing, then replace STRING of specific grammar with GSTRING. The main idea is to reduce the usage of GSTRING.</li>
-</ul>
+<div class="textblock"><p>enum of GDSII records and data types </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Oct 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00367_source.html">LefDriver.h</a>.</p>
+<p>Definition in file <a class="el" href="a00367_source.html">GdsRecords.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

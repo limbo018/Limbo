@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/geometry/api/bLibApi.h Source File</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/containers/DisjointSet.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,101 +87,110 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_07e544b58feaf5e1ebe10360eb3a1613.html">geometry</a></li><li class="navelem"><a class="el" href="dir_fc5098a7dee8c311c6fadc7f621cfa43.html">api</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_67961cc7bc7695996924d6bf198dc652.html">containers</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">bLibApi.h</div>  </div>
+<div class="title">DisjointSet.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00331.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifndef _LIMBO_GEOMETRY_API_BLIBAPI_H</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define _LIMBO_GEOMETRY_API_BLIBAPI_H</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00334.html">limbo/geometry/Geometry.h</a>&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#ifndef LIMBO_CONTAINERS_DISJOINTSET_H</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define LIMBO_CONTAINERS_DISJOINTSET_H</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00435.html">limbo</a> </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{ </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>geometry </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">template</span> &lt;&gt;</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="a00221.html">   25</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00220.html">point_traits</a>&lt;bLib::bPoint&gt;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">typedef</span> bLib::bPoint point_type;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">typedef</span> <span class="keywordtype">int</span> coordinate_type;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a00221.html#a2c3ac99ec9cfcffa2acadfe561f62b1b">   36</a></span>&#160;    <span class="keyword">static</span> coordinate_type <span class="keyword">get</span>(<span class="keyword">const</span> point_type&amp; point, <a class="code" href="a00199.html">orientation_2d</a> <span class="keyword">const</span>&amp; orient) </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00440.html">limbo</a> </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{ </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="a00445.html">   23</a></span>&#160;<span class="keyword">namespace </span>containers </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="a00083.html">   28</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00083.html">DisjointSet</a> </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SubsetHelperType&gt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a00083.html#aa35ab9c800ca1f8aa47cbe82d1f9afa4">   36</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">typename</span> SubsetHelperType::element_type <span class="keyword">const</span>&amp; <a class="code" href="a00083.html#aa35ab9c800ca1f8aa47cbe82d1f9afa4">find_set</a>(SubsetHelperType <span class="keyword">const</span>&amp; gp, <span class="keyword">typename</span> SubsetHelperType::element_type <span class="keyword">const</span>&amp; e)</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">if</span> (orient == HORIZONTAL) <span class="keywordflow">return</span> point.x();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (orient == VERTICAL) <span class="keywordflow">return</span> point.y();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">else</span> assert(0);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">if</span> (gp.get_parent(e) == e) <span class="comment">// if e is its own parent, it reaches to the top set </span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordflow">return</span> e;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="a00083.html#aa35ab9c800ca1f8aa47cbe82d1f9afa4">find_set</a>(gp, gp.get_parent(e));</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a00221.html#aefe052fdf5afb65df24fc888f5fa7299">   46</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="a00221.html#aefe052fdf5afb65df24fc888f5fa7299">set</a>(point_type&amp; point, <a class="code" href="a00199.html">orientation_2d</a> <span class="keyword">const</span>&amp; orient, coordinate_type <span class="keyword">const</span>&amp; value) </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">if</span> (orient == HORIZONTAL) <span class="keywordflow">return</span> point.set(value, point.y());</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (orient == VERTICAL) <span class="keywordflow">return</span> point.set(point.x(), value);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">else</span> assert(0);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="a00221.html#ab2c2c6639fc6b81f71c0ae0f32ecd1b1">   56</a></span>&#160;    <span class="keyword">static</span> point_type <a class="code" href="a00221.html#ab2c2c6639fc6b81f71c0ae0f32ecd1b1">construct</a>(coordinate_type <span class="keyword">const</span>&amp; x, coordinate_type <span class="keyword">const</span>&amp; y) </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordflow">return</span> point_type(x, y);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">template</span> &lt;&gt;</div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="a00238.html">   64</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00237.html">rectangle_traits</a>&lt;bLib::bBox&gt;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">typedef</span> bLib::bBox rectangle_type;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">typedef</span> <span class="keywordtype">int</span> coordinate_type;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="a00238.html#abcc1c3ae344072a39ecfef971b8aa6ee">   75</a></span>&#160;    <span class="keyword">static</span> coordinate_type <span class="keyword">get</span>(<span class="keyword">const</span> rectangle_type&amp; rect, <a class="code" href="a00441.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> <span class="keyword">const</span>&amp; dir) </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">switch</span> (dir)</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keywordflow">case</span> LEFT: <span class="keywordflow">return</span> rect.x1();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">case</span> BOTTOM: <span class="keywordflow">return</span> rect.y1();</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordflow">case</span> RIGHT: <span class="keywordflow">return</span> rect.x2();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordflow">case</span> TOP: <span class="keywordflow">return</span> rect.y2();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">default</span>: assert(0);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
-<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="a00238.html#a1e89a3d8914ac9adae29c9a22fdcc1cd">   90</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="a00238.html#a1e89a3d8914ac9adae29c9a22fdcc1cd">set</a>(rectangle_type&amp; rect, <a class="code" href="a00441.html#a4cbc68a48a3effe8b97c1b85b1db8304">direction_2d</a> <span class="keyword">const</span>&amp; dir, coordinate_type <span class="keyword">const</span>&amp; value) </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">switch</span> (dir)</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordflow">case</span> LEFT: rect.set(value, rect.y1(), rect.x2(), rect.y2()); <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordflow">case</span> BOTTOM: rect.set(rect.x1(), value, rect.x2(), rect.y2()); <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keywordflow">case</span> RIGHT: rect.set(rect.x1(), rect.y1(), value, rect.y2()); <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordflow">case</span> TOP: rect.set(rect.x1(), rect.y1(), rect.x2(), value); <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="keywordflow">default</span>: assert(0);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
-<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="a00238.html#aea62b079184b83df2019100a00ddb938">  104</a></span>&#160;    <span class="keyword">static</span> rectangle_type <a class="code" href="a00238.html#aea62b079184b83df2019100a00ddb938">construct</a>(coordinate_type <span class="keyword">const</span>&amp; xl, coordinate_type <span class="keyword">const</span>&amp; yl, </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            coordinate_type <span class="keyword">const</span>&amp; xh, coordinate_type <span class="keyword">const</span>&amp; yh) </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    {</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">return</span> rectangle_type(xl, yl, xh, yh); </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;};</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}}<span class="comment">// namespace limbo // namespace geometry</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#endif </span></div>
-<div class="ttc" id="a00441_html_a4cbc68a48a3effe8b97c1b85b1db8304"><div class="ttname"><a href="a00441.html#a4cbc68a48a3effe8b97c1b85b1db8304">limbo::geometry::direction_2d</a></div><div class="ttdeci">direction_2d</div><div class="ttdoc">direction type for rectangles </div><div class="ttdef"><b>Definition:</b> <a href="a00334_source.html#l00072">Geometry.h:72</a></div></div>
-<div class="ttc" id="a00435_html"><div class="ttname"><a href="a00435.html">limbo</a></div><div class="ttdoc">namespace for Limbo </div><div class="ttdef"><b>Definition:</b> <a href="a00322_source.html#l00022">GraphUtility.h:22</a></div></div>
-<div class="ttc" id="a00199_html"><div class="ttname"><a href="a00199.html">limbo::geometry::orientation_2d</a></div><div class="ttdoc">a class denoting orientation of lines </div><div class="ttdef"><b>Definition:</b> <a href="a00334_source.html#l00092">Geometry.h:92</a></div></div>
-<div class="ttc" id="a00238_html_a1e89a3d8914ac9adae29c9a22fdcc1cd"><div class="ttname"><a href="a00238.html#a1e89a3d8914ac9adae29c9a22fdcc1cd">limbo::geometry::rectangle_traits&lt; bLib::bBox &gt;::set</a></div><div class="ttdeci">static void set(rectangle_type &amp;rect, direction_2d const &amp;dir, coordinate_type const &amp;value)</div><div class="ttdoc">set coordinate for rectangle </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00090">bLibApi.h:90</a></div></div>
-<div class="ttc" id="a00221_html_aefe052fdf5afb65df24fc888f5fa7299"><div class="ttname"><a href="a00221.html#aefe052fdf5afb65df24fc888f5fa7299">limbo::geometry::point_traits&lt; bLib::bPoint &gt;::set</a></div><div class="ttdeci">static void set(point_type &amp;point, orientation_2d const &amp;orient, coordinate_type const &amp;value)</div><div class="ttdoc">set coordinate for point </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00046">bLibApi.h:46</a></div></div>
-<div class="ttc" id="a00334_html"><div class="ttname"><a href="a00334.html">Geometry.h</a></div><div class="ttdoc">Contains utilities for geometric types, such as type traits, area calculator. I&#39;m trying to make thes...</div></div>
-<div class="ttc" id="a00220_html"><div class="ttname"><a href="a00220.html">limbo::geometry::point_traits</a></div><div class="ttdoc">type traits for point </div><div class="ttdef"><b>Definition:</b> <a href="a00334_source.html#l00168">Geometry.h:168</a></div></div>
-<div class="ttc" id="a00237_html"><div class="ttname"><a href="a00237.html">limbo::geometry::rectangle_traits</a></div><div class="ttdoc">type traits for rectangle </div><div class="ttdef"><b>Definition:</b> <a href="a00334_source.html#l00199">Geometry.h:199</a></div></div>
-<div class="ttc" id="a00221_html_ab2c2c6639fc6b81f71c0ae0f32ecd1b1"><div class="ttname"><a href="a00221.html#ab2c2c6639fc6b81f71c0ae0f32ecd1b1">limbo::geometry::point_traits&lt; bLib::bPoint &gt;::construct</a></div><div class="ttdeci">static point_type construct(coordinate_type const &amp;x, coordinate_type const &amp;y)</div><div class="ttdoc">construct point from coordinates </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00056">bLibApi.h:56</a></div></div>
-<div class="ttc" id="a00238_html_aea62b079184b83df2019100a00ddb938"><div class="ttname"><a href="a00238.html#aea62b079184b83df2019100a00ddb938">limbo::geometry::rectangle_traits&lt; bLib::bBox &gt;::construct</a></div><div class="ttdeci">static rectangle_type construct(coordinate_type const &amp;xl, coordinate_type const &amp;yl, coordinate_type const &amp;xh, coordinate_type const &amp;yh)</div><div class="ttdoc">construct rectangle from coordinates </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00104">bLibApi.h:104</a></div></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SubsetHelperType&gt;</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="a00083.html#a86841d0b7c4d72da25921b6a6bb9ef73">   49</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="a00083.html#a86841d0b7c4d72da25921b6a6bb9ef73">union_set</a>(SubsetHelperType&amp; gp, <span class="keyword">typename</span> SubsetHelperType::element_type <span class="keyword">const</span>&amp; e1, <span class="keyword">typename</span> SubsetHelperType::element_type <span class="keyword">const</span>&amp; e2)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">typename</span> SubsetHelperType::element_type <span class="keyword">const</span>&amp; root1 = <a class="code" href="a00083.html#aa35ab9c800ca1f8aa47cbe82d1f9afa4">find_set</a>(gp, e1);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">typename</span> SubsetHelperType::element_type <span class="keyword">const</span>&amp; root2 = <a class="code" href="a00083.html#aa35ab9c800ca1f8aa47cbe82d1f9afa4">find_set</a>(gp, e2);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="comment">// set parent </span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">if</span> (gp.get_rank(root1) &lt; gp.get_rank(root2))</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            gp.set_parent(root1, root2);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (gp.get_rank(root1) &gt; gp.get_rank(root2))</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            gp.set_parent(root2, root1);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            gp.set_parent(root2, root1);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            gp.set_rank(root1, gp.get_rank(root1)+1);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SubsetHelperType&gt;</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="a00083.html#af53c31e5221b0b1d646bfb8ba0256649">   69</a></span>&#160;    <span class="keyword">static</span> std::size_t <a class="code" href="a00083.html#af53c31e5221b0b1d646bfb8ba0256649">count_sets</a>(SubsetHelperType <span class="keyword">const</span>&amp; gp)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        std::size_t count = 0;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">typename</span> SubsetHelperType::element_type i = 0, ie = gp.size(); i != ie; ++i)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">if</span> (gp.get_parent(i) == i) <span class="comment">// top subset</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                ++count;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">return</span> count;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ElementType, <span class="keyword">typename</span> RankType&gt;</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="a00260.html">   83</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="a00260.html">SubsetHelper</a></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keyword">typedef</span> ElementType element_type;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keyword">typedef</span> RankType rank_type;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="a00260.html#a72c162dc3efb94cc881f2c6f8cec52b2">   90</a></span>&#160;        std::vector&lt;element_type&gt;&amp; <a class="code" href="a00260.html#a72c162dc3efb94cc881f2c6f8cec52b2">vParent</a>; </div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="a00260.html#a489f762dac788e6c7de885d0aabeeedc">   91</a></span>&#160;        std::vector&lt;rank_type&gt;&amp; <a class="code" href="a00260.html#a489f762dac788e6c7de885d0aabeeedc">vRank</a>; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="a00260.html#aa5bf23bffae8612759996738f0c113aa">   96</a></span>&#160;        <a class="code" href="a00260.html#aa5bf23bffae8612759996738f0c113aa">SubsetHelper</a>(std::vector&lt;element_type&gt;&amp; vp, std::vector&lt;rank_type&gt;&amp; vr) </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            : vParent(vp)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            , vRank(vr)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="comment">// set initial parent to every vertex itself </span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0, ie = vParent.size(); i != ie; ++i)</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                vParent[i] = i;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            std::fill(vRank.begin(), vRank.end(), 0);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        }</div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="a00260.html#aee2beb7bc9bfe384c1714e87ce14687d">  108</a></span>&#160;        <span class="keyword">inline</span> element_type <span class="keyword">const</span>&amp; <a class="code" href="a00260.html#aee2beb7bc9bfe384c1714e87ce14687d">get_parent</a>(element_type <span class="keyword">const</span>&amp; e)<span class="keyword"> const </span>{<span class="keywordflow">return</span> vParent[e];}</div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="a00260.html#a3df275969d8b812d70b391fa66a3059f">  112</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="a00260.html#a3df275969d8b812d70b391fa66a3059f">set_parent</a>(element_type <span class="keyword">const</span>&amp; e, element_type <span class="keyword">const</span>&amp; p) {vParent[e] = p;}</div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="a00260.html#a923b68b560c9bea9409a3929a52d27c8">  116</a></span>&#160;        <span class="keyword">inline</span> rank_type <span class="keyword">const</span>&amp; <a class="code" href="a00260.html#a923b68b560c9bea9409a3929a52d27c8">get_rank</a>(element_type <span class="keyword">const</span>&amp; e)<span class="keyword"> const </span>{<span class="keywordflow">return</span> vRank[e];}</div>
+<div class="line"><a name="l00120"></a><span class="lineno"><a class="line" href="a00260.html#a8e549391a1682384ab77d29f022c2174">  120</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="a00260.html#a8e549391a1682384ab77d29f022c2174">set_rank</a>(element_type <span class="keyword">const</span>&amp; e, rank_type <span class="keyword">const</span>&amp; r) {vRank[e] = r;}</div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="a00260.html#a003ca33fbc1a9ca30b93ba5518c932ca">  122</a></span>&#160;        <span class="keyword">inline</span> std::size_t <a class="code" href="a00260.html#a003ca33fbc1a9ca30b93ba5518c932ca">size</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> vParent.size();}</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    };</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;};</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}} <span class="comment">// namespace limbo // namespace containers</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a00260_html_a8e549391a1682384ab77d29f022c2174"><div class="ttname"><a href="a00260.html#a8e549391a1682384ab77d29f022c2174">limbo::containers::DisjointSet::SubsetHelper::set_rank</a></div><div class="ttdeci">void set_rank(element_type const &amp;e, rank_type const &amp;r)</div><div class="ttdoc">set rank </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00120">DisjointSet.h:120</a></div></div>
+<div class="ttc" id="a00260_html_a923b68b560c9bea9409a3929a52d27c8"><div class="ttname"><a href="a00260.html#a923b68b560c9bea9409a3929a52d27c8">limbo::containers::DisjointSet::SubsetHelper::get_rank</a></div><div class="ttdeci">rank_type const &amp; get_rank(element_type const &amp;e) const </div><div class="ttdoc">get rank </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00116">DisjointSet.h:116</a></div></div>
+<div class="ttc" id="a00260_html_aa5bf23bffae8612759996738f0c113aa"><div class="ttname"><a href="a00260.html#aa5bf23bffae8612759996738f0c113aa">limbo::containers::DisjointSet::SubsetHelper::SubsetHelper</a></div><div class="ttdeci">SubsetHelper(std::vector&lt; element_type &gt; &amp;vp, std::vector&lt; rank_type &gt; &amp;vr)</div><div class="ttdoc">constructor </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00096">DisjointSet.h:96</a></div></div>
+<div class="ttc" id="a00260_html_a489f762dac788e6c7de885d0aabeeedc"><div class="ttname"><a href="a00260.html#a489f762dac788e6c7de885d0aabeeedc">limbo::containers::DisjointSet::SubsetHelper::vRank</a></div><div class="ttdeci">std::vector&lt; rank_type &gt; &amp; vRank</div><div class="ttdoc">reference to rank array </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00091">DisjointSet.h:91</a></div></div>
+<div class="ttc" id="a00260_html_aee2beb7bc9bfe384c1714e87ce14687d"><div class="ttname"><a href="a00260.html#aee2beb7bc9bfe384c1714e87ce14687d">limbo::containers::DisjointSet::SubsetHelper::get_parent</a></div><div class="ttdeci">element_type const &amp; get_parent(element_type const &amp;e) const </div><div class="ttdoc">get parent element </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00108">DisjointSet.h:108</a></div></div>
+<div class="ttc" id="a00083_html_aa35ab9c800ca1f8aa47cbe82d1f9afa4"><div class="ttname"><a href="a00083.html#aa35ab9c800ca1f8aa47cbe82d1f9afa4">limbo::containers::DisjointSet::find_set</a></div><div class="ttdeci">static SubsetHelperType::element_type const &amp; find_set(SubsetHelperType const &amp;gp, typename SubsetHelperType::element_type const &amp;e)</div><div class="ttdoc">find the subset of an element e </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00036">DisjointSet.h:36</a></div></div>
+<div class="ttc" id="a00083_html"><div class="ttname"><a href="a00083.html">limbo::containers::DisjointSet</a></div><div class="ttdoc">simply used for scope control </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00028">DisjointSet.h:28</a></div></div>
+<div class="ttc" id="a00083_html_a86841d0b7c4d72da25921b6a6bb9ef73"><div class="ttname"><a href="a00083.html#a86841d0b7c4d72da25921b6a6bb9ef73">limbo::containers::DisjointSet::union_set</a></div><div class="ttdeci">static void union_set(SubsetHelperType &amp;gp, typename SubsetHelperType::element_type const &amp;e1, typename SubsetHelperType::element_type const &amp;e2)</div><div class="ttdoc">union two subsets represented by element e1 and e2 </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00049">DisjointSet.h:49</a></div></div>
+<div class="ttc" id="a00440_html"><div class="ttname"><a href="a00440.html">limbo</a></div><div class="ttdoc">namespace for Limbo </div><div class="ttdef"><b>Definition:</b> <a href="a00324_source.html#l00022">GraphUtility.h:22</a></div></div>
+<div class="ttc" id="a00083_html_af53c31e5221b0b1d646bfb8ba0256649"><div class="ttname"><a href="a00083.html#af53c31e5221b0b1d646bfb8ba0256649">limbo::containers::DisjointSet::count_sets</a></div><div class="ttdeci">static std::size_t count_sets(SubsetHelperType const &amp;gp)</div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00069">DisjointSet.h:69</a></div></div>
+<div class="ttc" id="a00260_html"><div class="ttname"><a href="a00260.html">limbo::containers::DisjointSet::SubsetHelper</a></div><div class="ttdoc">a sample implementation of SubsetHelper that uses std::vector as the container. It needs to store par...</div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00083">DisjointSet.h:83</a></div></div>
+<div class="ttc" id="a00260_html_a3df275969d8b812d70b391fa66a3059f"><div class="ttname"><a href="a00260.html#a3df275969d8b812d70b391fa66a3059f">limbo::containers::DisjointSet::SubsetHelper::set_parent</a></div><div class="ttdeci">void set_parent(element_type const &amp;e, element_type const &amp;p)</div><div class="ttdoc">set parent element </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00112">DisjointSet.h:112</a></div></div>
+<div class="ttc" id="a00260_html_a72c162dc3efb94cc881f2c6f8cec52b2"><div class="ttname"><a href="a00260.html#a72c162dc3efb94cc881f2c6f8cec52b2">limbo::containers::DisjointSet::SubsetHelper::vParent</a></div><div class="ttdeci">std::vector&lt; element_type &gt; &amp; vParent</div><div class="ttdoc">reference to parent array </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00090">DisjointSet.h:90</a></div></div>
+<div class="ttc" id="a00260_html_a003ca33fbc1a9ca30b93ba5518c932ca"><div class="ttname"><a href="a00260.html#a003ca33fbc1a9ca30b93ba5518c932ca">limbo::containers::DisjointSet::SubsetHelper::size</a></div><div class="ttdeci">std::size_t size() const </div><div class="ttdef"><b>Definition:</b> <a href="a00331_source.html#l00122">DisjointSet.h:122</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:11 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:39 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

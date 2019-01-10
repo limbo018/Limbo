@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/bookshelf/bison/BookshelfDriver.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/makeutils/GCCVersion.mk File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,55 +87,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_80860ce5c68dd3fca259aa432c07f7f2.html">bookshelf</a></li><li class="navelem"><a class="el" href="dir_d8770031fc66771b7bedf5d3bcbc897c.html">bison</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_1fc182626e7eef33c760a3801c695bc4.html">makeutils</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">BookshelfDriver.h File Reference</div>  </div>
+<div class="title">GCCVersion.mk File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Driver for Bookshelf parser.  
+<p>compute version of CXX, set GCCVERSION, assume CXX is gcc  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00350_source.html">BookshelfDataBase.h</a>&quot;</code><br />
-</div>
-<p><a href="a00351_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html">BookshelfParser::Driver</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00423"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00423.html">BookshelfParser</a></td></tr>
-<tr class="memdesc:a00423"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for <a class="el" href="a00423.html" title="namespace for BookshelfParser ">BookshelfParser</a> <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:af764f80c5e0928a975057a71b33dbe1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00423.html#af764f80c5e0928a975057a71b33dbe1d">BookshelfParser::read</a> (<a class="el" href="a00047.html">BookshelfDataBase</a> &amp;db, const string &amp;auxFile)</td></tr>
-<tr class="memdesc:af764f80c5e0928a975057a71b33dbe1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">API for <a class="el" href="a00423.html" title="namespace for BookshelfParser ">BookshelfParser</a>. Read .aux file and parse all other files.  <a href="#af764f80c5e0928a975057a71b33dbe1d">More...</a><br /></td></tr>
-<tr class="separator:af764f80c5e0928a975057a71b33dbe1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33a39624b706e1065c259ca3110e64df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00423.html#a33a39624b706e1065c259ca3110e64df">BookshelfParser::readPl</a> (<a class="el" href="a00047.html">BookshelfDataBase</a> &amp;db, const string &amp;plFile)</td></tr>
-<tr class="memdesc:a33a39624b706e1065c259ca3110e64df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read .pl file only, the callback only provide positions and orientation.  <a href="#a33a39624b706e1065c259ca3110e64df">More...</a><br /></td></tr>
-<tr class="separator:a33a39624b706e1065c259ca3110e64df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Driver for Bookshelf parser. </p>
-<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00351_source.html">BookshelfDriver.h</a>.</p>
+<p><a href="a00351_source.html">Go to the source code of this file.</a></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>compute version of CXX, set GCCVERSION, assume CXX is gcc </p>
+<p>calculate gcc version without . and save to GCCVERSION Use following command in the Makefile to view the results </p><pre class="fragment">$(info GCCVERSION = $(GCCVERSION))
+</pre><dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Aug 2015</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">CXX</td><td>given CXX and assume it is gcc </td></tr>
+    <tr><td class="paramname">GCCVERSION</td><td>set version of gcc </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition in file <a class="el" href="a00351_source.html">GCCVersion.mk</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/geometry/Polygon2Rectangle.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/geometry/api/GeoBoostPolygonApi.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,77 +87,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_07e544b58feaf5e1ebe10360eb3a1613.html">geometry</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_07e544b58feaf5e1ebe10360eb3a1613.html">geometry</a></li><li class="navelem"><a class="el" href="dir_fc5098a7dee8c311c6fadc7f621cfa43.html">api</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Polygon2Rectangle.h File Reference</div>  </div>
+<div class="title">GeoBoostPolygonApi.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>a generic implementation of polygon-to-rectangle conversion  
+<p>this file extracts polygon-to-rectangle conversion for Boost.Polygon API.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;fstream&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;list&gt;</code><br />
-<code>#include &lt;map&gt;</code><br />
-<code>#include &lt;boost/lexical_cast.hpp&gt;</code><br />
-<code>#include &lt;boost/algorithm/string/trim.hpp&gt;</code><br />
-<code>#include &lt;boost/algorithm/string/classification.hpp&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00334_source.html">limbo/geometry/Geometry.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00388_source.html">limbo/string/String.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00374_source.html">limbo/preprocessor/AssertMsg.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00336_source.html">limbo/geometry/Polygon2RectangleVec.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;boost/polygon/polygon.hpp&gt;</code><br />
 </div>
 <p><a href="a00335_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00219.html">limbo::geometry::point_compare_type</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">sort helper if orient == HORIZONTAL, sort by left lower if orient == VERTICAL, sort by lower left  <a href="a00219.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00226.html">limbo::geometry::Polygon2Rectangle&lt; PointSet, RectSet &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class implement conversion from manhattan polygon to rectangle  <a href="a00226.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00157.html">limbo::geometry::Polygon2Rectangle&lt; PointSet, RectSet &gt;::is_equal_type</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">is equal helper  <a href="a00157.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00441"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00441.html">limbo::geometry</a></td></tr>
-<tr class="memdesc:a00441"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Geometry <br /></td></tr>
+<tr class="memitem:a00446"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00446.html">limbo::geometry</a></td></tr>
+<tr class="memdesc:a00446"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Geometry <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a80de7b7ae4b1c3d5074b45f012f4e177"><td class="memTemplParams" colspan="2">template&lt;typename InputIterator , typename PointSet , typename RectSet &gt; </td></tr>
-<tr class="memitem:a80de7b7ae4b1c3d5074b45f012f4e177"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00441.html#a80de7b7ae4b1c3d5074b45f012f4e177">limbo::geometry::polygon2rectangle</a> (InputIterator input_begin, InputIterator input_end, PointSet const &amp;, RectSet &amp;r, slicing_orientation_2d slicing_orient=HORIZONTAL_SLICING)</td></tr>
-<tr class="memdesc:a80de7b7ae4b1c3d5074b45f012f4e177"><td class="mdescLeft">&#160;</td><td class="mdescRight">standby function for polygon-to-rectangle conversion  <a href="#a80de7b7ae4b1c3d5074b45f012f4e177">More...</a><br /></td></tr>
-<tr class="separator:a80de7b7ae4b1c3d5074b45f012f4e177"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9159c8df3405f1cbd52fe1b8b219e0a4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00446.html#a9159c8df3405f1cbd52fe1b8b219e0a4">limbo::geometry::polygon2RectangleBoost</a> (std::vector&lt; gtl::point_data&lt; int &gt; &gt; const &amp;vPoint, std::vector&lt; gtl::rectangle_data&lt; int &gt; &gt; &amp;vRectangle)</td></tr>
+<tr class="memdesc:a9159c8df3405f1cbd52fe1b8b219e0a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function takes a set of points describing a rectilinear polygon and decomposes it into rectangles  <a href="#a9159c8df3405f1cbd52fe1b8b219e0a4">More...</a><br /></td></tr>
+<tr class="separator:a9159c8df3405f1cbd52fe1b8b219e0a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6789247a66411a571aa622e502a6b1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00446.html#aa6789247a66411a571aa622e502a6b1d">limbo::geometry::polygon2RectangleBoost</a> (gtl::polygon_90_data&lt; int &gt; const &amp;polygon, std::vector&lt; gtl::rectangle_data&lt; int &gt; &gt; &amp;vRectangle)</td></tr>
+<tr class="memdesc:aa6789247a66411a571aa622e502a6b1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function takes a rectilinear polygon and decomposes it into rectangles  <a href="#aa6789247a66411a571aa622e502a6b1d">More...</a><br /></td></tr>
+<tr class="separator:aa6789247a66411a571aa622e502a6b1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>a generic implementation of polygon-to-rectangle conversion </p>
-<p>K.D.Gourley and D.M. Green, <a href="http://doi.ieeecomputersociety.org/10.1109/MCG.1983.262975">A Polygon-to-Rectangle Conversion Algorithm</a>, IEEE COMP. GRAPHICS &amp; APPLIC. 3.1 (1983): 31-32.</p>
-<p>If a contour polygon has duplicate points, remove all of them and form a polygon with holes</p>
+<div class="textblock"><p>this file extracts polygon-to-rectangle conversion for Boost.Polygon API. </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Sep 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00335_source.html">Polygon2Rectangle.h</a>.</p>
+<p>Definition in file <a class="el" href="a00335_source.html">GeoBoostPolygonApi.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

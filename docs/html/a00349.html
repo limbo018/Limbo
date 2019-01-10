@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/math/Math.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/makeutils/FindLPSolve.mk File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,146 +87,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_097e2c25298f70f66c89ea595c418bf0.html">math</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_1fc182626e7eef33c760a3801c695bc4.html">makeutils</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Math.h File Reference</div>  </div>
+<div class="title">FindLPSolve.mk File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>mathematical utilities such as abs  
+<p>find lpsolve library given LPSOLVE_DIR, set LPSOLVE_LINK_LIB  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iterator&gt;</code><br />
-<code>#include &lt;limits&gt;</code><br />
-</div>
+
 <p><a href="a00349_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a81051f8c3a52a1adb466ed44fc40be2c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a81051f8c3a52a1adb466ed44fc40be2c"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a81051f8c3a52a1adb466ed44fc40be2c">limbo::abs</a> (T const &amp;t)</td></tr>
-<tr class="memdesc:a81051f8c3a52a1adb466ed44fc40be2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">generalized api can handle both integer and floating points  <a href="#a81051f8c3a52a1adb466ed44fc40be2c">More...</a><br /></td></tr>
-<tr class="separator:a81051f8c3a52a1adb466ed44fc40be2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a745249ea3313a2d10f895f6a1d1bab20"><td class="memTemplParams" colspan="2">template&lt;typename Iterator &gt; </td></tr>
-<tr class="memitem:a745249ea3313a2d10f895f6a1d1bab20"><td class="memTemplItemLeft" align="right" valign="top">std::iterator_traits&lt; Iterator &gt;<br class="typebreak" />
-::value_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a745249ea3313a2d10f895f6a1d1bab20">limbo::sum</a> (Iterator first, Iterator last)</td></tr>
-<tr class="memdesc:a745249ea3313a2d10f895f6a1d1bab20"><td class="mdescLeft">&#160;</td><td class="mdescRight">get summation of an array  <a href="#a745249ea3313a2d10f895f6a1d1bab20">More...</a><br /></td></tr>
-<tr class="separator:a745249ea3313a2d10f895f6a1d1bab20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a7e9e872d9bdb1a39f465f4bbeabac1"><td class="memTemplParams" colspan="2">template&lt;typename Iterator &gt; </td></tr>
-<tr class="memitem:a8a7e9e872d9bdb1a39f465f4bbeabac1"><td class="memTemplItemLeft" align="right" valign="top">std::iterator_traits&lt; Iterator &gt;<br class="typebreak" />
-::value_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a8a7e9e872d9bdb1a39f465f4bbeabac1">limbo::average</a> (Iterator first, Iterator last)</td></tr>
-<tr class="memdesc:a8a7e9e872d9bdb1a39f465f4bbeabac1"><td class="mdescLeft">&#160;</td><td class="mdescRight">get average of an array  <a href="#a8a7e9e872d9bdb1a39f465f4bbeabac1">More...</a><br /></td></tr>
-<tr class="separator:a8a7e9e872d9bdb1a39f465f4bbeabac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70f11c16058445049de838e5805c9652"><td class="memTemplParams" colspan="2">template&lt;typename Iterator &gt; </td></tr>
-<tr class="memitem:a70f11c16058445049de838e5805c9652"><td class="memTemplItemLeft" align="right" valign="top">std::iterator_traits&lt; Iterator &gt;<br class="typebreak" />
-::value_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a70f11c16058445049de838e5805c9652">limbo::max</a> (Iterator first, Iterator last)</td></tr>
-<tr class="memdesc:a70f11c16058445049de838e5805c9652"><td class="mdescLeft">&#160;</td><td class="mdescRight">get max of an array  <a href="#a70f11c16058445049de838e5805c9652">More...</a><br /></td></tr>
-<tr class="separator:a70f11c16058445049de838e5805c9652"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbae349757a070ef1af46523c1708891"><td class="memTemplParams" colspan="2">template&lt;typename Iterator &gt; </td></tr>
-<tr class="memitem:adbae349757a070ef1af46523c1708891"><td class="memTemplItemLeft" align="right" valign="top">std::iterator_traits&lt; Iterator &gt;<br class="typebreak" />
-::value_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#adbae349757a070ef1af46523c1708891">limbo::min</a> (Iterator first, Iterator last)</td></tr>
-<tr class="memdesc:adbae349757a070ef1af46523c1708891"><td class="mdescLeft">&#160;</td><td class="mdescRight">get min of an array  <a href="#adbae349757a070ef1af46523c1708891">More...</a><br /></td></tr>
-<tr class="separator:adbae349757a070ef1af46523c1708891"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">generic functions to get lowest value of numbers, i.e., min for integers, -max for floating point numbers</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>generic function to get lowest value of numbers</p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>number type </td></tr>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>find lpsolve library given LPSOLVE_DIR, set LPSOLVE_LINK_LIB </p>
+<p>It checks the version of lpsolve and generates linking flag. Use following command in the Makefile to view the results </p><pre class="fragment">$(info LPSolve: LPSOLVE_VERSION = $(LPSOLVE_VERSION), LPSOLVE_LINK_LIB = $(LPSOLVE_LINK_LIB))
+</pre><dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Dec 2018 11:18:47 AM CST</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">LPSOLVE_VERSION</td><td>version of lpsolve </td></tr>
+    <tr><td class="paramname">LPSOLVE_LINK_LIB</td><td>link to lpsolve </td></tr>
   </table>
   </dd>
 </dl>
-</div></td></tr>
-<tr class="memitem:a98a2932af338a01566cfc0134b17e101"><td class="memTemplParams" colspan="2"><a class="anchor" id="a98a2932af338a01566cfc0134b17e101"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a98a2932af338a01566cfc0134b17e101"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>limbo::lowest</b> ()</td></tr>
-<tr class="separator:a98a2932af338a01566cfc0134b17e101"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a536279cd697849fee78a7247d16fd5d8"><td class="memTemplParams" colspan="2"><a class="anchor" id="a536279cd697849fee78a7247d16fd5d8"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a536279cd697849fee78a7247d16fd5d8"><td class="memTemplItemLeft" align="right" valign="top">char&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a536279cd697849fee78a7247d16fd5d8">limbo::lowest&lt; char &gt;</a> ()</td></tr>
-<tr class="memdesc:a536279cd697849fee78a7247d16fd5d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for integer types <br /></td></tr>
-<tr class="separator:a536279cd697849fee78a7247d16fd5d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a0ddf985629cab8f3a2f35f1fa794be"><td class="memTemplParams" colspan="2"><a class="anchor" id="a6a0ddf985629cab8f3a2f35f1fa794be"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a6a0ddf985629cab8f3a2f35f1fa794be"><td class="memTemplItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a6a0ddf985629cab8f3a2f35f1fa794be">limbo::lowest&lt; unsigned char &gt;</a> ()</td></tr>
-<tr class="memdesc:a6a0ddf985629cab8f3a2f35f1fa794be"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for integer types <br /></td></tr>
-<tr class="separator:a6a0ddf985629cab8f3a2f35f1fa794be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f6fe86bbc67e7413ec42b9c282aa917"><td class="memTemplParams" colspan="2"><a class="anchor" id="a6f6fe86bbc67e7413ec42b9c282aa917"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a6f6fe86bbc67e7413ec42b9c282aa917"><td class="memTemplItemLeft" align="right" valign="top">short&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a6f6fe86bbc67e7413ec42b9c282aa917">limbo::lowest&lt; short &gt;</a> ()</td></tr>
-<tr class="memdesc:a6f6fe86bbc67e7413ec42b9c282aa917"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for integer types <br /></td></tr>
-<tr class="separator:a6f6fe86bbc67e7413ec42b9c282aa917"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c562a951a0a269dd787a1b07c06251a"><td class="memTemplParams" colspan="2"><a class="anchor" id="a9c562a951a0a269dd787a1b07c06251a"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a9c562a951a0a269dd787a1b07c06251a"><td class="memTemplItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a9c562a951a0a269dd787a1b07c06251a">limbo::lowest&lt; unsigned short &gt;</a> ()</td></tr>
-<tr class="memdesc:a9c562a951a0a269dd787a1b07c06251a"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for integer types <br /></td></tr>
-<tr class="separator:a9c562a951a0a269dd787a1b07c06251a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73d79cda2600f0c26f66985488a41c6c"><td class="memTemplParams" colspan="2"><a class="anchor" id="a73d79cda2600f0c26f66985488a41c6c"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a73d79cda2600f0c26f66985488a41c6c"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a73d79cda2600f0c26f66985488a41c6c">limbo::lowest&lt; int &gt;</a> ()</td></tr>
-<tr class="memdesc:a73d79cda2600f0c26f66985488a41c6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for integer types <br /></td></tr>
-<tr class="separator:a73d79cda2600f0c26f66985488a41c6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a305371bc09cffdb140193a21de68e655"><td class="memTemplParams" colspan="2"><a class="anchor" id="a305371bc09cffdb140193a21de68e655"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a305371bc09cffdb140193a21de68e655"><td class="memTemplItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a305371bc09cffdb140193a21de68e655">limbo::lowest&lt; unsigned int &gt;</a> ()</td></tr>
-<tr class="memdesc:a305371bc09cffdb140193a21de68e655"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for integer types <br /></td></tr>
-<tr class="separator:a305371bc09cffdb140193a21de68e655"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecde078af41186883922a28a3c57e183"><td class="memTemplParams" colspan="2"><a class="anchor" id="aecde078af41186883922a28a3c57e183"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:aecde078af41186883922a28a3c57e183"><td class="memTemplItemLeft" align="right" valign="top">long&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#aecde078af41186883922a28a3c57e183">limbo::lowest&lt; long &gt;</a> ()</td></tr>
-<tr class="memdesc:aecde078af41186883922a28a3c57e183"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for integer types <br /></td></tr>
-<tr class="separator:aecde078af41186883922a28a3c57e183"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada4557e1b12d0e20d04023050dfcf737"><td class="memTemplParams" colspan="2"><a class="anchor" id="ada4557e1b12d0e20d04023050dfcf737"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:ada4557e1b12d0e20d04023050dfcf737"><td class="memTemplItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#ada4557e1b12d0e20d04023050dfcf737">limbo::lowest&lt; unsigned long &gt;</a> ()</td></tr>
-<tr class="memdesc:ada4557e1b12d0e20d04023050dfcf737"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for integer types <br /></td></tr>
-<tr class="separator:ada4557e1b12d0e20d04023050dfcf737"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2308d1c52de36ebd0fee712fffd7b53a"><td class="memTemplParams" colspan="2"><a class="anchor" id="a2308d1c52de36ebd0fee712fffd7b53a"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a2308d1c52de36ebd0fee712fffd7b53a"><td class="memTemplItemLeft" align="right" valign="top">long long&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a2308d1c52de36ebd0fee712fffd7b53a">limbo::lowest&lt; long long &gt;</a> ()</td></tr>
-<tr class="memdesc:a2308d1c52de36ebd0fee712fffd7b53a"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for integer types <br /></td></tr>
-<tr class="separator:a2308d1c52de36ebd0fee712fffd7b53a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a295227044dc2959e63c7abde768a1f85"><td class="memTemplParams" colspan="2"><a class="anchor" id="a295227044dc2959e63c7abde768a1f85"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a295227044dc2959e63c7abde768a1f85"><td class="memTemplItemLeft" align="right" valign="top">unsigned long long&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a295227044dc2959e63c7abde768a1f85">limbo::lowest&lt; unsigned long long &gt;</a> ()</td></tr>
-<tr class="memdesc:a295227044dc2959e63c7abde768a1f85"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for integer types <br /></td></tr>
-<tr class="separator:a295227044dc2959e63c7abde768a1f85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a808417dee7fb5d6f6d84d26aa811f337"><td class="memTemplParams" colspan="2"><a class="anchor" id="a808417dee7fb5d6f6d84d26aa811f337"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a808417dee7fb5d6f6d84d26aa811f337"><td class="memTemplItemLeft" align="right" valign="top">float&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a808417dee7fb5d6f6d84d26aa811f337">limbo::lowest&lt; float &gt;</a> ()</td></tr>
-<tr class="memdesc:a808417dee7fb5d6f6d84d26aa811f337"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for floating point types <br /></td></tr>
-<tr class="separator:a808417dee7fb5d6f6d84d26aa811f337"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b74cceebc5dfc4e2913ac4364b3f8d5"><td class="memTemplParams" colspan="2"><a class="anchor" id="a7b74cceebc5dfc4e2913ac4364b3f8d5"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a7b74cceebc5dfc4e2913ac4364b3f8d5"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a7b74cceebc5dfc4e2913ac4364b3f8d5">limbo::lowest&lt; double &gt;</a> ()</td></tr>
-<tr class="memdesc:a7b74cceebc5dfc4e2913ac4364b3f8d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for floating point types <br /></td></tr>
-<tr class="separator:a7b74cceebc5dfc4e2913ac4364b3f8d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a690186f11c4118a429c4dafe13ac4d8a"><td class="memTemplParams" colspan="2"><a class="anchor" id="a690186f11c4118a429c4dafe13ac4d8a"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a690186f11c4118a429c4dafe13ac4d8a"><td class="memTemplItemLeft" align="right" valign="top">long double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00435.html#a690186f11c4118a429c4dafe13ac4d8a">limbo::lowest&lt; long double &gt;</a> ()</td></tr>
-<tr class="memdesc:a690186f11c4118a429c4dafe13ac4d8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for floating point types <br /></td></tr>
-<tr class="separator:a690186f11c4118a429c4dafe13ac4d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>mathematical utilities such as abs </p>
-<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Dec 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00349_source.html">Math.h</a>.</p>
+<p>Definition in file <a class="el" href="a00349_source.html">FindLPSolve.mk</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

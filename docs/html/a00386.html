@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/solvers/Numerical.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/solvers/lpmcf/Lgf.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,66 +87,67 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_bf387cd841d140e51bbf6ba57d00cc45.html">solvers</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_bf387cd841d140e51bbf6ba57d00cc45.html">solvers</a></li><li class="navelem"><a class="el" href="dir_bc8e812147eefdca8c1463002ca91056.html">lpmcf</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">Numerical.h File Reference</div>  </div>
+<div class="title">Lgf.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>numerical functions for linear algebra  
+<p>solve linear programming with min-cost flow  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="a00387_source.html">limbo/solvers/Solvers.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;cctype&gt;</code><br />
+<code>#include &lt;ctime&gt;</code><br />
+<code>#include &lt;lemon/network_simplex.h&gt;</code><br />
+<code>#include &lt;lemon/cost_scaling.h&gt;</code><br />
+<code>#include &lt;lemon/list_graph.h&gt;</code><br />
+<code>#include &lt;lemon/smart_graph.h&gt;</code><br />
+<code>#include &lt;lemon/lgf_reader.h&gt;</code><br />
+<code>#include &lt;lemon/lgf_writer.h&gt;</code><br />
+<code>#include &lt;lemon/graph_to_eps.h&gt;</code><br />
+<code>#include &lt;lemon/math.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00377_source.html">limbo/preprocessor/AssertMsg.h</a>&gt;</code><br />
 </div>
 <p><a href="a00386_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00443"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html">limbo::solvers</a></td></tr>
-<tr class="memdesc:a00443"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace Limbo.Solvers <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00168.html">limbo::solvers::lpmcf::Lgf&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">solve network flow graph with min-cost flow  <a href="a00168.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a6a3a6b22ace88f2e3d3a56068253de80"><td class="memTemplParams" colspan="2">template&lt;typename T , typename V &gt; </td></tr>
-<tr class="memitem:a6a3a6b22ace88f2e3d3a56068253de80"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00443.html#a6a3a6b22ace88f2e3d3a56068253de80">limbo::solvers::axpy</a> (unsigned int n, T a, V const *x, T *y)</td></tr>
-<tr class="memdesc:a6a3a6b22ace88f2e3d3a56068253de80"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( y = a \cdot x+y \)  <a href="#a6a3a6b22ace88f2e3d3a56068253de80">More...</a><br /></td></tr>
-<tr class="separator:a6a3a6b22ace88f2e3d3a56068253de80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa552bd4dc8be4568878543e1cad9ad1"><td class="memTemplParams" colspan="2">template&lt;typename T , typename V , typename MatrixType &gt; </td></tr>
-<tr class="memitem:aaa552bd4dc8be4568878543e1cad9ad1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00443.html#aaa552bd4dc8be4568878543e1cad9ad1">limbo::solvers::AxPlusy</a> (T a, MatrixType const &amp;A, V const *x, T *y)</td></tr>
-<tr class="memdesc:aaa552bd4dc8be4568878543e1cad9ad1"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( y = a A x + y \)  <a href="#aaa552bd4dc8be4568878543e1cad9ad1">More...</a><br /></td></tr>
-<tr class="separator:aaa552bd4dc8be4568878543e1cad9ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7ba625acb376d9b0885631e5d1a2386"><td class="memTemplParams" colspan="2">template&lt;typename T , typename V , typename MatrixType &gt; </td></tr>
-<tr class="memitem:af7ba625acb376d9b0885631e5d1a2386"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00443.html#af7ba625acb376d9b0885631e5d1a2386">limbo::solvers::ATxPlusy</a> (T a, MatrixType const &amp;A, V const *x, T *y)</td></tr>
-<tr class="memdesc:af7ba625acb376d9b0885631e5d1a2386"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( y = a A^T x + y \)  <a href="#af7ba625acb376d9b0885631e5d1a2386">More...</a><br /></td></tr>
-<tr class="separator:af7ba625acb376d9b0885631e5d1a2386"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed8f66339c60d0144b515a9fd3242f38"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:aed8f66339c60d0144b515a9fd3242f38"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00443.html#aed8f66339c60d0144b515a9fd3242f38">limbo::solvers::dot</a> (unsigned int n, T const *x, T const *y)</td></tr>
-<tr class="memdesc:aed8f66339c60d0144b515a9fd3242f38"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute dot product \( x^T y \)  <a href="#aed8f66339c60d0144b515a9fd3242f38">More...</a><br /></td></tr>
-<tr class="separator:aed8f66339c60d0144b515a9fd3242f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1265b694434ea8eeaf832a4d7f2f8fce"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a1265b694434ea8eeaf832a4d7f2f8fce"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00443.html#a1265b694434ea8eeaf832a4d7f2f8fce">limbo::solvers::vcopy</a> (unsigned int n, T const *x, T *y)</td></tr>
-<tr class="memdesc:a1265b694434ea8eeaf832a4d7f2f8fce"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy vector  <a href="#a1265b694434ea8eeaf832a4d7f2f8fce">More...</a><br /></td></tr>
-<tr class="separator:a1265b694434ea8eeaf832a4d7f2f8fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00448"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00448.html">limbo::solvers</a></td></tr>
+<tr class="memdesc:a00448"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace Limbo.Solvers <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00449"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00449.html">limbo::solvers::lpmcf</a></td></tr>
+<tr class="memdesc:a00449"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Solvers.lpmcf <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>numerical functions for linear algebra </p>
+<div class="textblock"><p>solve linear programming with min-cost flow </p>
+<p><a href="https://lemon.cs.elte.hu">Lemon</a> is used as min-cost flow solver</p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Mar 2017 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00386_source.html">Numerical.h</a>.</p>
+<p>Definition in file <a class="el" href="a00386_source.html">Lgf.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/geometry/api/GeoBoostPolygonApi.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/geometry/api/bLibApi.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -92,47 +92,47 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">GeoBoostPolygonApi.h File Reference</div>  </div>
+<div class="title">bLibApi.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>this file extracts polygon-to-rectangle conversion for Boost.Polygon API.  
+<p>Geometry traits for bLib, include this file when bLib is used if your point class setting is different from that in the default point_traits, please create a specialization.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;boost/polygon/polygon.hpp&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00336_source.html">limbo/geometry/Geometry.h</a>&gt;</code><br />
 </div>
 <p><a href="a00333_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00223.html">limbo::geometry::point_traits&lt; bLib::bPoint &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="a00222.html">limbo::geometry::point_traits</a> for bLib::bPoint  <a href="a00223.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00441"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00441.html">limbo::geometry</a></td></tr>
-<tr class="memdesc:a00441"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Geometry <br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00240.html">limbo::geometry::rectangle_traits&lt; bLib::bBox &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="a00239.html">limbo::geometry::rectangle_traits</a> for bLib::bBox  <a href="a00240.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a9159c8df3405f1cbd52fe1b8b219e0a4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00441.html#a9159c8df3405f1cbd52fe1b8b219e0a4">limbo::geometry::polygon2RectangleBoost</a> (std::vector&lt; gtl::point_data&lt; int &gt; &gt; const &amp;vPoint, std::vector&lt; gtl::rectangle_data&lt; int &gt; &gt; &amp;vRectangle)</td></tr>
-<tr class="memdesc:a9159c8df3405f1cbd52fe1b8b219e0a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function takes a set of points describing a rectilinear polygon and decomposes it into rectangles  <a href="#a9159c8df3405f1cbd52fe1b8b219e0a4">More...</a><br /></td></tr>
-<tr class="separator:a9159c8df3405f1cbd52fe1b8b219e0a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6789247a66411a571aa622e502a6b1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00441.html#aa6789247a66411a571aa622e502a6b1d">limbo::geometry::polygon2RectangleBoost</a> (gtl::polygon_90_data&lt; int &gt; const &amp;polygon, std::vector&lt; gtl::rectangle_data&lt; int &gt; &gt; &amp;vRectangle)</td></tr>
-<tr class="memdesc:aa6789247a66411a571aa622e502a6b1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function takes a rectilinear polygon and decomposes it into rectangles  <a href="#aa6789247a66411a571aa622e502a6b1d">More...</a><br /></td></tr>
-<tr class="separator:aa6789247a66411a571aa622e502a6b1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00446"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00446.html">limbo::geometry</a></td></tr>
+<tr class="memdesc:a00446"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Geometry <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>this file extracts polygon-to-rectangle conversion for Boost.Polygon API. </p>
+<div class="textblock"><p>Geometry traits for bLib, include this file when bLib is used if your point class setting is different from that in the default point_traits, please create a specialization. </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Sep 2015 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00333_source.html">GeoBoostPolygonApi.h</a>.</p>
+<p>Definition in file <a class="el" href="a00333_source.html">bLibApi.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

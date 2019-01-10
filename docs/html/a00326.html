@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/partition/FMMultiWay.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/MaxIndependentSet.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,54 +87,64 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li><li class="navelem"><a class="el" href="dir_79637abb8b132f5967c5d0bdbe97424d.html">partition</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_f81cdaf623c0ecf989467d1e7498b895.html">algorithms</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">FMMultiWay.h File Reference</div>  </div>
+<div class="title">MaxIndependentSet.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the Multi-way FM partitioning algorithm.  
+<p>solve maximum independent sets with maximum cliques  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &lt;deque&gt;</code><br />
+<code>#include &lt;boost/graph/bron_kerbosch_all_cliques.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00324_source.html">limbo/algorithms/GraphUtility.h</a>&gt;</code><br />
+</div>
 <p><a href="a00326_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00109.html">limbo::algorithms::partition::FMMultiWay&lt; GainCalcType &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00183.html">limbo::algorithms::MaxIndependentSetByMaxClique</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html">limbo::algorithms::partition::FMMultiWay&lt; GainCalcType &gt;::VertexMove</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class denotes movement of vertex  <a href="a00278.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00056.html">limbo::algorithms::MaxIndependentSetByMaxClique::clique_visitor_type&lt; GraphType, MisVisitorType &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for boost::bron_kerbosch_all_cliques  <a href="a00056.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
+<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo</a></td></tr>
+<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00436"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html">limbo::algorithms</a></td></tr>
-<tr class="memdesc:a00436"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.algorithms <br /></td></tr>
+<tr class="memitem:a00441"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00441.html">limbo::algorithms</a></td></tr>
+<tr class="memdesc:a00441"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.algorithms <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00438"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00438.html">limbo::algorithms::partition</a></td></tr>
-<tr class="memdesc:a00438"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Algorithms.Partition <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:adbeddadaaf2896c6cf254dd6b252a282"><td class="memTemplParams" colspan="2">template&lt;typename GraphType , typename VisitorType , typename AlgorithmType &gt; </td></tr>
+<tr class="memitem:adbeddadaaf2896c6cf254dd6b252a282"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00441.html#adbeddadaaf2896c6cf254dd6b252a282">limbo::algorithms::max_independent_set</a> (GraphType const &amp;g, VisitorType vis, AlgorithmType const &amp;)</td></tr>
+<tr class="separator:adbeddadaaf2896c6cf254dd6b252a282"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97d118046b971c19c5fcf93d779380d6"><td class="memTemplParams" colspan="2">template&lt;typename GraphType , typename MisVisitorType &gt; </td></tr>
+<tr class="memitem:a97d118046b971c19c5fcf93d779380d6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00441.html#a97d118046b971c19c5fcf93d779380d6">limbo::algorithms::max_independent_set</a> (GraphType const &amp;g, MisVisitorType vis, MaxIndependentSetByMaxClique const &amp;)</td></tr>
+<tr class="separator:a97d118046b971c19c5fcf93d779380d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the Multi-way FM partitioning algorithm. </p>
-<p>Refer to Fiduccia and Mattheyses, "A Linear-time Heuristics for Improving Network Partitions", DAC 1982</p>
+<div class="textblock"><p>solve maximum independent sets with maximum cliques </p>
+<p>The maximum independent set of a graph is the maximum clique of its complement graph.</p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Sep 2015 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Feb 2015 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00326_source.html">FMMultiWay.h</a>.</p>
+<p>Definition in file <a class="el" href="a00326_source.html">MaxIndependentSet.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

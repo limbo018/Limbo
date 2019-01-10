@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: TfDataBase Struct Reference</title>
+<title>Limbo: GdfParser::Text Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,40 +87,91 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="a00435.html">GdfParser</a></li><li class="navelem"><a class="el" href="a00264.html">Text</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00467.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00519.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">TfDataBase Struct Reference</div>  </div>
+<div class="title">GdfParser::Text Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Custom class that inheritates <a class="el" href="a00263.html">TfParser::TfDataBase</a> with all the required callbacks defined.  
+<p>text  
  <a href="a00264.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00359_source.html">GdfDataBase.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for TfDataBase:</div>
+Inheritance diagram for GdfParser::Text:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="a00264.png" usemap="#TfDataBase_map" alt=""/>
-  <map id="TfDataBase_map" name="TfDataBase_map">
-<area href="a00263.html" title="Base class for tf database. Only pure virtual functions are defined. User needs to inheritate this cl..." alt="TfParser::TfDataBase" shape="rect" coords="0,0,132,24"/>
+  <img src="a00264.png" usemap="#GdfParser::Text_map" alt=""/>
+  <map id="GdfParser::Text_map" name="GdfParser::Text_map">
+<area href="a00159.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures. " alt="GdfParser::Item" shape="rect" coords="0,0,99,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ac9b50dc800d5e4732a0557a281120f2c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac9b50dc800d5e4732a0557a281120f2c"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00264.html#ac9b50dc800d5e4732a0557a281120f2c">TextTypeEnum</a> { <br />
+&#160;&#160;<b>NUMBER_OF_LAYERS</b>, 
+<b>WIRE_SPACINGS</b>, 
+<b>VIA_SPACINGS</b>, 
+<b>WIRE_WIDTHS</b>, 
+<br />
+&#160;&#160;<b>VIA_WIDTHS</b>, 
+<b>VERTICAL_WIRE_COSTS</b>, 
+<b>HORIZONTAL_WIRE_COSTS</b>, 
+<b>VIA_COSTS</b>, 
+<br />
+&#160;&#160;<b>STRING</b>, 
+<b>UNKNOWN</b>
+<br />
+ }</td></tr>
+<tr class="memdesc:ac9b50dc800d5e4732a0557a281120f2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">type of text <br /></td></tr>
+<tr class="separator:ac9b50dc800d5e4732a0557a281120f2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a472c2c374d651152f216391a72e6925e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00264.html#a472c2c374d651152f216391a72e6925e">add_tf_layer_id</a> (string const &amp;s1, int32_t const &amp;s2, string const &amp;s3)</td></tr>
-<tr class="memdesc:a472c2c374d651152f216391a72e6925e"><td class="mdescLeft">&#160;</td><td class="mdescRight">add layer name, layer id, layer abbreviation  <a href="#a472c2c374d651152f216391a72e6925e">More...</a><br /></td></tr>
-<tr class="separator:a472c2c374d651152f216391a72e6925e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a981bf91b8f31bdcc3090a91c0a78b699"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a981bf91b8f31bdcc3090a91c0a78b699"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00264.html#a981bf91b8f31bdcc3090a91c0a78b699">Text</a> ()</td></tr>
+<tr class="memdesc:a981bf91b8f31bdcc3090a91c0a78b699"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
+<tr class="separator:a981bf91b8f31bdcc3090a91c0a78b699"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe8831a868aab21956b12724cd455d82"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe8831a868aab21956b12724cd455d82"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00264.html#afe8831a868aab21956b12724cd455d82">reset</a> ()</td></tr>
+<tr class="memdesc:afe8831a868aab21956b12724cd455d82"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br /></td></tr>
+<tr class="separator:afe8831a868aab21956b12724cd455d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43295c01929c06180f8405273faa9fdd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00264.html#a43295c01929c06180f8405273faa9fdd">print</a> (ostream &amp;ss) const </td></tr>
+<tr class="memdesc:a43295c01929c06180f8405273faa9fdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">print data members  <a href="#a43295c01929c06180f8405273faa9fdd">More...</a><br /></td></tr>
+<tr class="separator:a43295c01929c06180f8405273faa9fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ac407b6707d03b16332514c8c5313b343"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac407b6707d03b16332514c8c5313b343"></a>
+<a class="el" href="a00264.html#ac9b50dc800d5e4732a0557a281120f2c">TextTypeEnum</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00264.html#ac407b6707d03b16332514c8c5313b343">textType</a></td></tr>
+<tr class="memdesc:ac407b6707d03b16332514c8c5313b343"><td class="mdescLeft">&#160;</td><td class="mdescRight">test type <br /></td></tr>
+<tr class="separator:ac407b6707d03b16332514c8c5313b343"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1813b005986e31ce74388a2b4396e3f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1813b005986e31ce74388a2b4396e3f0"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00264.html#a1813b005986e31ce74388a2b4396e3f0">name</a></td></tr>
+<tr class="memdesc:a1813b005986e31ce74388a2b4396e3f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">more information for textType <br /></td></tr>
+<tr class="separator:a1813b005986e31ce74388a2b4396e3f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e4c183f8ac0abfbdae4e5509694a895"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e4c183f8ac0abfbdae4e5509694a895"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00264.html#a3e4c183f8ac0abfbdae4e5509694a895">content</a></td></tr>
+<tr class="memdesc:a3e4c183f8ac0abfbdae4e5509694a895"><td class="mdescLeft">&#160;</td><td class="mdescRight">content of text <br /></td></tr>
+<tr class="separator:a3e4c183f8ac0abfbdae4e5509694a895"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Custom class that inheritates <a class="el" href="a00263.html">TfParser::TfDataBase</a> with all the required callbacks defined. </p>
+<div class="textblock"><p>text </p>
 
-<p>Definition at line <a class="el" href="a00411_source.html#l00019">19</a> of file <a class="el" href="a00411_source.html">test_spirit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="a00359_source.html#l00318">318</a> of file <a class="el" href="a00359_source.html">GdfDataBase.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a472c2c374d651152f216391a72e6925e"></a>
+<a class="anchor" id="a43295c01929c06180f8405273faa9fdd"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -128,27 +179,11 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void TfDataBase::add_tf_layer_id </td>
+          <td class="memname">virtual void GdfParser::Text::print </td>
           <td>(</td>
-          <td class="paramtype">string const &amp;&#160;</td>
-          <td class="paramname"><em>s1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int32_t const &amp;&#160;</td>
-          <td class="paramname"><em>s2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string const &amp;&#160;</td>
-          <td class="paramname"><em>s3</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>ss</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -158,29 +193,27 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>add layer name, layer id, layer abbreviation </p>
+<p>print data members </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s1</td><td>layer name </td></tr>
-    <tr><td class="paramname">s2</td><td>layer id </td></tr>
-    <tr><td class="paramname">s3</td><td>layer abbreviation </td></tr>
+    <tr><td class="paramname">ss</td><td>output stream </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="a00263.html#a1bc627ca1edba4dbfe5e6a055f860571">TfParser::TfDataBase</a>.</p>
+<p>Reimplemented from <a class="el" href="a00159.html#aeb2483225aca5843a2285910c089bcb4">GdfParser::Item</a>.</p>
 
-<p>Definition at line <a class="el" href="a00411_source.html#l00025">25</a> of file <a class="el" href="a00411_source.html">test_spirit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="a00359_source.html#l00352">352</a> of file <a class="el" href="a00359_source.html">GdfDataBase.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/test/parsers/tf/<a class="el" href="a00411_source.html">test_spirit.cpp</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdf/bison/<a class="el" href="a00359_source.html">GdfDataBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

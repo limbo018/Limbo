@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: parsers/Lp.md Source File</title>
+<title>Limbo: parsers/Gdsii.md Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,47 +88,103 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">parsers/Lp.md</div>  </div>
+<div class="title">parsers/Gdsii.md</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;Limbo.Parsers.LpParser {#Parsers_LpParser}</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;Limbo.Parsers.GdsiiParser {#Parsers_GdsiiParser}</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;---------</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;[TOC]</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;# Introduction {#Parsers_LpParser_Introduction}</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;# Introduction {#Parsers_GdsiiParser_Introduction}</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;[LP format](https://www.gurobi.com/documentation/6.5/refman/lp_format.html) is among the various file format to describe optimization problems. </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;The parser can read a special case of linear programming problem in the LP format compatible to [Gurobi](https://www.gurobi.com), which contains only differential constaints. </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;The special linear programming problem can be solved by dual min-cost flow algorithm in the @ref Solvers package. </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;Here is a sample file.</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;\include test/parsers/lp/benchmarks/problem.lp</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;# Examples {#Parsers_LpParser_Examples}</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;## Flex/Bison Parser {#Parsers_LpParser_Flex_Bison}</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;See documented version: [test/parsers/lp/test_bison.cpp](@ref lp/test_bison.cpp)</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;\include test/parsers/lp/test_bison.cpp</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;[GDSII](https://en.wikipedia.org/wiki/GDSII) is an industry standard for data exchange of integrated circuits (IC) layout artwork. </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;It is a binary file format representing planar geometric shapes, text labels, and other information about the layout in hierarchical form. </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;The manual can be found in [here](http://www.buchanan1.net/stream_description.html). </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;The parser consists of three parts, reader, writer and database for full chip parsing. </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;@ref GdsParser::GdsReader provides API to read GDSII files (.gds or .gds.gz with Boost and Zlib support). </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;@ref GdsParser::GdsWriter provides API to write GDSII files (.gds or .gds.gz with Boost and Zlib support). </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;These two parts are basic functionalities for read and write in GDSII format. </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;@ref GdsParser::GdsDB is a database to store layout elements and provides easy API to read, write and flatten full layouts. </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;# Examples {#Parsers_GdsiiParser_Examples}</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;## Stream Reader {#Parsers_GdsiiParser_StreamReader}</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;Compiling and running commands (assuming LIMBO_DIR is exported as the environment variable to the path where limbo library is installed)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;~~~~~~~~~~~~~~~~</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;g++ -o test_bison test_bison.cpp -I $LIMBO_DIR/include -L $LIMBO_DIR/lib -llpparser</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;./test_bison benchmarks/problem.lp</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;See documented version: [test/parsers/gdsii/test_reader.cpp](@ref gdsii/test_reader.cpp)</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;\include test/parsers/gdsii/test_reader.cpp</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;Compiling and running commands (assuming LIMBO_DIR is exported as the environment variable to the path where limbo library is installed)</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;~~~~~~~~~~~~~~~~</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;## All Examples {#Parsers_LpParser_Examples_All}</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;- [test/parsers/lp/test_bison.cpp](@ref lp/test_bison.cpp)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;g++ -o test_reader test_reader.cpp -I $LIMBO_DIR/include -L $LIMBO_DIR/lib -lgdsparser</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;# read a file </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;./test_reader benchmarks/test_reader.gds</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;~~~~~~~~~~~~~~~~</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;# References {#Parsers_LpParser_References}</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;- [limbo/parsers/lp/bison/LpDataBase.h](@ref LpDataBase.h)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;- [limbo/parsers/lp/bison/LpDriver.h](@ref LpDriver.h)</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;If BOOST_DIR and ZLIB_DIR have been defined as environment variables when building Limbo library, one can compile with support to compression files. </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;g++ -o test_reader test_reader.cpp -I $LIMBO_DIR/include -L $LIMBO_DIR/lib -lgdsparser -L $BOOST_DIR/lib -lboost_iostreams -L $ZLIB_DIR -lz</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;# read a compressed file </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;./test_reader benchmarks/test_reader_gz.gds.gz</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;## Stream Writer {#Parsers_GdsiiParser_StreamWriter}</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;See documented version: [test/parsers/gdsii/test_writer.cpp](@ref gdsii/test_writer.cpp)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;\include test/parsers/gdsii/test_writer.cpp</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;Compiling and running commands (assuming LIMBO_DIR is exported as the environment variable to the path where limbo library is installed)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;g++ -o test_writer test_writer.cpp -I $LIMBO_DIR/include -L $LIMBO_DIR/lib -lgdsparser</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;# write to a file </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;./test_writer test_writer.gds</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;If BOOST_DIR and ZLIB_DIR have been defined as environment variables when building Limbo library, one can compile with support to compression files. </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;g++ -o test_writer test_writer.cpp -I $LIMBO_DIR/include -L $LIMBO_DIR/lib -lgdsparser -L $BOOST_DIR/lib -lboost_iostreams -L $ZLIB_DIR -lz</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;# write to a compressed file </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;./test_writer test_writer_gz.gds.gz</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;## Stream GDSII Database {#Parsers_GdsiiParser_StreamGdsDB}</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;See documented version: [test/parsers/gdsii/test_gdsdb.cpp](@ref gdsii/test_gdsdb.cpp)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;\include test/parsers/gdsii/test_gdsdb.cpp</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;Compiling and running commands (assuming LIMBO_DIR is exported as the environment variable to the path where limbo library is installed)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;g++ -o test_gdsdb test_gdsdb.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -L $LIMBO_DIR/lib -lgdsparser -lgdsdb</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;# read a file and test flatten </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;./test_gdsdb benchmarks/test_reader.gds test_gdsdb.gds test_gdsdb_flat.gds TOPCELL</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;If BOOST_DIR and ZLIB_DIR have been defined as environment variables when building Limbo library, one can compile with support to compression files. </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;g++ -o test_gdsdb test_gdsdb.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -L $LIMBO_DIR/lib -lgdsparser -lgdsdb -L $BOOST_DIR/lib -lboost_iostreams -L $ZLIB_DIR -lz</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;# read a compressed file and test flatten  </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;./test_gdsdb benchmarks/test_reader_gz.gds.gz test_gdsdb_gz.gds.gz test_gdsdb_gz_flat.gds.gz TOPCELL</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;~~~~~~~~~~~~~~~~</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;## All Examples {#Parsers_GdsiiParser_Examples_All}</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;- [test/parsers/gdsii/test_reader.cpp](@ref gdsii/test_reader.cpp)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;- [test/parsers/gdsii/test_writer.cpp](@ref gdsii/test_writer.cpp)</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;- [test/parsers/gdsii/test_gdsdb.cpp](@ref gdsii/test_gdsdb.cpp)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;# References {#Parsers_GdsiiParser_References}</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;- [limbo/parsers/gdsii/stream/GdsRecords.h](@ref GdsRecords.h)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;- [limbo/parsers/gdsii/stream/GdsReader.h](@ref GdsReader.h)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;- [limbo/parsers/gdsii/stream/GdsWriter.h](@ref GdsWriter.h)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;- [limbo/parsers/gdsii/stream/GdsDriver.h](@ref GdsDriver.h)</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;- [limbo/parsers/gdsii/gdsdb/GdsIO.h](@ref GdsIO.h)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;- [limbo/parsers/gdsii/gdsdb/GdsObjects.h](@ref GdsObjects.h)</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;- [limbo/parsers/gdsii/gdsdb/GdsObjectHelpers.h](@ref GdsObjectHelpers.h)</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:10 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:39 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

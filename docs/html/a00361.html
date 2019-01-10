@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/GdsObjects.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/GdsIO.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,82 +95,48 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">GdsObjects.h File Reference</div>  </div>
+<div class="title">GdsIO.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Various GDSII objects and a top GDSII database.  
+<p>Wrapper to GDSII read and write with GDSII database <a class="el" href="a00123.html">GdsParser::GdsDB::GdsDB</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;boost/geometry.hpp&gt;</code><br />
-<code>#include &lt;boost/geometry/geometries/adapted/boost_polygon.hpp&gt;</code><br />
-<code>#include &lt;boost/geometry/geometries/geometries.hpp&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00363_source.html">limbo/parsers/gdsii/stream/GdsReader.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;limits&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00366_source.html">limbo/parsers/gdsii/stream/GdsReader.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00368_source.html">limbo/parsers/gdsii/stream/GdsWriter.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00364_source.html">limbo/parsers/gdsii/gdsdb/GdsObjects.h</a>&gt;</code><br />
 </div>
 <p><a href="a00361_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00127.html">GdsParser::GdsDB::GdsObject</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00132.html">GdsParser::GdsDB::GdsReader</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">read GDSII file with GDSII database <a class="el" href="a00123.html">GdsParser::GdsDB::GdsDB</a>  <a href="a00132.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00135.html">GdsParser::GdsDB::GdsShape</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00134.html">GdsParser::GdsDB::GdsRectangle</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00130.html">GdsParser::GdsDB::GdsPolygon</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00129.html">GdsParser::GdsDB::GdsPath</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00138.html">GdsParser::GdsDB::GdsText</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00119.html">GdsParser::GdsDB::GdsCellReference</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00118.html">GdsParser::GdsDB::GdsCellArray</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00117.html">GdsParser::GdsDB::GdsCell</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00123.html">GdsParser::GdsDB::GdsDB</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00260.html">boost::geometry::traits::tag&lt; GdsParser::GdsDB::GdsRectangle &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for tag  <a href="a00260.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00225.html">boost::geometry::traits::point_type&lt; GdsParser::GdsDB::GdsRectangle &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for point_type  <a href="a00225.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00259.html">boost::geometry::traits::tag&lt; GdsParser::GdsDB::GdsPolygon &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for tag  <a href="a00259.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00224.html">boost::geometry::traits::point_type&lt; GdsParser::GdsDB::GdsPolygon &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for point_type  <a href="a00224.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00144.html">boost::polygon::geometry_concept&lt; GdsParser::GdsDB::GdsRectangle &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for Boost.Polygon traits for <a class="el" href="a00134.html">GdsParser::GdsDB::GdsRectangle</a>  <a href="a00144.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00143.html">boost::polygon::geometry_concept&lt; GdsParser::GdsDB::GdsPolygon &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization for Boost.Polygon traits for <a class="el" href="a00130.html">GdsParser::GdsDB::GdsPolygon</a>  <a href="a00143.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00140.html">GdsParser::GdsDB::GdsWriter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">write GDSII file with GDSII database <a class="el" href="a00123.html">GdsParser::GdsDB::GdsDB</a>  <a href="a00140.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00431"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00431.html">GdsParser</a></td></tr>
-<tr class="memdesc:a00431"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.GdsParser <br /></td></tr>
+<tr class="memitem:a00436"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00436.html">GdsParser</a></td></tr>
+<tr class="memdesc:a00436"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.GdsParser <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00432"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00432.html">GdsParser::GdsDB</a></td></tr>
-<tr class="memdesc:a00432"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.GdsParser.GdsDB <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00424"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00424.html">boost</a></td></tr>
-<tr class="memdesc:a00424"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boost.Geometry. <br /></td></tr>
+<tr class="memitem:a00437"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00437.html">GdsParser::GdsDB</a></td></tr>
+<tr class="memdesc:a00437"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.GdsParser.GdsDB <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Various GDSII objects and a top GDSII database. </p>
+<div class="textblock"><p>Wrapper to GDSII read and write with GDSII database <a class="el" href="a00123.html">GdsParser::GdsDB::GdsDB</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Oct 2016 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Nov 2016 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00361_source.html">GdsObjects.h</a>.</p>
+<p>Definition in file <a class="el" href="a00361_source.html">GdsIO.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

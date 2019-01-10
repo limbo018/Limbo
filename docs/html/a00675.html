@@ -89,25 +89,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00445.html">LpParser</a></li><li class="navelem"><a class="el" href="a00174.html">LpDataBase</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00440.html">limbo</a></li><li class="navelem"><a class="el" href="a00448.html">solvers</a></li><li class="navelem"><a class="el" href="a00276.html">VariableProperty</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">LpParser::LpDataBase Member List</div>  </div>
+<div class="title">limbo::solvers::VariableProperty&lt; V &gt; Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00174.html">LpParser::LpDataBase</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00174.html#a06e69b33012729ca43b282b54f0a28d2">add_constraint</a>(string const &amp;cname, TermArray const &amp;terms, char compare, double constant)=0</td><td class="entry"><a class="el" href="a00174.html">LpParser::LpDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00174.html#ac9362bd3c5c0f5611cdb492828583ef5">add_objective</a>(bool minimize, TermArray const &amp;terms)=0</td><td class="entry"><a class="el" href="a00174.html">LpParser::LpDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00174.html#a59d7089cd4e139a73d7acdf4efd5a6aa">add_variable</a>(string const &amp;vname, double l=limbo::lowest&lt; double &gt;(), double r=std::numeric_limits&lt; double &gt;::max())=0</td><td class="entry"><a class="el" href="a00174.html">LpParser::LpDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00174.html#ac2869dbe780548dd9dfa67661a51dce3">set_integer</a>(string const &amp;vname, bool binary)=0</td><td class="entry"><a class="el" href="a00174.html">LpParser::LpDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00276.html#a9a8cfa1f0625a97962c6981e6efc6db4">copy</a>(VariableProperty const &amp;rhs)</td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00276.html#ad39f7adfa92f656110de7d61edfa6dcd">lowerBound</a>() const </td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00276.html#a91b7b25d3d59782379b479adfd2ea899">m_lowerBound</a></td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00276.html#af21752b2a1da23b1a579012e490ed1e0">m_name</a></td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00276.html#af92f863d4c96b048dac7b00821fe46fd">m_numericType</a></td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00276.html#a81ed00b4fa60eef5ba92cffbb5d8c10f">m_upperBound</a></td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00276.html#a847aa35bc3b4006834fc22285f84d471">name</a>() const </td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00276.html#ab16619dfd3eb700835af1a43b1c685c7">numericType</a>() const </td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00276.html#a4ae92a5786a72be68b5faca4e360b7a9">operator=</a>(VariableProperty const &amp;rhs)</td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00276.html#a0a8ea6e66969772b37e1fad817650223">setLowerBound</a>(variable_value_type lb)</td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00276.html#a6fab758ec2b0e6f27da4e82b7d9aa063">setName</a>(std::string const &amp;n)</td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00276.html#acda73437599f622e8ca1701ca5eafacf">setNumericType</a>(SolverProperty nt)</td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00276.html#ad31437fa42f498c977970bbe2a712db3">setUpperBound</a>(variable_value_type ub)</td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00276.html#a15245662f00ad20414c3f5252682c142">updateLowerBound</a>(variable_value_type lb)</td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00276.html#a232100a3ff85c375e27fe942e589a732">updateUpperBound</a>(variable_value_type ub)</td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00276.html#a56912fe136d3375370e2440ada6cbf39">upperBound</a>() const </td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00276.html#a7cebf9dda2b4e37f7f30a60ce1b7b981">variable_value_type</a> typedef</td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00276.html#a30d4a8048a436475b427ac78a29a4a91">VariableProperty</a>(variable_value_type lb, variable_value_type ub, SolverProperty nt, std::string const &amp;n)</td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00276.html#adea30cb340ef1b7f76b0da0290a1f39c">VariableProperty</a>(VariableProperty const &amp;rhs)</td><td class="entry"><a class="el" href="a00276.html">limbo::solvers::VariableProperty&lt; V &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:41 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

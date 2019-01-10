@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: TfParser Class Reference</title>
+<title>Limbo: TfDataBase Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,64 +90,60 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="a00468.html">List of all members</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="a00472.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">TfParser Class Reference</div>  </div>
+<div class="title">TfDataBase Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Tf parser for technology file.  
+<p>Custom class that inheritates <a class="el" href="a00265.html">TfParser::TfDataBase</a> with all the required callbacks defined.  
  <a href="a00266.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="a00371_source.html">TfParser.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for TfDataBase:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00266.png" usemap="#TfDataBase_map" alt=""/>
+  <map id="TfDataBase_map" name="TfDataBase_map">
+<area href="a00265.html" title="Base class for tf database. Only pure virtual functions are defined. User needs to inheritate this cl..." alt="TfParser::TfDataBase" shape="rect" coords="0,0,132,24"/>
+</map>
+ </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00250.html">SkipperGrammar</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">grammar of skipper  <a href="a00250.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00263.html">TfDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for tf database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00263.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00265.html">TfGrammar</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">define grammar  <a href="a00265.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ac4370257cf00d969472a040aefeb1884"><td class="memTemplParams" colspan="2">template&lt;typename DataBaseType &gt; </td></tr>
-<tr class="memitem:ac4370257cf00d969472a040aefeb1884"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00266.html#ac4370257cf00d969472a040aefeb1884">read</a> (DataBaseType &amp;db, const string &amp;tfFile)</td></tr>
-<tr class="memdesc:ac4370257cf00d969472a040aefeb1884"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to read tf file.  <a href="#ac4370257cf00d969472a040aefeb1884">More...</a><br /></td></tr>
-<tr class="separator:ac4370257cf00d969472a040aefeb1884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a472c2c374d651152f216391a72e6925e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00266.html#a472c2c374d651152f216391a72e6925e">add_tf_layer_id</a> (string const &amp;s1, int32_t const &amp;s2, string const &amp;s3)</td></tr>
+<tr class="memdesc:a472c2c374d651152f216391a72e6925e"><td class="mdescLeft">&#160;</td><td class="mdescRight">add layer name, layer id, layer abbreviation  <a href="#a472c2c374d651152f216391a72e6925e">More...</a><br /></td></tr>
+<tr class="separator:a472c2c374d651152f216391a72e6925e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Tf parser for technology file. </p>
-<p>Developed with Boost.Spirit </p>
+<div class="textblock"><p>Custom class that inheritates <a class="el" href="a00265.html">TfParser::TfDataBase</a> with all the required callbacks defined. </p>
 
-<p>Definition at line <a class="el" href="a00371_source.html#l00052">52</a> of file <a class="el" href="a00371_source.html">TfParser.h</a>.</p>
+<p>Definition at line <a class="el" href="a00415_source.html#l00019">19</a> of file <a class="el" href="a00415_source.html">test_spirit.cpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ac4370257cf00d969472a040aefeb1884"></a>
+<a class="anchor" id="a472c2c374d651152f216391a72e6925e"></a>
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename DataBaseType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static bool TfParser::read </td>
+          <td class="memname">void TfDataBase::add_tf_layer_id </td>
           <td>(</td>
-          <td class="paramtype">DataBaseType &amp;&#160;</td>
-          <td class="paramname"><em>db</em>, </td>
+          <td class="paramtype">string const &amp;&#160;</td>
+          <td class="paramname"><em>s1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>tfFile</em>&#160;</td>
+          <td class="paramtype">int32_t const &amp;&#160;</td>
+          <td class="paramname"><em>s2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string const &amp;&#160;</td>
+          <td class="paramname"><em>s3</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -157,31 +153,34 @@ template&lt;typename DataBaseType &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>API to read tf file. </p>
+<p>add layer name, layer id, layer abbreviation </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">db</td><td>database </td></tr>
-    <tr><td class="paramname">tfFile</td><td>tf file </td></tr>
+    <tr><td class="paramname">s1</td><td>layer name </td></tr>
+    <tr><td class="paramname">s2</td><td>layer id </td></tr>
+    <tr><td class="paramname">s3</td><td>layer abbreviation </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00371_source.html#l00199">199</a> of file <a class="el" href="a00371_source.html">TfParser.h</a>.</p>
+<p>Implements <a class="el" href="a00265.html#a1bc627ca1edba4dbfe5e6a055f860571">TfParser::TfDataBase</a>.</p>
+
+<p>Definition at line <a class="el" href="a00415_source.html#l00025">25</a> of file <a class="el" href="a00415_source.html">test_spirit.cpp</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/tf/spirit/<a class="el" href="a00371_source.html">TfParser.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/test/parsers/tf/<a class="el" href="a00415_source.html">test_spirit.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

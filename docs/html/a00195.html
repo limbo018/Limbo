@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::solvers::NetworkSimplex&lt; T, V &gt; Class Template Reference</title>
+<title>Limbo: BookshelfParser::NetPin Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,200 +89,134 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00443.html">solvers</a></li><li class="navelem"><a class="el" href="a00195.html">NetworkSimplex</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00428.html">BookshelfParser</a></li><li class="navelem"><a class="el" href="a00195.html">NetPin</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="a00656.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00483.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::solvers::NetworkSimplex&lt; T, V &gt; Class Template Reference</div>  </div>
+<div class="title">BookshelfParser::NetPin Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Network simplex algorithm for min-cost flow.  
+<p>describe a pin of a net  
  <a href="a00195.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00381_source.html">DualMinCostFlow.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00353_source.html">BookshelfDataBase.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for limbo::solvers::NetworkSimplex&lt; T, V &gt;:</div>
+Inheritance diagram for BookshelfParser::NetPin:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="a00195.png" usemap="#limbo::solvers::NetworkSimplex&lt; T, V &gt;_map" alt=""/>
-  <map id="limbo::solvers::NetworkSimplex&lt; T, V &gt;_map" name="limbo::solvers::NetworkSimplex&lt; T, V &gt;_map">
-<area href="a00184.html" title="A base class of min-cost flow solver. " alt="limbo::solvers::MinCostFlowSolver&lt; T, V &gt;" shape="rect" coords="0,0,253,24"/>
-<area href="a00184.html" title="A base class of min-cost flow solver. " alt="limbo::solvers::MinCostFlowSolver&lt; T, V &gt;" shape="rect" coords="263,0,516,24"/>
+  <img src="a00195.png" usemap="#BookshelfParser::NetPin_map" alt=""/>
+  <map id="BookshelfParser::NetPin_map" name="BookshelfParser::NetPin_map">
+<area href="a00160.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures. " alt="BookshelfParser::Item" shape="rect" coords="0,0,148,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a419814a5e0440dd5f83b1269b622b41b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a419814a5e0440dd5f83b1269b622b41b"></a>
-typedef T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a419814a5e0440dd5f83b1269b622b41b">value_type</a></td></tr>
-<tr class="memdesc:a419814a5e0440dd5f83b1269b622b41b"><td class="mdescLeft">&#160;</td><td class="mdescRight">value type <br /></td></tr>
-<tr class="separator:a419814a5e0440dd5f83b1269b622b41b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69ab308fbb9fe178ca86139ce2d3a9cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a69ab308fbb9fe178ca86139ce2d3a9cd"></a>
-typedef <a class="el" href="a00184.html">MinCostFlowSolver</a>&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a69ab308fbb9fe178ca86139ce2d3a9cd">base_type</a></td></tr>
-<tr class="memdesc:a69ab308fbb9fe178ca86139ce2d3a9cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">base type <br /></td></tr>
-<tr class="separator:a69ab308fbb9fe178ca86139ce2d3a9cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af42e9204a0a49ed584fe1f8ecda80588"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af42e9204a0a49ed584fe1f8ecda80588"></a>
-typedef <a class="el" href="a00184.html#a263e4cf12120e31b7f6a036441ffe6e4">base_type::dualsolver_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#af42e9204a0a49ed584fe1f8ecda80588">dualsolver_type</a></td></tr>
-<tr class="memdesc:af42e9204a0a49ed584fe1f8ecda80588"><td class="mdescLeft">&#160;</td><td class="mdescRight">dual min-cost flow solver type <br /></td></tr>
-<tr class="separator:af42e9204a0a49ed584fe1f8ecda80588"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a393bb2e1aa1ac39238b3e0d3210503a8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a393bb2e1aa1ac39238b3e0d3210503a8"></a>
-typedef lemon::NetworkSimplex<br class="typebreak" />
-&lt; typename <br class="typebreak" />
-dualsolver_type::graph_type, <br class="typebreak" />
-<a class="el" href="a00195.html#a419814a5e0440dd5f83b1269b622b41b">value_type</a>, <a class="el" href="a00195.html#a419814a5e0440dd5f83b1269b622b41b">value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a393bb2e1aa1ac39238b3e0d3210503a8">alg_type</a></td></tr>
-<tr class="memdesc:a393bb2e1aa1ac39238b3e0d3210503a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">algorithm type <br /></td></tr>
-<tr class="separator:a393bb2e1aa1ac39238b3e0d3210503a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a419814a5e0440dd5f83b1269b622b41b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a419814a5e0440dd5f83b1269b622b41b"></a>
-typedef T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a419814a5e0440dd5f83b1269b622b41b">value_type</a></td></tr>
-<tr class="memdesc:a419814a5e0440dd5f83b1269b622b41b"><td class="mdescLeft">&#160;</td><td class="mdescRight">value type <br /></td></tr>
-<tr class="separator:a419814a5e0440dd5f83b1269b622b41b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69ab308fbb9fe178ca86139ce2d3a9cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a69ab308fbb9fe178ca86139ce2d3a9cd"></a>
-typedef <a class="el" href="a00184.html">MinCostFlowSolver</a>&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a69ab308fbb9fe178ca86139ce2d3a9cd">base_type</a></td></tr>
-<tr class="memdesc:a69ab308fbb9fe178ca86139ce2d3a9cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">base type <br /></td></tr>
-<tr class="separator:a69ab308fbb9fe178ca86139ce2d3a9cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2362011ff7c107748fbae5ae944d3bae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2362011ff7c107748fbae5ae944d3bae"></a>
-typedef <br class="typebreak" />
-<a class="el" href="a00184.html#a2097d26aa450d613128b30befac02e95">base_type::primalsolver_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a2362011ff7c107748fbae5ae944d3bae">primalsolver_type</a></td></tr>
-<tr class="memdesc:a2362011ff7c107748fbae5ae944d3bae"><td class="mdescLeft">&#160;</td><td class="mdescRight">dual min-cost flow solver type <br /></td></tr>
-<tr class="separator:a2362011ff7c107748fbae5ae944d3bae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b6db2b868b4eddea0e76db07fc071f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b6db2b868b4eddea0e76db07fc071f0"></a>
-typedef lemon::NetworkSimplex<br class="typebreak" />
-&lt; typename <br class="typebreak" />
-primalsolver_type::graph_type, <br class="typebreak" />
-<a class="el" href="a00195.html#a419814a5e0440dd5f83b1269b622b41b">value_type</a>, <a class="el" href="a00195.html#a419814a5e0440dd5f83b1269b622b41b">value_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a6b6db2b868b4eddea0e76db07fc071f0">alg_type</a></td></tr>
-<tr class="memdesc:a6b6db2b868b4eddea0e76db07fc071f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">algorithm type <br /></td></tr>
-<tr class="separator:a6b6db2b868b4eddea0e76db07fc071f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_a00184"><td colspan="2" onclick="javascript:toggleInherit('pub_types_a00184')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="a00184.html">limbo::solvers::MinCostFlowSolver&lt; T, V &gt;</a></td></tr>
-<tr class="memitem:a263e4cf12120e31b7f6a036441ffe6e4 inherit pub_types_a00184"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a263e4cf12120e31b7f6a036441ffe6e4"></a>
-typedef <a class="el" href="a00092.html">DualMinCostFlow</a>&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html#a263e4cf12120e31b7f6a036441ffe6e4">dualsolver_type</a></td></tr>
-<tr class="memdesc:a263e4cf12120e31b7f6a036441ffe6e4 inherit pub_types_a00184"><td class="mdescLeft">&#160;</td><td class="mdescRight">dual min-cost flow solver type <br /></td></tr>
-<tr class="separator:a263e4cf12120e31b7f6a036441ffe6e4 inherit pub_types_a00184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2097d26aa450d613128b30befac02e95 inherit pub_types_a00184"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2097d26aa450d613128b30befac02e95"></a>
-typedef <a class="el" href="a00183.html">MinCostFlow</a>&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html#a2097d26aa450d613128b30befac02e95">primalsolver_type</a></td></tr>
-<tr class="memdesc:a2097d26aa450d613128b30befac02e95 inherit pub_types_a00184"><td class="mdescLeft">&#160;</td><td class="mdescRight">dual min-cost flow solver type <br /></td></tr>
-<tr class="separator:a2097d26aa450d613128b30befac02e95 inherit pub_types_a00184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a59dfd7b8168cd225cc781ee6d29899bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a59dfd7b8168cd225cc781ee6d29899bb">NetworkSimplex</a> (typename alg_type::PivotRule pivotRule=alg_type::BLOCK_SEARCH)</td></tr>
-<tr class="memdesc:a59dfd7b8168cd225cc781ee6d29899bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a59dfd7b8168cd225cc781ee6d29899bb">More...</a><br /></td></tr>
-<tr class="separator:a59dfd7b8168cd225cc781ee6d29899bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af79ad8931453986d33d4e8115c4f5df6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#af79ad8931453986d33d4e8115c4f5df6">NetworkSimplex</a> (<a class="el" href="a00195.html">NetworkSimplex</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:af79ad8931453986d33d4e8115c4f5df6"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#af79ad8931453986d33d4e8115c4f5df6">More...</a><br /></td></tr>
-<tr class="separator:af79ad8931453986d33d4e8115c4f5df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abddecdd0d59855f5a7b84bfa483a72b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00195.html">NetworkSimplex</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#abddecdd0d59855f5a7b84bfa483a72b4">operator=</a> (<a class="el" href="a00195.html">NetworkSimplex</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:abddecdd0d59855f5a7b84bfa483a72b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment  <a href="#abddecdd0d59855f5a7b84bfa483a72b4">More...</a><br /></td></tr>
-<tr class="separator:abddecdd0d59855f5a7b84bfa483a72b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebc8e8b92bf81fdf62ef580f03d60d85"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#aebc8e8b92bf81fdf62ef580f03d60d85">operator()</a> (<a class="el" href="a00184.html#a263e4cf12120e31b7f6a036441ffe6e4">dualsolver_type</a> *d)</td></tr>
-<tr class="memdesc:aebc8e8b92bf81fdf62ef580f03d60d85"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to run min-cost flow solver.  <a href="#aebc8e8b92bf81fdf62ef580f03d60d85">More...</a><br /></td></tr>
-<tr class="separator:aebc8e8b92bf81fdf62ef580f03d60d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59dfd7b8168cd225cc781ee6d29899bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a59dfd7b8168cd225cc781ee6d29899bb">NetworkSimplex</a> (typename alg_type::PivotRule pivotRule=alg_type::BLOCK_SEARCH)</td></tr>
-<tr class="memdesc:a59dfd7b8168cd225cc781ee6d29899bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a59dfd7b8168cd225cc781ee6d29899bb">More...</a><br /></td></tr>
-<tr class="separator:a59dfd7b8168cd225cc781ee6d29899bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af79ad8931453986d33d4e8115c4f5df6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#af79ad8931453986d33d4e8115c4f5df6">NetworkSimplex</a> (<a class="el" href="a00195.html">NetworkSimplex</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:af79ad8931453986d33d4e8115c4f5df6"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#af79ad8931453986d33d4e8115c4f5df6">More...</a><br /></td></tr>
-<tr class="separator:af79ad8931453986d33d4e8115c4f5df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abddecdd0d59855f5a7b84bfa483a72b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00195.html">NetworkSimplex</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#abddecdd0d59855f5a7b84bfa483a72b4">operator=</a> (<a class="el" href="a00195.html">NetworkSimplex</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:abddecdd0d59855f5a7b84bfa483a72b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment  <a href="#abddecdd0d59855f5a7b84bfa483a72b4">More...</a><br /></td></tr>
-<tr class="separator:abddecdd0d59855f5a7b84bfa483a72b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19bd320affb71723d83f6621d8627771"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a19bd320affb71723d83f6621d8627771">operator()</a> (<a class="el" href="a00184.html#a2097d26aa450d613128b30befac02e95">primalsolver_type</a> *d)</td></tr>
-<tr class="memdesc:a19bd320affb71723d83f6621d8627771"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to run min-cost flow solver.  <a href="#a19bd320affb71723d83f6621d8627771">More...</a><br /></td></tr>
-<tr class="separator:a19bd320affb71723d83f6621d8627771"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_a00184"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00184')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="a00184.html">limbo::solvers::MinCostFlowSolver&lt; T, V &gt;</a></td></tr>
-<tr class="memitem:a7eb189628886b288cbba8540f4b9bfcf inherit pub_methods_a00184"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7eb189628886b288cbba8540f4b9bfcf"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html#a7eb189628886b288cbba8540f4b9bfcf">MinCostFlowSolver</a> ()</td></tr>
-<tr class="memdesc:a7eb189628886b288cbba8540f4b9bfcf inherit pub_methods_a00184"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:a7eb189628886b288cbba8540f4b9bfcf inherit pub_methods_a00184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9901e848ff1682bfd76fdcdc62865c68 inherit pub_methods_a00184"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html#a9901e848ff1682bfd76fdcdc62865c68">MinCostFlowSolver</a> (<a class="el" href="a00184.html">MinCostFlowSolver</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:a9901e848ff1682bfd76fdcdc62865c68 inherit pub_methods_a00184"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#a9901e848ff1682bfd76fdcdc62865c68">More...</a><br /></td></tr>
-<tr class="separator:a9901e848ff1682bfd76fdcdc62865c68 inherit pub_methods_a00184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1a8a327569e5eb0367336a2b4ecc74a inherit pub_methods_a00184"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00184.html">MinCostFlowSolver</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html#af1a8a327569e5eb0367336a2b4ecc74a">operator=</a> (<a class="el" href="a00184.html">MinCostFlowSolver</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:af1a8a327569e5eb0367336a2b4ecc74a inherit pub_methods_a00184"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment  <a href="#af1a8a327569e5eb0367336a2b4ecc74a">More...</a><br /></td></tr>
-<tr class="separator:af1a8a327569e5eb0367336a2b4ecc74a inherit pub_methods_a00184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cdd2ce6143da33f46c297a8f973ffdb inherit pub_methods_a00184"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9cdd2ce6143da33f46c297a8f973ffdb"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html#a9cdd2ce6143da33f46c297a8f973ffdb">~MinCostFlowSolver</a> ()</td></tr>
-<tr class="memdesc:a9cdd2ce6143da33f46c297a8f973ffdb inherit pub_methods_a00184"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
-<tr class="separator:a9cdd2ce6143da33f46c297a8f973ffdb inherit pub_methods_a00184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7eb189628886b288cbba8540f4b9bfcf inherit pub_methods_a00184"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7eb189628886b288cbba8540f4b9bfcf"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html#a7eb189628886b288cbba8540f4b9bfcf">MinCostFlowSolver</a> ()</td></tr>
-<tr class="memdesc:a7eb189628886b288cbba8540f4b9bfcf inherit pub_methods_a00184"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:a7eb189628886b288cbba8540f4b9bfcf inherit pub_methods_a00184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9901e848ff1682bfd76fdcdc62865c68 inherit pub_methods_a00184"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html#a9901e848ff1682bfd76fdcdc62865c68">MinCostFlowSolver</a> (<a class="el" href="a00184.html">MinCostFlowSolver</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:a9901e848ff1682bfd76fdcdc62865c68 inherit pub_methods_a00184"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <a href="#a9901e848ff1682bfd76fdcdc62865c68">More...</a><br /></td></tr>
-<tr class="separator:a9901e848ff1682bfd76fdcdc62865c68 inherit pub_methods_a00184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1a8a327569e5eb0367336a2b4ecc74a inherit pub_methods_a00184"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00184.html">MinCostFlowSolver</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html#af1a8a327569e5eb0367336a2b4ecc74a">operator=</a> (<a class="el" href="a00184.html">MinCostFlowSolver</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:af1a8a327569e5eb0367336a2b4ecc74a inherit pub_methods_a00184"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment  <a href="#af1a8a327569e5eb0367336a2b4ecc74a">More...</a><br /></td></tr>
-<tr class="separator:af1a8a327569e5eb0367336a2b4ecc74a inherit pub_methods_a00184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cdd2ce6143da33f46c297a8f973ffdb inherit pub_methods_a00184"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9cdd2ce6143da33f46c297a8f973ffdb"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html#a9cdd2ce6143da33f46c297a8f973ffdb">~MinCostFlowSolver</a> ()</td></tr>
-<tr class="memdesc:a9cdd2ce6143da33f46c297a8f973ffdb inherit pub_methods_a00184"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
-<tr class="separator:a9cdd2ce6143da33f46c297a8f973ffdb inherit pub_methods_a00184"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8300088b514c3ccb3ae7af015de562e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8300088b514c3ccb3ae7af015de562e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#aa8300088b514c3ccb3ae7af015de562e">NetPin</a> ()</td></tr>
+<tr class="memdesc:aa8300088b514c3ccb3ae7af015de562e"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
+<tr class="separator:aa8300088b514c3ccb3ae7af015de562e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a164b036d2220a576d3f9680460cb23b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a164b036d2220a576d3f9680460cb23b0">NetPin</a> (string &amp;nn, char d, double x, double y, double w, double h, string &amp;pn)</td></tr>
+<tr class="separator:a164b036d2220a576d3f9680460cb23b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af930a1564ad8249693d429bf7534039f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#af930a1564ad8249693d429bf7534039f">NetPin</a> (string &amp;nn, char d, double x, double y, double w, double h)</td></tr>
+<tr class="separator:af930a1564ad8249693d429bf7534039f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2531aa42f370dc7f4739c3946bdbd27e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2531aa42f370dc7f4739c3946bdbd27e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a2531aa42f370dc7f4739c3946bdbd27e">reset</a> ()</td></tr>
+<tr class="memdesc:a2531aa42f370dc7f4739c3946bdbd27e"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data members <br /></td></tr>
+<tr class="separator:a2531aa42f370dc7f4739c3946bdbd27e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_a00160"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00160')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="a00160.html">BookshelfParser::Item</a></td></tr>
+<tr class="memitem:a42b0fbfb28af2289bae5581414a71a3c inherit pub_methods_a00160"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42b0fbfb28af2289bae5581414a71a3c"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00160.html#a42b0fbfb28af2289bae5581414a71a3c">print</a> (ostream &amp;) const </td></tr>
+<tr class="memdesc:a42b0fbfb28af2289bae5581414a71a3c inherit pub_methods_a00160"><td class="mdescLeft">&#160;</td><td class="mdescRight">print data members <br /></td></tr>
+<tr class="separator:a42b0fbfb28af2289bae5581414a71a3c inherit pub_methods_a00160"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:aa11a6ffa5326d20c763c882dfab07bd5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa11a6ffa5326d20c763c882dfab07bd5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#aa11a6ffa5326d20c763c882dfab07bd5">copy</a> (<a class="el" href="a00195.html">NetworkSimplex</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:aa11a6ffa5326d20c763c882dfab07bd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy object <br /></td></tr>
-<tr class="separator:aa11a6ffa5326d20c763c882dfab07bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa11a6ffa5326d20c763c882dfab07bd5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa11a6ffa5326d20c763c882dfab07bd5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#aa11a6ffa5326d20c763c882dfab07bd5">copy</a> (<a class="el" href="a00195.html">NetworkSimplex</a> const &amp;rhs)</td></tr>
-<tr class="memdesc:aa11a6ffa5326d20c763c882dfab07bd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy object <br /></td></tr>
-<tr class="separator:aa11a6ffa5326d20c763c882dfab07bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_a00184"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_a00184')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="a00184.html">limbo::solvers::MinCostFlowSolver&lt; T, V &gt;</a></td></tr>
-<tr class="memitem:aca282ffe9803bfb2974d95710503c0a8 inherit pro_methods_a00184"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca282ffe9803bfb2974d95710503c0a8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html#aca282ffe9803bfb2974d95710503c0a8">copy</a> (<a class="el" href="a00184.html">MinCostFlowSolver</a> const &amp;)</td></tr>
-<tr class="memdesc:aca282ffe9803bfb2974d95710503c0a8 inherit pro_methods_a00184"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy object <br /></td></tr>
-<tr class="separator:aca282ffe9803bfb2974d95710503c0a8 inherit pro_methods_a00184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca282ffe9803bfb2974d95710503c0a8 inherit pro_methods_a00184"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca282ffe9803bfb2974d95710503c0a8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00184.html#aca282ffe9803bfb2974d95710503c0a8">copy</a> (<a class="el" href="a00184.html">MinCostFlowSolver</a> const &amp;)</td></tr>
-<tr class="memdesc:aca282ffe9803bfb2974d95710503c0a8 inherit pro_methods_a00184"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy object <br /></td></tr>
-<tr class="separator:aca282ffe9803bfb2974d95710503c0a8 inherit pro_methods_a00184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a72e891bc771d553d143160d38f5532d0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72e891bc771d553d143160d38f5532d0"></a>
-alg_type::PivotRule&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a72e891bc771d553d143160d38f5532d0">m_pivotRule</a></td></tr>
-<tr class="memdesc:a72e891bc771d553d143160d38f5532d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">pivot rule for the algorithm, FIRST_ELIGIBLE, BEST_ELIGIBLE, BLOCK_SEARCH, CANDIDATE_LIST, ALTERING_LIST <br /></td></tr>
-<tr class="separator:a72e891bc771d553d143160d38f5532d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ab0f5cd8dc5973a9402d7fd1a59440e83"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab0f5cd8dc5973a9402d7fd1a59440e83"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#ab0f5cd8dc5973a9402d7fd1a59440e83">node_name</a></td></tr>
+<tr class="memdesc:ab0f5cd8dc5973a9402d7fd1a59440e83"><td class="mdescLeft">&#160;</td><td class="mdescRight">node name <br /></td></tr>
+<tr class="separator:ab0f5cd8dc5973a9402d7fd1a59440e83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a946f4da11ed23b171c9f95b62f423fd9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a946f4da11ed23b171c9f95b62f423fd9"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a946f4da11ed23b171c9f95b62f423fd9">pin_name</a></td></tr>
+<tr class="memdesc:a946f4da11ed23b171c9f95b62f423fd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">pin name <br /></td></tr>
+<tr class="separator:a946f4da11ed23b171c9f95b62f423fd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67815b1cdbc1ae1d290284cbb5ff13a5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67815b1cdbc1ae1d290284cbb5ff13a5"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a67815b1cdbc1ae1d290284cbb5ff13a5">direct</a></td></tr>
+<tr class="memdesc:a67815b1cdbc1ae1d290284cbb5ff13a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">direction <br /></td></tr>
+<tr class="separator:a67815b1cdbc1ae1d290284cbb5ff13a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a417122ccf857c83d1ea4106595bc6c4a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a417122ccf857c83d1ea4106595bc6c4a"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a417122ccf857c83d1ea4106595bc6c4a">offset</a> [2]</td></tr>
+<tr class="memdesc:a417122ccf857c83d1ea4106595bc6c4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">offset (x, y) to node origin <br /></td></tr>
+<tr class="separator:a417122ccf857c83d1ea4106595bc6c4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55f2b448b4137e64480f341cc66cb38e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a55f2b448b4137e64480f341cc66cb38e"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html#a55f2b448b4137e64480f341cc66cb38e">size</a> [2]</td></tr>
+<tr class="memdesc:a55f2b448b4137e64480f341cc66cb38e"><td class="mdescLeft">&#160;</td><td class="mdescRight">sizes (x, y) of pin <br /></td></tr>
+<tr class="separator:a55f2b448b4137e64480f341cc66cb38e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename T, typename V&gt;<br />
-class limbo::solvers::NetworkSimplex&lt; T, V &gt;</h3>
+<div class="textblock"><p>describe a pin of a net </p>
 
-<p>Network simplex algorithm for min-cost flow. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>coefficient type </td></tr>
-    <tr><td class="paramname">V</td><td>variable type </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00381_source.html#l00035">35</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+<p>Definition at line <a class="el" href="a00353_source.html#l00138">138</a> of file <a class="el" href="a00353_source.html">BookshelfDataBase.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a59dfd7b8168cd225cc781ee6d29899bb"></a>
+<a class="anchor" id="a164b036d2220a576d3f9680460cb23b0"></a>
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename V &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00195.html">limbo::solvers::NetworkSimplex</a>&lt; T, V &gt;::<a class="el" href="a00195.html">NetworkSimplex</a> </td>
+          <td class="memname">BookshelfParser::NetPin::NetPin </td>
           <td>(</td>
-          <td class="paramtype">typename alg_type::PivotRule&#160;</td>
-          <td class="paramname"><em>pivotRule</em> = <code>alg_type::BLOCK_SEARCH</code></td><td>)</td>
+          <td class="paramtype">string &amp;&#160;</td>
+          <td class="paramname"><em>nn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string &amp;&#160;</td>
+          <td class="paramname"><em>pn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -291,34 +225,68 @@ template&lt;typename T , typename V &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pivotRule</td><td>pivot rule </td></tr>
+    <tr><td class="paramname">nn</td><td>node name </td></tr>
+    <tr><td class="paramname">d</td><td>direction </td></tr>
+    <tr><td class="paramname">x,y</td><td>offset of pin to node origin </td></tr>
+    <tr><td class="paramname">w,h</td><td>size of pin </td></tr>
+    <tr><td class="paramname">pn</td><td>pin name </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00381_source.html#l00808">808</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+<p>Definition at line <a class="el" href="a00353_source.html#l00163">163</a> of file <a class="el" href="a00353_source.html">BookshelfDataBase.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af79ad8931453986d33d4e8115c4f5df6"></a>
+<a class="anchor" id="af930a1564ad8249693d429bf7534039f"></a>
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename V &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00195.html">limbo::solvers::NetworkSimplex</a>&lt; T, V &gt;::<a class="el" href="a00195.html">NetworkSimplex</a> </td>
+          <td class="memname">BookshelfParser::NetPin::NetPin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00195.html">NetworkSimplex</a>&lt; T, V &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td class="paramtype">string &amp;&#160;</td>
+          <td class="paramname"><em>nn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -327,248 +295,27 @@ template&lt;typename T , typename V &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>copy constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
+    <tr><td class="paramname">nn</td><td>node name </td></tr>
+    <tr><td class="paramname">d</td><td>direction </td></tr>
+    <tr><td class="paramname">x,y</td><td>offset of pin to node origin </td></tr>
+    <tr><td class="paramname">w,h</td><td>size of pin </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00381_source.html#l00815">815</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
+<p>Definition at line <a class="el" href="a00353_source.html#l00178">178</a> of file <a class="el" href="a00353_source.html">BookshelfDataBase.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a59dfd7b8168cd225cc781ee6d29899bb"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00195.html">limbo::solvers::NetworkSimplex</a>&lt; T, V &gt;::<a class="el" href="a00195.html">NetworkSimplex</a> </td>
-          <td>(</td>
-          <td class="paramtype">typename alg_type::PivotRule&#160;</td>
-          <td class="paramname"><em>pivotRule</em> = <code>alg_type::BLOCK_SEARCH</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pivotRule</td><td>pivot rule </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00384_source.html#l00712">712</a> of file <a class="el" href="a00384_source.html">MinCostFlow.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="af79ad8931453986d33d4e8115c4f5df6"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00195.html">limbo::solvers::NetworkSimplex</a>&lt; T, V &gt;::<a class="el" href="a00195.html">NetworkSimplex</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00195.html">NetworkSimplex</a>&lt; T, V &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>copy constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00384_source.html#l00719">719</a> of file <a class="el" href="a00384_source.html">MinCostFlow.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a19bd320affb71723d83f6621d8627771"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> <a class="el" href="a00195.html">limbo::solvers::NetworkSimplex</a>&lt; T, V &gt;::operator() </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00184.html#a2097d26aa450d613128b30befac02e95">primalsolver_type</a> *&#160;</td>
-          <td class="paramname"><em>d</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>API to run min-cost flow solver. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">d</td><td>dual min-cost flow object </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="a00184.html#ab33b789fb1df48fd9416f3eec0f9ccd8">limbo::solvers::MinCostFlowSolver&lt; T, V &gt;</a>.</p>
-
-<p>Definition at line <a class="el" href="a00384_source.html#l00738">738</a> of file <a class="el" href="a00384_source.html">MinCostFlow.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aebc8e8b92bf81fdf62ef580f03d60d85"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="a00443.html#a500190a99a5762b6aa25aec1230479f0">SolverProperty</a> <a class="el" href="a00195.html">limbo::solvers::NetworkSimplex</a>&lt; T, V &gt;::operator() </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00184.html#a263e4cf12120e31b7f6a036441ffe6e4">dualsolver_type</a> *&#160;</td>
-          <td class="paramname"><em>d</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>API to run min-cost flow solver. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">d</td><td>dual min-cost flow object </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="a00184.html#af1ccd717ebff46fd2091df18ef456e0c">limbo::solvers::MinCostFlowSolver&lt; T, V &gt;</a>.</p>
-
-<p>Definition at line <a class="el" href="a00381_source.html#l00834">834</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="abddecdd0d59855f5a7b84bfa483a72b4"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00195.html">NetworkSimplex</a>&amp; <a class="el" href="a00195.html">limbo::solvers::NetworkSimplex</a>&lt; T, V &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00195.html">NetworkSimplex</a>&lt; T, V &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>assignment </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00384_source.html#l00726">726</a> of file <a class="el" href="a00384_source.html">MinCostFlow.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="abddecdd0d59855f5a7b84bfa483a72b4"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00195.html">NetworkSimplex</a>&amp; <a class="el" href="a00195.html">limbo::solvers::NetworkSimplex</a>&lt; T, V &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00195.html">NetworkSimplex</a>&lt; T, V &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>assignment </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>right hand side </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="a00381_source.html#l00822">822</a> of file <a class="el" href="a00381_source.html">DualMinCostFlow.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00381_source.html">DualMinCostFlow.h</a></li>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00384_source.html">MinCostFlow.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/bookshelf/bison/<a class="el" href="a00353_source.html">BookshelfDataBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

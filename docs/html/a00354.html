@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/ebeam/bison/EbeamDataBase.h File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/parsers/bookshelf/bison/BookshelfDriver.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,82 +87,55 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_5dc89861a410cf4c6365b5609be8c125.html">ebeam</a></li><li class="navelem"><a class="el" href="dir_b9d9febcccb0e8d1f743a891db3a9605.html">bison</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_b4da3917fe35e0ac434cacaebf821afd.html">parsers</a></li><li class="navelem"><a class="el" href="dir_80860ce5c68dd3fca259aa432c07f7f2.html">bookshelf</a></li><li class="navelem"><a class="el" href="dir_d8770031fc66771b7bedf5d3bcbc897c.html">bison</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">EbeamDataBase.h File Reference</div>  </div>
+<div class="title">BookshelfDriver.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Database for Ebeam parser.  
+<p>Driver for Bookshelf parser.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;string&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;fstream&gt;</code><br />
-<code>#include &lt;sstream&gt;</code><br />
-<code>#include &lt;cassert&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00353_source.html">BookshelfDataBase.h</a>&quot;</code><br />
 </div>
 <p><a href="a00354_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00156.html">EbeamParser::IntegerArray</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">bison does not support vector very well, so here create a dummy class for integer array.  <a href="a00156.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00256.html">EbeamParser::StringArray</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">bison does not support vector very well, so here create a dummy class for string array.  <a href="a00256.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00162.html">EbeamParser::Item</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temporary data structures to hold parsed data. Base class for all temporary data structures.  <a href="a00162.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00093.html">EbeamParser::EbeamBoundary</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">describe ebeam boundary  <a href="a00093.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00068.html">EbeamParser::ConfSite</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">describe conflict sites  <a href="a00068.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00177.html">EbeamParser::Macro</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">describe conflict sites for each standard cell type  <a href="a00177.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00094.html">EbeamParser::EbeamDataBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for ebeam database. Only pure virtual functions are defined. User needs to inheritate this class and derive a custom database type with all callback functions defined.  <a href="a00094.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00089.html">BookshelfParser::Driver</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00429"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00429.html">EbeamParser</a></td></tr>
-<tr class="memdesc:a00429"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for <a class="el" href="a00429.html" title="namespace for EbeamParser ">EbeamParser</a> <br /></td></tr>
+<tr class="memitem:a00428"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00428.html">BookshelfParser</a></td></tr>
+<tr class="memdesc:a00428"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for <a class="el" href="a00428.html" title="namespace for BookshelfParser ">BookshelfParser</a> <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:ae003961bf122e0492220a6307f786322"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae003961bf122e0492220a6307f786322"></a>
-typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>EbeamParser::int32_t</b></td></tr>
-<tr class="separator:ae003961bf122e0492220a6307f786322"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ea266bf143bc87a0db8676d0f4734d2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ea266bf143bc87a0db8676d0f4734d2"></a>
-typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>EbeamParser::uint32_t</b></td></tr>
-<tr class="separator:a6ea266bf143bc87a0db8676d0f4734d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a368fa3497f1bd12e56f380415e0fbc76"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a368fa3497f1bd12e56f380415e0fbc76"></a>
-typedef long&#160;</td><td class="memItemRight" valign="bottom"><b>EbeamParser::int64_t</b></td></tr>
-<tr class="separator:a368fa3497f1bd12e56f380415e0fbc76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:af764f80c5e0928a975057a71b33dbe1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00428.html#af764f80c5e0928a975057a71b33dbe1d">BookshelfParser::read</a> (<a class="el" href="a00047.html">BookshelfDataBase</a> &amp;db, const string &amp;auxFile)</td></tr>
+<tr class="memdesc:af764f80c5e0928a975057a71b33dbe1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">API for <a class="el" href="a00428.html" title="namespace for BookshelfParser ">BookshelfParser</a>. Read .aux file and parse all other files.  <a href="#af764f80c5e0928a975057a71b33dbe1d">More...</a><br /></td></tr>
+<tr class="separator:af764f80c5e0928a975057a71b33dbe1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33a39624b706e1065c259ca3110e64df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00428.html#a33a39624b706e1065c259ca3110e64df">BookshelfParser::readPl</a> (<a class="el" href="a00047.html">BookshelfDataBase</a> &amp;db, const string &amp;plFile)</td></tr>
+<tr class="memdesc:a33a39624b706e1065c259ca3110e64df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read .pl file only, the callback only provide positions and orientation.  <a href="#a33a39624b706e1065c259ca3110e64df">More...</a><br /></td></tr>
+<tr class="separator:a33a39624b706e1065c259ca3110e64df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Database for Ebeam parser. </p>
+<div class="textblock"><p>Driver for Bookshelf parser. </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Oct 2014 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00354_source.html">EbeamDataBase.h</a>.</p>
+<p>Definition in file <a class="el" href="a00354_source.html">BookshelfDriver.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

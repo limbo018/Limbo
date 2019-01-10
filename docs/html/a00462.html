@@ -90,23 +90,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">LpDataBase Member List</div>  </div>
+<div class="title">EnumDataBase Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00175.html">LpDataBase</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a00099.html">EnumDataBase</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00175.html#a32e8d45c236cc95c4b3c25003b68abcb">add_constraint</a>(LpParser::TermArray const &amp;terms, char compare, double constant)</td><td class="entry"><a class="el" href="a00175.html">LpDataBase</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00174.html#a06e69b33012729ca43b282b54f0a28d2">LpParser::LpDataBase::add_constraint</a>(string const &amp;cname, TermArray const &amp;terms, char compare, double constant)=0</td><td class="entry"><a class="el" href="a00174.html">LpParser::LpDataBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00175.html#adb0e919fa73bb0fa07218086a3c56ecb">add_objective</a>(bool minimize, LpParser::TermArray const &amp;terms)</td><td class="entry"><a class="el" href="a00175.html">LpDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00175.html#a73322416aa09e80c3a804f4250285f33">add_variable</a>(string const &amp;vname, double l, double r)</td><td class="entry"><a class="el" href="a00175.html">LpDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00175.html#a350a7112f99883cdab1bbd21b63fff41">int64_t</a> typedef</td><td class="entry"><a class="el" href="a00175.html">LpDataBase</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00175.html#a2847fff9bdc6a16ddacced1c589cf901">LpDataBase</a>()</td><td class="entry"><a class="el" href="a00175.html">LpDataBase</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00175.html#a7f454516dc32a06e56ea813705659aa7">set_integer</a>(string const &amp;vname, bool binary)</td><td class="entry"><a class="el" href="a00175.html">LpDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00099.html#a4dce5b24298dee1140396af7a7952618">begin_end_cbk</a>(GdsParser::GdsRecords::EnumType record_type)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00099.html#aa930c78b39d107fd1794a0740ce50379">bit_array_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector&lt; int &gt; const &amp;vBitArray)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00099.html#afa07fc8779d99e7f06737c57bd52904c">EnumDataBase</a>()</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00099.html#a85646491c12b05d796f0cfcfb4903927">general_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, ContainerType const &amp;data)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00099.html#a913aa3804259e1d91fc0138d0f409248">integer_2_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector&lt; int &gt; const &amp;vInteger)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00099.html#a1b7a7ca543da943c44b30885726ddf0a">integer_4_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector&lt; int &gt; const &amp;vInteger)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00099.html#a76405dd0a7ae24137269683475afdb42">real_4_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector&lt; double &gt; const &amp;vFloat)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00099.html#a2b2424a53c40a15c615bc849ebc87185">real_8_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, vector&lt; double &gt; const &amp;vFloat)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00099.html#a6807a31ed7971929f91c7fa406729370">string_cbk</a>(GdsParser::GdsRecords::EnumType record_type, GdsParser::GdsData::EnumType data_type, string const &amp;str)</td><td class="entry"><a class="el" href="a00099.html">EnumDataBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

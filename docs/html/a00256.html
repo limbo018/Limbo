@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: EbeamParser::StringArray Class Reference</title>
+<title>Limbo: VerilogParser::StringArray Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,51 +89,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00429.html">EbeamParser</a></li><li class="navelem"><a class="el" href="a00256.html">StringArray</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00451.html">VerilogParser</a></li><li class="navelem"><a class="el" href="a00256.html">StringArray</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="a00499.html">List of all members</a>  </div>
+<a href="a00689.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">EbeamParser::StringArray Class Reference</div>  </div>
+<div class="title">VerilogParser::StringArray Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>bison does not support vector very well, so here create a dummy class for string array.  
  <a href="a00256.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00354_source.html">EbeamDataBase.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00375_source.html">VerilogDataBase.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for EbeamParser::StringArray:</div>
+Inheritance diagram for VerilogParser::StringArray:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="a00256.png" usemap="#EbeamParser::StringArray_map" alt=""/>
-  <map id="EbeamParser::StringArray_map" name="EbeamParser::StringArray_map">
+  <img src="a00256.png" usemap="#VerilogParser::StringArray_map" alt=""/>
+  <map id="VerilogParser::StringArray_map" name="VerilogParser::StringArray_map">
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a5e21290ecdb45577565f96084f7b4e7b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e21290ecdb45577565f96084f7b4e7b"></a>
-typedef vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>base_type</b></td></tr>
-<tr class="separator:a5e21290ecdb45577565f96084f7b4e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed1352633a0f97abdeecc51305bc86e0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aed1352633a0f97abdeecc51305bc86e0"></a>
+typedef std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>base_type</b></td></tr>
+<tr class="separator:aed1352633a0f97abdeecc51305bc86e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3de0c7b38d013dbf22719f00c5b1a0f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00256.html#a3de0c7b38d013dbf22719f00c5b1a0f9">StringArray</a> (const allocator_type &amp;alloc=allocator_type())</td></tr>
-<tr class="separator:a3de0c7b38d013dbf22719f00c5b1a0f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0c250b778382cdf13ab0b5f197a3cf3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00256.html#af0c250b778382cdf13ab0b5f197a3cf3">StringArray</a> (size_type n, const value_type &amp;val, const allocator_type &amp;alloc=allocator_type())</td></tr>
-<tr class="separator:af0c250b778382cdf13ab0b5f197a3cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76ea46946f9a3c0994e78e4423e061b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00256.html#a76ea46946f9a3c0994e78e4423e061b0">StringArray</a> (const allocator_type &amp;alloc=allocator_type())</td></tr>
+<tr class="memdesc:a76ea46946f9a3c0994e78e4423e061b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a76ea46946f9a3c0994e78e4423e061b0">More...</a><br /></td></tr>
+<tr class="separator:a76ea46946f9a3c0994e78e4423e061b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76125ce32f8971d9c954e984ed3e7a55"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00256.html#a76125ce32f8971d9c954e984ed3e7a55">StringArray</a> (size_type n, const value_type &amp;val, const allocator_type &amp;alloc=allocator_type())</td></tr>
+<tr class="memdesc:a76125ce32f8971d9c954e984ed3e7a55"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a76125ce32f8971d9c954e984ed3e7a55">More...</a><br /></td></tr>
+<tr class="separator:a76125ce32f8971d9c954e984ed3e7a55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>bison does not support vector very well, so here create a dummy class for string array. </p>
 
-<p>Definition at line <a class="el" href="a00354_source.html#l00062">62</a> of file <a class="el" href="a00354_source.html">EbeamDataBase.h</a>.</p>
+<p>Definition at line <a class="el" href="a00375_source.html#l00085">85</a> of file <a class="el" href="a00375_source.html">VerilogDataBase.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a3de0c7b38d013dbf22719f00c5b1a0f9"></a>
+<a class="anchor" id="a76ea46946f9a3c0994e78e4423e061b0"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -141,7 +143,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">EbeamParser::StringArray::StringArray </td>
+          <td class="memname">VerilogParser::StringArray::StringArray </td>
           <td>(</td>
           <td class="paramtype">const allocator_type &amp;&#160;</td>
           <td class="paramname"><em>alloc</em> = <code>allocator_type()</code></td><td>)</td>
@@ -154,18 +156,20 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">alloc</td><td>memory allocator </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00354_source.html#l00074">74</a> of file <a class="el" href="a00354_source.html">EbeamDataBase.h</a>.</p>
+<p>Definition at line <a class="el" href="a00375_source.html#l00097">97</a> of file <a class="el" href="a00375_source.html">VerilogDataBase.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af0c250b778382cdf13ab0b5f197a3cf3"></a>
+<a class="anchor" id="a76125ce32f8971d9c954e984ed3e7a55"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -173,7 +177,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">EbeamParser::StringArray::StringArray </td>
+          <td class="memname">VerilogParser::StringArray::StringArray </td>
           <td>(</td>
           <td class="paramtype">size_type&#160;</td>
           <td class="paramname"><em>n</em>, </td>
@@ -202,7 +206,9 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">n</td><td>number of values </td></tr>
     <tr><td class="paramname">val</td><td>data value </td></tr>
@@ -211,17 +217,17 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00354_source.html#l00080">80</a> of file <a class="el" href="a00354_source.html">EbeamDataBase.h</a>.</p>
+<p>Definition at line <a class="el" href="a00375_source.html#l00103">103</a> of file <a class="el" href="a00375_source.html">VerilogDataBase.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/ebeam/bison/<a class="el" href="a00354_source.html">EbeamDataBase.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/verilog/bison/<a class="el" href="a00375_source.html">VerilogDataBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:42 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

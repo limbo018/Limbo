@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: limbo::solvers::MinCoefficientScaler&lt; T, V &gt; Class Template Reference</title>
+<title>Limbo: limbo::algorithms::max_clique_visitor_type&lt; GraphType &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,144 +89,88 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00435.html">limbo</a></li><li class="navelem"><a class="el" href="a00443.html">solvers</a></li><li class="navelem"><a class="el" href="a00182.html">MinCoefficientScaler</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00440.html">limbo</a></li><li class="navelem"><a class="el" href="a00441.html">algorithms</a></li><li class="navelem"><a class="el" href="a00182.html">max_clique_visitor_type</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="a00650.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00560.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::solvers::MinCoefficientScaler&lt; T, V &gt; Class Template Reference</div>  </div>
+<div class="title">limbo::algorithms::max_clique_visitor_type&lt; GraphType &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Scaling scheme with minimum coefficient in an expression.  
+<p>callback for boost::bron_kerbosch_all_cliques  
  <a href="a00182.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for limbo::solvers::MinCoefficientScaler&lt; T, V &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="a00182.png" usemap="#limbo::solvers::MinCoefficientScaler&lt; T, V &gt;_map" alt=""/>
-  <map id="limbo::solvers::MinCoefficientScaler&lt; T, V &gt;_map" name="limbo::solvers::MinCoefficientScaler&lt; T, V &gt;_map">
-<area href="a00232.html" title="Base class for scaling scheme with default no scaling. " alt="limbo::solvers::ProblemScaler&lt; T, V &gt;" shape="rect" coords="0,0,262,24"/>
-</map>
- </div></div>
+<p><code>#include &lt;<a class="el" href="a00325_source.html">MaxClique.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a8b9bcffebdb31027578896dffb3a388c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b9bcffebdb31027578896dffb3a388c"></a>
-typedef <a class="el" href="a00232.html">ProblemScaler</a>&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#a8b9bcffebdb31027578896dffb3a388c">base_type</a></td></tr>
-<tr class="memdesc:a8b9bcffebdb31027578896dffb3a388c"><td class="mdescLeft">&#160;</td><td class="mdescRight">base type <br /></td></tr>
-<tr class="separator:a8b9bcffebdb31027578896dffb3a388c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62708df15964bab6d8aa7487b9c264f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62708df15964bab6d8aa7487b9c264f0"></a>
-typedef <a class="el" href="a00232.html#a1d6c55c973b4895cbda6f486f1810574">base_type::model_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#a62708df15964bab6d8aa7487b9c264f0">model_type</a></td></tr>
-<tr class="memdesc:a62708df15964bab6d8aa7487b9c264f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">model type <br /></td></tr>
-<tr class="separator:a62708df15964bab6d8aa7487b9c264f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaab7862ad5a44bc9fd44d790ed641d2f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaab7862ad5a44bc9fd44d790ed641d2f"></a>
-typedef <a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">base_type::value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#aaab7862ad5a44bc9fd44d790ed641d2f">value_type</a></td></tr>
-<tr class="memdesc:aaab7862ad5a44bc9fd44d790ed641d2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">value type <br /></td></tr>
-<tr class="separator:aaab7862ad5a44bc9fd44d790ed641d2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cabaacdb1b29ed2cea5dd5ce74bde30"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5cabaacdb1b29ed2cea5dd5ce74bde30"></a>
-typedef <a class="el" href="a00232.html#a4cdcb857d8d23ef01b77d2a539584a79">base_type::expression_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#a5cabaacdb1b29ed2cea5dd5ce74bde30">expression_type</a></td></tr>
-<tr class="memdesc:a5cabaacdb1b29ed2cea5dd5ce74bde30"><td class="mdescLeft">&#160;</td><td class="mdescRight">expression type <br /></td></tr>
-<tr class="separator:a5cabaacdb1b29ed2cea5dd5ce74bde30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8feca5f1b02dfad2c14bb514804bc8d1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8feca5f1b02dfad2c14bb514804bc8d1"></a>
-typedef <a class="el" href="a00232.html#a0765a03c30b7d3476f7828264a7931c1">base_type::constraint_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#a8feca5f1b02dfad2c14bb514804bc8d1">constraint_type</a></td></tr>
-<tr class="memdesc:a8feca5f1b02dfad2c14bb514804bc8d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">constraint type <br /></td></tr>
-<tr class="separator:a8feca5f1b02dfad2c14bb514804bc8d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8eb00b51bd77579a1f7187e22bd6e05"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8eb00b51bd77579a1f7187e22bd6e05"></a>
-typedef <a class="el" href="a00232.html#a296cc653c0e89f1278ac18d2e86af5cb">base_type::term_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#ac8eb00b51bd77579a1f7187e22bd6e05">term_type</a></td></tr>
-<tr class="memdesc:ac8eb00b51bd77579a1f7187e22bd6e05"><td class="mdescLeft">&#160;</td><td class="mdescRight">term type <br /></td></tr>
-<tr class="separator:ac8eb00b51bd77579a1f7187e22bd6e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_a00232"><td colspan="2" onclick="javascript:toggleInherit('pub_types_a00232')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="a00232.html">limbo::solvers::ProblemScaler&lt; T, V &gt;</a></td></tr>
-<tr class="memitem:a1d6c55c973b4895cbda6f486f1810574 inherit pub_types_a00232"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d6c55c973b4895cbda6f486f1810574"></a>
-typedef <a class="el" href="a00171.html">LinearModel</a>&lt; T, V &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a1d6c55c973b4895cbda6f486f1810574">model_type</a></td></tr>
-<tr class="memdesc:a1d6c55c973b4895cbda6f486f1810574 inherit pub_types_a00232"><td class="mdescLeft">&#160;</td><td class="mdescRight">model type <br /></td></tr>
-<tr class="separator:a1d6c55c973b4895cbda6f486f1810574 inherit pub_types_a00232"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d11af66827d1b4dac788c668344840e inherit pub_types_a00232"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d11af66827d1b4dac788c668344840e"></a>
-typedef <br class="typebreak" />
-<a class="el" href="a00171.html#a6d83996e8205090fd1150a2393314e23">model_type::coefficient_value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">value_type</a></td></tr>
-<tr class="memdesc:a1d11af66827d1b4dac788c668344840e inherit pub_types_a00232"><td class="mdescLeft">&#160;</td><td class="mdescRight">value type <br /></td></tr>
-<tr class="separator:a1d11af66827d1b4dac788c668344840e inherit pub_types_a00232"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cdcb857d8d23ef01b77d2a539584a79 inherit pub_types_a00232"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4cdcb857d8d23ef01b77d2a539584a79"></a>
-typedef <a class="el" href="a00171.html#ae34a87308edce3f094e3445ba2d711a4">model_type::expression_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a4cdcb857d8d23ef01b77d2a539584a79">expression_type</a></td></tr>
-<tr class="memdesc:a4cdcb857d8d23ef01b77d2a539584a79 inherit pub_types_a00232"><td class="mdescLeft">&#160;</td><td class="mdescRight">expression type <br /></td></tr>
-<tr class="separator:a4cdcb857d8d23ef01b77d2a539584a79 inherit pub_types_a00232"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0765a03c30b7d3476f7828264a7931c1 inherit pub_types_a00232"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0765a03c30b7d3476f7828264a7931c1"></a>
-typedef <a class="el" href="a00171.html#a7c57e635bbf5f7f296bffd67be900a32">model_type::constraint_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a0765a03c30b7d3476f7828264a7931c1">constraint_type</a></td></tr>
-<tr class="memdesc:a0765a03c30b7d3476f7828264a7931c1 inherit pub_types_a00232"><td class="mdescLeft">&#160;</td><td class="mdescRight">constraint type <br /></td></tr>
-<tr class="separator:a0765a03c30b7d3476f7828264a7931c1 inherit pub_types_a00232"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a296cc653c0e89f1278ac18d2e86af5cb inherit pub_types_a00232"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a296cc653c0e89f1278ac18d2e86af5cb"></a>
-typedef <a class="el" href="a00171.html#ae57d4cb612f57ca66353dc2844943cce">model_type::term_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a296cc653c0e89f1278ac18d2e86af5cb">term_type</a></td></tr>
-<tr class="memdesc:a296cc653c0e89f1278ac18d2e86af5cb inherit pub_types_a00232"><td class="mdescLeft">&#160;</td><td class="mdescRight">term type <br /></td></tr>
-<tr class="separator:a296cc653c0e89f1278ac18d2e86af5cb inherit pub_types_a00232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a12508092badb4abd53bd60854cf8c8f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a12508092badb4abd53bd60854cf8c8f3"></a>
+typedef GraphType&#160;</td><td class="memItemRight" valign="bottom"><b>graph_type</b></td></tr>
+<tr class="separator:a12508092badb4abd53bd60854cf8c8f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82963be3ad79e6c89fda94f5389f7106"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82963be3ad79e6c89fda94f5389f7106"></a>
+typedef boost::graph_traits<br class="typebreak" />
+&lt; graph_type &gt;<br class="typebreak" />
+::vertex_descriptor&#160;</td><td class="memItemRight" valign="bottom"><b>vertex_descriptor_type</b></td></tr>
+<tr class="separator:a82963be3ad79e6c89fda94f5389f7106"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9027935e6b13b1226eb531d4baaa732c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9027935e6b13b1226eb531d4baaa732c"></a>
+typedef vector<br class="typebreak" />
+&lt; vertex_descriptor_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>clique_type</b></td></tr>
+<tr class="separator:a9027935e6b13b1226eb531d4baaa732c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2af84b0142f211b08123581769a69881"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2af84b0142f211b08123581769a69881"></a>
+typedef vector&lt; clique_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>clique_container_type</b></td></tr>
+<tr class="separator:a2af84b0142f211b08123581769a69881"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad8c2855c27ca3245ca80aa847af80ea3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#ad8c2855c27ca3245ca80aa847af80ea3">MinCoefficientScaler</a> (<a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">value_type</a> factor=1)</td></tr>
-<tr class="memdesc:ad8c2855c27ca3245ca80aa847af80ea3"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#ad8c2855c27ca3245ca80aa847af80ea3">More...</a><br /></td></tr>
-<tr class="separator:ad8c2855c27ca3245ca80aa847af80ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8c0c4b012f02d66b61d373713caa205"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8c0c4b012f02d66b61d373713caa205"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#ac8c0c4b012f02d66b61d373713caa205">~MinCoefficientScaler</a> ()</td></tr>
-<tr class="memdesc:ac8c0c4b012f02d66b61d373713caa205"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
-<tr class="separator:ac8c0c4b012f02d66b61d373713caa205"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb68e6b5ca3461027b8cd1e9d71c1169"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#acb68e6b5ca3461027b8cd1e9d71c1169">operator()</a> (<a class="el" href="a00232.html#a4cdcb857d8d23ef01b77d2a539584a79">expression_type</a> const &amp;expr) const </td></tr>
-<tr class="memdesc:acb68e6b5ca3461027b8cd1e9d71c1169"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to compute scaling factor for expression using L2 norm.  <a href="#acb68e6b5ca3461027b8cd1e9d71c1169">More...</a><br /></td></tr>
-<tr class="separator:acb68e6b5ca3461027b8cd1e9d71c1169"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37a03afc961c4afd772c3096590fc5e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#a37a03afc961c4afd772c3096590fc5e9">operator()</a> (<a class="el" href="a00232.html#a0765a03c30b7d3476f7828264a7931c1">constraint_type</a> const &amp;constr) const </td></tr>
-<tr class="memdesc:a37a03afc961c4afd772c3096590fc5e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to compute scaling factor for constraints using L2 norm.  <a href="#a37a03afc961c4afd772c3096590fc5e9">More...</a><br /></td></tr>
-<tr class="separator:a37a03afc961c4afd772c3096590fc5e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_a00232"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00232')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="a00232.html">limbo::solvers::ProblemScaler&lt; T, V &gt;</a></td></tr>
-<tr class="memitem:a2b38ee9771b6e61d7c8ffa4abc4b6d84 inherit pub_methods_a00232"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b38ee9771b6e61d7c8ffa4abc4b6d84"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a2b38ee9771b6e61d7c8ffa4abc4b6d84">ProblemScaler</a> ()</td></tr>
-<tr class="memdesc:a2b38ee9771b6e61d7c8ffa4abc4b6d84 inherit pub_methods_a00232"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor <br /></td></tr>
-<tr class="separator:a2b38ee9771b6e61d7c8ffa4abc4b6d84 inherit pub_methods_a00232"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9de9f19482d08e2fdd763acd767b5e24 inherit pub_methods_a00232"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9de9f19482d08e2fdd763acd767b5e24"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00232.html#a9de9f19482d08e2fdd763acd767b5e24">~ProblemScaler</a> ()</td></tr>
-<tr class="memdesc:a9de9f19482d08e2fdd763acd767b5e24 inherit pub_methods_a00232"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor <br /></td></tr>
-<tr class="separator:a9de9f19482d08e2fdd763acd767b5e24 inherit pub_methods_a00232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac674d41aacbe08175430a0a883a9ecd7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#ac674d41aacbe08175430a0a883a9ecd7">max_clique_visitor_type</a> (clique_container_type &amp;vc)</td></tr>
+<tr class="separator:ac674d41aacbe08175430a0a883a9ecd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1e758d23977d07b259eaaa754252109"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#ab1e758d23977d07b259eaaa754252109">max_clique_visitor_type</a> (clique_container_type const &amp;rhs)</td></tr>
+<tr class="separator:ab1e758d23977d07b259eaaa754252109"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac910eeecf691edb7a560f984be182021"><td class="memTemplParams" colspan="2">template&lt;typename CliqueType &gt; </td></tr>
+<tr class="memitem:ac910eeecf691edb7a560f984be182021"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00182.html#ac910eeecf691edb7a560f984be182021">clique</a> (CliqueType const &amp;c, graph_type const &amp;cg)</td></tr>
+<tr class="separator:ac910eeecf691edb7a560f984be182021"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a469980dc63152db458dda68faf508518"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a469980dc63152db458dda68faf508518"></a>
-<a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#a469980dc63152db458dda68faf508518">m_scalingFactor</a></td></tr>
-<tr class="memdesc:a469980dc63152db458dda68faf508518"><td class="mdescLeft">&#160;</td><td class="mdescRight">constant scaling factor <br /></td></tr>
-<tr class="separator:a469980dc63152db458dda68faf508518"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:aab2c14e0e02d7ccdec9ee52239a0117f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab2c14e0e02d7ccdec9ee52239a0117f"></a>
+clique_container_type &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#aab2c14e0e02d7ccdec9ee52239a0117f">vClique</a></td></tr>
+<tr class="memdesc:aab2c14e0e02d7ccdec9ee52239a0117f"><td class="mdescLeft">&#160;</td><td class="mdescRight">container to store cliques <br /></td></tr>
+<tr class="separator:aab2c14e0e02d7ccdec9ee52239a0117f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename T, typename V&gt;<br />
-class limbo::solvers::MinCoefficientScaler&lt; T, V &gt;</h3>
+<div class="textblock"><h3>template&lt;typename GraphType&gt;<br />
+struct limbo::algorithms::max_clique_visitor_type&lt; GraphType &gt;</h3>
 
-<p>Scaling scheme with minimum coefficient in an expression. </p>
+<p>callback for boost::bron_kerbosch_all_cliques </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>coefficient value type </td></tr>
-    <tr><td class="paramname">V</td><td>variable value type </td></tr>
+    <tr><td class="paramname">GraphType</td><td>graph type </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00385_source.html#l01118">1118</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+<p>Definition at line <a class="el" href="a00325_source.html#l00030">30</a> of file <a class="el" href="a00325_source.html">MaxClique.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ad8c2855c27ca3245ca80aa847af80ea3"></a>
+<a class="anchor" id="ac674d41aacbe08175430a0a883a9ecd7"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename V &gt; </div>
+template&lt;typename GraphType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00182.html">limbo::solvers::MinCoefficientScaler</a>&lt; T, V &gt;::<a class="el" href="a00182.html">MinCoefficientScaler</a> </td>
+          <td class="memname"><a class="el" href="a00182.html">limbo::algorithms::max_clique_visitor_type</a>&lt; GraphType &gt;::<a class="el" href="a00182.html">max_clique_visitor_type</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">value_type</a>&#160;</td>
-          <td class="paramname"><em>factor</em> = <code>1</code></td><td>)</td>
+          <td class="paramtype">clique_container_type &amp;&#160;</td>
+          <td class="paramname"><em>vc</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -236,105 +180,112 @@ template&lt;typename T , typename V &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>constructor </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>constructor </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">factor</td><td>a constant scaling factor </td></tr>
+    <tr><td class="paramname">vc</td><td>clique container </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00385_source.html#l01136">1136</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+<p>Definition at line <a class="el" href="a00325_source.html#l00043">43</a> of file <a class="el" href="a00325_source.html">MaxClique.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab1e758d23977d07b259eaaa754252109"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GraphType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00182.html">limbo::algorithms::max_clique_visitor_type</a>&lt; GraphType &gt;::<a class="el" href="a00182.html">max_clique_visitor_type</a> </td>
+          <td>(</td>
+          <td class="paramtype">clique_container_type const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>copy constructor </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>a clique_container_type object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00325_source.html#l00046">46</a> of file <a class="el" href="a00325_source.html">MaxClique.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="acb68e6b5ca3461027b8cd1e9d71c1169"></a>
+<a class="anchor" id="ac910eeecf691edb7a560f984be182021"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename V &gt; </div>
+template&lt;typename GraphType &gt; </div>
+<div class="memtemplate">
+template&lt;typename CliqueType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">value_type</a> <a class="el" href="a00182.html">limbo::solvers::MinCoefficientScaler</a>&lt; T, V &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="a00182.html">limbo::algorithms::max_clique_visitor_type</a>&lt; GraphType &gt;::clique </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00232.html#a4cdcb857d8d23ef01b77d2a539584a79">expression_type</a> const &amp;&#160;</td>
-          <td class="paramname"><em>expr</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">CliqueType const &amp;&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
         </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>API to compute scaling factor for expression using L2 norm. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">expr</td><td>expression </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>scaling factor </dd></dl>
-
-<p>Reimplemented from <a class="el" href="a00232.html#a8c1839f11e6a8ac48456f3e51af2e46f">limbo::solvers::ProblemScaler&lt; T, V &gt;</a>.</p>
-
-<p>Definition at line <a class="el" href="a00385_source.html#l01143">1143</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a37a03afc961c4afd772c3096590fc5e9"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename V &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00232.html#a1d11af66827d1b4dac788c668344840e">value_type</a> <a class="el" href="a00182.html">limbo::solvers::MinCoefficientScaler</a>&lt; T, V &gt;::operator() </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00232.html#a0765a03c30b7d3476f7828264a7931c1">constraint_type</a> const &amp;&#160;</td>
-          <td class="paramname"><em>constr</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">graph_type const &amp;&#160;</td>
+          <td class="paramname"><em>cg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>API to compute scaling factor for constraints using L2 norm. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">constr</td><td>constraint </td></tr>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CliqueType</td><td>container type for vertices of a clique </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>scaling factor </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>clique vertices in graph </td></tr>
+    <tr><td class="paramname">cg</td><td>graph </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Reimplemented from <a class="el" href="a00232.html#a8c61c0449713187ed81a4a1926011483">limbo::solvers::ProblemScaler&lt; T, V &gt;</a>.</p>
-
-<p>Definition at line <a class="el" href="a00385_source.html#l01153">1153</a> of file <a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a>.</p>
+<p>Definition at line <a class="el" href="a00325_source.html#l00052">52</a> of file <a class="el" href="a00325_source.html">MaxClique.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/solvers/<a class="el" href="a00385_source.html">MultiKnapsackLagRelax.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/algorithms/<a class="el" href="a00325_source.html">MaxClique.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:41 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

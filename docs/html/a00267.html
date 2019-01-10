@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: GdsParser::GdsDB::ApplyCellReferenceActionDetails::Translate Struct Reference</title>
+<title>Limbo: TfParser::TfGrammar&lt; Iterator, Skipper, DataBaseType &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,58 +89,119 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00431.html">GdsParser</a></li><li class="navelem"><a class="el" href="a00432.html">GdsDB</a></li><li class="navelem"><a class="el" href="a00433.html">ApplyCellReferenceActionDetails</a></li><li class="navelem"><a class="el" href="a00267.html">Translate</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00268.html">TfParser</a></li><li class="navelem"><a class="el" href="a00267.html">TfGrammar</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="a00550.html">List of all members</a>  </div>
+<a href="a00476.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GdsParser::GdsDB::ApplyCellReferenceActionDetails::Translate Struct Reference</div>  </div>
+<div class="title">TfParser::TfGrammar&lt; Iterator, Skipper, DataBaseType &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="a00267.html" title="Translate operation. ">Translate</a> operation.  
+<p>define grammar  
  <a href="a00267.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00374_source.html">TfParser.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for TfParser::TfGrammar&lt; Iterator, Skipper, DataBaseType &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00267.png" usemap="#TfParser::TfGrammar&lt; Iterator, Skipper, DataBaseType &gt;_map" alt=""/>
+  <map id="TfParser::TfGrammar&lt; Iterator, Skipper, DataBaseType &gt;_map" name="TfParser::TfGrammar&lt; Iterator, Skipper, DataBaseType &gt;_map">
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2211f1ebf964f55eaebcbe45fb87526e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#a2211f1ebf964f55eaebcbe45fb87526e">Translate</a> (GdsCellReference::point_type const &amp;o)</td></tr>
-<tr class="memdesc:a2211f1ebf964f55eaebcbe45fb87526e"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a2211f1ebf964f55eaebcbe45fb87526e">More...</a><br /></td></tr>
-<tr class="separator:a2211f1ebf964f55eaebcbe45fb87526e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a454da9a331a49bfb8cc622a9a1c2a6e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#a454da9a331a49bfb8cc622a9a1c2a6e3">operator()</a> (GdsCellReference::point_type &amp;p) const </td></tr>
-<tr class="memdesc:a454da9a331a49bfb8cc622a9a1c2a6e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to run operation.  <a href="#a454da9a331a49bfb8cc622a9a1c2a6e3">More...</a><br /></td></tr>
-<tr class="separator:a454da9a331a49bfb8cc622a9a1c2a6e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fd1216fe729c66df0f026f1aa2b89ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#a6fd1216fe729c66df0f026f1aa2b89ab">TfGrammar</a> (DataBaseType &amp;db, <a class="el" href="a00100.html">ErrorHandler</a>&lt; Iterator &gt; &amp;error_handler)</td></tr>
+<tr class="memdesc:a6fd1216fe729c66df0f026f1aa2b89ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor  <a href="#a6fd1216fe729c66df0f026f1aa2b89ab">More...</a><br /></td></tr>
+<tr class="separator:a6fd1216fe729c66df0f026f1aa2b89ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1b01e16d9a0769d9203ce43b26a9a47"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#ab1b01e16d9a0769d9203ce43b26a9a47">layer_id_cbk</a> (string const &amp;s1, int32_t const &amp;d2, string const &amp;s3)</td></tr>
+<tr class="memdesc:ab1b01e16d9a0769d9203ce43b26a9a47"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback of layer id  <a href="#ab1b01e16d9a0769d9203ce43b26a9a47">More...</a><br /></td></tr>
+<tr class="separator:ab1b01e16d9a0769d9203ce43b26a9a47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a759abeee73ed54c81541ac6e9ef62176"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a759abeee73ed54c81541ac6e9ef62176"></a>
-GdsCellReference::point_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#a759abeee73ed54c81541ac6e9ef62176">offset</a></td></tr>
-<tr class="memdesc:a759abeee73ed54c81541ac6e9ef62176"><td class="mdescLeft">&#160;</td><td class="mdescRight">offset <br /></td></tr>
-<tr class="separator:a759abeee73ed54c81541ac6e9ef62176"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ce8b82f2399e04817c04aace06a397f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ce8b82f2399e04817c04aace06a397f"></a>
+qi::rule&lt; Iterator, Skipper &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#a5ce8b82f2399e04817c04aace06a397f">expression</a></td></tr>
+<tr class="memdesc:a5ce8b82f2399e04817c04aace06a397f"><td class="mdescLeft">&#160;</td><td class="mdescRight">expression <br /></td></tr>
+<tr class="separator:a5ce8b82f2399e04817c04aace06a397f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a53d423e3427aecce2c3808c4e0f396"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a53d423e3427aecce2c3808c4e0f396"></a>
+qi::rule&lt; Iterator, Skipper &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#a8a53d423e3427aecce2c3808c4e0f396">block_defn</a></td></tr>
+<tr class="memdesc:a8a53d423e3427aecce2c3808c4e0f396"><td class="mdescLeft">&#160;</td><td class="mdescRight">layer definitions <br /></td></tr>
+<tr class="separator:a8a53d423e3427aecce2c3808c4e0f396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bbb436eb4b1fe4ede870f1775f5f739"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6bbb436eb4b1fe4ede870f1775f5f739"></a>
+qi::rule&lt; Iterator, Skipper &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#a6bbb436eb4b1fe4ede870f1775f5f739">block_layer_id</a></td></tr>
+<tr class="memdesc:a6bbb436eb4b1fe4ede870f1775f5f739"><td class="mdescLeft">&#160;</td><td class="mdescRight">layer id <br /></td></tr>
+<tr class="separator:a6bbb436eb4b1fe4ede870f1775f5f739"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a912e95535ec4d886bfdedcf4a5cd4ad9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a912e95535ec4d886bfdedcf4a5cd4ad9"></a>
+qi::rule&lt; Iterator, Skipper &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#a912e95535ec4d886bfdedcf4a5cd4ad9">block_layer_purpose</a></td></tr>
+<tr class="memdesc:a912e95535ec4d886bfdedcf4a5cd4ad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">layer purpose <br /></td></tr>
+<tr class="separator:a912e95535ec4d886bfdedcf4a5cd4ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e993e07d180d740aea2fbb5a51e3ace"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0e993e07d180d740aea2fbb5a51e3ace"></a>
+qi::rule&lt; Iterator, Skipper &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#a0e993e07d180d740aea2fbb5a51e3ace">block_display</a></td></tr>
+<tr class="memdesc:a0e993e07d180d740aea2fbb5a51e3ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">technology display <br /></td></tr>
+<tr class="separator:a0e993e07d180d740aea2fbb5a51e3ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1b2906b846e50d77e89e1b0e6bb8f5b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1b2906b846e50d77e89e1b0e6bb8f5b"></a>
+qi::rule&lt; Iterator, string(), <br class="typebreak" />
+Skipper &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#ab1b2906b846e50d77e89e1b0e6bb8f5b">text</a></td></tr>
+<tr class="memdesc:ab1b2906b846e50d77e89e1b0e6bb8f5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">text <br /></td></tr>
+<tr class="separator:ab1b2906b846e50d77e89e1b0e6bb8f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76b362e0cc8d52c9a92bd29895b4c5a1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a76b362e0cc8d52c9a92bd29895b4c5a1"></a>
+qi::rule&lt; Iterator, string(), <br class="typebreak" />
+Skipper &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#a76b362e0cc8d52c9a92bd29895b4c5a1">text_nc</a></td></tr>
+<tr class="memdesc:a76b362e0cc8d52c9a92bd29895b4c5a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">no constraints <br /></td></tr>
+<tr class="separator:a76b362e0cc8d52c9a92bd29895b4c5a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad079366615983b05a78fe9c238fe84b4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad079366615983b05a78fe9c238fe84b4"></a>
+DataBaseType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#ad079366615983b05a78fe9c238fe84b4">m_db</a></td></tr>
+<tr class="memdesc:ad079366615983b05a78fe9c238fe84b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">reference to database <br /></td></tr>
+<tr class="separator:ad079366615983b05a78fe9c238fe84b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="a00267.html" title="Translate operation. ">Translate</a> operation. </p>
+<div class="textblock"><h3>template&lt;typename Iterator, typename Skipper, typename DataBaseType&gt;<br />
+struct TfParser::TfGrammar&lt; Iterator, Skipper, DataBaseType &gt;</h3>
 
-<p>Definition at line <a class="el" href="a00359_source.html#l00272">272</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
+<p>define grammar </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>iterator of text </td></tr>
+    <tr><td class="paramname">Skipper</td><td>skip some contens </td></tr>
+    <tr><td class="paramname">DataBaseType</td><td>database to store the parsed content </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="a00374_source.html#l00076">76</a> of file <a class="el" href="a00374_source.html">TfParser.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a2211f1ebf964f55eaebcbe45fb87526e"></a>
+<a class="anchor" id="a6fd1216fe729c66df0f026f1aa2b89ab"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Skipper, typename DataBaseType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">GdsParser::GdsDB::ApplyCellReferenceActionDetails::Translate::Translate </td>
+          <td class="memname"><a class="el" href="a00267.html">TfParser::TfGrammar</a>&lt; Iterator, Skipper, DataBaseType &gt;::<a class="el" href="a00267.html">TfGrammar</a> </td>
           <td>(</td>
-          <td class="paramtype">GdsCellReference::point_type const &amp;&#160;</td>
-          <td class="paramname"><em>o</em></td><td>)</td>
+          <td class="paramtype">DataBaseType &amp;&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="a00100.html">ErrorHandler</a>&lt; Iterator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>error_handler</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -153,29 +214,48 @@ GdsCellReference::point_type&#160;</td><td class="memItemRight" valign="bottom">
 <p>constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">o</td><td>offset </td></tr>
+    <tr><td class="paramname">db</td><td>database </td></tr>
+    <tr><td class="paramname">error_handler</td><td>error handler </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00359_source.html#l00278">278</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
+<p>Definition at line <a class="el" href="a00374_source.html#l00091">91</a> of file <a class="el" href="a00374_source.html">TfParser.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a454da9a331a49bfb8cc622a9a1c2a6e3"></a>
+<a class="anchor" id="ab1b01e16d9a0769d9203ce43b26a9a47"></a>
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename Skipper, typename DataBaseType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void GdsParser::GdsDB::ApplyCellReferenceActionDetails::Translate::operator() </td>
+          <td class="memname">void <a class="el" href="a00267.html">TfParser::TfGrammar</a>&lt; Iterator, Skipper, DataBaseType &gt;::layer_id_cbk </td>
           <td>(</td>
-          <td class="paramtype">GdsCellReference::point_type &amp;&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">string const &amp;&#160;</td>
+          <td class="paramname"><em>s1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t const &amp;&#160;</td>
+          <td class="paramname"><em>d2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string const &amp;&#160;</td>
+          <td class="paramname"><em>s3</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -185,25 +265,27 @@ GdsCellReference::point_type&#160;</td><td class="memItemRight" valign="bottom">
 </table>
 </div><div class="memdoc">
 
-<p>API to run operation. </p>
+<p>callback of layer id </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">p</td><td>given position and perform operation on the position </td></tr>
+    <tr><td class="paramname">s1</td><td>layer name </td></tr>
+    <tr><td class="paramname">d2</td><td>layer id </td></tr>
+    <tr><td class="paramname">s3</td><td>layer abbreviation </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00359_source.html#l00282">282</a> of file <a class="el" href="a00359_source.html">GdsObjectHelpers.h</a>.</p>
+<p>Definition at line <a class="el" href="a00374_source.html#l00171">171</a> of file <a class="el" href="a00374_source.html">TfParser.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/gdsii/gdsdb/<a class="el" href="a00359_source.html">GdsObjectHelpers.h</a></li>
+<li>/Users/yibolin/Documents/Projects/Limbo/limbo/parsers/tf/spirit/<a class="el" href="a00374_source.html">TfParser.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

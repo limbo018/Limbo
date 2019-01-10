@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/test/string/test_string.cpp File Reference</title>
+<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/test/solvers/test_LPSolveApi.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,24 +87,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_1439c9d351dd978c38b2510729161b97.html">string</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_39b21b41cf10d9ff223861185498a807.html">solvers</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">test_string.cpp File Reference</div>  </div>
+<div class="title">test_LPSolveApi.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>test string functions  
+<p>Test LPSolve API <a class="el" href="a00177.html">limbo::solvers::LPSolveLinearApi</a>.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00388_source.html">limbo/string/String.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00374_source.html">limbo/preprocessor/AssertMsg.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00349_source.html">limbo/math/Math.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00384_source.html">limbo/solvers/api/LPSolveApi.h</a>&gt;</code><br />
 </div>
 <p><a href="a00421_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -115,11 +112,11 @@ Functions</h2></td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>test string functions </p>
+<div class="textblock"><p>Test LPSolve API <a class="el" href="a00177.html">limbo::solvers::LPSolveLinearApi</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Dec 2014 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Dec 2018 </dd></dl>
 
-<p>Definition in file <a class="el" href="a00421_source.html">test_string.cpp</a>.</p>
+<p>Definition in file <a class="el" href="a00421_source.html">test_LPSolveApi.cpp</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
 <div class="memitem">
@@ -135,16 +132,19 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>main function </p>
+<p>Solve following problem, </p><p class="formulaDsp">
+\begin{eqnarray*} &amp; min. &amp; x_1 + x_2 + x_3 + x_4, \\ &amp; s.t. &amp; x_1 - x_2 \ge 0.5, \\ &amp; &amp; x_4 - x_3 \ge 0.1, \\ &amp; &amp; x_2 - x_3 \ge 0.2. \end{eqnarray*}
+</p>
 <dl class="section return"><dt>Returns</dt><dd>0 </dd></dl>
 
-<p>Definition at line <a class="el" href="a00421_source.html#l00019">19</a> of file <a class="el" href="a00421_source.html">test_string.cpp</a>.</p>
+<p>Definition at line <a class="el" href="a00421_source.html#l00021">21</a> of file <a class="el" href="a00421_source.html">test_LPSolveApi.cpp</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

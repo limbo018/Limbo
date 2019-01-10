@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Limbo: /Users/yibolin/Documents/Projects/Limbo/limbo/containers/FastMultiSet.h File Reference</title>
+<title>Limbo: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,8 +45,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -67,8 +67,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -87,55 +89,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f54ce893858be0a691da3faa61601fad.html">limbo</a></li><li class="navelem"><a class="el" href="dir_67961cc7bc7695996924d6bf198dc652.html">containers</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00451.html">VerilogParser</a></li><li class="navelem"><a class="el" href="a00142.html">GeneralNameArray</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">FastMultiSet.h File Reference</div>  </div>
+<div class="title">VerilogParser::GeneralNameArray Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>a container of multiple-level set  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;map&gt;</code><br />
-<code>#include &lt;multiset&gt;</code><br />
-<code>#include &lt;cassert&gt;</code><br />
-<code>#include &lt;boost/typeof.hpp&gt;</code><br />
-</div>
-<p><a href="a00330_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00102.html">limbo::containers::FastMultiSet&lt; KeyType, Compare1, Compare2 &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00435"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00435.html">limbo</a></td></tr>
-<tr class="memdesc:a00435"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00440"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00440.html">limbo::containers</a></td></tr>
-<tr class="memdesc:a00440"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace for Limbo.Containers <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>a container of multiple-level set </p>
-<p>Description : Use 2 level comparison Compare1 is for main multiset, it allows duplicate keys. Compare2 is for secondary map, it must have unique keys. In other words, keys to Compare1 can have duplicated compare results, while to Compare2, the compare results must be unique. The data structure is as follows multiset keeps the correct order that user wants for duplicate keys, map can ensure fast access because map saves &lt;key, iterator in multiset&gt;</p>
-<p>This data structure can provide O(logN) in insert, erase and update for even duplicate keys</p>
-<p>It is suitable to use pointers as key_type or value_type, which will not change during the operations. But the data the pointers point to can change, so that no data race between the order of update data and update multiset.</p>
-<dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Feb 2015 </dd></dl>
-
-<p>Definition in file <a class="el" href="a00330_source.html">FastMultiSet.h</a>.</p>
-</div></div><!-- contents -->
+<p>This is the complete list of members for <a class="el" href="a00142.html">VerilogParser::GeneralNameArray</a>, including all inherited members.</p>
+<table class="directory">
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>base_type</b> typedef (defined in <a class="el" href="a00142.html">VerilogParser::GeneralNameArray</a>)</td><td class="entry"><a class="el" href="a00142.html">VerilogParser::GeneralNameArray</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00142.html#a26609645e08ad5d0d1eb01b176767c67">GeneralNameArray</a>(const allocator_type &amp;alloc=allocator_type())</td><td class="entry"><a class="el" href="a00142.html">VerilogParser::GeneralNameArray</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00142.html#af7b6268a662e9039a7169ab5c3eb8d3f">GeneralNameArray</a>(size_type n, const value_type &amp;val, const allocator_type &amp;alloc=allocator_type())</td><td class="entry"><a class="el" href="a00142.html">VerilogParser::GeneralNameArray</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+</table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 30 2018 22:19:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 22:07:42 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
