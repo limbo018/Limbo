@@ -6,7 +6,7 @@ Limbo.Solvers {#Solvers}
 # Introduction {#Solvers_Introduction}
 
 Solvers and API for specialized problems, such as solving special linear programming problems with min-cost flow algorithms. 
-It also wraps solvers like semidefinite programming solver [Csdp](https://projects.coin-or.org/Csdp "Csdp") and convex optimization solver [Gurobi](https://www.gurobi.com "Gurobi"). 
+It also wraps solvers like semidefinite programming solver [Csdp](https://projects.coin-or.org/Csdp "Csdp") and convex optimization solver [Gurobi](https://www.gurobi.com "Gurobi") and [lpsolve](http://lpsolve.sourceforge.net "lpsolve"). 
 
 # Examples {#Solvers_Examples}
 

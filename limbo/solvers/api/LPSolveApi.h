@@ -25,6 +25,9 @@ extern "C"
 #undef SUBOPTIMAL               
 #undef INFEASIBLE               
 #undef UNBOUNDED                
+/// @brief convert lpsolve status to limbo::solvers status 
+/// @param status solving status from lpsolve 
+/// @return solving status in limbo::solvers
 inline limbo::solvers::SolverProperty getSolveStatus(int status)
 {
     switch (status)
