@@ -1,7 +1,6 @@
 /**
  * @file   GurobiApi.h
- * @brief  Gurobi API by writing out problem file in LP format and read solution. 
- *         Consider the file IO overhead before using it. 
+ * @brief  Gurobi API wrapper using its C API. 
  * @author Yibo Lin
  * @date   Nov 2014
  */

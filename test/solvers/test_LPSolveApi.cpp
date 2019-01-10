@@ -2,6 +2,7 @@
  * @file   test_LPSolveApi.cpp
  * @author Yibo Lin
  * @date   Dec 2018
+ * @brief  Test LPSolve API @ref limbo::solvers::LPSolveLinearApi
  */
 #include <iostream>
 #include <limbo/solvers/api/LPSolveApi.h>
@@ -42,7 +43,7 @@ int main()
     typedef limbo::solvers::LPSolveLinearApi<model_type::coefficient_value_type, model_type::variable_value_type> solver_type; 
     solver_type solver (&optModel); 
     limbo::solvers::LPSolveParameters lpsolveParams; 
-    lpsolveParams.setVerbose(SEVERE); 
+    lpsolveParams.setVerbose(FULL); 
 
     limbo::solvers::SolverProperty optStatus = solver(&lpsolveParams); 
 

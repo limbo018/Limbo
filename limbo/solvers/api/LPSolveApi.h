@@ -1,5 +1,6 @@
 /**
  * @file   LPSolveApi.h
+ * @brief  lpsolve API wrapper using its C API. 
  * @author Yibo Lin
  * @date   Dec 2018
  */

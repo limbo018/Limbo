@@ -192,16 +192,18 @@ g++ -o test_lpmcf compare.cpp -I $LIMBO_DIR/include -I $BOOST_DIR/include -I $LE
 ./test_lpmcf benchmarks/graph.lgf 
 ~~~~~~~~~~~~~~~~
 
-## Gurobi API {#Solvers_Examples_GurobiApi}
+## Generalized Linear Programming API {#Solvers_Examples_GurobiApi}
 
-A generalized API to solve problem described by @ref limbo::solvers::LinearModel with [Gurobi](https://www.gurobi.com "Gurobi") solver. 
+A generalized API to solve problem described by @ref limbo::solvers::LinearModel with [Gurobi](https://www.gurobi.com "Gurobi") and [lpsolve](http://lpsolve.sourceforge.net "lpsolve") solvers. 
 
-See documented version: [test/solvers/test_GurobiApi.cpp](@ref test_GurobiApi.cpp)
+See documented version: [test/solvers/test_GurobiApi.cpp](@ref test_GurobiApi.cpp) and [test/solvers/test_LPSolveApi.cpp](@ref test_LPSolveApi.cpp)
+
+For Gurobi 
 \include test/solvers/test_GurobiApi.cpp
 
 Compiling and running commands (assuming LIMBO_DIR, and GUROBI_HOME are well defined). 
 ~~~~~~~~~~~~~~~~
-g++ -o test_GurobiApi test_GurobiApi.cpp -I $LIMBO_DIR/include -I $GUROBI_HOME/include -L $GUROBI_HOME/lib -lgurobi_c++ -lgurobi60 
+g++ -o test_GurobiApi test_GurobiApi.cpp -I $LIMBO_DIR/include -I $GUROBI_HOME/include -L $GUROBI_HOME/lib -lgurobi60 
 # test Gurobi API for linear programming problem 
 ./test_GurobiApi
 ~~~~~~~~~~~~~~~~
@@ -225,6 +227,87 @@ Optimal objective  1.000000000e+00
 optStatus = 5
 ~~~~~~~~~~~~~~~~
 
+For lpsolve (same model construction as Gurobi)
+\include test/solvers/test_LPSolveApi.cpp
+
+Compiling and running commands (assuming LIMBO_DIR, and LPSOLVE_DIR are well defined). 
+~~~~~~~~~~~~~~~~
+g++ -o test_LPSolveApi test_LPSolveApi.cpp -I $LIMBO_DIR/include -I $LPSOLVE_DIR -L $LPSOLVE_DIR -llpsolve55 
+# test lpsolve API for linear programming problem 
+./test_LPSolveApi
+~~~~~~~~~~~~~~~~
+
+Output 
+~~~~~~~~~~~~~~~~
+Model name:  'LPSolveLinearApi' - run #1
+Objective:   Minimize(R0)
+
+SUBMITTED
+Model size:        3 constraints,       4 variables,            6 non-zeros.
+Sets:                                   0 GUB,                  0 SOS.
+
+PRESOLVE             Elimination loops performed.......... O2:M2:I2
+                   3 bounds............................... TIGHTENED.
+                     [           +0 < Z < +4           ]
+
+REDUCED
+Model size:        3 constraints,       4 variables,            6 non-zeros.
+Sets:                                   0 GUB,                  0 SOS.
+Row-types:         0 LE,                3 GE,                   0 EQ.
+
+
+CONSTRAINT CLASSES
+General REAL       3
+
+Using DUAL simplex for phase 1 and PRIMAL simplex for phase 2.
+The primal and dual simplex pricing strategy set to 'Devex'.
+
+Objective value               -0.9 at iter          2.
+Optimal solution with dual simplex at iter            3.
+
+Primal objective:
+
+  Column name                      Value   Objective         Min         Max
+  --------------------------------------------------------------------------
+  x1                                   1         0.7           0       1e+30
+  x2                                   1         0.2          -1       1e+30
+  x3                                   1           0          -3       1e+30
+  x4                                   1         0.1           0       1e+30
+
+Primal variables:
+
+  Column name                      Value       Slack         Min         Max
+  --------------------------------------------------------------------------
+  x1                                 0.7           0      -1e+30       1e+30
+  x2                                 0.2           0      -1e+30       1e+30
+  x3                                   0           4        -0.1         0.3
+  x4                                 0.1           0      -1e+30       1e+30
+
+Dual variables:
+
+  Row name                         Value       Slack         Min         Max
+  --------------------------------------------------------------------------
+  c1                                   1         0.5        -0.2         0.8
+  c2                                   1         0.1           0           1
+  c3                                   2         0.2           0         0.5
+
+
+Optimal solution                   1 after          3 iter.
+
+Relative numeric accuracy ||*|| = 3.70074e-17
+
+ MEMO: lp_solve version 5.5.2.5 for 64 bit OS, with 64 bit REAL variables.
+      In the total iteration count 3, 0 (0.0%) were bound flips.
+      There were 0 refactorizations, 0 triggered by time and 0 by density.
+       ... on average 3.0 major pivots per refactorization.
+      The largest [LUSOL v2.2.1.0] fact(B) had 4 NZ entries, 1.0x largest basis.
+      The constraint matrix inf-norm is 1, with a dynamic range of 1.
+      Time to load data was 0.000 seconds, presolve used 0.000 seconds,
+       ... 0.001 seconds in simplex solver, in total 0.001 seconds.
+optStatus = 5
+~~~~~~~~~~~~~~~~
+
+
 ## All Examples {#Solvers_Examples_All}
 
 Possible dependencies: 
@@ -237,6 +320,7 @@ Possible dependencies:
 - [test/solvers/test_MinCostFlow.cpp](@ref test_MinCostFlow.cpp)
 - [test/solvers/test_DualMinCostFlow.cpp](@ref test_DualMinCostFlow.cpp)
 - [test/solvers/test_GurobiApi.cpp](@ref test_GurobiApi.cpp)
+- [test/solvers/test_LPSolveApi.cpp](@ref test_LPSolveApi.cpp)
 
 # References {#Solvers_References}
 
@@ -244,6 +328,7 @@ Possible dependencies:
 - [limbo/solvers/lpmcf/LpDualMcf.h](@ref LpDualMcf.h)
 - [limbo/solvers/api/CsdpEasySdpApi.h](@ref CsdpEasySdpApi.h)
 - [limbo/solvers/api/GurobiApi.h](@ref GurobiApi.h)
+- [limbo/solvers/api/LPSolveApi.h](@ref LPSolveApi.h)
 - [limbo/solvers/MultiKnapsackLagRelax.h](@ref MultiKnapsackLagRelax.h)
 - [limbo/solvers/MinCostFlow.h](@ref MinCostFlow.h)
 - [limbo/solvers/DualMinCostFlow.h](@ref DualMinCostFlow.h)
