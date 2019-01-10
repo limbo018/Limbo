@@ -476,12 +476,12 @@ bool GdsReader::operator() (std::istream& fp)
 							indent_amount, "", record[data_ktr], record[data_ktr + 1],
 							display_char_1, display_char_2);
 #endif 
-					if (((!isprint (record[data_ktr])) && (record[data_ktr] != 0)) ||
-							((!isprint (record[data_ktr + 1])) && (record[data_ktr + 1] != 0)))
-					{
-						printf ("%*s# ***ERROR*** There was a non-printable character in the last 2 byte word.\n",
-								indent_amount, "");
-					}
+					//if (((!isprint (record[data_ktr])) && (record[data_ktr] != 0)) ||
+					//		((!isprint (record[data_ktr + 1])) && (record[data_ktr + 1] != 0)))
+					//{
+					//	printf ("%*s# ***ERROR*** There was a non-printable character in the last 2 byte word.\n",
+					//			indent_amount, "");
+					//}
 				}
 				m_db.string_cbk(enum_record_type, enum_data_type, str);
 			}

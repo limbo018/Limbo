@@ -358,6 +358,8 @@ void GdsWriter::write(::GdsParser::GdsWriter& gw, GdsText const& object) const
 		gw.gds_write_presentation(object.presentation()/16, (object.presentation()%16)/4, (object.presentation()%16)%4); // (font, vp, hp) presentation = hp + 4*vp + 16*font
 	if (object.strans() != std::numeric_limits<int>::max())
 		gw.gds_write_strans(object.strans()/32768, (object.strans()%32768)%2, (object.strans()%32768)/2); // (reflect, abs_angle, abs_mag) strans = 32768*reflect + 2*abs_mag + abs_angle
+	if (object.magnification() != std::numeric_limits<double>::max())
+		gw.gds_write_mag(object.magnification());             
 
 	std::vector<GdsText::coordinate_type> vx (1, object.position().x());
 	std::vector<GdsText::coordinate_type> vy (1, object.position().y());
@@ -376,8 +378,6 @@ void GdsWriter::write(::GdsParser::GdsWriter& gw, GdsCellReference const& object
 		gw.gds_write_strans(object.strans()/32768, (object.strans()%32768)%2, (object.strans()%32768)/2); // (reflect, abs_angle, abs_mag) strans = 32768*reflect + 2*abs_mag + abs_angle
 	if (object.angle() != std::numeric_limits<double>::max())
 		gw.gds_write_angle(object.angle());             // and tilted at some weird angle
-	if (object.magnification() != std::numeric_limits<double>::max())
-		gw.gds_write_mag(object.magnification());             
 
     int x[1] = {object.position().x()};  
     int y[1] = {object.position().y()};  

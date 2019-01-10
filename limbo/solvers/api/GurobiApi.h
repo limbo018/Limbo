@@ -1,7 +1,6 @@
 /**
  * @file   GurobiApi.h
- * @brief  Gurobi API by writing out problem file in LP format and read solution. 
- *         Consider the file IO overhead before using it. 
+ * @brief  Gurobi API wrapper using its C API. 
  * @author Yibo Lin
  * @date   Nov 2014
  */
@@ -144,7 +143,7 @@ SolverProperty GurobiLinearApi<T, V>::operator()(GurobiLinearApi<T, V>::paramete
     errorHandler(env, error);
     param->operator()(env); 
     // Create an empty model 
-    error = GRBnewmodel(env, &m_grbModel, "LP", m_model->numVariables(), NULL, NULL, NULL, NULL, NULL);
+    error = GRBnewmodel(env, &m_grbModel, "GurobiLinearApi", m_model->numVariables(), NULL, NULL, NULL, NULL, NULL);
     errorHandler(env, error);
 
     // create variables 

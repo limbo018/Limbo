@@ -186,7 +186,7 @@ In other words, set consistent _GLIBCXX_USE_CXX11_ABI values.
 A safe way is to leave it to the default value. 
 
 # Copyright 
-The software is released under MIT license except third party packages. Please see the @ref OverallLicense file for details. 
+The software is released under MIT license except third party packages. Please see the LICENSE file for details. 
 
 Third party package **c-thread-pool** is released under MIT license. 
 

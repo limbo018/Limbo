@@ -119,7 +119,9 @@ assign          return token::ASSIGN;
 }
 
  /* gobble up comments */
-[/][/]([^\n])* {
+ /* make sure multipe \/ works */
+ /* make sure \/\/ works with directly end of line */
+[/]([/])+([\n]|([^\n])*) {
     yylloc->step();
 }
 

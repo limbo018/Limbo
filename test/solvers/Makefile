@@ -16,12 +16,14 @@ VPATH = .
 DBG = 0
 # default GUROBI is off 
 GUROBI = 0
+# default LPSolve is off
+LPSOLVE = 0
 
 # include environmental configurations 
 include $(LIMBO_ROOT_DIR)/Include.mk
 
 ifeq ($(DBG), 1)
-	CXXFLAGS = $(CXXFLAGS_DEBUG) -DDEBUG_GUROBIAPI=1 -DDEBUG_DUALMINCOSTFLOW -DDEBUG_MINCOSTFLOW
+	CXXFLAGS = $(CXXFLAGS_DEBUG) -DDEBUG_GUROBIAPI=1 -DDEBUG_LPSOLVEAPI=1 -DDEBUG_DUALMINCOSTFLOW -DDEBUG_MINCOSTFLOW
 else
 	CXXFLAGS = $(CXXFLAGS_RELEASE)
 endif
@@ -31,6 +33,11 @@ ifdef GUROBI_HOME
 include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindGurobi.mk
 endif
 
+# dependency to LPSOLVE and get LPSOLVE_LINK_LIB
+ifdef LPSOLVE_DIR
+include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindLPSolve.mk
+endif
+
 #==========================================================================
 #                         Special Library
 # ==========================================================================
@@ -38,9 +45,9 @@ endif
 # internal dependency is lp parser 
 # external dependency is boost
 INCLUDE = -I $(LIMBO_ROOT_DIR) \
-		  -I $(LEMON_DIR)/include
+		  -I $(LEMON_DIR)/include 
 LIBS = -L $(LIMBO_ROOT_DIR)/lib -llpparser \
-	   -L $(LEMON_DIR)/lib -lemon
+	   -L $(LEMON_DIR)/lib -lemon 
 
 # GUROBI 
 ifeq ($(GUROBI), 1)
@@ -48,19 +55,27 @@ INCLUDE += -I $(GUROBI_HOME)/include
 LIBS += $(DYNAMIC_LINK_FLAG) $(GUROBI_LINK_LIB)
 endif 
 
+# LPSOLVE 
+ifeq ($(LPSOLVE), 1)
+INCLUDE += -I $(LPSOLVE_DIR)
+LIBS += $(DYNAMIC_LINK_FLAG) $(LPSOLVE_LINK_LIB)
+endif 
+
 # ==========================================================================
 #                         Standard Setting
 # ==========================================================================
 
-SRCS = $(wildcard *.cpp)
+SRCS = test_DualMinCostFlow.cpp test_MinCostFlow.cpp test_MultiKnapsackLagRelax.cpp test_solvers.cpp
+ifeq ($(GUROBI), 1)
+	SRCS += test_GurobiApi.cpp
+endif 
+ifeq ($(LPSOLVE), 1)
+	SRCS += test_LPSolveApi.cpp
+endif 
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 DEPS = $(OBJS:%.o=%.d) 	# one dependency file for each source
 
-ifeq ($(GUROBI), 0)
-all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow test_MinCostFlow
-else
-all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow test_MinCostFlow test_GurobiApi 
-endif
+all: lpmcf test_solvers test_MultiKnapsackLagRelax test_DualMinCostFlow test_MinCostFlow test_GurobiApi test_LPSolveApi 
 
 .PHONY: lpmcf
 
@@ -98,6 +113,17 @@ test_MinCostFlow: $(OBJDIR)/test_MinCostFlow.o
 ifeq ($(GUROBI), 1)
 test_GurobiApi: $(OBJDIR)/test_GurobiApi.o
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_GurobiApi.o $(LIBS) 
+else 
+test_GurobiApi: 
+	@echo "test_GurobiApi skipped"
+endif 
+
+ifeq ($(LPSOLVE), 1)
+test_LPSolveApi: $(OBJDIR)/test_LPSolveApi.o
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_LPSolveApi.o $(LIBS) 
+else 
+test_LPSolveApi: 
+	@echo "test_LPSolveApi skipped"
 endif 
 
 .PHONY: clean
@@ -108,6 +134,7 @@ clean: cleandep
 	rm -f test_DualMinCostFlow
 	rm -f test_MinCostFlow
 	rm -f test_GurobiApi
+	rm -f test_LPSolveApi
 	rm -f $(OBJS) 
 
 .PHONY: cleandep
