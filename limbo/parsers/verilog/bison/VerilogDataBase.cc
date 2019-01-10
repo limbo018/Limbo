@@ -10,6 +10,11 @@
 
 namespace VerilogParser {
 
+void VerilogDataBase::verilog_module_declaration_cbk(std::string const& /*module_name*/, std::vector<GeneralName> const& /*vPinName*/)
+{
+	verilog_user_cbk_reminder(__func__);
+}
+
 void VerilogDataBase::verilog_assignment_cbk(std::string const& /*target_name*/, Range const& /*target_range*/, std::string const& /*source_name*/, Range const& /*source_range*/)
 {
 	verilog_user_cbk_reminder(__func__);
