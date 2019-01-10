@@ -79,8 +79,13 @@ void Driver::wire_pin_cbk(std::string& net_name, std::string& pin_name, Range co
 }
 void Driver::wire_pin_cbk(int bits, int value, std::string& pin_name)
 {
-    std::string net_name = "CONSTANT";
+    std::string net_name = "VerilogParser::CONSTANT_NET";
 	m_vNetPin.push_back(NetPin(net_name, pin_name, Range(0, bits), value));
+}
+void Driver::wire_pin_cbk(std::vector<GeneralName>& vNetName, std::string& pin_name)
+{
+    std::string net_name = "VerilogParser::GROUP_NETS";
+	m_vNetPin.push_back(NetPin(net_name, pin_name, vNetName));
 }
 void Driver::wire_declare_cbk(std::vector<GeneralName> const& vNetName, Range const& range)
 {

@@ -184,7 +184,7 @@ param2: '.' NAME '(' NAME ')' {driver.wire_pin_cbk(*$4, *$2); delete $2; delete 
       | '.' NAME '(' OCT_MASK ')' {driver.wire_pin_cbk($4.bits, $4.value, *$2); delete $2;} 
       | '.' NAME '(' DEC_MASK ')' {driver.wire_pin_cbk($4.bits, $4.value, *$2); delete $2;} 
       | '.' NAME '(' HEX_MASK ')' {driver.wire_pin_cbk($4.bits, $4.value, *$2); delete $2;} 
-      /*| '.' NAME '(' '{' general_name_array '}' ')' {driver.wire_pin_cbk(*$4, *$2); delete $2; delete $4;}*/ /* a group of nets not supported yet */
+      | '.' NAME '(' '{' general_name_array '}' ')' {driver.wire_pin_cbk(*$5, *$2); delete $2; delete $5;} 
       ;
 
 param3: INPUT general_name_array {driver.pin_declare_cbk(*$2, kINPUT); delete $2;}
