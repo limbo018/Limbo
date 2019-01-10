@@ -1,5 +1,9 @@
-// $Id: driver.cc 39 2008-08-03 10:07:15Z tb $
-/** \file driver.cc Implementation of the example::Driver class. */
+/**
+ * @file   LefDriver.cc
+ * @author Yibo Lin
+ * @date   Oct 2014
+ * @brief  Implementation of @ref LefParser::Driver
+ */
 
 #include <limbo/parsers/lef/bison/LefDriver.h>
 #include <limbo/parsers/lef/bison/LefScanner.h>
@@ -143,7 +147,7 @@ Driver::Driver(LefDataBase& db)
 	lef_ntokens = 0;
 	lef_nlines = 1;
 
-	lefrLog = 0;
+	lefrLog = stdout; // dump to screen, original is 0 
 }
 Driver::~Driver()
 {

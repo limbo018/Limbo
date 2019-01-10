@@ -36,6 +36,15 @@ INCLUDE = -I $(realpath .) \
 		  -I $(LEX_INCLUDE_DIR) \
 		  -I $(BOOST_DIR)/include
 
+LIB = -static 
+
+ifdef ZLIB_DIR
+ifdef BOOST_DIR
+	LIB += $(BOOST_LINK_FLAG) -L $(BOOST_DIR)/lib -lboost_iostreams $(DYNAMIC_LINK_FLAG) \
+		   $(ZLIB_LINK_FLAG) -L $(ZLIB_DIR) -lz #$(DYNAMIC_LINK_FLAG)
+endif 
+endif
+
 # ==========================================================================
 #                         Standard Setting
 # ==========================================================================
@@ -63,7 +72,7 @@ $(OBJDIR)/%.o: %.cpp
 # Link executable
 
 test_bison: $(OBJDIR)/test_bison.o $(LIMBO_ROOT_DIR)/lib/lib$(LIB_PREFIX)parser.a
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_bison.o -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)parser
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJDIR)/test_bison.o -L $(LIMBO_ROOT_DIR)/lib -l$(LIB_PREFIX)parser $(LIB)
 
 .PHONY: clean
 clean: cleandep

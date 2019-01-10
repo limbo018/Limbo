@@ -29,6 +29,13 @@ else
 	CXXFLAGS = $(CXXFLAGS_RELEASE)
 endif
 
+# if zlib and boost are available, support compression/decompression features 
+ifdef ZLIB_DIR
+ifdef BOOST_DIR
+	CXXFLAGS += -DZLIB=1
+endif
+endif
+
 #==========================================================================
 #                         Special Library
 # ==========================================================================
@@ -36,6 +43,14 @@ endif
 INCLUDE = -I $(realpath .) \
 		  -I $(LIMBO_ROOT_DIR) \
 		  -I $(LEX_INCLUDE_DIR)
+
+ifdef ZLIB_DIR
+ifdef BOOST_DIR
+	INCLUDE += -I $(BOOST_DIR)/include $(ZLIB_INCLUDE_FLAG)
+	LIB += -L $(BOOST_DIR)/lib -lboost_iostreams \
+		   $(ZLIB_LINK_FLAG) -lz
+endif
+endif
 
 # ==========================================================================
 #                         Standard Setting

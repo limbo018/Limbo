@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: ProgramOptions.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Sat 25 Jul 2015 11:20:30 AM CDT
- ************************************************************************/
+/**
+ @file   ProgramOptions.cpp
+ @author Yibo Lin
+ @date   Jul 2015
+ @brief  Implementation of @ref limbo::programoptions::ProgramOptions
+ */
 
 #include "ProgramOptions.h"
 

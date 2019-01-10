@@ -11,11 +11,21 @@ CTHREADPOOL_SRCS = CThreadPool
 DLX_SRCS = dlx
 LIBDIVIDE_SRCS = libdivide
 FLEX_SRCS = flex
+LEF_SRCS = lefdef/5.8/lef
+DEF_SRCS = lefdef/5.8/def
 
 CSDP_LIB = $(LIMBO_ROOT_DIR)/lib/libsdp.a
 OPENBLAS_LIB = $(LIMBO_ROOT_DIR)/lib/libopenblas-st.a
 CTHREADPOOL_LIB = $(LIMBO_ROOT_DIR)/lib/libthpool.a
 DLX_LIB = $(LIMBO_ROOT_DIR)/lib/libdlx.a
+LEF_LIB = $(LIMBO_ROOT_DIR)/lib/libclef.a \
+		  $(LIMBO_ROOT_DIR)/lib/libclefzlib.a \
+		  $(LIMBO_ROOT_DIR)/lib/liblef.a \
+		  $(LIMBO_ROOT_DIR)/lib/liblefzlib.a
+DEF_LIB = $(LIMBO_ROOT_DIR)/lib/libcdef.a \
+		  $(LIMBO_ROOT_DIR)/lib/libcdefzlib.a \
+		  $(LIMBO_ROOT_DIR)/lib/libdef.a \
+		  $(LIMBO_ROOT_DIR)/lib/libdefzlib.a
 
 #==========================================================================
 #                         Compilation Flags
@@ -40,14 +50,14 @@ endif
 # ==========================================================================
 
 ifeq ($(OPENBLAS), 1)
-all: $(CSDP_LIB) $(OPENBLAS_LIB) $(CTHREADPOOL_LIB) $(DLX_LIB)
+all: $(CSDP_LIB) $(OPENBLAS_LIB) $(CTHREADPOOL_LIB) $(DLX_LIB) $(LEF_LIB) $(DEF_LIB)
 	@echo ">> building default with OPENBLAS on"
 else 
-all: $(CTHREADPOOL_LIB) $(DLX_LIB)
+all: $(CTHREADPOOL_LIB) $(DLX_LIB) $(LEF_LIB) $(DEF_LIB)
 	@echo ">> building default with OPENBLAS off"
 endif 
 
-.PHONY: $(OPENBLAS_LIB) $(CSDP_LIB) $(CTHREADPOOL_LIB) $(DLX_LIB)
+.PHONY: $(OPENBLAS_LIB) $(CSDP_LIB) $(CTHREADPOOL_LIB) $(DLX_LIB) $(LEF_LIB) $(DEF_LIB)
 
 $(OPENBLAS_LIB): 
 	@echo ">> building OpenBLAS"
@@ -65,6 +75,14 @@ $(DLX_LIB):
 	@echo ">> build dlx"
 	$(MAKE) -C $(DLX_SRCS)
 
+$(LEF_LIB):
+	@echo ">> build lef"
+	$(MAKE) -C $(LEF_SRCS)
+
+$(DEF_LIB):
+	@echo ">> build def"
+	$(MAKE) -C $(DEF_SRCS)
+
 install: 
 	@echo ">> building install"
 ifneq ($(wildcard $(CSDP_LIB)),)
@@ -77,6 +95,8 @@ endif
 	$(MAKE) install -C $(DLX_SRCS)
 	$(MAKE) install -C $(LIBDIVIDE_SRCS)
 	$(MAKE) install -C $(FLEX_SRCS)
+	$(MAKE) myinstall -C $(LEF_SRCS)
+	$(MAKE) myinstall -C $(DEF_SRCS)
 
 .PHONY: clean
 clean: 
@@ -86,6 +106,8 @@ clean:
 	$(MAKE) clean -C $(DLX_SRCS)
 	$(MAKE) clean -C $(LIBDIVIDE_SRCS)
 	$(MAKE) clean -C $(FLEX_SRCS)
+	$(MAKE) clean -C $(LEF_SRCS)
+	$(MAKE) clean -C $(DEF_SRCS)
 
 .PHONY: extraclean
 extraclean: clean
@@ -94,3 +116,5 @@ extraclean: clean
 	rm -f $(LIMBO_ROOT_DIR)/bin/csdp
 	rm -f $(CTHREADPOOL_LIB)
 	rm -f $(DLX_LIB)
+	rm -f $(LEF_SRCS)
+	rm -f $(DEF_SRCS)

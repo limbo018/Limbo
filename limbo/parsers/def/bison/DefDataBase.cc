@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: DefDataBase.cc
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Thu 11 Dec 2014 04:28:14 PM CST
- ************************************************************************/
+/**
+ @file   DefDataBase.cc
+ @author Yibo Lin
+ @date   Dec 2014
+ @brief  Implementation of @ref DefParser::DefDataBase
+ */
 
 #include "DefDataBase.h"
 #include <cstring>

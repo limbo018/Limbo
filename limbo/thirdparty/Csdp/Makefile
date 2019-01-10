@@ -29,11 +29,11 @@ include $(LIMBO_ROOT_DIR)/Include.mk
 
 all:
 	make -C lib CC=$(CC) libsdp.a
+	@$(LIBMKDIR)
+	mv lib/libsdp.a $(LIBDIR)
 	make -C solver CC=$(CC) csdp
 	make -C theta CC=$(CC) all 
 	make -C example CC=$(CC) all 
-	@$(LIBMKDIR)
-	mv lib/libsdp.a $(LIBDIR)
 	@mkdir -p $(LIMBO_ROOT_DIR)/bin
 	mv solver/csdp $(LIMBO_ROOT_DIR)/bin
 
@@ -48,6 +48,7 @@ unitTest:
 # Install the executables in /usr/local/bin.
 #
 
+.PHONY: install
 install:
 	cmp -s $(PREFIX)/lib/libsdp.a $(LIBDIR)/libsdp.a; \
 	RETVAL=$$?; \
@@ -71,7 +72,9 @@ install:
 
 clean:
 	make -C lib clean 
+	rm -f $(LIBDIR)/libsdp.a
 	make -C solver clean 
+	rm -f $(LIMBO_ROOT_DIR)/bin/csdp
 	make -C theta clean 
 	make -C test clean 
 	make -C example clean

@@ -1,9 +1,9 @@
-/*************************************************************************
-    > File Name: LefDataBase.cpp
-    > Author: Yibo Lin
-    > Mail: yibolin@utexas.edu
-    > Created Time: Thu 11 Dec 2014 04:28:14 PM CST
- ************************************************************************/
+/**
+ @file   LefDataBase.cpp
+ @author Yibo Lin
+ @date   Dec 2014
+ @brief  Implementation of @ref LefParser::LefDataBase
+ */
 
 #include <limbo/parsers/lef/bison/LefDataBase.h>
 #include <cstring>

@@ -7,6 +7,9 @@
 
 ## @cond 
 
+ifneq ($(shell which g++),)
+	CXX = g++
+else
 ifneq ($(shell which g++48),)
 	CXX = g++48
 else
@@ -31,6 +34,7 @@ endif
 endif
 endif
 endif
+endif 
 endif 
 
 ## @endcond

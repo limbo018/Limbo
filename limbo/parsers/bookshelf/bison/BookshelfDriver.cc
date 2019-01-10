@@ -1,10 +1,19 @@
-// $Id: driver.cc 39 2008-08-03 10:07:15Z tb $
-/** \file driver.cc Implementation of the example::Driver class. */
+/**
+ * @file   BookshelfDriver.cc
+ * @author Yibo Lin
+ * @date   Oct 2014
+ * @brief  Implementation of @ref BookshelfParser::Driver
+ */
 
 #include "BookshelfDriver.h"
 #include "BookshelfScanner.h"
 #include <limbo/string/String.h>
 #include <algorithm>
+#if ZLIB == 1 
+#include <boost/iostreams/filter/gzip.hpp>
+#include <boost/iostreams/device/file.hpp>
+#include <boost/iostreams/filtering_stream.hpp>
+#endif
 
 namespace BookshelfParser {
 
@@ -31,6 +40,17 @@ bool Driver::parse_stream(std::istream& in, const std::string& sname)
 
 bool Driver::parse_file(const std::string &filename)
 {
+#if ZLIB == 1
+    if (limbo::get_file_suffix(filename) == "gz") // detect .gz file 
+    {
+        boost::iostreams::filtering_istream in; 
+        in.push(boost::iostreams::gzip_decompressor());
+        in.push(boost::iostreams::file_source(filename.c_str()));
+
+        if (!in.good()) return false;
+        return parse_stream(in, filename);
+    }
+#endif
     std::ifstream in(filename.c_str());
     if (!in.good()) return false;
     return parse_stream(in, filename);
@@ -185,6 +205,14 @@ bool read(BookshelfDataBase& db, const string& auxFile)
 	//driver.trace_scanning = true;
 	//driver.trace_parsing = true;
 
+    bool gzFlag = limbo::iequals(limbo::get_file_suffix(auxFile), "gz"); // compressed or not 
+#if ZLIB == 0
+    if (gzFlag)
+    {
+        std::cerr << "compile with ZLIB_DIR defined to read .gz files\n";
+        return false; 
+    }
+#endif
 	bool flagAux = driverAux.parse_file(auxFile);
     if (!flagAux)
         return false;
@@ -218,7 +246,11 @@ bool read(BookshelfDataBase& db, const string& auxFile)
     for (vector<std::pair<int, int> >::const_iterator it = vOrder.begin(); it != vOrder.end(); ++it)
     {
         std::pair<int, int> const& order = *it;
-        string const& filename = driverAux.bookshelfFiles().at(order.second);
+        string filename = driverAux.bookshelfFiles().at(order.second);
+        if (gzFlag && !limbo::iequals(limbo::get_file_suffix(filename), "gz"))
+        {
+            filename += ".gz";
+        }
 
         Driver driver (db);
         bool flag = driver.parse_file(auxPath + "/" + filename);

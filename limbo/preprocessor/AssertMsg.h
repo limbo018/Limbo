@@ -69,4 +69,23 @@
     }\
 } while (false)
 
+/// namespace for Limbo
+namespace limbo 
+{
+
+/// @brief static assertion 
+template <bool>
+struct StaticAssert;
+/// @brief template specialization 
+template <>
+struct StaticAssert<true> {};
+
+} // namespace limbo
+
+/// @def limboStaticAssert(condition)
+/// @brief compile time assertion 
+#define limboStaticAssert(condition) {\
+    limbo::StaticAssert<(condition) != 0>(); \
+}
+
 #endif 

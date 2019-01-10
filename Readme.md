@@ -1,34 +1,35 @@
-Limbo Library for VLSI CAD Design {#mainpage}
+Limbo Library for VLSI CAD Design 
 ---------
 
 All components are written with C/C++ and API is designed for easy usage and simple embedding. 
 Please read this **Readme** file carefully for proper instructions to **install** and **customize**. 
 
+- [Documentation](http://limbo018.github.io/Limbo). 
+- [Github](https://github.com/limbo018/Limbo).
+
 ---------
 
-[TOC]
-
-# Packages {#Packages}
+# Packages 
 | Packages                                | Languages                       | Description                                                                |
 | --------------------------------------- | ------------------------------- | -------------------------------------------------------------------------- |
-| [Algorithms](@ref Algorithms)           | C++                             | Useful algorithms including partitioning, coloring, etc.                   |
-| [Bibtex](@ref Bibtex)                   | Python                          | Scripts convert bibtex into various formats                                |
-| [Containers](@ref Containers)           | C++                             | Extension of contains from STL                                             |
-| [Geometry](@ref Geometry)               | C++                             | Geometric utilities and algorithms such as polygon-to-rectangle conversion |
-| [MakeUtils](@ref MakeUtils)             | Makefile                        | Makefile utilities that help find dependencies                             |
-| [Math](@ref Math)                       | C++                             | Extension of math functions from STL                                       |
-| [Parsers](@ref Parsers)                 | C++, Flex/Bison                 | Parsers to various formats, such as LEF/DEF, verilog, GDSII, etc.          |
-| [Preprocessor](@ref Preprocessor)       | C++                             | Macros such as assertion with message                                      |
-| [ProgramOptions](@ref ProgramOptions)   | C++                             | Easy API to parser command line options                                    |
-| [Solvers](@ref Solvers)                 | C++                             | Solver wrap-ups such as SDP, LP solver with min-cost flow, etc.            |
-| [String](@ref String)                   | C++                             | Utilities to char and string                                               |
-| [ThirdParty](@ref ThirdParty)           | C/C++, Fortran                  | Third party packages required                                              |
+| Algorithms                              | C++                             | Useful algorithms including partitioning, coloring, etc.                   |
+| Bibtex                                  | Python                          | Scripts convert bibtex into various formats                                |
+| Containers                              | C++                             | Extension of contains from STL                                             |
+| Geometry                                | C++                             | Geometric utilities and algorithms such as polygon-to-rectangle conversion |
+| MakeUtils                               | Makefile                        | Makefile utilities that help find dependencies                             |
+| Math                                    | C++                             | Extension of math functions from STL                                       |
+| Parsers                                 | C++, Flex/Bison                 | Parsers to various formats, such as LEF/DEF, verilog, GDSII, etc.          |
+| Preprocessor                            | C++                             | Macros such as assertion with message                                      |
+| ProgramOptions                          | C++                             | Easy API to parser command line options                                    |
+| Solvers                                 | C++                             | Solver wrap-ups such as SDP, LP solver with min-cost flow, etc.            |
+| String                                  | C++                             | Utilities to char and string                                               |
+| ThirdParty                              | C/C++, Fortran                  | Third party packages required                                              |
 
-# Developers {#Developers}
+# Developers 
 
 - [Yibo Lin](http://www.yibolin.com), ECE Department, UT Austin 
 
-# Introduction {#Introduction}
+# Introduction 
 
 ## 1. Flex
 
@@ -69,19 +70,19 @@ In this library, an API for lemon (MFC solver) is implemented to solve LP and du
 The API supports reading files with both LGF (lemon graph format) and LP (linear program format) and then dump out solutions. 
 Thus, it will be easier to verify results with general LP solvers such as Gurobi or CBC.
 
-# Bug Report {#BugReport}
+# Bug Report 
 
 Please report bugs to [yibolin at utexas dot edu](mailto:yibolin@utexas.edu). 
 
-# Installation {#Installation}
+# Installation 
 
 Some components depend on external libraries, such as 
 
-* [Boost](www.boost.org): require BOOST_DIR environment variable to the path where Boost is installed. Limbo library is tested through Boost 1.55.0 to 1.57.0.
+* [Boost](www.boost.org): require BOOST_DIR environment variable to the path where Boost is installed. Limbo library is tested through Boost 1.55.0 to 1.57.0. BOOST_DIR should defined in a way that BOOST_DIR/include contains the headers to include and BOOST_DIR/lib contains the libraries to link. 
 * [Lemon](https://lemon.cs.elte.hu): require LEMON_DIR environment variable to the path where Lemon is installed. 
 * [Gurobi](www.gurobi.com): require GUROBI_HOME environment variable to the path where Gurobi is installed. 
 * [Flex](http://flex.sourceforge.net): require FLEX_DIR or LEX_INCLUDE_DIR environment variable if the flex version is not 2.5.37. See FAQ for details. 
-* [Zlib](http://www.zlib.net) (optional): require ZLIB_DIR environment variable to enable zlib features. If both zlib and boost are available, Gds parser supports reading/writing .gds.gz files. 
+* [Zlib](http://www.zlib.net): require ZLIB_DIR, or ZLIB_INCLUDE_FLAG and ZLIB_LINK_FLAG environment variables to enable zlib features. If both zlib and boost are available, Gds parser supports reading/writing .gds.gz files. If using ZLIB_DIR, ZLIB_DIR should defined in a way that ZLIB_DIR/include contains the headers to include and ZLIB_DIR/lib contains the libraries to link; otherwise, use ZLIB_INCLUDE_FLAG and ZLIB_LINK_FLAG 
 
 Users need to make sure they are properly installed and the corresponding settings are configured. 
 
@@ -142,7 +143,7 @@ The default version of OpenBLAS is not very stable for cross platforms, which of
 OpenBLAS is integrated as a submodule which fetch source code from remote repository, so it is always up-to-date version. 
 If you already have OpenBLAS in the directory, simply run "git submodule update" to fetch the latest version in the submodule directory. 
 
-# FAQ {#FAQ}
+# FAQ 
 
 ##1. (*Deprecated*) Compiling errors like
 ~~~~~~~~~~~~~~~~
@@ -184,8 +185,8 @@ Therefore, it is necessary to make sure the same STL ABI is used for compiling L
 In other words, set consistent _GLIBCXX_USE_CXX11_ABI values. 
 A safe way is to leave it to the default value. 
 
-# Copyright {#Copyright}
-The software is released under MIT license except third party packages. Please see the @ref OverallLicense file for details. 
+# Copyright 
+The software is released under MIT license except third party packages. Please see the LICENSE file for details. 
 
 Third party package **c-thread-pool** is released under MIT license. 
 
@@ -193,13 +194,13 @@ Third party package **csdp** is released under CPL v1.0 license.
 
 Third party package **OpenBLAS** has its copyright reserved; please check its license. 
 
-# Tutorial {#Tutorial}
+# Tutorial 
 
 Some components in limbo library do not need linkage, so they can be used directly by including the headers, while some components require linkage to the corresponding static libraries.  
 Here are some simple example to show the basic usage and compiling commands with gcc under Linux. 
 For clang, the compiling commands are slightly different as users need to specify the same **-stdlib** as that in **CXXSTDLIB** flag used to install the library. 
 See pages of each package for examples. 
 
-# LICENSE {#OverallLicense}
+# LICENSE 
 
-\include LICENSE
+See LICENSE

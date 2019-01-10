@@ -42,11 +42,17 @@ endif
 
 INCLUDE = -I $(LIMBO_ROOT_DIR) 
 
-ifdef ZLIB_DIR
+# boost is still needed 
 ifdef BOOST_DIR
 	INCLUDE += -I $(BOOST_DIR)/include
+endif
+
+# boost iostreams is needed for compression
+ifdef ZLIB_DIR
+ifdef BOOST_DIR
+	INCLUDE += $(ZLIB_INCLUDE_FLAG)
 	LIB += -L $(BOOST_DIR)/lib -lboost_iostreams \
-		   -L $(ZLIB_DIR) -lz
+		   $(ZLIB_LINK_FLAG) -lz
 endif
 endif
 
