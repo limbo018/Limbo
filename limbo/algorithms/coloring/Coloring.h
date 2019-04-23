@@ -218,8 +218,8 @@ class Coloring
         // @param stitch_relatiin_set recording for each vertex indicating the stitch relation
         // @param visited is visited in DFS
         // @param stitch_edge_num total stitch edge number in graph
-        void depth_first_search_stitch(graph_vertex_type v, std::vector<int>& stitch_relation_set,\
-        std::vector<bool>& visited,uint32_t& stitch_edge_num,int stitch_index);
+        void depth_first_search_stitch(graph_vertex_type v, std::vector<int>& stitch_relation_set,
+                std::vector<bool>& visited,uint32_t& stitch_edge_num,int stitch_index);
 		// for debug 
         /// write graph in graphviz format 
         /// @param filename output file name 
@@ -255,33 +255,10 @@ Coloring<GraphType>::Coloring(Coloring<GraphType>::graph_type const& g)
 template <typename GraphType>
 double Coloring<GraphType>::operator()()
 {
+    // clock_t sub_comp_begin = clock();
     double cost ;
     uint32_t stitch_edge_num = 0;
     int stitch_index = 0;
-    // clock_t sub_comp_start = clock();
-    // if (boost::num_vertices(m_graph) <= color_num()) // if vertex number is no larger than color number, directly assign color
-    // {
-    //     // need to consider precolored vertices
-    //     bool unusedColors[4] = {true, true, true, true};
-    //     if (color_num() == THREE)
-    //         unusedColors[3] = false;
-    //     for (int32_t i = 0, ie = m_vColor.size(); i != ie; ++i)
-    //     {
-    //         if (m_vColor[i] < 0) // if not precolored, assign to an unused color
-    //         {
-    //             for (int8_t c = 0; c != 4; ++c)
-    //                 if (unusedColors[c])
-    //                 {
-    //                     m_vColor[i] = c;
-    //                     break;
-    //                 }
-    //         }
-    //         // must have valid color after assignment 
-    //         assert(m_vColor[i] >= 0);
-    //         unusedColors[m_vColor[i]] = false;
-    //     }
-    //     cost = calc_cost(m_vColor);
-    // }
     //Step 1. Firstly, count the number of stitch edges and store all of the stitch relations
     vertex_iterator_type vi, vie,next;
     boost::tie(vi, vie) = vertices(m_graph);
@@ -291,8 +268,8 @@ double Coloring<GraphType>::operator()()
     {
         ++next;
         graph_vertex_type v = *vi;
-        if(visited[(int)v]) continue;
-        else{
+        if(!visited[(int)v])
+        {
             visited[(int)v] = true;
             stitch_relation_set[(int)v] = stitch_index;
             depth_first_search_stitch(v,stitch_relation_set,visited,stitch_edge_num,stitch_index);
@@ -304,29 +281,33 @@ double Coloring<GraphType>::operator()()
     //Step 2. Verify the feasibility of this method(no conflict should be introduced when inserting stitch)
     //This code part can be commented
     boost::tie(vi, vie) = vertices(m_graph);
-    for (next = vi; vi != vie; vi = next)
+    for (next = vi; vi != vie && is_legal; vi = next)
     {
         ++next;
         graph_vertex_type v = *vi;
         adjacency_iterator vi2, vie2,next2;
         boost::tie(vi2, vie2) = boost::adjacent_vertices(v, m_graph);
-        for (next2 = vi2; vi2 != vie2; vi2 = next2){
+        for (next2 = vi2; vi2 != vie2; vi2 = next2)
+        {
             ++next2; 
             graph_vertex_type v2 = *vi2;
             std::pair<graph_edge_type, bool> e12 = boost::edge(v, v2, m_graph);
-            assert(e12.second);
-            if (boost::get(boost::edge_weight, m_graph, e12.first) > 0 && stitch_relation_set[(int)v] == stitch_relation_set[(int)v2])  is_legal = false;
+            limboAssert(e12.second);
+            if (boost::get(boost::edge_weight, m_graph, e12.first) > 0 && stitch_relation_set[(int)v] == stitch_relation_set[(int)v2])
+            {
+                is_legal = false;
+                break; 
+            }
         }
     }
     //Step 3. Assign the colors 
     std::vector<int> stitch_relation_to_color(stitch_index,-1);
     std::vector<bool> unused_color(color_num(),true);
 
-
-    if (boost::num_vertices(m_graph) <= color_num()+stitch_edge_num && is_legal) // if vertex number is no larger than color number, directly assign color
+    if (is_legal && boost::num_vertices(m_graph) <= color_num()+stitch_edge_num) // if vertex number is no larger than color number, directly assign color
     {
         //Step 3.1: Assign pre-defined color firstly
-        assert(stitch_index <= color_num());
+        limboAssert(stitch_index <= color_num());
         for (int32_t i = 0, ie = m_vColor.size(); i != ie; ++i)
         {
             if (m_vColor[i] >= 0) // if not precolored, assign to an unused color
@@ -341,12 +322,16 @@ double Coloring<GraphType>::operator()()
         {
             if (m_vColor[i] < 0) // if not precolored, assign to an unused color
             {
-                if(stitch_relation_to_color[stitch_relation_set[i]] != -1){ 
+                if(stitch_relation_to_color[stitch_relation_set[i]] != -1)
+                { 
                     m_vColor[i] = stitch_relation_to_color[stitch_relation_set[i]];
-                    }
-                else{
-                    for(int c= 0;c<color_num();c++){
-                        if(unused_color[c]){
+                }
+                else
+                {
+                    for(int c= 0;c<color_num();c++)
+                    {
+                        if(unused_color[c])
+                        {
                             m_vColor[i] = c;
                             stitch_relation_to_color[stitch_relation_set[i]] = c;
                             unused_color[m_vColor[i]] = false;
@@ -360,24 +345,28 @@ double Coloring<GraphType>::operator()()
         cost = calc_cost(m_vColor);
     }
     else // perform coloring algorithm 
+    {
         cost = this->coloring();
+    }
     // clock_t sub_comp_end = clock();
     return cost;
 }
 
 template <typename GraphType>
-void Coloring<GraphType>::depth_first_search_stitch(graph_vertex_type v, std::vector<int>& stitch_relation_set,\
-std::vector<bool>& visited,uint32_t& stitch_edge_num, int stitch_index)
+void Coloring<GraphType>::depth_first_search_stitch(graph_vertex_type v, std::vector<int>& stitch_relation_set,
+        std::vector<bool>& visited,uint32_t& stitch_edge_num, int stitch_index)
 {
     adjacency_iterator vi2, vie2,next2;
     boost::tie(vi2, vie2) = boost::adjacent_vertices(v, m_graph);
-    for (next2 = vi2; vi2 != vie2; vi2 = next2){
+    for (next2 = vi2; vi2 != vie2; vi2 = next2)
+    {
         ++next2; 
         graph_vertex_type v2 = *vi2;
         if(visited[(int)v2])    continue;
         std::pair<graph_edge_type, bool> e12 = boost::edge(v, v2, m_graph);
-        assert(e12.second);
-        if (boost::get(boost::edge_weight, m_graph, e12.first) < 0) {
+        limboAssert(e12.second);
+        if (boost::get(boost::edge_weight, m_graph, e12.first) < 0) 
+        {
             visited[(int)v2] = true;
             stitch_edge_num ++;
             stitch_relation_set[(int)v2] = stitch_index;
@@ -390,7 +379,7 @@ std::vector<bool>& visited,uint32_t& stitch_edge_num, int stitch_index)
 template <typename GraphType>
 typename Coloring<GraphType>::edge_weight_type Coloring<GraphType>::calc_cost(std::vector<int8_t> const& vColor) const 
 {
-	assert(vColor.size() == boost::num_vertices(this->m_graph));
+	limboAssert(vColor.size() == boost::num_vertices(this->m_graph));
 	double cost = 0;
 	edge_iterator_type ei, eie;
 	for (boost::tie(ei, eie) = boost::edges(m_graph); ei != eie; ++ei)
