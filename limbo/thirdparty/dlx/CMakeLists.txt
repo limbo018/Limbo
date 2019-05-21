@@ -11,4 +11,4 @@ include_directories(
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
 
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
-install(DIRECTORY include/dlx DESTINATION include/thirdparty)
+install(DIRECTORY include/dlx DESTINATION include/limbo/thirdparty)

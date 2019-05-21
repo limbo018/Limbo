@@ -11,21 +11,17 @@ if(NOT CMAKE_BUILD_TYPE)
 endif(NOT CMAKE_BUILD_TYPE)
 message("-- CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
-if(NOT CMAKE_CXX_ABI)
-    set(CMAKE_CXX_ABI 0 CACHE STRING
-        "Choose the value for _GLIBCXX_USE_CXX11_ABI, options are: 0|1."
-        FORCE)
-endif(NOT CMAKE_CXX_ABI)
-message("-- CMAKE_CXX_ABI: _GLIBCXX_USE_CXX11_ABI=${CMAKE_CXX_ABI}")
-
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-set(CMAKE_CXX_STANDARD 11)
+SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
+find_package(Threads REQUIRED)
 find_package(BISON REQUIRED)
 find_package(FLEX REQUIRED)
 find_package(ZLIB REQUIRED)
-find_package(Boost 1.55.0 REQUIRED)
-find_package(Cairo)
+find_package(Boost 1.55.0 REQUIRED COMPONENTS iostreams chrono timer unit_test_framework graph regex)
+find_package(Gurobi)
+find_package(LpSolve)
 
 add_subdirectory(limbo)
+add_subdirectory(test)

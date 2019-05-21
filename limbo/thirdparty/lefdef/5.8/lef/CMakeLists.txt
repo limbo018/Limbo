@@ -24,6 +24,10 @@ set(LEF_SOURCES
     lef/lefrCallbacks.cpp
     lef/lefrSettings.cpp
     )
+set(LEF_HEADERS
+    lef/crypt.hpp      lef/lefiCrossTalk.hpp  lef/lefiDefs.hpp        lef/lefiKRDefs.hpp  lef/lefiMacro.hpp  lef/lefiNonDefault.hpp  lef/lefiPropType.hpp  lef/lefiUser.hpp  lef/lefiVia.hpp      lef/lefrCallBacks.hpp  lef/lefrReader.hpp    lef/lefwWriterCalls.hpp
+    lef/lefiArray.hpp  lef/lefiDebug.hpp      lef/lefiEncryptInt.hpp  lef/lefiLayer.hpp   lef/lefiMisc.hpp   lef/lefiProp.hpp        lef/lefiUnits.hpp     lef/lefiUtil.hpp  lef/lefiViaRule.hpp  lef/lefrData.hpp       lef/lefrSettings.hpp  lef/lefwWriter.hpp
+    )
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -44,6 +48,7 @@ BISON_TARGET(LefParser lef/lef.y ${CMAKE_CURRENT_BINARY_DIR}/lef.tab.cpp
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 add_library(lef STATIC ${LEF_SOURCES} ${BISON_LefParser_OUTPUTS})
 install(TARGETS lef DESTINATION lib)
+install(FILES ${LEF_HEADERS} DESTINATION include/limbo/thirdparty/lefdef/5.8/lef/lef)
 
 set(CLEF_SOURCES 
     clef/xlefiArray.cpp
@@ -65,7 +70,6 @@ set(CLEF_SOURCES
     clef/xlefwWriter.cpp
     )
 
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 add_library(clef STATIC ${CLEF_SOURCES})
 install(TARGETS clef DESTINATION lib)
 

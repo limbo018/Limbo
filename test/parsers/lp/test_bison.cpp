@@ -39,8 +39,9 @@ class LpDataBase : public LpParser::LpDataBase
         /// @param terms array of terms in left hand side 
         /// @param compare operator '<', '>', '='
         /// @param constant constant in the right hand side 
-		void add_constraint(LpParser::TermArray const& terms, char compare, double constant) 
+		void add_constraint(string const& cname, LpParser::TermArray const& terms, char compare, double constant) 
 		{
+            cout << cname << ": ";
             for (LpParser::TermArray::const_iterator it = terms.begin(); it != terms.end(); ++it)
                 cout << " + " << it->coef << " " << it->var; 
             cout << " " << compare << " " << constant << endl; 

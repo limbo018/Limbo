@@ -35,6 +35,12 @@ set(DEF_SOURCES
     def/defiSlot.cpp
     def/defrData.cpp
     )
+set(DEF_HEADERS 
+    def/defiAlias.hpp      def/defiDebug.hpp  def/defiGroup.hpp     def/defiNet.hpp         def/defiPinCap.hpp    def/defiRegion.hpp     def/defiSlot.hpp           def/defiVia.hpp        def/defrSettings.hpp
+    def/defiAssertion.hpp  def/defiDefs.hpp   def/defiIOTiming.hpp  def/defiNonDefault.hpp  def/defiPinProp.hpp   def/defiRowTrack.hpp   def/defiTimingDisable.hpp  def/defrCallBacks.hpp  def/defwWriterCalls.hpp
+    def/defiBlockage.hpp   def/defiFill.hpp   def/defiKRDefs.hpp    def/defiPartition.hpp   def/defiProp.hpp      def/defiScanchain.hpp  def/defiUser.hpp           def/defrData.hpp       def/defwWriter.hpp
+    def/defiComponent.hpp  def/defiFPC.hpp    def/defiMisc.hpp      def/defiPath.hpp        def/defiPropType.hpp  def/defiSite.hpp       def/defiUtil.hpp           def/defrReader.hpp
+    )
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -55,6 +61,7 @@ BISON_TARGET(DefParser def/def.y ${CMAKE_CURRENT_BINARY_DIR}/def.tab.cpp
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 add_library(def STATIC ${DEF_SOURCES} ${BISON_DefParser_OUTPUTS})
 install(TARGETS def DESTINATION lib)
+install(FILES ${DEF_HEADERS} DESTINATION include/limbo/thirdparty/lefdef/5.8/def/def)
 
 set(CDEF_SOURCES 
     cdef/xdefiAssertion.cpp
@@ -110,7 +117,7 @@ set(DEFRW_SOURCES
 
 add_executable(defrw ${DEFRW_SOURCES})
 target_link_libraries(defrw def ${ZLIB_LIBRARIES})
-install(TARGETS defrw DESTINATION bin/thirdparty/defdef/5.8/def)
+install(TARGETS defrw DESTINATION bin/thirdparty/lefdef/5.8/def)
 
 set(DEFDIFF_SOURCES 
     defdiff/diffDefRW.cpp
@@ -119,7 +126,7 @@ set(DEFDIFF_SOURCES
 
 add_executable(defdiff ${DEFDIFF_SOURCES})
 target_link_libraries(defdiff def ${ZLIB_LIBRARIES})
-install(TARGETS defdiff DESTINATION bin/thirdparty/defdef/5.8/def)
+install(TARGETS defdiff DESTINATION bin/thirdparty/lefdef/5.8/def)
 
 set(DEFWRITE_SOURCES 
     defwrite/defwrite.cpp
@@ -128,4 +135,4 @@ set(DEFWRITE_SOURCES
 
 add_executable(defwrite ${DEFWRITE_SOURCES})
 target_link_libraries(defwrite def ${ZLIB_LIBRARIES})
-install(TARGETS defwrite DESTINATION bin/thirdparty/defdef/5.8/def)
+install(TARGETS defwrite DESTINATION bin/thirdparty/lefdef/5.8/def)
