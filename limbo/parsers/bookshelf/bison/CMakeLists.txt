@@ -18,6 +18,9 @@ file(GLOB SOURCES
     *.cc
     )
 add_library(bookshelfparser ${SOURCES} ${BISON_BookshelfParser_OUTPUTS} ${FLEX_BookshelfLexer_OUTPUTS})
+if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+    target_compile_definitions(bookshelfparser PRIVATE DEBUG_BOOKSHELFPARSER)
+endif()
 
 install(TARGETS bookshelfparser DESTINATION lib)
 install(FILES BookshelfDataBase.h BookshelfDriver.h DESTINATION include/limbo/parsers/bookshelf/bison)

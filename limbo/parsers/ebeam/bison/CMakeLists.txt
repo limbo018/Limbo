@@ -18,6 +18,9 @@ file(GLOB SOURCES
     *.cc
     )
 add_library(ebeamparser ${SOURCES} ${BISON_EbeamParser_OUTPUTS} ${FLEX_EbeamLexer_OUTPUTS})
+if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+    target_compile_definitions(ebeamparser PRIVATE DEBUG_EBEAMPARSER)
+endif()
 
 install(TARGETS ebeamparser DESTINATION lib)
 install(FILES EbeamDataBase.h EbeamDriver.h DESTINATION include/limbo/parsers/ebeam/bison)

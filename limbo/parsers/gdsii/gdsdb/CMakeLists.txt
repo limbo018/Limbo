@@ -13,6 +13,9 @@ file(GLOB HEADERS
     )
 add_library(gdsdb STATIC ${SOURCES})
 target_compile_options(gdsdb PRIVATE "-DZLIB=1")
+if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+    target_compile_definitions(gdsdb PRIVATE DEBUG_GDSREADER DEBUG_GDSWRITER)
+endif()
 
 install(TARGETS gdsdb DESTINATION lib)
 install(FILES ${HEADERS} DESTINATION include/limbo/parsers/gdsii/gdsdb)

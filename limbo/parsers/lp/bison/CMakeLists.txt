@@ -18,6 +18,9 @@ file(GLOB SOURCES
     *.cc
     )
 add_library(lpparser ${SOURCES} ${BISON_LpParser_OUTPUTS} ${FLEX_LpLexer_OUTPUTS})
+if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+    target_compile_definitions(lpparser PRIVATE DEBUG_LPPARSER)
+endif()
 
 install(TARGETS lpparser DESTINATION lib)
 install(FILES LpDataBase.h LpDriver.h DESTINATION include/limbo/parsers/lp/bison)

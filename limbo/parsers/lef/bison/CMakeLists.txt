@@ -18,6 +18,9 @@ file(GLOB SOURCES
     *.cc
     )
 add_library(lefparser ${SOURCES} ${BISON_LefParser_OUTPUTS} ${FLEX_LefLexer_OUTPUTS})
+if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+    target_compile_definitions(lefparser PRIVATE DEBUG_LEFPARSER)
+endif()
 
 file(GLOB HEADERS
     *.hpp

@@ -18,6 +18,9 @@ file(GLOB SOURCES
     *.cc
     )
 add_library(gdfparser ${SOURCES} ${BISON_GdfParser_OUTPUTS} ${FLEX_GdfLexer_OUTPUTS})
+if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+    target_compile_definitions(gdfparser PRIVATE DEBUG_GDFPARSER)
+endif()
 
 install(TARGETS gdfparser DESTINATION lib)
 install(FILES GdfDataBase.h GdfDriver.h DESTINATION include/limbo/parsers/gdf/bison)

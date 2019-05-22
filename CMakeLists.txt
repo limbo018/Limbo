@@ -4,12 +4,13 @@ project(Limbo)
 
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}" CACHE PATH "Prefix prepended to install directories")
 
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE "Release" CACHE STRING
-        "Choose the type of build, options are: Debug Release."
-        FORCE)
-endif(NOT CMAKE_BUILD_TYPE)
+option(CMAKE_BUILD_TYPE "Choose the type of build, Debug|Release" "Release")
+string(TOUPPER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE)
 message("-- CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
+
+# packages like Csdp and SDPColoringCsdp are dependent to OPENBLAS
+option(OPENBLAS "Choose to enable OpenBLAS or not, ON|OFF" ON)
+message("-- OPENBLAS: ${OPENBLAS}")
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
