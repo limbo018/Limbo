@@ -1,3 +1,0 @@
-<map id="GdsParser::GdsDataBase" name="GdsParser::GdsDataBase">
-<area shape="rect" id="node2" href="$classGdsParser_1_1GdsDataBaseKernel.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. " alt="" coords="5,5,216,32"/>
-</map>

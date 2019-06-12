@@ -1,5 +1,0 @@
-<map id="LpParser::LpDataBase" name="LpParser::LpDataBase">
-<area shape="rect" id="node2" href="$classlimbo_1_1solvers_1_1LinearModel.html" title="model to describe an optimization problem " alt="" coords="208,5,389,47"/>
-<area shape="rect" id="node3" href="$classlimbo_1_1solvers_1_1lpmcf_1_1LpDualMcf.html" title="LP solved with min&#45;cost flow. " alt="" coords="227,71,370,112"/>
-<area shape="rect" id="node4" href="$classLpDataBase.html" title="Custom class that inheritates LpParser::LpDataBase with all the required callbacks defined..." alt="" coords="251,137,346,163"/>
-</map>

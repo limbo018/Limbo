@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -88,16 +94,16 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1algorithms_1_1EdgeLabelWriter.html">EdgeLabelWriter</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">default <a class="el" href="structlimbo_1_1algorithms_1_1EdgeLabelWriter.html" title="default EdgeLabelWriter for write_graph ">EdgeLabelWriter</a> for write_graph  <a href="structlimbo_1_1algorithms_1_1EdgeLabelWriter.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1algorithms_1_1_edge_label_writer.html">EdgeLabelWriter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">default <a class="el" href="structlimbo_1_1algorithms_1_1_edge_label_writer.html" title="default EdgeLabelWriter for write_graph ">EdgeLabelWriter</a> for write_graph  <a href="structlimbo_1_1algorithms_1_1_edge_label_writer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1algorithms_1_1max__clique__visitor__type.html">max_clique_visitor_type</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for boost::bron_kerbosch_all_cliques  <a href="structlimbo_1_1algorithms_1_1max__clique__visitor__type.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1algorithms_1_1MaxIndependentSetByMaxClique.html">MaxIndependentSetByMaxClique</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1algorithms_1_1_max_independent_set_by_max_clique.html">MaxIndependentSetByMaxClique</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1algorithms_1_1VertexLabelWriter.html">VertexLabelWriter</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">default <a class="el" href="structlimbo_1_1algorithms_1_1VertexLabelWriter.html" title="default VertexLabelWriter for write_graph ">VertexLabelWriter</a> for write_graph  <a href="structlimbo_1_1algorithms_1_1VertexLabelWriter.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1algorithms_1_1_vertex_label_writer.html">VertexLabelWriter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">default <a class="el" href="structlimbo_1_1algorithms_1_1_vertex_label_writer.html" title="default VertexLabelWriter for write_graph ">VertexLabelWriter</a> for write_graph  <a href="structlimbo_1_1algorithms_1_1_vertex_label_writer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -121,7 +127,7 @@ Functions</h2></td></tr>
 <tr class="memitem:adbeddadaaf2896c6cf254dd6b252a282"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacelimbo_1_1algorithms.html#adbeddadaaf2896c6cf254dd6b252a282">max_independent_set</a> (GraphType const &amp;g, VisitorType vis, AlgorithmType const &amp;)</td></tr>
 <tr class="separator:adbeddadaaf2896c6cf254dd6b252a282"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97d118046b971c19c5fcf93d779380d6"><td class="memTemplParams" colspan="2">template&lt;typename GraphType , typename MisVisitorType &gt; </td></tr>
-<tr class="memitem:a97d118046b971c19c5fcf93d779380d6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacelimbo_1_1algorithms.html#a97d118046b971c19c5fcf93d779380d6">max_independent_set</a> (GraphType const &amp;g, MisVisitorType vis, <a class="el" href="structlimbo_1_1algorithms_1_1MaxIndependentSetByMaxClique.html">MaxIndependentSetByMaxClique</a> const &amp;)</td></tr>
+<tr class="memitem:a97d118046b971c19c5fcf93d779380d6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacelimbo_1_1algorithms.html#a97d118046b971c19c5fcf93d779380d6">max_independent_set</a> (GraphType const &amp;g, MisVisitorType vis, <a class="el" href="structlimbo_1_1algorithms_1_1_max_independent_set_by_max_clique.html">MaxIndependentSetByMaxClique</a> const &amp;)</td></tr>
 <tr class="separator:a97d118046b971c19c5fcf93d779380d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -178,6 +184,8 @@ template&lt;typename GraphType &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="_graph_utility_8h_source.html#l00034">34</a> of file <a class="el" href="_graph_utility_8h_source.html">GraphUtility.h</a>.</p>
+
 </div>
 </div>
 <a id="a923c2eae93790c4540ebfbae6c64aef3"></a>
@@ -222,6 +230,8 @@ template&lt;typename GraphType &gt; </div>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="_graph_utility_8h_source.html#l00150">150</a> of file <a class="el" href="_graph_utility_8h_source.html">GraphUtility.h</a>.</p>
 
 </div>
 </div>
@@ -277,6 +287,8 @@ template&lt;typename GraphType &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a set of cliques with at least <em>clique_num</em> vertices </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_max_clique_8h_source.html#l00071">71</a> of file <a class="el" href="_max_clique_8h_source.html">MaxClique.h</a>.</p>
+
 </div>
 </div>
 <a id="adbeddadaaf2896c6cf254dd6b252a282"></a>
@@ -331,7 +343,7 @@ template&lt;typename GraphType , typename VisitorType , typename AlgorithmType &
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">g</td><td>graph </td></tr>
-    <tr><td class="paramname">vis</td><td>once an independent set is found, callback vis.mis(MisType const&amp;) will be called. In this way, user can choose to store all the independent sets or process one by one. Refer to <a class="el" href="structlimbo_1_1algorithms_1_1coloring_1_1LawlerChromaticNumber_1_1mis__visitor__type.html">limbo::algorithms::coloring::LawlerChromaticNumber::mis_visitor_type</a> for example. </td></tr>
+    <tr><td class="paramname">vis</td><td>once an independent set is found, callback vis.mis(MisType const&amp;) will be called. In this way, user can choose to store all the independent sets or process one by one. Refer to <a class="el" href="structlimbo_1_1algorithms_1_1coloring_1_1_lawler_chromatic_number_1_1mis__visitor__type.html">limbo::algorithms::coloring::LawlerChromaticNumber::mis_visitor_type</a> for example. </td></tr>
   </table>
   </dd>
 </dl>
@@ -364,7 +376,7 @@ template&lt;typename GraphType , typename MisVisitorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structlimbo_1_1algorithms_1_1MaxIndependentSetByMaxClique.html">MaxIndependentSetByMaxClique</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="structlimbo_1_1algorithms_1_1_max_independent_set_by_max_clique.html">MaxIndependentSetByMaxClique</a> const &amp;&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -389,10 +401,12 @@ template&lt;typename GraphType , typename MisVisitorType &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">g</td><td>graph </td></tr>
-    <tr><td class="paramname">vis</td><td>once an independent set is found, callback vis.mis(MisType const&amp;) will be called. In this way, user can choose to store all the independent sets or process one by one. Refer to <a class="el" href="structlimbo_1_1algorithms_1_1coloring_1_1LawlerChromaticNumber_1_1mis__visitor__type.html">limbo::algorithms::coloring::LawlerChromaticNumber::mis_visitor_type</a> for example. </td></tr>
+    <tr><td class="paramname">vis</td><td>once an independent set is found, callback vis.mis(MisType const&amp;) will be called. In this way, user can choose to store all the independent sets or process one by one. Refer to <a class="el" href="structlimbo_1_1algorithms_1_1coloring_1_1_lawler_chromatic_number_1_1mis__visitor__type.html">limbo::algorithms::coloring::LawlerChromaticNumber::mis_visitor_type</a> for example. </td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="_max_independent_set_8h_source.html#l00093">93</a> of file <a class="el" href="_max_independent_set_8h_source.html">MaxIndependentSet.h</a>.</p>
 
 </div>
 </div>
@@ -455,12 +469,14 @@ template&lt;typename GraphType , typename VertexLabelType , typename EdgeLabelTy
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="_graph_utility_8h_source.html#l00119">119</a> of file <a class="el" href="_graph_utility_8h_source.html">GraphUtility.h</a>.</p>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 12 2019 12:56:32 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

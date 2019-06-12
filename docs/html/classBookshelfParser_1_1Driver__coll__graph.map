@@ -1,6 +1,0 @@
-<map id="BookshelfParser::Driver" name="BookshelfParser::Driver">
-<area shape="rect" id="node2" href="$structBookshelfParser_1_1Row.html" title="placement row " alt="" coords="297,43,450,69"/>
-<area shape="rect" id="node3" href="$structBookshelfParser_1_1Item.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures. " alt="" coords="13,144,165,171"/>
-<area shape="rect" id="node7" href="$structBookshelfParser_1_1Net.html" title="net to describe interconnection of netlist " alt="" coords="300,211,447,237"/>
-<area shape="rect" id="node6" href="$classBookshelfParser_1_1BookshelfDataBase.html" title="Base class for bookshelf database. Only pure virtual functions are defined. User needs to inheritate ..." alt="" coords="281,145,465,186"/>
-</map>

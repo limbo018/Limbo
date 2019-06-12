@@ -1,5 +1,0 @@
-<map id="limbo::solvers::FeasibleSearcher&lt; T, V &gt;" name="limbo::solvers::FeasibleSearcher&lt; T, V &gt;">
-<area shape="rect" id="node2" href="$classlimbo_1_1solvers_1_1SearchByAdjustCoefficient.html" title="Heuristic to search for feasible solutions by adjusting coefficients so that some items will not be a..." alt="" coords="217,5,388,47"/>
-<area shape="rect" id="node4" href="$classlimbo_1_1solvers_1_1SearchByCombinedStrategy.html" title="Heuristic to search for feasible solutions by combined strategies. " alt="" coords="213,71,392,112"/>
-<area shape="rect" id="node3" href="$classlimbo_1_1solvers_1_1SearchByBinSmoothing.html" title="Heuristic to search for feasible solutions by smoothing dense bins. " alt="" coords="440,5,608,47"/>
-</map>

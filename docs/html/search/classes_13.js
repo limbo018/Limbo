@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xreflection',['XReflection',['../structGdsParser_1_1GdsDB_1_1ApplyCellReferenceActionDetails_1_1XReflection.html',1,'GdsParser::GdsDB::ApplyCellReferenceActionDetails']]]
+  ['xreflection',['XReflection',['../struct_gds_parser_1_1_gds_d_b_1_1_apply_cell_reference_action_details_1_1_x_reflection.html',1,'GdsParser::GdsDB::ApplyCellReferenceActionDetails']]]
 ];

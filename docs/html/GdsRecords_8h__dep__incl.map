@@ -1,9 +1,0 @@
-<map id="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/parsers/gdsii/stream/GdsRecords.h" name="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/parsers/gdsii/stream/GdsRecords.h">
-<area shape="rect" id="node2" href="$GdsReader_8h.html" title="read GDSII file " alt="" coords="271,124,445,195"/>
-<area shape="rect" id="node3" href="$GdsIO_8h.html" title="Wrapper to GDSII read and write with GDSII database GdsParser::GdsDB::GdsDB. " alt="" coords="5,361,180,432"/>
-<area shape="rect" id="node5" href="$GdsObjects_8h.html" title="Various GDSII objects and a top GDSII database. " alt="" coords="68,243,243,313"/>
-<area shape="rect" id="node6" href="$GdsObjectHelpers_8h.html" title="Various GDSII objects and a top GDSII database. " alt="" coords="267,243,449,313"/>
-<area shape="rect" id="node7" href="$GdsDriver_8h.html" title="high&#45;level wrapper for GdsReader (deprecated) " alt="" coords="473,243,648,313"/>
-<area shape="rect" id="node8" href="$test__reader_8cpp.html" title="test GdsParser::GdsReader " alt="" coords="673,243,843,313"/>
-<area shape="rect" id="node4" href="$test__gdsdb_8cpp.html" title="test GdsParser::GdsDriver " alt="" coords="7,480,178,551"/>
-</map>

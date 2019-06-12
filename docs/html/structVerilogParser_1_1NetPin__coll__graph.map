@@ -1,4 +1,0 @@
-<map id="VerilogParser::NetPin" name="VerilogParser::NetPin">
-<area shape="rect" id="node2" href="$structVerilogParser_1_1Range.html" title="range with pair of low and high values " alt="" coords="5,13,152,39"/>
-<area shape="rect" id="node3" href="$unionVerilogParser_1_1NetPin_1_1Extension.html" title="Extension to handle a net with constant values or a regular net. " alt="" coords="177,5,325,47"/>
-</map>

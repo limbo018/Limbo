@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -79,11 +85,11 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1container__traits.html">container_traits</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">type traits for containers such as vector, list, multiset  <a href="structlimbo_1_1geometry_1_1container__traits.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1container__traits_3_01std_1_1list_3_01T_01_4_01_4.html">container_traits&lt; std::list&lt; T &gt; &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">partial specialization of <a class="el" href="structlimbo_1_1geometry_1_1container__traits.html">limbo::geometry::container_traits</a> for commonly used data structures like std::list  <a href="structlimbo_1_1geometry_1_1container__traits_3_01std_1_1list_3_01T_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1container__traits_3_01std_1_1list_3_01_t_01_4_01_4.html">container_traits&lt; std::list&lt; T &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">partial specialization of <a class="el" href="structlimbo_1_1geometry_1_1container__traits.html">limbo::geometry::container_traits</a> for commonly used data structures like std::list  <a href="structlimbo_1_1geometry_1_1container__traits_3_01std_1_1list_3_01_t_01_4_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1container__traits_3_01std_1_1vector_3_01T_01_4_01_4.html">container_traits&lt; std::vector&lt; T &gt; &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">partial specialization of <a class="el" href="structlimbo_1_1geometry_1_1container__traits.html">limbo::geometry::container_traits</a> for commonly used data structures like std::vector  <a href="structlimbo_1_1geometry_1_1container__traits_3_01std_1_1vector_3_01T_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1container__traits_3_01std_1_1vector_3_01_t_01_4_01_4.html">container_traits&lt; std::vector&lt; T &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">partial specialization of <a class="el" href="structlimbo_1_1geometry_1_1container__traits.html">limbo::geometry::container_traits</a> for commonly used data structures like std::vector  <a href="structlimbo_1_1geometry_1_1container__traits_3_01std_1_1vector_3_01_t_01_4_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1coordinate__traits.html">coordinate_traits</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">type traits for coordinates  <a href="structlimbo_1_1geometry_1_1coordinate__traits.html#details">More...</a><br /></td></tr>
@@ -100,32 +106,32 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1point__traits.html">point_traits</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">type traits for point  <a href="structlimbo_1_1geometry_1_1point__traits.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1point__traits_3_01bLib_1_1bPoint_01_4.html">point_traits&lt; bLib::bPoint &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="structlimbo_1_1geometry_1_1point__traits.html">limbo::geometry::point_traits</a> for bLib::bPoint  <a href="structlimbo_1_1geometry_1_1point__traits_3_01bLib_1_1bPoint_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1point__traits_3_01b_lib_1_1b_point_01_4.html">point_traits&lt; bLib::bPoint &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="structlimbo_1_1geometry_1_1point__traits.html">limbo::geometry::point_traits</a> for bLib::bPoint  <a href="structlimbo_1_1geometry_1_1point__traits_3_01b_lib_1_1b_point_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1point__traits_3_01boost_1_1polygon_1_1point__data_3_01T_01_4_01_4.html">point_traits&lt; boost::polygon::point_data&lt; T &gt; &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="structlimbo_1_1geometry_1_1point__traits.html">limbo::geometry::point_traits</a> for boost::polygon::point_data  <a href="structlimbo_1_1geometry_1_1point__traits_3_01boost_1_1polygon_1_1point__data_3_01T_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1point__traits_3_01boost_1_1polygon_1_1point__data_3_01_t_01_4_01_4.html">point_traits&lt; boost::polygon::point_data&lt; T &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="structlimbo_1_1geometry_1_1point__traits.html">limbo::geometry::point_traits</a> for boost::polygon::point_data  <a href="structlimbo_1_1geometry_1_1point__traits_3_01boost_1_1polygon_1_1point__data_3_01_t_01_4_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1point__traits_3_01Point_01_4.html">point_traits&lt; Point &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">if your point class setting is different from that in the default <a class="el" href="structlimbo_1_1geometry_1_1point__traits.html" title="type traits for point ">point_traits</a>, please create a specialization  <a href="structlimbo_1_1geometry_1_1point__traits_3_01Point_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1point__traits_3_01_point_01_4.html">point_traits&lt; Point &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">if your point class setting is different from that in the default <a class="el" href="structlimbo_1_1geometry_1_1point__traits.html" title="type traits for point ">point_traits</a>, please create a specialization  <a href="structlimbo_1_1geometry_1_1point__traits_3_01_point_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1geometry_1_1Polygon2Rectangle.html">Polygon2Rectangle</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class implement conversion from manhattan polygon to rectangle  <a href="classlimbo_1_1geometry_1_1Polygon2Rectangle.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1geometry_1_1_polygon2_rectangle.html">Polygon2Rectangle</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class implement conversion from manhattan polygon to rectangle  <a href="classlimbo_1_1geometry_1_1_polygon2_rectangle.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1geometry_1_1Polygon2Rectangle_3_01std_1_1vector_3_01PointType_01_4_00_01std_1_1vector_3_01RectangleType_01_4_01_4.html">Polygon2Rectangle&lt; std::vector&lt; PointType &gt;, std::vector&lt; RectangleType &gt; &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class implement conversion from manhattan polygon to rectangle  <a href="classlimbo_1_1geometry_1_1Polygon2Rectangle_3_01std_1_1vector_3_01PointType_01_4_00_01std_1_1vector_3_01RectangleType_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1geometry_1_1_polygon2_rectangle_3_01std_1_1vector_3_01_point_type_01_4_00_01std_1_ebaeace44504bb05c5ee6894aa9cd42f.html">Polygon2Rectangle&lt; std::vector&lt; PointType &gt;, std::vector&lt; RectangleType &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class implement conversion from manhattan polygon to rectangle  <a href="classlimbo_1_1geometry_1_1_polygon2_rectangle_3_01std_1_1vector_3_01_point_type_01_4_00_01std_1_ebaeace44504bb05c5ee6894aa9cd42f.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1rectangle__traits.html">rectangle_traits</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">type traits for rectangle  <a href="structlimbo_1_1geometry_1_1rectangle__traits.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1rectangle__traits_3_01bLib_1_1bBox_01_4.html">rectangle_traits&lt; bLib::bBox &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="structlimbo_1_1geometry_1_1rectangle__traits.html">limbo::geometry::rectangle_traits</a> for bLib::bBox  <a href="structlimbo_1_1geometry_1_1rectangle__traits_3_01bLib_1_1bBox_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1rectangle__traits_3_01b_lib_1_1b_box_01_4.html">rectangle_traits&lt; bLib::bBox &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="structlimbo_1_1geometry_1_1rectangle__traits.html">limbo::geometry::rectangle_traits</a> for bLib::bBox  <a href="structlimbo_1_1geometry_1_1rectangle__traits_3_01b_lib_1_1b_box_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1rectangle__traits_3_01boost_1_1polygon_1_1rectangle__data_3_01T_01_4_01_4.html">rectangle_traits&lt; boost::polygon::rectangle_data&lt; T &gt; &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="structlimbo_1_1geometry_1_1rectangle__traits.html">limbo::geometry::rectangle_traits</a> for boost::polygon::rectangle_data  <a href="structlimbo_1_1geometry_1_1rectangle__traits_3_01boost_1_1polygon_1_1rectangle__data_3_01T_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1rectangle__traits_3_01boost_1_1polygon_1_1rectangle__data_3_01_t_01_4_01_4.html">rectangle_traits&lt; boost::polygon::rectangle_data&lt; T &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">specialization of <a class="el" href="structlimbo_1_1geometry_1_1rectangle__traits.html">limbo::geometry::rectangle_traits</a> for boost::polygon::rectangle_data  <a href="structlimbo_1_1geometry_1_1rectangle__traits_3_01boost_1_1polygon_1_1rectangle__data_3_01_t_01_4_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1rectangle__traits_3_01Rectangle_01_4.html">rectangle_traits&lt; Rectangle &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">if your rectangle class setting is different from that in the default <a class="el" href="structlimbo_1_1geometry_1_1point__traits.html" title="type traits for point ">point_traits</a>, please create a specialization  <a href="structlimbo_1_1geometry_1_1rectangle__traits_3_01Rectangle_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1geometry_1_1rectangle__traits_3_01_rectangle_01_4.html">rectangle_traits&lt; Rectangle &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">if your rectangle class setting is different from that in the default <a class="el" href="structlimbo_1_1geometry_1_1point__traits.html" title="type traits for point ">point_traits</a>, please create a specialization  <a href="structlimbo_1_1geometry_1_1rectangle__traits_3_01_rectangle_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
@@ -205,6 +211,8 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
+<p class="definition">Definition at line <a class="el" href="_geometry_8h_source.html#l00039">39</a> of file <a class="el" href="_geometry_8h_source.html">Geometry.h</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
@@ -241,6 +249,8 @@ template&lt;typename PointSet &gt; </div>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="_geometry_8h_source.html#l00330">330</a> of file <a class="el" href="_geometry_8h_source.html">Geometry.h</a>.</p>
 
 </div>
 </div>
@@ -317,6 +327,8 @@ template&lt;typename InputIterator , typename PointSet , typename RectSet &gt; <
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if succeed </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_polygon2_rectangle_8h_source.html#l00698">698</a> of file <a class="el" href="_polygon2_rectangle_8h_source.html">Polygon2Rectangle.h</a>.</p>
 
 </div>
 </div>
@@ -429,12 +441,14 @@ template&lt;typename InputIterator , typename PointSet , typename RectSet &gt; <
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string denoting slicing orientation </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_geometry_8h_source.html#l00051">51</a> of file <a class="el" href="_geometry_8h_source.html">Geometry.h</a>.</p>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 12 2019 12:56:32 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

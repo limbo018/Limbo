@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['verilogparser',['VerilogParser',['../namespaceVerilogParser.html',1,'']]]
+  ['verilogparser',['VerilogParser',['../namespace_verilog_parser.html',1,'']]]
 ];

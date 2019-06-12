@@ -1,7 +1,0 @@
-<map id="GdsParser::GdsDataBaseKernel" name="GdsParser::GdsDataBaseKernel">
-<area shape="rect" id="node2" href="$structEnumDataBase.html" title="test enum callbacks " alt="" coords="5,80,120,107"/>
-<area shape="rect" id="node3" href="$classGdsParser_1_1GdsDataBase.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks " alt="" coords="145,80,319,107"/>
-<area shape="rect" id="node6" href="$classGdsParser_1_1GdsDB_1_1GdsReader.html" title="read GDSII file with GDSII database GdsParser::GdsDB::GdsDB " alt="" coords="343,80,553,107"/>
-<area shape="rect" id="node4" href="$structAsciiDataBase.html" title="test ascii callbacks " alt="" coords="100,155,209,181"/>
-<area shape="rect" id="node5" href="$classGdsParser_1_1GdsDriver.html" title="High&#45;level wrapper class for GdsReader. Everything is saved in an internal data structure and users o..." alt="" coords="234,155,385,181"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="EbeamParser::Driver" name="EbeamParser::Driver">
-<area shape="rect" id="node2" href="$classEbeamParser_1_1EbeamDataBase.html" title="Base class for ebeam database. Only pure virtual functions are defined. User needs to inheritate this..." alt="" coords="283,5,491,32"/>
-<area shape="rect" id="node3" href="$structEbeamParser_1_1EbeamBoundary.html" title="describe ebeam boundary " alt="" coords="284,232,489,259"/>
-<area shape="rect" id="node4" href="$structEbeamParser_1_1Item.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures. " alt="" coords="13,197,147,224"/>
-<area shape="rect" id="node8" href="$structEbeamParser_1_1Macro.html" title="describe conflict sites for each standard cell type " alt="" coords="314,128,459,155"/>
-</map>

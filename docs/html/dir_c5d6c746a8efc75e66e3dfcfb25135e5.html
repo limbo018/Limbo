@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -66,32 +72,23 @@ $(function() {
 <div class="title">api Directory Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Directory dependency graph for api:</div>
-<div class="dyncontent">
-<div class="center"><img src="dir_c5d6c746a8efc75e66e3dfcfb25135e5_dep.png" border="0" usemap="#dir__c5d6c746a8efc75e66e3dfcfb25135e5__dep" alt="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/solvers/api"/></div>
-<map name="dir__c5d6c746a8efc75e66e3dfcfb25135e5__dep" id="dir__c5d6c746a8efc75e66e3dfcfb25135e5__dep">
-<area shape="rect" id="node1" href="dir_c5d6c746a8efc75e66e3dfcfb25135e5.html" title="api" alt="" coords="27,52,99,100"/>
-<area shape="rect" id="clust1" href="dir_24e40502ec5758438df34070c595168a.html" title="solvers" alt="" coords="16,16,109,111"/>
-</map>
-</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
 Files</h2></td></tr>
-<tr class="memitem:CsdpEasySdpApi_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CsdpEasySdpApi_8h.html">CsdpEasySdpApi.h</a> <a href="CsdpEasySdpApi_8h_source.html">[code]</a></td></tr>
-<tr class="memdesc:CsdpEasySdpApi_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">this file is a modified version of easysdp.c in Csdp package. Original version does not provide control over parameters and print level. The function <a class="el" href="namespacelimbo_1_1solvers.html#aa750e4038e98a15a46f84781218d50ba" title="API to call Csdp solver. ">limbo::solvers::easy_sdp_ext</a> passes two additional parameters for better flexibility. <br /></td></tr>
+<tr class="memitem:_csdp_easy_sdp_api_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_csdp_easy_sdp_api_8h.html">CsdpEasySdpApi.h</a> <a href="_csdp_easy_sdp_api_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:_csdp_easy_sdp_api_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">this file is a modified version of easysdp.c in Csdp package. Original version does not provide control over parameters and print level. The function <a class="el" href="namespacelimbo_1_1solvers.html#aa750e4038e98a15a46f84781218d50ba" title="API to call Csdp solver. ">limbo::solvers::easy_sdp_ext</a> passes two additional parameters for better flexibility. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:GurobiApi_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GurobiApi_8h.html">GurobiApi.h</a> <a href="GurobiApi_8h_source.html">[code]</a></td></tr>
-<tr class="memdesc:GurobiApi_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gurobi API wrapper using its C API. <br /></td></tr>
+<tr class="memitem:_gurobi_api_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gurobi_api_8h.html">GurobiApi.h</a> <a href="_gurobi_api_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:_gurobi_api_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gurobi API wrapper using its C API. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:LPSolveApi_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LPSolveApi_8h.html">LPSolveApi.h</a> <a href="LPSolveApi_8h_source.html">[code]</a></td></tr>
-<tr class="memdesc:LPSolveApi_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">lpsolve API wrapper using its C API. <br /></td></tr>
+<tr class="memitem:_l_p_solve_api_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_l_p_solve_api_8h.html">LPSolveApi.h</a> <a href="_l_p_solve_api_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:_l_p_solve_api_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">lpsolve API wrapper using its C API. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 12 2019 12:56:32 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

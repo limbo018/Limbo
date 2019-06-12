@@ -1,4 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classVerilogParser_1_1VerilogDataBase.html" title="Base class for verilog database. Only pure virtual functions are defined. User needs to inheritate th..." alt="" coords="5,5,212,32"/>
-<area shape="rect" id="node2" href="$classVerilogDataBase.html" title="Custom class that inheritates VerilogParser::VerilogDataBase with all the required callbacks defined..." alt="" coords="260,5,380,32"/>
-</map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['numerical_2eh',['Numerical.h',['../Numerical_8h.html',1,'']]]
+  ['numerical_2eh',['Numerical.h',['../_numerical_8h.html',1,'']]]
 ];

@@ -1,6 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structEbeamParser_1_1Item.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures. " alt="" coords="5,56,140,83"/>
-<area shape="rect" id="node2" href="$structEbeamParser_1_1ConfSite.html" title="describe conflict sites " alt="" coords="211,5,371,32"/>
-<area shape="rect" id="node3" href="$structEbeamParser_1_1EbeamBoundary.html" title="describe ebeam boundary " alt="" coords="188,56,393,83"/>
-<area shape="rect" id="node4" href="$structEbeamParser_1_1Macro.html" title="describe conflict sites for each standard cell type " alt="" coords="218,107,363,133"/>
-</map>

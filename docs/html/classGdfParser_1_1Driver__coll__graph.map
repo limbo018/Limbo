@@ -1,5 +1,0 @@
-<map id="GdfParser::Driver" name="GdfParser::Driver">
-<area shape="rect" id="node2" href="$classGdfParser_1_1GdfDataBase.html" title="Base class for def database. Only pure virtual functions are defined. User needs to inheritate this c..." alt="" coords="5,95,173,121"/>
-<area shape="rect" id="node4" href="$structGdfParser_1_1Cell.html" title="the whole routing layout is describe by a cell " alt="" coords="323,95,435,121"/>
-<area shape="rect" id="node5" href="$structGdfParser_1_1Item.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures. " alt="" coords="321,5,436,32"/>
-</map>

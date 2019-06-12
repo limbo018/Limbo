@@ -1,8 +1,0 @@
-<map id="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/test/algorithms/test_GraphSimplification.cpp" name="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/test/algorithms/test_GraphSimplification.cpp">
-<area shape="rect" id="node7" href="$GraphSimplification_8h.html" title="Various graph simplification techniques for graph coloring. Some of them can also be used in other ap..." alt="" coords="997,124,1163,165"/>
-<area shape="rect" id="node18" href="$AssertMsg_8h.html" title="assertion with message " alt="" coords="1231,213,1363,255"/>
-<area shape="rect" id="node26" href="$Math_8h.html" title="mathematical utilities such as abs " alt="" coords="1799,221,1929,247"/>
-<area shape="rect" id="node29" href="$GraphUtility_8h.html" title="some graph utilities such as compute complement graph and graphviz writer. " alt="" coords="627,221,829,247"/>
-<area shape="rect" id="node19" href="$Msg_8h.html" title="header to include PrintMsg.h and AssertMsg.h " alt="" coords="1231,303,1363,344"/>
-<area shape="rect" id="node20" href="$PrintMsg_8h.html" title="functions for printing messages " alt="" coords="1231,392,1363,433"/>
-</map>

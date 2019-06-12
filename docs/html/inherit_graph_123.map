@@ -1,5 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classlimbo_1_1solvers_1_1FeasibleSearcher.html" title="limbo::solvers::Feasible\lSearcher\&lt; coefficient\l_value_type, variable_value_type \&gt;" alt="" coords="5,5,232,61"/>
-<area shape="rect" id="node2" href="$classlimbo_1_1solvers_1_1SearchByAdjustCoefficient.html" title="limbo::solvers::SearchBy\lAdjustCoefficient\&lt; coefficient\l_value_type, variable_value_type \&gt;" alt="" coords="280,5,507,61"/>
-<area shape="rect" id="node3" href="$classlimbo_1_1solvers_1_1SearchByBinSmoothing.html" title="limbo::solvers::SearchBy\lBinSmoothing\&lt; coefficient\l_value_type, variable_value_type \&gt;" alt="" coords="555,5,781,61"/>
-</map>

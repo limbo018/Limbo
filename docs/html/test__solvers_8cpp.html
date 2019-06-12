@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -69,25 +75,13 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>test API of solvers in <a class="el" href="classlimbo_1_1solvers_1_1LinearModel.html">limbo::solvers::LinearModel</a>  
+<p>test API of solvers in <a class="el" href="classlimbo_1_1solvers_1_1_linear_model.html">limbo::solvers::LinearModel</a>  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;<a class="el" href="Solvers_8h_source.html">limbo/solvers/Solvers.h</a>&gt;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for test_solvers.cpp:</div>
-<div class="dyncontent">
-<div class="center"><img src="test__solvers_8cpp__incl.png" border="0" usemap="#_2home_2polaris_2yibolin_2Documents_2Projects_2tmp_2Limbo_2test_2solvers_2test__solvers_8cpp" alt=""/></div>
-<map name="_2home_2polaris_2yibolin_2Documents_2Projects_2tmp_2Limbo_2test_2solvers_2test__solvers_8cpp" id="_2home_2polaris_2yibolin_2Documents_2Projects_2tmp_2Limbo_2test_2solvers_2test__solvers_8cpp">
-<area shape="rect" id="node3" href="Solvers_8h.html" title="Basic utilities such as variables and linear expressions in solvers. " alt="" coords="719,124,877,151"/>
-<area shape="rect" id="node9" href="Msg_8h.html" title="header to include PrintMsg.h and AssertMsg.h " alt="" coords="429,199,561,240"/>
-<area shape="rect" id="node17" href="Math_8h.html" title="mathematical utilities such as abs " alt="" coords="1082,377,1213,404"/>
-<area shape="rect" id="node19" href="LpDriver_8h.html" title="Driver for Lp parser. " alt="" coords="586,199,735,240"/>
-<area shape="rect" id="node10" href="PrintMsg_8h.html" title="functions for printing messages " alt="" coords="145,288,277,329"/>
-<area shape="rect" id="node16" href="AssertMsg_8h.html" title="assertion with message " alt="" coords="429,288,561,329"/>
-<area shape="rect" id="node20" href="LpDataBase_8h.html" title="Database for Lp parser. " alt="" coords="608,295,713,322"/>
-</map>
+<code>#include &lt;<a class="el" href="_solvers_8h_source.html">limbo/solvers/Solvers.h</a>&gt;</code><br />
 </div>
-</div><table class="memberdecls">
+<p><a href="test__solvers_8cpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a1440a7779ac56f47a3f355ce4a8c7da0"><td class="memItemLeft" align="right" valign="top"><a id="a1440a7779ac56f47a3f355ce4a8c7da0"></a>
@@ -102,9 +96,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>test API of solvers in <a class="el" href="classlimbo_1_1solvers_1_1LinearModel.html">limbo::solvers::LinearModel</a> </p>
+<div class="textblock"><p>test API of solvers in <a class="el" href="classlimbo_1_1solvers_1_1_linear_model.html">limbo::solvers::LinearModel</a> </p>
 <dl class="section author"><dt>Author</dt><dd>Yibo Lin </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Feb 2017 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="test__solvers_8cpp_source.html">test_solvers.cpp</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
@@ -141,6 +137,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="test__solvers_8cpp_source.html#l00056">56</a> of file <a class="el" href="test__solvers_8cpp_source.html">test_solvers.cpp</a>.</p>
+
 </div>
 </div>
 <a id="ad8694886ff12bb963f4ecc0bdb9b4702"></a>
@@ -167,12 +165,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="test__solvers_8cpp_source.html#l00043">43</a> of file <a class="el" href="test__solvers_8cpp_source.html">test_solvers.cpp</a>.</p>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 12 2019 12:56:31 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

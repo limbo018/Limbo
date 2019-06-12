@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -86,29 +92,29 @@ Packages</h1>
 <tr>
 <th>Packages </th><th>Languages </th><th>Description  </th></tr>
 <tr>
-<td><a class="el" href="Algorithms.html">Algorithms</a> </td><td>C++ </td><td>Useful algorithms including partitioning, coloring, etc. </td></tr>
+<td><a class="el" href="_algorithms.html">Algorithms</a> </td><td>C++ </td><td>Useful algorithms including partitioning, coloring, etc. </td></tr>
 <tr>
-<td><a class="el" href="Bibtex.html">Bibtex</a> </td><td>Python </td><td>Scripts convert bibtex into various formats </td></tr>
+<td><a class="el" href="_bibtex.html">Bibtex</a> </td><td>Python </td><td>Scripts convert bibtex into various formats </td></tr>
 <tr>
-<td><a class="el" href="Containers.html">Containers</a> </td><td>C++ </td><td>Extension of contains from STL </td></tr>
+<td><a class="el" href="_containers.html">Containers</a> </td><td>C++ </td><td>Extension of contains from STL </td></tr>
 <tr>
-<td><a class="el" href="Geometry.html">Geometry</a> </td><td>C++ </td><td>Geometric utilities and algorithms such as polygon-to-rectangle conversion </td></tr>
+<td><a class="el" href="_geometry.html">Geometry</a> </td><td>C++ </td><td>Geometric utilities and algorithms such as polygon-to-rectangle conversion </td></tr>
 <tr>
-<td><a class="el" href="MakeUtils.html">MakeUtils</a> </td><td>Makefile </td><td>Makefile utilities that help find dependencies </td></tr>
+<td><a class="el" href="_make_utils.html">MakeUtils</a> </td><td>Makefile </td><td>Makefile utilities that help find dependencies </td></tr>
 <tr>
-<td><a class="el" href="Math.html">Math</a> </td><td>C++ </td><td>Extension of math functions from STL </td></tr>
+<td><a class="el" href="_math.html">Math</a> </td><td>C++ </td><td>Extension of math functions from STL </td></tr>
 <tr>
-<td><a class="el" href="Parsers.html">Parsers</a> </td><td>C++, Flex/Bison </td><td>Parsers to various formats, such as LEF/DEF, verilog, GDSII, etc. </td></tr>
+<td><a class="el" href="_parsers.html">Parsers</a> </td><td>C++, Flex/Bison </td><td>Parsers to various formats, such as LEF/DEF, verilog, GDSII, etc. </td></tr>
 <tr>
-<td><a class="el" href="Preprocessor.html">Preprocessor</a> </td><td>C++ </td><td>Macros such as assertion with message </td></tr>
+<td><a class="el" href="_preprocessor.html">Preprocessor</a> </td><td>C++ </td><td>Macros such as assertion with message </td></tr>
 <tr>
-<td><a class="el" href="ProgramOptions.html">ProgramOptions</a> </td><td>C++ </td><td>Easy API to parser command line options </td></tr>
+<td><a class="el" href="_program_options.html">ProgramOptions</a> </td><td>C++ </td><td>Easy API to parser command line options </td></tr>
 <tr>
-<td><a class="el" href="Solvers.html">Solvers</a> </td><td>C++ </td><td>Solver wrap-ups such as SDP, LP solver with min-cost flow, etc. </td></tr>
+<td><a class="el" href="_solvers.html">Solvers</a> </td><td>C++ </td><td>Solver wrap-ups such as SDP, LP solver with min-cost flow, etc. </td></tr>
 <tr>
-<td><a class="el" href="String.html">String</a> </td><td>C++ </td><td>Utilities to char and string </td></tr>
+<td><a class="el" href="_string.html">String</a> </td><td>C++ </td><td>Utilities to char and string </td></tr>
 <tr>
-<td><a class="el" href="ThirdParty.html">ThirdParty</a> </td><td>C/C++, Fortran </td><td>Third party packages required </td></tr>
+<td><a class="el" href="_third_party.html">ThirdParty</a> </td><td>C/C++, Fortran </td><td>Third party packages required </td></tr>
 </table>
 <h1><a class="anchor" id="Developers"></a>
 Developers</h1>
@@ -193,7 +199,7 @@ LICENSE</h1>
 <div class="fragment"><div class="line">The MIT License (MIT)</div><div class="line">Copyright (c) 2016 Yibo Lin &lt;yibolin@utexas.edu&gt;, University of Texas at Austin</div><div class="line"></div><div class="line">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</div><div class="line"></div><div class="line">The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</div><div class="line"></div><div class="line">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</div></div><!-- fragment --> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 12 2019 12:56:32 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

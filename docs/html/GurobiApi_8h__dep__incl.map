@@ -1,5 +1,0 @@
-<map id="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/solvers/api/GurobiApi.h" name="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/solvers/api/GurobiApi.h">
-<area shape="rect" id="node2" href="$ILPColoring_8h.html" title="coloring algorithm based on integer linear programming (ILP) with Gurobi as ILP solver. " alt="" coords="5,124,176,195"/>
-<area shape="rect" id="node4" href="$test__GurobiApi_8cpp.html" title="Test Gurobi API limbo::solvers::GurobiLinearApi. " alt="" coords="200,124,371,195"/>
-<area shape="rect" id="node3" href="$test__ILPColoring_8cpp.html" title="test ILP based coloring algorithm limbo::algorithms::coloring::ILPColoring " alt="" coords="5,243,176,313"/>
-</map>

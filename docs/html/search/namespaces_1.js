@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['defparser',['DefParser',['../namespaceDefParser.html',1,'']]]
+  ['defparser',['DefParser',['../namespace_def_parser.html',1,'']]]
 ];

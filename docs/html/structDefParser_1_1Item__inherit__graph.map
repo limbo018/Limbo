@@ -1,6 +1,0 @@
-<map id="DefParser::Item" name="DefParser::Item">
-<area shape="rect" id="node2" href="$structDefParser_1_1Component.html" title="cell in placement " alt="" coords="5,80,161,107"/>
-<area shape="rect" id="node3" href="$structDefParser_1_1Net.html" title="net to describe interconnection of netlist " alt="" coords="185,80,296,107"/>
-<area shape="rect" id="node4" href="$structDefParser_1_1Pin.html" title="pin of node/cell " alt="" coords="320,80,428,107"/>
-<area shape="rect" id="node5" href="$structDefParser_1_1Row.html" title="placement row " alt="" coords="452,80,568,107"/>
-</map>

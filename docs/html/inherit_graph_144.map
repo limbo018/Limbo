@@ -1,5 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classlimbo_1_1solvers_1_1ProblemScaler.html" title="Base class for scaling scheme with default no scaling. " alt="" coords="5,39,201,80"/>
-<area shape="rect" id="node2" href="$classlimbo_1_1solvers_1_1L2NormScaler.html" title="Scaling scheme with default L2 norm scaling. " alt="" coords="249,5,444,47"/>
-<area shape="rect" id="node3" href="$classlimbo_1_1solvers_1_1MinCoefficientScaler.html" title="Scaling scheme with minimum coefficient in an expression. " alt="" coords="249,71,444,112"/>
-</map>

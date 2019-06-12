@@ -1,3 +1,0 @@
-<map id="limbo::solvers::SubGradientDescent&lt; T &gt;" name="limbo::solvers::SubGradientDescent&lt; T &gt;">
-<area shape="rect" id="node2" href="$classlimbo_1_1solvers_1_1LagMultiplierUpdater.html" title="A base helper function object to update lagrangian multipliers using subgradient descent. All other schemes can be derived from this class. " alt="" coords="5,5,189,47"/>
-</map>

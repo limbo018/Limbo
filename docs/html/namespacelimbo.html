@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -91,11 +97,11 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1StaticAssert.html">StaticAssert</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">static assertion  <a href="structlimbo_1_1StaticAssert.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1_static_assert.html">StaticAssert</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">static assertion  <a href="structlimbo_1_1_static_assert.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1StaticAssert_3_01true_01_4.html">StaticAssert&lt; true &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization  <a href="structlimbo_1_1StaticAssert_3_01true_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1_static_assert_3_01true_01_4.html">StaticAssert&lt; true &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">template specialization  <a href="structlimbo_1_1_static_assert_3_01true_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
@@ -154,10 +160,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:aafb29a70d6eee85ebc7ffdfe4222b43e"><td class="mdescLeft">&#160;</td><td class="mdescRight">print prefix message to buffer  <a href="#aafb29a70d6eee85ebc7ffdfe4222b43e">More...</a><br /></td></tr>
 <tr class="separator:aafb29a70d6eee85ebc7ffdfe4222b43e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88090cd88eafd40cd46c270c779958d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelimbo.html#a88090cd88eafd40cd46c270c779958d1">limboPrintAssertMsg</a> (const char *expr, const char *fileName, unsigned lineNum, const char *funcName, const char *format,...)</td></tr>
-<tr class="memdesc:a88090cd88eafd40cd46c270c779958d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">print message for assertion failure with additional message, see <a class="el" href="AssertMsg_8h.html#a5e43d9f746647e2bf1154325caaaa913" title="custom assertion with message ">limboAssertMsg</a>(condition, args...)  <a href="#a88090cd88eafd40cd46c270c779958d1">More...</a><br /></td></tr>
+<tr class="memdesc:a88090cd88eafd40cd46c270c779958d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">print message for assertion failure with additional message, see <a class="el" href="_assert_msg_8h.html#a5e43d9f746647e2bf1154325caaaa913" title="custom assertion with message ">limboAssertMsg</a>(condition, args...)  <a href="#a88090cd88eafd40cd46c270c779958d1">More...</a><br /></td></tr>
 <tr class="separator:a88090cd88eafd40cd46c270c779958d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4cf7b3501bd2bd76c7165da6ee7af1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelimbo.html#ab4cf7b3501bd2bd76c7165da6ee7af1d">limboPrintAssertMsg</a> (const char *expr, const char *fileName, unsigned lineNum, const char *funcName)</td></tr>
-<tr class="memdesc:ab4cf7b3501bd2bd76c7165da6ee7af1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">print message for assertion failure without additional message, see <a class="el" href="AssertMsg_8h.html#aad1773afc93177ac77cdce82432d81f9" title="custom assertion without message ">limboAssert(condition)</a>  <a href="#ab4cf7b3501bd2bd76c7165da6ee7af1d">More...</a><br /></td></tr>
+<tr class="memdesc:ab4cf7b3501bd2bd76c7165da6ee7af1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">print message for assertion failure without additional message, see <a class="el" href="_assert_msg_8h.html#aad1773afc93177ac77cdce82432d81f9" title="custom assertion without message ">limboAssert(condition)</a>  <a href="#ab4cf7b3501bd2bd76c7165da6ee7af1d">More...</a><br /></td></tr>
 <tr class="separator:ab4cf7b3501bd2bd76c7165da6ee7af1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad28905911fb4acbd97a031fe8e64c8a2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelimbo.html#ad28905911fb4acbd97a031fe8e64c8a2">is_integer</a> (string const &amp;s)</td></tr>
 <tr class="memdesc:ad28905911fb4acbd97a031fe8e64c8a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">check whether string represents an integer  <a href="#ad28905911fb4acbd97a031fe8e64c8a2">More...</a><br /></td></tr>
@@ -330,6 +336,8 @@ template&lt;typename T &gt; </div>
 <p>generalized api can handle both integer and floating points </p>
 <dl class="section return"><dt>Returns</dt><dd>absolute value of a number </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_math_8h_source.html#l00021">21</a> of file <a class="el" href="_math_8h_source.html">Math.h</a>.</p>
+
 </div>
 </div>
 <a id="a8a7e9e872d9bdb1a39f465f4bbeabac1"></a>
@@ -384,6 +392,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="_math_8h_source.html#l00044">44</a> of file <a class="el" href="_math_8h_source.html">Math.h</a>.</p>
+
 </div>
 </div>
 <a id="a7df852268c8a2f86dc06582d80dfa5ad"></a>
@@ -418,6 +428,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the pure name of a file (no path) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_string_8h_source.html#l00127">127</a> of file <a class="el" href="_string_8h_source.html">String.h</a>.</p>
 
 </div>
 </div>
@@ -454,6 +466,8 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the relative path of a file </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_string_8h_source.html#l00118">118</a> of file <a class="el" href="_string_8h_source.html">String.h</a>.</p>
+
 </div>
 </div>
 <a id="a33f4201bab9b2d54232f1ff9c59c8fd8"></a>
@@ -489,6 +503,8 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the suffix of a file </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_string_8h_source.html#l00136">136</a> of file <a class="el" href="_string_8h_source.html">String.h</a>.</p>
+
 </div>
 </div>
 <a id="a7f24ba1f3a0ce8a2d333f17f91efbd11"></a>
@@ -523,6 +539,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the first word of a string, assume delimiter is space or tab </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_string_8h_source.html#l00154">154</a> of file <a class="el" href="_string_8h_source.html">String.h</a>.</p>
 
 </div>
 </div>
@@ -570,6 +588,8 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if s1 and s2 are equal case-insensitively </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_string_8h_source.html#l00108">108</a> of file <a class="el" href="_string_8h_source.html">String.h</a>.</p>
+
 </div>
 </div>
 <a id="ac94a9f8ab47da7a5e8eed918f46c6950"></a>
@@ -604,6 +624,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if s is an float </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_string_8h_source.html#l00041">41</a> of file <a class="el" href="_string_8h_source.html">String.h</a>.</p>
 
 </div>
 </div>
@@ -640,6 +662,8 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if s is an integer </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_string_8h_source.html#l00028">28</a> of file <a class="el" href="_string_8h_source.html">String.h</a>.</p>
+
 </div>
 </div>
 <a id="a653ed551b6caf3d19c55d5290a09c584"></a>
@@ -674,6 +698,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if s is a number </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_string_8h_source.html#l00062">62</a> of file <a class="el" href="_string_8h_source.html">String.h</a>.</p>
 
 </div>
 </div>
@@ -726,6 +752,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_print_msg_8h_source.html#l00049">49</a> of file <a class="el" href="_print_msg_8h_source.html">PrintMsg.h</a>.</p>
 
 </div>
 </div>
@@ -787,7 +815,7 @@ template&lt;typename Iterator &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>print message for assertion failure with additional message, see <a class="el" href="AssertMsg_8h.html#a5e43d9f746647e2bf1154325caaaa913" title="custom assertion with message ">limboAssertMsg</a>(condition, args...) </p>
+<p>print message for assertion failure with additional message, see <a class="el" href="_assert_msg_8h.html#a5e43d9f746647e2bf1154325caaaa913" title="custom assertion with message ">limboAssertMsg</a>(condition, args...) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">expr</td><td>assertion condition </td></tr>
@@ -799,6 +827,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_print_msg_8h_source.html#l00163">163</a> of file <a class="el" href="_print_msg_8h_source.html">PrintMsg.h</a>.</p>
 
 </div>
 </div>
@@ -848,7 +878,7 @@ template&lt;typename Iterator &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>print message for assertion failure without additional message, see <a class="el" href="AssertMsg_8h.html#aad1773afc93177ac77cdce82432d81f9" title="custom assertion without message ">limboAssert(condition)</a> </p>
+<p>print message for assertion failure without additional message, see <a class="el" href="_assert_msg_8h.html#aad1773afc93177ac77cdce82432d81f9" title="custom assertion without message ">limboAssert(condition)</a> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">expr</td><td>assertion condition </td></tr>
@@ -859,6 +889,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_print_msg_8h_source.html#l00182">182</a> of file <a class="el" href="_print_msg_8h_source.html">PrintMsg.h</a>.</p>
 
 </div>
 </div>
@@ -919,6 +951,8 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_print_msg_8h_source.html#l00064">64</a> of file <a class="el" href="_print_msg_8h_source.html">PrintMsg.h</a>.</p>
+
 </div>
 </div>
 <a id="a75ca3e6bc16ef5504e6cb88f43438829"></a>
@@ -978,6 +1012,8 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_print_msg_8h_source.html#l00101">101</a> of file <a class="el" href="_print_msg_8h_source.html">PrintMsg.h</a>.</p>
+
 </div>
 </div>
 <a id="aafb29a70d6eee85ebc7ffdfe4222b43e"></a>
@@ -1023,6 +1059,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_print_msg_8h_source.html#l00134">134</a> of file <a class="el" href="_print_msg_8h_source.html">PrintMsg.h</a>.</p>
 
 </div>
 </div>
@@ -1084,6 +1122,8 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_print_msg_8h_source.html#l00080">80</a> of file <a class="el" href="_print_msg_8h_source.html">PrintMsg.h</a>.</p>
+
 </div>
 </div>
 <a id="ad2e6c0595981e4a8c0e645ede0d7c64b"></a>
@@ -1144,6 +1184,8 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_print_msg_8h_source.html#l00117">117</a> of file <a class="el" href="_print_msg_8h_source.html">PrintMsg.h</a>.</p>
+
 </div>
 </div>
 <a id="a70f11c16058445049de838e5805c9652"></a>
@@ -1197,6 +1239,8 @@ template&lt;typename Iterator &gt; </div>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="_math_8h_source.html#l00061">61</a> of file <a class="el" href="_math_8h_source.html">Math.h</a>.</p>
 
 </div>
 </div>
@@ -1252,6 +1296,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="_math_8h_source.html#l00077">77</a> of file <a class="el" href="_math_8h_source.html">Math.h</a>.</p>
+
 </div>
 </div>
 <a id="a745249ea3313a2d10f895f6a1d1bab20"></a>
@@ -1306,6 +1352,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="_math_8h_source.html#l00031">31</a> of file <a class="el" href="_math_8h_source.html">Math.h</a>.</p>
+
 </div>
 </div>
 <a id="a310ac0314ad5ba8619b7a97d3c89d8b2"></a>
@@ -1340,6 +1388,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_to_string_8h_source.html#l00024">24</a> of file <a class="el" href="_to_string_8h_source.html">ToString.h</a>.</p>
 
 </div>
 </div>
@@ -1376,6 +1426,8 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_to_string_8h_source.html#l00033">33</a> of file <a class="el" href="_to_string_8h_source.html">ToString.h</a>.</p>
+
 </div>
 </div>
 <a id="ac942548404521f2dc9b5eb91c1db2224"></a>
@@ -1410,6 +1462,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_to_string_8h_source.html#l00042">42</a> of file <a class="el" href="_to_string_8h_source.html">ToString.h</a>.</p>
 
 </div>
 </div>
@@ -1446,6 +1500,8 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_to_string_8h_source.html#l00051">51</a> of file <a class="el" href="_to_string_8h_source.html">ToString.h</a>.</p>
+
 </div>
 </div>
 <a id="a49310acdd4e3253f9647e3a9a39c1ed7"></a>
@@ -1480,6 +1536,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_to_string_8h_source.html#l00060">60</a> of file <a class="el" href="_to_string_8h_source.html">ToString.h</a>.</p>
 
 </div>
 </div>
@@ -1516,6 +1574,8 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_to_string_8h_source.html#l00069">69</a> of file <a class="el" href="_to_string_8h_source.html">ToString.h</a>.</p>
+
 </div>
 </div>
 <a id="acac2a0ebe33d62cdcad05f8267cfa1e1"></a>
@@ -1550,6 +1610,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_to_string_8h_source.html#l00078">78</a> of file <a class="el" href="_to_string_8h_source.html">ToString.h</a>.</p>
 
 </div>
 </div>
@@ -1586,6 +1648,8 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_to_string_8h_source.html#l00088">88</a> of file <a class="el" href="_to_string_8h_source.html">ToString.h</a>.</p>
+
 </div>
 </div>
 <a id="a02fdf94db3da0c5606af3f590e0b86bc"></a>
@@ -1620,6 +1684,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_to_string_8h_source.html#l00098">98</a> of file <a class="el" href="_to_string_8h_source.html">ToString.h</a>.</p>
 
 </div>
 </div>
@@ -1656,6 +1722,8 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>lower case copy of s </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_string_8h_source.html#l00095">95</a> of file <a class="el" href="_string_8h_source.html">String.h</a>.</p>
+
 </div>
 </div>
 <a id="a66eb59b91fd8e2a1d69b6c5705acc3eb"></a>
@@ -1690,6 +1758,8 @@ template&lt;typename Iterator &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>upper case copy of s </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_string_8h_source.html#l00083">83</a> of file <a class="el" href="_string_8h_source.html">String.h</a>.</p>
 
 </div>
 </div>
@@ -1726,12 +1796,14 @@ template&lt;typename Iterator &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string without suffix of the file </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_string_8h_source.html#l00145">145</a> of file <a class="el" href="_string_8h_source.html">String.h</a>.</p>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 12 2019 12:56:32 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

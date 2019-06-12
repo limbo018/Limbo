@@ -1,4 +1,0 @@
-<map id="GdsParser::GdsDriver" name="GdsParser::GdsDriver">
-<area shape="rect" id="node2" href="$classGdsParser_1_1GdsDataBase.html" title="GdsDataBase redirects callbacks of GdsDataBaseKernel to ascii callbacks " alt="" coords="23,80,198,107"/>
-<area shape="rect" id="node3" href="$classGdsParser_1_1GdsDataBaseKernel.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. " alt="" coords="5,5,216,32"/>
-</map>
