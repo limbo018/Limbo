@@ -19,17 +19,14 @@ else (GUROBI_INCLUDE_DIR)
         PATHS "$ENV{GUROBI_HOME}/include"
         )
 
+    # hints of names from version 40 to 99
+    set(GUROBI_NAME_HINTS "")
+    foreach(GUROBI_VERSION RANGE 40 99)
+        list(APPEND GUROBI_NAME_HINTS "gurobi${GUROBI_VERSION}")
+    endforeach()
+
     find_library( GUROBI_LIBRARY 
-        NAMES gurobi
-        gurobi45
-        gurobi46
-        gurobi50 
-        gurobi51
-        gurobi52
-        gurobi55
-        gurobi56
-        gurobi60
-        gurobi65
+        NAMES ${GUROBI_NAME_HINTS}
         PATHS "$ENV{GUROBI_HOME}/lib" 
         )
 

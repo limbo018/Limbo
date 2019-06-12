@@ -1,4 +1,4 @@
-file(GLOB SRCS
+file(GLOB ORIG_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/Readme.md 
     ${CMAKE_CURRENT_SOURCE_DIR}/algorithms/* 
     ${CMAKE_CURRENT_SOURCE_DIR}/bibtex/* 
@@ -62,23 +62,28 @@ file(GLOB SRCS
     ${PROJECT_SOURCE_DIR}/test/string/*.cpp 
     ${PROJECT_SOURCE_DIR}/limbo/string/*.h
     )
-string(REPLACE ";" " " SRCS "${SRCS}")
+string(REPLACE ";" " " SRCS "${ORIG_SRCS}")
 
-file(GLOB CITE_BIB_FILES
+file(GLOB ORIG_CITE_BIB_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/ref/Top.bib
     ${CMAKE_CURRENT_SOURCE_DIR}/ref/*.bib
     )
-string(REPLACE ";" " " CITE_BIB_FILES "${CITE_BIB_FILES}")
+string(REPLACE ";" " " CITE_BIB_FILES "${ORIG_CITE_BIB_FILES}")
 
 set(doxyfile_in ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in)
 set(doxyfile ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+set(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/docs.stamp")
 
-configure_file(${doxyfile_in} ${doxyfile} @ONLY)
+configure_file(${doxyfile_in} ${doxyfile})
 
-add_custom_target(doc
+add_custom_command(OUTPUT ${OUTPUT}
     COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile}
+    COMMAND ${CMAKE_COMMAND} -E touch ${OUTPUT}
+    DEPENDS ${ORIG_SRCS} ${ORIG_CITE_BIB_FILES}
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     COMMENT "Generating API documentation with Doxygen"
-    VERBATIM)
+    )
+
+add_custom_target(doc ALL DEPENDS ${OUTPUT})
 
 install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html DESTINATION docs)

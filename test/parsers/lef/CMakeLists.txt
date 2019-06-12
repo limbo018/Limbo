@@ -16,7 +16,7 @@ if(COMPILE_DEFINITIONS)
 endif(COMPILE_DEFINITIONS)
 install(TARGETS test_lef_bison DESTINATION test/parsers/lef)
 
-add_executable(test_lef_adapt test_adapt.cpp ${PROJECT_BINARY_DIR}/limbo/parsers/lef/adapt/liblefparseradapt.a)
+add_executable(test_lef_adapt test_adapt.cpp)
 set_target_properties(test_lef_adapt PROPERTIES OUTPUT_NAME "test_adapt")
 target_link_libraries(test_lef_adapt ${PROJECT_BINARY_DIR}/limbo/parsers/lef/adapt/liblefparseradapt.a)
 add_dependencies(test_lef_adapt lefparseradapt)
