@@ -256,7 +256,7 @@ defrData::defiError(int check, int msgNum, const char* mess)
   } else if (settings->ErrorLogFunction) {
     (*(settings->ErrorLogFunction))(mess);
   } else {
-    fprintf(stderr, mess);
+    fprintf(stderr, "%s", mess);
   }
 }
 

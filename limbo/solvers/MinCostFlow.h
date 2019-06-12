@@ -88,13 +88,29 @@ class MinCostFlow
 
         /// @brief constructor 
         /// @param model pointer to the model of problem 
-        MinCostFlow(model_type* model);
+        MinCostFlow(model_type* model)
+            : m_model(model)
+              , m_graph()
+              , m_mLower(m_graph)
+              , m_mUpper(m_graph)
+              , m_mCost(m_graph)
+              , m_mSupply(m_graph)
+              , m_totalFlowCost(std::numeric_limits<typename MinCostFlow<T, V>::value_type>::max())
+              , m_mFlow(m_graph)
+              , m_mPotential(m_graph)
+        {
+        }
         /// @brief destructor 
-        ~MinCostFlow(); 
+        ~MinCostFlow()
+        {
+        }
         
         /// @brief API to run the algorithm 
         /// @param solver an object to solve min cost flow, use default updater if NULL  
-        SolverProperty operator()(solver_type* solver = NULL); 
+        SolverProperty operator()(solver_type* solver = NULL)
+        {
+            return solve(solver);
+        }
 
         /// @return graph 
         graph_type const& graph() const; 
@@ -154,28 +170,6 @@ class MinCostFlow
 		node_pot_map_type m_mPotential; ///< solution of min-cost flow, which is the dual solution of LP 
 };
 
-template <typename T, typename V>
-MinCostFlow<T, V>::MinCostFlow(typename MinCostFlow<T, V>::model_type* model)
-    : m_model(model)
-    , m_graph()
-    , m_mLower(m_graph)
-    , m_mUpper(m_graph)
-    , m_mCost(m_graph)
-    , m_mSupply(m_graph)
-    , m_totalFlowCost(std::numeric_limits<typename MinCostFlow<T, V>::value_type>::max())
-    , m_mFlow(m_graph)
-    , m_mPotential(m_graph)
-{
-}
-template <typename T, typename V>
-MinCostFlow<T, V>::~MinCostFlow() 
-{
-}
-template <typename T, typename V>
-SolverProperty MinCostFlow<T, V>::operator()(typename MinCostFlow<T, V>::solver_type* solver)
-{
-    return solve(solver);
-}
 template <typename T, typename V>
 typename MinCostFlow<T, V>::graph_type const& MinCostFlow<T, V>::graph() const 
 {

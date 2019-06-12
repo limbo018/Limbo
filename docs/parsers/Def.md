@@ -8,7 +8,7 @@ Limbo.Parsers.DefParser {#Parsers_DefParser}
 [DEF](https://en.wikipedia.org/wiki/Design_Exchange_Format) together with [LEF](https://en.wikipedia.org/wiki/Library_Exchange_Format) is a common file format in VLSI physical design. 
 Generally LEF/DEF formats are quit complicated due to the complex cases in chip design. 
 This parser is adjusted from the open source LEF parser released by [Cadence Design Systems](https://www.cadence.com) with C++ wrappers. 
-The original parsers lie in the [Thirdparty package](@ref Thirdparty).
+The original parsers lie in the [Thirdparty package](@ref ThirdParty).
 Users have to follow the [LICENSE](@ref Parsers_DefParser_License) agreement from the original release. 
 The parser does not contain full API of the original LEF/DEF parsers, but it is tested under various academic benchmarks for VLSI placement. 
 

@@ -63,16 +63,16 @@ class CycleCanceling;
 /// 3. Re-write the problem \n
 /// \f{eqnarray*}{
 /// & min. & \sum_{i=0}^{n} c_i \cdot y_i - \sum_{i,j} u_{ij} \alpha_{ij}, \textrm{ where } \
-///   c_i = \begin{cases}
+///   c_i = \left\{\begin{array}{lr}
 ///             c_i, & \forall i \in [1, n],  \\
-///             - \sum_{j=1}^{n} c_i, & i = 0, \\
-///           \end{cases} \\
+///             - \sum_{j=1}^{n} c_i, & i = 0, 
+///           \end{array}\right. \\
 /// & s.t. & y_i - y_j \ge \
-///        \begin{cases}
+///        \left\{\begin{array}{lr}
 ///            b_{ij}, & \forall (i, j) \in E, \\
 ///            d_i,  & \forall j = 0, i \in [1, n], \\
-///            -u_i, & \forall i = 0, j \in [1, n], \\
-///        \end{cases} \\
+///            -u_i, & \forall i = 0, j \in [1, n], 
+///        \end{array}\right. \\
 /// &      & y_i \textrm{ is unbounded integer}, \forall i \in [0, n], \\
 /// &      & \alpha_{ij} \ge 0, \forall (i, j) \in A.  
 /// \f}
@@ -129,13 +129,31 @@ class DualMinCostFlow
 
         /// @brief constructor 
         /// @param model pointer to the model of problem 
-        DualMinCostFlow(model_type* model);
+        DualMinCostFlow(model_type* model)
+            : m_model(model)
+              , m_graph()
+              //, m_mLower(m_graph)
+              , m_mUpper(m_graph)
+              , m_mCost(m_graph)
+              , m_mSupply(m_graph)
+              , m_totalFlowCost(std::numeric_limits<typename DualMinCostFlow<T, V>::value_type>::max())
+              , m_diffBigM(std::numeric_limits<typename DualMinCostFlow<T, V>::value_type>::max())
+              , m_boundBigM(std::numeric_limits<typename DualMinCostFlow<T, V>::value_type>::max())
+              , m_mFlow(m_graph)
+              , m_mPotential(m_graph)
+        {
+        }
         /// @brief destructor 
-        ~DualMinCostFlow(); 
+        ~DualMinCostFlow()
+        {
+        }
         
         /// @brief API to run the algorithm 
         /// @param solver an object to solve min cost flow, use default updater if NULL  
-        SolverProperty operator()(solver_type* solver = NULL); 
+        SolverProperty operator()(solver_type* solver = NULL)
+        {
+            return solve(solver);
+        }
 
         /// @return big M for differential constraints 
         value_type diffBigM() const; 
@@ -225,30 +243,6 @@ class DualMinCostFlow
 		node_pot_map_type m_mPotential; ///< dual solution of min-cost flow, which is the solution of LP 
 };
 
-template <typename T, typename V>
-DualMinCostFlow<T, V>::DualMinCostFlow(typename DualMinCostFlow<T, V>::model_type* model)
-    : m_model(model)
-    , m_graph()
-    //, m_mLower(m_graph)
-    , m_mUpper(m_graph)
-    , m_mCost(m_graph)
-    , m_mSupply(m_graph)
-    , m_totalFlowCost(std::numeric_limits<typename DualMinCostFlow<T, V>::value_type>::max())
-    , m_diffBigM(std::numeric_limits<typename DualMinCostFlow<T, V>::value_type>::max())
-    , m_boundBigM(std::numeric_limits<typename DualMinCostFlow<T, V>::value_type>::max())
-    , m_mFlow(m_graph)
-    , m_mPotential(m_graph)
-{
-}
-template <typename T, typename V>
-DualMinCostFlow<T, V>::~DualMinCostFlow() 
-{
-}
-template <typename T, typename V>
-SolverProperty DualMinCostFlow<T, V>::operator()(typename DualMinCostFlow<T, V>::solver_type* solver)
-{
-    return solve(solver);
-}
 template <typename T, typename V>
 typename DualMinCostFlow<T, V>::value_type DualMinCostFlow<T, V>::diffBigM() const
 {

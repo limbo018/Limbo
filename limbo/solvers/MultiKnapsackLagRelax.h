@@ -84,21 +84,65 @@ class MultiKnapsackLagRelax
         
         /// @brief constructor 
         /// @param model pointer to the model of problem 
-        MultiKnapsackLagRelax(model_type* model);
+        MultiKnapsackLagRelax(model_type* model)
+        {
+            // T must be a floating point number 
+            limboStaticAssert(!std::numeric_limits<T>::is_integer);
+            // V must be a floating point number 
+            //limboStaticAssert(!std::numeric_limits<V>::is_integer);
+
+            m_model = model; 
+
+            m_vObjCoef = NULL; 
+            m_constrMatrix.reset();
+            m_vConstrRhs = NULL; 
+
+            m_vGroupedVariable = NULL;
+            m_vVariableGroupBeginIndex = NULL; 
+            m_numGroups = 0; 
+
+            m_vLagMultiplier = NULL;
+            m_vNewLagMultiplier = NULL;
+            m_vSlackness = NULL;
+
+            m_objConstant = 0; 
+            m_lagObj = 0; 
+            m_lagObjFlag = false; 
+
+            m_iter = 0; 
+            m_maxIters = 1000; 
+            m_bestObj = std::numeric_limits<coefficient_value_type>::max();
+            m_useInitialSol = false; 
+        }
         /// @brief copy constructor 
         /// @param rhs right hand side 
-        MultiKnapsackLagRelax(MultiKnapsackLagRelax const& rhs);
+        MultiKnapsackLagRelax(MultiKnapsackLagRelax const& rhs)
+        {
+            copy(rhs);
+        }
         /// @brief assignment
         /// @param rhs right hand side 
-        MultiKnapsackLagRelax& operator=(MultiKnapsackLagRelax const& rhs);
+        MultiKnapsackLagRelax& operator=(MultiKnapsackLagRelax const& rhs)
+        {
+            if (this != &rhs)
+                copy(rhs);
+            return *this;
+        }
         /// @brief destructor 
-        ~MultiKnapsackLagRelax(); 
+        ~MultiKnapsackLagRelax()
+        {
+            // recycle model 
+            destroy(); 
+        }
         
         /// @brief API to run the algorithm 
         /// @param updater an object to update lagrangian multipliers, use default updater if NULL  
         /// @param scaler an object to scale constraints and objective, use default scaler if NULL 
         /// @param searcher an object to search for feasible solutions, use default searcher if NULL 
-        SolverProperty operator()(updater_type* updater = NULL, scaler_type* scaler = NULL, searcher_type* searcher = NULL); 
+        SolverProperty operator()(updater_type* updater = NULL, scaler_type* scaler = NULL, searcher_type* searcher = NULL)
+        {
+            return solve(updater, scaler, searcher);
+        }
 
         /// @return maximum iterations 
         unsigned int maxIterations() const;
@@ -284,60 +328,6 @@ class MultiKnapsackLagRelax
         friend class FeasibleSearcher<coefficient_value_type, variable_value_type>; 
 };
 
-template <typename T, typename V>
-MultiKnapsackLagRelax<T, V>::MultiKnapsackLagRelax(typename MultiKnapsackLagRelax<T, V>::model_type* model)
-{
-    // T must be a floating point number 
-    limboStaticAssert(!std::numeric_limits<T>::is_integer);
-    // V must be a floating point number 
-    //limboStaticAssert(!std::numeric_limits<V>::is_integer);
-
-    m_model = model; 
-
-    m_vObjCoef = NULL; 
-    m_constrMatrix.reset();
-    m_vConstrRhs = NULL; 
-
-    m_vGroupedVariable = NULL;
-    m_vVariableGroupBeginIndex = NULL; 
-    m_numGroups = 0; 
-
-    m_vLagMultiplier = NULL;
-    m_vNewLagMultiplier = NULL;
-    m_vSlackness = NULL;
-
-    m_objConstant = 0; 
-    m_lagObj = 0; 
-    m_lagObjFlag = false; 
-
-    m_iter = 0; 
-    m_maxIters = 1000; 
-    m_bestObj = std::numeric_limits<coefficient_value_type>::max();
-    m_useInitialSol = false; 
-}
-template <typename T, typename V>
-MultiKnapsackLagRelax<T, V>::MultiKnapsackLagRelax(MultiKnapsackLagRelax<T, V> const& rhs)
-{
-    copy(rhs);
-}
-template <typename T, typename V>
-MultiKnapsackLagRelax<T, V>& MultiKnapsackLagRelax<T, V>::operator=(MultiKnapsackLagRelax<T, V> const& rhs)
-{
-    if (this != &rhs)
-        copy(rhs);
-    return *this;
-}
-template <typename T, typename V>
-MultiKnapsackLagRelax<T, V>::~MultiKnapsackLagRelax() 
-{
-    // recycle model 
-    destroy(); 
-}
-template <typename T, typename V>
-SolverProperty MultiKnapsackLagRelax<T, V>::operator()(typename MultiKnapsackLagRelax<T, V>::updater_type* updater, typename MultiKnapsackLagRelax<T, V>::scaler_type* scaler, typename MultiKnapsackLagRelax<T, V>::searcher_type* searcher) 
-{
-    return solve(updater, scaler, searcher);
-}
 template <typename T, typename V>
 unsigned int MultiKnapsackLagRelax<T, V>::maxIterations() const 
 {

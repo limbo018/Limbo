@@ -113,16 +113,16 @@ struct hash_pair : pair<T1, T2>
 /// 3. Re-write the problem \n
 /// \f{eqnarray*}{
 /// & min. & \sum_{i=0}^{n} c_i \cdot y_i, \textrm{ where } \
-///   c_i = \begin{cases}
+///   c_i = \left\{\begin{array}{lr}
 ///             c_i, & \forall i \in [1, n],  \\
-///             - \sum_{j=1}^{n} c_i, & i = 0, \\
-///           \end{cases} \\
+///             - \sum_{j=1}^{n} c_i, & i = 0, 
+///           \end{array}\right. \\
 /// & s.t. & y_i - y_j \ge \
-///        \begin{cases}
+///        \left\{\begin{array}{lr}
 ///            b_{ij}, & \forall (i, j) \in E, \\
 ///            d_i,  & \forall j = 0, i \in [1, n], \\
-///            -u_i, & \forall i = 0, j \in [1, n], \\
-///        \end{cases} \\
+///            -u_i, & \forall i = 0, j \in [1, n], 
+///        \end{array}\right. \\
 /// &      & y_i \textrm{ is unbounded integer}, \forall i \in [0, n].  
 /// \f}
 /// \n
