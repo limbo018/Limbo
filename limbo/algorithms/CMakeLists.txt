@@ -1,19 +1,27 @@
 file(GLOB SOURCES
     *.h 
     )
-install(FILES ${SOURCES} DESTINATION include/limbo/algorithms)
+if(INSTALL_LIMBO)
+    install(FILES ${SOURCES} DESTINATION include/limbo/algorithms)
+endif(INSTALL_LIMBO)
 
 file(GLOB SOURCES
     coloring/*.h
     )
-install(FILES ${SOURCES} DESTINATION include/limbo/algorithms/coloring)
+if(INSTALL_LIMBO)
+    install(FILES ${SOURCES} DESTINATION include/limbo/algorithms/coloring)
+endif(INSTALL_LIMBO)
 
 file(GLOB SOURCES
     partition/*.h
     )
-install(FILES ${SOURCES} DESTINATION include/limbo/algorithms/partition)
+if(INSTALL_LIMBO)
+    install(FILES ${SOURCES} DESTINATION include/limbo/algorithms/partition)
+endif(INSTALL_LIMBO)
 
 file(GLOB SOURCES
     placement/*.h
     )
-install(FILES ${SOURCES} DESTINATION include/limbo/algorithms/placement)
+if(INSTALL_LIMBO)
+    install(FILES ${SOURCES} DESTINATION include/limbo/algorithms/placement)
+endif(INSTALL_LIMBO)

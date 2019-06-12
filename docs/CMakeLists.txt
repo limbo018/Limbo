@@ -86,4 +86,6 @@ add_custom_command(OUTPUT ${OUTPUT}
 
 add_custom_target(doc ALL DEPENDS ${OUTPUT})
 
-install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html DESTINATION docs)
+if(INSTALL_LIMBO)
+    install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html DESTINATION docs)
+endif(INSTALL_LIMBO)

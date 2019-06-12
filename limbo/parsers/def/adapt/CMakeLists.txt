@@ -25,5 +25,7 @@ add_custom_command(OUTPUT ${OUTPUT}
     )
 add_custom_target(defparseradapt ALL DEPENDS ${OUTPUT})
 
-install(FILES ${OUTPUT} DESTINATION lib)
-install(FILES DefDataBase.h DefDriver.h DESTINATION include/limbo/parsers/def/adapt)
+if(INSTALL_LIMBO)
+    install(FILES ${OUTPUT} DESTINATION lib)
+    install(FILES DefDataBase.h DefDriver.h DESTINATION include/limbo/parsers/def/adapt)
+endif(INSTALL_LIMBO)

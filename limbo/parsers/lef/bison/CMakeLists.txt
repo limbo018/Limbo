@@ -25,5 +25,7 @@ endif()
 file(GLOB HEADERS
     *.hpp
     )
-install(TARGETS lefparser DESTINATION lib)
-install(FILES LefDataBase.h LefDriver.h ${HEADERS} DESTINATION include/limbo/parsers/lef/bison)
+if(INSTALL_LIMBO)
+    install(TARGETS lefparser DESTINATION lib)
+    install(FILES LefDataBase.h LefDriver.h ${HEADERS} DESTINATION include/limbo/parsers/lef/bison)
+endif(INSTALL_LIMBO)

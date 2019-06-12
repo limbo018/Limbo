@@ -25,5 +25,7 @@ add_custom_command(OUTPUT ${OUTPUT}
     )
 add_custom_target(lefparseradapt ALL DEPENDS ${OUTPUT})
 
-install(FILES ${OUTPUT} DESTINATION lib)
-install(FILES LefDataBase.h LefDriver.h DESTINATION include/limbo/parsers/lef/adapt)
+if(INSTALL_LIMBO)
+    install(FILES ${OUTPUT} DESTINATION lib)
+    install(FILES LefDataBase.h LefDriver.h DESTINATION include/limbo/parsers/lef/adapt)
+endif(INSTALL_LIMBO)

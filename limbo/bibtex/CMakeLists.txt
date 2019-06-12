@@ -1,4 +1,6 @@
 file(GLOB SOURCES
     *.py
     )
-install(FILES ${SOURCES} DESTINATION include/limbo/bibtex)
+if(INSTALL_LIMBO)
+    install(FILES ${SOURCES} DESTINATION include/limbo/bibtex)
+endif(INSTALL_LIMBO)

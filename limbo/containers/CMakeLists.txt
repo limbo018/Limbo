@@ -1,4 +1,6 @@
 file(GLOB SOURCES
     *.h
     )
-install(FILES ${SOURCES} DESTINATION include/limbo/containers)
+if(INSTALL_LIMBO)
+    install(FILES ${SOURCES} DESTINATION include/limbo/containers)
+endif(INSTALL_LIMBO)

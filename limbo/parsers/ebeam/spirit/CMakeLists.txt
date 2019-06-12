@@ -1,4 +1,6 @@
 file(GLOB SOURCES
     *.h
     )
-install(FILES ${SOURCES} DESTINATION include/limbo/parsers/ebeam/spirit)
+if(INSTALL_LIMBO)
+    install(FILES ${SOURCES} DESTINATION include/limbo/parsers/ebeam/spirit)
+endif(INSTALL_LIMBO)
