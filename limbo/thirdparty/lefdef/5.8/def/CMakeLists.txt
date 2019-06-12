@@ -97,21 +97,27 @@ set(CDEF_SOURCES
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 add_library(cdef STATIC ${CDEF_SOURCES})
-install(TARGETS cdef DESTINATION lib)
+if(INSTALL_LIMBO)
+    install(TARGETS cdef DESTINATION lib)
+endif(INSTALL_LIMBO)
 
 set(DEFZLIB_SOURCES 
     defzlib/defzlib.cpp
     )
 
 add_library(defzlib STATIC ${DEFZLIB_SOURCES})
-install(TARGETS defzlib DESTINATION lib)
+if(INSTALL_LIMBO)
+    install(TARGETS defzlib DESTINATION lib)
+endif(INSTALL_LIMBO)
 
 set(CDEFZLIB_SOURCES 
     cdefzlib/cdefzlib.c
     )
 
 add_library(cdefzlib STATIC ${CDEFZLIB_SOURCES})
-install(TARGETS cdefzlib DESTINATION lib)
+if(INSTALL_LIMBO)
+    install(TARGETS cdefzlib DESTINATION lib)
+endif(INSTALL_LIMBO)
 
 set(DEFRW_SOURCES 
     defrw/defrw.cpp
@@ -119,7 +125,9 @@ set(DEFRW_SOURCES
 
 add_executable(defrw ${DEFRW_SOURCES})
 target_link_libraries(defrw def ${ZLIB_LIBRARIES})
-install(TARGETS defrw DESTINATION bin/thirdparty/lefdef/5.8/def)
+if(INSTALL_LIMBO)
+    install(TARGETS defrw DESTINATION bin/thirdparty/lefdef/5.8/def)
+endif(INSTALL_LIMBO)
 
 set(DEFDIFF_SOURCES 
     defdiff/diffDefRW.cpp
@@ -128,7 +136,9 @@ set(DEFDIFF_SOURCES
 
 add_executable(defdiff ${DEFDIFF_SOURCES})
 target_link_libraries(defdiff def ${ZLIB_LIBRARIES})
-install(TARGETS defdiff DESTINATION bin/thirdparty/lefdef/5.8/def)
+if(INSTALL_LIMBO)
+    install(TARGETS defdiff DESTINATION bin/thirdparty/lefdef/5.8/def)
+endif(INSTALL_LIMBO)
 
 set(DEFWRITE_SOURCES 
     defwrite/defwrite.cpp
@@ -137,4 +147,6 @@ set(DEFWRITE_SOURCES
 
 add_executable(defwrite ${DEFWRITE_SOURCES})
 target_link_libraries(defwrite def ${ZLIB_LIBRARIES})
-install(TARGETS defwrite DESTINATION bin/thirdparty/lefdef/5.8/def)
+if(INSTALL_LIMBO)
+    install(TARGETS defwrite DESTINATION bin/thirdparty/lefdef/5.8/def)
+endif(INSTALL_LIMBO)
