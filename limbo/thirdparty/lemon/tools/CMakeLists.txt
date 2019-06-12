@@ -16,6 +16,7 @@ TARGET_LINK_LIBRARIES(dimacs-to-lgf lemon)
 ADD_EXECUTABLE(dimacs-solver dimacs-solver.cc)
 TARGET_LINK_LIBRARIES(dimacs-solver lemon)
 
+if(INSTALL_LIMBO)
 INSTALL(
   TARGETS lgf-gen dimacs-to-lgf dimacs-solver
   RUNTIME DESTINATION bin
@@ -29,3 +30,4 @@ IF(NOT WIN32)
     COMPONENT bin
   )
 ENDIF()
+endif(INSTALL_LIMBO)
