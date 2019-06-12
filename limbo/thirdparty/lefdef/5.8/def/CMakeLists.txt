@@ -60,8 +60,10 @@ BISON_TARGET(DefParser def/def.y ${CMAKE_CURRENT_BINARY_DIR}/def.tab.cpp
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 add_library(def STATIC ${DEF_SOURCES} ${BISON_DefParser_OUTPUTS})
-install(TARGETS def DESTINATION lib)
-install(FILES ${DEF_HEADERS} DESTINATION include/limbo/thirdparty/lefdef/5.8/def/def)
+if(INSTALL_LIMBO)
+    install(TARGETS def DESTINATION lib)
+    install(FILES ${DEF_HEADERS} DESTINATION include/limbo/thirdparty/lefdef/5.8/def/def)
+endif(INSTALL_LIMBO)
 
 set(CDEF_SOURCES 
     cdef/xdefiAssertion.cpp
