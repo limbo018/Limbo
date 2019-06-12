@@ -1,0 +1,8 @@
+<map id="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/parsers/gdsii/gdsdb/GdsIO.h" name="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/parsers/gdsii/gdsdb/GdsIO.h">
+<area shape="rect" id="node4" href="$GdsReader_8h.html" title="read GDSII file " alt="" coords="1043,213,1189,255"/>
+<area shape="rect" id="node14" href="$GdsWriter_8h.html" title="write GDSII file " alt="" coords="507,124,647,165"/>
+<area shape="rect" id="node24" href="$GdsObjects_8h.html" title="Various GDSII objects and a top GDSII database. " alt="" coords="1231,124,1377,165"/>
+<area shape="rect" id="node8" href="$GdsRecords_8h.html" title="enum of GDSII records and data types " alt="" coords="1241,303,1396,344"/>
+<area shape="rect" id="node9" href="$String_8h.html" title="Check string is integer, floating point, number... Convert string to upper/lower cases. " alt="" coords="908,310,1047,337"/>
+<area shape="rect" id="node12" href="$ToString_8h.html" title="convert metadata type to string " alt="" coords="786,392,939,419"/>
+</map>

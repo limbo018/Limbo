@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classGdfParser_1_1GdfDataBase.html" title="Base class for def database. Only pure virtual functions are defined. User needs to inheritate this c..." alt="" coords="5,5,173,32"/>
+<area shape="rect" id="node2" href="$classGdfDataBase.html" title="Custom class that inheritates GdfParser::GdfDataBase with all the required callbacks gdfined..." alt="" coords="221,5,323,32"/>
+</map>

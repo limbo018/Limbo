@@ -1,0 +1,13 @@
+<map id="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/test/algorithms/test_LPColoring.cpp" name="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/test/algorithms/test_LPColoring.cpp">
+<area shape="rect" id="node9" href="$ChromaticNumber_8h.html" title="return chromatic number of a graph " alt="" coords="398,124,565,165"/>
+<area shape="rect" id="node21" href="$GreedyColoring_8h.html" title="coloring a graph with saturation degree based heuristics " alt="" coords="519,213,686,255"/>
+<area shape="rect" id="node22" href="$LPColoring_8h.html" title="coloring algorithm based on iterative linear programming (LP) and rounding " alt="" coords="1566,124,1733,165"/>
+<area shape="rect" id="node14" href="$MaxIndependentSet_8h.html" title="solve maximum independent sets with maximum cliques " alt="" coords="30,213,247,255"/>
+<area shape="rect" id="node17" href="$GraphUtility_8h.html" title="some graph utilities such as compute complement graph and graphviz writer. " alt="" coords="1273,310,1474,337"/>
+<area shape="rect" id="node32" href="$String_8h.html" title="Check string is integer, floating point, number... Convert string to upper/lower cases. " alt="" coords="2356,221,2495,247"/>
+<area shape="rect" id="node36" href="$Coloring_8h.html" title="base class for all graph coloring algorithms " alt="" coords="1730,213,1897,255"/>
+<area shape="rect" id="node34" href="$ToString_8h.html" title="convert metadata type to string " alt="" coords="2671,310,2825,337"/>
+<area shape="rect" id="node38" href="$AssertMsg_8h.html" title="assertion with message " alt="" coords="1117,303,1249,344"/>
+<area shape="rect" id="node39" href="$Msg_8h.html" title="header to include PrintMsg.h and AssertMsg.h " alt="" coords="1117,392,1249,433"/>
+<area shape="rect" id="node40" href="$PrintMsg_8h.html" title="functions for printing messages " alt="" coords="2141,481,2273,523"/>
+</map>

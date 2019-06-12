@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ilpcoloring_2eh',['ILPColoring.h',['../a00318.html',1,'']]],
-  ['ilpcoloringlemoncbc_2eh',['ILPColoringLemonCbc.h',['../a00319.html',1,'']]]
+  ['ilpcoloring_2eh',['ILPColoring.h',['../ILPColoring_8h.html',1,'']]],
+  ['ilpcoloringlemoncbc_2eh',['ILPColoringLemonCbc.h',['../ILPColoringLemonCbc_8h.html',1,'']]]
 ];

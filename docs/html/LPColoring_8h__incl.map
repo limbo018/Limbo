@@ -1,0 +1,9 @@
+<map id="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/algorithms/coloring/LPColoring.h" name="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/algorithms/coloring/LPColoring.h">
+<area shape="rect" id="node16" href="$String_8h.html" title="Check string is integer, floating point, number... Convert string to upper/lower cases. " alt="" coords="195,131,334,158"/>
+<area shape="rect" id="node21" href="$Coloring_8h.html" title="base class for all graph coloring algorithms " alt="" coords="911,124,1077,165"/>
+<area shape="rect" id="node19" href="$ToString_8h.html" title="convert metadata type to string " alt="" coords="5,221,159,247"/>
+<area shape="rect" id="node25" href="$AssertMsg_8h.html" title="assertion with message " alt="" coords="1309,213,1441,255"/>
+<area shape="rect" id="node31" href="$GraphUtility_8h.html" title="some graph utilities such as compute complement graph and graphviz writer. " alt="" coords="1032,221,1233,247"/>
+<area shape="rect" id="node26" href="$Msg_8h.html" title="header to include PrintMsg.h and AssertMsg.h " alt="" coords="1340,303,1472,344"/>
+<area shape="rect" id="node27" href="$PrintMsg_8h.html" title="functions for printing messages " alt="" coords="559,392,691,433"/>
+</map>

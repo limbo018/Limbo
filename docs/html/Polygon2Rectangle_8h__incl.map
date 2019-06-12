@@ -1,0 +1,9 @@
+<map id="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/geometry/Polygon2Rectangle.h" name="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/geometry/Polygon2Rectangle.h">
+<area shape="rect" id="node11" href="$Geometry_8h.html" title="Contains utilities for geometric types, such as type traits, area calculator. I&#39;m trying to make thes..." alt="" coords="848,131,1031,158"/>
+<area shape="rect" id="node13" href="$String_8h.html" title="Check string is integer, floating point, number... Convert string to upper/lower cases. " alt="" coords="174,131,313,158"/>
+<area shape="rect" id="node18" href="$AssertMsg_8h.html" title="assertion with message " alt="" coords="388,124,520,165"/>
+<area shape="rect" id="node25" href="$Polygon2RectangleVec_8h.html" title="a template specialization for std::vector. It is more efficient than generic version ..." alt="" coords="544,124,772,165"/>
+<area shape="rect" id="node15" href="$ToString_8h.html" title="convert metadata type to string " alt="" coords="71,221,224,247"/>
+<area shape="rect" id="node19" href="$Msg_8h.html" title="header to include PrintMsg.h and AssertMsg.h " alt="" coords="431,213,563,255"/>
+<area shape="rect" id="node20" href="$PrintMsg_8h.html" title="functions for printing messages " alt="" coords="376,303,508,344"/>
+</map>

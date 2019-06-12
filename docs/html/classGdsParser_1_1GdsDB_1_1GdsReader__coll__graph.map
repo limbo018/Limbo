@@ -1,0 +1,5 @@
+<map id="GdsParser::GdsDB::GdsReader" name="GdsParser::GdsDB::GdsReader">
+<area shape="rect" id="node2" href="$classGdsParser_1_1GdsDataBaseKernel.html" title="Kernel callbacks for GdsReader. These callbacks use enum for record_type and data_type, which is faster than ascii callbacks. " alt="" coords="5,111,216,137"/>
+<area shape="rect" id="node3" href="$classGdsParser_1_1GdsDB_1_1GdsDB.html" title="GdsParser::GdsDB::GdsDB" alt="" coords="240,111,427,137"/>
+<area shape="rect" id="node4" href="$classGdsParser_1_1GdsDB_1_1GdsObject.html" title="GdsParser::GdsDB::GdsObject" alt="" coords="217,5,423,32"/>
+</map>

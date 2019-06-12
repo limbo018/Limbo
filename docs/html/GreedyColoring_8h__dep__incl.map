@@ -1,0 +1,7 @@
+<map id="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/algorithms/coloring/GreedyColoring.h" name="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/algorithms/coloring/GreedyColoring.h">
+<area shape="rect" id="node2" href="$BacktrackColoring_8h.html" title="graph coloring by backtracking " alt="" coords="5,124,199,195"/>
+<area shape="rect" id="node5" href="$test__ChromaticNumber_8cpp.html" title="test chromatic number algorithm " alt="" coords="223,124,410,195"/>
+<area shape="rect" id="node6" href="$test__LPColoring_8cpp.html" title="test LP based coloring algorithm limbo::algorithms::coloring::LPColoring " alt="" coords="434,124,605,195"/>
+<area shape="rect" id="node3" href="$SDPColoringCsdp_8h.html" title="graph coloring algorithm based on semidefinite programming (SDP) " alt="" coords="5,243,199,313"/>
+<area shape="rect" id="node4" href="$test__SDPColoring_8cpp.html" title="test SDP coloring algorithm " alt="" coords="17,361,187,432"/>
+</map>

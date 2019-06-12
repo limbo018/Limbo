@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classEbeamParser_1_1EbeamDataBase.html" title="Base class for ebeam database. Only pure virtual functions are defined. User needs to inheritate this..." alt="" coords="5,5,213,32"/>
+<area shape="rect" id="node2" href="$classEbeamDataBase.html" title="Custom class that inheritates EbeamParser::EbeamDataBase with all the required callbacks defined..." alt="" coords="261,5,383,32"/>
+</map>

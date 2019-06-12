@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classBookshelfParser_1_1BookshelfDataBase.html" title="Base class for bookshelf database. Only pure virtual functions are defined. User needs to inheritate ..." alt="" coords="5,5,189,47"/>
+<area shape="rect" id="node2" href="$classBookshelfDataBase.html" title="Custom class that inheritates BookshelfParser::BookshelfDataBase with all the required callbacks defi..." alt="" coords="237,13,376,39"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/parsers/gdsii/gdsdb/GdsObjectHelpers.h" name="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/parsers/gdsii/gdsdb/GdsObjectHelpers.h">
+<area shape="rect" id="node4" href="$GdsReader_8h.html" title="read GDSII file " alt="" coords="297,124,444,165"/>
+<area shape="rect" id="node15" href="$GdsWriter_8h.html" title="write GDSII file " alt="" coords="822,124,962,165"/>
+<area shape="rect" id="node26" href="$Msg_8h.html" title="header to include PrintMsg.h and AssertMsg.h " alt="" coords="1496,124,1628,165"/>
+<area shape="rect" id="node8" href="$GdsRecords_8h.html" title="enum of GDSII records and data types " alt="" coords="122,213,277,255"/>
+<area shape="rect" id="node9" href="$String_8h.html" title="Check string is integer, floating point, number... Convert string to upper/lower cases. " alt="" coords="301,221,440,247"/>
+<area shape="rect" id="node12" href="$ToString_8h.html" title="convert metadata type to string " alt="" coords="386,303,539,329"/>
+<area shape="rect" id="node27" href="$PrintMsg_8h.html" title="functions for printing messages " alt="" coords="1652,213,1784,255"/>
+<area shape="rect" id="node32" href="$AssertMsg_8h.html" title="assertion with message " alt="" coords="1496,213,1628,255"/>
+</map>

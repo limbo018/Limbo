@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classlimbo_1_1solvers_1_1lpmcf_1_1Lgf.html" title="solve network flow graph with min&#45;cost flow " alt="" coords="11,5,154,47"/>
+<area shape="rect" id="node2" href="$classlimbo_1_1solvers_1_1lpmcf_1_1LpDualMcf.html" title="LP solved with min&#45;cost flow. " alt="" coords="227,5,370,47"/>
+<area shape="rect" id="node3" href="$classLpParser_1_1LpDataBase.html" title="Base class for lp database. Only pure virtual functions are defined. User needs to inheritate this cl..." alt="" coords="5,78,160,105"/>
+<area shape="rect" id="node4" href="$classlimbo_1_1solvers_1_1LinearModel.html" title="model to describe an optimization problem " alt="" coords="208,71,389,112"/>
+<area shape="rect" id="node5" href="$classLpDataBase.html" title="Custom class that inheritates LpParser::LpDataBase with all the required callbacks defined..." alt="" coords="251,137,346,163"/>
+</map>

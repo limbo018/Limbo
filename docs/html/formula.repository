@@ -1,0 +1,68 @@
+\form#0:\begin{eqnarray*} & min. & C X, \\ & s.t. & x_{ii} = 1, \forall i \in V, \\ & & x_{ij} \ge -0.5, \forall (i, j) \in E, \\ & & X \succeq 0, \textrm{(PSD)}. \end{eqnarray*}
+\form#1:\begin{eqnarray*} & min. & \sum_{i=1}^{n} c_i \cdot x_i - \sum_{i,j} u_{ij} \alpha_{ij}, \\ & s.t. & x_i - x_j - \alpha_{ij} \ge b_{ij}, \forall (i, j) \in E, \\ & & d_i \le x_i \le u_i, \forall i \in [1, n], \\ & & \alpha_{ij} \ge 0, \forall (i, j) \in A. \end{eqnarray*}
+\form#2:$y_i$
+\form#3:$[0, n]$
+\form#4:$x_i = y_i - y_0$
+\form#5:\begin{eqnarray*} & min. & \sum_{i=1}^{n} c_i \cdot (y_i-y_0) - \sum_{i,j} u_{ij} \alpha_{ij}, \\ & s.t. & y_i - y_j -\alpha_{ij} \ge b_{ij}, \forall (i, j) \in E \\ & & d_i \le y_i - y_0 - \alpha_{ij} \le u_i, \forall i \in [1, n], \\ & & y_i \textrm{ is unbounded integer}, \forall i \in [0, n], \\ & & \alpha_{ij} \ge 0, \forall (i, j) \in A. \end{eqnarray*}
+\form#6:\begin{eqnarray*} & min. & \sum_{i=0}^{n} c_i \cdot y_i - \sum_{i,j} u_{ij} \alpha_{ij}, \textrm{ where } \ c_i = \left\{\begin{array}{lr} c_i, & \forall i \in [1, n], \\ - \sum_{j=1}^{n} c_i, & i = 0, \end{array}\right. \\ & s.t. & y_i - y_j \ge \ \left\{\begin{array}{lr} b_{ij}, & \forall (i, j) \in E, \\ d_i, & \forall j = 0, i \in [1, n], \\ -u_i, & \forall i = 0, j \in [1, n], \end{array}\right. \\ & & y_i \textrm{ is unbounded integer}, \forall i \in [0, n], \\ & & \alpha_{ij} \ge 0, \forall (i, j) \in A. \end{eqnarray*}
+\form#7:$c'_i$
+\form#8:$c_i$
+\form#9:$b'_{ij}$
+\form#10:$b_{ij}$
+\form#11:$(i, j) \in E'$
+\form#12:$-b'_{ij}$
+\form#13:$[0, u_{ij}]$
+\form#14:$\alpha_{ij}$
+\form#15:$u_{ij}$
+\form#16:$\infty$
+\form#17:$f_{ij}^*$
+\form#18:$(i, j)$
+\form#19:$c_{ij}^\pi$
+\form#20:$c_{ij}^\pi > 0$
+\form#21:$f_{ij}^* = 0$
+\form#22:$ 0 < f_{ij}^* < u_{ij} $
+\form#23:$ c_{ij}^\pi = 0 $
+\form#24:$c_{ij}^\pi < 0$
+\form#25:$f_{ij}^* = u_{ij}$
+\form#26:$ x_i - x_j \ge c_{ij} $
+\form#27:$ x_i $
+\form#28:$ x_j $
+\form#29:\begin{eqnarray*} & min. & \sum_{i, j \in E} c_{ij} \cdot x_{ij}, \\ & s.t. & l_{ij} \le x_{ij} \le u_{ij}, \forall (i, j) \in E, \\ & & \sum_{j \in V} x_{ij} = s_i, \forall i \ne t, \in V, \\ & & x_{ij} = -x_{ji}, \forall (i, j) \in E. (implicit) \end{eqnarray*}
+\form#30:$C$
+\form#31:$B$
+\form#32:$x_{ij}$
+\form#33:$i$
+\form#34:$j$
+\form#35:$P$
+\form#36:\begin{eqnarray*} & min. & \sum_{i,j} c_{ij} \cdot x_{ij}, \\ & s.t. & \sum_{i} a_i x_{ij} \le b_j, \forall j \in B, \\ & & \sum_{j} x_{ij} = 1, \forall i \in C, \\ & & x_{ij} \in \{0, 1\}, \forall i \in C, j \in B. \end{eqnarray*}
+\form#37:$L$
+\form#38:\begin{eqnarray*} & min. & \sum_{i,j} c_{ij} \cdot x_{ij} + \sum_{j} \lambda_j (\sum_{i} a_i x_{ij} - b_j), \\ & s.t. & \sum_{j} x_{ij} = 1, \forall i \in C, \\ & & x_{ij} \in \{0, 1\}, \forall i \in C, j \in B. \end{eqnarray*}
+\form#39:$b-Ax$
+\form#40:$A$
+\form#41:$b$
+\form#42:$ b-Ax $
+\form#43:$ Ax \le b $
+\form#44:$ t_k = \beta \cdot k^{-\alpha} $
+\form#45:$ y = a \cdot x+y $
+\form#46:$ y = a A x + y $
+\form#47:$ y = a A^T x + y $
+\form#48:$ x^T y $
+\form#49:\begin{eqnarray*} & min. & \sum_{i=1}^{n} c_i \cdot x_i, \\ & s.t. & x_i - x_j \ge b_{ij}, \forall (i, j) \in E, \\ & & d_i \le x_i \le u_i, \forall i \in [1, n]. \end{eqnarray*}
+\form#50:\begin{eqnarray*} & min. & \sum_{i=1}^{n} c_i \cdot (y_i-y_0), \\ & s.t. & y_i - y_j \ge b_{ij}, \forall (i, j) \in E \\ & & d_i \le y_i - y_0 \le u_i, \forall i \in [1, n], \\ & & y_i \textrm{ is unbounded integer}, \forall i \in [0, n]. \end{eqnarray*}
+\form#51:\begin{eqnarray*} & min. & \sum_{i=0}^{n} c_i \cdot y_i, \textrm{ where } \ c_i = \left\{\begin{array}{lr} c_i, & \forall i \in [1, n], \\ - \sum_{j=1}^{n} c_i, & i = 0, \end{array}\right. \\ & s.t. & y_i - y_j \ge \ \left\{\begin{array}{lr} b_{ij}, & \forall (i, j) \in E, \\ d_i, & \forall j = 0, i \in [1, n], \\ -u_i, & \forall i = 0, j \in [1, n], \end{array}\right. \\ & & y_i \textrm{ is unbounded integer}, \forall i \in [0, n]. \end{eqnarray*}
+\form#52:$[0, \infty]$
+\form#53:$x_i$
+\form#54:$l_i \le x_i \le u_i$
+\form#55:$st$
+\form#56:$x_i - x_j \ge c_{ij}$
+\form#57:$x_i \rightarrow x_j, \textrm{cost} = -c_{ij}$
+\form#58:$2^{32 \times \frac{3}{4}}$
+\form#59:$2^{64 \times \frac{3}{4}}$
+\form#60:$-\infty \le x_i \le \infty$
+\form#61:$l_i$
+\form#62:$u_i$
+\form#63:$x_j$
+\form#64:$c_{ij}$
+\form#65:$(l_i, u_i)$
+\form#66:$x_i \rightarrow x_j$
+\form#67:\begin{eqnarray*} & min. & x_1 + x_2 + x_3 + x_4, \\ & s.t. & x_1 - x_2 \ge 0.5, \\ & & x_4 - x_3 \ge 0.1, \\ & & x_2 - x_3 \ge 0.2. \end{eqnarray*}

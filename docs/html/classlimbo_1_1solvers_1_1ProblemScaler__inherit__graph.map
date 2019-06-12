@@ -1,0 +1,4 @@
+<map id="limbo::solvers::ProblemScaler&lt; T, V &gt;" name="limbo::solvers::ProblemScaler&lt; T, V &gt;">
+<area shape="rect" id="node2" href="$classlimbo_1_1solvers_1_1L2NormScaler.html" title="Scaling scheme with default L2 norm scaling. " alt="" coords="5,95,200,136"/>
+<area shape="rect" id="node3" href="$classlimbo_1_1solvers_1_1MinCoefficientScaler.html" title="Scaling scheme with minimum coefficient in an expression. " alt="" coords="224,95,419,136"/>
+</map>

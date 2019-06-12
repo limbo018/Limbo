@@ -1,0 +1,13 @@
+<map id="limbo::solvers::SearchByCombinedStrategy&lt; T, V &gt;" name="limbo::solvers::SearchByCombinedStrategy&lt; T, V &gt;">
+<area shape="rect" id="node2" href="$classlimbo_1_1solvers_1_1FeasibleSearcher.html" title="Base heuristic to search for feasible solutions. " alt="" coords="1067,79,1227,121"/>
+<area shape="rect" id="node3" href="$classlimbo_1_1solvers_1_1Variable.html" title="limbo::solvers::Variable\l\&lt; coefficient_value_type \&gt;" alt="" coords="341,27,517,69"/>
+<area shape="rect" id="node8" href="$classlimbo_1_1solvers_1_1MultiKnapsackLagRelax.html" title="Solve multiple knapsack problem with lagrangian relaxation. " alt="" coords="693,107,891,149"/>
+<area shape="rect" id="node11" href="$classlimbo_1_1solvers_1_1FeasibleSearcher.html" title="limbo::solvers::Feasible\lSearcher\&lt; coefficient\l_value_type, variable_value_type \&gt;" alt="" coords="1033,195,1260,251"/>
+<area shape="rect" id="node4" href="$classlimbo_1_1solvers_1_1LinearModel.html" title="model to describe an optimization problem " alt="" coords="339,197,520,238"/>
+<area shape="rect" id="node5" href="$classLpParser_1_1LpDataBase.html" title="Base class for lp database. Only pure virtual functions are defined. User needs to inheritate this cl..." alt="" coords="33,175,188,201"/>
+<area shape="rect" id="node6" href="$classlimbo_1_1solvers_1_1LinearExpression.html" title="limbo::solvers::LinearExpression\l\&lt; coefficient_value_type \&gt;" alt="" coords="5,226,216,267"/>
+<area shape="rect" id="node7" href="$structlimbo_1_1solvers_1_1MatrixCSR.html" title="Compressed sparse row (CSR) matrix. " alt="" coords="704,237,880,278"/>
+<area shape="rect" id="node9" href="$structlimbo_1_1solvers_1_1MatrixCSR.html" title="limbo::solvers::MatrixCSR\l\&lt; coefficient_value_type,\l int, 1 \&gt;" alt="" coords="341,100,517,156"/>
+<area shape="rect" id="node10" href="$classlimbo_1_1solvers_1_1SearchByAdjustCoefficient.html" title="limbo::solvers::SearchBy\lAdjustCoefficient\&lt; coefficient\l_value_type, variable_value_type \&gt;" alt="" coords="1309,195,1536,251"/>
+<area shape="rect" id="node12" href="$classlimbo_1_1solvers_1_1SearchByBinSmoothing.html" title="limbo::solvers::SearchBy\lBinSmoothing\&lt; coefficient\l_value_type, variable_value_type \&gt;" alt="" coords="1585,200,1812,256"/>
+</map>

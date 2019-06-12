@@ -1,0 +1,6 @@
+<map id="limbo::solvers::MinCostFlowSolver&lt; T, V &gt;" name="limbo::solvers::MinCostFlowSolver&lt; T, V &gt;">
+<area shape="rect" id="node2" href="$classlimbo_1_1solvers_1_1CapacityScaling.html" title="Capacity scaling algorithm for min&#45;cost flow. " alt="" coords="263,5,426,47"/>
+<area shape="rect" id="node3" href="$classlimbo_1_1solvers_1_1CostScaling.html" title="Cost scaling algorithm for min&#45;cost flow. " alt="" coords="253,71,436,112"/>
+<area shape="rect" id="node4" href="$classlimbo_1_1solvers_1_1CycleCanceling.html" title="Cycle canceling algorithm for min&#45;cost flow. " alt="" coords="243,136,446,177"/>
+<area shape="rect" id="node5" href="$classlimbo_1_1solvers_1_1NetworkSimplex.html" title="Network simplex algorithm for min&#45;cost flow. " alt="" coords="241,201,448,243"/>
+</map>

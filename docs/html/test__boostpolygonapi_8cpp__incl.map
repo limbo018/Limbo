@@ -1,0 +1,12 @@
+<map id="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/test/geometry/test_boostpolygonapi.cpp" name="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/test/geometry/test_boostpolygonapi.cpp">
+<area shape="rect" id="node8" href="$Polygon2Rectangle_8h.html" title="a generic implementation of polygon&#45;to&#45;rectangle conversion " alt="" coords="940,131,1179,158"/>
+<area shape="rect" id="node29" href="$BoostPolygonApi_8h.html" title="Geometry traits for Boost.Polygon, include this file when you use Boost.Polygon geometric types..." alt="" coords="1585,124,1723,165"/>
+<area shape="rect" id="node30" href="$GeoBoostPolygonApi_8h.html" title="this file extracts polygon&#45;to&#45;rectangle conversion for Boost.Polygon API. " alt="" coords="1949,124,2111,165"/>
+<area shape="rect" id="node14" href="$Geometry_8h.html" title="Contains utilities for geometric types, such as type traits, area calculator. I&#39;m trying to make thes..." alt="" coords="1563,221,1745,247"/>
+<area shape="rect" id="node16" href="$String_8h.html" title="Check string is integer, floating point, number... Convert string to upper/lower cases. " alt="" coords="706,221,845,247"/>
+<area shape="rect" id="node21" href="$AssertMsg_8h.html" title="assertion with message " alt="" coords="5,213,137,255"/>
+<area shape="rect" id="node28" href="$Polygon2RectangleVec_8h.html" title="a template specialization for std::vector. It is more efficient than generic version ..." alt="" coords="869,213,1097,255"/>
+<area shape="rect" id="node18" href="$ToString_8h.html" title="convert metadata type to string " alt="" coords="699,310,852,337"/>
+<area shape="rect" id="node22" href="$Msg_8h.html" title="header to include PrintMsg.h and AssertMsg.h " alt="" coords="5,303,137,344"/>
+<area shape="rect" id="node23" href="$PrintMsg_8h.html" title="functions for printing messages " alt="" coords="111,392,243,433"/>
+</map>

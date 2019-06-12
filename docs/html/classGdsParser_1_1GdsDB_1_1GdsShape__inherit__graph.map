@@ -1,0 +1,7 @@
+<map id="GdsParser::GdsDB::GdsShape" name="GdsParser::GdsDB::GdsShape">
+<area shape="rect" id="node3" href="$classGdsParser_1_1GdsDB_1_1GdsPath.html" title="GdsParser::GdsDB::GdsPath" alt="" coords="527,5,721,32"/>
+<area shape="rect" id="node4" href="$classGdsParser_1_1GdsDB_1_1GdsPolygon.html" title="GdsParser::GdsDB::GdsPolygon" alt="" coords="517,56,731,83"/>
+<area shape="rect" id="node5" href="$classGdsParser_1_1GdsDB_1_1GdsRectangle.html" title="GdsParser::GdsDB::GdsRectangle" alt="" coords="511,107,737,133"/>
+<area shape="rect" id="node6" href="$classGdsParser_1_1GdsDB_1_1GdsText.html" title="GdsParser::GdsDB::GdsText" alt="" coords="527,157,721,184"/>
+<area shape="rect" id="node2" href="$classGdsParser_1_1GdsDB_1_1GdsObject.html" title="GdsParser::GdsDB::GdsObject" alt="" coords="5,81,211,108"/>
+</map>

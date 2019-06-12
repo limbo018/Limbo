@@ -1,0 +1,4 @@
+<map id="limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;" name="limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;">
+<area shape="rect" id="node2" href="$classlimbo_1_1solvers_1_1SearchByAdjustCoefficient.html" title="Heuristic to search for feasible solutions by adjusting coefficients so that some items will not be a..." alt="" coords="5,95,176,136"/>
+<area shape="rect" id="node3" href="$classlimbo_1_1solvers_1_1FeasibleSearcher.html" title="Base heuristic to search for feasible solutions. " alt="" coords="11,5,171,47"/>
+</map>

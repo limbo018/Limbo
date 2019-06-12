@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$structBookshelfParser_1_1Item.html" title="Temporary data structures to hold parsed data. Base class for all temporary data structures. " alt="" coords="5,56,157,83"/>
+<area shape="rect" id="node2" href="$structBookshelfParser_1_1Net.html" title="net to describe interconnection of netlist " alt="" coords="215,5,362,32"/>
+<area shape="rect" id="node3" href="$structBookshelfParser_1_1NetPin.html" title="describe a pin of a net " alt="" coords="205,56,372,83"/>
+<area shape="rect" id="node4" href="$structBookshelfParser_1_1Row.html" title="placement row " alt="" coords="212,107,365,133"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="limbo::solvers::MultiKnapsackLagRelax&lt; T, V &gt;" name="limbo::solvers::MultiKnapsackLagRelax&lt; T, V &gt;">
+<area shape="rect" id="node2" href="$classlimbo_1_1solvers_1_1Variable.html" title="limbo::solvers::Variable\l\&lt; coefficient_value_type \&gt;" alt="" coords="341,5,517,47"/>
+<area shape="rect" id="node3" href="$structlimbo_1_1solvers_1_1MatrixCSR.html" title="limbo::solvers::MatrixCSR\l\&lt; coefficient_value_type,\l int, 1 \&gt;" alt="" coords="341,71,517,127"/>
+<area shape="rect" id="node4" href="$classlimbo_1_1solvers_1_1LinearModel.html" title="model to describe an optimization problem " alt="" coords="339,152,520,193"/>
+<area shape="rect" id="node5" href="$classLpParser_1_1LpDataBase.html" title="Base class for lp database. Only pure virtual functions are defined. User needs to inheritate this cl..." alt="" coords="33,130,188,157"/>
+<area shape="rect" id="node6" href="$classlimbo_1_1solvers_1_1LinearExpression.html" title="limbo::solvers::LinearExpression\l\&lt; coefficient_value_type \&gt;" alt="" coords="5,181,216,223"/>
+</map>

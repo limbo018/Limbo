@@ -1,0 +1,8 @@
+<map id="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/algorithms/coloring/BacktrackColoring.h" name="/home/polaris/yibolin/Documents/Projects/tmp/Limbo/limbo/algorithms/coloring/BacktrackColoring.h">
+<area shape="rect" id="node2" href="$Coloring_8h.html" title="base class for all graph coloring algorithms " alt="" coords="913,124,1080,165"/>
+<area shape="rect" id="node24" href="$GreedyColoring_8h.html" title="coloring a graph with saturation degree based heuristics " alt="" coords="303,213,469,255"/>
+<area shape="rect" id="node10" href="$AssertMsg_8h.html" title="assertion with message " alt="" coords="147,213,279,255"/>
+<area shape="rect" id="node19" href="$GraphUtility_8h.html" title="some graph utilities such as compute complement graph and graphviz writer. " alt="" coords="1277,221,1479,247"/>
+<area shape="rect" id="node12" href="$Msg_8h.html" title="header to include PrintMsg.h and AssertMsg.h " alt="" coords="147,303,279,344"/>
+<area shape="rect" id="node13" href="$PrintMsg_8h.html" title="functions for printing messages " alt="" coords="147,392,279,433"/>
+</map>
