@@ -69,10 +69,12 @@ struct NetPin
     std::string net; ///< net name, reserved names VerilogParser::CONSTANT_NET, VerilogParser::GROUP_NETS 
     std::string pin; ///< pin name 
     Range range; ///< range of net 
+
+    /// @brief Extension to handle a net with constant values or a regular net 
     union Extension {
         int constant; ///< constant value if the net is a constant 
         std::vector<GeneralName>* vNetName; ///< a group of net names if the net is a group of nets 
-    } extension;
+    } extension; ///< extension to handle a net with constant values or a regular net 
 
     /// @brief constructor 
     /// @param n net name
@@ -132,7 +134,7 @@ struct NetPin
     }
 
     /// @brief copy function 
-    /// @param right hand side 
+    /// @param rhs right hand side 
     void copy(NetPin const& rhs)
     {
         if (net == "VerilogParser::GROUP_NETS")

@@ -36,6 +36,7 @@ class LpDataBase : public LpParser::LpDataBase
 			cout << l << " <= " << vname << " <= " << r << endl;
 		}
         /// @brief add constraint that \a terms \a compare \a constant. 
+        /// @param cname name of the constraint 
         /// @param terms array of terms in left hand side 
         /// @param compare operator '<', '>', '='
         /// @param constant constant in the right hand side 

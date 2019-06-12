@@ -23,6 +23,11 @@ find_package(ZLIB REQUIRED)
 find_package(Boost 1.55.0 REQUIRED COMPONENTS iostreams chrono timer unit_test_framework graph regex)
 find_package(Gurobi)
 find_package(LpSolve)
+find_package(Doxygen)
 
 add_subdirectory(limbo)
 add_subdirectory(test)
+
+if (DOXYGEN_FOUND)
+    add_subdirectory(docs)
+endif(DOXYGEN_FOUND)

@@ -92,57 +92,23 @@ Users need to make sure they are properly installed and the corresponding settin
 
 * In the directory of limbo library, run 
 ~~~~~~~~~~~~~~~~
+mkdir build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=absolute/path/to/your/installation
 make
-make doc (optional)                       # generate documentation 
-make test (optional)                      # build test programs 
-make install PREFIX=an_absolute_path
+make install 
 ~~~~~~~~~~~~~~~~
 
-
-The default installation path is the same as building path. 
-Please do not set PREFIX with a relative path. 
 After installation, it is strongly recommended to export LIMBO_DIR to the path where Limbo library is installed as an environment variable. 
 
-## 2. Customize CXX, CC and FC options 
-
-* CXX sets the compiler for C++ and CC sets the compiler for C. FC sets the fortran compiler which is only needed by some third party packages like OpenBLAS. 
-Some examples are as follows, 
-~~~~~~~~~~~~~~~~
-make CXX=g++ CC=gcc FC=gfortran (default for Linux)
-make CXX=clang++ CC=clang FC=gfortran (default for Mac/Darwin)
-~~~~~~~~~~~~~~~~
-
-
-## 3. Customize CXXSTDLIB and CXXSTD options
-
-* CXXSTDLIB is used to control -stdlib=xxx under clang++, and CXXSTD is used to control -std=xxx in most compilers. 
-
-Under clang, following combinations are valid, 
-~~~~~~~~~~~~~~~~
-make CXXSTDLIB="-stdlib=libstdc++" CXXSTD="-std=c++98" (default)
-make CXXSTDLIB="-stdlib=libc++" CXXSTD="-std=c++98"
-make CXXSTDLIB="-stdlib=libc++" CXXSTD="-std=c++11"
-~~~~~~~~~~~~~~~~
-
-
-Under gcc, there is no -stdlib option, so following combinations are valid, 
-~~~~~~~~~~~~~~~~
-make CXXSTD="-std=c++98" (default)
-make CXXSTD="-std=c++11"
-~~~~~~~~~~~~~~~~
-
-
-Users must make sure the setting is consistent to dependent libraries during compilation, such as Boost, Lemon, etc. 
-For example, if Boost is compiled with "clang++ -stdlib=libstdc++ -std=c++98", the same setting should be used for components dependent to Boost. 
-
-## 4. Customize OPENBLAS options 
+## 2. Customize OPENBLAS options 
 
 * There is a third party OpenBLAS required by some other third party packages, such as Csdp. OPENBLAS option is used to control whether compiling these packages. 
 
-If you do not need these packages, set OPENBLAS=0 (default); 
-otherwise, set OPENBLAS=1.
+If you do not need these packages, set -DOPENBLAS=0 (default); 
+otherwise, set -DOPENBLAS=1.
 The default version of OpenBLAS is not very stable for cross platforms, which often results in compiling errors. 
-OpenBLAS is integrated as a submodule which fetch source code from remote repository, so it is always up-to-date version. 
+OpenBLAS is integrated as a submodule which fetch source code from remote repository. 
 If you already have OpenBLAS in the directory, simply run "git submodule update" to fetch the latest version in the submodule directory. 
 
 # FAQ {#FAQ}

@@ -124,13 +124,168 @@ class LPSolveLinearApi
         
         /// @brief constructor 
         /// @param model pointer to the model of problem 
-        LPSolveLinearApi(model_type* model);
+        LPSolveLinearApi(model_type* model)
+            : m_model(model)
+              , m_lpModel(NULL)
+        {
+        }
         /// @brief destructor 
-        ~LPSolveLinearApi(); 
+        ~LPSolveLinearApi()
+        {
+        }
         
         /// @brief API to run the algorithm 
         /// @param param set additional parameters, use default if NULL 
-        SolverProperty operator()(parameter_type* param = NULL); 
+        SolverProperty operator()(parameter_type* param = NULL)
+        {
+            bool defaultParam = false; 
+            if (param == NULL)
+            {
+                param = new LPSolveParameters;
+                defaultParam = true; 
+            }
+
+            // column indices 
+            std::vector<int> vIdx; 
+            // coefficients  
+            std::vector<double> vValue; 
+            // buffer for name 
+            char buf[64]; 
+
+            m_lpModel = make_lp(m_model->constraints().size(), m_model->numVariables()); 
+
+            set_lp_name(m_lpModel, (char*)"LPSolveLinearApi");
+            // set verbose level 
+            set_verbose(m_lpModel, SEVERE);
+
+            // create variables 
+            for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
+            {
+                variable_type var (i);
+                limboAssertMsg(set_bounds(m_lpModel, i+1, m_model->variableLowerBound(var), m_model->variableUpperBound(var)), "failed to set bounds of variable for LP");
+                sprintf(buf, "%s", m_model->variableName(var).c_str());
+                limboAssertMsg(set_col_name(m_lpModel, i+1, buf), "failed to set name of variable %s", m_model->variableName(var).c_str());
+                switch (m_model->variableNumericType(var))
+                {
+                    case CONTINUOUS:
+                        break; 
+                    case BINARY: 
+                        limboAssertMsg(set_binary(m_lpModel, i+1, TRUE), "failed to set binary variable for LP"); 
+                        break;
+                    case INTEGER:
+                        limboAssertMsg(set_int(m_lpModel, i+1, TRUE), "failed to set integer variable for LP"); 
+                        break;
+                    default:
+                        limboAssertMsg(0, "unknown numeric type");
+                }
+            }
+
+            // create objective 
+            vIdx.clear(); 
+            vValue.clear();
+            for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
+            {
+                vIdx.push_back(it->variable().id()+1); // variable id starts from 1 for LPSolve
+                vValue.push_back(it->coefficient());
+            }
+            limboAssertMsg(set_obj_fnex(m_lpModel, vIdx.size(), &vValue[0], &vIdx[0]), "failed to set objective for LP"); 
+            if (m_model->optimizeType() == MIN)
+            {
+                set_minim(m_lpModel); 
+            }
+            else 
+            {
+                set_maxim(m_lpModel); 
+            }
+
+            // create constraints 
+            for (unsigned int i = 0, ie = m_model->constraints().size(); i < ie; ++i)
+            {
+                constraint_type const& constr = m_model->constraints().at(i);
+
+                vIdx.clear(); 
+                vValue.clear();
+                for (typename std::vector<term_type>::const_iterator it = constr.expression().terms().begin(), ite = constr.expression().terms().end(); it != ite; ++it)
+                {
+                    vIdx.push_back(it->variable().id()+1); // variable id starts from 1 for LPSolve
+                    vValue.push_back(it->coefficient());
+                }
+
+                limboAssertMsg(set_rowex(m_lpModel, i+1, vIdx.size(), &vValue[0], &vIdx[0]), "failed to set constraint for LP");
+                switch (constr.sense())
+                {
+                    case '>':
+                        limboAssertMsg(set_constr_type(m_lpModel, i+1, GE), "failed to set constraint type for LP");
+                        break;
+                    case '<':
+                        limboAssertMsg(set_constr_type(m_lpModel, i+1, LE), "failed to set constraint type for LP");
+                        break;
+                    case '=':
+                        limboAssertMsg(set_constr_type(m_lpModel, i+1, EQ), "failed to set constraint type for LP");
+                        break;
+                    default:
+                        limboAssertMsg(0, "unknown sense");
+                }
+                limboAssertMsg(set_rh(m_lpModel, i+1, constr.rightHandSide()), "failed to set constraint right-hand side for LP"); 
+                sprintf(buf, "%s", m_model->constraintName(constr).c_str());
+                limboAssertMsg(set_row_name(m_lpModel, i+1, buf), "failed to set constraint name %s for LP", m_model->constraintName(constr).c_str()); 
+            }
+
+            // solve LP 
+#ifdef DEBUG_LPSOLVEAPI
+            write_lp(m_lpModel, (char*)"problem.lp"); 
+#endif
+            set_scaling(m_lpModel, SCALE_RANGE); 
+            // call parameter setting before optimization 
+            param->operator()(m_lpModel); 
+            int status = solve(m_lpModel); 
+
+            // apply solution 
+            for (unsigned int i = 0; i < m_model->numVariables(); ++i)
+            {
+                REAL value = get_var_primalresult(m_lpModel, m_model->constraints().size()+1+i);
+                m_model->setVariableSolution(m_model->variable(i), value);
+            }
+
+#ifdef DEBUG_LPSOLVEAPI
+            std::vector<REAL> vSol (1+m_model->constraints().size()+m_model->numVariables()); 
+            limboAssertMsg(get_primal_solution(m_lpModel, &vSol[0]), "failed to get_primal_solution for LP");
+            std::ofstream out ("problem.sol"); 
+            limboAssertMsg(out.good(), "failed to open %s for write", "problem.sol"); 
+            out << "# Solution for model " << get_lp_name(m_lpModel) << "\n"; 
+            out << "# Objective value = " << get_objective(m_lpModel) << "\n"; 
+            for (unsigned int i = 0; i < m_model->numVariables(); ++i)
+            {
+                out << get_col_name(m_lpModel, i+1) << " " << vSol[1+m_model->constraints().size()+i] << "\n";
+            }
+            out.close();
+#endif
+
+            if (defaultParam)
+                delete param; 
+            delete_lp(m_lpModel); 
+
+            return getSolveStatus(status);
+            //switch (status)
+            //{
+            //    case 0: // OPTIMAL 
+            //    case 8: // PRESOLVED 
+            //        return OPTIMAL;
+            //    case 1: // SUBOPTIMAL 
+            //    case 6: // USERABORT 
+            //    case 7: // TIMEOUT 
+            //        return SUBOPTIMAL; 
+            //    case 2: // INFEASIBLE
+            //    case 4: // DEGENERATE 
+            //    case 5: // NUMFAILURE, numerical failure 
+            //    case 25: // NUMFAILURE, accuracy error encountered 
+            //        return INFEASIBLE;
+            //    case 3: // UNBOUNDED
+            //        return UNBOUNDED;
+            //    default:
+            //        limboAssertMsg(0, "unknown status %d", status);
+            //}
+        }
     protected:
         /// @brief copy constructor, forbidden 
         /// @param rhs right hand side 
@@ -142,168 +297,6 @@ class LPSolveLinearApi
         model_type* m_model; ///< model for the problem 
         lprec* m_lpModel; ///< model for LPSolve 
 };
-
-template <typename T, typename V>
-LPSolveLinearApi<T, V>::LPSolveLinearApi(LPSolveLinearApi<T, V>::model_type* model)
-    : m_model(model)
-    , m_lpModel(NULL)
-{
-}
-template <typename T, typename V>
-LPSolveLinearApi<T, V>::~LPSolveLinearApi()
-{
-}
-template <typename T, typename V>
-SolverProperty LPSolveLinearApi<T, V>::operator()(LPSolveLinearApi<T, V>::parameter_type* param)
-{
-    bool defaultParam = false; 
-    if (param == NULL)
-    {
-        param = new LPSolveParameters;
-        defaultParam = true; 
-    }
-
-    // column indices 
-    std::vector<int> vIdx; 
-    // coefficients  
-    std::vector<double> vValue; 
-    // buffer for name 
-    char buf[64]; 
-
-    m_lpModel = make_lp(m_model->constraints().size(), m_model->numVariables()); 
-
-	set_lp_name(m_lpModel, (char*)"LPSolveLinearApi");
-	// set verbose level 
-	set_verbose(m_lpModel, SEVERE);
-
-    // create variables 
-    for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
-    {
-        variable_type var (i);
-        limboAssertMsg(set_bounds(m_lpModel, i+1, m_model->variableLowerBound(var), m_model->variableUpperBound(var)), "failed to set bounds of variable for LP");
-        sprintf(buf, "%s", m_model->variableName(var).c_str());
-		limboAssertMsg(set_col_name(m_lpModel, i+1, buf), "failed to set name of variable %s", m_model->variableName(var).c_str());
-        switch (m_model->variableNumericType(var))
-        {
-            case CONTINUOUS:
-                break; 
-            case BINARY: 
-                limboAssertMsg(set_binary(m_lpModel, i+1, TRUE), "failed to set binary variable for LP"); 
-                break;
-            case INTEGER:
-                limboAssertMsg(set_int(m_lpModel, i+1, TRUE), "failed to set integer variable for LP"); 
-                break;
-            default:
-                limboAssertMsg(0, "unknown numeric type");
-        }
-    }
-
-    // create objective 
-    vIdx.clear(); 
-    vValue.clear();
-    for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
-    {
-        vIdx.push_back(it->variable().id()+1); // variable id starts from 1 for LPSolve
-        vValue.push_back(it->coefficient());
-    }
-	limboAssertMsg(set_obj_fnex(m_lpModel, vIdx.size(), &vValue[0], &vIdx[0]), "failed to set objective for LP"); 
-    if (m_model->optimizeType() == MIN)
-    {
-        set_minim(m_lpModel); 
-    }
-    else 
-    {
-        set_maxim(m_lpModel); 
-    }
-
-    // create constraints 
-    for (unsigned int i = 0, ie = m_model->constraints().size(); i < ie; ++i)
-    {
-        constraint_type const& constr = m_model->constraints().at(i);
-
-        vIdx.clear(); 
-        vValue.clear();
-        for (typename std::vector<term_type>::const_iterator it = constr.expression().terms().begin(), ite = constr.expression().terms().end(); it != ite; ++it)
-        {
-            vIdx.push_back(it->variable().id()+1); // variable id starts from 1 for LPSolve
-            vValue.push_back(it->coefficient());
-        }
-
-        limboAssertMsg(set_rowex(m_lpModel, i+1, vIdx.size(), &vValue[0], &vIdx[0]), "failed to set constraint for LP");
-        switch (constr.sense())
-        {
-            case '>':
-                limboAssertMsg(set_constr_type(m_lpModel, i+1, GE), "failed to set constraint type for LP");
-                break;
-            case '<':
-                limboAssertMsg(set_constr_type(m_lpModel, i+1, LE), "failed to set constraint type for LP");
-                break;
-            case '=':
-                limboAssertMsg(set_constr_type(m_lpModel, i+1, EQ), "failed to set constraint type for LP");
-                break;
-            default:
-                limboAssertMsg(0, "unknown sense");
-        }
-        limboAssertMsg(set_rh(m_lpModel, i+1, constr.rightHandSide()), "failed to set constraint right-hand side for LP"); 
-        sprintf(buf, "%s", m_model->constraintName(constr).c_str());
-        limboAssertMsg(set_row_name(m_lpModel, i+1, buf), "failed to set constraint name %s for LP", m_model->constraintName(constr).c_str()); 
-    }
-
-    // solve LP 
-#ifdef DEBUG_LPSOLVEAPI
-    write_lp(m_lpModel, (char*)"problem.lp"); 
-#endif
-    set_scaling(m_lpModel, SCALE_RANGE); 
-    // call parameter setting before optimization 
-    param->operator()(m_lpModel); 
-    int status = solve(m_lpModel); 
-
-    // apply solution 
-    for (unsigned int i = 0; i < m_model->numVariables(); ++i)
-    {
-        REAL value = get_var_primalresult(m_lpModel, m_model->constraints().size()+1+i);
-        m_model->setVariableSolution(m_model->variable(i), value);
-    }
-
-#ifdef DEBUG_LPSOLVEAPI
-    std::vector<REAL> vSol (1+m_model->constraints().size()+m_model->numVariables()); 
-    limboAssertMsg(get_primal_solution(m_lpModel, &vSol[0]), "failed to get_primal_solution for LP");
-    std::ofstream out ("problem.sol"); 
-    limboAssertMsg(out.good(), "failed to open %s for write", "problem.sol"); 
-    out << "# Solution for model " << get_lp_name(m_lpModel) << "\n"; 
-    out << "# Objective value = " << get_objective(m_lpModel) << "\n"; 
-    for (unsigned int i = 0; i < m_model->numVariables(); ++i)
-    {
-        out << get_col_name(m_lpModel, i+1) << " " << vSol[1+m_model->constraints().size()+i] << "\n";
-    }
-    out.close();
-#endif
-
-    if (defaultParam)
-        delete param; 
-    delete_lp(m_lpModel); 
-
-    return getSolveStatus(status);
-    //switch (status)
-    //{
-    //    case 0: // OPTIMAL 
-    //    case 8: // PRESOLVED 
-    //        return OPTIMAL;
-    //    case 1: // SUBOPTIMAL 
-    //    case 6: // USERABORT 
-    //    case 7: // TIMEOUT 
-    //        return SUBOPTIMAL; 
-    //    case 2: // INFEASIBLE
-    //    case 4: // DEGENERATE 
-    //    case 5: // NUMFAILURE, numerical failure 
-    //    case 25: // NUMFAILURE, accuracy error encountered 
-    //        return INFEASIBLE;
-    //    case 3: // UNBOUNDED
-    //        return UNBOUNDED;
-    //    default:
-    //        limboAssertMsg(0, "unknown status %d", status);
-    //}
-}
 
 } // namespace solvers
 } // namespace limbo
