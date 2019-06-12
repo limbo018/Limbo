@@ -170,14 +170,21 @@ general_name_array: NAME {
             $$ = $1;
         }
 
+/*
 param1: NAME {delete $1;}
       | NAME range {delete $1; delete $2;} 
       ;
+*/
 
 /* wire_pin_cbk will be called before module_instance_cbk */
 param2: '.' NAME '(' NAME ')' {driver.wire_pin_cbk(*$4, *$2); delete $2; delete $4;}
       | '.' NAME '(' NAME range ')' {driver.wire_pin_cbk(*$4, *$2, *$5); delete $2; delete $4; delete $5;}
       | '.' NAME '(' ')' {delete $2;} /* allow floating pin */
+      | '.' NAME '(' BIT_MASK ')' {driver.wire_pin_cbk($4.bits, $4.value, *$2); delete $2;} 
+      | '.' NAME '(' OCT_MASK ')' {driver.wire_pin_cbk($4.bits, $4.value, *$2); delete $2;} 
+      | '.' NAME '(' DEC_MASK ')' {driver.wire_pin_cbk($4.bits, $4.value, *$2); delete $2;} 
+      | '.' NAME '(' HEX_MASK ')' {driver.wire_pin_cbk($4.bits, $4.value, *$2); delete $2;} 
+      | '.' NAME '(' '{' general_name_array '}' ')' {driver.wire_pin_cbk(*$5, *$2); delete $2; delete $5;} 
       ;
 
 param3: INPUT general_name_array {driver.pin_declare_cbk(*$2, kINPUT); delete $2;}
@@ -202,17 +209,21 @@ param5: WIRE general_name_array {driver.wire_declare_cbk(*$2); delete $2;}
       | WIRE range general_name_array {driver.wire_declare_cbk(*$3, *$2); delete $2; delete $3;}
       ;
 
-
+/*
 module_param: param1 
             | param3
       ;
+*/
 
-module_params: /* empty */
+/*
+module_params: 
              | module_param 
              | module_params ',' module_param 
              ;
+*/
 
-module_declare: MODULE NAME '(' module_params ')' ';' {delete $2;}
+module_declare: MODULE NAME '(' /* empty */ ')' ';' {driver.module_name_cbk(*$2, GeneralNameArray()); delete $2;} 
+              | MODULE NAME '(' general_name_array ')' ';' {driver.module_name_cbk(*$2, *$4); delete $2; delete $4;} 
               ;
 
 variable_declare: param3 ';'

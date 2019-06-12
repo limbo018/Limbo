@@ -26,9 +26,24 @@ class VerilogDataBase : public VerilogParser::VerilogDataBase
 			cout << "VerilogDataBase::" << __func__ << endl;
 		}
 		//////////////////// required callbacks from abstract VerilogParser::VerilogDataBase ///////////////////
+        /// @brief read a module declaration 
+        ///
+        /// module NOR2_X1 ( a, b, c );
+        ///
+        /// @param module_name name of a module 
+        /// @param vPinName array of pins 
+        virtual void verilog_module_declaration_cbk(std::string const& module_name, std::vector<VerilogParser::GeneralName> const& vPinName)
+        {
+            cout << __func__ << " => " << module_name << "\n";
+            for (std::vector<VerilogParser::GeneralName>::const_iterator it = vPinName.begin(); it != vPinName.end(); ++it)
+                cout << "\t" << it->name << "[" << it->range.low << ":" << it->range.high << "] ";
+            cout << endl; 
+        }
         /// @brief read an instance. 
         /// 
         /// NOR2_X1 u2 ( .a(n1), .b(n3), .o(n2) );
+        /// NOR2_X1 u2 ( .a(n1), .b({n3, n4}), .o(n2) );
+        /// NOR2_X1 u2 ( .a(n1), .b(1'b0), .o(n2) );
         /// 
         /// @param macro_name standard cell type or module name 
         /// @param inst_name instance name 
@@ -37,7 +52,25 @@ class VerilogDataBase : public VerilogParser::VerilogDataBase
         {
 			cout << __func__ << " => " << macro_name << ", " << inst_name << ", ";
             for (std::vector<VerilogParser::NetPin>::const_iterator it = vNetPin.begin(); it != vNetPin.end(); ++it)
-                cout << it->pin << "(" << it->net << ")" << "[" << it->range.low << ":" << it->range.high << "] ";
+            {
+                if (it->net == "VerilogParser::CONSTANT_NET")
+                {
+                    cout << it->pin << "(" << it->net << " " << it->extension.constant << ")" << "[" << it->range.low << ":" << it->range.high << "] ";
+                }
+                else if (it->net == "VerilogParser::GROUP_NETS")
+                {
+                    cout << it->pin << "(" << it->net << " {";
+                    for (std::vector<VerilogParser::GeneralName>::const_iterator itn = it->extension.vNetName->begin(); itn != it->extension.vNetName->end(); ++itn)
+                    {
+                        cout << "(" << itn->name << ")" << "[" << itn->range.low << ":" << itn->range.high << "] ";
+                    }
+                    cout << "} " << ")" << "[" << it->range.low << ":" << it->range.high << "] ";
+                }
+                else 
+                {
+                    cout << it->pin << "(" << it->net << ")" << "[" << it->range.low << ":" << it->range.high << "] ";
+                }
+            }
             cout << endl;
         }
         /// @brief read an net declaration 

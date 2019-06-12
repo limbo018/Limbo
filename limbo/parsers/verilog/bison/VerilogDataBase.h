@@ -60,16 +60,24 @@ struct GeneralName
 /// @brief Describe the connection of pins to nets. 
 /// 
 /// NOR2_X1 u2 ( .a(n1), .b(n3), .o(n2) );
+/// NOR2_X1 u2 ( .a(1'b1), .b(n3), .o(n2) ); // constant net 
+/// NOR2_X1 u2 ( .a(n1), .b({n3, n4}), .o(n2) ); // group nets 
 ///
 /// Each of .a(n1), .b(n3) and .o(n2) generates an object of net and pin. 
 struct NetPin
 {
-    std::string net; ///< net name 
+    std::string net; ///< net name, reserved names VerilogParser::CONSTANT_NET, VerilogParser::GROUP_NETS 
     std::string pin; ///< pin name 
     Range range; ///< range of net 
 
+    /// @brief Extension to handle a net with constant values or a regular net 
+    union Extension {
+        int constant; ///< constant value if the net is a constant 
+        std::vector<GeneralName>* vNetName; ///< a group of net names if the net is a group of nets 
+    } extension; ///< extension to handle a net with constant values or a regular net 
+
     /// @brief constructor 
-    /// @param n net name 
+    /// @param n net name
     /// @param p pin name 
     /// @param r net range 
     NetPin(std::string& n, std::string& p, Range const& r = Range())
@@ -77,6 +85,73 @@ struct NetPin
         net.swap(n);
         pin.swap(p);
         range = r;
+    }
+    /// @brief constructor 
+    /// @param n net name; it will be VerilogParser::CONSTANT_NET if the net is actually a value 
+    /// @param p pin name 
+    /// @param r net range 
+    /// @param c constant value only valid if the net is a VerilogParser::CONSTANT_NET
+    NetPin(std::string& n, std::string& p, Range const& r, int c)
+    {
+        net.swap(n);
+        pin.swap(p);
+        range = r;
+        extension.constant = c; 
+    }
+    /// @brief constructor 
+    /// @param n net name; it will be VerilogParser::GROUP_NETS if the net is actually a group of nets  
+    /// @param p pin name 
+    /// @param vNetName group of nets only valid if the net is a VerilogParser::GROUP_NETS
+    NetPin(std::string& n, std::string& p, std::vector<GeneralName>& vNetName)
+    {
+        net.swap(n);
+        pin.swap(p);
+        range = Range();
+        extension.vNetName = new std::vector<GeneralName>();
+        extension.vNetName->swap(vNetName); 
+    }
+    /// @brief copy constructor 
+    /// @param rhs right hand side 
+    NetPin(NetPin const& rhs)
+    {
+        copy(rhs);
+    }
+    /// @brief assignment 
+    /// @param rhs right hand side 
+    NetPin& operator=(NetPin const& rhs)
+    {
+        if (this != &rhs)
+            copy(rhs);
+        return *this;
+    }
+    /// @brief destructor
+    ~NetPin()
+    {
+        if (net == "VerilogParser::GROUP_NETS")
+        {
+            delete extension.vNetName; 
+        }
+    }
+
+    /// @brief copy function 
+    /// @param rhs right hand side 
+    void copy(NetPin const& rhs)
+    {
+        if (net == "VerilogParser::GROUP_NETS")
+        {
+            delete extension.vNetName; 
+        }
+        net = rhs.net; 
+        pin = rhs.pin; 
+        range = rhs.range; 
+        if (net == "VerilogParser::CONSTANT_NET")
+        {
+            extension.constant = rhs.extension.constant; 
+        }
+        else if (net == "VerilogParser::GROUP_NETS")
+        {
+            extension.vNetName = new std::vector<GeneralName> (*rhs.extension.vNetName);
+        }
     }
 };
 
@@ -136,9 +211,18 @@ class GeneralNameArray : public std::vector<GeneralName>
 class VerilogDataBase
 {
 	public:
+        /// @brief read a module declaration 
+        ///
+        /// module NOR2_X1 ( a, b, c );
+        ///
+        /// @param module_name name of a module 
+        /// @param vPinName array of pins 
+        virtual void verilog_module_declaration_cbk(std::string const& module_name, std::vector<GeneralName> const& vPinName); 
         /// @brief read an instance. 
         /// 
         /// NOR2_X1 u2 ( .a(n1), .b(n3), .o(n2) );
+        /// NOR2_X1 u2 ( .a(n1), .b({n3, n4}), .o(n2) );
+        /// NOR2_X1 u2 ( .a(n1), .b(1'b0), .o(n2) );
         /// 
         /// @param macro_name standard cell type or module name 
         /// @param inst_name instance name 

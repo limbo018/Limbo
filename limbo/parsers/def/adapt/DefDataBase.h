@@ -14,8 +14,8 @@
 #include <fstream>
 #include <sstream>
 #include <cassert>
-#include <limbo/thirdparty/lefdef/5.8/def/include/defrReader.hpp>
-#include <limbo/thirdparty/lefdef/5.8/def/include/defiAlias.hpp>
+#include <limbo/thirdparty/lefdef/5.8/def/def/defrReader.hpp>
+#include <limbo/thirdparty/lefdef/5.8/def/def/defiAlias.hpp>
 
 /// namespace for DefParser
 namespace DefParser {

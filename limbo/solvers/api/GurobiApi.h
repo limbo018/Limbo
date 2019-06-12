@@ -91,13 +91,138 @@ class GurobiLinearApi
         
         /// @brief constructor 
         /// @param model pointer to the model of problem 
-        GurobiLinearApi(model_type* model);
+        GurobiLinearApi(model_type* model)
+            : m_model(model)
+              , m_grbModel(NULL)
+        {
+        }
         /// @brief destructor 
-        ~GurobiLinearApi(); 
+        ~GurobiLinearApi()
+        {
+        }
         
         /// @brief API to run the algorithm 
         /// @param param set additional parameters, use default if NULL 
-        SolverProperty operator()(parameter_type* param = NULL); 
+        SolverProperty operator()(parameter_type* param = NULL)
+        {
+            bool defaultParam = false; 
+            if (param == NULL)
+            {
+                param = new GurobiParameters;
+                defaultParam = true; 
+            }
+
+            // ILP environment
+            GRBenv* env = NULL; 
+            m_grbModel = NULL; 
+            // Create environment
+            int error = GRBloadenv(&env, NULL);
+            errorHandler(env, error);
+            param->operator()(env); 
+            // Create an empty model 
+            error = GRBnewmodel(env, &m_grbModel, "GurobiLinearApi", m_model->numVariables(), NULL, NULL, NULL, NULL, NULL);
+            errorHandler(env, error);
+
+            // create variables 
+            error = GRBupdatemodel(m_grbModel);
+            errorHandler(env, error);
+            for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
+            {
+                variable_type var (i);
+                error = GRBsetdblattrelement(m_grbModel, GRB_DBL_ATTR_LB, var.id(), m_model->variableLowerBound(var));
+                errorHandler(env, error);
+                error = GRBsetdblattrelement(m_grbModel, GRB_DBL_ATTR_UB, var.id(), m_model->variableUpperBound(var));
+                errorHandler(env, error);
+                error = GRBsetdblattrelement(m_grbModel, GRB_DBL_ATTR_START, var.id(), m_model->variableSolution(var));
+                errorHandler(env, error);
+                error = GRBsetcharattrelement(m_grbModel, GRB_CHAR_ATTR_VTYPE, var.id(), m_model->variableNumericType(var) == CONTINUOUS? GRB_CONTINUOUS : GRB_INTEGER);
+                errorHandler(env, error);
+                error = GRBsetstrattrelement(m_grbModel, GRB_STR_ATTR_VARNAME, var.id(), m_model->variableName(var).c_str());
+                errorHandler(env, error);
+            }
+
+            // create constraints 
+            std::vector<int> vIdx; 
+            std::vector<double> vValue; 
+            for (unsigned int i = 0, ie = m_model->constraints().size(); i < ie; ++i)
+            {
+                constraint_type const& constr = m_model->constraints().at(i);
+
+                vIdx.clear(); 
+                vValue.clear();
+                for (typename std::vector<term_type>::const_iterator it = constr.expression().terms().begin(), ite = constr.expression().terms().end(); it != ite; ++it)
+                {
+                    vIdx.push_back(it->variable().id()); 
+                    vValue.push_back(it->coefficient());
+                }
+
+                error = GRBaddconstr(m_grbModel, constr.expression().terms().size(), &vIdx[0], &vValue[0], constr.sense(), constr.rightHandSide(), m_model->constraintName(constr).c_str());
+                errorHandler(env, error);
+            }
+
+            // create objective 
+            for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
+            {
+                error = GRBsetdblattrelement(m_grbModel, GRB_DBL_ATTR_OBJ, it->variable().id(), it->coefficient());
+                errorHandler(env, error);
+            }
+            error = GRBsetintattr(m_grbModel, GRB_INT_ATTR_MODELSENSE, m_model->optimizeType() == MIN? GRB_MINIMIZE : GRB_MAXIMIZE);
+            errorHandler(env, error);
+
+            // call parameter setting before optimization 
+            param->operator()(m_grbModel); 
+            error = GRBupdatemodel(m_grbModel);
+            errorHandler(env, error);
+
+#ifdef DEBUG_GUROBIAPI
+            GRBwrite(m_grbModel, "problem.lp");
+#endif 
+            error = GRBoptimize(m_grbModel);
+
+            int status = 0; 
+            error = GRBgetintattr(m_grbModel, GRB_INT_ATTR_STATUS, &status);
+            errorHandler(env, error);
+
+            if (status == GRB_INFEASIBLE)
+            {
+                error = GRBcomputeIIS(m_grbModel);
+                errorHandler(env, error); 
+                GRBwrite(m_grbModel, "problem.ilp");
+                limboPrint(kERROR, "Model is infeasible, compute IIS and write to problem.ilp\n");
+            }
+#ifdef DEBUG_GUROBIAPI
+            GRBwrite(m_grbModel, "problem.sol");
+#endif 
+
+            for (unsigned int i = 0; i < m_model->numVariables(); ++i)
+            {
+                variable_type var = m_model->variable(i); 
+                double value = 0; 
+                error = GRBgetdblattrelement(m_grbModel, GRB_DBL_ATTR_X, var.id(), &value);
+                errorHandler(env, error);
+                m_model->setVariableSolution(m_model->variable(i), value);
+            }
+
+            if (defaultParam)
+                delete param; 
+            // Free model 
+            GRBfreemodel(m_grbModel);
+            // Free environment 
+            GRBfreeenv(env);
+
+            switch (status)
+            {
+                case GRB_OPTIMAL:
+                    return OPTIMAL;
+                case GRB_INFEASIBLE:
+                    return INFEASIBLE;
+                case GRB_INF_OR_UNBD:
+                case GRB_UNBOUNDED:
+                    return UNBOUNDED;
+                default:
+                    limboAssertMsg(0, "unknown status %d", status);
+            }
+        }
 
         /// @brief error handler 
         /// @param env environment 
@@ -114,138 +239,6 @@ class GurobiLinearApi
         model_type* m_model; ///< model for the problem 
         GRBmodel* m_grbModel; ///< model for Gurobi 
 };
-
-template <typename T, typename V>
-GurobiLinearApi<T, V>::GurobiLinearApi(GurobiLinearApi<T, V>::model_type* model)
-    : m_model(model)
-    , m_grbModel(NULL)
-{
-}
-template <typename T, typename V>
-GurobiLinearApi<T, V>::~GurobiLinearApi()
-{
-}
-template <typename T, typename V>
-SolverProperty GurobiLinearApi<T, V>::operator()(GurobiLinearApi<T, V>::parameter_type* param)
-{
-    bool defaultParam = false; 
-    if (param == NULL)
-    {
-        param = new GurobiParameters;
-        defaultParam = true; 
-    }
-
-	// ILP environment
-	GRBenv* env = NULL; 
-    m_grbModel = NULL; 
-    // Create environment
-    int error = GRBloadenv(&env, NULL);
-    errorHandler(env, error);
-    param->operator()(env); 
-    // Create an empty model 
-    error = GRBnewmodel(env, &m_grbModel, "GurobiLinearApi", m_model->numVariables(), NULL, NULL, NULL, NULL, NULL);
-    errorHandler(env, error);
-
-    // create variables 
-    error = GRBupdatemodel(m_grbModel);
-    errorHandler(env, error);
-    for (unsigned int i = 0, ie = m_model->numVariables(); i < ie; ++i)
-    {
-        variable_type var (i);
-        error = GRBsetdblattrelement(m_grbModel, GRB_DBL_ATTR_LB, var.id(), m_model->variableLowerBound(var));
-        errorHandler(env, error);
-        error = GRBsetdblattrelement(m_grbModel, GRB_DBL_ATTR_UB, var.id(), m_model->variableUpperBound(var));
-        errorHandler(env, error);
-        error = GRBsetdblattrelement(m_grbModel, GRB_DBL_ATTR_START, var.id(), m_model->variableSolution(var));
-        errorHandler(env, error);
-        error = GRBsetcharattrelement(m_grbModel, GRB_CHAR_ATTR_VTYPE, var.id(), m_model->variableNumericType(var) == CONTINUOUS? GRB_CONTINUOUS : GRB_INTEGER);
-        errorHandler(env, error);
-        error = GRBsetstrattrelement(m_grbModel, GRB_STR_ATTR_VARNAME, var.id(), m_model->variableName(var).c_str());
-        errorHandler(env, error);
-    }
-
-    // create constraints 
-    std::vector<int> vIdx; 
-    std::vector<double> vValue; 
-    for (unsigned int i = 0, ie = m_model->constraints().size(); i < ie; ++i)
-    {
-        constraint_type const& constr = m_model->constraints().at(i);
-
-        vIdx.clear(); 
-        vValue.clear();
-        for (typename std::vector<term_type>::const_iterator it = constr.expression().terms().begin(), ite = constr.expression().terms().end(); it != ite; ++it)
-        {
-            vIdx.push_back(it->variable().id()); 
-            vValue.push_back(it->coefficient());
-        }
-
-        error = GRBaddconstr(m_grbModel, constr.expression().terms().size(), &vIdx[0], &vValue[0], constr.sense(), constr.rightHandSide(), m_model->constraintName(constr).c_str());
-        errorHandler(env, error);
-    }
-
-    // create objective 
-    for (typename std::vector<term_type>::const_iterator it = m_model->objective().terms().begin(), ite = m_model->objective().terms().end(); it != ite; ++it)
-    {
-        error = GRBsetdblattrelement(m_grbModel, GRB_DBL_ATTR_OBJ, it->variable().id(), it->coefficient());
-        errorHandler(env, error);
-    }
-    error = GRBsetintattr(m_grbModel, GRB_INT_ATTR_MODELSENSE, m_model->optimizeType() == MIN? GRB_MINIMIZE : GRB_MAXIMIZE);
-    errorHandler(env, error);
-
-    // call parameter setting before optimization 
-    param->operator()(m_grbModel); 
-    error = GRBupdatemodel(m_grbModel);
-    errorHandler(env, error);
-
-#ifdef DEBUG_GUROBIAPI
-    GRBwrite(m_grbModel, "problem.lp");
-#endif 
-    error = GRBoptimize(m_grbModel);
-
-    int status = 0; 
-    error = GRBgetintattr(m_grbModel, GRB_INT_ATTR_STATUS, &status);
-    errorHandler(env, error);
-
-    if (status == GRB_INFEASIBLE)
-    {
-        error = GRBcomputeIIS(m_grbModel);
-        errorHandler(env, error); 
-        GRBwrite(m_grbModel, "problem.ilp");
-        limboPrint(kERROR, "Model is infeasible, compute IIS and write to problem.ilp\n");
-    }
-#ifdef DEBUG_GUROBIAPI
-    GRBwrite(m_grbModel, "problem.sol");
-#endif 
-
-    for (unsigned int i = 0; i < m_model->numVariables(); ++i)
-    {
-        variable_type var = m_model->variable(i); 
-        double value = 0; 
-        error = GRBgetdblattrelement(m_grbModel, GRB_DBL_ATTR_X, var.id(), &value);
-        errorHandler(env, error);
-        m_model->setVariableSolution(m_model->variable(i), value);
-    }
-
-    if (defaultParam)
-        delete param; 
-    // Free model 
-    GRBfreemodel(m_grbModel);
-    // Free environment 
-    GRBfreeenv(env);
-
-    switch (status)
-    {
-        case GRB_OPTIMAL:
-            return OPTIMAL;
-        case GRB_INFEASIBLE:
-            return INFEASIBLE;
-        case GRB_INF_OR_UNBD:
-        case GRB_UNBOUNDED:
-            return UNBOUNDED;
-        default:
-            limboAssertMsg(0, "unknown status %d", status);
-    }
-}
 
 template <typename T, typename V>
 void GurobiLinearApi<T, V>::errorHandler(GRBenv* env, int error) const 

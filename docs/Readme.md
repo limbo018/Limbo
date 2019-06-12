@@ -80,11 +80,12 @@ Please report bugs to [yibolin at utexas dot edu](mailto:yibolin@utexas.edu).
 
 Some components depend on external libraries, such as 
 
-* [Boost](www.boost.org): require BOOST_DIR environment variable to the path where Boost is installed. Limbo library is tested through Boost 1.55.0 to 1.57.0. BOOST_DIR should defined in a way that BOOST_DIR/include contains the headers to include and BOOST_DIR/lib contains the libraries to link. 
-* [Lemon](https://lemon.cs.elte.hu): require LEMON_DIR environment variable to the path where Lemon is installed. 
+* [CMake](https://cmake.org): CMake version 3.7.0 or later is required to build the library. 
+* [Boost](www.boost.org): managed by CMake [FindBoost](https://cmake.org/cmake/help/v3.13/module/FindBoost.html). 
+* [Lemon](https://lemon.cs.elte.hu): integrated as a third party package. 
 * [Gurobi](www.gurobi.com): require GUROBI_HOME environment variable to the path where Gurobi is installed. 
-* [Flex](http://flex.sourceforge.net): require FLEX_DIR or LEX_INCLUDE_DIR environment variable if the flex version is not 2.5.37. See FAQ for details. 
-* [Zlib](http://www.zlib.net): require ZLIB_DIR, or ZLIB_INCLUDE_FLAG and ZLIB_LINK_FLAG environment variables to enable zlib features. If both zlib and boost are available, Gds parser supports reading/writing .gds.gz files. If using ZLIB_DIR, ZLIB_DIR should defined in a way that ZLIB_DIR/include contains the headers to include and ZLIB_DIR/lib contains the libraries to link; otherwise, use ZLIB_INCLUDE_FLAG and ZLIB_LINK_FLAG 
+* [Flex](http://flex.sourceforge.net): managed by CMake [FindFlex](https://cmake.org/cmake/help/v3.13/module/FindFLEX.html). 
+* [Zlib](http://www.zlib.net): managed by CMake [FindZLIB] (https://cmake.org/cmake/help/v3.13/module/FindZLIB.html). 
 
 Users need to make sure they are properly installed and the corresponding settings are configured. 
 
@@ -92,57 +93,23 @@ Users need to make sure they are properly installed and the corresponding settin
 
 * In the directory of limbo library, run 
 ~~~~~~~~~~~~~~~~
+mkdir build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=absolute/path/to/your/installation
 make
-make doc (optional)                       # generate documentation 
-make test (optional)                      # build test programs 
-make install PREFIX=an_absolute_path
+make install 
 ~~~~~~~~~~~~~~~~
 
-
-The default installation path is the same as building path. 
-Please do not set PREFIX with a relative path. 
 After installation, it is strongly recommended to export LIMBO_DIR to the path where Limbo library is installed as an environment variable. 
 
-## 2. Customize CXX, CC and FC options 
-
-* CXX sets the compiler for C++ and CC sets the compiler for C. FC sets the fortran compiler which is only needed by some third party packages like OpenBLAS. 
-Some examples are as follows, 
-~~~~~~~~~~~~~~~~
-make CXX=g++ CC=gcc FC=gfortran (default for Linux)
-make CXX=clang++ CC=clang FC=gfortran (default for Mac/Darwin)
-~~~~~~~~~~~~~~~~
-
-
-## 3. Customize CXXSTDLIB and CXXSTD options
-
-* CXXSTDLIB is used to control -stdlib=xxx under clang++, and CXXSTD is used to control -std=xxx in most compilers. 
-
-Under clang, following combinations are valid, 
-~~~~~~~~~~~~~~~~
-make CXXSTDLIB="-stdlib=libstdc++" CXXSTD="-std=c++98" (default)
-make CXXSTDLIB="-stdlib=libc++" CXXSTD="-std=c++98"
-make CXXSTDLIB="-stdlib=libc++" CXXSTD="-std=c++11"
-~~~~~~~~~~~~~~~~
-
-
-Under gcc, there is no -stdlib option, so following combinations are valid, 
-~~~~~~~~~~~~~~~~
-make CXXSTD="-std=c++98" (default)
-make CXXSTD="-std=c++11"
-~~~~~~~~~~~~~~~~
-
-
-Users must make sure the setting is consistent to dependent libraries during compilation, such as Boost, Lemon, etc. 
-For example, if Boost is compiled with "clang++ -stdlib=libstdc++ -std=c++98", the same setting should be used for components dependent to Boost. 
-
-## 4. Customize OPENBLAS options 
+## 2. Customize OPENBLAS options 
 
 * There is a third party OpenBLAS required by some other third party packages, such as Csdp. OPENBLAS option is used to control whether compiling these packages. 
 
-If you do not need these packages, set OPENBLAS=0 (default); 
-otherwise, set OPENBLAS=1.
+If you do not need these packages, set -DOPENBLAS=0 (default); 
+otherwise, set -DOPENBLAS=1.
 The default version of OpenBLAS is not very stable for cross platforms, which often results in compiling errors. 
-OpenBLAS is integrated as a submodule which fetch source code from remote repository, so it is always up-to-date version. 
+OpenBLAS is integrated as a submodule which fetch source code from remote repository. 
 If you already have OpenBLAS in the directory, simply run "git submodule update" to fetch the latest version in the submodule directory. 
 
 # FAQ {#FAQ}
@@ -167,7 +134,7 @@ come from new versions of flex, such as 2.6.0.
 
 **A:** It can be solved by installing correct flex version 2.5.37 and add the directory to correct flex to PATH environment variable. 
 
-##3. Compiling errors related to LefScanner.cc usually come from the configurations of flex version and environment variables FLEX_DIR and LEX_INCLUDE_DIR. 
+##3. (*Deprecated*) Compiling errors related to LefScanner.cc usually come from the configurations of flex version and environment variables FLEX_DIR and LEX_INCLUDE_DIR. 
 
 **A:** LefScanner.cc needs to include the correct FlexLexer.h from the flex package for compilation; i.e., the version of FlexLexer.h must match the version of the flex executable. 
 Most errors for LefScanner.cc are caused by the failure of finding the correct FlexLexer.h (be careful when you have multiple versions of flex installed). 

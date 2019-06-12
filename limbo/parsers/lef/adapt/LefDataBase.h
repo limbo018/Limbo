@@ -14,11 +14,11 @@
 #include <fstream>
 #include <sstream>
 #include <cassert>
-#include <limbo/thirdparty/lefdef/5.8/lef/include/lefrReader.hpp>
-#include <limbo/thirdparty/lefdef/5.8/lef/include/lefwWriter.hpp>
-#include <limbo/thirdparty/lefdef/5.8/lef/include/lefiDebug.hpp>
-#include <limbo/thirdparty/lefdef/5.8/lef/include/lefiEncryptInt.hpp>
-#include <limbo/thirdparty/lefdef/5.8/lef/include/lefiUtil.hpp>
+#include <limbo/thirdparty/lefdef/5.8/lef/lef/lefrReader.hpp>
+#include <limbo/thirdparty/lefdef/5.8/lef/lef/lefwWriter.hpp>
+#include <limbo/thirdparty/lefdef/5.8/lef/lef/lefiDebug.hpp>
+#include <limbo/thirdparty/lefdef/5.8/lef/lef/lefiEncryptInt.hpp>
+#include <limbo/thirdparty/lefdef/5.8/lef/lef/lefiUtil.hpp>
 
 /// namespace for LefParser
 namespace LefParser {
