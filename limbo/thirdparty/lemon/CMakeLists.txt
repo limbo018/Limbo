@@ -270,6 +270,7 @@ CONFIGURE_FILE(
   ${PROJECT_BINARY_DIR}/cmake/LEMONConfig.cmake
   @ONLY
 )
+if(INSTALL_LIMBO)
 IF(UNIX)
   INSTALL(
     FILES ${PROJECT_BINARY_DIR}/cmake/LEMONConfig.cmake
@@ -281,6 +282,7 @@ ELSEIF(WIN32)
     DESTINATION cmake
   )
 ENDIF()
+endif(INSTALL_LIMBO)
 
 CONFIGURE_FILE(
   ${PROJECT_SOURCE_DIR}/cmake/version.cmake.in

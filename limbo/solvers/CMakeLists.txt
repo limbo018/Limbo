@@ -1,14 +1,20 @@
 file(GLOB SOURCES
     *.h
     )
-install(FILES ${SOURCES} DESTINATION include/limbo/solvers)
+if(INSTALL_LIMBO)
+    install(FILES ${SOURCES} DESTINATION include/limbo/solvers)
+endif(INSTALL_LIMBO)
 
 file(GLOB SOURCES
     api/*.h
     )
-install(FILES ${SOURCES} DESTINATION include/limbo/solvers/api)
+if(INSTALL_LIMBO)
+    install(FILES ${SOURCES} DESTINATION include/limbo/solvers/api)
+endif(INSTALL_LIMBO)
 
 file(GLOB SOURCES
     lpmcf/*.h
     )
-install(FILES ${SOURCES} DESTINATION include/limbo/solvers/lpmcf)
+if(INSTALL_LIMBO)
+    install(FILES ${SOURCES} DESTINATION include/limbo/solvers/lpmcf)
+endif(INSTALL_LIMBO)

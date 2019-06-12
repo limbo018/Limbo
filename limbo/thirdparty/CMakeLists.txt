@@ -4,9 +4,11 @@ if(OPENBLAS)
     add_subdirectory(OpenBLAS)
     # OpenBLAS is installed to /include by default 
     # create symbolic link 
-    install(CODE
-        "EXECUTE_PROCESS(COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/include/openblas ${CMAKE_INSTALL_PREFIX}/include/limbo/thirdparty/OpenBLAS)"
-        )
+    if(INSTALL_LIMBO)
+        install(CODE
+            "EXECUTE_PROCESS(COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/include/openblas ${CMAKE_INSTALL_PREFIX}/include/limbo/thirdparty/OpenBLAS)"
+            )
+    endif(INSTALL_LIMBO)
     add_subdirectory(Csdp)
 endif(OPENBLAS)
 add_subdirectory(dlx)
@@ -16,6 +18,8 @@ add_subdirectory(libdivide)
 add_subdirectory(lemon)
 # lemon is installed to /include by default 
 # create symbolic link 
-install(CODE
-    "EXECUTE_PROCESS(COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/include/lemon ${CMAKE_INSTALL_PREFIX}/include/limbo/thirdparty/lemon)"
-    )
+if(INSTALL_LIMBO)
+    install(CODE
+        "EXECUTE_PROCESS(COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/include/lemon ${CMAKE_INSTALL_PREFIX}/include/limbo/thirdparty/lemon)"
+        )
+endif(INSTALL_LIMBO)

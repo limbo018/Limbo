@@ -47,8 +47,10 @@ BISON_TARGET(LefParser lef/lef.y ${CMAKE_CURRENT_BINARY_DIR}/lef.tab.cpp
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 add_library(lef STATIC ${LEF_SOURCES} ${BISON_LefParser_OUTPUTS})
-install(TARGETS lef DESTINATION lib)
-install(FILES ${LEF_HEADERS} DESTINATION include/limbo/thirdparty/lefdef/5.8/lef/lef)
+if(INSTALL_LIMBO)
+    install(TARGETS lef DESTINATION lib)
+    install(FILES ${LEF_HEADERS} DESTINATION include/limbo/thirdparty/lefdef/5.8/lef/lef)
+endif(INSTALL_LIMBO)
 
 set(CLEF_SOURCES 
     clef/xlefiArray.cpp
@@ -71,21 +73,27 @@ set(CLEF_SOURCES
     )
 
 add_library(clef STATIC ${CLEF_SOURCES})
-install(TARGETS clef DESTINATION lib)
+if(INSTALL_LIMBO)
+    install(TARGETS clef DESTINATION lib)
+endif(INSTALL_LIMBO)
 
 set(LEFZLIB_SOURCES 
     lefzlib/lefzlib.cpp
     )
 
 add_library(lefzlib STATIC ${LEFZLIB_SOURCES})
-install(TARGETS lefzlib DESTINATION lib)
+if(INSTALL_LIMBO)
+    install(TARGETS lefzlib DESTINATION lib)
+endif(INSTALL_LIMBO)
 
 set(CLEFZLIB_SOURCES 
     clefzlib/clefzlib.c
     )
 
 add_library(clefzlib STATIC ${CLEFZLIB_SOURCES})
-install(TARGETS clefzlib DESTINATION lib)
+if(INSTALL_LIMBO)
+    install(TARGETS clefzlib DESTINATION lib)
+endif(INSTALL_LIMBO)
 
 set(LEFRW_SOURCES 
     lefrw/lefrw.cpp
@@ -93,7 +101,9 @@ set(LEFRW_SOURCES
 
 add_executable(lefrw ${LEFRW_SOURCES})
 target_link_libraries(lefrw lef ${ZLIB_LIBRARIES})
-install(TARGETS lefrw DESTINATION bin/thirdparty/lefdef/5.8/lef)
+if(INSTALL_LIMBO)
+    install(TARGETS lefrw DESTINATION bin/thirdparty/lefdef/5.8/lef)
+endif(INSTALL_LIMBO)
 
 set(LEFDIFF_SOURCES 
     lefdiff/diffLefRW.cpp
@@ -102,7 +112,9 @@ set(LEFDIFF_SOURCES
 
 add_executable(lefdiff ${LEFDIFF_SOURCES})
 target_link_libraries(lefdiff lef ${ZLIB_LIBRARIES})
-install(TARGETS lefdiff DESTINATION bin/thirdparty/lefdef/5.8/lef)
+if(INSTALL_LIMBO)
+    install(TARGETS lefdiff DESTINATION bin/thirdparty/lefdef/5.8/lef)
+endif(INSTALL_LIMBO)
 
 set(LEFWRITE_SOURCES 
     lefwrite/lefwrite.cpp
@@ -111,4 +123,6 @@ set(LEFWRITE_SOURCES
 
 add_executable(lefwrite ${LEFWRITE_SOURCES})
 target_link_libraries(lefwrite lef ${ZLIB_LIBRARIES})
-install(TARGETS lefwrite DESTINATION bin/thirdparty/lefdef/5.8/lef)
+if(INSTALL_LIMBO)
+    install(TARGETS lefwrite DESTINATION bin/thirdparty/lefdef/5.8/lef)
+endif(INSTALL_LIMBO)

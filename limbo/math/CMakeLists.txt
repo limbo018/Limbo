@@ -1,4 +1,6 @@
 file(GLOB SOURCES
     *.h
     )
-install(FILES ${SOURCES} DESTINATION include/limbo/math)
+if(INSTALL_LIMBO)
+    install(FILES ${SOURCES} DESTINATION include/limbo/math)
+endif(INSTALL_LIMBO)

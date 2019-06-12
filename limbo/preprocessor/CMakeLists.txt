@@ -1,4 +1,6 @@
 file(GLOB SOURCES
     *.h
     )
-install(FILES ${SOURCES} DESTINATION include/limbo/preprocessor)
+if(INSTALL_LIMBO)
+    install(FILES ${SOURCES} DESTINATION include/limbo/preprocessor)
+endif(INSTALL_LIMBO)

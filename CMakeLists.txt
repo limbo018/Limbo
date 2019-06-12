@@ -12,6 +12,10 @@ message("-- CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 option(OPENBLAS "Choose to enable OpenBLAS or not, ON|OFF" ON)
 message("-- OPENBLAS: ${OPENBLAS}")
 
+# whether install the library or not 
+option(INSTALL_LIMBO "Whether install ${PROJECT_NAME} or not, ON|OFF" ON)
+message("-- INSTALL_LIMBO: ${INSTALL_LIMBO}")
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
