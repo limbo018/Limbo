@@ -9,21 +9,6 @@
 .PHONY: all
 all: install release
 
-#==========================================================================
-#                         Directories and names 
-# ==========================================================================
-
-LIMBO_ROOT_DIR = $(realpath ../../../../..)
-LIBDIR = $(LIMBO_ROOT_DIR)/lib
-LIBMKDIR = mkdir -p $(LIBDIR)
-
-#==========================================================================
-#                         Compilation Flags
-# ==========================================================================
-
-# include environmental configurations 
-include $(LIMBO_ROOT_DIR)/Include.mk
-
 BUILD_ORDER	= \
 			def \
 			cdef \
@@ -50,26 +35,7 @@ install:
 	@$(MAKE) $(MFLAGS) installhdrs installlib installbin
 
 release:
-	@$(LIBMKDIR)
 	@$(MAKE) "DEBUG=$(OPTIMIZE_FLAG)" install
-	mv lib/libcdef.a $(LIMBO_ROOT_DIR)/lib
-	mv lib/libcdefzlib.a $(LIMBO_ROOT_DIR)/lib
-	mv lib/libdef.a $(LIMBO_ROOT_DIR)/lib
-	mv lib/libdefzlib.a $(LIMBO_ROOT_DIR)/lib
-
-myinstall: 
-	@$(LIBMKDIR)
-	mkdir -p $(PREFIX)/include/limbo/thirdparty/lefdef/5.8/def/include
-	cp $(wildcard include/*.h) $(PREFIX)/include/limbo/thirdparty/lefdef/5.8/def/include
-	cp $(wildcard include/*.hpp) $(PREFIX)/include/limbo/thirdparty/lefdef/5.8/def/include
-	cmp -s $(PREFIX)/lib/libcdef.a $(LIBDIR)/libcdef.a; \
-	RETVAL=$$?; \
-	if [ $$RETVAL -ne 0 ]; then \
-		cp $(LIMBO_ROOT_DIR)/lib/libcdef.a $(PREFIX)/lib; \
-		cp $(LIMBO_ROOT_DIR)/lib/libcdefzlib.a $(PREFIX)/lib; \
-		cp $(LIMBO_ROOT_DIR)/lib/libdef.a $(PREFIX)/lib; \
-		cp $(LIMBO_ROOT_DIR)/lib/libdefzlib.a $(PREFIX)/lib; \
-	fi
 
 test:
 	@$(MAKE) "BUILD_ORDER=TEST" dotest
