@@ -1,5 +1,6 @@
 include_directories(
     ${PROJECT_SOURCE_DIR}
+    ${Boost_INCLUDE_DIRS}
     )
 set(LIBS lpparser)
 
