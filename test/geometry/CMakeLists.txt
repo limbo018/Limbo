@@ -1,5 +1,6 @@
 include_directories(
     ${PROJECT_SOURCE_DIR}
+    ${Boost_INCLUDE_DIRS}
     )
 add_executable(test_p2r test_p2r.cpp)
 if(INSTALL_LIMBO)
