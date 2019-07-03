@@ -15,7 +15,9 @@ FLEX_TARGET(LefLexer
 ADD_FLEX_BISON_DEPENDENCY(LefLexer LefParser)
 
 file(GLOB SOURCES
-    *.cc
+    LefDataBase.cc    lefiDebug.cc      lefiMisc.cc       lefiPropType.cc   lefiVia.cc
+    LefDriver.cc      lefiArray.cc      lefiLayer.cc      lefiNonDefault.cc lefiUnits.cc      lefiViaRule.cc
+    lefiCrossTalk.cc  lefiMacro.cc      lefiProp.cc       lefiUtil.cc
     )
 add_library(lefparser ${SOURCES} ${BISON_LefParser_OUTPUTS} ${FLEX_LefLexer_OUTPUTS})
 if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")

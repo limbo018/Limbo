@@ -15,7 +15,8 @@ FLEX_TARGET(DefLexer
 ADD_FLEX_BISON_DEPENDENCY(DefLexer DefParser)
 
 file(GLOB SOURCES
-    *.cc
+    DefDataBase.cc 
+    DefDriver.cc
     )
 add_library(defparser ${SOURCES} ${BISON_DefParser_OUTPUTS} ${FLEX_DefLexer_OUTPUTS})
 if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
