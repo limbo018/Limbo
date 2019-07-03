@@ -17,7 +17,8 @@ var searchData=
   ['path',['Path',['../struct_gdf_parser_1_1_path.html',1,'GdfParser']]],
   ['pathobj',['PathObj',['../struct_gdf_parser_1_1_path_obj.html',1,'GdfParser']]],
   ['pin',['Pin',['../struct_def_parser_1_1_pin.html',1,'DefParser']]],
-  ['point',['Point',['../struct_point.html',1,'Point'],['../struct_gdf_parser_1_1_point.html',1,'GdfParser::Point']]],
+  ['point',['Point',['../struct_point.html',1,'']]],
+  ['point',['Point',['../struct_gdf_parser_1_1_point.html',1,'GdfParser']]],
   ['point_5fcompare_5ftype',['point_compare_type',['../structlimbo_1_1geometry_1_1point__compare__type.html',1,'limbo::geometry']]],
   ['point_5ftraits',['point_traits',['../structlimbo_1_1geometry_1_1point__traits.html',1,'limbo::geometry']]],
   ['point_5ftraits_3c_20blib_3a_3abpoint_20_3e',['point_traits&lt; bLib::bPoint &gt;',['../structlimbo_1_1geometry_1_1point__traits_3_01b_lib_1_1b_point_01_4.html',1,'limbo::geometry']]],
@@ -31,7 +32,7 @@ var searchData=
   ['print_5fhelper_3c_20bool_20_3e',['print_helper&lt; bool &gt;',['../structlimbo_1_1programoptions_1_1print__helper_3_01bool_01_4.html',1,'limbo::programoptions']]],
   ['print_5fhelper_3c_20std_3a_3aset_3c_20t_20_3e_20_3e',['print_helper&lt; std::set&lt; T &gt; &gt;',['../structlimbo_1_1programoptions_1_1print__helper_3_01std_1_1set_3_01_t_01_4_01_4.html',1,'limbo::programoptions']]],
   ['print_5fhelper_3c_20std_3a_3avector_3c_20t_20_3e_20_3e',['print_helper&lt; std::vector&lt; T &gt; &gt;',['../structlimbo_1_1programoptions_1_1print__helper_3_01std_1_1vector_3_01_t_01_4_01_4.html',1,'limbo::programoptions']]],
-  ['problemscaler',['ProblemScaler',['../classlimbo_1_1solvers_1_1_problem_scaler.html',1,'limbo::solvers']]],
+  ['problemscaler',['ProblemScaler',['../singletonlimbo_1_1solvers_1_1_problem_scaler.html',1,'limbo::solvers']]],
   ['programoptions',['ProgramOptions',['../classlimbo_1_1programoptions_1_1_program_options.html',1,'limbo::programoptions']]],
   ['programoptionsexception',['ProgramOptionsException',['../classlimbo_1_1programoptions_1_1_program_options_exception.html',1,'limbo::programoptions']]]
 ];

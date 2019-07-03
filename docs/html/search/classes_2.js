@@ -1,7 +1,7 @@
 var searchData=
 [
   ['capacityconstraintpred',['CapacityConstraintPred',['../structlimbo_1_1solvers_1_1_multi_knapsack_lag_relax_1_1_capacity_constraint_pred.html',1,'limbo::solvers::MultiKnapsackLagRelax']]],
-  ['capacityscaling',['CapacityScaling',['../classlimbo_1_1solvers_1_1_capacity_scaling.html',1,'limbo::solvers']]],
+  ['capacityscaling',['CapacityScaling',['../singletonlimbo_1_1solvers_1_1_capacity_scaling.html',1,'limbo::solvers']]],
   ['cell',['Cell',['../struct_gdf_parser_1_1_cell.html',1,'GdfParser']]],
   ['cellinstance',['CellInstance',['../struct_gdf_parser_1_1_cell_instance.html',1,'GdfParser']]],
   ['cellport',['CellPort',['../struct_gdf_parser_1_1_cell_port.html',1,'GdfParser']]],
@@ -14,7 +14,8 @@ var searchData=
   ['compareconstraintslack',['CompareConstraintSlack',['../structlimbo_1_1solvers_1_1_search_by_bin_smoothing_1_1_compare_constraint_slack.html',1,'limbo::solvers::SearchByBinSmoothing']]],
   ['comparetermbyvariable',['CompareTermByVariable',['../structlimbo_1_1solvers_1_1_compare_term_by_variable.html',1,'limbo::solvers']]],
   ['comparevariablebycoefficient',['CompareVariableByCoefficient',['../structlimbo_1_1solvers_1_1_multi_knapsack_lag_relax_1_1_compare_variable_by_coefficient.html',1,'limbo::solvers::MultiKnapsackLagRelax']]],
-  ['comparevariablemovecost',['CompareVariableMoveCost',['../structlimbo_1_1solvers_1_1_search_by_adjust_coefficient_1_1_compare_variable_move_cost.html',1,'limbo::solvers::SearchByAdjustCoefficient&lt; T, V &gt;::CompareVariableMoveCost'],['../structlimbo_1_1solvers_1_1_search_by_bin_smoothing_1_1_compare_variable_move_cost.html',1,'limbo::solvers::SearchByBinSmoothing&lt; T, V &gt;::CompareVariableMoveCost']]],
+  ['comparevariablemovecost',['CompareVariableMoveCost',['../structlimbo_1_1solvers_1_1_search_by_bin_smoothing_1_1_compare_variable_move_cost.html',1,'limbo::solvers::SearchByBinSmoothing']]],
+  ['comparevariablemovecost',['CompareVariableMoveCost',['../structlimbo_1_1solvers_1_1_search_by_adjust_coefficient_1_1_compare_variable_move_cost.html',1,'limbo::solvers::SearchByAdjustCoefficient']]],
   ['component',['Component',['../struct_def_parser_1_1_component.html',1,'DefParser']]],
   ['confsite',['ConfSite',['../struct_ebeam_parser_1_1_conf_site.html',1,'EbeamParser']]],
   ['constraint_5ftype',['constraint_type',['../structlimbo_1_1solvers_1_1lpmcf_1_1_lp_dual_mcf_1_1constraint__type.html',1,'limbo::solvers::lpmcf::LpDualMcf']]],
@@ -25,6 +26,6 @@ var searchData=
   ['coordinate_5ftraits',['coordinate_traits',['../structlimbo_1_1geometry_1_1coordinate__traits.html',1,'limbo::geometry']]],
   ['coordinate_5ftraits_3c_20int_20_3e',['coordinate_traits&lt; int &gt;',['../structlimbo_1_1geometry_1_1coordinate__traits_3_01int_01_4.html',1,'limbo::geometry']]],
   ['copycellobjectaction',['CopyCellObjectAction',['../struct_gds_parser_1_1_gds_d_b_1_1_copy_cell_object_action.html',1,'GdsParser::GdsDB']]],
-  ['costscaling',['CostScaling',['../classlimbo_1_1solvers_1_1_cost_scaling.html',1,'limbo::solvers']]],
-  ['cyclecanceling',['CycleCanceling',['../classlimbo_1_1solvers_1_1_cycle_canceling.html',1,'limbo::solvers']]]
+  ['costscaling',['CostScaling',['../singletonlimbo_1_1solvers_1_1_cost_scaling.html',1,'limbo::solvers']]],
+  ['cyclecanceling',['CycleCanceling',['../singletonlimbo_1_1solvers_1_1_cycle_canceling.html',1,'limbo::solvers']]]
 ];

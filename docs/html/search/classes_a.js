@@ -8,7 +8,7 @@ var searchData=
   ['maxindependentsetbymaxclique',['MaxIndependentSetByMaxClique',['../structlimbo_1_1algorithms_1_1_max_independent_set_by_max_clique.html',1,'limbo::algorithms']]],
   ['mincoefficientscaler',['MinCoefficientScaler',['../classlimbo_1_1solvers_1_1_min_coefficient_scaler.html',1,'limbo::solvers']]],
   ['mincostflow',['MinCostFlow',['../classlimbo_1_1solvers_1_1_min_cost_flow.html',1,'limbo::solvers']]],
-  ['mincostflowsolver',['MinCostFlowSolver',['../classlimbo_1_1solvers_1_1_min_cost_flow_solver.html',1,'limbo::solvers']]],
+  ['mincostflowsolver',['MinCostFlowSolver',['../singletonlimbo_1_1solvers_1_1_min_cost_flow_solver.html',1,'limbo::solvers']]],
   ['mis_5fvisitor_5ftype',['mis_visitor_type',['../structlimbo_1_1algorithms_1_1coloring_1_1_lawler_chromatic_number_1_1mis__visitor__type.html',1,'limbo::algorithms::coloring::LawlerChromaticNumber']]],
   ['miscoloring',['MISColoring',['../classlimbo_1_1algorithms_1_1coloring_1_1_m_i_s_coloring.html',1,'limbo::algorithms::coloring']]],
   ['misvisitor',['MisVisitor',['../struct_mis_visitor.html',1,'']]],
