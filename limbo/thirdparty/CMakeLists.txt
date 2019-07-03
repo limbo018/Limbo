@@ -15,6 +15,11 @@ add_subdirectory(dlx)
 add_subdirectory(flex)
 add_subdirectory(lefdef)
 add_subdirectory(libdivide)
+
+set(LEMON_ENABLE_GLPK OFF CACHE STRING "Turn off GLPK for Lemon")
+set(LEMON_ENABLE_ILOG OFF CACHE STRING "Turn off ILOG for Lemon")
+#set(LEMON_ENABLE_COIN OFF CACHE STRING "Turn off COIN for Lemon")
+set(LEMON_ENABLE_SOPLEX OFF CACHE STRING "Turn off SOPLEX for Lemon")
 add_subdirectory(lemon)
 # lemon is installed to /include by default 
 # create symbolic link 

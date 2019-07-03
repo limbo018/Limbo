@@ -15,7 +15,7 @@ FLEX_TARGET(GdfLexer
 ADD_FLEX_BISON_DEPENDENCY(GdfLexer GdfParser)
 
 file(GLOB SOURCES
-    *.cc
+    GdfDriver.cc
     )
 add_library(gdfparser ${SOURCES} ${BISON_GdfParser_OUTPUTS} ${FLEX_GdfLexer_OUTPUTS})
 if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")

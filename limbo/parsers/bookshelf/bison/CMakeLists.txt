@@ -15,7 +15,7 @@ FLEX_TARGET(BookshelfLexer
 ADD_FLEX_BISON_DEPENDENCY(BookshelfLexer BookshelfParser)
 
 file(GLOB SOURCES
-    *.cc
+    BookshelfDriver.cc
     )
 add_library(bookshelfparser ${SOURCES} ${BISON_BookshelfParser_OUTPUTS} ${FLEX_BookshelfLexer_OUTPUTS})
 if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")

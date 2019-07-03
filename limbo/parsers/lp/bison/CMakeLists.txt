@@ -15,7 +15,7 @@ FLEX_TARGET(LpLexer
 ADD_FLEX_BISON_DEPENDENCY(LpLexer LpParser)
 
 file(GLOB SOURCES
-    *.cc
+    LpDriver.cc
     )
 add_library(lpparser ${SOURCES} ${BISON_LpParser_OUTPUTS} ${FLEX_LpLexer_OUTPUTS})
 if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")

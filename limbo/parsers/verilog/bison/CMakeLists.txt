@@ -15,7 +15,7 @@ FLEX_TARGET(VerilogLexer
 ADD_FLEX_BISON_DEPENDENCY(VerilogLexer VerilogParser)
 
 file(GLOB SOURCES
-    *.cc
+    VerilogDataBase.cc VerilogDriver.cc
     )
 add_library(verilogparser STATIC ${SOURCES} ${BISON_VerilogParser_OUTPUTS} ${FLEX_VerilogLexer_OUTPUTS})
 if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
