@@ -41,6 +41,8 @@ IF (LPSOLVE_INCLUDE_PATH)
         /usr/local/lib
         /opt/lib
         )
+    # add both paths to include directories, as we are not sure whehter there is an lpsolve subdirectory 
+    SET(LPSOLVE_INCLUDE_DIRS ${LPSOLVE_INCLUDE_DIRS};${LPSOLVE_INCLUDE_DIRS}/lpsolve)
 
     # hints of names from version 55 to 99
     set(LPSOLVE_NAME_HINTS "")
