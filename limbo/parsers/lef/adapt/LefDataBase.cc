@@ -24,29 +24,14 @@ int LefDataBase::lefNamesCaseSensitive = TRUE;
 int LefDataBase::lefrShiftCase = FALSE;
 
 
-void LefDataBase::lef_version_cbk(string const& v)
-{
-	cout << "LEF version: " << v << endl;
-	lef_user_cbk_reminder(__func__);
-}
 void LefDataBase::lef_version_cbk(double v)
 {
 	cout << "LEF version: " << v << endl;
 	lef_user_cbk_reminder(__func__);
 }
-void LefDataBase::lef_dividerchar_cbk(string const& v)
-{
-	cout << "LEF dividerchar: " << v << endl;
-	lef_user_cbk_reminder(__func__);
-}
 void LefDataBase::lef_casesensitive_cbk(int v)
 {
 	cout << "LEF casesensitive: " << v << endl;
-	lef_user_cbk_reminder(__func__);
-}
-void LefDataBase::lef_nowireextension_cbk(string const& v)
-{
-	cout << "LEF nowireextension: " << v << endl;
 	lef_user_cbk_reminder(__func__);
 }
 void LefDataBase::lef_manufacturing_cbk(double v)
@@ -59,19 +44,9 @@ void LefDataBase::lef_useminspacing_cbk(lefiUseMinSpacing const& v)
 	v.print(stdout);
 	lef_user_cbk_reminder(__func__);
 }
-void LefDataBase::lef_clearancemeasure_cbk(string const& v)
-{
-	cout << "LEF clearancemeasure: " << v << endl;
-	lef_user_cbk_reminder(__func__);
-}
 void LefDataBase::lef_units_cbk(lefiUnits const& v)
 {
 	v.print(stdout);
-	lef_user_cbk_reminder(__func__);
-}
-void LefDataBase::lef_busbitchars_cbk(string const& v)
-{
-	cout << "LEF busbitchars: " << v << endl;
 	lef_user_cbk_reminder(__func__);
 }
 void LefDataBase::lef_layer_cbk(lefiLayer const& v)
@@ -123,11 +98,6 @@ void LefDataBase::lef_site_cbk(lefiSite const& v)
 {
 	v.print(stdout);
 	lef_user_cbk_reminder(__func__);
-}
-void LefDataBase::lef_macrobegin_cbk(std::string const& v)
-{
-    cout << "macro begin " << v << endl; 
-    lef_user_cbk_reminder(__func__); 
 }
 void LefDataBase::lef_macro_cbk(lefiMacro const& v)
 {
@@ -222,11 +192,6 @@ void LefDataBase::lef_antennaoutput_cbk(double v)
 void LefDataBase::lef_antennainout_cbk(double v)
 {
 	cout << "LEF antennainout: " << v << endl;
-	lef_user_cbk_reminder(__func__);
-}
-void LefDataBase::lef_extension_cbk(string const& v)
-{
-	cout << "LEF extension: " << v << endl;
 	lef_user_cbk_reminder(__func__);
 }
 void LefDataBase::lef_user_cbk_reminder(const char* str) const 
