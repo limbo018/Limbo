@@ -126,7 +126,11 @@ void realGraph(string const& filename)
 /// @return 0 
 int main(int argc, char** argv)
 {
-	assert(argc >= 2);
+	if (argc < 2)
+    {
+        std::cout << "ERROR: at least one input graph required\n";
+        return 1; 
+    }
 	realGraph(argv[1]);
 
 	return 0;

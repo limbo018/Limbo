@@ -50,7 +50,11 @@ set(CSDP_SOURCES
     )
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+# must be added to avoid using unsigned shorts 
+set(CSDP_COMPILE_DEFINITIONS NOSHORTS)
+
 add_library(sdp STATIC ${CSDP_SOURCES})
+target_compile_definitions(sdp PRIVATE ${CSDP_COMPILE_DEFINITIONS})
 if(INSTALL_LIMBO)
     install(TARGETS sdp DESTINATION lib)
 endif(INSTALL_LIMBO)
@@ -61,7 +65,9 @@ if(UNIX AND NOT APPLE)
 endif()
 
 add_executable(csdp solver/csdp.c)
+target_compile_definitions(csdp PRIVATE ${CSDP_COMPILE_DEFINITIONS})
 add_executable(csdp_test solver/csdp_test.c)
+target_compile_definitions(csdp_test PRIVATE ${CSDP_COMPILE_DEFINITIONS})
 target_link_libraries(csdp ${LIBS})
 target_link_libraries(csdp_test ${LIBS})
 if(INSTALL_LIMBO)
@@ -69,9 +75,13 @@ if(INSTALL_LIMBO)
 endif(INSTALL_LIMBO)
 
 add_executable(complement theta/complement.c)
+target_compile_definitions(complement PRIVATE ${CSDP_COMPILE_DEFINITIONS})
 add_executable(graphtoprob theta/graphtoprob.c)
+target_compile_definitions(graphtoprob PRIVATE ${CSDP_COMPILE_DEFINITIONS})
 add_executable(rand_graph theta/rand_graph.c)
+target_compile_definitions(rand_graph PRIVATE ${CSDP_COMPILE_DEFINITIONS})
 add_executable(theta theta/theta.c)
+target_compile_definitions(theta PRIVATE ${CSDP_COMPILE_DEFINITIONS})
 target_link_libraries(complement ${LIBS})
 target_link_libraries(graphtoprob ${LIBS})
 target_link_libraries(rand_graph ${LIBS})
@@ -81,6 +91,7 @@ if(INSTALL_LIMBO)
 endif(INSTALL_LIMBO)
 
 add_executable(${PROJECT_NAME}_example example/example.c)
+target_compile_definitions(${PROJECT_NAME}_example PRIVATE ${CSDP_COMPILE_DEFINITIONS})
 target_link_libraries(${PROJECT_NAME}_example ${LIBS})
 set_target_properties(${PROJECT_NAME}_example
         PROPERTIES OUTPUT_NAME example)
