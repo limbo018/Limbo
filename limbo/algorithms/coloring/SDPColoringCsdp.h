@@ -4,7 +4,7 @@
  *
  * "Layout decomposition for triple patterning lithography", 
  * Bei Yu, Kun Yuan, Duo Ding, and David Z. Pan, 
- * IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD), 34(3):433â€“446, March 2015.
+ * IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD), 34(3):433â€?46, March 2015.
  *
  * See @ref limbo::algorithms::coloring::SDPColoringCsdp for details. 
  *
@@ -263,8 +263,8 @@ double SDPColoringCsdp<GraphType>::coloring()
     // this block is all 0s, so we use diagonal format to represent  
     construct_objectve_blockrec(C, 2, num_conflict_edges, DIAG);
 #ifdef DEBUG_SDPCOLORING
-    print_blockrec("C.blocks[1].data.mat", C.blocks[1]);
-    print_blockrec("C.blocks[2].data.vec", C.blocks[2]);
+    //print_blockrec("C.blocks[1].data.mat", C.blocks[1]);
+    //print_blockrec("C.blocks[2].data.vec", C.blocks[2]);
 #endif
 
     // setup right hand side of constraints b
