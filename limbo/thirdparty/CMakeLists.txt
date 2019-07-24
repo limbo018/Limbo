@@ -1,7 +1,7 @@
 add_subdirectory(CThreadPool)
 if(OPENBLAS)
     set(USE_THREAD 0)
-    set(BUILD_WITHOUT_LAPACK ON)
+    #set(BUILD_WITHOUT_LAPACK ON)
     set(BUILD_WITHOUT_CBLAS ON)
     add_subdirectory(OpenBLAS)
     # OpenBLAS is installed to /include by default 
