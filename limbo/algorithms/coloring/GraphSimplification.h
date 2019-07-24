@@ -1349,7 +1349,7 @@ void GraphSimplification<GraphType>::recover_hide_small_degree(std::vector<int8_
 			graph_vertex_type u = *vi;
 			if (vColor[u] >= 0)
 			{
-				limboAssert(vColor[u] < m_color_num);
+				limboAssert(vColor[u] < (int)m_color_num);
 				std::pair<graph_edge_type, bool> e12 = boost::edge(v, u, this->m_graph);
 				assert(e12.second);
 				if (boost::get(boost::edge_weight, this->m_graph, e12.first) < 0)
