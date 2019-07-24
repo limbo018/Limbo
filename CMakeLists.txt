@@ -10,6 +10,16 @@ endif(NOT CMAKE_BUILD_TYPE)
 string(TOUPPER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE)
 message("-- CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
+# deal with GCC dual ABI issue 
+if(NOT CMAKE_CXX_ABI)
+    set(CMAKE_CXX_ABI 0 CACHE STRING
+        "Choose the value for _GLIBCXX_USE_CXX11_ABI, options are: 0|1."
+        FORCE)
+endif(NOT CMAKE_CXX_ABI)
+message("-- CMAKE_CXX_ABI: _GLIBCXX_USE_CXX11_ABI=${CMAKE_CXX_ABI}")
+add_definitions(-D_GLIBCXX_USE_CXX11_ABI=${CMAKE_CXX_ABI})
+
+
 # packages like Csdp and SDPColoringCsdp are dependent to OPENBLAS
 option(OPENBLAS "Choose to enable OpenBLAS or not, ON|OFF" ON)
 message("-- OPENBLAS: ${OPENBLAS}")
