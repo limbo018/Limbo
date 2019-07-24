@@ -559,7 +559,9 @@ void SDPColoringCsdp<GraphType>::coloring_merged_graph(graph_type const& mg, std
 #endif
         }
 
+#ifdef QDEBUG
         clock_t recover_start = clock();
+#endif
         // recover color assignment according to the simplification level set previously 
         // HIDE_SMALL_DEGREE needs to be recovered manually for density balancing 
         gs.recover(vMColor, mSubColor, mSimpl2Orig);
@@ -570,8 +572,8 @@ void SDPColoringCsdp<GraphType>::coloring_merged_graph(graph_type const& mg, std
 */
         // recover colors for simplified vertices without balanced assignment 
         gs.recover_hide_small_degree(vMColor);
-        clock_t recover_end = clock();
 #ifdef QDEBUG
+        clock_t recover_end = clock();
         std::cout << "Coloring recovery takes " << (double)(recover_end - recover_start)/CLOCKS_PER_SEC << "s." << std::endl;
         ::cout << "SDP final result :  ";
         for(uint32_t i = 0; i < vMColor.size(); i++)
