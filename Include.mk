@@ -48,7 +48,7 @@ include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindBoost.mk
 endif
 # dependency to Zlib and get ZLIB_LINK_FLAG
 ifdef ZLIB_DIR
-include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindZlib.mk
+#include $(LIMBO_ROOT_DIR)/limbo/makeutils/FindZlib.mk
 endif
 # dependency to GUROBI and get GUROBI_LINK_LIB and GUROBI_CXX_LINK_LIB
 ifdef GUROBI_HOME
