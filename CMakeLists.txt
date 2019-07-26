@@ -28,6 +28,10 @@ message("-- OPENBLAS: ${OPENBLAS}")
 option(INSTALL_LIMBO "Whether install ${PROJECT_NAME} or not, ON|OFF" ON)
 message("-- INSTALL_LIMBO: ${INSTALL_LIMBO}")
 
+# whether generate documentations 
+option(GENERATE_DOCS "Whether generate documentations, ON|OFF" ON)
+message("-- GENERATE_DOCS: ${GENERATE_DOCS}")
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
@@ -40,11 +44,13 @@ find_package(ZLIB REQUIRED)
 find_package(Boost 1.55.0 REQUIRED COMPONENTS iostreams chrono timer unit_test_framework graph regex)
 find_package(Gurobi)
 find_package(LpSolve)
-find_package(Doxygen)
 
 add_subdirectory(limbo)
 add_subdirectory(test)
 
-if (DOXYGEN_FOUND)
-    add_subdirectory(docs)
-endif(DOXYGEN_FOUND)
+if (GENERATE_DOCS)
+    find_package(Doxygen)
+    if (DOXYGEN_FOUND)
+        add_subdirectory(docs)
+    endif(DOXYGEN_FOUND)
+endif(GENERATE_DOCS)
