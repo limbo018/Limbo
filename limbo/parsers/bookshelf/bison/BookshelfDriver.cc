@@ -182,6 +182,10 @@ void Driver::sclCoreRowEnd()
     m_row.reset();
 }
 // .wts file 
+void Driver::wtsNetWeightEntry(string& net_name, double weight)
+{
+    m_db.set_bookshelf_net_weight(net_name, weight);
+}
 // .aux file 
 void Driver::auxCbk(string& design_name, vector<string>& vBookshelfFiles)
 {

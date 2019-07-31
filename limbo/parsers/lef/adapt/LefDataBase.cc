@@ -1,5 +1,5 @@
 /**
- @file   LefDataBase.cpp
+ @file   LefDataBase.cc
  @author Yibo Lin
  @date   Dec 2014
  @brief  Implementation of @ref LefParser::LefDataBase

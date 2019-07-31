@@ -80,6 +80,10 @@ class BookshelfDataBase : public BookshelfParser::BookshelfDataBase
         {
             cout << __func__ << " => " << name << ", " << x << ", " << y << ", " << orient << ", " << status << ", plFlag = " << plFlag << endl;
         }
+        virtual void set_bookshelf_net_weight(string const& name, double w)
+        {
+            cout << __func__ << " => " << name << ", " << w << endl; 
+        }
         /// @param name design name 
         virtual void set_bookshelf_design(string& name)
         {

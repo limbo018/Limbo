@@ -243,10 +243,20 @@ class BookshelfDataBase
         virtual void add_bookshelf_row(Row const&) = 0;
         /// @brief set node position 
         virtual void set_bookshelf_node_position(string const&, double, double, string const&, string const&, bool) = 0;
+        /// @brief set net weight 
+        virtual void set_bookshelf_net_weight(string const& name, double w) 
+        {
+            cerr << "Bookshelf net weight: " << name << " " << w << endl;
+            bookshelf_user_cbk_reminder(__func__);
+        }
         /// @brief set design name 
         virtual void set_bookshelf_design(string&) = 0;
         /// @brief a callback when a bookshelf file reaches to the end 
         virtual void bookshelf_end() = 0;
+    private:
+        /// @brief remind users to define some optional callback functions at runtime 
+        /// @param str message including the information to the callback function in the reminder 
+        void bookshelf_user_cbk_reminder(const char* str) const;
 };
 
 } // namespace BookshelfParser

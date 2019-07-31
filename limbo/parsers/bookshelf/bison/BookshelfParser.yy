@@ -407,8 +407,20 @@ wts_header : KWD_UCLA KWD_WTS DOUBLE
            | wts_header EOL
            ;
 
+wts_entry : STRING NUMBER {
+          driver.wtsNetWeightEntry(*$1, $2);
+          delete $1;
+          }
+          | wts_entry EOL
+          ;
+
+wts_entries : wts_entry 
+            | wts_entries wts_entry 
+            ;
+
 /* .wts top */
 bookshelf_wts : wts_header
+              wts_entries
               ;
 
 /***** .aux file ******/
