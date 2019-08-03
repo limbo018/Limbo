@@ -184,7 +184,7 @@ void FMMultiWay<GainCalcType>::run()
         best_kth_move(k, improve);
         revert_to_kth_move(k);
         reset();
-    } while (improve > 0);
+    } while (improve > 1e-3);
 }
 
 } // namespace partition
