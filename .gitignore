@@ -6,6 +6,7 @@ include/*
 wiki
 obj/*
 *.d
+*vscode*
 *.nfs*
 limbo/thirdparty/liblinear/predict
 limbo/thirdparty/liblinear/train

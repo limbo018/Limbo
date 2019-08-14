@@ -4,7 +4,7 @@
  *
  * "Layout decomposition for triple patterning lithography", 
  * Bei Yu, Kun Yuan, Duo Ding, and David Z. Pan, 
- * IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD), 34(3):433â€?46, March 2015.
+ * IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD), 34(3):433-446, March 2015.
  *
  * See @ref limbo::algorithms::coloring::SDPColoringCsdp for details. 
  *
