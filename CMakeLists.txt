@@ -21,7 +21,7 @@ add_definitions(-D_GLIBCXX_USE_CXX11_ABI=${CMAKE_CXX_ABI})
 
 
 # packages like Csdp and SDPColoringCsdp are dependent to OPENBLAS
-option(OPENBLAS "Choose to enable OpenBLAS or not, ON|OFF" ON)
+option(OPENBLAS "Choose to enable OpenBLAS or not, ON|OFF" OFF)
 message("-- OPENBLAS: ${OPENBLAS}")
 
 # whether install the library or not 
