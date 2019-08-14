@@ -32,6 +32,10 @@ message("-- INSTALL_LIMBO: ${INSTALL_LIMBO}")
 option(GENERATE_DOCS "Whether generate documentations, ON|OFF" ON)
 message("-- GENERATE_DOCS: ${GENERATE_DOCS}")
 
+# whether compile test component 
+option(ENABLE_TEST "Whether enable test, ON|OFF" ON)
+message("-- ENABLE_TEST: ${ENABLE_TEST}")
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
@@ -46,7 +50,9 @@ find_package(Gurobi)
 find_package(LpSolve)
 
 add_subdirectory(limbo)
-add_subdirectory(test)
+if (ENABLE_TEST)
+    add_subdirectory(test)
+endif (ENABLE_TEST)
 
 if (GENERATE_DOCS)
     find_package(Doxygen)

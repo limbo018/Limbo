@@ -421,6 +421,7 @@ wts_entries : wts_entry
 /* .wts top */
 bookshelf_wts : wts_header
               wts_entries
+              | wts_header
               ;
 
 /***** .aux file ******/
