@@ -90,7 +90,7 @@ double BacktrackColoring<GraphType>::coloring()
 	vector<int8_t> vColor (this->m_vColor.begin(), this->m_vColor.end());
 	double best_cost = this->init_coloring(vBestColor);
 	double cur_cost = 0;
-	double actual_cost;
+	//double actual_cost;
 
     //std::cout << "best cost from dsat = " << best_cost << std::endl;
 
@@ -125,7 +125,8 @@ double BacktrackColoring<GraphType>::coloring()
 	this->m_vColor.swap(vBestColor);
 
 	// verify solution  
-	actual_cost = this->calc_cost(this->m_vColor);
+	//actual_cost = 
+        this->calc_cost(this->m_vColor);
 //	if(best_cost == actual_cost)
 //		std::cout << "best_cost == actual_cost." << std::endl;
 //	else 
