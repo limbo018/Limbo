@@ -30,3 +30,5 @@ if(INSTALL_LIMBO)
         "EXECUTE_PROCESS(COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/include/lemon ${CMAKE_INSTALL_PREFIX}/include/limbo/thirdparty/lemon)"
         )
 endif(INSTALL_LIMBO)
+
+add_subdirectory(gzstream)

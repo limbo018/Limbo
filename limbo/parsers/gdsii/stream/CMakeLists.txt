@@ -1,7 +1,6 @@
 include_directories(
     ${PROJECT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${Boost_INCLUDE_DIRS}
     ${ZLIB_INCLUDE_DIRS}
     )
 

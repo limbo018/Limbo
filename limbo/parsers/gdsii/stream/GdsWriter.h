@@ -82,7 +82,7 @@ struct gds_celltype                  /*!< A GDS library is a linked list of cell
 };
 
 // forward declaration of a writer class 
-// which is flexiable to choose std::ofstream or boost::iostreams
+// which is flexiable to choose std::ofstream or gzstream
 class GdsStream; 
 
 /// @class GdsParser::GdsWriter

@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <limbo/preprocessor/AssertMsg.h>
 #include <boost/graph/graphviz.hpp>
 #include <boost/graph/graph_utility.hpp>
 #include <boost/graph/adjacency_list.hpp>
@@ -60,7 +61,11 @@ void realGraph(string const& filename)
 	tmpdp.property("label", get(vertex_name, tmpg));
 	tmpdp.property("weight", get(edge_weight, tmpg));
 	tmpdp.property("label", get(edge_weight, tmpg));
-	assert(read_graphviz(in, tmpg, tmpdp, "node_id"));
+    std::cout << "read_graphviz\n";
+	limboAssert(read_graphviz(in, tmpg, tmpdp, "node_id"));
+
+    std::cout << "num_vertices: " << num_vertices(tmpg) << "\n";
+    std::cout << "num_edges: " << num_edges(tmpg) << "\n";
 
 	// real graph 
 	graph_type g (num_vertices(tmpg));
@@ -78,7 +83,7 @@ void realGraph(string const& filename)
 		size_t s_name = get(vertex_name, tmpg, source(*eit, tmpg));
 		size_t t_name = get(vertex_name, tmpg, target(*eit, tmpg));
 		pair<edge_descriptor, bool> pe = add_edge(s_name, t_name, g);
-		assert(pe.second);
+		limboAssert(pe.second);
 		int weight = get(edge_weight, g, *eit);
 		put(edge_weight, g, pe.first, weight);
 	}

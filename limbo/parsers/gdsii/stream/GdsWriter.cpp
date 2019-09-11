@@ -104,11 +104,9 @@ ENDEL
 
 #include <limbo/parsers/gdsii/stream/GdsWriter.h>
 #include <limbo/string/String.h>
-/// support to .gds.gz if BOOST is available 
+/// support to .gds.gz if enabled
 #if ZLIB == 1 
-#include <boost/iostreams/filter/gzip.hpp>
-#include <boost/iostreams/device/file.hpp>
-#include <boost/iostreams/filtering_stream.hpp>
+#include <limbo/thirdparty/gzstream/gzstream.h>
 #endif
 
 #define SKIPOVER( fd, count )  { for ( i=0; i < ((count)-4); i+=2 ) read( (fd), &gdsword, 2 ); }
@@ -126,38 +124,29 @@ class GdsStream
     public:
         GdsStream(const char* filename)
         {
-            m_std = -1; 
 #if ZLIB == 1
             if (limbo::get_file_suffix(filename) == "gz") // detect gz file 
             {
-                m_bos.push(boost::iostreams::gzip_compressor());
-                m_bos.push(boost::iostreams::file_sink(filename));
-                m_stream = &m_bos; 
-                m_std = 0; 
+                m_stream = new ogzstream(filename);
             }
+            else
 #endif
-            if (m_std == -1)
             {
-                m_fos.open(filename);
-                if (!m_fos.good()) 
-                    BAILOUT( "UNABLE TO OPEN OUTPUT FILE" );
-                m_stream = &m_fos; 
-                m_std = 1; 
+                m_stream = new std::ofstream(filename);
+            }
+
+            if (!m_stream->good())
+            {
+                BAILOUT( "UNABLE TO OPEN OUTPUT FILE" );
             }
         }
         ~GdsStream()
         {
-            if (m_std)
-                m_fos.close();
+            delete m_stream; 
         }
         std::ostream& getStream() {return *m_stream;}
     protected:
-#if ZLIB == 1
-        boost::iostreams::filtering_ostream m_bos; 
-#endif
-        std::ofstream m_fos; 
         std::ostream* m_stream; 
-        char m_std; ///< 0 for m_bos, 1 for m_fos, -1 for invalid 
 };
 
 /*------------------------------------------------------------------------------------------*/
