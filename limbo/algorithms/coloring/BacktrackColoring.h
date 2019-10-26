@@ -38,7 +38,6 @@ class BacktrackColoring : public Coloring<GraphType>
         using typename base_type::edge_weight_type;
 		using typename base_type::ColorNumType;
 		typedef typename boost::graph_traits<graph_type>::adjacency_iterator adjacency_iterator_type;
-		typedef typename boost::graph_traits<graph_type>::edge_descriptor edge_descriptor;
         /// @endnowarn
 
 		/// constructor
@@ -69,23 +68,6 @@ class BacktrackColoring : public Coloring<GraphType>
 template <typename GraphType>
 double BacktrackColoring<GraphType>::coloring()
 {
-	/*
-	// init edge costs
-	// For positive edge, cost = 1; for negative edge cost = this->stitch_weight();
-	edge_iterator_type ei, eie;
-	graph_type *tempGraph = const_cast<graph_type* >(&this->m_graph);
-	for(boost::tie(ei, eie) = boost::edges(*tempGraph); ei != eie; ++ei)
-	{
-		// edge_descriptor ed = *ei;
-		edge_weight_type w = 0;
-		if(this->edge_weight(*ei) >= 0)
-			w = 1;
-		else 
-			w = -this->stitch_weight();
-		// (*tempGraph)[ed].weight = w;
-		std::cout << "weight : " << this->edge_weight(*ei) << std::endl;
-	}
-*/
 	vector<int8_t> vBestColor(this->m_vColor.begin(), this->m_vColor.end());
 	vector<int8_t> vColor (this->m_vColor.begin(), this->m_vColor.end());
 	double best_cost = this->init_coloring(vBestColor);
@@ -126,12 +108,8 @@ double BacktrackColoring<GraphType>::coloring()
 
 	// verify solution  
 	actual_cost = this->calc_cost(this->m_vColor);
-//	if(best_cost == actual_cost)
-//		std::cout << "best_cost == actual_cost." << std::endl;
-//	else 
-//		std::cout << "best_cost != actual_cost." << std::endl;
-	//assert_msg(best_cost == actual_cost, "best_cost = " << best_cost << ", actual cost = " << actual_cost);
-	std::cout << "(I) Graph has " << boost::num_vertices(this->m_graph) << " nodes, with backtracking cost " << best_cost << std::endl;
+	assert_msg(best_cost == actual_cost, "best_cost = " << best_cost << ", actual cost = " << actual_cost);
+
 	return best_cost;
 }
 
@@ -173,7 +151,6 @@ void BacktrackColoring<GraphType>::coloring_kernel(vector<int8_t>& vBestColor, v
 			best_cost = cur_cost;
 			vBestColor.assign(vColor.begin(), vColor.end());
 		}
-		// std::cout << "best_cost : " << best_cost << std::endl;
 		return;
 	}
 
@@ -194,13 +171,14 @@ void BacktrackColoring<GraphType>::coloring_kernel(vector<int8_t>& vBestColor, v
 			graph_vertex_type u = *vi;
 			if (u < v) // only check parent node in the recursion tree 
 			{
-				std::pair<graph_edge_type, bool> e = boost::edge(u, v, this->m_graph);
-				assert_msg(e.second, "failed to find edge with " << u << "--" << v);
-				edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, e.first);
-				if (w >= 0) // conflict edge 
-            		delta_cost += (vColor[u] == c)*w;
-				else // stitch edge 
-					delta_cost -= (vColor[u] != c)*w;
+				if (vColor[u] == c) // conflict 
+				{
+					std::pair<graph_edge_type, bool> e = boost::edge(u, v, this->m_graph);
+					assert_msg(e.second, "failed to find edge with " << u << "--" << v);
+					edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, e.first);
+					assert_msg(w > 0, "only support conflict edges with positive cost"); // only support conflict edges 
+					delta_cost += w;
+				}
 			}
 		}
 		cur_cost += delta_cost;
