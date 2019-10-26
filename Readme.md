@@ -27,7 +27,7 @@ Please read this **Readme** file carefully for proper instructions to **install*
 
 # Developers 
 
-- [Yibo Lin](http://www.yibolin.com), ECE Department, UT Austin 
+- [Yibo Lin](http://www.yibolin.com), School of EECS, Peking University
 
 # Introduction 
 
