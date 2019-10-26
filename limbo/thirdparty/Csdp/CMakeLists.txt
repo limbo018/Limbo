@@ -59,7 +59,7 @@ if(INSTALL_LIMBO)
     install(TARGETS sdp DESTINATION lib)
 endif(INSTALL_LIMBO)
 
-set(LIBS sdp openblas m ${CMAKE_THREAD_LIBS_INIT} gfortran)
+set(LIBS sdp ${OpenBLAS_LIBNAME} m ${CMAKE_THREAD_LIBS_INIT} gfortran)
 if(UNIX AND NOT APPLE)
     set(LIBS ${LIBS} rt)
 endif()
