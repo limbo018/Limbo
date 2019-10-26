@@ -1,12 +1,12 @@
 /**
- * @file   ILPColoring.h
+ * @file   ILPColoringUpdated.h
  * @brief  coloring algorithm based on integer linear programming (ILP) with Gurobi as ILP solver.
  * @author Yibo Lin
  * @date   May 2015
  */
 
-#ifndef LIMBO_ALGORITHMS_COLORING_ILPCOLORING
-#define LIMBO_ALGORITHMS_COLORING_ILPCOLORING
+#ifndef LIMBO_ALGORITHMS_COLORING_ILPColoringUpdated
+#define LIMBO_ALGORITHMS_COLORING_ILPColoringUpdated
 
 #include <iostream>
 #include <vector>
@@ -43,7 +43,7 @@ namespace algorithms
 namespace coloring 
 {
 
-/// @class limbo::algorithms::coloring::ILPColoring
+/// @class limbo::algorithms::coloring::ILPColoringUpdated
 /// ILP based graph coloring.  
 /// Edge weight is used to differentiate conflict edge and stitch edge. 
 /// Non-negative weight implies conflict edge, 
@@ -51,7 +51,7 @@ namespace coloring
 /// 
 /// @tparam GraphType graph type 
 template <typename GraphType>
-class ILPColoring : public Coloring<GraphType>
+class ILPColoringUpdated : public Coloring<GraphType>
 {
 	public:
         /// @nowarn 
@@ -70,11 +70,11 @@ class ILPColoring : public Coloring<GraphType>
         
 		/// constructor
         /// @param g graph 
-		ILPColoring(graph_type const& g) 
+		ILPColoringUpdated(graph_type const& g) 
 			: base_type(g)
 		{}
 		/// destructor
-		virtual ~ILPColoring() {}
+		virtual ~ILPColoringUpdated() {}
 
         /// write raw solution of ILP 
         /// @param filename output file name 
@@ -89,7 +89,7 @@ class ILPColoring : public Coloring<GraphType>
 };
 
 template <typename GraphType>
-double ILPColoring<GraphType>::coloring()
+double ILPColoringUpdated<GraphType>::coloring()
 {
 	uint32_t vertex_num = boost::num_vertices(this->m_graph);
 	uint32_t edge_num = boost::num_edges(this->m_graph);
@@ -97,10 +97,18 @@ double ILPColoring<GraphType>::coloring()
 
 	boost::unordered_map<graph_edge_type, uint32_t, edge_hash_type> hEdgeIdx; // edge index 
 
-	uint32_t cnt = 0;
+	uint32_t stitch_cnt = 0;
 	edge_iterator_type ei, eie;
-	for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei, ++cnt)
-		hEdgeIdx[*ei] = cnt;
+	for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei)
+	{
+		edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, *ei);
+		if(w<0){
+			hEdgeIdx[*ei] = stitch_cnt;
+			stitch_cnt++;
+		}
+		
+	}
+		
 
 	/// ILP model 
     model_type opt_model;
@@ -136,22 +144,52 @@ double ILPColoring<GraphType>::coloring()
 	}
 
 	// edge variables 
-	vEdgeBit.reserve(edge_num);
-	for (uint32_t i = 0; i != edge_num; ++i)
+
+    // //New version by Wei
+    // int stitch_index = 0;
+    // uint32_t stitch_edge_num = 0;
+    // //parent node in non-stitch graph index of each node in stitch graph
+    // std::vector<int> stitch_relation_set;
+
+    // //Step 1. Firstly, count the number of stitch edges and store all of the stitch relations
+    // vertex_iterator_type vi, vie,next;
+    // boost::tie(vi, vie) = vertices(this->m_graph);
+    // std::vector<bool> visited(boost::num_vertices(this->m_graph), false);
+    // stitch_relation_set.assign(boost::num_vertices(this->m_graph),-1);
+    // for (next = vi; vi != vie; vi = next)
+    // {
+    //     ++next;
+    //     graph_vertex_type v = *vi;
+    //     if(visited[(int)v]) continue;
+    //     else{
+    //         visited[(int)v] = true;
+    //         stitch_relation_set[(int)v] = stitch_index;
+    //         Coloring<GraphType>::depth_first_search_stitch(v,stitch_relation_set,visited,stitch_edge_num,stitch_index);
+    //         stitch_index ++;
+    //     }
+    // }
+	std::vector<model_type::variable_type> vBigEdgeBit;
+	vBigEdgeBit.reserve(this->big_edge_num);
+    model_type::expression_type obj;
+	for (uint32_t i = 0; i != this->big_edge_num; ++i)
+	{
+		std::ostringstream oss;
+		oss << "big_e" << i;
+		vBigEdgeBit.push_back(opt_model.addVariable(0, 1, limbo::solvers::INTEGER, oss.str()));
+        obj += vBigEdgeBit[i];
+	}
+	// set up the objective 
+	vEdgeBit.reserve(stitch_cnt);
+	for (uint32_t i = 0; i != stitch_cnt; ++i)
 	{
 		std::ostringstream oss;
 		oss << "e" << i;
 		vEdgeBit.push_back(opt_model.addVariable(0, 1, limbo::solvers::INTEGER, oss.str()));
 	}
-
-	// set up the objective 
-    model_type::expression_type obj;
 	for (boost::tie(ei, eie) = edges(this->m_graph); ei != eie; ++ei)
 	{
 		edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, *ei);
-		if (w > 0) // weighted conflict 
-			obj += w*vEdgeBit[hEdgeIdx[*ei]];
-		else if (w < 0) // weighted stitch 
+		if (w < 0) // weighted stitch 
 			obj += this->m_stitch_weight*(-w)*vEdgeBit[hEdgeIdx[*ei]];
 	}
 	opt_model.setObjective(obj);
@@ -166,41 +204,46 @@ double ILPColoring<GraphType>::coloring()
 
 		uint32_t vertex_idx1 = s<<1;
 		uint32_t vertex_idx2 = t<<1;
+		int edge_idx =-1;
 
 		edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, *ei);
-		uint32_t edge_idx = hEdgeIdx[*ei];
-
+		if(w<0){
+			edge_idx = hEdgeIdx[*ei];
+		}	
+	
 		char buf[100];
 		string tmpConstr_name;
 		if (w >= 0) // constraints for conflict edges 
 		{
+			int big_e_index = this->edge_index_vector[(uint32_t)(this->stitch_relation_set[(int)s]*this->stitch_index + this->stitch_relation_set[(int)t])];
 			sprintf(buf, "R%u", constr_num++);  
 			opt_model.addConstraint(
 					vVertexBit[vertex_idx1] + vVertexBit[vertex_idx1+1] 
 					+ vVertexBit[vertex_idx2] + vVertexBit[vertex_idx2+1] 
-					+ vEdgeBit[edge_idx] >= 1
+					+ vBigEdgeBit[big_e_index] >= 1
 					, buf);
 
 			sprintf(buf, "R%u", constr_num++);  
 			opt_model.addConstraint(
 					- vVertexBit[vertex_idx1] + vVertexBit[vertex_idx1+1] 
 					- vVertexBit[vertex_idx2] + vVertexBit[vertex_idx2+1] 
-					+ vEdgeBit[edge_idx] >= -1
+					+ vBigEdgeBit[big_e_index] >= -1
 					, buf);
 
 			sprintf(buf, "R%u", constr_num++);  
 			opt_model.addConstraint(
 					vVertexBit[vertex_idx1] - vVertexBit[vertex_idx1+1] 
 					+ vVertexBit[vertex_idx2] - vVertexBit[vertex_idx2+1] 
-					+ vEdgeBit[edge_idx] >= -1
+					+ vBigEdgeBit[big_e_index] >= -1
 					, buf);
 
 			sprintf(buf, "R%u", constr_num++);  
 			opt_model.addConstraint(
 					- vVertexBit[vertex_idx1] - vVertexBit[vertex_idx1+1] 
 					- vVertexBit[vertex_idx2] - vVertexBit[vertex_idx2+1] 
-					+ vEdgeBit[edge_idx] >= -3
+					+ vBigEdgeBit[big_e_index] >= -3
 					, buf);
+			//std::cout <<(int)s<<" "<<(int)t<<std::endl;
 
 		}
 		else // constraints for stitch edges 
@@ -241,7 +284,7 @@ double ILPColoring<GraphType>::coloring()
 	//optimize model 
     solver_type solver (&opt_model); 
     int32_t opt_status = solver(&gurobiParams); 
-#ifdef DEBUG_ILPCOLORING
+#ifdef DEBUG_ILPColoringUpdated
 	opt_model.print("graph.lp");
 	opt_model.printSolution("graph.sol");
 #endif 
@@ -251,7 +294,7 @@ double ILPColoring<GraphType>::coloring()
 		exit(1);
 	}
 
-#ifdef DEBUG_ILPCOLORING
+#ifdef DEBUG_ILPColoringUpdated
     this->write_graph_sol("graph_sol", opt_model, vVertexBit); // dump solution figure 
 #endif
 
@@ -273,8 +316,8 @@ double ILPColoring<GraphType>::coloring()
 }
 
 template <typename GraphType>
-void ILPColoring<GraphType>::write_graph_sol(string const& filename, typename ILPColoring<GraphType>::model_type const& opt_model, 
-        std::vector<typename ILPColoring<GraphType>::model_type::variable_type> const& vVertexBit) const
+void ILPColoringUpdated<GraphType>::write_graph_sol(string const& filename, typename ILPColoringUpdated<GraphType>::model_type const& opt_model, 
+        std::vector<typename ILPColoringUpdated<GraphType>::model_type::variable_type> const& vVertexBit) const
 {
 	std::ofstream out((filename+".gv").c_str());
 	out << "graph D { \n"
