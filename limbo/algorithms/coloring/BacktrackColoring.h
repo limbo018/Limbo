@@ -196,7 +196,7 @@ void BacktrackColoring<GraphType>::coloring_kernel(vector<int8_t>& vBestColor, v
 				if (w >= 0) // conflict edge 
             		delta_cost += (vColor[u] == c)*w;
 				else // stitch edge 
-					delta_cost -= (vColor[u] != c)*w;
+					delta_cost -= (vColor[u] != c)*w*this->stitch_weight();
 			}
 		}
 		cur_cost += delta_cost;

@@ -7,6 +7,7 @@
 
 #ifndef LIMBO_ALGORITHMS_COLORING_COLORING
 #define LIMBO_ALGORITHMS_COLORING_COLORING
+#define DEBUG_LIWEI
 #include <fstream>
 #include <vector>
 #include <boost/cstdint.hpp>
@@ -153,6 +154,13 @@ class Coloring
 		/// constructor
         /// @param g graph 
 		Coloring(graph_type const& g);
+        // node num in big graph
+        int stitch_index = 0;
+        // edge num in big graph
+        int big_edge_num = 0;
+        std::vector<int> stitch_relation_set;
+        //a verctor of len(stitch_index*stitch_index) 
+        std::vector<int> edge_index_vector;
 		/// destructor
 		virtual ~Coloring() {};
 
@@ -258,36 +266,16 @@ double Coloring<GraphType>::operator()()
 {
     double cost ;
     uint32_t stitch_edge_num = 0;
-    int stitch_index = 0;
-    // clock_t sub_comp_start = clock();
-    // if (boost::num_vertices(m_graph) <= color_num()) // if vertex number is no larger than color number, directly assign color
-    // {
-    //     // need to consider precolored vertices
-    //     bool unusedColors[4] = {true, true, true, true};
-    //     if (color_num() == THREE)
-    //         unusedColors[3] = false;
-    //     for (int32_t i = 0, ie = m_vColor.size(); i != ie; ++i)
-    //     {
-    //         if (m_vColor[i] < 0) // if not precolored, assign to an unused color
-    //         {
-    //             for (int8_t c = 0; c != 4; ++c)
-    //                 if (unusedColors[c])
-    //                 {
-    //                     m_vColor[i] = c;
-    //                     break;
-    //                 }
-    //         }
-    //         // must have valid color after assignment 
-    //         limboAssert(m_vColor[i] >= 0);
-    //         unusedColors[m_vColor[i]] = false;
-    //     }
-    //     cost = calc_cost(m_vColor);
-    // }
+    //total wo-stitch node number
+    
+    //parent node in non-stitch graph index of each node in stitch graph
+
+
     //Step 1. Firstly, count the number of stitch edges and store all of the stitch relations
     vertex_iterator_type vi, vie,next;
     boost::tie(vi, vie) = vertices(m_graph);
     std::vector<bool> visited(boost::num_vertices(m_graph), false);
-    std::vector<int> stitch_relation_set(boost::num_vertices(m_graph));
+    stitch_relation_set.assign(boost::num_vertices(m_graph),-1);
     for (next = vi; vi != vie; vi = next)
     {
         ++next;
@@ -300,10 +288,13 @@ double Coloring<GraphType>::operator()()
             stitch_index ++;
         }
     }
+
+
+    edge_index_vector.assign(stitch_index*stitch_index,-1);
     bool is_legal = true;
 
     //Step 2. Verify the feasibility of this method(no conflict should be introduced when inserting stitch)
-    //This code part can be commented
+    // Also, record the edge_index_vector
     boost::tie(vi, vie) = vertices(m_graph);
     for (next = vi; vi != vie; vi = next)
     {
@@ -315,7 +306,14 @@ double Coloring<GraphType>::operator()()
             ++next2; 
             graph_vertex_type v2 = *vi2;
             std::pair<graph_edge_type, bool> e12 = boost::edge(v, v2, m_graph);
-            limboAssert(e12.second);
+            assert(e12.second);
+            if(boost::get(boost::edge_weight, m_graph, e12.first) > 0){
+                //if the big_edge is not considered, consider it and add 1
+                if(edge_index_vector[stitch_relation_set[(int)v]*stitch_index + stitch_relation_set[(int)v2]] == -1){
+                    edge_index_vector[stitch_relation_set[(int)v]*stitch_index + stitch_relation_set[(int)v2]] = big_edge_num;
+                    big_edge_num++;
+                }
+            }
             if (boost::get(boost::edge_weight, m_graph, e12.first) > 0 && stitch_relation_set[(int)v] == stitch_relation_set[(int)v2])  is_legal = false;
         }
     }
@@ -327,7 +325,7 @@ double Coloring<GraphType>::operator()()
     if (boost::num_vertices(m_graph) <= color_num()+stitch_edge_num && is_legal) // if vertex number is no larger than color number, directly assign color
     {
         //Step 3.1: Assign pre-defined color firstly
-        limboAssert(stitch_index <= color_num());
+        assert(stitch_index <= color_num());
         for (int32_t i = 0, ie = m_vColor.size(); i != ie; ++i)
         {
             if (m_vColor[i] >= 0) // if not precolored, assign to an unused color
@@ -377,7 +375,7 @@ std::vector<bool>& visited,uint32_t& stitch_edge_num, int stitch_index)
         graph_vertex_type v2 = *vi2;
         if(visited[(int)v2])    continue;
         std::pair<graph_edge_type, bool> e12 = boost::edge(v, v2, m_graph);
-        limboAssert(e12.second);
+        assert(e12.second);
         if (boost::get(boost::edge_weight, m_graph, e12.first) < 0) {
             visited[(int)v2] = true;
             stitch_edge_num ++;
@@ -391,7 +389,7 @@ std::vector<bool>& visited,uint32_t& stitch_edge_num, int stitch_index)
 template <typename GraphType>
 typename Coloring<GraphType>::edge_weight_type Coloring<GraphType>::calc_cost(std::vector<int8_t> const& vColor) const 
 {
-	limboAssert(vColor.size() == boost::num_vertices(this->m_graph));
+	assert(vColor.size() == boost::num_vertices(this->m_graph));
 	double cost = 0;
 	edge_iterator_type ei, eie;
 	for (boost::tie(ei, eie) = boost::edges(m_graph); ei != eie; ++ei)
