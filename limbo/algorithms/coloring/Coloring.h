@@ -402,16 +402,13 @@ typename Coloring<GraphType>::edge_weight_type Coloring<GraphType>::calc_cost(st
             continue; 
 		if (w >= 0) // conflict edge 
         {
-            // std::cout << "conflict : " << w << std::endl;
             cost += (vColor[s] == vColor[t])*w;
         }
 		else // stitch edge 
         {
-            // std::cout << "stitch : " << w << std::endl;
 			cost -= (vColor[s] != vColor[t])*w*this->stitch_weight();
         }
 	}
-    // std::cout << "cost : " << cost << std::endl;
 	return cost;
 }
 
@@ -433,9 +430,9 @@ void Coloring<GraphType>::print_edge_weight(typename Coloring<GraphType>::graph_
 	for (boost::tie(ei, eie) = boost::edges(g); ei != eie; ++ei)
 	{
 		edge_weight_type w = boost::get(boost::edge_weight, m_graph, *ei);
-        std::cout << w << " ";
+        limboPrint(kNONE, "%g ", (double)w);
     }
-    std::cout << "\n";
+    limboPrint(kNONE, "\n");
 }
 
 // it seems doxygen cannot handle template functions with the same name correctly 
@@ -450,7 +447,7 @@ template <typename GraphType>
 void Coloring<GraphType>::write_graph(std::string const& filename, Coloring<GraphType>::graph_type const& g, std::vector<int8_t> const& vColor) const
 {
     std::ofstream out ((filename+".gv").c_str());
-    std::cout << "write_graph : " << filename << std::endl;
+    limboPrint(kINFO, "write_graph : %s\n", filename.c_str());
     la::write_graph(out, g, ColoringVertexLabelWriter<graph_type>(g, vColor), ColoringEdgeLabelWriter<graph_type>(g, vColor));
     out.close();
     la::graphviz2pdf(filename);
