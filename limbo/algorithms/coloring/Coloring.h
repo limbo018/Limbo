@@ -7,7 +7,7 @@
 
 #ifndef LIMBO_ALGORITHMS_COLORING_COLORING
 #define LIMBO_ALGORITHMS_COLORING_COLORING
-#define DEBUG_LIWEI
+
 #include <fstream>
 #include <vector>
 #include <boost/cstdint.hpp>

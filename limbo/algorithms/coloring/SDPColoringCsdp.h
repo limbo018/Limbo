@@ -196,7 +196,9 @@ SDPColoringCsdp<GraphType>::SDPColoringCsdp(SDPColoringCsdp<GraphType>::graph_ty
 template <typename GraphType>
 double SDPColoringCsdp<GraphType>::coloring()
 {
+#ifdef DEBUG_LIWEI
     clock_t solve_start = clock();
+#endif
     // Since Csdp is written in C, the api here is also in C 
     // Please refer to the documation of Csdp for different notations 
     // basically, X is primal variables, C, b, constraints and pobj are all for primal 
@@ -363,8 +365,10 @@ double SDPColoringCsdp<GraphType>::coloring()
     int ret = limbo::solvers::easy_sdp_ext<int>(num_variables, num_constraints, C, b, constraints, 0.0, &X, &y, &Z, &pobj, &dobj, params, printlevel);
     limboAssertMsg(ret == 0, "SDP failed");
 
+#ifdef DEBUG_LIWEI
     clock_t solve_end = clock();
-    std::cout << "(I) SDP solver takes " << (double)(solve_end - solve_start)/CLOCKS_PER_SEC << " seconds with " << num_vertices << " nodes." << std::endl;
+    limboPrint(kDEBUG, "SDP solver takes %g seconds with %u nodes\n", (double)(solve_end - solve_start)/CLOCKS_PER_SEC, num_vertices);
+#endif
     // round result to get colors 
     round_sol(X);
 
@@ -377,7 +381,9 @@ double SDPColoringCsdp<GraphType>::coloring()
     // return objective value 
     //return (dobj+pobj)/2;
     double final_cost = this->calc_cost(this->m_vColor);
-    std::cout << "(I) SDP coloring cost " << final_cost << std::endl;
+#ifdef DEBUG_LIWEI
+    limboPrint(kDEBUG, "SDP coloring cost %g\n", final_cost);
+#endif
     return final_cost;
 }
 
@@ -490,7 +496,6 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
 #endif
     }
 #ifdef DEBUG_SDPCOLORING
-    std::cout << "DEBUG_SDPCOLORING defined." << std::endl;
     //this->print_edge_weight(this->m_graph);
     //this->check_edge_weight(this->m_graph, this->stitch_weight()/10, 4);
     //this->print_edge_weight(mg);
@@ -517,7 +522,9 @@ void SDPColoringCsdp<GraphType>::coloring_merged_graph(graph_type const& mg, std
 {
 
     uint32_t num_vertices = boost::num_vertices(mg);
-    std::cout << "(I) SDP merged coloring with " << num_vertices << " nodes.\n";
+#ifdef DEBUG_LIWEI
+    limboPrint(kDEBUG, "SDP merged coloring with %u nodes\n", num_vertices);
+#endif
     // if small number of vertices or no vertex merged, no need to simplify graph 
     if (num_vertices <= max_backtrack_num_vertices || num_vertices == boost::num_vertices(this->m_graph)) 
     {
@@ -588,12 +595,16 @@ void SDPColoringCsdp<GraphType>::coloring_algos(graph_type const& g, std::vector
 {
     if (boost::num_vertices(g) <= max_backtrack_num_vertices)
     {
-        std::cout << "coloring by backtrack with " << boost::num_vertices(g) << " nodes."<< std::endl;
+#ifdef DEBUG_LIWEI
+        limboPrint(kDEBUG, "coloring by backtrack with %lu nodes\n", boost::num_vertices(g));
+#endif
         coloring_by_backtrack(g, vColor);
     }
     else
     {
-        std::cout << "coloring by FM with " << boost::num_vertices(g) << " nodes."<< std::endl;
+#ifdef DEBUG_LIWEI
+        limboPrint(kDEBUG, "coloring by FM with %lu nodes\n", boost::num_vertices(g));
+#endif
         coloring_by_FM(g, vColor);
     }
 #ifdef QDEBUG
@@ -620,14 +631,18 @@ void SDPColoringCsdp<GraphType>::coloring_by_backtrack(SDPColoringCsdp<GraphType
 template <typename GraphType>
 void SDPColoringCsdp<GraphType>::coloring_by_FM(SDPColoringCsdp<GraphType>::graph_type const& mg, std::vector<int8_t>& vColor) const
 {
+#ifdef DEBUG_LIWEI
     clock_t fm_start = clock();
+#endif
     limbo::algorithms::partition::FMMultiWay<FMGainCalcType> fmp (FMGainCalcType(mg), boost::num_vertices(mg), this->color_num());
     fmp.set_partitions(vColor.begin(), vColor.end());
     fmp();
     for (uint32_t i = 0, ie = vColor.size(); i != ie; ++i)
         vColor[i] = fmp.partition(i);
+#ifdef DEBUG_LIWEI
     clock_t fm_end = clock();
-    std::cout << "(I) FM coloring takes " << (double)(fm_end - fm_start)/CLOCKS_PER_SEC << " seconds.\n";
+    limboPrint(kDEBUG, "FM coloring takes %g seconds\n", (double)(fm_end - fm_start)/CLOCKS_PER_SEC);
+#endif
 }
 
 template <typename GraphType>

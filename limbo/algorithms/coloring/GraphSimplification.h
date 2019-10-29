@@ -460,7 +460,6 @@ bool GraphSimplification<GraphType>::whether_VDDGND(typename GraphSimplification
 	return m_isVDDGND[id];
 }
 
-
 template <typename GraphType>
 bool GraphSimplification<GraphType>::simplified_graph_component(uint32_t comp_id, typename GraphSimplification<GraphType>::graph_type& simplG, 
 		std::vector<typename GraphSimplification<GraphType>::graph_vertex_type>& vSimpl2Orig) const
@@ -477,11 +476,11 @@ bool GraphSimplification<GraphType>::simplified_graph_component(uint32_t comp_id
 #ifdef DEBUG_GRAPHSIMPLIFICATION
 	std::cout << "Comp " << comp_id << ": ";
 	for (uint32_t i = 0; i != vCompVertex.size(); ++i)
-		//std::cout << vCompVertex[i] << " ";
+		std::cout << vCompVertex[i] << " ";
 	std::cout << std::endl;
 #endif
+#ifdef DEBUG_LIWEI
 	bool flag = false;
-#ifdef _DGOUT_LIWEI
 	std::cout << "\nSimplified Comp " << comp_id << " : \n";
 	for (uint32_t i = 0; i != vCompVertex.size(); ++i)
 		std::cout << i << " : " << vCompVertex[i] << std::endl;
@@ -504,18 +503,22 @@ bool GraphSimplification<GraphType>::simplified_graph_component(uint32_t comp_id
 		assert(this->good(v));
 		bool ap = this->articulation_point(v);
 
+#ifdef DEBUG_LIWEI
 		if (flag)
 		{
-			std::cout << "v : " << v << "  ap : " << ap << std::endl;
+            limboPrint(kDEBUG, "v : %u ap : %d\n", (uint32_t)v, (int)ap);
 		}
+#endif
 		std::vector<graph_vertex_type> const& vChildren = m_vChildren.at(v);
 		for (typename std::vector<graph_vertex_type>::const_iterator vic = vChildren.begin(); vic != vChildren.end(); ++vic)
 		{
 			graph_vertex_type vc = *vic;
+#ifdef DEBUG_LIWEI
 			if (flag)
 			{
 				std::cout << "vc : " << vc << std::endl;
 			}
+#endif
 			typename boost::graph_traits<graph_type>::adjacency_iterator ui, uie;
 			for (boost::tie(ui, uie) = boost::adjacent_vertices(vc, m_graph); ui != uie; ++ui)
 			{
@@ -523,10 +526,12 @@ bool GraphSimplification<GraphType>::simplified_graph_component(uint32_t comp_id
 				// skip hidden 
 				if (this->hidden(uc)) continue;
 				graph_vertex_type u = this->parent(uc);
+#ifdef DEBUG_LIWEI
 				if (flag)
 				{
 					std::cout << "uc : " << uc << "  parent u : " << u << std::endl;
 				}
+#endif
 				// skip non-good 
 				if (!this->good(u)) continue;
 				else if (v >= u) continue; // avoid duplicate 
@@ -539,10 +544,12 @@ bool GraphSimplification<GraphType>::simplified_graph_component(uint32_t comp_id
 				// skip bridge 
 				//if (m_sBridgeEdge.count(e.first)) continue;
 				graph_vertex_type usg = mOrig2Simpl[u];
+#ifdef DEBUG_LIWEI
 				if (flag)
 				{
 					std::cout << "usg : " << usg <<  "  vsg : " << vsg << std::endl;
 				}
+#endif
 				assert_msg(usg != vsg, u << "==" << v << ": " << usg << " == " << vsg);
 				
 				std::pair<graph_edge_type, bool> esg = boost::edge(vsg, usg, sg);
@@ -573,9 +580,7 @@ bool GraphSimplification<GraphType>::simplified_graph_component(uint32_t comp_id
 	for (boost::tie(vi1, vie1) = boost::vertices(simplG); vi1 != vie1; ++vi1)
 	{
 		count++;
-		//std::cout << *vi1 << " " ;
 	}
-	//std::cout << "\nFinally : " << count << std::endl << std::endl;
 	return true;
 }
 
@@ -644,9 +649,9 @@ void GraphSimplification<GraphType>::simplify(uint32_t level)
     }
 	if (m_level & BICONNECTED_COMPONENT)
     {
-		//std::cout << "also conduct biconnected_component()!" << std::endl;
 		this->biconnected_component();
         reconstruct = false;
+#ifdef DEBUG_LIWEI
 		uint32_t comp_id = 0;
 		for (typename std::vector<std::vector<graph_vertex_type> >::iterator it = m_mCompVertex.begin(); it != m_mCompVertex.end(); it++, comp_id++)
 		{
@@ -654,12 +659,12 @@ void GraphSimplification<GraphType>::simplify(uint32_t level)
 			{
 				if (m_isVDDGND[*its])
 				{
-					std::cout << "comp " << comp_id << " has VDD " << *its << std::endl;
+                    limboPrint(kDEBUG, "comp %u has VDD %u\n", comp_id, (uint32_t)*its);
 				}
 			}
 		}
+#endif
     }
-	//std::cout << "num_component() : " << this->num_component() << std::endl;
     if (reconstruct) // if BICONNECTED_COMPONENT or HIDE_SMALL_DEGREE is not on, we need to construct m_mCompVertex with size 1 
     {
         m_mCompVertex.assign(1, std::vector<graph_vertex_type>());
@@ -854,8 +859,10 @@ void GraphSimplification<GraphType>::hide_small_degree()
 					std::pair<graph_edge_type, bool> e12 = boost::edge(vc1, *vi2, m_graph);
 					assert(e12.second);
 					if (boost::get(boost::edge_weight, m_graph, e12.first) < 0) 
-						{	stitchPreVDD_degree += 1;
-							continue;}
+					{
+                        stitchPreVDD_degree += 1;
+							continue;
+                    }
 					// not exactly the number of conflict edge
 					bool isVdd = m_isVDDGND[*vi2];
 					if (isVdd && bFind)	continue;
@@ -912,7 +919,6 @@ void GraphSimplification<GraphType>::biconnected_component()
 	for (boost::tie(vi, vie) = boost::vertices(m_graph); vi != vie; ++vi)
 		vParent[*vi] = *vi;
 	
-	//std::cout << "\nm_vStatus.size() : " << m_vStatus.size() << std::endl;
 	for (boost::tie(vi, vie) = boost::vertices(m_graph); vi != vie; ++vi)
 	{
 		graph_vertex_type source = *vi;
@@ -958,30 +964,29 @@ void GraphSimplification<GraphType>::biconnected_component()
 		}
 	}
 
-	//std::cout << "articulation has :" << m_mArtiPoint.size() << std::endl;
-	//std::cout << "\n********************\nNow output the articulation  information : " << std::endl;
+#ifdef DEBUG_LIWEI
 	for (typename std::map<graph_vertex_type, std::set<uint32_t> >::iterator it = m_mArtiPoint.begin(); it != m_mArtiPoint.end(); it++)
 	{
 		if (m_isVDDGND[it->first])
-			std::cout << "VDD__";
-		std::cout << "AP : " << it->first << std::endl << "with comps : ";
+            limboPrint(kNONE, "VDD__");
+        limboPrint(kNONE, "AP : %u\nwith comps : ", (uint32_t)it->first);
 		for (typename std::set<uint32_t>::iterator its = it->second.begin(); its != it->second.end(); its++)
-			std::cout << *its << ", ";
-		std::cout << std::endl;
+            limboPrint(kNONE, "%u, ", (uint32_t)*its);
+        limboPrint(kNONE, "\n");
 	}
 	comp_id = 0;
-	//std::cout << "\n********************\nNow output the component information : " << std::endl;
 	for (typename std::vector<std::vector<graph_vertex_type> >::iterator it = m_mCompVertex.begin(); it != m_mCompVertex.end(); it++, comp_id++)
 	{
-		std::cout << "comp " << comp_id << std::endl;
+        limboPrint(kNONE, "comp %u\n", comp_id);
 		for (typename std::vector<graph_vertex_type>::iterator its = it->begin(); its != it->end(); its++)
 		{
 			if(m_isVDDGND[*its])
-				std::cout << "vdd_";
-			std::cout << *its << " ";
+                limboPrint(kNONE, "vdd_");
+            limboPrint(kNONE, "%u ", (uint32_t)*its);
 		}
-		std::cout << "\n\n";
+        limboPrint(kNONE, "\n\n");
 	}
+#endif
 
 #ifdef DEBUG_GRAPHSIMPLIFICATION
 	comp_id = 0;
@@ -1031,10 +1036,7 @@ void GraphSimplification<GraphType>::biconnected_component_recursion(graph_verte
 	for (typename std::vector<graph_vertex_type>::const_iterator vic = vChildren.begin(); vic != vChildren.end(); ++vic)
 	{
 		graph_vertex_type vc = *vic;
-		if (vc >= m_vStatus.size())
-		{
-			std::cout << "\nm_vStatus ERROR !!!!! " << v << " and " << vc << std::endl;
-		}
+        limboAssertMsg(vc < m_vStatus.size(), "m_vStatus ERROR: %u vs %u", (uint32_t)v, (uint32_t)vc);
 		// skip hidden vertex 
 		if (this->hidden(vc)) continue;
 

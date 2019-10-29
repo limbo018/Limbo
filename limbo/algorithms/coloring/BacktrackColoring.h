@@ -128,7 +128,9 @@ double BacktrackColoring<GraphType>::coloring()
 	// verify solution  
 	actual_cost = this->calc_cost(this->m_vColor);
 	//assert_msg(best_cost == actual_cost, "best_cost = " << best_cost << ", actual cost = " << actual_cost);
-	std::cout << "(I) Graph has " << boost::num_vertices(this->m_graph) << " nodes, with backtracking cost " << best_cost << std::endl;
+#ifdef DEBUG_LIWEI
+    limboPrint(kDEBUG, "Graph has %lu nodes, with backtracking cost %g\n", boost::num_vertices(this->m_graph), best_cost);
+#endif
 	return best_cost;
 }
 
