@@ -306,7 +306,7 @@ double Coloring<GraphType>::operator()()
             ++next2; 
             graph_vertex_type v2 = *vi2;
             std::pair<graph_edge_type, bool> e12 = boost::edge(v, v2, m_graph);
-            assert(e12.second);
+            limboAssert(e12.second);
             if(boost::get(boost::edge_weight, m_graph, e12.first) > 0){
                 //if the big_edge is not considered, consider it and add 1
                 if(edge_index_vector[stitch_relation_set[(int)v]*stitch_index + stitch_relation_set[(int)v2]] == -1){
@@ -325,7 +325,7 @@ double Coloring<GraphType>::operator()()
     if (boost::num_vertices(m_graph) <= color_num()+stitch_edge_num && is_legal) // if vertex number is no larger than color number, directly assign color
     {
         //Step 3.1: Assign pre-defined color firstly
-        assert(stitch_index <= color_num());
+        limboAssert(stitch_index <= color_num());
         for (int32_t i = 0, ie = m_vColor.size(); i != ie; ++i)
         {
             if (m_vColor[i] >= 0) // if not precolored, assign to an unused color
@@ -357,6 +357,7 @@ double Coloring<GraphType>::operator()()
             }
         }
         cost = calc_cost(m_vColor);
+        limboAssert(cost == 0);
     }
     else // perform coloring algorithm 
         cost = this->coloring();
@@ -375,7 +376,7 @@ std::vector<bool>& visited,uint32_t& stitch_edge_num, int stitch_index)
         graph_vertex_type v2 = *vi2;
         if(visited[(int)v2])    continue;
         std::pair<graph_edge_type, bool> e12 = boost::edge(v, v2, m_graph);
-        assert(e12.second);
+        limboAssert(e12.second);
         if (boost::get(boost::edge_weight, m_graph, e12.first) < 0) {
             visited[(int)v2] = true;
             stitch_edge_num ++;
@@ -389,7 +390,7 @@ std::vector<bool>& visited,uint32_t& stitch_edge_num, int stitch_index)
 template <typename GraphType>
 typename Coloring<GraphType>::edge_weight_type Coloring<GraphType>::calc_cost(std::vector<int8_t> const& vColor) const 
 {
-	assert(vColor.size() == boost::num_vertices(this->m_graph));
+	limboAssert(vColor.size() == boost::num_vertices(this->m_graph));
 	double cost = 0;
 	edge_iterator_type ei, eie;
 	for (boost::tie(ei, eie) = boost::edges(m_graph); ei != eie; ++ei)
