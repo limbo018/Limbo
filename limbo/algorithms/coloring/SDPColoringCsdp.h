@@ -182,7 +182,7 @@ class SDPColoringCsdp : public Coloring<GraphType>
 
         double m_rounding_lb; ///< if SDP solution x < m_rounding_lb, take x as -0.5
         double m_rounding_ub; ///< if SDP solution x > m_rounding_ub, take x as 1.0
-        const static uint32_t max_backtrack_num_vertices = 6; ///< maximum number of graph size that @ref limbo::algorithms::coloring::BacktrackColoring can handle
+        const static uint32_t max_backtrack_num_vertices = 100; ///< maximum number of graph size that @ref limbo::algorithms::coloring::BacktrackColoring can handle
 };
 
 template <typename GraphType>
@@ -485,7 +485,7 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
         graph_vertex_type mt = vG2MG.at(t);
         std::pair<graph_edge_type, bool> me = boost::edge(ms, mt, mg);
         // need to consider if this setting is still reasonable when stitch is on 
-        edge_weight_type w = (this->edge_weight(e) >= 0)? 1 : -this->stitch_weight();
+        edge_weight_type w = (this->edge_weight(e) >= 0)? 1 : -1;
         if (me.second) // already exist, update weight 
             w += boost::get(boost::edge_weight, mg, me.first);
         else // not exist, add edge 

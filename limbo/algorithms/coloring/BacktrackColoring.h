@@ -88,8 +88,8 @@ double BacktrackColoring<GraphType>::coloring()
 */
 	vector<int8_t> vBestColor(this->m_vColor.begin(), this->m_vColor.end());
 	vector<int8_t> vColor (this->m_vColor.begin(), this->m_vColor.end());
-	double best_cost = this->init_coloring(vBestColor);
-	//double best_cost = std::numeric_limits<double>::max();
+	//double best_cost = this->init_coloring(vBestColor);
+	double best_cost = std::numeric_limits<double>::max();
 	double cur_cost = 0;
 	double actual_cost;
 
@@ -163,7 +163,7 @@ void BacktrackColoring<GraphType>::coloring_kernel(vector<int8_t>& vBestColor, v
 {
 	if (best_cost <= cost_lb) // no conflict or reach to lower bound cost  
 		return;
-	if (cur_cost >= best_cost || cur_cost > cost_ub) // branch and bound 
+	if (cur_cost >= best_cost|| cur_cost > cost_ub) // branch and bound 
 		return; 
 	if (v == boost::num_vertices(this->m_graph)) // leaf node in the recursion tree 
 	{
