@@ -967,7 +967,7 @@ void GraphSimplification<GraphType>::biconnected_component()
 		std::cout << "AP : " << it->first << std::endl << "with comps : ";
 		for (typename std::set<uint32_t>::iterator its = it->second.begin(); its != it->second.end(); its++)
 			std::cout << *its << ", ";
-		std::cout << endl;
+		std::cout << std::endl;
 	}
 	comp_id = 0;
 	//std::cout << "\n********************\nNow output the component information : " << std::endl;

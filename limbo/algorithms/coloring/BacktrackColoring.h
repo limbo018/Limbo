@@ -89,6 +89,7 @@ double BacktrackColoring<GraphType>::coloring()
 	vector<int8_t> vBestColor(this->m_vColor.begin(), this->m_vColor.end());
 	vector<int8_t> vColor (this->m_vColor.begin(), this->m_vColor.end());
 	double best_cost = this->init_coloring(vBestColor);
+	//double best_cost = std::numeric_limits<double>::max();
 	double cur_cost = 0;
 	double actual_cost;
 
