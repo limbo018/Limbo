@@ -603,17 +603,10 @@ void GraphSimplification<GraphType>::mergeVDD(std::set<typename GraphSimplificat
 {
 	typename std::set<graph_vertex_type>::iterator it = vdd_set.begin();
 
-#ifdef _DGOUT
-	std::cout << "\nThe first VDD is : " << *it << " with vChildren " << m_vChildren.size() << " and m_vParent " << m_vParent.size() << std::endl;
-#endif
-
 	graph_vertex_type parent = *it;
 	it++;
 	for (; it != vdd_set.end(); it++)
 	{
-#ifdef _DGOUT
-		std::cout << "set " << *it << " parent as " << parent << std::endl;
-#endif
 		m_vParent[*it] = parent;
 		m_vStatus[*it] = MERGED;
 	}
@@ -621,9 +614,6 @@ void GraphSimplification<GraphType>::mergeVDD(std::set<typename GraphSimplificat
 	it++;
 	for (; it != vdd_set.end(); it++)
 	{
-#ifdef _DGOUT
-		std::cout << "set " << parent << " Child " << *it << std::endl;
-#endif
 		m_vChildren[parent].push_back(*it);
 	}
 
