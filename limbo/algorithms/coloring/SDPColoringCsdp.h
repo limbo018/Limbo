@@ -182,7 +182,7 @@ class SDPColoringCsdp : public Coloring<GraphType>
 
         double m_rounding_lb; ///< if SDP solution x < m_rounding_lb, take x as -0.5
         double m_rounding_ub; ///< if SDP solution x > m_rounding_ub, take x as 1.0
-        const static uint32_t max_backtrack_num_vertices = 100; ///< maximum number of graph size that @ref limbo::algorithms::coloring::BacktrackColoring can handle
+        const static uint32_t max_backtrack_num_vertices = 6; ///< maximum number of graph size that @ref limbo::algorithms::coloring::BacktrackColoring can handle
 };
 
 template <typename GraphType>
@@ -190,15 +190,13 @@ SDPColoringCsdp<GraphType>::SDPColoringCsdp(SDPColoringCsdp<GraphType>::graph_ty
     : base_type(g)
 {
     m_rounding_lb = -0.4;
-    m_rounding_ub = 0.9;
+    m_rounding_ub = 0.95;
 }
 
 template <typename GraphType>
 double SDPColoringCsdp<GraphType>::coloring()
 {
-#ifdef DEBUG_LIWEI
     clock_t solve_start = clock();
-#endif
     // Since Csdp is written in C, the api here is also in C 
     // Please refer to the documation of Csdp for different notations 
     // basically, X is primal variables, C, b, constraints and pobj are all for primal 
@@ -365,7 +363,7 @@ double SDPColoringCsdp<GraphType>::coloring()
     int ret = limbo::solvers::easy_sdp_ext<int>(num_variables, num_constraints, C, b, constraints, 0.0, &X, &y, &Z, &pobj, &dobj, params, printlevel);
     limboAssertMsg(ret == 0, "SDP failed");
 
-#ifdef DEBUG_LIWEI
+ #ifdef DEBUG_LIWEI
     clock_t solve_end = clock();
     limboPrint(kDEBUG, "SDP solver takes %g seconds with %u nodes\n", (double)(solve_end - solve_start)/CLOCKS_PER_SEC, num_vertices);
 #endif
@@ -483,9 +481,10 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
         graph_vertex_type t = boost::target(e, this->m_graph);
         graph_vertex_type ms = vG2MG.at(s);
         graph_vertex_type mt = vG2MG.at(t);
+        if(ms == mt)    continue;
         std::pair<graph_edge_type, bool> me = boost::edge(ms, mt, mg);
         // need to consider if this setting is still reasonable when stitch is on 
-        edge_weight_type w = (this->edge_weight(e) >= 0)? 1 : -1;
+        edge_weight_type w = (this->edge_weight(e) >= 0)? 1 : -this->stitch_weight();
         if (me.second) // already exist, update weight 
             w += boost::get(boost::edge_weight, mg, me.first);
         else // not exist, add edge 

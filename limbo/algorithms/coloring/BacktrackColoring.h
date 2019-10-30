@@ -105,7 +105,7 @@ double BacktrackColoring<GraphType>::coloring()
 		{
 			//best_cost = tmp_best_cost;
             //best_cost = std::numeric_limits<double>::max();
-			this->coloring_kernel(vBestColor, vColor, best_cost, cur_cost, 0, tmp_best_cost, tmp_best_cost);
+			this->coloring_kernel(vBestColor, vColor, best_cost, cur_cost, 0, 0, tmp_best_cost);
 			//actual_cost = this->calc_cost(vBestColor);
             //std::cout << "tmp_best_cost = " << tmp_best_cost << " best_cost = " << best_cost << " actual_cost = " << actual_cost 
                 //<< " best_cost_lb = " << best_cost_lb 
