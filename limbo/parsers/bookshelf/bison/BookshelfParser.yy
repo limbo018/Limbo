@@ -30,10 +30,10 @@
 %skeleton "lalr1.cc"
 
 /* namespace to enclose parser in */
-%name-prefix="BookshelfParser"
+%define api.prefix {BookshelfParser}
 
 /* set the parser's class identifier */
-%define "parser_class_name" "Parser"
+%define parser_class_name {Parser}
 
 /* keep track of the current position within the input */
 %locations
@@ -407,8 +407,21 @@ wts_header : KWD_UCLA KWD_WTS DOUBLE
            | wts_header EOL
            ;
 
+wts_entry : STRING NUMBER {
+          driver.wtsNetWeightEntry(*$1, $2);
+          delete $1;
+          }
+          | wts_entry EOL
+          ;
+
+wts_entries : wts_entry 
+            | wts_entries wts_entry 
+            ;
+
 /* .wts top */
 bookshelf_wts : wts_header
+              wts_entries
+              | wts_header
               ;
 
 /***** .aux file ******/

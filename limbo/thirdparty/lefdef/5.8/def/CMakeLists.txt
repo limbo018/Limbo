@@ -125,6 +125,7 @@ set(DEFRW_SOURCES
 
 add_executable(defrw ${DEFRW_SOURCES})
 target_link_libraries(defrw def ${ZLIB_LIBRARIES})
+set_target_properties(defrw PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
 if(INSTALL_LIMBO)
     install(TARGETS defrw DESTINATION bin/thirdparty/lefdef/5.8/def)
 endif(INSTALL_LIMBO)
@@ -136,6 +137,7 @@ set(DEFDIFF_SOURCES
 
 add_executable(defdiff ${DEFDIFF_SOURCES})
 target_link_libraries(defdiff def ${ZLIB_LIBRARIES})
+set_target_properties(defdiff PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
 if(INSTALL_LIMBO)
     install(TARGETS defdiff DESTINATION bin/thirdparty/lefdef/5.8/def)
 endif(INSTALL_LIMBO)
@@ -147,6 +149,7 @@ set(DEFWRITE_SOURCES
 
 add_executable(defwrite ${DEFWRITE_SOURCES})
 target_link_libraries(defwrite def ${ZLIB_LIBRARIES})
+set_target_properties(defwrite PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
 if(INSTALL_LIMBO)
     install(TARGETS defwrite DESTINATION bin/thirdparty/lefdef/5.8/def)
 endif(INSTALL_LIMBO)

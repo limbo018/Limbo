@@ -10,7 +10,7 @@ endif()
 
 add_executable(test_verilog_bison test_bison.cpp)
 set_target_properties(test_verilog_bison PROPERTIES OUTPUT_NAME "test_bison")
-target_link_libraries(test_verilog_bison verilogparser ${Boost_LIBRARIES})
+target_link_libraries(test_verilog_bison verilogparser)
 if(COMPILE_DEFINITIONS)
     target_compile_definitions(test_verilog_bison PRIVATE ${COMPILE_DEFINITIONS})
 endif(COMPILE_DEFINITIONS)

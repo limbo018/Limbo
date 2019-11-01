@@ -36,10 +36,10 @@
 %skeleton "lalr1.cc"
 
 /* namespace to enclose parser in */
-%name-prefix="LefParser"
+%define api.prefix {LefParser}
 
 /* set the parser's class identifier */
-%define "parser_class_name" "Parser"
+%define parser_class_name {Parser}
 
 /* keep track of the current position within the input */
 %locations
@@ -6756,6 +6756,7 @@ array_rule:
     }
   | floorplan_start floorplan_list K_END STRING 
     {
+    delete $4;
     }
   | K_GCELLGRID { if (/*driver.lefrArrayCbk*/ 1) driver.lefrDoGcell = 1; } gcellPattern ';'
     {
@@ -6812,7 +6813,9 @@ msg_statement:
 
 create_file_statement:
   K_CREATEFILE {driver.lefDumbMode=1;driver.lefNlToken=TRUE;} STRING '=' s_expr dtrm
-    { }
+  {
+  delete $3;
+  }
 
 def_statement:
   K_DEFINE {driver.lefDumbMode=1;driver.lefNlToken=TRUE;} STRING '=' expression dtrm

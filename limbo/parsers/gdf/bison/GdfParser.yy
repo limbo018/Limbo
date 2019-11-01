@@ -30,10 +30,10 @@
 %skeleton "lalr1.cc"
 
 /* namespace to enclose parser in */
-%name-prefix="GdfParser"
+%define api.prefix {GdfParser}
 
 /* set the parser's class identifier */
-%define "parser_class_name" "Parser"
+%define parser_class_name {Parser}
 
 /* keep track of the current position within the input */
 %locations
@@ -111,12 +111,14 @@
 %token          KWD_SEGMENT         "SEGMENT"
 %token          KWD_VIA         "VIA"
 
+/*
 %type <numberArrayVal> number_array 
-/* %type <stringArrayVal> string_array */
+ %type <stringArrayVal> string_array 
+*/
 %type <numberVal>  NUMBER      
 
 %destructor { delete $$; } STRING QUOTE BINARY 
-%destructor { delete $$; } number_array /*string_array*/ 
+/*%destructor { delete $$; } number_array string_array*/ 
 
  /*** END EXAMPLE - Change the example grammar's tokens above ***/
 
@@ -140,7 +142,7 @@
 NUMBER : INTEGER {$$ = $1;}
        | DOUBLE {$$ = $1;}
        ;
-
+/*
 number_array : NUMBER {
 				$$ = new NumberArray(1, $1);
 			  }
@@ -148,7 +150,7 @@ number_array : NUMBER {
 				$1->push_back($2);
 				$$ = $1;
 			  }
-/*
+
 string_array : STRING {
 				$$ = new StringArray(1, *$1);
                 delete $1;

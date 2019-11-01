@@ -4,7 +4,7 @@
  *
  * "Layout decomposition for triple patterning lithography", 
  * Bei Yu, Kun Yuan, Duo Ding, and David Z. Pan, 
- * IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD), 34(3):433–446, March 2015.
+ * IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD), 34(3):433-446, March 2015.
  *
  * See @ref limbo::algorithms::coloring::SDPColoringCsdp for details. 
  *
@@ -41,7 +41,7 @@ namespace coloring
 /// 
 /// SDP formulation from Bei Yu's TCAD 2015 paper \cite TPL_TCAD2015_Yu 
 /// 
-/// \f{eqnarray*}{
+/// f{eqnarray*}{
 /// & min. & C X, \\
 /// & s.t. & x_{ii} = 1, \forall i \in V, \\
 /// &      & x_{ij} \ge -0.5, \forall (i, j) \in E, \\
@@ -84,9 +84,11 @@ class SDPColoringCsdp : public Coloring<GraphType>
             typedef edge_weight_type value_type;
             graph_type const& graph; ///< graph 
 
+            double m_stitch_weight;
             /// constructor 
             /// @param g graph 
-            FMGainCalcType(graph_type const& g) : graph(g) {}
+            FMGainCalcType(graph_type const& g) : graph(g) { }
+
             /// compute the gain when moving a vertex from one partition to another 
             /// @param v vertex 
             /// @param origp original partition 
@@ -104,12 +106,13 @@ class SDPColoringCsdp : public Coloring<GraphType>
                     graph_vertex_type t = boost::target(*ei, graph);
                     int8_t pt = vPartition[t];
 #ifdef DEBUG_SDPCOLORING
-                    assert((int32_t)t != v);
+                    limboAssert((int32_t)t != v);
 #endif
                     // skip unpartitioned vertex 
                     if (pt < 0) continue;
                     edge_weight_type w = boost::get(boost::edge_weight, graph, *ei);
                     // assume origp != newp, pt >= 0 
+                    // conflict (positive) edges and stitch (negative) edges all follow the same rules
                     gain += (pt == newp)? -w : (pt == origp)? w : 0;
                     //gain += w * ((vPartition[t] == origp && origp >= 0) - (vPartition[t] == newp));
                 }
@@ -179,7 +182,7 @@ class SDPColoringCsdp : public Coloring<GraphType>
 
         double m_rounding_lb; ///< if SDP solution x < m_rounding_lb, take x as -0.5
         double m_rounding_ub; ///< if SDP solution x > m_rounding_ub, take x as 1.0
-        const static uint32_t max_backtrack_num_vertices = 7; ///< maximum number of graph size that @ref limbo::algorithms::coloring::BacktrackColoring can handle
+        const static uint32_t max_backtrack_num_vertices = 6; ///< maximum number of graph size that @ref limbo::algorithms::coloring::BacktrackColoring can handle
 };
 
 template <typename GraphType>
@@ -187,12 +190,13 @@ SDPColoringCsdp<GraphType>::SDPColoringCsdp(SDPColoringCsdp<GraphType>::graph_ty
     : base_type(g)
 {
     m_rounding_lb = -0.4;
-    m_rounding_ub = 0.9;
+    m_rounding_ub = 0.95;
 }
 
 template <typename GraphType>
 double SDPColoringCsdp<GraphType>::coloring()
 {
+    clock_t solve_start = clock();
     // Since Csdp is written in C, the api here is also in C 
     // Please refer to the documation of Csdp for different notations 
     // basically, X is primal variables, C, b, constraints and pobj are all for primal 
@@ -202,8 +206,7 @@ double SDPColoringCsdp<GraphType>::coloring()
     // I still do not have a full understanding about the block concept, especially blocks.blocksize 
     // with some reverse engineering, for the coloring problem here, matrices in C, b, and constraints mainly consists of 2 blocks 
     // the first block is for vertex variables, and the second block is for slack variables introduced to resolve '>=' operators in the constraints
-
-    assert_msg(!this->has_precolored(), "SDP coloring does not support precolored layout yet");
+    limboAssertMsg(!this->has_precolored(), "SDP coloring does not support precolored layout yet");
     // The problem and solution data.
     struct blockmatrix C; // objective matrix 
     double *b; // right hand side of constraints
@@ -229,7 +232,7 @@ double SDPColoringCsdp<GraphType>::coloring()
         else // stitch edge 
             num_stitch_edges += 1;
     }
-    assert_msg(num_edges > 0 && num_conflict_edges > 0, "no edges or conflict edges found, no need to solve SDP");
+    limboAssertMsg(num_edges > 0 && num_conflict_edges > 0, "no edges or conflict edges found, no need to solve SDP");
     // compute total number of variables and constraints
     uint32_t num_variables = num_vertices+num_conflict_edges;
     uint32_t num_constraints = num_conflict_edges+num_vertices;
@@ -237,7 +240,7 @@ double SDPColoringCsdp<GraphType>::coloring()
     // setup blockmatrix C 
     C.nblocks = 2;
     C.blocks = (struct blockrec *)malloc((C.nblocks+1)*sizeof(struct blockrec));
-    assert_msg(C.blocks, "Couldn't allocate storage for C");
+    limboAssertMsg(C.blocks, "Couldn't allocate storage for C");
     // C.blocks[0] is not used according to the example of Csdp
     // block 1 for vertex variables 
     construct_objectve_blockrec(C, 1, num_vertices, MATRIX);
@@ -268,7 +271,7 @@ double SDPColoringCsdp<GraphType>::coloring()
     // the order is first for conflict edges and then for vertices  
     // the order matters for constraint matrices 
     b = (double *)malloc((num_constraints+1)*sizeof(double));
-    assert_msg(b, "Failed to allocate storage for right hand side of constraints b");
+    limboAssertMsg(b, "Failed to allocate storage for right hand side of constraints b");
     // -1/(k-1) according to Bei Yu's DAC2014 paper
     // consider in the constraints, xij+xji >= beta, so beta should be -2/(k-1)
     double beta = -2.0/(this->color_num()-1.0); // right hand side of constraints for conflict edges 
@@ -283,7 +286,7 @@ double SDPColoringCsdp<GraphType>::coloring()
     // setup constraint matrix constraints
     // the order should be the same as right hand side b 
     constraints=(struct constraintmatrix *)malloc((num_constraints+1)*sizeof(struct constraintmatrix));
-    assert_msg(constraints, "Failed to allocate storage for constraints");
+    limboAssertMsg(constraints, "Failed to allocate storage for constraints");
     // for conflict edges, xij 
     uint32_t cnt = 1;
     for (boost::tie(ei, eie) = boost::edges(this->m_graph); ei != eie; ++ei)
@@ -358,8 +361,12 @@ double SDPColoringCsdp<GraphType>::coloring()
     // objective value is (dobj+pobj)/2
     //int ret = easy_sdp(num_variables, num_constraints, C, b, constraints, 0.0, &X, &y, &Z, &pobj, &dobj);
     int ret = limbo::solvers::easy_sdp_ext<int>(num_variables, num_constraints, C, b, constraints, 0.0, &X, &y, &Z, &pobj, &dobj, params, printlevel);
-    assert_msg(ret == 0, "SDP failed");
+    limboAssertMsg(ret == 0, "SDP failed");
 
+ #ifdef DEBUG_LIWEI
+    clock_t solve_end = clock();
+    limboPrint(kDEBUG, "SDP solver takes %g seconds with %u nodes\n", (double)(solve_end - solve_start)/CLOCKS_PER_SEC, num_vertices);
+#endif
     // round result to get colors 
     round_sol(X);
 
@@ -371,7 +378,11 @@ double SDPColoringCsdp<GraphType>::coloring()
 #endif
     // return objective value 
     //return (dobj+pobj)/2;
-    return this->calc_cost(this->m_vColor);
+    double final_cost = this->calc_cost(this->m_vColor);
+#ifdef DEBUG_LIWEI
+    limboPrint(kDEBUG, "SDP coloring cost %g\n", final_cost);
+#endif
+    return final_cost;
 }
 
 template <typename GraphType>
@@ -383,14 +394,14 @@ void SDPColoringCsdp<GraphType>::construct_objectve_blockrec(blockmatrix& C, int
     if (blockcategory == MATRIX)
     {
         cblock.data.mat = (double *)malloc(blocksize*blocksize*sizeof(double));
-        assert_msg(cblock.data.mat, "Couldn't allocate storage for cblock.data.mat");
+        limboAssertMsg(cblock.data.mat, "Couldn't allocate storage for cblock.data.mat");
         // initialize to all 0s
         std::fill(cblock.data.mat, cblock.data.mat+blocksize*blocksize, 0); 
     }
     else if (blockcategory == DIAG)
     {
         cblock.data.vec = (double *)malloc((blocksize+1)*sizeof(double));
-        assert_msg(cblock.data.vec, "Couldn't allocate storage for cblock.data.vec");
+        limboAssertMsg(cblock.data.vec, "Couldn't allocate storage for cblock.data.vec");
         // initialize to all 0s
         std::fill(cblock.data.vec, cblock.data.vec+blocksize+1, 0); 
     }
@@ -400,18 +411,18 @@ template <typename GraphType>
 struct sparseblock* SDPColoringCsdp<GraphType>::construct_constraint_sparseblock(int32_t blocknum, int32_t blocksize, int32_t constraintnum, int32_t entrynum) const 
 {
     struct sparseblock* blockptr = (struct sparseblock *)malloc(sizeof(struct sparseblock));
-    assert_msg(blockptr, "Allocation of constraint block failed for blockptr");
+    limboAssertMsg(blockptr, "Allocation of constraint block failed for blockptr");
     blockptr->blocknum = blocknum;
     blockptr->blocksize = blocksize;
     blockptr->constraintnum = constraintnum;
     blockptr->next = NULL;
     blockptr->nextbyblock = NULL;
     blockptr->entries = (double *) malloc((entrynum+1)*sizeof(double));
-    assert_msg(blockptr->entries, "Allocation of constraint block failed for blockptr->entries");
+    limboAssertMsg(blockptr->entries, "Allocation of constraint block failed for blockptr->entries");
     blockptr->iindices = (int *) malloc((entrynum+1)*sizeof(int));
-    assert_msg(blockptr->iindices, "Allocation of constraint block failed for blockptr->iindices");
+    limboAssertMsg(blockptr->iindices, "Allocation of constraint block failed for blockptr->iindices");
     blockptr->jindices = (int *) malloc((entrynum+1)*sizeof(int));
-    assert_msg(blockptr->jindices, "Allocation of constraint block failed for blockptr->jindices");
+    limboAssertMsg(blockptr->jindices, "Allocation of constraint block failed for blockptr->jindices");
     blockptr->numentries = entrynum;
 
     return blockptr;
@@ -439,7 +450,7 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
     // check SDP solution in X 
     // we are only interested in block 1 
     struct blockrec const& block = X.blocks[1];
-    assert_msg(block.blockcategory == MATRIX, "mismatch of block category");
+    limboAssertMsg(block.blockcategory == MATRIX, "mismatch of block category");
     for (int32_t i = 1; i <= block.blocksize; ++i)
         for (int32_t j = i+1; j <= block.blocksize; ++j)
         {
@@ -458,7 +469,7 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
         if (vParent[i] != i)
             vG2MG[i] = vG2MG.at(disjoint_set_type::find_set(gp, i));
 #ifdef DEBUG_SDPCOLORING
-    assert(mg_count == disjoint_set_type::count_sets(gp));
+    limboAssert(mg_count == disjoint_set_type::count_sets(gp));
 #endif
     graph_type mg (mg_count); // merged graph 
     // for edges in merged graph 
@@ -470,6 +481,7 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
         graph_vertex_type t = boost::target(e, this->m_graph);
         graph_vertex_type ms = vG2MG.at(s);
         graph_vertex_type mt = vG2MG.at(t);
+        if(ms == mt)    continue;
         std::pair<graph_edge_type, bool> me = boost::edge(ms, mt, mg);
         // need to consider if this setting is still reasonable when stitch is on 
         edge_weight_type w = (this->edge_weight(e) >= 0)? 1 : -this->stitch_weight();
@@ -479,14 +491,14 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
             me = boost::add_edge(ms, mt, mg);
         boost::put(boost::edge_weight, mg, me.first, w);
 #ifdef DEBUG_SDPCOLORING
-        assert(boost::get(boost::edge_weight, mg, me.first) != 0);
+        limboAssert(boost::get(boost::edge_weight, mg, me.first) != 0);
 #endif
     }
 #ifdef DEBUG_SDPCOLORING
     //this->print_edge_weight(this->m_graph);
     //this->check_edge_weight(this->m_graph, this->stitch_weight()/10, 4);
     //this->print_edge_weight(mg);
-    this->check_edge_weight(mg, this->stitch_weight()/10, boost::num_edges(this->m_graph));
+    //this->check_edge_weight(mg, this->stitch_weight()/10, boost::num_edges(this->m_graph));
 #endif
     // coloring for merged graph 
     std::vector<int8_t> vMColor (mg_count, -1); // coloring solution for merged graph 
@@ -499,7 +511,7 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
         graph_vertex_type v = *vi;
         this->m_vColor[v] = vMColor.at(vG2MG.at(v));
 #ifdef DEBUG_SDPCOLORING
-        assert(this->m_vColor[v] >= 0 && this->m_vColor[v] < this->color_num());
+        limboAssert(this->m_vColor[v] >= 0 && this->m_vColor[v] < this->color_num());
 #endif
     }
 }
@@ -507,12 +519,20 @@ void SDPColoringCsdp<GraphType>::round_sol(struct blockmatrix const& X)
 template <typename GraphType>
 void SDPColoringCsdp<GraphType>::coloring_merged_graph(graph_type const& mg, std::vector<int8_t>& vMColor) const
 {
+
     uint32_t num_vertices = boost::num_vertices(mg);
+#ifdef DEBUG_LIWEI
+    limboPrint(kDEBUG, "SDP merged coloring with %u nodes\n", num_vertices);
+#endif
     // if small number of vertices or no vertex merged, no need to simplify graph 
     if (num_vertices <= max_backtrack_num_vertices || num_vertices == boost::num_vertices(this->m_graph)) 
+    {
+       // std::cout << "small size graph." << std::endl;
         coloring_algos(mg, vMColor);
+    }
     else 
     {
+        // std::cout << "\n\nlarge size graph.\n\n" << std::endl;
         // simplify merged graph 
         typedef GraphSimplification<graph_type> graph_simplification_type;
         graph_simplification_type gs (mg, this->color_num());
@@ -523,8 +543,10 @@ void SDPColoringCsdp<GraphType>::coloring_merged_graph(graph_type const& mg, std
         // but graph is not necessary 
         std::vector<std::vector<int8_t> > mSubColor (gs.num_component());
         std::vector<std::vector<graph_vertex_type> > mSimpl2Orig (gs.num_component());
+        // std::cout << "component number : " << gs.num_component() << std::endl;
         for (uint32_t sub_comp_id = 0; sub_comp_id < gs.num_component(); ++sub_comp_id)
         {
+            // std::cout << "now comp " << sub_comp_id << std::endl;
             graph_type sg;
             std::vector<int8_t>& vSubColor = mSubColor[sub_comp_id];
             std::vector<graph_vertex_type>& vSimpl2Orig = mSimpl2Orig[sub_comp_id];
@@ -534,21 +556,36 @@ void SDPColoringCsdp<GraphType>::coloring_merged_graph(graph_type const& mg, std
             vSubColor.assign(boost::num_vertices(sg), -1);
 
 #ifdef DEBUG_SDPCOLORING
-            this->write_graph("initial_merged_graph", sg, vSubColor);
+            this->write_graph("initial_merged_graph_" + limbo::to_string(sub_comp_id), sg, vSubColor);
 #endif
             // solve coloring 
             coloring_algos(sg, vSubColor);
 #ifdef DEBUG_SDPCOLORING
-            this->write_graph("final_merged_graph", sg, vSubColor);
+            this->write_graph("final_merged_graph_" + limbo::to_string(sub_comp_id), sg, vSubColor);
 #endif
         }
 
+#ifdef QDEBUG
+        clock_t recover_start = clock();
+#endif
         // recover color assignment according to the simplification level set previously 
         // HIDE_SMALL_DEGREE needs to be recovered manually for density balancing 
         gs.recover(vMColor, mSubColor, mSimpl2Orig);
-
+/*
+        std::cout << "vMColor : " << std::endl;
+        for(uint32_t i = 0; i < vMColor.size(); ++i)
+            std::cout << +unsigned(vMColor[i]) << " ";
+*/
         // recover colors for simplified vertices without balanced assignment 
         gs.recover_hide_small_degree(vMColor);
+#ifdef QDEBUG
+        clock_t recover_end = clock();
+        std::cout << "Coloring recovery takes " << (double)(recover_end - recover_start)/CLOCKS_PER_SEC << "s." << std::endl;
+        ::cout << "SDP final result :  ";
+        for(uint32_t i = 0; i < vMColor.size(); i++)
+            std::cout << unsigned(vMColor[i]) << " ";
+        std::cout << std::endl;
+#endif
     }
 }
 
@@ -556,9 +593,25 @@ template <typename GraphType>
 void SDPColoringCsdp<GraphType>::coloring_algos(graph_type const& g, std::vector<int8_t>& vColor) const
 {
     if (boost::num_vertices(g) <= max_backtrack_num_vertices)
+    {
+#ifdef DEBUG_LIWEI
+        limboPrint(kDEBUG, "coloring by backtrack with %lu nodes\n", boost::num_vertices(g));
+#endif
         coloring_by_backtrack(g, vColor);
-    else 
+    }
+    else
+    {
+#ifdef DEBUG_LIWEI
+        limboPrint(kDEBUG, "coloring by FM with %lu nodes\n", boost::num_vertices(g));
+#endif
         coloring_by_FM(g, vColor);
+    }
+#ifdef QDEBUG
+    std::cout << "Coloring algo result :  ";
+    for(uint32_t i = 0; i < vColor.size(); i++)
+        std::cout << unsigned(vColor[i]) << " ";
+    std::cout << std::endl;
+#endif
 }
 
 template <typename GraphType>
@@ -567,7 +620,7 @@ void SDPColoringCsdp<GraphType>::coloring_by_backtrack(SDPColoringCsdp<GraphType
     // currently backtrack coloring is used 
     // TO DO: add faster coloring approach like FM partition based 
     BacktrackColoring<graph_type> bc (mg);
-    bc.stitch_weight(1); // already scaled in edge weights 
+    bc.stitch_weight(this->stitch_weight()); // already scaled in edge weights 
     bc.color_num(this->color_num());
     bc();
     for (uint32_t i = 0, ie = vColor.size(); i != ie; ++i)
@@ -577,11 +630,18 @@ void SDPColoringCsdp<GraphType>::coloring_by_backtrack(SDPColoringCsdp<GraphType
 template <typename GraphType>
 void SDPColoringCsdp<GraphType>::coloring_by_FM(SDPColoringCsdp<GraphType>::graph_type const& mg, std::vector<int8_t>& vColor) const
 {
+#ifdef DEBUG_LIWEI
+    clock_t fm_start = clock();
+#endif
     limbo::algorithms::partition::FMMultiWay<FMGainCalcType> fmp (FMGainCalcType(mg), boost::num_vertices(mg), this->color_num());
     fmp.set_partitions(vColor.begin(), vColor.end());
     fmp();
     for (uint32_t i = 0, ie = vColor.size(); i != ie; ++i)
         vColor[i] = fmp.partition(i);
+#ifdef DEBUG_LIWEI
+    clock_t fm_end = clock();
+    limboPrint(kDEBUG, "FM coloring takes %g seconds\n", (double)(fm_end - fm_start)/CLOCKS_PER_SEC);
+#endif
 }
 
 template <typename GraphType>
@@ -618,14 +678,14 @@ void SDPColoringCsdp<GraphType>::write_sdp_sol(std::string const& filename, stru
                     };
                 break;
             case PACKEDMATRIX:
-            default: assert_msg(0, "Invalid Block Type");
+            default: limboAssertMsg(0, "Invalid Block Type");
         }
         index_offset += X.blocks[blk].blocksize; 
     }
 
     // write to file 
     std::ofstream out (filename.c_str());
-    assert_msg(out.good(), "failed to open file " << filename << " for write");
+    limboAssertMsg(out.good(), "failed to open file %s for write\n", filename.c_str());
     for (std::vector<std::vector<double> >::const_iterator it1 = mSol.begin(), it1e = mSol.end(); it1 != it1e; ++it1)
     {
         const char* prefix = "";

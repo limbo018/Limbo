@@ -1,6 +1,5 @@
 include_directories(
     ${PROJECT_SOURCE_DIR}
-    ${Boost_INCLUDE_DIRS}
     )
 if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
     set(COMPILE_DEFINITIONS DEBUG_BOOKSHELFPARSER)
@@ -10,7 +9,7 @@ endif()
 
 add_executable(test_bookshelf_bison test_bison.cpp)
 set_target_properties(test_bookshelf_bison PROPERTIES OUTPUT_NAME "test_bison")
-target_link_libraries(test_bookshelf_bison bookshelfparser ${Boost_LIBRARIES})
+target_link_libraries(test_bookshelf_bison bookshelfparser gzstream ${ZLIB_LIBRARIES})
 if(COMPILE_DEFINITIONS)
     target_compile_definitions(test_bookshelf_bison PRIVATE ${COMPILE_DEFINITIONS})
 endif(COMPILE_DEFINITIONS)

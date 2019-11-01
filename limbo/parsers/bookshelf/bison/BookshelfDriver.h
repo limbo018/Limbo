@@ -146,6 +146,8 @@ public:
     /// @brief from .scl file, end of core row 
     void sclCoreRowEnd();
     // .wts file 
+    /// @brief from .wts file, net weight entry 
+    void wtsNetWeightEntry(string&, double);
     // .aux file 
     /// @brief from .aux file, other bookshelf files 
     void auxCbk(string&, vector<string>&);

@@ -10,9 +10,7 @@
 #include <limbo/string/String.h>
 #include <algorithm>
 #if ZLIB == 1 
-#include <boost/iostreams/filter/gzip.hpp>
-#include <boost/iostreams/device/file.hpp>
-#include <boost/iostreams/filtering_stream.hpp>
+#include <limbo/thirdparty/gzstream/gzstream.h>
 #endif
 
 namespace BookshelfParser {
@@ -43,9 +41,7 @@ bool Driver::parse_file(const std::string &filename)
 #if ZLIB == 1
     if (limbo::get_file_suffix(filename) == "gz") // detect .gz file 
     {
-        boost::iostreams::filtering_istream in; 
-        in.push(boost::iostreams::gzip_decompressor());
-        in.push(boost::iostreams::file_source(filename.c_str()));
+        igzstream in (filename.c_str());
 
         if (!in.good()) return false;
         return parse_stream(in, filename);
@@ -182,6 +178,10 @@ void Driver::sclCoreRowEnd()
     m_row.reset();
 }
 // .wts file 
+void Driver::wtsNetWeightEntry(string& net_name, double weight)
+{
+    m_db.set_bookshelf_net_weight(net_name, weight);
+}
 // .aux file 
 void Driver::auxCbk(string& design_name, vector<string>& vBookshelfFiles)
 {

@@ -10,7 +10,7 @@ endif()
 
 add_executable(test_gdf_bison test_bison.cpp)
 set_target_properties(test_gdf_bison PROPERTIES OUTPUT_NAME "test_bison")
-target_link_libraries(test_gdf_bison gdfparser ${Boost_LIBRARIES})
+target_link_libraries(test_gdf_bison gdfparser)
 if(COMPILE_DEFINITIONS)
     target_compile_definitions(test_gdf_bison PRIVATE ${COMPILE_DEFINITIONS})
 endif(COMPILE_DEFINITIONS)
