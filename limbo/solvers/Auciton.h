@@ -57,18 +57,20 @@ namespace MyAuction {
 
 			AuctionAlgrithm& reset(){
 				_node_num = countNodes(_graph);
+				_node_num;
 				_arc_num = countArcs(_graph);
 				int max_arc_num = _node_num*_node_num;
 		
-				_source.resize(_arc_num);
-				_target.resize(_arc_num);
+				_source.resize(_arc_num, 0);
+				_target.resize(_arc_num, 0);
 
-				_supply.resize(_node_num);
-				_price.resize(_node_num);
-				_flow.resize(max_arc_num);
-				_lower.resize(max_arc_num);
-				_upper.resize(max_arc_num);
-				_cost.resize(max_arc_num);
+				_supply.resize(_node_num, 0);
+				_grow.resize(_node_num, 0);
+				_price.resize(_node_num, 0);
+				_flow.resize(max_arc_num, 0);
+				_lower.resize(max_arc_num, 0);
+				_upper.resize(max_arc_num, 0);
+				_cost.resize(max_arc_num, 0);
 
 				int i = 0;
 				for(typename GR::NodeIt n(_graph); n !=	lemon::INVALID; ++n, ++i){
@@ -90,14 +92,6 @@ namespace MyAuction {
 				std::cout << "Auction ResetParams\n";
 				#endif
 
-				for (int i = 0; i != _node_num; ++i) {
-					_supply[i] = 0;
-				}
-				for (int j = 0; j != _arc_num; ++j) {
-			        _lower[j] = 0;
-			        _upper[j] = INF;
-			        _cost[j] = -1;
-				}
 			    return *this;
 			}
 			
@@ -129,6 +123,7 @@ namespace MyAuction {
 			AuctionAlgrithm& supplyMap(const SupplyMap& map){
 				for(typename GR::NodeIt n(_graph); n != lemon::INVALID; ++n){
 					_supply[_node_id[n]] = map[n];
+					_grow[_node_id[n]] = map[n];
 				}
 				return *this;
 			}
@@ -138,6 +133,9 @@ namespace MyAuction {
 				int* fgraph = new int[_node_num*_node_num];
 				memset(fgraph,0,sizeof(int)*_node_num*_node_num);
 				//print cost of edge;
+				std::cout << "******************\n"
+					<< "node_num:" << _node_num << "*  edge_num" << _arc_num
+					<< "******************\n";
 				for(int i = 0; i < _arc_num; i++){
 					fgraph[_source[i]*_node_num + _target[i]] = _cost[i];
 				}
@@ -164,32 +162,167 @@ namespace MyAuction {
 					}
 					std::cout << std::endl;
 				}
-
+				
 
 
 			}
 
+		private:
+			int pushEdge(){
+				int fpoCount = 0;
+				int fnaCount = 0;
+				//edge id
+				IntVector pushListPo;
+				IntVector pushListNa;
+				//遍历 edge
+				for(int i = 0; i < _arc_num; i++){
+					if(_price[_source[i]] == _price[_target[i]] + _cost[i] + _epsilon){
+						pushListPo.push_back(i);
+					}
+					if(_price[_source[i]] == _price[_target[i]] - _cost[i] + _epsilon){
+						pushListNa.push_back(i);
+					}				
+				}
+				int fId;//edge id
+				Value fdelta;
+				int fpoSize = pushListPo.size();
+				int fnaSize = pushListNa.size();
+				for(int i = 0;i < fpoSize; i++){
+					fId = pushListPo[i];
+					fdelta = std::min(_grow[_source[fId]], _upper[fId] - _flow[fId]);
+					_flow[fId] += fdelta;
+					_grow[_source[fId]] -= fdelta;
+					_grow[_target[fId]] += fdelta;
+				}
+
+				for(int i = 0; i < fnaSize; i++){
+					fId = pushListNa[i];
+					fdelta = std::min(_grow[_source[fId]], _flow[fId] - _lower[fId]);
+					_flow[fId] -= fdelta;
+					_grow[_source[fId]] -= fdelta;
+					_grow[_target[fId]] += fdelta;
+				}
+
+				return 0;
+			}
+
+			int priceRise(){
+				//node id
+				std::vector<bool> frisePriceId;
+				frisePriceId.resize(_node_num, false);
+				Cost minRise = INF;
+				for(int i = 0; i < _node_num; i++){
+					if(_grow[i] > 0){
+						frisePriceId[i] = true;
+					}
+				}
+
+				for(int i = 0; i < _arc_num; i++){
+					if(frisePriceId[_source[i]]&&(!frisePriceId[_target[i]])){
+						if(_flow[i] < _upper[i]){
+							minRise = std::min(_price[_target[i]] + _cost[i] + _epsilon - _price[_source[i]], minRise);
+						}
+						if(_flow[i] > _lower[i]){
+							minRise = std::min(_price[_target[i]] - _cost[i] + _epsilon -_price[_source[i]], minRise);
+						}
+					}
+				}
+
+				for(int i = 0; i < _node_num; i++){
+					if(frisePriceId[i]){
+						_price[i] += minRise;
+					}
+				}
+				return 0;
+			}
+			
+			bool iterateEnd(){
+				bool fflag = true;
+				for(int i = 0; i < _node_num; i++){
+					if(_grow[i] != 0){
+						fflag = false;
+						break;
+					}
+				}
+				return fflag;
+			}
+					
 
 
-			ProblemType run(int m_epsilon){
+
+
+		public:
+#if AUCTION_DEBUG
+			void printFlow(){
+				int* fgraph = new int[_node_num*_node_num];
+				memset(fgraph,0,sizeof(int)*_node_num*_node_num);
+
+				for(int i = 0; i < _arc_num; i++){
+					fgraph[_source[i]*_node_num + _target[i]] = _flow[i];
+				}
+				for(int i = 0; i < _node_num; i++){
+					for(int j = 0; j < _node_num; j++){
+						std::cout << fgraph[i*_node_num + j] << "  \t";
+					}
+					std::cout << std::endl;
+				}
+			}
+	
+#endif
+
+
+			template <typename Cost>
+			ProblemType run(Cost m_epsilon){
 				_epsilon = m_epsilon;
-				std::cout << "***************" << "some varible:\n" 
+				//for debug
+				/*
+				 * std::cout << "***************" << "some varible:\n" 
 					<< "* num of node: " << _node_num << std::endl
 					<< "* num of edge: " << _arc_num << std::endl
 					<< "***********************";
 				std::cout << "print cost graph!!\n";
-				
 				myaprintGraph();
-
-
-				std::cout << "run_ not success!!\n";
+				*
+				*/
+				myaprintGraph();	
+				int i = 0;
+				/*
+				while(!iterateEnd()){
+					i ++;
+					std::cout << "iteration: " << i << std::endl;
+#if AUCTION_DEBUG
+					printFlow();
+#endif
+					pushEdge();
+					priceRise();
+				}
+				*/
 				return OPTIMAL;
 			}
 
+			template <typename FlowMap>
+			void flowMap(FlowMap &map) const{
+				for(typename GR::ArcIt a(_graph); a != lemon::INVALID; ++a){
+					map.set(a, _flow[_arc_id[a]]);
+				}
+			}
+/*
+			template <typename Number>
+			Number totalCost() const {
+				Number c = 0;
+				for(typename GR::ArcIt a(_graph); a!= lemon::INVALID; ++a){
+					int i = _arc_id[a];
+					c += static_cast<Number>(_flow[i] * _cost[i]);
+				}
+				return c;
+			}
+*/
 
+#ifndef DOXYGEN
 			Cost totalCost() const {
 				return totalCost<Cost>();
 			}
+#endif
 
 			/// \brief Return the total cost of the found flow
 			///
@@ -230,6 +363,7 @@ namespace MyAuction {
 			IntVector _target;
 
 			ValueVector _supply;	//1
+			ValueVector _grow;		//1
 			CostVector _price;			//1
 			ValueVector _flow;			//2
 			ValueVector _lower;			//2
@@ -237,7 +371,7 @@ namespace MyAuction {
 			CostVector _cost;			//2
 			
 
-			int _epsilon;
+			Cost _epsilon;
 	};
 
 }
