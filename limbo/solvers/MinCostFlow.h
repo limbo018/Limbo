@@ -15,6 +15,7 @@
 #include <lemon/lgf_writer.h>
 
 #include <limbo/solvers/Solvers.h>
+#include <limbo/solvers/Auciton.h>
 
 /// namespace for Limbo 
 namespace limbo 
@@ -487,6 +488,107 @@ class MinCostFlowSolver
         void copy(MinCostFlowSolver const& /*rhs*/) {} 
 };
 
+/// @brief Auction algorithm for min-cost flow
+/// @tparam T coefficient type
+/// @tparam V variable type
+template <typename T, typename V>
+class AuctionSolver : public MinCostFlowSolver<T, V>
+{
+	public:
+        /// @brief value type 
+        typedef T value_type;
+        /// @brief base type 
+        typedef MinCostFlowSolver<T, V> base_type; 
+        /// @brief dual min-cost flow solver type 
+        typedef typename base_type::primalsolver_type primalsolver_type; 
+        /// @brief algorithm type 
+        typedef MyAuction::AuctionAlgrithm<typename primalsolver_type::graph_type, 
+                value_type, 
+                value_type> alg_type;
+
+        /// @brief constructor 
+        /// @param factor scaling factor 
+        AuctionSolver(value_type epsilon = 1)
+            : base_type()
+            , m_epsilon(epsilon)
+        {
+        }
+        /// @brief copy constructor 
+        /// @param rhs right hand side 
+        AuctionSolver(AuctionSolver const& rhs)
+            : AuctionSolver::base_type(rhs)
+        {
+            copy(rhs);
+        }
+        /// @brief assignment 
+        /// @param rhs right hand side 
+        AuctionSolver& operator=(AuctionSolver const& rhs)
+        {
+            if (this != &rhs)
+            {
+                this->base_type::operator=(rhs);
+                copy(rhs);
+            }
+            return *this;
+        }
+
+        /// @brief API to run min-cost flow solver 
+        /// @param d dual min-cost flow object 
+        virtual SolverProperty operator()(primalsolver_type* d)
+        {
+            // 1. choose algorithm 
+            alg_type alg (d->graph());
+
+            // 2. run 
+            typename alg_type::ProblemType status = alg.resetParams()
+                .lowerMap(d->lowerMap())
+                .upperMap(d->upperMap())
+                .costMap(d->costMap())
+                .supplyMap(d->supplyMap())
+                .run(m_epsilon);
+
+            // 3. check results 
+            SolverProperty solverStatus; 
+            switch (status)
+            {
+                case alg_type::OPTIMAL:
+                    solverStatus = OPTIMAL; 
+                    break;
+                case alg_type::INFEASIBLE:
+                    solverStatus = INFEASIBLE; 
+                    break;
+                case alg_type::UNBOUNDED:
+                    solverStatus = UNBOUNDED; 
+                    break;
+                default:
+                    limboAssertMsg(0, "unknown status");
+            }
+
+            // 4. apply results 
+            // get dual solution of LP, which is the flow of min-cost flow, skip this if not necessary
+           
+			//alg.flowMap(d->flowMap());
+
+            // get solution of LP, which is the dual solution of min-cost flow 
+            //alg.potentialMap(d->potentialMap());
+            // set total cost of min-cost flow 
+            d->setTotalFlowCost(alg.totalCost());
+
+            return solverStatus; 
+       }
+    protected:
+        /// @brief copy object 
+        void copy(AuctionSolver const& rhs)
+        {
+            m_epsilon = rhs.m_epsilon;
+        }
+
+        value_type m_epsilon; ///< scaling factor for the algorithm 
+
+};
+
+
+
 /// @brief Capacity scaling algorithm for min-cost flow 
 /// @tparam T coefficient type 
 /// @tparam V variable type 
@@ -572,7 +674,7 @@ class CapacityScaling : public MinCostFlowSolver<T, V>
             d->setTotalFlowCost(alg.totalCost());
 
             return solverStatus; 
-        }
+       }
     protected:
         /// @brief copy object 
         void copy(CapacityScaling const& rhs)
