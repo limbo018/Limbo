@@ -57,7 +57,6 @@ namespace MyAuction {
 
 			AuctionAlgrithm& reset(){
 				_node_num = countNodes(_graph);
-				_node_num;
 				_arc_num = countArcs(_graph);
 				int max_arc_num = _node_num*_node_num;
 		
@@ -73,9 +72,18 @@ namespace MyAuction {
 				_cost.resize(max_arc_num, 0);
 
 				int i = 0;
+#if AUCTION_DEBUG
+				std::cout << "********in function Auction.h/reset()*********\n";
+#endif
 				for(typename GR::NodeIt n(_graph); n !=	lemon::INVALID; ++n, ++i){
 					_node_id[n] = i;
+#if AUCTION_DEBUG
+					std::cout << "node_id: " << i << std::endl;
+#endif
 				}
+#if AUCTION_DEBUG
+				std::cout << "*****************\n";
+#endif
 		
 				i = 0;
 				for(typename GR ::ArcIt a(_graph); a != lemon::INVALID; ++a, ++i){
@@ -88,7 +96,7 @@ namespace MyAuction {
 				return *this;
 			}
 			AuctionAlgrithm& resetParams(){      
-				#ifndef AUCTION_DEBUG
+				#if AUCTION_DEBUG
 				std::cout << "Auction ResetParams\n";
 				#endif
 
@@ -114,7 +122,7 @@ namespace MyAuction {
 			template <typename CostMap>
 			AuctionAlgrithm& costMap(const CostMap& map){
 				for(typename GR::ArcIt a(_graph); a != lemon::INVALID; ++a){
-					_cost[_arc_id[a]] = map[a];
+					_cost[_arc_id[a]] = map[a]*(_node_num-1);
 				}
 				return *this;
 			}
@@ -178,8 +186,9 @@ namespace MyAuction {
 				for(int i = 0; i < _arc_num; i++){
 					if(_price[_source[i]] == _price[_target[i]] + _cost[i] + _epsilon){
 						pushListPo.push_back(i);
+						continue;
 					}
-					if(_price[_source[i]] == _price[_target[i]] - _cost[i] + _epsilon){
+					if(_price[_target[i]] == _price[_source[i]] - _cost[i] + _epsilon){
 						pushListNa.push_back(i);
 					}				
 				}
@@ -197,10 +206,10 @@ namespace MyAuction {
 
 				for(int i = 0; i < fnaSize; i++){
 					fId = pushListNa[i];
-					fdelta = std::min(_grow[_source[fId]], _flow[fId] - _lower[fId]);
+					fdelta = std::min(_grow[_target[fId]], _flow[fId] - _lower[fId]);
 					_flow[fId] -= fdelta;
-					_grow[_source[fId]] -= fdelta;
-					_grow[_target[fId]] += fdelta;
+					_grow[_target[fId]] -= fdelta;
+					_grow[_source[fId]] += fdelta;
 				}
 
 				return 0;
@@ -222,8 +231,10 @@ namespace MyAuction {
 						if(_flow[i] < _upper[i]){
 							minRise = std::min(_price[_target[i]] + _cost[i] + _epsilon - _price[_source[i]], minRise);
 						}
+					}
+					if(frisePriceId[_target[i]]&&(!frisePriceId[_source[i]])){
 						if(_flow[i] > _lower[i]){
-							minRise = std::min(_price[_target[i]] - _cost[i] + _epsilon -_price[_source[i]], minRise);
+							minRise = std::min(_price[_source[i]] - _cost[i] + _epsilon -_price[_target[i]], minRise);
 						}
 					}
 				}
@@ -267,6 +278,36 @@ namespace MyAuction {
 					std::cout << std::endl;
 				}
 			}
+			void printPrice(){
+				int* fgraph = new int[_node_num*_node_num];
+				memset(fgraph,0,sizeof(int)*_node_num*_node_num);
+
+				std::cout << "***********************\n"
+					<< "printPrice\n";
+				for(int i = 0; i < _node_num; i++){
+					fgraph[i] = _price[i];
+				}
+				for(int i = 0; i < _node_num; i++){
+						std::cout << fgraph[i] << "  \t";
+				}
+				std::cout << std::endl
+					<< "***********************\n";
+			}
+			void printGrow(){
+				int* fgraph = new int[_node_num*_node_num];
+				memset(fgraph,0,sizeof(int)*_node_num*_node_num);
+
+				std::cout << "***********************\n"
+					<< "printGrow\n";
+				for(int i = 0; i < _node_num; i++){
+					fgraph[i] = _grow[i];
+				}
+				for(int i = 0; i < _node_num; i++){
+						std::cout << fgraph[i] << "  \t";
+				}
+				std::cout << std::endl
+					<< "***********************\n";
+			}
 	
 #endif
 
@@ -285,18 +326,15 @@ namespace MyAuction {
 				*
 				*/
 				myaprintGraph();	
-				int i = 0;
-				/*
 				while(!iterateEnd()){
-					i ++;
-					std::cout << "iteration: " << i << std::endl;
 #if AUCTION_DEBUG
 					printFlow();
+					printPrice();
+					printGrow();
 #endif
 					pushEdge();
 					priceRise();
 				}
-				*/
 				return OPTIMAL;
 			}
 

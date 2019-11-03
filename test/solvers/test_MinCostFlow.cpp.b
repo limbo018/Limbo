@@ -18,24 +18,38 @@ void test(std::string const& filename, int alg)
     optModel.read(filename); 
 
     // print problem 
-    optModel.print(std::cout); 
+//    optModel.print(std::cout); 
 
     // solve 
     limbo::solvers::MinCostFlowSolver<double, int>* minCostFlowSolver = NULL; 
-    minCostFlowSolver = new limbo::solvers::AuctionSolver<double, int>();
+    switch (alg)
+    {
+        case 0:
+            minCostFlowSolver = new limbo::solvers::CostScaling<double, int>(); 
+            break;
+        case 1:
+            minCostFlowSolver = new limbo::solvers::CapacityScaling<double, int>(); 
+            break;
+        case 2:
+            minCostFlowSolver = new limbo::solvers::NetworkSimplex<double, int>(); 
+            break;
+        default:
+            minCostFlowSolver = new limbo::solvers::CycleCanceling<double, int>(); 
+            break; 
+    }
     limbo::solvers::MinCostFlow<double, int> solver (&optModel); 
     limbo::solvers::SolverProperty status = solver(minCostFlowSolver);
     //limbo::solvers::SolverProperty status = solver();
     std::cout << "Problem solved " << limbo::solvers::toString(status) << "\n";
     delete minCostFlowSolver;
 
-    //print solutions 
+    // print solutions 
     optModel.printSolution(std::cout);
     // print problem 
-    optModel.print(std::cout); 
+ //   optModel.print(std::cout); 
 
     // print graph with solution information 
-    //solver.printGraph(true);
+    solver.printGraph(true);
 }
 
 /// @brief main function 
