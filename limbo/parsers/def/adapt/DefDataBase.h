@@ -179,6 +179,88 @@ struct Net : public Item
 		ss << endl;
 	}
 };
+/// @brief region to describe regions like fence 
+struct Region : public Item
+{
+    string region_name; ///< region name 
+    string region_type; ///< region type 
+    std::vector<std::vector<int> > vRectangle; ///< array of rectangles with (xl, yl, xh, yh)
+    std::vector<string> vPropertyName; ///< array of property names 
+    std::vector<string> vPropertyValue; ///< array of property values 
+    std::vector<char>  vPropertyType; ///< array of property types 
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        region_name = "";
+        region_type = "";
+        vRectangle.clear();
+        vPropertyName.clear();
+        vPropertyValue.clear();
+        vPropertyType.clear();
+    }
+    /// @brief print data members 
+    /// @param ss output stream 
+    virtual void print(ostringstream& ss) const 
+    {
+		ss << "//////// Region ////////" << endl
+			<< "region_name = " << region_name << endl
+            << "region_type = " << region_type << endl;
+        for (uint32_t i = 0; i < vRectangle.size(); ++i)
+            ss << "(" << vRectangle[i][0] << ", " << vRectangle[i][1] << ", " << vRectangle[i][2] << ", " << vRectangle[i][3] << ") "; 
+        ss << endl; 
+        for (uint32_t i = 0; i < vPropertyName.size(); ++i)
+            ss << "Property " << vPropertyName[i] << " " << vPropertyType[i] << " " << vPropertyValue[i] << endl; 
+    }
+};
+/// @brief group to describe cells corresponding to region 
+struct Group : public Item
+{
+    string group_name; ///< group name 
+    std::vector<string> vGroupMember; ///< group members 
+    string region_name; ///< region name 
+    int perim; ///< MAXHALFPERIMETER, I do not know what they are used for 
+    int maxx;
+    int maxy; 
+    std::vector<std::vector<int> > vRectangle; ///< array of regions with (xl, yl, xh, yh)
+    std::vector<string> vPropertyName; ///< array of property names 
+    std::vector<string> vPropertyValue; ///< array of property values 
+    std::vector<char>  vPropertyType; ///< array of property types 
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        group_name = "";
+        vGroupMember.clear();
+        region_name = "";
+        perim = 0; 
+        maxx = 0; 
+        maxy = 0; 
+        vRectangle.clear();
+        vPropertyName.clear();
+        vPropertyValue.clear();
+        vPropertyType.clear();
+    }
+    /// @brief print data members 
+    /// @param ss output stream 
+    virtual void print(ostringstream& ss) const 
+    {
+		ss << "//////// Group ////////" << endl
+            << "group_name = " << group_name << endl
+			<< "region_name = " << region_name << endl
+            << "perim = " << perim << endl 
+            << "maxx = " << maxx << ", " << "maxy = " << maxy << endl; 
+        ss << "vGroupMember[" << vGroupMember.size() << "] = ";
+        for (uint32_t i = 0; i < vGroupMember.size(); ++i)
+            ss << vGroupMember[i] << " ";
+        ss << endl; 
+        for (uint32_t i = 0; i < vRectangle.size(); ++i)
+            ss << "(" << vRectangle[i][0] << ", " << vRectangle[i][1] << ", " << vRectangle[i][2] << ", " << vRectangle[i][3] << ") "; 
+        ss << endl; 
+        for (uint32_t i = 0; i < vPropertyName.size(); ++i)
+            ss << "Property " << vPropertyName[i] << " " << vPropertyType[i] << " " << vPropertyValue[i] << endl; 
+    }
+};
 // forward declaration
 /// @class DefParser::DefDataBase
 /// @brief Base class for def database. 
@@ -218,6 +300,14 @@ class DefDataBase
         virtual void resize_def_blockage(int);
         /// @brief add placement blockages, array of boxes with xl, yl, xh, yh
         virtual void add_def_placement_blockage(std::vector<std::vector<int> > const&);
+        /// @brief set number of regions 
+        virtual void resize_def_region(int); 
+        /// @brief add region 
+        virtual void add_def_region(Region const&); 
+        /// @brief set number of groups 
+        virtual void resize_def_group(int);
+        /// @brief add group 
+        virtual void add_def_group(Group const&); 
         /// @brief end of design 
         virtual void end_def_design(); 
 
