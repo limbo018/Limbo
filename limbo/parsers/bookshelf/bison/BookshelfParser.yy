@@ -474,7 +474,9 @@ shapes_node_entries : shapes_one_line_entry
 /* .shapes top */
 bookshelf_shapes : shapes_header
                shapes_number 
-               shapes_node_entries
+               shapes_node_entries {
+               driver.shapesEndCbk();
+               }
                ; 
 
 /***** .route file *****/

@@ -159,6 +159,8 @@ public:
     void shapesEntryCbk(string&, double, double, double, double);
     /// @brief from .shapes file, node name and number of boxes
     void shapesNodeNameCbk(string&, int);
+    /// @brief from .shapes file, end file 
+    void shapesEndCbk();
     /// @brief from .route file, Global routing grid (num_X_grids num_Y_grids num_layers)
     void routeGridCbk(int, int, int); 
     /// @brief from .route file, Vertical capacity per tile edge on each layer 

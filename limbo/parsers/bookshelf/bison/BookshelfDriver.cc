@@ -213,6 +213,13 @@ void Driver::shapesNodeNameCbk(string& node_name, int n)
     m_shape.node_name.swap(node_name);
     m_shape.vShapeBox.reserve(n);
 }
+void Driver::shapesEndCbk()
+{
+    if (!m_shape.node_name.empty())
+    {
+        m_db.set_bookshelf_shape(m_shape); 
+    }
+}
 /// @brief from .route file, Global routing grid (num_X_grids num_Y_grids num_layers)
 void Driver::routeGridCbk(int numGridX, int numGridY, int numLayers)
 {
