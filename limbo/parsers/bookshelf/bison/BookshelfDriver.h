@@ -137,8 +137,12 @@ public:
     void sclCoreRowSitespacing(int);
     /// @brief from .scl file, site orientation 
     void sclCoreRowSiteorient(int);
+    /// @brief from .scl file, site orientation 
+    void sclCoreRowSiteorient(string&);
     /// @brief from .scl file, site symmetry
     void sclCoreRowSitesymmetry(int);
+    /// @brief from .scl file, site symmetry
+    void sclCoreRowSitesymmetry(string&);
     /// @brief from .scl file, subrow origin 
     void sclCoreRowSubRowOrigin(int);
     /// @brief from .scl file, number of sites 
@@ -148,6 +152,40 @@ public:
     // .wts file 
     /// @brief from .wts file, net weight entry 
     void wtsNetWeightEntry(string&, double);
+    /// .shapes file 
+    /// @brief from .shapes file, number of nodes with non-rectangular shapes 
+    void shapesNumNonRectangularNodesCbk(int);
+    /// @brief from .shapes file, one box entry 
+    void shapesEntryCbk(string&, double, double, double, double);
+    /// @brief from .shapes file, node name and number of boxes
+    void shapesNodeNameCbk(string&, int);
+    /// @brief from .route file, Global routing grid (num_X_grids num_Y_grids num_layers)
+    void routeGridCbk(int, int, int); 
+    /// @brief from .route file, Vertical capacity per tile edge on each layer 
+    void routeVerticalCapacityCbk(IntegerArray&);
+    /// @brief from .route file, Horizontal capacity per tile edge on each layer 
+    void routeHorizontalCapacityCbk(IntegerArray&); 
+    /// @brief from .route file, Minimum metal width on each layer 
+    void routeMinWireWidthCbk(IntegerArray&);
+    /// @brief from .route file, Minimum spacing on each layer 
+    void routeMinWireSpacingCbk(IntegerArray&);
+    /// @brief from .route file, Via spacing per layer 
+    void routeViaSpacingCbk(IntegerArray&); 
+    /// @brief from .route file, Absolute coordinates of the origin of the grid (grid_lowerleft_X grid_lowerleft_Y)
+    void routeGridOriginCbk(double, double);
+    /// @brief from .route file, tile_width tile_height 
+    void routeTileSizeCbk(double, double); 
+    /// @brief from .route file, Porosity for routing blockages
+    /// (Zero implies the blockage completely blocks overlapping routing tracks. Default = 0)
+    void routeBlockagePorosityCbk(int); 
+    /// @brief from .route file, number of IO pins  
+    void routeNumNiTerminalsCbk(int); 
+    /// @brief from .route file, for IO pins, (node_name layer_id_for_all_node_pins) 
+    void routePinLayerCbk(string&, int); 
+    /// @brief from .route file, number of blockage nodes
+    void routeNumBlockageNodes(int); 
+    /// @brief from .route file, for blockages, (node_name num_blocked_layers list_of_blocked_layers) 
+    void routeBlockageNodeLayerCbk(string&, int, IntegerArray&); 
     // .aux file 
     /// @brief from .aux file, other bookshelf files 
     void auxCbk(string&, vector<string>&);
@@ -158,6 +196,8 @@ public:
 protected:
 	Row m_row; ///< temporary storage of row 
 	Net m_net; ///< temporary storage of net 
+    NodeShape m_shape; ///< temporary storage of shape 
+    RouteInfo m_routeInfo; ///< temporary storage of routing information 
     vector<string> m_vBookshelfFiles; ///< store bookshelf files except .aux 
     bool m_plFlag; ///< if true, indicate that only reads .pl file, this will result in different callbacks in the database 
 };

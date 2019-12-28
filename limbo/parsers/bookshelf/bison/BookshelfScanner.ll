@@ -62,6 +62,7 @@ typedef BookshelfParser::Parser::token_type token_type;
 (?i:NumPins) {return token::KWD_NUMPINS;}
 (?i:NumNodes) {return token::KWD_NUMNODES;}
 (?i:NumTerminals) {return token::KWD_NUMTERMINALS;}
+(?i:NumNonRectangularNodes) {return token::KWD_NUMNONRECTANGULARNODES;}
 (?i:NumRows) {return token::KWD_NUMROWS;}
 (?i:CoreRow) {return token::KWD_COREROW;}
 (?i:Horizontal) {return token::KWD_HORIZONTAL;}
@@ -83,6 +84,8 @@ typedef BookshelfParser::Parser::token_type token_type;
 (?i:nets) {return token::KWD_NETS;}
 (?i:pl) {return token::KWD_PL;}
 (?i:wts) {return token::KWD_WTS;}
+(?i:shapes) {return token::KWD_SHAPES;}
+(?i:route) {return token::KWD_ROUTE;}
 (?i:aux) {return token::KWD_AUX;}
 (?i:[\/]?FIXED) {return token::KWD_FIXED;}
 (?i:[\/]?FIXED_NI) {return token::KWD_FIXED_NI;}
@@ -99,6 +102,17 @@ typedef BookshelfParser::Parser::token_type token_type;
 (?i:FS) {return token::KWD_FS;}
 (?i:FW) {return token::KWD_FW;}
 (?i:FE) {return token::KWD_FE;}
+(?i:Grid) {return token::KWD_GRID;}
+(?i:VerticalCapacity) {return token::KWD_VERTICALCAPACITY;}
+(?i:HorizontalCapacity) {return token::KWD_HORIZONTALCAPACITY;}
+(?i:MinWireWidth) {return token::KWD_MINWIREWIDTH;}
+(?i:MinWireSpacing) {return token::KWD_MINWIRESPACING;}
+(?i:ViaSpacing) {return token::KWD_VIASPACING;}
+(?i:GridOrigin) {return token::KWD_GRIDORIGIN;}
+(?i:TileSize) {return token::KWD_TILESIZE;}
+(?i:BlockagePorosity) {return token::KWD_BLOCKAGE_POROSITY;}
+(?i:NumNiTerminals) {return token::KWD_NUMNITERMINALS;}
+(?i:NumBlockageNodes) {return token::KWD_NUMBLOCKAGENODES;}
 
 
 [\+\-]?[0-9]+ {

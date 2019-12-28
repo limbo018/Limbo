@@ -11,6 +11,48 @@
 
 namespace BookshelfParser {
 
+void BookshelfDataBase::resize_bookshelf_shapes(int n)
+{
+    cerr << "Bookshelf has " << n << " shapes" << endl; 
+    bookshelf_user_cbk_reminder(__func__); 
+}
+
+void BookshelfDataBase::resize_bookshelf_niterminal_layers(int n)
+{
+    cerr << "Bookshelf route has " << n << " NI terminals with layers" << endl; 
+    bookshelf_user_cbk_reminder(__func__); 
+}
+
+void BookshelfDataBase::resize_bookshelf_blockage_layers(int n)
+{
+    cerr << "Bookshelf route has " << n << " blockages with layers" << endl; 
+    bookshelf_user_cbk_reminder(__func__); 
+}
+
+void BookshelfDataBase::set_bookshelf_shape(NodeShape const& shape) 
+{
+    cerr << "Bookshelf shape: " << shape.node_name << endl; 
+    bookshelf_user_cbk_reminder(__func__); 
+}
+
+void BookshelfDataBase::set_bookshelf_route_info(RouteInfo const&)
+{
+    cerr << "Bookshelf route: RouteInfo" << endl; 
+    bookshelf_user_cbk_reminder(__func__); 
+}
+
+void BookshelfDataBase::add_bookshelf_niterminal_layer(string const& name, int layer)
+{
+    cerr << "Bookshelf route: " << name << ", " << layer << endl; 
+    bookshelf_user_cbk_reminder(__func__); 
+}
+
+void BookshelfDataBase::add_bookshelf_blockage_layers(string const& name, vector<int> const&)
+{
+    cerr << "Bookshelf route: " << name << endl; 
+    bookshelf_user_cbk_reminder(__func__); 
+}
+
 void BookshelfDataBase::bookshelf_user_cbk_reminder(const char* str) const 
 {
     cerr << "A corresponding user-defined callback is necessary: " << str << endl;

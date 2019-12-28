@@ -14,6 +14,7 @@
 #include <fstream>
 #include <sstream>
 #include <cassert>
+#include <limits>
 
 /// namespace for BookshelfParser
 namespace BookshelfParser {
@@ -105,8 +106,10 @@ struct Row : public Item
 	int32_t site_num; ///< number of sites 
 	int32_t site_width; ///< width of a site 
     int32_t site_spacing; ///< spacing of a site 
-    int32_t site_orient; ///< orientation of a site 
+    int32_t site_orient; ///< orientation of a site, one of these two will be valid  
+    string site_orient_str; ///< orientation of a site in string
     int32_t site_symmetry; ///< symmetry of a site 
+    string site_symmetry_str; ///< symmetry of a site in string 
     /// constructor 
     Row()
     {
@@ -120,6 +123,8 @@ struct Row : public Item
         height = 0;
         site_num = 0;
         site_width = site_spacing = site_orient = site_symmetry = 0;
+        site_orient_str = "";
+        site_symmetry_str = "";
 	}
     /// print data members 
     /// @param ss output stream 
@@ -131,7 +136,9 @@ struct Row : public Item
             << "site width = " << site_width << endl 
             << "site_spacing = " << site_spacing << endl 
             << "site_orient = " << site_orient << endl 
-            << "site_symmetry = " << site_symmetry << endl;
+            << "site_orient_str = " << site_orient_str << endl
+            << "site_symmetry = " << site_symmetry << endl
+            << "site_symmetry_str = " << site_symmetry_str << endl;
 	}
 };
 /// @brief describe a pin of a net 
@@ -218,6 +225,161 @@ struct Net : public Item
 		ss << endl;
 	}
 };
+
+/// @brief shape box to describe one node shape 
+struct ShapeBox : public Item 
+{
+    string name; ///< shape name 
+    double origin[2]; ///< lower left corner of the box
+    double size[2]; ///< width and height
+
+    /// @brief constructor 
+    /// @param n shape name 
+    /// @param x lower left coordinate 
+    /// @param y lower left coordinate 
+    /// @param w width 
+    /// @param h height 
+    ShapeBox(string& n, double x, double y, double w, double h)
+    {
+        name.swap(n); 
+        origin[0] = x; 
+        origin[1] = y; 
+        size[0] = w; 
+        size[1] = h; 
+    }
+    /// reset all data members 
+    void reset()
+    {
+        name = "";
+        origin[0] = origin[1] = 0;
+        size[0] = size[1] = 0;
+    }
+};
+
+/// @brief node shape to describe the shapes of node 
+struct NodeShape : public Item 
+{
+    string node_name; ///< node name 
+    vector<ShapeBox> vShapeBox; 
+
+    /// reset all data members 
+	void reset()
+	{
+		node_name = "";
+		vShapeBox.clear();
+	}
+    /// print data members 
+    /// @param ss output stream 
+	virtual void print(ostream& ss) const
+	{
+		ss << "//////// NodeShape ////////" << endl
+			<< "node_name = " << node_name << endl; 
+		for (uint32_t i = 0; i < vShapeBox.size(); ++i)
+			ss << vShapeBox[i].name 
+                << " @(" << vShapeBox[i].origin[0] << ", " << vShapeBox[i].origin[1] << ") "
+                << " w/h (" << vShapeBox[i].size[0] << ", " << vShapeBox[i].size[1] << ")" 
+                << endl;
+		ss << endl;
+	}
+};
+
+/// @brief describe (pin, layer) pair 
+struct IOPinLayer : public Item 
+{
+    string pin_name; ///< pin name 
+    int layer; ///< layer 
+
+    /// @brief constructor 
+    IOPinLayer(string& name, int l)
+    {
+        pin_name.swap(name); 
+        layer = l; 
+    }
+    /// @brief reset all data members 
+    void reset()
+    {
+        pin_name = "";
+        layer = std::numeric_limits<int>::max();
+    }
+};
+
+/// @brief describe blockage node name, blocked layer list 
+struct BlockageLayer : public Item 
+{
+    string node_name; ///< node name 
+    vector<int> vLayer; ///< layer list 
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        node_name = "";
+        vLayer.clear();
+    }
+};
+
+/// @brief information for routing to describe .route 
+/// refer to DAC 2012 contest 
+/// http://archive.sigda.org/dac2012/contest/other_files/Benchmark_Description.pdf
+struct RouteInfo : public Item 
+{
+    int numGrids[2]; ///< global routing grids in X and Y 
+    int numLayers; ///< number of layers 
+    vector<int> vVerticalCapacity; ///< vertical capacity at each layer 
+    vector<int> vHorizontalCapacity; ///< horizontal capacity at each layer 
+    vector<int> vMinWireWidth; ///< min wire width for each layer 
+    vector<int> vMinWireSpacing; ///< min wire spacing for each layer 
+    vector<int> vViaSpacing; ///< via spacing per layer 
+    double gridOrigin[2]; ///< Absolute coordinates of the origin of the grid (grid_lowerleft_X grid_lowerleft_Y)
+    double tileSize[2]; ///< tile_width, tile_height
+    int blockagePorosity; ///< Porosity for routing blockages (Zero implies the blockage completely blocks overlapping routing tracks. Default = 0)
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        numGrids[0] = numGrids[1] = 0; 
+        numLayers = 0; 
+        vVerticalCapacity.clear(); 
+        vHorizontalCapacity.clear(); 
+        vMinWireWidth.clear(); 
+        vMinWireSpacing.clear(); 
+        vViaSpacing.clear(); 
+        gridOrigin[0] = gridOrigin[1] = 0; 
+        tileSize[0] = tileSize[1] = 0; 
+        blockagePorosity = 0; 
+    }
+    /// print data members 
+    /// @param ss output stream 
+	virtual void print(ostream& ss) const
+	{
+		ss << "//////// RouteInfo ////////" << endl;
+        ss << "grids = " << numGrids[0] << ", " << numGrids[1] << endl; 
+        ss << "numLayers = " << numLayers << endl; 
+        ss << "vVerticalCapacity = ";
+        for (unsigned int i = 0; i < vVerticalCapacity.size(); ++i)
+            ss << vVerticalCapacity[i] << " ";
+        ss << endl; 
+        ss << "vHorizontalCapacity = ";
+        for (unsigned int i = 0; i < vHorizontalCapacity.size(); ++i)
+            ss << vHorizontalCapacity[i] << " ";
+        ss << endl; 
+        ss << "vMinWireWidth = ";
+        for (unsigned int i = 0; i < vMinWireWidth.size(); ++i)
+            ss << vMinWireWidth[i] << " ";
+        ss << endl; 
+        ss << "vMinWireSpacing = ";
+        for (unsigned int i = 0; i < vMinWireSpacing.size(); ++i)
+            ss << vMinWireSpacing[i] << " ";
+        ss << endl; 
+        ss << "vViaSpacing = ";
+        for (unsigned int i = 0; i < vViaSpacing.size(); ++i)
+            ss << vViaSpacing[i] << " ";
+        ss << endl; 
+        ss << "gridOrigin = " << gridOrigin[0] << ", " << gridOrigin[1] << endl; 
+        ss << "tileSize = " << tileSize[0] << ", " << tileSize[1] << endl; 
+        ss << "blockagePorosity = " << blockagePorosity << endl; 
+	}
+};
+
 // forward declaration
 /// @brief Base class for bookshelf database. 
 /// Only pure virtual functions are defined.  
@@ -233,6 +395,12 @@ class BookshelfDataBase
         virtual void resize_bookshelf_pin(int) = 0;
         /// @brief set number of rows 
         virtual void resize_bookshelf_row(int) = 0;
+        /// @brief set number of shapes 
+        virtual void resize_bookshelf_shapes(int);
+        /// @brief set number of NI terminals with layers 
+        virtual void resize_bookshelf_niterminal_layers(int);
+        /// @brief set number of blockage nodes with layers 
+        virtual void resize_bookshelf_blockage_layers(int);
         /// @brief add terminal 
         virtual void add_bookshelf_terminal(string&, int, int) = 0;
         /// @brief add node 
@@ -249,6 +417,14 @@ class BookshelfDataBase
             cerr << "Bookshelf net weight: " << name << " " << w << endl;
             bookshelf_user_cbk_reminder(__func__);
         }
+        /// @brief set node shapes 
+        virtual void set_bookshelf_shape(NodeShape const&); 
+        /// @brief set routing information 
+        virtual void set_bookshelf_route_info(RouteInfo const&);
+        /// @brief set NI terminal with layers 
+        virtual void add_bookshelf_niterminal_layer(string const&, int);
+        /// @brief set blockages with layers 
+        virtual void add_bookshelf_blockage_layers(string const&, vector<int> const&);
         /// @brief set design name 
         virtual void set_bookshelf_design(string&) = 0;
         /// @brief a callback when a bookshelf file reaches to the end 

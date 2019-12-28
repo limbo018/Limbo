@@ -21,6 +21,10 @@ Driver::Driver(BookshelfDataBase& db)
       m_db(db), 
       m_plFlag(false)
 {
+    m_row.reset();
+    m_net.reset();
+    m_shape.reset();
+    m_routeInfo.reset();
 }
 
 bool Driver::parse_stream(std::istream& in, const std::string& sname)
@@ -160,9 +164,17 @@ void Driver::sclCoreRowSiteorient(int site_orient)
 {
     m_row.site_orient = site_orient;
 }
+void Driver::sclCoreRowSiteorient(string& site_orient)
+{
+    m_row.site_orient_str.swap(site_orient);
+}
 void Driver::sclCoreRowSitesymmetry(int site_symmetry)
 {
     m_row.site_symmetry = site_symmetry;
+}
+void Driver::sclCoreRowSitesymmetry(string& site_symmetry)
+{
+    m_row.site_symmetry_str.swap(site_symmetry);
 }
 void Driver::sclCoreRowSubRowOrigin(int x)
 {
@@ -182,6 +194,105 @@ void Driver::wtsNetWeightEntry(string& net_name, double weight)
 {
     m_db.set_bookshelf_net_weight(net_name, weight);
 }
+// .shapes file 
+void Driver::shapesNumNonRectangularNodesCbk(int n)
+{
+    m_db.resize_bookshelf_shapes(n);
+}
+void Driver::shapesEntryCbk(string& shape_name, double xl, double yl, double w, double h)
+{
+    m_shape.vShapeBox.push_back(ShapeBox(shape_name, xl, yl, w, h));
+}
+void Driver::shapesNodeNameCbk(string& node_name, int n)
+{
+    if (!m_shape.node_name.empty())
+    {
+        m_db.set_bookshelf_shape(m_shape); 
+    }
+    m_shape.reset(); 
+    m_shape.node_name.swap(node_name);
+    m_shape.vShapeBox.reserve(n);
+}
+/// @brief from .route file, Global routing grid (num_X_grids num_Y_grids num_layers)
+void Driver::routeGridCbk(int numGridX, int numGridY, int numLayers)
+{
+    m_routeInfo.numGrids[0] = numGridX; 
+    m_routeInfo.numGrids[1] = numGridY; 
+    m_routeInfo.numLayers = numLayers; 
+} 
+/// @brief from .route file, Vertical capacity per tile edge on each layer 
+void Driver::routeVerticalCapacityCbk(IntegerArray& vVerticalCapacity)
+{
+    m_routeInfo.vVerticalCapacity.swap(vVerticalCapacity);
+}
+/// @brief from .route file, Horizontal capacity per tile edge on each layer 
+void Driver::routeHorizontalCapacityCbk(IntegerArray& vHorizontalCapacity)
+{
+    m_routeInfo.vHorizontalCapacity.swap(vHorizontalCapacity);
+} 
+/// @brief from .route file, Minimum metal width on each layer 
+void Driver::routeMinWireWidthCbk(IntegerArray& vMinWireWidth)
+{
+    m_routeInfo.vMinWireWidth.swap(vMinWireWidth);
+}
+/// @brief from .route file, Minimum spacing on each layer 
+void Driver::routeMinWireSpacingCbk(IntegerArray& vMinWireSpacing)
+{
+    m_routeInfo.vMinWireSpacing.swap(vMinWireSpacing);
+}
+/// @brief from .route file, Via spacing per layer 
+void Driver::routeViaSpacingCbk(IntegerArray& vViaSpacing)
+{
+    m_routeInfo.vViaSpacing.swap(vViaSpacing);
+} 
+/// @brief from .route file, Absolute coordinates of the origin of the grid (grid_lowerleft_X grid_lowerleft_Y)
+void Driver::routeGridOriginCbk(double gridOriginX, double gridOriginY)
+{
+    m_routeInfo.gridOrigin[0] = gridOriginX;
+    m_routeInfo.gridOrigin[1] = gridOriginY;
+}
+/// @brief from .route file, tile_width tile_height 
+void Driver::routeTileSizeCbk(double tileSizeX, double tileSizeY)
+{
+    m_routeInfo.tileSize[0] = tileSizeX; 
+    m_routeInfo.tileSize[1] = tileSizeY; 
+} 
+/// @brief from .route file, Porosity for routing blockages
+/// (Zero implies the blockage completely blocks overlapping routing tracks. Default = 0)
+void Driver::routeBlockagePorosityCbk(int bp)
+{
+    m_routeInfo.blockagePorosity = bp;
+} 
+/// @brief from .route file, number of IO pins  
+void Driver::routeNumNiTerminalsCbk(int n)
+{
+    if (!m_routeInfo.vVerticalCapacity.empty() || !m_routeInfo.vHorizontalCapacity.empty())
+    {
+        m_db.set_bookshelf_route_info(m_routeInfo); 
+        m_routeInfo.reset(); 
+    }
+    m_db.resize_bookshelf_niterminal_layers(n); 
+} 
+/// @brief from .route file, for IO pins, (node_name layer_id_for_all_node_pins) 
+void Driver::routePinLayerCbk(string& name, int layer)
+{
+    m_db.add_bookshelf_niterminal_layer(name, layer);
+} 
+/// @brief from .route file, number of blockage nodes
+void Driver::routeNumBlockageNodes(int n)
+{
+    if (!m_routeInfo.vVerticalCapacity.empty() || !m_routeInfo.vHorizontalCapacity.empty())
+    {
+        m_db.set_bookshelf_route_info(m_routeInfo); 
+        m_routeInfo.reset(); 
+    }
+    m_db.resize_bookshelf_blockage_layers(n);
+} 
+/// @brief from .route file, for blockages, (node_name num_blocked_layers list_of_blocked_layers) 
+void Driver::routeBlockageNodeLayerCbk(string& name, int, IntegerArray& vLayer)
+{
+    m_db.add_bookshelf_blockage_layers(name, vLayer);
+} 
 // .aux file 
 void Driver::auxCbk(string& design_name, vector<string>& vBookshelfFiles)
 {
@@ -235,6 +346,10 @@ bool read(BookshelfDataBase& db, const string& auxFile)
             vOrder[i].first = 3;
         else if (limbo::iequals(suffix, "pl"))
             vOrder[i].first = 4;
+        else if (limbo::iequals(suffix, "shapes"))
+            vOrder[i].first = 5;
+        else if (limbo::iequals(suffix, "route"))
+            vOrder[i].first = 6;
         else 
             vOrder[i].first = vOrder.size();
         vOrder[i].second = i;
