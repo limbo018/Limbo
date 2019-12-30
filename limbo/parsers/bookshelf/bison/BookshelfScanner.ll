@@ -76,6 +76,7 @@ typedef BookshelfParser::Parser::token_type token_type;
 (?i:SubrowOrigin) {return token::KWD_SUBROWORIGIN;}
 (?i:NumSites) {return token::KWD_NUMSITES;}
 (?i:End) {return token::KWD_END;}
+(?i:terminal_NI) {return token::KWD_TERMINAL_NI;}
 (?i:terminal) {return token::KWD_TERMINAL;}
 (?i:UCLA) {return token::KWD_UCLA;}
 (?i:NetDegree) {return token::KWD_NETDEGREE;}

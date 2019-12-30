@@ -100,6 +100,8 @@ public:
     void numNodeTerminalsCbk(int, int);
     /// @brief from .nodes file, terminal entry 
     void terminalEntryCbk(string&, int, int);
+    /// @brief from .nodes file, terminal_NI entry 
+    void terminalNIEntryCbk(string&, int, int);
     /// @brief from .nodes file, node entry 
     void nodeEntryCbk(string&, int, int, string&);
     /// @brief from .nodes file, node entry 

@@ -29,6 +29,18 @@ void BookshelfDataBase::resize_bookshelf_blockage_layers(int n)
     bookshelf_user_cbk_reminder(__func__); 
 }
 
+void BookshelfDataBase::add_bookshelf_terminal_NI(string& n, int, int)
+{
+    cerr << "Bookshelf has terminal_NI " << n << endl; 
+    bookshelf_user_cbk_reminder(__func__);
+}
+
+void BookshelfDataBase::set_bookshelf_net_weight(string const& name, double w)
+{
+    cerr << "Bookshelf net weight: " << name << " " << w << endl;
+    bookshelf_user_cbk_reminder(__func__);
+}
+
 void BookshelfDataBase::set_bookshelf_shape(NodeShape const& shape) 
 {
     cerr << "Bookshelf shape: " << shape.node_name << endl; 

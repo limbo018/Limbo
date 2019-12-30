@@ -93,6 +93,7 @@
 %token          KWD_NUMSITES    "NumSites"
 %token          KWD_END         "End"
 %token          KWD_TERMINAL    "terminal"
+%token          KWD_TERMINAL_NI "terminal_NI"
 %token          KWD_UCLA        "UCLA"
 %token          KWD_NETDEGREE   "NetDegree"
 %token          KWD_SCL         "scl"
@@ -239,7 +240,11 @@ nodes_numbers : nodes_number
               ;
 
 nodes_node_entry : STRING INTEGER INTEGER KWD_TERMINAL EOL {
-                     driver.terminalEntryCbk(*$1, $2, $3);
+                 driver.terminalEntryCbk(*$1, $2, $3);
+                     delete $1;
+                     } 
+                     | STRING INTEGER INTEGER KWD_TERMINAL_NI EOL {
+                     driver.terminalNIEntryCbk(*$1, $2, $3);
                      delete $1;
                      } 
                      | STRING INTEGER INTEGER STRING EOL {

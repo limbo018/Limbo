@@ -403,6 +403,8 @@ class BookshelfDataBase
         virtual void resize_bookshelf_blockage_layers(int);
         /// @brief add terminal 
         virtual void add_bookshelf_terminal(string&, int, int) = 0;
+        /// @brief add terminal_NI
+        virtual void add_bookshelf_terminal_NI(string&, int, int);
         /// @brief add node 
         virtual void add_bookshelf_node(string&, int, int) = 0;
         /// @brief add net 
@@ -412,11 +414,7 @@ class BookshelfDataBase
         /// @brief set node position 
         virtual void set_bookshelf_node_position(string const&, double, double, string const&, string const&, bool) = 0;
         /// @brief set net weight 
-        virtual void set_bookshelf_net_weight(string const& name, double w) 
-        {
-            cerr << "Bookshelf net weight: " << name << " " << w << endl;
-            bookshelf_user_cbk_reminder(__func__);
-        }
+        virtual void set_bookshelf_net_weight(string const& name, double w);
         /// @brief set node shapes 
         virtual void set_bookshelf_shape(NodeShape const&); 
         /// @brief set routing information 

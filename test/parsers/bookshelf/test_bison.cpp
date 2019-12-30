@@ -69,6 +69,13 @@ class BookshelfDataBase : public BookshelfParser::BookshelfDataBase
         {
             cout << __func__ << " => " << name << ", " << w << ", " << h << endl;
         }
+        /// @param name terminal NI name 
+        /// @param w width 
+        /// @param h height 
+        virtual void add_bookshelf_terminal_NI(string& name, int w, int h)
+        {
+            cout << __func__ << " => " << name << ", " << w << ", " << h << endl;
+        }
         /// @param name node name 
         /// @param w width 
         /// @param h height 
