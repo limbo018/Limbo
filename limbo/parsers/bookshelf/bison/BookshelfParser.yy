@@ -344,7 +344,7 @@ orient : KWD_N {$$ = new std::string ("N");}
           ;
 
 pl_status : KWD_FIXED {$$ = new std::string("FIXED");}
-          | KWD_FIXED_NI {$$ = new std::string("FIXED");}
+          | KWD_FIXED_NI {$$ = new std::string("FIXED_NI");}
           | KWD_PLACED {$$ = new std::string("PLACED");}
           | KWD_UNPLACED {$$ = new std::string("UNPLACED");}
           ;
