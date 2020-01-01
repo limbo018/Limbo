@@ -132,7 +132,7 @@
 %token			KWD_NUMBLOCKAGENODES		"NumBlockageNodes"
 
 %type <integerArrayVal> integer_array 
-/* %type <stringArrayVal> string_array */
+%type <stringArrayVal> string_array 
 %type <stringArrayVal> path_array
 %type <stringVal> path
 %type <numberVal>  NUMBER      
@@ -146,7 +146,7 @@
 */
 
 %destructor { delete $$; } STRING QUOTE BINARY path
-%destructor { delete $$; } integer_array /*string_array*/  path_array 
+%destructor { delete $$; } integer_array string_array  path_array 
 %destructor { delete $$; } orient pl_status
 /*
 %destructor { delete $$; } constant variable
@@ -180,7 +180,6 @@ integer_array : INTEGER {
 				$$ = $1;
 			  }
               ;
-/*
 string_array : STRING {
 				$$ = new StringArray(1, *$1);
                 delete $1;
@@ -191,7 +190,6 @@ string_array : STRING {
 				$$ = $1;
 			  }
               ;
-*/
 path : STRING {$$ = $1;}
      | PATH {$$ = $1;}
      ;
@@ -559,6 +557,11 @@ pin_layer_entry : STRING INTEGER {
                 driver.routePinLayerCbk(*$1, $2);
                 delete $1;
                 }
+                | STRING STRING {
+                driver.routePinLayerCbk(*$1, *$2);
+                delete $1;
+                delete $2;
+                }
                 | pin_layer_entry EOL 
                 ;
 
@@ -576,6 +579,11 @@ num_blockage_nodes_entry : KWD_NUMBLOCKAGENODES ':' INTEGER {
                          ;
 
 blockage_node_layer_entry : STRING INTEGER integer_array {
+                          driver.routeBlockageNodeLayerCbk(*$1, $2, *$3);
+                          delete $1; 
+                          delete $3;
+                          }
+                          | STRING INTEGER string_array {
                           driver.routeBlockageNodeLayerCbk(*$1, $2, *$3);
                           delete $1; 
                           delete $3;

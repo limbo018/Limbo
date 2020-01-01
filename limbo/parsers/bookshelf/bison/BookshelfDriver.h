@@ -186,10 +186,12 @@ public:
     void routeNumNiTerminalsCbk(int); 
     /// @brief from .route file, for IO pins, (node_name layer_id_for_all_node_pins) 
     void routePinLayerCbk(string&, int); 
+    void routePinLayerCbk(string&, string&); 
     /// @brief from .route file, number of blockage nodes
     void routeNumBlockageNodes(int); 
     /// @brief from .route file, for blockages, (node_name num_blocked_layers list_of_blocked_layers) 
     void routeBlockageNodeLayerCbk(string&, int, IntegerArray&); 
+    void routeBlockageNodeLayerCbk(string&, int, StringArray&); 
     // .aux file 
     /// @brief from .aux file, other bookshelf files 
     void auxCbk(string&, vector<string>&);

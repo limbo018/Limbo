@@ -53,13 +53,13 @@ void BookshelfDataBase::set_bookshelf_route_info(RouteInfo const&)
     bookshelf_user_cbk_reminder(__func__); 
 }
 
-void BookshelfDataBase::add_bookshelf_niterminal_layer(string const& name, int layer)
+void BookshelfDataBase::add_bookshelf_niterminal_layer(string const& name, string const& layer)
 {
     cerr << "Bookshelf route: " << name << ", " << layer << endl; 
     bookshelf_user_cbk_reminder(__func__); 
 }
 
-void BookshelfDataBase::add_bookshelf_blockage_layers(string const& name, vector<int> const&)
+void BookshelfDataBase::add_bookshelf_blockage_layers(string const& name, vector<string> const&)
 {
     cerr << "Bookshelf route: " << name << endl; 
     bookshelf_user_cbk_reminder(__func__); 

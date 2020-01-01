@@ -117,11 +117,11 @@ class BookshelfDataBase : public BookshelfParser::BookshelfDataBase
             info.print(cout);
         }
         /// @brief set NI terminal with layers 
-        virtual void add_bookshelf_niterminal_layer(string const&, int)
+        virtual void add_bookshelf_niterminal_layer(string const&, string const&)
         {
         }
         /// @brief set blockages with layers 
-        virtual void add_bookshelf_blockage_layers(string const&, std::vector<int> const&)
+        virtual void add_bookshelf_blockage_layers(string const&, std::vector<string> const&)
         {
         }
         /// @param name design name 

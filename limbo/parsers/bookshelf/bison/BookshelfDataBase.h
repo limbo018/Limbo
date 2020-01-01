@@ -420,9 +420,9 @@ class BookshelfDataBase
         /// @brief set routing information 
         virtual void set_bookshelf_route_info(RouteInfo const&);
         /// @brief set NI terminal with layers 
-        virtual void add_bookshelf_niterminal_layer(string const&, int);
+        virtual void add_bookshelf_niterminal_layer(string const&, string const&);
         /// @brief set blockages with layers 
-        virtual void add_bookshelf_blockage_layers(string const&, vector<int> const&);
+        virtual void add_bookshelf_blockage_layers(string const&, vector<string> const&);
         /// @brief set design name 
         virtual void set_bookshelf_design(string&) = 0;
         /// @brief a callback when a bookshelf file reaches to the end 

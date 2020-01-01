@@ -287,6 +287,14 @@ void Driver::routeNumNiTerminalsCbk(int n)
 /// @brief from .route file, for IO pins, (node_name layer_id_for_all_node_pins) 
 void Driver::routePinLayerCbk(string& name, int layer)
 {
+    // convert to name 
+    char buf[64]; 
+    sprintf(buf, "%d", layer);
+    string layerName (buf); 
+    m_db.add_bookshelf_niterminal_layer(name, layerName);
+} 
+void Driver::routePinLayerCbk(string& name, string& layer)
+{
     m_db.add_bookshelf_niterminal_layer(name, layer);
 } 
 /// @brief from .route file, number of blockage nodes
@@ -301,6 +309,18 @@ void Driver::routeNumBlockageNodes(int n)
 } 
 /// @brief from .route file, for blockages, (node_name num_blocked_layers list_of_blocked_layers) 
 void Driver::routeBlockageNodeLayerCbk(string& name, int, IntegerArray& vLayer)
+{
+    // convert to name 
+    std::vector<std::string> vLayerName (vLayer.size()); 
+    for (unsigned int i = 0; i < vLayer.size(); ++i)
+    {
+        char buf[64]; 
+        sprintf(buf, "%d", vLayer[i]); 
+        vLayerName[i] = buf; 
+    }
+    m_db.add_bookshelf_blockage_layers(name, vLayerName);
+} 
+void Driver::routeBlockageNodeLayerCbk(string& name, int, StringArray& vLayer)
 {
     m_db.add_bookshelf_blockage_layers(name, vLayer);
 } 
