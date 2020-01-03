@@ -131,7 +131,7 @@ typedef BookshelfParser::Parser::token_type token_type;
     return token::BINARY;
 }
 
-[A-Za-z][A-Za-z0-9_,.\$\-\[\]]* {
+[A-Za-z][A-Za-z0-9_,.\$\-\[\]\/]* {
     yylval->stringVal = new std::string(yytext, yyleng);
     return token::STRING;
 }
@@ -139,11 +139,6 @@ typedef BookshelfParser::Parser::token_type token_type;
 \"([^"])*\" {
     yylval->quoteVal = new std::string(yytext+1, yyleng-2);
     return token::QUOTE;
-}
-
-[A-Za-z0-9_,.\$\-\[\]\/\(\)]* {
-    yylval->stringVal = new std::string(yytext, yyleng);
-    return token::PATH;
 }
 
  /* gobble up comments */

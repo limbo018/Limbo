@@ -72,7 +72,6 @@
 %token <doubleVal> 	DOUBLE		"double"
 %token <stringVal> 	STRING		"string"
 %token <quoteVal> 	QUOTE		"quoted chars"
-%token <stringVal> 	PATH		"path"
 %token <binaryVal> 	BINARY		"binary numbers"
 %token			KWD_NUMNETS		"NumNets"
 %token          KWD_NUMPINS     "NumPins"
@@ -133,8 +132,6 @@
 
 %type <integerArrayVal> integer_array 
 %type <stringArrayVal> string_array 
-%type <stringArrayVal> path_array
-%type <stringVal> path
 %type <numberVal>  NUMBER      
 %type <charVal> nets_pin_direct
 %type <stringVal> pl_status
@@ -145,8 +142,8 @@
 %type <integerVal>	expression 
 */
 
-%destructor { delete $$; } STRING QUOTE BINARY path
-%destructor { delete $$; } integer_array string_array  path_array 
+%destructor { delete $$; } STRING QUOTE BINARY 
+%destructor { delete $$; } integer_array string_array  
 %destructor { delete $$; } orient pl_status
 /*
 %destructor { delete $$; } constant variable
@@ -190,20 +187,6 @@ string_array : STRING {
 				$$ = $1;
 			  }
               ;
-path : STRING {$$ = $1;}
-     | PATH {$$ = $1;}
-     ;
-path_array : path {
-				$$ = new StringArray(1, *$1);
-                delete $1;
-			  }
-			  | path_array path {
-				$1->push_back(*$2);
-                delete $2;
-				$$ = $1;
-			  }
-              ;
-
 NUMBER : INTEGER {$$ = $1;}
        | DOUBLE {$$ = $1;}
        ;
@@ -619,7 +602,7 @@ bookshelf_route : route_info_block
 
 /***** .aux file ******/
 /* .aux top */
-aux_entry : STRING ':' path_array {
+aux_entry : STRING ':' string_array {
               driver.auxCbk(*$1, *$3);
               delete $1;
               delete $3;
