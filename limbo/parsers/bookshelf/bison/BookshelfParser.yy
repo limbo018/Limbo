@@ -463,6 +463,7 @@ bookshelf_shapes : shapes_header
                shapes_node_entries {
                driver.shapesEndCbk();
                }
+               | shapes_header
                ; 
 
 /***** .route file *****/
