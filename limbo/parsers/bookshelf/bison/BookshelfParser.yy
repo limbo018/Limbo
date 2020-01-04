@@ -617,7 +617,8 @@ bookshelf_aux : aux_entry
 
 
  /*** grammar for top file ***/
-start : bookshelf_nodes
+start : /* empty */
+      | bookshelf_nodes
       | bookshelf_nets 
       | bookshelf_pl 
       | bookshelf_scl
