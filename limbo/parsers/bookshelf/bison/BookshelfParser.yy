@@ -582,20 +582,20 @@ blockage_node_layer_entries : blockage_node_layer_entry
 blockage_node_layer_block : num_blockage_nodes_entry blockage_node_layer_entries
                           ;
 
-route_info_block : route_header
-                 | route_info_block grid_entry 
-                 | route_info_block vertical_capacity_entry 
-                 | route_info_block horizontal_capacity_entry 
-                 | route_info_block min_wire_width_entry 
-                 | route_info_block min_wire_spacing_entry 
-                 | route_info_block via_spacing_entry 
-                 | route_info_block grid_origin_entry 
-                 | route_info_block tile_size_entry 
-                 | route_info_block blockage_porosity_entry 
+route_info_block : grid_entry 
+                 | vertical_capacity_entry 
+                 | horizontal_capacity_entry 
+                 | min_wire_width_entry 
+                 | min_wire_spacing_entry 
+                 | via_spacing_entry 
+                 | grid_origin_entry 
+                 | tile_size_entry 
+                 | blockage_porosity_entry 
                  ;
 
 /* .route top */
-bookshelf_route : route_info_block 
+bookshelf_route : route_header 
+                | bookshelf_route route_info_block 
                 | bookshelf_route pin_layer_block
                 | bookshelf_route blockage_node_layer_block
                ; 
