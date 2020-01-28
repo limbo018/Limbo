@@ -190,7 +190,7 @@ SDPColoringCsdp<GraphType>::SDPColoringCsdp(SDPColoringCsdp<GraphType>::graph_ty
     : base_type(g)
 {
     m_rounding_lb = -0.4;
-    m_rounding_ub = 0.95;
+    m_rounding_ub = 0.93;
 }
 
 template <typename GraphType>

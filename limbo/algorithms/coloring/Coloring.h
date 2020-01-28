@@ -133,6 +133,7 @@ class Coloring
         /// number of colors 
 		enum ColorNumType
 		{
+            TWO = 2,
 			THREE = 3, 
 			FOUR = 4
 		};
@@ -174,7 +175,7 @@ class Coloring
 		virtual void color_num(ColorNumType cn) {m_color_num = cn;} 
 		/// set number of colors 
         /// @param cn number of colors 
-		virtual void color_num(int8_t cn) {m_color_num = (cn == 3)? THREE : FOUR;}
+		virtual void color_num(int8_t cn) {m_color_num = (cn == 3)? THREE : (cn == 2)? TWO : FOUR;}
         /// @return number of colors 
         virtual ColorNumType color_num() const {return m_color_num;}
 
