@@ -1,8 +1,13 @@
+if(Boost_INCLUDE_DIRS)
+    set(INCLUDES ${Boost_INCLUDE_DIRS})
+    set(LIBS ${Boost_LIBRARIES})
+else(Boost_INCLUDE_DIRS)
+    set(LIBS Boost::graph)
+endif(Boost_INCLUDE_DIRS)
 include_directories(
     ${PROJECT_SOURCE_DIR}
-    ${Boost_INCLUDE_DIRS}
+    ${INCLUDES}
     )
-set(LIBS ${Boost_LIBRARIES})
 if(UNIX AND NOT APPLE)
     set(LIBS ${LIBS} rt)
 endif()

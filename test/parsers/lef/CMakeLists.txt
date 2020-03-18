@@ -1,6 +1,12 @@
+if(Boost_INCLUDE_DIRS)
+    set(INCLUDES ${Boost_INCLUDE_DIRS})
+    set(LIBS ${Boost_LIBRARIES})
+else(Boost_INCLUDE_DIRS)
+    set(LIBS Boost::boost)
+endif(Boost_INCLUDE_DIRS)
 include_directories(
     ${PROJECT_SOURCE_DIR}
-    ${Boost_INCLUDE_DIRS}
+    ${INCLUDES}
     )
 if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
     set(COMPILE_DEFINITIONS DEBUG_LEFPARSER)
@@ -10,7 +16,7 @@ endif()
 
 add_executable(test_lef_bison test_bison.cpp)
 set_target_properties(test_lef_bison PROPERTIES OUTPUT_NAME "test_bison")
-target_link_libraries(test_lef_bison lefparser)
+target_link_libraries(test_lef_bison PRIVATE lefparser ${LIBS})
 if(COMPILE_DEFINITIONS)
     target_compile_definitions(test_lef_bison PRIVATE ${COMPILE_DEFINITIONS})
 endif(COMPILE_DEFINITIONS)
@@ -20,7 +26,7 @@ endif(INSTALL_LIMBO)
 
 add_executable(test_lef_adapt test_adapt.cpp)
 set_target_properties(test_lef_adapt PROPERTIES OUTPUT_NAME "test_adapt")
-target_link_libraries(test_lef_adapt ${PROJECT_BINARY_DIR}/limbo/parsers/lef/adapt/liblefparseradapt.a)
+target_link_libraries(test_lef_adapt PRIVATE ${PROJECT_BINARY_DIR}/limbo/parsers/lef/adapt/liblefparseradapt.a ${LIBS})
 add_dependencies(test_lef_adapt lefparseradapt)
 if(COMPILE_DEFINITIONS)
     target_compile_definitions(test_lef_adapt PRIVATE ${COMPILE_DEFINITIONS})
