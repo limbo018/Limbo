@@ -23,7 +23,8 @@ add_custom_command(OUTPUT ${OUTPUT}
     COMMAND ar -qc libdefparseradapt.a *.o
     DEPENDS def defparseradapt_uncombined
     )
-add_custom_target(defparseradapt ALL DEPENDS ${OUTPUT})
+add_custom_target(defparseradapt ALL 
+  DEPENDS ${OUTPUT} def)
 
 if(INSTALL_LIMBO)
     install(FILES ${OUTPUT} DESTINATION lib)
