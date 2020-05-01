@@ -146,7 +146,7 @@ double ILPColoringUpdated<GraphType>::coloring()
 	// edge variables 
 
     // //New version by Wei
-    // int stitch_index = 0;
+    // int m_stitch_index = 0;
     // uint32_t stitch_edge_num = 0;
     // //parent node in non-stitch graph index of each node in stitch graph
     // std::vector<int> stitch_relation_set;
@@ -163,15 +163,15 @@ double ILPColoringUpdated<GraphType>::coloring()
     //     if(visited[(int)v]) continue;
     //     else{
     //         visited[(int)v] = true;
-    //         stitch_relation_set[(int)v] = stitch_index;
-    //         Coloring<GraphType>::depth_first_search_stitch(v,stitch_relation_set,visited,stitch_edge_num,stitch_index);
-    //         stitch_index ++;
+    //         stitch_relation_set[(int)v] = m_stitch_index;
+    //         Coloring<GraphType>::depth_first_search_stitch(v,stitch_relation_set,visited,stitch_edge_num,m_stitch_index);
+    //         m_stitch_index ++;
     //     }
     // }
 	std::vector<model_type::variable_type> vBigEdgeBit;
-	vBigEdgeBit.reserve(this->big_edge_num);
+	vBigEdgeBit.reserve(this->m_big_edge_num);
     model_type::expression_type obj;
-	for (uint32_t i = 0; i != this->big_edge_num; ++i)
+	for (uint32_t i = 0; i != this->m_big_edge_num; ++i)
 	{
 		std::ostringstream oss;
 		oss << "big_e" << i;
@@ -215,7 +215,7 @@ double ILPColoringUpdated<GraphType>::coloring()
 		string tmpConstr_name;
 		if (w >= 0) // constraints for conflict edges 
 		{
-			int big_e_index = this->edge_index_vector[(uint32_t)(this->stitch_relation_set[(int)s]*this->stitch_index + this->stitch_relation_set[(int)t])];
+			int big_e_index = this->m_edge_index_vector[(uint32_t)(this->m_stitch_relation_set[(int)s]*this->m_stitch_index + this->m_stitch_relation_set[(int)t])];
 			sprintf(buf, "R%u", constr_num++);  
 			opt_model.addConstraint(
 					vVertexBit[vertex_idx1] + vVertexBit[vertex_idx1+1] 
