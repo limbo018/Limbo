@@ -69,6 +69,26 @@ class GurobiParameters
         int m_numThreads; ///< number of threads 
 };
 
+/// @brief Round floating point solutions to integer if the variable type is integer. 
+/// If not rounded, there might be precision issues. 
+template <typename T, std::size_t = std::numeric_limits<T>::is_integer>
+struct SmartRound
+{
+    inline T operator()(double value) const 
+    {
+        return value; 
+    }
+}; 
+
+template <typename T>
+struct SmartRound<T, 1>
+{
+    inline T operator()(double value) const 
+    {
+        return std::round(value); 
+    }
+}; 
+
 /// @brief Gurobi API with @ref limbo::solvers::LinearModel
 /// @tparam T coefficient type 
 /// @tparam V variable type 
@@ -194,13 +214,15 @@ class GurobiLinearApi
             GRBwrite(m_grbModel, "problem.sol");
 #endif 
 
+            // round if the variable type is integer 
+            SmartRound<V> sround; 
             for (unsigned int i = 0; i < m_model->numVariables(); ++i)
             {
                 variable_type var = m_model->variable(i); 
                 double value = 0; 
                 error = GRBgetdblattrelement(m_grbModel, GRB_DBL_ATTR_X, var.id(), &value);
                 errorHandler(env, error);
-                m_model->setVariableSolution(m_model->variable(i), value);
+                m_model->setVariableSolution(m_model->variable(i), sround(value));
             }
 
             if (defaultParam)
