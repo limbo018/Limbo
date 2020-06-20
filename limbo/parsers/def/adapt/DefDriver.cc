@@ -16,6 +16,12 @@ Driver::Driver(DefDataBase& db)
       trace_parsing(false),
       m_db(db)
 {
+    this->row().reset();
+    this->component().reset();
+    this->pin().reset();
+    this->net().reset();
+    this->region().reset();
+    this->group().reset();
 }
 
 /// =========== callbacks ============
@@ -1274,12 +1280,14 @@ int cs(defrCallbackType_e c, int num, defiUserData ud)
             break;
         case defrRegionStartCbkType : 
             // name = "REGIONS"; 
+            defDB->resize_def_region(num);
             break;
         case defrSNetStartCbkType : 
             // name = "SPECIALNETS"; 
             break;
         case defrGroupsStartCbkType : 
             // name = "GROUPS"; 
+            defDB->resize_def_group(num);
             break;
         case defrScanchainsStartCbkType : 
             // name = "SCANCHAINS"; 
@@ -1854,51 +1862,47 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
             break;
         case defrRegionCbkType :
             re = (defiRegion*)cl;
-            limboPrint(limbo::kNONE, "- %s ", re->name());
+            defDriver->region().region_name = re->name();
+            defDriver->region().vRectangle.assign(re->numRectangles(), std::vector<int>(4));
             for (i = 0; i < re->numRectangles(); i++)
-                limboPrint(limbo::kNONE, "%d %d %d %d \n", re->xl(i),
-                        re->yl(i), re->xh(i),
-                        re->yh(i));
+            {
+                defDriver->region().vRectangle[i][0] = re->xl(i);
+                defDriver->region().vRectangle[i][1] = re->yl(i);
+                defDriver->region().vRectangle[i][2] = re->xh(i);
+                defDriver->region().vRectangle[i][3] = re->yh(i);
+            }
             if (re->hasType())
-                limboPrint(limbo::kNONE, "+ TYPE %s\n", re->type());
+                defDriver->region().region_type = re->type();
+            defDriver->region().vPropertyName.resize(re->numProps());
+            defDriver->region().vPropertyValue.resize(re->numProps());
+            defDriver->region().vPropertyType.resize(re->numProps());
             if (re->numProps())
             {
                 for (i = 0; i < re->numProps(); i++)
                 {
-                    limboPrint(limbo::kNONE, "+ PROPERTY %s %s ", re->propName(i),
-                            re->propValue(i));
-                    switch (re->propType(i))
-                    {
-                        case 'R': limboPrint(limbo::kNONE, "REAL ");
-                                  break;
-                        case 'I': limboPrint(limbo::kNONE, "INTEGER ");
-                                  break;
-                        case 'S': limboPrint(limbo::kNONE, "STRING ");
-                                  break;
-                        case 'Q': limboPrint(limbo::kNONE, "QUOTESTRING ");
-                                  break;
-                        case 'N': limboPrint(limbo::kNONE, "NUMBER ");
-                                  break;
-                    }
+                    defDriver->region().vPropertyName[i] = re->propName(i); 
+                    defDriver->region().vPropertyValue[i] = re->propValue(i);
+                    defDriver->region().vPropertyType[i] = re->propType(i); 
                 }
             }
-            limboPrint(limbo::kNONE, ";\n"); 
+            defDB->add_def_region(defDriver->region());
+            defDriver->region().reset();
             --numObjs;
-            if (numObjs <= 0)
-            {
-                limboPrint(limbo::kNONE, "END REGIONS\n");
-            }
+            //if (numObjs <= 0)
+            //{
+            //    limboPrint(limbo::kNONE, "END REGIONS\n");
+            //}
             break;
         case defrGroupNameCbkType :
             if ((char*)cl)
             {
-                limboPrint(limbo::kNONE, "- %s", (char*)cl);
+                defDriver->group().group_name = (char*)cl; 
             }
             break;
         case defrGroupMemberCbkType :
             if ((char*)cl)
             {
-                limboPrint(limbo::kNONE, " %s", (char*)cl);
+                defDriver->group().vGroupMember.push_back(std::string((char*)cl)); 
             }
             break;
         case defrComponentMaskShiftLayerCbkType :
@@ -1915,52 +1919,46 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
             if (group->hasMaxX() | group->hasMaxY()
                     | group->hasPerim())
             {
-                limboPrint(limbo::kNONE, "\n  + SOFT ");
                 if (group->hasPerim()) 
-                    limboPrint(limbo::kNONE, "MAXHALFPERIMETER %d ",
-                            group->perim());
+                    defDriver->group().perim = group->perim();
                 if (group->hasMaxX())
-                    limboPrint(limbo::kNONE, "MAXX %d ", group->maxX());
+                    defDriver->group().maxx = group->maxX();
                 if (group->hasMaxY()) 
-                    limboPrint(limbo::kNONE, "MAXY %d ", group->maxY());
+                    defDriver->group().maxy = group->maxY();
             } 
             if (group->hasRegionName())
-                limboPrint(limbo::kNONE, "\n  + REGION %s ", group->regionName());
+                defDriver->group().region_name = group->regionName();
             if (group->hasRegionBox())
             {
                 int *gxl, *gyl, *gxh, *gyh;
                 int size;
                 group->regionRects(&size, &gxl, &gyl, &gxh, &gyh);
+                defDriver->group().vRectangle.assign(size, std::vector<int>(4));
                 for (i = 0; i < size; i++)
-                    limboPrint(limbo::kNONE, "REGION %d %d %d %d ", gxl[i], gyl[i],
-                            gxh[i], gyh[i]);
+                {
+                    defDriver->group().vRectangle[i][0] = gxl[i];
+                    defDriver->group().vRectangle[i][1] = gyl[i];
+                    defDriver->group().vRectangle[i][2] = gxh[i];
+                    defDriver->group().vRectangle[i][3] = gyh[i];
+                }
             }
             if (group->numProps())
             {
+                defDriver->group().vPropertyName.resize(group->numProps());
+                defDriver->group().vPropertyValue.resize(group->numProps());
+                defDriver->group().vPropertyType.resize(group->numProps());
                 for (i = 0; i < group->numProps(); i++)
                 {
-                    limboPrint(limbo::kNONE, "\n  + PROPERTY %s %s ",
-                            group->propName(i),
-                            group->propValue(i));
-                    switch (group->propType(i))
-                    {
-                        case 'R': limboPrint(limbo::kNONE, "REAL ");
-                                  break;
-                        case 'I': limboPrint(limbo::kNONE, "INTEGER ");
-                                  break;
-                        case 'S': limboPrint(limbo::kNONE, "STRING ");
-                                  break;
-                        case 'Q': limboPrint(limbo::kNONE, "QUOTESTRING ");
-                                  break;
-                        case 'N': limboPrint(limbo::kNONE, "NUMBER ");
-                                  break;
-                    }
+                    defDriver->group().vPropertyName[i] = group->propName(i);
+                    defDriver->group().vPropertyValue[i] = group->propValue(i);
+                    defDriver->group().vPropertyType[i] = group->propType(i);
                 }
             }
-            limboPrint(limbo::kNONE, " ;\n");
+            defDB->add_def_group(defDriver->group()); 
+            defDriver->group().reset();
             --numObjs;
-            if (numObjs <= 0)
-                limboPrint(limbo::kNONE, "END GROUPS\n");
+            //if (numObjs <= 0)
+            //    limboPrint(limbo::kNONE, "END GROUPS\n");
             break;
         case defrScanchainCbkType :
             sc = (defiScanchain*)cl;

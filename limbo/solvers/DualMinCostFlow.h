@@ -397,7 +397,7 @@ void DualMinCostFlow<T, V>::prepare()
     // big M for bound constraints should be larger than that for differential constraints 
     // so the results are more controllable for INFEASIBLE models  
     if (m_boundBigM == std::numeric_limits<value_type>::max())
-        m_boundBigM = m_diffBigM<<1; 
+        m_boundBigM = m_diffBigM*2; 
 
     // reset data members
     m_reversedArcFlowCost = 0; 

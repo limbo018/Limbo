@@ -9,6 +9,6 @@ target_link_libraries(${PROJECT_NAME}_example ${PROJECT_NAME}_thpool ${CMAKE_THR
 
 if(INSTALL_LIMBO)
     install(TARGETS ${PROJECT_NAME}_thpool DESTINATION lib)
-	install(TARGETS ${PROJECT_NAME}_example DESTINATION bin/thirdparty/CThreadPool)
+    install(TARGETS ${PROJECT_NAME}_example DESTINATION bin/thirdparty/CThreadPool)
     install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/thpool.h DESTINATION include/limbo/thirdparty/CThreadPool)
 endif(INSTALL_LIMBO)

@@ -19,6 +19,22 @@ void DefDataBase::add_def_placement_blockage(std::vector<std::vector<int> >const
 {
 	def_user_cbk_reminder(__func__);
 }
+void DefDataBase::resize_def_region(int)
+{
+	def_user_cbk_reminder(__func__);
+}
+void DefDataBase::add_def_region(Region const&)
+{
+	def_user_cbk_reminder(__func__);
+}
+void DefDataBase::resize_def_group(int)
+{
+	def_user_cbk_reminder(__func__);
+}
+void DefDataBase::add_def_group(Group const&)
+{
+	def_user_cbk_reminder(__func__);
+}
 void DefDataBase::end_def_design() 
 {
 	def_user_cbk_reminder(__func__);

@@ -15,6 +15,7 @@
 ## @cond
 
 LEMON_LINK_FLAG :=
+LEMON_DIR := $(realpath ../..)
 
 # use libemon.a to test whether lemon has static library
 ifeq ($(wildcard $(LEMON_DIR)/lib/libemon.a),) 

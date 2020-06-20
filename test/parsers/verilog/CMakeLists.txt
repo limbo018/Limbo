@@ -1,6 +1,12 @@
+if(Boost_INCLUDE_DIRS)
+    set(INCLUDES ${Boost_INCLUDE_DIRS})
+    set(LIBS ${Boost_LIBRARIES})
+else(Boost_INCLUDE_DIRS)
+    set(LIBS Boost::boost)
+endif(Boost_INCLUDE_DIRS)
 include_directories(
     ${PROJECT_SOURCE_DIR}
-    ${Boost_INCLUDE_DIRS}
+    ${INCLUDES}
     )
 if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
     set(COMPILE_DEFINITIONS DEBUG_VERILOGPARSER)
@@ -10,7 +16,7 @@ endif()
 
 add_executable(test_verilog_bison test_bison.cpp)
 set_target_properties(test_verilog_bison PROPERTIES OUTPUT_NAME "test_bison")
-target_link_libraries(test_verilog_bison verilogparser)
+target_link_libraries(test_verilog_bison PRIVATE verilogparser ${LIBS})
 if(COMPILE_DEFINITIONS)
     target_compile_definitions(test_verilog_bison PRIVATE ${COMPILE_DEFINITIONS})
 endif(COMPILE_DEFINITIONS)

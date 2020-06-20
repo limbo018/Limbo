@@ -10,6 +10,7 @@
 #ifndef _LIMBO_GEOMETRY_API_BOOSTPOLYGONAPI_H
 #define _LIMBO_GEOMETRY_API_BOOSTPOLYGONAPI_H
 
+#include <limits>
 #include <limbo/geometry/Geometry.h>
 
 /// @brief namespace for Limbo
@@ -36,7 +37,11 @@ struct point_traits<boost::polygon::point_data<T> >
 	{
 		if (orient == HORIZONTAL) return point.x();
 		else if (orient == VERTICAL) return point.y();
-		else assert(0);
+		else 
+        {
+            assert(0);
+            return std::numeric_limits<coordinate_type>::max();
+        }
 	}
     /// @brief set coordinate for point 
     /// @param point a point object 
@@ -46,7 +51,10 @@ struct point_traits<boost::polygon::point_data<T> >
 	{
 		if (orient == HORIZONTAL) return point.set(boost::polygon::HORIZONTAL, value);
 		else if (orient == VERTICAL) return point.set(boost::polygon::VERTICAL, value);
-		else assert(0);
+		else 
+        {
+            assert(0);
+        }
 	}
     /// @brief construct point from coordinates 
     /// @param x coordinate 
@@ -79,7 +87,7 @@ struct rectangle_traits<boost::polygon::rectangle_data<T> >
 			case BOTTOM: return boost::polygon::yl(rect);
 			case RIGHT: return boost::polygon::xh(rect);
 			case TOP: return boost::polygon::yh(rect);
-			default: assert(0);
+            default: assert(0); return std::numeric_limits<coordinate_type>::max();
 		}
 	}
     /// @brief set coordinate for rectangle 

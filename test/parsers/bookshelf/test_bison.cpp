@@ -47,10 +47,32 @@ class BookshelfDataBase : public BookshelfParser::BookshelfDataBase
         {
             cout << __func__ << " => " << n << endl;
         }
+        /// @brief set number of shapes 
+        virtual void resize_bookshelf_shapes(int n)
+        {
+            cout << __func__ << " => " << n << endl;
+        }
+        /// @brief set number of NI terminals with layers 
+        virtual void resize_bookshelf_niterminal_layers(int n)
+        {
+            cout << __func__ << " => " << n << endl; 
+        }
+        /// @brief set number of blockage nodes with layers 
+        virtual void resize_bookshelf_blockage_layers(int n)
+        {
+            cout << __func__ << " => " << n << endl; 
+        }
         /// @param name terminal name 
         /// @param w width 
         /// @param h height 
         virtual void add_bookshelf_terminal(string& name, int w, int h)
+        {
+            cout << __func__ << " => " << name << ", " << w << ", " << h << endl;
+        }
+        /// @param name terminal NI name 
+        /// @param w width 
+        /// @param h height 
+        virtual void add_bookshelf_terminal_NI(string& name, int w, int h)
         {
             cout << __func__ << " => " << name << ", " << w << ", " << h << endl;
         }
@@ -83,6 +105,24 @@ class BookshelfDataBase : public BookshelfParser::BookshelfDataBase
         virtual void set_bookshelf_net_weight(string const& name, double w)
         {
             cout << __func__ << " => " << name << ", " << w << endl; 
+        }
+        /// @brief set node shapes 
+        virtual void set_bookshelf_shape(BookshelfParser::NodeShape const& shape)
+        {
+            shape.print(cout); 
+        }
+        /// @brief set routing information 
+        virtual void set_bookshelf_route_info(BookshelfParser::RouteInfo const& info)
+        {
+            info.print(cout);
+        }
+        /// @brief set NI terminal with layers 
+        virtual void add_bookshelf_niterminal_layer(string const&, string const&)
+        {
+        }
+        /// @brief set blockages with layers 
+        virtual void add_bookshelf_blockage_layers(string const&, std::vector<string> const&)
+        {
         }
         /// @param name design name 
         virtual void set_bookshelf_design(string& name)

@@ -224,6 +224,10 @@ module_params:
 
 module_declare: MODULE NAME '(' /* empty */ ')' ';' {driver.module_name_cbk(*$2, GeneralNameArray()); delete $2;} 
               | MODULE NAME '(' general_name_array ')' ';' {driver.module_name_cbk(*$2, *$4); delete $2; delete $4;} 
+              | MODULE NAME '(' INPUT general_name_array ',' OUTPUT general_name_array ')' ';' {driver.module_name_cbk(*$2, *$5, *$8); delete $2; delete $5; delete $8;}
+              | MODULE NAME '(' OUTPUT general_name_array ',' INPUT general_name_array ')' ';' {driver.module_name_cbk(*$2, *$8, *$5); delete $2; delete $5; delete $8;}
+              | MODULE NAME '(' INPUT general_name_array ')' ';' {driver.module_name_cbk(*$2, *$5, GeneralNameArray()); delete $2; delete $5; }
+              | MODULE NAME '(' OUTPUT general_name_array ')' ';' {driver.module_name_cbk(*$2, GeneralNameArray(), *$5); delete $2; delete $5; }
               ;
 
 variable_declare: param3 ';'

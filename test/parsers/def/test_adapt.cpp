@@ -111,6 +111,26 @@ class DefDataBase : public DefParser::DefDataBase
                 cout << "(" << (*it)[0] << ", " << (*it)[1] << ", " << (*it)[2] << ", " << (*it)[3] << ") ";
             cout << endl; 
         }
+        /// @brief set number of regions 
+        virtual void resize_def_region(int n)
+        {
+			cout << __func__ << " => " << n << endl;
+        }
+        /// @brief add region 
+        virtual void add_def_region(DefParser::Region const& region)
+        {
+            cout << __func__ << "\n" << region; 
+        }
+        /// @brief set number of groups 
+        virtual void resize_def_group(int n)
+        {
+			cout << __func__ << " => " << n << endl;
+        }
+        /// @brief add group 
+        virtual void add_def_group(DefParser::Group const& group)
+        {
+            cout << __func__ << "\n" << group; 
+        }
         /// @brief end of design 
         virtual void end_def_design()
         {

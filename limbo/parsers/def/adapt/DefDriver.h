@@ -81,6 +81,10 @@ public:
     Pin& pin() {return m_pin;}
     Net const& net() const {return m_net;}
     Net& net() {return m_net;}
+    Region const& region() const {return m_region;}
+    Region& region() {return m_region;}
+    Group const& group() const {return m_group;}
+    Group& group() {return m_group;}
     /// @endcond 
 protected:
     /** Reference to the database filled during parsing of the
@@ -95,6 +99,10 @@ protected:
 	Pin m_pin;
     /// @brief temporary net 
 	Net m_net;
+    /// @brief temporary region 
+    Region m_region; 
+    /// @brief temporary group 
+    Group m_group; 
 };
 
 /// @brief API for DefParser. 

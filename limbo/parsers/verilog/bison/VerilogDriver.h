@@ -93,6 +93,7 @@ public:
 
     /// @cond
     void module_name_cbk(std::string const&, std::vector<GeneralName> const&); 
+    void module_name_cbk(std::string const&, std::vector<GeneralName> const&, std::vector<GeneralName> const&); 
     void wire_pin_cbk(std::string&, std::string&, Range const& = Range());
     void wire_pin_cbk(int, int, std::string&);
     void wire_pin_cbk(std::vector<GeneralName>&, std::string&);
