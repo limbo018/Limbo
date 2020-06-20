@@ -59,6 +59,17 @@ void Driver::module_name_cbk(std::string const& module_name, std::vector<General
     m_db.verilog_module_declaration_cbk(module_name, vPinName);
 }
 
+void Driver::module_name_cbk(std::string const& module_name, std::vector<GeneralName> const& vInPinName, std::vector<GeneralName> const& vOutPinName)
+{
+    std::vector<GeneralName> vPinName (vInPinName); 
+    vPinName.insert(vPinName.end(), vOutPinName.begin(), vOutPinName.end()); 
+
+    this->module_name_cbk(module_name, vPinName); 
+
+    this->pin_declare_cbk(vInPinName, kINPUT);
+    this->pin_declare_cbk(vOutPinName, kOUTPUT);
+}
+
 void Driver::module_instance_cbk(std::string const& macro_name, std::string const& inst_name) 
 {
 	// due to the feature of LL 
