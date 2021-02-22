@@ -406,7 +406,7 @@ class BookshelfDataBase
         /// @brief add terminal_NI
         virtual void add_bookshelf_terminal_NI(string&, int, int);
         /// @brief add node 
-        virtual void add_bookshelf_node(string&, int, int, bool) = 0;
+        virtual void add_bookshelf_node(string&, int, int) = 0;
         /// @brief add net 
         virtual void add_bookshelf_net(Net const&) = 0;
         /// @brief add row 

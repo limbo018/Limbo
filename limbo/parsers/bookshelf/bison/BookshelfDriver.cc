@@ -94,11 +94,11 @@ void Driver::terminalNIEntryCbk(string& name, int w, int h)
 }
 void Driver::nodeEntryCbk(string& name, int w, int h, string&)
 {
-    m_db.add_bookshelf_node(name, w, h, true);
+    m_db.add_bookshelf_node(name, w, h);
 }
 void Driver::nodeEntryCbk(string& name, int w, int h)
 {
-    m_db.add_bookshelf_node(name, w, h, true);
+    m_db.add_bookshelf_node(name, w, h);
 }
 // .nets file 
 void Driver::numNetCbk(int n)
