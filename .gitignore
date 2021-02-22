@@ -9,3 +9,5 @@ obj/*
 *.nfs*
 limbo/thirdparty/liblinear/predict
 limbo/thirdparty/liblinear/train
+build
+install

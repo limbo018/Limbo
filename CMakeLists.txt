@@ -33,7 +33,7 @@ option(GENERATE_DOCS "Whether generate documentations, ON|OFF" ON)
 message(STATUS "GENERATE_DOCS: ${GENERATE_DOCS}")
 
 # whether compile test component 
-option(ENABLE_TEST "Whether enable test, ON|OFF" ON)
+option(ENABLE_TEST "Whether enable test, ON|OFF" OFF)
 message(STATUS "ENABLE_TEST: ${ENABLE_TEST}")
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -42,7 +42,7 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 find_package(Threads REQUIRED)
-find_package(BISON 3.0 REQUIRED)
+find_package(BISON 3.3 REQUIRED)
 find_package(FLEX REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(Boost 1.55.0 REQUIRED COMPONENTS graph regex)
