@@ -20,7 +20,7 @@
 /*** yacc/bison Declarations ***/
 
 /* Require bison 2.3 or later */
-%require "2.3"
+%require "3.3"
 
 /* add debug output code to generated parser. disable this for release
  * versions. */
@@ -39,7 +39,7 @@
 %define api.prefix {LefParser}
 
 /* set the parser's class identifier */
-%define parser_class_name {Parser}
+%define api.parser.class {Parser}
 
 /* keep track of the current position within the input */
 %locations
@@ -55,7 +55,7 @@
 %parse-param { class Driver& driver }
 
 /* verbose error messages */
-%error-verbose
+%define parse.error verbose
 
  /*** BEGIN EXAMPLE - Change the example grammar's tokens below ***/
 
