@@ -79,9 +79,10 @@ class BookshelfDataBase : public BookshelfParser::BookshelfDataBase
         /// @param name node name 
         /// @param w width 
         /// @param h height 
-        virtual void add_bookshelf_node(string& name, int w, int h)
+        /// @param is_cell true for cells 
+        virtual void add_bookshelf_node(string& name, int w, int h, bool is_cell)
         {
-            cout << __func__ << " => " << name << ", " << w << ", " << h << endl;
+            cout << __func__ << " => " << name << ", " << w << ", " << h << ", " << is_cell << endl;
         }
         /// @param net net object 
         virtual void add_bookshelf_net(BookshelfParser::Net const& net)
