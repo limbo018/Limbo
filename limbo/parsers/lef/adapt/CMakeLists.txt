@@ -12,7 +12,7 @@ include_directories(
     )
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 add_library(lefparseradapt_uncombined STATIC ${SOURCES})
-if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(lefparseradapt_uncombined PRIVATE DEBUG_LEFPARSER)
 endif()
 set(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/liblefparseradapt.a")

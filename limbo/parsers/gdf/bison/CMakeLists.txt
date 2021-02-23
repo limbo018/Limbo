@@ -19,7 +19,7 @@ file(GLOB SOURCES
     GdfDriver.cc
     )
 add_library(gdfparser ${SOURCES} ${BISON_GdfParser_OUTPUTS} ${FLEX_GdfLexer_OUTPUTS})
-if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(gdfparser PRIVATE DEBUG_GDFPARSER)
 endif()
 

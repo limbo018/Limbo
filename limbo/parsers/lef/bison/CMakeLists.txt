@@ -21,7 +21,7 @@ file(GLOB SOURCES
     lefiCrossTalk.cc  lefiMacro.cc      lefiProp.cc       lefiUtil.cc
     )
 add_library(lefparser ${SOURCES} ${BISON_LefParser_OUTPUTS} ${FLEX_LefLexer_OUTPUTS})
-if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(lefparser PRIVATE DEBUG_LEFPARSER)
 endif()
 

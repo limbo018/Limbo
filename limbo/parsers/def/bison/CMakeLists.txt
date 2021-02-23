@@ -20,7 +20,7 @@ file(GLOB SOURCES
     DefDriver.cc
     )
 add_library(defparser ${SOURCES} ${BISON_DefParser_OUTPUTS} ${FLEX_DefLexer_OUTPUTS})
-if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(defparser PRIVATE DEBUG_DEFPARSER)
 endif()
 

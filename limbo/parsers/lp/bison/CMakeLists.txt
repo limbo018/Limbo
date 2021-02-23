@@ -19,7 +19,7 @@ file(GLOB SOURCES
     LpDriver.cc
     )
 add_library(lpparser ${SOURCES} ${BISON_LpParser_OUTPUTS} ${FLEX_LpLexer_OUTPUTS})
-if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(lpparser PRIVATE DEBUG_LPPARSER)
 endif()
 
