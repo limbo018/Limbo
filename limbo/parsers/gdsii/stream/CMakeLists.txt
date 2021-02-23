@@ -12,7 +12,7 @@ file(GLOB HEADERS
     )
 add_library(gdsparser STATIC ${SOURCES})
 target_compile_options(gdsparser PRIVATE "-DZLIB=1")
-if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(gdsparser PRIVATE DEBUG_GDSREADER DEBUG_GDSWRITER)
 endif()
 

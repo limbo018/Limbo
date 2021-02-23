@@ -21,7 +21,7 @@ file(GLOB SOURCES
     )
 add_library(bookshelfparser ${SOURCES} ${BISON_BookshelfParser_OUTPUTS} ${FLEX_BookshelfLexer_OUTPUTS})
 target_compile_options(bookshelfparser PRIVATE "-DZLIB=1")
-if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(bookshelfparser PRIVATE DEBUG_BOOKSHELFPARSER)
 endif()
 
