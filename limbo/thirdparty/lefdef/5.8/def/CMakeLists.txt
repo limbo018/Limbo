@@ -59,7 +59,9 @@ BISON_TARGET(DefParser def/def.y ${CMAKE_CURRENT_BINARY_DIR}/def.tab.cpp
              )
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-add_library(def STATIC ${DEF_SOURCES} ${BISON_DefParser_OUTPUTS})
+add_library(def_objlib OBJECT ${DEF_SOURCES} ${BISON_DefParser_OUTPUTS})
+add_library(def STATIC STATIC $<TARGET_OBJECTS:def_objlib>)
+#add_library(def STATIC ${DEF_SOURCES} ${BISON_DefParser_OUTPUTS})
 if(INSTALL_LIMBO)
     install(TARGETS def DESTINATION lib)
     install(FILES ${DEF_HEADERS} DESTINATION include/limbo/thirdparty/lefdef/5.8/def/def)
