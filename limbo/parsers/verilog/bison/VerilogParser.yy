@@ -185,6 +185,7 @@ param2: '.' NAME '(' NAME ')' {driver.wire_pin_cbk(*$4, *$2); delete $2; delete 
       | '.' NAME '(' DEC_MASK ')' {driver.wire_pin_cbk($4.bits, $4.value, *$2); delete $2;} 
       | '.' NAME '(' HEX_MASK ')' {driver.wire_pin_cbk($4.bits, $4.value, *$2); delete $2;} 
       | '.' NAME '(' '{' general_name_array '}' ')' {driver.wire_pin_cbk(*$5, *$2); delete $2; delete $5;} 
+      | '.' NAME '(' '{' general_name_array ',' '}' ')' {driver.wire_pin_cbk(*$5, *$2); delete $2; delete $5;} 
       ;
 
 param3: INPUT general_name_array {driver.pin_declare_cbk(*$2, kINPUT); delete $2;}
