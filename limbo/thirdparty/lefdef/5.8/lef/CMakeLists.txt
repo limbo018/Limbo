@@ -39,6 +39,7 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/lefdiff
     ${CMAKE_CURRENT_SOURCE_DIR}/lefwrite
     ${CMAKE_CURRENT_BINARY_DIR}
+    ${ZLIB_INCLUDE_DIRS}
     )
 BISON_TARGET(LefParser lef/lef.y ${CMAKE_CURRENT_BINARY_DIR}/lef.tab.cpp 
              DEFINES_FILE ${CMAKE_CURRENT_BINARY_DIR}/lef.tab.h

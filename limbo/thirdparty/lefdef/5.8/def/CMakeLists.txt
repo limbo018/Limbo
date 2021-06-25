@@ -52,6 +52,7 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/defdiff
     ${CMAKE_CURRENT_SOURCE_DIR}/defwrite
     ${CMAKE_CURRENT_BINARY_DIR}
+    ${ZLIB_INCLUDE_DIRS}
     )
 BISON_TARGET(DefParser def/def.y ${CMAKE_CURRENT_BINARY_DIR}/def.tab.cpp 
              DEFINES_FILE ${CMAKE_CURRENT_BINARY_DIR}/def.tab.h

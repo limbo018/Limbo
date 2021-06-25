@@ -1,6 +1,9 @@
 project(gzstream)
 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
+include_directories(
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ${ZLIB_INCLUDE_DIRS}
+  )
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 add_library(${PROJECT_NAME} STATIC ${CMAKE_CURRENT_SOURCE_DIR}/gzstream.C)
