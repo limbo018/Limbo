@@ -11,22 +11,28 @@ include_directories(
     ${PROJECT_SOURCE_DIR}
     )
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-add_library(defparseradapt_uncombined STATIC ${SOURCES})
+#add_library(defparseradapt_uncombined STATIC ${SOURCES})
+#if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+#    target_compile_definitions(defparseradapt_uncombined PRIVATE DEBUG_DEFPARSER)
+#endif()
+#set(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/libdefparseradapt.a")
+## merge two static libraries 
+#add_custom_command(OUTPUT ${OUTPUT}
+#    COMMAND ar -x $<TARGET_FILE:def> 
+#    COMMAND ar -x $<TARGET_FILE:defparseradapt_uncombined> 
+#    COMMAND ar -qc libdefparseradapt.a *.o
+#    DEPENDS def defparseradapt_uncombined
+#    )
+#add_custom_target(defparseradapt ALL 
+#  DEPENDS ${OUTPUT} def)
+
+add_library(defparseradapt STATIC ${SOURCES} $<TARGET_OBJECTS:def_objlib>)
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_definitions(defparseradapt_uncombined PRIVATE DEBUG_DEFPARSER)
+    target_compile_definitions(defparseradapt PRIVATE DEBUG_DEFPARSER)
 endif()
-set(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/libdefparseradapt.a")
-# merge two static libraries 
-add_custom_command(OUTPUT ${OUTPUT}
-    COMMAND ar -x $<TARGET_FILE:def> 
-    COMMAND ar -x $<TARGET_FILE:defparseradapt_uncombined> 
-    COMMAND ar -qc libdefparseradapt.a *.o
-    DEPENDS def defparseradapt_uncombined
-    )
-add_custom_target(defparseradapt ALL 
-  DEPENDS ${OUTPUT} def)
 
 if(INSTALL_LIMBO)
-    install(FILES ${OUTPUT} DESTINATION lib)
+  #install(FILES ${OUTPUT} DESTINATION lib)
+    install(TARGETS defparseradapt DESTINATION lib)
     install(FILES DefDataBase.h DefDriver.h DESTINATION include/limbo/parsers/def/adapt)
 endif(INSTALL_LIMBO)

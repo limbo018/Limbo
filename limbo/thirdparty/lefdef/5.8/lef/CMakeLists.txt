@@ -39,6 +39,7 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/lefdiff
     ${CMAKE_CURRENT_SOURCE_DIR}/lefwrite
     ${CMAKE_CURRENT_BINARY_DIR}
+    ${ZLIB_INCLUDE_DIRS}
     )
 BISON_TARGET(LefParser lef/lef.y ${CMAKE_CURRENT_BINARY_DIR}/lef.tab.cpp 
              DEFINES_FILE ${CMAKE_CURRENT_BINARY_DIR}/lef.tab.h
@@ -46,7 +47,9 @@ BISON_TARGET(LefParser lef/lef.y ${CMAKE_CURRENT_BINARY_DIR}/lef.tab.cpp
              )
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-add_library(lef STATIC ${LEF_SOURCES} ${BISON_LefParser_OUTPUTS})
+add_library(lef_objlib OBJECT ${LEF_SOURCES} ${BISON_LefParser_OUTPUTS})
+add_library(lef STATIC $<TARGET_OBJECTS:lef_objlib>)
+#add_library(lef STATIC ${LEF_SOURCES} ${BISON_LefParser_OUTPUTS})
 if(INSTALL_LIMBO)
     install(TARGETS lef DESTINATION lib)
     install(FILES ${LEF_HEADERS} DESTINATION include/limbo/thirdparty/lefdef/5.8/lef/lef)
