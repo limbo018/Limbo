@@ -3,6 +3,7 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}
     ${FLEX_INCLUDE_DIRS}
+    ${ZLIB_INCLUDE_DIRS}
     )
 
 BISON_TARGET(BookshelfParser
