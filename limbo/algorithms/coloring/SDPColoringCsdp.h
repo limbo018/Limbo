@@ -196,6 +196,7 @@ SDPColoringCsdp<GraphType>::SDPColoringCsdp(SDPColoringCsdp<GraphType>::graph_ty
 template <typename GraphType>
 double SDPColoringCsdp<GraphType>::coloring()
 {
+    std::cout<<"start csdp!";
     clock_t solve_start = clock();
     // Since Csdp is written in C, the api here is also in C 
     // Please refer to the documation of Csdp for different notations 
@@ -262,10 +263,10 @@ double SDPColoringCsdp<GraphType>::coloring()
     // block 2 for slack variables 
     // this block is all 0s, so we use diagonal format to represent  
     construct_objectve_blockrec(C, 2, num_conflict_edges, DIAG);
-#ifdef DEBUG_SDPCOLORING
+//#ifdef DEBUG_SDPCOLORING
     print_blockrec("C.blocks[1].data.mat", C.blocks[1]);
     print_blockrec("C.blocks[2].data.vec", C.blocks[2]);
-#endif
+//#endif
 
     // setup right hand side of constraints b
     // the order is first for conflict edges and then for vertices  
@@ -363,10 +364,10 @@ double SDPColoringCsdp<GraphType>::coloring()
     int ret = limbo::solvers::easy_sdp_ext<int>(num_variables, num_constraints, C, b, constraints, 0.0, &X, &y, &Z, &pobj, &dobj, params, printlevel);
     limboAssertMsg(ret == 0, "SDP failed");
 
- #ifdef DEBUG_LIWEI
+// #ifdef DEBUG_LIWEI
     clock_t solve_end = clock();
     limboPrint(kDEBUG, "SDP solver takes %g seconds with %u nodes\n", (double)(solve_end - solve_start)/CLOCKS_PER_SEC, num_vertices);
-#endif
+//#endif
     // round result to get colors 
     round_sol(X);
 

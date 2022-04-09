@@ -361,10 +361,12 @@ double Coloring<GraphType>::operator()()
             }
         }
         cost = calc_cost(m_vColor);
+        std::cout<<"Heustical calcuted";
         limboAssert(cost == 0);
     }
     else // perform coloring algorithm 
         cost = this->coloring();
+        std::cout<<"selected coloring solver calcuted"<<cost;
     // clock_t sub_comp_end = clock();
     return cost;
 }
