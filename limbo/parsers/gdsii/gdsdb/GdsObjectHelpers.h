@@ -307,8 +307,8 @@ struct Rotate
 	void operator()(GdsCellReference::point_type& p) const 
 	{
 		p = gtl::construct<GdsCellReference::point_type>(
-				p.x()*cosAngle - p.y()*sinAngle, 
-				p.x()*sinAngle + p.y()*cosAngle
+				std::round(p.x()*cosAngle - p.y()*sinAngle), 
+				std::round(p.x()*sinAngle + p.y()*cosAngle)
 				);
 	}
 };
@@ -327,7 +327,8 @@ struct MagScale
     /// @param p given position and perform operation on the position 
 	void operator()(GdsCellReference::point_type& p) const 
 	{
-		p = gtl::construct<GdsCellReference::point_type>(p.x()*scaleX, p.y()*scaleY);
+		p = gtl::construct<GdsCellReference::point_type>(std::round(p.x()*scaleX),
+                                                     std::round(p.y()*scaleY));
 	}
 };
 /// @brief X reflection 
