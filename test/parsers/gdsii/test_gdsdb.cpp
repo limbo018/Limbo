@@ -33,10 +33,20 @@ int main(int argc, char** argv)
     }
 	else if (argc > 4)
     {
+        // test simple read and write
+        GdsParser::GdsDB::GdsReader reader (db); 
+        limboAssert(reader(argv[1]));
+
+        for (std::vector<GdsParser::GdsDB::GdsCell>::const_iterator it = db.cells().begin(); it != db.cells().end(); ++it)
+            std::cout << "cell: " << it->name() << std::endl; 
+
         // test flatten 
         GdsParser::GdsDB::GdsCell flatCell = db.extractCell(argv[4]);
 
         GdsParser::GdsDB::GdsDB flatDB; 
+        flatDB.setLibname(db.libname()); 
+        flatDB.setUnit(db.unit()); 
+        flatDB.setPrecision(db.precision());
         flatDB.addCell(flatCell); 
 
         // write flatten cell 
