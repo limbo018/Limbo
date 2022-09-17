@@ -174,8 +174,9 @@ GdsPolygon GdsPath::toPolygon() const
 			--itNext;
 
 		// get three points 
-		point_type point = *it; 
-		point_type neighborPoints[2] = {*itPrev, *itNext};
+    // use float point type to avoid numerical issues 
+		float_point_type point = *it; 
+		float_point_type neighborPoints[2] = {*itPrev, *itNext};
 		// skip duplicate points 
 		if (point == neighborPoints[0] && point == neighborPoints[1])
 			continue; 
@@ -211,9 +212,9 @@ GdsPolygon GdsPath::toPolygon() const
           case 2: // half width extension 
             {
               if (it == itPrev)
-                  point = gtl::construct<point_type>(round(point.x()+width()/2.0*cos(theta[0])), point.y()+width()/2.0*sin(theta[0]));
+                  point = gtl::construct<float_point_type>(round(point.x()+width()/2.0*cos(theta[0])), point.y()+width()/2.0*sin(theta[0]));
               if (it == itNext)
-                  point = gtl::construct<point_type>(round(point.x()+width()/2.0*cos(theta[1])), point.y()+width()/2.0*sin(theta[1]));
+                  point = gtl::construct<float_point_type>(round(point.x()+width()/2.0*cos(theta[1])), point.y()+width()/2.0*sin(theta[1]));
             }
             break; 
           case 4: // custom extension 
@@ -223,14 +224,14 @@ GdsPolygon GdsPath::toPolygon() const
                 if (bgnExtn() == std::numeric_limits<coordinate_type>::max()) 
                   limboPrint(limbo::kWARN, "Pathtype 4 requires BGNEXTN set, ignored\n");
                 else
-                  point = gtl::construct<point_type>(round(point.x()+bgnExtn()*cos(theta[0])), point.y()+bgnExtn()*sin(theta[0]));
+                  point = gtl::construct<float_point_type>(round(point.x()+bgnExtn()*cos(theta[0])), point.y()+bgnExtn()*sin(theta[0]));
               }
               if (it == itNext)
               {
                 if (endExtn() == std::numeric_limits<coordinate_type>::max()) 
                   limboPrint(limbo::kWARN, "Pathtype 4 requires ENDEXTN set, ignored\n");
                 else
-                  point = gtl::construct<point_type>(round(point.x()+endExtn()*cos(theta[1])), point.y()+endExtn()*sin(theta[1]));
+                  point = gtl::construct<float_point_type>(round(point.x()+endExtn()*cos(theta[1])), point.y()+endExtn()*sin(theta[1]));
               }
             }
             break; 

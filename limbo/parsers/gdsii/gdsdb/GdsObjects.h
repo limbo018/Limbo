@@ -42,6 +42,8 @@ class GdsObject
         ///@{
         /// point type 
 		typedef gtl::point_data<coordinate_type> point_type;
+        /// float point type to avoid numerical issue 
+		typedef gtl::point_data<double> float_point_type;
         /// interval type 
 		typedef gtl::interval_data<coordinate_type> interval_type; 
         /// rectangle type 

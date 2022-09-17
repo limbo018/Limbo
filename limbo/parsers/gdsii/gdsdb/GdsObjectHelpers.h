@@ -269,22 +269,24 @@ namespace ApplyCellReferenceActionDetails
 {
 
 /// @brief Translate operation 
+template<typename PointType>
 struct Translate 
 {
-	GdsCellReference::point_type offset; ///< offset 
+	PointType offset; ///< offset 
 
     /// @brief constructor 
     /// @param o offset 
-	Translate(GdsCellReference::point_type const& o) : offset(o) {}
+	Translate(PointType const& o) : offset(o) {}
 
     /// @brief API to run operation.
     /// @param p given position and perform operation on the position 
-	void operator()(GdsCellReference::point_type& p) const 
+	void operator()(PointType& p) const 
 	{
-		p = gtl::construct<GdsCellReference::point_type>(p.x()+offset.x(), p.y()+offset.y());
+		p = gtl::construct<PointType>(p.x()+offset.x(), p.y()+offset.y());
 	}
 };
 /// @brief Rotate operation 
+template<typename PointType>
 struct Rotate 
 {
 	double angle; ///< angle 
@@ -304,15 +306,16 @@ struct Rotate
 	/// cos(theta) -sin(theta) \n
 	/// sin(theta) cos(theta)
     /// @param p given position and perform operation on the position 
-	void operator()(GdsCellReference::point_type& p) const 
+	void operator()(PointType& p) const 
 	{
-		p = gtl::construct<GdsCellReference::point_type>(
+		p = gtl::construct<PointType>(
 				p.x()*cosAngle - p.y()*sinAngle, 
 				p.x()*sinAngle + p.y()*cosAngle
 				);
 	}
 };
 /// @brief Scale magnification 
+template<typename PointType>
 struct MagScale 
 {
 	double scaleX; ///< scale x 
@@ -325,19 +328,20 @@ struct MagScale
 
     /// @brief API to run operation 
     /// @param p given position and perform operation on the position 
-	void operator()(GdsCellReference::point_type& p) const 
+	void operator()(PointType& p) const 
 	{
-		p = gtl::construct<GdsCellReference::point_type>(p.x()*scaleX, p.y()*scaleY);
+		p = gtl::construct<PointType>(p.x()*scaleX, p.y()*scaleY);
 	}
 };
 /// @brief X reflection 
+template<typename PointType>
 struct XReflection
 {
     /// @brief API to run operation. 
     /// @param p given position and perform operation on the position 
-	void operator()(GdsCellReference::point_type& p) const 
+	void operator()(PointType& p) const 
 	{
-		p = gtl::construct<GdsCellReference::point_type>(p.x(), -p.y());
+		p = gtl::construct<PointType>(p.x(), -p.y());
 	}
 };
 
@@ -396,28 +400,43 @@ template <typename ObjectType>
 inline void apply(GdsCellReference const& cellRef, ObjectType* object)
 {
 	std::vector<GdsCellReference::point_type> vPoint; 
+	std::vector<GdsCellReference::float_point_type> vFloatPoint; 
 	copyToArray(vPoint, object);
+  // copy to temporary float point array 
+  // use float point type to avoid numerical issues 
+  vFloatPoint.reserve(vPoint.size());
+  for (std::vector<GdsCellReference::point_type>::const_iterator it = vPoint.begin(); it != vPoint.end(); ++it)
+  {
+    vFloatPoint.push_back(gtl::construct<GdsCellReference::float_point_type>(it->x(), it->y())); 
+  }
 	// the order must be kept according to the manual 
 	// strans
-	if (cellRef.strans() != std::numeric_limits<int>::max() && cellRef.strans()/32768 > 0) // apply x reflection 
+	if (cellRef.strans() != std::numeric_limits<int>::max() && (cellRef.strans() & 0x8000)) // apply x reflection 
 	{
-		transform(vPoint.begin(), vPoint.end(), XReflection()); 
+		transform(vFloatPoint.begin(), vFloatPoint.end(), XReflection<GdsCellReference::float_point_type>()); 
 	}
-	// magnification 
-	if (cellRef.magnification() != std::numeric_limits<double>::max())
+	// magnification, magnification bit in strans must be set to 1 (KLayout does not honor this bit) 
+	if (/*(cellRef.strans() & 0x4) &&*/ cellRef.magnification() != std::numeric_limits<double>::max())
 	{
-		transform(vPoint.begin(), vPoint.end(), MagScale(cellRef.magnification(), cellRef.magnification())); 
+		transform(vFloatPoint.begin(), vFloatPoint.end(), MagScale<GdsCellReference::float_point_type>(cellRef.magnification(), cellRef.magnification())); 
 	}
-	// angle 
-	if (cellRef.angle() != std::numeric_limits<double>::max())
+	// angle, angle bit in strans must be set to 1 (KLayout does not honor this bit)
+	if (/*(cellRef.strans() & 0x2) &&*/ cellRef.angle() != std::numeric_limits<double>::max())
 	{
-		transform(vPoint.begin(), vPoint.end(), Rotate(cellRef.angle())); 
+		transform(vFloatPoint.begin(), vFloatPoint.end(), Rotate<GdsCellReference::float_point_type>(cellRef.angle())); 
 	}
 	// position offset 
 	if (cellRef.position().x() != std::numeric_limits<int>::max() && cellRef.position().y() != std::numeric_limits<int>::max())
 	{
-		transform(vPoint.begin(), vPoint.end(), Translate(cellRef.position())); 
+		transform(vFloatPoint.begin(), vFloatPoint.end(), Translate<GdsCellReference::float_point_type>(cellRef.position())); 
 	}
+
+  // copy back 
+  vPoint.clear();
+  for (std::vector<GdsCellReference::float_point_type>::const_iterator it = vFloatPoint.begin(); it != vFloatPoint.end(); ++it)
+  {
+    vPoint.push_back(gtl::construct<GdsCellReference::point_type>(round(it->x()), round(it->y()))); 
+  }
 	copyFromArray(vPoint, object);
 }
 
