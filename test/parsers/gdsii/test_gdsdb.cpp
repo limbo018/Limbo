@@ -69,6 +69,10 @@ int main(int argc, char** argv)
                 {
                   break; 
                 }
+                else 
+                {
+                  --itc; 
+                }
               }
             }
           }
