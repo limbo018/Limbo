@@ -65,14 +65,7 @@ int main(int argc, char** argv)
                 cell.objects().pop_back(); 
                 // update end iterator 
                 itce = cell.objects().end();
-                if (itc == itclast)
-                {
-                  break; 
-                }
-                else 
-                {
-                  --itc; 
-                }
+                --itc; 
               }
             }
           }
