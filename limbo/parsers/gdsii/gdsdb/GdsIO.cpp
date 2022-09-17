@@ -48,6 +48,8 @@ void GdsReader::reset()
 	m_width = std::numeric_limits<int>::max(); ///< WIDTH 
 	m_columns = std::numeric_limits<int>::max(); ///< COLROW 
 	m_rows = std::numeric_limits<int>::max(); 
+  m_bgnextn = std::numeric_limits<int>::max(); 
+  m_endextn = std::numeric_limits<int>::max(); 
 	m_angle = std::numeric_limits<double>::max(); ///< ANGLE 
 	m_magnification = std::numeric_limits<double>::max(); ///< MAG 
 	m_strans = std::numeric_limits<int>::max(); ///< STRANS
@@ -143,7 +145,7 @@ void GdsReader::begin_end_cbk(::GdsParser::GdsRecords::EnumType record_type)
 						break; 
                     case ::GdsParser::GdsRecords::PATH:
                         limboAssert(m_layer != -1);
-						m_db.cells().back().addPath(m_layer, m_datatype, m_pathtype, m_width, m_vPoint); 
+						m_db.cells().back().addPath(m_layer, m_datatype, m_pathtype, m_width, m_bgnextn, m_endextn, m_vPoint); 
                         break;
 					case ::GdsParser::GdsRecords::TEXT:
                         limboAssert(m_layer != -1 && !m_string.empty());
@@ -228,8 +230,12 @@ void GdsReader::integer_cbk(::GdsParser::GdsRecords::EnumType record_type, ::Gds
         case ::GdsParser::GdsRecords::BGNSTR: // just date of creation, not interesting
 			m_status = ::GdsParser::GdsRecords::BGNSTR; 
             break;
-		case ::GdsParser::GdsRecords::BGNEXTN: // appear in PATH with PATHTYPE 4, not really useful though 
-		case ::GdsParser::GdsRecords::ENDTEXTN:
+		case ::GdsParser::GdsRecords::BGNEXTN: // appear in PATH with PATHTYPE 4
+ 			m_bgnextn = vData.front(); 
+ 			break; 
+		case ::GdsParser::GdsRecords::ENDEXTN: // appear in PATH with PATHTYPE 4
+ 			m_endextn = vData.front(); 
+ 			break; 
         default: // other not interested record_type
 			{
 				// only print invalid records or unsupported records for the first time 
@@ -321,6 +327,10 @@ void GdsWriter::write(::GdsParser::GdsWriter& gw, GdsPath const& object) const
 		gw.gds_write_pathtype(object.pathtype());
 	if (object.width() != std::numeric_limits<int>::max())
 		gw.gds_write_width(object.width());
+	if (object.bgnExtn() != std::numeric_limits<int>::max())
+		gw.gds_write_bgnextn(object.bgnExtn());
+	if (object.endExtn() != std::numeric_limits<int>::max())
+		gw.gds_write_endextn(object.endExtn());
 
 	std::vector<int> vx(object.size());
 	std::vector<int> vy(object.size());

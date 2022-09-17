@@ -55,6 +55,8 @@
    ENDEL               end of element
    SNAME               structure (cell) name
    COLROW              number of columns and rows (for aref)
+   BGNEXTN             begin point extension used in pathtype 4
+   ENDEXTN             end point extension used in pathtype 4
    TEXTTYPE            just like datatype, for text
    PRESENTATION        text justification
    STRING              character string
@@ -72,8 +74,8 @@
    Unsupported, discontinued, and unused tokens:
 
 REFLIBS     SPACING     STRCLASS     PLEX       ELFLAGS
-FONTS       TEXTNODE    RESERVED     BGNEXTN    PROPVALUE
-NODE        UINTEGER    FORMAT       ENDEXTN    ELKEY
+FONTS       TEXTNODE    RESERVED     PROPVALUE
+NODE        UINTEGER    FORMAT       ELKEY
 NODETYPE    USTRING     MASK         LINKKEYS   LINKTYPE
 PROPATTR    STYPTABLE   ENDMASKS     TAPENUM    SRFNAME
 ATTRTABLE   STRTYPE     LIBDIRSIZE   TAPECODE   LIBSECUR
@@ -103,6 +105,7 @@ ENDEL
 */
 
 #include <limbo/parsers/gdsii/stream/GdsWriter.h>
+#include <limbo/parsers/gdsii/stream/GdsRecords.h>
 #include <limbo/string/String.h>
 /// support to .gds.gz if enabled
 #if ZLIB == 1 
@@ -1202,6 +1205,44 @@ void GdsWriter::gds_write_colrow(  int ncols, int nrows )
 
 /*------------------------------------------------------------------------------------------*/
 
+void GdsWriter::gds_write_bgnextn( int bgnextn )
+{
+	static short int
+		count,
+		token;
+
+	count = 8;
+	gds_swap2bytes( (BYTE *) &count );
+	gds_write((char*)(&count), 2 );
+	token = 0x3003;                 // BGNEXTN
+	gds_swap2bytes( (BYTE *) &token );
+	gds_write((char*)(&token), 2 );
+	gds_swap4bytes( (BYTE *) &bgnextn );
+	gds_write((char*)(&bgnextn), 4 );
+
+}  // write_bgnextn
+
+/*------------------------------------------------------------------------------------------*/
+
+void GdsWriter::gds_write_endextn( int endextn )
+{
+	static short int
+		count,
+		token;
+
+	count = 8;
+	gds_swap2bytes( (BYTE *) &count );
+	gds_write((char*)(&count), 2 );
+	token = 0x3103;                 // ENDEXTN
+	gds_swap2bytes( (BYTE *) &token );
+	gds_write((char*)(&token), 2 );
+	gds_swap4bytes( (BYTE *) &endextn );
+	gds_write((char*)(&endextn), 4 );
+
+}  // write_endextn
+
+
+/*------------------------------------------------------------------------------------------*/
 void GdsWriter::gds_write_units( double dbu_uu, double dbu_m )
 {
 	short int
