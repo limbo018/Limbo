@@ -50,7 +50,7 @@ int main(int argc, char** argv)
           if (cell.name() != argv[4]) // check the non-top cell 
           {
             // iterate through all objects 
-            for (std::vector<GdsParser::GdsDB::GdsCell::object_entry_type>::iterator itc = cell.objects().begin(), itce = cell.objects().end(); itc != itce; ++itc) 
+            for (std::vector<GdsParser::GdsDB::GdsCell::object_entry_type>::iterator itc = cell.objects().begin(), itce = cell.objects().end(); itc != itce; ) 
             {
               if (itc->first == ::GdsParser::GdsRecords::TEXT) // find TEXT records
               {
@@ -65,7 +65,10 @@ int main(int argc, char** argv)
                 cell.objects().pop_back(); 
                 // update end iterator 
                 itce = cell.objects().end();
-                --itc; 
+              }
+              else 
+              {
+                ++itc; 
               }
             }
           }
