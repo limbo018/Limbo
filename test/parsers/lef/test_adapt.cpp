@@ -64,6 +64,18 @@ class LefDataBase : public LefParser::LefDataBase
 		{
 			cout << "lef manufacturing = " << v << endl;
 		}
+        /// @brief set use min space 
+        /// @param v an object for use min space 
+    virtual void lef_useminspacing_cbk(lefiUseMinSpacing const& v)
+    {
+        v.print(stdout);
+    }
+        /// @brief set clearance measure 
+        /// @param v clearance measure 
+    virtual void lef_clearancemeasure_cbk(string const& v)
+    {
+        cout << "lef clearancemeasure = " << v << endl;
+    }
         /// @brief set bus bit characters 
         /// @param v but bit characters 
 		virtual void lef_busbitchars_cbk(string const& v)

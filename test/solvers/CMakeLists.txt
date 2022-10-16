@@ -50,6 +50,7 @@ endif(INSTALL_LIMBO)
 if (GUROBI_FOUND)
     include_directories(
         ${GUROBI_INCLUDE_DIRS}
+        ${Boost_INCLUDE_DIRS}
         )
     add_executable(test_GurobiApi test_GurobiApi.cpp)
     target_link_libraries(test_GurobiApi ${LIBS} ${GUROBI_LIBRARIES})
