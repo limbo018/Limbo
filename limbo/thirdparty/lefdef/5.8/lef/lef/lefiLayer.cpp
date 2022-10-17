@@ -3244,13 +3244,10 @@ lefiLayer::hasLayerType() const
 int
 lefiLayer::hasPitch() const
 {
-    // Modified by Yibo Lin
-    // hasPitch_ = 2 when both pitchX_ and pitchY_ are set
-    return hasPitch_; 
-    //if (hasPitch_ == 1)
-    //    return 1;
-    //else
-    //    return 0;
+    if (hasPitch_ == 1)
+        return 1;
+    else
+        return 0;
 }
 
 int
@@ -4162,13 +4159,15 @@ lefiLayer::print(FILE *f) const
     fprintf(f, "Layer %s:\n", name());
     if (hasType())
         fprintf(f, "  type %s\n", type());
+    if (hasLayerType())
+        fprintf(f, "  layer type %s\n", layerType());
     if (hasMask())
         fprintf(f, "  mask %d\n", mask());
-    // Modified by Yibo Lin 
-    // to handle both pitchX_ and pitchY_ 
-    if (hasPitch() == 1)
+    if (hasPitch())
         fprintf(f, "  pitch %g\n", pitch());
-    if (hasPitch() == 2)
+    // Added by Yibo Lin 
+    // to handle both pitchX_ and pitchY_ 
+    if (hasXYPitch())
         fprintf(f, "  pitch %g %g\n", pitchX(), pitchY());
     if (hasWireExtension())
         fprintf(f, "  wireextension %g\n", wireExtension());
