@@ -84,7 +84,7 @@ message(STATUS "  PARSER_GDSII: ${PARSER_GDSII}")
 option(PARSER_GDSII_STREAM "Whether compile Parser.GDSII.stream or not, ON|OFF" ${PARSER_GDSII})
 message(STATUS "    PARSER_GDSII_STREAM: ${PARSER_GDSII_STREAM}")
 option(PARSER_GDSII_ASCII "Whether compile Parser.GDSII.ascii or not, ON|OFF" ${PARSER_GDSII})
-message(STATUS "    PARSER_GDSII_ascii: ${PARSER_GDSII_ascii}")
+message(STATUS "    PARSER_GDSII_ASCII: ${PARSER_GDSII_ASCII}")
 
 option(PARSER_LEF "Whether compile Parser.LEF or not, ON|OFF" ${PARSER})
 message(STATUS "  PARSER_LEF: ${PARSER_LEF}")
