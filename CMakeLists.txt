@@ -35,21 +35,9 @@ message(STATUS "GENERATE_DOCS: ${GENERATE_DOCS}")
 option(ENABLE_TEST "Whether enable test, ON|OFF" OFF)
 message(STATUS "ENABLE_TEST: ${ENABLE_TEST}")
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-
-set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-
-find_package(Threads REQUIRED)
-find_package(BISON 3.3 REQUIRED)
-find_package(FLEX REQUIRED)
-find_package(ZLIB REQUIRED)
-find_package(Boost 1.55.0 REQUIRED COMPONENTS graph regex)
-find_package(Gurobi)
-find_package(LpSolve)
-
-
 # switches for each package 
+message(STATUS "Statistics of Limbo packages")
+
 option(ALGORITHMS "Whether compile Algorithms or not, ON|OFF" ON)
 message(STATUS "ALGORITHMS: ${ALGORITHMS}")
 
@@ -121,6 +109,22 @@ option(PARSER_VERILOG "Whether compile Parser.VERILOG or not, ON|OFF" ${PARSER})
 message(STATUS "  PARSER_VERILOG: ${PARSER_VERILOG}")
 option(PARSER_VERILOG_BISON "Whether compile Parser.VERILOG.bison or not, ON|OFF" ${PARSER_VERILOG})
 message(STATUS "    PARSER_VERILOG_BISON: ${PARSER_VERILOG_BISON}")
+
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+find_package(Threads REQUIRED)
+find_package(BISON 3.3 REQUIRED)
+find_package(FLEX REQUIRED)
+find_package(ZLIB REQUIRED)
+find_package(Boost 1.55.0 REQUIRED COMPONENTS graph regex)
+if(ALGORITHMS OR SOLVERS)
+find_package(Gurobi)
+find_package(LpSolve)
+endif(ALGORITHMS OR SOLVERS)
 
 
 add_subdirectory(limbo)
