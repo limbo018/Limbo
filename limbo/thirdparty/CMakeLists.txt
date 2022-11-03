@@ -68,6 +68,6 @@ if(INSTALL_LIMBO)
 endif(INSTALL_LIMBO)
 endif(ALGORIHTMS OR SOLVERS)
 
-if(PARSER)
+if(PARSERS)
 add_subdirectory(gzstream)
-endif(PARSER)
+endif(PARSERS)
