@@ -1684,26 +1684,23 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
                 defDriver->pin().direct = pin->direction(); 
             if (pin->hasUse())
                 defDriver->pin().use = pin->use(); 
+            if (pin->isPlaced())
+            {
+              defDriver->pin().status = "PLACED"; 
+            }
+            if (pin->isFixed())
+            {
+              defDriver->pin().status = "FIXED"; 
+            }
+            if (pin->isUnplaced())
+            {
+              defDriver->pin().status = "UNPLACED"; 
+            }
             if (pin->hasPlacement())
             {
-                if (pin->isPlaced())
-                {
-                    defDriver->pin().status = "PLACED"; 
-                    defDriver->pin().orient = orientStr(pin->orient()); 
-                    defDriver->pin().origin[0] = pin->placementX(); 
-                    defDriver->pin().origin[1] = pin->placementY(); 
-                }
-                if (pin->isFixed())
-                {
-                    defDriver->pin().status = "FIXED"; 
-                }
-                if (pin->isUnplaced())
-                {
-                    defDriver->pin().status = "UNPLACED"; 
-                }
-                defDriver->pin().orient = orientStr(pin->orient()); 
                 defDriver->pin().origin[0] = pin->placementX(); 
                 defDriver->pin().origin[1] = pin->placementY(); 
+                defDriver->pin().orient = orientStr(pin->orient()); 
             }
             if (pin->hasLayer())
             {
@@ -1718,6 +1715,41 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
                             &(defDriver->pin().vBbox[i][2]), 
                             &(defDriver->pin().vBbox[i][3]) 
                             );
+                }
+            }
+            if (pin->hasPort()) 
+            {
+                defDriver->pin().vPinPort.resize(pin->numPorts()); 
+                for (int i = 0; i < pin->numPorts(); i++)
+                {
+                    PinPort& pinPort = defDriver->pin().vPinPort.at(i); 
+                    defiPinPort* pport = pin->pinPort(i);
+                    pinPort.vLayer.resize(pport->numLayer()); 
+                    pinPort.vBbox.resize(pport->numLayer(), std::vector<int32_t>(4));
+                    for (int j = 0; j < pport->numLayer(); ++j) 
+                    {
+                        pinPort.vLayer[j] = pport->layer(j); 
+                        pport->bounds(j, 
+                            &(pinPort.vBbox[j][0]), 
+                            &(pinPort.vBbox[j][1]), 
+                            &(pinPort.vBbox[j][2]), 
+                            &(pinPort.vBbox[j][3]) 
+                            );
+                    }
+                    if (pport->isPlaced())
+                    {
+                      pinPort.status = "PLACED"; 
+                    }
+                    if (pport->isFixed())
+                    {
+                      pinPort.status = "FIXED"; 
+                    }
+                    if (pport->hasPlacement()) 
+                    {
+                        pinPort.origin[0] = pport->placementX(); 
+                        pinPort.origin[1] = pport->placementY(); 
+                        pinPort.orient = orientStr(pport->orient()); 
+                    }
                 }
             }
             defDB->add_def_pin(defDriver->pin()); 

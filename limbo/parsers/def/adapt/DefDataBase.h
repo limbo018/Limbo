@@ -117,6 +117,34 @@ struct Component : public Item
 			<< "orient = " << orient << endl; 
 	}
 };
+/// @brief port of pin 
+struct PinPort : public Item
+{
+	string status; ///< placement status 
+	int32_t origin[2]; ///< offset to node origin 
+	string orient; ///< orientation 
+    vector<string> vLayer; ///< layers  
+    vector<vector<int32_t> > vBbox; ///< bounding box on each layer 
+    /// @brief reset all data members 
+	void reset()
+	{
+		status = orient = "";
+		origin[0] = origin[1] = -1;
+        vLayer.clear(); 
+        vBbox.clear(); 
+	}
+    /// @brief print data members 
+    /// @param ss output stream 
+	virtual void print(ostringstream& ss) const
+	{
+		ss << "//////// Port ////////" << endl
+			<< "status = " << status << endl 
+			<< "origin = " << origin[0] << " " << origin[1] << endl 
+			<< "orient = " << orient << endl; 
+        for (uint32_t i = 0; i < vLayer.size(); ++i)
+		    ss << "layer " << vLayer[i] << " " << vBbox[i][0] << " " << vBbox[i][1] << " " << vBbox[i][2] << " " << vBbox[i][3] << endl;
+	}
+};
 /// @brief pin of node/cell 
 struct Pin : public Item
 {
@@ -129,6 +157,7 @@ struct Pin : public Item
     vector<string> vLayer; ///< layers  
     vector<vector<int32_t> > vBbox; ///< bounding box on each layer 
 	string use; ///< "use" token in DEF file 
+  vector<PinPort> vPinPort; ///< pin ports 
     /// @brief reset all data members 
 	void reset()
 	{
@@ -136,6 +165,7 @@ struct Pin : public Item
 		origin[0] = origin[1] = -1;
         vLayer.clear(); 
         vBbox.clear(); 
+        vPinPort.clear();
 		use = "";
 	}
     /// @brief print data members 
@@ -152,6 +182,8 @@ struct Pin : public Item
         for (uint32_t i = 0; i < vLayer.size(); ++i)
 		    ss << "layer " << vLayer[i] << " " << vBbox[i][0] << " " << vBbox[i][1] << " " << vBbox[i][2] << " " << vBbox[i][3] << endl;
 		ss << "use = " << use << endl;
+    for (uint32_t i = 0; i < vPinPort.size(); ++i)
+      vPinPort[i].print(ss); 
 	}
 };
 /// @brief net to describe interconnection of netlist 
