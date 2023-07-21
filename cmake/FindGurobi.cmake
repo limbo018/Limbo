@@ -1,4 +1,5 @@
-#### Taken from http://www.openflipper.org/svnrepo/CoMISo/trunk/CoMISo/cmake/FindGUROBI.cmake
+#
+## Taken from http://www.openflipper.org/svnrepo/CoMISo/trunk/CoMISo/cmake/FindGUROBI.cmake
 
 
 # - Try to find GUROBI
@@ -18,10 +19,14 @@ else (GUROBI_INCLUDE_DIR)
         NAMES gurobi_c++.h
         PATHS "$ENV{GUROBI_HOME}/include"
         )
+    
+    message(STATUS "[LIMBO] GUROBI_INCLUDE_DIR: ${GUROBI_INCLUDE_DIR}")
+    message(STATUS "[LIMBO] GUROBI_HOME: ${GUROBI_HOME}")
+    message(STATUS "[LIMBO] GUROBI_VERSION: ${GUROBI_VERSION}")
 
     # hints of names from version 40 to 99
     set(GUROBI_NAME_HINTS "")
-    foreach(GUROBI_VERSION RANGE 40 99)
+    foreach(GUROBI_VERSION RANGE 40 110)
         list(APPEND GUROBI_NAME_HINTS "gurobi${GUROBI_VERSION}")
     endforeach()
 
@@ -53,3 +58,5 @@ else (GUROBI_INCLUDE_DIR)
     endif(GUROBI_INCLUDE_DIR AND GUROBI_LIBRARY AND GUROBI_CXX_LIBRARY)
 
 endif(GUROBI_INCLUDE_DIR)
+
+message(STATUS "[LIMBO] GUROBI_LIBRARIES: ${GUROBI_LIBRARIES}")
