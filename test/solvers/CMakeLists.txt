@@ -76,6 +76,21 @@ if (LPSOLVE_FOUND)
     endif(INSTALL_LIMBO)
 endif(LPSOLVE_FOUND)
 
+if (CPLEX_FOUND)
+    include_directories(
+        ${CPLEX_INCLUDE_DIRS}
+        ${Boost_INCLUDE_DIRS}
+        )
+    add_executable(test_CplexApi test_CplexApi.cpp)
+    target_link_libraries(test_CplexApi ${LIBS} ${CPLEX_LIBRARIES})
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+        target_compile_definitions(test_CplexApi PRIVATE DEBUG_CPLEXAPI=1)
+    endif()
+    if(INSTALL_LIMBO)
+        install(TARGETS test_CplexApi DESTINATION test/solvers)
+    endif(INSTALL_LIMBO)
+endif(CPLEX_FOUND)
+
 if(INSTALL_LIMBO)
     install(DIRECTORY benchmarks DESTINATION test/solvers)
 endif(INSTALL_LIMBO)
