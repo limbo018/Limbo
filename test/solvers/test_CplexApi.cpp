@@ -1,11 +1,11 @@
 /**
- * @file   test_GurobiApi.cpp
+ * @file   test_CplexApi.cpp
  * @author Yibo Lin
- * @date   Mar 2017
- * @brief  Test Gurobi API @ref limbo::solvers::GurobiLinearApi
+ * @date   Aug 2023
+ * @brief  Test CPLEX API @ref limbo::solvers::CplexLinearApi
  */
 #include <iostream>
-#include <limbo/solvers/api/GurobiApi.h>
+#include <limbo/solvers/api/CplexApi.h>
 
 /// @brief main function 
 /// 
@@ -39,14 +39,14 @@ int main()
     optModel.addConstraint(var4 - var3 >= 0.1, "c2"); 
     optModel.addConstraint(var2 - var3 >= 0.2, "c3"); 
 
-    // solve by Gurobi 
-    typedef limbo::solvers::GurobiLinearApi<model_type::coefficient_value_type, model_type::variable_value_type> solver_type; 
+    // solve by CPLEX 
+    typedef limbo::solvers::CplexLinearApi<model_type::coefficient_value_type, model_type::variable_value_type> solver_type; 
     solver_type solver (&optModel); 
-    limbo::solvers::GurobiParameters gurobiParams; 
-    gurobiParams.setNumThreads(1);
-    gurobiParams.setOutputFlag(1); 
+    limbo::solvers::CplexParameters cplexParams; 
+    cplexParams.setNumThreads(1);
+    cplexParams.setOutputFlag(1); 
 
-    limbo::solvers::SolverProperty optStatus = solver(&gurobiParams); 
+    limbo::solvers::SolverProperty optStatus = solver(&cplexParams); 
 
     std::cout << "optStatus = " << optStatus << std::endl; 
 

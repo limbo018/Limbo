@@ -123,6 +123,7 @@ find_package(ZLIB REQUIRED)
 find_package(Boost 1.55.0 REQUIRED COMPONENTS graph regex)
 if(ALGORITHMS OR SOLVERS)
 find_package(GUROBI)
+find_package(CPLEX)
 find_package(LPSOLVE)
 endif(ALGORITHMS OR SOLVERS)
 

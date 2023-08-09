@@ -157,6 +157,8 @@ class GurobiLinearApi
                 errorHandler(env, error);
                 error = GRBsetcharattrelement(m_grbModel, GRB_CHAR_ATTR_VTYPE, var.id(), m_model->variableNumericType(var) == CONTINUOUS? GRB_CONTINUOUS : GRB_INTEGER);
                 errorHandler(env, error);
+                limboAssertMsg(!(std::numeric_limits<V>::is_integer && m_model->variableNumericType(var) == CONTINUOUS), 
+                    "LinearModel<T, V> is declared as V = integer type, but variable %s is CONTINUOUS", m_model->variableName(var).c_str());
                 error = GRBsetstrattrelement(m_grbModel, GRB_STR_ATTR_VARNAME, var.id(), m_model->variableName(var).c_str());
                 errorHandler(env, error);
             }
