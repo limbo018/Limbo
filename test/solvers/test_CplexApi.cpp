@@ -21,7 +21,7 @@
 int main()
 {
     // ILP model 
-    typedef limbo::solvers::LinearModel<double, long> model_type; 
+    typedef limbo::solvers::LinearModel<double, double> model_type; 
     model_type optModel; 
 
     // create variables 
@@ -44,11 +44,16 @@ int main()
     solver_type solver (&optModel); 
     limbo::solvers::CplexParameters cplexParams; 
     cplexParams.setNumThreads(1);
-    cplexparams.setOutputFlag(1); 
+    cplexParams.setOutputFlag(1); 
 
     limbo::solvers::SolverProperty optStatus = solver(&cplexParams); 
 
     std::cout << "optStatus = " << optStatus << std::endl; 
+
+    std::cout << optModel.variableName(var1) << " = " << optModel.variableSolution(var1) << "\n";
+    std::cout << optModel.variableName(var2) << " = " << optModel.variableSolution(var2) << "\n";
+    std::cout << optModel.variableName(var3) << " = " << optModel.variableSolution(var3) << "\n";
+    std::cout << optModel.variableName(var4) << " = " << optModel.variableSolution(var4) << "\n";
 
     return 0; 
 }

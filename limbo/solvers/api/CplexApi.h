@@ -16,6 +16,11 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/assert.hpp> 
 #include <limbo/solvers/Solvers.h>
+
+/// TODO
+// 1. Add option to control the verbose level 
+// 2. Support to set starting point 
+
 // make sure CPLEX is configured properly 
 extern "C" 
 {
@@ -45,17 +50,23 @@ class CplexParameters
         virtual ~CplexParameters() {}
         /// @brief customize environment 
         /// @param env Cplex environment 
-        virtual void operator()(GRBenv* env) const 
+        virtual void operator()(CPXENVptr env) const 
         {
             // mute the log from the LP solver
-            GRBsetintparam(env, GRB_INT_PAR_OUTPUTFLAG, m_outputFlag); 
+            if (m_outputFlag < 3)
+            {
+              // CPXXsetlogfilename(env, NULL, NULL);
+            }
+            if (m_outputFlag < 2)
+            {
+            }
             if (m_numThreads > 0 && m_numThreads != std::numeric_limits<int>::max())
-                GRBsetintparam(env, GRB_INT_PAR_THREADS, m_numThreads);
+              CPXXsetintparam(env, CPXPARAM_Threads, m_numThreads);
         }
         /// @brief customize model 
         /// 
         /// param model CPLEX model 
-        virtual void operator()(GRBmodel* /*model*/) const 
+        virtual void operator()(CPXLPptr /*model*/) const 
         {
         }
 
@@ -160,10 +171,9 @@ class CplexLinearApi
             std::vector<double> obj (numcols, 0);
             std::vector<double> rhs (numrows, 0);
             std::vector<char> sense (numrows, '=');
+            // follows compressed sparse column format 
             std::vector<CPXNNZ> matbeg (numcols, 0);
             std::vector<CPXDIM> matcnt (numcols, 0);
-            std::vector<CPXDIM> matind (numnz, 0);
-            std::vector<double> matval (numnz, 0);
             std::vector<double> lb (numcols);
             std::vector<double> ub (numcols);
             std::vector<char> ctype (numcols);
@@ -175,6 +185,8 @@ class CplexLinearApi
                 ub[var.id()] = m_model->variableUpperBound(var);
                 // error = GRBsetdblattrelement(m_cplexModel, GRB_DBL_ATTR_START, var.id(), m_model->variableSolution(var));
                 ctype[var.id()] = m_model->variableNumericType(var) == CONTINUOUS? 'C' : 'I';
+                limboAssertMsg(!(std::numeric_limits<V>::is_integer && m_model->variableNumericType(var) == CONTINUOUS), 
+                    "LinearModel<T, V> is declared as V = integer type, but variable %s is CONTINUOUS", m_model->variableName(var).c_str());
             }
 
             // create constraints 
@@ -188,15 +200,22 @@ class CplexLinearApi
                     if (it->coefficient() != 0)
                     {
                       matcnt[it->variable().id()] += 1; 
+                      limboAssert(it->variable().id() < matcnt.size());
                     }
                 }
             }
             // initialize matbeg 
+            int numnz = 0; // number of non-zeros in constraint matrix 
             for (unsigned int i = 0; i < numcols - 1; ++i)
             {
               matbeg[i + 1] = matbeg[i] + matcnt[i];
+              numnz += matcnt[i];
             }
+            numnz += matcnt.back();
             // initialize matind, matval, sense, rhs
+            std::vector<CPXDIM> matind (numnz, 0);
+            std::vector<double> matval (numnz, 0);
+            std::vector<CPXDIM> curcnt (numcols, 0); // intermediate count of how many elements filled in each column 
             for (unsigned int i = 0, ie = m_model->constraints().size(); i < ie; ++i)
             {
                 constraint_type const& constr = m_model->constraints().at(i);
@@ -205,8 +224,10 @@ class CplexLinearApi
                 {
                     if (it->coefficient() != 0)
                     {
-                      matind[matbeg[it->variable().id()] + i] = i; 
-                      matval[matbeg[it->variable().id()] + i] = it->coefficient(); 
+                      matind[matbeg[it->variable().id()] + curcnt[it->variable().id()]] = i; 
+                      matval[matbeg[it->variable().id()] + curcnt[it->variable().id()]] = it->coefficient(); 
+                      limboAssert(matbeg[it->variable().id()] + curcnt[it->variable().id()] < matind.size());
+                      curcnt[it->variable().id()] += 1; 
                     }
                 }
 
@@ -267,11 +288,18 @@ class CplexLinearApi
               limboAssertMsg(0, "CPXXgetstat failed");
             }
 
-            if (solstat == GRB_INFEASIBLE)
+            if (solstat == CPXMIP_INFEASIBLE)
             {
-                error = GRBcomputeIIS(m_cplexModel);
-                errorHandler(env, error); 
-                GRBwrite(m_cplexModel, "problem.ilp");
+                status = CPXXrefineconflictext (env, m_cplexModel, 0, 0, NULL, NULL, NULL, NULL);
+                if (status)
+                {
+                  limboAssertMsg(0, "CPXXrefineconflictext failed");
+                }
+                status = CPXXclpwrite (env, m_cplexModel, "problem.ilp");
+                if (status)
+                {
+                  limboAssertMsg(0, "CPXXclpwrite failed");
+                }
                 limboPrint(kERROR, "Model is infeasible, compute IIS and write to problem.ilp\n");
             }
 #ifdef DEBUG_CPLEXAPI
@@ -282,9 +310,8 @@ class CplexLinearApi
             }
 #endif 
 
-            cur_numrows = CPXXgetnumrows (env, lp);
-            cur_numcols = CPXXgetnumcols (env, lp);
-            status = CPXXgetx (env, lp, x, 0, cur_numcols-1);
+            std::vector<double> x (numcols, 0);
+            status = CPXXgetx (env, m_cplexModel, x.data(), 0, numcols-1);
             if (status)
             {
               limboAssertMsg(0, "CPXXgetx failed");
@@ -321,12 +348,16 @@ class CplexLinearApi
 
             switch (solstat)
             {
-                case CPX_STAT_OPTIMAL:
+                //case CPX_STAT_OPTIMAL:
+                case CPXMIP_OPTIMAL:
                     return OPTIMAL;
-                case CPX_STAT_INFEASIBLE:
+                //case CPX_STAT_INFEASIBLE:
+                case CPXMIP_INFEASIBLE:
                     return INFEASIBLE;
-                case CPX_STAT_INForUNBD:
-                case CPX_STAT_UNBOUNDED:
+                //case CPX_STAT_INForUNBD:
+                //case CPX_STAT_UNBOUNDED:
+                case CPXMIP_INForUNBD:
+                case CPXMIP_UNBOUNDED:
                     return UNBOUNDED;
                 default:
                     limboAssertMsg(0, "unknown status %d", solstat);
@@ -344,121 +375,6 @@ class CplexLinearApi
         model_type* m_model; ///< model for the problem 
         CPXLPptr m_cplexModel; ///< model for CPLEX 
 };
-
-#if CPLEXFILEAPI == 1
-#include <ilcplex/ilocplex.h>
-/// This api needs a file in LP format as input.
-/// And then read the solution output by CPLEX 
-/// I plan to come up with more efficient api without file io operations 
-template <typename T>
-struct CplexFileApi 
-{
-    /// @brief value type 
-	typedef T value_type;
-
-	/// @brief data structure to save solution
-	struct solution_type 
-	{
-		value_type obj; ///< objective value 
-		std::list<std::pair<std::string, value_type> > vVariable; ///< std::list of (variable, solution) pairs 
-	};
-	/// @brief API function 
-    /// @param fileName input file name 
-    /// @return solution 
-	virtual boost::shared_ptr<solution_type> operator()(std::string const& fileName, bool = true) const 
-	{
-		// better to use full path for file name 
-		boost::shared_ptr<solution_type> pSol (new solution_type);
-		// remove previous solution file 
-		std::cout << "rm -rf "+fileName+".sol" << std::endl;
-		std::cout << system(("rm -rf "+fileName+".sol").c_str()) << std::endl;;
-
-		std::cout << "solve linear program "+fileName << std::endl;
-		this->solve_lp(fileName);
-
-		// read rpt 
-		{
-			std::ifstream solFile ((fileName+".sol").c_str(), std::ifstream::in);
-			if (!solFile.good()) BOOST_ASSERT_MSG(false, ("failed to open " + fileName + ".sol").c_str());
-
-			std::string var;
-			double value;
-
-			// read objective value 
-			solFile >> var >> var >> var >> var >> value;
-			pSol->obj = value;
-
-			while (!solFile.eof())
-			{
-				solFile >> var >> value;
-				pSol->vVariable.push_back(make_pair(var, value));
-			}
-			solFile.close();
-		}
-
-		return pSol;
-	}
-	/// Core function to solve lp problem with CPLEX. 
-	/// It is modified from examples of CPLEX. 
-	/// Basically it reads input problem file, and output solution file. 
-    /// @param fileName input file 
-	virtual void solve_lp(std::string fileName) const 
-	{
-		try 
-		{
-			GRBEnv env = GRBEnv();
-			GRBModel model = GRBModel(env, fileName+".lp");
-
-			model.optimize();
-
-			int optimstatus = model.get(GRB_IntAttr_Status);
-
-			if (optimstatus == GRB_INF_OR_UNBD) 
-			{
-				model.getEnv().set(GRB_IntParam_Presolve, 0);
-				model.optimize();
-				optimstatus = model.get(GRB_IntAttr_Status);
-			}
-
-			if (optimstatus == GRB_OPTIMAL) 
-			{
-				double objval = model.get(GRB_DoubleAttr_ObjVal);
-				std::cout << "Optimal objective: " << objval << std::endl;
-				// write result 
-				model.write(fileName+".sol");
-			} 
-			else if (optimstatus == GRB_INFEASIBLE) 
-			{
-				std::cout << "Model is infeasible" << std::endl;
-
-				// compute and write out IIS
-
-				model.computeIIS();
-				model.write(fileName+".ilp");
-			} 
-			else if (optimstatus == GRB_UNBOUNDED) 
-			{
-				std::cout << "Model is unbounded" << std::endl;
-			} 
-			else 
-			{
-				std::cout << "Optimization was stopped with status = "
-					<< optimstatus << std::endl;
-			}
-		} 
-		catch(GRBException e) 
-		{
-			std::cout << "Error code = " << e.getErrorCode() << std::endl;
-			std::cout << e.getMessage() << std::endl;
-		} 
-		catch (...) 
-		{
-			std::cout << "Error during optimization" << std::endl;
-		}
-	}
-
-};
-#endif
 
 } // namespace solvers
 } // namespace limbo
