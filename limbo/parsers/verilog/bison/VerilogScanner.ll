@@ -48,6 +48,9 @@ typedef VerilogParser::Parser::token_type token_type;
 #define YY_USER_ACTION  yylloc->columns(yyleng);
 %}
 
+/* c-style comments using starting condition */
+%x C_COMMENT
+
 %% /*** Regular Expressions Part ***/
 
  /* code to place at the beginning of yylex() */
@@ -139,6 +142,14 @@ assign          return token::ASSIGN;
 }
 
  /* gobble up comments */
+ /* c-style comments */
+"/*"              BEGIN(C_COMMENT);
+<C_COMMENT>{
+"*/"      BEGIN(INITIAL);
+[^*\n]+   // eat comment in chunks
+"*"       // eat the lone star
+\n        {yylloc->lines(yyleng); yylloc->step();}
+}
  /* make sure multipe \/ works */
  /* make sure \/\/ works with directly end of line */
 [/]([/])+([\n]|([^\n])*) {

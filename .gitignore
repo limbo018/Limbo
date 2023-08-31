@@ -11,3 +11,4 @@ limbo/thirdparty/liblinear/predict
 limbo/thirdparty/liblinear/train
 build
 install
+.DS_Store
