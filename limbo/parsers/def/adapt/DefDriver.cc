@@ -1660,7 +1660,14 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
             break;
         case defrDieAreaCbkType :
             box = (defiBox*)cl;
-            defDB->set_def_diearea(box->xl(), box->yl(), box->xh(), box->yh()); 
+            if (box->getPoint().numPoints <= 2)
+            {
+              defDB->set_def_diearea(box->xl(), box->yl(), box->xh(), box->yh()); 
+            }
+            else 
+            {
+              defDB->set_def_diearea(box->getPoint().numPoints, box->getPoint().x, box->getPoint().y); 
+            }
             break;
         case defrPinCapCbkType :
             pc = (defiPinCap*)cl;

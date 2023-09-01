@@ -11,6 +11,11 @@
 
 namespace DefParser {
 
+void DefDataBase::set_def_diearea(int, const int*, const int*)
+{
+	def_user_cbk_reminder(__func__);
+}
+
 void DefDataBase::resize_def_blockage(int) 
 {
 	def_user_cbk_reminder(__func__);

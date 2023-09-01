@@ -313,6 +313,8 @@ class DefDataBase
 		virtual void set_def_unit(int) = 0;
         /// @brief set die area xl, yl, xh, yh
 		virtual void set_def_diearea(int, int, int, int) = 0;
+        /// @brief set die area, optional parameters for non-rectangular shapes defined as points 
+		virtual void set_def_diearea(int, const int*, const int*);
         /// @brief add row 
 		virtual void add_def_row(Row const&) = 0;
         /// @brief add component/cell 
