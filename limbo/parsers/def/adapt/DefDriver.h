@@ -85,6 +85,14 @@ public:
     Region& region() {return m_region;}
     Group const& group() const {return m_group;}
     Group& group() {return m_group;}
+    Track const& track() const {return m_track;}
+    Track& track() {return m_track;}
+    GCellGrid const& gcellgrid() const {return m_gcellgrid;}
+    GCellGrid& gcellgrid() {return m_gcellgrid;}
+    Via const& via() const {return m_via;}
+    Via& via() {return m_via;}
+    SNet const& snet() const {return m_snet;}
+    SNet& snet() {return m_snet;}
     /// @endcond 
 protected:
     /** Reference to the database filled during parsing of the
@@ -103,6 +111,14 @@ protected:
     Region m_region; 
     /// @brief temporary group 
     Group m_group; 
+
+    Track m_track;
+
+    GCellGrid m_gcellgrid;
+
+    Via m_via;
+
+    SNet m_snet;
 };
 
 /// @brief API for DefParser. 

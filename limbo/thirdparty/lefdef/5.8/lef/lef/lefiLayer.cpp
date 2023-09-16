@@ -5167,7 +5167,7 @@ lefiLayer::addSpInfluence(double    width,
 }
 
 int
-lefiLayer::numSpacingTable()
+lefiLayer::numSpacingTable() const
 {
     return numSpacingTable_;
 }
@@ -5176,6 +5176,12 @@ void
 lefiLayer::setSpTwoWidthsHasPRL(int hasPRL)
 {
     hasTwoWidthPRL_ = hasPRL;
+}
+
+lefiSpacingTable const*
+lefiLayer::spacingTable(int index) const
+{
+    return spacingTable_[index];
 }
 
 lefiSpacingTable *

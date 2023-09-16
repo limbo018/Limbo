@@ -8,6 +8,8 @@
 #ifndef DEFPARSER_DATABASE_H
 #define DEFPARSER_DATABASE_H
 
+#include <array>
+#include <ostream>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -293,6 +295,151 @@ struct Group : public Item
             ss << "Property " << vPropertyName[i] << " " << vPropertyType[i] << " " << vPropertyValue[i] << endl; 
     }
 };
+/// @brief routing tracks 
+struct Track : public Item
+{
+    string track_name; ///< group name 
+    std::vector<string> vLayerNames; ///< group members 
+    int start;
+    int step;
+    int num; 
+    int firstTrackMask;
+    int sameMask; 
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        track_name = "";
+        vLayerNames.clear();
+        start = 0;
+        step = 0;
+        num = 0;
+        firstTrackMask = 0;
+        sameMask = 0;
+    }
+    /// @brief print data members 
+    /// @param ss output stream 
+    virtual void print(ostringstream& ss) const 
+    {
+		ss << "//////// Track ////////" << endl
+            << "start = " << start << endl
+            << "step  = " << step  << endl 
+            << "num   = " << num   << endl
+            << "Layer ";
+        for (auto &layername: vLayerNames) {
+            ss << layername << " ";
+        }
+        ss << endl;
+    }
+};
+/// @brief routing tracks 
+struct GCellGrid : public Item
+{
+    string gcellgrid_name; ///< group name  
+    int start;
+    int step;
+    int num; 
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        gcellgrid_name = "";
+        start = 0;
+        step = 0;
+        num = 0;
+    }
+    /// @brief print data members 
+    /// @param ss output stream 
+    virtual void print(ostringstream& ss) const 
+    {
+		ss << "//////// GCellGrid ////////" << endl
+            << "name  = " << gcellgrid_name << endl
+            << "start = " << start << endl
+            << "step  = " << step  << endl 
+            << "num   = " << num   << endl;
+    }
+};
+struct ViaType : public Item
+{
+    std::string viatype_name; ///< group name  
+    int x, y;
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        viatype_name = "";
+        x = 0;
+        y = 0;
+    }
+    /// @brief print data members 
+    /// @param ss output stream 
+    virtual void print(ostringstream& ss) const 
+    {
+		ss << "//////// Via ////////" << endl
+            << "type  = " << viatype_name << endl
+            << "coord = ()" << x << ", " << y << ")" << endl;
+    }
+};
+struct Via : public Item
+{
+    std::string viatype_name; ///< group name  
+    int x, y;
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        viatype_name = "";
+        x = 0;
+        y = 0;
+    }
+    /// @brief print data members 
+    /// @param ss output stream 
+    virtual void print(ostringstream& ss) const 
+    {
+		ss << "//////// Via ////////" << endl
+            << "type  = " << viatype_name << endl
+            << "coord = ()" << x << ", " << y << ")" << endl;
+    }
+};
+/// @brief routing tracks 
+struct SNet : public Item
+{
+    std::string net_name; ///< group name  
+    std::string type;
+    vector<vector<int>> shapes; ///< shapes in snet, only support rectangles yet
+    vector<Via> vias;
+    
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        net_name = "";
+        shapes.clear();
+        vias.clear();
+        type = "";
+    }
+    /// @brief print data members 
+    /// @param ss output stream 
+    virtual void print(ostringstream& ss) const 
+    {
+		ss << "//////// Special Net ////////" << endl
+            << "name  = " << net_name << endl
+            << "type = " << type << endl
+            << "vias = ";
+        for (auto const& via: vias) {
+            via.print(ss);
+        }
+        ss << endl << "shapes = ";
+        for (auto const& rect: shapes) {
+            ss << '(';
+            for (int i = 0; i < rect.size(); ++i) {
+                ss  << rect[i] << ", ";
+            }
+            ss << ") ";
+        }
+        ss << endl;
+    }
+};
 // forward declaration
 /// @class DefParser::DefDataBase
 /// @brief Base class for def database. 
@@ -329,6 +476,13 @@ class DefDataBase
 		virtual void add_def_net(Net const&) = 0;
         /// @brief set number of nets 
 		virtual void resize_def_net(int) = 0;
+        ///
+        virtual void add_def_track(Track const&) = 0;
+        virtual void add_def_gcellgird(GCellGrid const&) = 0;
+        virtual void add_def_snet(SNet const&) = 0;
+        virtual void add_def_via(Via const&) = 0;
+        /// @brief add placement blockages, array of boxes with xl, yl, xh, yh
+        virtual void add_def_route_blockage(std::vector<std::vector<int> > const&, std::string const&) = 0;
         // check these callbacks at runtime 
         /// @brief set number of blockages 
         virtual void resize_def_blockage(int);

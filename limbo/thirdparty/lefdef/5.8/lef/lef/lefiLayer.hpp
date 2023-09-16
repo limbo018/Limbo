@@ -732,8 +732,9 @@ public:
   double minenclosedareaWidth(int index) const;
 
   // 5.5 SPACINGTABLE FOR LAYER ROUTING
-  int               numSpacingTable();
+  int               numSpacingTable() const; 
   lefiSpacingTable* spacingTable(int index);
+  lefiSpacingTable const* spacingTable(int index) const;
 
   // 5.6 ENCLOSURE, PREFERENCLOSURE, RESISTANCEPERCUT & DIAGMINEDGELENGTH
   int    numEnclosure() const;
