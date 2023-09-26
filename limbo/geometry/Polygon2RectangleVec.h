@@ -283,7 +283,7 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
                             break; 
                         }
                         default:
-                            assert_msg(0, "should not reach here " << m_slicing_orient); 
+                            assert_msg2(0, "should not reach here " << m_slicing_orient);
                     }
 				}
 				// insert or remove point 

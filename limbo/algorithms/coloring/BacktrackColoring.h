@@ -127,7 +127,7 @@ double BacktrackColoring<GraphType>::coloring()
 
 	// verify solution  
 	actual_cost = this->calc_cost(this->m_vColor);
-	//assert_msg(best_cost == actual_cost, "best_cost = " << best_cost << ", actual cost = " << actual_cost);
+	//assert_msg2(best_cost == actual_cost, "best_cost = " << best_cost << ", actual cost = " << actual_cost);
 #ifdef DEBUG_LIWEI
     limboPrint(kDEBUG, "Graph has %lu nodes, with backtracking cost %g\n", boost::num_vertices(this->m_graph), best_cost);
 #endif
@@ -194,7 +194,7 @@ void BacktrackColoring<GraphType>::coloring_kernel(vector<int8_t>& vBestColor, v
 			if (u < v) // only check parent node in the recursion tree 
 			{
 				std::pair<graph_edge_type, bool> e = boost::edge(u, v, this->m_graph);
-				assert_msg(e.second, "failed to find edge with " << u << "--" << v);
+				assert_msg2(e.second, "failed to find edge with " << u << "--" << v);
 				edge_weight_type w = boost::get(boost::edge_weight, this->m_graph, e.first);
 				if (w >= 0) // conflict edge 
             		delta_cost += (vColor[u] == c)*w;

@@ -205,19 +205,19 @@ void GdsDriver::general_cbk(string const& ascii_record_type, string const&, Cont
 	else if (ascii_record_type == "BOUNDARY" || ascii_record_type == "BOX") // BOUNDARY and BOX are generalized to BOUNDARY
 	{
 		m_current = "BOUNDARY";
-		assert_msg(!m_lib.vCell.empty(), ascii_record_type << " block must be in a BGNSTR block");
+		assert_msg2(!m_lib.vCell.empty(), ascii_record_type << " block must be in a BGNSTR block");
 		m_lib.vCell.back().vBoundary.push_back(GdsBoundary());
 	}
 	else if (ascii_record_type == "TEXT")
 	{
 		m_current = "TEXT";
-		assert_msg(!m_lib.vCell.empty(), ascii_record_type << " block must be in a BGNSTR block");
+		assert_msg2(!m_lib.vCell.empty(), ascii_record_type << " block must be in a BGNSTR block");
 		m_lib.vCell.back().vText.push_back(GdsText());
 	}
 	else if (ascii_record_type == "SREF")
 	{
 		m_current = "SREF";
-		assert_msg(!m_lib.vCell.empty(), ascii_record_type << " block must be in a BGNSTR block");
+		assert_msg2(!m_lib.vCell.empty(), ascii_record_type << " block must be in a BGNSTR block");
 		m_lib.vCell.back().vSref.push_back(GdsSref());
 	}
 	else if (ascii_record_type == "LAYER")
@@ -261,7 +261,7 @@ void GdsDriver::general_cbk(string const& ascii_record_type, string const&, Cont
 	{
 		if (m_current == "BOUNDARY")
 		{
-			assert_msg((vData.size() % 2) == 0 && vData.size() > 4, "invalid size of data array: " << vData.size());
+			assert_msg2((vData.size() % 2) == 0 && vData.size() > 4, "invalid size of data array: " << vData.size());
 			for (uint32_t i = 0; i < vData.size(); i += 2)
 			{
 				vector<int32_t> point (2);
@@ -272,44 +272,44 @@ void GdsDriver::general_cbk(string const& ascii_record_type, string const&, Cont
 		}
 		else if (m_current == "TEXT")
 		{
-			assert_msg(vData.size() == 2, "invalid size of data array for " 
+			assert_msg2(vData.size() == 2, "invalid size of data array for "
 					<< m_current << ": " << vData.size());
 			m_lib.vCell.back().vText.back().position.assign(vData.begin(), vData.end());
 		}
 		else if (m_current == "SREF")
 		{
-			assert_msg(vData.size() == 2, "invalid size of data array for " 
+			assert_msg2(vData.size() == 2, "invalid size of data array for "
 					<< m_current << ": " << vData.size());
 			m_lib.vCell.back().vSref.back().position.assign(vData.begin(), vData.end());
 		}
-		else assert_msg(0, "record XY should only appear in BOUNDARY, BOX, TEXT, SREF");
+		else assert_msg2(0, "record XY should only appear in BOUNDARY, BOX, TEXT, SREF");
 	}
 	else if (ascii_record_type == "STRING")
 	{
-		assert_msg(m_current == "TEXT", "record type STRING must appear in TEXT block rather than " << m_current);
+		assert_msg2(m_current == "TEXT", "record type STRING must appear in TEXT block rather than " << m_current);
 		m_lib.vCell.back().vText.back().content.assign(vData.begin(), vData.end());
 	}
 	else if (ascii_record_type == "ENDEL")
 	{
-		assert_msg(m_current == "BOUNDARY" || m_current == "TEXT"
+		assert_msg2(m_current == "BOUNDARY" || m_current == "TEXT"
 				|| m_current == "SREF", 
 				"currently only support BOUNDARY, BOX, and TEXT");
 		m_current = "CELL"; // go back to upper 
 	}
 	else if (ascii_record_type == "ENDSTR")
 	{
-		assert_msg(m_current == "CELL", "BGNSTR and ENDSTR should be in pair");
+		assert_msg2(m_current == "CELL", "BGNSTR and ENDSTR should be in pair");
 		m_current = "LIBRARY"; // go back to upper 
 	}
 	else if (ascii_record_type == "ENDLIB")
 	{
-		assert_msg(m_current == "LIBRARY", "BGNLIB and ENDLIB should be in pair");
+		assert_msg2(m_current == "LIBRARY", "BGNLIB and ENDLIB should be in pair");
 		m_current = "HEADER"; 
 		// call db 
 		m_db.add_gds_lib(m_lib);
 		m_lib.reset();
 	}
-	else assert_msg(0, "unsupported record type: " << ascii_record_type);
+	else assert_msg2(0, "unsupported record type: " << ascii_record_type);
 }
 
 /// @brief API function for GdsDriver

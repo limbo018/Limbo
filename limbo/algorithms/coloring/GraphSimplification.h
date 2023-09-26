@@ -537,7 +537,7 @@ bool GraphSimplification<GraphType>::simplified_graph_component(uint32_t comp_id
 				else if (v >= u) continue; // avoid duplicate 
 				else if (ap && !mOrig2Simpl.count(u)) continue; // skip vertex that is not in component 
 				//else if (u == v) continue;
-				assert_msg(u != v, u << " == " << v);
+				assert_msg2(u != v, u << " == " << v);
 
 				std::pair<graph_edge_type, bool> e = boost::edge(vc, uc, m_graph);
 				assert(e.second);
@@ -550,7 +550,7 @@ bool GraphSimplification<GraphType>::simplified_graph_component(uint32_t comp_id
 					std::cout << "usg : " << usg <<  "  vsg : " << vsg << std::endl;
 				}
 #endif
-				assert_msg(usg != vsg, u << "==" << v << ": " << usg << " == " << vsg);
+				assert_msg2(usg != vsg, u << "==" << v << ": " << usg << " == " << vsg);
 				
 				std::pair<graph_edge_type, bool> esg = boost::edge(vsg, usg, sg);
 				if (!esg.second)
@@ -1335,7 +1335,7 @@ void GraphSimplification<GraphType>::recover_biconnected_component(std::vector<s
 			int8_t color = mColor[comp][mApOrig2Simpl[comp][vap]];
 			if (itc == sComp.begin())
 				prev_color = color;
-			else assert_msg(prev_color == color, 
+			else assert_msg2(prev_color == color,
 					vap << ": " << "comp " << comp << ", c[" << mApOrig2Simpl[comp][vap] << "] = " << color << "; " 
 					<< "prev_color = " << prev_color);
 		}
@@ -1509,7 +1509,7 @@ void GraphSimplification<GraphType>::write_simplified_graph_dot(std::string cons
 				graph_vertex_type mv1 = boost::source(e, sg);
 				graph_vertex_type mv2 = boost::target(e, sg);
 				int32_t w = boost::get(boost::edge_weight, sg, e);
-				assert_msg(mv1 != mv2, mv1 << " == " << mv2);
+				assert_msg2(mv1 != mv2, mv1 << " == " << mv2);
 
 				char buf[256];
 				if (w >= 0)
