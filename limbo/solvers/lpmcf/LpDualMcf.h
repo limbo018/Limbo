@@ -248,18 +248,18 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
                 lb = limbo::lowest<value_type>();
             if (r >= (double)std::numeric_limits<value_type>::max())
                 ub = std::numeric_limits<value_type>::max();
-			assert_msg2(lb <= ub, "failed to add bound " << lb << " <= " << xi << " <= " << ub);
+			limboAssertMsg(lb <= ub, "failed to add bound " << lb << " <= " << xi << " <= " << ub);
 
 			// no variables with the same name is allowed 
 			BOOST_AUTO(found, m_hVariable.find(xi));
 			if (found == m_hVariable.end())
-				assert_msg2(m_hVariable.insert(make_pair(xi, variable_type(xi, lb, ub, 0))).second,
+				limboAssertMsg(m_hVariable.insert(make_pair(xi, variable_type(xi, lb, ub, 0))).second,
 						"failed to insert variable " << xi << " to hash table");
 			else 
 			{
 				found->second.range.first = std::max(found->second.range.first, (value_type)lb);
 				found->second.range.second = std::min(found->second.range.second, (value_type)ub);
-				assert_msg2(found->second.range.first <= found->second.range.second,
+				limboAssertMsg(found->second.range.first <= found->second.range.second,
 						"failed to set bound " << found->second.range.first << " <= " << xi << " <= " << found->second.range.second);
 			}
 			// if user set bounds to variables 
@@ -273,7 +273,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
         /// @param constant constant in the right hand side 
         virtual void add_constraint(std::string const& /*cname*/, LpParser::TermArray const& terms, char compare, double constant)
         {
-            assert(terms.size() == 2 && terms[0].coef*terms[1].coef < 0);
+            limboAssert(terms.size() == 2 && terms[0].coef*terms[1].coef < 0);
             // in case some variables are not added yet 
             add_variable(terms[0].var); 
             add_variable(terms[1].var); 
@@ -336,7 +336,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 		{
 			BOOST_AUTO(found, m_hConstraint.find(make_pair(xi, xj)));
 			if (found == m_hConstraint.end())
-				assert_msg2(m_hConstraint.insert(
+				limboAssertMsg(m_hConstraint.insert(
 							make_pair(
 								make_pair(xi, xj), 
 								constraint_type(xi, xj, cij)
@@ -358,7 +358,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 			if (w == 0) return;
 
 			BOOST_AUTO(found, m_hVariable.find(xi));
-			assert_msg2(found != m_hVariable.end(), "failed to add objective " << w << " " << xi);
+			limboAssertMsg(found != m_hVariable.end(), "failed to add objective " << w << " " << xi);
 
 			found->second.weight += w;
 		}
@@ -410,7 +410,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 		value_type solution(string const& xi) const 
 		{
 			BOOST_AUTO(found, m_hVariable.find(xi));
-			assert_msg2(found != m_hVariable.end(), "failed to find variable " << xi);
+			limboAssertMsg(found != m_hVariable.end(), "failed to find variable " << xi);
 
 			return found->second.value;
 		}
@@ -531,8 +531,8 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 				constraint_type& constraint = it->second;
 				BOOST_AUTO(found1, m_hVariable.find(constraint.variable.first));
 				BOOST_AUTO(found2, m_hVariable.find(constraint.variable.second));
-				assert_msg2(found1 != m_hVariable.end(), "failed to find variable1 " << constraint.variable.first << " in preparing arcs");
-				assert_msg2(found2 != m_hVariable.end(), "failed to find variable2 " << constraint.variable.second << " in preparing arcs");
+				limboAssertMsg(found1 != m_hVariable.end(), "failed to find variable1 " << constraint.variable.first << " in preparing arcs");
+				limboAssertMsg(found2 != m_hVariable.end(), "failed to find variable2 " << constraint.variable.second << " in preparing arcs");
 
 				variable_type const& variable1 = found1->second;
 				variable_type const& variable2 = found2->second;
@@ -620,7 +620,7 @@ class LpDualMcf : public Lgf<T>, public LpParser::LpDataBase
 					break;
 			}
 
-			assert_msg2(status == alg_type::OPTIMAL, "failed to achieve OPTIMAL solution");
+			limboAssertMsg(status == alg_type::OPTIMAL, "failed to achieve OPTIMAL solution");
 #endif 
 			// 4. update solution 
 			if (status == alg_type::OPTIMAL)

@@ -71,7 +71,7 @@ struct point_compare_type
 	template <typename PointType>
 	inline bool operator()(PointType const& p1, PointType const& p2) const 
 	{
-		assert(m_orient.valid());
+		limboAssert(m_orient.valid());
 		return point_traits<PointType>::get(p1, m_orient) < point_traits<PointType>::get(p2, m_orient)
 			|| (point_traits<PointType>::get(p1, m_orient) == point_traits<PointType>::get(p2, m_orient)
 					&& point_traits<PointType>::get(p1, m_orient.get_perpendicular()) < point_traits<PointType>::get(p2, m_orient.get_perpendicular())
@@ -166,7 +166,7 @@ class Polygon2Rectangle
 					break;
 				}
 			}
-			assert_msg2(input_last != input_end, "failed to find input_last, maybe too few points");
+			limboAssertMsg(input_last != input_end, "failed to find input_last, maybe too few points");
 			if (is_equal_type()(*input_begin, *input_last)) ++input_begin; // skip identical first and last points 
 			// use only operator++ so that just forward_iteartor is enough
 			for (InputIterator itPrev = input_begin; itPrev != input_end; ++itPrev)
@@ -189,7 +189,7 @@ class Polygon2Rectangle
 						&& this->get(*itCur, HORIZONTAL) == this->get(*itNext, HORIZONTAL)) // vertical line 
 				{
 #ifdef DEBUG
-					assert(std::min(this->get(*itPrev, VERTICAL), this->get(*itNext, VERTICAL)) <= this->get(*itCur, VERTICAL)
+					limboAssert(std::min(this->get(*itPrev, VERTICAL), this->get(*itNext, VERTICAL)) <= this->get(*itCur, VERTICAL)
 							&& std::max(this->get(*itPrev, VERTICAL), this->get(*itNext, VERTICAL)) >= this->get(*itCur, VERTICAL));
 #endif 
 					continue;
@@ -198,7 +198,7 @@ class Polygon2Rectangle
 						&& this->get(*itCur, VERTICAL) == this->get(*itNext, VERTICAL)) // horizontal line 
 				{
 #ifdef DEBUG
-					assert(std::min(this->get(*itPrev, HORIZONTAL), this->get(*itNext, HORIZONTAL)) <= this->get(*itCur, HORIZONTAL)
+					limboAssert(std::min(this->get(*itPrev, HORIZONTAL), this->get(*itNext, HORIZONTAL)) <= this->get(*itCur, HORIZONTAL)
 							&& std::max(this->get(*itPrev, HORIZONTAL), this->get(*itNext, HORIZONTAL)) >= this->get(*itCur, HORIZONTAL));
 #endif 
 					continue;
@@ -214,7 +214,7 @@ class Polygon2Rectangle
 			}
 #ifdef DEBUG
 			// a simple manhattan polygon should have even number of different points
-			assert(vTmpPoint.size() % 2 == 0);
+			limboAssert(vTmpPoint.size() % 2 == 0);
 #endif 
 
 			// copy from vTmpPoint to m_mPoint
@@ -272,7 +272,7 @@ class Polygon2Rectangle
 					orientation_2d const& orient = it->first;
 #ifdef DEBUG
 					point_set_type const& vPoint = it->second; // just for gdb 
-                    assert(vPoint.empty() || !vPoint.empty()); // to remove annoying warning 
+                    limboAssert(vPoint.empty() || !vPoint.empty()); // to remove annoying warning 
 #endif 
 
 					point_type Pk, Pl, Pm;
@@ -340,7 +340,7 @@ class Polygon2Rectangle
                             break; 
                         }
                         default:
-                            assert_msg2(0, "should not reach here " << m_slicing_orient);
+                            limboAssertMsg(0, "should not reach here %d", m_slicing_orient);
                     }
 				}
 				// insert or remove point 
@@ -350,7 +350,7 @@ class Polygon2Rectangle
 					orientation_2d const& orient = it->first;
 #ifdef DEBUG
 					point_set_type const& vPoint = it->second; // just for gdb 
-                    assert(vPoint.empty() || !vPoint.empty()); // to remove annoying warning 
+                    limboAssert(vPoint.empty() || !vPoint.empty()); // to remove annoying warning 
 #endif 
 
 					F(point_traits<point_type>::construct(this->get(*itRect, LEFT), this->get(*itRect, BOTTOM)), orient);
@@ -536,13 +536,13 @@ class Polygon2Rectangle
 			switch (slicing_orient)
 			{
 				case HORIZONTAL_SLICING:
-					assert(m_mPoint.insert(make_pair(
+					limboAssert(m_mPoint.insert(make_pair(
 									VERTICAL, 
 									container_traits<point_set_type>::construct(point_compare_type(VERTICAL))
 									)).second);
 					break;
 				case VERTICAL_SLICING:
-					assert(m_mPoint.insert(make_pair(
+					limboAssert(m_mPoint.insert(make_pair(
 									HORIZONTAL, 
 									container_traits<point_set_type>::construct(point_compare_type(HORIZONTAL))
 									)).second);
@@ -550,18 +550,18 @@ class Polygon2Rectangle
 				case HOR_VER_SLICING:
                 case HOR_VER_SA_SLICING:
                 case HOR_VER_AR_SLICING:
-					assert(m_mPoint.insert(make_pair(
+					limboAssert(m_mPoint.insert(make_pair(
 									VERTICAL, 
 									container_traits<point_set_type>::construct(point_compare_type(VERTICAL))
 									)).second);
-					assert(m_mPoint.insert(make_pair(
+					limboAssert(m_mPoint.insert(make_pair(
 									HORIZONTAL, 
 									container_traits<point_set_type>::construct(point_compare_type(HORIZONTAL))
 									)).second);
 					break;
 				default:
 					cout << "unknown slicing orientation" << endl;
-					assert(0);
+					limboAssert(0);
 			}
 		}
         /**
@@ -596,7 +596,7 @@ class Polygon2Rectangle
 				else if (this->get(Pk, orient.get_perpendicular()) <= this->get(*it, orient.get_perpendicular())
 						&& this->get(*it, orient.get_perpendicular()) <= this->get(Pl, orient.get_perpendicular()))
 				{
-					assert(this->get(*it, orient) > this->get(Pk, orient));
+					limboAssert(this->get(*it, orient) > this->get(Pk, orient));
 					this->set(Pm, HORIZONTAL, this->get(*it, HORIZONTAL));
 					this->set(Pm, VERTICAL, this->get(*it, VERTICAL));
 					break;

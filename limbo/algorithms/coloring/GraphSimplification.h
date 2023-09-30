@@ -101,8 +101,8 @@ class GraphSimplification
 			for (typename std::vector<std::vector<graph_vertex_type> >::iterator it = m_vChildren.begin(), ite = m_vChildren.end(); it != ite; ++it, ++v)
 				it->push_back(v);
 #ifdef DEBUG_GRAPHSIMPLIFICATION
-			assert(m_vParent.size() == boost::num_vertices(m_graph));
-			assert(m_vChildren.size() == boost::num_vertices(m_graph));
+			limboAssert(m_vParent.size() == boost::num_vertices(m_graph));
+			limboAssert(m_vChildren.size() == boost::num_vertices(m_graph));
 #endif
 		}
 		/// copy constructor is not allowed 
@@ -117,7 +117,7 @@ class GraphSimplification
 		{
 			m_vPrecolor.assign(first, last);
 #ifdef DEBUG_GRAPHSIMPLIFICATION
-			assert(m_vPrecolor.size() == boost::num_vertices(m_graph));
+			limboAssert(m_vPrecolor.size() == boost::num_vertices(m_graph));
 #endif
 		}
 
@@ -248,7 +248,7 @@ class GraphSimplification
 		graph_vertex_type parent(graph_vertex_type v) const 
 		{
 #ifdef DEBUG_GRAPHSIMPLIFICATION
-			assert(!this->hidden(v));
+			limboAssert(!this->hidden(v));
 #endif
 			while (v != m_vParent.at(v))
 				v = m_vParent.at(v);
@@ -323,9 +323,9 @@ class GraphSimplification
 		{
 			bool flag = (m_vStatus.at(v1) == MERGED);
 #ifdef DEBUG_GRAPHSIMPLIFICATION
-			assert(flag == m_vChildren.at(v1).empty());
-			if (!flag) assert(v1 == m_vParent.at(v1));
-			else assert(v1 != m_vParent.at(v1));
+			limboAssert(flag == m_vChildren.at(v1).empty());
+			if (!flag) limboAssert(v1 == m_vParent.at(v1));
+			else limboAssert(v1 != m_vParent.at(v1));
 #endif
 			return flag;
 		}
@@ -419,8 +419,8 @@ GraphSimplification<GraphType>::simplified_graph() const
 		graph_vertex_type tp = this->parent(t);
 
 #ifdef DEBUG_GRAPHSIMPLIFICATION
-		assert(mG2MG.count(sp));
-		assert(mG2MG.count(tp));
+		limboAssert(mG2MG.count(sp));
+		limboAssert(mG2MG.count(tp));
 #endif
 		graph_vertex_type msp = mG2MG[sp];
 		graph_vertex_type mtp = mG2MG[tp];
@@ -428,7 +428,7 @@ GraphSimplification<GraphType>::simplified_graph() const
 		if (!emg.second)
 		{
 			emg = boost::add_edge(msp, mtp, mg);
-			assert(emg.second);
+			limboAssert(emg.second);
 			boost::put(boost::edge_weight, mg, emg.first, boost::get(boost::edge_weight, m_graph, e));
 		}
 		else 
@@ -500,7 +500,7 @@ bool GraphSimplification<GraphType>::simplified_graph_component(uint32_t comp_id
 		graph_vertex_type v = *vi;
 		
 		graph_vertex_type vsg = mOrig2Simpl[v];
-		assert(this->good(v));
+		limboAssert(this->good(v));
 		bool ap = this->articulation_point(v);
 
 #ifdef DEBUG_LIWEI
@@ -537,10 +537,10 @@ bool GraphSimplification<GraphType>::simplified_graph_component(uint32_t comp_id
 				else if (v >= u) continue; // avoid duplicate 
 				else if (ap && !mOrig2Simpl.count(u)) continue; // skip vertex that is not in component 
 				//else if (u == v) continue;
-				assert_msg2(u != v, u << " == " << v);
+				limboAssertMsg(u != v, "%u == %u", u, v);
 
 				std::pair<graph_edge_type, bool> e = boost::edge(vc, uc, m_graph);
-				assert(e.second);
+				limboAssert(e.second);
 				// skip bridge 
 				//if (m_sBridgeEdge.count(e.first)) continue;
 				graph_vertex_type usg = mOrig2Simpl[u];
@@ -550,13 +550,13 @@ bool GraphSimplification<GraphType>::simplified_graph_component(uint32_t comp_id
 					std::cout << "usg : " << usg <<  "  vsg : " << vsg << std::endl;
 				}
 #endif
-				assert_msg2(usg != vsg, u << "==" << v << ": " << usg << " == " << vsg);
+				limboAssertMsg(usg != vsg, "%u==%u: %u == %u", u, v, usg, vsg);
 				
 				std::pair<graph_edge_type, bool> esg = boost::edge(vsg, usg, sg);
 				if (!esg.second)
 				{
 					esg = boost::add_edge(vsg, usg, sg);
-					assert(esg.second);
+					limboAssert(esg.second);
 					boost::put(boost::edge_weight, sg, esg.first, boost::get(boost::edge_weight, m_graph, e.first));
 				}
 				else 
@@ -680,7 +680,7 @@ void GraphSimplification<GraphType>::recover(std::vector<int8_t>& vColorFlat, st
 		{
 			graph_vertex_type v = vSimpl2Orig[subv];
 			if (vColorFlat[v] >= 0)
-				assert(vColorFlat[v] == vColor[subv]);
+				limboAssert(vColorFlat[v] == vColor[subv]);
 			else 
 				vColorFlat[v] = vColor[subv];
 		}
@@ -726,7 +726,7 @@ void GraphSimplification<GraphType>::merge_subK4()
 			for (typename std::vector<graph_vertex_type>::const_iterator vic1 = vChildren1.begin(); vic1 != vChildren1.end(); ++vic1)
 			{
 #ifdef DEBUG_GRAPHSIMPLIFICATION
-				assert(vic1-vChildren1.begin() >= 0);
+				limboAssert(vic1-vChildren1.begin() >= 0);
 #endif
 				graph_vertex_type vc1 = *vic1;
 				adjacency_iterator vi2, vie2;
@@ -736,7 +736,7 @@ void GraphSimplification<GraphType>::merge_subK4()
 					if (this->hidden(*vi2)) continue;
 					// skip stitch edges 
 					std::pair<graph_edge_type, bool> e12 = boost::edge(vc1, *vi2, m_graph);
-					assert(e12.second);
+					limboAssert(e12.second);
 					if (boost::get(boost::edge_weight, m_graph, e12.first) < 0) continue;
 
 					graph_vertex_type v2 = this->parent(*vi2);
@@ -752,7 +752,7 @@ void GraphSimplification<GraphType>::merge_subK4()
 							if (this->hidden(*vi3)) continue;
 							// skip stitch edges 
 							std::pair<graph_edge_type, bool> e23 = boost::edge(vc2, *vi3, m_graph);
-							assert(e23.second);
+							limboAssert(e23.second);
 							if (boost::get(boost::edge_weight, m_graph, e23.first) < 0) continue;
 
 							graph_vertex_type v3 = this->parent(*vi3);
@@ -773,7 +773,7 @@ void GraphSimplification<GraphType>::merge_subK4()
 									if (this->hidden(*vi4) || this->precolored(*vi4)) continue;
 									// skip stitch edges 
 									std::pair<graph_edge_type, bool> e34 = boost::edge(vc3, *vi4, m_graph);
-									assert(e34.second);
+									limboAssert(e34.second);
 									if (boost::get(boost::edge_weight, m_graph, e34.first) < 0) continue;
 
 									graph_vertex_type v4 = this->parent(*vi4);
@@ -791,7 +791,7 @@ void GraphSimplification<GraphType>::merge_subK4()
 									m_vParent[v4] = v1;
 									merge_flag = true;
 #ifdef DEBUG_GRAPHSIMPLIFICATION
-									assert(m_vStatus[v1] == GOOD);
+									limboAssert(m_vStatus[v1] == GOOD);
 									//this->write_graph_dot("graph_simpl");
 #endif
 									break;
@@ -837,7 +837,7 @@ void GraphSimplification<GraphType>::hide_small_degree()
 			for (typename std::vector<graph_vertex_type>::const_iterator vic1 = vChildren1.begin(); vic1 != vChildren1.end(); ++vic1)
 			{
 #ifdef DEBUG_GRAPHSIMPLIFICATION
-				assert(vic1-vChildren1.begin() >= 0);
+				limboAssert(vic1-vChildren1.begin() >= 0);
 #endif
 				graph_vertex_type vc1 = *vic1;
 				adjacency_iterator vi2, vie2;
@@ -847,7 +847,7 @@ void GraphSimplification<GraphType>::hide_small_degree()
 					if (this->hidden(*vi2)) continue;
 					// skip stitch edges 
 					std::pair<graph_edge_type, bool> e12 = boost::edge(vc1, *vi2, m_graph);
-					assert(e12.second);
+					limboAssert(e12.second);
 					if (boost::get(boost::edge_weight, m_graph, e12.first) < 0) 
 					{
                         stitchPreVDD_degree += 1;
@@ -874,7 +874,7 @@ void GraphSimplification<GraphType>::hide_small_degree()
 					m_vStatus[*vic1] = HIDDEN;
 #ifdef DEBUG_GRAPHSIMPLIFICATION
 				std::cout << "std::stack +" << v1 << std::endl;
-				assert(m_vStatus[v1] == HIDDEN);
+				limboAssert(m_vStatus[v1] == HIDDEN);
 #endif
 				break;
 			}
@@ -1039,7 +1039,7 @@ void GraphSimplification<GraphType>::biconnected_component_recursion(graph_verte
 
 			isolate = false; 
 			graph_vertex_type u = this->parent(uc);
-			assert(this->good(u));
+			limboAssert(this->good(u));
 
 			// If v is not visited yet, then make it a child of u
 			// in DFS tree and recur for it
@@ -1140,7 +1140,7 @@ void GraphSimplification<GraphType>::connected_component()
 
 #ifdef DEBUG_GRAPHSIMPLIFICATION
 				std::pair<graph_edge_type, bool> e = boost::edge(u, v, m_graph);
-				assert(e.second);
+				limboAssert(e.second);
 #endif
 
 				if (!vVisited[u]) // non-visited vertex 
@@ -1213,7 +1213,7 @@ void GraphSimplification<GraphType>::recover_merge_subK4(std::vector<int8_t>& vC
 		graph_vertex_type v = *vi;
 		if (this->good(v))
 		{
-			assert(vColor[v] >= 0 && vColor[v] < (int8_t)this->m_color_num);
+			limboAssert(vColor[v] >= 0 && vColor[v] < (int8_t)this->m_color_num);
 			for (uint32_t j = 0; j != m_vChildren[v].size(); ++j)
 			{
 				graph_vertex_type u = m_vChildren[v][j];
@@ -1258,7 +1258,7 @@ void GraphSimplification<GraphType>::recover_biconnected_component(std::vector<s
 		{
 			uint32_t comp = *itc;
 			vCompAp[comp].insert(vap);
-			//assert(vCompAp[comp].size() < 3);
+			//limboAssert(vCompAp[comp].size() < 3);
 		}
 	}
 
@@ -1305,7 +1305,7 @@ void GraphSimplification<GraphType>::recover_biconnected_component(std::vector<s
 		int32_t rotation = vRotation[comp_id];
 		if (rotation < 0) // add a large enough K*m to achieve positive value 
 			rotation += (limbo::abs(rotation)/m_color_num+1)*m_color_num;
-		assert(rotation >= 0);
+		limboAssert(rotation >= 0);
 		rotation %= (int32_t)m_color_num;
 		for (uint32_t v = 0; v < vColor.size(); ++v)
 		{	 
@@ -1315,7 +1315,7 @@ void GraphSimplification<GraphType>::recover_biconnected_component(std::vector<s
 			else
 				Non_color_count++;
 		#else
-			assert(vColor[v] >= 0);
+			limboAssert(vColor[v] >= 0);
 			vColor[v] = (vColor[v] + rotation) % (int32_t)m_color_num;
 		#endif
 
@@ -1335,9 +1335,8 @@ void GraphSimplification<GraphType>::recover_biconnected_component(std::vector<s
 			int8_t color = mColor[comp][mApOrig2Simpl[comp][vap]];
 			if (itc == sComp.begin())
 				prev_color = color;
-			else assert_msg2(prev_color == color,
-					vap << ": " << "comp " << comp << ", c[" << mApOrig2Simpl[comp][vap] << "] = " << color << "; " 
-					<< "prev_color = " << prev_color);
+			else limboAssertMsg(prev_color == color,
+					"%u: comp %u, c[%u] = %u; prev_color = %u", vap, comp, mApOrig2Simpl[comp][vap], color, prev_color);
 		}
 	}
 #endif
@@ -1362,7 +1361,7 @@ void GraphSimplification<GraphType>::recover_hide_small_degree(std::vector<int8_
 			{
 				limboAssert(vColor[u] < (int32_t)m_color_num);
 				std::pair<graph_edge_type, bool> e12 = boost::edge(v, u, this->m_graph);
-				assert(e12.second);
+				limboAssert(e12.second);
 				if (boost::get(boost::edge_weight, this->m_graph, e12.first) < 0)
 				{
 					vStitchColor[vColor[u]] = true;
@@ -1396,7 +1395,7 @@ void GraphSimplification<GraphType>::recover_hide_small_degree(std::vector<int8_
 				}
 			}
 		}
-		assert(vColor[v] >= 0 && vColor[v] < (int8_t)m_color_num);
+		limboAssert(vColor[v] >= 0 && vColor[v] < (int8_t)m_color_num);
 	}
 }
 
@@ -1509,7 +1508,7 @@ void GraphSimplification<GraphType>::write_simplified_graph_dot(std::string cons
 				graph_vertex_type mv1 = boost::source(e, sg);
 				graph_vertex_type mv2 = boost::target(e, sg);
 				int32_t w = boost::get(boost::edge_weight, sg, e);
-				assert_msg2(mv1 != mv2, mv1 << " == " << mv2);
+				limboAssertMsg(mv1 != mv2, "%u == %u", mv1, mv2);
 
 				char buf[256];
 				if (w >= 0)

@@ -236,7 +236,7 @@ class Lgf
 					break;
 			}
 
-			assert_msg2(status == alg_type::OPTIMAL, "failed to achieve OPTIMAL solution");
+			limboAssertMsg(status == alg_type::OPTIMAL, "failed to achieve OPTIMAL solution");
 #endif 
 			// 4. update solution 
 			if (status == alg_type::OPTIMAL)
