@@ -8,6 +8,9 @@
 #ifndef DEFPARSER_DATABASE_H
 #define DEFPARSER_DATABASE_H
 
+#include "limbo/thirdparty/lefdef/5.8/def/def/defiNet.hpp"
+#include "limbo/thirdparty/lefdef/5.8/def/def/defiRowTrack.hpp"
+#include "limbo/thirdparty/lefdef/5.8/def/def/defiVia.hpp"
 #include <array>
 #include <ostream>
 #include <string>
@@ -477,10 +480,10 @@ class DefDataBase
         /// @brief set number of nets 
 		virtual void resize_def_net(int) = 0;
         ///
-        virtual void add_def_track(Track const&) = 0;
+        virtual void add_def_track(defiTrack const&) = 0;
         virtual void add_def_gcellgird(GCellGrid const&) = 0;
-        virtual void add_def_snet(SNet const&) = 0;
-        virtual void add_def_via(Via const&) = 0;
+        virtual void add_def_snet(defiNet const&) = 0;
+        virtual void add_def_via(defiVia const&) = 0;
         /// @brief add placement blockages, array of boxes with xl, yl, xh, yh
         virtual void add_def_route_blockage(std::vector<std::vector<int> > const&, std::string const&) = 0;
         // check these callbacks at runtime 

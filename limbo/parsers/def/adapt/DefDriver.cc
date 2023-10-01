@@ -545,29 +545,10 @@ int snetwire(defrCallbackType_e c, defiNet* ppath, defiUserData ud)
     defiWire*   wire;
     defiShield* shield;
     int         numX, numY, stepX, stepY;
-    std::string layername, vianame;
-    int fx = 0;
-    int fy = 0;
-    int fz = 0;
-    int tx = 0;
-    int ty = 0;
-    int tz = 0;
-    int lx = 0;
-    int ly = 0;
-    int hx = 0;
-    int hy = 0;
-    int ext = 0;
-    int nextExt = 0;
-    int wirewidth = 0;
-
 
     if (c != defrSNetWireCbkType)
         return 1;
     if (ud != userData) dataError();
-
-    defDriver->snet().net_name = ppath->name();
-    defDriver->snet().type = ppath->use();
-
 
     limboPrint(limbo::kNONE, "SPECIALNET wire data\n");
 
@@ -576,7 +557,6 @@ int snetwire(defrCallbackType_e c, defiNet* ppath, defiUserData ud)
     // POLYGON
     if (ppath->numPolygons())
     {
-        // not support yet
         struct defiPoints points;
         for (i = 0; i < ppath->numPolygons(); i++)
         {
@@ -595,11 +575,9 @@ int snetwire(defrCallbackType_e c, defiNet* ppath, defiUserData ud)
     {
         for (i = 0; i < ppath->numRectangles(); i++)
         {
-            defDriver->snet().shapes.push_back(
-                {ppath->xl(i), ppath->yl(i), ppath->xh(i), ppath->yh(i)});
-            // limboPrint(limbo::kNONE, "\n  + RECT %s %d %d %d %d", ppath->rectName(i),
-            //         ppath->xl(i), ppath->yl(i),
-            //         ppath->xh(i), ppath->yh(i));
+            limboPrint(limbo::kNONE, "\n  + RECT %s %d %d %d %d", ppath->rectName(i),
+                    ppath->xl(i), ppath->yl(i),
+                    ppath->xh(i), ppath->yh(i));
         }
     }
     // VIA
@@ -646,7 +624,6 @@ int snetwire(defrCallbackType_e c, defiNet* ppath, defiUserData ud)
                     switch (path)
                     {
                         case DEFIPATH_LAYER:
-                            layername = p->getLayer();
                             if (newLayer == 0)
                             {
                                 limboPrint(limbo::kNONE, "%s ", p->getLayer());
@@ -656,23 +633,18 @@ int snetwire(defrCallbackType_e c, defiNet* ppath, defiUserData ud)
                             break;
                         case DEFIPATH_VIA:
                             limboPrint(limbo::kNONE, "%s ", ignoreViaNames ? "XXX" : p->getVia());
-                            defDriver->via().viatype_name = p->getVia();
-                            defDriver->via().x = fx;
-                            defDriver->via().y = fy;
-                            defDB->add_def_via(defDriver->via());
                             break;
                         case DEFIPATH_VIAROTATION:
                             limboPrint(limbo::kNONE, "%s ",
                                     orientStr(p->getViaRotation()));
                             break;
                         case DEFIPATH_VIADATA:
-                            // Not implemented yet
                             p->getViaData(&numX, &numY, &stepX, &stepY);
                             limboPrint(limbo::kNONE, "DO %d BY %d STEP %d %d ", numX, numY,
                                     stepX, stepY);
                             break;
                         case DEFIPATH_WIDTH:
-                            wirewidth = p->getWidth();
+                            limboPrint(limbo::kNONE, "%d ", p->getWidth());
                             break;
                         case DEFIPATH_MASK:
                             limboPrint(limbo::kNONE, "MASK %d ", p->getMask());
@@ -785,6 +757,7 @@ int snetwire(defrCallbackType_e c, defiNet* ppath, defiUserData ud)
 
 int snetf(defrCallbackType_e c, defiNet* net, defiUserData ud)
 {
+    defDB->add_def_snet(*net);
     // For net and special net.
     int         i, j, x, y, z, count, newLayer;
     char*       layerName;
@@ -1816,16 +1789,7 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
             break;
         case defrTrackCbkType :
             track = (defiTrack*)cl;
-
-            defDriver->track().start = track->x();
-            defDriver->track().step = track->xStep();
-            defDriver->track().num = track->xNum();
-            defDriver->track().track_name = track->macro();
-            defDriver->track().firstTrackMask = track->firstTrackMask();
-            defDriver->track().sameMask = track->sameMask();
-            for (i = 0; i < track->numLayers(); i++)
-                defDriver->track().vLayerNames.push_back( track->layer(i) );
-            defDB->add_def_track(defDriver->track());
+            defDB->add_def_track(*track);
 
             break;
         case defrGcellGridCbkType :
@@ -1845,6 +1809,7 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
                 via->print(stdout);
             } else
             {
+                defDB->add_def_via(*via);
                 limboPrint(limbo::kNONE, "- %s ", via->name());
                 if (via->hasPattern())
                     limboPrint(limbo::kNONE, "+ PATTERNNAME %s ", via->pattern());
@@ -2570,10 +2535,10 @@ bool Driver::parse_file(const std::string &filename)
         defrSetNetNonDefaultRuleCbk(nondefRulef);
         defrSetNetSubnetNameCbk(subnetNamef);
         defrSetNetPartialPathCbk(netpath);
-        //defrSetSNetCbk(snetf);
-        defrSetSNetPartialPathCbk(snetpath);
-        if (setSNetWireCbk)
-            defrSetSNetWireCbk(snetwire);
+        defrSetSNetCbk(snetf);
+        // defrSetSNetPartialPathCbk(snetpath);
+        // if (setSNetWireCbk)
+        //     defrSetSNetWireCbk(snetwire);
         defrSetComponentMaskShiftLayerCbk(compMSL);
         defrSetComponentCbk(compf);
         defrSetAddPathToNet();
@@ -2638,8 +2603,8 @@ bool Driver::parse_file(const std::string &filename)
         defrSetPinPropCbk((defrPinPropCbkFnType)cls);
         defrSetDefaultCapCbk((defrIntegerCbkFnType)cls);
         defrSetRowCbk((defrRowCbkFnType)cls);
-        //defrSetTrackCbk((defrTrackCbkFnType)cls);
-        //defrSetGcellGridCbk((defrGcellGridCbkFnType)cls);
+        defrSetTrackCbk((defrTrackCbkFnType)cls);
+        defrSetGcellGridCbk((defrGcellGridCbkFnType)cls);
         defrSetViaCbk((defrViaCbkFnType)cls);
         defrSetRegionCbk((defrRegionCbkFnType)cls);
         defrSetGroupNameCbk((defrStringCbkFnType)cls);

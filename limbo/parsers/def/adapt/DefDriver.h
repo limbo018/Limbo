@@ -8,6 +8,9 @@
 #ifndef DEFPARSER_DRIVER_H
 #define DEFPARSER_DRIVER_H
 
+#include "limbo/thirdparty/lefdef/5.8/def/def/defiNet.hpp"
+#include "limbo/thirdparty/lefdef/5.8/def/def/defiRowTrack.hpp"
+#include "limbo/thirdparty/lefdef/5.8/def/def/defiVia.hpp"
 #include <limbo/parsers/def/adapt/DefDataBase.h>
 
 /** The example namespace is used to encapsulate the three parser classes
@@ -24,6 +27,10 @@ using std::pair;
 using std::make_pair;
 using std::ostringstream;
 
+using defiVia = LefDefParser::defiVia;
+using defiNet = LefDefParser::defiNet;
+using defiTrack = LefDefParser::defiTrack;
+using defiGcellGrid = LefDefParser::defiGcellGrid;
 /** 
  * @class DefParser::Driver
  * The Driver class brings together all components. It creates an instance of
@@ -89,10 +96,10 @@ public:
     Track& track() {return m_track;}
     GCellGrid const& gcellgrid() const {return m_gcellgrid;}
     GCellGrid& gcellgrid() {return m_gcellgrid;}
-    Via const& via() const {return m_via;}
-    Via& via() {return m_via;}
-    SNet const& snet() const {return m_snet;}
-    SNet& snet() {return m_snet;}
+    // Via const& via() const {return m_via;}
+    // Via& via() {return m_via;}
+    // SNet const& snet() const {return m_snet;}
+    // SNet& snet() {return m_snet;}
     /// @endcond 
 protected:
     /** Reference to the database filled during parsing of the
