@@ -96,7 +96,7 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 		template <typename InputIterator>
 		void initialize(InputIterator input_begin, InputIterator input_end)
 		{
-            assert(input_begin != input_end); 
+            limboAssert(input_begin != input_end); 
 			// 1. collecting vertices from input container 
 			// it should be ordered, clockwise or counterclockwise  
 			// identical vertices are skipped 
@@ -132,7 +132,7 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 						&& this->get(*itCur, HORIZONTAL) == this->get(*itNext, HORIZONTAL)) // vertical line 
 				{
 #ifdef DEBUG
-					assert(std::min(this->get(*itPrev, VERTICAL), this->get(*itNext, VERTICAL)) <= this->get(*itCur, VERTICAL)
+					limboAssert(std::min(this->get(*itPrev, VERTICAL), this->get(*itNext, VERTICAL)) <= this->get(*itCur, VERTICAL)
 							&& std::max(this->get(*itPrev, VERTICAL), this->get(*itNext, VERTICAL)) >= this->get(*itCur, VERTICAL));
 #endif 
 					continue;
@@ -141,7 +141,7 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 						&& this->get(*itCur, VERTICAL) == this->get(*itNext, VERTICAL)) // horizontal line 
 				{
 #ifdef DEBUG
-					assert(std::min(this->get(*itPrev, HORIZONTAL), this->get(*itNext, HORIZONTAL)) <= this->get(*itCur, HORIZONTAL)
+					limboAssert(std::min(this->get(*itPrev, HORIZONTAL), this->get(*itNext, HORIZONTAL)) <= this->get(*itCur, HORIZONTAL)
 							&& std::max(this->get(*itPrev, HORIZONTAL), this->get(*itNext, HORIZONTAL)) >= this->get(*itCur, HORIZONTAL));
 #endif 
 					continue;
@@ -157,7 +157,7 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 			}
 #ifdef DEBUG
 			// a simple manhattan polygon should have even number of different points
-			assert(vTmpPoint.size() % 2 == 0);
+			limboAssert(vTmpPoint.size() % 2 == 0);
 #endif 
 
 			// copy from vTmpPoint to m_mPoint
@@ -215,7 +215,7 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 					orientation_2d const& orient = it->first;
 #ifdef DEBUG
 					point_set_type const& vPoint = it->second; // just for gdb 
-                    assert(vPoint.empty() || !vPoint.empty()); // to remove annoying warning 
+                    limboAssert(vPoint.empty() || !vPoint.empty()); // to remove annoying warning 
 #endif 
 
 					point_type Pk, Pl, Pm;
@@ -283,7 +283,7 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
                             break; 
                         }
                         default:
-                            assert_msg(0, "should not reach here " << m_slicing_orient); 
+                            limboAssertMsg(0, "should not reach here %d", m_slicing_orient);
                     }
 				}
 				// insert or remove point 
@@ -293,7 +293,7 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 					orientation_2d const& orient = it->first;
 #ifdef DEBUG
 					point_set_type const& vPoint = it->second; // just for gdb 
-                    assert(vPoint.empty() || !vPoint.empty()); // to remove annoying warning 
+                    limboAssert(vPoint.empty() || !vPoint.empty()); // to remove annoying warning 
 #endif 
 
 					F(point_traits<point_type>::construct(this->get(*itRect, LEFT), this->get(*itRect, BOTTOM)), orient);
@@ -497,7 +497,7 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 					break;
 				default:
                     std::cout << "unknown slicing orientation" << std::endl;
-					assert(0);
+					limboAssert(0);
 			}
 		}
         /**
@@ -532,7 +532,7 @@ class Polygon2Rectangle<std::vector<PointType>, std::vector<RectangleType> >
 				else if (this->get(Pk, orient.get_perpendicular()) <= this->get(*it, orient.get_perpendicular())
 						&& this->get(*it, orient.get_perpendicular()) <= this->get(Pl, orient.get_perpendicular()))
 				{
-					assert(this->get(*it, orient) > this->get(Pk, orient));
+					limboAssert(this->get(*it, orient) > this->get(Pk, orient));
 					this->set(Pm, HORIZONTAL, this->get(*it, HORIZONTAL));
 					this->set(Pm, VERTICAL, this->get(*it, VERTICAL));
 					break;

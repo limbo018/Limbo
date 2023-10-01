@@ -520,7 +520,7 @@ class ProgramOptions
          */
         inline void print_space(std::ostream& os, unsigned num) const 
         {
-            assert_msg(num < 1000, "num out of bounds: " << num);
+            limboAssertMsg(num < 1000, "num out of bounds: %u", num);
             os << std::string (num, ' ');
         }
 
