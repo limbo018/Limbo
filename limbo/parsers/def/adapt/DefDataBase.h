@@ -481,7 +481,7 @@ class DefDataBase
 		virtual void resize_def_net(int) = 0;
         ///
         virtual void add_def_track(defiTrack const&) = 0;
-        virtual void add_def_gcellgird(GCellGrid const&) = 0;
+        virtual void add_def_gcellgrid(GCellGrid const&) = 0;
         virtual void add_def_snet(defiNet const&) = 0;
         virtual void add_def_via(defiVia const&) = 0;
         /// @brief add placement blockages, array of boxes with xl, yl, xh, yh

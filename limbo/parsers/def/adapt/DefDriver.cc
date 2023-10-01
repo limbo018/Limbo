@@ -1799,7 +1799,7 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
             defDriver->gcellgrid().start = gcg->x();
             defDriver->gcellgrid().step = gcg->xStep();
             defDriver->gcellgrid().num = gcg->xNum();
-            defDB->add_def_gcellgird(defDriver->gcellgrid());
+            defDB->add_def_gcellgrid(defDriver->gcellgrid());
             
             break;
         case defrViaCbkType :
