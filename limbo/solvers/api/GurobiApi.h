@@ -304,7 +304,7 @@ struct GurobiFileApi
 		// read rpt 
 		{
 			std::ifstream solFile ((fileName+".sol").c_str(), std::ifstream::in);
-			if (!solFile.good()) BOOST_ASSERT_MSG(false, ("failed to open " + fileName + ".sol").c_str());
+			if (!solFile.good()) BOOST_limbo_assert_msg(false, ("failed to open " + fileName + ".sol").c_str());
 
 			std::string var;
 			double value;

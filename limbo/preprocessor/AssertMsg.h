@@ -2,7 +2,7 @@
  * @file   AssertMsg.h
  * @brief  assertion with message 
  *
- * macro: assert_msg (deprecated)
+ * macro: limbo_assert_msg (deprecated)
  *
  * attribute: assertion with message. 
  *            if defined NO_LIMBO_ASSERTION, call assert in STL; 
@@ -24,14 +24,14 @@
 #include <limbo/preprocessor/Msg.h>
 
 /// deprecated
-/// @def assert_msg(condition, message)
+/// @def limbo_assert_msg(condition, message)
 /// @brief assertion with message 
 /// 
 /// I leave it here for backward compatibility. 
 /// custom assertion with message. 
-/// example usage: assert_msg(condition, "this is " << value << " for test");
+/// example usage: limbo_assert_msg(condition, "this is " << value << " for test");
 #ifndef NO_LIMBO_ASSERTION
-#define assert_msg(condition, message) \
+#define limbo_assert_msg(condition, message) \
     do { \
         if (! (condition)) { \
             std::cerr << __FILE__ << ":" << __LINE__ << ": " << __PRETTY_FUNCTION__ << ": Assertion `" << #condition << "' failed: " << message << std::endl; \
@@ -39,7 +39,7 @@
         } \
     } while (false)
 #else
-#define assert_msg(condition, message) \
+#define limbo_assert_msg(condition, message) \
 	do { \
 		assert(condition); \
 	} while (false)

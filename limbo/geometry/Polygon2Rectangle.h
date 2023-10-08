@@ -166,7 +166,7 @@ class Polygon2Rectangle
 					break;
 				}
 			}
-			assert_msg(input_last != input_end, "failed to find input_last, maybe too few points");
+			limbo_assert_msg(input_last != input_end, "failed to find input_last, maybe too few points");
 			if (is_equal_type()(*input_begin, *input_last)) ++input_begin; // skip identical first and last points 
 			// use only operator++ so that just forward_iteartor is enough
 			for (InputIterator itPrev = input_begin; itPrev != input_end; ++itPrev)
@@ -340,7 +340,7 @@ class Polygon2Rectangle
                             break; 
                         }
                         default:
-                            assert_msg(0, "should not reach here " << m_slicing_orient); 
+                            limbo_assert_msg(0, "should not reach here " << m_slicing_orient); 
                     }
 				}
 				// insert or remove point 

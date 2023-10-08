@@ -405,7 +405,7 @@ void LPColoring<GraphType>::set_optimize_model(vector<GRBVar>& vColorBits, vecto
         uint32_t bitIdxT = t<<1;
 
         edge_weight_type w = this->edge_weight(e);
-        assert_msg(w > 0, "no stitch edge allowed, positive edge weight expected: " << w);
+        limbo_assert_msg(w > 0, "no stitch edge allowed, positive edge weight expected: " << w);
 
         sprintf(buf, "R%u", m_constrs_num++);  
         optModel.addConstr(
@@ -570,7 +570,7 @@ void LPColoring<GraphType>::solve_model(GRBModel& optModel)
         sprintf(buf, "%u.ilp", m_lp_iters);
         optModel.write(buf);
     }
-    assert_msg(optStatus != GRB_INFEASIBLE, "model is infeasible");
+    limbo_assert_msg(optStatus != GRB_INFEASIBLE, "model is infeasible");
     ++m_lp_iters;
 }
 

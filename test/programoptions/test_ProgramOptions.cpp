@@ -65,7 +65,7 @@ int main(int argc, char** argv)
         cout << *it << " ";
     cout << endl;
 
-    assert_msg(help == false, "help turned to true");
+    limbo_assert_msg(help == false, "help turned to true");
 
     return 0;
 }
