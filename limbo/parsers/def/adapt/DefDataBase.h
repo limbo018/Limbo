@@ -480,12 +480,12 @@ class DefDataBase
         /// @brief set number of nets 
 		virtual void resize_def_net(int) = 0;
         ///
-        virtual void add_def_track(defiTrack const&) = 0;
-        virtual void add_def_gcellgrid(GCellGrid const&) = 0;
-        virtual void add_def_snet(defiNet const&) = 0;
-        virtual void add_def_via(defiVia const&) = 0;
+        virtual void add_def_track(defiTrack const&);
+        virtual void add_def_gcellgrid(GCellGrid const&);
+        virtual void add_def_snet(defiNet const&);
+        virtual void add_def_via(defiVia const&);
         /// @brief add placement blockages, array of boxes with xl, yl, xh, yh
-        virtual void add_def_route_blockage(std::vector<std::vector<int> > const&, std::string const&) = 0;
+        virtual void add_def_route_blockage(std::vector<std::vector<int> > const&, std::string const&);
         // check these callbacks at runtime 
         /// @brief set number of blockages 
         virtual void resize_def_blockage(int);

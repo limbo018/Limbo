@@ -50,4 +50,21 @@ void DefDataBase::def_user_cbk_reminder(const char* str) const
 	exit(0);
 }
 
+void DefDataBase::add_def_track(defiTrack const&) {
+	def_user_cbk_reminder(__func__);
+}
+void DefDataBase::add_def_gcellgrid(GCellGrid const&) {
+	def_user_cbk_reminder(__func__);
+}
+void DefDataBase::add_def_snet(defiNet const&) {
+	def_user_cbk_reminder(__func__);
+}
+void DefDataBase::add_def_via(defiVia const&) {
+	def_user_cbk_reminder(__func__);
+}
+void DefDataBase::add_def_route_blockage(std::vector<std::vector<int> > const&, std::string const&) {
+	def_user_cbk_reminder(__func__);
+}
+        
+
 }
