@@ -217,6 +217,12 @@ struct GdsWriter
         /// @param ncols number of columns 
         /// @param nrows number of rows 
         void gds_write_colrow( int ncols, int nrows );
+        /// @brief write BGNEXTN
+        /// @param bgnextn begin point extension 
+        void gds_write_bgnextn( int bgnextn ); 
+        /// @brief write ENDEXTN
+        /// @param endextn end point extension 
+        void gds_write_endextn( int endextn ); 
         /// @brief write UNITS
         /// @param dbu_uu database unit in user units, usually 0.001
         /// @param dbu_m database unit in meters, usually 1e-9

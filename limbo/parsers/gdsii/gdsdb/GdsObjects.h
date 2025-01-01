@@ -42,6 +42,8 @@ class GdsObject
         ///@{
         /// point type 
 		typedef gtl::point_data<coordinate_type> point_type;
+        /// float point type to avoid numerical issue 
+		typedef gtl::point_data<double> float_point_type;
         /// interval type 
 		typedef gtl::interval_data<coordinate_type> interval_type; 
         /// rectangle type 
@@ -257,6 +259,16 @@ class GdsPath : public GdsShape, public bg::model::linestring<GdsShape::point_ty
         /// @param w width 
 		void setWidth(coordinate_type w) {m_width = w;}
 
+    /// @return begin point extension 
+    coordinate_type bgnExtn() const {return m_bgnextn;}
+    /// @param e extension 
+    void setBgnExtn(coordinate_type e) {m_bgnextn = e;}
+
+    /// @return end point extension 
+    coordinate_type endExtn() const {return m_endextn;}
+    /// @param e extension 
+    void setEndExtn(coordinate_type e) {m_endextn = e;}
+
         /// @brief set path 
         /// @tparam Iterator iterator to points 
         /// @param first, last begin and end iterator to points 
@@ -269,6 +281,8 @@ class GdsPath : public GdsShape, public bg::model::linestring<GdsShape::point_ty
 	protected:
 		int m_pathtype; ///< path type 
 		coordinate_type m_width; ///< path width 
+    coordinate_type m_bgnextn; ///< begin point extension 
+    coordinate_type m_endextn; ///< end point extension 
 };
 
 /**
@@ -577,8 +591,10 @@ class GdsCell : public GdsObject
         /// @param datatype data type 
         /// @param pathtype path type 
         /// @param width path width 
+        /// @param bgnextn begin point extension 
+        /// @param endextn end point extension
         /// @param vPoint array of points 
-		void addPath(int layer, int datatype, int pathtype, int width, std::vector<point_type> const& vPoint);
+		void addPath(int layer, int datatype, int pathtype, int width, int bgnextn, int endextn, std::vector<point_type> const& vPoint);
         /// @param layer layer 
         /// @param datatype data type 
         /// @param texttype text type 

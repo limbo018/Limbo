@@ -5,8 +5,10 @@
  * @brief  Implementation of @ref DefParser::Driver
  */
 
+#include "DefDataBase.h"
 #include <limbo/parsers/def/adapt/DefDriver.h>
 #include <limbo/preprocessor/Msg.h>
+#include <string>
 
 namespace DefParser
 {
@@ -755,6 +757,7 @@ int snetwire(defrCallbackType_e c, defiNet* ppath, defiUserData ud)
 
 int snetf(defrCallbackType_e c, defiNet* net, defiUserData ud)
 {
+    defDB->add_def_snet(*net);
     // For net and special net.
     int         i, j, x, y, z, count, newLayer;
     char*       layerName;
@@ -1660,7 +1663,14 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
             break;
         case defrDieAreaCbkType :
             box = (defiBox*)cl;
-            defDB->set_def_diearea(box->xl(), box->yl(), box->xh(), box->yh()); 
+            if (box->getPoint().numPoints <= 2)
+            {
+              defDB->set_def_diearea(box->xl(), box->yl(), box->xh(), box->yh()); 
+            }
+            else 
+            {
+              defDB->set_def_diearea(box->getPoint().numPoints, box->getPoint().x, box->getPoint().y); 
+            }
             break;
         case defrPinCapCbkType :
             pc = (defiPinCap*)cl;
@@ -1684,26 +1694,23 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
                 defDriver->pin().direct = pin->direction(); 
             if (pin->hasUse())
                 defDriver->pin().use = pin->use(); 
+            if (pin->isPlaced())
+            {
+              defDriver->pin().status = "PLACED"; 
+            }
+            if (pin->isFixed())
+            {
+              defDriver->pin().status = "FIXED"; 
+            }
+            if (pin->isUnplaced())
+            {
+              defDriver->pin().status = "UNPLACED"; 
+            }
             if (pin->hasPlacement())
             {
-                if (pin->isPlaced())
-                {
-                    defDriver->pin().status = "PLACED"; 
-                    defDriver->pin().orient = orientStr(pin->orient()); 
-                    defDriver->pin().origin[0] = pin->placementX(); 
-                    defDriver->pin().origin[1] = pin->placementY(); 
-                }
-                if (pin->isFixed())
-                {
-                    defDriver->pin().status = "FIXED"; 
-                }
-                if (pin->isUnplaced())
-                {
-                    defDriver->pin().status = "UNPLACED"; 
-                }
-                defDriver->pin().orient = orientStr(pin->orient()); 
                 defDriver->pin().origin[0] = pin->placementX(); 
                 defDriver->pin().origin[1] = pin->placementY(); 
+                defDriver->pin().orient = orientStr(pin->orient()); 
             }
             if (pin->hasLayer())
             {
@@ -1718,6 +1725,41 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
                             &(defDriver->pin().vBbox[i][2]), 
                             &(defDriver->pin().vBbox[i][3]) 
                             );
+                }
+            }
+            if (pin->hasPort()) 
+            {
+                defDriver->pin().vPinPort.resize(pin->numPorts()); 
+                for (int i = 0; i < pin->numPorts(); i++)
+                {
+                    PinPort& pinPort = defDriver->pin().vPinPort.at(i); 
+                    defiPinPort* pport = pin->pinPort(i);
+                    pinPort.vLayer.resize(pport->numLayer()); 
+                    pinPort.vBbox.resize(pport->numLayer(), std::vector<int32_t>(4));
+                    for (int j = 0; j < pport->numLayer(); ++j) 
+                    {
+                        pinPort.vLayer[j] = pport->layer(j); 
+                        pport->bounds(j, 
+                            &(pinPort.vBbox[j][0]), 
+                            &(pinPort.vBbox[j][1]), 
+                            &(pinPort.vBbox[j][2]), 
+                            &(pinPort.vBbox[j][3]) 
+                            );
+                    }
+                    if (pport->isPlaced())
+                    {
+                      pinPort.status = "PLACED"; 
+                    }
+                    if (pport->isFixed())
+                    {
+                      pinPort.status = "FIXED"; 
+                    }
+                    if (pport->hasPlacement()) 
+                    {
+                        pinPort.origin[0] = pport->placementX(); 
+                        pinPort.origin[1] = pport->placementY(); 
+                        pinPort.orient = orientStr(pport->orient()); 
+                    }
                 }
             }
             defDB->add_def_pin(defDriver->pin()); 
@@ -1747,36 +1789,18 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
             break;
         case defrTrackCbkType :
             track = (defiTrack*)cl;
-            if (track->firstTrackMask())
-            {
-                if (track->sameMask())
-                {
-                    limboPrint(limbo::kNONE, "TRACKS %s %g DO %g STEP %g MASK %d SAMEMASK LAYER ",
-                            track->macro(), track->x(),
-                            track->xNum(), track->xStep(),
-                            track->firstTrackMask());
-                } else
-                {
-                    limboPrint(limbo::kNONE, "TRACKS %s %g DO %g STEP %g MASK %d LAYER ",
-                            track->macro(), track->x(),
-                            track->xNum(), track->xStep(),
-                            track->firstTrackMask());
-                }
-            } else
-            {
-                limboPrint(limbo::kNONE, "TRACKS %s %g DO %g STEP %g LAYER ",
-                        track->macro(), track->x(),
-                        track->xNum(), track->xStep());
-            }
-            for (i = 0; i < track->numLayers(); i++)
-                limboPrint(limbo::kNONE, "%s ", track->layer(i));
-            limboPrint(limbo::kNONE, ";\n"); 
+            defDB->add_def_track(*track);
+
             break;
         case defrGcellGridCbkType :
             gcg = (defiGcellGrid*)cl;
-            limboPrint(limbo::kNONE, "GCELLGRID %s %d DO %d STEP %g ;\n",
-                    gcg->macro(), gcg->x(),
-                    gcg->xNum(), gcg->xStep());
+
+            defDriver->gcellgrid().gcellgrid_name = gcg->macro();
+            defDriver->gcellgrid().start = gcg->x();
+            defDriver->gcellgrid().step = gcg->xStep();
+            defDriver->gcellgrid().num = gcg->xNum();
+            defDB->add_def_gcellgrid(defDriver->gcellgrid());
+            
             break;
         case defrViaCbkType :
             via = (defiVia*)cl;
@@ -1785,6 +1809,7 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
                 via->print(stdout);
             } else
             {
+                defDB->add_def_via(*via);
                 limboPrint(limbo::kNONE, "- %s ", via->name());
                 if (via->hasPattern())
                     limboPrint(limbo::kNONE, "+ PATTERNNAME %s ", via->pattern());
@@ -2241,8 +2266,19 @@ int cls(defrCallbackType_e c, void* cl, defiUserData ud)
             break;
         case defrBlockageCbkType :
             block = (defiBlockage*)cl;
-            if (block->hasPlacement())
-            {
+            if (block->hasLayer()) {
+                std::vector<std::vector<int> > vBbox (block->numRectangles(), std::vector<int>(4)); 
+                for (i = 0; i < block->numRectangles(); i++)
+                {
+                    vBbox[i][0] = block->xl(i); 
+                    vBbox[i][1] = block->yl(i); 
+                    vBbox[i][2] = block->xh(i); 
+                    vBbox[i][3] = block->yh(i); 
+                } 
+                string layername(block->layerName());
+                defDB->add_def_route_blockage(vBbox, layername);
+            }
+            else if (block->hasPlacement()) {
                 std::vector<std::vector<int> > vBbox (block->numRectangles(), std::vector<int>(4)); 
                 for (i = 0; i < block->numRectangles(); i++)
                 {
@@ -2499,10 +2535,10 @@ bool Driver::parse_file(const std::string &filename)
         defrSetNetNonDefaultRuleCbk(nondefRulef);
         defrSetNetSubnetNameCbk(subnetNamef);
         defrSetNetPartialPathCbk(netpath);
-        //defrSetSNetCbk(snetf);
-        defrSetSNetPartialPathCbk(snetpath);
-        if (setSNetWireCbk)
-            defrSetSNetWireCbk(snetwire);
+        defrSetSNetCbk(snetf);
+        // defrSetSNetPartialPathCbk(snetpath);
+        // if (setSNetWireCbk)
+        //     defrSetSNetWireCbk(snetwire);
         defrSetComponentMaskShiftLayerCbk(compMSL);
         defrSetComponentCbk(compf);
         defrSetAddPathToNet();
@@ -2567,8 +2603,8 @@ bool Driver::parse_file(const std::string &filename)
         defrSetPinPropCbk((defrPinPropCbkFnType)cls);
         defrSetDefaultCapCbk((defrIntegerCbkFnType)cls);
         defrSetRowCbk((defrRowCbkFnType)cls);
-        //defrSetTrackCbk((defrTrackCbkFnType)cls);
-        //defrSetGcellGridCbk((defrGcellGridCbkFnType)cls);
+        defrSetTrackCbk((defrTrackCbkFnType)cls);
+        defrSetGcellGridCbk((defrGcellGridCbkFnType)cls);
         defrSetViaCbk((defrViaCbkFnType)cls);
         defrSetRegionCbk((defrRegionCbkFnType)cls);
         defrSetGroupNameCbk((defrStringCbkFnType)cls);

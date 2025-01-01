@@ -370,7 +370,7 @@ void LPColoring<GraphType>::set_optimize_model(vector<GRBVar>& vColorBits, vecto
         {
             int8_t colorBit = (i&1)? (color&1) : (color>>1); 
 #ifdef DEBUG_LPCOLORING
-            assert(colorBit >= 0 && colorBit <= 1);
+            limboAssert(colorBit >= 0 && colorBit <= 1);
 #endif
             vColorBits.push_back(optModel.addVar(colorBit, colorBit, colorBit, GRB_CONTINUOUS, buf));
         }
@@ -405,7 +405,7 @@ void LPColoring<GraphType>::set_optimize_model(vector<GRBVar>& vColorBits, vecto
         uint32_t bitIdxT = t<<1;
 
         edge_weight_type w = this->edge_weight(e);
-        assert_msg(w > 0, "no stitch edge allowed, positive edge weight expected: " << w);
+        limboAssertMsg(w > 0, "no stitch edge allowed, positive edge weight expected: %u", w);
 
         sprintf(buf, "R%u", m_constrs_num++);  
         optModel.addConstr(
@@ -570,7 +570,7 @@ void LPColoring<GraphType>::solve_model(GRBModel& optModel)
         sprintf(buf, "%u.ilp", m_lp_iters);
         optModel.write(buf);
     }
-    assert_msg(optStatus != GRB_INFEASIBLE, "model is infeasible");
+    limboAssertMsg(optStatus != GRB_INFEASIBLE, "model is infeasible");
     ++m_lp_iters;
 }
 
@@ -847,7 +847,7 @@ bool LPColoring<GraphType>::refine_color(LPColoring<GraphType>::graph_edge_type 
                     {
                         std::pair<graph_edge_type, bool> eU2cv = boost::edge(cv, u, this->m_graph);
 #ifdef DEBUG_LPCOLORING
-                        assert(eU2cv.second);
+                        limboAssert(eU2cv.second);
 #endif
                         // edge weight is important since we may deal with merged graphs
                         curCost += std::max((edge_weight_type)1, boost::get(boost::edge_weight, this->m_graph, eU2cv.first));

@@ -101,6 +101,8 @@ class GdsReader : ::GdsParser::GdsDataBaseKernel
 		int m_width; ///< WIDTH 
 		int m_columns; ///< COLROW, number of columns 
 		int m_rows; ///< COLROW, number of rows 
+    int m_bgnextn; ///< BGNEXTN 
+    int m_endextn; ///< ENDEXTN
 		double m_angle; ///< ANGLE 
 		double m_magnification; ///< MAG 
 		int m_strans; ///< STRANS

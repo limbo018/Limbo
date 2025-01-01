@@ -361,10 +361,12 @@ double Coloring<GraphType>::operator()()
             }
         }
         cost = calc_cost(m_vColor);
+        std::cout<<"Heustical calcuted";
         limboAssert(cost == 0);
     }
     else // perform coloring algorithm 
         cost = this->coloring();
+        std::cout<<"selected coloring solver calcuted"<<cost;
     // clock_t sub_comp_end = clock();
     return cost;
 }
@@ -423,7 +425,7 @@ void Coloring<GraphType>::check_edge_weight(typename Coloring<GraphType>::graph_
 	for (boost::tie(ei, eie) = boost::edges(g); ei != eie; ++ei)
 	{
 		edge_weight_type w = boost::get(boost::edge_weight, m_graph, *ei);
-        assert_msg(w >= lb && w <= ub, "edge weight out of range: " << w);
+        limboAssertMsg(w >= lb && w <= ub, "edge weight out of range: " << w);
     }
 }
 

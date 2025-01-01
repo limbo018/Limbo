@@ -70,7 +70,7 @@ struct GdsRecords
         BOXTYPE = 0x2e, 
         PLEX = 0x2f, 
         BGNEXTN = 0x30, 
-        ENDTEXTN = 0x31, /* first 'T' a typo in GDSII manual??? */
+        ENDEXTN = 0x31, /* first 'T' a typo in GDSII manual??? */
         TAPENUM = 0x32, 
         TAPECODE = 0x33, 
         STRCLASS = 0x34, 

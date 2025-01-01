@@ -46,11 +46,14 @@ if(OPENBLAS)
 
     add_subdirectory(Csdp)
 endif(OPENBLAS)
+if(ALGORIHTMS)
 add_subdirectory(dlx)
+endif(ALGORIHTMS)
 add_subdirectory(flex)
 add_subdirectory(lefdef)
 add_subdirectory(libdivide)
 
+if(ALGORIHTMS OR SOLVERS)
 set(LEMON_ENABLE_GLPK OFF CACHE STRING "Turn off GLPK for Lemon")
 set(LEMON_ENABLE_ILOG OFF CACHE STRING "Turn off ILOG for Lemon")
 #set(LEMON_ENABLE_COIN OFF CACHE STRING "Turn off COIN for Lemon")
@@ -63,5 +66,8 @@ if(INSTALL_LIMBO)
         "EXECUTE_PROCESS(COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/include/lemon ${CMAKE_INSTALL_PREFIX}/include/limbo/thirdparty/lemon)"
         )
 endif(INSTALL_LIMBO)
+endif(ALGORIHTMS OR SOLVERS)
 
+if(PARSERS)
 add_subdirectory(gzstream)
+endif(PARSERS)

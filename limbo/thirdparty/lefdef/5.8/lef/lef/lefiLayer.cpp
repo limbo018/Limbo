@@ -4159,10 +4159,16 @@ lefiLayer::print(FILE *f) const
     fprintf(f, "Layer %s:\n", name());
     if (hasType())
         fprintf(f, "  type %s\n", type());
+    if (hasLayerType())
+        fprintf(f, "  layer type %s\n", layerType());
     if (hasMask())
         fprintf(f, "  mask %d\n", mask());
     if (hasPitch())
         fprintf(f, "  pitch %g\n", pitch());
+    // Added by Yibo Lin 
+    // to handle both pitchX_ and pitchY_ 
+    if (hasXYPitch())
+        fprintf(f, "  pitch %g %g\n", pitchX(), pitchY());
     if (hasWireExtension())
         fprintf(f, "  wireextension %g\n", wireExtension());
     if (hasWidth())
@@ -5161,7 +5167,7 @@ lefiLayer::addSpInfluence(double    width,
 }
 
 int
-lefiLayer::numSpacingTable()
+lefiLayer::numSpacingTable() const
 {
     return numSpacingTable_;
 }
@@ -5170,6 +5176,12 @@ void
 lefiLayer::setSpTwoWidthsHasPRL(int hasPRL)
 {
     hasTwoWidthPRL_ = hasPRL;
+}
+
+lefiSpacingTable const*
+lefiLayer::spacingTable(int index) const
+{
+    return spacingTable_[index];
 }
 
 lefiSpacingTable *

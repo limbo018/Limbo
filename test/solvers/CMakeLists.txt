@@ -50,6 +50,7 @@ endif(INSTALL_LIMBO)
 if (GUROBI_FOUND)
     include_directories(
         ${GUROBI_INCLUDE_DIRS}
+        ${Boost_INCLUDE_DIRS}
         )
     add_executable(test_GurobiApi test_GurobiApi.cpp)
     target_link_libraries(test_GurobiApi ${LIBS} ${GUROBI_LIBRARIES})
@@ -74,6 +75,22 @@ if (LPSOLVE_FOUND)
         install(TARGETS test_LPSolveApi DESTINATION test/solvers)
     endif(INSTALL_LIMBO)
 endif(LPSOLVE_FOUND)
+
+if (CPLEX_FOUND)
+  message(STATUS "CPLEX_INCLUDE_DIRS=${CPLEX_INCLUDE_DIRS}")
+    include_directories(
+        ${CPLEX_INCLUDE_DIRS}
+        ${Boost_INCLUDE_DIRS}
+        )
+    add_executable(test_CplexApi test_CplexApi.cpp)
+    target_link_libraries(test_CplexApi PRIVATE ${LIBS} ${CPLEX_LIBRARIES} m Threads::Threads ${CMAKE_DL_LIBS})
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+        target_compile_definitions(test_CplexApi PRIVATE DEBUG_CPLEXAPI=1)
+    endif()
+    if(INSTALL_LIMBO)
+        install(TARGETS test_CplexApi DESTINATION test/solvers)
+    endif(INSTALL_LIMBO)
+endif(CPLEX_FOUND)
 
 if(INSTALL_LIMBO)
     install(DIRECTORY benchmarks DESTINATION test/solvers)

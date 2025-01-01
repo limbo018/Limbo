@@ -8,6 +8,11 @@
 #ifndef DEFPARSER_DATABASE_H
 #define DEFPARSER_DATABASE_H
 
+#include "limbo/thirdparty/lefdef/5.8/def/def/defiNet.hpp"
+#include "limbo/thirdparty/lefdef/5.8/def/def/defiRowTrack.hpp"
+#include "limbo/thirdparty/lefdef/5.8/def/def/defiVia.hpp"
+#include <array>
+#include <ostream>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -117,6 +122,34 @@ struct Component : public Item
 			<< "orient = " << orient << endl; 
 	}
 };
+/// @brief port of pin 
+struct PinPort : public Item
+{
+	string status; ///< placement status 
+	int32_t origin[2]; ///< offset to node origin 
+	string orient; ///< orientation 
+    vector<string> vLayer; ///< layers  
+    vector<vector<int32_t> > vBbox; ///< bounding box on each layer 
+    /// @brief reset all data members 
+	void reset()
+	{
+		status = orient = "";
+		origin[0] = origin[1] = -1;
+        vLayer.clear(); 
+        vBbox.clear(); 
+	}
+    /// @brief print data members 
+    /// @param ss output stream 
+	virtual void print(ostringstream& ss) const
+	{
+		ss << "//////// Port ////////" << endl
+			<< "status = " << status << endl 
+			<< "origin = " << origin[0] << " " << origin[1] << endl 
+			<< "orient = " << orient << endl; 
+        for (uint32_t i = 0; i < vLayer.size(); ++i)
+		    ss << "layer " << vLayer[i] << " " << vBbox[i][0] << " " << vBbox[i][1] << " " << vBbox[i][2] << " " << vBbox[i][3] << endl;
+	}
+};
 /// @brief pin of node/cell 
 struct Pin : public Item
 {
@@ -129,6 +162,7 @@ struct Pin : public Item
     vector<string> vLayer; ///< layers  
     vector<vector<int32_t> > vBbox; ///< bounding box on each layer 
 	string use; ///< "use" token in DEF file 
+  vector<PinPort> vPinPort; ///< pin ports 
     /// @brief reset all data members 
 	void reset()
 	{
@@ -136,6 +170,7 @@ struct Pin : public Item
 		origin[0] = origin[1] = -1;
         vLayer.clear(); 
         vBbox.clear(); 
+        vPinPort.clear();
 		use = "";
 	}
     /// @brief print data members 
@@ -152,6 +187,8 @@ struct Pin : public Item
         for (uint32_t i = 0; i < vLayer.size(); ++i)
 		    ss << "layer " << vLayer[i] << " " << vBbox[i][0] << " " << vBbox[i][1] << " " << vBbox[i][2] << " " << vBbox[i][3] << endl;
 		ss << "use = " << use << endl;
+    for (uint32_t i = 0; i < vPinPort.size(); ++i)
+      vPinPort[i].print(ss); 
 	}
 };
 /// @brief net to describe interconnection of netlist 
@@ -261,6 +298,151 @@ struct Group : public Item
             ss << "Property " << vPropertyName[i] << " " << vPropertyType[i] << " " << vPropertyValue[i] << endl; 
     }
 };
+/// @brief routing tracks 
+struct Track : public Item
+{
+    string track_name; ///< group name 
+    std::vector<string> vLayerNames; ///< group members 
+    int start;
+    int step;
+    int num; 
+    int firstTrackMask;
+    int sameMask; 
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        track_name = "";
+        vLayerNames.clear();
+        start = 0;
+        step = 0;
+        num = 0;
+        firstTrackMask = 0;
+        sameMask = 0;
+    }
+    /// @brief print data members 
+    /// @param ss output stream 
+    virtual void print(ostringstream& ss) const 
+    {
+		ss << "//////// Track ////////" << endl
+            << "start = " << start << endl
+            << "step  = " << step  << endl 
+            << "num   = " << num   << endl
+            << "Layer ";
+        for (auto &layername: vLayerNames) {
+            ss << layername << " ";
+        }
+        ss << endl;
+    }
+};
+/// @brief routing tracks 
+struct GCellGrid : public Item
+{
+    string gcellgrid_name; ///< group name  
+    int start;
+    int step;
+    int num; 
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        gcellgrid_name = "";
+        start = 0;
+        step = 0;
+        num = 0;
+    }
+    /// @brief print data members 
+    /// @param ss output stream 
+    virtual void print(ostringstream& ss) const 
+    {
+		ss << "//////// GCellGrid ////////" << endl
+            << "name  = " << gcellgrid_name << endl
+            << "start = " << start << endl
+            << "step  = " << step  << endl 
+            << "num   = " << num   << endl;
+    }
+};
+struct ViaType : public Item
+{
+    std::string viatype_name; ///< group name  
+    int x, y;
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        viatype_name = "";
+        x = 0;
+        y = 0;
+    }
+    /// @brief print data members 
+    /// @param ss output stream 
+    virtual void print(ostringstream& ss) const 
+    {
+		ss << "//////// Via ////////" << endl
+            << "type  = " << viatype_name << endl
+            << "coord = ()" << x << ", " << y << ")" << endl;
+    }
+};
+struct Via : public Item
+{
+    std::string viatype_name; ///< group name  
+    int x, y;
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        viatype_name = "";
+        x = 0;
+        y = 0;
+    }
+    /// @brief print data members 
+    /// @param ss output stream 
+    virtual void print(ostringstream& ss) const 
+    {
+		ss << "//////// Via ////////" << endl
+            << "type  = " << viatype_name << endl
+            << "coord = ()" << x << ", " << y << ")" << endl;
+    }
+};
+/// @brief routing tracks 
+struct SNet : public Item
+{
+    std::string net_name; ///< group name  
+    std::string type;
+    vector<vector<int>> shapes; ///< shapes in snet, only support rectangles yet
+    vector<Via> vias;
+    
+
+    /// @brief reset all data members 
+    void reset()
+    {
+        net_name = "";
+        shapes.clear();
+        vias.clear();
+        type = "";
+    }
+    /// @brief print data members 
+    /// @param ss output stream 
+    virtual void print(ostringstream& ss) const 
+    {
+		ss << "//////// Special Net ////////" << endl
+            << "name  = " << net_name << endl
+            << "type = " << type << endl
+            << "vias = ";
+        for (auto const& via: vias) {
+            via.print(ss);
+        }
+        ss << endl << "shapes = ";
+        for (auto const& rect: shapes) {
+            ss << '(';
+            for (int i = 0; i < rect.size(); ++i) {
+                ss  << rect[i] << ", ";
+            }
+            ss << ") ";
+        }
+        ss << endl;
+    }
+};
 // forward declaration
 /// @class DefParser::DefDataBase
 /// @brief Base class for def database. 
@@ -281,6 +463,8 @@ class DefDataBase
 		virtual void set_def_unit(int) = 0;
         /// @brief set die area xl, yl, xh, yh
 		virtual void set_def_diearea(int, int, int, int) = 0;
+        /// @brief set die area, optional parameters for non-rectangular shapes defined as points 
+		virtual void set_def_diearea(int, const int*, const int*);
         /// @brief add row 
 		virtual void add_def_row(Row const&) = 0;
         /// @brief add component/cell 
@@ -295,6 +479,13 @@ class DefDataBase
 		virtual void add_def_net(Net const&) = 0;
         /// @brief set number of nets 
 		virtual void resize_def_net(int) = 0;
+        ///
+        virtual void add_def_track(defiTrack const&);
+        virtual void add_def_gcellgrid(GCellGrid const&);
+        virtual void add_def_snet(defiNet const&);
+        virtual void add_def_via(defiVia const&);
+        /// @brief add placement blockages, array of boxes with xl, yl, xh, yh
+        virtual void add_def_route_blockage(std::vector<std::vector<int> > const&, std::string const&);
         // check these callbacks at runtime 
         /// @brief set number of blockages 
         virtual void resize_def_blockage(int);

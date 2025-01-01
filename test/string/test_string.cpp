@@ -21,9 +21,9 @@ int main()
 	string s1 = "limbo2343slimbo";
 	string s2 = "LiMbo2343SliMbo";
 
-	assert_msg(limbo::toupper(s1) == "LIMBO2343SLIMBO", "limbo::toupper failed");
-	assert_msg(limbo::tolower(s2) == "limbo2343slimbo", "limbo::tolower failed");
-	assert_msg(limbo::iequals(s1, s2), "limbo::iequals failed");
+	limboAssertMsg(limbo::toupper(s1) == "LIMBO2343SLIMBO", "limbo::toupper failed");
+	limboAssertMsg(limbo::tolower(s2) == "limbo2343slimbo", "limbo::tolower failed");
+	limboAssertMsg(limbo::iequals(s1, s2), "limbo::iequals failed");
 
 	string tmp;
 	tmp = limbo::to_string(limbo::lowest<int>());

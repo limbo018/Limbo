@@ -118,6 +118,8 @@ GdsPath::GdsPath()
 	, GdsPath::base_ext_type()
 	, m_pathtype(std::numeric_limits<int>::max())
 	, m_width(std::numeric_limits<GdsPath::coordinate_type>::max())
+	, m_bgnextn(std::numeric_limits<GdsPath::coordinate_type>::max())
+	, m_endextn(std::numeric_limits<GdsPath::coordinate_type>::max())
 {
 }
 
@@ -126,6 +128,8 @@ GdsPath::GdsPath(GdsPath const& rhs)
 	, GdsPath::base_ext_type(rhs)
 	, m_pathtype(rhs.m_pathtype)
 	, m_width(rhs.m_width)
+	, m_bgnextn(rhs.m_bgnextn)
+	, m_endextn(rhs.m_endextn)
 {
 }
 
@@ -137,6 +141,8 @@ GdsPath& GdsPath::operator=(GdsPath const& rhs)
 		this->base_ext_type::operator=((base_ext_type)rhs);
 		m_pathtype = rhs.m_pathtype; 
 		m_width = rhs.m_width; 
+		m_bgnextn = rhs.m_bgnextn; 
+		m_endextn = rhs.m_endextn; 
 	}
 	return *this; 
 }
@@ -168,8 +174,9 @@ GdsPolygon GdsPath::toPolygon() const
 			--itNext;
 
 		// get three points 
-		point_type point = *it; 
-		point_type neighborPoints[2] = {*itPrev, *itNext};
+    // use float point type to avoid numerical issues 
+		float_point_type point = *it; 
+		float_point_type neighborPoints[2] = {*itPrev, *itNext};
 		// skip duplicate points 
 		if (point == neighborPoints[0] && point == neighborPoints[1])
 			continue; 
@@ -196,10 +203,45 @@ GdsPolygon GdsPath::toPolygon() const
 			theta[1] = theta[0]+M_PI;
 
         // extend line ends for half width 
-        if (it == itPrev)
-            point = gtl::construct<point_type>(round(point.x()+width()/2.0*cos(theta[0])), point.y()+width()/2.0*sin(theta[0]));
-        if (it == itNext)
-            point = gtl::construct<point_type>(round(point.x()+width()/2.0*cos(theta[1])), point.y()+width()/2.0*sin(theta[1]));
+        switch(pathtype())
+        {
+          case 1: // half round extension, NOT supported yet!  
+            {
+              limboPrint(limbo::kWARN, "Pathtype 1 NOT supported, use pathtype 2 instead\n");
+            }
+          case 2: // half width extension 
+            {
+              if (it == itPrev)
+                  point = gtl::construct<float_point_type>(round(point.x()+width()/2.0*cos(theta[0])), point.y()+width()/2.0*sin(theta[0]));
+              if (it == itNext)
+                  point = gtl::construct<float_point_type>(round(point.x()+width()/2.0*cos(theta[1])), point.y()+width()/2.0*sin(theta[1]));
+            }
+            break; 
+          case 4: // custom extension 
+            {
+              if (it == itPrev)
+              {
+                if (bgnExtn() == std::numeric_limits<coordinate_type>::max()) 
+                  limboPrint(limbo::kWARN, "Pathtype 4 requires BGNEXTN set, ignored\n");
+                else
+                  point = gtl::construct<float_point_type>(round(point.x()+bgnExtn()*cos(theta[0])), point.y()+bgnExtn()*sin(theta[0]));
+              }
+              if (it == itNext)
+              {
+                if (endExtn() == std::numeric_limits<coordinate_type>::max()) 
+                  limboPrint(limbo::kWARN, "Pathtype 4 requires ENDEXTN set, ignored\n");
+                else
+                  point = gtl::construct<float_point_type>(round(point.x()+endExtn()*cos(theta[1])), point.y()+endExtn()*sin(theta[1]));
+              }
+            }
+            break; 
+          default: // no other cases in the manual 
+            {
+              limboPrint(limbo::kWARN, "Pathtype %d NOT supported, use pathtype 0 instead\n", pathtype());
+            }
+          case 0: // flush 
+            break; 
+        }
 
 		double targetTheta = (theta[0]+theta[1])/2;
 		// need to form a loop of points in order 
@@ -454,7 +496,7 @@ void GdsCell::addPolygon(int layer, int datatype, std::vector<point_type> const&
 	polygon->set(vPoint.begin(), vPoint.end()); 
 }
 
-void GdsCell::addPath(int layer, int datatype, int pathtype, int width, std::vector<point_type> const& vPoint)
+void GdsCell::addPath(int layer, int datatype, int pathtype, int width, int bgnextn, int endextn, std::vector<point_type> const& vPoint)
 {
 	GdsPath* path = new GdsPath(); 
 	m_vObject.push_back(std::make_pair(::GdsParser::GdsRecords::PATH, path)); 
@@ -462,6 +504,8 @@ void GdsCell::addPath(int layer, int datatype, int pathtype, int width, std::vec
 	path->setDatatype(datatype); 
 	path->setPathtype(pathtype); 
 	path->setWidth(width); 
+  path->setBgnExtn(bgnextn); 
+  path->setEndExtn(endextn);
 	path->set(vPoint.begin(), vPoint.end()); 
 }
 
