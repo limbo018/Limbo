@@ -237,13 +237,22 @@ struct GdsWriter
         /// @param libname name of library 
         /// @param dbu_um database unit in microns, usually 1e-6
         void gds_create_lib( const char *libname, double dbu_um );    
-        /// @brief wrapper to create text 
+        /// @brief wrapper to create text (deprecated, left for backward compatibility), 
+        /// datatype is set to 0
         /// @param str text 
         /// @param x x position 
         /// @param y y position 
         /// @param layer layer 
         /// @param size text size 
         void gds_create_text( const char *str, int x, int y, int layer, int size );
+        /// @brief wrapper to create text 
+        /// @param str text 
+        /// @param x x position 
+        /// @param y y position 
+        /// @param layer layer 
+        /// @param datatype datatype 
+        /// @param size text size 
+        void gds_create_text( const char *str, int x, int y, int layer, int datatype, int size );
 
         ///@}
 

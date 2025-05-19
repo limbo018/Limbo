@@ -1326,6 +1326,7 @@ void GdsWriter::gds_create_lib( const char *libname, double dbu_um )
 
 /*------------------------------------------------------------------------------------------*/
 
+// for backward compatibility 
 void GdsWriter::gds_create_text( const char *str, int x, int y, int layer, int size )
 { 
 	static int xx[1], yy[1];
@@ -1335,6 +1336,27 @@ void GdsWriter::gds_create_text( const char *str, int x, int y, int layer, int s
 	gds_write_text(  );
 	gds_write_layer( layer );
 	gds_write_texttype( 0 );
+	gds_write_presentation( 0, 1, 0 );  // this->out, font=0, vp=center, hp=left
+	gds_write_width( size );
+	gds_write_strans( 0, 0, 0 );        // this->out, reflect, abs_angle, abs_mag
+	xx[0] = x;  
+	yy[0] = y;
+	gds_write_xy(  xx, yy, 1 );  
+	gds_write_string( str );
+	gds_write_endel(  );
+
+} // create_text
+
+// this is the new function with datatype parameter
+void GdsWriter::gds_create_text( const char *str, int x, int y, int layer, int datatype, int size )
+{ 
+	static int xx[1], yy[1];
+
+	// generate text centered at x,y
+
+	gds_write_text(  );
+	gds_write_layer( layer );
+	gds_write_texttype( datatype );
 	gds_write_presentation( 0, 1, 0 );  // this->out, font=0, vp=center, hp=left
 	gds_write_width( size );
 	gds_write_strans( 0, 0, 0 );        // this->out, reflect, abs_angle, abs_mag
